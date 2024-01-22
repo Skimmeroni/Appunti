@@ -1,0 +1,88 @@
+\begin[class = book, papersize = a3]{document}
+
+	\script[src = packages/pdf]
+	\script[src = packages/framebox]
+	\script[src = packages/parbox]
+	\script[src = packages/ptable]
+	\script[src = packages/lists]
+	\script[src = packages/image]
+	\script[src = packages/verbatim]
+	\script[src = packages/math]
+	\script[src = packages/textsubsuper]
+	\script[src = packages/rules]
+	\script[src = packages/rotate]
+
+	\define[command = example]{
+		\smallskip
+		\begin[borderwidth = 0.5mm, 
+			 padding = 5mm, 
+			 shadow = true, 
+			 bordercolor = #00ffff, 
+			 fillcolor = #ffffff,
+			 shadowcolor = 220]{roundbox}
+            	\begin[width = 51%pmax]{parbox}
+            		\process
+            	\end{parbox}
+		\end{roundbox}
+		\bigskip
+	}
+
+	\define[command = theorem]{ 
+		\smallskip 
+		\begin[borderwidth = 0.5mm,  
+			padding = 5mm,  
+			shadow = true,  
+			bordercolor = #00ff00, 
+			fillcolor = #ffffff, 
+			shadowcolor = 220]{roundbox} 
+			\begin[width = 51%pmax]{parbox} 
+				\process 
+			\end{parbox} 
+		\end{roundbox} 
+		\bigskip 
+	}
+
+	\neverindent
+	\language[main = it]
+	\tableofcontents[depth = 2]
+	\font[size = 11pt]
+	\set[parameter = math.font.size, value = 11]
+	\pdf:metadata[key = Title, value = Appunti di Ricerca Operativa]
+	\pdf:metadata[key = Author, value = Shania]
+
+	% \center{\img[src = Ricerca_Operativa_copertina.jpg, width = 75%pw]}
+
+	\pagebreak
+
+	\chapter{Complementi}
+		\section{Spazi vettoriali}
+		\include[src = Prerequisiti/Spazi.sil]
+		\section{Matrici}
+		\include[src = Prerequisiti/Matrici.sil]
+		\section{Algebra lineare}
+		\include[src = Prerequisiti/Algebra.sil]
+	\chapter{Programmazione lineare}
+		\section{Modello di programmazione matematica}
+		\include[src = Lineare/Modello.sil]
+		\section{Modello di programmazione lineare}
+		\include[src = Lineare/Lineare.sil]
+		\section{Metodo del simplesso}
+		\include[src = Lineare/Simplesso.sil]
+		\section{Teoria della dualitá}
+		\include[src = Lineare/Duale.sil]
+	\chapter{Programmazione lineare intera}
+		\section{Modello di programmazione lineare intera}
+		\include[src = Intera/Modello.sil]
+		\section{Adattamento al modello di programmazione binaria}
+		\include[src = Intera/Adattamento.sil]
+		\section{Metodo Branch-and-Bound per la programmazione binaria}
+		\include[src = Intera/BaB-binaria.sil]
+	\chapter{Programmazione nonlineare}
+		\section{Modello di programmazione nonlineare}
+		\include[src = NonLineare/Modello.sil]
+		\section{Ottimizzazione non vincolata in una sola variabile}
+		\include[src = NonLineare/NV1.sil]
+		\section{Ottimizzazione non vincolata in piú variabili}
+		\include[src = NonLineare/NVn.sil]
+
+\end{document}

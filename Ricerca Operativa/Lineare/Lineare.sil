@@ -1,0 +1,375 @@
+\begin{sile}
+
+    Un problema di programmazione matematica dove figurano esclusivamente
+    funzioni lineari, sia nella funzione obiettivo che nei vincoli, prende
+    il nome di \strong{problema di programmazione lineare}:
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \mi{min} / \mi{max} \thickspace
+            Z = c_{1}x_{1} + c_{2}x_{2} + \unicodecdots + c_{n}x_{n}
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \{\table{
+                a_{11}x_{1} & + & a_{12}x_{2} & + & \unicodecdots & + & a_{1n}x_{n} &
+                \leq / \geq / = & b_{1} \\
+                a_{21}x_{1} & + & a_{22}x_{2} & + & \unicodecdots & + & a_{2n}x_{n} &
+                \leq / \geq / = & b_{2} \\
+                \unicodecdots & + & \unicodecdots & + & \unicodecdots & + & \unicodecdots &
+                \leq / \geq / = & \unicodecdots \\
+                a_{m1}x_{1} & + & a_{m2}x_{2} & + & \unicodecdots & + & a_{mn}x_{n} &
+                \leq / \geq / = & b_{m} \\
+            }
+        \end{math}
+    \end{parbox}
+    \par
+
+    \math{Z} é la funzione obiettivo, composta da \math{n} variabili
+    decisionali \math{x_{j}}, le cui soluzioni ammissibili vanno
+    cercate nella regione ammissibile definita dagli \math{m} vincoli.
+    I coefficienti \math{c_{j}}, \math{a_{ij}} e \math{b_{i}} costituiscono
+    i \strong{parametri} del problema. Nello specifico, i primi sono chiamati
+    \strong{coefficienti di costo}, i secondi \strong{termini noti sinistri} 
+    ed i terzi \strong{termini noti destri}.
+
+    Particolare rilevanza hanno i problemi di programmazione lineare
+    detti in \strong{forma standard}, ovvero quei problemi dove:
+
+    \begin{enumerate}
+        \begin{item}
+            La funzione obiettivo deve essere massimizzata (sono problemi di 
+            ottimizzazione di massimo);
+        \end{item}
+        \begin{item}
+            Ogni variabile \math{x_{i}} ha associato un vincolo del tipo
+            \math{x_{i} \geq 0}, detto \strong{vincolo di non negativitá};
+        \end{item}
+        \begin{item}
+            Tutti i vincoli restanti, detti \strong{vincoli funzionali},
+            sono di tipo \math{\leq}.
+        \end{item}
+    \end{enumerate}
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \mi{max} \thickspace
+            Z = c_{1}x_{1} + c_{2}x_{2} + \unicodecdots + c_{n}x_{n}
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \{\table{
+                a_{11}x_{1} & + & a_{12}x_{2} & + & \unicodecdots & + & a_{1n}x_{n} &
+                \leq & b_{1} \\
+                \unicodecdots & + & \unicodecdots & + & \unicodecdots & + & \unicodecdots &
+                \leq & \unicodecdots \\
+                a_{m1}x_{1} & + & a_{m2}x_{2} & + & \unicodecdots & + & a_{mn}x_{n} &
+                \leq & b_{m} \\
+                x_{i} & \geq & 0 & \forall i \in \{1, 2, \unicodeellipsis, n\} \\
+            }
+        \end{math}
+    \end{parbox}
+    \par
+
+    É sempre possibile convertire un problema di programmazione lineare 
+    generico in un problema di programmazione lineare equivalente in forma
+    standard. Pertanto é possibile assumere (se non specificato diversamente)
+    che si stia sempre parlando di problemi di programmazione lineare in forma
+    standard senza perdita di generalitá. Per effettuare la conversione é 
+    necessario rifarsi alle seguenti manipolazioni algebriche:
+
+    \begin{itemize}
+        \begin{item}
+            Se il problema di programmazione lineare é un problema di
+            minimizzazione, é sufficiente cambiare il segno della funzione
+            obiettivo per convertirlo in un problema di massimizzazione.
+        \end{item}
+        \begin{item}
+            Se una variabile \math{x_{i}} che figura nella funzione obiettivo
+            del problema di programmazione lineare non ha un vincolo di non
+            negativitá associato, occorre riscriverla come una differenza del
+            tipo \math{x_{i} = x_{i}^{+} - x_{i}^{-}}, dove \math{x_{i}^{+}} e
+            \math{x_{i}^{-}} sono due variabili entrambe non negative.
+        \end{item}
+        \begin{item}
+            Se un vincolo funzionale del problema di programmazione lineare
+            é del tipo \math{\geq}, é sufficiente cambiarne il segno per
+            ottenere un vincolo nella forma \math{\leq}. Se il problema
+            presenta invece un vincolo di uguaglianza, occorre riscrivere
+            tale vincolo come una coppia di vincoli, uno nella forma
+            \math{\geq} (che viene poi cambiato di segno) ed uno nella
+            forma \math{\leq}.
+        \end{item}
+    \end{itemize}
+
+    \bigskip
+
+    I problemi di programmazione lineare in forma standard sono preferibili
+    perché é semplice darvi una interpretazione che non sia strettamente 
+    matematica. Ad esempio, é possibile interpretarli in chiave economica:
+
+    \begin{itemize}
+        \begin{item}
+            \math{Z} é il valore della misura di prestazione;
+        \end{item}
+        \begin{item}
+            \math{x_{j}} é il livello dell'attivitá \math{j};
+        \end{item}
+        \begin{item}
+            \math{c_{j}} é l'incremento del valore della misura di
+            prestazione \math{Z} corrispondente all'incremento di
+            un'unitá del valore dell'attivitá \math{x_{j}};
+        \end{item}
+        \begin{item}
+            \math{b_{i}} é la quantitá di risorsa \math{i} allocabile
+            alle attivitá \math{x_{j}, j = 1, 2, \unicodeellipsis, n};
+        \end{item}
+        \begin{item}
+            \math{a_{ij}} é la quantita di risorsa \math{i}
+            consumata da ogni unitá di attivitá \math{x_{j},
+            j = 1, 2, \unicodeellipsis, n};
+        \end{item}
+    \end{itemize}
+
+    \bigskip
+
+    I problemi di programmazione lineare hanno, oltre che una interpretazione
+    economica, anche una interpretazione geometrica come elementi dello spazio
+    \math{n}-dimensionale.
+
+    Un generico vincolo di disuguaglianza di un problema di programmazione
+    lineare divide lo spazio \math{n}-dimensionale in due regioni: una i
+    cui punti soddisfano il vincolo ed una in cui lo violano. Sostituendo
+    la disuguaglianza con un'uguaglianza si ottiene l'equazione della
+    \strong{frontiera} associata a tale vincolo, che nello spazio
+    \math{n}-dimensionale corrisponde ad un \strong{iperpiano} a \math{n}
+    dimensioni. Nel caso particolare in cui \math{n = 2}, tale iperpiano
+    corrisponde ad una retta nel piano bidimensionale (piano cartesiano),
+    mentre se si ha \math{n = 3} tale iperpiano corrisponde ad un piano
+    nello spazio tridimensionale.
+
+    Quando un vincolo é invece espresso come uguaglianza, solo i punti che
+    si trovano sulla frontiera soddisfano il vincolo stesso. La frontiera
+    della regione ammissibile contiene quelle soluzioni che soddisfano
+    una o piú equazioni che definiscono la frontiera. Dal punto di vista
+    geometrico, qualsiasi punto sulla frontiera della regione ammissibile
+    si trova su uno o piú degli iperpiani definiti dalle corrispondenti
+    equazioni.
+
+    Dal punto di vista geometrico, viene detto \strong{vertice ammissibile}
+    il punto di intersezione delle frontiere di \math{n} vincoli oppure,
+    equivalentemente, una soluzione ammissibile che non é presente su
+    nessun segmento nello spazio \math{n}-dimensionale che congiunge altre
+    due soluzioni ammissibili. Nel caso particolare in cui \math{n = 2}, un
+    vertice ammissibile corrisponde al punto di intersezione di due rette,
+    mentre se si ha \math{n = 3} tale vertice corrisponde al punto di
+    intersezione di tre piani.
+
+    Dal punto di vista algebrico, un vertice ammissibile é dato dalla
+    soluzione di un sistema di \math{n} equazioni, dove tali equazioni
+    definiscono la frontiera della regione ammissibile. Si noti peró
+    come non sia necessariamente vero il contrario: in generale, i
+    vincoli di un problema di programmazione lineare sono costituiti
+    da \math{n} vincoli di non negativitá e da \math{m} vincoli funzionali.
+    Essendo \math{m + n \leq n}, possono esistere delle soluzioni di \math{n}
+    frontiere che non rispettano tutti i vincoli del problema; soluzioni
+    di questo tipo, che pur corrispondendo a dei vertici dello spazio
+    \math{n}-dimensionale non sono soluzioni ammissibili, vengono anche
+    dette \strong{vertici non ammissibili}.
+
+    Dal punto di vista geometrico, uno \strong{spigolo} della regione
+    ammissibile é un segmento dato dall'intersezione delle frontiere di
+    \math{n - 1} vincoli interamente costituito da punti che sono soluzioni
+    ammissibili. Gli estremi di uno spigolo sono vertici ammissibili; se
+    esiste uno spigolo che congiunge due vertici ammissibili si dice che
+    tali vertici sono \strong{adiacenti}.
+
+    Dal punto di vista algebrico, uno spigolo é dato dalla soluzione di un
+    sistema di \math{n - 1} equazioni, dove tali equazioni definiscono parte
+    della frontiera della regione ammissibile. Se due vertici ammissibili
+    sono soluzioni (distinte) dello stesso sistema di \math{n - 1} equazioni,
+    allora sono adiacenti. 
+
+    \begin{theorem}
+        \strong{Teorema fondamentale della programmazione lineare}.
+        (\strong{I}) Se un problema di programmazione lineare ha
+        una sola soluzione ottima, allora tale soluzione deve essere
+        un vertice ammissibile. (\strong{II}) Se un problema di
+        programmazione lineare ha piú di una sola soluzione ottima, 
+        allora almeno due soluzioni ottime sono vertici ammissibili
+        adiacenti.
+
+        \begin{itemize}
+            \begin{item}
+                \strong{Dimostrazione}. Si consideri un problema di
+                programmazione lineare con una sola soluzione ottima
+                \math{x^{*}}, avente corrispondente valore della funzione
+                obiettivo \math{Z^{*}}. Si supponga per assurdo che tale
+                soluzione non sia un vertice ammissibile: allora deve
+                esistere un segmento della regione ammissibile che contiene
+                \math{x^{*}}. Si indichino gli estremi di tale segmento con
+                \math{x'} e \math{x''} ed i corrispondenti valori della
+                funzione obiettivo con \math{Z_{1}} e \math{Z_{2}}. Come per
+                ogni altro punto sul segmento che ha \math{x'} e \math{x''}
+                per estremi si ha, per un certo \math{\alpha \in (0, 1)}:
+
+                \begin[width = 50%fw]{parbox}
+                    \begin[mode = display]{math}
+                        x^{*} = \alpha x'' + (1 - \alpha) x'
+                    \end{math}
+                \end{parbox}
+                \begin[width = 50%fw]{parbox}
+                    \begin[mode = display]{math}
+                        Z^{*} = \alpha Z_{2} + (1 - \alpha) Z_{1}
+                    \end{math}
+                \end{parbox}
+                \par
+
+                Possono esistere solamente tre possibilitá: \math{Z^{*}
+                = Z_{1} = Z_{2}}, \math{Z_{1} < Z^{*} < Z_{2}} oppure
+                \math{Z_{2} < Z^{*} < Z_{1}}. La prima implica che il
+                segmento che ha \math{x'} e \math{x''} per estremi sia
+                degenere, ovvero che anche \math{x'} e \math{x''} siano
+                soluzioni ottime, ma questo va in contraddizione con
+                l'ipotesi di partenza secondo cui l'unica soluzione ottima
+                é \math{x^{*}}. La seconda e la terza possibilitá sono
+                entrambe contraddittorie, perché implicano che \math{x^{*}}
+                non sia la soluzione ottima. Dato che tutte e tre le
+                possibilitá sono contraddittorie, occorre assumere che se
+                esiste una sola soluzione ottima allora tale soluzione deve
+                essere un vertice ammissibile.
+
+                \bigskip
+                \strong{Osservazione}. L'enunciato opposto, ovvero che tutti
+                i vertici ammissibili di un problema di programmazione lineare
+                sono soluzioni ottime, non é necessariamente vero.
+            \end{item}
+            \begin{item}
+                \strong{Dimostrazione}. Se esistono due vertici ammissibili
+                adiacenti, tali vertici devono giacere sullo stesso iperpiano
+                \math{n}-dimensionale. Di conseguenza, tutte le soluzioni
+                ottime possono essere ottenute come medie pesate dei vertici
+                ottimi.
+            \end{item}
+        \end{itemize}
+    \end{theorem}
+
+    Il teorema precedente implica che, al fine di cercare la soluzione ottima
+    di un problema di programmazione lineare, non é necessario valutare tutti
+    i punti della regione ammissibile (che sono infiniti e non numerabili),
+    ma solamente i vertici. Questo é possibile solamente se il numero di
+    vertici é un numero finito.
+
+    \begin{theorem}
+        Il numero di vertici ammissibili in un problema di programmazione
+        lineare é finito.
+
+        \bigskip
+        \strong{Dimostrazione}. Ciascun vertice (non necessariamente
+        ammissibile) é dato dalla soluzione di un sistema di \math{n}
+        equazioni estratte dagli \math{m + n} vincoli del problema. Il
+        numero totale di vertici (non necessariamente ammissibili) é
+        dato dal numero di combinazioni distinte di \math{m + n}
+        equazioni considerate \math{n} alla volta:
+
+        \begin[mode = display]{math}
+            (\table{
+                m + n \\
+                n \\
+            }) = \frac{(m + n)!}{m!n!}
+        \end{math}
+
+        Essendo \math{m} e \math{n} due valori certamente finiti,
+        anche \math{(m + n)! / m!n!} deve essere un valore finito,
+        ed essendo il numero di vertici ammissibili almeno pari a
+        tale valore dev'essere finito a sua volta.
+    \end{theorem}
+
+    Il teorema precedente conferma che, essendo numerabile e finito il numero
+    di vertici delle regioni ammissibili, é effettivamente possibile trovare
+    le soluzioni ottime di un problema di programmazione lineare analizzando
+    tutti i vertici ammissibili uno per uno fino a trovare quale fra questi
+    é la soluzione migliore. Si noti peró come questo procedimento sia 
+    inapplicabile nella pratica, perché il valore di \math{(m + n)!/(m!n!)}
+    cresce estremamente velocemente con il crescere di \math{m} e di \math{n}. 
+
+    \begin{theorem}
+        In un problema di programmazione lineare, se un vertice ammissibile
+        non ha alcun vertice adiacente che é soluzione migliore di esso,
+        allora anche tutti gli altri vertici ammissibili non lo sono. Di
+        conseguenza, se un vertice ammissibile non ha alcun vertice adiacente
+        che é soluzione migliore di esso, allora tale vertice é una soluzione
+        ottima.
+
+        \bigskip
+        \strong{Dimostrazione}. L'insieme delle soluzioni che soddisfano un 
+        generico vincolo di programmazione lineare (sia esso di uguaglianza 
+        o di disuguaglianza) é un insieme convesso. Per un qualunque problema
+        di programmazione lineare, la regione ammissibile é un poliedro
+        convesso formato dall'intersezione di (\math{m + n}) semispazi
+        \math{n}-dimensionali, ciascuno rappresentante uno dei vincoli.
+        Poiché l'intersezione di insiemi convessi é a sua volta un insieme
+        convesso, la regione ammissibile é un insieme convesso.
+    \end{theorem}
+
+    Il teorema precedente restringe ulteriormente il numero di
+    vertici ammissibili da analizzare per trovare la soluzione
+    ottima di un problema di programmazione lineare. Infatti,
+    appena viene individuato un vertice ammissibile che non ha
+    alcun vertice adiacente che é soluzione migliore di esso,
+    a quel punto si ha la certezza che tale vertice é la soluzione
+    ottima e tutti gli altri vertici della regione ammissibile non
+    ancora considerati possono essere scartati.
+
+    Le ipotesi del modello di programmazione lineare sono, per
+    l'appunto, che la funzione obiettivo e i vincoli siano funzioni
+    lineari. Tuttavia, affinché si possa assumere che tali funzioni
+    siano effettivamente lineari, occorre che i dati e le attivitá
+    del problema modellato rispettino determinate ipotesi.
+
+    \begin{itemize}
+        \begin{item}
+            \strong{Ipotesi di proporzionalitá}. Il contributo di ogni
+            attivitá al valore della funzione obiettivo e alla quantitá
+            a sinistra in ogni vincolo funzionale é proporzionale al
+            livello dell'attivitá stessa. In altri termini, sia nella
+            funzione obiettivo che nei vincoli, non possono comparire
+            variabili elevate ad un qualsiasi esponente che non sia 1.
+            Questa ipotesi é necessaria perché, se non fosse valida, le
+            funzioni in esame non sarebbero lineari. In un contesto reale
+            non sempre é possibile avere tale ipotesi soddisfatta, se non
+            a meno di una certa approssimazione. Se tale approssimazione
+            discosta troppo il modello dalla realtá in analisi, é
+            preferibile utilizzare modelli di programmazione distinti
+            dalla programmazione lineare.
+        \end{item}
+        \begin{item}
+            \strong{Ipotesi di additivitá}. La funzione obiettivo e la
+            quantitá a sinistra di un vincolo funzionale devono essere il
+            risultato della somma dei contributi individuali delle rispettive
+            attivitá. In altri termini, sia nella funzione obiettivo che nei
+            vincoli, non possono comparire prodotti fra variabili. Come per la
+            precedente, in un contesto reale questa ipotesi puó essere vera
+            solamente a meno di un certo grado di approssimazione.
+        \end{item}
+        \begin{item}
+            \strong{Ipotesi di divisibilitá}. Le variabili decisionali
+            di un modello di programmazione lineare devono poter assumere
+            valori reali o, al piú, razionali. Se in un contesto reale
+            questa ipotesinon é soddisfatta, la programmazione lineare é
+            quasi certamente un modello inapplicabile.
+        \end{item}
+        \begin{item}
+            \strong{Ipotesi di certezza}. I valori assegnati ad ogni
+            parametro che compare nel modello di programmazione lineare
+            sono costanti note. In un contesto reale questa ipotesi non
+            potrá mai essere valida a pieno perché, essendo i modelli di
+            programmazione lineare formulati per pianificare azioni future,
+            i valori dei parametri sono basati su previsioni, e questo
+            introduce inevitabilmente un certo grado di incertezza.
+        \end{item}
+    \end{itemize}
+
+\end{sile}

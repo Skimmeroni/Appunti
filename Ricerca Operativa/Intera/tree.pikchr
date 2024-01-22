@@ -1,0 +1,35 @@
+circlerad = 0.125
+
+A: circle at (0, 0)
+B1: circle at (0.75, 0.25) 
+B2: circle color cyan at (1, -0.25)
+C1: circle at (1.75, 0)
+C2: circle color cyan at (2, -0.5)
+D1: circle at (2, 0.5)
+D2: circle at (2.5, 0.5)
+D3: circle color cyan at (3, -0.5)
+D4: circle at (2.5, 0)
+E1: circle color cyan at (3.75, -0.5)
+E2: circle at (3.75, 0)
+
+line from A.ne to B1.w
+line from A.se to B2.w
+line from B2.ne to C1.w
+line from B2.se to C2.w
+line from C1.n to D1.sw
+line from C1.ne to D2.sw
+line from C2.e to D3.w
+line from C2.ne to D4.sw
+line from D3.e to E1.w
+line from D3.ne to E2.w
+
+"0" at B1
+"1" at B2
+"0" at C1
+"1" at C2
+"0" at D2
+"1" at D1
+"0" at D3
+"1" at D4
+"0" at E1
+"1" at E2

@@ -1,0 +1,1289 @@
+\begin{sile}
+
+    Il \strong{metodo del simplesso} é un algoritmo iterativo, basato sui
+    principi enunciati nei precedenti teoremi, in grado di individuare la
+    soluzione ottima di un problema di programmazione lineare in tempo (in
+    media) lineare. L'algoritmo puó essere descritto in maniera informale 
+    come segue: si sceglie un vertice di partenza e si osservano i vertici
+    a questo adiacenti. Se nessuno di questi vertici é soluzione migliore 
+    del vertice in esame, allora quest'ultimo é la soluzione ottima (teorema
+    3), altrimenti si ripete l'algoritmo considerando peró il vertice che,
+    fra i vertici adiacenti a quello in esame, é la soluzione migliore. 
+
+    Prima di applicare il metodo del simplesso ad un problema di programmazione
+    lineare di questo tipo occorre convertire tutti i vincoli funzionali di
+    disuguaglianza del problema in vincoli di uguaglianza equivalenti (i
+    vincoli di non negativitá rimangono espressi come disuguaglianza, perché
+    vanno trattati a parte). Questo puó essere fatto aggiungendo in maniera
+    opportuna delle variabili extra, chiamate \strong{variabili slack}
+    (\strong{scarto}).
+
+    \begin{example}
+        Si consideri un problema di programmazione lineare avente per funzione
+        obiettivo \math{Z = 3x_{1} + 5x_{2}}. A sinistra sono riportati i 
+        vincoli del problema espressi cosí come sono stati forniti, a destra
+        sono riportati vincoli equivalenti riscritti come equazioni e con 
+        aggiunte le variabili di slack.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table{
+                    x_{1} \leq 4 \\
+                    2x_{2} \leq 12 \\
+                    3x_{1} + 2x_{2} \leq 18 \\
+                }
+            \end{math}
+
+            Con \math{x_{1} \geq 0} e \math{x_{2} \geq 0}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table{
+                    x_{1} + x_{3} = 4 \\
+                    2x_{2} + x_{4} = 12 \\
+                    3x_{1} + 2x_{2} + x_{5} = 18 \\
+                }
+            \end{math}
+
+            Con \math{x_{i} \geq 0} per \math{i \in \{1, 2, 3, 4, 5\}}
+        \end{parbox}
+    \end{example}
+
+    La nuova forma in cui i vincoli vengono espressi viene chiamata
+    \strong{forma aumentata}. Una \strong{soluzione aumentata}
+    (\em{augmented solution}) é una soluzione del problema nella
+    forma originale a cui vengono aggiunte le variabili slack. Una
+    \strong{soluzione di base} (\em{basic solution}) é un vertice
+    del problema nella forma originale a cui vengono aggiunti i
+    corrispondenti valori delle variabili slack. Una \strong{soluzione
+    di base ammissibile} (\em{Basic Feasible Solution}, \strong{BFS})
+    é un vertice ammissibile del problema nella forma originale a
+    cui vengono aggiunti i corrispondenti valori delle variabili slack.
+    Se una soluzione di base non é ammissibile, é una \strong{soluzione
+    di base non ammissibile}.
+
+    \begin{example}
+        Si consideri il problema di programmazione lineare dell'esempio
+        precedente: a partire dalla soluzione ammissibile \math{(0, 6)}
+        é possibile costruire la soluzione di base ammissibile \math{(0,
+        6, 4, 0, 6)}.
+
+        \begin[mode = display]{math}
+            \{\table{
+                x_{1} + x_{3} = 4 \\
+                2x_{2} + x_{4} = 12 \\
+                3x_{1} + 2x_{2} + x_{5} = 18 \\
+            }
+            \thickspace \Rightarrow \thickspace
+            \{\table{
+                0 + x_{3} = 4 \\
+                2 \cdot 6 + x_{4} = 12 \\
+                3 \cdot 0 + 2 \cdot 6 + x_{5} = 18 \\
+            }
+            \thickspace \Rightarrow \thickspace
+            \{\table{
+                x_{3} = 4 \\
+                12 + x_{4} = 12 \\
+                12 + x_{5} = 18 \\
+            }
+            \thickspace \Rightarrow \thickspace
+            \{\table{
+                x_{3} = 4 \\
+                x_{4} = 0 \\
+                x_{5} = 6 \\
+            }
+        \end{math}
+    \end{example}
+
+    Ogni vertice della regione ammissibile é dato da un sistema di
+    \math{n} equazioni (i piani \math{n}-dimensionali che compongono
+    la frontiera), le quali \em{definiscono} il vertice. Ogni vincolo
+    di un problema di programmazione lineare ha una \strong{variabile
+    indicatrice} (\em{indicating variable}) che assicura, se il suo
+    valore é zero, che l'equazione che definisce la frontiera di quel
+    vincolo é soddisfatta dalla soluzione corrente. Questo significa
+    che, nella forma aumentata del problema, ogni volta che un'equazione
+    che definisce la frontiera di un vincolo é una delle equazioni che
+    definiscono il vertice, una specifica variabile ha valore uguale a
+    zero. Una variabile con queste caratteristiche é denominata
+    \strong{variabile non di base} per la soluzione di base corrispondente.
+
+    Un vincolo di non negativitá é una disequazione nella forma \math{x_{i}
+    \geq 0}, e la relativa equazione che definisce la frontiera di tale
+    vincolo é \math{x_{i} = 0}. É evidente come tale equazione sia nulla
+    nel solo ed unico caso in cui la \math{i}-esima componente della soluzione
+    é nulla a sua volta, pertanto la variabile indicatrice di un vincolo di
+    non negativitá del tipo \math{x_{i} \geq 0} é \math{x_{i}}.
+
+    Un vincolo funzionale é una disequazione nella forma \math{\sum_{i =
+    1}^{n} a_{ij}x_{j} \leq b_{i}}, dove l'equazione che ne definisce la
+    frontiera é \math{\sum_{i = 1}^{n} a_{ij}x_{j} = b_{i}}. Nella forma
+    aumentata, il vincolo funzionale viene riscritto come \math{\sum_{i =
+    1}^{n} a_{ij}x_{j} + x_{n + 1} = b_{i} \wedge x_{n + 1} \geq 0}.
+    Affinché un vertice possa trovarsi sull'iperpiano \math{n}-dimensionale
+    definito da un vincolo, deve valere per esso l'equazione \math{\sum_{i
+    = 1}^{n} a_{ij}x_{j} = b_{i}}, che non é altro che l'equazione del vincolo
+    in forma aumentata con \math{x_{n + 1}} posto a 0. Questo significa che,
+    per un vincolo funzionale, la relativa variabile di base é \math{x_{n +
+    1}}, la variabile che viene introdotta per costruirne la forma aumentata.
+
+    \begin{example}
+        In merito al problema di programmazione lineare dell'esempio
+        precedente, alla soluzione \math{(4, 3)} del problema é associata
+        la soluzione aumentata \math{(4, 3, 0, 6, 0)}. Questo significa
+        che tale vertice é definito dal vincolo \math{x_{1} \leq 4} e dal
+        vincolo \math{3x_{1} + 2x_{2} \leq 18}.
+    \end{example}
+
+    Se la variabile di una soluzione non é una variabile non di base,
+    allora é detta \strong{variabile di base}. Il numero delle variabili
+    di base é uguale al numero di vincoli funzionali, pertanto il numero
+    delle variabili di base é uguale al numero delle variabili meno il
+    numero dei vincoli funzionali. I valori delle variabili di base, anche
+    detti semplicemente \strong{base}, sono ottenuti ponendo a 0 i valori
+    delle variabili non di base e risolvendo il sistema di equazioni
+    risultante. Se tale sistema ha soluzione e tutti i valori non sono
+    negativi, allora la soluzione risultante é una BFS. Una variabile di
+    base é detta \strong{degenere} per una BFS se ha valore pari a 0.
+
+    Indicando con \math{n} il numero complessivo di variabili e con
+    \math{m} il numero di vincoli funzionali, il numero di variabili
+    non di base é \math{n - m}. Si ha quindi che il numero totale di
+    sistemi di equazioni che é possibile costruire ponendo a 0 le 
+    variabili non di base é dato dal numero di disposizioni di \math{n}
+    elementi presi \math{n - m} alla volta, ovvero \math{n! / (n - m)!m!}.
+    Si noti peró come non tutte le combinazioni costruibili possono dare
+    luogo a delle soluzioni, perché alcuni dei sistemi di equazioni possono
+    essere sistemi impossibili.
+
+    Se due vertici della regione ammissibile di un problema di programmazione
+    lineare sono adiacenti, allora anche le rispettive BFS lo sono nella forma
+    aumentata del problema. Si noti come due vertici distinti nel piano
+    \math{n}-dimensionale sono adiacenti se é possibile sovrapporre uno
+    sull'altro operando una singola traslazione, e questo richiede che i
+    due vertici differiscano per una sola componente. Ricordando che almeno
+    \math{n - m} variabili di una BFS sono nulle (le variabili di base),
+    si ha che due BFS sono adiacenti se hanno tutte le variabili non di base
+    uguali tranne una.
+
+    \begin{example}
+        Si consideri il problema dell'esempio precedente. Il numero di
+        variabili del problema é 5, mentre il numero di vincoli funzionali
+        (scritti come equazioni) é 3. Il numero di variabili non di base di
+        ciascuna soluzione é quindi \math{5 - 3 = 2}, ed il numero totale
+        di combinazioni possibili é dato da \math{5! / (5 - 3)!3! = 10}. É
+        quindi possibile costruire almeno 10 vertici distinti annullando 2
+        delle 5 variabili.
+
+        \begin[cols = 12.5%fw 22.5%fw 25%fw 20%fw 20%fw]{ptable}
+            \begin{row}
+                \cell{\strong{Vertice}}
+                \cell{\strong{Soluzione di base}}
+                \cell{\strong{Variabili non di base}}
+                \cell{\strong{É ammissibile?}}
+                \cell{\strong{Vertici adiacenti}}
+            \end{row}
+            \begin{row}
+                \cell{(0, 0)}
+                \cell{(0, 0, 4, 12, 18)}
+                \cell{\math{x_{1}, x_{2}}}
+                \cell{sí}
+                \cell{(0, 6), (4, 0)}
+            \end{row}
+            \begin{row}
+                \cell{non esiste}
+                \cell{non esiste}
+                \cell{\math{x_{1}, x_{3}}}
+                \cell{non esiste}
+                \cell{non esiste}
+            \end{row}
+            \begin{row}
+                \cell{(0, 6)}
+                \cell{(0, 6, 4, 0, 6)}
+                \cell{\math{x_{1}, x_{4}}}
+                \cell{sí}
+                \cell{(0, 0), (2, 6)}
+            \end{row}
+            \begin{row}
+                \cell{(0, 9)}
+                \cell{(0, 9, 4, -6, 0)}
+                \cell{\math{x_{1}, x_{5}}}
+                \cell{no}
+                \cell{non é una BFS}
+            \end{row}
+            \begin{row}
+                \cell{(4, 0)}
+                \cell{(4, 0, 0, 12, 6)}
+                \cell{\math{x_{2}, x_{3}}}
+                \cell{sí}
+                \cell{(0, 0), (4, 3)}
+            \end{row}
+            \begin{row}
+                \cell{non esiste}
+                \cell{non esiste}
+                \cell{\math{x_{2}, x_{4}}}
+                \cell{non esiste}
+                \cell{non esiste}
+            \end{row}
+            \begin{row}
+                \cell{(6, 0)}
+                \cell{(6, 0, -2, 12, 0)}
+                \cell{\math{x_{2}, x_{5}}}
+                \cell{no}
+                \cell{non é una BFS}
+            \end{row}
+            \begin{row}
+                \cell{(4, 6)}
+                \cell{(4, 6, 0, 0, -6)}
+                \cell{\math{x_{3}, x_{4}}}
+                \cell{no}
+                \cell{non é una BFS}
+            \end{row}
+            \begin{row}
+                \cell{(4, 3)}
+                \cell{(4, 3, 0, 6, 0)}
+                \cell{\math{x_{3}, x_{5}}}
+                \cell{sí}
+                \cell{(2, 6), (4, 0)}
+            \end{row}
+            \begin{row}
+                \cell{(2, 6)}
+                \cell{(2, 6, 2, 0, 0)}
+                \cell{\math{x_{4}, x_{5}}}
+                \cell{sí}
+                \cell{(0, 6), (4, 3)}
+            \end{row}
+        \end{ptable}
+
+        Tutti i vertici del problema, sia ammissibili che non ammissibili,
+        sono stati riportati nella tabella precedente, insieme alla rispettiva
+        soluzione di base. Si noti come delle 10 combinazioni, solamente 8 
+        restituiscono delle soluzioni, perché ponendo \math{x_{1} = x_{3} = 0}
+        oppure ponendo \math{x_{2} = x_{4} = 0} si ottiene un sistema di 
+        equazioni senza soluzione. Delle 8 soluzioni di base esistenti,
+        solamente le 5 soluzioni che non contengono alcun valore negativo
+        sono delle BFS. Per queste 5 soluzioni é possibile mettere in evidenza
+        quali sono i vertici ad esse adiacenti osservando quali sono le 
+        rispettive variabili non di base.
+    \end{example}
+
+    Quando si affrontano problemi nella forma aumentata é conveniente
+    considerare e manipolare allo stesso tempo l'equazione che definisce
+    la funzione obiettivo e i nuovi vincoli funzionali. Questo puó essere
+    fatto semplicemente riscrivendo \math{Z = \sum_{j = 1}^{n} c_{j}}
+    come \math{Z - \sum_{j = 1}^{n} a_{0j} = 0}. L'equazione cosí riscritta
+    figura come fosse uno dei vincoli originari, dove non é peró necessario
+    introdurre delle variabili slack perché il vincolo era giá espresso
+    come uguaglianza. In questo modo, il numero totale di variabili aumenta
+    di uno, ma anche il numero di vincoli aumenta di uno, pertanto é comunque
+    possibile ricavare tutte le variabili delle soluzioni di base.
+
+    \begin{example}
+        Le soluzioni di base del precedente problema possono essere
+        ulteriormente estese introducendo il valore della variabile
+        \math{Z}.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \{\table{
+                    Z & - 3x_{1} & - 5x_{2} & & & & & = 0 \\
+                    & x_{1} & & + x_{3} & & & & = 4 \\
+                    & & 2x_{2} & & & + x_{4} & & = 12 \\
+                    & 3x_{1} & + 2x_{2} & & & & + x_{5} & = 18 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table{
+                    (0,  0, 0,  4, 12, 18) &
+                    (30, 0, 6,  4,  0,  6) \\
+                    (40, 0, 9,  4, -6,  0) &
+                    (12, 4, 0,  0, 12,  6) \\
+                    (18, 6, 0, -2, 12,  0) &
+                    (42, 4, 6,  0,  0, -6) \\
+                    (27, 4, 3,  0,  6,  0) & 
+                    (36, 2, 6,  2,  0,  0) \\
+                }
+            \end{math}
+        \end{parbox}
+    \end{example}
+
+    Gli elementi finora introdotti sono sufficienti a descrivere formalmente
+    il metodo del simplesso per la risoluzione di un problema di programmazione
+    lineare:
+
+    \begin{enumerate}
+        \begin{item}
+            Si riscriva, se necessario, il problema in forma standard.
+        \end{item}
+        \begin{item}
+            Si riscriva il problema in forma aumentata, ottenendo un sistema
+            di \math{m} equazioni in \math{n} variabili (contando anche
+            \math{Z}).
+        \end{item}
+        \begin{item}
+            Si scelgano \math{n - m} variabili delle \math{n} a disposizione
+            come variabili non di base per ottenere un vertice di partenza,
+            che fungerá da soluzione attuale: se possibile, é conveniente
+            scegliere il vertice nullo scegliendo come variabili non di
+            base le variabili che compaiono con coefficiente non nullo
+            nella funzione obiettivo.
+        \end{item}
+        \begin{item}
+            Si riscriva il sistema di equazioni nella \strong{forma
+            canonica}, ovvero dove ciascuna equazione ha una variabile
+            di base con coefficiente uguale ad 1, tutte le altre variabili
+            di base con coefficiente uguale a 0 e tutte le variabili non di
+            base hanno coefficiente arbitrario. Se la soluzione attuale é il
+            vertice nullo, il sistema di equazioni é giá in questa forma,
+            altrimenti é possibile ricondurre il sistema alla forma canonica
+            applicandovi una o piú mosse di Gauss (considerando la matrice
+            associata al sistema di equazioni).
+        \end{item}
+        \begin{item}
+            Si impongano uguali a zero le variabili non di base della
+            soluzione attuale e si calcolino i valori delle variabili
+            di base risolvendo il sistema di \math{m} equazioni in
+            \math{m} incognite che ne risulta.
+        \end{item}
+        \begin{item}
+            Si operi un test di ottimalitá per valutare se la soluzione
+            corrente é la migliore. La soluzione é da considerarsi ottimale
+            se, nella funzione obiettivo riscritta come vincolo, compaiono
+            solo valori non negativi, perché significa che non é possibile
+            incrementarla ulteriormente senza uscire dalla regione ammissibile.
+            Se la soluzione attuale é la soluzione ottima, l'algoritmo termina,
+            altrimenti si procede oltre.
+        \end{item}
+        \begin{item}
+            Si determini la variabile non di base, chiamata \strong{variabile
+            entrante}, che va scambiata con una delle variabili della
+            funzione obiettivo. Tale variabile viene individuata scegliendo,
+            nell'equazione (0), la variabile con il coefficiente negativo piú
+            grande in valore assoluto, perché é la variabile che, a paritá di
+            incremento, influenza maggiormente il valore di \math{Z}.
+        \end{item}
+        \begin{item}
+            Si determini la variabile di base della funzione obiettivo,
+            chiamata \strong{variabile uscente}, che va scambiata con
+            una delle altre variabili mediante il \strong{test del minimo
+            rapporto}. Tale test prevede di isolare, in tutte le equazioni,
+            la variabile entrante ed il termine noto, imporre tale espressione
+            maggiore o uguale di zero, spostare il termine noto a destra e
+            dividere ambo i membri per il coefficiente della variabile entrante
+            (se in una o piú equazioni la variabile entrante non compare, tale
+            o tali equazioni possono venire ignorate). La variabile uscente é
+            quella che, fra queste espressioni, compare con il termine noto
+            piú piccolo, perché é quella che prima di tutte restituisce una
+            soluzione al di fuori della regione ammissibile.
+        \end{item}
+        \begin{item}
+            Riprendere il flusso d'esecuzione dal punto 4.
+        \end{item}
+    \end{enumerate}
+
+    \begin{example}
+        Si consideri il problema di programmazione lineare dell'esempio
+        precedente. La prima iterazione del metodo del simplesso puó essere
+        descritta come segue:
+
+        \begin{itemize}
+            \begin{item}
+                Essendo (0, 0) una soluzione ammissibile nella forma standard
+                del problema, é possibile usare il vertice nullo come vertice 
+                di partenza. Questo significa che il sistema di equazioni é
+                giá nella forma canonica.
+            \end{item}
+            \begin{item}
+                Si imposta a 0 il valore delle variabili \math{x_{1}} e
+                \math{x_{2}}, di modo da ottenere la soluzione di partenza:
+
+                \begin[mode = display]{math}
+                    \{\table{
+                        Z - 3 \cdot 0 - 5 \cdot 0 = 0 \\
+                        0 + x_{3} = 4 \\
+                        2 \cdot 0 + x_{4} = 12 \\
+                        3 \cdot 0 + 2 \cdot 0 + x_{5} = 18 \\
+                    }
+                    \thickspace \Rightarrow \thickspace
+                    \{\table{
+                        Z = 0 \\
+                        x_{3} = 4 \\
+                        x_{4} = 12 \\
+                        x_{5} = 18 \\
+                    }
+                    \thickspace \Rightarrow \thickspace
+                    (0, 0, 0, 4, 12, 18)
+                \end{math}
+            \end{item}
+            \begin{item}
+                Si opera un test di ottimalitá su \math{(0, 0, 0, 4, 12, 18)}.
+                I coefficienti di \math{x_{1}} e \math{x_{2}} sono positivi,
+                pertanto é possibile inferire che \math{(0, 0, 0, 4, 12, 18)}
+                non sia la soluzione ottima, ma che ve ne sia una migliore.
+            \end{item}
+            \begin{item}
+                Il coefficiente di \math{x_{2}} é maggiore del coefficiente
+                di \math{x_{1}}, pertanto \math{x_{2}} va scelta come variabile
+                entrante.
+            \end{item}
+            \begin{item}
+                Si determini la variabile uscente mediante test del minimo
+                rapporto:
+
+                \begin[mode = display]{math}
+                    \{\table{
+                        0 + x_{3} = 4 \geq 0 \\
+                        2 \cdot 0 + 2x_{2} + x_{4} = 12 \geq 0 \\
+                        3 \cdot 0 + 2x_{2} + x_{5} = 18 \geq 0 \\
+                    }
+                    \thickspace \Rightarrow \thickspace
+                    \{\table{
+                        x_{3} = 4 \geq 0 \\
+                        x_{4} = 12 - 2x_{2} \geq 0 \\
+                        x_{5} = 18 - 2x_{2} \geq 0 \\
+                    }
+                    \thickspace \Rightarrow \thickspace
+                    \{\table{
+                        \forall x_{2} \\
+                        x_{2} \leq 6 \\
+                        x_{2} \leq 9 \\
+                    }
+                \end{math}
+
+                Il piú piccolo termine noto é 6, pertanto la variabile 
+                uscente é \math{x_{4}}.
+            \end{item}
+            \begin{item}
+                Si procede con una nuova iterazione, sostituendo \math{x_{4}}
+                con \math{x_{2}} come variabile di base.
+            \end{item}
+        \end{itemize}
+    \end{example}
+
+    Non sempre la scelta della variabile entrante o uscente di una iterazione
+    del metodo del simplesso é univoca. Possono infatti presentarsi situazioni
+    in cui esistono nessuna o piú variabili candidate ad essere la variabile
+    entrante o la variabile uscente:
+
+    \begin{itemize}
+        \begin{item}
+            Se esiste piú di una variabile elegibile ad essere la
+            variabile entrante é sufficiente sceglierne una qualsiasi,
+            perché significa che il tasso di miglioramento della soluzione
+            é lo stesso a prescindere dalla variabile scelta. L'unica
+            differenza che puó verificarsi nello scegliere una variabile
+            piuttosto che un'altra é il numero di iterazioni necessarie a
+            trovare la soluzione ottima, ma questo non é comunque conoscibile
+            a priori.
+        \end{item}
+        \begin{item}
+            Se non esiste alcuna variabile elegibile ad essere la variabile
+            uscente significa che la funzione obiettivo puó essere aumentata
+            all'infinito senza uscire dalla regione ammissibile, e quindi il
+            problema termina in quanto \math{Z} é illimitata.
+        \end{item}
+        \begin{item}
+            Se esiste piú di una variabile elegibile ad essere la variabile
+            uscente, potrebbe presentarsi una situazione problematica. Quando
+            la variabile entrante viene aumentata, le variabili di base che
+            sono elegibili a variabili uscenti si annullano contemporaneamente, 
+            pertanto la soluzione che ne risulta avrá delle variabili di base
+            nulle (degeneri). Se una variabile degenere mantiene il proprio 
+            valore nullo sino all'iterazione successiva, dove viene selezionata
+            come variabile uscente, la corrispondente variabile entrante 
+            deve rimanere nulla a sua volta (dato che non puó essere aumentata
+            senza far assumere un valore negativo alla variabile uscente),
+            pertanto il valore della funzione \math{Z} resta invariato. Se il
+            valore di \math{Z} rimane costante anziché aumentare ad ogni 
+            iterazione, il metodo del simplesso potrebbe entrare in un loop 
+            infinito ripetendo la stessa sequenza di soluzioni senza mai
+            raggiungere la soluzione ottimale. Si noti peró che una situazione
+            di questo tipo é piuttosto inusuale, e puó pertanto non venire
+            presa in considerazione. Inoltre, esistono strategie apposite in
+            grado di rompere loop infiniti di questo tipo.
+        \end{item}
+    \end{itemize}
+
+    \bigskip
+
+    Raramente il metodo del simplesso viene applicato in forma
+    discorsiva, perché é estremamente dispendiosa. In genere,
+    ogni iterazione del metodo del simplesso viene riportata in
+    una forma tabellare chiamata \strong{tableau}, dove vengono
+    riportate solamente le informazioni essenziali:
+
+    \begin[cols = 16.5%fw 19.5%fw 16.5%fw 7.5%fw 7.5%fw 7.5%fw 7.5%fw 17.5%fw]{ptable}
+        \begin{row}
+            \cell{\strong{Iterazione}}
+            \cell{\strong{Variabili di base}}
+            \cell{\strong{Equazione}}
+            \begin[span = 4]{celltable}
+                \begin{row}
+                    \cell[span = 4]{\strong{Coefficiente di:}}
+                \end{row}
+                \begin{row}
+                    \cell{\math{Z}}
+                    \cell{\math{x_{1}}}
+                    \cell{\math{\unicodeellipsis}}
+                    \cell{\math{x_{n}}}
+                \end{row}
+            \end{celltable}
+            \cell{\strong{Termini noti}}
+        \end{row}
+        \begin{row}
+            \cell{i}
+            \begin{celltable}
+                \begin{row}
+                    \cell{\math{Z}} \cell{(0)} \cell{}
+                    \cell{} \cell{} \cell{} \cell{}
+                \end{row}
+                \begin{row}
+                    \cell{\math{x_{1}}} \cell{(1)} \cell{} 
+                    \cell{} \cell{} \cell{} \cell{}
+                \end{row}
+                \begin{row}
+                    \cell{\math{\unicodeellipsis}} \cell{}
+                    \cell{} \cell{} \cell{} \cell{} \cell{}
+                \end{row}
+                \begin{row}
+                    \cell{\math{x_{m}}} \cell{(m)} \cell{}
+                    \cell{} \cell{} \cell{} \cell{}
+                \end{row}
+            \end{celltable}
+        \end{row}
+    \end{ptable}
+
+    Per ciascuna iterazione sono riportati i coefficienti delle variabili, i
+    termini noti e la variabile di base di ciascuna equazione. La variabile
+    entrante, individuata come di consueto come il coefficiente negativo
+    maggiore in valore assoluto della funzione obiettivo, determina una
+    colonna della tabella, chiamata \strong{colonna pivot}. La variabile
+    uscente é determinata a partire dai valori che si ottengono dividendo,
+    per ciascuna equazione, il termine noto per il coefficiente della
+    variabile entrante; la variabile uscente é la variabile di base
+    dell'equazione che ha il piú piccolo fra tali valori. La variabile
+    uscente determina una riga della tabella, chiamata \strong{riga pivot}.
+    A partire da tale riga si modificano le altre righe della tabella mediante
+    mosse di Gauss per effettuare il passaggio di variabile.
+
+    \begin{example}
+        \begin[cols = 15.5%fw 19.5%fw 14.5%fw 5.5%fw 5.5%fw
+                      5.5%fw 5.5%fw 5.5%fw 5.5%fw 17.5%fw]{ptable}
+            \begin{row}
+                \cell{\strong{Iterazione}}
+                \cell{\strong{Variabili di base}}
+                \cell{\strong{Equazione}}
+                \begin[span = 6]{celltable}
+                    \begin{row}
+                        \cell[span = 6]{\strong{Coefficiente di:}}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{Z}}
+                        \cell{\math{x_{1}}}
+                        \cell{\math{x_{2}}}
+                        \cell{\math{x_{3}}}
+                        \cell{\math{x_{4}}}
+                        \cell{\math{x_{5}}}
+                    \end{row}
+                \end{celltable}
+                \cell{\strong{Termini noti}}
+            \end{row}
+            \begin{row}
+                \cell{0}
+                \begin{celltable}
+                    \begin{row}
+                        \cell{\math{Z}} \cell{(0)} \cell{1} \cell{-3}
+                        \cell{-5} \cell{0} \cell{0} \cell{0} \cell{0}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{3}}} \cell{(1)} \cell{0} \cell{1}
+                        \cell{0} \cell{1} \cell{0} \cell{0} \cell{4}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{4}}} \cell{(2)} \cell{0} \cell{0}
+                        \cell{2} \cell{0} \cell{1} \cell{0} \cell{12}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{5}}} \cell{(3)} \cell{0} \cell{3}
+                        \cell{2} \cell{0} \cell{0} \cell{1} \cell{18}
+                    \end{row}
+                \end{celltable}
+            \end{row}
+            \begin{row}
+                \cell{1}
+                \begin{celltable}
+                    \begin{row}
+                        \cell{\math{Z}} \cell{(0)} \cell{1} \cell{-3} \cell{0}
+                        \cell{0} \cell{\math{\frac{5}{2}}} \cell{0} \cell{30}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{3}}} \cell{(1)} \cell{0} \cell{1}
+                        \cell{0} \cell{1} \cell{0} \cell{0} \cell{4}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{2}}} \cell{(2)} \cell{0} \cell{0}
+                        \cell{1} \cell{0} \cell{\math{\frac{1}{2}}} \cell{0}
+                        \cell{6}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{5}}} \cell{(3)} \cell{0} \cell{3}
+                        \cell{0} \cell{0} \cell{-1} \cell{1} \cell{6}
+                    \end{row}
+                \end{celltable}
+            \end{row}
+            \begin{row}
+                \cell{2}
+                \begin{celltable}
+                    \begin{row}
+                        \cell{\math{Z}} \cell{(0)} \cell{1} \cell{0} \cell{0}
+                        \cell{0} \cell{\math{\frac{3}{2}}} \cell{1} \cell{36}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{3}}} \cell{(1)} \cell{0} \cell{0}
+                        \cell{0} \cell{1} \cell{\math{\frac{1}{3}}}
+                        \cell{\math{-\frac{1}{3}}} \cell{2}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{2}}} \cell{(2)} \cell{0} \cell{0}
+                        \cell{1} \cell{0} \cell{\math{\frac{1}{2}}} \cell{0}
+                        \cell{6}
+                    \end{row}
+                    \begin{row}
+                        \cell{\math{x_{1}}} \cell{(3)} \cell{0} \cell{1}
+                        \cell{0} \cell{0} \cell{\math{-\frac{1}{3}}}
+                        \cell{\math{\frac{1}{3}}} \cell{2}
+                    \end{row}
+                \end{celltable}
+            \end{row}
+        \end{ptable}
+    \end{example}
+
+    Il metodo del simplesso termina quando viene trovata una BFS, ma questo
+    non significa che non possano esisterne altre. Per il terzo teorema, se
+    un problema di programmazione lineare ha piú di una soluzione ottima 
+    allora tali soluzioni sono vertici adiacenti. In particolare, qualsiasi
+    \strong{combinazione convessa} di tali vertici é un punto sul segmento 
+    che li unisce, ed é pertanto una soluzione ottima a sua volta. Una
+    combinazione convessa é un particolare tipo di combinazione lineare
+    dove, indicando con \math{a_{i}} l'\math{i}-esimo coefficiente, valgono
+    \math{\sum_{i = 1}^{n} a_{i} = 1} e \math{a_{i} \geq 0 \forall i}.
+
+    Vi sono situazioni dove, a prescindere dai vincoli, si richiede di
+    scegliere fra soluzioni ottime alternative. Ogni qual volta un problema
+    di programmazione lineare ha piú di una BFS ottima, almeno una delle
+    variabili non di base ha un coefficiente nullo nella funzione obiettivo
+    (scritta come vincolo) nell'ultima iterazione, perché tali incognite sono
+    incognite libere nel sistema di equazioni. Dato che cambiare il valore di
+    queste variabili non influisce sul valore di \math{Z}, eventuali soluzioni
+    aggiuntive possono essere trovate eseguendo ulteriori iterazioni del metodo
+    del simplesso scegliendo come variabile entrante una variabile non di base
+    con coefficiente nullo.
+
+    Dalla rappresentazione tabellare del metodo del simplesso deriva
+    una terza rappresentazione, quella \strong{matriciale}. Sia \math{Z
+    = \sum_{j = 1}^{n} c_{j}} la funzione obiettivo. Il risultato di tale
+    espressione puó essere visto come il prodotto riga per colonna di due
+    matrici, una matrice colonna \math{\bi{x}} che contiene le variabili
+    che compaiono nella funzione ed una matrice riga \math{\bi{c}} che ne
+    contiene i relativi coefficienti.
+
+    \begin[mode = display]{math}
+        Z = \bi{cx} = 
+        {[\table{
+            c_{1} & c_{2} & \unicodeellipsis & c_{n} \\
+        }]}
+        [\table{
+            x_{1} \\
+            x_{2} \\
+            \unicodeellipsis \\
+            x_{n} \\
+        }]
+    \end{math}
+
+    Similmente, i vincoli funzionali di un problema di programmazione
+    lineare sono, di fatto, un sistema di \math{m} equazioni in \math{n}
+    incognite. Pertanto, é possibile rappresentarli mediante la relativa
+    matrice incompleta. Lo stesso puó essere fatto per i vincoli di non
+    negativitá.
+
+    \begin[width = 60%fw]{parbox}
+        \begin[mode = display]{math}
+            \bi{Ax} \leq \bi{b}
+            \thickspace \Rightarrow \thickspace
+            [\table{
+                a_{11} & a_{12} & \unicodecdots & a_{1n} \\
+                a_{21} & a_{22} & \unicodecdots & a_{2n} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                a_{m1} & a_{m2} & \unicodecdots & a_{mn} \\
+            }]
+            [\table{
+                x_{1} \\
+                x_{2} \\
+                \unicodeellipsis \\
+                x_{n} \\
+            }]
+            \leq 
+            [\table{
+                b_{1} \\
+                b_{2} \\
+                \unicodeellipsis \\
+                b_{m} \\
+            }]
+        \end{math}
+    \end{parbox}
+    \begin[width = 40%fw]{parbox}
+        \begin[mode = display]{math}
+            \bi{x} \geq \bi{0}
+            \thickspace \Rightarrow \thickspace
+            [\table{
+                x_{1} \\
+                x_{2} \\
+                \unicodeellipsis \\
+                x_{n} \\
+            }]
+            \geq 
+            [\table{
+                0 \\
+                0 \\
+                \unicodeellipsis \\
+                0 \\
+            }]
+        \end{math}
+    \end{parbox}
+    \par
+
+    Per ottenere la forma aumentata del problema, la matrice
+    colonna \math{\bi{x}} deve venire unita ad un'altra matrice
+    colonna \math{\bi{x}_{s}}, costituita dalle variabili slack.
+    Inoltre, la matrice \math{\bi{A}} deve venire estesa con la
+    matrice identitá di dimensione \math{m \times n}, che rappresenta
+    i coefficienti (iniziali) delle suddette variabili.
+
+    \begin[width = 65%fw]{parbox}
+        \begin[mode = display]{math}
+            {[\bi{A}, \bi{I}]}
+            {[\table{
+                \bi{x} \\
+                \bi{x}_{s} \\
+            }]}
+            = \bi{b}
+            \thickspace \Rightarrow \thickspace
+            [\table{
+                a_{11} & a_{12} & \unicodecdots & a_{1n} & 1 & 1 & \unicodeellipsis & 1 \\
+                a_{21} & a_{22} & \unicodecdots & a_{2n} & 1 & 1 & \unicodeellipsis & 1 \\
+                \vdots & \vdots & \ddots & \vdots & 1 & 1 & \unicodeellipsis & 1 \\
+                a_{m1} & a_{m2} & \unicodecdots & a_{mn} & 1 & 1 & \unicodeellipsis & 1 \\
+            }]
+            [\table{
+                x_{1} \\
+                \unicodeellipsis \\
+                x_{n} \\
+                x_{n + 1} \\
+                \unicodeellipsis \\
+                x_{n + m} \\
+            }]
+            =
+            [\table{
+                b_{1} \\
+                b_{2} \\
+                \unicodeellipsis \\
+                b_{m} \\
+            }]
+        \end{math}
+    \end{parbox}
+    \begin[width = 35%fw]{parbox}
+        \begin[mode = display]{math}
+            {[\table{
+                \bi{x} \\
+                \bi{x}_{s} \\
+            }]} \geq \bi{0}
+            \thickspace \Rightarrow \thickspace
+            [\table{
+                x_{1} \\
+                \unicodeellipsis \\
+                x_{n} \\
+                x_{n + 1} \\
+                \unicodeellipsis \\
+                x_{n + m} \\
+            }] \geq
+            {[\table{
+                0 \\
+                \unicodeellipsis \\
+                0 \\
+                0 \\
+                \unicodeellipsis \\
+                0 \\
+            }]}
+        \end{math}
+    \end{parbox}
+    \par
+
+    Per completare una iterazione, é necessario scegliere \math{n} variabili
+    non di base fra le \math{n + m} variabili a disposizione, porle uguali
+    a 0 e risolvere il sistema di \math{m} equazioni di \math{m} incognite
+    che ne risulta. Nel contesto della rappresentazione matriciale, questo
+    equivale a risolvere l'equazione:
+
+    \begin[mode = display]{math}
+        \bi{Bx}_{B} = \bi{b}
+        \thickspace \Rightarrow \thickspace
+        [\table{
+            B_{11} & B_{12} & \unicodecdots & B_{1m} \\
+            B_{21} & B_{22} & \unicodecdots & B_{2m} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            B_{m1} & B_{m2} & \unicodecdots & B_{mm} \\
+        }]
+        [\table{
+            x_{B1} \\
+            x_{B2} \\
+            \unicodeellipsis \\
+            x_{Bm} \\
+        }]
+        =
+        [\table{
+            b_{1} \\
+            b_{2} \\
+            \unicodeellipsis \\
+            b_{m} \\
+        }]
+    \end{math}
+
+    Dove \math{\bi{x}_{B}} é la matrice colonna ottenuta eliminando le
+    variabili non di base dalla matrice \math{[\table{\bi{x} \\ \bi{x}_{s}
+    \\}]} e la matrice \math{\bi{B}}, detta \strong{matrice di base}, é la
+    matrice ottenuta eliminando le colonne che corrispondono alle variabili
+    non di base dalla matrice \math{[\bi{A}, \bi{I}]}.
+
+    Spostando a destra la matrice \math{\bi{B}}, é possibile esprimere
+    l'equazione rispetto a \math{\bi{x}_{B}}:
+
+    \begin[mode = display]{math}
+        \bi{x}_{B} = \bi{B}^{-1}\bi{b}
+    \end{math}
+
+    Ammesso che la matrice \math{\bi{B}^{-1}} esista, ovvero che \math{\bi{B}}
+    sia una matrice singolare. Indicando con \math{\bi{c}_{B}} la matrice riga
+    che contiene i coefficienti della funzione obiettivo per i corrispondenti
+    elementi di \math{\bi{x}_{B}} e sostituendo la precedente equazione
+    nell'equazione per \math{Z}, si ha: 
+
+    \begin[mode = display]{math}
+        Z = \bi{c}_{B}\bi{x}_{B} = \bi{c}_{B}\bi{B}^{-1}\bi{b}
+    \end{math}
+
+    Rimane ora da mostrare come ottenere l'insieme delle equazioni che
+    compaiono nel tableau ad ogni iterazione del metodo del simplesso.
+    Per ottenere l'insieme di equazioni per l'iterazione iniziale é
+    sufficiente includere \math{Z} come variabile, riscrivendo la
+    funzione obiettivo come equazione associata ad un vincolo. Come
+    giá visto, la variabile \math{Z} ha coefficiente 1 nella prima
+    equazione e 0 in tutte le altre (dato che compare solamente nella
+    funzione obiettivo, per la quale funge da variabile di base). Si ha
+    allora:
+
+    \begin[mode = display]{math}
+        {[\table{
+            1 & -\bi{c} & \bi{0} \\
+            \bi{0} & \bi{A} & \bi{I} \\
+        }]}
+        {[\table{
+            Z \\
+            \bi{x} \\
+            \bi{x}_{s} \\
+        }]}
+        =
+        {[\table{
+            0 \\
+            \bi{b} \\
+        }]}
+    \end{math}
+
+    Le mosse di Gauss eseguite sulle equazioni durante ciascuna
+    iterazione del metodo del simplesso per effettuare il cambio
+    di variabile si traducono nella forma matriciale pre-moltiplicando
+    entrambi i lati dell'insieme di equazioni originali per una matrice
+    opportuna. Questa matrice avrá gli stessi elementi della matrice
+    identitá eccetto che ciascuna costante moltiplicativa necessaria
+    per una operazione algebrica verrá inserita nella posizione opportuna
+    cosí che la pre-moltiplicazione per questa matrice produca l'operazione
+    richiesta.
+
+    Dopo ogni iterazione, \math{\bi{x}_{B} = \bi{B}^{-1}\bi{b}} e
+    \math{Z = \bi{c}_{B}\bi{B}^{-1}\bi{b}} ed i termini noti del
+    nuovo sistema di equazioni diventano:
+
+    \begin[mode = display]{math}
+        {[\table{
+            Z \\
+            \bi{x}_{B} \\
+        }]}
+        =
+        {[\table{
+            1 & \bi{c}_{B} \bi{B}^{-1} \\
+            \bi{0} & \bi{B}^{-1} \\            
+        }]}
+        {[\table{
+            0 \\
+            \bi{b} \\
+        }]}
+        =
+        {[\table{
+            \bi{c}_{B} \bi{B}^{-1} \bi{b} \\
+            \bi{B}^{-1} \bi{b} \\
+        }]}
+    \end{math}
+
+    Poiché viene eseguita la stessa serie di operazioni aritmetiche su
+    entrambi i termini dell'insieme originale di equazioni, la stessa
+    matrice, che pre-moltiplica il lato destro originale viene usata per
+    pre-moltiplicare il lato sinistro originale. Di conseguenza, dato che:
+
+    \begin[mode = display]{math}
+        {[\table{
+            1 & \bi{c}_{B} \bi{B}^{-1} \\
+            \bi{0} & \bi{B}^{-1} \\            
+        }]}
+        {[\table{
+            1 & -\bi{c} & \bi{0} \\
+            \bi{0} & \bi{A} & \bi{I} \\
+        }]}
+        =
+        {[\table{
+            1 & \bi{c}_{B} \bi{B}^{-1} \bi{A} -\bi{c} & \bi{c}_{B} \bi{B}^{-1} \\
+            \bi{0} & \bi{B}^{-1}\bi{A} & \bi{B}^{-1} \\
+        }]}
+    \end{math}
+
+    La forma della matriciale dell'insieme delle equazioni dopo ogni iterazione
+    é
+
+    \begin[mode = display]{math}
+        {[\table{
+            1 & \bi{c}_{B} \bi{B}^{-1} \bi{A} -\bi{c} & \bi{c}_{B} \bi{B}^{-1} \\
+            \bi{0} & \bi{B}^{-1}\bi{A} & \bi{B}^{-1} \\
+        }]}
+        {[\table{
+            Z \\
+            \bi{x} \\
+            \bi{x}_{s} \\
+        }]}
+        =
+        {[\table{
+            \bi{c}_{B} \bi{B}^{-1} \bi{b} \\
+            \bi{B}^{-1} \bi{b} \\
+        }]}
+    \end{math}
+
+    Questa non é altro che una forma piú generale per il sistema di
+    equazioni che compare nella \math{i}-esima equazione del metodo
+    del simplesso. Imponendo infatti \math{\bi{B}^{-1} = \bi{I} =
+    \bi{B}} e \math{\bi{c}_{B} = \bi{0}}, si riottiene l'equazione
+    per l'iterazione iniziale:
+
+    \begin[mode = display]{math}
+        {[\table{
+            1 & \bi{0} \bi{I} \bi{A} -\bi{c} & 0 \bi{I} \\
+            \bi{0} & \bi{I}\bi{A} & \bi{I} \\
+        }]}
+        {[\table{
+            Z \\
+            \bi{x} \\
+            \bi{x}_{s} \\
+        }]}
+        =
+        {[\table{
+            \bi{0} \bi{I} \bi{b} \\
+            \bi{I} \bi{b} \\
+        }]}
+        \thickspace \Rightarrow \thickspace
+        {[\table{
+            1 & -\bi{c} & 0 \\
+            \bi{0} & \bi{A} & \bi{I} \\
+        }]}
+        {[\table{
+            Z \\
+            \bi{x} \\
+            \bi{x}_{s} \\
+        }]}
+        =
+        {[\table{
+            0 \\
+            \bi{b} \\
+        }]}
+    \end{math}
+
+    La relazione fra notazione matriciale e notazione a tableau é riassunta
+    nella seguente tabella:
+
+    \begin[cols = 13.5%fw 14%fw 13.5%fw 5%fw 20.5%fw 17%fw 16.5%fw,
+           cellborder = 1pt 1pt 1pt 1pt]{ptable}
+        \begin{row}
+            \cell{\strong{Iterazione}}
+            \cell{\strong{Variabili} \par \strong{di base}}
+            \cell{\strong{Equazione}}
+            \begin[span = 3]{celltable}
+                \begin{row}
+                    \cell[span = 3]{\strong{Coefficiente di:}}
+                \end{row}
+                \begin{row}
+                    \cell{\math{Z}}
+                    \cell{\strong{Variabili originali}}
+                    \cell{\strong{Variabili slack}}
+                \end{row}
+            \end{celltable}
+            \cell{\strong{Termine noto}}
+        \end{row}
+        \begin{row}
+            \cell{0}
+            \begin{celltable}
+                \begin{row}
+                    \cell[border = 1pt 0 1pt 1pt]{\math{Z}}
+                    \cell[border = 1pt 0 1pt 1pt]{(0)}
+                    \cell[border = 1pt 0 1pt 1pt]{1}
+                    \cell[border = 1pt 0 1pt 1pt]{\math{-\bi{c}}}
+                    \cell[border = 1pt 0 1pt 1pt]{\math{\bi{0}}}
+                    \cell[border = 1pt 0 1pt 1pt]{0}
+                \end{row}
+                \begin{row}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{x}_{B}}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{(1, 2, \unicodeellipsis, m)}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{0}}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{A}}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{I}}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{b}}}
+                \end{row}
+            \end{celltable}
+        \end{row}
+        \begin{row}
+            \cell{}
+            \cell{}
+            \cell{}
+            \cell{}
+            \cell{}
+            \cell{}
+            \cell{}
+        \end{row}
+        \begin{row}
+            \cell{\math{i}}
+            \begin{celltable}
+                \begin{row}
+                    \cell[border = 1pt 0 1pt 1pt]{\math{Z}}
+                    \cell[border = 1pt 0 1pt 1pt]{(0)}
+                    \cell[border = 1pt 0 1pt 1pt]{1}
+                    \cell[border = 1pt 0 1pt 1pt]{\math{\bi{c}_{B}\bi{B}^{-1}\bi{A}-\bi{c}}}
+                    \cell[border = 1pt 0 1pt 1pt]{\math{\bi{c}_{B}\bi{B}^{-1}}}
+                    \cell[border = 1pt 0 1pt 1pt]{\math{\bi{c}_{B}\bi{B}^{-1}\bi{b}}}
+                \end{row}
+                \begin{row}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{x}_{B}}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{(1, 2, \unicodeellipsis, m)}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{0}}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{B}^{-1}\bi{A}}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{B}^{-1}}}
+                    \cell[border = 0 1pt 1pt 1pt]{\math{\bi{B}^{-1}\bi{b}}}
+                \end{row}
+            \end{celltable}
+        \end{row}
+    \end{ptable}
+
+    Dalle relazioni presentate si deduce come sia possibile calcolare
+    i valori del sistema di equazioni associato alla \math{i}-esima
+    iterazione del metodo del simplesso ricalcolando solamente
+    \math{\bi{B}} e \math{\bi{c}_{B}} ad ogni iterazione, dato che i
+    valori di \math{\bi{A}}, \math{-\bi{c}} e \math{\bi{b}} sono calcolati
+    alla prima iterazione e rimangono gli stessi in tutte le successive.
+
+    La riga 0 del tableau iniziale é \math{\bi{t} = [\table{-\bi{c} & \bi{0}
+    & 0 \\}]}, mentre le altre rige sono \math{\bi{T} = [\table{\bi{A} &
+    \bi{I} & \bi{b} \\}]}. Dopo ogni iterazione, i coefficienti delle
+    variabili slack nell'\math{i}-esimo tableau diventano \math{\bi{c}_{B}
+    \bi{B}^{-1}} per la riga 0 e \math{\bi{B}^{-1}} per le altre righe. Dopo
+    ogni iterazione, le righe del tableau divengono:
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \mi{Riga} \thickspace 0: \thickspace
+            [\table{-\bi{c} & \bi{0} & 0 \\}] +
+            \bi{c}_{B} \bi{B}^{-1} [\table{\bi{A} & \bi{I} & \bi{b} \\}]
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \mi{Riga} \thickspace (1, \unicodeellipsis, m): \thickspace
+            [\table{-\bi{c} & \bi{0} & 0 \\}] +
+            \bi{c}_{B} \bi{B}^{-1} [\table{\bi{A} & \bi{I} & \bi{b} \\}]
+        \end{math}
+    \end{parbox}
+    \par
+
+    La matrice \math{\bi{B}} e la matrice \math{\bi{c}_{B}} cambiano ad
+    ogni iterazione, e con la notazione finora presentata non é possibile
+    distinguere fra l'espressione matriciale relativa all'iterazione corrente
+    ed una iterazione generica. Si indichi allora con \math{\bi{B}} la matrice
+    di base specifica per l'ultima iterazione, quella che restituisce il valore
+    ottimo. Siano allora:
+
+    \begin{itemize}
+        \begin{item}
+            \math{\bi{S}* = \bi{B}^{-1}} la matrice che contiene i
+            coefficienti delle variabili slack nelle righe \math{1,
+            \unicodeellipsis, m} dell'ultima iterazione;
+        \end{item}
+        \begin{item}
+            \math{\bi{A}* = \bi{B}^{-1}\bi{A}} la matrice che contiene i
+            coefficienti delle variabili originali nelle righe \math{1,
+            \unicodeellipsis, m} dell'ultima iterazione;
+        \end{item}
+        \begin{item}
+            \math{\bi{y}* = \bi{c}_{B}\bi{B}^{-1}} la matrice che contiene
+            i coefficienti delle variabili slack nella riga 0 dell'ultima
+            iterazione;
+        \end{item}
+        \begin{item}
+            \math{\bi{z}* = \bi{c}_{B}\bi{B}^{-1}\bi{A}},
+            quindi \math{\bi{z}*-\bi{c}} é la matrice che contiene
+            i coefficienti delle variabili originali nella riga 0
+            dell'ultima iterazione;
+        \end{item}
+        \begin{item}
+            \math{Z* = \bi{c}_{B}\bi{B}^{-1}\bi{b}} il valore ottimale della
+            funzione obiettivo;
+        \end{item}
+        \begin{item}
+            \math{\bi{b}* = \bi{B}^{-1}\bi{b}} la matrice che contiene
+            i termini noti delle righe \math{1, \unicodeellipsis, m}
+            dell'ultima iterazione;
+        \end{item}
+    \end{itemize}
+
+    \bigskip
+
+    Per ottenere i valori che compaiono nel tableau finale, é sufficiente 
+    conoscere \math{\bi{t}, \bi{T}, \bi{y}*} e \math{\bi{S}*}. Si ha infatti:
+
+    \begin[mode = display]{math}
+        \{\table[columnalign = left]{
+            \bi{t}* = [\table{-\bi{c} & \bi{0} & 0 \\}] +
+            \bi{c}_{B} \bi{B}^{-1} [\table{\bi{A} & \bi{I} & \bi{b} \\}]
+            = \bi{t} + \bi{y}*\bi{T} = [\table{\bi{y}*\bi{A}
+            - \bi{c} & \bi{y}* & \bi{y}*\bi{b} \\}] \\
+            \bi{T}* = \bi{B}^{-1} [\table{\bi{A} & \bi{I} & \bi{b} \\}]
+            = \bi{S}*\bi{T} = [\table{\bi{S}*\bi{A} & \bi{S}* & 
+            \bi{S}*\bi{b} \\}] \\
+        }
+    \end{math}
+
+    \begin{example}
+        Si consideri il problema precedente e le matrici a questo associate:
+
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \bi{A} =
+                {[\table{
+                    1 & 0 \\
+                    0 & 2 \\
+                    3 & 2 \\
+                }]}
+            \end{math}
+        \end{parbox}
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \bi{b} =
+                {[\table{
+                    4 \\
+                    12 \\
+                    18 \\
+                }]}
+            \end{math}
+        \end{parbox}
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                -\bi{c} =
+                {[\table{
+                    -3 & -5 \\
+                }]}
+            \end{math}
+        \end{parbox}
+        \par
+
+        Le matrici relative all'ultima iterazione del metodo del simplesso sono:
+
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \bi{B} =
+                {[\table{
+                    1 & 0 & 0 \\
+                    0 & 2 & 0 \\
+                    0 & 2 & 3 \\
+                }]}
+            \end{math}
+        \end{parbox}
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \bi{B}^{-1} =
+                {[\table{
+                    0 & \frac{1}{2} & -\frac{1}{2} \\
+                    0 & \frac{1}{2} & 0 \\
+                    0 & -\frac{1}{2} & \frac{1}{2} \\
+                }]}
+            \end{math}
+        \end{parbox}\begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \bi{c}_{B} =
+                {[\table{
+                    0 & 5 & 3 \\
+                }]}
+            \end{math}
+        \end{parbox}
+        \par
+
+        Entrambe le uguaglianze sono soddisfatte:
+
+        \begin[mode = display]{math}
+            \bi{t}* = \bi{t} + \bi{y}*\bi{T}
+            \thickspace \Rightarrow \thickspace
+            {[\table{
+                0 & 0 & 0 & \frac{3}{2} & 1 & 36 \\
+            }]} =
+            {[\table{
+                -3 & -5 & 0 & 0 & 0 & 0 \\
+            }]} +
+            {[\table{
+                0 & 5 & 3 \\
+            }]}
+            {[\table{
+                0 & \frac{1}{2} & -\frac{1}{2} \\
+                0 & \frac{1}{2} & 0 \\
+                0 & -\frac{1}{2} & \frac{1}{2} \\
+            }]}
+            {[\table{
+                1 & 0 & 1 & 0 & 0 & 4 \\
+                0 & 2 & 0 & 1 & 0 & 12 \\
+                3 & 2 & 0 & 0 & 1 & 18 \\
+            }]}
+        \end{math}
+
+        \begin[mode = display]{math}
+            \bi{T}* = \bi{S}*\bi{T}
+            \thickspace \Rightarrow \thickspace
+            {[\table{
+                0 & 0 & 1 & \frac{1}{3} & -\frac{1}{3} & 2 \\
+                0 & 1 & 0 & \frac{1}{2} & 0 & 6 \\
+                1 & 0 & 0 & -\frac{1}{3} & \frac{1}{3} & 2 \\
+            }]} =
+            {[\table{
+                0 & \frac{1}{2} & -\frac{1}{2} \\
+                0 & \frac{1}{2} & 0 \\
+                0 & -\frac{1}{2} & \frac{1}{2} \\
+            }]}
+            {[\table{
+                1 & 0 & 1 & 0 & 0 & 4 \\
+                0 & 2 & 0 & 1 & 0 & 12 \\
+                3 & 2 & 0 & 0 & 1 & 18 \\
+            }]}
+        \end{math}
+    \end{example}
+
+\end{sile}

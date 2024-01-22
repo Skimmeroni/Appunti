@@ -1,0 +1,255 @@
+\begin{sile}
+
+	Sia \math{V} un insieme di elementi dello stesso tipo. Siano poi definite su
+	questo insieme (almeno) due operazioni: una \strong{somma di vettori componente
+	per componente} ed un \strong{prodotto fra un vettore ed uno scalare}. La prima
+	associa a ciascuna coppia di elementi \math{(\bi{v}_{1}, \bi{v}_{2})} uno
+	ed un solo elemento di \math{V}, indicato con \math{\bi{v}_{1} + \bi{v}_{2}}, 
+	mentre la seconda associa associa ad ogni numero reale \math{\alpha} ed ad 
+	ogni elemento \math{\bi{v} \in V} uno ed un solo elemento di \math{V}, 
+	indicato con \math{\alpha \cdot \bi{v}} o semplicemente con \math{\alpha 
+	\bi{v}}. Si supponga che l'insieme \math{V} possieda tutte le seguenti 
+	proprietá:
+
+	\begin{enumerate}
+		\begin{item}
+			\begin{math}
+				\bi{v}_{1} + \bi{v}_{2} = \bi{v}_{2} + \bi{v}_{1} \thickspace
+				\forall \bi{v}_{1}, \bi{v}_{2} \in V
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				(\bi{v}_{1} + \bi{v}_{2}) + \bi{v}_{3} = 
+				\bi{v}_{1} + (\bi{v}_{2} + \bi{v}_{3}) \thickspace
+				\forall \bi{v}_{1}, \bi{v}_{2}, \bi{v}_{3} \in V
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				\exists \bi{0} \in V t.c. \bi{v} + \bi{0} = \bi{v} \thickspace
+				\forall \bi{v} \in V
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				\forall \bi{v} \in V \thickspace \exists \thickspace \bi{-v} \thickspace
+				t.c. \thickspace \bi{v} + (\bi{-v}) = 0
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				(\alpha \beta) \bi{v} = \alpha (\beta \bi{v}) \thickspace
+				\forall \bi{v} \in V \wedge \forall \alpha, \beta \in \dsi{R}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				\alpha (\bi{v}_{1} + \bi{v}_{2}) = 
+				\alpha \bi{v}_{1} + \alpha \bi{v}_{2} \thickspace
+				\forall \bi{v}_{1}, \bi{v}_{2} \in V \wedge \forall \alpha \in \dsi{R}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				(\alpha + \beta) \bi{v} = \alpha \bi{v} + \beta \bi{v} \thickspace
+				\forall \bi{v} \in V \wedge \forall \alpha, \beta \in \dsi{R}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				1 \cdot \bi{v} = \bi{v} \thickspace \forall \bi{v} \in V
+			\end{math}
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	Se questo é vero, \math{V} é allora detto \strong{spazio vettoriale} ed i suoi 
+	elementi prendono il nome di \strong{vettori}. Dalle proprietá sopra citate é
+	possibile immediatamente dedurne altre, fra le quali:
+
+	\begin{itemize}
+		\begin{item}
+			\begin{math}
+				\bi{v}_{1} + \bi{v}_{2} = \bi{v}_{2} + \bi{v}_{3} 
+				\Rightarrow \bi{v}_{1} = \bi{v}_{3}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				\exists ! \bi{x} = \bi{v}_{2} + 
+				(\bi{-v}_{1}) \thickspace t.c. \thickspace \bi{v}_{1} + \bi{x} = \bi{v}_{2}  
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				0 \bi{v} = 0 \thickspace \forall \bi{v} \in V
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				\alpha \bi{0} = 0 \thickspace \forall \alpha \in \dsi{R}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				(-1)\bi{v} = \bi{-v} \thickspace \forall \bi{v} \in V
+			\end{math}
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Uno spazio vettoriale puó essere contenuto in uno spazio vettoriale piú 
+	ampio: si parla in questo caso di \strong{sottospazio vettoriale}. Dato
+	\math{V} uno spazio vettoriale e \math{S} un sottoinsieme non vuoto di
+	\math{V} (\math{S\subseteq V}), si ha che \math{S} é un sottospazio
+	vettoriale di \math{V} se valgono (almeno) le seguenti due proprietá:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			\bi{v}_{1}, \bi{v}_{2} \in S \Rightarrow (\bi{v}_{1} + \bi{v}_{2}) \in S
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			\bi{v} \in S \Rightarrow (\alpha \bi{v}) \in S \thickspace 
+			\forall \alpha \in \dsi{R}
+		\end{math}
+	\end{parbox}
+	\par
+
+	Ogni spazio vettoriale \math{V} ha sempre almeno due sottospazi vettoriali: 
+	sé stesso e \math{\bi{0}}. Il primo é detto \strong{sottospazio improprio}, 
+	il secondo \strong{sottospazio banale}.
+
+	Sia \math{V} uno spazio vettoriale qualsiasi e siano \math{\bi{v}_{1}, 
+	\bi{v}_{2}, \unicodeellipsis, \bi{v}_{n}} dei vettori di \math{V}. Siano 
+	poi \math{a_{1}, a_{2}, \unicodeellipsis, a_{n}} dei coefficienti reali non 
+	necessariamente distinti. É detta \strong{combinazione lineare} dei vettori 
+	\math{\bi{v}_{1}, \bi{v}_{2}, \unicodeellipsis, \bi{v}_{n}} ogni somma 
+	del tipo:
+
+	\begin[mode = display]{math}
+		\sum_{i = 1}^{n} a_{i}\bi{v}_{i} = a_{1}\bi{v}_{1} + 
+		a_{2}\bi{v}_{2} + \unicodeellipsis + a_{n}\bi{v}_{n}
+	\end{math}
+
+	L'insieme di tutte le (infinite) combinazioni lineari dei vettori 
+	\math{\bi{v}_{1}, \bi{v}_{2}, \unicodeellipsis, \bi{v}_{n}} di 
+	\math{V} é un sottospazio vettoriale di \math{V}. In particolare, 
+	questo sottospazio vettoriale viene detto \strong{sottospazio di
+	V generato da} \math{\bi{v}_{1}, \bi{v}_{2}, \unicodeellipsis,
+	\bi{v}_{n}}, indicato con \math{[\bi{v}_{1}, \bi{v}_{2},
+	\unicodeellipsis, \bi{v}_{n}]} oppure con \math{\mi{span}\{\bi{v}_{1},
+	\bi{v}_{2}, \unicodeellipsis, \bi{v}_{n}\}}.
+
+	Un insieme di vettori di uno spazio vettoriale sono \strong{linearmente
+	dipendenti} se esiste una loro combinazione lineare nulla che abbia almeno
+	un coefficiente non nullo. Un insieme di vettori di uno spazio vettoriale
+	sono \strong{linearmente indipendenti} se non sono linearmente dipendenti,
+	ovvero se ogni loro combinazione lineare nulla ha per coefficienti solo
+	valori nulli. Legate alle combinazioni lineari e alla dipendenza ed
+	indipendenza lineare sono le seguenti proprietá degli spazi vettoriali:
+
+	\begin{itemize}
+		\begin{item}
+			Se un vettore \math{\bi{v} \in V} si puó esprimere come una combinazione 
+			lineare dei vettori \math{\bi{v}_{1}, \bi{v}_{2}, \unicodeellipsis, 
+			\bi{v}_{n} \in V}, allora i vettori \math{\bi{v}, \bi{v}_{1}, 
+			\bi{v}_{2}, \unicodeellipsis, \bi{v}_{n}} sono linearmente dipendenti. 
+			Allo stesso modo, se i vettori \math{\bi{v}_{1}, \bi{v}_{2}, 
+			\unicodeellipsis, \bi{v}_{n} \in V} sono linearmente dipendenti, allora 
+			almeno uno di essi puó essere espresso come una combinazione lineare dei 
+			rimanenti;
+		\end{item}
+		\begin{item}
+			Se un insieme di vettori contiene (almeno) un vettore nullo o (almeno) una 
+			coppia di vettori uguali, allora quei vettori sono linearmente dipendenti;
+		\end{item}
+		\begin{item}
+			Un vettore \math{\bi{v} \in V} non nullo preso singolarmente é sempre 
+			linearmente indipendente. Questo perché se \math{\bi{v} \ne 0}, allora 
+			si ha \math{\alpha \bi{v} = 0}, con il coefficiente \math{\alpha} non 
+			nullo;
+		\end{item}
+		\begin{item}
+			Sia \math{S_{1}} un insieme di \math{n} vettori \math{\bi{v}_{1}, 
+			\bi{v}_{2}, \unicodeellipsis, \bi{v}_{n} \in V} linearmente dipendenti. 
+			Sia \math{S_{2}} l'insieme di \math{m} vettori costruito aggiungendo ad 
+			\math{S_{1}} i vettori \math{\bi{v}_{n + 1}, \bi{v}_{n + 2}, 
+			\unicodeellipsis, \bi{v}_{m} \in V}, questi non necessariamente 
+			linearmente dipendenti. A prescindere da quali siano i vettori 
+			\math{\bi{v}_{n + 1}, \bi{v}_{n + 2}, \unicodeellipsis, \bi{v}_{m}},
+			i vettori in \math{S_{2}} sono linearmente dipendenti;
+		\end{item}
+		\begin{item}
+			Sia \math{S_{1}} un insieme di \math{n} vettori \math{\bi{v}_{1}, 
+			\bi{v}_{2}, \unicodeellipsis, \bi{v}_{n} \in V} linearmente 
+			indipendenti. Sia \math{S_{2}} l'insieme non vuoto costruito rimuovendo 
+			da \math{S_{1}} un numero qualsiasi (anche nessuno) di vettori. I vettori 
+			in \math{S_{2}} sono linearmente indipendenti;
+		\end{item}
+		\begin{item}
+			Se i vettori \math{\bi{w}, \bi{v}_{1}, \bi{v}_{2}, \unicodeellipsis, 
+			\bi{v}_{n} \in V} sono linearmente dipendenti ma \math{\bi{v}_{1}, 
+			\bi{v}_{2}, \unicodeellipsis, \bi{v}_{n}} sono linearmente indipendenti, 
+			allora \math{\bi{w}} é una combinazione lineare di \math{\bi{v}_{1}, 
+			\bi{v}_{2}, \unicodeellipsis, \bi{v}_{n}}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Uno spazio vettoriale \math{V} ha \strong{dimensione finita} se esiste (almeno) 
+	un insieme di vettori \math{\bi{v}_{1}, \bi{v}_{2}, \unicodeellipsis, 
+	\bi{v}_{n} \in V} che \strong{generano} tutto \math{V}, cioé tali per cui 
+	ogni elemento di \math{V} puó essere espresso come combinazione lineare di 
+	\math{\bi{v}_{1}, \bi{v}_{2}, \unicodeellipsis, \bi{v}_{n}}. Se uno 
+	spazio vettoriale non ha dimensione finita, si dice allora che ha 
+	\strong{dimensione infinita}.
+
+	Un insieme di vettori linearmente indipendenti che generano uno spazio 
+	vettoriale é detto \strong{base} dello spazio vettoriale. Allo stesso modo, 
+	ogni vettore di uno spazio vettoriale puó essere espresso come combinazione 
+	lineare degli elementi di una sua qualsiasi base. Valgono le seguenti 
+	proprietá:
+
+	\begin{itemize}
+		\begin{item}
+			Se uno spazio vettoriale non vuoto ha dimensione finita, allora ha 
+			sicuramente almeno una base;
+		\end{item}
+		\begin{item}
+			Se \math{v} é un vettore di uno spazio vettoriale espresso come combinazione
+			lineare di una sua base, i coefficienti di questa combinazione lineare sono 
+			univoci. Questi prendono il nome di \strong{coordinate} o \strong{componenti};
+		\end{item}
+		\begin{item}
+			Il numero di elementi di ogni base di ogni spazio vettoriale \math{V} é 
+			sempre lo stesso. Questa quantitá viene chiamata \strong{dimensione} di \math{V} 
+			e viene indicata con \math{\mi{dim}(V)};
+		\end{item}
+		\begin{item}
+			Un sottospazio vettoriale di \math{V} ha sempre dimensione minore o uguale 
+			a \math{V}. In particolare, se un sottospazio vettoriale di \math{V} ha la 
+			stessa dimensione di \math{V}, allora quel sottospazio é \math{V} stesso;
+		\end{item}
+		\begin{item}
+			Una qualsiasi base di un sottospazio \math{V} contiene il massimo numero 
+			di vettori linearmente indipendenti che é possibile avere in \math{V}. 
+			Viceversa, se un qualsiasi insieme di vettori di \math{V} linearmente 
+			indipendenti é formato da tanti elementi quanti \math{\mi{dim}(V)}, allora
+			quell'insieme é una base per \math{V}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Fra le basi di uno spazio vettoriale figura per importanza la \strong{base 
+	canonica}, ovvero la base "piú semplice possibile" per quello spazio 
+	vettoriale. La definizione di base canonica differisce per ciascuno spazio
+	vettoriale.
+
+\end{sile}

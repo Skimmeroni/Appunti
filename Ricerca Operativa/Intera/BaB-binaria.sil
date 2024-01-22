@@ -1,0 +1,468 @@
+\begin{sile}
+
+    L'unica significativa distinzione fra i problemi di programmazione
+    lineare ed i problemi di programmazione binaria é nel dominio dal
+    quale tali variabili provengono. Infatti, tutte le altre ipotesi 
+    che sostengono i due modelli (proporzionalitá, additivitá, certezza)
+    sono le medesime. Dato che la differenza fra i due modelli sembrerebbe
+    essere marginale, ci si chiede allora cosa accadrebbe se si tentasse di
+    risolvere un problema di programmazione binaria semplicemente applicando
+    il metodo del simplesso, cosí come é stato formulato in precedenza.
+
+    Innanzitutto, occorre puntualizzare come il metodo del simplesso sfrutti
+    l'esistenza di una regione ammissibile di un piano \math{n}-dimensionale,
+    avente vertici che sono a loro volta potenziali soluzioni ottimali (anzi,
+    sono proprio tali soluzioni ad essere le uniche che il metodo del simplesso 
+    prende in considerazione). Nel caso della programmazione binaria, questo
+    non si verifica sempre, perché gli estremi della regione ammissibile non
+    sono necessariamente numeri interi, e quindi non sono necessariamente 
+    soluzioni ammissibili.
+
+    Si potrebbe pensare di aggirare questo sconveniente approssimando, se 
+    necessario, la soluzione ottimale restituita dal metodo del simplesso
+    applicato al problema di programmazione binaria alla soluzione intera
+    piú vicina. Tuttavia, questo approccio non garantisce di restituire una
+    soluzione ammissibile, dato che la soluzione intera piú vicina a quella
+    restituita dal metodo del simplesso potrebbe non essere parte della
+    regione ammissibile.
+
+    \begin{example}
+        \begin[width = 40%fw, valign = middle]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    Z = x_{2} \\
+                    -x_{1} + x_{2} \leq \frac{1}{2} \\
+                    x_{1} + x_{2} \leq \frac{7}{2} \\
+                    x_{1} \geq 0, \thickspace x_{2} \geq 0 \\
+                    x_{1}, x_{2} \in \dsi{Z} \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 60%fw, strut = character, valign = middle]{parbox}
+            \center{\img[src = Intera/pli.pdf, width = 67.5%fw]}
+        \end{parbox}
+        \par
+
+        Si consideri il problema di programmazione lineare intera sopra
+        presentato. Se si tralascia il vincolo che ciascuna variabile
+        debba essere intera e si applica il metodo del simplesso, si
+        ottiene la soluzione \math{(\frac{3}{2}, 2)}. Si noti peró come
+        approssimare tale soluzione ad una delle due soluzioni intere
+        piú vicine, sia questa \math{(1, 2)} o \math{(2, 2)}, restituisce
+        comunque una soluzione non ammissibile.
+    \end{example}
+
+    Inoltre, anche ammesso che la soluzione intera piú vicina a quella
+    restituita dal metodo del simplesso sia contenuta nella regione
+    ammissibile del problema, non vi é garanzia che tale soluzione
+    intera sia la soluzione ottimale.
+
+    \begin{example}
+        \begin[width = 40%fw, valign = middle]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    Z = x_{1} + 5x_{2} \\
+                    x_{1} + 10x_{2} \leq 20 \\
+                    x_{1} \leq 2 \\
+                    x_{1} \geq 0, \thickspace x_{2} \geq 0 \\
+                    x_{1}, x_{2} \in \dsi{Z} \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 60%fw, strut = character, valign = middle]{parbox}
+            \center{\img[src = Intera/pli2.pdf, width = 50%fw]}
+        \end{parbox}
+        \par
+
+        Si consideri il problema di programmazione lineare intera sopra
+        presentato. Se si tralascia il vincolo che ciascuna variabile
+        debba essere intera e si applica il metodo del simplesso, si
+        ottiene la soluzione \math{(2, \frac{9}{5})}, alla quale é associato
+        il valore della funzione obiettivo \math{Z = 11}. Approssimando tale
+        soluzione alla soluzione intera piú vicina si ottiene la soluzione
+        ammissibile \math{(2, 1)}. Questa é peró molto lontana dall'essere
+        la soluzione ottima del problema, che é \math{(0, 2)}. Infatti, per
+        la soluzione \math{(2, 1)} si ha \math{Z = 7}, mentre per la soluzione
+        \math{(0, 2)} si ha \math{Z = 10}.
+    \end{example}
+
+    Il fatto che i problemi di programmazione binaria abbiano un numero
+    di soluzioni finito potrebbe indurre a pensare che questi possano
+    essere risolti semplicemente per esaustione, ovvero calcolando il
+    valore della funzione obiettivo per ciascuna possibile soluzione
+    ammissibile e cercando quella che ne massimizza o ne minimizza il
+    valore. Questo é certamente vero, ma occorre ricordare che il numero
+    di soluzioni ammissibili di un problema di programmazione lineare
+    aumenta esponenzialmente con l'aumentare delle variabili, e anche
+    per problemi di dimensione contenuta valutare ogni singola soluzione
+    possibile sarebbe impraticabile.
+
+    \begin{example}
+        Si consideri un problema di programmazione lineare intera avente
+        \math{n = 100} variabili binarie e nessun vincolo. Il numero totale
+        di possibili soluzioni di tale problema é pari a \math{2^{100} =
+        1,26 \times 10^{30}}. Assumendo che il valore della funzione obiettivo
+        restituito da una soluzione possa essere calcolato in \math{10^{-11}}
+        secondi (stima estremamente generosa), per controllare ogni singola
+        soluzione di tale problema sarebbero comunque necessari circa 400
+        anni di computazione ininterrotta.
+    \end{example}
+
+    Tale approccio funzionerebbe se fosse possibile ridurre il numero
+    di potenziali soluzioni ottimali ad una quantitá sufficientemente
+    maneggevole. Il metodo \strong{Branch-and-Bound}, presentato di
+    seguito, opera precisamente in questo modo. Tale metodo partiziona
+    l'intero insieme delle soluzioni ammissibili in insiemi sempre piú
+    piccoli, determina un limite superiore per la soluzione del problema
+    nel sottoinsieme e scarta i sottoinsiemi che non possono contenere
+    la soluzione ottima. Queste tre fasi vengono chiamate rispettivamente
+    \strong{branching}, \strong{bounding} e \strong{fathoming}.
+
+    \begin{itemize}
+        \begin{item}
+            Un singolo passo di branching prevede di fissare il valore di
+            una delle variabili e considerare tutti i sottoproblemi che ne
+            conseguono. Nel caso della programmazione binaria una variabile
+            puó assumere soltanto due valori, pertanto un passo di branching
+            applicato ad un problema di programmazione binaria genera due
+            sottoproblemi ad ogni iterazione.
+
+            La variabile che viene usata per eseguire questa
+            suddivisione ad ogni iterazione fissandone il valore
+            é chiamata \strong{variabile di branching}. La scelta
+            di una certa variabile di branching piuttosto che un'altra
+            non inficia la correttezza del metodo branch-and-bound, ma
+            solo la velocitá con la quale questo viene terminato. Sebbene
+            esistano diverse procedure raffinate con le quali stimare quale
+            sia la variabile di branching che fará terminare il metodo piú
+            in fretta possibile, per semplicitá é possibile scegliere sempre
+            la \math{i}-esima variabile per la \math{i}-esima iterazione. 
+
+            I sottoproblemi che vengono mano a mano generati possono
+            essere descritti mediante una struttura ad albero, chiamata
+            \strong{albero delle soluzioni}. Ciascun nodo rappresenta
+            il valore a cui una certa variabile viene fissata, ciascun
+            \math{i}-esimo livello dell'albero rappresenta i valori
+            assunti dalla variabile \math{i}-esima e ciascun arco
+            rappresenta la generazione di un nuovo sottoproblema.
+        \end{item}
+        \begin{item}
+            Per ciascun sottoproblema costruito a partire dalla fase di
+            branching si deve ottenere un limite (\em{bound}) su quanto
+            buona possa essere la migliore soluzione ammissibile. Il
+            metodo standard per fare questo consiste nel compiere un
+            \strong{rilassamento} del sottoproblema, ovvero sostituirne
+            una ipotesi con un'altra meno stringente. Nel caso della
+            programmazione binaria, il rilassamento piú usato prevede di
+            imporre che le variabili possano anche assumere valori reali
+            e non solo valori binari; in questo modo, una soluzione al
+            sottoproblema puó essere ottenuta applicando il metodo del
+            simplesso.
+
+            Come giá detto in precedenza, tale soluzione non sará
+            necessariamente intera e nemmeno necessariamente ottimale,
+            ma ció che interessa é l'utilizzarla come limite. Infatti,
+            se il problema originale é un problema di ottimizzazione di
+            massimo, la sua soluzione ottimale non potrá mai restituire
+            un valore della funzione obiettivo superiore a quello della
+            soluzione ottenuta dal problema rilassato (usando il metodo
+            del simplesso). Allo stesso modo, se é un problema di
+            ottimizzazione di minimo, la sua soluzione ottimale non potrá
+            mai restituire un valore della funzione obiettivo inferiore a
+            quello della soluzione ottenuta dal problema rilassato.
+
+            La migliore soluzione ammissibile finora trovata per il
+            problema originario prende il nome di \strong{soluzione
+            incombente}. Di tale soluzione si ha interesse a memorizzare
+            il relativo valore della funzione obiettivo, indicato con
+            \math{Z*}. Inizialmente, a tale quantitá viene assegnato
+            \math{-\infty}, e nel corso delle successive iterazioni
+            tale valore viene migliorato.
+        \end{item}
+        \begin{item}
+            Un sottoproblema puó essere soppresso (\em{fathomed}) se
+            rispetta diversi criteri. Innanzitutto, se il metodo del
+            simplesso applicato ad un sottoproblema rilassato restituisce
+            una soluzione avente bound inferiore a quello della soluzione
+            incombente, allora tale problema puó essere scartato, perché
+            le soluzioni ottimali che tale sottoproblema e tutti i
+            sottoproblemi che ne derivano non forniranno mai soluzioni
+            migliori di quella incombente.
+
+            Inoltre, se il metodo del simplesso applicato ad un sottoproblema
+            rilassato restituisce direttamente una soluzione intera, tale
+            soluzione sará anche la soluzione ottimale per il problema non
+            rilassato. In questo caso, qualsiasi rilassamento ulteriore del
+            sottoproblema non porterá mai ad una soluzione migliore di quanto
+            questa possa essere. Inoltre, se tale soluzione intera ha un
+            valore della funzione obiettivo maggiore di quello della soluzione
+            incombente attuale, allora la soluzione intera in questione puó
+            essere scelta come nuova soluzione incombente.
+
+            Infine, molto semplicemente, se un sottoproblema non ha alcuna
+            soluzione ammissibile puó essere scartato, perché anche tutti
+            i sottoproblemi che ne derivano non ne avranno. 
+        \end{item}
+    \end{itemize}
+
+    \bigskip
+
+    Alla luce di quanto detto finora, é possibile esporre l'algoritmo per
+    l'applicazione del metodo branch-and-bound ai problemi di programmazione
+    binaria:
+
+    \begin{enumerate}
+        \begin{item}
+            \math{Z*}, il valore della funzione obiettivo per la soluzione
+            incombente, viene inizializzato a \math{-\infty};
+        \end{item}
+        \begin{item}
+            Se il problema originale é un problema di ottimizzazione di
+            minimo, lo si converta in un problema di ottimizzazione di 
+            massimo equivalente;
+        \end{item}
+        \begin{item}
+            Si convertano tutti i vincoli del problema originale nella forma
+            \math{x_{j} \in \{0, 1\}} in vincoli nella forma \math{0 \leq
+            x_{j} \leq 1}.
+        \end{item}
+        \begin{item}
+            \em{Branching}. Si scelga uno fra tutti i possibili sottoproblemi
+            ancora aperti (se questa é la prima iterazione, il problema é uno
+            solo e coincide con il problema originale). Si fissi il valore
+            della \math{i}-esima variabile, generando cosí due sottoproblemi;
+        \end{item}
+        \begin{item}
+            \em{Bounding}. Per ogni nuovo sottoproblema si ottenga un limite
+            superiore alla soluzione del problema originale applicando il
+            metodo del simplesso al sottoproblema rilassato. Se la soluzione
+            approssimata cosí ottenuta non fornisce un valore intero per
+            la soluzione obiettivo, tale valore viene approssimato per
+            difetto;
+        \end{item}
+        \begin{item}
+            \em{Fathoming}. Per ogni nuovo sottoproblema si valuti se é
+            possibile scartarlo. Questo avviene se é rispettato uno dei
+            tre criteri:
+
+            \begin{itemize}
+                \begin{item}
+                    Il sottoproblema rilassato non possiede alcuna soluzione
+                    ottima;
+                \end{item}
+                \begin{item}
+                    La soluzione fornita dal sottoproblema rilassato
+                    restituisce un valore per la funzione obiettivo
+                    inferiore a quello della soluzione incombente;
+                \end{item}
+                \begin{item}
+                    La soluzione fornita dal sottoproblema rilassato é una
+                    soluzione intera.
+                \end{item}
+            \end{itemize}
+        \end{item}
+        \begin{item}
+            Se la soluzione approssimata fornita dal sottoproblema
+            rilassato é una soluzione intera ed il valore della
+            funzione obiettivo a questa associata é superiore al 
+            valore di \math{Z*}, tale valore sostituisce \math{Z*};
+        \end{item}
+        \begin{item}
+            Se vi sono ancora dei sottoproblemi da eliminare, l'algoritmo
+            riprende dal punto 4, altrimenti si procede oltre;
+        \end{item}
+        \begin{item}
+            L'algoritmo termina e \math{Z*} é il valore della funzione
+            obiettivo associato alla soluzione ottimale. Tale soluzione
+            puó venire eventualmente ricostruita ripercorrendo a ritroso
+            l'albero delle soluzioni.
+        \end{item}
+    \end{enumerate}
+
+    \begin{example}
+        \begin[width = 65%fw, valign = middle]{parbox}
+            Si consideri il problema di programmazione binaria presentato di
+            seguito. Una soluzione ottimale per tale problema puó essere ottenuta
+            applicando il metodo branch-and-bound.
+
+            Tale problema é un problema di ottimizzazione di massimo, pertanto
+            é giá nella forma desiderata. Occorre sostituire solamente i vincoli 
+            \math{x_{j} \in \{0, 1\}} con vincoli \math{0 \leq x_{j} \leq 1}.
+
+            Impostando la variabile \math{x_{1}} prima a 0 e poi a 1 del
+            problema originale si ottengono i due sottoproblemi seguenti:
+        \end{parbox}
+        \begin[width = 35%fw, strut = character, valign = middle]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 9x_{1} + 5x_{2} + 6x_{3} + 4x_{4} \\
+                    6x_{1} + 3x_{2} + 5x_{3} + 2x_{4} \leq 10 \\
+                    x_{3} + x_{4} \leq 1 \\
+                    -x_{1} + x_{3} \leq 0 \\
+                    -x_{2} + x_{4} \leq 0 \\
+                    x_{j} \in \{0, 1\} \thickspace \mi{per} \thickspace j = 1, 2, 3, 4 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 5x_{2} + 6x_{3} + 4x_{4} \\
+                    3x_{2} + 5x_{3} + 2x_{4} \leq 10 \\
+                    x_{3} + x_{4} \leq 1 \\
+                    x_{3} \leq 0 \\
+                    -x_{2} + x_{4} \leq 0 \\
+                    0 \leq x_{j} \leq 1 \thickspace \mi{per} \thickspace j = 2, 3, 4 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 9 + 5x_{2} + 6x_{3} + 4x_{4} \\
+                    3x_{2} + 5x_{3} + 2x_{4} \leq 4 \\
+                    x_{3} + x_{4} \leq 1 \\
+                    x_{3} \leq 1 \\
+                    -x_{2} + x_{4} \leq 0 \\
+                    0 \leq x_{j} \leq 1 \thickspace \mi{per} \thickspace j = 2, 3, 4 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Il primo ha soluzione ottima \math{(1, 0, 1)} con \math{Z = 9},
+        e puó essere eliminato perché rispetta il terzo criterio di
+        fathoming. Il secondo ha soluzione ottima \math{(\frac{4}{5}, 0,
+        \frac{4}{5})}, con \math{Z = 16.2} (arrotondato a 16), e non
+        rispetta alcun criterio di fathoming. Inoltre, avendo il primo
+        problema una soluzione intera il cui valore della funzione obiettivo
+        é superiore a quello di \math{Z*}, si impone \math{Z* = 9}. 
+
+        L'unico sottoproblema rimasto é quello con \math{x_{1} = 1}.
+        Impostando la variabile \math{x_{2}} prima a 0 e poi a 1 in
+        quest'ultimo si ottengono i due sottoproblemi seguenti:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 9 + 6x_{3} + 4x_{4} \\
+                    5x_{3} + 2x_{4} \leq 4 \\
+                    x_{3} + x_{4} \leq 1 \\
+                    x_{3} \leq 1 \\
+                    x_{4} \leq 0 \\
+                    0 \leq x_{j} \leq 1 \thickspace \mi{per} \thickspace j = 3, 4 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 14 + 6x_{3} + 4x_{4} \\
+                    5x_{3} + 2x_{4} \leq 1 \\
+                    x_{3} + x_{4} \leq 1 \\
+                    x_{3} \leq 1 \\
+                    x_{4} \leq 1 \\
+                    0 \leq x_{j} \leq 1 \thickspace \mi{per} \thickspace j = 3, 4 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Il primo ha soluzione ottima \math{(\frac{4}{5}, 0)}, con \math{Z =
+        13.2} (arrotondato a 13), mentre il secondo ha soluzione ottima
+        \math{(0, \frac{1}{2})}, con \math{Z = 16}. Nessuno dei due rispetta
+        alcun criterio di fathoming, pertanto vanno mantenuti entrambi.
+        Impostando la variabile \math{x_{3}} prima a 0 e poi a 1 in
+        entrambi si ottengono i quattro sottoproblemi seguenti:
+
+        \begin[width = 25%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 9 + 4x_{4} \\
+                    2x_{4} \leq 4 \\
+                    x_{4} \leq 1 \\
+                    0 \leq 1 \\
+                    x_{4} \leq 0 \\
+                    0 \leq x_{4} \leq 1 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 25%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 15 + 4x_{4} \\
+                    2x_{4} \leq -1 \\
+                    x_{4} \leq 0 \\
+                    1 \leq 1 \\
+                    x_{4} \leq 0 \\
+                    0 \leq x_{4} \leq 1 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 25%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 14 + 4x_{4} \\
+                    2x_{4} \leq 1 \\
+                    x_{4} \leq 1 \\
+                    0 \leq 1 \\
+                    x_{4} \leq 1 \\
+                    0 \leq x_{4} \leq 1 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 25%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 20 + 4x_{4} \\
+                    2x_{4} \leq -4 \\
+                    x_{4} \leq 0 \\
+                    1 \leq 1 \\
+                    x_{4} \leq 1 \\
+                    0 \leq x_{4} \leq 1 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Il primo, il secondo ed il quarto problema non hanno alcuna soluzione
+        ammissibile, pertanto possono essere scartati. Il terzo ha soluzione
+        ottima \math{(\frac{1}{2})} con \math{Z = 16}. Impostando la variabile
+        \math{x_{4}} prima a 0 e poi a 1 in quest'ultimo si ottengono i due
+        sottoproblemi seguenti:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 14 \\
+                    0 \leq 1, 0 \leq 1, 0 \leq 1 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 24 \\
+                    2 \leq -4, 1 \leq 0, 1 \leq 1 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Il primo ha soluzione ottima intera (degenere) con \math{Z = 14} e
+        puó essere eliminato perché rispetta il terzo criterio di fathoming.
+        Il secondo, invece, non ha alcuna soluzione ammissibile, pertanto
+        puó essere scartato. Inoltre, avendo il primo problema una soluzione
+        intera il cui valore della funzione obiettivo é superiore a quello di
+        \math{Z*}, si impone \math{Z* = 14}.
+
+        Non esistendo piú alcun sottoproblema aperto, l'algoritmo termina.
+        Ripercorrendo a ritroso l'albero delle soluzioni, si ottiene la
+        soluzione ottimale per il problema originale \math{(1, 1, 0, 0)}.
+
+        \center{\img[src = Intera/tree.pdf, width = 75%fw]}
+    \end{example}
+
+\end{sile}

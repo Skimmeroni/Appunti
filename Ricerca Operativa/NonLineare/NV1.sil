@@ -1,0 +1,273 @@
+\begin{sile}
+
+    Il caso piú semplice di programmazione nonlineare é un problema di
+    ottimizzazione in una sola variabile, senza vincoli e dove la funzione
+    obiettivo \math{f(x)} é concava. In questo caso, la soluzione ottimale
+    é la soluzione (o le soluzioni) che rendono nulla la derivata prima
+    della funzione obiettivo.
+
+    \begin[mode = display]{math}
+        x* = \frac{df}{dx} f{(x)}
+    \end{math}
+
+    Se la funzione \math{f(x)} é sufficientemente semplice, tale valore puó
+    essere calcolato analiticamente. Se la funzione é particolarmente ostica,
+    é comunque possibile ottenere una approssimazione della soluzione ottima
+    applicando specifici algoritmi.
+
+    Algoritmi di questo tipo si basano sul costruire una sequenza di punti
+    che convergono ad una soluzione ottima. Ad ogni iterazione, a partire
+    dal punto corrente si esegue una ricerca sistematica che culmina con
+    l'identificazione di un punto migliore. La procedura termina quando
+    viene ottenuta un'approssimazione della soluzione ottima sufficientemente
+    buona.
+
+    \subsection{Metodo di bisezione}
+
+        Sia \math{f(x)} una funzione continua e derivabile. Dalla definizione
+        di derivata, si ha:
+
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \frac{df(x)}{dx} > 0 \thickspace \mi{se} \thickspace x < x*
+            \end{math}
+        \end{parbox}
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \frac{df(x)}{dx} = 0 \thickspace \mi{se} \thickspace x = x*
+            \end{math}
+        \end{parbox}
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \frac{df(x)}{dx} < 0 \thickspace \mi{se} \thickspace x > x*
+            \end{math}
+        \end{parbox}
+        \par
+
+        Sia \math{x'} una certa approssimazione della soluzione ottima. Se la
+        derivata prima valutata in \math{x'} é positiva, allora \math{x'} é
+        inferiore alla soluzione ottima. Questo significa che qualsiasi punto
+        nell'intervallo \math{[x', x*)} é una migliore approssimazione per
+        \math{x*} di quanto possa esserlo \math{x'}. Allo stesso modo, se la
+        derivata prima valutata in \math{x'} é negativa, allora \math{x'} é
+        superiore alla soluzione ottima. Questo significa che qualsiasi punto
+        nell'intervallo \math{(x*, x']} é una migliore approssimazione per
+        \math{x*} di quanto possa esserlo \math{x'}. 
+
+        Il \strong{metodo di bisezione} si basa sul ripetere questo processo
+        di raffinamento fino ad ottenere una approssimazione della soluzione
+        ottima che dista da questo meno di un valore fissato \math{\epsilon}.
+        Indicando con \math{x_{L}} una approssimazione per difetto di \math{x*}
+        e con \math{x_{R}} una approssimazione per eccesso di \math{x*}, 
+        l'algoritmo procede come segue:
+
+        \begin{enumerate}
+            \begin{item}
+                Si fissi un certo \math{\epsilon};
+            \end{item}
+            \begin{item}
+                Si calcolino due valori iniziali per \math{x_{L}} e per
+                \math{x_{R}}. Tali valori devono essere scelti tali per
+                cui la funzione é continua in \math{[x_{L}, x_{R}]} e
+                \math{f(x_{L})} e \math{f(x_{R})} hanno segno opposto;
+            \end{item}
+            \begin{item}
+                Si calcoli l'approssimazione \math{x'} di \math{x*} come
+                \math{x' = x_{R} - x_{L} / 2};
+            \end{item}
+            \begin{item}
+                Si calcoli la derivata prima di \math{f(x)} nel punto
+                \math{x'}. Se tale valore é positivo, allora \math{x_{L}}
+                viene sostituito con \math{x'}, mentre se é negativo
+                \math{x_{R}} viene sostituito con \math{x'};
+            \end{item}
+            \begin{item}
+                Se \math{x_{R} - x_{L} < 2\epsilon}, allora l'algoritmo
+                termina, perché \math{x'} é una approssimazione accettabile
+                di \math{x*}. Altrimenti, si riprende dal punto 3.
+            \end{item}
+        \end{enumerate}
+
+        \begin{example}
+            Si voglia calcolare un valore ottimo della funzione \math{f(x) =
+            12x - 3x^{4} - 2x^{6}}. La derivata prima di tale funzione é
+            \math{f'(x) = 12(1 - x^{3} - x^{5})}, mentre la derivata seconda
+            é \math{f''(x) = -12(3x^{2} + 5x^{4})}.
+
+            Si noti come non sia possibile ricavare analiticamente il valore
+            ottimo della funzione, ovvero calcolare direttamente lo zero della
+            derivata prima, perché tale funzione é un polinomio di quinto
+            grado. Essendo peró \math{f(x)} concava, dato che la derivata
+            seconda é sempre negativa, é possibile applicare il metodo di
+            bisezione.
+
+            Si fissi \math{\epsilon = 0.01}. Come valori iniziali
+            per \math{x_{L}} e \math{x_{R}} é possibile utilizzare
+            rispettivamente i valori -1 e 2: infatti, \math{f(-1)
+            = 36} e \math{f(2) = -24}. Il valore \math{x'} viene
+            allora inizializzato a \math{(2 + (-1)) / 2 = 0.5}. 
+            Applicando il metodo di bisezione, si ottiene il valore 
+            approssimato per \math{x*} pari a 0.833984375
+
+            \begin[cols = 20%fw 20%fw 20%fw 20%fw 20%fw]{ptable}
+                \begin{row}
+                    \cell{\strong{Iterazione}}
+                    \cell{\strong{Derivata in} \math{x'}}
+                    \cell{\math{x_{L}}}
+                    \cell{\math{x_{R}}}
+                    \cell{\strong{Nuovo} \math{x'}}
+                \end{row}
+                \begin{row}
+                    \cell{0} \cell{} \cell{-1} \cell{2} \cell{0.5}
+                \end{row}
+                \begin{row}
+                    \cell{1} \cell{+10.13} \cell{0.5} \cell{2} \cell{1.25}
+                \end{row}
+                \begin{row}
+                    \cell{2} \cell{-48.06} \cell{0.5} \cell{1.25} \cell{0.875}
+                \end{row}
+                \begin{row}
+                    \cell{3} \cell{-2.19} \cell{0.5} \cell{0.875} \cell{0.6875}
+                \end{row}
+                \begin{row}
+                    \cell{4} \cell{+6.26} \cell{0.6875} \cell{0.875} \cell{0.78125}
+                \end{row}
+                \begin{row}
+                    \cell{5} \cell{+2.79} \cell{0.78125} \cell{0.875} \cell{0.828125}
+                \end{row}
+                \begin{row}
+                    \cell{6} \cell{+0.51} \cell{0.828125} \cell{0.875} \cell{0.8515625}
+                \end{row}
+                \begin{row}
+                    \cell{7} \cell{-0.78} \cell{0.828125} \cell{0.8515625} \cell{0.83984375}
+                \end{row}
+                \begin{row}
+                    \cell{8} \cell{-0.12} \cell{0.828125} \cell{0.83984375} \cell{0.833984375}
+                \end{row}
+            \end{ptable}
+        \end{example}
+
+    \subsection{Metodo di Newton}
+
+        Il metodo di bisezione é molto semplice, ma converge molto
+        lentamente ad una soluzione ottima. Un metodo tanto piú veloce
+        quanto piú complesso, che fa uso della derivata seconda della
+        funzione da massimizzare, é il cosiddetto \strong{Metodo di
+        Newton}.
+
+        L'idea alla base del metodo di Newton é quella di approssimare,
+        nell'intorno del punto corrente, la funzione \math{f(x)} con
+        una funzione quadratica, e poi massimizzare (o minimizzare)
+        la funzione approssimata per ottenere un nuovo punto. Questa
+        \strong{approssimazione quadratica} viene fatta troncando la
+        serie di Taylor al secondo termine. In particolare, se \math{x_{i}}
+        é l'approssimazione di \math{x*} alla \math{i}-esima iterazione,
+        allora la serie di Taylor troncata per \math{x_{i + 1}} é:
+
+        \begin[mode = display]{math}
+            f{(x_{i + 1})} \approx f{(x_{i})} + f'{(x_{i})} {(x_{i + 1} - x_{i})} + \frac{f''{(x_{i})} {(x_{i + 1} - x_{i})}^{2}}{2}
+        \end{math}
+
+        Il punto \math{x_{i}} é fissato all'inizio della \math{i}-esima
+        iterazione, e quindi le quantitá \math{f(x_{i})}, \math{f'(x_{i})}
+        e \math{f''(x_{i})} sono costanti nella funzione approssimante a
+        destra. Quindi, essa é una funzione quadratica nella variabile
+        \math{x_{i + 1}}. Inoltre, questa funzione quadratica é una buona
+        approssimazione di \math{f(x_{i + 1})} nell'intorno di \math{x_{i}}
+        ed il suo valore e quello della sua derivata prima e seconda sono
+        esattamente gli stessi per \math{x_{i + 1} = x_{i}}.
+
+        Tale funzione quadratica puó essere massimizzata nella maniera
+        consueta ponendo uguale a zero la sua derivata prima e risolvendo
+        per \math{x_{i + 1}}. Questa derivata prima allora:
+
+        \begin[mode = display]{math}
+            \frac{d}{dx} {(f{(x_{i + 1})})} \approx
+            \frac{d}{dx} {(f{(x_{i})} + f'{(x_{i})} {(x_{i + 1} - x_{i})} + \frac{f''{(x_{i})} {(x_{i + 1} - x_{i})}^{2}}{2})} \approx
+            f'{(x_{i + 1})} \approx f'{(x_{i})} + f''{(x_{i})} {(x_{i + 1} - x_{i})}
+        \end{math}
+
+        Imponendo che la derivata prima della funzione a destra sia zero e
+        risolvendo per \math{x_{i + 1}}, si ottiene:
+
+        \begin[mode = display]{math}
+            f'{(x_{i + 1})} = 0
+            \thickspace \Rightarrow \thickspace
+            f'{(x_{i})} + f''{(x_{i})} {(x_{i + 1} - x_{i})} = 0
+            \thickspace \Rightarrow \thickspace
+            f'{(x_{i})} + f''{(x_{i})} x_{i + 1} - f''{(x_{i})} x_{i} = 0
+            \thickspace \Rightarrow \thickspace
+            f''{(x_{i})} x_{i + 1} = f''{(x_{i})} x_{i} - f'{(x_{i})}
+            \thickspace \Rightarrow \thickspace
+            x_{i + 1} = x_{i} - \frac{f'{(x_{i})}}{f''{(x_{i})}}
+        \end{math}
+
+        Il metodo termina quando la distanza fra \math{x_{i + 1}} e
+        \math{x_{i}} é inferiore ad un valore fissato \math{\epsilon}.
+        L'algoritmo procede come segue:
+
+        \begin{enumerate}
+            \begin{item}
+                Si fissi un certo \math{\epsilon};
+            \end{item}
+            \begin{item}
+                Si ponga \math{i = 1};
+            \end{item}
+            \begin{item}
+                Si scelga un punto iniziale \math{x_{1}};
+            \end{item}
+            \begin{item}
+                Si calcolino \math{f'(x_{i})} e \math{f''(x_{i})};
+            \end{item}
+            \begin{item}
+                Si calcoli \math{x_{i + 1}} come \math{x_{i} - (f'(x_{i}) /
+                f''(x_{i}))};
+            \end{item}
+            \begin{item}
+                Se \math{|x_{i + 1} - x_{i}| \leq \epsilon}, allora l'algoritmo
+                termina, perché \math{x + 1} é una approssimazione accettabile
+                di \math{x*}. Altrimenti, si aumenta \math{i} di 1 e si riprende
+                dal punto 4.
+            \end{item}
+        \end{enumerate}
+
+        \begin{example}
+            Il problema precedente puó essere affrontanto applicando il
+            metodo di Newtown, ottenendo un'approssimazione per \math{x*}
+            molto piú rapidamente di quanto possa fare il metodo di
+            bisezione. Fissato \math{\epsilon = 0.00001}, si ha:
+
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    x_{i + 1} = x_{i} - \frac{f'{(x_{i})}}{f''{(x_{i})}} =
+                    x_{i} - \frac{12 {(1 - x_{i}^{3} - x_{i}^{5})}}{-12
+                    {(3x_{i}^{2} + 5x_{i}^{4})}} = x_{i} + \frac{1 -
+                    x_{i}^{3} - x_{i}^{5}}{3x_{i}^{2} + 5x_{i}^{4}}
+                \end{math}
+            \end{parbox}
+            \begin[width = 50%fw]{parbox}
+                \begin[cols = 20%fw 20%fw 20%fw 20%fw 20%fw]{ptable}
+                    \begin{row}
+                        \cell{\strong{Iterazione}}
+                        \cell{\math{x_{i}}}
+                        \cell{\math{f'(x_{i})}}
+                        \cell{\math{f''(x_{i})}}
+                        \cell{\math{x_{i + 1}}}
+                    \end{row}
+                    \begin{row}
+                        \cell{1} \cell{1} \cell{-12} \cell{-96} \cell{0.875}
+                    \end{row}
+                    \begin{row}
+                        \cell{2} \cell{0.875} \cell{-2.1940} \cell{-62.733} \cell{0.84003}
+                    \end{row}
+                    \begin{row}
+                        \cell{3} \cell{0.84003} \cell{-0.1325} \cell{-55.279} \cell{0.83763}
+                    \end{row}
+                    \begin{row}
+                        \cell{4} \cell{0.83763} \cell{-0.0006} \cell{-54.795} \cell{0.83762}
+                    \end{row}
+                \end{ptable}
+            \end{parbox}
+        \end{example}
+
+\end{sile}

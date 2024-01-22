@@ -1,0 +1,67 @@
+\begin{sile}
+
+    Si consideri ora il problema di massimizzare una funzione
+    \math{f(\bi{x})} a piú variabili, con \math{\bi{x} = (x_{1},
+    x_{2}, \unicodeellipsis, x_{n})}, in cui non esistono vincoli
+    sui valori ammissibili. In questo caso, la soluzione ottimale
+    é la soluzione (o le soluzioni) che rendono nulle tutte le
+    derivate parziali della funzione obiettivo.
+
+    Sia \math{f(\bi{x})} una funzione in \math{n} variabili. Il
+    vettore avente per componenti le derivate \math{n} parziali
+    prime di \math{f(\bi{x})} prende il nome di \strong{vettore
+    gradiente}, o semplicemente \strong{gradiente}:
+
+    \begin[mode = display]{math}
+        \nabla f{(\bi{x})} = {(\frac{\partial f}{\partial x_{1}},
+        \frac{\partial f}{\partial x_{2}}, \unicodeellipsis,
+        \frac{\partial f}{\partial x_{n}})}
+    \end{math}
+
+    Se \math{f(\bi{x})} é differenziabile nel punto \math{\bi{x}_{0}},
+    allora esiste \math{\nabla f(\bi{x}_{0})}, altrimenti il gradiente
+    della funzione in tale punto non é definito.
+
+    Se la funzione \math{f(\bi{x})} é sufficientemente semplice ed
+    é differenziabile nell'intorno di \math{x*}, il suo massimo puó
+    essere calcolato semplicemente ponendo a zero tutte le componenti
+    di \math{\nabla f(\bi{x})} e risolvendo per ciascuna \math{x_{i}}.
+    Se questo non é possibile, una soluzione approssimata puó essere
+    comunque ricavata applicando specifici algoritmi.
+
+    In tal senso, si ricordi che per definizione di gradiente la
+    variazione infinitesimale di \math{\bi{x}} che massimizza il
+    tasso a cui la funzione \math{f(\bi{x})} cresce é una variazione
+    proporzionale a \math{\nabla f(\bi{x})}. Una efficiente procedura
+    di ricerca consisterebbe quindi nel "muoversi" nella direzione del
+    gradiente identificando punti di \math{f(\bi{x})} in cui il gradiente
+    é sempre piú vicino allo zero per tutte le sue componenti.
+
+    \begin{example}
+        Si consideri la funzione \math{f(\bi{x}) = 2xy + 2y - x^{2} - 2y^{2}}.
+        Tale funzione é concava, in quanto la sua matrice Hessiana é
+        semidefinita negativa:
+
+        \begin[mode = display]{math}
+            z^{T}Hz =
+            {[\table{x & y \\}]}
+            {[\table[columnalign = left left]{
+                \frac{\partial^{2} f(x, y)}{\partial x^{2}} &
+                \frac{\partial^{2} f(x, y)}{\partial x \partial y} \\
+                \frac{\partial^{2} f(x, y)}{\partial y \partial x} &
+                \frac{\partial^{2} f(x, y)}{\partial y^{2}} \\
+            }]}
+            {[\table{x \\ y \\}]}
+            =
+            {[\table{x & y \\}]}
+            {[\table[columnalign = right right]{
+                -2 & 2 \\
+                2 & -4 \\
+            }]}
+            {[\table{x \\ y \\}]}
+            = -2x^{2} + 4xy - 4y^{2}
+            = -2 {[{(x - y)}^{2} + y^{2}]}
+        \end{math}
+    \end{example}
+
+\end{sile}

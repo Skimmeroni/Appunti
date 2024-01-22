@@ -1,0 +1,930 @@
+\begin{sile}
+
+	Una \strong{matrice} é un oggetto matematico bidimensionale, rappresentato
+	nelle seguenti forme:
+
+	\begin[width = 40%fw]{parbox}
+		\begin[mode = display]{math}
+			A =
+			(\table{
+				a_{11} & a_{12} & \unicodecdots & a_{1n} \\
+				a_{21} & a_{22} & \unicodecdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{m1} & a_{m2} & \unicodecdots & a_{mn} \\
+			})
+		\end{math}
+	\end{parbox}
+	\begin[width = 60%fw]{parbox}
+		\begin[mode = display]{math}
+			A = (a_{ij}) \thickspace i = 1, \unicodeellipsis, m \wedge 
+			j = 1, \thickspace, n
+		\end{math}
+	\end{parbox}
+	\par
+
+	I numeri reali \math{a_{ij}} sono detti \strong{elementi della matrice},
+	mentre i numeri interi \math{i} e \math{j} sono detti \strong{indici}.
+	I numeri \math{a_{i1}, a_{i2}, \unicodeellipsis, a_{in}} formano una
+	\strong{riga} di una matrice, mentre i numeri \math{a_{1j}, a_{2j},
+	\unicodeellipsis, a_{mj}} formano una \strong{colonna} di una matrice.
+	Il numero di righe e di colonne di una matrice é detto \strong{ordine},
+	e si indica con \math{m \times n}.
+	
+	Due matrici \math{A = (a_{ij})} e \math{B = (b_{ij})} si dicono
+	\strong{uguali} se hanno lo stesso ordine e se \math{(a_{ij}) = (b_{ij})
+	\forall i, j}.
+
+	\begin{example}
+		\begin[mode = display]{math}
+			(\table{
+				3 & -1 & 0 & \pi \\
+				-\frac{3}{4} & 5 & \frac{2}{5} & 0 \\
+				5 & -2 & 9 & \frac{1}{2} \\
+			})
+		\end{math}
+	\end{example}
+
+	Una matrice che abbia \math{m = n} é detta \strong{matrice
+	quadrata di ordine n} (o di ordine \math{m}). Gli elementi
+	\math{a_{11}, a_{22}, \unicodeellipsis, a_{nn}} di una matrice
+	quadrata sono detti \strong{elementi diagonali} e costituiscono
+	la \strong{diagonale} della matrice.
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			A =
+			(\table{
+				a_{11} & a_{12} & \unicodecdots & a_{1n} \\
+				a_{21} & a_{22} & \unicodecdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{n1} & a_{n2} & \unicodecdots & a_{nn} \\
+			})
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			A = (a_{ij}) \thickspace i = 1, \unicodeellipsis, n \wedge
+		 	j = 1, \unicodeellipsis, n
+		\end{math}
+	\end{parbox}
+	\par
+
+	Una matrice é detta \strong{matrice diagonale} se \math{(a_{ij}) = 0} 
+	per \math{i \ne j}, ovvero se tutti gli elementi non diagonali sono
+	nulli (gli elementi diagonali possono anche non essere nulli). Una
+	matrice diagonale particolare é la cosiddetta \strong{matrice identitá},
+	indicata anche con \math{I_{n}}, che ha la diagonale costituita da tutti
+	e soli 1.
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+		A = (\table{
+				a_{11} & 0 & \unicodecdots & 0 \\
+				0 & a_{22} & \unicodecdots & 0 \\
+				\vdots & \vdots & \ddots & \vdots \\
+				0 & 0 & \unicodecdots & a_{nn} \\
+			})
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+		I = (\table{
+				1 & 0 & \unicodecdots & \unicodecdots & 0 \\
+				0 & 1 & \unicodecdots & \unicodecdots & 0 \\
+				\vdots & \vdots & \vdots & \ddots & \unicodecdots \\
+				0 & 0 & \unicodecdots & 0 & 1 \\
+			})
+		\end{math}
+	\end{parbox}
+	\par
+
+	Una matrice i cui elementi sono tutti elementi nulli é detta 
+	\strong{matrice nulla} e si indica con \math{A = (0)} oppure 
+	\math{A = (0_{ij})}.
+
+	\begin[mode = display]{math}
+		A =
+		(\table{
+			0 & 0 & \unicodecdots & 0 \\
+			0 & 0 & \unicodecdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \unicodecdots & 0 \\
+		})
+	\end{math}
+
+	Data una matrice \math{A}, é detta \strong{trasposta} di \math{A} la matrice
+	\math{A^{t}} le cui colonne sono ordinatamente le righe di \math{A}.
+
+	\begin{example}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					1 & 0 & 2 \\
+					\pi & 1 & 3 \\
+					3 & -4 & -2 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				A^{t} =
+				(\table{
+					1 & \pi & 3 \\
+					0 & 1 & -4 \\
+					-2 & 3 & -2 \\
+				})
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+	Una matrice formata da una sola riga e da un certo numero \math{n} di colonne
+	(in altre parole, di ordine \math{1 \times n}) é anche detta \strong{matrice
+	riga}, mentre una matrice formata da una sola colonna e da un certo numero di
+	righe (ordine \math{n \times 1}) é detta \strong{matrice colonna}.
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			A =
+			(\table{
+				a_{11} & a_{12} & \unicodecdots & a_{1n} \\
+			})
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			A =
+			(\table{
+				a_{11} \\
+				a_{21} \\
+				\vdots \\
+				a_{m1} \\
+			})
+		\end{math}
+	\end{parbox}
+	\par
+
+	Una matrice \math{A} é detta \strong{matrice a scala} se in ogni riga il
+	numero di zeri dopo il primo elemento diverso da zero aumenta di riga in
+	riga, fino ad avere eventualmente solo righe nulle (il primo elemento
+	della prima riga puó essere nullo). I primi elementi non nulli di ciascuna
+	riga sono detti \strong{pivot}.
+
+	\begin{example}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					0 & 4 & 1 & 5 & 2 \\
+					0 & 0 & 6 & 1 & 9 \\
+					0 & 0 & 0 & 4 & 1 \\
+					0 & 0 & 0 & 0 & 3 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				B =
+				(\table{
+					2 & 1 & 3 \\
+					0 & 4 & 2 \\
+					0 & 0 & 0 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				C =
+				(\table{
+					1 & 3 & 5 & 0 \\
+					0 & 9 & 0 & 1 \\
+					0 & 0 & -4 & 2 \\
+				})
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+	Sulle matrici é possibile applicare operazioni algebriche. La
+	\strong{somma di matrici} genera, prese due matrici \math{A} e
+	\math{B}, una \strong{matrice somma} \math{A + B} i cui elementi
+	sono ottenuti sommando algebricamente gli elementi corrispondenti
+	delle matrici \math{A} e \math{B}. La somma di matrici é esprimibile
+	come \math{A + B = (a_{ij} + b_{ij})}.
+
+	\begin[width = 30%fw]{parbox}
+		\begin[mode = display]{math}
+			A =
+			(\table{
+				a_{11} & \unicodecdots & a_{1n} \\
+				\vdots & \ddots & \vdots \\
+				a_{m1} & \unicodecdots & a_{mn} \\
+			})
+		\end{math}
+	\end{parbox}
+	\begin[width = 30%fw]{parbox}
+		\begin[mode = display]{math}
+			B =
+			(\table{
+				b_{11} & \unicodecdots & b_{1n} \\
+				\vdots & \ddots & \vdots \\
+				b_{m1} & \unicodecdots & b_{mn} \\
+			})
+		\end{math}
+	\end{parbox}
+	\begin[width = 40%fw]{parbox}
+		\begin[mode = display]{math}
+			A + B =
+			(\table{
+				a_{11} + b_{11} & \unicodecdots & a_{1n} + b_{1n} \\
+				\vdots & \ddots & \vdots \\
+				a_{m1} + b_{m1} & \unicodecdots & a_{mn} + b_{mn} \\
+			})
+		\end{math}
+	\end{parbox}
+	\par
+
+	La somma tra due matrici é possibile solo se queste hanno lo stesso
+	ordine. Si dice in questo caso che le due matrici sono \strong{conformi
+	per la somma}.
+
+	\begin{example}
+		\begin[width = 30%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					3 & 4 & 1 \\
+					2 & 5 & 0 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 30%fw]{parbox}
+			\begin[mode = display]{math}
+				B =
+				(\table{
+					-1 & 2 & 3 \\
+					6 & 7 & -2 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 40%fw]{parbox}
+			\begin[mode = display]{math}
+				A + B =
+				(\table{
+					2 & 6 & 14 \\
+					8 & 12 & -2 \\
+				})
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+	Data una matrice \math{A}, é detta \strong{matrice opposta} di \math{A} la
+	matrice \math{-A} tale per cui \math{A + (-A) = (0_{ij})}
+
+	\begin{example}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				\table{
+					4 & -1 & 2 \\
+					5 & 6 & 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				-A =
+				\table{
+					-4 & 1 & -2 \\
+					-5 & -6 & 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				A + (-A) =
+				\table{
+					0 & 0 & 0 \\
+					0 & 0 & 0 \\
+				}
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+	Il \strong{prodotto di una matrice per uno scalare} genera, presi un
+	numero reale \math{k} e una matrice \math{A}, la matrice \math{kA}
+	ottenuta moltiplicando tutti gli elementi di \math{A} per il numero
+	\math{k}. Possiamo scrivere il prodotto di una matrice per uno scalare
+	come \math{kA = k(a_{ij})}.
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			A =
+			(\table{
+				a_{11} & a_{12} & \unicodecdots & a_{1n} \\
+				a_{21} & a_{22} & \unicodecdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{m1} & a_{m2} & \unicodecdots & a_{mn} \\
+			})
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			kA =
+			(\table{
+				ka_{11} & ka_{12} & \unicodecdots & ka_{1n} \\
+				ka_{21} & ka_{22} & \unicodecdots & ka_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				ka_{m1} & ka_{m2} & \unicodecdots & ka_{mn} \\
+			})
+		\end{math}
+	\end{parbox}
+	\par
+
+	\begin{example}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				k = 2
+				A =
+				(\table{
+					-2 & 3 & 1 \\
+					4 & 5 & 6 \\
+					-3 & 1 & -4 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				kA =
+				(\table{
+					-4 & 6 & 2 \\
+					8 & 10 & 12 \\
+					-6 & 2 & -8 \\
+				})
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+	Il \strong{prodotto tra matrici} (anche detto \strong{prodotto righe per 
+	colonne}) genera, data una matrice \math{A} di ordine \math{m \times p}
+	e una matrice \math{B} di ordine \math{p \times n}, la \strong{matrice
+	prodotto} \math{C} i cui elementi si ottengono come segue:
+
+	\begin[mode = display]{math}
+		C = {(c_{ij})} = \sum_{i = 1}^{p} a_{ik} \cdot b_{kj} =
+		a_{i1}b_{1j} + a_{i2}b_{2j} + \unicodeellipsis + a_{ip}b_{pj}
+		\thickspace i = 1, 2, \unicodeellipsis, m \wedge j = 1, 2, \unicodeellipsis, n
+	\end{math}
+
+	Se due matrici possono essere moltiplicate tra di loro, allora le due matrici
+	sono dette \strong{conformi per il prodotto}. Due matrici sono conformi per
+	il prodotto se il numero di colonne della prima matrice é uguale al numero
+	di righe della seconda matrice. La matrice risultante avrá numero di righe 
+	pari al numero di righe della prima matrice e numero di colonne pari al
+	numero di colonne della seconda matrice.
+
+	\begin{example}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					-1 & 4 \\
+					6 & 1 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				B =
+				(\table{
+					3 & 2 & -4 \\
+					5 & 0 & 2 \\
+				})
+			\end{math}
+		\end{parbox}
+
+		\begin[mode = display]{math}
+			AB =
+			(\table{
+				-1 & 4 \\
+				6 & 1 \\
+			})
+			(\table{
+				3 & 2 & -4 \\
+				5 & 0 & 2 \\
+			})
+			= 
+			(\table{
+				(-1) \cdot 3 + 4 \cdot 5 & (-1) \cdot 2 + 4 \cdot 0 & (-1) \cdot (-4) + 4 \cdot 2 \\
+				6 \cdot 3 + 1 \cdot 5 & 6 \cdot 2 + 1 \cdot 0 & 6 \cdot (-4) + 1 \cdot 2 \\
+			})
+			= 
+			(\table{
+				17 & -2 & 12 \\
+				23 & 12 & -22 \\
+			})
+		\end{math}
+	\end{example}
+
+	L'operazione di prodotto tra matrici differisce dall'operazione di prodotto
+	tra due numeri reali \footnote{É possibile vedere il prodotto fra due numeri
+	reali come il caso particolare del prodotto fra due matrici quadrate di 
+	ordine 1.}:
+
+	\begin{itemize}
+		\begin{item}
+			Il prodotto tra matrici non é commutativo. Date due matrici \math{A} e
+			\math{B}, \math{AB} e \math{BA} non sono (sempre) uguali.
+		\end{item}
+		\begin{item}
+			Matrici diverse possono portare a prodotti di matrici di uguale
+			risultato. Date tre matrici \math{A}, \math{B} e \math{C}, se si
+			verifica \math{AB = AC} non é necessariamente vero che \math{B} e
+			\math{C} siano uguali.
+		\end{item}
+		\begin{item}
+			Il prodotto di due matrici non nulle puó essere nullo. Date due
+			matrici \math{A} e \math{B}, entrambe non nulle, puó comunque
+			verificarsi \math{AB = 0}.
+		\end{item}
+		\begin{item}
+			La matrice identitá e l'elemento neutro della moltiplicazione fra
+			matrici, in quanto \math{AI = IA = A} per qualsiasi matrice \math{A}.
+		\end{item}
+	\end{itemize}
+
+	Il \strong{determinante} di una matrice é un particolare numero associato
+	ad ogni matrice quadrata, indicato con \math{\mi{det}(A)}. Il calcolo del 
+	determinante di una matrice viene fatto per ricorsione. I casi base del
+	procedimento si hanno per le matrici di ordine 1 e 2, il cui determinante
+	é calcolabile in maniera immediata:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			A = 
+			(\table{
+				a_{11} \\
+			})
+		\end{math}
+		\begin[mode = display]{math}
+			\mi{det}(A) = a_{11}
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			A =
+			(\table{
+				a_{11} & a_{12} \\
+				a_{21} & a_{22} \\
+			})
+		\end{math}
+		\begin[mode = display]{math}
+			\mi{det}(A) = a_{11}a_{22} - a_{21}{a}_{12}
+		\end{math}
+	\end{parbox}
+	\par
+
+	Data una matrice quadrata \math{A} di ordine \math{n}, sia
+	\math{{A*}_{ij}} la matrice di ordine \math{n - 1} ottenuta
+	a partire da \math{A} togliendo la \math{i}-esima riga e la
+	\math{j}-esima colonna. Il determinante di \math{A} puó essere
+	ottenuto in funzione del determinante di \math{{A*}_{ij}}
+	mediante la seguente equazione di ricorrenza:
+
+	\begin[mode = display]{math}
+		det(A) = (-1)^{i+1}a_{i1}det({A*}_{i1}) +
+		         (-1)^{i+2}a_{i2}det({A*}_{i2}) +
+		         \unicodeellipsis +
+		         (-1)^{i+n}a_{in}det({A*}_{in})
+	\end{math}
+
+	Questa formula é detta \strong{sviluppo del determinante secondo
+	la i-esima riga di A}. A prescindere da quale sia la riga scelta,
+	il risultato che si ottiene é sempre lo stesso. 
+
+	\begin{theorem}
+		Il determinante di una matrice é uguale al determinante della relativa
+		matrice trasposta. Pertanto, il determinante di una matrice puó essere
+		sviluppato anche secondo le sue colonne.
+	\end{theorem}
+
+	\begin{theorem}
+		Se una matrice ha (almeno) una riga/colonna composta interamente da zeri,
+		il suo determinante é zero.
+
+		\bigskip
+		\strong{Dimostrazione}. Sia \math{A} una matrice la cui \math{i}-esima
+		riga/colonna é composta interamente da zeri. Sviluppando il determinante
+		secondo tale riga/colonna, si ottiene:
+
+		\begin[mode = display]{math}
+			\mi{det}(A) = (-1)^{i+1} \cdot 0 \cdot det({A*}_{i1}) +
+						  \unicodeellipsis + (-1)^{i+n} \cdot 0 \cdot det({A*}_{in}) =
+						  0 + \unicodeellipsis + 0 = 0
+		\end{math}
+	\end{theorem}
+
+	\begin{theorem}
+		Il determinante di una matrice é una funzione omogenea.
+
+		\bigskip
+		\strong{Dimostrazione}. Osservando l'equazione di ricorrenza per il calcolo del
+		determinante, il risultato é immediato:
+
+		\begin[mode = display]{math}
+			\mi{det}(kA) = (-1)^{i+1}ka_{i1}det({A*}_{i1}) +
+										 (-1)^{i+2}ka_{i2}det({A*}_{i2}) +
+										 \unicodeellipsis +
+										 (-1)^{i+n}ka_{in}det({A*}_{in})
+									 = k\mi{det}(A)
+		\end{math}
+	\end{theorem}
+
+	\begin{example}
+		Sviluppare il determinante di una matrice secondo le righe/colonne aventi
+		degli zeri (se esistono) é vantaggioso, perché parte delle computazioni
+		puó venire evitata.
+
+		\begin[mode = display]{math}
+			\mi{det}(\table{
+				-2 & 2 & -3 \\
+				-1 & 1 & 3 \\
+				2 & 0 & -1 \\
+			}) =
+			2 \cdot {(-1)}^{3 + 1}
+			\mi{det}(\table{
+				2 & -3 \\
+				1 & 3 \\
+			}) +
+			0 \cdot {(-1)}^{3 + 2}
+			\mi{det}(\table{
+				-2 & -3 \\
+				-1 & 3 \\
+			}) +
+			{(-1)} \cdot {(-1)}^{3 + 3}
+			\mi{det}(\table{
+				-2 & 2 \\
+				-1 & 1 \\
+			}) = 18
+		\end{math}
+
+		Il determinante é stato sviluppato secondo la terza riga, perché contiene
+		uno zero.
+	\end{example}
+
+	\begin{theorem}
+		\strong{Teorema di Binet}. Date due matrici quadrate, il determinante
+		della loro matrice prodotto é uguale al prodotto dei loro determinanti.
+	\end{theorem}
+
+	La nozione di \strong{dipendenza lineare} e \strong{indipendenza lineare}
+	puó essere declinata nel caso specifico delle matrici. Data una matrice
+	\math{A}, le righe/colonne \math{A_{1}, A_{2}, \unicodeellipsis, A_{m}}
+	di \math{A} si dicono linearmente dipendenti se esistono dei coefficienti
+	\math{k_{1}, k_{2}, \unicodeellipsis, k_{m} \in \bi{R}} non tutti nulli
+	tali che:
+
+	\begin[mode = display]{math}
+		k_{1}A_{1} + k_{2}A_{2} + \unicodeellipsis + k_{m}A_{m} = (0_{ij})
+	\end{math}
+
+	\begin{example}
+		Scegliendo come coefficienti \math{2, -1, 1}, é possibile mostrare come
+		le righe (e quindi le colonne) della matrice presentata di seguito siano
+		linearmente dipendenti.
+
+		\begin[width = 35%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					1 & -2 & 1 \\
+					3 & 4 & 7 \\
+					1 & 8 & 5 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 65%fw]{parbox}
+			\begin[mode = display]{math}
+				2A_{1} - A_{2} + A_{3} = (2,-4,2) - (3,4,7) + (1,8,5) = (0,0,0)
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+	Se le righe/colonne di \math{A} non sono linearmente dipendenti, si
+	dicono linearmente indipendenti. In particolare, le righe/colonne
+	\math{A_{1}, A_{2}, \unicodeellipsis, A_{m}} della matrice \math{A}
+	sono linearmente indipendenti se: 
+
+	\begin[mode = display]{math}
+		k_{1}A_{1} + k_{2}A_{2} + \unicodeellipsis + k_{m}A_{m} = (0)
+		\thickspace \Rightarrow \thickspace
+		k_{1} = 0, k_{2} = 0, \unicodeellipsis, k_{m} = 0 
+	\end{math}
+
+	Se le righe/colonne di una matrice quadrata sono linearmente dipendenti,
+	si dice che tale matrice é una \strong{matrice singolare}. Viceversa, se
+	le righe/colonne di una matrice quadrata sono linearmente indipendenti, 
+	si dice che tale matrice é una \strong{matrice non singolare}.
+
+	\begin{theorem}
+		Se una matrice é singolare, il determinante di tale matrice é zero,
+		e viceversa.
+	\end{theorem}
+
+	Una riga/colonna \math{A_{i}} della matrice \math{A} é combinazione lineare
+	delle altre righe/colonne se esistono \math{a_{1}, a_{2}, \unicodeellipsis,
+	a_{i-1}, a_{i+1}, \unicodeellipsis, a_{n} \in \bi{R}} non tutti nulli tali
+	che:
+
+	\begin[mode = display]{math}
+		A_{i} = a_{1}A_{1} + a_{2}A_{2} + \unicodeellipsis +
+						a_{i-1}A_{i-1} + a_{i+1}A_{i+1} + \unicodeellipsis +
+						a_{n}A_{n}
+	\end{math}
+
+	\begin{theorem}
+		Se le righe/colonne di una matrice sono linearmente dipendenti,
+		allora (almeno) una delle righe/colonne é esprimibile come
+		combinazione lineare delle altre, e viceversa.
+
+		\bigskip
+		\strong{Dimostrazione}. Se le righe/colonne di una matrice sono linearmente
+		dipendenti, allora vale:
+
+		\begin[mode = display]{math}
+			k_{1}A_{1} + \unicodeellipsis +
+			k_{i - 1}A_{i - 1} + k_{i}A_{i} + k_{i + 1}A_{i + 1} +
+			\unicodeellipsis + k_{m}A_{m} = (0_{ij})
+		\end{math}
+
+		Dove almeno uno dei coefficienti non é nullo, sia questo ad esempio
+		\math{k_{i}}. Spostando \math{k_{i}A_{i}} a destra e dividendo ambo
+		i membri per \math{k_{i}}, si ottiene:
+
+		\begin[mode = display]{math}
+			\frac{k_{1}}{k_{i}}A_{1} + \unicodeellipsis +
+			\frac{k_{i - 1}}{k_{i}}A_{i - 1} + \frac{k_{i + 1}}{k_{i}}A_{i + 1} +
+			\unicodeellipsis + \frac{k_{m}}{k_{i}}A_{m} = A_{i}
+		\end{math}
+
+		Che é la definizione di combinazione lineare.
+	\end{theorem}
+
+	Il massimo numero di righe linearmente indipendenti di una matrice \math{A}
+	é chiamato \strong{rango per righe} di \math{A}. Analogamente, il massimo
+	numero di colonne linearmente indipendenti di una matrice \math{A} é detto
+	\strong{rango per colonne} di \math{A}.
+
+	Presa una matrice generica \math{A} di ordine \math{m \times n},
+	é detto \strong{minore di ordine r} una qualunque matrice quadrata
+	ottenuta intersecando \math{r} colonne della matrice \math{A} e
+	\math{r} righe della matrice \math{A}. É evidente dalla definizione
+	come l'ordine di un qualsiasi minore di una matrice non possa essere
+	maggiore del numero di righe o di colonne della matrice da cui é stato
+	estratto.
+
+	La \strong{caratteristica} di una matrice \math{A}, indicata con
+	\math{\mi{car}(A)}, é l'ordine del minore di \math{A} che ha
+	il maggior numero di righe/colonne avente il determinante
+	diverso da zero. Essendo la caratteristica di una matrice
+	l'ordine di un suo minore, dovrá necessariamente aversi che
+	anche la caratteristica di una matrice non puó essere maggiore
+	del numero di righe/colonne della matrice stessa.
+
+	\begin{example}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					4 & 1 & 3 \\
+					0 & 2 & 1 \\
+					0 & 0 & 4 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				B =
+				(\table{
+					1 & 4 & 3 & 9 \\
+					0 & -3 & -4 & 6 \\
+					0 & 0 & 0 & 0 \\
+				})
+			\end{math}
+		\end{parbox}
+		\par
+
+		\begin{itemize}
+			\begin{item}
+				Il determinante di \math{A} é 32, pertanto il minore con determinante
+				diverso da zero di \math{A} avente dimensione massima é sé stessa.
+				Allora, \math{\mi{car}(A) = 3}.
+			\end{item}
+			\begin{item}
+				\math{B} ha una riga composta interamente da zeri. Questo significa
+				che qualsiasi minore di ordine 3 estratto da \math{B} avrá a sua volta
+				una riga composta interamente da zeri, e pertanto avrá determinante
+				pari a zero. Tuttavia, \math{B} possiede almeno un minore di ordine 2
+				con determinante diverso da zero, ad esempio quello estratto a partire 
+				dalle prime due righe e dalle prime due colonne (che ha determinante
+				pari a -3). Allora, \math{\mi{car}(B) = 2}.
+			\end{item}
+		\end{itemize}
+	\end{example}
+
+	\begin{theorem}
+		La caratteristica di una matrice a scala é pari al numero dei suoi pivot.
+	\end{theorem}
+
+	\begin{theorem}
+		Il rango per righe/colonne di una matrice é uguale alla sua
+		caratteristica.
+	\end{theorem}
+
+	Vengono definite \strong{mosse di Gauss} le tre operazioni riportate di seguito
+	che possono essere eseguite una o piú volte sulle matrici:
+
+	\begin{itemize}
+		\begin{item}
+			Permutare due righe/colonne;
+		\end{item}
+		\begin{item}
+			Moltiplicare una riga/colonna per un numero reale diverso da zero;
+		\end{item}
+		\begin{item}
+			Sommare ad una riga/colonna un'altra riga/colonna moltiplicata per un
+			numero reale.
+		\end{item}
+	\end{itemize}
+
+	\begin{theorem}
+		Applicando un qualsiasi numero di volte una o piú mosse di Gauss ad una
+		matrice si ottiene una matrice con la stessa caratteristica della matrice
+		originaria.
+	\end{theorem}
+
+	\begin{example}
+		Essendo il calcolo della caratteristica di una matrice a scala molto
+		semplice ed essendo la caratteristica invariante rispetto alle mosse 
+		di Gauss, per calcolare la caratteristica di una matrice generica é
+		utile convertirla in una matrice a scala operando mosse di Gauss e 
+		calcolare la caratteristica sulla matrice risultante.
+
+		\begin[mode = display]{math}
+			A =
+			(\table{
+				1 & -1 & 3 & 2 \\
+				3 & 2 & 7 & 6 \\
+				1 & 4 & 1 & 2 \\
+			})
+			\thickspace \Rightarrow \thickspace
+			(\table{
+				1 & -1 & 3 & 2 \\
+				0 & 5 & -2 & 0 \\
+				0 & 5 & -2 & 0 \\
+			})
+			\thickspace \Rightarrow \thickspace
+			(\table{
+				1 & -1 & 3 & 2 \\
+				0 & 5 & -2 & 0 \\
+				0 & 0 & 0 & 0 \\
+			})
+		\end{math}
+
+		La caratteristica della matrice generica \math{A} é pari a 2.
+	\end{example}
+
+	\begin{theorem}
+		Applicando \math{k} volte la prima mossa di Gauss ad una matrice si
+		ottiene una matrice il cui determinante é dato dal prodotto fra il
+		determinante della matrice originaria e \math{(-1)^{k}}.
+	\end{theorem}
+
+	\begin{theorem}
+		Applicando una o piú volte la terza mossa di Gauss ad una matrice si
+		ottiene una matrice con lo stesso determinante della matrice originaria.
+	\end{theorem}
+
+	Viene detta \strong{matrice inversa} della matrice quadrata \math{A}
+	la matrice quadrata \math{A^{-1}} tale per cui valga la relazione
+	\math{AA^{-1} = A^{-1}A = I}. Indicando con \math{x_{ij}} l'elemento
+	della matrice inversa \math{A^{-1}} di riga \math{i} e colonna \math{j},
+	si ha:
+
+	\begin[mode = display]{math}
+		x_{ij} = \frac{(-1)^{i+j} \mi{det}({A*}_{ji})}{\mi{det}(A)}
+	\end{math}
+
+	Dove \math{{A*}_{ji}} indica la matrice \math{A} di partenza a cui é stata 
+	tolta la \math{j}-esima riga e la \math{i}-esima colonna.
+
+	\begin{theorem}
+		Il determinante di una matrice é l'inverso del determinante della
+		rispettiva matrice inversa.
+
+		\bigskip
+		\strong{Dimostrazione}. Il teorema é una diretta conseguenza del teorema
+		di Binet:
+
+		\begin[mode = display]{math}
+			\mi{det}(AA^{-1}) = \mi{det}(A) \cdot \mi{det}(A^{-1}) = 1
+			\thickspace \Rightarrow \thickspace
+			\mi{det}(A) = \frac{1}{\mi{det}(A^{-1})}
+			\thickspace \Rightarrow \thickspace
+			\mi{det}(A^{-1}) = \frac{1}{\mi{det}(A)}
+		\end{math}
+	\end{theorem}
+
+	\begin{theorem}
+		Se una matrice é singolare, la sua matrice inversa non esiste.
+
+		\bigskip
+		\strong{Dimostrazione}. Una matrice \math{A} é singolare se
+		\math{\mi{det}(A) = 0}. Dato che per il teorema precedente
+		\math{\mi{det}(A) = \frac{1}{\mi{det}(A^{-1})}}, se \math{A}
+		é singolare si avrebbe \math{0 = \frac{1}{\mi{det}(A^{-1})}},
+		che é una equazione impossibile.
+	\end{theorem}
+
+	\begin{example}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					2 & 2 & 0 \\
+					1 & 0 & 1 \\
+					0 & 1 & 1 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				A^{-1} =
+				(\table{
+					\frac{1}{4} &  \frac{1}{2} & -\frac{1}{2} \\
+					-\frac{1}{4} & -\frac{1}{2} & \frac{1}{2} \\
+					-\frac{1}{4} &  \frac{1}{2} & \frac{1}{2} \\
+				})
+			\end{math}
+		\end{parbox}
+		\par
+
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				x_{11} =
+				\frac{(-1)^{1+1} \mi{det}({A*}_{11})}{\mi{det}(A)} = 
+				\frac{1}{4}
+			\end{math}
+
+			\begin[mode = display]{math}
+				x_{21} =
+				\frac{(-1)^{2+1} \mi{det}({A*}_{21})}{\mi{det}(A)} = 
+				-\frac{1}{4}
+			\end{math}
+
+			\begin[mode = display]{math}
+				x_{31} =
+				\frac{(-1)^{3+1} \mi{det}({A*}_{31})}{\mi{det}(A)} = 
+				-\frac{1}{4}
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				x_{12} =
+				\frac{(-1)^{1+2} \mi{det}({A*}_{12})}{\mi{det}(A)} = 
+				\frac{1}{2}
+			\end{math}
+
+			\begin[mode = display]{math}
+				x_{22} =
+				\frac{(-1)^{2+2} \mi{det}({A*}_{22})}{\mi{det}(A)} = 
+				-\frac{1}{2}
+			\end{math}
+
+			\begin[mode = display]{math}
+				x_{32} =
+				\frac{(-1)^{3+2} \mi{det}({A*}_{32})}{\mi{det}(A)} = 
+				\frac{1}{2}
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				x_{13} =
+				\frac{(-1)^{1+3} \mi{det}({A*}_{13})}{\mi{det}(A)} = 
+				-\frac{1}{2}
+			\end{math}
+
+			\begin[mode = display]{math}
+				x_{23} =
+				\frac{(-1)^{2+3} \mi{det}({A*}_{23})}{\mi{det}(A)} = 
+				\frac{1}{2}
+			\end{math}
+
+			\begin[mode = display]{math}
+				x_{33} =
+				\frac{(-1)^{3+3} \mi{det}({A*}_{33})}{\mi{det}(A)} = 
+				\frac{1}{2}
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+\end{sile}

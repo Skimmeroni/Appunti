@@ -1,0 +1,535 @@
+\begin{sile}
+
+	É detta \strong{equazione lineare} su \math{\dsi{R}} ogni equazione del
+	tipo:
+
+	\begin[mode = display]{math}
+		a_{1}x_{1} + a_{2}x_{2} + \unicodeellipsis + a_{n}x_{n} = b
+	\end{math}
+
+	\math{x_{i}, i = 1, 2, \unicodeellipsis, n} sono dette \strong{variabili}
+	o \strong{incognite}. Se il numero di variabili é piccolo, queste vengono
+	spesso indicate con \math{x, y, z, \unicodeellipsis} anziché \math{x_{1},
+	x_{2}, x_{3}, \unicodeellipsis}. I numeri \math{a_{i}, i = 1, 2,
+	\unicodeellipsis, n} sono invece chiamati \strong{coefficienti} delle 
+	variabili \math{x_{i}}, mentre \math{b} é detto \strong{termine noto}
+	dell'equazione.
+
+	Una \math{n}-pla ordinata di numeri reali (\math{k_{1}, k_{2},
+	\unicodeellipsis, k_{n}}) é detta \strong{soluzione} dell'equazione
+	precedente se vale: 
+
+	\begin[mode = display]{math}
+		a_{1}k_{1} + a_{2}k_{2} + \unicodeellipsis + a_{n}k_{n} = b
+	\end{math}
+
+	Una equazione lineare puó avere una, nessuna o infinite soluzioni.
+
+	\begin{example}
+		\begin{enumerate}
+			\begin{item}
+				L'equazione \math{3x = 5} ha una ed una sola soluzione:
+				\math{x = \frac{5}{3}};
+			\end{item}
+			\begin{item}
+				L'equazione \math{2x - y = 1} ha infinite soluzioni:
+				tutte le coppie di numeri reali \math{(k, 2k - 1),
+				k \in \dsi{R}};
+			\end{item}
+			\begin{item}
+				L'equazione \math{0x = 1} non ha nessuna soluzione:
+				qualsiasi valore si sostituisca a \math{x} si ottiene
+				sempre \math{0 = 1}, che é una equazione impossibile.
+			\end{item}
+		\end{enumerate}
+	\end{example}
+	
+	Un insieme di \math{m} equazioni in \math{n} incognite \math{x_{1},
+	x_{2}, \unicodeellipsis, x_{n}} considerate contemporaneamente viene
+	chiamato \strong{sistema lineare di} \em{m} \strong{equazioni in} \em{n}
+	\strong{incognite}, o semplicemente \strong{sistema lineare}. Un sistema
+	lineare ha in genere la seguente forma:
+
+	\begin[mode = display]{math}
+		\{\table{
+			a_{11}x_{1} & + & a_{12}x_{2} & + & \unicodecdots & + & a_{1n}x_{n} & = & b_{1} \\
+			a_{21}x_{1} & + & a_{22}x_{2} & + & \unicodecdots & + & a_{2n}x_{n} & = & b_{2} \\
+			\vdots      &   & \vdots      &   & \ddots &   & \vdots      & = & \vdots \\
+			a_{m1}x_{1} & + & a_{m2}x_{2} & + & \unicodecdots & + & a_{mn}x_{n} & = & b_{m} \\
+		}
+		\thickspace a_{ij} \thickspace
+		i = 1, \unicodeellipsis, m \thickspace j = 1, \unicodeellipsis, n 
+	\end{math}
+
+	In particolare, se i termini noti \math{b_{i}, i = 1, \unicodeellipsis, m}
+	sono tutti nulli, il sistema é detto \strong{sistema lineare omogeneo}.
+
+	\begin{example}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				\{\table{
+					2x + 3y - 5z = 1 \\
+					4x + y - 2z = 3 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				\{\table{
+					2x + 3y - 2z = 0 \\
+					4x + 3y - 2z = 0 \\
+					x + 2y - z = 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				\{\table{
+					2x + 2y = 1 \\
+					4x + y = -1 \\
+				}
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+	Una \math{n}-pla ordinata di numeri reali \math{(k_{1}, k_{2},
+	\unicodeellipsis, k_{n})} é detta \strong{soluzione} del sistema
+	lineare se soddisfa contemporaneamente tutte le equazioni del
+	sistema. Ciascuna soluzione del sistema é detta \strong{soluzione
+	particolare}, mentre l'insieme di tutte le soluzioni particolari
+	é detta \strong{soluzione generale}.
+
+	\strong{Risolvere} un sistema significa trovare la soluzione generale
+	del sistema: se questa esiste, il sistema é detto \strong{consistente},
+	altrimenti é detto \strong{inconsistente}. La soluzione generale puó essere
+	costituita da una, nessuna o infinite soluzioni.
+
+	\begin{example}
+		\begin[mode = display]{math}
+			A =
+			\{\table{
+				x + y = 0 \\
+				2x + 2y = 1 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				x = -y \\
+				2(-y) + 2y = 1 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				x = -y \\
+				-2y + 2y = 1 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				x = -y \\
+				0 = 1
+			}
+		\end{math}
+
+		\begin[mode = display]{math}
+			B =
+			\{\table{
+				2x + y = 2 \\
+				4x + 2y = 4 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				y = 2 - 2x \\
+				4x + 2(2 - 2x) = 4 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				y = 2 - 2x \\
+				4x + 4 - 4x = 4 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				y = 2 - 2x \\
+				0 = 0 \\
+			}
+		\end{math}
+
+		\begin[mode = display]{math}
+			C =
+			\{\table{
+				3x + 2y = 4 \\
+				5x + y = 1 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				y = 1 - 5x \\
+				3x + 2(1 - 5x) = 4 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				y = 1 - 5x \\
+				3x + 2 - 10x = 4 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			\{\table{
+				x = -\frac{2}{7} \\
+				y = \frac{17}{7} \\
+			}
+		\end{math}
+
+		Il sistema \math{A} non ha nessuna soluzione. Il sistema \math{B} ha
+		infinite soluzioni nella forma \math{(k, 2 - 2k), k \in \dsi{R}}. Il
+		sistema \math{C} ha per unica soluzione \math{-2/7, 17/7}.
+	\end{example}
+
+	É possibile associare delle matrici ad un sistema di equazioni. In
+	particolare, la matrice formata dai coefficienti del sistema lineare
+	(disposti nello stesso ordine in cui il sistema lineare é riportato)
+	é chiamata \strong{matrice incompleta} del sistema lineare, indicata
+	in genere con la lettera \math{A}.
+
+	\begin[mode = display]{math}
+		A =
+		(\table{
+			a_{11} & a_{12} & \unicodecdots & a_{1n} \\
+			a_{21} & a_{22} & \unicodecdots & a_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{m1} & a_{m2} & \unicodecdots & a_{mn} \\
+		})
+	\end{math}
+
+	La matrice colonna formata dalle incognite di un sistema lineare viene 
+	in genere indicata con \math{X}, mentre la matrice colonna formata dai
+	termini noti di un sistema lineare viene in genere indicata con \math{B}.
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			X =
+			\table{
+				x_{1} \\
+				x_{2} \\
+				\vdots \\
+				x_{n} \\
+			}
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			B =
+			\table{
+				b_{1} \\
+				b_{2} \\
+				\vdots \\
+				b_{m} \\
+			}
+		\end{math}
+	\end{parbox}
+	\par
+
+	La matrice formata giustapponendo alla matrice incompleta \math{A} di
+	un sistema lineare e la matrice dei termini noti \math{B} viene chiamata
+	\strong{matrice completa}, e viene in genere indicata con \math{(A,B)}. 
+
+	\begin[mode = display]{math}
+		(A,B) =
+		(\table{
+			a_{11} & a_{12} & \unicodecdots & a_{1n} & b_{1} \\
+			a_{21} & a_{22} & \unicodecdots & a_{2n} & b_{2} \\
+			\vdots & \vdots & \ddots & \vdots & \vdots \\
+			a_{m1} & a_{m2} & \unicodecdots & a_{mn} & b_{m} \\
+		})
+	\end{math}
+
+	Data la struttura delle matrici \math{A}, \math{B} e \math{X}, é
+	possibile notare come gli elementi di un sistema lineare possano
+	venire rappresentati come prodotto \math{AX = B} fra matrici:
+
+	\begin[mode = display]{math}
+		X_{1}A^{1} + X_{2}A^{2} + \unicodeellipsis + X_{n}A^{n} = B
+	\end{math}
+
+	\begin{example}
+		\begin[mode = display]{math}
+			\table{
+				2x - y + z = 4 \\
+				x + 3y - 4z = 1 \\
+				-x + 5y + 6z = 0 \\
+			}
+			\thickspace \Rightarrow \thickspace
+			(\table{
+				2 & -1 & 1 \\
+				1 & 3 & -4 \\
+				-1 & 5 & 6 \\
+			})
+			(\table{
+				x \\
+				y \\
+				z \\
+			})
+			=
+			(\table{
+				4 \\
+				1 \\
+				0 \\
+			})
+			\thickspace \Rightarrow \thickspace
+			(\table{
+				2x - y + z \\
+				x + 3y - 4z \\
+				-x + 5y + 6z \\
+			})
+			=
+			(\table{
+				4 \\
+				1 \\
+				0 \\
+			})
+		\end{math}
+
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					2 & -1 & 1 \\
+					1 & 3 & -4 \\
+					-1 & 5 & 6 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				X =
+				(\table{
+					x \\
+					y \\
+					z \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				B =
+				(\table{
+					4 \\
+					1 \\
+					0 \\
+				})
+			\end{math}
+		\end{parbox}
+	\end{example}
+
+	\begin{theorem}
+		\strong{Teorema di Rouché-Capelli}. Un sistema lineare é
+		consistente se e solo se la relativa matrice completa e la
+		relativa matrice incompleta hanno la stessa caratteristica.
+	\end{theorem}
+
+	\begin{example}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				\{\table{
+					x - y + 2z = 1 \\
+					3x + y + 3z = 6 \\
+					x + 3y - z = -1 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					1 & -1 & 2 \\
+					3 & 1 & 3 \\
+					1 & 3 & -1 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				(A, B) =
+				(\table{
+					1 & -1 & 2 & 1 \\
+					3 & 1 & 3 & 6 \\
+					1 & 3 & -1 & -1 \\
+				})
+			\end{math}
+		\end{parbox}
+		\par
+
+		La caratteristica della matrice incompleta \math{A} é 2, mentre
+		quella della matrice completa \math{(A, B)} é 3, quindi il sistema
+		é inconsistente.
+
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				\{\table{
+					x + 3y - z = -2 \\
+					4x + y + z = 1 \\
+					2x - 5y + 3z = 5 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				A =
+				(\table{
+					1 & 3 & -1 \\
+					4 & 1 & 1 \\
+					2 & -5 & 3 \\
+				})
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				(A, B) =
+				(\table{
+					1 & 3 & -1 & -2 \\
+					4 & 1 & 1 & 1 \\
+					2 & -5 & 3 & 5 \\
+				})
+			\end{math}
+		\end{parbox}
+		\par
+
+		Sia la matrice incompleta \math{A} sia la matrice completa
+		\math{(A, B)} hanno caratteristica 2, quindi il sistema é
+		consistente.
+	\end{example}
+
+	\begin{theorem}
+		Un sistema lineare omogeneo é sempre consistente.
+
+		\bigskip
+		\strong{Dimostrazione}. La matrice completa di un sistema lineare
+		omogeneo é ottenuta giustapponendo una colonna di soli zeri alla
+		matrice incompleta, pertanto la caratteristica di tali matrici é
+		necessariamente la stessa. Il teorema di Rouché-Capelli stabilisce
+		allora che tale sistema avrá sempre almeno una soluzione. É facile
+		verificare che tale soluzione é la soluzione nulla, ovvero quella
+		formata esclusivamente da zeri.
+	\end{theorem}
+
+	Un sistema lineare é detto \strong{determinato} se é costituito da tante 
+	equazioni quante sono le incognite che in queste compaiono. É invece
+	detto \strong{sovradeterminato} se ha piú equazioni che incognite. Infine,
+	é detto \strong{sottodeterminato} se ha piú incognite che equazioni.
+
+	\begin{theorem}
+		\strong{Teorema di Cramer}. Un sistema lineare determinato ha una
+		ed una sola soluzione se e solo se la matrice incompleta associata
+		al sistema non é singolare.
+	\end{theorem}
+
+	\begin{theorem}
+		Sia dato un sistema lineare consistente e determinato/sovradeterminato.
+		Questo avrá una sola soluzione se la caratteristica della relativa
+		matrice incompleta coincide con il numero delle incognite, mentre
+		avrá infinite soluzioni se la caratteristica della relativa matrice
+		incompleta é inferiore al numero delle incognite.		
+	\end{theorem}
+
+	\begin{theorem}
+		Un sistema lineare sottodeterminato, se é consistente, ha sempre
+		infinite soluzioni.
+	\end{theorem}
+
+	\begin{theorem}
+		Sia data la matrice incompleta associata ad un sistema lineare. 
+		Applicando un qualsiasi numero di volte una o piú mosse di Gauss
+		a tale matrice si ottiene una matrice incompleta associata ad un
+		sistema lineare avente lo stesso insieme di soluzioni del sistema
+		originario.
+	\end{theorem}
+
+	\begin{example}
+		\begin[width = 35%fw]{parbox}
+			\begin[mode = display]{math}
+				\{\table{
+					x - y = 2 \\
+					x - y - z = 3 \\
+					x + y + z = 6 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 65%fw]{parbox}
+			\begin[mode = display]{math}
+				(\table{
+					1 & -1 & 0 \\
+					1 & -1 & -1 \\
+					1 & 1 & 1 \\
+				})
+				(\table{
+					x \\
+					y \\
+					z \\
+				})
+				=
+				(\table{
+					2 \\
+					3 \\
+					6 \\
+				})
+			\end{math}
+		\end{parbox}
+		\par
+
+		Il sistema puó essere semplificato applicando mosse di Gauss alla
+		relativa matrice completa:
+
+		\begin[width = 20%fw]{parbox}
+			\begin[mode = display]{math}
+				(\table{
+					1 & -1 & 0 & 2 \\
+					1 & -1 & -1 & 3 \\
+					1 & 1 & 1 & 6 \\
+				})
+			\end{math}
+
+			Si sommi alla seconda riga la prima riga moltiplicata per -2.
+		\end{parbox}
+		\begin[width = 20%fw]{parbox}
+			\begin[mode = display]{math}
+				(\table{
+					1 & -1 & 0 & 2 \\
+					0 & 1 & -1 & -1 \\
+					1 & 1 & 1 & 6 \\
+				})
+			\end{math}
+
+			Si sommi alla terza riga la prima riga moltiplicata per -1.
+		\end{parbox}
+		\begin[width = 20%fw]{parbox}
+			\begin[mode = display]{math}
+				(\table{
+					1 & -1 & 0 & 2 \\
+					0 & 1 & -1 & -1 \\
+					0 & 2 & 1 & 4 \\
+				})
+			\end{math}
+
+			Si sommi alla terza riga la seconda riga moltiplicata per -2.
+		\end{parbox}
+		\begin[width = 20%fw]{parbox}
+			\begin[mode = display]{math}
+				(\table{
+					1 & -1 & 0 & 2 \\
+					0 & 1 & -1 & -1 \\
+					0 & 0 & 3 & 6 \\
+				})
+			\end{math}
+
+			Si moltiplichi la terza riga per 1/3
+		\end{parbox}
+		\begin[width = 20%fw]{parbox}
+			\begin[mode = display]{math}
+				(\table{
+					1 & -1 & 0 & 2 \\
+					0 & 1 & -1 & -1 \\
+					0 & 0 & 1 & 2 \\
+				})
+			\end{math}
+		\end{parbox}
+		\par
+
+		Il sistema associato a tale matrice completa ha come sola ed unica
+		soluzione \math{(3, 1, 2)}.
+	\end{example}
+
+\end{sile}

@@ -1,0 +1,218 @@
+\begin{sile}
+
+    %Un tipico studio di RO é riassumibile nelle seguenti sei fasi:
+
+    %\begin{enumerate}
+    %    \begin{item}
+    %        \strong{Definizione del problema e raccolta dei dati}. La maggior
+    %        parte dei problemi di RO sono inizialmente descritti in modo 
+    %        vago; di conseguenza, occorre innanzitutto individuare gli 
+    %        elementi essenziali e sviluppare una precisa formulazione del
+    %        problema in esame. Ció comporta la determinazione di obiettivi
+    %        appropriati, l'identificazione di limitazioni sul possibile 
+    %        operato, di relazioni fra il settore in esame e settori
+    %        correlati, di possibili alternativi, di limiti temporali,
+    %        ecc\math{\unicodeellipsis}.
+    %    \end{item}
+    %    \begin{item}
+    %        \strong{Formulazione del modello matematico}. Una modello é
+    %        una interpretazione parziale della realtá che ne cattura
+    %        soltanto la parte di interesse. In questo modo, diventa
+    %        possibile concentrarsi solamente sugli aspetti rilevanti
+    %        per il problema e tralasciare gli aspetti superflui. Un
+    %        modello matematico particolarmente rilevante é il modello
+    %        di \strong{programmazione lineare}, dove le funzioni matematiche
+    %        che figurano nel modello sono funzioni lineari.
+    %    \end{item}
+    %    \begin{item}
+    %        \strong{Determinazione delle soluzioni del modello}. É molto difficile,
+    %        in un contesto reale, ottenere subito una soluzione ottima per il
+    %        modello che si é costruito. Un approccio piú cauto consiste
+    %        nell'individuare una soluzione "ragionevolmente" buona per poi 
+    %        operare una \strong{analisi post-ottimale}, ovvero usarla come
+    %        punto di partenza per la ricerca di soluzioni migliori, fermandosi 
+    %        quando la discrepanza fra la soluzione trovata e la soluzione attesa
+    %        diventa trascurabile. Una parte importante dell'analisi post-ottimale 
+    %        é la ricerca dei \strong{parametri sensibili}, ovvero quei parametri 
+    %        del modello i quali, se ne cambia il valore, cambia anche la
+    %        soluzione ottima. Individuare i parametri sensibili é un punto
+    %        cruciale nella RO, perché assegnare valori sbagliati a tali 
+    %        parametri comporta nette storture nel modello.
+    %    \end{item}
+    %    \begin{item}
+    %        \strong{Test e validazione del modello}. La prima versione di un 
+    %        modello matematico presenterá inevitabilmente diversi difetti,
+    %        che vengono poi corretti nei raffinamenti successivi. Prima
+    %        che un modello possa venire utilizzato, é quindi necessario
+    %        che venga opportunamente testato per individuare e rimuovere
+    %        quanti piú errori possibile.
+    %    \end{item}
+    %    \begin{item}
+    %        \strong{Predisposizione di un sistema di supporto all'applicazione
+    %        del modello}. Se il modello deve venire utilizzato piú volte,
+    %        dopo averlo opportunamente testato conviene predisporre un
+    %        sistema di supporto al modello, che comprende anche i processi
+    %        per ottenere le soluzioni (inclusa l'analisi post-ottimale) e
+    %        le procedure operative per l'implementazione dei risultati
+    %        ottenuti.
+    %    \end{item}
+    %    \begin{item}
+    %        \strong{Implementazione del sistema}. Dopo aver costruito il
+    %        sistema di supporto, l'ultimo passo consiste nell'effettiva
+    %        implementazione di tale sistema, monitorandolo durante tutto
+    %        il tempo della sua messa in uso per controllare che le ipotesi
+    %        formulate nel modello continuino ad essere soddisfatte.
+    %    \end{item}
+    %\end{enumerate}
+
+    %\bigskip
+
+    Sia data una funzione \math{f}, chiamata \strong{funzione
+    obiettivo}, nella forma \math{f:X \subseteq \dsi{R}^{n}
+    \mapsto \dsi{R}}, ovvero avente un numero \math{n} di
+    variabili \math{x_{1}, x_{2}, \unicodeellipsis, x_{n}}, 
+    chiamate \strong{variabili decisionali}, e restituente un
+    numero reale (scalare). Qualsiasi \math{n}-pla di elementi
+    che soddisfano \math{f} é detta \strong{soluzione} di \math{f}.
+
+    Sia poi fornito un insieme \math{X}, sottoinsieme del dominio di una
+    funzione obiettivo \math{f} (e quindi anche di \math{\dsi{R}^{n}}),
+    chiamato \strong{regione ammissibile}. Una \math{n}-pla di elementi che
+    soddisfa \math{f} e che appartiene a \math{X} é detta \strong{soluzione
+    ammissibile} per \math{f}.
+
+    A partire da una funzione obiettivo \math{f} e da una regione ammissibile
+    \math{X} é possibile definire un \strong{problema di ottimizzazione} come
+    la ricerca della soluzione ammissibile (o delle soluzioni ammissibili)
+    \math{\bi{x}* \in X} per \math{f} tale che sia "ottimale". Tale soluzione
+    (o tali soluzioni) é detta \strong{soluzione ottimale}:
+
+    \begin[mode = display]{math}
+        \bi{x}* = \{\bi{x} \in X \thickspace \mi{t.c.} \thickspace \mi{opt}(f(\bi{x}))\}
+    \end{math}
+
+    La qualitá di una soluzione ammissibile generica dipende da
+    quanto questa é "vicina" alla soluzione ottimale \math{\bi{x}*}.
+    Se una soluzione ammissibile \math{\bi{x}_{A}} é piú "vicina" a
+    \math{\bi{x}*} di quanto lo sia un'altra soluzione ammissibile
+    \math{\bi{x}_{B}}, allora si dice che \math{\bi{x}_{A}} é una
+    soluzione \em{migliore} di \math{\bi{x}_{B}}, o semplicemente
+    che \math{\bi{x}_{A}} é \em{migliore} di \math{\bi{x}_{B}}.
+
+    In genere, vi sono due possibili definizioni di "soluzione ottimale":
+    la soluzione piú piccola assumibile dalla funzione oppure la soluzione
+    piú grande assumibile dalla funzione. Nel primo caso si parla di
+    \strong{problema di minimizzazione}, mentre nel secondo caso di
+    \strong{problema di massimizzazione}.
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \bi{x}* = \{\bi{x} \in X \thickspace \mi{t.c.} \thickspace \mi{min}(f(\bi{x}))\}
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \bi{x}* = \{\bi{x} \in X \thickspace \mi{t.c.} \thickspace \mi{max}(f(\bi{x}))\}
+        \end{math}
+    \end{parbox}
+    \par
+
+    La regione ammissibile é definita sulla base di un certo numero di
+    \em{restrizioni} definite nel problema, chiamate \strong{vincoli}.
+    Nel caso in cui non vi sia alcuna restrizione, ovvero nel caso in
+    cui la ricerca dei valori ottimali della funzione obiettivo venga
+    condotta sui valori dell'intero dominio della funzione obiettivo,
+    si parla di \strong{ottimizzazione non vincolata}. Se invece almeno 
+    una restrizione esiste, si parla di \strong{ottimizzazione vincolata}.
+
+    Quando i vincoli che definiscono la regione ammissibile di
+    un problema di ottimizzazione sono espressi come un sistema
+    di equazioni e disequazioni, tale problema prende il nome di
+    \strong{problema di programmazione matematica} (\strong{PM}).
+    Un generico vincolo \math{g_{i}} viene allora espresso come
+    una funzione \math{g_{i}:X \mapsto \dsi{R}} nella forma
+    \math{g_{i}(\bi{x}) = 0}, \math{g_{i}(\bi{x}) \geq 0} oppure
+    \math{g_{i}(\bi{x}) \leq 0}. La regione ammissibile di un
+    problema di programmazione matematica viene quindi ad essere
+    l'insieme \math{X} composto da tutti i valori \math{\bi{x}}
+    per i quali sono contemporaneamente verificate tutte le
+    \math{m} equazioni/disequazioni definite nei vincoli.
+
+    \begin[mode = display]{math}
+        X = \{\bi{x} \in \dsi{R}^{n} \thickspace \mi{t.c.} \thickspace
+        g_{i}{(\bi{x})} \{\table{\geq \\ = \\ \leq \\}\} 0 \thickspace
+        \forall i \in \{0, 1, \unicodeellipsis, m\}\},
+    \end{math}
+
+    In merito alla natura della regione ammissibile, si distinguono quattro
+    tipi di problemi:
+
+    \begin{itemize}
+        \begin{item}
+            Quando l'insieme \math{X} coincide con l'insieme vuoto, si
+            parla di \strong{problema non ammissibile}. Il problema non
+            ha alcuna soluzione, perché nessuna soluzione é ammissibile
+            per \math{X}, e a maggior ragione non ha alcuna soluzione
+            ottima;
+        \end{item}
+        \begin{item}
+            Quando qualsiasi valore puó fare parte di \math{X}, si
+            parla di \strong{problema illimitato}. Nello specifico,
+            se il problema é un problema di minimizzazione si parla
+            di \strong{problema illimitato inferiormente}, mentre se
+            é un problema di massimizzazione si parla di \strong{problema
+            illimitato superiormente};
+        \end{item}
+        \begin{item}
+            Il caso piú generico é il \strong{problema con piú di una
+            soluzione ottima}, dove l'insieme \math{X} contiene due o
+            piú soluzioni ottimali, aventi tutti ugual valore della
+            funzione obiettivo.
+        \end{item}
+    \end{itemize}
+
+    \begin{example}
+        Si consideri il seguente problema di programmazione matematica:
+
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                f = x_{3}            
+            \end{math}
+        \end{parbox}
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                x* = \mi{max}_{x_{1}, x_{2}, x_{3}} \{f\}
+            \end{math}
+        \end{parbox}
+        \begin[width = 33%fw]{parbox}
+            \begin[mode = display]{math}
+                \{\table{
+                    0 \leq x_{1} \leq 1 \\
+                    0 \leq x_{2} \leq 1 \\
+                    0 \leq x_{3} \leq 1 \\
+                    x_{1} + x_{2} + x_{3} - 2 = 0 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Si consideri il problema dal punto di vista dell'algebra lineare.
+        Le prime tre disequazioni riportate nei vincoli specificano che le
+        soluzioni ammissibili devono necessariamente trovarsi all'interno
+        del cubo delimitato dai vertici:
+
+        \begin[mode = display]{math}
+            \table{
+                (0, 0, 0) & (0, 0, 1) & (0, 1, 0) & (1, 0, 0) &
+                (1, 0, 1) & (0, 1, 1) & (1, 1, 0) & (1, 1, 1) \\
+            }
+        \end{math}
+
+        L'ultima disequazione specifica che l'insieme delle soluzioni
+        ammissibili é dato dall'intersezione fra tale cubo ed il piano
+        di equazione \math{x_{1} + x_{2} + x_{3} - 2 = 0}. Le soluzioni
+        ottimali sono tutti i punti di \math{\dsi{R}^{3}} che fanno parte
+        di tale intersezione e hanno \math{x_{3} = 1}.
+    \end{example}
+
+\end{sile}

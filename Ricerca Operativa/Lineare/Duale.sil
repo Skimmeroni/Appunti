@@ -1,0 +1,917 @@
+\begin{sile}
+
+    Si consideri un problema di programmazione lineare espresso in
+    forma standard (ottimizzazione di massimo, vincoli funzionali di
+    tipo \math{\leq}, vincoli di non negativitá per ciascuna variabile).
+    A ciascun problema di questo tipo, che in questo contesto prende il
+    nome di \strong{problema primale}, é possibile associare un problema
+    "gemello" , chiamato \strong{problema duale}, con il quale é fortemente
+    correlato. Lo studio della correlazione fra problemi primali e problemi
+    duali prende il nome di \strong{teoria della dualitá}.
+
+    La struttura di un generico problema primale e quella del rispettivo
+    problema duale é presentata di seguito. Si noti come quasi tutti gli
+    elementi di un problema siano presenti nell'altro, ma con un ruolo o
+    in una forma diversa:
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \table[columnalign = left left]{
+                \mi{max} \thickspace Z = \sum_{j = 1}^{n} c_{j} \cdot x_{j} &
+                \\
+                \sum_{j = 1}^{n} a_{ij} \cdot x_{j} \leq b_{i} &
+                i = 1, 2, \unicodeellipsis, m \\
+                x_{j} \geq 0 &
+                j = 1, 2, \unicodeellipsis, n \\
+            }
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \table[columnalign = left left]{
+                \mi{min} \thickspace W = \sum_{i = 1}^{m} b_{i} \cdot y_{i} &
+                \\
+                \sum_{i = 1}^{m} a_{ij} \cdot y_{i} \geq c_{j} &
+                j = 1, 2, \unicodeellipsis, n \\
+                y_{i} \geq 0 &
+                i = 1, 2, \unicodeellipsis, m \\
+            }
+        \end{math}
+    \end{parbox}
+    \par
+
+    \begin{enumerate}
+        \begin{item}
+            Il problema primale é un problema di ottimizzazione di massimo,
+            mentre il problema duale é un problema di ottimizzazione di
+            minimo;
+        \end{item}
+        \begin{item}
+            I coefficienti della funzione obiettivo del problema primale
+            figurano come termini destri dei vincoli funzionali del problema
+            duale;
+        \end{item}
+        \begin{item}
+            I termini destri dei vincoli funzionali del problema primale
+            figurano come coefficienti della funzione obiettivo del problema
+            duale;
+        \end{item}
+        \begin{item}
+            I vincoli funzionali del problema primale sono di tipo
+            \math{\leq}, mentre i vincoli funzionali del problema
+            duale sono di tipo \math{\geq};
+        \end{item}
+        \begin{item}
+            Sia nel problema primale che nel problema duale é presente un 
+            vincolo di non negativitá per ciascuna variabile.
+        \end{item}
+    \end{enumerate}
+
+    \bigskip
+
+    La rappresentazione tabellare ben si presta a mostrare esplicitamente la
+    relazione fra problema primale e problema duale. Tale notazione, estesa
+    al descrivere la relazione fra i due, prende il nome di \strong{tabella
+    primale-duale}.
+
+    \begin{center}
+        \begin[cols = 7.5%fw 7.5%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 7.5%fw, cellborder = 0]{ptable}
+            \begin{row}
+                \cell[span = 3]{}
+                \cell[span = 5, border = 1pt 1pt 1pt 1pt]{\strong{PROBLEMA PRIMALE}}
+                \cell{}
+            \end{row}
+            \begin{row}
+                \cell[span = 3]{}
+                \begin[span = 4]{celltable}
+                    \begin{row}
+                        \cell[span = 4, border = 0 0 1pt 1pt]{\strong{coefficiente di}}
+                    \end{row}
+                    \begin{row}
+                        \cell[border = 1pt 1pt 1pt 0]{\math{x_{1}}}
+                        \cell[border = 1pt 1pt 0 0]{\math{x_{2}}}
+                        \cell[border = 1pt 1pt 0 0]{\math{\unicodeellipsis}}
+                        \cell[border = 1pt 1pt 0 1pt]{\math{x_{n}}} 
+                    \end{row}
+                \end{celltable}
+                \cell[border = 0 0 0 1pt]{\strong{termine noto}}
+                \cell{}
+            \end{row}
+            \begin{row}
+                \cell[border = 1pt 1pt 1pt 1pt]{\rotate[angle = 270]{\strong{PROBLEMA DUALE}}}
+                \begin[span = 8]{celltable}
+                    \begin{row}
+                        \cell[border = 1pt 1pt 0 0]{\rotate[angle = 270]{\strong{coefficiente di}}}
+                        \begin[span = 6]{celltable}
+                            \begin{row}
+                                \cell[border = 1pt 0 1pt 1pt]{\math{y_{1}}}
+                                \cell{\math{a_{11}}}
+                                \cell{\math{a_{12}}}
+                                \cell{\math{\unicodeellipsis}}
+                                \cell{\math{a_{1n}}}
+                                \cell[border = 1pt 0 1pt 1pt]{\math{b_{1}}} 
+                            \end{row}
+                            \begin{row}
+                                \cell[border = 0 0 1pt 1pt]{\math{y_{2}}}
+                                \cell{\math{a_{21}}}
+                                \cell{\math{a_{22}}}
+                                \cell{\math{\unicodeellipsis}}
+                                \cell{\math{a_{2n}}}
+                                \cell[border = 0 0 1pt 1pt]{\math{b_{2}}} 
+                            \end{row}
+                            \begin{row}
+                                \cell[border = 0 0 1pt 1pt]{\math{\unicodeellipsis}}
+                                \cell{\math{\unicodeellipsis}}
+                                \cell{\math{\unicodeellipsis}}
+                                \cell{\math{\unicodeellipsis}}
+                                \cell{\math{\unicodeellipsis}}
+                                \cell[border = 0 0 1pt 1pt]{\math{\unicodeellipsis}} 
+                            \end{row}
+                            \begin{row}
+                                \cell[border = 0 1pt 1pt 1pt]{\math{y_{m}}}
+                                \cell{\math{a_{m1}}}
+                                \cell{\math{a_{m2}}}
+                                \cell{\math{\unicodeellipsis}}
+                                \cell{\math{a_{mn}}} 
+                                \cell[border = 0 1pt 1pt 1pt]{\math{b_{m}}} 
+                            \end{row}
+                        \end{celltable}
+                        \cell[border = 1pt 1pt 0 1pt]{\rotate[angle = 270]{\strong{Coefficienti della funzione obiettivo}}}
+                    \end{row}
+                    \begin{row}
+                        \cell[span = 2, border = 0 1pt 0 0]{\strong{termine noto}}
+                        \cell[border = 1pt 1pt 1pt 0]{\math{c_{1}}}
+                        \cell[border = 1pt 1pt 0 0]{\math{c_{2}}}
+                        \cell[border = 1pt 1pt 0 0]{\math{\unicodeellipsis}}
+                        \cell[border = 1pt 1pt 0 1pt]{\math{c_{n}}}
+                        \cell[span = 2]{}
+                    \end{row}
+                \end{celltable}
+            \end{row}
+            \begin{row}
+                \cell[span = 3]{}
+                \cell[span = 4, border = 0 1pt 1pt 1pt]{\strong{Coefficienti della funzione obiettivo}}
+                \cell[span = 2]{}
+            \end{row}
+        \end{ptable}
+    \end{center}
+
+    %%%%%%%%%%%
+
+    I problemi di programmazione lineare possono essere interpretati in
+    termini di allocazione di risorse ad attivitá. In particolare, quando
+    i vincoli funzionali sono nella forma \math{\leq}, i termini noti a
+    destra della disuguaglianza possono essere interpretati come le quantitá
+    delle varie risorse che sono disponibili per le attivitá in esame. In
+    genere, queste quantitá non sono veritá assolute, ma derivano da delle
+    scelte manageriali; questo significa che, se é vantaggioso farlo, tali
+    quantitá possono essere aumentate o diminuite.
+
+    I termini noti che si trovano a destra nei vincoli funzionali influenzano
+    il valore della funzione obiettivo, pertanto per poter determinare se é 
+    vantaggioso aumentarli o diminuirli é necessario avere a disposizione una
+    misura di \em{quanto} una variazione nel valore di tali termini noti
+    influenza il valore della funzione obiettivo, ovvero del \strong{valore
+    marginale} della risorsa relativa a tale termine noto.
+
+    Per ciascuna risorsa \math{i}, la misura del suo valore marginale é data
+    dal cosiddetto \strong{prezzo ombra}, indicato con \math{{y*}_{i}}. Il
+    valore di \math{{y*}_{i}} puó venire ricavato facilmente a partire dai
+    tableau del problema di programmazione lineare di riferimento, dato che 
+    corrisponde al coefficiente della \math{i}-esima variabile slack nella
+    riga 0 del tableau finale.
+
+    Se il prezzo ombra \math{{y*}_{i}} é un valore positivo, allora
+    significa che incrementando la risorsa \math{i} di un valore
+    infinitesimo si ha effettivamente un incremento pari a \math{{y*}_{i}}
+    del valore della funzione obiettivo. Questo accade se l'\math{i}-esimo
+    vincolo é soddisfatto dalla soluzione ottima non solo come disuguaglianza,
+    ma anche come uguaglianza; vincoli con queste caratteristiche vengono detti
+    \strong{vincoli attivi}. Una situazione di questo tipo viene interpretata
+    come una scarsa disponibilitá della risorsa \math{i}, dato che se un suo
+    piccolo cambiamento comporta un incremento del valore della funzione
+    obiettivo questo significa che tale risorsa viene interamente consumata.
+    Risorse di questo tipo vengono chiamate \strong{scarce goods} (\em{risorse
+    rare}).
+
+    Se il prezzo ombra \math{{y*}_{i}} é nullo, allora significa che
+    incrementando la risorsa \math{i} di un valore infinitesimo non
+    si ha alcun incremento del valore della funzione obiettivo. Questo
+    accade se l'\math{i}-esimo vincolo é soddisfatto dalla soluzione
+    come disuguaglianza, ma non come uguaglianza. Una situazione di
+    questo tipo viene interpretata come una sovrabbondanza della risorsa
+    \math{i}, dato che se un suo piccolo cambiamento non comporta alcun
+    incremento del valore della funzione obiettivo questo significa che
+    tale risorsa non verrá mai interamente consumata. Risorse di questo
+    tipo vengono chiamate \strong{free goods} (\em{risorse abbonanti}).
+
+    %%%%%%%%%%
+
+    Uno dei principali obiettivi dell'analisi della sensitivitá é quello
+    di analizzare i \strong{parametri sensibili}, ovvero quelli che, se
+    modificati, comportano un cambiamento della soluzione ottima. I 
+    parametri sensibili sono i parametri che necessitano di essere stimati
+    con piú attenzione, e quelli che devono venire monitorati con maggiore
+    attenzione.
+
+    Per quanto riguarda i termini noti dei vincoli funzionali, per determinare
+    se questi siano oppure non siano parametri sensibili é possibile rifarsi
+    ai prezzi ombra. Infatti, per definizione, se il prezzo ombra associato ad
+    una risorsa é un valore positivo, allora una variazione di tale risorsa
+    comporta una variazione del valore della funzione obiettivo, mentre se il
+    prezzo ombra é nullo il valore della funzione obiettivo rimane costante.
+    Questo comporta che i termini noti dei vincoli funzionali che hanno
+    associato un prezzo ombra positivo, specialmente se tale prezzo ombra é
+    grande in modulo, sono da considerarsi parametri sensibili.
+
+    I coefficienti di un vincolo funzionale sono da considerarsi parametri
+    sensibili se tale vincolo é un vincolo attivo per la soluzione ottima
+    perché, per definizione, se un vincolo é un vincolo attivo allora la 
+    risorsa a questo associata é uno \em{scarce good}. Un ragionamento
+    simile puó essere fatto per determinare se i coefficienti della funzione
+    obiettivo siano da considerarsi parametri sensibili.
+
+    Si noti come, nelle analisi reali, si tende a concentrarsi sul determinare
+    se i termini noti dei vincoli funzionali ed i coefficienti della funzione
+    obiettivo siano da considerarsi parametri sensibili, e raramente si fa
+    lo stesso con i coefficienti dei vincoli funzionali. Questo perché i
+    vincoli funzionali dei problemi reali sono in genere moltissimi, pertanto
+    una variazione di uno solo di questi ha difficilmente una influenza
+    significativa sulla soluzione ottima.
+
+    %%%%%%%%%%
+
+    Ci si chiede allora da dove provenga il problema duale e la sua struttura.
+    Si consideri la notazione matriciale introdotta in precedenza per il 
+    metodo del simplesso: in una generica iterazione del problema primale,
+    i coefficienti per le prime \math{n} variabili sono dati dalla matrice
+    \math{\bi{z} - \bi{c}}, mentre quelli per le restanti \math{m} variabili
+    sono dati dalla matrice \math{\bi{y}} (nell'iterazione iniziale,
+    \math{\bi{y}} e \math{\bi{c}} sono entrambe matrici nulle). Si ricordi 
+    inoltre che sono state validate le seguenti espressioni:
+
+    \begin[width = 35%fw]{parbox}
+        \begin[mode = display]{math}
+            W = \bi{yb}
+        \end{math}
+    \end{parbox}
+    \begin[width = 65%fw]{parbox}
+        \begin[mode = display]{math}
+            \bi{z} = \bi{yA}
+            \thickspace \Rightarrow \thickspace
+            z_{j} = \sum_{i = 1}^{m} a_{ij}y_{i}
+        \end{math}
+    \end{parbox}
+    \par
+
+    Dove, dato che si sta considerando il problema duale, \math{W} prende
+    il posto di \math{Z} nell'indicare il valore della funzione obiettivo.
+    Nello specifico, la prima equazione funzione la funzione obiettivo per
+    il problema duale, mentre la seconda equazione fornisce i termini a 
+    sinistra dei vincoli funzionali per il problema duale. Quindi
+    sottraendo i termini noti di questi vincoli del tipo \math{\geq},
+    la quantitá \math{z_{j} - c_{j}} puó essere interpretate come variabile
+    surprlus per il \math{j}-esimo vincolo funzionale.
+
+    Occorre a questo punto approfondire a cosa tende il metodo del simplesso
+    in termini di queste variabili introdotte. In particolare, il metodo del
+    simplesso cerca un insieme di variabili di base e la corrispondente BFS
+    tali che tutti i coefficienti della riga 0 siano non negativi; una volta
+    ottenuta una soluzione di questo tipo (che é ottima), la procedura termina.
+    In altre parole, l'obiettivo perseguito dal metodo del simplesso, la sua
+    \em{condzione di ottimalitá}, puó essere espressa come:
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            z_{j} - c_{j} \geq 0
+            \thickspace \mi{per} \thickspace
+            j = 1, 2, \unicodeellipsis, n
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            y_{i} \geq 0
+            \thickspace \mi{per} \thickspace
+            i = 1, 2, \unicodeellipsis, m
+        \end{math}
+    \end{parbox}
+    \par
+
+    Sostituendo l'espressione per \math{z_{j}} nell'equazione precedente, la
+    condizione di ottimalitá afferma che il metodo del simplesso puó essere
+    interpretato come la ricerca di quei valori \math{y_{1}, \unicodeellipsis,
+    y_{m}} tali per cui:
+
+    \begin[mode = display]{math}
+        W = \sum_{i = 1}^{m} b_{i}y_{i}
+        \thickspace\thickspace\thickspace\thickspace
+        \mi{soggetto} \thickspace \mi{ai} \thickspace \mi{vincoli}
+        \thickspace\thickspace\thickspace\thickspace
+        \{\table[columnalign = left left]{
+            \sum_{i = 1}^{m} a_{ij} y_{i} \geq c_{j} &
+            j = 1, 2, \unicodeellipsis, n \\
+            y_{i} \geq 0 &
+            i = 1, 2, \unicodeellipsis, m \\
+        }
+    \end{math}
+
+    Che, ad eccezione della mancata indicazione se la quantitá \math{W} debba
+    essere minimizzata o massimizzata, é esattamente nella stessa forma del
+    problema duale.
+
+    Il motivo per cui, in questo nuovo problema, \math{W} vada minimizzato 
+    anziché massimizzato (come si potrebbe pensare, dato che \math{W*} e
+    \math{Z*} coincidono) é da cercarsi nel fatto che le uniche soluzioni
+    ammissibili per questo problema sono quelle che soddisfano la condizione
+    di ottimalitá per il problema primale. Quindi, solo una soluzione ottima
+    per il problema primale costituisce una soluzione ammissibile per questo
+    nuovo problema. Di conseguenza, il valore ottimo di \math{Z} nel problema
+    primale é il minimo valore ammissibile di \math{W} nel nuovo problema
+    duale, e cosí \math{W} deve essere minimizzato. Introdurre tale
+    informazione nel problema appena presentato permette di ricostruire
+    il problema duale completo.
+
+    Di conseguenza, il problema duale puó essere visto come una
+    riaffermazione in chiave di programmazione lineare dell'obiettivo
+    del metodo del simplesso, vale a dire, ottenere una soluzione per
+    il problema primale che soddisfi le condizioni di ottimalitá.
+    Prima che questo obiettivo sia raggiunto, il corrispondente vettore
+    \math{\bi{y}} della riga 0 (i coefficienti delle variabili slack)
+    del tableau corrente non risulta ammissibile per il problema duale.
+    Tuttavia, dopo che l'obiettivo viene raggiunto, il corrispondente 
+    vettore \math{\bi{y}} é una soluzione ottima (e viene pertanto
+    indicato con \math{\bi{y}*}) per il problema duale, perché costituisce
+    una soluzione ammissibile con il valore minimo possibile per \math{W}.
+    Tale soluzione ottima \math{(y_{1}, y_{2}, \unicodeellipsis, y_{m})}
+    fornisce i prezzi ombra del problema primale.
+
+    \begin{theorem}
+        \strong{Proprietá di dualitá forte}: se \math{\bi{x}*} é una
+        soluzione ottima per un problema di programmazione lineare in
+        forma standard e \math{\bi{y}*} é una soluzione ottima per il
+        rispettivo problema duale, allora vale \math{\bi{cx}* =
+        \bi{y}*\bi{b}}.
+    \end{theorem}
+
+    \begin{theorem}
+        \strong{Proprietá di dualitá debole}: se \math{\bi{x}} é
+        una soluzione ammissibile (non necessariamente ottima) per
+        un problema di programmazione lineare in forma standard e
+        \math{\bi{y}} é una soluzione ammissibile (non necessariamente
+        ottima) per il rispettivo problema duale, allora vale
+        \math{\bi{cx} \leq \bi{yb}}.
+
+        \bigskip
+        \strong{Dimostrazione}. Come mostrato in precedenza, si ha
+        \math{Z = \bi{cx}} e \math{W = \bi{yb}}. Essendo la soluzione
+        ottima per il problema duale data dal minimo valore di \math{W}
+        ed essendo \math{W* = Z*}, allora qualsiasi valore di \math{W}
+        non ottimale é necessariamente maggiore di qualsiasi valore di
+        \math{Z} non ottimale.
+    \end{theorem}
+
+    \begin{theorem}
+        \strong{Condizione di complementarietá}. Ad ogni iterazione generica,
+        il metodo del simplesso identifica simultaneamente un vertice
+        \math{bi{x}} per il problema primale ed una \strong{soluzione
+        complementare} \math{\bi{y}} per il problema duale, dove 
+        \math{\bi{cx} = \bi{yb}}. Se \math{\bi{x}} non é una soluzione
+        ottima per il problema primale, allora \math{\bi{y}} non é una
+        soluzione ammissibile per il problema duale.
+    \end{theorem}
+
+    \begin{theorem}
+        \strong{Condizione di complementarietá per soluzioni ottime}.
+        Nell'iterazione finale, il metodo del simplesso identifica
+        simultaneamente una soluzione ottima \math{bi{x}*} per il
+        problema primale ed una \strong{soluzione complementare ottima}
+        \math{\bi{y}*} per il problema duale, dove \math{\bi{cx}* =
+        \bi{y}*\bi{b}}. Le quantitá \math{y_{i}} sono i prezzi ombra
+        per il problema primale.
+    \end{theorem}
+
+    \begin{theorem}
+        \strong{Simmetria}. Siano dati un problema primale di programmazione
+        lineare ed il relativo problema duale. Il problema duale del problema
+        duale é il problema primale.
+    \end{theorem}
+
+    Il teorema precedente implica che non é possibile parlare di problema
+    primale o duale in senso "assoluto"; é indifferente quale dei due
+    problemi legati da una relazione primale-duale venga considerato come
+    primale e quale come duale, perché a seconda del punto di vista entrambe
+    le denominazioni sono corrette. Allo stesso modo, tutte le relazioni che
+    il problema primale ha nei confronti del problema duale sono valide anche
+    in senso inverso. Per convenzione, si tende a considerare come problema
+    primale quello dei due che modella la situazione che si vuole
+    rappresentare.
+    
+    Il teorema precedente implica inoltre che i problemi primali ed i
+    rispettivi problemi duali possono essere risolti con gli stessi metodi.
+    Il metodo del simplesso puó essere quindi applicato all'uno o all'altro
+    problema (dopo averli eventualmente convertiti nella forma standard) e
+    permetterá di identificare simultaneamente le soluzioni complementari
+    per l'altro problema.
+
+    \begin{theorem}
+        \strong{Teorema della dualitá}. Siano dati un problema primale di
+        programmazione lineare ed il relativo problema duale. Fra i due 
+        problemi deve presentarsi una ed una sola fra queste due possibili
+        correlazioni:
+
+        \begin{itemize}            
+            \begin{item}
+                Se uno dei due problemi ha almeno una soluzione ammissibile
+                ed una funzione obiettivo limitata (e quindi ha almeno una
+                soluzione ottima), allora anche l'altro problema ha almeno
+                una soluzione ammissibile ed una funzione obiettivo limitata;
+            \end{item}
+            \begin{item}
+                Se uno dei due problemi non ha alcuna soluzione ammissibile,
+                allora l'altro problema non ha alcuna soluzione ammissibile
+                oppure ha una funzione obiettivo illimitata.
+            \end{item}
+        \end{itemize}
+    \end{theorem}
+
+    %%%%%%%%%%
+
+    Il problema duale ed i suoi elementi hanno anche una interpretazione
+    economica, strettamente correlata all'interpretazione economica dei
+    problemi di programmazione lineare in forma standard vista in precedenza.
+
+    Poiché \math{W = b_{1}y_{1} + \unicodeellipsis + b_{m}y_{m} = Z}, ogni
+    quantitá \math{b_{i}y_{i}} puó essere interpretata come il contributo
+    al profitto corrente quando \math{b_{i}} unitá della risorsa \math{i}
+    sono disponibili, mentre \math{y_{i}} rappresenta il prezzo ombra.
+
+    Questa definizione delle variabili duali porta naturalmente ad
+    una interpretazione dell'intero problema duale. In particolare,
+    poiché nel problema primale ogni unitá dell'attivitá \math{j}
+    consuma \math{a_{ij}} unitá della risorsa \math{i}, la quantitá
+    \math{\sum_{i = 1}^{m} a_{ij}y_{i}} puó essere interpretata come
+    il contributo al profitto della combinazione di risorse che verrebbe
+    consumata se venisse impiegata un'unitá dell'attivitá \math{j}.
+
+    Nel problema primale, \math{c_{j}} corrisponde al profitto unitario
+    dell'attivitá \math{j}. Questo significa che, nel problema duale,
+    se si verifica \math{\sum_{i = 1}^{m} a_{ij}y_{i} > c_{j}} allora
+    significa che il contributo al profitto \math{\sum_{i = 1}^{m}
+    a_{ij}y_{i}} é superiore a quello ottenuto utilizzando un'unitá
+    dell'attivitá \math{j}; diversamente, queste risorse non verrebbero
+    usate nel modo migliore. Analogamente, il vincolo di non negativitá
+    \math{y_{i} \geq 0} indica che il contributo dato dalla risorsa \math{i}
+    al profitto deve essere un valore non negativo, altrimenti sarebbe
+    deletereo farne uso.
+
+    La funzione obiettivo \math{W = \sum_{i = 1}^{m} b_{i}y_{i}} da minimizzare
+    puó essere vista come la minimizzazione del valore totale implicito delle
+    risorse consumate dalle varie attivitá.
+
+    %%%%%%%%%%%%%%
+
+    Poiché il problema duale é un problema di programmazione lineare,
+    anche per esso é possibile ragionare in termini di vertici e di 
+    regione ammissibile. Inoltre, cosí come il problema primale, é
+    possibile esprimerlo in forma aumentata introducendo opportune
+    variabili aggiuntive per esprimerne i vertici come soluzioni di
+    base. Nello specifico, poiché i vincoli del problema duale sono
+    di tipo \math{\geq}, tale forma aumentata si ottiene sottraendo
+    una variabile aggiuntiva, detta \strong{variabile surplus} (e
+    non sommando una variabile slack) a sinistra di ogni vincolo. Si
+    ha quindi:
+
+    \begin[mode = display]{math}
+        z_{j} - c_{j} = \sum_{i = 1}^{m} a_{ij} y_{i} - c_{j}
+        \thickspace\thickspace \mi{per} \thickspace\thickspace
+        j = 1, 2, \unicodeellipsis, n
+    \end{math}
+
+    In questo modo \math{z_{j} - c_{j}} svolge il ruolo della
+    variabile surplus per il vincolo \math{j}. Di conseguenza,
+    da ogni vertice \math{(y_{1}, y_{2}, \unicodeellipsis,
+    y_{m})} si ottiene una soluzione di base \math{(y_{1},
+    y_{2}, \unicodeellipsis, y_{m}, z_{1} - c_{1}, z_{2} - c_{2},
+    \unicodeellipsis, z_{n} - c_{n})}. Poiché la forma aumentata
+    del problema duale ha \math{n} vincoli funzionali e \math{n + m}
+    variabili, ogni soluzione di base ha \math{n} variabili di base
+    e \math{m} variabili non di base.
+
+    \begin{theorem}
+        Ad ogni soluzione di base del problema primale corrisponde una
+        soluzione di base complementare nel problema duale ed i rispettivi
+        valori della funzione obiettivo sono uguali.
+    \end{theorem}
+
+    \begin{theorem}
+        \strong{Proprietá di complementary slackness}. Se una variabile del
+        problema primale é variabile di base per una certa soluzione, allora
+        la variabile a questa associata nel problema duale é variabile non
+        di base per la relativa soluzione, e viceversa.
+    \end{theorem}
+
+    \begin{example}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{max} \thickspace Z = 3x_{1} + 5x_{2} \\
+                    x_{1} \leq 4 \\
+                    2x_{2} \leq 12 \\
+                    3x_{1} + 2x_{2} \leq 18 \\
+                    x_{1} \geq 0, x_{2} \geq 0 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \mi{min} \thickspace W = 4y_{1} + 12y_{2} + 18y_{3} \\
+                    y_{1} + 3y_{3} \geq 3 \\
+                    2y_{2} + 2y_{3} \geq 5 \\
+                    y_{1} \geq 0, y_{2} \geq 0, y_{3} \geq 0 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        \begin[cols = 5%fw 25%fw 17.5%fw 10%fw 25%fw 17.5%fw]{ptable}
+            \begin{row}
+                \cell{\strong{N.}}
+                \begin[span = 2]{celltable}
+                    \begin{row}
+                        \cell[span = 2]{\strong{Problema primale}}
+                    \end{row}
+                    \begin{row}
+                        \cell{\strong{Soluzione di base}}
+                        \cell{\strong{Ammissibile?}}
+                    \end{row}
+                \end{celltable}
+                \cell{\strong{Z = W}}
+                \begin{celltable}
+                    \begin{row}
+                        \cell[span = 2]{\strong{Problema duale}}
+                    \end{row}
+                    \begin{row}
+                        \cell{\strong{Soluzione di base}}
+                        \cell{\strong{Ammissibile?}}
+                    \end{row}
+                \end{celltable}
+            \end{row}
+            \begin{row}
+                \cell{1}
+                \cell{(0, 0, 4, 12, 18)}
+                \cell{sí}
+                \cell{0}
+                \cell{(0, 0, 0, -3, -5)}
+                \cell{no}
+            \end{row}
+            \begin{row}
+                \cell{2}
+                \cell{(4, 0, 0, 12, 6)}
+                \cell{sí}
+                \cell{12}
+                \cell{(3, 0, 0, 0, -5)}
+                \cell{no}
+            \end{row}
+            \begin{row}
+                \cell{3}
+                \cell{(6, 0, -2, 12, 0)}
+                \cell{no}
+                \cell{18}
+                \cell{(0, 0, 1, 0, -3)}
+                \cell{no}
+            \end{row}
+            \begin{row}
+                \cell{4}
+                \cell{(4, 3, 0, 6, 0)}
+                \cell{sí}
+                \cell{27}
+                \cell{(-\math{\frac{9}{2}}, 0, \math{\frac{5}{2}}, 0, 0)}
+                \cell{no}
+            \end{row}
+            \begin{row}
+                \cell{5}
+                \cell{(0, 6, 4, 0, 6)}
+                \cell{sí}
+                \cell{30}
+                \cell{(0, \math{\frac{5}{2}}, 0, -3, 0)}
+                \cell{no}
+            \end{row}
+            \begin{row}
+                \cell{6}
+                \cell{(2, 6, 2, 0, 0)}
+                \cell{sí}
+                \cell{36}
+                \cell{(0, \math{\frac{3}{2}}, 1, 0, 0)}
+                \cell{sí}
+            \end{row}
+            \begin{row}
+                \cell{7}
+                \cell{(4, 6, 0, 0, -6)}
+                \cell{no}
+                \cell{42}
+                \cell{(3, \math{\frac{5}{2}}, 0, 0, 0)}
+                \cell{sí}
+            \end{row}
+            \begin{row}
+                \cell{8}
+                \cell{(0, 9, 4, -6, 0)}
+                \cell{no}
+                \cell{45}
+                \cell{(0, 0, \math{\frac{5}{2}}, \math{\frac{9}{2}}, 0)}
+                \cell{sí}
+            \end{row}
+        \end{ptable}
+    \end{example}
+
+    La proprietá di complementarietá delle soluzioni ottimali viene estesa
+    in modo molto naturale alla forma aumentata del problema.
+
+    \begin{theorem}
+        \strong{Proprietá di complementarietá delle soluzioni di base
+        ottime}. Ad ogni soluzione di base ottima del problema primale
+        é associata una soluzione di base complementare ottimale del 
+        problema duale, ed i valori delle rispettive funzioni obiettivo
+        sono gli stessi.
+    \end{theorem}
+
+    Le soluzioni di base possono essere classificate a seconda
+    che esse soddisfino o meno ciascuna delle seguenti condizioni.
+    Una é la \strong{condizione di ammissibilitá}, cioé se tutte
+    le variabili (comprese quelle slack) nella soluzione aumentata
+    sono non negative. L'altra é la \strong{condizione di ottimalitá},
+    cioé se tutte le variabili nella soluzione di base complementare
+    sono non negativi. Le due condizioni possono sia presentarsi
+    contemporaneamente, sia essere entrambe assenti; in particolare,
+    si distinguono quattro casi:
+
+    \begin{enumerate}
+        \begin{item}
+            Se una soluzione di base soddisfa sia la condizione di
+            ammissibilitá che la condizione di ottimalitá, si dice 
+            che tale soluzione é \strong{ottimale};
+        \end{item}
+        \begin{item}
+            Se una soluzione di base soddisfa la condizione di
+            ammissibilitá ma non la condizione di ottimalitá, si
+            dice che tale soluzione é \strong{sub-ottimale};
+        \end{item}
+        \begin{item}
+            Se una soluzione di base soddisfa la condizione di
+            ottimalitá ma non la condizione di ammissibilitá, si
+            dice che tale soluzione é \strong{super-ottimale};
+        \end{item}
+        \begin{item}
+            Se una soluzione di base non soddisfa né la condizione
+            di ammissibilitá né la condizione di ottimalitá, si
+            dice che tale soluzione non é \strong{né ammissibile né
+            super-ottimale};
+        \end{item}
+    \end{enumerate}
+
+    \begin{example}
+        In merito all'esempio precedente, la condizione di ammissibilitá
+        é soddisfatta dalle soluzioni 1, 2, 4, 5 e 6, mentre la condizione
+        di ottimalitá é soddisfatta dalle soluzioni 6, 7 e 8. Si ha quindi
+        che le soluzioni 1, 2, 4 e 5 sono sub-ottime, la soluzione 6 é
+        ottima, le soluzioni 7 e 8 sono super-ottime e la soluzione 3
+        non é né ammissibile né super-ottimale.
+    \end{example}
+
+    Ricordando che la relazione di dualitá fra problema primale e
+    problema duale é simmetrica, si ha che una soluzione sub-ottimale
+    é una soluzione super-ottimale se considera il problema primale
+    come problema duale (e viceversa); allo stesso modo, una soluzione
+    super-ottimale é una soluzione sub-ottimale se considera il problema
+    primale come problema duale (e viceversa).
+
+    Mentre il metodo del simplesso visita soluzioni di base sub-ottimali,
+    cercando di trovare la soluzione ottimale del problema primale,
+    indirettamente e come se visitasse soluzioni complementari super-ottimali,
+    cercando di ottenere una soluzione ammissibile per il problema duale. Per
+    descrivere una coppia di soluzioni di base complementari vengono anche
+    usati i seguenti termini: \strong{primale ammissibile} se la soluzione di
+    base primale è ammissibile per il primale e \strong{duale ammissibile} se
+    la soluzione di base complementare del duale è ammissibile per il duale.
+    Utilizzando questa terminologia, il metodo del simplesso visita soluzioni
+    primali ammissibili, cercando di ottenere l’ammissibilità duale. Quando
+    questo viene ottenuto, le due soluzioni di base complementari sono
+    ottimali per i rispettivi problemi.
+
+    %%%%%%%%%%%%%%%%%%%%%%%
+
+    Dato che é sempre possibile trasformare un problema di programmazione
+    lineare generico in un problema equivalente in forma standard, a tutti
+    i problemi di programmazione lineare é possibile associare un problema
+    duale, non solamente a quelli in forma standard. L'unica differenza é
+    che tale problema duale non sará necessariamente nella forma finora
+    considerata (problema di ottimizzazione di minimo, vincoli funzionali
+    tutti nella forma \math{\geq} e vincoli di non negativitá per ogni
+    variabile).
+
+    Per ricavare il problema duale associato ad un problema primale
+    in forma non standard si potrebbe convertire tale problema nella
+    forma standard e poi ricavare il problema duale come di consueto.
+    Questo approccio é certamente corretto, ma dispendioso. Infatti,
+    la relazione che sussiste fra i coefficienti che compaiono nel
+    problema primale in forma non standard ed il rispettivo problema
+    duale é sempre la stessa, la differenza sta soltanto nella forma
+    dei vincoli del problema e nel tipo di ottimizzazione.
+
+    Esiste un metodo piú veloce che permette di ricavare subito la forma dei
+    vincoli del problema duale associato ad un problema primale in forma non
+    standard, senza effettuare alcuna conversione. Tale metodo prende il nome
+    di \strong{metodo SOB} (\strong{Strange-Odd-Bizarre}), e si compone di
+    quattro passaggi. Noto un problema di programmazione lineare scelto come
+    problema primale:
+
+    \begin{enumerate}
+        \begin{item}
+            Se il problema primale é un problema di ottimizzazione
+            di massimo, allora il problema duale sará un problema
+            di ottimizzazione di minimo. Viceversa, se il problema
+            primale é un problema di ottimizzazione di minimo, allora
+            il problema duale sará un problema di ottimizzazione di
+            massimo;
+        \end{item}
+        \begin{item}
+            Etichettare le diverse forme di vincoli funzionali ed i
+            vincoli sulle singole variabili decisionali del primale
+            come Sensible, Odd o Bizarre, in accordo con la tabella
+            in basso a sinistra. L’etichettatura dei vincoli funzionali
+            dipende dalla natura del problema (se é di ottimizzazione di
+            massimo o di ottimizzazione di minimo);
+        \end{item}
+        \begin{item}
+            Per ogni vincolo su una variabile di decisione del problema
+            duale, utilizzare la forma che ha medesima etichetta del
+            vincolo funzionale per il problema primale corrispondente
+            a questa variabile duale, in accordo con la tabella in basso
+            a destra;
+        \end{item}
+        \begin{item}
+            Per ogni vincolo funzionale del problema duale, utilizzare la
+            forma che ha la stessa etichetta del vincolo della corrispondente
+            variabile di decisione del problema primale, in accordo con la
+            tabella in basso a destra.
+        \end{item}
+    \end{enumerate}
+
+    \begin[width = 55%fw]{parbox}
+        \begin[cols = 20%fw 40%fw 40%fw, cellborder = 0 0 1pt 1pt]{ptable}
+            \begin{row}
+                \cell[border = 1pt 1pt 1pt 1pt]{\strong{Etichetta}}
+                \cell[border = 1pt 1pt 1pt 1pt]{\strong{Problema primale} \par \strong{(o duale)}}
+                \cell[border = 1pt 1pt 1pt 1pt]{\strong{Problema duale} \par \strong{(o primale)}}
+            \end{row}
+            \begin{row}
+                \cell[border = 0 1pt 1pt 1pt]{}
+                \cell[border = 0 1pt 1pt 1pt]{max Z (o W)}
+                \cell[border = 0 1pt 1pt 1pt]{min W (o Z)}
+            \end{row}
+            \begin{row}
+                \cell{}
+                \cell{Vincolo \math{i}}:
+                \cell{Variabile \math{y_{i}} (o \math{x_{i}})}:
+            \end{row}
+            \begin{row}
+                \cell{Sensible}
+                \cell{\math{\leq}}
+                \cell{\math{y_{i} \geq 0}}
+            \end{row}
+            \begin{row}
+                \cell{Odd}
+                \cell{=}
+                \cell{non vincolata}
+            \end{row}
+            \begin{row}
+                \cell[border = 0 1pt 1pt 1pt]{Bizarre}
+                \cell[border = 0 1pt 1pt 1pt]{\math{\geq}}
+                \cell[border = 0 1pt 1pt 1pt]{\math{y_{i}' \leq 0}}
+            \end{row}
+            \begin{row}
+                \cell{}
+                \cell{Variabile \math{x_{j}} (o \math{y_{j}})}:
+                \cell{Vincolo \math{j}}:
+            \end{row}
+            \begin{row}
+                \cell{Sensible}
+                \cell{\math{x_{j} \geq 0}}
+                \cell{\math{\geq}}
+            \end{row}
+            \begin{row}
+                \cell{Odd}
+                \cell{non vincolata}
+                \cell{=}
+            \end{row}
+            \begin{row}
+                \cell[border = 0 1pt 1pt 1pt]{Bizarre}
+                \cell[border = 0 1pt 1pt 1pt]{\math{x_{j}' \leq 0}}
+                \cell[border = 0 1pt 1pt 1pt]{\math{\leq}}
+            \end{row}
+        \end{ptable}
+    \end{parbox}
+    \begin[padding = 10%fw, width = 35%fw]{parbox}
+        \begin[cols = 50%fw 50%fw, cellborder = 1pt 1pt 1pt 1pt]{ptable}
+            \begin{row}
+                \cell{\strong{problema 1#}}
+                \cell{\strong{problema 2#}}
+            \end{row}
+            \begin{row}
+                \cell{Vincolo \math{i}}
+                \cell{Variabile \math{i}}
+            \end{row}
+            \begin{row}
+                \cell{Funzione \par obiettivo}
+                \cell{Termine \par noto destro}
+            \end{row}
+        \end{ptable}
+    \end{parbox}
+
+    \begin{example}
+        \begin[width = 60%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left left]{
+                    \mi{max} \thickspace -Z = & -0.4 x_{1} -0.5 x_{2} \\
+                    & 0.3 x_{1} + 0.1 x_{2} \leq 2.7 \\
+                    & 0.5 x_{1} + 0.5 x_{2} = 6 \\
+                    & 0.6 x_{1} + 0.4 x_{2} \geq 6 \\
+                    & x_{1} \geq 0, \thickspace x_{2} \geq 0 \\
+                }            
+            \end{math}
+        \end{parbox}
+        \begin[width = 40%fw]{parbox}
+            Si consideri il problema di programmazione lineare presentato
+            a lato. Tale problema non si trova in forma standard, dato che
+            non tutti i vincoli funzionali sono di tipo \math{\leq}. É peró
+            possibile applicare il metodo SOB per costruirne il relativo
+            problema duale:
+        \end{parbox}
+        \par
+
+        \begin{enumerate}
+            \begin{item}
+                Il problema primale é un problema di ottimizzazione di
+                massimo, pertanto il rispettivo problema duale sará un
+                problema di ottimizzazione di minimo;
+            \end{item}
+            \begin{item}
+                Il problema primale ha tre vincoli funzionali e due
+                variabili, pertanto il rispettivo problema duale avrá
+                due vincoli funzionali e tre variabili;
+            \end{item}
+            \begin{item}
+                Il primo vincolo funzionale del problema primale é di tipo
+                \math{\leq}, pertanto la variabile \math{y_{1}} del problema
+                duale avrá associato un vincolo di non negativitá;
+            \end{item}
+            \begin{item}
+                Il secondo vincolo funzionale del problema primale é di tipo
+                =, pertanto la variabile \math{y_{2}} del problema duale non
+                avrá associato un vincolo legato al suo segno;
+            \end{item}
+            \begin{item}
+                Il terzo vincolo funzionale del problema primale é di tipo
+                \math{\geq}, pertanto la variabile \math{y_{3}'} del problema
+                duale (costruita ad-hoc) avrá associato un vincolo di non
+                positivitá;
+            \end{item}
+            \begin{item}
+                I coefficienti dell'\math{i}-esimo vincolo del problema
+                duale corrispondono ai coefficienti della variabile
+                \math{x_{i}} nei vincoli funzionali del problema primale,
+                mentre il termine noto destro corrisponde al coefficiente
+                della variabile \math{x_{i}} nella funzione obiettivo del
+                problema primale. Tale vincolo sará nella forma \math{\geq};
+            \end{item}
+            \begin{item}
+                L'\math{i}-esimo coefficiente della funzione obiettivo
+                del problema duale é dato dal termine noto destro
+                dell'\math{i}-esimo vincolo funzionale del problema primale.
+            \end{item}
+        \end{enumerate}
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left left]{
+                    \mi{max} \thickspace -Z = & -0.4 x_{1} -0.5 x_{2} \\
+                    & 0.3 x_{1} + 0.1 x_{2} \leq 2.7 \\
+                    & 0.5 x_{1} + 0.5 x_{2} = 6 \\
+                    & 0.6 x_{1} + 0.4 x_{2} \geq 6 \\
+                    & x_{1} \geq 0, \thickspace x_{2} \geq 0 \\
+                }            
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left left]{
+                    \mi{min} \thickspace W = & 2.7 y_{1} + 6 y_{2} + 6 y_{3}' \\
+                    & 0.3 y_{1} + 0.5 y_{2} + 0.6 y_{3}' \geq -0.4 \\
+                    & 0.1 y_{1} + 0.5 y_{2} + 0.4 y_{3}' \geq -0.5 \\
+                    & y_{1} \geq 0, \thickspace y_{3}' \leq 0 \\
+                }            
+            \end{math}
+        \end{parbox}
+    \end{example}
+
+\end{sile}

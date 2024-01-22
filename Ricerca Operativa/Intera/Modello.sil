@@ -1,0 +1,152 @@
+\begin{sile}
+
+    I problemi di programmazione lineare finora presentati rispettavano,
+    fra le altre, l'ipotesi di divisibilitá, ovvero veniva assunto che le
+    variabili decisionali del problema potessero assumere valori reali 
+    (o, al piú, razionali). Tuttavia, non sempre il problema da modellare
+    rispetta questa ipotesi, e pertanto la programmazione lineare risulta
+    inapplicabile. Ad esempio, l'ipotesi é evidentemente invalidata in 
+    problemi che riguardano: assegnazione del personale, distribuzione 
+    o stoccaggio di beni, decisioni manageriali. Ció che accomuna tutte 
+    queste situazioni é il fatto che gli elementi reali da modellare sono
+    enti discreti.
+
+    Se un problema programmazione lineare richiede che tutte le
+    variabili decisionali debbano assumere esclusivamente valori
+    interi, si parla di \strong{Programmazione Lineare Intera Pura},
+    o semplicemente di \strong{Programmazione Lineare Intera}
+    (\strong{PLI}). Se invece soltanto una parte delle variabili
+    decisionali devono assumere valori interi si parla di
+    \strong{Programmazione Lineare Intera Mista} (\strong{PLM}).
+
+    Una particolare classe di problemi di programmazione lineare intera
+    che merita attenzione sono i problemi che trattano di decisioni "si/no".
+    Tali decisioni possono essere rappresentate mediante variabili che
+    possono assumere esclusivamente due valori, che per analogia con
+    l'algebra booleana tendono ad essere 0 e 1. In questo senso, se la
+    \math{i}-esima variabile decisionale del problema assume valore 1
+    significa che la \math{i}-esima decisione é stata presa, mentre se
+    assume valore 0 significa che l'\math{i}-esima decisione é stata
+    rigettata. Variabili di questo tipo sono dette \strong{variabili
+    binarie}, e problemi di programmazione lineare intera che trattano
+    solo variabili binarie sono indicati come \strong{problemi di
+    programmazione binaria}.
+
+    \begin{example}
+        \begin{strong}
+            Una azienda manufatturiera sta considerando la possibilitá
+            di espandersi costruendo una nuova fabbrica a Los Angeles,
+            a San Francisco o in entrambe le cittá. Inoltre, vi é anche
+            la possibilitá di costruire un nuovo magazzino in al piú
+            una delle due cittá, ma solo se in questa é stata costruita
+            anche la fabbrica. Il profitto che genererá la costruzione
+            di una struttura, oltre al capitale necessario per
+            l'investimento, é riportato per ciascuna di queste nella
+            tabella di seguito (espresso in milioni di dollari). Sapendo
+            che il capitale massimo a disposizione é 10 milioni di dollari,
+            qual'é la combinazione di decisioni che genera il massimo
+            profitto? 
+        \end{strong}
+
+        \begin[cols = 15%fw 17.5%fw 20%fw 15%fw 20%fw]{ptable}
+            \begin{row}
+                \cell{\strong{Decisione}}
+                \cell{\strong{Struttura da} \par \strong{costruire}}
+                \cell{\strong{Luogo in cui} \par \strong{costruire}}
+                \cell{\strong{Profitto} \par \strong{ipotetico}}
+                \cell{\strong{Investimento} \par \strong{necessario}}
+            \end{row}
+            \begin{row}
+                \cell{1}
+                \cell{Fabbrica}
+                \cell{Los Angeles}
+                \cell{9}
+                \cell{6}
+            \end{row}
+            \begin{row}
+                \cell{2}
+                \cell{Fabbrica}
+                \cell{San Francisco}
+                \cell{5}
+                \cell{3}
+            \end{row}
+            \begin{row}
+                \cell{3}
+                \cell{Magazzino}
+                \cell{Los Angeles}
+                \cell{6}
+                \cell{5}
+            \end{row}
+            \begin{row}
+                \cell{4}
+                \cell{Magazzino}
+                \cell{San Francisco}
+                \cell{4}
+                \cell{2}
+            \end{row}
+        \end{ptable}
+
+        Il problema puó essere modellato come un problema di programmazione 
+        lineare intera binaria.
+
+        Alla decisione di costruire ciascuna \math{i}-esima struttura viene 
+        associata una variabile binaria \math{x_{i}}: tale variabile assume
+        valore 1 se si é deciso che l'\math{i}-esima struttura va costruita
+        mentre assume valore 0 se si é deciso che l'\math{i}-esima struttura
+        non va costruita.
+
+        Sia \math{Z} la funzione obiettivo del problema, che corrisponde al
+        profitto totale dato dalla costruzione da zero a quattro strutture.
+        Il problema richiede di trovare la combinazione di decisioni che
+        restituisca il massimo profitto, pertanto tale funzione deve venire
+        massimizzata. Si ricordi inoltre che il capitale massimo a
+        disposizione é 10 milioni di dollari, pertanto la spesa totale
+        non puó superare tale cifra. Si ottengono quindi l'espressione per
+        \math{Z} ed un primo vincolo:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                Z = 9x_{1} + 5x_{2} + 6x_{3} + 4x_{4}
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                6x_{1} + 3x_{2} + 5x_{3} + 2x_{4} \leq 10
+            \end{math}
+        \end{parbox}
+        \par
+
+        Le decisioni 3 e 4 sono mutualmente esclusive, dato che é stato
+        imposto che venga costruito al piú un solo magazzino. In altri
+        termini, le variabili \math{x_{3}} e \math{x_{4}} non possono
+        assumere contemporaneamente il valore 1, ma possono assumere
+        contemporaneamente il valore 0. Tale costrizione puó venire
+        espressa aggiungendo al problema il vincolo \math{x_{3} + x_{4}
+        \leq 1}.
+
+        La decisione 3 dipende della decisione 1, perché la costruzione
+        di un magazzino é ammessa solamente se nella stessa cittá viene
+        costruita anche una fabbrica. In altri termini, se la variabile
+        \math{x_{1}} vale 0 allora \math{x_{3}} deve valere per forza 0,
+        ma se \math{x_{1}} vale 1 allora \math{x_{3}} puó valere sia 0
+        che 1. Un ragionamento del tutto analogo puó essere fatto per
+        le decisioni 4 e 2 e le rispettive variabili decisionali. Tali
+        costrizioni possono venire espresse aggiungendo al problema i
+        vincoli \math{x_{3} \leq x_{1}} e \math{x_{4} \leq x_{2}}.
+
+        Unificando tutti i vincoli rilevati, si ottiene il seguente problema
+        di programmazione lineare intera binaria:
+
+        \begin[mode = display]{math}
+            \table[columnalign = left left]{
+                \mi{max} \thickspace Z = & 9x_{1} + 5x_{2} + 6x_{3} + 4x_{4} \\
+                & 6x_{1} + 3x_{2} + 5x_{3} + 2x_{4} \leq 10 \\
+                & x_{3} + x_{4} \leq 1 \\
+                & - x_{1} + x_{3} \leq 0 \\
+                & - x_{2} + x_{4} \leq 0 \\
+                x_{j} \in \{0, 1\} & \mi{per} \thickspace j = 1, 2, 3, 4 \\
+            }
+        \end{math}
+    \end{example}
+
+\end{sile}

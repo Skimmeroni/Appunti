@@ -1,0 +1,266 @@
+return {
+  {
+    label = {
+      "Complementi",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest1",
+    number = "1",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Spazi vettoriali",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest2",
+    number = "1.1",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Matrici",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest3",
+    number = "1.2",
+    pageno = "4"
+  },
+  {
+    label = {
+      "Algebra lineare",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest4",
+    number = "1.3",
+    pageno = "10"
+  },
+  {
+    label = {
+      "Programmazione lineare",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest5",
+    number = "2",
+    pageno = "15"
+  },
+  {
+    label = {
+      "Modello di programmazione matematica",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest6",
+    number = "2.1",
+    pageno = "15"
+  },
+  {
+    label = {
+      "Modello di programmazione lineare",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest7",
+    number = "2.2",
+    pageno = "16"
+  },
+  {
+    label = {
+      "Metodo del simplesso",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest8",
+    number = "2.3",
+    pageno = "18"
+  },
+  {
+    label = {
+      "Teoria della dualitá",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest9",
+    number = "2.4",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Programmazione lineare intera",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest10",
+    number = "3",
+    pageno = "33"
+  },
+  {
+    label = {
+      "Modello di programmazione lineare intera",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest11",
+    number = "3.1",
+    pageno = "33"
+  },
+  {
+    label = {
+      "Adattamento al modello di programmazione binaria",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest12",
+    number = "3.2",
+    pageno = "34"
+  },
+  {
+    label = {
+      "Vincoli di tipo \"either-of\"",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest13",
+    number = "3.2.1",
+    pageno = "34"
+  },
+  {
+    label = {
+      "Devono essere soddisfatti ",
+      {
+        "K",
+        command = "math",
+        id = "texlike_command",
+        options = {
+        }
+      },
+      " degli ",
+      {
+        "N",
+        command = "math",
+        id = "texlike_command",
+        options = {
+        }
+      },
+      " vincoli presenti",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest14",
+    number = "3.2.2",
+    pageno = "34"
+  },
+  {
+    label = {
+      "Funzioni con ",
+      {
+        "N",
+        command = "math",
+        id = "texlike_command",
+        options = {
+        }
+      },
+      " possibili valori",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest15",
+    number = "3.2.3",
+    pageno = "35"
+  },
+  {
+    label = {
+      "Problema del \"fixed charge\"",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest16",
+    number = "3.2.4",
+    pageno = "35"
+  },
+  {
+    label = {
+      "Rappresentare variabili intere come variabili binarie",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest17",
+    number = "3.2.5",
+    pageno = "37"
+  },
+  {
+    label = {
+      "Metodo Branch-and-Bound per la programmazione binaria",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest18",
+    number = "3.3",
+    pageno = "37"
+  },
+  {
+    label = {
+      "Programmazione nonlineare",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest19",
+    number = "4",
+    pageno = "41"
+  },
+  {
+    label = {
+      "Modello di programmazione nonlineare",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest20",
+    number = "4.1",
+    pageno = "41"
+  },
+  {
+    label = {
+      "Ottimizzazione non vincolata in una sola variabile",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest21",
+    number = "4.2",
+    pageno = "43"
+  },
+  {
+    label = {
+      "Metodo di bisezione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest22",
+    number = "4.2.1",
+    pageno = "43"
+  },
+  {
+    label = {
+      "Metodo di Newton",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest23",
+    number = "4.2.2",
+    pageno = "44"
+  },
+  {
+    label = {
+      "Ottimizzazione non vincolata in piú variabili",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest24",
+    number = "4.3",
+    pageno = "44"
+  }
+}

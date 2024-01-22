@@ -1,0 +1,674 @@
+\begin{sile}
+
+    Vi sono diverse situazioni in cui le variabili binarie permettono di
+    ridurre un problema complesso ad un problema di programmazione lineare
+    intera binaria. Situazioni di questo tipo nascono quando la formulazione
+    originaria del problema si adatta ad un modello di PLI ad eccezione di 
+    alcune condizioni che coinvolgono relazioni di tipo combinatorio del
+    modello. Esprimento queste relazioni in termini di domande a cui bisogna
+    dare risposta sí-no, é possibile aggiungere delle variabili binarie 
+    ausiliare al modello per rappresentare queste decisioni riducendo il 
+    problema ad un problema di PLI mista.
+
+    \subsection{Vincoli di tipo "either-of"}
+
+        Si consideri il caso in cui, dati due vincoli, solo uno
+        di questi deve essere soddisfatto, e non é necessario 
+        che sia soddisfatto anche l'altro. In altri termini,
+        almeno una delle due uguaglianze/disuguaglianze deve
+        essere vera, ma non necessariamente entrambe:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                a_{1} x_{1} + \unicodeellipsis + a_{n} x_{n}
+                \thickspace
+                \{\table{
+                    \leq \\
+                    \geq \\
+                    = \\
+                }\}
+                \thickspace
+                \alpha
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                b_{1} x_{1} + \unicodeellipsis + b_{n} x_{n}
+                \thickspace
+                \{\table{
+                    \leq \\
+                    \geq \\
+                    = \\
+                }\}
+                \thickspace
+                \beta
+            \end{math}
+        \end{parbox}
+        \par
+
+        Una situazione di questo tipo non é esprimibile direttamente
+        in termini di programmazione lineare, perché nel modello di
+        programmazione lineare tutti i vincoli devono essere sempre
+        soddisfatti.
+
+        Si assuma che la forma dei vincoli sia \math{\leq} (se non lo
+        sono, é sempre possibile convertirli in tale forma). Sia \math{M}
+        un numero positivo molto grande; aggiungendo \math{M} a destra di 
+        una disuguaglianza \math{\leq} che é noto essere verificata si
+        ottiene una nuova disuguaglianza \math{\leq} anch'essa certamente
+        verificata. Introducendo \math{M}, la coppia di vincoli puó essere
+        riscritta indifferentemente in uno dei due modi:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \{\table[columnalign = left]{
+                    a_{1} x_{1} + \unicodeellipsis + a_{n} x_{n}
+                    \leq \alpha + M \\
+                    b_{1} x_{1} + \unicodeellipsis + b_{n} x_{n}
+                    \leq \beta \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \{\table[columnalign = left]{
+                    a_{1} x_{1} + \unicodeellipsis + a_{n} x_{n}
+                    \leq \alpha \\
+                    b_{1} x_{1} + \unicodeellipsis + b_{n} x_{n}
+                    \leq \beta + M \\
+                }   
+            \end{math}
+        \end{parbox}
+        \par
+
+        L'idea é che aggiungendo \math{M} a destra di un vincolo lo si rende
+        irrilevante, perché una soluzione che soddisfa gli altri vincoli del
+        problema soddisfa certamente anche questo (naturalmente, si deve
+        assumere che \math{M} sia abbastanza grande da non invalidare
+        potenziali soluzioni ammissibili). Introducendo una variabile binaria
+        ausiliaria \math{y}, le due forme della riscrittura possono essere 
+        riassunte in una sola:
+
+        \begin[mode = display]{math}
+            \{\table[columnalign = left]{
+                a_{1} x_{1} + \unicodeellipsis + a_{n} x_{n}
+                \leq \alpha + My \\
+                b_{1} x_{1} + \unicodeellipsis + b_{n} x_{n}
+                \leq \beta + M(1 - y) \\
+            }
+        \end{math}
+
+        In questo modo, la variabile \math{y} annulla alternativamente
+        la variabile \math{M} in uno dei due vincoli a seconda di quale
+        valore assume, ed il vincolo in cui \math{M} permane viene reso
+        irrilevante. In questo senso, la variabile binaria \math{y}
+        rappresenta la decisione sí-no in merito a quale dei due vincoli
+        é quello che si ha maggior interesse che venga soddisfatto, perché
+        l'altro lo sará sicuramente.
+
+    \subsection{Devono essere soddisfatti \math{K} degli \math{N} vincoli presenti}
+
+        Si consideri il caso di un modello che include un insieme di \math{N}
+        vincoli, tali che solo \math{K} di questi devono essere soddisfatti 
+        (si assuma \math{K < N}). Parte del processo di ottimizzazione é
+        scegliere la combinazione dei \math{K} vincoli che permette alla
+        funzione obiettivo di raggiungere i migliori valori possibili,
+        mentre i rimanenti \math{N - K} vincoli vengono resi irrilevanti.
+        Si noti come questa é semplicemente una generalizzazione della
+        situazione precedente; infatti, quest'ultima si ottiene ponendo
+        \math{K = 1} e \math{N = 2}.
+
+        Si assuma sempre che gli \math{N} vincoli siano nella forma
+        \math{\leq}. Siano questi denotati come:
+
+        \begin[mode = display]{math}
+            \{\table{
+                f_{1} (x_{1}, x_{2}, \unicodeellipsis, x_{n}) \leq d_{1} \\
+                \vdots \\
+                f_{N} (x_{1}, x_{2}, \unicodeellipsis, x_{n}) \leq d_{N} \\
+            }
+        \end{math}
+
+        Applicando la stessa logica del caso precedente, una formulazione
+        equivalente al requisito che \math{K} di questi vincoli debbano 
+        essere soddisfatti é
+
+        \begin[mode = display]{math}
+            \{\table{
+                f_{1} (x_{1}, x_{2}, \unicodeellipsis, x_{n}) \leq d_{1} + My_{1} \\
+                \vdots \\
+                f_{N} (x_{1}, x_{2}, \unicodeellipsis, x_{n}) \leq d_{N} + My_{N} \\
+                \sum_{i = 1}^{N} y_{i} = N - K \\
+            }
+        \end{math}
+
+        Dove \math{y_{i}} con \math{i = 1, 2, \unicodeellipsis, N} sono tutte
+        variabili binarie ed \math{M} é un numero positivo molto grande. Per
+        ciascun \math{i}-esimo vincolo, se la variabile \math{y_{i}} assume
+        valore 0 il valore \math{M} viene annullato, rendendo tale vincolo 
+        equivalente a quello originale, mentre se assume valore 1 il valore 
+        \math{M} viene mantenuto, rendendo il vincolo sicuramente soddisfatto
+        dalle soluzioni che soddisfano gli altri vincoli.
+
+        Poiché i vincoli sulle variabili \math{y_{i}} garantiscono che
+        \math{K} di queste variabili siano uguali a 0 e \math{N - K} siano
+        uguali ad 1, \math{K} dei vincoli originari saranno lasciati intatti
+        e \math{N - K} verranno resi irrilevanti. La scelta di quali siano i
+        \math{K} vincoli da dover essere mantenuti é demanata all'algoritmo
+        risolutivo stesso.
+
+    \subsection{Funzioni con \math{N} possibili valori}
+
+        Si consideri la situazione in cui una data funzione assuma
+        uno fra \math{N} possibili valori. Si denoti un vincolo di
+        questo tipo con
+
+        \begin[mode = display]{math}
+            f(x_{1}, x_{2}, \unicodeellipsis, x_{n}) =
+            \{\table{d_{1} & d_{2} & \unicodeellipsis & d_{N} \\}\}
+        \end{math}
+
+        Come in precedenza, anche una situazione di questo tipo non puó
+        venire espressa direttamente in termini di programmazione lineare.
+        Tale vincolo puó peró essere riscritto in una forma equivalente,
+        compatibile con il modello di PLI, composta da una coppia di vincoli:
+
+        \begin[mode = display]{math}
+            \{\table[columnalign = left]{
+                f{(x_{1}, x_{2}, \unicodeellipsis, x_{n})} =
+                \sum_{i = 1}^{N} d_{i} y_{i} \\
+                \sum_{i = 1}^{N} y_{i} = 1 \\
+            }
+        \end{math}
+
+        Dove \math{y_{i}} con \math{i = 1, 2, \unicodeellipsis, N} sono
+        tutte variabili binarie. Il primo vincolo é il corrispettivo del
+        vincolo originale, dove i valori \math{d_{i}} con \math{i = 1, 2,
+        \unicodeellipsis, N} sono stati sostituiti da una sommatoria i cui
+        elementi sono le variabili \math{d_{i}} e le variabili binarie 
+        ausiliarie \math{y_{i}}.
+
+        Il secondo vincolo impone che esattamente una sola variabile
+        \math{y_{i}} assuma il valore 1 e tutte le altre assumano il
+        valore 0, ed in questo modo tutti i valori \math{d_{i}} vengono
+        annullati tranne uno; tale valore sará il valore che viene assunto
+        dalla funzione. In questo caso, ci sono \math{N} domande di tipo
+        sí-no da porsi: il valore scelto é \math{d_{i}} con \math{i = 1, 2,
+        \unicodeellipsis, N}?
+
+        \begin{example}
+            Il vincolo a sinistra per un ipotetico problema di
+            programmazione lineare puó essere riscritto in una
+            forma equivalente come a destra, introducendo le
+            tre variabili binarie \math{y_{1}, y_{2}, y_{3}}.
+ 
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    3x_{1} + 2x_{2} =
+                    \{\table{6 & 12 & 18 \\}\}
+                \end{math}
+            \end{parbox}
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    \{\table[columnalign = left]{
+                        3x_{1} + 2x_{2} = 6y_{1} + 12y_{2} + 18y_{3} \\
+                        y_{1} + y_{2} + y_{3} = 1 \\
+                    }
+                \end{math}
+            \end{parbox}
+        \end{example}
+
+    \subsection{Problema del "fixed charge"}
+
+        Si consideri una situazione in cui le variabili decisionali
+        \math{x_{j}} con \math{j = 1, 2, \unicodeellipsis, n} di un
+        problema di programmazione lineare rappresentino delle attivitá,
+        a cui é associato un costo. Nel caso in cui l'attivitá in questione
+        venga avviata, il suo costo totale é dato dalla somma di una spesa
+        fissa legata all'inizializzazione di tale attivitá e ad un costo
+        variabile, in genere proporzionale al livello dell'attivitá stessa.
+        Nel caso in cui l'attivitá in questione non venga avviata, il suo
+        costo é zero.
+
+        Il costo totale di una attivitá \math{x_{j}} con tali caratteristiche
+        puó rappresentato mediante la seguente funzione:
+
+        \begin[mode = display]{math}
+            f_{j} {(x_{j})} =
+            \{\table[columnalign = left]{
+                k_{j} + c_{j} x_{j} & \mi{se} \thickspace x_{j} > 0 \\
+                0 & \mi{se} \thickspace x_{j} = 0 \\
+            }
+        \end{math}
+
+        Dove \math{x_{j}} denota il livello dell'attivitá \math{j},
+        \math{k_{j}} denota il costo di setup della \math{j}-esima
+        attivitá e \math{c_{j}} denota il costo per ogni unitá
+        incrementale della \math{j}-esima attivitá. La presenza del
+        costo fisso \math{k_{j}} impedisce al problema di essere 
+        formulato direttamente come problema di programmazione lineare.
+
+        Si considerino allora \math{n} attivitá \math{x_{j}}, ciascuna con
+        un costo di inizializzazione (con \math{k_{j} \geq 0} in ogni caso
+        e \math{k_{j} > 0} per qualche \math{j = 1, 2, \unicodeellipsis, n}).
+        Se il portare a termine una attivitá implica un costo, allora il
+        problema consiste nel minimizzare la funzione obiettivo
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                Z = f_{1} {(x_{1})} + f_{2} {(x_{2})} + \unicodeellipsis + f_{n} {(x_{n})}
+                = \sum_{j = 1}^{n} f_{j} {(x_{j})}
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                f_{j} {(x_{j})} =
+                \{\table[columnalign = left]{
+                    k_{j} + c_{j} x_{j} & \mi{se} \thickspace x_{j} > 0 \\
+                    0 & \mi{se} \thickspace x_{j} = 0 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        sottostando ai vincoli del problema (quali che siano).
+
+        Questo problema puó essere trasformato in un problema di PLI
+        equivalente introducendo \math{n} variabili binarie ausiliarie
+        \math{y_{i}} con \math{i = 1, 2, \unicodeellipsis, n}. Ciascuna 
+        variabile \math{y_{i}} rappresenta la decisione sí-no relativa
+        all'intraprendere o al non intraprendere la \math{i}-esima attivitá.
+        A tal fine, la funzione obiettivo \math{Z} puó venire riscritta come:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                Z = f_{1} {(x_{1})} + f_{2} {(x_{2})} + \unicodeellipsis + f_{n} {(x_{n})}
+                = \sum_{j = 1}^{n} f_{j} {(x_{j})}
+                = \sum_{j = 1}^{n} c_{j} x_{j} + k_{j} y_{j}
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                y_{j} =
+                \{\table[columnalign = left]{
+                    1 & \mi{se} \thickspace x_{j} > 0 \\
+                    0 & \mi{se} \thickspace x_{j} = 0 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Se la \math{j}-esima attivitá non viene intrapresa, ovvero se sia
+        \math{x_{j}} che \math{y_{j}} sono uguali a 0, allora il costo per
+        la \math{j}-esima attivitá é esso stesso 0.
+
+        Questa riscrittura non é peró sufficiente a trasformare il problema 
+        originale in un problema PLI, perché la definizione di \math{y_{i}}
+        sopra riportata non é esprimibile in termini di programmazione
+        lineare. Occorre infatti compiere un ulteriore passo e tradurre la
+        definizione di \math{y_{i}} come uno o piú vincoli.
+
+        In tal senso, sia \math{M} un numero intero positivo molto grande.
+        Introducendo \math{n} vincoli
+
+        \begin[mode = display]{math}
+            x_{j} \leq M y_{j}
+        \end{math}
+
+        per ciascun \math{j = 1, 2, \unicodeellipsis, n} si ha la certezza che
+        \math{y_{j}} valga 1 invece che 0 ogni volta che \math{x_{j} > 0}.
+
+        Ora occorrerebbe introdurre uno o piú vincoli che impongano
+        che le variabili \math{y_{j}} assumano il valore 0 ogni volta
+        che \math{x_{j}} vale 0. Tuttavia, per la natura stessa della
+        funzione obiettivo, non é necessario esplicitare tale restrizione.
+
+        Si consideri infatti il caso in cui \math{x_{j} = 0}. Se
+        \math{k_{j} = 0}, l'intera espressione \math{c_{j} x_{j} +
+        k_{j} y_{j}} si annulla comunque, quindi la scelta di \math{y_{j}}
+        é irrilevante. Se invece \math{k_{j} > 0}, scegliere \math{y_{j} = 0}
+        annulla l'intera espressione, mentre scegliere \math{y_{j} = 1}
+        restituisce il solo \math{k_{j}}, che per ipotesi é un valore
+        positivo. Pertanto, dato che il problema é un problema di
+        ottimizzazione di minimo, la scelta migliore per il valore di
+        \math{y_{j}} quando \math{x_{j} = 0} e \math{k_{j} > 0} é sempre
+        e comunque 0.
+
+        %\begin{example}
+        %    \begin{strong}
+        %        Una acciaieria sta valutando diversi metodi per ridurre 
+        %        l'inquinamento atmosferico prodotto dalle sue fornaci.
+        %        Tali fornaci sono di due tipi: fornaci di fusione e
+        %        fornaci a crogiolo aperto. Tale inquinamento si presenta
+        %        in tre forme: polveri sottili, ossido di zolfo e gas metano.
+        %        Le soluzioni proposte sono tre: aumentare l'altezza dei
+        %        camini, usare filtri con maggior potere di cattura oppure
+        %        usare combustibili migliori. Naturalmente l'impiego di una
+        %        o piú tecnologie di riduzione dell'inquinamento comporta un
+        %        costo, e ci si aspetta che tale costo debba essere il piú
+        %        contenuto possibile. Qual'é la percentuale di utilizzo di
+        %        ciascuna soluzione che permette di minimizzare i costi ed
+        %        al contempo di ridurre le emissioni nocive della quantitá
+        %        prefissata?
+        %    \end{strong}
+        %
+        %    \par
+        %    \begin[width = 50%fw]{parbox}
+        %        \begin[cols = 40%fw 30%fw]{ptable}
+        %            \begin{row}
+        %                \cell{\strong{Sostanza} \par \strong{inquinante}}
+        %                \cell{\strong{Quantitá da} \par \strong{eliminare}}
+        %            \end{row}
+        %            \begin{row}
+        %                \cell{Polveri sottili}
+        %                \cell{60}
+        %            \end{row}
+        %            \begin{row}
+        %                \cell{Ossido di zolfo}
+        %                \cell{150}
+        %            \end{row}
+        %            \begin{row}
+        %                \cell{Gas metano}
+        %                \cell{125}
+        %            \end{row}
+        %        \end{ptable}
+        %    \end{parbox}
+        %    \begin[width = 50%fw]{parbox}
+        %        \begin[cols = 35%fw 25%fw 25%fw]{ptable}
+        %            \begin{row}
+        %                \cell{\strong{Metodo di} \par \strong{abbattimento}}
+        %                \cell{\strong{Fusione}}
+        %                \cell{\strong{Crogiolo} \par \strong{aperto}}
+        %            \end{row}
+        %            \begin{row}
+        %                \cell{Camini piú alti}
+        %                \cell{8}
+        %                \cell{10}
+        %            \end{row}
+        %            \begin{row}
+        %                \cell{Migliori filtri}
+        %                \cell{7}
+        %                \cell{6}
+        %            \end{row}
+        %            \begin{row}
+        %                \cell{Migliori \par combustibili}
+        %                \cell{11}
+        %                \cell{9}
+        %            \end{row}
+        %        \end{ptable}
+        %    \end{parbox}
+        %    \par
+        %
+        %    \begin[cols = 17.5%fw 13.5%fw 13.5%fw 13.5%fw 13.5%fw 13.5%fw 13.5%fw]{ptable}
+        %        \begin{row}
+        %            \cell{\strong{Sostanza} \par \strong{inquinante}}
+        %            \cell[span = 2]{\strong{Camini piú alti}}
+        %            \cell[span = 2]{\strong{Migliori filtri}}
+        %            \cell[span = 2]{\strong{Migliori combustibili}}
+        %        \end{row}
+        %        \begin{row}
+        %            \cell{}
+        %            \cell{\strong{Fusione}}
+        %            \cell{\strong{Crogiolo} \par \strong{aperto}}
+        %            \cell{\strong{Fusione}}
+        %            \cell{\strong{Crogiolo} \par \strong{aperto}}
+        %            \cell{\strong{Fusione}}
+        %            \cell{\strong{Crogiolo} \par \strong{aperto}}
+        %        \end{row}
+        %        \begin{row}
+        %            \cell{Polveri sottili}
+        %            \cell{12}
+        %            \cell{9}
+        %            \cell{25}
+        %            \cell{20}
+        %            \cell{17}
+        %            \cell{13}
+        %        \end{row}
+        %        \begin{row}
+        %            \cell{Ossido di zolfo}
+        %            \cell{35}
+        %            \cell{42}
+        %            \cell{18}
+        %            \cell{31}
+        %            \cell{56}
+        %            \cell{49}
+        %        \end{row}
+        %        \begin{row}
+        %            \cell{Gas metano}
+        %            \cell{37}
+        %            \cell{53}
+        %            \cell{28}
+        %            \cell{24}
+        %            \cell{29}
+        %            \cell{20}
+        %        \end{row}
+        %    \end{ptable}
+        %
+        %    Siano \math{x_{i}} con \math{i = 1, 2, \unicodeellipsis, 6} delle
+        %    variabili che rappresentano la percentuale dell'\math{i}-esimo
+        %    metodo utilizzato per ridurre le emissioni. Il problema consiste
+        %    quindi nel minimizzare la funzione:
+        %
+        %    \begin[mode = display]{math}
+        %        Z = 8x_{1} + 10x_{2} + 7x_{3} + 6x_{4} + 11x_{5} + 9x_{6}
+        %    \end{math}
+        %
+        %    Essendo delle percentuali, ciascuna variabile \math{x_{i}}
+        %    deve essere un valore compreso fra 0 e 1. Inoltre, la quantitá
+        %    di emissioni eliminate deve essere almeno pari alla quantitá
+        %    prefissata. Pertanto occorre introdurre i vincoli:
+        %
+        %    \begin[width = 50%fw]{parbox}
+        %        \begin[mode = display]{math}
+        %            \{\table[columnalign = left]{
+        %                12x_{1} + 9x_{2} + 25x_{3} + 20x_{4} + 17x_{5} + 13x_{6} \geq 60 \\
+        %                35x_{1} + 42x_{2} + 18x_{3} + 31x_{4} + 56x_{5} + 49x_{6} \geq 150 \\
+        %                37x_{1} + 53x_{2} + 28x_{3} + 24x_{4} + 29x_{5} + 20x_{6} \geq 125 \\
+        %            }
+        %        \end{math}
+        %    \end{parbox}
+        %    \begin[width = 50%fw]{parbox}
+        %        \begin[mode = display]{math}
+        %            0 \leq x_{j} \leq 1
+        %            \thickspace \forall j \in \{1, 2, 3, 4, 5, 6\}
+        %        \end{math}
+        %    \end{parbox}
+        %\end{example}
+
+        \begin{example}
+            \begin{strong}
+                Una acciaieria sta valutando come ridurre l'inquinamento
+                atmosferico prodotto dalle sue fornaci con la minima spesa
+                possibile. Tali fornaci sono di due tipi: fornaci di fusione
+                e fornaci a crogiolo aperto. L'inquinamento si presenta in
+                tre forme: polveri sottili, ossido di zolfo e gas metano. 
+                Qual'é la percentuale di utilizzo che permette di minimizzare
+                i costi ed al contempo di ridurre le emissioni nocive della
+                quantitá prefissata?
+            \end{strong}
+
+            \par
+            \begin[width = 57.5%fw]{parbox}
+                \begin[cols = 30%fw 25%fw 15%fw 15%fw]{ptable}
+                    \begin{row}
+                        \cell{\strong{Sostanza} \par \strong{inquinante}}
+                        \cell{\strong{Quantitá da} \par \strong{eliminare}}
+                        \cell[span = 2]{\strong{Riduzione a} \par \strong{pieno regime}}
+                    \end{row}
+                    \begin{row}
+                        \cell{Polveri sottili}
+                        \cell{25}
+                        \cell{12}
+                        \cell{9}
+                    \end{row}
+                    \begin{row}
+                        \cell{Ossido di zolfo}
+                        \cell{50}
+                        \cell{35}
+                        \cell{42}
+                    \end{row}
+                    \begin{row}
+                        \cell{Gas metano}
+                        \cell{75}
+                        \cell{37}
+                        \cell{53}
+                    \end{row}
+                \end{ptable}
+            \end{parbox}
+            \begin[width = 42.5%fw]{parbox}
+                \begin[cols = 40%fw 25%fw 30%fw]{ptable}
+                    \begin{row}
+                        \cell{\strong{Costo}}
+                        \cell{\strong{Fusione}}
+                        \cell{\strong{Crogiolo} \par \strong{aperto}}
+                    \end{row}
+                    \begin{row}
+                        \cell{Spesa fissa}
+                        \cell{2}
+                        \cell{3}
+                    \end{row}
+                    \begin{row}
+                        \cell{Spesa variabile}
+                        \cell{8}
+                        \cell{10}
+                    \end{row}
+                \end{ptable}
+            \end{parbox}
+            \par
+
+            Sia \math{x_{1}} la percentuale di ottimizzazione impiegata
+            per le fornaci a fusione, e sia math{x_{2}} la percentuale
+            di ottimizzazione impiegata per le fornace a crogiolo aperto.
+            Essendo delle percentuali, tali variabili devono assumere un
+            valore compreso fra 0 e 1. Inoltre, la quantitá di emissioni
+            eliminate deve essere almeno pari alla quantitá prefissata.
+            Pertanto occorre introdurre i vincoli:
+
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    \{\table[columnalign = left]{
+                        12x_{1} + 9x_{2} \geq 25 \\
+                        35x_{1} + 42x_{2} \geq 50 \\
+                        37x_{1} + 53x_{2} \geq 75 \\
+                    }
+                \end{math}
+            \end{parbox}
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    \table[columnalign = left]{
+                        0 \leq x_{1} \leq 1 \\
+                        0 \leq x_{2} \leq 1 \\                    
+                    }
+                \end{math}
+            \end{parbox}
+            \par
+
+            Il problema consiste quindi nel minimizzare la funzione:
+
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    Z = 8x_{1} + 10x_{2} + 2y_{1} + 3y_{2}
+                \end{math}
+            \end{parbox}
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    \{\table[columnalign = left]{
+                        x_{1} - M y_{1} \leq 0 \\
+                        x_{2} - M y_{2} \leq 0 \\
+                    }
+                \end{math}
+            \end{parbox}
+            \par
+
+            Dove \math{y_{1}} e \math{y_{2}} sono due variabili binarie, 
+            alle quali sono associati i vincoli necessari per rappresentare
+            il costo fisso associato alla ottimizzazione delle fornaci. Il
+            problema complessivo viene quindi definito come:
+
+            \begin[mode = display]{math}
+                \table[columnalign = left left]{
+                    \mi{min} \thickspace Z = & 8x_{1} + 10x_{2} + 2y_{1} + 3y_{2} \\
+                    & 12x_{1} +  9x_{2} \geq 25 \\
+                    & 35x_{1} + 42x_{2} \geq 50 \\
+                    & 37x_{1} + 53x_{2} \geq 75 \\
+                    & x_{1} \geq 0 \\
+                    & x_{1} \leq 1 \\
+                    & x_{1} - M y_{1} \leq 0 \\
+                    & x_{2} \geq 0 \\ 
+                    & x_{2} \leq 1 \\
+                    & x_{2} - M y_{2} \leq 0 \\
+                }
+            \end{math}
+        \end{example}
+
+    \subsection{Rappresentare variabili intere come variabili binarie}
+
+        Si supponga di avere un problema di PLI pura dove la maggior parte
+        delle variabili sono variabili binarie ed una piccola parte sono 
+        variabili intere, che impediscono di risolvere il problema mediante
+        algoritmi di programmazione lineare intera binaria (che sono molto
+        piú veloci degli algoritmi per la programmazione lineare generica).
+
+        Se le variabili intere in questione sono poche, é possibile aggirare
+        il problema in maniera elegante é quello di usare la rappresentazione
+        binaria per ognuna di queste. Nello specifico, se i limiti per una
+        variabile intera sono \math{0 \leq x \leq u}, dove \math{u} é un
+        numero compreso fra la \math{N}-esima e la \math{N + 1}-esima potenza
+        di due, la rappresentazione binaria di \math{x} é:
+
+        \begin[mode = display]{math}
+            x = \sum_{i = 0}^{N} 2^{i} y_{i} 
+        \end{math}
+
+        Dove le variabili \math{y_{i}} con \math{i = 1, 2, \unicodeellipsis, N}
+        sono variabili binarie aggiuntive. Sostituendo questa rappresentazione
+        binaria al posto di ognuna delle variabili intere, avendo cura di
+        selezionare un insieme differente di variabili aggiuntive binarie
+        per ciascuna di esse, l'intero problema si riduce ad un modello di
+        programmazione binaria.
+
+        \begin{example}
+            Si consideri un problema di PLI avente un certo numero
+            di variabili binarie e due variabili intere \math{x_{1}}
+            e \math{x_{2}}. Si supponga che ad entrambe le variabili
+            siano associati dei vincoli di non negativitá ed i
+            seguenti vincoli funzionali:
+
+            \begin[mode = display]{math}
+                \{\table[columnalign = left]{
+                    x_{1} \leq 5 \\
+                    2x_{1} + 3x_{2} \leq 30 \\
+                }
+            \end{math}
+
+            Questi vincoli implicano che \math{u = 5} per \math{x_{1}}
+            e \math{u = 10} per \math{x_{2}}. Quindi si ha \math{N = 2}
+            per \math{x_{1}} (perché \math{2^{2} \leq 5 < 2^{3}}) e
+            \math{N = 3} per \math{x_{2}} (perché \math{2^{3} \leq 10
+            < 2^{4}}). Pertanto, a queste variabili é possibile associare
+            la seguente rappresentazione binaria:
+
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    x_{1} = \sum_{i = 0}^{2} 2^{i} y_{i} =
+                    2^{0} y_{0} + 2^{1} y_{1} + 2^{2} y_{2} =
+                    y_{0} + 2 y_{1} + 4 y_{2} \\
+                    x_{2} = \sum_{i = 0}^{3} 2^{i} y_{i + 3} =
+                    2^{0} y_{3} + 2^{1} y_{4} + 2^{2} y_{5} + 2^{3} y_{6} =
+                    y_{3} + 2 y_{4} + 4 y_{5} + 8 y_{6} \\
+                }
+            \end{math}
+
+            Sostituendo tale rappresentazione nei vincoli, si ottiene un
+            problema di programmazione lineare intera in cui figurano solo
+            ed esclusivamente variabili binarie:
+
+            \begin[mode = display]{math}
+                \{\table[columnalign = left]{
+                    y_{0} + 2 y_{1} + 4 y_{2} \leq 5 \\
+                    2 y_{0} + 4 y_{1} + 8 y_{2} + 3y_{3} + 6 y_{4} + 12 y_{5} + 24 y_{6} \leq 30 \\
+                }
+            \end{math}            
+        \end{example}
+
+\end{sile}
