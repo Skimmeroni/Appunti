@@ -1,0 +1,517 @@
+\begin{sile}
+
+    Sia dato un grafo connesso non orientato pesato \math{G = (V, E)}, 
+    con \math{W} funzione che associa un intero positivo a ciascuna
+    coppia di archi di \math{G}. Il \strong{problema del minimum 
+    spanning tree} (\strong{MST problem}) richiede di trovare l'albero
+    \math{T}, sottoinsieme di \math{E}, tale per cui \math{G_{T} = (V, T)}
+    é lo spanning tree per il grafo \math{G} che ha peso complessivo minimo.
+    Il peso di uno spanning tree é dato dalla somma dei pesi di tutti gli
+    archi di cui é composto.
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \forall v \in V, \thickspace \exists (u, v) \in T
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            W{(T)} = \sum_{(u, v) \in T} W{(u, v)} \thickspace \mi{minimo}
+        \end{math}
+    \end{parbox}
+    \par
+
+    \begin{example}
+        \img[src = Greedy/matroid3.pdf, width = 100%fw]
+
+        Rispetto al grafo sopra riportato, quello evidenziato in blu é il MST.
+    \end{example}
+
+    É evidente come il problema possa essere risolto mediante tecnica
+    greedy, perché un insieme massimale di un matroide grafico é uno
+    spanning tree. Si ha quindi che il minimum spanning tree é dato
+    dall'insieme massimale del matroide grafico con peso minimo. In
+    termini molto generici, l'algoritmo puó essere descritto come segue:
+
+    \begin[width = 55%fw]{parbox}
+        \begin{enumerate}
+            \begin{item}
+                Viene inizializzato un insieme \math{A} vuoto;
+            \end{item}
+            \begin{item}
+                Viene scelto l'arco \math{(u, v)} di modo che \math{A \cup (u, v)}
+                sia un sottoinsieme dell'insieme \math{T} degli archi del MST. Un 
+                arco che aggiunto ad \math{A} restituisce un insieme di archi ancora
+                sottoinsieme dell'MST é detto \strong{arco sicuro} per \math{A};
+            \end{item}
+            \begin{item}
+                Se \math{A = T}, ovvero se \math{G_{A} = (V, T)} é il MST,
+                l'algoritmo termina, altrimenti si torna al punto precedente.
+            \end{item}
+        \end{enumerate}
+    \end{parbox}
+    \begin[width = 45%fw]{parbox}
+        \begin{verbatim}
+            procedure GENERIC-MST(G, W)
+            1    A \unichar{U+2190} \unichar{U+2205}
+
+            \bigskip
+            2    while G\textsubscript{A} = (V, A) \unichar{U+2260} MST do
+            3        trova arco (u, v) sicuro per A
+            4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
+
+            \bigskip
+            5    return A
+        \end{verbatim}
+    \end{parbox}
+    \par\bigskip
+
+    L'algoritmo é effettivamente un algoritmo greedy perché ad ogni
+    iterazione viene operata una scelta localmente ottima assumendo
+    che lo sia anche complessivamente. 
+
+    Si noti come la condizione di terminazione dell'algoritmo, ovvero valutare
+    se il sottografo \math{G_{A} = (V, A)} é il MST, sia piuttosto vaga, dato
+    che non é direttamente computabile. A tal proposito, si presti attenzione
+    all'insieme \math{A}: in una qualsiasi iterazione, tale insieme definisce
+    una foresta \math{G_{A} = (V, A)} per un grafo \math{G = (V, E)} avente
+    \math{\abs{V} - \abs{A}} alberi.
+
+    Dato che per definizione lo Spanning Tree si ha quando la foresta é
+    costituita da un solo albero, la condizione di terminazione dell'algoritmo
+    puó essere formulata come un controllo sulla differenza fra il numero di
+    vertici del grafo ed il numero di alberi della foresta. In particolare,
+    tale condizione é verificata quando la differenza fra i due é pari ad 1,
+    perché questo significa che é rimasto un solo albero.
+
+    \begin{verbatim}
+        procedure GENERIC-MST(G, W)
+        1    A \unichar{U+2190} \unichar{U+2205}
+
+        \bigskip
+        2    while |V| - |A| > 1 do
+        3        trova arco (u, v) sicuro per A
+        4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
+
+        \bigskip
+        5    return A
+    \end{verbatim}
+
+    Per rendere l'algoritmo effettivamente utilizzabile é infine necessario
+    capire come compiere la scelta greedy, ovvero definire un metodo che
+    discrimini quando un arco é un arco sicuro.
+
+    Dato un grafo \math{G = (V, E)}, viene detto \strong{taglio} una qualsiasi
+    partizione di \math{V} in due insiemi, \math{V'} e \math{V - V'}. Un arco
+    \math{(u, v) \in E} si dice che \strong{attraversa il taglio} se il vertice
+    \math{u} appartiene a \math{V'} e \math{v} appartiene a \math{V - V'}.
+    L'arco che attraversa il taglio avente peso minimo é detto \strong{arco
+    leggero}. Dato un sottoinsieme \math{A \subseteq E}, si dice che un taglio
+    \strong{rispetta} l'insieme \math{A} se nessun arco di \math{A}
+    attraversa tale taglio.
+
+    \begin{example}
+        \img[src = Greedy/matroid4.pdf, width = 100%fw]
+
+        Si consideri il grafo sopra presentato. Il taglio evidenziato
+        partiziona i vertici del grafo in due sottoinsiemi, \math{V =
+        \{A, B, C, D, E\}} e \math{V - V' = \{F, G, H, I\}}. Tale taglio
+        rispetta il sottoinsieme di archi \math{A = \{(B, C), (C, D),
+        (D, E), (F, G), (G, H)\}}. Gli archi che attraversano il taglio
+        sono \math{(A, F), (B, F), (C, I), (C, H), (D, H), (E, H)}; fra
+        questi, l'arco \math{(C, I)} é l'arco leggero per il taglio, essendo
+        quello fra questi di peso minimo.
+    \end{example}
+
+    \begin{theorem}
+        \strong{Teorema dell'arco sicuro}. Siano dati un grafo connesso non
+        orientato e pesato \math{G = (V, E, W)}, un sottoinsieme \math{A}
+        dell'insieme \math{T} di archi del MST e un qualsiasi taglio che
+        rispetti \math{A}. L'arco leggero \math{(u, v)} del taglio é
+        certamente un arco sicuro per \math{A}, ovvero \math{A \cup
+        \{(u, v)\} \subseteq T}.
+
+        \bigskip
+        \strong{Dimostrazione}. Se \math{(u, v)} é l'unico arco che
+        attraversa il taglio il teorema é dimostrato, dato che é l'unico
+        arco in grado di connettere le due componenti distinte nel MST.
+
+        Si consideri invece il caso in cui esista almeno un altro arco
+        che attraversa il taglio. Si supponga per assurdo che l'arco
+        leggero \math{(u, v)} del taglio non sia un arco sicuro per
+        \math{A}, ovvero che aggiungendo \math{(u, v)} all'insieme
+        \math{A} non si ottiene un sottoinsieme di \math{T}. Deve
+        allora esistere un'altro arco che attraversa il taglio e
+        che appartiene a \math{T}, sia questo \math{(x, y)}.
+
+        L'arco \math{(x, y)} non puó appartenere ad \math{A}, perché
+        per definizione il taglio rispetta \math{A}. Se da \math{T}
+        viene rimosso l'arco \math{(x, y)} si ottengono due alberi
+        separate; se viene poi aggiunto \math{(u, v)} i due alberi
+        si ricongiungono per ottenere l'albero di connessione, non
+        necessariamente minimo, \math{T' = T - \{(x, y)\} \cup \{(u,
+        v)\}}. Poiché per ipotesi \math{(u, v)} é l'arco leggero per
+        il taglio, il peso di \math{(u, v)} deve essere inferiore al
+        peso di \math{(x, y)}. Allora:
+
+        \begin[mode = display]{math}
+            W(T') = W(T) - W(x, y) + W(u, v) \leq W(T)
+        \end{math}
+
+        Essendo peró \math{T} un albero di connessione minimo, deve
+        aversi \math{W(T) \leq W(T')}; si ha quindi \math{W(T') \leq
+        W(T) \wedge W(T) \leq W(T')}, ma questo significa \math{W(T) 
+        = W(T')}, e quindi anche \math{T'} é un albero di connessione
+        minimo.
+
+        Dato che per ipotesi \math{A \subseteq T} e \math{(x, y) \notin A},
+        allora \math{A \subseteq T'}. Questo significa che \math{A \cup
+        \{(u, v)\} \subseteq T'}. Ma questa é la definizione di arco sicuro,
+        ed avendo appena mostrato che \math{T'} é un MST deve aversi che 
+        \math{(u, v)} é un arco sicuro per \math{A}.
+    \end{theorem}
+
+    \begin{example}
+        \img[src = Greedy/matroid5.pdf, width = 100%fw]
+
+        Il sottoinsieme di archi \math{A = \{(B, C), (C, D), (D, E),
+        (F, G), (G, H)\}} é parte degli archi del MST. Per questo motivo,
+        il teorema precedente stabilisce che l'arco leggero del taglio che
+        rispetta \math{A} é un arco sicuro per \math{A}, e infatti l'arco
+        \math{(C, I)} é uno degli archi del MST.
+    \end{example}
+
+    \begin{theorem}
+        \strong{Corollario del teorema dell'arco sicuro}. Siano dati un grafo
+        connesso non orientato e pesato \math{G = (V, E)} ed un sottoinsieme
+        \math{A} dell'insieme \math{T} di archi del MST che definisce una
+        foresta \math{G_{A} = (V, A)}. Sia \math{C = (V_{C}, A_{C})}, con 
+        \math{V_{C} \subseteq V} e \math{A_{C} \subseteq A} uno qualsiasi
+        degli alberi di \math{G_{A}}. Il taglio che divide i vertici di
+        \math{G_{A}} nei due sottoinsiemi \math{V_{C}} e \math{V - V_{C}}
+        rispetta l'insieme \math{A}. Inoltre, un arco leggero per tale 
+        taglio é anche arco sicuro per l'insieme \math{A}.
+
+        \bigskip
+        \strong{Dimostrazione}. Il taglio \math{(V_{C}, V - V_{C})} rispetta
+        \math{A} e \math{(u, v)} é un arco leggero per questo taglio, quindi
+        \math{(u, v)} é sicuro per \math{A}.
+    \end{theorem}
+
+    Sia \math{A} il sottoinsieme degli archi del MST di una generica
+    iterazione dell'algoritmo, e sia \math{G_{A}} la foresta indotta
+    dall'insieme \math{A}. Il corollario appena mostrato stabilisce
+    che per trovare un arco sicuro per \math{A}, e che puó essere
+    aggiunto a quest'ultimo, é sufficiente scegliere uno qualsiasi
+    degli alberi di \math{G_{A}} e trovare l'arco di peso minimo che
+    collega un vertice che appartiene a tale albero con un vertice
+    che non vi appartiene.
+
+    Ci si chiede allora come determinare in una qualsiasi iterazione (ed
+    in maniera efficiente) quale sia l'arco di peso minimo da aggiungere
+    all'insieme di archi del MST in costruzione. Per farlo vi sono diversi
+    approcci, e ciascuno di questi é associato ad un algoritmo diverso.
+
+    \subsection{Algoritmo di Kruskal}
+
+        L'\strong{Algoritmo di Kruskal} é un algoritmo greedy che permette
+        di ricavare il MST di un grafo a partire dall'algoritmo greedy
+        standard.
+
+        Innanzitutto, sia \math{G = (V, E, W)} un grafo connesso, non
+        orientato e pesato; a questo é possibile associare un matroide
+        grafico \math{M_{G} = (S, F)}. Come giá detto, un qualsiasi
+        insieme massimale di archi \math{M_{G}} é uno spanning tree,
+        pertanto il MST é quell'insieme massimale avente peso minimo.
+
+        L'algoritmo greedy standard risolve problemi di ottimizzazione
+        di massimo, ma la ricerca di un MST (come dice il nome) é un
+        problema di ottimizzazione di minimo. A tale scopo occorre, come
+        giá visto in precedenza, sostituire alla funzione peso \math{W}
+        la funzione peso \math{W'}, dove ciascun valore \math{i}-esimo
+        é dato dalla differenza fra il massimo valore in \math{W} e
+        l'\math{i}-esimo valore di \math{W}.
+
+        Rifacendosi all'algoritmo greedy standard, l'insieme che sará
+        passato in input all'algoritmo (e che viene poi ordinato) sará
+        l'insieme degli archi del grafo. Si ricordi che tale insieme va
+        ordinato, secondo ordine decrescente, rispetto a \math{W'}, e non
+        rispetto a \math{W}. In realtá questo equivale ad ordinare gli 
+        elementi rispetto a \math{W} ma in ordine inverso (in ordine
+        crescente), pertanto é possibile applicare tale semplificazione.
+
+        \begin{verbatim}
+            KRUSKAL-MST(E)
+                A \unichar{U+2190} \unichar{U+2205}
+                E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+
+                \bigskip
+                for i from 1 to n do
+                    if e\textsubscript{i} é arco sicuro then
+                        A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+
+                \bigskip
+                return A
+        \end{verbatim}
+
+        Per sapere se l'\math{i}-esimo arco é un arco sicuro occorre
+        applicare il corollario al teorema dell'arco sicuro: un arco
+        é sicuro se connette due alberi distinti di \math{G_{A}}.
+
+        \begin{verbatim}
+            KRUSKAL-MST(V, E, W)
+                A \unichar{U+2190} \unichar{U+2205}
+                E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+
+                \bigskip
+                for i from 1 to n do
+                    (u, v) \unichar{U+2190} e\textsubscript{i} 
+                    if u e v \unichar{U+2209} stesso albero in G\textsubscript{A} = (V, A) then
+                        A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+
+                \bigskip
+                return A
+        \end{verbatim}
+
+        L'algoritmo funziona perché, ordinando gli elementi in ordine
+        crescente, é garantito che fra tutti i possibili archi che
+        connettono due alberi distinti verrá sempre scelto quello di
+        peso minimo.
+
+        L'ultimo passo consiste nel determinare che struttura dati usare
+        per salvare le informazioni relative agli alberi. Questo puó essere
+        fatto in maniera efficiente mediante una union-find e le relative
+        primitive: per ogni vertice viene creato un insieme che contiene
+        solo quel vertice, ed i confronti vengono fatti su questi insiemi.
+        In particolare, se vengono trovati due insiemi disgiunti significa
+        che non vi é alcun vertice in comune ai due insiemi, e che quindi é
+        stato trovato un arco che unisce due alberi distinti. A questo punto
+        é sufficiente sostituire i due insiemi con la loro unione.
+
+        \begin{verbatim}
+            KRUSKAL-MST(V, E, W)
+             1    A \unichar{U+2190} \unichar{U+2205}
+             2    E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+             3    foreach v \unichar{U+2208} V do
+             4        MAKE_SET(v)
+
+                  \bigskip
+             5    for i from 1 to n do
+             6        (u, v) \unichar{U+2190} e\textsubscript{i} 
+             7        if FIND_SET(u) \unichar{U+2260} FIND_SET(v) then
+             8            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+             9            UNION(u, v)
+
+                  \bigskip
+            10    return A
+        \end{verbatim}
+
+        Per quanto riguarda il tempo di esecuzione dell'algoritmo, é
+        possibile distinguere tre sezioni dello stesso: l'ordinamento
+        degli archi rispetto al peso (riga 2), la costruzione dei set
+        (righe 3 e 4) ed il loop principale (righe da 5 a 9):
+
+        \begin{enumerate}
+            \begin{item}
+                L'ordinamento avviene con il consueto tempo logaritmico, \math{O(n
+                \mi{log}(n))}. Dato che, nello specifico, l'ordinamento é fatto sugli
+                archi di un grafo \math{G = (V, E, W)}, e che il numero di tali archi
+                é dato dalla cardinalitá di \math{E}, si ha che l'ordinamento degli
+                archi ha tempo di esecuzione \math{O(\abs{E} \mi{log}(\abs{E}))}.
+            \end{item}
+            \begin{item}
+                É possibile assumere che la costruzione dei set avvenga in tempo
+                lineare per le proprietá della struttura dati union-find. Dato che
+                viene costruito un set per ogni vertice, il tempo di esecuzione di
+                tale costruzione é \math{O(\abs{V})}.
+            \end{item}
+            \begin{item}
+                Il tempo di esecuzione del loop principale dipende interamente
+                dal tempo di esecuzione delle primitive della union-find. Il
+                confronto fra due set e l'unione di due set avviene in tempo
+                \math{\alpha}, con \math{\alpha} costante fissata. Dato che il
+                confronto avviene tante volte quanti sono gli archi del grafo, 
+                e dato che le unioni avvengono al massimo tante volte quanti 
+                sono i confronti, il tempo di esecuzione del loop principale é
+                \math{O(\abs{E}\alpha)}.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        Il tempo di esecuzione complessivo é dato dalla somma dei tre
+        tempi di esecuzione parziali, ovvero \math{O(\abs{E} \mi{log}
+        (\abs{E})) + O(\abs{V}) + O(\abs{E}\alpha)}. Dato che si sta
+        considerando un grafo connesso, il numero di archi é necessariamente
+        superiore al numero di vertici, pertanto é possibile effettuare una
+        maggiorazione e sostituire \math{\abs{V}} con \math{\abs{E}}.
+        Si ha quindi \math{O(\abs{E} \mi{log}(\abs{E})) + O(\abs{E}) +
+        O(\abs{E}\alpha)}, che asintoticamente equivale a \math{O(\abs{E}
+        \mi{log}(\abs{E})) + O(\abs{E}\alpha)}. A sua volta, la costante
+        \math{\alpha} é certamente inferiore a \math{\mi{log}(\abs{V})},
+        che é a sua volta certamente inferiore a \math{\mi{log}(\abs{E})}.
+        É quindi possibile maggiorare il tempo di esecuzione come
+        \math{O(\abs{E} \mi{log}(\abs{E})) + O(\abs{E} \mi{log}(\abs{E}))},
+        ovvero \math{O(2\abs{E} \mi{log}(\abs{E}))}, ma che asintoticamente
+        equivale semplicemente a \math{O(\abs{E} \mi{log}(\abs{E}))}.
+
+    \subsection{Algoritmo di Prim}
+
+        L'\strong{Algoritmo di Prim} é un algoritmo greedy che permette
+        di ricavare il MST di un grafo che non si rifá all'algoritmo
+        greedy standard. In termini molto generali, l'idea dell'algoritmo
+        é la seguente:
+
+        \begin{enumerate}
+            \begin{item}
+                Dato un grafo \math{G = (V, E, W)}, viene scelto
+                arbitrariamente un vertice \math{r}, e si considera
+                l'albero (degenere) \math{C} formato da questo vertice
+                isolato;
+            \end{item}
+            \begin{item}
+                Viene trovato l'arco di peso minimo che connette un vertice in
+                \math{C} con un vertice \math{v} non in \math{C} e si aggiunge
+                \math{v} a \math{C};
+            \end{item}
+            \begin{item}
+                L'algoritmo viene ripetuto fino ad esaurire tutti i vertici.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        L'algoritmo funziona perché ad ogni iterazione i vertici del
+        grafo vengono divisi in due sottoinsiemi: i vertici dell'albero
+        in costruzione (l'insieme \math{V_{C}}) e tutti quelli rimanenti
+        (l'insieme \math{V - V_{C}}). Per definizione, tale taglio rispetta
+        l'insieme degli archi di \math{C}, pertanto l'arco di peso minimo
+        che connette un vertice in \math{V_{C}} con un vertice in \math{V -
+        V_{C}} é certamente un arco sicuro per l'arco in costruzione.
+
+        Per determinare quale sia l'arco corretto da considerare, l'algoritmo
+        associa a ciascun vertice \math{v} del grafo \math{G = (V, E, W)}
+        due campi: un campo chiave (\math{v}.key) ed un campo predecessore
+        (\math{v.\pi}. Il campo chiave contiene il peso dell'arco che,
+        rispetto all'iterazione corrente, é il minimo trovato, mentre il
+        campo predecessore contiene il vertice con il quale il vertice
+        corrente ha l'arco con peso piú piccolo. Dato un grafo \math{G =
+        (V, E, W)}, si ha allora:
+
+        \begin{enumerate}
+            \begin{item}
+                I campi chiave di tutti i vertici vengono inizializzati
+                a \math{\infty}, mentre i campi predecessore vengono
+                inizializzati a NULL;
+            \end{item}
+            \begin{item}
+                Viene scelto un vertice arbitrario, al quale viene assegnato
+                come campo chiave il valore 0. Dopodiché, tutti i vertici
+                vengono inseriti in una coda di min-priority, dove il valore
+                della chiave definisce l'ordine (la prioritá) con cui i 
+                vertici vengono estratti. In questo modo, il vertice estratto
+                é sempre quello con valore del campo chiave piú piccolo;
+            \end{item}
+            \begin{item}
+                Viene operata un'estrazione ed il vertice \math{v} estratto
+                viene confrontato con i vertici a questo adiacenti che ancora
+                si trovano nella coda. Per ciascuno di questi, se il relativo
+                campo chiave contiene un valore maggiore di \math{v}.key
+                allora come campo predecessore viene posto \math{v} e come
+                campo chiave viene posto il peso dell'arco che connette
+                \math{v} a tale vertice;
+            \end{item}
+            \begin{item}
+                Se la coda di prioritá non é vuota, l'algoritmo riprende
+                dal punto 2, altrimenti si procede oltre, perché é possibile
+                assumere che a tutti i vertici tranne quello di partenza é
+                stato univocamente assegnato un predecessore;
+            \end{item}
+            \begin{item}
+                L'insieme degli archi del MST viene costruito riportando,
+                per ciascun vertice, l'arco (quale che sia) che ha con il
+                rispettivo predecessore.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        \begin{verbatim}
+            PRIM-MST(V, E, W, r)
+             1    foreach v \unichar{U+2208} V do
+             2        v.key \unichar{U+2190} \unichar{U+221E}
+             3        v.\unichar{U+03C0} \unichar{U+2190} NULL
+             4    r.key \unichar{U+2190} 0
+
+                  \bigskip
+             5    Aggiungi tutti i vertici di V alla coda Q
+
+                  \bigskip
+             6    while Q \unichar{U+2260} \unichar{U+2205} do
+             7        u \unichar{U+2190} POP(Q)
+             8        foreach v \unichar{U+2208} ADJ(u) do
+             9            if v \unichar{U+2208} Q and W(u, v) < v.key then
+            10                v.key \unichar{U+2190} W(u, v)
+            11                v.\unichar{U+03C0} \unichar{U+2190} u
+
+                  \bigskip
+            12    A \unichar{U+2190} \unichar{U+2205}
+            13    foreach v \unichar{U+2208} V do
+            14        A \unichar{U+2190} A \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
+
+                  \bigskip
+            15    return A
+        \end{verbatim}
+
+        Per quanto riguarda il tempo di esecuzione dell'algoritmo, é
+        possibile distinguere quattro sezioni dello stesso: la costruzione
+        della coda di prioritá (righe da 1 a 5), il loop principale (righe
+        da 6 a 11) e la ricostruzione della soluzione (righe da 12 a 14)
+
+        \begin{enumerate}
+            \begin{item}
+                Il campo chiave ed il campo predecessore vengono aggiunti
+                a ciascun vertice in tempo lineare. Allo stesso modo, il
+                tempo di esecuzione dell'aggiunta dei vertici alla coda é
+                proporzionale al numero di vertici, perché tutti i vertici
+                inizialmente hanno la stessa prioritá e quindi possono
+                essere aggiunti in ordine casuale. Il tempo di esecuzione
+                della costruzione della coda é allora \math{O(\abs{V})};
+            \end{item}
+            \begin{item}
+                Il loop principale viene eseguito una volta per ciascun
+                vertice del grafo. L'estrazione del vertice in cima alla
+                coda é una operazione che richiede tempo di esecuzione 
+                logaritmico, perché per ricavare il vertice con campo
+                chiave piú piccolo occorre effettuare una ricerca binaria.
+                Allo stesso modo, l'analisi di ciascun vertice adiacente
+                al vertice corrente viene compiuta in tempo logaritmico.
+                Il tempo di esecuzione del loop principale é allora
+                \math{O(\abs{V} \mi{log}(\abs{V}))};
+            \end{item}
+            \begin{item}
+                La ricostruzione della soluzione viene eseguita in tempo
+                propozionale al numero dei vertici, perché l'aggiunta di
+                un singolo vertice avviene in tempo costante e ciascun
+                vertice viene analizzato esattamente una sola volta. Si
+                ha allora che il tempo di esecuzione della ricostruzione
+                della soluzione é \math{O(\abs{V})}.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        Il tempo di esecuzione complessivo é dato dalla somma dei
+        tre tempi di esecuzione parziali, ovvero \math{O(\abs{V}) +
+        O(\abs{V} \mi{log} (\abs{V}) + O(\abs{V})}, che asintoticamente
+        equivale a \math{O(\abs{V}) + O(\abs{V} \mi{log}(\abs{V})}. Essendo
+        il tempo logaritmico piú influente sul tempo complessivo rispetto a
+        quello lineare, si ha che l'equazione equivale asintoticamente a
+        \math{\abs{V} \mi{log}(\abs{V})}. Dato che si sta considerando un
+        grafo connesso, il numero di archi é necessariamente superiore al
+        numero di vertici, pertanto é possibile effettuare una maggiorazione
+        e sostituire \math{\abs{V}} con \math{\abs{E}}. Si ha allora che il
+        tempo di esecuzione dell'algoritmo di Prim é \math{\abs{E}
+        \mi{log}(\abs{E})}.
+
+\end{sile}

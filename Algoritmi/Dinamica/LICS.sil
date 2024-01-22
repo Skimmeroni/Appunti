@@ -1,0 +1,248 @@
+\begin{sile}
+
+	\subsection{Definizione del problema}
+
+        Il problema della \strong{Longest Increasing Common Subsequence}
+        (\strong{LICS}) prevede di trovare la piú lunga sottosequenza
+        comune a due sequenze i cui elementi (nell'ordine in cui si
+        trovano) hanno valore strettamente crescente.
+
+        \begin{example}
+            Siano date le sequenze \math{X = \langle 14, 2, 4, 2, 7, 0,
+            13, 21, 11 \rangle} e \math{Y = \langle 13, 2, 6, 5, 4, 11,
+            0 \rangle}. Una sottosequenza strettamente crescente comune
+            ad \math{X} e a \math{Y} di lunghezza massima é \math{\langle
+            2, 4, 11 \rangle}.
+        \end{example}
+
+        Attaccare il problema LICS direttamente tramite programmazione dinamica
+        é complesso. Un miglior approccio consiste nel restringere i requisiti
+        del problema per considerarne una versione semplificata.
+
+        Una versione piú semplice del problema LICS, chiamato \strong{LICS
+        vincolato}, prevede di trovare la piú lunga sottosequenza comune a 
+        due sequenze i cui elementi (nell'ordine in cui si trovano) hanno
+        valore strettamente crescente e dove l'ultimo elemento di tale
+        sottosequenza coincide con l'ultimo elemento di entrambe le sequenze
+        originarie.
+
+        \begin{example}
+            Siano date le sequenze \math{X = \langle 14, 2, 4, 6, 13, 15,
+            0 \rangle} e \math{Y = \langle 13, 2, 6, 5, 4, 11, 0 \rangle}.
+            Una sottosequenza strettamente crescente di massima lunghezza
+            comune ad \math{X} e ad \math{Y} é \math{\langle 2, 4 \rangle}.
+            D'altro canto, la sottosequenza strettamente crescente di
+            massima lunghezza comune ad \math{X} e ad \math{Y} vincolata
+            é \math{\langle 0 \rangle}.
+        \end{example}
+
+    \subsection{Programmazione dinamica: sottostruttura ottima}
+
+        \begin{theorem}
+                \strong{Proprietá della sottostruttura ottima per il problema
+		Longest Increasing Common Subsequence}. Sia \math{X} una sequenza
+		di \math{m} numeri interi e sia \math{X_{i}} un suo prefisso di
+		lunghezza \math{i}, con \math{1 \leq i \leq m}. Sia \math{Y} una
+		sequenza di \math{n} numeri interi e sia \math{Y_{j}} un suo
+		prefisso di lunghezza \math{j}, con \math{1 \leq j \leq n}.
+
+		Sia \math{Z^{i,j}} una LICS di \math{X_{i}} e di \math{Y_{j}} tale
+		che termini con \math{x_{i} = y_{j}}. Sia infine \math{W_{i,j}}
+		l'insieme di tutte le sottosequenze crescenti comuni (non
+		necessariamente le piú lunghe) di \math{X_{h}} e di \math{Y_{k}}
+		che finiscono con \math{x_{h} = y_{k}} e a cui é possibile
+		concatenare \math{x_{i}} (o \math{y_{j}}) ottenendo ancora una
+		sequenza crescente comune, ovvero:
+
+		\smallskip
+            \begin{center}
+                \begin{math}
+                    W_{i, j} = \bigcup_{1 \leq h < i; \thickspace i \leq k < j;
+                    \thickspace x_{h} = y_{k} < x_{i} = y_{j}}
+                \end{math}
+                \{\math{W} sottosequenza comune crescente di \math{X_{h}} e di
+                \math{Y_{k}} che termina con \math{x_{h} = y_{k}}\}
+            \end{center}
+            \bigskip
+
+            Allora vale che \math{Z^{i, j} = Z* | x_{i} = Z* | y_{j}} , con
+	    \math{Z* \in W_{i, j}} e \math{|Z*| = \mi{max}_{W \in W_{i, j}}
+	    \{|W|\}}.
+
+            \bigskip
+            \strong{Dimostrazione}. Si supponga per assurdo che
+            \math{Z^{i} = Z* | x_{i} = Z* | y_{j}} non sia la
+            soluzione per l'\math{i,j}-esimo problema. Questa
+            deve allora essere \math{Z^{i} = Z' | x_{i} = Z' | y_{j}},
+            dove \math{Z'} é una sottosequenza crescente comune distinta
+            da \math{Z*}. Naturalmente deve aversi \math{|Z'| > |Z*|},
+            perché se \math{Z^{i}} si ottiene a partire da \math{Z'} e
+            non da \math{Z*} e \math{Z^{i}} é la sottosequenza crescente
+            comune piú lunga, allora \math{Z'} deve essere piú lunga di
+            \math{Z*}.
+
+            Sia \math{z'} l'elemento in coda a \math{Z'}. É chiaro che
+            \math{z' < x_{i} = y_{j}}, perché se é stato possibile accodare
+            \math{x_{i} = y_{j}} a \math{Z'} ottenendo ancora una sequenza
+            crescente allora \math{z'} deve venire prima di \math{x_{i} =
+            y_{j}}.
+
+            Siano poi \math{r < i} e \math{s < j} la piú grande coppia di
+	    indici tali per cui \math{x_{r} = y_{s} = z'}. Di conseguenza,
+            per come é stato definito \math{W_{i}}, si ottiene che \math{Z'
+	    \in W_{i, j}}. Infatti, \math{Z'} é una sottosequenza crescente
+	    comune di \math{X_{r}} e di \math{Y_{s}}, la quale termina con
+            \math{x_{r} < x_{i} = y_{j}}. Ció porta peró ad una contraddizione: 
+            infatti si ha \math{|Z'| > |Z*|} ma al contempo \math{|Z*| =
+            \mi{max}_{W \in W_{i, j}} \{|W|\}}.
+        \end{theorem}
+
+        \subsection{Programmazione dinamica: equazione di ricorrenza}
+        
+        Date due sequenze \math{X} e \math{Y} di lunghezza rispettivamente
+        \math{n} e \math{m}, siano \math{X_{i} = X[1 : i]} e \math{Y_{j} =
+        Y[1 : j]} i prefissi di lunghezza \math{i} e \math{j} rispettivamente
+        della sequenza \math{X} e della sequenza \math{Y}. La soluzione
+        \math{S_{i, j}} per l'\math{i, j}-esima istanza del problema
+        corrisponde a trovare la soluzione ottimale per il problema LICS
+        vincolato rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}.
+        La soluzione per le intere sequenze \math{X} e \math{Y} é la soluzione
+        per le istanze \math{X_{n}} e \math{Y_{m}}. La lunghezza della
+        sottosequenza strettamente crescente piú lunga comune soluzione
+        per la \math{i, j}-esima istanza del problema viene indicata con
+        \math{\mi{Opt}(i, j)}.
+
+        Certamente, la soluzione per tutte le coppie di indici \math{i, j}
+        con \math{i = 0} oppure \math{j = 0} si rivela immediatamente essere 
+        la stringa vuota, perché questa é l'unica sottosequenza che una
+        sequenza generica puó avere in comune con la stringa vuota stessa.
+
+        Tuttavia, anche nel caso in cui \math{x_{i} \ne y_{j}}, ovvero
+        quando le due sottosequenze \math{X_{i}} e \math{Y_{j}} non terminano
+        con lo stesso carattere, la sottosequenza crescente comune piú lunga
+        é la stringa vuota. Questo perché il problema chiede di trovare una
+        sottosequenza che termini con il carattere (uguale) delle due stringhe,
+        e se tale carattere é distinto l'unica soluzione accettabile non puó
+        che essere la stringa vuota.
+
+        Dato che, per definizione, l'ultimo elemento della stringa vuota
+        (non esistendo) non puó coincidere con l'ultimo carattere dell'altra
+        sequenza, il caso \math{i = 0 \vee j = 0} rientra di fatto nel caso
+        \math{x_{i} \ne y_{j}}, pertanto é sufficiente considerare solamente
+        quest'ultimo come caso base.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                S_{i, j} = \epsilon \thickspace \mi{se} \thickspace x_{i} \ne y_{j}
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \mi{Opt}(i, j) = 0 \thickspace \mi{se} \thickspace x_{i} \ne y_{j}
+            \end{math}
+        \end{parbox}
+        \par
+
+        Per quanto riguarda il passo ricorsivo, si assuma di avere a
+        disposizione tutte le soluzioni nella forma \math{S_{a, b}}, 
+        con \math{1 \leq a < i} e \math{1 \leq b < j}, e di voler
+        calcolare \math{S_{i, j}}. Dato che il problema LICS vincolato
+        richiede di trovare la sottosequenza strettamente crescente
+        comune piú lunga che termini con l'ultimo termine di entrambe
+        le sequenze, deve per forza aversi \math{x_{i} = y_{j} \in S_{i, j}}.
+
+        Una generica soluzione per la \math{i, j}-esima istanza del problema
+        deve essere costruita accodando \math{x_{i} = y_{j}} ad sottosequenza
+        strettamente crescente comune alle due stringhe tale che tutti gli
+        elementi di tale sottosequenza vengono prima, in ordine lessicografico,
+        di \math{x_{i} = y_{j}}. Questo perché l'aggiunta di \math{x_{i} =
+        y_{j}} in coda ad una tale sottosequenza restituisce ancora una
+        sottosequenza strettamente crescente comune alle due. La soluzione
+        ottimale \math{S_{i, j}} é data dalla sottosequenza con queste
+        caratteristiche piú lunga possibile a cui viene aggiunto \math{x_{i}
+        = y_{j}} in coda.
+
+        La sottosequenza strettamente crescente comune piú lunga possibile
+        con tutti gli elementi che vengono prima, in ordine lessicografico,
+        di \math{x_{i} = y_{j}} sará a sua volta soluzione di una certa
+        istanza \math{h, k} del problema, con \math{h < i} e \math{k < j}.
+        La soluzione \math{S_{i, j}} é allora il risultato dell'accodare
+        l'elemento \math{x_{i} = y_{j}} alla soluzione \math{S_{h, k}}.
+        Se \math{x_{i} = y_{j}} viene dopo tutti gli altri elementi di
+        \math{X_{i}} nell'ordine lessicografico, allora l'elemento
+        \math{x_{h}} non esiste. In questo caso, la soluzione per la
+        \math{i, j}-esima istanza del problema é formata dal solo elemento
+        \math{x_{i} = y_{j}}.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                S_{i, j} =
+                \{\table[columnalign = left left]{
+                    \mi{max}\{S_{h, k} | 1 \leq h < i, 1 \leq k < j, x_{h} < x_{i}\} | x_{i} &
+                    \mi{se} \thickspace \exists h, k \\
+                    x_{i} &
+                    \mi{se} \thickspace \nexists h, k \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \mi{Opt} {(i, j)} = 
+                \{\table[columnalign = left left]{
+                    \mi{max}\{\mi{Opt}(h, k) | 1 \leq h < i, 1 \leq k < j, x_{h} < x_{i}\} + 1 &
+                    \mi{se} \thickspace \exists h, k \\
+                    1 &
+                    \mi{se} \thickspace \nexists h, k \\
+                }
+            \end{math}
+        \end{parbox}
+
+        \subsection{Programmazione dinamica: implementazione bottom-up}
+
+                L'algoritmo bottom-up viene costruito a partire dall'equazione
+                di ricorrenza sfruttando una tabella \math{c}. In ciascuna cella
+		\math{c[i, j]} viene riportato il valore della soluzione ottimale
+		per la \math{i, j}-esima istanza del problema, che viene utilizzata
+		per calcolare i valori ottimali per le istanze successive. L'algoritmo
+		riceve in input le due sequenze \math{X} e \math{Y} e restituisce in
+		output la tabella \math{c} ed il valore ottimale. 
+
+		\begin{verbatim}
+			procedure LICS(X, Y)
+			    max = 0
+			    for i = 1 to m do
+			        for j = 1 to n do
+			            if X[i] \unichar{U+2260} Y[j] then
+			                c[i, j] = 0
+			            else
+			                t = 0
+			                for h = 1 to i - 1 do
+			                    for k = 1 to j - 1 do
+			                        if (X[h] < X[i]) \unichar{U+2227} (c[h, k] > t) then
+			                            t = c[h, k]
+			                c[i, j] = 1 + t
+			            if c[i, j] > max then
+			                max = c[i, j]
+			    return c, max
+		\end{verbatim}
+
+                Il tempo di esecuzione dell'algoritmo é \math{O(m^{2}n^{2})},
+                dove \math{m} é la lunghezza della stringa \math{X} e \math{n}
+                é la lunghezza della stringa \math{Y}. Si noti infatti come 
+                l'algoritmo sia costituito da due cicli innestati, dove il 
+                primo esegue il secondo \math{m} volte ed il secondo esegue
+                potenzialmente \math{n} volte a sua volta una coppia di cicli
+                innestati, dove il primo esegue il secondo al piú \math{m}
+                volte ed il secondo esegue al piú \math{n} volte un blocco di
+                istruzioni avente tempo di esecuzione immediato. Si ha quindi
+                \math{O(m \cdot n \cdot (m \cdot n)) = O(m^{2}n^{2})}.
+
+        \subsection{Programmazione dinamica: ricostruzione di una soluzione}
+
+        \subsection{Osservazioni}
+
+        Il problema LICS non vincolato puó essere ridotto al problema LICS
+        vincolato. Infatti, la soluzione del problema LICS vincolato non é
+        altro che la maggior soluzione parziale del problema LICS vincolato.
+
+\end{sile}

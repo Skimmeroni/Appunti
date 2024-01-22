@@ -1,0 +1,24 @@
+lineht *= 1.25
+circlerad = 0.1
+
+A: circle at (-0.125, 0)
+B: circle at (0.5, 0.375)
+C: circle at (1.125, 0)
+D: circle at (0.875, -0.75)
+E: circle at (0.125, -0.75)
+
+"A" at A
+"B" at B
+"C" at C
+"D" at D
+"E" at E
+
+arrow from A.ne to B.w  "9"  aligned above
+arrow from A.e  to C.w  "16" aligned above
+arrow from A.s  to E.nw "2"  aligned above
+arrow from B.se to D.n  "7"  aligned above
+arrow from B.sw to E.n  "13" aligned above
+arrow from C.nw to B.e  "1"  aligned above
+arrow from D.ne to C.s  "1"  aligned above
+arrow from D.nw to A.se "8"  aligned above
+arrow from E.e  to D.w  "3"  aligned above

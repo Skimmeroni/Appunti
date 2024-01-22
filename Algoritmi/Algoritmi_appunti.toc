@@ -1,0 +1,632 @@
+return {
+  {
+    label = {
+      "Tecnica di programmazione dinamica",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest1",
+    number = "1",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Longest Common Subsequence",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest2",
+    number = "1.1",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest3",
+    number = "1.1.1",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest4",
+    number = "1.1.2",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest5",
+    number = "1.1.3",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest6",
+    number = "1.1.4",
+    pageno = "4"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest7",
+    number = "1.1.5",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Weighted Interval Scheduling",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest8",
+    number = "1.2",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest9",
+    number = "1.2.1",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest10",
+    number = "1.2.2",
+    pageno = "6"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest11",
+    number = "1.2.3",
+    pageno = "7"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest12",
+    number = "1.2.4",
+    pageno = "7"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest13",
+    number = "1.2.5",
+    pageno = "8"
+  },
+  {
+    label = {
+      "Hateville",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest14",
+    number = "1.3",
+    pageno = "8"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest15",
+    number = "1.3.1",
+    pageno = "8"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest16",
+    number = "1.3.2",
+    pageno = "8"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest17",
+    number = "1.3.3",
+    pageno = "9"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest18",
+    number = "1.3.4",
+    pageno = "10"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest19",
+    number = "1.3.5",
+    pageno = "10"
+  },
+  {
+    label = {
+      "Longest Increasing Subsequence",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest20",
+    number = "1.4",
+    pageno = "10"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest21",
+    number = "1.4.1",
+    pageno = "10"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest22",
+    number = "1.4.2",
+    pageno = "11"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest23",
+    number = "1.4.3",
+    pageno = "11"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest24",
+    number = "1.4.4",
+    pageno = "11"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione della soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest25",
+    number = "1.4.5",
+    pageno = "12"
+  },
+  {
+    label = {
+      "Osservazioni",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest26",
+    number = "1.4.6",
+    pageno = "12"
+  },
+  {
+    label = {
+      "Longest Increasing Common Subsequence",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest27",
+    number = "1.5",
+    pageno = "12"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest28",
+    number = "1.5.1",
+    pageno = "13"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest29",
+    number = "1.5.2",
+    pageno = "13"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest30",
+    number = "1.5.3",
+    pageno = "13"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest31",
+    number = "1.5.4",
+    pageno = "14"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest32",
+    number = "1.5.5",
+    pageno = "14"
+  },
+  {
+    label = {
+      "Osservazioni",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest33",
+    number = "1.5.6",
+    pageno = "14"
+  },
+  {
+    label = {
+      "Knapsack 0/1",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest34",
+    number = "1.6",
+    pageno = "14"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest35",
+    number = "1.6.1",
+    pageno = "15"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest36",
+    number = "1.6.2",
+    pageno = "15"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest37",
+    number = "1.6.3",
+    pageno = "15"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest38",
+    number = "1.6.4",
+    pageno = "16"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest39",
+    number = "1.6.5",
+    pageno = "17"
+  },
+  {
+    label = {
+      "Chiusura palindroma",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest40",
+    number = "1.7",
+    pageno = "17"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest41",
+    number = "1.7.1",
+    pageno = "17"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest42",
+    number = "1.7.2",
+    pageno = "17"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest43",
+    number = "1.7.3",
+    pageno = "18"
+  },
+  {
+    label = {
+      "Cammino su un grafo",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest44",
+    number = "1.8",
+    pageno = "18"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest45",
+    number = "1.8.1",
+    pageno = "18"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest46",
+    number = "1.8.2",
+    pageno = "20"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest47",
+    number = "1.8.3",
+    pageno = "20"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest48",
+    number = "1.8.4",
+    pageno = "21"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest49",
+    number = "1.8.5",
+    pageno = "22"
+  },
+  {
+    label = {
+      "Osservazioni",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest50",
+    number = "1.8.6",
+    pageno = "23"
+  },
+  {
+    label = {
+      "Tecnica greedy",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest51",
+    number = "2",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Introduzione alla tecnica greedy",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest52",
+    number = "2.1",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Matroidi e sistemi di indipendenza",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest53",
+    number = "2.2",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Algoritmo Greedy Standard",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest54",
+    number = "2.3",
+    pageno = "27"
+  },
+  {
+    label = {
+      "Strutture dati per insiemi disgiunti",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest55",
+    number = "2.4",
+    pageno = "30"
+  },
+  {
+    label = {
+      "Minimum Spanning Tree",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest56",
+    number = "2.5",
+    pageno = "31"
+  },
+  {
+    label = {
+      "Algoritmo di Kruskal",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest57",
+    number = "2.5.1",
+    pageno = "34"
+  },
+  {
+    label = {
+      "Algoritmo di Prim",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest58",
+    number = "2.5.2",
+    pageno = "35"
+  },
+  {
+    label = {
+      "Cammini minimi da sorgente unica",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest59",
+    number = "2.6",
+    pageno = "36"
+  },
+  {
+    label = {
+      "Visite di grafi",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest60",
+    number = "3",
+    pageno = "39"
+  },
+  {
+    label = {
+      "Visita in ampiezza",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest61",
+    number = "3.1",
+    pageno = "39"
+  },
+  {
+    label = {
+      "Visita in profonditá",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest62",
+    number = "3.2",
+    pageno = "40"
+  },
+  {
+    label = {
+      "Ordinamento topologico",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest63",
+    number = "3.3",
+    pageno = "42"
+  }
+}

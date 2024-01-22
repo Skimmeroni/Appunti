@@ -1,0 +1,49 @@
+circlerad = 0.1
+
+A: circle fill springgreen at (0.25, 0)
+B: circle fill springgreen at (1, 0.5)
+C: circle fill springgreen at (2, 0.5)
+D: circle fill springgreen at (3, 0.5)
+E: circle fill springgreen at (3.75, 0)
+
+F: circle fill aqua at (1, -0.5)
+G: circle fill aqua at (2, -0.5)
+H: circle fill aqua at (3, -0.5)
+I: circle fill aqua at (1.625, 0)
+
+"A" at A
+"B" at B
+"C" at C
+"D" at D
+"E" at E
+"F" at F
+"G" at G
+"H" at H
+"I" at I
+
+line from B.e  to C.w  "8"  aligned above
+line from C.e  to D.w  "7"  aligned above
+line from D.e  to E.nw "9"  aligned above
+line from F.e  to G.w  "1"  aligned above
+line from G.e  to H.w  "2"  aligned above
+line from A.ne to B.w  "4"  aligned above
+line from I.ne to C.sw "2"  aligned above
+line from C.se to H.nw "4"  aligned above
+line from D.s  to H.n  "14" aligned above
+line from H.e to E.sw  "10" aligned above
+line from I.se to G.nw "6"  aligned above
+line from F.ne to I.sw "7"  aligned above
+line from B.s  to F.n  "11" aligned above
+line from A.se to F.w  "8"  aligned above
+
+line color dodgerblue thick from I.ne to C.sw
+line color dodgerblue thick from C.se to H.nw
+line color dodgerblue thick from A.ne to B.w
+
+line color blue thick from B.e  to C.w
+line color blue thick from C.e  to D.w
+line color blue thick from D.e  to E.nw
+line color blue thick from F.e  to G.w 
+line color blue thick from G.e  to H.w
+
+spline color orange thick from (0.5,-0.5) to (2,0.5) to (3.5,-0.5)

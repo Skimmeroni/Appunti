@@ -1,0 +1,646 @@
+\begin{sile}
+
+    \subsection{Definizione del problema}
+
+        Si definisce \strong{grafo} una coppia \math{G = (V, E)}, costituita
+        da un insieme \math{V} di \strong{vertici} \math{\{v_{1}, v_{2},
+        \unicodeellipsis, v_{n}\}} e da un insieme \math{E} di \strong{archi}
+        \math{\{e_{1}, e_{2}, \unicodeellipsis, e_{m}\}}. Il numero di elementi
+        di \math{V} e di \math{E} indicando la \strong{dimensione} del grafo.
+
+        Ogni arco \math{e_{k}} indica l'esistenza di una relazione
+        \math{R} tra i due vertici \math{v_{i}} e \math{v_{j}}. Se
+        la relazione \math{R} é simmetrica, ovvero se per qualsiasi
+        coppia \math{(v_{i}, v_{j})} l'esistenza di \math{v_{i} R v_{j}}
+        implica l'esistenza di \math{v_{j} R v_{i}}, il grafo si dice
+        \strong{non orientato}. Se invece la relazione non é simmetrica,
+        il grafo si dice \strong{orientato}. Un vertice si dice
+        \strong{adiacente} ad un'altro vertice se esiste un arco che
+        ha tali vertici come elementi. Ovvero, \math{u} é adiacente a
+        \math{v} in un grafo \math{G = (V, E)} se \math{(u, v) \in E}.
+        Un arco \math{(v_{i}, v_{i})}, ovvero un arco che unisce un
+        vertice con sé stesso, viene chiamato \strong{cappio}.
+
+        Un grafo puó venire rappresentato in forma estensionale
+        elencando gli elementi dei due insiemi di cui é costituito.
+        In alternativa, puó essere rappresentato graficamente riportando
+        i nodi come cerchi numerati e gli archi come frecce che connettono
+        tali cerchi. Se il grafo é orientato, le frecce hanno una punta,
+        mentre se non é orientato sono piatte.
+
+        \begin{example}
+            \math{V = \{1, 2, 3, 4, 5\}, E = \{(1, 2), (1, 5), (2, 3), (2, 4),
+            (4, 3), (5, 2), (5, 4)\}}.
+
+            \begin[width = 50%fw]{parbox}
+                \center{\img[src = Dinamica/graph1_d.pdf, width = 75%fw]}
+            \end{parbox}
+            \begin[width = 50%fw]{parbox}
+                \center{\img[src = Dinamica/graph1_nd.pdf, width = 75%fw]}
+            \end{parbox}
+        \end{example}
+
+        Esistono principalmente due strutture dati in grado di contenere
+        le informazioni relative ad un grafo, entrambe con punti di forza
+        e punti deboli:
+
+        \begin{itemize}
+            \begin{item}
+                \strong{Liste di adiacenza}: vettore \math{L_{v}} di
+                dimensione \math{\abs{V}} dove \math{V[i]} é una lista
+                che contiene tutti i vettori rispetto a cui \math{v_{i}}
+                é adiacente. 
+            \end{item}
+            \begin{item}
+                \strong{Matrice di adiacenza}: matrice \math{M_{v}}
+                di dimensione \math{n \times n} dove ciascuna cella
+                \math{(i, j)} ha valore 1 se i vertici \math{v_{i}} e
+                \math{v_{j}} sono adiacenti, e 0 altrimenti.
+            \end{item}
+        \end{itemize}
+
+        \bigskip
+
+        Le liste di adiacenza riportano solamente le informazioni
+        relative a quali nodi e quali archi esistono all'interno
+        del grafo, ed infatti il numero di elementi che contiene é
+        \math{\abs{V} + \abs{E}}. D'altro canto, per sapere se una
+        certa coppia di vertici del grafo che rappresenta sono adiacenti
+        é una operazione eseguibile in tempo lineare, perché occorre
+        "scorrere" le liste relative ai due vertici fino a trovare (se
+        esistono) una corrispondenza. Pertanto, le liste di adiacenza
+        sono una codifica vantaggiosa se il numero di archi é, rispetto
+        al numero di vertici, piccolo.
+
+        La matrice di adiacenza deve riportare esplicitamente informazioni
+        in merito all'esistenza o alla non esistenza di ogni arco, ed infatti
+        il numero di elementi che contiene é \math{\abs{V^{2}}}. D'altro
+        canto, sapere se una certa coppia di vertici del grafo che rappresenta
+        sono adiacenti é una operazione eseguibile in tempo costante, perché
+        é sufficiente leggere il valore della cella che ha tale vertici per
+        indici. Pertanto, la matrice di adiacenza é una codifica vantaggiosa
+        se il numero di archi é, rispetto al numero di vertici, grande.
+
+        \begin{example}
+            \math{V = \{1, 2, 3, 4, 5\}, E = \{(1, 2), (1, 5), (2, 3), (2, 4),
+            (4, 3), (5, 2), (5, 4)\}}
+
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    \table[columnalign = left]{
+                        A \Rightarrow B \Rightarrow E \\
+                        B \Rightarrow C \Rightarrow D \\
+                        C \\
+                        D \Rightarrow C \\
+                        E \Rightarrow B \Rightarrow D \\
+                    }
+                \end{math}
+            \end{parbox}
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    \table{
+                        & A & B & C & D & E \\
+                        A & 0 & 1 & 0 & 0 & 1 \\
+                        B & 0 & 0 & 1 & 1 & 0 \\
+                        C & 0 & 0 & 0 & 0 & 0 \\
+                        D & 0 & 0 & 1 & 0 & 0 \\
+                        E & 0 & 1 & 0 & 1 & 0 \\
+                    }
+                \end{math}
+            \end{parbox}
+            \par
+
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    \table[columnalign = left]{
+                        A \Rightarrow B \Rightarrow E \\
+                        B \Rightarrow A \Rightarrow C \Rightarrow D \Rightarrow E \\
+                        C \Rightarrow B \Rightarrow D \\
+                        D \Rightarrow B \Rightarrow C \Rightarrow E \\
+                        E \Rightarrow A \Rightarrow B \Rightarrow D \\
+                    }
+                \end{math}
+            \end{parbox}
+            \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                    \table{
+                        & A & B & C & D & E \\
+                        A & 0 & 1 & 0 & 0 & 1 \\
+                        B & 1 & 0 & 1 & 1 & 1 \\
+                        C & 0 & 1 & 0 & 1 & 0 \\
+                        D & 0 & 1 & 1 & 0 & 1 \\
+                        E & 1 & 1 & 0 & 1 & 0 \\
+                    }
+                \end{math}
+            \end{parbox}
+        \end{example}
+
+        Dato un grafo \math{G = (V, E)}, prende il nome di \strong{cammino}
+        una qualsiasi sequenza \math{P = \langle {v_{i}}_{1}, {v_{i}}_{2},
+        \unicodeellipsis, {v_{i}}_{k - 1}, {v_{i}}_{k} \rangle} tale per
+        cui un generico \math{{v_{i}}_{j}} appartiene a \math{V} per ogni
+        \math{1 \leq j \leq k} e \math{({v_{i}}_{j}, {v_{i}}_{j + 1})}
+        appartiene ad \math{E} per \math{1 \leq j < k}. La \strong{lunghezza}
+        del cammino é \math{k - 1}, dove \math{k} é il numero di archi.
+
+        Un cammino \math{P} in cui si ha che \math{{v_{i}}_{1}} coincide
+        con \math{{v_{i}}_{k}} viene detto \strong{ciclo}. Un cammino in
+        cui ogni suo vertice compare una sola volta, ovvero che non
+        contiene alcun ciclo, prende il nome di \strong{cammino semplice}.
+        Preso un qualsiasi vertice \math{{v_{i}}_{k} \in P}, viene
+        detto \strong{predecessore} di \math{{v_{i}}_{k}} il vertice
+        \math{{v_{i}}_{k - 1}}. Tutti i vertici in un cammino \math{P =
+        \langle {v_{i}}_{1}, {v_{i}}_{2}, \unicodeellipsis, {v_{i}}_{k}
+        \rangle} diversi da \math{{v_{i}}_{1}} e da \math{{v_{i}}_{k}}
+        sono detti \strong{vertici intermedi}.
+
+        Un \strong{grafo orientato pesato} é costituito da una tripla
+        \math{G = (V, E, W)} dove, oltre all'insieme \math{V = \{v_{1},
+        \unicodeellipsis, v_{n}\}} di vertici e all'insieme \math{E =
+        \{e_{1}, \unicodeellipsis, e_{m}\}} di archi, figura la funzione
+        \math{W : V \times V \mapsto \dsi{R}^{+}}. Tale funzione restituisce,
+        per ciascuna coppia di vertici in \math{V \times V}, un numero
+        positivo \math{w_{ij}} chiamato \strong{peso} dell'arco \math{(v_{i},
+        v_{j})}. Per convenzione, se l'arco \math{(v_{i}, v_{j})} non é
+        presente nel grafo, si ha \math{W(v_{i}, v_{j}) = \infty}, mentre se
+        \math{v_{i} = v_{j}} si ha \math{W(v_{i}, v_{j}) = 0}. Il peso di un
+        cammino é dato dalla somma dei pesi degli archi che costituiscono il
+        cammino.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                W{(v_{i}, v_{j})} =
+                \{\table[columnalign = left left]{
+                    0 & \mi{se} \thickspace v_{i} = v_{j} \\
+                    \infty & \mi{se} \thickspace v_{i} \ne v_{j} \wedge
+                            (v_{i}, v_{j}) \in E \\
+                    w_{ij} & \mi{altrimenti} \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                W{(\langle {v_{i}}_{1}, {v_{i}}_{2}, \unicodeellipsis, {v_{i}}_{k} \rangle)} =
+                \sum_{j = 1}^{k - 1} W{({v_{i}}_{j}, {v_{i}}_{j + 1})}
+            \end{math}
+        \end{parbox}
+        \par
+
+        \begin{example}
+            Il cammino blu ha peso 2 + 3 + 1 = 6, mentre il cammino rosa ha peso
+            8 + 9 + 7 = 24. Il primo é un cammino semplice, mentre il secondo no.
+
+            \begin[width = 50%fw]{parbox}
+                \center{\img[src = Dinamica/graph2_path1.pdf, width = 75%fw]}
+            \end{parbox}
+            \begin[width = 50%fw]{parbox}
+                \center{\img[src = Dinamica/graph2_path2.pdf, width = 75%fw]}
+            \end{parbox}
+        \end{example}
+
+        Dato un grafo \math{G = (V, E, W)} senza cappi, orientato e
+        pesato, il \strong{problema dei cammini minimi} richiede, per
+        ogni coppia di vertici \math{(v_{i}, v_{j}) \in V \times V},
+        di trovare il cammino che ha inizio in \math{v_{i}} e fine in
+        \math{v_{j}} avente il minimo peso. Il problema puó essere
+        formulato come un problema di ottimizzazione di minimo:
+
+        \begin{itemize}
+            \begin{item}
+                Per ciascuna coppia di vertici \math{(v_{i}, v_{j})},
+                l'insieme delle soluzioni possibili é dato da tutti i
+                possibili cammini che hanno \math{v_{i}} come primo
+                vertice e \math{v_{j}} come ultimo;
+            \end{item}
+            \begin{item}
+                La funzione obiettivo é il peso del cammino;
+            \end{item}
+            \begin{item}
+                Il valore ottimo per \math{v_{i}} e \math{v_{j}} é il
+                peso del cammino minimo da \math{v_{i}} a \math{v_{j}};
+            \end{item}
+            \begin{item}
+                La soluzione ottimale é data da uno qualsiasi dei cammini
+                di peso minimo fra i vertici \math{v_{i}} e \math{v_{j}};
+            \end{item}
+        \end{itemize}
+
+    \subsection{Programmazione dinamica: sottostruttura ottima}
+
+        \begin{theorem}
+            \strong{Proprietá della sottostruttura ottima per il problema
+            dei cammini minimi}. Sia dato un grafo orientato e pesato
+            \math{G = (V, E, W)}. Sia \math{P_{0k}} un cammino minimo
+            su \math{G} per i vertici \math{v_{0}} e \math{v_{k}}. Si
+            considerino due indici \math{i, j} qualsiasi tali per cui
+            \math{0 \leq i \leq j \leq k}: il sottocammino \math{P_{ij}}
+            di \math{P_{0k}} é un cammino minimo per i vertici \math{v_{i}}
+            e \math{v_{j}}.
+
+            \bigskip
+            \strong{Dimostrazione}. Il cammino \math{P_{0k}} puó essere
+            separato in tre sottocammini: il cammino \math{P_{0i}} da
+            \math{v_{0}} a \math{v_{i}}, il cammino \math{P_{ij}} da 
+            \math{v_{i}} a \math{v_{j}} ed il cammino \math{P_{jk}} da 
+            \math{v_{j}} a \math{v_{k}}.
+
+            \begin[width = 55%fw]{parbox}
+                \begin[mode = display]{math}
+                    P_{0k} = \langle v_{0}, v_{1}, \unicodeellipsis, v_{i},
+                    \unicodeellipsis, v_{j}, \unicodeellipsis, v_{k} \rangle =
+                    P_{0i} \rightsquigarrow P_{ij} \rightsquigarrow P_{jk}
+                \end{math}
+            \end{parbox}
+            \begin[width = 45%fw]{parbox}
+                \begin[mode = display]{math}
+                    W(P_{0k}) = W(P_{0i}) + W(P_{ij}) + W(P_{jk})
+                \end{math}
+            \end{parbox}
+            \par
+
+            Si supponga per assurdo che esista un cammino \math{{P'}_{ij}} tale che
+            \math{W({P'}_{ij}) < W(P_{ij})}. Allora \math{P_{0i} \rightsquigarrow
+            {P'}_{ij} \rightsquigarrow P_{jk}} é un cammino da \math{v_{0}} a
+            \math{v_{k}} il cui peso é inferiore a \math{P_{0k}}, ma questo va
+            contro l'ipotesi secondo la quale \math{P_{0k}} é un cammino minimo
+            da \math{v_{0}} a \math{v_{k}}.
+        \end{theorem}
+
+    \subsection{Programmazione dinamica: equazione di ricorrenza}
+
+        Dato un grafo orientato e pesato \math{G = (V, E, W)}, se ne numerino
+        i vertici in maniera univoca. Supponendo che i vertici di \math{G}
+        siano \math{V = \{v_{1}, v_{2}, \unicodeellipsis, v_{n}\}}, se ne
+        consideri un sottoinsieme \math{K = \{v_{1}, v_{2}, \unicodeellipsis,
+        v_{k}\}} per un \math{k} generico. Presi due vertici \math{v_{i},
+        v_{j} \in V}, si indichi con \math{P^{k}_{ij}} un cammino minimo da
+        \math{v_{i}} a \math{v_{j}} i cui vertici intermedi sono stati estratti
+        dall'insieme \math{K}.
+
+        Parametrizzando il problema rispetto ai \math{k} vertici
+        intermedi si ottiene un algoritmo di programmazione dinamica
+        chiamato \strong{Algoritmo di Floyd-Warshall}. L'algoritmo puó
+        essere descritto in maniera informale come segue:
+
+        \begin{enumerate}
+            \begin{item}
+                Per tutte le possibili coppie di vertici \math{(v_{i}, v_{j})}
+                si calcoli \math{P^{0}_{ij}}, il cammino minimo da \math{v_{i}}
+                a \math{v_{j}} che non ha alcun vertice intermedio. Tali cammini
+                possono essere costruiti immediatamente a partire dai dati del
+                problema;
+            \end{item}
+            \begin{item}
+                Si utilizzi tale informazione per calcolare, per tutte
+                le possibili coppie di vertici \math{(v_{i}, v_{j})},
+                \math{P^{k}_{ij}}, il cammino minimo da \math{v_{i}}
+                a \math{v_{j}} i cui vertici intermedi sono estratti
+                dall'insieme \math{\{ v_{1}, v_{2}, \unicodeellipsis,
+                v_{k} \}}. Si noti come l'insieme dei vertici intermedi
+                di tale cammino minimo non deve necessariamente coincidere
+                con l'intero \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}
+                \}}, ma ne é certamente un sottoinsieme;
+            \end{item}
+            \begin{item}
+                L'algoritmo termina quando viene calcolato, per tutte
+                le possibili coppie di vertici \math{(v_{i}, v_{j})},
+                \math{P^{n}_{ij}}, il cammino minimo da \math{v_{i}}
+                a \math{v_{j}} i cui vertici intermedi sono estratti
+                dall'intero insieme \math{V};
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        Il caso base dell'equazione di ricorrenza si ha con \math{P^{0}_{ij}}, 
+        il cammino minimo da \math{v_{i}} a \math{v_{j}} che non ha alcun
+        vertice intermedio, l'arco che connette direttamente \math{v_{i}}
+        e \math{v_{j}}. Se i due vertici sono coincidenti, ovvero se
+        \math{v_{i} = v_{j}}, l'unico cammino possibile é il cammino
+        degenere che va da \math{v_{i}} a sé stesso. Tale cammino non
+        solo effettivamente non possiede alcun vertice intermedio,
+        rispettando la definizione, ma essendo l'unico cammino possibile é
+        anche certamente quello di peso minimo. Se i due vertici sono distinti
+        ma non é presente nel grafo un arco fra i due, si ha per convenzione
+        \math{P^{0}_{ij} =} NULL.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                P^{0}_{ij} =
+                \{\table[columnalign = left left]{
+                    \mi{NULL} & \mi{se} \thickspace v_{i} \ne v_{j} \wedge
+                                    \langle v_{i}, v_{j} \rangle \notin E \\
+                    \langle v_{i} \rangle & \mi{se} \thickspace v_{i} = v_{j} \\
+                    \langle v_{i}, v_{j} \rangle & \mi{altrimenti} \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \mi{Opt}_{0} {(i, j)} =
+                \{\table[columnalign = left left]{
+                    \infty & \mi{se} \thickspace v_{i} \ne v_{j} \wedge
+                    \langle v_{i}, v_{j} \rangle \notin E \\
+                    0 & \mi{se} \thickspace v_{i} = v_{j} \\
+                    W{(v_{i}, v_{j})} & \mi{altrimenti} \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Per quanto riguarda la relazione di ricorrenza, si consideri
+        \math{P^{k}_{ij}}, il cammino minimo da \math{v_{i}} a \math{v_{j}}
+        i cui vertici intermedi sono estratti dall'insieme \math{\{v_{1},
+        v_{2}, \unicodeellipsis, v_{k}\}}. Si indichi con \math{\mi{Opt}_{k} 
+        (i, j)} il peso totale del cammino minimo \math{P^{k}_{i, j}}.
+        Possono verificarsi due situazioni: \math{v_{k}} é oppure non é
+        uno dei vertici intermedi del cammino.
+
+        Se \math{v_{k}} non é uno dei vertici del cammino, allora questo
+        equivale a dire che i vertici intermedi di \math{P^{k}_{ij}} sono
+        estratti dall'insieme \math{\{v_{1}, v_{2}, \unicodeellipsis,
+        v_{k - 1}\}}, che é lo stesso insieme da cui sono stati estratti
+        i vertici intermedi di \math{P^{k - 1}_{ij}}. Questo significa
+        che un cammino minimo che va da \math{i} a \math{j} i cui vertici
+        intermedi sono stati estratti da \math{\{v_{1}, v_{2},
+        \unicodeellipsis, v_{k - 1}\}} é anche un cammino minimo che va da
+        \math{i} a \math{j} i cui vertici intermedi sono stati estratti da
+        \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}\}}.
+
+        Se invece \math{v_{k}} é uno dei vertici intermedi di
+        \math{P^{k}_{ij}}, allora tale cammino puó essere certamente
+        diviso in due parti: \math{v_{i} \rightsquigarrow v_{k}} e
+        \math{v_{k} \rightsquigarrow v_{j}}. Il primo sottocammino é
+        a sua volta un cammino minimo che ha inizio in \math{v_{i}} e
+        fine in \math{v_{k}}, mentre il secondo sottocammino é un cammino
+        minimo che ha inizio in \math{v_{k}} e fine in \math{v_{j}}. 
+
+        Dato che entrambi i sottocammini provengono da un cammino i cui
+        vertici intermedi sono stati estratti dall'insieme \math{\{v_{1},
+        v_{2}, \unicodeellipsis, v_{k}\}}, anche questi avranno i loro
+        vertici intermedi estratti da tale insieme. Dato che peró in
+        nessuno dei due sottocammini figura \math{v_{k}} come vertice
+        intermedio, essendo sempre agli estremi, allora é possibile
+        affermare con certezza che i vertici intermedi di entrambi i
+        sottocammini sono estratti dall'insieme \math{\{v_{1}, v_{2},
+        \unicodeellipsis, v_{k - 1}\}}.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                P^{k}_{ij} =
+                \{\table[columnalign = left left]{
+                    P^{k - 1}_{ij} &
+                    \mi{se} \thickspace v_{k} \notin P^{k}_{ij} \\
+                    P^{k - 1}_{ik} \rightsquigarrow P^{k - 1}_{kj} &
+                    \mi{se} \thickspace v_{k} \in P^{k}_{ij} \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \mi{Opt}_{k} {(i, j)} =
+                \{\table[columnalign = left left]{
+                    \mi{Opt}_{k - 1} {(i, j)} &
+                    \mi{se} \thickspace v_{k} \notin P^{k}_{ij} \\
+                    \mi{Opt}_{k - 1} {(i, k)} + \mi{Opt}_{k - 1} {(k, j)} &
+                    \mi{se} \thickspace v_{k} \in P^{k}_{ij} \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Naturalmente non é possibile sapere, se non a posteriori, se
+        \math{v_{k}} fa o non fa parte della \math{k}-esima soluzione
+        ottimale. La scelta migliore fa l'includere o il non includere
+        \math{v_{k}} nella soluzione dipende da quale rende ottimale,
+        ovvero minimo, il peso del cammino risultante.
+
+        \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                        P^{k}_{ij} = \mi{min}\{P^{k - 1}_{ij},
+                        P^{k - 1}_{ik} \rightsquigarrow P^{k - 1}_{kj}\}
+                \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                        \mi{Opt}_{k} {(i, j)} = \mi{min}\{\mi{Opt}_{k - 1}{(i, j)},
+                        \mi{Opt}_{k - 1}{(i, k)} + \mi{Opt}_{k - 1}{(k, j)}\}
+                \end{math}
+        \end{parbox}
+        \par
+
+        Per la restituzione di una soluzione ottima é utile definire, oltre
+        ai cammini minimi \math{P^{k}_{ij}}, anche \math{\Pi^{k}_{ij}}. Questi
+        valori rappresentano il predecessore nel cammino minimo che ha inizio
+        nel vertice \math{v_{i}} e ha fine nel vertice \math{v_{j}}, dove i
+        vertici intermedi sono stati estratti dall'insieme \math{\{v_{1},
+        v_{2}, \unicodeellipsis, v_{k}\}}. Tali valori sono calcolati, come
+        \math{P^{k}_{ij}}, a partire da un'equazione di ricorrenza.
+
+        Il caso base dell'equazione di ricorrenza si ha con
+        \math{\pi^{0}_{ij}}, il predecessore di \math{v_{j}}
+        in \math{P^{k}_{ij}}, ovvero nel cammino minimo da
+        \math{v_{i}} a \math{v_{j}} che non ha alcun vertice
+        intermedio. Se i due vertici sono coincidenti, ovvero
+        se \math{v_{i} = v_{j}}, il vertice \math{v_{j}} non
+        ha un predecessore in \math{P^{0}_{ij}}, perché si
+        sposta da sé stesso in sé stesso. Allo stesso modo,
+        se \math{P^{0}_{ij}} non esiste, il vertice \math{v_{j}}
+        non ha un predecessore in tale cammino. Se i due vertici
+        sono distinti e \math{P^{0}_{ij}} esiste, allora deve aversi
+        che \math{\pi^{0}_{ij} = v_{i}}, perché \math{P^{0}_{ij}} é
+        costituito da un arco che connette i due vertici direttamente.
+
+        \begin[mode = display]{math}
+            \pi^{0}_{ij} =
+            \{\table[columnalign = left left]{
+                \mi{NULL} & \mi{se} \thickspace {(v_{i} \ne v_{j} \wedge
+                                        \langle v_{i}, v_{j} \rangle \notin E)}
+                                        \vee v_{i} = v_{j} \\
+                v_{i} & \mi{altrimenti} \\
+            }
+        \end{math}
+
+        Per quanto riguarda il passo ricorsivo, si assuma di avere a
+        disposizione tutti i valori \math{\pi^{k - 1}_{ij}, \pi^{k - 2}_{ij},
+        \unicodeellipsis} e di voler calcolare \math{\pi^{k}_{ij}}.
+
+        Se \math{\mi{opt}^{k}(i, j) = \mi{opt}^{k - 1}(i, j)}, ovvero
+        se il cammino minimo da \math{v_{i}} a \math{v_{j}} avente i
+        vertici intermedi estratti dall'insieme \math{\{v_{1}, v_{2},
+        \unicodeellipsis, v_{k - 1}\}} ha la stessa lunghezza di quello
+        avente i vertici intermedi estratti dall'insieme \math{\{v_{1},
+        v_{2}, \unicodeellipsis, v_{k}\}}, allora é possibile inferire
+        che il cammino minimo \math{P^{k}_{ij}} ed il cammino minimo
+        \math{P^{k - 1}_{ij}} abbiano lo stesso penultimo vertice, ovvero
+        che \math{\pi^{k}_{ij} = \pi^{k - 1}_{ij}}. Questo perché, se i due
+        cammini hanno la stessa lunghezza, allora significa che esiste una
+        soluzione ottimale (non necessariamente l'unica) comune alla
+        \math{k}-esima e alla \math{k - 1}-esima istanza del problema.
+
+        Altrimenti si ha \math{\pi^{k}_{ij} = \pi^{k - 1}_{kj}}, ovvero il
+        predecessore del vertice \math{v_{j}} nel cammino minimo avente i
+        vertici intermedi estratti dall'insieme \math{\{v_{1}, v_{2},
+        \unicodeellipsis, v_{k - 1}\}} che va da \math{v_{k}} a \math{v_{j}}.
+
+        \begin[mode = display]{math}
+            \pi^{k}_{ij} =
+                \{\table[columnalign = left left]{
+                        \pi^{k - 1}_{ij} &
+                        \mi{se} \thickspace \mi{opt}_{k}{(i, j)} = \mi{opt}_{k - 1}{(i, j)} \\
+                        \pi^{k - 1}_{kj} &
+                        \mi{se} \thickspace \mi{opt}_{k}{(i, j)} \ne \mi{opt}_{k - 1}{(i, j)} \\
+                }
+        \end{math}
+
+    \subsection{Programmazione dinamica: implementazione bottom-up}
+
+        L'algoritmo bottom-up viene costruito a partire dall'equazione di
+        ricorrenza sfruttando tante matrici \math{d} quanti sono i vertici
+        del grafo. All'interno di \math{d^{k}[i, j]}, la cella \math{[i, j]}
+        della \math{k}-esima matrice, viene \math{\mi{opt}_{k}{(i, j)}}, la
+        lunghezza del cammino minimo fra i vertici \math{v_{i}} e \math{v_{j}}
+        i cui vertici intermedi sono stati estratti dall'insieme \math{v_{1},
+        v_{2}, \unicodeellipsis, v_{k}}. L'algoritmo riceve la matrice \math{W}
+        dei pesi degli archi e restituisce in output la matrice \math{d^{n}},
+        quella per la soluzione all'\math{n}-esima istanza.
+
+        Si noti come la matrice \math{d^{0}} coincida esattamente con
+        \math{W}, la matrice passata in input, perché entrambe riportano
+        i cammini (unici, se esistono) costituiti da un solo arco
+        \footnote{Si noti inoltre come i valori della \math{i}-esima matrice
+        dipendano esclusivamente da quelli della \math{i - 1}-esima: questo
+        significa che sarebbe possibile ottimizzare ulteriormente il costo
+        spaziale dell'algoritmo tenendo traccia, in ciascuna \math{i}-esima
+        iterazione, solamente dei valori della \math{i - 1}-esima matrice e
+        non di tutte le precedenti.}.
+
+        \begin{verbatim}
+                procedure FLOYD-WARSHALL(W)
+                    n = W.rows
+                    d\textsuperscript{0} = W
+                    for k = 1 to n do
+                        d\textsuperscript{k} nuova matrice n x n
+                            for i = 1 to n do
+                                for j = 1 to n do
+                                    d\textsuperscript{k}[i, j] = min(d\textsuperscript{k - 1}[i, j], d\textsuperscript{k - 1}[i, k] + d\textsuperscript{k - 1}[k, j])
+                    return d\textsuperscript{n}
+        \end{verbatim}
+
+        É facile notare come il tempo di esecuzione dell'algoritmo
+	sia \math{O(\abs{V^{3}})}, perché sono presenti tre cicli
+	dove in quello piú interno viene eseguita una operazione
+	con costo unitario.
+
+    \subsection{Programmazione dinamica: ricostruzione di una soluzione}
+
+        Restituire una soluzione al problema dei cammini minimi
+        puó venire fatto estendendo l'algoritmo per il calcolo
+        della matrice dei pesi per costruire, allo stesso tempo,
+        la matrice dei predecessori. Sia allora \math{\Pi^{k}} la
+        matrice che contiene i predecessori di tutti i vertici del
+        grafo dove i vertici dei cammini sono estratti dall'insieme
+        \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}\}}.
+
+        Ciascuna riga \math{i} della matrice \math{\Pi} definisce un
+        \strong{sottografo dei predecessori} \math{G = ({V_{i}}_{\pi},
+        {E_{i}}_{\pi})}. \math{{V_{i}}_{\pi}} é definito come l'insieme
+        dei vertici di \math{G} con predecessori diversi da NULL a cui
+        viene aggiunto \math{i}. L'insieme degli archi orientati
+        \math{{E_{i}}_{\pi}} é l'insieme degli archi indotto dai
+        valori \math{\pi} per i vertici in \math{{V_{i}}_{\pi}}:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                {V_{i}}_{\pi} = \{j \in V | \pi_{ij} \ne \mi{NULL}\} \cup \{i\}
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                {E_{i}}_{\pi} = \{({\pi}_{ij}, j) \in E | v \in ({V_{i}}_{\pi} \mathslash \{i\}) \}
+            \end{math}
+        \end{parbox}
+        \par
+
+        %Alla vecchia procedura opportunamente modificata ne viene
+        %aggiunta un'altra, \tt{PRINT-FLOYD-WARSHALL}. Per ottenere
+        %il cammino minimo fra due vertici \math{v_{i}} e \math{v_{j}}
+        %é sufficiente ricorsivamente leggere i valori dalla tabella
+        %\math{\Pi^{n}[i, j]} fino a trovare un valore nullo.
+
+        \begin{verbatim}
+                procedure FLOYD-WARSHALL(W)
+                    n = W.rows
+                    d\textsuperscript{0} = W
+                    for i = 1 to n do
+                        for j = 1 to n do
+                            if d\textsuperscript{0}[i][j] != infinity and i != j
+                                pi\textsuperscript{0} = i
+                            else
+                                pi\textsuperscript{0} = NULL
+
+                    \bigskip
+                    for k = 1 to n do
+                        d\textsuperscript{k} nuova matrice n x n
+                        pi\textsuperscript{k} nuova matrice n x n
+                            for i = 1 to n do
+                                for j = 1 to n do
+                                    if (d\textsuperscript{k - 1}[i, j] <= d\textsuperscript{k - 1}[i, k] + d\textsuperscript{k - 1}[k, j])
+                                        d\textsuperscript{k}[i, j] = d\textsuperscript{k - 1}[i, j]
+                                        pi\textsuperscript{k}[i, j] = pi\textsuperscript{k - 1}[i, j]
+                                    else
+                                        d\textsuperscript{k}[i, j] = d\textsuperscript{k - 1}[i, k] + d\textsuperscript{k - 1}[k, j]
+                                        pi\textsuperscript{k}[i, j] = pi\textsuperscript{k - 1}[k, j]
+                    return d\textsuperscript{n}, pi\textsuperscript{n}
+        \end{verbatim}
+
+    \begin{example}
+        \begin[width = 33%fw, strut = character, valign = middle]{parbox}
+            \center{\img[src = Dinamica/graph2.pdf, width = 87.5%fw]}
+        \end{parbox}
+        \begin[width = 33%fw, valign = middle]{parbox}
+            \begin[mode = display]{math}
+                \table{
+                      & A  & B & C & D & E \\
+                    A & 0  & 7 & 6 & 5 & 2 \\
+                    B & 15 & 0 & 8 & 7 & 13 \\
+                    C & 16 & 1 & 0 & 8 & 14 \\
+                    D & 8  & 2 & 1 & 0 & 10 \\
+                    E & 11 & 5 & 4 & 3 & 0 \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 33%fw, valign = middle]{parbox}
+            \begin[mode = display]{math}
+                \table{
+                      & A         & B         & C         & D         & E \\
+                    A & \mi{NULL} & C         & D         & E         & A \\
+                    B & D         & \mi{NULL} & D         & B         & B \\
+                    C & D         & C         & \mi{NULL} & B         & B \\
+                    D & D         & C         & D         & \mi{NULL} & A \\
+                    E & D         & C         & D         & E         & \mi{NULL} \\
+                }
+            \end{math}
+        \end{parbox}
+    \end{example}
+
+        \subsection{Osservazioni}
+
+                L'algoritmo Floyd-Warshall puó essere utilizzato anche
+                per calcolare la chiusura transitiva di un grafo. La
+                \strong{chiusura transitiva} di un grafo \math{G = (V, E)}
+                é definita come il grafo \math{G* = (V, E*)}, dove
+
+                \smallskip
+                \begin{center}
+                        \math{E*} = \{\math{(i, j)}: esiste un cammino dal
+                        vertice \math{i} al vertice \math{j} in \math{G}\}
+                \end{center}
+                \bigskip
+
+                Il metodo consiste nell'assegnare un peso 1 ad ogni arco di
+                \math{E} e nell'eseguire l'algoritmo di Floyd-Warshall. Se
+                esiste un cammino dal vertice \math{i} al vertice \math{j},
+                si ha \math{d_{ij} < n}, altrimenti \math{d_{ij} = \infty}.
+
+\end{sile}

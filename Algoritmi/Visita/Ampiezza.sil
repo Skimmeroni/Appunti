@@ -1,0 +1,143 @@
+\begin{sile}
+
+        Una breadth-first search di un grafo \math{G = (V, E)} non orientato
+        e non pesato a partire da una sorgente \math{s} viene indicata come
+        \math{\mi{BFS}(G, s)}. Concettualmente, una BFS opera come segue:
+
+        \begin{enumerate}
+            \begin{item}
+                Viene visitata la sorgente \math{s};
+            \end{item}
+            \begin{item}
+                Vengono visitati uno dopo l'altro tutti
+                i vertici adiacenti ad \math{s};
+            \end{item}
+            \begin{item}
+                Vengono visitati uno dopo l'altro tutti
+                i vertici adiacenti dei vertici adiacenti
+                ad \math{s \unicodeellipsis};
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        In altri termini, vengono prima calcolati i vertici che distano
+        0 da \math{s} (sé stesso), poi i vertici che distano 1 da \math{s},
+        poi i vertici che distano 2 da \math{s}, \math{\unicodeellipsis}
+        dove con \strong{distanza fra due vertici} si intende il numero
+        minimo di archi che compongono un cammino fra i due.
+
+        In una visita in ampiezza vengono raggiunti una ed una sola volta
+        tutti e i soli vertici raggiungibili a partire dalla sorgente, e
+        permette di ricavarne la distanza dalla sorgente. Nel fare questo
+        viene a costituirsi una struttura ad albero, con la sorgente come
+        radice e dove al livello \math{i}-esimo dell'albero si trovano
+        tutti i vertici che distano \math{i} dalla sorgente.
+
+        L'algoritmo per la costruzione di una BFS prevede di associare tre
+        campi a ciascun vertice:
+
+        \begin{itemize}
+            \begin{item}
+                Un campo \math{c}, che contiene il \em{colore} associato al
+                vertice. Tale colore indica lo stato del vertice all'iterazione
+                corrente dell'algoritmo. I colori in questione sono tre:
+
+                \begin{itemize}
+                    \begin{item}
+                        Bianco: il vertice non é stato ancora visitato;
+                    \end{item}
+                    \begin{item}
+                        Grigio: il vertice é stato visitato ma alcuni vertici
+                        a questo adiacenti non sono stati ancora visitati;
+                    \end{item}
+                    \begin{item}
+                        Nero: il vertice é stato visitato e tutti vertici
+                        a questo adiacenti sono stati visitati;
+                    \end{item}
+                \end{itemize}
+            \end{item}
+            \begin{item}
+                Un campo \math{d}, che contiene la distanza del vertice dalla
+                sorgente;
+            \end{item}
+            \begin{item}
+                Un campo \math{\pi}, che contiene il predecessore del vertice
+                nell'albero indotto dalla visita.
+            \end{item}
+        \end{itemize}
+
+        \bigskip
+
+        All'inizio della visita, tutti i vertici hanno assegnato il colore
+        bianco, un valore \math{d} pari a \math{\infty} (ad eccezione della
+        sorgente che ha assegnato 0) ed un valore \math{\pi} pari a NULL.
+        Alla fine della visita, tutti i vertici raggiungibili dalla sorgente
+        avranno assegnato il colore nero ed i relativi valori per \math{d} e
+        per \math{\pi}, mentre i vertici non raggiungibili dalla sorgente 
+        avranno ancora assegnato il colore bianco, un valore \math{d} ancora
+        pari a \math{\infty} ed un valore \math{\pi} ancora pari a NULL.
+
+        L'algoritmo per la costruzione di una BFS utilizza una coda di
+        prioritá, nella quale vengono messi i vertici non appena vengono
+        visitati e nella quale rimangono fino a quando estratti per
+        esplorarne gli adiacenti. L'algoritmo termina quando la coda é
+        vuota, ovvero quando non esistono piú vertici grigi. Infatti, un
+        vertice puó venire associato il colore grigio solamente durante
+        la visita, mai prima e mai dopo.
+
+        Una volta assegnati i valori corretti ai tre campi per ciascun
+        vertice é possibile costruire l'albero \math{T = (V_{T}, E_{T})}
+        indotto dalla visita a partire dai valori \math{\pi}. Tale albero
+        conterrá tutti i vertici che alla fine dell'esecuzione dell'algoritmo
+        hanno bianco come colore e come archi tutti gli archi formati da un
+        vertice di \math{V_{T}} e dal rispettivo predecessore.
+
+        \begin{verbatim}
+            BFS(V, E, s)
+             1    foreach v \unichar{U+2208} (V - \{s\}) do
+             2       v.color \unichar{U+2190} W
+             3       v.d \unichar{U+2190} \unichar{U+221E}
+             4       v.\unichar{U+03C0} \unichar{U+2190} NULL
+
+                 \bigskip
+             5   s.color \unichar{U+2190} G
+             6   s.d \unichar{U+2190} 0
+
+                 \bigskip
+             7   Q \unichar{U+2190} \unichar{U+2205}
+             8   enqueue(Q, s)
+
+                 \bigskip
+             9   while Q \unichar{U+2260} \unichar{U+2205} do
+            10        v \unichar{U+2190} head(Q)
+            11        foreach v \unichar{U+2208} adj(v) do
+            12            if u.color == W then
+            13                u.color \unichar{U+2190} G
+            14                enqueue(Q, u)
+            15                u.d \unichar{U+2190} v.d + 1
+            16                u.\unichar{U+03C0} \unichar{U+2190} v
+            17        v.color \unichar{U+2190} B
+            18        dequeue(Q)
+
+                 \bigskip
+            19   Et \unichar{U+2190} \unichar{U+2205}
+            20   Vt \unichar{U+2190} \unichar{U+2205}
+            21   foreach v \unichar{U+2208} (V - \{s\}) do
+            22       if v.\unichar{U+03C0} \unichar{U+2260} NULL then
+            23           Vt \unichar{U+2190} Vt \unichar{U+222A} \{v\}
+            24           Et \unichar{U+2190} Et \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
+        \end{verbatim}
+
+        Il costo di inizializzazione dell'algoritmo in termini di tempo di
+        esecuzione é \math{O(\abs{V})}, perché viene compiuto un numero
+        costante di operazioni per ciascun vertice. Una singola operazione
+        sulla coda puó considerarsi eseguita in un tempo costante. Ciascun
+        vertice viene inserito e/o estratto dalla coda non piú di una sola
+        volta. Questo significa che il numero massimo di volte che l'algoritmo
+        ispeziona un vertice é \math{2E}, e che quindi il costo del loop
+        principale dell'algoritmo in termini di tempo di esecuzione é
+        \math{O(\abs{E})}. Il tempo di esecuzione complessivo dell'algoritmo
+        viene allora ad essere \math{O(\abs{V} + \abs{E})}.
+
+\end{sile}

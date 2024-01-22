@@ -1,0 +1,38 @@
+lineht *= 1.25
+circlerad = 0.1
+
+A: circle at (0.25, 0)
+B: circle at (1, 0.5)
+C: circle at (2, 0.5)
+D: circle at (3, 0.5)
+E: circle at (3.75, 0)
+F: circle at (1, -0.5)
+G: circle at (2, -0.5)
+H: circle at (3, -0.5)
+I: circle at (1.5, 0)
+
+"A" at A
+"B" at B
+"C" at C
+"D" at D
+"E" at E
+"F" at F
+"G" at G
+"H" at H
+"I" at I
+
+line from A.ne to B.w
+line from B.e  to C.w
+line from C.e  to D.w
+line from D.e  to E.nw
+line from F.e  to G.w
+line from G.e  to H.w
+line from I.se to G.nw
+
+line color gray dashed from C.se to H.nw
+line color gray dashed from I.sw to F.ne
+line color gray dashed from C.sw to I.ne
+line color gray dashed from B.s  to F.n
+line color gray dashed from D.s  to H.n
+line color gray dashed from E.sw to H.e
+line color gray dashed from A.se to F.w

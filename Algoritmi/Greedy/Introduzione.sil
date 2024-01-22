@@ -1,0 +1,47 @@
+\begin{sile}
+
+    La \strong{tecnica greedy} é un tipo di approccio alla costruzione di
+    algoritmi che risolvono problemi di ottimizzazione. La tecnica greedy
+    permette di calcolare la soluzione ottima (di una istanza) di un problema
+    attraverso una sequenza di scelte localmente ottime, dove ogni scelta 
+    compiuto non dipende da quelle successive. Le differenze con la tecnica
+    di programmazione dinamica sono riassunte di seguito:
+
+    \begin[cols = 50%fw 50%fw, cellborder = 1pt 1pt 1pt 1pt]{ptable}
+        \begin{row}
+            \cell{\strong{Tecnica di programmazione dinamica}}
+            \cell{\strong{Tecnica greedy}}
+        \end{row}
+        \begin{row}
+            \cell{Restituisce il valore ottimo, a partire dal quale si ricava
+            una soluzione ottima}
+            \cell{Restituisce direttamente la soluzione ottima}
+        \end{row}
+        \begin{row}
+            \cell{Bottom-up}
+            \cell{Top-down}
+        \end{row}
+        \begin{row}
+            \cell{Il problema é scomposto in molti sottoproblemi}
+            \cell{Il problema é scomposto in pochi sottoproblemi}       
+        \end{row}
+        \begin{row}
+            \cell{L'algoritmo é complesso e, in genere, non troppo
+            efficiente}
+            \cell{L'algoritmo é semplice e, in genere, efficiente}
+        \end{row}
+        \begin{row}
+            \cell{Permette di risolvere molti problemi}
+            \cell{Permette di risolvere pochi problemi}
+        \end{row}
+    \end{ptable}
+
+    L'approccio greedy alla risoluzione di un problema é possibile
+    solamente se viene dimostrata matematicamente la \strong{proprietá
+    della scelta greedy}, ovvero se la scelta che viene compiuta ad ogni
+    iterazione appartiene ad una soluzione ottima del sottoproblema in
+    esame. A sua volta, affinche tale proprietá sia vera, é necessario
+    dimostrare che il problema possiede la proprietá della sottostruttura
+    ottima (come per la programmazione dinamica).
+
+\end{sile}

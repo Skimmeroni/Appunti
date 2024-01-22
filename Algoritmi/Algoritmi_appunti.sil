@@ -1,0 +1,130 @@
+\begin[class = book, papersize = a3]{document}
+
+	\script[src = packages/pdf]
+	\script[src = packages/framebox]
+	\script[src = packages/parbox]
+	\script[src = packages/ptable]
+	\script[src = packages/lists]
+	\script[src = packages/image]
+	\script[src = packages/verbatim]
+	\script[src = packages/math]
+	\script[src = packages/textsubsuper]
+	\script[src = packages/rules]
+	\script[src = packages/unichar]
+	\script[src = packages/color]
+
+	\define[command = emoji]{
+		\font[family = Twitter Color Emoji, 
+		      size = 22pt]{\process}
+	}
+
+	\define[command = tt]{
+		\font[family = Hack,
+			size = 9pt,
+			language = und,
+			style = roman]{\process}
+	}
+
+	\define[command = example]{
+		\smallskip
+		\begin[borderwidth = 0.5mm, 
+			 padding = 5mm, 
+			 shadow = true, 
+			 bordercolor = #00ffff, 
+			 fillcolor = #ffffff,
+			 shadowcolor = 220]{roundbox}
+            	\begin[width = 51%pmax]{parbox}
+            		\process
+            	\end{parbox}
+		\end{roundbox}
+		\bigskip
+	}
+
+	\define[command = theorem]{ 
+		\smallskip 
+		\begin[borderwidth = 0.5mm,  
+			padding = 5mm,  
+			shadow = true,  
+			bordercolor = #808080, 
+			fillcolor = #ffffff, 
+			shadowcolor = 220]{roundbox} 
+			\begin[width = 51%pmax]{parbox} 
+				\process 
+			\end{parbox} 
+		\end{roundbox} 
+		\bigskip 
+	}
+
+	\define[command = code]{ 
+		\smallskip 
+		\begin[borderwidth = 0.5mm,  
+			padding = 5mm,  
+			shadow = true,  
+			bordercolor = #ff00ff, 
+			fillcolor = #ffffff, 
+			shadowcolor = 220]{roundbox} 
+			\begin[width = 51%pmax]{parbox} 
+				\process 
+			\end{parbox} 
+		\end{roundbox} 
+		\bigskip 
+	}
+
+	\neverindent
+	\language[main = it]
+	\tableofcontents[depth = 2]
+	\font[size = 12pt]
+	\set[parameter = math.font.size, value = 12]
+	\pdf:metadata[key = Title, value = Appunti di Algoritmi]
+	\pdf:metadata[key = Author, value = Shania]
+	\math{\def{abs}{\mn{|} #1 \mn{|}}}
+
+	% \center{\img[src = Algoritmi_copertina.jpg, width = 75%pw]}
+
+	\pagebreak
+
+	\chapter{Tecnica di programmazione dinamica}
+		\section{Longest Common Subsequence}
+		\include[src = Dinamica/LCS.sil]
+		\section{Weighted Interval Scheduling}
+		\include[src = Dinamica/WIS.sil]
+		\section{Hateville}
+		\include[src = Dinamica/Hateville.sil]
+		\section{Longest Increasing Subsequence}
+		\include[src = Dinamica/LIS.sil]
+		\section{Longest Increasing Common Subsequence}
+		\include[src = Dinamica/LICS.sil]
+		\section{Knapsack 0/1}
+		\include[src = Dinamica/Knapsack.sil]
+		\section{Chiusura palindroma}
+		\include[src = Dinamica/Palindroma.sil]		
+		%\section{Distanza di modifica}
+		%\include[src = Dinamica/Distanza.sil]
+		\section{Cammino su un grafo}
+		\include[src = Dinamica/Grafo.sil]
+	\chapter{Tecnica greedy}
+		\section{Introduzione alla tecnica greedy}
+		\include[src = Greedy/Introduzione.sil]
+		%\section{Weighted interval scheduling (rivisitato)}
+		%\include[src = Greedy/WIS.sil]
+		%\section{Zaino frazionario}
+		%\include[src = Greedy/Zaino.sil]
+		\section{Matroidi e sistemi di indipendenza}
+		\include[src = Greedy/Matroidi.sil]
+		\section{Algoritmo Greedy Standard}
+		\include[src = Greedy/Standard.sil]
+		\section{Strutture dati per insiemi disgiunti}
+		\include[src = Greedy/Union.sil]
+		\section{Minimum Spanning Tree}
+		\include[src = Greedy/MST.sil]
+		\section{Cammini minimi da sorgente unica}
+		\include[src = Greedy/Dijkstra.sil]
+	\chapter{Visite di grafi}
+		\section{Visita in ampiezza}
+		\include[src = Visita/Ampiezza.sil]
+		\section{Visita in profonditá}
+		\include[src = Visita/Profondita.sil]
+		\section{Ordinamento topologico}
+		\include[src = Visita/Topologico.sil]
+
+\end{document}

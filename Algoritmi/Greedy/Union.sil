@@ -1,0 +1,114 @@
+\begin{sile}
+
+    Una \strong{struttura dati per insiemi disgiunti} mantiene
+    una collezione \math{\{S_{1}, S_{2}, \unicodeellipsis, S_{k}\}}
+    di insiemi dinamici disgiunti, ovvero insiemi di cardinalitá non
+    fissata i cui elementi non possono trovarsi in piú di un insieme
+    contemporaneamente. Ciascun insieme é identificato da un
+    \strong{rappresentante}, che é un elemento dell'insieme.
+    Quale elemento questo debba essere é lasciato all'implementazione:
+    puó sia essere un elemento qualunque, sia un elemento che possiede
+    una certa caratteristica all'interno dell'insieme (l'elemento piú
+    piccolo, l'elemento che ha associato il valore maggiore,
+    ecc\math{\unicodeellipsis}).
+
+    Indicando con \math{x} un generico elemento di uno degli insiemi, si vuole
+    costruire una struttura dati che supporti le seguenti tre operazioni:
+
+    \begin{itemize}
+        \begin{item}
+            \tt{MAKE-SET(x)} crea un nuovo insieme il cui unico elemento e
+            rappresentante é \math{x}. Poiché gli insiemi sono disgiunti,
+            \math{x} non puó trovarsi in un'altro insieme.
+        \end{item}
+        \begin{item}
+            \tt{UNION(x, y)} unisce gli insiemi (univoci) che contengono
+            gli elementi \math{x} e \math{y}, siano questi \math{S_{x}}
+            e \math{S_{y}}, in un unico insieme, che é l'unione di questi
+            due, che viene poi aggiunto alla collezione. Naturalmente, si
+            assume che \math{S_{x}} e \math{S_{y}} siano disgiunti prima
+            di applicare l'operazione. Il rappresentante di \math{S_{x}
+            \cup S_{y}} diviene uno qualsiasi degli elementi di \math{S_{x}}
+            o di \math{S_{y}} \footnote{In alcune implementazioni si richiede
+            che il rappresentante dell'insieme unione sia sempre un elemento
+            del primo insieme o sempre un elemento del secondo insieme.}. Al
+            fine di mantenere la proprietá di disgiunzione degli insiemi
+            della collezione, occorre eliminare dalla collezione \math{S_{x}}
+            e \math{S_{y}}.
+        \end{item}
+        \begin{item}
+            \tt{FIND-SET(x)} restituisce un puntatore al rappresentante 
+            dell'insieme (unico) che contiene \math{x}.
+        \end{item}
+    \end{itemize}
+
+    \bigskip
+
+    Una prima implementazione di una struttura dati per insiemi disgiunti
+    prevede di rappresentare ciascun insieme mediante una lista concatenata.
+    L'oggetto di ciascun insieme ha gli attributi \tt{head}, che punta al
+    primo oggetto della lista, e \tt{tail}, che punta all'ultimo oggetto.
+    Ogni oggetto nella lista contiene un elemento dell'insieme, un puntatore
+    al successivo oggetto della lista e un puntatore che ritorna all'oggetto
+    dell'insieme. All'interno di ciascuna lista concatenata, gli oggetti
+    possono apparire in qualsiasi ordine. Il rappresentante é l'elemento
+    dell'insieme nel primo oggetto della lista.
+
+    Con questa rappresentazione, entrambe le operazioni \tt{MAKE-SET} e
+    \tt{FIND-SET} possono essere implementate per avere tempo di esecuzione
+    unitario. Per implementare \tt{MAKE-SET} é sufficiente creare una nuova
+    lista concatenata il cui unico oggetto é \math{x}. Per implementare 
+    \tt{FIND-SET} occorre seguire il puntatore da \math{x} per arrivare
+    all'oggetto del suo insieme e poi ritornare all'elemento nell'oggetto
+    cui punta \tt{head}.
+
+    \bigskip
+    \center{\img[src = Greedy/union-find.pdf, width = 75%fw]}
+    \bigskip
+
+    La piú semplice implementazione dell'operazione \tt{UNION(x, y)} richiede
+    un tempo di esecuzione nettamente superiore a quello di \tt{MAKE-SET(x)} e
+    di \tt{FIND-SET(x)}. Per eseguire \tt{UNION(x, y)} viene aggiunta la lista
+    di \math{y} alla fine della lista di \math{x}, ed il rappresentante di
+    \math{x} diviene rappresentante dell'insieme risultante. Questo richiede
+    di aggiornare il puntatore all'oggetto dell'insieme per ogni oggetto che 
+    si trovava in \math{y}, e questa operazione richiede tempo lineare nella
+    lunghezza della lista di \math{y}.
+
+    Una delle tante applicazioni delle strutture dati per insiemi disgiunti
+    consiste nel determinare le componenti connesse di un grafo non orientato.
+    La procedura \tt{CONNECTED-COMPONENTS} usa le operazioni degli insiemi
+    disgiunti per calcolare le componenti connesse di un grafo. Una volta
+    che \tt{CONNECTED-COMPONENTS} ha preprocessato il grafo, la procedura 
+    \tt{SAME-COMPONENT} é in grado di determinare se due vertici sono nella
+    stessa componente connessa.
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure CONNECTED-COMPONENTS(V, E)
+			1    foreach v \unichar{U+2208} V
+			2        MAKE-SET(v)
+			3    foreach (u, v) \unichar{U+2208} E
+			4        if (FIND-SET(u) \unichar{U+2260} FIND-SET(v)) then
+			5            UNION(u, v)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure SAME-COMPONENT(u, v)
+			6    if (FIND-SET(u) == FIND-SET(v))
+			7        return TRUE
+			8    else
+			9        return FALSE
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+    La procedura \tt{CONNECTED-COMPONENTS} costruisce un insieme per ciascun
+    vertice. Dopodiché, unisce tutti gli insiemi i cui rappresentanti hanno
+    un arco nel grafo che li unisce. In questo modo, vengono a crearsi tanti
+    insiemi quante sono le componenti connesse di un grafo. A questo punto é
+    posssibile utilizzare la procedura \tt{SAME-COMPONENT} per sapere se due
+    vertici si trovano nella stessa componente.
+
+\end{sile}

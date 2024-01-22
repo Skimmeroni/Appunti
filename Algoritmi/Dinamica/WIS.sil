@@ -1,0 +1,401 @@
+\begin{sile}
+
+	\subsection{Definizione del problema}
+
+		Sia dato un insieme \math{X} costituito da "attivitá". Ciascuna
+		attivitá \math{i \in X} é definita a partire da una tripla
+		\math{(s_{i}, f_{i}, v_{i})}, dove i tre valori indicano
+		rispettivamente il tempo di inizio dell'attivitá, il tempo di
+		fine ed il suo peso. Due attivitá \math{i} e \math{j} distinte
+		si dicono \em{compatibili} se \math{i} termina prima che \math{j}
+		inizi, ovvero se \math{f_{i} \leq s_{j}}.
+
+		\begin[width = 35%fw]{parbox}
+			\begin[mode = display]{math}
+				i \in X = (s_{i}, f_{i}, v_{i})
+			\end{math}
+		\end{parbox}
+		\begin[width = 65%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{Comp} {(i, j)} = 
+				\{\table{
+					T & \mi{se} \thickspace f_{i} \leq s_{j} \\
+					F & \mi{se} \thickspace f_{i} > s_{j} \\
+				}
+			\end{math}
+		\end{parbox}
+		\par
+
+		La nozioni di peso e di compatibilitá vengono poi estese dai singoli
+		elementi di \math{X} a sottoinsiemi \math{A} di \math{X}. Il peso di
+		un insieme \math{A \subseteq X} é dato dalla somma dei pesi di tutte
+		le attivitá di cui é costituito (per convenzione, se \math{A} é 
+		l'insieme vuoto, il suo peso é 0). Similmente, un insieme \math{A 
+		\subseteq X} si dice compatibile se contiene solo ed esclusivamente
+		elementi di \math{X} tutti compatibili fra di loro o, equivalentemente,
+		non contiene nemmeno una coppia di elementi di \math{X} che non sono
+		fra loro compatibili.
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				V{(A)} = 
+				\{\table[columnalign = left left]{
+					\sum_{i = 1}^{|A|} v_{a_{i}} \in A & \mi{se} \thickspace A \ne \varnothing \\
+					0 & \mi{se} \thickspace A = \varnothing \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{Comp} {(A)} = 
+				\{\table{
+					T & \mi{se} \thickspace \nexists i, j \in A \thickspace
+											\mi{t.c.} \thickspace f_{i} > s_{j} \\
+					F & \mi{se} \thickspace \exists i, j \in A \thickspace
+											\mi{t.c.} \thickspace f_{i} > s_{j} \\
+				}
+			\end{math}
+		\end{parbox}
+		\par
+
+		Il problema \strong{Weighted Interval Scheduling} richiede di
+		individuare qual'é, dato un insieme di attivitá, il sottoinsieme
+		di attivitá fra loro compabili che ha peso maggiore. Il problema
+		puó essere risolto in maniera banale osservando l'insieme potenza
+		dell'insieme di attivitá (che ne contiene tutti i possibili
+		sottoinsiemi), scartando tutti gli insiemi di cui é costituito
+		che non sono compatibili, calcolando il peso di tutti gli insiemi
+		compatibili e cercando il peso massimo.
+
+		\begin{example}
+			\begin[width = 50%fw]{parbox}
+				\begin[cols = 25%fw 25%fw 25%fw 25%fw]{ptable}
+					\begin{row}
+						\cell{\strong{Attivitá}}
+						\cell{\strong{Tempo} \par \strong{iniziale}}
+						\cell{\strong{Tempo} \par \strong{finale}}
+						\cell{\strong{Peso}}
+					\end{row}
+					\begin{row}
+						\cell{\math{a_{1}}}
+						\cell{1}
+						\cell{3}
+						\cell{10}
+					\end{row}
+					\begin{row}
+						\cell{\math{a_{2}}}
+						\cell{2}
+						\cell{0}
+						\cell{4}
+					\end{row}
+					\begin{row}
+						\cell{\math{a_{3}}}
+						\cell{8}
+						\cell{3}
+						\cell{5}
+					\end{row}
+					\begin{row}
+						\cell{\math{a_{4}}}
+						\cell{1}
+						\cell{4}
+						\cell{8}
+					\end{row}
+					\begin{row}
+						\cell{\math{a_{5}}}
+						\cell{1}
+						\cell{2}
+						\cell{10}
+					\end{row}
+					\begin{row}
+						\cell{\math{a_{6}}}
+						\cell{3}
+						\cell{8}
+						\cell{11}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+			\begin[width = 50%fw]{parbox}
+				\img[src = Dinamica/wis.pdf, width = 75%fw]
+			\end{parbox}
+			\par
+
+			Il sottoinsieme \math{A = \{a_{2}, a_{4}, a_{6}\}} é un insieme
+			compatibile, ma non é il sottoinsieme con peso maggiore. Si osserva
+			infatti che il sottoinsieme con queste caratteristiche é \math{B =
+			\{a_{1}, a_{3}, a_{6}\}}, che ha peso pari a 21.
+		\end{example}
+
+	\subsection{Programmazione dinamica: sottostruttura ottima}
+
+		\begin{theorem}
+			\strong{Proprietá della sottostruttura ottima per il
+			problema Weighted Interval Scheduling}. Siano \math{S_{0},
+			S_{1}, \unicodeellipsis, S_{i - 1}} con \math{i > 0} gli
+			insiemi soluzione rispettivamente dell'istanza \math{X_{0},
+			X_{1}, \unicodeellipsis, X_{i - 1}} del problema Weighted
+			Interval Scheduling. Allora l'insieme \math{S_{i}}, soluzione
+			dell'istanza \math{X_{i}}, é data da:
+		
+			\begin[mode = display]{math}
+				S_{i} =
+				\{\table[columnalign = left left]{
+					S_{\mi{p}(i)} \cup \{i\} & 
+					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} \geq \mi{Opt}(i - 1) \\
+					S_{i - 1} & 
+					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} < \mi{Opt}(i - 1) \\
+				}
+			\end{math}
+
+			\strong{Dimostrazione}. Il caso base é banale e viene dimostrato
+			vero immediatamente. Il passo ricorsivo viene dimostrato caso per
+			caso:
+
+			\begin{itemize}
+				\begin{item}
+					\math{i} é parte della \math{i}-esima soluzione,
+					ovvero \math{i \in S_{i}}. Si supponga per assurdo
+					che \math{S_{\mi{p}(i)} \cup \{i\}} non sia la
+					soluzione dell'\math{i}-esima istanza del problema,
+					ovvero \math{S_{i} \ne S_{\mi{p}(i)} \cup \{i\}}.
+					Deve allora aversi che \math{\mi{Opt}(i) > \mi{Opt}
+					(\mi{p}(i)) + v_{i}}. Essendo \math{i} membro di
+					\math{S_{i}}, é possibile esprimere \math{S_{i}}
+					come \math{S_{\delta} \cup \{i\}}, dove \math{S_{\delta}}
+					é un insieme i cui elementi non sono noti (ma che,
+					certamente, non contiene \math{i}). Si ha allora:
+
+					\begin[mode = display]{math}
+						V(S_{\delta} \cup \{i\}) >
+						V(S_{\mi{p}(i)} \cup \{i\})
+						\thickspace \Rightarrow \thickspace
+						\mi{Opt}(\delta) + v_{i} > \mi{Opt}(\mi{p}(i)) + v_{i}
+						\thickspace \Rightarrow \thickspace
+						\mi{Opt}(\delta) > \mi{Opt}(\mi{p}(i))
+					\end{math}
+
+					Avendosi \math{\mi{p}(i) < i}, si ha che \math{S_{\delta}
+					\subseteq \{1, \unicodeellipsis, \mi{p}(i)\}}. Essendo
+					peró \math{\mi{Opt} (\delta) > \mi{Opt}(\mi{p}(i))}, si
+					ha che \math{S_{\delta}} é un miglior candidato di
+					\math{S_{\mi{p}(i)}} ad essere la soluzione dell'istanza
+					\math{X_{\mi{p}(i)}} del problema, che é in contraddizione
+					con l'ipotesi di partenza. Pertanto, se \math{i} é parte
+					della \math{i}-esima soluzione, deve necessariamente valere
+					che \math{S_{i} = S_{\mi{p}(i)} \cup \{i\}}.
+				\end{item}
+				\begin{item}
+					\math{i} non é parte della \math{i}-esima soluzione,
+					ovvero \math{i \notin S_{i}}. Si supponga per
+					assurdo che \math{S_{i - 1}} non sia la soluzione
+					dell'\math{i}-esima istanza del problema, ovvero
+					\math{S_{i} \ne S_{i - 1}}. Deve allora aversi che
+					\math{\mi{Opt}(i) > \mi{Opt}(i - 1)}. Per definizione
+					\math{S_{i} \subseteq \{1, \unicodeellipsis, i - 1, i\}},
+					ma dato che per ipotesi \math{i \notin S_{i}} si ha
+					\math{S_{i} \subseteq \{1, \unicodeellipsis, i - 1\}}.
+					Questo, unito al fatto che \math{\mi{Opt}(i) > \mi{Opt}(i -
+					1)}, comporta che \math{S_{i}} sia un miglior candidato
+					di \math{S_{i - 1}} ad essere la soluzione dell'istanza
+					\math{X_{i - 1}} del problema, che é in contraddizione
+					con l'ipotesi di partenza. Pertanto, se \math{i} non é
+					parte della \math{i}-esima soluzione, deve necessariamente
+					valere che \math{S_{i} = S_{i - 1}}.
+				\end{item}
+			\end{itemize}
+		\end{theorem}
+
+	\subsection{Programmazione dinamica: equazione di ricorrenza}
+
+		Dato un insieme di attivitá \math{X} avente cardinalitá \math{n},
+		ordinate per tempo di fine, sia \math{X_{i}} l'insieme costituito
+		dalle prime \math{i} attivitá di \math{X}. La soluzione \math{S_{i}}
+		per la \math{i}-esima istanza del problema corrisponde a trovare
+		la soluzione ottimale per il problema WIS rispetto al sottoinsieme
+		\math{X_{i}}. La soluzione per l'intero insieme \math{X} é la
+		soluzione per l'istanza \math{X_{n}}. Il valore totale della
+		soluzione ottimale per la \math{i}-esima istanza del problema
+		viene indicata con \math{\mi{Opt}(i)}.
+
+		Il caso base é semplice da determinare; l'istanza \math{X_{0}},
+		che corrisponde all'insieme vuoto, ha per soluzione l'insieme
+		vuoto stesso, che per definizione ha associato il valore 0.
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				S_{0} = \varnothing
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{Opt}(0) = 0
+			\end{math}
+		\end{parbox}
+		\par
+
+		Per quanto riguarda il passo ricorsivo, si assuma di
+		avere a disposizione tutte le soluzioni \math{S_{1},
+		S_{2}, \unicodeellipsis, S_{i - 1}} e di voler calcolare
+		\math{S_{i}}. Possono verificarsi solamente due situazioni,
+		mutualmente esclusive: l'\math{i}-esima attivitá fa parte
+		della soluzione ottimale \math{S_{i}} oppure non ne fa parte.
+
+		Nel primo caso, é evidente come \math{S_{i}} e \math{S_{i - 1}}
+		debbano essere lo stesso insieme. Questo perché, essendo sia
+		\math{S_{i}} sia \math{S_{i - 1}} soluzioni ottimali, se \math{i}
+		non é uno dei componenti della soluzione ottimale dell'istanza
+		\math{X_{i}}, allora la soluzione ottimale di tale istanza dovrá
+		essere la stessa dell'insieme \math{X_{i}} a cui viene tolto
+		l'elemento \math{i}, ovvero \math{X_{i - 1}}, la cui soluzione é
+		proprio \math{S_{i - 1}}.
+
+		Nel secondo caso, la soluzione ottimale dell'istanza \math{X_{i}} 
+		deve essere un insieme che contiene \math{i} e tutte le attivitá 
+		precedenti ad \math{i} che sono con questa compatibili. Tuttavia, 
+		dato che l'insieme \math{S_{i}} é soprainsieme di tutti gli insiemi
+		\math{S_{j}} con \math{j < i}, per individuare il sottoinsieme
+		di \math{S_{i}} che contiene tutte le attivitá compatibili con
+		\math{i} é sufficiente cercare quello di indice maggiore, perché
+		per definizione conterrá anche tutti i sottoinsiemi di elementi
+		compatibili con \math{i} a loro volta piú piccoli. L'indice con
+		queste caratteristiche viene indicato con \math{\mi{p}(i)}.
+
+		\begin[mode = display]{math}
+			\mi{p}(i) = \mi{max}\{j | j < i \wedge \mi{Comp}(i, j) = T\}
+		\end{math}
+
+		Le equazioni di ricorrenza complete per gli insiemi \math{S_{i}}
+		e per i valori \math{\mi{Opt}(i)} possono allora essere scritte
+		in questa forma:
+
+		\begin[width = 40%fw]{parbox}
+			\begin[mode = display]{math}
+				S_{i} =
+				\{\table[columnalign = left left]{
+					S_{\mi{p}(i)} \cup \{i\} & \mi{se} \thickspace i \in S_{i} \\
+					S_{i - 1}                   & \mi{se} \thickspace i \notin S_{i} \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 60%fw]{parbox}
+			\begin[mode = display]{math}
+				V {(S_{i})} = \mi{Opt} {(i)} =
+				\{\table[columnalign = left left]{
+					\mi{Opt}(\mi{p}(i)) + v_{i} & \mi{se} \thickspace i \in S_{i} \\
+					\mi{Opt}(i - 1)                & \mi{se} \thickspace i \notin S_{i} \\
+				}
+			\end{math}
+		\end{parbox}
+		\par
+
+		Naturalmente non é possibile sapere a priori se l'\math{i}-esimo
+		elemento appartiene oppure non appartiene ad \math{S_{i}}; l'unica
+		informazione nota é il peso complessivo degli insiemi \math{S_{j}}
+		con \math{j < i}. Dovendo peró ricavare l'insieme avente valore
+		ottimale, é sufficiente scegliere di volta in volta l'insieme
+		\math{S} che permette di avere il valore massimo. Ovvero, se
+		il valore dell'insieme \math{S_{\mi{p}(i)}} a cui viene unito
+		\math{\{i\}} é maggiore del valore dell'insieme \math{S_{i - 1}},
+		allora \math{S_{\mi{p}(i)} \cup \{i\}} é la scelta migliore,
+		altrimenti é l'insieme \math{S_{i - 1}} ad esserlo.
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				S_{i} =
+				\{\table[columnalign = left left]{
+					S_{\mi{p}(i)} \cup \{i\} & 
+					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} \geq \mi{Opt}(i - 1) \\
+					S_{i - 1} & 
+					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} < \mi{Opt}(i - 1) \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{Opt} {(i)} = \mi{max}\{\mi{Opt}(\mi{p}(i)) + v_{i}; \mi{Opt}(i - 1)\}
+			\end{math}
+		\end{parbox}
+		\par
+
+	\subsection{Programmazione dinamica: implementazione bottom-up}
+
+		L'algoritmo bottom-up viene costruito a partire dall'equazione
+		di ricorrenza sfruttando un vettore monodimensionale \math{c}.
+		In ciascuna cella \math{c[i]} viene riportato il valore della
+		soluzione ottimale per la \math{i}-esima istanza del problema,
+		che viene utilizzata per calcolare i valori ottimali per le
+		istanze successive. Tale procedura ha in input i valori associati
+		alle attivitá (ordinate per tempo di fine) e restituisce in output
+		il vettore \math{c}.
+
+		Si noti come la prima cella del vettore \math{c} possa venire riempito
+		immediatamente con 0, come da caso base dell'equazione di ricorrenza.
+
+		\begin{verbatim}
+			procedure WIS(X)
+			    c[0] = 0
+
+			    \bigskip
+			    for i = 1 to |X| do
+			        c[i] = max(c[i - 1], c[p[i]] + X[i])
+
+			    \bigskip
+			    return c
+		\end{verbatim}
+
+		É facile notare come il tempo di esecuzione dell'algoritmo sia
+		\math{O(n)}, dove \math{n} é la lunghezza del vettore \math{X}.
+		Questo perché é presente un ciclo che esegue una istruzione 
+		in tempo immediato esattamente \math{\abs{X}} volte. Naturalmente,
+		questo é possibile solamente se il vettore \math{p} é noto,
+		altrimenti il tempo di esecuzione salirebbe a \math{O(n^{2})}.
+
+	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
+
+		Una volta calcolato il valore dell'insieme ottimale di intervalli,
+		é possibile individuarne uno ripercorrendo la tabella a ritroso. In
+		particolare, questo viene fatto introducendo una nuova procedura,
+		\tt{PRINT-WIS}, che ha in input la tabella \math{c}, il vettore
+		\math{X} ed un indice \math{i}, mentre in output ha uno dei possibili
+		insiemi di attivitá mutualmente compatibili aventi massimo valore
+		totale. La prima chiamata alla procedura ha \math{\abs{X}} come
+		valore per \math{i}, in modo da ottenere la soluzione per l'istanza
+		\math{\abs{X}}.
+
+		La procedura ripercorre il vettore \math{c} dalla cella \math{i}
+		verso la cella 0; ogni volta che si ha \math{c[p[i]] + X[i] \geq
+		c[i - 1]}, si ha che l'\math{i}-esima attivitá é un elemento della
+		soluzione.
+
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure WIS(X)
+				    c[0] = 0
+
+				    \bigskip
+				    for i = 1 to |X| do
+				        c[i] = max(c[i - 1], c[p[i]] + X[i])
+
+				    \bigskip
+				    return c
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure PRINT-WIS(c, X, i)
+				    if i \unichar{U+2260} 0
+				        if c[p[i]] + X[i] \unichar{U+2265} c[i - 1]
+				            PRINT-WIS(c, X, p[i])
+				            print i
+				        else
+				            PRINT-WIS(c, X, i - 1)
+				    else
+				        return
+			\end{verbatim}
+		\end{parbox}
+		\par
+
+		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione é 
+		comunque proporzionale alla lunghezza del vettore \math{c}, perché
+		la ricorsione é una tail-recursion.
+
+\end{sile}

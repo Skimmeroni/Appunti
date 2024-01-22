@@ -1,0 +1,74 @@
+\begin{sile}
+
+    Si consideri un grafo orientato, diretto e aciclico (\em{Directed Acyclic
+    Graph}, \em{DAG}). Un \strong{ordinamento topologico} del DAG \math{G =
+    (V, E)} é un ordinamento lineare di tutti i suoi vertici tale che, se
+    \math{G} contiene un arco \math{(u, v)}, allora \math{u} compare prima
+    di \math{v} in tale ordinamento.
+
+    Un ordinamento topologico viene eseguito estendendo l'algoritmo per la
+    ricerca in profonditá. In particolare: l'algoritmo per l'ordinamento
+    topologico puó essere descritto a grandi linee come segue:
+
+    \begin{enumerate}
+        \begin{item}
+            Per ogni vertice viene effettuata una normale ricerca in
+            profonditá, in modo da calcolare il tempo di completamento
+            \math{v.f} per ciascun vertice \math{v};
+        \end{item}
+        \begin{item}
+            Una volta completata l'ispezione di un vertice, tale vertice
+            viene inserito in uno stack;
+        \end{item}
+        \begin{item}
+            Vengono stampati i vertici contenuti nello stack (nell'ordine in
+            cui sono stati inseriti).
+        \end{item}
+    \end{enumerate}
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			DFS(G)
+			1    foreach v ∈ V do
+			2        color[v] = W
+			3        π[v] = NULL
+			4        d[v] = 0
+			5        f[v] = 0
+			6    time = 0
+			7    S = []
+			8    foreach v ∈ V do
+			9        if color[v] is W then
+			10            DFS_visit(G, v)
+			11    while not isEmpty(S) do
+			12        pop(S)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			DFS_visit(G, u)
+			13    time = time + 1
+			14    d[u] = time
+			15    color[u] = G
+			16    foreach v ∈ adj(u) do
+			17        if color[v] = W then
+			18            π[v] = u
+			19            DFS_visit(G, v)
+			20    color[u] = B
+			21    push(S, u)
+			22    time = time + 1
+			23    f[u] = time
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+    Il tempo di esecuzione dell'algoritmo per l'ordinamento topologico
+    é \math{O(\abs{V} + \abs{E})}. L'ordinamento in profonditá, anche
+    se viene esteso con l'aggiunta di una operazione di push, richiede
+    comunque tempo \math{O(\abs{V} + \abs{E})}, perché tale operazione
+    ha tempo di esecuzione immediato. Dato che la stampa degli elementi
+    della coda é una operazione immediata che viene effettuata esattamente
+    \math{\abs{V}} volte, si ha che il tempo di esecuzione complessivo é
+    asintoticamente pari a \math{O(\abs{V}) + O(\abs{V} + \abs{E}) =
+    O(\abs{V} + \abs{E})}.
+
+\end{sile}

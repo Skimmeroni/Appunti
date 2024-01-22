@@ -1,0 +1,47 @@
+lineht *= 1.25
+
+A1: box fill gray wid 1 ht 0.5 at (0, 0)
+A2: box wid 1 ht 0.5 at (0, -0.5)
+A3: box fill gray wid 1 ht 0.5 at (0, -1)
+
+B1: box fill gray wid 1 ht 0.5 at (2, 0)
+B2: box wid 1 ht 0.5 at (2, -0.5)
+B3: box fill gray wid 1 ht 0.5 at (2, -1)
+
+C1: box fill gray wid 1 ht 0.5 at (4, 0)
+C2: box wid 1 ht 0.5 at (4, -0.5)
+C3: box fill gray wid 1 ht 0.5 at (4, -1)
+
+X0: box wid 1.5 ht 1.75 at (-2.5, -1.25)
+X1: box fill gray wid 0.5 ht 0.5 at (-2.25, -1)
+X2: box fill gray wid 0.5 ht 0.5 at (-2.25, -1.75)
+
+"HEAD" at (-2.75, -1)
+"TAIL" at (-2.75, -1.75)
+
+dot at A1 
+dot at A3
+dot at B1 
+dot at B3
+dot at C1 
+dot at X1
+dot at X2
+
+arrow from X1 to A3.w
+arrow from A3 to B3.w
+arrow from B3 to C3.w
+
+arrow from X2 to (C3.x, X2.y) to C3.s
+
+arrow from A1 to (A1.x, A1.y + 0.5) to \
+                 ((X0.n.x + X0.ne.x) / 2, A1.y + 0.5) to \
+                  ((X0.n.x + X0.ne.x) / 2, X0.n.y)
+arrow from B1 to (B1.x, B1.y + 0.75) to \
+                 (X0.x, B1.y + 0.75) to (X0.x, X0.n.y)
+arrow from C1 to (C1.x, C1.y + 1) to \
+                 ((X0.n.x + X0.nw.x) / 2, B1.y + 1) to \
+                 ((X0.n.x + X0.nw.x) / 2, X0.n.y)
+
+cylinder fill cyan wid 0.375 ht 0.275 at A2
+cylinder fill cyan wid 0.375 ht 0.275 at B2
+cylinder fill cyan wid 0.375 ht 0.275 at C2

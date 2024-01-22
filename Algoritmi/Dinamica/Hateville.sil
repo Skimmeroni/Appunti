@@ -1,0 +1,266 @@
+\begin{sile}
+
+    \subsection{Definizione del problema}
+
+        Si consideri una via di una cittá, composta da \math{n} case. Per
+        la costruzione di un ospedale si richiede agli \math{n} residenti
+        una donazione. Ciascun \math{i}-esimo residente é disposto a donare
+        una certa somma di denaro \math{d_{i}}, ma a condizione che entrambi
+        i suoi vicini, l'\math{i - 1}-esimo e il \math{i + 1}-esimo residente,
+        si rifiutino di partecipare. Il problema \strong{Hateville} richiede
+        di trovare l'insieme di residenti tale per cui nessuno di questi é
+        vicino di un altro ed al contempo permette di ricavare la massima
+        quantitá di denaro dalle donazioni.
+
+        Sia \math{X = \{1, 2, \unicodeellipsis, n\}} un insieme di
+        \math{n} entitá: a ciascuno é associato un valore \math{d_{i}}.
+        Per qualsiasi insieme \math{A \subseteq X} é possibile definire
+        un valore \math{D(A)} come la somma dei valori di tutte le entitá
+        costituiscono \math{A}. Due entitá \math{x_{i}} e \math{x_{j}},
+        con \math{i > j}, si dicono \em{compatibili} se \math{x_{j} \ne
+        x_{i - 1}} e \math{x_{j} \ne x_{i + 1}}. La nozione di compatibilitá
+        viene estesa ad un qualsiasi insieme \math{A \subseteq X} assegnandovi
+        un valore booleano \math{\mi{Comp}(A)}, che ha valore di veritá
+        \math{T} se tutte le entitá che compongo \math{A} sono fra loro
+        compatibili, e \math{F} altrimenti.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                D{(A)} = \sum_{x_{i} \in A} d_{i}
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \mi{Comp} {(A)} =
+                \{\table[columnalign = left left]{
+                    T & \mi{se} \thickspace x_{i - 1} \notin A \wedge
+                                x_{i + 1} \notin A \forall x_{i} \in A \\
+                    F & \mi{altrimenti} \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        La risoluzione del problema é data dall'insieme \math{A* \subset X}
+        formato esclusivamente da elementi fra loro compatibili che ha il
+        massimo valore fra tutti gli insiemi con questa caratteristica:
+
+        \begin[mode = display]{math}
+            \mi{Comp}(A*) = T \wedge
+            D(A*) = \mi{max}_{A \subset X \thickspace \mi{t.c.}
+            \thickspace \mi{Comp}(A) = T}\{D(A)\}
+        \end{math}
+
+    \subsection{Programmazione dinamica: sottostruttura ottima}
+
+        \begin{theorem}
+			\strong{Proprietá della sottostruttura ottima per il problema
+			Hateville}. Sia data una istanza \math{X_{i} = \{x_{1}, x_{2},
+			\unicodeellipsis, x_{i}\}} del problema Hateville, con \math{i
+			\geq 2}. Assunto di avere a disposizione tutte le soluzioni per
+			le istanze precedenti ad \math{X_{i}}, ovvero \math{S_{1}, S_{2},
+			\unicodeellipsis, S_{i - 1}}, si ha:
+
+            \begin[mode = display]{math}
+                S_{i} =
+                \{\table[columnalign = left left]{
+                    S_{i - 2} \cup \{i\} & \mi{se} \thickspace x_{i} \in S_{i} \\
+                    S_{i - 1} & \mi{se} \thickspace x_{i} \notin S_{i} \\
+                }
+            \end{math}
+
+            \strong{Dimostrazione}. L'\math{i}-esimo elemento dell'istanza
+            \math{X_{i}} puó oppure non puó fare parte della \math{i}-esima
+            soluzione. Si distinguono allora due casi:
+
+            \begin{itemize}
+                \begin{item}
+                    \math{x_{i} \notin S_{i}}. Si supponga per assurdo
+                    che la soluzione presentata per questo caso, ovvero
+                    \math{S_{i - 1}}, non sia la soluzione al problema
+                    per l'istanza \math{X_{i}}.
+
+                    Se, come da ipotesi, \math{x_{i}} non appartiene
+                    ad \math{S_{i}}, deve aversi che, come \math{S_{i - 1}},
+                    \math{S_{i} \subseteq X_{i - 1}}. Se \math{S_{i - 1}} non
+                    é la soluzione per la \math{i}-esima istanza del problema,
+                    allora la seconda deve avere associato un valore maggiore
+                    di quello associato alla prima, ovvero \math{\mi{Opt}(i)
+                    > \mi{Opt}(i - 1)}.
+                    
+                    Essendo peró \math{S_{i} \subseteq X_{i - 1}}, il fatto
+                    che \math{\mi{Opt}(i)} sia maggiore di \math{\mi{Opt}(i
+                    - 1)} equivale a dire che \math{S_{i}} sia una soluzione
+                    migliore per la \math{i - 1}-esima istanza del problema
+                    di quanto lo sia \math{S_{i - 1}}, e questo é in
+                    contraddizione con le ipotesi. Occorre allora assumere
+                    che \math{S_{i - 1}} sia l'effettiva soluzione per la
+                    \math{i}-esima istanza del problema quando \math{x_{i}
+                    \notin S_{i}}.
+                \end{item}
+                \begin{item}
+                    \math{x_{i} \in S_{i}}. Si supponga per assurdo
+                    che la soluzione presentata per questo caso, ovvero
+                    \math{S_{i - 2} \cup \{x_{i}\}}, non sia la soluzione
+                    al problema per l'istanza \math{X_{i}}.
+
+                    Se \math{S_{i - 2} \cup \{x_{i}\}} non é la soluzione
+                    per la \math{i}-esima istanza del problema, allora
+                    la seconda deve avere associato un valore maggiore di
+                    quello associato alla prima, ovvero \math{\mi{Opt}(i)
+                    > \mi{Opt}(i - 2) + d_{i})}. Deve pertanto esistere 
+                    una soluzione \math{S_{h}}, distinta da \math{S_{i - 2}},
+                    tale per cui \math{S_{i} = S_{h} \cup \{x_{i}\}}. Dato
+                    che \math{S_{h}} deve essere costituita da elementi
+                    mutualmente compatibili, tale soluzione non puó
+                    contenere \math{x_{i - 1}}. Si ha allora che, come 
+                    \math{S_{i - 2}}, \math{S_{h} \subseteq X_{i - 2}}.
+
+                    Se \math{S_{h}} é soluzione per la \math{i}-esima istanza,
+                    allora vale \math{\mi{Opt}(h) + d_{i} = \mi{Opt}(i)}.
+                    Ma questo significa che \math{\mi{Opt}(h) + d_{i} >
+                    \mi{Opt}(i - 2) + d_{i}}, ovvero \math{\mi{Opt}(h) >
+                    \mi{Opt}(i - 2)}. Questo implica che \math{S_{h}} sia
+                    una soluzione migliore di \math{S_{i - 2}} per la
+                    \math{i - 2}-esima istanza, e questo é in contraddizione
+                    con le ipotesi. Occorre allora assumere che \math{S_{i - 2}
+                    \cup \{x_{i}\}} sia l'effettiva soluzione per la
+                    \math{i}-esima istanza del problema quando \math{x_{i}
+                    \in S_{i}}.
+                \end{item}
+            \end{itemize}
+		\end{theorem}
+
+    \subsection{Programmazione dinamica: equazione di ricorrenza}
+
+        Il problema puó essere risolto mediante programmazione dinamica.
+        Si consideri \math{X_{i} = \{x_{1}, x_{2}, \unicodeellipsis, x_{i}\}
+        \subseteq X}, l'insieme costituito dai primi \math{i} elementi di 
+        \math{X}, che corrisponde alla \math{i}-esima istanza del problema.
+        A tale insieme é associato l'insieme \math{S_{i} = \{x_{1}, x_{2},
+        \unicodeellipsis, x_{i}\} \subseteq X_{i}}, la soluzione ottimale
+        per la \math{i}-esima istanza del problema. Il valore della
+        soluzione \math{S_{i}} viene indicato con \math{\mi{Opt}(i)}. La
+        soluzione finale del problema é \math{S_{n}}, in quanto associata
+        all'istanza \math{X_{n}}, che coincide con l'intero insieme \math{X}.
+
+        L'insieme \math{S_{i}} ed il valore \math{\mi{Opt}(i)} vengono
+        calcolati a partire da una equazione di ricorrenza. Il caso base
+        di tale equazione é immediato: si consideri l'istanza \math{X_{0}}
+        del problema, che non contiene alcuna entitá. Tale insieme é
+        certamente composto esclusivamente da entitá fra loro compatibili,
+        non contenendone alcuno. Inoltre, per lo stesso motivo, il valore
+        di tale insieme é nullo.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                S_{0} = X_{0} = \varnothing
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                D(S_{0}) = \mi{Opt}(i) = 0
+            \end{math}
+        \end{parbox}
+        \par
+
+        Per quanto riguarda la relazione di ricorrenza, si consideri una
+        generica istanza \math{X_{i} = \{x_{1}, x_{2}, \unicodeellipsis,
+        x_{i}\}} del problema, alla quale viene associata la soluzione 
+        ottimale \math{S_{i} \subseteq \{x_{1}, x_{2}, \unicodeellipsis,
+        x_{i}\}} assumendo di avere a disposizione tutte le soluzioni ottimali
+        \math{S_{j} \subseteq \{x_{1}, x_{2}, \unicodeellipsis, x_{j}\}} tali
+        per cui \math{j < i}. Possono presentarsi due casistiche: \math{x_{i}}
+        puó oppure non puó fare parte di \math{S_{i}}. Se \math{x_{i} \notin
+        S_{i}}, allora é possibile assumere che la soluzione ottimale per la
+        \math{i}-esima istanza sia la medesima della \math{i - 1}-istanza.
+
+        Se invece \math{x_{i} \in S_{i}}, allora la soluzione ottimale
+        \math{S_{i - 1} \subseteq \{x_{1}, x_{2}, \unicodeellipsis,
+        x_{i - 1}\}} potrebbe dover venire esclusa, perché \math{x_{i}}
+        e \math{x_{i - 1}} sono elementi certamente incompatibili e
+        \math{S_{i - 1}} potrebbe contenere \math{x_{i - 1}}. D'altro
+        canto, \math{x_{i}} e \math{x_{i - 2}} sono certamente compatibili,
+        pertanto \math{S_{i - 2}} é una possibile soluzione per la
+        \math{i}-esima istanza, dato che non puó contenere \math{x_{i - 1}}.
+        Tuttavia, proprio per il fatto che \math{x_{i}} e \math{x_{i - 2}}
+        sono compatibili, anche \math{S_{i - 2} \cup \{x_{i}\}} é una
+        soluzione, ed é certamente una soluzione migliore di \math{S_{i - 2}}.
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                S_{i} =
+                \{\table[columnalign = left left]{
+                    S_{i - 2} \cup \{x_{i}\} & \mi{se} \thickspace x_{i} \in S_{i} \\
+                    S_{i - 1} & \mi{se} \thickspace x_{i} \notin S_{i} \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \mi{Opt} {(i)} =
+                \{\table[columnalign = left left]{
+                    \mi{Opt}(i - 2) + d_{i} & \mi{se} \thickspace x_{i} \in S_{i} \\
+                    \mi{Opt}(i - 1) & \mi{se} \thickspace x_{i} \notin S_{i} \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Naturalmente non é possibile sapere a priori se \math{x_{i}} fa
+        oppure non fa parte di \math{S_{i}}, tuttavia é possibile scegliere
+        se includere oppure non includere \math{x_{i}} nella \math{i}-esima
+        soluzione ottimale in base a quale delle due scelte rende maggiore
+        il valore di \math{S_{i}}:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                S_{i} =
+                \{\table[columnalign = left left]{
+                    S_{i - 1} & \mi{se} \thickspace \mi{Opt}(i - 1) > \mi{Opt}(i - 2) + d_{i} \\
+                    S_{i - 2} \cup \{x_{i}\} & \mi{altrimenti} \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \mi{Opt}(i) = \mi{max}\{\mi{Opt}(i - 1), \mi{Opt}(i - 2) + d_{i}\}
+            \end{math}
+        \end{parbox}
+
+    \subsection{Programmazione dinamica: implementazione bottom-up}
+
+        L'algoritmo bottom-up viene costruito a partire dall'equazione
+        di ricorrenza sfruttando un vettore \math{c}. In ciascuna cella
+		\math{c[i]} viene riportato il valore della soluzione ottimale
+		per la \math{i}-esima istanza del problema, che viene utilizzata
+		per calcolare i valori ottimali per le istanze successive.
+		L'algoritmo riceve in input il vettore \math{A} e la funzione
+		peso \math{W} e restituisce in output il vettore \math{c}.
+
+        Si noti come la prima cella del vettore \math{c} possa venire
+        riempito immediatamente con 0, mentre la seconda con il valore
+        associato al primo elemento di \math{A}, come da caso base
+        dell'equazione di ricorrenza.
+
+		\begin{verbatim}
+			procedure HATEVILLE(A, W)
+			    c[0] = 0
+			    c[1] = W(A[1])
+
+			    \bigskip
+			    for i = 2 to |A|
+			        c[i] = max\{c[i - 1] > c[i - 2] + W(A[i - 1])\}
+
+			    \bigskip
+			    return c
+		\end{verbatim}
+
+        É facile notare come il tempo di esecuzione dell'algoritmo sia
+		\math{O(n)}, dove \math{n} é la lunghezza del vettore \math{A}.
+		Questo perché é presente un ciclo che esegue una istruzione 
+		in tempo immediato esattamente \math{\abs{A}} volte.
+
+    \subsection{Programmazione dinamica: ricostruzione di una soluzione}
+
+\end{sile}

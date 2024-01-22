@@ -1,0 +1,353 @@
+\begin{sile}
+
+        Una depth-first search di un grafo \math{G = (V, E)} orientato
+        e non pesato a partire da una sorgente \math{s} viene indicata come
+        \math{\mi{DFS}(G, s)}. Concettualmente, una DFS opera come segue:
+
+        \begin{enumerate}
+            \begin{item}
+                Viene visitata la sorgente \math{s};
+            \end{item}
+            \begin{item}
+                Viene visitato il primo adiacente \math{a1} di \math{s},
+                poi viene visitato il primo adiacente \math{a2} di \math{a1},
+                poi visita il primo adiacente \math{a3} di \math{a2},
+                \math{\unicodeellipsis}
+            \end{item}
+            \begin{item}
+                Quando viene raggiunto un vertice che non ha adiacenti da
+                visitare si risale al predecessore e la visita riparte (se
+                possible) da un altro adiacente di tale predecessore;
+            \end{item}
+            \begin{item}
+                Ogni volta che non ci sono adiacenti da visitare si risale al
+                predecessore;
+            \end{item}
+            \begin{item}
+                Quando la visita risale alla sorgente e \math{s} non ha più
+                adiacenti da visitare, si sceglie una nuova sorgente e la
+                visita riparte;
+            \end{item}
+            \begin{item}
+                La visita termina quando non ci sono più vertici disponibili
+                per essere scelti come nuova sorgente.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        Dato che potenzialmente ogni vertice puó diventare sorgente nella
+        stessa visita in profonditá, e dato che la visita termina quando
+        non vi sono piú vertici elegibili a sorgente, questo significa che
+        tutti i vertici del grafo verranno sempre raggiunti. In particolare,
+        verrá a crearsi una foresta di alberi dove ogni albero rappresenta
+        una delle componenti connesse del grafo.
+
+        L'algoritmo per la costruzione di una DFS prevede di associare quattro
+        campi a ciascun vertice:
+
+        \begin{itemize}
+            \begin{item}
+                Un campo \math{c}, che contiene il \em{colore} associato al
+                vertice. Tale colore indica lo stato del vertice all'iterazione
+                corrente dell'algoritmo. I colori in questione sono tre:
+
+                \begin{itemize}
+                    \begin{item}
+                        Bianco: il vertice non é stato ancora visitato;
+                    \end{item}
+                    \begin{item}
+                        Grigio: il vertice é stato visitato ma alcuni vertici
+                        a questo adiacenti non sono stati ancora visitati;
+                    \end{item}
+                    \begin{item}
+                        Nero: il vertice é stato visitato e tutti vertici
+                        a questo adiacenti sono stati visitati;
+                    \end{item}
+                \end{itemize}
+            \end{item}
+            \begin{item}
+                Un campo \math{\pi}, che contiene il predecessore del vertice
+                nella foresta indotta dalla visita;
+            \end{item}
+            \begin{item}
+                Un campo \math{d}, che contiene l'istante temporale associato
+                alla "scoperta" del vertice;
+            \end{item}
+            \begin{item}
+                Un campo \math{f}, che contiene l'istante temporale associato
+                alla completa esplorazione del vertice.
+            \end{item}
+        \end{itemize}
+
+        \bigskip
+
+        Prima della visita, tutti i vertici hanno assegnato il colore
+        bianco; tuttavia, a differenza della visita in ampiezza, alla
+        fine della visita tutti i vertici avranno assegnato il colore
+        nero. Il colore grigio puó comparire solamente \em{durante} la
+        visita, mai prima e mai dopo.
+
+        Prima della visita, il campo \math{\pi} é NULL per tutti i vertici.
+        Dopo la visita, il campo \math{\pi} sará rimasto NULL solamente per
+        quei vertici che sono stati scelti come sorgente, perché per
+        definizione le sorgenti non hanno un predecessore.
+
+        L'algoritmo fa uso di un contatore che viene incrementato di uno
+        ogni volta che si avanza di una iterazione. Il valore di tale
+        contatore viene assegnato al campo \math{d} di un vertice quando
+        viene preso in considerazione per la prima volta (ovvero, quando
+        gli viene assegnato il colore grigio), mentre viene assegnato al
+        campo \math{f} quando tutti i vertici adiacenti sono stati esplorati
+        (ovvero, quando gli viene assegnato il colore nero). Naturalmente, il
+        valore del campo \math{d} di un vertice deve essere sempre inferiore 
+        al valore del suo campo \math{f}. La differenza fra \math{f} e
+        \math{d} restituisce il tempo effettivo che é stato necessario per
+        esplorare completamente il vertice.
+
+        \begin{theorem}
+            \strong{Teorema delle parentesi}. Dato un grafo \math{G = (V, E)}
+            orientato e non pesato, si operi una visita in profonditá su tale
+            grafo. Si consideri una coppia di vertici \math{u} e \math{v}
+            ed i relativi intervalli \math{(u.d, u.f)} e \math{(v.d, v.f)}:
+
+            \begin{itemize}
+                \begin{item}
+                    \math{(u.d, u.f)} contiene \math{(v.d, v.f)}. Allora
+                    \math{u} e \math{v} si trovano in uno stesso albero della
+                    foresta indotta dalla visita, ed in particolare \math{u} é
+                    un predecessore di \math{v};
+                \end{item}
+                \begin{item}
+                    \math{(v.d, v.f)} contiene \math{(u.d, u.f)}. Allora
+                    \math{u} e \math{v} si trovano in uno stesso albero della
+                    foresta indotta dalla visita, ed in particolare \math{v} é
+                    un predecessore di \math{u};
+                \end{item}
+                \begin{item}
+                    \math{(v.d, v.f)} e \math{(u.d, u.f)} sono intervalli
+                    disgiunti. Allora \math{u} e \math{v} si trovano in due
+                    alberi distinti della foresta indotta dalla visita.
+                \end{item}
+            \end{itemize}
+
+            \bigskip
+
+            \strong{Dimostrazione}. Si consideri la situazione \math{u.d <
+            v.d} (la situazione opposta é del tutto analoga, basta invertire
+            i vertici). Possono presentarsi due casi:
+
+            \begin{itemize}
+                \begin{item}
+                    \math{v.d < u.f}. Questo significa che \math{v} é
+                    stato scoperto dopo il tempo di scoperta di \math{u}
+                    ma prima del tempo di fine esplorazione di \math{u},
+                    il che significa che \math{v} é un discendente di 
+                    \math{u}. Inoltre, poiché \math{v} é stato scoperto
+                    prima di \math{u}, verrá completamente esplorato prima
+                    della completa esplorazione di \math{u}. Ne segue che i
+                    vari tempi coinvolti sono disposti nell'ordine:
+
+                    \begin[mode = display]{math}
+                        u.d < v.d < v.f < u.f
+                    \end{math}
+
+                    Che equivale a dire che l'intervallo \math{(v.d, v.f)} é 
+                    interamente contenuto nell'intervallo \math{(u.d, u.f)}
+                \end{item}
+                \begin{item}
+                    \math{u.f < v.d}. In questo caso, i due intervalli sono 
+                    completamente disgiunti, in quanto l'ordine ottenuto é il
+                    seguente:
+
+                    \begin[mode = display]{math}
+                        u.d < u.f < v.d < v.f
+                    \end{math}
+
+                    Infatti, questo equivale a dire che nessuno dei due
+                    vertici é stato scoperto mentre l'altro era grigio.
+                    Ne segue che anche \math{u} e \math{v} non sono
+                    discendenti l'uno dell'altro.
+                \end{item}
+            \end{itemize}
+        \end{theorem}
+
+        Un'altra interessante proprietá della visita in profonditá é
+        che questa puó essere utilizzata per classificare gli archi del
+        grafo in input. Questa puó venire poi utilizzata per raccogliere
+        informazioni interessanti sullo stesso. In particolare, una visita
+        in ampiezza assegna ad ogni arco del grafo una etichetta fra quattro:
+
+        \begin{itemize}
+            \begin{item}
+                \strong{Arco d'albero}, indicato con la lettera \strong{T}.
+                Sono quegli archi \math{(u, v)} tali per cui \math{v} é un
+                nodo di colore bianco quando l'arco viene esplorato. Dato
+                che \math{v} non é stato visitato prima d'ora, il suo colore
+                viene cambiato in grigio, e \math{u} diviene predecessore di
+                \math{v}.
+            \end{item}
+            \begin{item}
+                \strong{Arco all'indietro}, indicato con la lettera \strong{B}.
+                Sono quegli archi \math{(u, v)} tali per cui \math{v} é un
+                nodo di colore grigio quando l'arco viene esplorato. Dato
+                che \math{v} é giá stato visitato in precedenza, \math{u}
+                non é predecessore di \math{v} ma \math{v} é un antenato
+                di \math{u} nello stesso albero della visita.
+            \end{item}
+            \begin{item}
+                \strong{Arco in avanti}, indicato con la lettera \strong{F}.
+                Sono quegli archi \math{(u, v)} tali per cui \math{v} é
+                un nodo di colore nero quando l'arco viene esplorato ed 
+                il tempo di inizio di \math{u} é inferiore a quello di 
+                \math{v}. Dato che \math{v} é giá stato completamente
+                esplorato, \math{u} non é predecessore di \math{v} ma
+                \math{u} é un antenato di \math{v} nello stesso albero
+                della visita.
+            \end{item}
+            \begin{item}
+                \strong{Arco trasversale}, indicato con la lettera \strong{C}.
+                Sono quegli archi \math{(u, v)} tali per cui \math{v} é
+                un nodo di colore nero quando l'arco viene esplorato ed 
+                il tempo di inizio di \math{u} é superiore a quello di 
+                \math{v}. In questo caso, né \math{u} né \math{v} sono 
+                l'uno l'antenato dell'altro, pertanto i due potrebbero 
+                essere parte di due alberi della visita distinti.
+            \end{item}
+        \end{itemize}
+
+        \bigskip
+
+        Sono stati presentati tutti gli elementi necessari ad introdurre
+        l'algoritmo vero e proprio per la ricerca in profonditá, presentato
+        di seguito:
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			DFS(G)
+			1    foreach v ∈ V do
+			2        color[v] = W
+			3        π[v] = NULL
+			4        d[v] = 0
+			5        f[v] = 0
+			6    time = 0
+			7    foreach v ∈ V do
+			8        if color[v] is W then
+			9            DFS_visit(G, v)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			DFS_visit(G, u)
+			10    time = time + 1
+			11    d[u] = time
+			12    color[u] = G
+			14    foreach v ∈ adj(u) do
+			15        if color[v] = W then
+			16            π[v] = u
+			17            DFS_visit(G, v)
+			18    color[u] = B
+			19    time = time + 1
+			20    f[u] = time
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+        Il tempo di esecuzione per l'inizializzazione (righe da 1 a 5) é
+        \math{O(\abs{V})}, dato che vengono eseguite delle operazioni con
+        tempo di esecuzione unitario una volta per ogni vertice. La procedura
+        \tt{DFS_visit} viene chiamata all'interno di \tt{DFS} una volta per
+        ciascun arco, pertanto il tempo di esecuzione delle righe da 7 a
+        9 é \math{\abs{E}}. Il tempo di esecuzione complessivo dell'algoritmo
+        é allora \math{O(\abs{V}) + O(\abs{E})}.
+
+        L'algoritmo per la visita in profonditá puó essere esteso facilmente
+        per includere l'etichettatura degli archi:
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			DFS(G)
+			1    foreach v ∈ V do
+			2        color[v] = W
+			3        π[v] = NULL
+			4        d[v] = 0
+			5        f[v] = 0
+			6    time = 0
+			7    foreach v ∈ V do
+			8        if color[v] is W then
+			9            DFS_visit(G, v)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			DFS_visit(G, u)
+			10    time = time + 1
+			11    d[u] = time
+			12    color[u] = G
+			13    foreach v ∈ adj(u) do
+			14        if color[v] = W then
+			15            (u, v) = "arco T"
+			16            π[v] = u
+			17            DFS_visit(G, v)
+			18        else
+			19            if color[v] = G then
+			20                (u, v) = "arco B"
+			21            else
+			22                if d[u] < d[v] then
+			23                    (u, v) = "arco F"
+			24                else
+			25                    (u, v) = "arco C"
+			26    color[u] = B
+			27    time = time + 1
+			28    f[u] = time
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+        L'algoritmo per la visita in profonditá puó essere esteso,
+        con poche modifiche, anche ai grafi non orientati. Infatti,
+        dato che gli archi di un grafo non orientato sono per definizione
+        simmetrici, occorre specificare che non vanno analizzati i vertici
+        predecessori del vertice in esame, altrimenti si entrerebbe in un
+        loop infinito.
+
+        \begin{theorem}
+                Un grafo non orientato, dopo una visita in profonditá, ha
+                solo archi d'albero e archi all'indietro. 
+        \end{theorem}
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			DFS(G)
+			1    foreach v ∈ V do
+			2        color[v] = W
+			3        π[v] = NULL
+			4        d[v] = 0
+			5        f[v] = 0
+			6    time = 0
+			7    foreach v ∈ V do
+			8        if color[v] is W then
+			9            DFS_visit(G, v)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			DFS_visit(G, u)
+			10    time = time + 1
+			11    d[u] = time
+			12    color[u] = G
+			13    foreach v ∈ adj(u) - \{π[u]\} do
+			14        if color[v] = W then
+			15            print "arco T"
+			16            π[v] = u
+			17            DFS_visit(G, v)
+			18        else
+			19            print "arco B"
+			20    color[u] = B
+			21    time = time + 1
+			22    f[u] = time
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+\end{sile}

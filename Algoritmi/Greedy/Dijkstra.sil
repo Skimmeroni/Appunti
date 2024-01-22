@@ -1,0 +1,207 @@
+\begin{sile}
+
+    Sia dato un grafo \math{G = (V, E, W)} non orientato, pesato e
+    connesso. Si consideri una funzione peso \math{W} che restituisce
+    esclusivamente valori strettamente positivi. Sia poi \math{s \in V}
+    un vertice "privilegiato", chiamato \strong{vertice sorgente}. Il 
+    \strong{problema dei cammini minimi da sorgente unica} richiede di 
+    trovare, rispetto ad un vertice fissato \math{s}, il cammino di
+    minima lunghezza da ciascun vertice del grafo ad \math{s}.
+
+    Si consideri un cammino minimo \math{P = \langle v_{1}, v_{2},
+    \unicodeellipsis, v_{k - 1}, v_{k} \rangle}. Come giá dimostrato
+    per l'algoritmo Floyd-Warshal, sono a loro volta minimi anche
+    tutti i sottocammini \math{P_{ij} = \langle v_{i}, v_{i + 1},
+    \unicodeellipsis, v_{j} \rangle} con \math{1 \leq i < j \leq k}.
+    In particolare, é minimo il sottocammino \math{\langle v_{1},
+    v_{2}, \unicodeellipsis, v_{k - 1} \rangle} dove \math{v_{k - 1}}
+    é il \strong{predecessore} di \math{v_{k}} nel cammino minimo
+    \math{P}.
+
+    Sia \math{\delta (s, v)} il peso complessivo del cammino minimo dalla
+    sorgente \math{s} ad un qualsiasi vertice \math{v}, ottenuto sommando
+    i pesi di tutti gli archi \math{(i, j)} che compongono tale cammino.
+    Sia \math{u} il predecessore di \math{v} su tale cammino; il peso del
+    cammino puó essere scomposto come somma fra il peso del sottocammino
+    minimo da \math{s} a \math{u} ed il peso dell'arco che connette
+    \math{u} a \math{v}. Per indicare che \math{v_{i}} é il predecessore
+    di \math{v_{j}} rispetto ad un certo cammino si una la notazione 
+    \math{v_{i} = \pi(v_{j})}.
+
+    \begin[mode = display]{math}
+        \delta {(s, v)} =
+        \sum_{(i, j) \in P, i = \pi(j)} W{(i, j)} =
+        \delta {(s, u)} + W{(u, v)}
+    \end{math}
+
+    Nel caso in cui \math{u} non sia il predecessore di \math{v} sul cammino
+    minimo da \math{s} a \math{v}, ma comunque \math{W(u, v)} esiste, si ha
+    \math{\delta (s, v) \leq \delta (s, u) + W(u, v)}. Questo perché se si 
+    mantiene il medesimo \math{\delta (s, u)}, il valore \math{W(u, v)} non
+    puó che essere maggiore del peso dell'arco minimo che unisce \math{u} a
+    \math{v}, altrimenti coinciderebbe con tale arco.
+
+    Un algoritmo che permette di risolvere il problema dei cammini minimi da
+    sorgente unica é l'\strong{Algoritmo di Dijkstra}. L'algoritmo associa a
+    ciascun vertice \math{v} del grafo in esame un campo \math{d} ed un campo
+    \math{\pi}: il primo contiene un limite superiore per \math{\delta (s, v)},
+    mentre il secondo riporta uno dei vertici con i quali \math{v} é congiunto
+    da un arco.
+
+    Prima dell'esecuzione dell'algoritmo, al vertice sorgente viene assegnato
+    0 come campo \math{d}, mentre a tutti gli altri vertici viene assegnato
+    \math{\infty}, mentre il campo \math{\pi} viene inizializzato a NULL per
+    tutti i vertici. Alla fine dell'esecuzione, per ciascun vertice il campo
+    \math{d} contiene precisamente il peso del cammino minimo dalla sorgente
+    al vertice, mentre il campo \math{\pi} riporta il predecessore del vertice
+    nel cammino minimo dalla sorgente al vertice.
+
+    Per un qualsiasi vertice \math{v}, l'algoritmo di Dijkstra permette al 
+    valore di \math{v.d} di passare dal valore iniziale \math{\infty} al
+    valore finale \math{\delta (s, v)} (l'effettivo peso del cammino minimo
+    da \math{v} alla sorgente) applicando una serie di "miglioramenti", detti
+    \strong{rilassamenti}. Presi due vertici \math{u} e \math{v}, se \math{v.d}
+    é maggiore della somma fra \math{u.d} ed il peso dell'arco che unisce
+    \math{u} e \math{d}, allora significa che il cammino che va dalla sorgente
+    a \math{v} passando per \math{u} come predecessore é un cammino con peso
+    inferiore, e quindi migliore, di quello attualmente salvato per \math{v}.
+    Un rilassamento consiste per l'appunto nel valutare se \math{v.d > u.d +
+    W(u, v)} e, in caso affermativo, sostituire \math{v.d} con \math{u.d +
+    W(u, v)} e \math{v.\pi} con \math{u}.
+
+    In particolare, l'algoritmo di Dijkstra opera esattamente un solo
+    rilassamento per ciascun vertice. Dato un grafo non orientato, pesato e
+    connesso \math{G = (V, E, W)}, il procedimento é riportato di seguito:
+
+    \begin{enumerate}
+        \begin{item}
+            A ciascun vertice del grafo viene associato un campo
+            \math{d}, inizializzato a \math{\infty}, ed un campo
+            \math{\pi}, inizializzato a NULL.
+        \end{item}
+        \begin{item}
+            Viene scelto il noto sorgente, indicato con \math{s},
+            il cui campo \math{d} viene impostato a 0. Dopodiché,
+            tutti i vertici vengono inseriti in una coda di min-priority,
+            dove la prioritá é determinata dal valore del campo \math{d};
+        \end{item}
+        \begin{item}
+            Viene estratto il vertice avente campo \math{d} con valore
+            minore, sia questo \math{v};
+        \end{item}
+        \begin{item}
+            Per ciascun vertice \math{u} adiacente a \math{v} viene
+            operato il rilassamento: se il valore \math{v.d} é maggiore
+            della somma fra \math{u.d} e \math{W(u, v)}, allora \math{v.d}
+            viene sostituito con \math{u.d + W(u, v)} e \math{v.\pi} viene
+            sostituito con \math{u};
+        \end{item}
+        \begin{item}
+            Se la coda non é vuota si riprende l'esecuzione dal punto 3, 
+            altrimenti l'algoritmo termina.
+        \end{item}
+    \end{enumerate}
+
+    \bigskip
+
+    \begin{verbatim}
+        DIJKSTRA(V, E, W, s)
+         1    foreach v \unichar{U+2208} V do
+         2        v.d \unichar{U+2190} \unichar{U+221E}
+         3        v.\unichar{U+03C0} \unichar{U+2190} NULL
+         4    s.d \unichar{U+2190} 0
+
+              \bigskip
+         5    Aggiungi tutti i vertici di V alla coda Q
+         6    S \unichar{U+2190} \unichar{U+2205}
+
+              \bigskip
+         7    while Q \unichar{U+2260} \unichar{U+2205} do
+         8        u \unichar{U+2190} POP(Q)
+         9        S \unichar{U+2190} \unichar{U+222A} \{u\}
+        10        foreach v \unichar{U+2208} ADJ(u) do
+        11            if v.d > u.d + W(u, v) then
+        12                v.d \unichar{U+2190} u.d + W(u, v)
+        13                v.\unichar{U+03C0} \unichar{U+2190} u
+    \end{verbatim}
+
+    \begin{theorem}
+        Dato un grafo connesso, non orientato e pesato \math{G = (V, E,
+        W)}, sia \math{s \in V} un vertice eletto a sorgente. L'algoritmo
+        di Dijkstra restituisce correttamente il cammino minimo dalla
+        sorgente \math{s} a tutti i vertici in \math{V}.
+
+        \bigskip
+        \strong{Dimostrazione}. Sia \math{\langle v_{1} = s, v_{2},
+        \unicodeellipsis, v_{n} \rangle} l'ordine con cui i vertici
+        del grafo vengono estratti dalla coda durante l'esecuzione
+        dell'algoritmo di Dijkstra. L'algoritmo é corretto se, quando
+        viene estratto il \math{k}-esimo vertice, si ha \math{v_{k}.d
+        = \delta (s, v_{k})} per tutti i \math{k \in \{1, n\}}. Tale
+        proprietá puó essere dimostrata per induzione.
+
+        Il caso base é dimostrato se \math{s.d = \delta (s, s)} quando
+        viene estratto \math{s}. Dato che per raggiungere \math{s} da
+        \math{s} non occorre percorrere alcun cammino, la distanza da
+        \math{s} a sé stesso é 0. In effetti l'algoritmo inizializza a
+        0 il valore di \math{s.d}, quindi quando \math{s} viene estratto
+        il valore di \math{s.d} é effettivamente 0.
+
+        Per quanto riguarda il passo ricorsivo, occorre mostrare
+        che per il vertice \math{v_{k}}, quando viene estratto,
+        vale \math{v_{k}.d = \delta (s, v_{k})} assumendo che
+        la relazione valga per \math{v_{k - 1}}. Si supponga
+        per assurdo che questo non sia vero, e che quindi
+        \math{v_{k}.d \ne \delta (s, v_{k})}.
+        %Naturalmente non
+        %puó aversi \math{v_{k}.d < \delta (s, v_{k})}, quindi
+        %deve aversi \math{v_{k}.d > \delta (s, v_{k})}.
+
+        Il vertice \math{v_{k}} non puó essere \math{s}, perché é
+        stato appena mostrato che il teorema per \math{s} é valido.
+        Deve allora essere un vertice che si trova dopo di \math{s},
+        e deve necessariamente esistere un cammino che va da \math{s}
+        a \math{v_{k}}, dato che altrimenti si avrebbe \math{\delta
+        (s, v_{k}) = \infty} e questo contraddirebbe l'ipotesi assunta
+        per assurdo \math{v_{k}.d \ne \delta (s, v_{k})}. Esistendo
+        (almeno) un cammino da \math{s} a \math{v_{k}}, esisterá
+        anche (almeno) un cammino minimo da \math{s} a \math{v_{k}}.
+
+        Sia \math{v_{y}} il primo vertice lungo il cammino minimo da
+        \math{s} a \math{v_{k}} ad essere ancora parte della coda di
+        prioritá, e sia \math{v_{x}} il predecessore di \math{v_{y}}.
+        Il cammino da \math{s} a \math{v_{k}} puó essere allora
+        scomposto come \math{s \rightsquigarrow v_{x} \rightarrow
+        v_{y} \rightsquigarrow v_{k}}. Si noti come \math{v_{k}}
+        potrebbe coincidere con \math{v_{y}}, cosí come \math{s}
+        potrebbe coincidere con \math{v_{x}}, pertanto i sottocammini
+        \math{s \rightsquigarrow v_{x}} e \math{v_{y} \rightsquigarrow
+        v_{k}} potrebbero essere vuoti.
+
+        Alla fine dell'iterazione per \math{v_{x}}, essendo \math{v_{x}}
+        predecessore di \math{v_{y}} ed essendo per ipotesi \math{v_{x}}
+        un vertice giá estratto dalla coda, si avrá \math{v_{y}.d = \delta
+        (s, \math{v_{y}})}. Poiché \math{v_{y}} precede \math{v_{k}} nel
+        cammino minimo da \math{s} a \math{v_{k}}, deve aversi \math{\delta
+        (s, v_{y}) \leq \delta (s, v_{k})}. Quindi:
+
+        \begin[mode = display]{math}
+            v_{y}.d = \delta (s, v_{y}) \leq \delta (s, v_{k}) \leq v_{k}.d
+        \end{math}
+
+        Tuttavia, poiché entrambi i vertici \math{v_{k}} e \math{v_{y}} si
+        trovavano ancora nella coda quando \math{v_{k}} viene estratto, si
+        ha \math{v_{k}.d \leq v_{y}.d}. Ma allora le disuguaglianze sopra
+        espresse sono di fatto delle uguaglianze:
+
+        \begin[mode = display]{math}
+            v_{y}.d = \delta (s, v_{y}) = \delta (s, v_{k}) = v_{k}.d
+        \end{math}
+
+        Si ha peró \math{\delta (s, v_{k}) = v_{k}.d}, che é in
+        contraddizione con l'ipotesi assunta per assurdo. Occorre
+        quindi concludere che effettivamente \math{\delta (s, v_{k})
+        = v_{k}.d}, ed il teorema é provato.
+    \end{theorem}
+
+\end{sile}

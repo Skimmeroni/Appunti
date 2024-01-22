@@ -1,0 +1,22 @@
+lineht *= 1.25
+circlerad = 0.1
+
+A: circle color magenta at (0, 0.75)
+B: circle color cyan    at (0.75, 0.75)
+C: circle color black   at (1.25, 0.375)
+D: circle color lime    at (0.75, 0)
+E: circle color orange  at (0, 0)
+
+"A" color magenta at A
+"B" color cyan    at B
+"C" color black   at C
+"D" color lime    at D
+"E" color orange  at E
+
+arrow color magenta from A.e  to B.w
+arrow color magenta from A.s  to E.n
+arrow color orange  from E.ne to B.sw
+arrow color orange  from E.e  to D.w
+arrow color cyan    from B.se to C.nw
+arrow color cyan    from B.s  to D.n
+arrow color lime    from D.ne to C.sw

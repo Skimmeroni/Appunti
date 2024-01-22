@@ -1,0 +1,37 @@
+circlerad = 0.1
+
+A: circle at (0.25, 0)
+B: circle at (1, 0.5)
+C: circle at (2, 0.5)
+D: circle at (3, 0.5)
+E: circle at (3.75, 0)
+F: circle at (1, -0.5)
+G: circle at (2, -0.5)
+H: circle at (3, -0.5)
+I: circle at (1.5, 0)
+
+"A" at A
+"B" at B
+"C" at C
+"D" at D
+"E" at E
+"F" at F
+"G" at G
+"H" at H
+"I" at I
+
+line color cyan from A.ne to B.w  "4" aligned above
+line color cyan from B.e  to C.w  "8" aligned above
+line color cyan from I.ne to C.sw "2" aligned above
+line color cyan from C.se to H.nw "4" aligned above
+line color cyan from F.e  to G.w  "1" aligned above
+line color cyan from G.e  to H.w  "2" aligned above
+line color cyan from C.e  to D.w  "7" aligned above
+line color cyan from D.e  to E.nw "9" aligned above
+
+line color gray from D.s  to H.n  "14" aligned above
+line color gray from H.e to E.sw  "10" aligned above
+line color gray from I.se to G.nw "6"  aligned above
+line color gray from F.ne to I.sw "7"  aligned above
+line color gray from B.s  to F.n  "11" aligned above
+line color gray from A.se to F.w  "8"  aligned above

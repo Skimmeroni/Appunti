@@ -1,0 +1,24 @@
+lineht *= 1.25
+circlerad = 0.1
+
+A: circle color magenta at (-0.125, 0)
+B: circle color magenta at (0.5, 0.375)
+C: circle color black   at (1.125, 0)
+D: circle color magenta at (0.875, -0.75)
+E: circle color black   at (0.125, -0.75)
+
+"A" color magenta at A
+"B" color magenta at B
+"C" color black   at C
+"D" color magenta at D
+"E" color black   at E
+
+arrow color magenta from A.ne to B.w  "9"  aligned above
+arrow color black   from A.e  to C.w  "16" aligned above
+arrow color black   from A.s  to E.nw "2"  aligned above
+arrow color magenta from B.se to D.n  "7"  aligned above
+arrow color black   from B.sw to E.n  "13" aligned above
+arrow color black   from C.nw to B.e  "1"  aligned above
+arrow color black   from D.ne to C.s  "1"  aligned above
+arrow color magenta from D.nw to A.se "8"  aligned above
+arrow color black   from E.e  to D.w  "3"  aligned above
