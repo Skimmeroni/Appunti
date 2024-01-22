@@ -1,0 +1,21 @@
+lineht *= 1.5
+circlerad = 0.0875
+
+R: circle fill black at (+0, +0)
+X: circle fill black at (-1.00, +0.25)
+Y: circle fill black at (+0.75, +0.25)
+
+A: circle at (-1.25, -0.25) "A"
+B: circle at (-1.25, +1.00) "B"
+C: circle at (+0, +1.25) "C"
+D: circle at (+1, +0.75) "D"
+E: circle at (+1, 0.00) "E"
+
+line from R.w to X.e "3" above aligned
+line from R.e to Y.w "2" above aligned
+
+line from X.sw to A.ne "2" above aligned
+line from X.nw to B.se "3" above aligned
+line from R.n  to C.s  "4" above aligned
+line from Y.ne to D.sw "2" above aligned
+line from Y.se to E.nw "1" above aligned

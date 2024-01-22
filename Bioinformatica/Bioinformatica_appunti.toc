@@ -1,0 +1,683 @@
+return {
+  {
+    label = {
+      "Elementi di algoritmica",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest1",
+    number = "1",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Definizioni di base",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest2",
+    number = "1.1",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Ordinamento",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest3",
+    number = "1.2",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Insertion sort",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest4",
+    number = "1.2.1",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Selection sort",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest5",
+    number = "1.2.2",
+    pageno = "6"
+  },
+  {
+    label = {
+      "Bubble sort",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest6",
+    number = "1.2.3",
+    pageno = "6"
+  },
+  {
+    label = {
+      "Merge sort",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest7",
+    number = "1.2.4",
+    pageno = "7"
+  },
+  {
+    label = {
+      "Counting sort",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest8",
+    number = "1.2.5",
+    pageno = "8"
+  },
+  {
+    label = {
+      "Prestazioni di algoritmi",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest9",
+    number = "1.3",
+    pageno = "8"
+  },
+  {
+    label = {
+      "Strutture dati elementari",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest10",
+    number = "1.4",
+    pageno = "12"
+  },
+  {
+    label = {
+      "Array",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest11",
+    number = "1.4.1",
+    pageno = "12"
+  },
+  {
+    label = {
+      "Liste concatenate",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest12",
+    number = "1.4.2",
+    pageno = "12"
+  },
+  {
+    label = {
+      "Pile",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest13",
+    number = "1.4.3",
+    pageno = "13"
+  },
+  {
+    label = {
+      "Code",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest14",
+    number = "1.4.4",
+    pageno = "13"
+  },
+  {
+    label = {
+      "Alberi",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest15",
+    number = "1.4.5",
+    pageno = "13"
+  },
+  {
+    label = {
+      "Strutture dati complesse",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest16",
+    number = "1.5",
+    pageno = "14"
+  },
+  {
+    label = {
+      "Heap",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest17",
+    number = "1.5.1",
+    pageno = "14"
+  },
+  {
+    label = {
+      "Tabella hash",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest18",
+    number = "1.5.2",
+    pageno = "15"
+  },
+  {
+    label = {
+      "Algoritmi di pattern matching",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest19",
+    number = "2",
+    pageno = "17"
+  },
+  {
+    label = {
+      "Algoritmo naive",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest20",
+    number = "2.1",
+    pageno = "17"
+  },
+  {
+    label = {
+      "Algoritmo Shift-And",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest21",
+    number = "2.2",
+    pageno = "18"
+  },
+  {
+    label = {
+      "Algoritmo Karp-Rabin",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest22",
+    number = "2.3",
+    pageno = "20"
+  },
+  {
+    label = {
+      "Ottimizzazione: ricerca di un ",
+      {
+        "p",
+        col = 44,
+        command = "math",
+        id = "texlike_command",
+        lno = 198,
+        options = {
+        },
+        pos = 8343
+      },
+      " efficiente",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest23",
+    number = "2.3.1",
+    pageno = "22"
+  },
+  {
+    label = {
+      "Ottimizzazione: utilizzare piú fingerprint",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest24",
+    number = "2.3.2",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Ottimizzazione: azzerare gli errori",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest25",
+    number = "2.3.3",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Suffix tree e suffix array",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest26",
+    number = "3",
+    pageno = "27"
+  },
+  {
+    label = {
+      "Trie e trie compatto",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest27",
+    number = "3.1",
+    pageno = "27"
+  },
+  {
+    label = {
+      "Suffix tree",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest28",
+    number = "3.2",
+    pageno = "29"
+  },
+  {
+    label = {
+      "Pattern matching mediante suffix tree",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest29",
+    number = "3.3",
+    pageno = "30"
+  },
+  {
+    label = {
+      "Suffix array",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest30",
+    number = "3.4",
+    pageno = "31"
+  },
+  {
+    label = {
+      "Longest common prefix",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest31",
+    number = "3.5",
+    pageno = "33"
+  },
+  {
+    label = {
+      "Pattern matching mediante suffix array",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest32",
+    number = "3.6",
+    pageno = "35"
+  },
+  {
+    label = {
+      "Ottimizzazione: ridurre il numero di confronti",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest33",
+    number = "3.6.1",
+    pageno = "37"
+  },
+  {
+    label = {
+      "Ottimizzazione: analisi caso per caso",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest34",
+    number = "3.6.2",
+    pageno = "37"
+  },
+  {
+    label = {
+      "Ottimizzazione: Calcolo dei valori LCP in tempo lineare",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest35",
+    number = "3.6.3",
+    pageno = "37"
+  },
+  {
+    label = {
+      "Generalized suffix tree e generalized suffix array",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest36",
+    number = "3.7",
+    pageno = "38"
+  },
+  {
+    label = {
+      "Range minimum query",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest37",
+    number = "3.8",
+    pageno = "39"
+  },
+  {
+    label = {
+      "Ottimizzazione: programmazione dinamica",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest38",
+    number = "3.8.1",
+    pageno = "40"
+  },
+  {
+    label = {
+      "Ottimizzazione: lettura di due valori alla volta",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest39",
+    number = "3.8.2",
+    pageno = "40"
+  },
+  {
+    label = {
+      "Sottostringa comune piú lunga",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest40",
+    number = "3.9",
+    pageno = "41"
+  },
+  {
+    label = {
+      "Ottimizzazione: saltare gli intervalli che non contengono entrambe le stringhe",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest41",
+    number = "3.9.1",
+    pageno = "43"
+  },
+  {
+    label = {
+      "Ottimizzazione: valori LCP in tempo lineare",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest42",
+    number = "3.9.2",
+    pageno = "43"
+  },
+  {
+    label = {
+      "Allineamento di sequenze",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest43",
+    number = "4",
+    pageno = "45"
+  },
+  {
+    label = {
+      "Ricostruzione della filogenesi",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest44",
+    number = "5",
+    pageno = "47"
+  },
+  {
+    label = {
+      "Filogenesi ed evoluzione delle specie",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest45",
+    number = "5.1",
+    pageno = "47"
+  },
+  {
+    label = {
+      "Problema della filogenesi perfetta",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest46",
+    number = "5.2",
+    pageno = "48"
+  },
+  {
+    label = {
+      "Distanza fra due stringhe",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest47",
+    number = "5.3",
+    pageno = "51"
+  },
+  {
+    label = {
+      "Piccolo problema di parsimonia",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest48",
+    number = "5.4",
+    pageno = "57"
+  },
+  {
+    label = {
+      "Peso uniforme: algoritmo di Fitch",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest49",
+    number = "5.4.1",
+    pageno = "57"
+  },
+  {
+    label = {
+      "Peso non uniforme: algoritmo di Sankoff",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest50",
+    number = "5.4.2",
+    pageno = "59"
+  },
+  {
+    label = {
+      "Grande problema di parsimonia",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest51",
+    number = "5.5",
+    pageno = "62"
+  },
+  {
+    label = {
+      "Ultrametricitá",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest52",
+    number = "5.5.1",
+    pageno = "64"
+  },
+  {
+    label = {
+      "Additivitá",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest53",
+    number = "5.5.2",
+    pageno = "65"
+  },
+  {
+    label = {
+      "Filogenesi mediante clustering",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest54",
+    number = "5.6",
+    pageno = "67"
+  },
+  {
+    label = {
+      "UPGMA",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest55",
+    number = "5.6.1",
+    pageno = "67"
+  },
+  {
+    label = {
+      "Neighbor Joining",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest56",
+    number = "5.6.2",
+    pageno = "69"
+  },
+  {
+    label = {
+      "Modelli di evoluzione",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest57",
+    number = "5.7",
+    pageno = "71"
+  },
+  {
+    label = {
+      "Modello di Jukes-Cantor",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest58",
+    number = "5.7.1",
+    pageno = "71"
+  },
+  {
+    label = {
+      "Modello K2P",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest59",
+    number = "5.7.2",
+    pageno = "71"
+  },
+  {
+    label = {
+      "Modello General Time-Reversible",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest60",
+    number = "5.7.3",
+    pageno = "72"
+  },
+  {
+    label = {
+      "Sequenziamento del DNA",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest61",
+    number = "6",
+    pageno = "73"
+  },
+  {
+    label = {
+      "Assemblaggio del DNA",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest62",
+    number = "6.1",
+    pageno = "73"
+  },
+  {
+    label = {
+      "Sequenziamento casuale",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest63",
+    number = "6.2",
+    pageno = "74"
+  },
+  {
+    label = {
+      "Sequenziamento mediante ibridazione",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest64",
+    number = "6.3",
+    pageno = "76"
+  },
+  {
+    label = {
+      "Genotipi e aplotipi",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest65",
+    number = "7",
+    pageno = "81"
+  },
+  {
+    label = {
+      "Ricostruzione degli aplotipi mediante pedigree",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest66",
+    number = "7.1",
+    pageno = "81"
+  },
+  {
+    label = {
+      "Ricostruzione degli aplotipi per singolo individuo",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest67",
+    number = "7.2",
+    pageno = "84"
+  }
+}

@@ -1,0 +1,62 @@
+\begin{sile}
+ 
+	Un \bf{albero dei suffissi generalizzato} (\bf{generalized suffix tree}) é 
+	un albero dei suffissi che non é relativo ad una singola stringa e ai suoi 
+	suffissi, ma bensí a \math{k} stringhe e ai suffissi di ciascuna. I nodi 
+	foglia di un generalized suffix tree sono etichettati con al piú \math{k} 
+	coppie di numeri: il primo numero di ciascuna coppia indica a quale stringa 
+	si sta facendo riferimento, mentre il secondo indica la posizione a partire 
+	dalla quale quel suffisso si trova in quella stringa.
+
+	Costruire un albero dei suffissi generalizzato per \math{k} stringhe é molto 
+	semplice. Occorre costruire l'albero dei suffissi per la prima stringa, 
+	dopodiché aggiungervi i suffissi della seconda stringa e cosí via fino ad 
+	esaurire tutte le \math{k} stringhe. Ciascun nodo foglia va etichettato 
+	riportando sia la \math{i}-esima stringa che si sta considerando sia la 
+	posizione del suffisso rispetto alla \math{i}-esima stringa. Nel caso in cui
+	un nodo foglia venga raggiunto piú volte, alla sua etichetta va aggiunta la
+	\math{i}-esima coppia indice-posizione.
+
+	\begin{examplebox}
+		\center{\img[src = Suffix/suffix_tree3.pdf, width = 75%fw]}
+	\end{examplebox}
+
+	Un \bf{array dei suffissi generalizzato} (\bf{generalized suffix array}) 
+	é un array dei suffissi che non contiene i suffissi disposti in ordine 
+	lessicografico di una sola stringa, ma bensí contiene quelli di \math{k} 
+	stringhe. Per evitare che due diverse stringhe abbiano lo stesso suffisso,
+	ai suffissi di ciascuna viene accodato uno stesso carattere di terminazione
+	speciale univoco per ogni stringa.
+
+	Sebbene sia possibile costruire un array dei suffissi generalizzato "da 
+	zero", é molto piú conveniente costruire un albero dei suffissi generalizzato 
+	per poi convertirlo in un array dei suffissi generalizzato equivalente. 
+	Innanzitutto, per definizione, ogni nodo foglia del suffix tree corrisponde 
+	ad un elemento del suffix array. Piú in generale, preso un nodo interno del 
+	suffix tree, i nodi foglia del sottoalbero che ha tale nodo per radice 
+	corrispondono ad un intervallo di posizioni contigue nel suffix array, perché 
+	per definizione le string-depth di tali nodi sono stringhe che si trovano una 
+	dopo l'altra secondo l'ordine lessicografico.
+
+	Si noti peró come la corrispondenza fra nodi foglia dell'albero dei suffissi 
+	generalizzato e elementi del suffix array generalizzato sia biunivoca, mentre 
+	la corrispondenza fra nodi interni ed intervalli non lo sia. Infatti, il 
+	numero totale di nodi di un generico albero é proporzionale al numero dei 
+	suoi nodi foglia, mentre il numero totale di intervalli costruibili in un 
+	array é proporzionale al quadrato della sua lunghezza. Avendo un generalized
+	suffix array tanti elementi quanti sono i nodi foglia del generalized suffix 
+	tree equivalente, il numero totale di intervalli dell'array sará per forza 
+	maggiore del numero di nodi dell'albero.
+
+	Siano \math{x} e \math{y} due nodi interni di un suffix tree. Se \math{x} é un
+	progenitore di \math{y}, allora l'intervallo di posizioni contigue definito dai
+	nodi foglia del sottoalbero avente \math{x} come radice contiene interamente 
+	l'analogo intervallo relativo ad \math{y}. Questo perché tutte le string-depth
+	dei nodi foglia discendenti di \math{y} sono suffissi di prefissi delle 
+	string-depth dei nodi foglia discendenti di \math{x}. Se \math{x} e \math{y} 
+	sono invece due nodi che non sono in una relazione di discendenza diretta, 
+	allora l'intervallo di posizioni contigue dei nodi foglia discendenti di 
+	\math{x} e l'intervallo di posizioni contigue dei nodi foglia discendenti di 
+	\math{y} sono disgiunti. 
+
+\end{sile}

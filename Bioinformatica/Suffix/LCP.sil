@@ -1,0 +1,132 @@
+\begin{sile}
+
+	Data una stringa \math{S} di lunghezza \math{m}, sia \math{Pos} l'array 
+	dei suffissi associato a \math{S}, e siano \math{i} e \math{j} due posizioni 
+	su quest'ultimo. Viene chiamata \bf{longest common prefix} di \math{i} e 
+	\math{j}, indicata con \math{Lcp(i,j)}, la lunghezza del prefisso piú lungo 
+	che hanno in comune \math{S[Pos[i]:m]} e \math{S[Pos[j]:m]}, ovvero 
+	rispettivamente il suffisso di \math{S} che inizia in posizione \math{Pos[i]} 
+	ed il suffisso di \math{S} che inizia in posizione \math{Pos[j]}.
+
+	\begin{examplebox}
+		Si consideri l'array dei suffissi \math{Pos = [12, 11, 8, 5, 2, 1, 10, 9, 
+		7, 4, 6, 3]} associato a \math{S = mississippi$}. Le due posizioni 5 e 3 
+		sull'array dei suffissi corrispondono rispettivamente alle stringhe 
+		\math{ississippi} e \math{ippi}. Dato che il prefisso piú lungo che 
+		queste hanno in comune é \math{i}, si ha \math{Lcp(5, 3) = 1}.
+	\end{examplebox}
+
+	Calcolare tutti i possibili valori LCP per una stringa é piuttosto 
+	complesso. Se peró si considerano solamente i valori LCP di posizioni 
+	contigue, questi possono essere calcolati direttamente durante la 
+	costruzione dell'array dei suffissi a partire dall'albero dei suffissi, 
+	senza perdite in termini di tempo di esecuzione. Durante l'attraversamento 
+	in profonditá dell'albero dei suffissi, si considerino i nodi interni che 
+	sono stati visitati fra la visita del nodo foglia etichettato \math{Pos[i]} 
+	e del nodo foglia etichettato \math{Pos[i+1]} (ovvero, fra l'\math{i}-esimo 
+	nodo foglia ed il successivo nodo foglia). Fra questi nodi interni, si 
+	consideri quello piú lontano dalla radice, eventualmente la radice stessa, 
+	chiamato \bf{least common ancestor}, abbreviato come \math{lca}.
+
+	Il percorso che va dalla radice a \math{Pos[i]} ed il percorso che va 
+	dalla radice a \math{Pos[i+1]} devono necessariamente passare entrambi 
+	per \math{lca}. Infatti, la string-depth di \math{lca} corrisponde alla 
+	lunghezza della parte di percorso in comune fra il percorso dalla radice 
+	a \math{Pos[i]} ed il percorso dalla radice a \math{Pos[i + 1]}, che é 
+	proprio la definizione di \math{Lcp(i, i+1)}. Individuare \math{lca} é 
+	semplice perché corrisponde al nodo che, durante la visita depth-first, 
+	ne fa invertire la direzione.
+
+	Si noti come, dati due nodi \math{u} e \math{v} dell'albero dei suffissi, 
+	se vale \math{Lcp(u, v) = 0} allora \math{u} e \math{v} hanno come 
+	\math{lca} la radice. Questo perché se il valore LCP associato ai due nodi 
+	é nullo, allora la string-depth dei due nodi non ha alcun prefisso in comune,
+	e l'unico nodo che non ha alcun prefisso associato é la radice. Viceversa, 
+	se due nodi \math{u} e \math{v} hanno come \math{lca} la radice, allora hanno 
+	nullo il valore LCP, perché significa che il prefisso piú lungo in comune alle
+	due string-depth é la stringa vuota.
+
+	\begin{examplebox}
+		Si consideri l'albero dei suffissi dell'esempio precedente, che ha 
+		associato l'array dei suffissi \math{Pos = [7, 5, 2, 6, 3, 4, 1]}. 
+
+		Si voglia calcolare \math{Lcp(6,7)}: occorre osservare l'\math{lca} di 
+		\math{Pos[6] = 4} e di \math{Pos[7] = 1}. La stringa che etichetta 
+		il percorso che va dalla radice a questo nodo é \math{tar}, pertanto 
+		\math{Lcp(6,7) = |tar| = 3}.
+
+		Si voglia invece calcolare \math{Lcp(3,4)}: dato che \math{Pos[3] = 2} 
+		e \math{Pos[4] = 6} hanno come \math{lca} la radice, che per definizione 
+		ha string-depth nulla, si ha \math{Lcp(3,4) = 0}.
+	\end{examplebox}
+
+	Una volta noto come ricavare i valori LCP di nodi adiacenti ed un array 
+	dei suffissi a partire da un albero dei suffissi, é possibile operare il
+	procedimento inverso, ovvero ottenere l'albero dei suffissi a partire dai 
+	valori LCP e dall'array dei suffissi. I valori LCP nulli di nodi adiacenti 
+	determinano il numero di partizioni in cui l'albero sará diviso, perché come
+	appena mostrato se due nodi adiacenti hanno valore LCP nullo allora hanno come
+	\math{lca} la radice. Tutti i valori LCP adiacenti non nulli indicano stringhe
+	che devono necessariamente trovarsi nella stessa partizione; in particolare, 
+	le stringhe con LCP piú basso saranno piú vicine alla radice delle stringhe 
+	con LCP alto, perché hanno un prefisso in comune piú corto. L' enumerazione 
+	dei nodi foglia puó essere dedotta semplicemente percorrendo ordinatamente le 
+	stringhe riportate nell'array dei suffissi.
+
+	\begin{examplebox}
+		Si consideri la stringa \em{rattata$}. Siano dati l'array dei suffissi ed i 
+		valori LCP contigui:
+
+		\begin[mode = display]{math}
+			\table[columnalign = left left]{
+				Pos = [$, a$, ata$, attata$, rattata$, ta$, tata$, ttata$]
+				= [8, 7, 5, 2, 1, 6, 4, 3] \\
+				Lcp(i, i + 1) = [0, 1, 2, 0, 0, 2, 1] \\
+			}
+		\end{math}
+
+		\begin{itemize}
+			\begin{item}
+				La coppia \math{(1, 2)} ha valore LCP nullo, pertanto le rispettive 
+				stringhe \math{$} e \math{a$} si trovano in partizioni distinte 
+				dell'albero. La stessa cosa puó essere detta delle stringhe 
+				\math{attata$} e \math{rattata$} (posizioni 4 e 5) e delle stringhe
+				\math{rattata$} e \math{ta$} (posizioni 5 e 6);
+			\end{item}
+			\begin{item}
+				La coppia \math{(2, 3)} ha un valore LCP non nullo, pertanto le rispettive
+				stringhe \math{a$} e \math{ata$} devono necessariamente trovarsi nella 
+				stessa partizione. La stessa cosa puó essere detta delle stringhe 
+				\math{ata$} e \math{attata$} (posizioni 3 e 4), delle stringhe \math{ta$} 
+				e \math{tata$} (posizioni 6 e 7) e delle stringhe \math{tata$} e 
+				\math{ttata$} (posizoni 7 e 8);
+			\end{item}
+			\begin{item}
+				Per proprietá transitiva, si ha che \math{a$}, \math{ata$} e \math{attata$}
+				devono trovarsi nella stessa partizione. Allo stesso modo, \math{ta$}, 
+				\math{tata$} e \math{ttata$} devono trovarsi nella stessa partizione. Per 
+				il momento si hanno quindi le quattro partizioni \math{[$], [a$, ata$, 
+				attata$], [ta$, tata$, ttata$], [rattata$]};
+			\end{item}
+			\begin{item}
+				La coppia \math{(2, 3)} ha valore LCP pari ad 1, mentre la coppia 
+				\math{(3, 4)} ha valore LCP pari a 2. Questo significa che la stringa
+				\math{a$} deve trovarsi piú vicina alla radice rispetto a \math{ata$} e
+				\math{attata$}, nello specifico che esiste un nodo interno raggiunto a 
+				da un arco partire dalla radice etichettato con i primi 1 caratteri di 
+				tutte e tre le stringhe. Lo stesso puó essere detto delle stringhe 
+				\math{ta$}, \math{tata$} e \math{ttata$};
+			\end{item}
+			\begin{item}
+				Il massimo valore LCP é 2, pertanto le stringhe \math{ata$} e 
+				\math{attata$} sono string-depth di due nodi con lo stesso 
+				genitore, cosí come le stringhe \math{ta$} e \math{tata$}.
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		\center{\img[src = Suffix/suffix_tree5.pdf, width = 50%fw]}
+	\end{examplebox}
+
+\end{sile}

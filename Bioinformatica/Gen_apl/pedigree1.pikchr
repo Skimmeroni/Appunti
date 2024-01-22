@@ -1,0 +1,30 @@
+lineht *= 1.25
+
+G1: box wid 0.5 ht 0.5 at (0,2)
+G2: circle wid 0.5 at (1,2)
+G3: box wid 0.5 ht 0.5 at (3.5,2)
+G4: circle wid 0.5 at (4.5,2)
+
+P1: box wid 0.5 ht 0.5 at (3,1)
+P2: circle wid 0.5 at (0.5,1)
+P3: circle wid 0.5 at (4,1)
+P4: circle wid 0.5 at (5,1)
+
+F1: box wid 0.5 ht 0.5 at (1,0)
+F2: box wid 0.5 ht 0.5 at (2.5,0)
+
+line from (1.75,1) to (1.75,0.5)
+line from F2.n to (2.5,0.5) to (1,0.5) to F1.n
+
+line from G1.e to G2.w
+line from G3.e to G4.w
+line from P3.n to ((G3.x + G4.x)/2, G3.y) 
+line from P2.n to (0.5,2)
+line from P1.w to P2.e
+line from (P3.x, (G3.y + P3.y)/2) to \
+	    (P1.x, (G3.y + P3.y)/2) to \
+	    (P1.x, P1.n.y)
+line from (P3.x, (G3.y + P3.y)/2) to \
+	    (P4.x, (G3.y + P3.y)/2) to \
+	    (P4.x, P4.n.y)
+

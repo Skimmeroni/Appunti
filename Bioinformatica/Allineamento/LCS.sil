@@ -1,0 +1,84 @@
+\begin{sile}
+
+	Data una stringa \math{S}, si dice \bf{sottosequenza} di \math{S} 
+	qualsiasi sottoinsieme dei caratteri di \math{S}, disposti secondo 
+	l'ordine in cui appaiono in \math{S}. Piú formalmente, una sottosequenza 
+	di lunghezza \math{n} una stringa \math{S} é definita da un insieme di 
+	indici \math{i_{1} < i_{2} < \unicodeellipsis < i_{k}}, tale per cui 
+	\math{k \leq n}. La sottosequenza che si ricava da questi indici é 
+	\math{S[i_{1}] S[i_{2}] \unicodeellipsis S[i_{k}]}.
+
+	Si noti come una sottosequenza sia diversa da una sottostringa; una 
+	sottosequenza é un sottoinsieme di caratteri di una stringa che non si 
+	trovano necessariamente in posizioni contigue (ma comunque disposti 
+	nell'ordine in cui vi compaiono), mentre una sottostringa é un sottoinsieme 
+	dei caratteri di una stringa che si trovano in posizioni contigue. Una 
+	sottostringa é pertanto anche una sottosequenza, ma una sottosequenza non 
+	é sempre anche una sottostringa.
+
+	\begin{examplebox}
+		La stringa \math{wer} é una sottosequenza della stringa \math{winter}, 
+		ma non una sottostringa. La stringa \math{in} é invece sia sottosequenza 
+		sia sottostringa di \math{winter}.
+	\end{examplebox}
+
+	Date due stringhe \math{S_{1}} ed \math{S_{2}}, una sottosequenza si 
+	dice comune ad entrambe le stringhe se appare sia in \math{S_{1}} che 
+	in \math{S_{2}}. Il problema della sottosequenza comune piú lunga consiste
+	nel trovare, in due stringhe \math{S_{1}} ed \math{S_{2}}, qual'é (se 
+	esiste) la sottosequenza comune ad entrambe che sia di lunghezza maggiore,
+	abbreviata con \math{LCS} (\em{longest common subsequence}).
+
+	La sottosequenza comune piú lunga puó essere determinata in maniera efficiente 
+	mediante programmazione dinamica. Si indichi la sottosequenza comune piú lunga 
+	a due stringhe \math{S_{1}} e \math{S_{2}} con \math{LCS(S_{1}, S_{2})}. 
+	Indicando con \math{P} il problema della sottosequenza comune piú lunga 
+	rispetto alle due stringhe \math{S_{1}} e \math{S_{2}} per intero, sia 
+	\math{P(i, j)} il problema ristretto alle sottostringhe \math{S_{1}[:i]} e 
+	\math{S_{2}[:j]}. Indicando con \math{s(i, j)} la soluzione ottimale al 
+	problema rispetto alle sottostringhe \math{S_{1}[:i]} e \math{S_{2}[:j]},
+	sia \math{s*} il valore piú alto fra tutte queste soluzioni ottimali parziali.
+	\math{s*} é la soluzione ottimale del problema rispetto alle stringhe per 
+	intero.
+
+	Il caso base é semplice da determinare; é evidente come due stringhe vuote 
+	non abbiano alcun carattere in comune. Inoltre, una qualsiasi stringa non 
+	vuota non ha alcun carattere in comune con la stringa vuota. Pertanto:
+
+	\begin[width = 30%fw]{parbox}
+		\begin[mode = display]{math}
+			LCS(\epsilon, \epsilon) = 0
+		\end{math}
+	\end{parbox}
+	\begin[width = 35%fw]{parbox}
+		\begin[mode = display]{math}
+			LCS(S_{1}[:i], \epsilon) = 0 \thickspace \forall i
+		\end{math}
+	\end{parbox}
+	\begin[width = 35%fw]{parbox}
+		\begin[mode = display]{math}
+			LCS(\epsilon, S_{2}[:j]) = 0 \thickspace \forall j
+		\end{math}
+	\end{parbox}
+	\par
+
+	Per quanto riguarda la relazione di ricorrenza, si consideri una ipotetica
+	iterazione dell'algoritmo. Possono verificarsi solamente due situazioni, 
+	mutualmente esclusive: i due caratteri sono uguali oppure sono diversi. Nel
+	primo caso, si aumenta di 1 l'\math{LCS} trovato finora, perché se i due 
+	caratteri sono uguali allora anche quest'ultimo carattere fará parte dell'
+	\math{LCS}. Nel secondo caso, solamente il carattere che massimizza 
+	l'\math{LCS} ricavato finora fará parte dell'\math{LCS} attuale. Pertanto:
+
+	\begin[mode = display]{math}
+		LCS(S_{1}, S_{2}) = 
+		\{\table[columnalign = left left]{
+			1 + LCS(S_{1}[: |S_{1}| - 1], S_{2}[: |S_{2}| - 1]) 
+			& S_{1}[i] = S_{2}[j] \\
+			\mi{max}(LCS(S_{1}, S_{2}[: |S_{2}| - 1]), 
+				   LCS(S_{1}[: |S_{1}| - 1], S_{2})) 
+			& S_{1}[i] \ne S_{2}[j] \\
+		}
+	\end{math}
+
+\end{sile}

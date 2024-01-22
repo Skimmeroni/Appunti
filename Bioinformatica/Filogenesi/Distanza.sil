@@ -1,0 +1,580 @@
+\begin{sile}
+
+	Il grado di somiglianza fra due stringhe viene genericamente chiamato 
+	\bf{distanza}. Sebbene vi siano diverse formulazioni della distanza fra
+	due stringhe, tutte possiedono le stesse proprietá di base. Matematicamente, 
+	la distanza é una metrica definita come \math{d: S \times S \mapsto R^{+}}, 
+	che assegna un valore reale ad ogni coppia di stringhe. La funzione distanza 
+	possiede le seguenti tre proprietá:
+
+	\begin{enumerate}
+		\begin{item}
+			\math{d(x, z) \leq d(x, y) + d(y, z)}, la disuguaglianza triangolare;
+		\end{item}
+		\begin{item}
+			\math{d(x, y) = 0} se e soltanto se \math{x = y};
+		\end{item}
+		\begin{item}
+			\math{d(x, y) = d(y, x)}, la simmetricitá.
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	La formulazione della distanza fra due stringhe piú semplice e piú utilizzata
+	é la cosiddetta \bf{distanza di modifica} (\bf{edit distance}), o \bf{distanza 
+	di Levenshtein}. Date due stringhe \math{S_{1}} e \math{S_{2}}, la distanza di 
+	modifica fra le due é data dal numero di operazioni atomiche sui singoli 
+	caratteri necessario a trasformare \math{S_{1}} in \math{S_{2}}. Le operazioni 
+	ammesse sono quattro:
+
+	\begin{enumerate}
+		\begin{item}
+			\em{Inserire} un carattere della seconda stringa nella prima;  
+		\end{item}
+		\begin{item}
+			\em{Rimuovere} un carattere dalla prima stringa;
+		\end{item}
+		\begin{item}
+			\em{Sostituire} un carattere della prima stringa con uno della seconda;
+		\end{item}
+		\begin{item}
+			non fare nulla (o equivalentemente, sostituire un carattere della prima 
+			stringa con sé stesso).
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	Siano le quattro operazioni sopra citate abbreviate rispettivamente con 
+	\math{I}, \math{D} e \math{R} e \math{M}. Una concatenazione di queste 
+	operazioni puó essere espressa come una stringa sull'alfabeto \math{\{I, 
+	D, M, R\}}. Ovvero, una stringa del tipo \math{op_{1} op_{2} op_{3} 
+	\unicodeellipsis op_{n}}, costruita usando i quattro caratteri dell'alfabeto 
+	sopra descritto, é una stringa dove ciascun carattere \math{op_{i}} indica 
+	l'operazione applicata all'\math{i}-esimo carattere di \math{S_{1}} per 
+	poterla trasformare in \math{S_{2}}. Una stringa che esprime la sequenza di 
+	operazioni necessarie a trasformare una stringa in un'altra viene chiamata 
+	\bf{trascrizione} delle due stringhe.
+
+	La distanza di modifica fra due stringhe puó essere allora vista anche 
+	come la lunghezza della trascrizione piú corta possibile per tale coppia 
+	di stringhe escludendo le operazioni \math{M}, ovvero il minimo numero di 
+	operazioni "rilevanti" (tutte tranne quelle nulle) necessarie a trasformare 
+	una stringa in un'altra. Una trascrizione che permette di trasformare una
+	stringa in un'altra nella maniera piú efficiente possibile, ovvero quella 
+	che contiene il minimo numero di operazioni rilevanti, viene detta 
+	\em{ottimale}. Si noti come la trascrizione ottimale non sia necessariamente 
+	univoca, ma possano esservene diverse aventi tutte la stessa lunghezza.
+
+	\begin{examplebox}
+		\begin[width = 35%fw]{parbox}
+			\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw, cellborder = 0]{ptable}
+				\begin{row}
+					\cell{R} \cell{I} \cell{M}
+					\cell{D} \cell{M} \cell{D}
+					\cell{M} \cell{M} \cell{I}
+				\end{row}
+				\begin{row}
+					\cell{v} \cell{} \cell{i}
+					\cell{n} \cell{t} \cell{n}
+					\cell{e} \cell{r} \cell{}
+				\end{row}
+				\begin{row}
+					\cell{w} \cell{r} \cell{i}
+					\cell{} \cell{t} \cell{}
+					\cell{e} \cell{r} \cell{s}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+		\begin[width = 55%fw, padding = 5%fw]{parbox}
+			La stringa \math{S_{1} = vintner} puó essere trasformata nella stringa
+			\math{S_{2} = writers} mediante 5 operazioni: sostituire \math{v} con 
+			\math{w}, inserire \math{r}, eliminare \math{n}, eliminare \math{n}
+			(di nuovo), inserire \math{s}. Le altre 4 operazioni sono no-op, perché
+			quei caratteri in quelle posizioni sono giá corretti. Pertanto, si ha
+			che \math{d(S_{1}, S_{2}) = 5}.
+		\end{parbox}
+	\end{examplebox}
+
+	É possibile descrivere meccanicamente il procedimento di trasformazione di
+	una stringa in un'altra come segue. Siano \math{S_{1}} ed \math{S_{2}} due
+	stringhe, delle quali é nota la trascrizione. Siano poi \math{next_{1}} un
+	puntatore a \math{S_{1}} e sia \math{next_{2}} un puntatore a \math{S_{2}},
+	entrambi inizializzati ad 1. La trascrizione viene letta ed applicata da
+	sinistra verso destra:
+
+	\begin{itemize}
+		\begin{item}
+			Se viene letto il simbolo \math{I}, il carattere di \math{S_{2}} in
+			posizione \math{next_{2}} viene inserito in \math{S_{1}} alla posizione
+			\math{next_{1} - 1}, e \math{next_{2}} viene incrementato di 1;
+		\end{item}
+		\begin{item}
+			Se viene letto il simbolo \math{D}, il carattere di \math{S_{1}} in
+			posizione \math{next_{1}} viene eliminato da \math{S_{1}}, e
+			\math{next_{1}} viene incrementato di 1;
+		\end{item}
+		\begin{item}
+			Se viene letto il simbolo \math{R}, il carattere di \math{S_{1}} in
+			posizione \math{next_{1}} viene sostituito con il carattere di
+			\math{S_{2}} alla posizione \math{next_{2}}, ed entrambi i puntatori
+			vengono incrementati di 1;
+		\end{item}
+		\begin{item}
+			Se viene letto il simbolo \math{M}, entrambi i puntatori vengono
+			incrementati di 1 senza compiere alcuna operazione.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	La lunghezza delle trascrizioni ottimali per una coppia di stringhe, e di 
+	conseguenza la loro distanza di modifica, puó essere calcolata mediante 
+	programmazione dinamica. Siano \math{S_{1}} e \math{S_{2}} due stringhe di 
+	lunghezza rispettivamente \math{n} e \math{m}. Ciascuna cella \math{(i, j)} 
+	della matrice \math{D} contiene la lunghezza delle trascrizioni ottimali fra 
+	il prefisso \math{S_{1}[1:i]} di \math{S_{1}} ed il prefisso \math{S_{2}[1:j]} 
+	di \math{S_{2}}, ovvero \math{D(i, j) = d(S_{1}[1:i], S_{2}[1:j])}. La 
+	lunghezza delle trascrizioni ottimali fra \math{S_{1}} e \math{S_{2}} é
+	quindi contenuta nella cella \math{D(n, m)}, ovvero \math{D(n, m) = d(S_{1}, 
+	S_{2})}.
+
+	Individuare il caso base della relazione di ricorrenza é semplice. 
+	Innanzitutto, é evidente come la lunghezza dell'unica trascrizione 
+	ottimale fra la stringa vuota e sé stessa sia zero, perché per 
+	ricavare \math{\epsilon} a partire da \math{\epsilon} nella maniera 
+	piú efficiente possibile é sufficiente non compiere alcuna operazione. 
+	Inoltre, la lunghezza dell'unica trascrizione ottimale fra una qualsiasi 
+	stringa di lunghezza \math{l} e la stringa vuota é proprio \math{l}, 
+	perché per ottenere la stringa vuota a partire da qualsiasi stringa 
+	nella maniera piú efficiente possibile occorre effettuare tante operazioni 
+	\math{D} quanti sono i caratteri di tale stringa. Si ha allora:
+
+	\begin[width = 33%fw]{parbox}
+		\begin[mode = display]{math}
+			D(0, 0) = d(\epsilon, \epsilon) = 0
+		\end{math}
+	\end{parbox}
+	\begin[width = 33%fw]{parbox}
+		\begin[mode = display]{math}
+			D(i, 0) = d(S_{1}[1 : i], \epsilon) = i
+		\end{math}
+	\end{parbox}
+	\begin[width = 33%fw]{parbox}
+		\begin[mode = display]{math}
+			D(0, j) = d(\epsilon, S_{2}[1 : j]) = j
+		\end{math}
+	\end{parbox}
+	\par
+
+	Individuare il passo ricorsivo la relazione di ricorrenza é piú complesso. 
+	Per prima cosa occorre, presa una cella generica \math{(i, j)} della matrice
+	\math{D}, capire quali sono i possibili valori che questa puó assumere.
+
+	\begin{theorem}
+		Una cella generica \math{(i, j)} della matrice \math{D} puó 
+		assumere esclusivamente uno fra questi quattro valori: 
+		\math{D(i - 1, j) + 1}, \math{D(i, j - 1) + 1}, 
+		\math{D(i - 1, j - 1) + 1} \math{D(i - 1, j - 1)}.
+
+		\bigskip
+		\bf{Dimostrazione}. Si consideri una trascrizione ottimale qualsiasi associata 
+		alla trasformazione di una stringa \math{S_{1}} in una stringa \math{S_{2}}. 
+		Ci si concentri sull'ultimo carattere della trascrizione, che dovrá 
+		necessariamente essere \math{I}, \math{D}, \math{R} o \math{M}:
+
+		\begin{itemize}
+			\begin{item}
+				Se é \math{I}, questo significa che l'ultima operazione che il processo
+				di trasformazione ha compiuto é stata l'inserimento del \math{j}-esimo
+				carattere della seconda stringa alla fine della prima stringa trasformata.
+				Questo significa che i simboli della trascrizione precedenti costituiscono
+				una trascrizione ottimale che trasforma \math{S[1:i]} in \math{S[1:j - 1]},
+				e questa trascrizione avrá per definizione lunghezza \math{D(i, j - 1)}.
+				Pertanto, se l'ultimo carattere della trascrizione é \math{I}, allora deve
+				aversi \math{D(i, j) = D(i, j - 1) + 1};
+			\end{item}
+			\begin{item}
+				Se é \math{D}, questo significa che l'ultima operazione che il processo
+				di trasformazione ha compiuto é stata l'eliminazione del \math{i}-esimo
+				carattere della prima stringa. Questo significa che i simboli della
+				trascrizione precedenti costituiscono una trascrizione ottimale che
+				trasforma \math{S[1:i - 1]} in \math{S[1:j]}, e questa trascrizione avrá
+				per definizione lunghezza \math{D(i - 1, j)}. Pertanto, se l'ultimo
+				carattere della trascrizione é \math{D}, allora deve aversi
+				\math{D(i, j) = D(i - 1, j) + 1};
+			\end{item}
+			\begin{item}
+				Se é \math{R}, questo significa che l'ultima operazione che il processo
+				di trasformazione ha compiuto é stata sostituire l'\math{i}-esimo carattere
+				della prima stringa con il \math{j}-esimo carattere della seconda stringa.
+				Questo significa che i simboli della trascrizione precedenti costituiscono
+				una trascrizione ottimale che trasforma \math{S[1:i - 1]} in \math{S[1:j -
+				1]}, e questa trascrizione avrá per definizione lunghezza \math{D(i - 1,
+				j - 1)}. Pertanto, se l'ultimo carattere della trascrizione é \math{R},
+				allora deve aversi \math{D(i, j) = D(i - 1, j - 1) + 1};
+			\end{item}
+			\begin{item}
+				Se é \math{M}, questo significa che l'ultima operazione che il processo
+				di trasformazione ha compiuto é stata una no-op, e che l'\math{i}-esimo
+				carattere della prima stringa era uguale al \math{j}-esimo carattere della
+				seconda. Quindi \math{D(i, j) = D(i - 1, j - 1)}, perché il valore della
+				distanza nello step precedente é rimasto lo stesso.
+			\end{item}
+		\end{itemize}
+	\end{theorem}
+
+	Una volta noti quali possono essere i valori che le celle della matrice 
+	\math{D} puó assumere, occorre determinare quale fra questi é il valore
+	che, per ciascuna iterazione dell'algoritmo, rende la trascrizione 
+	(parziale) ottimale.
+
+	\begin{theorem}
+		Il valore ottimale da porre nella cella generica \math{(i, j)} della matrice 
+		\math{D} é il minimo dei quattro possibili.
+
+		\bigskip
+		\bf{Dimostrazione}. Sia \math{S_{1}} una qualsiasi stringa che si vuole 
+		trasformare, in maniera ottimale, in una stringa \math{S_{2}}. Si consideri 
+		il passaggio intermedio (obbligato) dove il prefisso \math{S_{1}[1:i]} viene 
+		trasformato nel prefisso \math{S_{2}[1:j]}:
+
+		\begin{enumerate}
+			\begin{item}
+				É possibile trasformare \math{S_{1}[1:i]} in \math{S_{2}[1:j]} in maniera 
+				ottimale impiegando \math{D(i, j - 1) + 1} operazioni. Per fare questo 
+				occorre trasformare \math{S_{1}[1:i]} in \math{S_{2}[1:j - 1]} in maniera 
+				ottimale, per poi compiere un'ultima operazione inserendo il \math{j}-esimo 
+				carattere di \math{S_{2}} alla fine di \math{S_{1}}. Dato che trasformare 
+				\math{S_{1}[1:i]} in \math{S_{2}[1:j - 1]} in maniera ottimale richiede 
+				\math{D(i, j - 1)} operazioni, trasformare \math{S_{1}[1:i]} in 
+				\math{S_{2}[1:j]} richiederá \math{D(i, j - 1) + 1} operazioni;
+			\end{item}
+			\begin{item}
+				É possibile trasformare \math{S_{1}[1:i]} in \math{S_{2}[1:j]} in maniera 
+				ottimale impiegando \math{D(i - 1, j) + 1} operazioni. Per fare questo 
+				occorre trasformare \math{S_{1}[1:i - 1]} in \math{S_{2}[1:j]} in maniera 
+				ottimale, per poi compiere un'ultima operazione eliminando l'\math{i}-esimo 
+				carattere di \math{S_{1}}. Dato che trasformare \math{S_{1}[1:i - 1]} 
+				in \math{S_{2}[1:j]} in maniera ottimale richiede \math{D(i - 1, j)} 
+				operazioni, trasformare \math{S_{1}[1:i]} in \math{S_{2}[1:j]} richiederá 
+				\math{D(i - 1, j) + 1} operazioni;
+			\end{item}
+			\begin{item}
+				É possibile trasformare \math{S_{1}[1:i]} in \math{S_{2}[1:j]} in maniera 
+				ottimale impiegando \math{D(i - 1, j - 1) + 1} operazioni. Per fare questo 
+				occorre trasformare \math{S_{1}[1:i - 1]} in \math{S_{2}[1:j - 1]} in 
+				maniera ottimale, per poi compiere un'ultima operazione sostituendo 
+				l'\math{i}-esimo carattere di \math{S_{1}} con il \math{j}-esimo
+				carattere di \math{S_{2}}. Dato che trasformare \math{S_{1}[1:i - 1]} in 
+				\math{S_{2}[1:j - 1]} in maniera ottimale richiede \math{D(i - 1, j - 1)} 
+				operazioni, trasformare \math{S_{1}[1:i]} in \math{S_{2}[1:j]} richiederá 
+				\math{D(i - 1, j - 1) + 1} operazioni;
+			\end{item}
+			\begin{item}
+				É possibile trasformare \math{S_{1}[1:i]} in \math{S_{2}[1:j]} in maniera 
+				ottimale impiegando \math{D(i - 1, j - 1)} operazioni, ma solo nel caso in
+				cui \math{S_{1}[i] = S_{2}[j]}. Per fare questo occorre trasformare 
+				\math{S_{1}[1:i - 1]} in \math{S_{2}[1:j - 1]} in maniera ottimale, 
+				dopodiché essendo \math{S_{1}[i] = S_{2}[j]} non é necessario compiere 
+				alcuna operazione perché \math{S_{1}[i]} é giá prefisso ottimale. Dato che 
+				trasformare \math{S_{1}[1:i - 1]} in \math{S_{2}[1:j - 1]} in maniera 
+				ottimale richiede \math{D(i - 1, j - 1)} operazioni, trasformare 
+				\math{S_{1}[1:i]} in \math{S_{2}[1:j]} quando \math{S_{1}[i] = S_{2}[j]}
+				richiederá \math{D(i - 1, j - 1)} operazioni;
+			\end{item}
+		\end{enumerate}
+
+		\bigskip
+
+		Questo significa che \math{D(i, j)} é certamente non superiore a 
+		\math{D(i - 1, j) + 1}, a \math{D(i, j - 1) + 1}, a \math{D(i - 1, 
+		j - 1)} e a \math{D(i - 1, j - 1) + 1}. Essendo questi quattro 
+		valori anche gli unici che \math{D(i, j)} puó assumere, deve allora
+		aversi che il valore ottimale per \math{D(i, j)} é il minimo fra questi.
+	\end{theorem}
+
+	Si ha quindi che il passo ricorsivo della relazione di ricorrenza é dato da:
+
+	\begin[mode = display]{math}
+		D(i, j) = min{(D(i - 1, j) + 1, D(i, j - 1) + 1, D(i - 1, j - 1) + 1, D(i - 1, j - 1))}
+	\end{math}
+
+	Avendo a disposizione sia il caso base che il passo ricorsivo della relazione
+	di ricorrenza, diventa possibile costruire la matrice risolutiva. I caratteri 
+	della prima stringa occupano la prima riga, mentre quelli della seconda 
+	stringa la prima colonna. La seconda riga e la seconda colonna vengono 
+	riempite con le informazioni disponibili dal caso base della relazione di 
+	ricorrenza, mentre le successive righe/colonne vengono calcolate una alla 
+	volta sulla base della precedente. Dato che per calcolare il valore di ogni 
+	cella occorre effettuare lo stesso confronto, e dato che il numero di celle 
+	complessivo é \math{(n + 1) \times (m + 1)}, si ha che l'algoritmo che calcola 
+	la distanza di modifica fra due stringhe ha un tempo di esecuzione di circa 
+	\math{O(mn)}.
+
+	\begin{examplebox}
+		\begin[width = 50%fw]{parbox}
+			\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
+				\begin{row}
+					\cell{} \cell{} \cell{\bf{s}} \cell{\bf{u}}
+					\cell{\bf{n}} \cell{\bf{d}} \cell{\bf{a}} \cell{\bf{y}}
+				\end{row}
+				\begin{row}
+					\cell{} \cell{0} \cell{1} \cell{2}
+					\cell{3} \cell{4} \cell{5} \cell{6}
+				\end{row}
+				\begin{row}
+					\cell{\bf{s}} \cell{1} \cell{} \cell{}
+					\cell{} \cell{} \cell{} \cell{}
+				\end{row}
+				\begin{row}
+					\cell{\bf{a}} \cell{2} \cell{} \cell{}
+					\cell{} \cell{} \cell{} \cell{}
+				\end{row}
+				\begin{row}
+					\cell{\bf{t}} \cell{3} \cell{} \cell{}
+					\cell{} \cell{} \cell{} \cell{}
+				\end{row}
+				\begin{row}
+					\cell{\bf{u}} \cell{4} \cell{} \cell{}
+					\cell{} \cell{} \cell{} \cell{}
+				\end{row}
+				\begin{row}
+					\cell{\bf{r}} \cell{5} \cell{} \cell{}
+					\cell{} \cell{} \cell{} \cell{}
+				\end{row}
+				\begin{row}
+					\cell{\bf{d}} \cell{6} \cell{} \cell{}
+					\cell{} \cell{} \cell{} \cell{}
+				\end{row}
+				\begin{row}
+					\cell{\bf{a}} \cell{7} \cell{} \cell{}
+					\cell{} \cell{} \cell{} \cell{}
+				\end{row}
+				\begin{row}
+					\cell{\bf{y}} \cell{8} \cell{} \cell{}
+					\cell{} \cell{} \cell{} \cell{}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
+				\begin{row}
+					\cell{} \cell{} \cell{\bf{s}} \cell{\bf{u}}
+					\cell{\bf{n}} \cell{\bf{d}} \cell{\bf{a}} \cell{\bf{y}}
+				\end{row}
+				\begin{row}
+					\cell{} \cell{0} \cell{1} \cell{2}
+					\cell{3} \cell{4} \cell{5} \cell{6}
+				\end{row}
+				\begin{row}
+					\cell{\bf{s}} \cell{1} \cell{0} \cell{1}
+					\cell{2} \cell{3} \cell{4} \cell{5}
+				\end{row}
+				\begin{row}
+					\cell{\bf{a}} \cell{2} \cell{1} \cell{1}
+					\cell{2} \cell{3} \cell{3} \cell{4}
+				\end{row}
+				\begin{row}
+					\cell{\bf{t}} \cell{3} \cell{2} \cell{2}
+					\cell{2} \cell{3} \cell{4} \cell{4}
+				\end{row}
+				\begin{row}
+					\cell{\bf{u}} \cell{4} \cell{3} \cell{2}
+					\cell{3} \cell{3} \cell{4} \cell{5}
+				\end{row}
+				\begin{row}
+					\cell{\bf{r}} \cell{5} \cell{4} \cell{3}
+					\cell{3} \cell{4} \cell{4} \cell{5}
+				\end{row}
+				\begin{row}
+					\cell{\bf{d}} \cell{6} \cell{5} \cell{4}
+					\cell{4} \cell{3} \cell{4} \cell{5}
+				\end{row}
+				\begin{row}
+					\cell{\bf{a}} \cell{7} \cell{6} \cell{5}
+					\cell{5} \cell{4} \cell{3} \cell{4}
+				\end{row}
+				\begin{row}
+					\cell{\bf{y}} \cell{8} \cell{7} \cell{6}
+					\cell{6} \cell{5} \cell{4} \cell{3}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+	\end{examplebox}
+
+	\begin{codeblock}
+		\begin{verbatim}
+			S1 = "..."
+			S2 = "..."
+
+			\bigskip
+			m = len(S1) + 1
+			n = len(S2) + 1
+
+			\bigskip
+			Lev = [[0] * (n) for _ in range(m)]
+
+			\bigskip
+			for i in range(1, m):               # The first row and first
+			    Lev[i][0] = i                   # column are computed from
+			for j in range(1, n):               # the base case of the
+			    Lev[0][j] = j                   # recurrence relation
+
+			\bigskip
+			for i in range(1, m):
+			    for j in range(1, n):
+			        A = Lev[i - 1][j] + 1       # A generic entry is given by
+			        B = Lev[i][j - 1] + 1       # computing its 3 companion values
+			        C = Lev[i - 1][j - 1]       # and finding the minimum
+
+			\bigskip
+			        if (S1[i - 1] != S2[j - 1]):
+			            C = C + 1
+
+			\bigskip
+			        Lev[i][j] = min(A, B, C)
+
+			\bigskip
+			print(Lev[m - 1][n - 1])            # The solution is the last entry
+		\end{verbatim}
+	\end{codeblock}
+
+	Oltre a calcolare la lunghezza delle trascrizioni ottimali, é possibile 
+	estendere l'algoritmo per ricavare tali trascrizioni. Mentre la tabella 
+	viene costruita, é possibile aggiungere dei puntatori alle celle in modo 
+	da poter ricostruire a ritroso la trascrizione che trasforma una stringa 
+	nell'altra. In particolare, una volta che é stato calcolato il valore 
+	della cella \math{(i, j)} della tabella, viene messo un puntatore che va 
+	da quest'ultima alla cella di posizione \math{(i, j - 1)} se \math{D(i, j) 
+	= D(i, j - 1) + 1}, alla cella di posizione \math{(i - 1, j)} se \math{D(i, 
+	j) = D(i - 1, j) + 1}, alla cella di posizione \math{(i - 1, j - 1)} se 
+	\math{D(i, j) = D(i - 1, j - 1) + 1} oppure alla cella di posizione 
+	\math{(i - 1, j - 1)} se \math{D(i, j) = D(i - 1, j - 1)}. Si noti come 
+	sia possibile che da una stessa cella si diramino piú puntatori, perché 
+	piú di una delle quattro condizioni possono verificarsi contemporaneamente.
+
+	Per ricavare una trascrizione ottimale a partire dalla tabella, é
+	sufficiente seguire un qualsiasi percorso definito dai puntatori
+	dalla cella \math{(n, m)} alla cella \math{(0, 0)}. Se ci si sposta
+	\em{orizzontalmente}, ovvero da una cella \math{(i, j)} ad una cella
+	\math{(i, j - 1)}, allora significa che l'operazione piú efficiente 
+	per quel passaggio é un inserimento. Se ci si sposta \em{verticalmente}, 
+	ovvero da una cella \math{(i, j)} ad una cella \math{(i - 1, j)} allora 
+	significa che l'operazione piú efficiente per quel passaggio é una 
+	rimozione. Se ci si sposta \em{diagonalmente}, ovvero da una cella
+	\math{(i, j)} ad una cella \math{(i - 1, j - 1)}, allora significa che 
+	l'operazione piú efficiente per quel passaggio é una sostituzione se 
+	\math{S_{1}[i] \ne S_{2}[j]} o una no-op altrimenti.
+
+	Una trascrizione viene costruita concatenando alla stringa, inizialmente vuota, 
+	il carattere \math{I} ogni volta che si incontra \math{\math{\leftarrow}}, il
+	carattere \math{D} ogni volta che si incontra \math{\math{\uparrow}}, il 
+	carattere \math{R} ogni volta che si incontra \math{\math{\nwarrow}} e 
+	\math{S_{1}[i] \ne S_{2}[j]} oppure il carattere \math{M} ogni volta che si 
+	incontra \math{\math{\nwarrow}} e \math{S_{1}[i] = S_{2}[j]}. Dato che le 
+	operazioni stanno venendo lette dall'ultima alla prima, la trascrizione 
+	ottimale si ottiene leggendo tale stringa in ordine inverso.
+
+	\begin{examplebox}
+		\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw]{ptable}
+			\begin{row}
+				\cell{} \cell{} \cell{\bf{w}} \cell{\bf{r}} \cell{\bf{i}}
+				\cell{\bf{t}} \cell{\bf{e}} \cell{\bf{r}} \cell{\bf{s}}
+			\end{row}
+			\begin{row}
+				\cell{} \cell{0} \cell{\math{\leftarrow} 1}
+				\cell{\math{\leftarrow} 2} \cell{\math{\leftarrow} 3}
+				\cell{\math{\leftarrow} 4} \cell{\math{\leftarrow} 5}
+				\cell{\math{\leftarrow} 6} \cell{\math{\leftarrow} 7}
+			\end{row}
+			\begin{row}
+				\cell{\bf{v}}
+				\cell{\math{\uparrow} 1}
+				\cell{\math{\nwarrow} 1}
+				\cell{\math{\nwarrow} \math{\leftarrow} 2}
+				\cell{\math{\nwarrow} \math{\leftarrow} 3}
+				\cell{\math{\nwarrow} \math{\leftarrow} 4}
+				\cell{\math{\nwarrow} \math{\leftarrow} 5}
+				\cell{\math{\nwarrow} \math{\leftarrow} 6}
+				\cell{\math{\nwarrow} \math{\leftarrow} 7}
+			\end{row}
+			\begin{row}
+				\cell{\bf{i}}
+				\cell{\math{\uparrow} 2}
+				\cell{\math{\nwarrow} \math{\uparrow} 2}
+				\cell{\math{\nwarrow} 2}
+				\cell{\math{\nwarrow} 2}
+				\cell{\math{\leftarrow} 3}
+				\cell{\math{\leftarrow} 4}
+				\cell{\math{\leftarrow} 5}
+				\cell{\math{\leftarrow} 6}
+			\end{row}
+			\begin{row}
+				\cell{\bf{n}}
+				\cell{\math{\uparrow} 3}
+				\cell{\math{\nwarrow} \math{\uparrow} 3}
+				\cell{\math{\nwarrow} \math{\uparrow} 3}
+				\cell{\math{\nwarrow} \math{\uparrow} 3}
+				\cell{\math{\uparrow} 3}
+				\cell{\math{\uparrow} \math{\leftarrow} 4}
+				\cell{\math{\uparrow} \math{\leftarrow} 5}
+				\cell{\math{\uparrow} \math{\leftarrow} 6}
+			\end{row}
+			\begin{row}
+				\cell{\bf{t}}
+				\cell{\math{\uparrow} 4}
+				\cell{\math{\nwarrow} \math{\uparrow} 4}
+				\cell{\math{\nwarrow} \math{\uparrow} 4}
+				\cell{\math{\nwarrow} \math{\uparrow} 4}
+				\cell{\math{\nwarrow} 3}
+				\cell{\math{\nwarrow} \math{\leftarrow} 4}
+				\cell{\math{\nwarrow} \math{\leftarrow} 5}
+				\cell{\math{\nwarrow} \math{\leftarrow} 6}
+			\end{row}
+			\begin{row}
+				\cell{\bf{n}}
+				\cell{\math{\uparrow} 5}
+				\cell{\math{\nwarrow} \math{\uparrow} 5}
+				\cell{\math{\nwarrow} \math{\uparrow} 5}
+				\cell{\math{\nwarrow} \math{\uparrow} 5}
+				\cell{\math{\uparrow} 4}
+				\cell{\math{\nwarrow} 4}
+				\cell{\math{\nwarrow} \math{\leftarrow} 5}
+				\cell{\math{\nwarrow} \math{\leftarrow} 6}
+			\end{row}
+			\begin{row}
+				\cell{\bf{e}}
+				\cell{\math{\uparrow} 6}
+				\cell{\math{\nwarrow} \math{\uparrow} 6}
+				\cell{\math{\nwarrow} \math{\uparrow} 6}
+				\cell{\math{\nwarrow} \math{\uparrow} 6}
+				\cell{\math{\uparrow} 5}
+				\cell{\math{\nwarrow} 4}
+				\cell{\math{\nwarrow} \math{\leftarrow} 5}
+				\cell{\math{\nwarrow} \math{\leftarrow} 6}
+			\end{row}
+			\begin{row}
+				\cell{\bf{r}}
+				\cell{\math{\uparrow} 7}
+				\cell{\math{\nwarrow} \math{\uparrow} 7}
+				\cell{\math{\nwarrow} 6}
+				\cell{\math{\nwarrow} \math{\leftarrow} \math{\uparrow} 7}
+				\cell{\math{\uparrow} 6}
+				\cell{\math{\uparrow} 5}
+				\cell{\math{\nwarrow} 4}
+				\cell{\math{\leftarrow} 5}
+			\end{row}
+		\end{ptable}
+
+		Seguendo tutti i possibili percorsi definiti dai puntatori, si ha che vi sono
+		tre possibili trascrizioni ottimali: \math{RIMDMDMMI}, \math{IRMDMDMMI} e 
+		\math{RRRMDMMI}. Come ci si aspettava, tutte e tre hanno la stessa lunghezza.
+	\end{examplebox}
+
+	Una volta che la tabella é stata costruita, ripercorrerla per ricavare le
+	trascrizioni ottimali richiede un tempo di esecuzione \math{O(n + m)}, 
+	pertanto il tempo complessivo dell'algoritmo non ne viene inficiato.
+
+\end{sile}

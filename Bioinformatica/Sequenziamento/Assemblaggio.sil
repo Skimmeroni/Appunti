@@ -1,0 +1,73 @@
+\begin{sile}
+
+	Il \bf{sequenziamento} di una biomolecola consiste nel determinare l'ordine 
+	degli elementi di base di cui é composta. Ad esempio, nel caso delle proteine 
+	questo significa determinare di quali amminoacidi é composta e qual'é la loro 
+	disposizione nello spazio, mentre nel caso del DNA significa ricavare l'ordine 
+	in cui sono disposte le basi azotate.
+
+	Ci si limiti, per semplicitá, al solo sequenziamento del DNA. Si noti come, a 
+	differenza ad esempio delle proteine, ogni specie ha un DNA sempre diverso da 
+	tutte le altre. Inoltre, nella maggior parte dei casi, ogni individuo di una 
+	stessa specie ha un DNA leggermente diverso dai suoi simili (e questo si 
+	riflette nelle loro differenze fenotipiche). Pertanto, non solo per ogni 
+	specie vivente occorre operare un proprio sequenziamento, ma questo deve anche 
+	tenere conto del fatto che esiste un certo "margine" di differenza ammesso fra 
+	individui della stessa specie.
+
+	La tecnologia attualmente esistente non é in grado di sequenziare l'intero 
+	genoma di una specie in un solo passaggio. Ció che é in grado di fare in 
+	un tempo accettabile e con bassa probabilitá di commettere un errore di 
+	lettura é sequenziare per intero piccoli frammenti di DNA, chiamati 
+	\bf{read}, lunghi dalle 50 alle 10000 coppie di basi (l'intero genoma umano 
+	é composto da circa \math{3 \times 10^{8}} basi). Non solo queste read sono 
+	molto piú piccole dell'intero DNA, ma non é nemmeno possibile sapere da quale 
+	regione del DNA sono state estratte. Infine, gli organismi diploidi (come 
+	l'essere umano) possiedono tutti i loro cromosomi in doppia copia, ciascuna 
+	ereditata da uno dei genitori, pertanto ciascuna read di uno stesso cromosoma
+	potrebbe essere relativa indifferentemente ad un cromosoma piuttosto che 
+	all'altro.
+
+	Sebbene gli algoritmi per il sequenziamento del DNA siano fra loro molto 
+	variegati, tutti quanti si basano sugli stessi tre passaggi: \bf{overlap}, 
+	\bf{layout}, \bf{consensus}.
+
+	\begin{itemize}
+		\begin{item}
+			\bf{Overlap}.
+
+			Avendo a disposizione un insieme di read, occorre determinare, per 
+			ciascuna coppia ordinata di read, quanto un suffisso della prima 
+			"combaci" con un prefisso della seconda, tenendo presente che le 
+			read contengono inevitabilmente degli errori di sequenziamento. 
+			Per questo motivo, si preferisce non osservare l'appaiamento diretto
+			suffisso-prefisso quanto piú la loro somiglianza (questo puó essere
+			fatto, ad esempio, mediante programmazione dinamica).
+		\end{item}
+		\begin{item}
+			\bf{Layout}.
+
+			Noto l'ordine in cui le read sono disposte, occorre unirle in un unica 
+			stringa. In questo passaggio é critica la gestione delle stringhe duplicate,
+			dato che per definizione é impossibile determinarne la posizione all'interno 
+			del DNA; inoltre, occorre anche determinare se due stringhe presentano un 
+			overlap significativo perché sono effettivamente consecutive all'interno del
+			DNA o per una coincidenza.
+		\end{item}
+		\begin{item}
+			\bf{Consensus}.
+
+			Il layout ha implicitamente assegnato ad ogni posizione del DNA una o piú
+			basi che possono trovarvisi. Se tutte le read hanno lo stesso carattere in
+			una certa posizione del loro overlap, allora si é (approssimativamente) 
+			certi che il DNA contenga effettivamente tale carattere in tale posizione.
+			Se le diverse read non concordano sul carattere presente in una certa 
+			posizione, occorre prendere una decisione. Un semplice approccio potrebbe
+			essere quello di riportare la frequenza di ciascun carattere per ciascuna 
+			posizione, e lasciare all'utente come interpretare questa informazione, 
+			oppure scegliere il carattere che si presenta piú spesso in una data 
+			posizione e assumere che sia quello corretto.
+		\end{item}
+	\end{itemize}
+
+\end{sile}

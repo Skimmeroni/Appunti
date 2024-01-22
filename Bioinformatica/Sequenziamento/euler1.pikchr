@@ -1,0 +1,27 @@
+lineht *= 1.25
+circlerad *= 0.75
+
+AA: circle at (0,0)         "AA"
+AC: circle at (1,0)         "AC"
+CA: circle at (2.5,0)       "CA"
+CG: circle at (1.75,-1)     "CG"
+GC: circle at (3.25,-1)     "GC"
+CT: circle at (0.25,-1)     "CT"
+TT: circle at (-0.75,-1.25) "TT"
+TA: circle at (-1,-0.25)    "TA"
+
+arrow from AC.se to CG.nw "ACG" aligned above
+arrow from CG.e  to GC.w  "CGC" aligned above
+arrow from GC.n  to CA.se "GCA" aligned above
+arrow from AC.sw to CT.ne "ACT" aligned above
+arrow from CT.w  to TT.e  "CTT" aligned above
+arrow from TT.nw to TA.s "TTA" aligned above
+arrow from TA.ne to AA.w  "TAA" aligned above
+arrow from AA.e  to AC.w  "AAC" aligned below
+arrow from AC.e  to CA.w  "ACA" aligned below
+arrow from CA.nw to AC.ne "CAC" aligned below
+arc -> from CA.n to AA.ne "CAA" aligned below
+spline -> from AA.sw to (AA.x - 0.125, AA.y - 0.25) \
+			   to (AA.x, AA.y - 0.375) \
+			   to (AA.x + 0.125, AA.y - 0.25) \
+			   to AA.se "AAA" aligned below

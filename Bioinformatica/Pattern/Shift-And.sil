@@ -1,0 +1,163 @@
+\begin{sile}
+
+	L'algoritmo naive é basato sulla comparazione di caratteri. Esistono approcci 
+	al problema dell'appaiamento esatto basati su operazioni aritmetiche: fra gli
+	algoritmi di questa famiglia figura l'\bf{algoritmo shift-and} \footnote{Anche
+	chiamato \bf{algoritmo di Baeza-Yates} o \bf{algoritmo di Gonnet}}.
+
+	Siano \math{P} un pattern di lunghezza \math{n} e \math{T} un testo di 
+	lunghezza \math{m}. Sia \math{M} un array di dimensione \math{n} per 
+	\math{m + 1} di valori binari, con indice \math{i} che va da 1 a \math{n} 
+	e indice \math{j} che va da 1 a \math{m}. Il valore in \math{M(i,j)} é 1 se 
+	i primi \math{i} caratteri di \math{P} coincidono con gli \math{i} caratteri 
+	di \math{T} che terminano al carattere \math{j}, altrimenti é 0. 
+
+	\begin{examplebox}
+		\begin[width = 25%fw]{parbox}
+			\begin[cols = 100%fw, cellborder = 0]{ptable}
+				\row{\cell{T = abracadabra}}
+				\row{\cell{P = abr}}
+			\end{ptable}
+		\end{parbox}
+		\begin[width = 75%fw]{parbox}
+			\begin[mode = display]{math}
+				[\table{
+					1 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 1 \\
+					0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+					0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+				}]
+			\end{math}
+		\end{parbox}
+	\end{examplebox}
+
+	Questo significa che se si ha \math{M(n,j) = 1} allora l'intera stringa 
+	\math{P} é contenuta in \math{T} terminando alla posizione \math{j} di 
+	\math{T}. Pertanto, per conoscere il numero di occorrenze di \math{P} 
+	in \math{T} é sufficiente contare quanti 1 sono presenti sull'ultima 
+	riga della matrice \math{M}. Essendo peró la matrice \math{M} composta 
+	esclusivamente da valori binari, contare il numero di 1 presenti in una 
+	sua riga equivale a sommare fra loro tutti i valori della riga.
+
+	Innanzitutto, si costruiscano tanti vettori \math{U_{x}} binari 
+	unidimensionali colonna di lunghezza \math{n} quante sono le 
+	lettere dell'alfabeto. La \math{i}-esima cella di \math{U_{x}} 
+	contiene il valore 1 se \math{x} coincide con l'\math{i}-esimo 
+	carattere di \math{P}, e 0 altrimenti.
+
+	\begin{examplebox}
+		\begin[width = 30%fw]{parbox}
+			\math{P} = abx
+		\end{parbox}
+		\begin[width = 17.5%fw]{parbox}
+			\math{U_{a} = [\table{1 \\ 0 \\ 0 \\ }]}
+		\end{parbox}
+		\begin[width = 17.5%fw]{parbox}
+			\math{U_{b} = [\table{0 \\ 1 \\ 0 \\ }]}
+		\end{parbox}
+		\begin[width = 17.5%fw]{parbox}
+			\math{U_{c} = [\table{0 \\ 0 \\ 0 \\ }]}
+		\end{parbox}
+		\begin[width = 17.5%fw]{parbox}
+			\math{\unicodeellipsis}
+		\end{parbox}
+	\end{examplebox}
+
+	Sia \math{\mi{Bit-Shift}(x)} una operazione sui vettori colonna, che 
+	restituisce il vettore \math{x} facendo scalare tutti gli elementi di 
+	una posizione verso il basso ed inserendo un 1 nella posizione lasciata 
+	vuota (la nuova prima posizione). Vedendo \math{x} come un vettore riga
+	trasposto, \math{\mi{Bit-Shift}(x)} si ottiene eseguendo uno shift a 
+	destra su \math{x} e accodando un 1 a sinistra.
+
+	\begin{examplebox}
+		\begin[mode = display]{math}
+			\mi{Bit-Shift} {({[\table{0 \\ 0 \\ 1 \\ 0 \\ 1 \\ }]})} =
+			\mi{Bit-Shift} {({[\table{0 & 0 & 1 & 0 & 1 \\ }]})^{T}} = 
+			{[\table{1 & 0 & 0 & 1 & 0 \\ }]}^{T} =
+			{[\table{1 \\ 0 \\ 0 \\ 1 \\ 0 \\ }]}
+		\end{math}
+	\end{examplebox}
+
+	La matrice \math{M} viene costruita colonna per colonna. Il primo passo é 
+	inizializzare i valori della prima colonna di \math{M}: se \math{T[1] \ne 
+	P[1]}, ovvero se il primo carattere di \math{P} ed il primo carattere di 
+	\math{T} differiscono, la prima colonna di \math{M} ha solo elementi 0; se 
+	invece \math{T[1] = P[1]}, allora il primo elemento della prima colonna di 
+	\math{M} vale 1 e tutti gli altri 0.
+
+	Ciascuna colonna restante \math{j > 1} é data dall'AND bit-a-bit fra 
+	\math{\mi{Bit-Shift}(j - 1)}, il vettore che si ottiene dall'applicare 
+	\math{\mi{Bit-Shift}} al vettore colonna precedente a \math{j}, e 
+	\math{U_{T[j]}}, il vettore \math{U} prima costruito relativo al 
+	carattere di \math{T} alla posizione corrente \math{j}. 
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			M[\cdot, j] = \mi{Bit-Shift}(j - 1) \thickspace \mi{AND} \thickspace U_{T[j]}
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			M[i, j] = \mi{Bit-Shift}(j - 1)[i] \thickspace \mi{AND} \thickspace U_{T[j]}[i]
+		\end{math}
+	\end{parbox}
+	\par
+
+	\begin{codeblock}
+		\begin{verbatim}
+			T = "..."
+			P = "..."
+			occurrences = 0
+
+			\bigskip
+			U = [[0] * (len(P)) for _ in range(26)] 
+			M = [[0] * (len(P)) for _ in range(len(T))]
+
+			\bigskip
+			for i in range (0, len(P)):
+			    Temp = ord(P[i]) - 97
+			    U[Temp][i] = 1
+
+			\bigskip
+			if (T[0] == P[0]):
+			    M[0][0] = 1
+
+			\bigskip
+			for i in range (1, len(T)):
+			    for j in range (1, len(P)):
+			        M[i][j] = M[i - 1][j - 1]
+			    M[i][0] = 1
+			    Temp = ord(T[i]) - 97
+			    for j in range (0, len(P)):
+			        M[i][j] = U[Temp][j] & M[i][j]
+
+			\bigskip
+			for i in range (len(T)):
+			    occurrences = occurrences + M[i][len(P) - 1]
+
+			\bigskip
+			print(occurrences)
+		\end{verbatim}
+	\end{codeblock}
+
+	Per convincersi della correttezza dell'algoritmo é sufficiente osservare che, 
+	per ogni \math{i > 1}, il valore di \math{M[i, j]} é 1 se e soltanto se sono 
+	contemporaneamente soddisfatte due condizioni: la prima é che i primi \math{i 
+	- 1} caratteri di \math{P} devono essere uguali agli \math{i - 1} caratteri 
+	di \math{T} che terminano in \math{j - 1}, mentre la seconda é che \math{P[i]} 
+	deve essere uguale a \math{T[j]}. La prima condizione é verificata se il 
+	valore contenuto in \math{M[i - 1, j - 1]} é 1, mentre la seconda condizione 
+	é verificata se il valore in \math{U_{T[j]}[i]} é 1. Tuttavia, il valore 
+	\math{M[i - 1, j - 1]} é uguale al valore \math{(\mi{Bit-Shift}(j - 1)[i])},
+	pertanto per valutare se entrambe le condizioni sono verificate é sufficiente
+	operare un AND fra \math{(\mi{Bit-Shift}(j - 1))} e \math{U_{T[j]}} e osservare
+	quale valore si trova nella cella \math{i}.
+
+	Nonostante il tempo di esecuzione dell'algoritmo Shift-And nel caso peggiore 
+	rimanga \math{\Theta (n \times m)}, l'algoritmo Shift-And é nettamente piú 
+	veloce dell'algoritmo naive se \math{n} é piccolo (grande quanto una parola). 
+	Questo perché ogni colonna di \math{M} ed ogni vettore \math{U} possono essere 
+	istanziati in una unica word, e le operazioni di \math{\mi{Bit-Shift}} e di 
+	AND possono essere fatte in una sola istruzione macchina. 
+
+\end{sile}

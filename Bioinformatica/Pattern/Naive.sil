@@ -1,0 +1,63 @@
+\begin{sile}
+
+	Data una stringa \math{P}, chiamata \em{pattern}, ed una stringa \math{T} 
+	di lunghezza maggiore di \math{P}, chiamata \em{testo}, il \bf{problema 
+	dell'appaiamento esatto} (\bf{exact matching problem}) consiste nel 
+	trovare, se ne esistono, tutte le occorrenze di \math{P} all'interno di 
+	\math{T}.
+
+	\begin{examplebox}
+		Con \math{P = aba} e \math{T = bbabaxababay}, vi sono tre occorrenze di 
+		P all'interno di T, in particolare alle posizioni 3, 7 e 9 di T. Si noti 
+		che é ammesso che diverse occorrenze si sovrappongano, come accade alle 
+		occorrenze in posizione 7 e 9 di T.
+	\end{examplebox}
+
+	Il metodo di risoluzione piú semplice e intuitivo per risolvere il 
+	problema dell'appaiamento esatto é quello che viene chiamato \bf{algoritmo 
+	naive} (\bf{algoritmo ingenuo}). L'algoritmo naive consiste nell'allineare 
+	l'estremo sinistro di \math{P} con l'estremo sinistro di \math{T}, 
+	dopodiché confrontare ordinatamente da sinistra a destra i caratteri 
+	di \math{P} con quelli di \math{T} finché non viene trovata una coppia 
+	di caratteri \math{P[i]} e \math{T[i]} diversi o finché si raggiunge la 
+	fine di \math{P}. Nel secondo caso, si segnala la presenza di una occorrenza. 
+	Il procedimento viene poi ripetuto spostando \math{P} di una posizione a 
+	destra; l'algoritmo termina quando la posizione dell'estremo destro di 
+	\math{P} supera quella dell'estremo destro di \math{T}.
+
+	\begin{codeblock}
+		\begin{verbatim}
+			occurrences = 0                                   # Number of occurrences
+			P = "..."                                         # Pattern
+			T = "..."                                         # Text
+			\bigskip
+			for i in range (0, len(T) - len(P) + 1):          # Iterate over Text
+			    mismatch = False
+			\bigskip
+			    for j in range (0, len(P)):                   # Iterate over Pattern, update the 
+			        if (P[j] != T[j + i]):                    # variable if a mismatch is found 
+			            mismatch = True
+			            break
+			\bigskip
+			    if (mismatch == False):                       # If an occurrence is found,
+			        occurrences = occurrences + 1;            # increment the variable
+			\bigskip
+			print(occurrences)
+		\end{verbatim}
+	\end{codeblock}
+
+	Siano \math{n} la lunghezza della stringa \math{P} e \math{m} la lunghezza
+	della stringa \math{T}. Il caso peggiore si ha quando esattamente ogni 
+	carattere di \math{P} si trova in \math{T}: per un numero \math{n} di volte
+	viene valutato (con risposta affermativa) se \math{P[i]} e \math{T[i]} sono
+	uguali per un numero \math{m - n + 1} di volte. Si ha quindi che il tempo 
+	nel caso peggiore é \math{n \times (m - n + 1) \approx \Theta (n \times m)}.
+
+	Si noti come questo risultato in termini di tempo di esecuzione sia lungi 
+	dall'essere il risultato ottimale. Si evidenzia infatti facilmente che 
+	il lower bound per il tempo di esecuzione di un qualsiasi algoritmo che 
+	risolve il problema del pattern matching é \math{O(n + m)}. Questo perché 
+	é sempre necessario, al fine di risolvere il problema, leggere almeno una 
+	volta tutti i caratteri sia di \math{P} che di \math{T}.
+
+\end{sile}

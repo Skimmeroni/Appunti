@@ -1,0 +1,41 @@
+box at (2.5,-1) "S1 = BANANA$" "S2 = PANNA$"
+
+lineht *= 1.5
+circlerad = 0.1
+
+Root: circle fill black at (0,0)
+A: circle fill black at (0.5,-0.5)
+B: circle fill black at (0.75,-1.5)
+C: circle fill black at (-1,-1)
+D: circle fill black at (-0.75,-1.5)
+E: circle fill black at (-0.5,-2)
+
+O1: circle             at (0,-1.25)    "1,1"
+O2: circle             at (0,-2.5)     "1,2"
+O3: circle             at (1.25,-1.75) "1,3"
+O4: circle             at (-1,-2.5)    "1,4"
+O5: circle radius 0.15 at (0.5,-2)     "1,5" "2,4"
+O6: circle radius 0.15 at (-1.5,-1.5)  "1,6" "2,5"
+O7: circle radius 0.15 at (-1,-0.25)   "1,7" "2,6"
+
+X1: circle at (1,0.25)    "2,1"
+X2: circle at (-1.25,-2)  "2,2"
+X3: circle at (1.25,-0.5) "2,3"
+
+line from Root to A "N" above aligned
+line from A    to B "A" above aligned
+line from Root to C "A" above aligned
+line from C    to D "N" above aligned
+line from D    to E "A" above aligned
+
+line from Root.s to O1.n  "BANANA$" above aligned
+line from Root.w to O7.ne "$"       above aligned
+line from B.sw   to O5.ne "$"       above aligned
+line from B.se   to O3.nw "NA$"     above aligned
+line from C.sw   to O6.ne "$"       above aligned
+line from E.sw   to O4.ne "$"       above aligned
+line from E.se   to O2.nw "NA$"     above aligned
+
+line from Root.e to X1.w  "PANNA$" above aligned
+line from D.sw   to X2.ne "NA$"    above aligned
+line from A.e    to X3.w  "NA$"    above aligned

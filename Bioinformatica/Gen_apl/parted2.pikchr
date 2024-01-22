@@ -1,0 +1,34 @@
+lineht *= 1.25 
+circlerad = 0.075
+
+A: circle fill 0 at (0,0)
+B: circle fill 0 at (0.5,-0.75)
+C: circle fill 0 at (1,-0.75)
+D: circle fill 0 at (0.5,0.75)
+E: circle fill 0 at (1.5,-0.75)
+F: circle fill 0 at (2,-0.75)
+G: circle fill 0 at (1.5,0.75)
+H: circle fill 0 at (2,0.75)
+I: circle fill 0 at (2.5,0)
+
+line from A to B
+line from A to D
+line from B to G
+line from C to D
+line from C to H
+line from D to E
+line from E to F
+line from E to H
+line from F to I
+line from G to H
+line from H to I
+
+"A" at (A.x - 0.25, A.y)
+"B" at (B.x, B.y - 0.25)
+"C" at (C.x, C.y - 0.25)
+"D" at (D.x, D.y + 0.25)
+"E" at (E.x, E.y - 0.25)
+"F" at (F.x, F.y - 0.25)
+"G" at (G.x, G.y + 0.25)
+"H" at (H.x, H.y + 0.25)
+"I" at (I.x + 0.25, I.y)

@@ -1,0 +1,132 @@
+\begin{sile}
+
+	Nonostante siano noti i meccanismi che stanno dietro le mutazioni del DNA
+	(deriva genetica, selezione naturale, ecc\math{\unicodeellipsis}), studiare
+	come ed in che ordine queste si verificano é tutt'altro problema. Un modello
+	statistico che descriva il rateo di mutazioni che avvengono nel DNA in 
+	funzione del tempo viene chiamato \bf{modello di mutazione}.
+
+	\subsection{Modello di Jukes-Cantor}
+
+		Il modello di mutazione piú semplice possibile, chiamato \bf{modello
+		di Jukes-Cantor}, assume che una base del DNA possa subire una mutazione 
+		e venire sostituita con un'altra base (diversa da sé stessa) con la stessa
+		probabilitá \math{\mu}. La probabilitá che una base questa venga sostituita 
+		con una base specifica é \math{\mu / 3}, essendo tutte e tre le possibilitá
+		equiprobabili, mentre la probabilitá che questa non subisca una mutazione 
+		é \math{1 - \mu}, perché é l'evento contrario all'evento "subire una 
+		mutazione qualsiasi":
+
+		\begin[cols = 5%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
+			\begin{row}
+				\cell{} \cell{A} \cell{C} \cell{G} \cell{T}
+			\end{row}
+			\begin{row}
+				\cell{A} \cell{\math{1 - \mu}} \cell{\math{\mu / 3}} 
+				\cell{\math{\mu / 3}} \cell{\math{\mu / 3}}
+			\end{row}
+			\begin{row}
+				\cell{C} \cell{\math{\mu / 3}} \cell{\math{1 - \mu}} 
+				\cell{\math{\mu / 3}} \cell{\math{\mu / 3}}
+			\end{row}
+			\begin{row}
+				\cell{G} \cell{\math{\mu / 3}} \cell{\math{\mu / 3}} 
+				\cell{\math{1 - \mu}} \cell{\math{\mu / 3}}
+			\end{row}
+			\begin{row}
+				\cell{T} \cell{\math{\mu / 3}} \cell{\math{\mu / 3}} 
+				\cell{\math{\mu / 3}} \cell{\math{1 - \mu}}
+			\end{row}
+		\end{ptable}
+
+	\subsection{Modello K2P}
+
+		Il modello di Jukes-Cantor é troppo semplicistico per descrivere la relazione
+		fra mutazioni del DNA e tempo trascorso. Ad esempio, al verificarsi di una
+		\bf{transizione} (la sostituzione di una purina con un'altra purina, o di
+		una pirimidina con un'altra pirimidina) o di una \bf{transversione} (la
+		sostituzione di una purina con una pirimidina, o di una pirimidina con una
+		purina) viene assegnata la stessa probabilitá, mentre é piú ragionevole
+		assumere che le due siano diverse (a causa della loro conformazione, é molto
+		piú probabile che una purina venga sostituita da un'altra purina piuttosto
+		che da una pirimidina, e viceversa).
+
+		Il \bf{modello K2P} é una estensione del modello di Jukes-Cantor, dove la
+		probabilitá che una base muti é sempre la stessa, ma vengono assegnate due
+		diverse probabilitá al verificarsi di una transizione o di una transversione.
+		Sia \math{\mu} la probabilitá che si verifichi una mutazione qualsiasi, e sia
+		\math{R} il rapporto fra la probabilitá che si verifichi una transizione e la
+		probabilitá che si verifichi una trasversione. La probabilitá che una base 
+		non subisca una mutazione rimane \math{1 - \mu}, ma la probabilitá che avvenga
+		una transizione piuttosto che una trasversione differisce:
+
+		\begin[cols = 5%fw 15%fw 15%fw 15%fw 15%fw]{ptable}
+			\begin{row}
+				\cell{} \cell{A} \cell{C} \cell{G} \cell{T}
+			\end{row}
+			\begin{row}
+				\cell{A} \cell{\math{1 - \mu}} \cell{\math{R / R + 1}} 
+				\cell{\math{1 / 2(R + 1)}} \cell{\math{1 / 2(R + 1)}}
+			\end{row}
+			\begin{row}
+				\cell{C} \cell{\math{R / R + 1}} \cell{\math{1 - \mu}} 
+				\cell{\math{1 / 2(R + 1)}} \cell{\math{1 / 2(R + 1)}}
+			\end{row}
+			\begin{row}
+				\cell{G} \cell{\math{1 / 2(R + 1)}} \cell{\math{1 / 2(R + 1)}} 
+				\cell{\math{1 - \mu}} \cell{\math{R / R + 1}}
+			\end{row}
+			\begin{row}
+				\cell{T} \cell{\math{1 / 2(R + 1)}} \cell{\math{1 / 2(R + 1)}} 
+				\cell{\math{R / R + 1}} \cell{\math{1 - \mu}}
+			\end{row}
+		\end{ptable}
+
+	\subsection{Modello General Time-Reversible}
+
+		Il modello \bf{General Time-Reversible} é ancora piú raffinato dei 
+		precedenti, perché prevede di assegnare una probabilitá univoca a 
+		ciascun tipo di mutazione, mantenendo peró la simmetricitá delle
+		probabilitá (la probabilitá che \math{i} muti in \math{j} é la stessa
+		che \math{j} muti in \math{i}, per qualsiasi coppia di basi \math{(i, j)}).
+
+		\begin[cols = 5%fw 5%fw 5%fw 5%fw 5%fw]{ptable}
+			\begin{row}
+				\cell{} \cell{A} \cell{C} \cell{G} \cell{T}
+			\end{row}
+			\begin{row}
+				\cell{A} \cell{\math{\alpha_{1}}} \cell{\math{\alpha_{2}}}
+				\cell{\math{\alpha_{3}}} \cell{\math{\alpha_{4}}}
+			\end{row}
+			\begin{row}
+				\cell{C} \cell{\math{\alpha_{2}}} \cell{\math{\chi_{1}}}
+				\cell{\math{\chi_{2}}} \cell{\math{\chi_{3}}}
+			\end{row}
+			\begin{row}
+				\cell{G} \cell{\math{\alpha_{3}}} \cell{\math{\chi_{2}}}
+				\cell{\math{\gamma_{1}}} \cell{\math{\gamma_{2}}}
+			\end{row}
+			\begin{row}
+				\cell{T} \cell{\math{\alpha_{4}}} \cell{\math{\chi_{3}}}
+				\cell{\math{\gamma_{2}}} \cell{\math{\tau_{1}}}
+			\end{row}
+		\end{ptable}
+
+		\bigskip
+
+		Il problema di questo modello é che se utilizzato per costruire alberi 
+		filogenetici, questi sono senza radice esplicita, mentre ci si aspetta 
+		che un albero filogenetico la possegga (dovendo descrivere un processo 
+		che ha un chiaro "prima" ed un chiaro "dopo").
+
+		Una soluzione molto semplice per trovare quale nodo dell'albero é il miglior 
+		candidato per essere la radice consiste nell'introdurre nell'insieme delle 
+		specie da analizzare una specie "spuria", chiamata \bf{outgroup}, che non ha 
+		alcuna relazione con le altre specie dell'insieme. Dato che questa specie 
+		verrá certamente a trovarsi nell'albero da tutt'altra parte rispetto alle 
+		altre, puó ben fungere da radice. Inoltre, ha anche una funzione di controllo 
+		incrociato, dato che se l'outgroup viene a trovarsi troppo vicino alle altre 
+		specie nell'albero filogenetico si ha un segnale evidente che é stato 
+		commesso un errore di classificazione.
+
+\end{sile}

@@ -1,0 +1,75 @@
+\begin{sile}
+
+	Data una stringa \math{S} di lunghezza \math{m}, viene chiamato \bf{suffix 
+	tree} (o \bf{albero dei suffissi}) per \math{S} il compact trie che ha per 
+	dizionario \math{S} e tutti i suoi suffissi. Un suffix tree per \math{S} 
+	ha esattamente \math{m} nodi foglia, numerati da 1 a \math{m}. Ogni nodo 
+	interno che non sia la radice ha almeno due nodi figli, ed ogni arco é 
+	etichettato da una sottostringa di \math{S}. Non possono esistere due archi 
+	in uscita da uno stesso nodo che abbiano una etichetta che inizi con lo 
+	stesso carattere. Esiste una corrispondenza biunivoca fra i percorsi che 
+	vanno dalla radice ai nodi foglia del suffix tree e i suffissi della stringa.
+
+	\begin{examplebox}
+		\center{\img[src = Suffix/suffix_tree.pdf, width = 75%fw]}
+	\end{examplebox}
+
+	Dato un nodo \math{u} di un albero dei suffissi, Viene chiamata 
+	\bf{path-label} di \math{u} la stringa costruita concatenando 
+	ordinatamente tutte le etichette degli archi del percorso che va 
+	dalla radice a \math{u}. La lunghezza della path-label di \math{u} 
+	viene chiamata \bf{string-depth} di \math{u}. É possibile aggiungere 
+	a ciascun nodo di un albero dei suffissi la sua path-label e la sua 
+	string-depth semplicemente con una visita in profonditá.
+
+	Data una stringa \math{S} di lunghezza \math{m}, é possibile costruire 
+	un albero dei suffissi relativo ad \math{S} mediante un algoritmo banale 
+	\footnote{Esistono algoritmi efficienti che permettono di costruire alberi 
+	dei suffissi in tempo lineare, come \bf{l'algoritmo di Ukkonen}, ma sono 
+	estremamente complessi.} in tempo \math{O(n^{2})}, basato sul costruire 
+	iterativamente \math{m} alberi intermedi per ciascun suffisso di \math{S}. 
+	Indicando con \math{N_{i}} l'albero intermedio che codifica tutti i suffissi 
+	di \math{S} da 1 a \math{i}, l'algoritmo puó essere descritto come segue:
+
+	\begin{enumerate}
+		\begin{item}
+			Innanzitutto viene costruito l'albero \math{N_{1}} mediante un arco 
+			etichettato \math{S[1:m]$}, che equivale alla stringa \math{S} riportata 
+			per intero, che unisce la radice dell'albero con una foglia etichettata 1;
+		\end{item}
+		\begin{item}
+			Il generico albero intermedio \math{N_{i+1}} é costruito a partire da 
+			\math{N_{i}}. Partendo dalla radice di \math{N_{i}}, si individui, se 
+			esiste, il percorso piú lungo esistente a partire dalla radice la cui 
+			etichetta contiene un prefisso di \math{S[i + 1:m]$};
+		\end{item}
+		\begin{item}
+			\begin{itemize}
+				\begin{item}
+					Se un percorso di questo tipo non esiste, viene aggiunto un nodo 
+					collegato direttamente alla radice avente \math{S[i + 1:m]$} come 
+					etichetta;
+				\end{item}
+				\begin{item}
+					Se invece questo percorso esiste, ci si aspetta che l'algoritmo si 
+					trovi nel mezzo di un arco \math{(u, v)} che va da un nodo \math{u} 
+					ad un nodo \math{v}, etichettato da una certa stringa \math{c}. Viene 
+					inserito nell'albero un nuovo nodo \math{w}, e l'arco \math{(u, v)}
+					viene sostituito con due archi distinti, \math{(u, w)} e \math{(w, v)}. 
+					Il primo é etichettato con i caratteri di \math{S[i + 1:m]$} che fanno 
+					da prefisso a \math{c}, mentre il secondo é etichettato con la stringa 
+					\math{c} a cui sono stati rimossi i primi \math{S[i + 1:m]$} caratteri.
+					Infine, vengono inseriti nell'albero un nodo foglia etichettato \math{i 
+					+ 1} ed un arco \math{(w, i + 1)} etichettato con il suffisso di \math{S[i 
+					+ 1:m]$} che non ha trovato corrispondenza.
+				\end{item}
+			\end{itemize}
+		\end{item}
+		\begin{item}
+			Se il numero di nodi foglia dell'albero finora costruito é inferiore 
+			ad \math{m}, si ripete l'algoritmo a partire dal punto 2. Altrimenti, 
+			l'algoritmo termina.
+		\end{item}
+	\end{enumerate} 
+
+\end{sile}

@@ -1,0 +1,22 @@
+lineht   *= 1.50  
+circlerad = 0.15
+boxht    *= 0.75
+
+ABCDE: box wid 1.00 at (+0.00, +0.00) "{A, B, C, D, E}" "h = 16.5"
+ABE:   box wid 0.75 at (-1.25, -1.00) "{A, B, E}"       "h = 11"
+CD:    box wid 0.75 at (+0.50, -0.75) "{C, D}"          "h = 14"
+AB:    box wid 0.75 at (-1.75, -1.75) "{A, B}"          "h = 8.5"
+E:     box wid 0.50 at (-0.75, -2.00) "{E}"             "h = 0"
+C:     box wid 0.50 at (+0.25, -1.75) "{C}"             "h = 0"
+D:     box wid 0.50 at (+1.00, -1.75) "{D}"             "h = 0"
+A:     box wid 0.50 at (-2.25, -2.75) "{A}"             "h = 0"
+B:     box wid 0.50 at (-1.25, -2.75) "{B}"             "h = 0"
+
+line from ((ABCDE.s.x + ABCDE.sw.x) / 2, ABCDE.s.y) to ABE.n "5.5" aligned above
+line from ((ABCDE.s.x + ABCDE.se.x) / 2, ABCDE.s.y) to CD.n  "2.5" aligned above
+line from ((CD.s.x + CD.sw.x) / 2,       CD.s.y)    to C.n   "14"  aligned above
+line from ((CD.s.x + CD.se.x) / 2,       CD.s.y)    to D.n   "14"  aligned above
+line from ((ABE.s.x + ABE.sw.x) / 2,     ABE.s.y)   to AB.n  "2.5" aligned above
+line from ((ABE.s.x + ABE.se.x) / 2,     ABE.s.y)   to E.n   "11"  aligned above
+line from ((AB.s.x + AB.sw.x) / 2,       AB.s.y)    to A.n   "8.5" aligned above
+line from ((AB.s.x + AB.se.x) / 2,       AB.s.y)    to B.n   "8.5" aligned above

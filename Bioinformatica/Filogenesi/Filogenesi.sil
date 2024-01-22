@@ -1,0 +1,64 @@
+\begin{sile}
+
+	La visione dominante dell'evoluzione della vita é che tutte le specie 
+	esistenti derivino da un antenato comune, ed una nuova specie possa 
+	emergere essenzialmente in due situazioni: quando una popolazione viene 
+	divisa in piú popolazioni che rimangono isolate abbastanza a lungo oppure
+	quando il codice genetico di una popolazione subisce abbastanza mutazioni 
+	vantaggiose che vengono poi propagate nella prole. Due specie possono dirsi
+	distinte quando un individuo della prima non é piú in grado di avere prole
+	fertile con individui della seconda, e viceversa. Quando da una specie se
+	ne genera una distinta si dice che é avvenuto un \bf{evento di speciazione}.
+
+	La stragrande maggioranza delle mutazioni sono o neutre, ovvero non 
+	influenzano la capacitá riproduttiva della specie, oppure negative, 
+	ovvero la riducono. Soltanto una piccola parte delle mutazioni si 
+	rivela essere vantaggiosa, e nella maggior parte dei casi sono 
+	relative a singoli nucleotidi. In casi molto rari possono peró 
+	verificarsi mutazioni che coinvolgono intere sezioni del DNA, come 
+	le \bf{inserzioni} (viene inserito in un punto del DNA un blocco di 
+	nucleotidi) o le \bf{inversioni} (i nucleotidi di un blocco vengono 
+	riposizionati in ordine inverso). 
+
+	Diviene allora naturale rappresentare l'evoluzione delle specie viventi come 
+	una struttura ad albero. Viene chiamato \bf{albero filogenetico} un albero i 
+	cui nodi rappresentano le specie e i cui archi rappresentano la relazione di 
+	parentela che sussiste fra queste. In particolare, i nodi foglia dell'albero 
+	sono le specie attualmente esistenti, mentre i nodi interni rappresentano gli
+	eventi di speciazione. La direzione degli archi rappresenta il verso in cui 
+	l'evoluzione é avvenuta (chi é antenato e chi é discendente), mentre la sua 
+	lunghezza o la sua etichetta rappresentano "quanto" una specie differisce dal 
+	suo antenato. In questo modo, un qualsiasi cammino sull'albero che va dalla 
+	radice ad una foglia corrisponde alla storia evolutiva della specie che il 
+	nodo foglia rappresenta.
+
+	La misura che quantifica la distanza fra una specie ed un suo antenato 
+	non é univoca, e influenza notevolmente la costruzione (e la struttura) 
+	dell'albero filogenetico. Fra le metriche in genere utilizzate ve ne 
+	sono due: la distanza temporale fra gli eventi di speciazione ed il 
+	numero di mutazioni che ha condotto alla speciazione. Si noti peró che 
+	le informazioni relative a queste metriche, che sia la distanza temporale 
+	o il numero di mutazioni avvenute, sono spesso note solo parzialmente, e 
+	soltanto per alcuni step della storia evolutiva delle specie. Pertanto, 
+	gran parte della filogenesi é una ricostruzione fatta a posteriori, e non
+	vi é modo di provarne la veridicitá. Un \bf{modello di filogenesi} é un 
+	determinato approccio alla ricostruzione della filogenesi, enfatizzando 
+	certi aspetti a discapito di altri e facendo determinate assunzioni.
+
+	L'evoluzione delle specie non puó mostrare un effetto apprezzabile se ci si
+	limita ad osservare un solo individuo della popolazione, perché la speciazione
+	é un fenomeno che si verifica con l'accumulo di molteplici cambiamenti di 
+	generazione in generazione. Inoltre, come giá detto, diverse mutazioni che un
+	individuo subisce non possono trasmettersi ai discendenti, perché non hanno
+	nulla a che vedere con mutazioni del suo codice genetico, e nascono e muoiono
+	insieme all'individuo stesso.
+
+	Tuttavia, lo studio delle cellule di un singolo individuo e le loro mutazioni 
+	puó essere assimilato allo studio dell'evoluzione di una popolazione, e fra 
+	le due non vi é quasi differenza. Pertanto, nonostante abbiano finalitá del 
+	tutto diverse, l'evoluzione delle specie e l'evoluzione delle cellule di un 
+	singolo individuo sono fenomeni studiabili applicando le stesse metodologie, 
+	ed in particolare i modelli utilizzati per descrivere la filogenesi della 
+	prima possono essere applicati (quasi) indifferentemente anche per la seconda.
+
+\end{sile}

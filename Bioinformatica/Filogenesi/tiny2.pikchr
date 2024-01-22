@@ -1,0 +1,42 @@
+lineht *= 1.5  
+circlerad = 0.175
+boxht *= 0.5
+boxwid *= 0.5
+
+I0: circle at (+0.0, +0.0) "{G}"
+I1: circle at (-1.0, -0.5) "{A, G}"
+I2: circle at (+1.0, -0.5) "{G, T}"
+I3: circle at (+2.0, -1.0) "{T}"
+I4: circle at (-2.0, -1.0) "{A}"
+
+"P5" at (+0.0, +0.25)
+"P4" at (-1.0, -0.25)
+"P3" at (+1.0, -0.25)
+"P2" at (+2.0, -0.75)
+"P1" at (-2.0, -0.75)
+
+S1: box at (-2.5, -1.5) "A"
+S2: box at (-0.5, -1.0) "G"
+S3: box at (+0.5, -1.0) "G"
+S4: box at (+1.5, -1.5) "T"
+S5: box at (+2.5, -1.5) "T"
+S6: box at (-1.5, -1.5) "A"
+
+"S1" at (-2.5, -1.75)
+"S4" at (-0.5, -1.25)
+"S3" at (+0.5, -1.25)
+"S2" at (+1.5, -1.75)
+"S5" at (+2.5, -1.75)
+"S6" at (-1.5, -1.75)
+
+line from I0.w to I1.ne
+line from I0.e to I2.nw
+line from I2.e to I3.nw
+line from I1.w to I4.ne
+
+line from I4.sw to S1.n
+line from I4.se to S6.n
+line from I1.se to S2.n
+line from I2.sw to S3.n
+line from I3.sw to S4.n
+line from I3.se to S5.n

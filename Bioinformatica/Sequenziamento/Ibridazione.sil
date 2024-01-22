@@ -1,0 +1,363 @@
+\begin{sile}
+
+	Lo shotgun sequencing risolve il problema del sequenziamento del DNA 
+	riducendolo ad una variante del problema TSP, che é NP-hard. Pertanto,
+	sebbene risolvibile in pratica per istanze di dimensioni contenute, 
+	non é possibile risolverlo per istanze di dimensioni considerevoli. Un 
+	approccio alternativo é dato dal \bf{sequenziamento mediante ibridazione} 
+	(\bf{sequencing by hybridization}), o \bf{SBH}.
+
+	SBH comincia con la costruzione di una matrice di \math{4^{k}} celle, 
+	con \math{k} valore fissato, chiamata \bf{chip} \footnote{Il nome 
+	deriva dal fatto che la tecnologia per costruirli é molto simile a 
+	quella usata per costruire i chip in silicio dei calcolatori.}. Ciascuna 
+	cella contiene una copia distinta di tutte le \math{4^{k}} possibili 
+	permutazioni della stessa stringa di DNA di lunghezza \math{k}, ciascuna 
+	chiamata \math{k}-\bf{mero}. Il chip viene messo in contatto con il DNA da 
+	sequenziare, al quale é stato applicato un marcatore radioattivo. Se il DNA 
+	da sequenziare presenta una sezione complementare ad uno dei \math{k}-meri, 
+	allora fra i due avverrá l'ibridazione, che viene resa evidente dalla presenza 
+	del marcatore radioattivo. A questo punto é sufficiente complementare i 
+	\math{k}-meri che hanno ibridato con il DNA per ottenere delle sezioni di 
+	DNA sequenziate.
+
+	Il valore \math{k} deve essere sia abbastanza piccolo da avere chip che 
+	riportano un numero contenuto di \math{k}-meri, ma al contempo abbastanza
+	grande da evitare che una stessa sottostringa compaia piú volte nella 
+	stringa bersaglio. Si noti come, a differenza dello shotgun sequencing 
+	prima trattato, nell'SBH due read non hanno un overlap di lunghezza 
+	arbitraria, bensí hanno un overlap di esattamente \math{k - 1} caratteri 
+	di lunghezza.
+
+	Questo alto livello di sovrapposizione puó essere sfruttato per ottenere 
+	una soluzione semplice ed elegante al sequenziamento mediante ibridazione.
+	Data una lista \math{L} contenente tutti i \math{k}-meri ottenibili a partire 
+	dalla stringa bersaglio \math{S}, si costruisca un grafo diretto \math{G(L)} 
+	come segue: si creino \math{4^{k - 1}} nodi, ciascuno etichettato con uno dei
+	possibili \math{(k - 1)}-meri, rimuovendo i duplicati se ve ne sono. Per 
+	ciascuna stringa \math{\chi} in \math{L}, si tracci un arco etichettato 
+	\math{\chi} dal nodo che ha per etichetta i \math{k - 1} caratteri piú a 
+	sinistra di \math{\chi} verso il nodo che ha per etichetta i \math{k - 1} 
+	caratteri piú a destra di \math{\chi}; alcuni nodi in \math{G(L)} potrebbero 
+	non essere raggiunti da alcun arco, pertanto possono essere soppressi. Un 
+	grafo cosí costruito viene chiamato \bf{Grafo di de Brujin}.
+
+	\begin{examplebox}
+		Sia data la lista \math{L = \{AAA, AAC, ACA, CAC, CAA, ACG, CGC, GCA, ACT, 
+		CTT, TTA, TAA\}}. Avendosi \math{k = 3}, tutte le stringhe di lunghezza 
+		\math{k - 1 = 2} che possono essere costruite dagli elementi di \math{L},
+		escludendo i duplicati, sono \math{\{AA, AC, CA, CG, GC, CT, TT, TA\}}.
+
+		\center{\img[src = Sequenziamento/euler1.pdf, width = 75%fw]}
+	\end{examplebox}
+
+	Similmente al grafo di overlap, é possibile ricavare la stringa del DNA 
+	completo a partire dalle etichette degli archi/nodi del grafo di de 
+	Brujin. Si noti peró come i vertici di un grafo di de Brujin non sono 
+	etichettati con delle read, ma bensí con sottostringhe di \math{k}-meri.
+	Pertanto, non é possibile modellare il problema del sequenziamento del DNA
+	in questa forma come un problema TSP. Dato che i \math{k}-meri si trovano
+	sugli archi, l'interesse é allora non nell'attraversare ogni vertice del
+	grafo esattamente una volta, bensí nell'attraversare ogni arco esattamente
+	una volta.
+
+	Dato un grafo diretto \math{G}, si dice \bf{percorso euleriano} un percorso 
+	diretto che attraversa ciascun arco di \math{G} esattamente una sola volta.
+	Nello specifico, viene chiamato \bf{circuito euleriano} un percorso euleriano
+	dove l'arco iniziale e l'arco finale coincidono.
+
+	Sia \math{G} un grafo orientato. \math{G} é detto \bf{semi-euleriano} se 
+	esistono esattamente due vertici \math{s} e \math{t} tali che \math{s} ha un
+	arco uscente in piú di quanti ne ha entranti, \math{t} ha un arco entrante in
+	piú di quanti ne abbia uscenti e tutti i vertici che non sono né \math{s} né
+	\math{t} hanno tanti archi entranti quanti archi uscenti. Viene invece detto
+	\bf{euleriano} se ogni suo vertice ha tanti archi entranti quanti archi 
+	uscenti.
+
+	\begin{theorem}
+		Sia \math{G} un grafo semi-euleriano, che possiede due vertici \math{s} e 
+		\math{t} tali che \math{s} ha un arco uscente in piú di quanti ne abbia 
+		entranti e \math{t} ha un arco entrante in piú di quanti ne abbia uscenti.
+		Sia \math{G_{1}} il grafo ottenuto a partire da \math{G} rimuovendo tutti 
+		gli archi di un qualsiasi percorso da \math{s} a \math{t}. Allora 
+		\math{G_{1}} é euleriano.
+
+		\bigskip
+		\bf{Dimostrazione}. Sia \math{P} un percorso da \math{s} a \math{t}. Essendo 
+		\math{G} un grafo semi-euleriano, qualsiasi vertice che non sia \math{s} o 
+		\math{t} ha tanti archi entranti quanti ne ha uscenti. Se viene costruito 
+		\math{G_{1}} rimuovendo \math{P}, questo ha l'effetto collaterale di rimuovere
+		un arco uscente da \math{s} ed un arco entrante da \math{t}. Questo significa
+		che ora anche \math{s} e \math{t} hanno tanti archi entranti quanti ne hanno 
+		uscenti. Quindi, avendo tutti i vertici di \math{G_{1}} lo stesso numero di 
+		archi entranti e uscenti, \math{G_{1}} é euleriano.
+	\end{theorem}
+
+	\begin{theorem}
+		Sia \math{G} un grafo euleriano e sia \math{C} un ciclo su \math{G}. Sia 
+		\math{G_{1}} il grafo ottenuto a partire da \math{G} rimuovendo tutti gli 
+		archi che compongono \math{C}. Allora anche \math{G_{1}} é euleriano.
+
+		\bigskip
+		\bf{Dimostrazione}. Essendo \math{G} un grafo semi-euleriano, qualsiasi 
+		vertice ha tanti archi entranti quanti ne ha uscenti. Sia \math{n} il 
+		numero di archi entranti o uscenti di un qualsiasi nodo di \math{G}. Se 
+		viene costruito \math{G_{1}} eliminando un intero ciclo, ciascun vertice 
+		avrá un arco entrante in meno ed un arco uscente in meno. Allora \math{G_{1}} 
+		é ancora euleriano, perché tutti i nodi hanno comunque lo stesso numero di
+		archi entranti e di archi uscenti, ovvero \math{n - 1}.
+	\end{theorem}
+
+	\pagebreak
+
+	\begin{theorem}
+		Un grafo \math{G} é semi-euleriano se e solo se ha un percorso euleriano.
+
+		\bigskip
+		\bf{Dimostrazione}. Sia \math{G} un grafo, e sia \math{P} un percorso 
+		euleriano dal vertice \math{s} al vertice \math{t}, con \math{s \ne t}. 
+		Per definizione, \math{P} percorre tutti gli archi di \math{G} esattamente 
+		una volta.
+
+		Sia \math{v} un vertice di \math{G} diverso sia da \math{s} che da 
+		\math{t}; anche questo vertice dovrá per forza venire attraversato da 
+		\math{P}. Inoltre, non essendo \math{v} né il nodo iniziale né quello 
+		finale di \math{P}, il numero di archi entranti in \math{v} é pari al 
+		numero di archi uscenti da \math{v}.
+
+		\math{s} é il vertice di partenza per \math{P}, pertanto viene attraversato 
+		un suo arco uscente nell'immediato inizio di \math{P} e, per ogni volta 
+		(anche nessuna) che si percorre un arco entrante in \math{s}, é necessario 
+		anche percorrere un arco uscente da \math{s}, perché \math{s} é stato 
+		scelto distinto dal nodo di arrivo \math{t}. Dato che \math{P} attraversa 
+		tutti i vertici di \math{G} esattamente una volta, il vertice \math{s} deve 
+		necessariamente avere un arco uscente in piú di quanti ne abbia entranti.
+
+		\math{t} é il vertice di arrivo per \math{P}, pertanto viene attraversato 
+		un suo arco entrante al termine di \math{P} e, per ogni volta (anche nessuna) 
+		che si percorre un arco uscente in \math{t}, é necessario anche percorrere un 
+		arco entrante da \math{t}, perché \math{t} é stato scelto distinto dal nodo 
+		di partenza \math{s}. Dato che \math{P} attraversa tutti i vertici di \math{G} 
+		esattamente una volta, il vertice \math{t} deve necessariamente avere un arco 
+		entrante in piú di quanti ne abbia uscenti.
+
+		Si ha quindi che \math{G} ha un vertice \math{s} che ha piú archi 
+		uscenti che archi entranti, un vertice \math{t} che ha piú archi 
+		entranti che archi uscenti e qualsiasi altro vertice \math{v} che 
+		non sia né \math{s} né \math{t} ha tanti archi entranti quanti ne 
+		ha uscenti. Ma questa é precisamente la definizione di grafo 
+		semi-euleriano, pertanto \math{G} é un grafo semi-euleriano.
+
+		\bigskip
+		Sia \math{G} un grafo semi-euleriano. Sia \math{s} l'arco di \math{G} che ha 
+		un arco uscente in piú di quanti ne abbia entranti, e sia \math{t} l'arco di
+		\math{G} che ha un arco entrante in piú di quanti ne abbia uscenti. Partendo 
+		da \math{s}, si costruisca un percorso \math{P} attraversando uno qualsiasi 
+		dei suoi archi uscenti raggiungendo un nodo \math{x}. Se \math{x = t}, allora 
+		\math{P} é un percorso euleriano, ed il teorema é provato. Se invece \math{x 
+		\ne t}, si attraversi un arco uscente da \math{x}, distinto da \math{s}, 
+		raggiungendo un nodo \math{y} e si reiteri questa procedura fino a raggiungere
+		\math{t}.
+
+		Essendo il grafo semi-euleriano, qualsiasi nodo che non sia \math{t} ha 
+		un nodo di archi uscenti non ancora visitati da \math{P} pari al numero 
+		di archi entranti non ancora visitati da \math{P}, ed ogni volta che 
+		\math{P} entra in un nodo ha sempre a disposizione un arco non ancora 
+		visitato per uscire. Il teorema é provato se é possibile dimostrare che 
+		il percorso \math{P} cosí costruito é un percorso euleriano.
+
+		Si supponga che \math{P} non sia un percorso euleriano. Devono allora 
+		esistere degli archi di \math{G} che \math{P} non ha ancora attraversato. 
+		Allora, per il teorema precedente, se vengono rimossi da \math{G} gli archi 
+		non attraversati da \math{P} si ottiene un grafo \math{G_{1}} euleriano. Se 
+		\math{G_{1}} é un grafo euleriano, allora deve avere un ciclo euleriano: sia 
+		allora \math{C} un ciclo di \math{G} formato da soli archi non attraversati 
+		da \math{P}. Si costruisca un percorso \math{P'} composto sia da tutti gli 
+		archi attraversati da \math{P}, sia da tutti quelli attraversati da \math{C}: 
+		un percorso di questo tipo puó essere costruito semplicemente iniziando da 
+		uno dei nodi in \math{P}, percorrendone gli archi fino a raggiungere un nodo 
+		che si trova sia in \math{C} che in \math{P}, percorrendo tutto \math{C} 
+		fino a tornare al nodo in questione e proseguendo sugli archi rimanenti in 
+		\math{P}. Dato che \math{P'} é un percorso che va da \math{s} a \math{t}, ci 
+		si chiede se sia euleriano: se non lo é, si ripete il procedimento costruendo 
+		un nuovo percorso \math{P''}, e cosí via fino ad esaurire tutti gli archi di 
+		\math{G}. Essendo \math{G} un grafo semi-euleriano, é garantito che questo 
+		processo possa fermarsi con la costruzione di un percorso euleriano.
+	\end{theorem}
+
+	\begin{theorem}
+		Un grafo \math{G} é euleriano se e solo se ha un ciclo euleriano.
+	\end{theorem}
+
+	A partire da un cammino euleriano su un grafo \math{G(L)} di De Brujin, é 
+	possibile costruire la stringa corrispondente al genoma. La stringa ha la 
+	proprietá che l'insieme delle sue sottostringhe di lunghezza \math{k} é 
+	esattamente l'insieme \math{L} che definisce \math{G(L)}.
+
+	% \begin{examplebox}
+		% Facendo riferimento alla lista \math{L} e al grafo \math{G(L)} dell'esempio 
+		% precedente, sia dato il percorso euleriano \math{\{AC, CA, AC, CG, GC, CA, 
+		% AA, AC, CT, TT, TA, AA, AA\}}. Le etichette degli archi percorsi lungo 
+		% questo percorso sono, nell'ordine: \math{A, C, G, C, A, A, C, T, T, A, A, A}. 
+		% Pertanto, la stringa definita dal percorso é \math{ACACGCAACTTAAA}. Si noti 
+		% come questo percorso euleriano non sia un circuito euleriano, perché \math{AC 
+		% \ne AA}.
+	% \end{examplebox}
+
+	Una stringa \math{S} si dice \bf{compatibile} con \math{L} se e soltanto se
+	contiene ogni sottostringa in \math{L} e (assumendo che \math{L} contenga
+	sottostringhe di lunghezza \math{k}) non contiene altre sottostringhe di
+	lunghezza \math{k}. É evidente come una stringa \math{S} sia compatibile
+	con \math{L} se e soltanto se é specificata da un cammino euleriano su
+	\math{G(L)}: questo perché, se cosí non fosse, allora \math{S} potrebbe
+	contenere sottostringhe che non si trovano in \math{L}.
+
+	Questo ha delle conseguenze interessanti: si assuma infatti che ciascuna
+	sottostringa in \math{L} si presenti nel DNA bersaglio una ed una sola volta.
+	Allora il dataset \math{L} determina senza ambiguitá la stringa DNA bersaglio
+	se e soltanto se \math{G(L)} ha un solo cammino euleriano. Inoltre, esiste una
+	corrispondenza uno-ad-uno fra i cammini euleriani per \math{G(L)} e le stringhe
+	che sono compatibili con \math{L}. Ovvero, ciascuna stringa compatibile
+	corrisponde ad un cammino euleriano distinto, e ciascun cammino euleriano
+	corrisponde ad una stringa distinta.
+
+	Se i dati sono stati raccolti in maniera corretta e nessuna sottostringa di
+	lunghezza \math{k} appare nella stringa bersaglio piú di una volta, allora
+	\math{G(L)} deve necessariamente avere almeno un cammino euleriano che
+	specifica la stringa di DNA in questione. Il problema si presenta quando c'é
+	piú di un cammino euleriano per \math{G(L)}, perché vi sono piú stringhe
+	elegibili per essere la stringa di DNA voluta. Tuttavia, anche se si presenta
+	questa situazione, é comunque possibile ottenere informazioni utili in merito
+	alla stringa bersaglio. Ad esempio, se una sottostringa compare in tutte o
+	molte delle stringhe elegibili per essere la stringa ricercata, allora si puó
+	presumere che quella sottostringa sia effettivamente presente nella stringa
+	bersaglio.
+
+	% Sia \math{S} la stringa \math{\alpha \beta \gamma \delta \epsilon}, ovvero
+	% una stringa definita come la concatenazione di cinque sottostringhe (non 
+	% necessariamente distinte). Si assuma che \math{\beta} e \math{\delta} non 
+	% siano la stringa vuota. Una \bf{rotazione} sulla stringa \math{S} é una 
+	% operazione che, a partire da \math{S}, restituisce la stringa \math{S^{'} = 
+	% \alpha \delta \gamma \beta \epsilon}, ovvero la stringa \math{S} a cui sono 
+	% state cambiate di posto le sottostringhe \math{\beta} e \math{\gamma}. Un 
+	% caso particolare di rotazione sulle stringhe é la \bf{rotazione ciclica}, 
+	% ovvero una rotazione sulle stringhe dove le sottostringhe \math{\alpha}, 
+	% \math{\gamma} e \math{\epsilon} sono stringhe vuote. Pertanto, una rotazione 
+	% ciclica sulla stringa \math{S = \beta \delta} produce la stringa \math{S = 
+	% \delta \beta}.
+
+	% \begin{examplebox}
+		% Sia \math{S = ACACGCAACTTAAA}. Si supponga di voler suddividere la stringa
+		% nelle cinque sottostringhe \math{\alpha = AC}, \math{\beta = A}, \math{\gamma 
+		% = C}, \math{\delta = GCA} e \math{\epsilon = ACTTAAA}. Si ha allora che la
+		% rotazione applicata ad \math{S} restituisce la stringa \math{S^{'} = 
+		% ACGCACAACTTAAA}.
+	% \end{examplebox}
+
+	% Sia data una lista \math{L} di sottostringhe ed un grafo \math{G} definito 
+	% come in precedenza. Ci si interroghi non sulla stringa specificata dall'unico 
+	% cammino euleriano per \math{G(L)} ma sull'insieme di stringhe specificate da 
+	% tutti i possibili cammini euleriani per \math{G(L)}. É possibile dimostrare 
+	% che le stringhe che appartengono a questo insieme sono soltanto rotazioni 
+	% l'una dell'altra. Nello specifico: siano date due stringhe \math{S} ed 
+	% \math{S^{'}} definite da due distinti cammini euleriani per uno stesso grafico 
+	% \math{G(L)}. Allora, \math{S} puó essere trasformata in \math{S^{'}} mediante 
+	% una o piú rotazioni, tali per cui ciascuna stringa intermedia ottenuta dalla 
+	% \math{i}-esima rotazione sia essa stessa una stringa definibile da un cammino 
+	% euleriano per \math{G(L)}.
+
+	% Siano \math{S} e \math{S^{'}} due stringhe definite da due cammini euleriani 
+	% distinti \math{P} e \math{P^{'}} per uno stesso grafo \math{G(L)}. L'obiettivo 
+	% é dimostrare che é possibile trasformare \math{P} in \math{P^{'}} mediante una 
+	% serie di trasformazioni sulle stringhe. Innanzitutto, si consideri la 
+	% situazione in cui \math{P} e \math{P^{'}} iniziano da due nodi diversi. 
+	% Occorre costruire, mediante una serie di rotazioni su \math{S}, una stringa 
+	% \math{S^{''}} tale che sia specificata da un cammino euleriano \math{P^{''}} 
+	% che ha lo stesso nodo iniziale di \math{P^{'}}. Si noti infatti che se 
+	% \math{G(L)} non contiene un circuito euleriano ma contiene un cammino 
+	% euleriano, allora \math{G(L)} deve avere un nodo con piú archi entranti
+	% che archi uscenti (cosí come un nodo con piú archi uscenti che
+	% archi entranti). Allora, in questo caso, quell'unico nodo deve essere
+	% il nodo iniziale di tutti i cammini euleriani per \math{G(L)}. Pertanto, se
+	% \math{P} e \math{P^{'}} iniziano con due nodi diversi, allora deve esistere 
+	% un circuito euleriano per \math{G(L)}. Ma allora il numero dgli archi 
+	% entranti deve essere lo stesso degli archi uscenti per tutti i nodi, e
+	% tutti i cammini euleriani devono anche essere circuiti euleriani. Pertanto,
+	% \math{P} deve essere esso stesso un circuito euleriano.
+
+	% Si definisca \math{P^{''}} come il circuito euleriano che inizia con lo stesso
+	% nodo \math{v} con cui \math{P^{'}} inizia e che poi percorre gli archi di
+	% \math{G(L)} nello stesso ordine con cui li percorre \math{P}. La stringa 
+	% \math{S^{''}} descritta da \math{P^{''}} é il risultato dell'applicare una 
+	% rotazione ciclica su \math{S}. Nello specifico, sia \math{\alpha} il prefisso 
+	% di \math{S} specificato dalla prima parte di \math{P}, ovvero la sezione del
+	% circuito \math{P} che va dall'inizio fino al raggiungere il nodo \math{v} per 
+	% la prima volta, e sia \math{\gamma} la restante parte di \math{S} specificata
+	% dalla restante parte di \math{P}. Il percorso \math{P^{''}} specifica la 
+	% stringa \math{S^{''} = \gamma \alpha}, ovvero una rotazione ciclica applicata
+	% ad \math{S} crea una stringa con associato un cammino euleriano che inizia con 
+	% lo stesso nodo con cui inizia \math{P^{'}}.
+
+	% Si assuma quindi, da ora in poi, che \math{P} e \math{P^{'}} inizino dallo 
+	% stesso nodo. Sia \math{A} il sottocammino iniziale in comune sia a \math{P} 
+	% che a \math{P^{'}} e sia \math{x} il nodo a partire dal quale \math{P} e 
+	% \math{P^{'}} divergono. Si assuma che il percorso \math{P} prosegua lungo 
+	% un nodo \math{e} e che il percorso \math{P^{'}} prosegua lungo un nodo 
+	% \math{e^{'}} (con \math{e \ne e^{'}}). Dato che \math{e^{'}} non fa parte 
+	% del sottocammino \math{A}, ma deve necessariamente fare parte del cammino 
+	% complessivo \math{P}, prima o poi \math{P} deve necessariamente passare da 
+	% \math{e}. Sia \math{B} il sottocammino euleriano che inizia con \math{e} e 
+	% finisce subito prima di attraversare \math{e^{'}}. Sia poi \math{C} la 
+	% rimanente parte di \math{P}.
+
+	% I sottocammini \math{B} e \math{C} devono necessariamente incontrarsi in 
+	% un nodo \math{y}. Infatti, il cammino euleriano \math{P^{'}} diverge dal 
+	% sottocammino \math{A} a partire da \math{e^{'}}, che si trova sul sottocammino
+	% \math{C}. Tuttavia, \math{P^{'}} deve necessariamente attraversare il 
+	% arco \math{e}, che si trova sul sottocammino \math{B}. Pertanto deve
+	% esistere almeno un nodo (indicato con \math{y}) lungo \math{C} che viene 
+	% percorso sia da \math{C} che da \math{B}.
+
+	% L'esistenza di \math{y} implica che sia possibile creare un cammino euleriano 
+	% \math{P^{''}} che ha \math{A} in comune con \math{P^{'}} e che passa per il 
+	% cammino \math{e^{'}}. \math{P^{''}} inizia con il sottocammino \math{A}, poi
+	% attraversa la prima parte di \math{C} fino a raggiungere il nodo \math{y}, 
+	% prosegue lungo la seconda parte di \math{B} fino ad \math{x} (di nuovo), 
+	% continua lungo la seconda parte di \math{B} fino ad \math{y} (di nuovo) ed
+	% infine prosegue lungo la seconda parte di \math{C}. \math{P^{''}} é un 
+	% cammino euleriano che contiene un sottocammino iniziale che ha in comune 
+	% con \math{P^{'}} (almeno) un nodo in piú di quanti ne abbia il sottocammino 
+	% iniziale di \math{P} in comune con \math{P^{'}}. Ripetendo il procedimento 
+	% un numero indefinito di volte, é possibile costruire una serie di cammini 
+	% euleriani la cui parte iniziale coincide con parti iniziali di \math{P} 
+	% sempre piú lunghe.
+
+	% Una trasformazione come quella appena descritta, che da un cammino euleriano 
+	% \math{P} ne produce un'altro \math{P^{''}}, viene chiamata \bf{rotazione di
+	% cammino}. Ne consegue che é sempre possibile trasformare un cammino euleriano
+	% \math{P} per \math{G(L)} in un altro cammino euleriano \math{P^{'}} per 
+	% \math{G(L)} mediante una o piú rotazioni di cammino, e ciascun cammino 
+	% intermedio ottenuto dalla \math{i}-esima di queste rotazioni é esso stesso 
+	% un cammino euleriano \math{P^{''}} per \math{G(L)}. É necessario ora mostrare
+	% che le rotazioni di cammino sono direttamente correlate alle rotazioni sulle
+	% stringhe.
+
+	% \center{\img[src = Sequenziamento/euler2.pdf, width = 87.5%fw]}
+
+	% Si faccia riferimento alla struttura sopra presentata, dove un cammino 
+	% euleriano generico \math{P} é stato decomposto in tre sottocammini 
+	% \math{A}, \math{B} e \math{C} determinati in base ai due nodi \math{x} 
+	% e \math{y}. Si decomponga la stringa \math{S} come \math{S = \alpha \beta 
+	% \gamma \delta \epsilon}, dove: \math{\alpha} é la parte di stringa costruita 
+	% dal sottocammino \math{A}, \math{\beta} é la parte di stringa costruita dal 
+	% sottocammino \math{B} fino al raggiungimento di \math{y}, \math{\gamma} é la 
+	% parte di stringa costruita dalla rimanente parte del sottocammino \math{B}, 
+	% \math{\delta} é la parte di stringa costruita dal sottocammino \math{C} fino 
+	% al raggiungimento di \math{x}, \math{\epsilon} é la parte di stringa costruita 
+	% dalla rimanente parte del sottocammino \math{C}. Il cammino euleriano 
+	% \math{P^{''}}, ottenuto mediante una rotazione di cammino come appena definita,
+	% genera la stringa \math{S^{''} = \alpha \delta \gamma \beta \epsilon}, che non 
+	% é altro che la stringa \math{S} a cui é stata applicata una rotazione sulle 
+	% stringhe.
+
+\end{sile}

@@ -1,0 +1,387 @@
+\begin{sile}
+
+	Il metodo Shift-And si basa sull'operare uno shift logico su array di bit. 
+	Dato che shiftare un numero di \math{n} posizioni equivale a moltiplicarlo 
+	\math{n} volte per la sua base, é possibile ripensare l'algoritmo Shift-And 
+	in termini di operazioni aritmetiche anziché operazioni logiche.
+
+	Siano dati un pattern \math{P} ed un testo \math{T}. Si assuma per il 
+	momento che \math{P} e \math{T} siano stringhe binarie, ovvero esclusivamente 
+	composte da 0 e 1. Questo permette di considerare le stringhe non come 
+	concatenazioni di caratteri ma come numeri binari. Si indichi con 
+	\math{T_{r}^{n}} la sottostringa di \math{T} che inizia alla posizione 
+	\math{r} ed ha lunghezza \math{n}, ovvero \math{T[r : r + n]}. Siano infine 
+	\math{H(P)} e \math{H(T_{r})} le rappresentazioni in forma decimale dei numeri 
+	binari \math{P} e \math{T_{r}^{n}}, ovvero:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			H{(P)} = \sum_{i = 1}^{n} 2^{n - i} \cdot P{[i]}
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			H{(T_{r})} = \sum_{i = 1}^{n} 2^{n - i} \cdot T{[r + i - 1]}
+		\end{math}
+	\end{parbox}
+
+	\begin{examplebox}
+		Se \math{P = 0101}, allora \math{H(P) = 2^{3} \times 0 + 2^{2} \times 1 + 
+		2^{1} \times 0 + 2^{0} \times 1 = 5}.
+
+		Se \math{T = 101101010}, \math{n = 4} e \math{r = 2} allora 
+		\math{H(T_{r}^{n}) = 2^{3} \times 0 + 2^{2} \times 1 +
+		2^{1} \times 1 + 2^{0} \times 0 = 6}.
+	\end{examplebox}
+
+	Ogni numero binario ha una ed una sola rappresentazione in forma decimale. 
+	Pertanto, se \math{H(P) = H(T_{r}^{n})}, allora il numero binario/stringa 
+	\math{P} ed il numero binario/stringa \math{H{(T_{r}^{n})}} sono uguali, 
+	ovvero esiste una occorrenza di \math{P} alla posizione \math{r} di \math{T}.
+	Si ha peró anche che ogni numero decimale ha una ed una sola rappresentazione 
+	in forma binaria, pertanto se \math{P = T_{r}^{n}}, ovvero esiste una 
+	occorrenza di \math{P} alla posizione \math{r} di \math{T}, allora \math{H(P) 
+	= H(T_{r}^{n})}.
+
+	Si potrebbe allora pensare di affrontare il problema del pattern matching 
+	utilizzando \math{H(P)} e \math{H(T_{r}^{n})}. Il problema di un approccio di 
+	questo tipo é che il costo per il calcolo di \math{H(P)} e \math{H(T_{r}^{n})} 
+	cresce troppo velocemente con l'aumentare della lunghezza delle stringhe. 
+	Inoltre, se le stringhe non sono binarie ma \math{n}-arie, il processo diventa 
+	ancora piú oneroso.
+
+	L'\bf{algoritmo Karp-Rabin} é un algoritmo che risolve il problema del 
+	pattern matching utilizzando \math{H(P)} e \math{H(T_{r}^{n})}. Tuttavia, 
+	non sfrutta i due valori per intero, bensí applicandovi l'operazione di 
+	modulo per un intero piccolo \math{p}. In questo modo, i valori sui quali 
+	l'algoritmo opera saranno sempre di dimensione contenuta, ma l'algoritmo 
+	diviene \em{probabilistico}, ovvero il risultato fornito é corretto a meno
+	di un certo errore. 
+
+	Per un intero positivo \math{p}, sia \math{H_{p}(P)} il resto ottenuto dalla
+	divisione intera di \math{H(P)} per \math{p}, ovvero \math{H(P) \mi{mod} p}. 
+	Analogamente, si definisce \math{H_{p}(T_{r}^{n})} come \math{H(T_{r}^{n}) 
+	\mi{mod} p}. I valori \math{H_{p}(P)} e \math{H_{p}(T_{r}^{n})} sono detti
+	\bf{fingerprint} di, rispettivamente, \math{P} e \math{T_{r}^{n}}.
+
+	Avendoli definiti come resto di una divisione, si ha che i valori 
+	\math{H_{p}(P)} e \math{H_{p}(T_{r}^{n})} sono necessariamente 
+	compresi tra 0 e \math{p - 1}. Tuttavia, se per ricavare \math{H_{p}(P)} 
+	e \math{H_{p}(T_{r}^{n})} é necessario prima calcolare \math{H(P)} e 
+	\math{H(T_{r}^{n})}, allora il problema della dimensione si ripropone. 
+	Fortunatamente, é possibile calcolare \math{H_{p}(P)} e 
+	\math{H_{p}(T_{r}^{n})} direttamente applicando le proprietá 
+	dell'aritmetica modulare:
+
+	\begin[mode = display]{math}
+		H_{p}(X) = \{[... (\{[X[1] \times 2 \mo[atom = bin]{mod} p +
+		X[2]] \times 2 \mo[atom = bin]{mod} p +
+		X[3]\} \times 2 \mo[atom = bin]{mod} p +
+		X[4]) ...] \mo[atom = bin]{mod} p +
+		X[n]\} \mo[atom = bin]{mod} p
+	\end{math}
+
+	\begin{examplebox}
+		\begin[width = 50%fw]{parbox}
+			Siano \math{P = 101111} e \math{p = 7}. Si ha allora che \math{H_{p}(P) =
+			101111 \mo[atom = bin]{mod} 7 = 47 \mo[atom = bin]{mod} 7 = 5}. Il valore
+			puó anche essere calcolato direttamente a partire da \math{P}, come
+			mostrato a fianco.
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\table[columnalign = left]{
+					1 \times 2 \mo[atom = bin]{mod} 7 + 0 = 2 \\
+					2 \times 2 \mo[atom = bin]{mod} 7 + 1 = 5 \\
+					5 \times 2 \mo[atom = bin]{mod} 7 + 1 = 4 \\
+					4 \times 2 \mo[atom = bin]{mod} 7 + 1 = 2 \\
+					2 \times 2 \mo[atom = bin]{mod} 7 + 1 = 5 \\
+					5 \mo[atom = bin]{mod} 7 = 5 \\
+				}
+			\end{math}
+		\end{parbox}
+	\end{examplebox}
+
+	Calcolare \math{H_{p}(P)} e \math{H_{p}(T_{r}^{n})} in questo modo permette
+	inoltre di operare con numeri di dimensione contenuta anche durante tutti 
+	gli step intermedi di computazione. Inoltre, é possibile mostrare che é 
+	possibile calcolare \math{H_{p}(T_{r}^{n})} in maniera efficiente a partire 
+	da \math{H_{p}(T_{r - 1}^{n})} con un numero costante di operazioni. Infatti:
+
+	\begin[mode = display]{math}
+		H(T_{r}^{n}) = 2 \times H(T_{r - 1}^{n}) - 2^{n}T[r - 1] + T[r + n - 1]
+	\end{math}
+
+	E ricordando che \math{H_{p}(T_{r}^{n}) = H(T_{r}^{n}) \mo[atom = bin]{mod} 
+	p}, si ha:
+
+	\begin[mode = display]{math}
+		H_{p}(T_{r}^{n}) = [(2 \times H(T_{r - 1}^{n}) 
+		\mo[atom = bin]{mod} p) - (2^{n} \mo[atom = bin]{mod} p) 
+		T[r - 1] + T[r + n - 1]] \mo[atom = bin]{mod} p
+	\end{math}
+
+	Se il pattern \math{P} si trova in \math{T} a partire dalla posizione 
+	\math{r}, allora \math{H_{p}(P) = H_{p}(T_{r}^{n})}. Questo perché se 
+	\math{P} si trova in \math{T} alla posizione \math{r}, ovvero se vale 
+	\math{H(P) = H(T_{r}^{n})}, allora vale anche \math{H(P) \mo[atom = bin]{mod} 
+	p = H(T_{r}^{n}) \mo[atom = bin]{mod} p}. Tuttavia, diversamente da quanto 
+	detto per \math{H(P)} e \math{H(T_{r}^{n})}, si perde l'implicazione inversa,
+	ovvero se vale \math{H_{p}(P) = H_{p}(T_{r}^{n})} non é detto che il pattern 
+	\math{P} si trovi in \math{T} a partire da \math{r}.
+
+	Quando si verifica una situazione in cui \math{H_{p}(P) = H_{p}(T_{r}^{n})} 
+	ma il pattern \math{P} non si trova effettivamente in \math{T} alla posizione 
+	\math{r}, si dice che si ha a che fare con un \bf{falso positivo}. Si noti 
+	peró che, siccome se il pattern \math{P} si trova in \math{T} a partire dalla 
+	posizione \math{r} é garantito che valga \math{H_{p}(P) = H_{p}(T_{r}^{n})},
+	non potranno mai verificarsi dei \bf{falsi negativi}, ovvero situazioni in 
+	cui \math{P} si trova in \math{T} a partire dalla posizione \math{r} ma 
+	l'algoritmo non lo registra. Questo significa che l'errore, se esiste, 
+	sará sempre in eccesso, mai in difetto.
+
+	A questo punto, si hanno a disposizione tutti gli elementi necessari per 
+	implementare l'algoritmo Karp-Rabin. Dati un testo \math{T} ed un pattern
+	\math{P}, entrambi sull'alfabeto binario:
+
+	\begin{enumerate}
+		\begin{item}
+			Si scelga un numero \math{p};
+		\end{item}
+		\begin{item}
+			Si calcolino \math{H_{p}(P)} e \math{H_{P}(T_{0}^{n})}, 
+			il valore iniziale di \math{H_{P}(T_{r}^{n})};
+		\end{item}
+		\begin{item}
+			Per ogni posizione \math{r} di \math{T}, si calcoli \math{H_{P}(T_{r}^{n})}
+			e si valuti se questo é uguale a \math{H_{p}(P)}. Se lo é, significa che é
+			presente una occorrenza, potenzialmente falsa, di \math{P} in \math{T}
+			alla posizione \math{r}.
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	\begin{codeblock}
+		\begin{verbatim}
+			T = "..." 
+			P = "..." 
+			pvalue = ... 
+			occurrences = 0
+
+			\bigskip
+			def initiate(S):
+			    H = 0
+			    for i in range (0, len(P)):
+			        H = H + (int(S[i]) * 2**(len(P) - i - 1))
+			    H = H \% pvalue
+			    return H
+
+			\bigskip
+			Hp = initiate(P) 
+			Ht = initiate(T)
+
+			\bigskip
+			for i in range (1, len(T) - len(P) + 1):
+			    Ht = (((2 * Ht) \% pvalue) - 
+			          (2**(len(P)) \% pvalue) * 
+			          int(T[i - 1]) + 
+			          int(T[len(P) + i - 1])) \% pvalue
+			    if (Ht == Hp):
+			        occurrences = occurrences + 1
+
+			\bigskip
+			print(occurrences)
+		\end{verbatim}
+	\end{codeblock}
+
+	\subsection{Ottimizzazione: ricerca di un \math{p} efficiente}
+
+		Una prima ottimizzazione per l'algoritmo Karp-Rabin é individuare un 
+		metodo che permetta di trovare dei \math{p} in maniera oculata. Nello 
+		specifico, occorre individuare dei valori \math{p} che siano abbastanza 
+		piccoli da rendere \math{H_{p}(P) = H_{p}(T_{r}^{n})} a loro volta piccoli, 
+		ma al contempo abbastanza grandi da minimizzare la probabilitá che si 
+		verifichino falsi positivi. 
+
+		É possibile mostrare che dei buoni valori \math{p} possono essere ottenuti 
+		sfruttando le proprietá aritmetiche dei numeri primi. Dato un numero intero 
+		positivo \math{x}, si indica con \math{\pi {(x)}} la \bf{funzione enumerativa 
+		dei numeri primi}; questa funzione restituisce quanti numeri primi esistono 
+		nell'intervallo che ha per estremi (inclusi) 1 e \math{x}.
+
+		\begin{theorem}
+			\bf{Teorema di Hadamard-Poussin} (anche chiamato semplicemente \bf{Teorema 
+			dei numeri primi}). Per \math{x} sufficientemente grandi, si ha \math{\pi 
+			{(x)} \approx \frac{x}{\mi{ln}(x)}}.
+		\end{theorem}
+
+		\begin{theorem}
+			\bf{Disuguaglianza di Rosser-Schoenfeld}. Sia \math{x \geq 29} un numero 
+			intero positivo. Il prodotto di tutti i numeri primi minori di \math{x} é 
+			strettamente maggiore di \math{2^{x}}.
+		\end{theorem}
+
+		\begin{theorem}
+			Siano \math{u} e \math{x} due numeri interi positivi tali per cui \math{u 
+			\geq 29} e \math{x \leq 2^{u}}. Allora \math{x} é scomponibile in meno di 
+			\math{\pi {(u)}} fattori primi distinti.
+
+			\bigskip
+			\bf{Dimostrazione}. Si supponga per assurdo che \math{x} sia scomponibile 
+			in \math{k > \pi (u)} fattori primi distinti: \math{q_{1}, q_{2}, 
+			\unicodeellipsis, q_{k}}. Essendo questi tutti diversi e tutti contati 
+			con molteplicitá uno, si ha che \math{x \geq q_{1} \cdot q_{2} \cdot 
+			\unicodeellipsis \cdot q_{k}}, perché \math{x} é dato dal prodotto dei 
+			suoi fattori primi tenendo conto della molteplicitá. Ricordando che per 
+			ipotesi si ha \math{2^{u} \geq x}, per proprietá transitiva \math{2^{u} 
+			\geq q_{1} \cdot q_{2} \cdot \unicodeellipsis \cdot q_{k}}.
+
+			Non é noto quali numeri primi \math{q_{1}, q_{2}, \unicodeellipsis, q_{k}} 
+			siano, ma é certo che il loro prodotto sia almeno pari al prodotto dei primi 
+			\math{k} numeri primi \math{2 \cdot 3 \cdot 5 \cdot \unicodeellipsis}. A sua 
+			volta, il prodotto dei primi \math{k} numeri primi deve essere maggiore del 
+			prodotto dei primi \math{\pi {u}} numeri primi, in quanto si é supposto per 
+			assurdo che \math{k > \pi (u)}.
+
+			Si ha quindi per proprietá transitiva che \math{2^{u}} é maggiore del 
+			prodotto dei primi \math{\pi {(u)}} numeri primi, ovvero che \math{2^{u}} 
+			é maggiore del prodotto di tutti i numeri primi minori o uguali a \math{u}. 
+			Questo é peró in contraddizione con la Disuguaglianza di Rosser-Schoenfeld, 
+			che stabilisce che il prodotto di tutti i numeri primi minori o uguali a 
+			\math{u} é strettamente maggiore di \math{2^{u}}. Pertanto, non é possibile 
+			assumere che esista un \math{k > \pi (u)}, ed il teorema é provato.
+		\end{theorem}
+
+		I teoremi relativi ai numeri primi appena riportati permettono di definire 
+		delle chiare limitazioni alla probabilitá che avvenga un falso positivo.
+
+		\pagebreak
+
+		\begin{theorem}
+			\bf{Teorema centrale Karp-Rabin}. Siano dati un pattern \math{P} 
+			ed un testo \math{T}, entrambe stringhe binarie, rispettivamente di 
+			lunghezza \math{n} e \math{m}, tali per cui \math{n \cdot m \geq 29}. 
+			Siano poi dati un numero intero positivo \math{I} ed un numero primo 
+			\math{p} scelto in modo da essere inferiore o uguale ad \math{I}. 
+			Allora la probabilitá che si verifichi (almeno) un falso positivo del 
+			pattern \math{P} nel testo \math{T} é minore o uguale a 
+			\math{\frac{\pi(nm)}{\pi(I)}}.
+
+			\bigskip
+			\bf{Dimostrazione}. Sia \math{R} l'insieme che contiene tutte le posizioni 
+			di \math{T} in cui \math{P} non inizia, ovvero \math{s \in R} se e solo se 
+			non c'é una occorrenza di \math{P} in \math{T} a partire dalla posizione 
+			\math{s}. In altri termini, si ha \math{H(P) \ne H(T_{s}^{n})} per qualsiasi
+			\math{s \in R}.
+
+			Si consideri la produttoria \math{\Pi_{s \in R} (|H(P) - H(T_{s}^{n})|)}. 
+			Essendo \math{P} e \math{T} due stringhe binarie, i massimi valori che 
+			\math{H(P)} e \math{H(T_{s}^{n})} possono assumere sono, rispettivamente,
+			\math{2^{n - 1}} e \math{2^{m - 1}}. Pertanto, deve certamente aversi che
+			\math{H(P) - H(T_{s}^{n}) \leq 2^{n}} per qualsiasi \math{s}. Avendo la 
+			produttoria non piú di \math{m} termini (nel caso limite in cui \math{P}
+			non compaia mai in \math{T}), si ha che \math{\Pi_{s \in R} (|H(P) - 
+			H(T_{s}^{n})|) \leq 2^{nm}}. Applicando il teorema precedente alla 
+			produttoria, é possibile stabilire che questa é scomponibile in meno di 
+			\math{\pi {(u)}} fattori primi distinti.
+
+			Si supponga che ad una certa posizione \math{r} di \math{T} si verifichi 
+			un falso positivo. Per definizione questo significa che \math{H_{p}(P) = 
+			H_{p}(T_{r}^{n})}, ovvero che \math{p} divide senza resto \math{H(P) - 
+			H(T_{r}^{n})}. Questo significa che \math{p} divide senza resto anche
+			la produttoria \math{\Pi_{s \in R} (|H(P) - H(T_{s}^{n})|)}, e quindi 
+			\math{p} é uno dei suoi fattori primi.
+
+			Se \math{p} permette il verificarsi di una falsa corrispondenza fra 
+			\math{P} e \math{T}, allora \math{p} deve essere membro di un insieme 
+			di almeno \math{\pi(nm)} elementi. Tuttavia, \math{p} é stato scelto 
+			casualmente da un insieme di \math{\pi(I)} elementi, pertanto la 
+			probabilitá che \math{p} sia un numero primo che comporta il verificarsi 
+			di un falso positivo di \math{P} in \math{T} é non superiore a 
+			\math{\frac{\pi(nm)}{\pi(I)}}.
+		\end{theorem}
+
+		Per avere una bassa probabilitá di ottenere un falso positivo é quindi 
+		sufficiente scegliere un numero primo qualsiasi minore o uguale ad 
+		\math{I}. Il problema si sposta quindi dalla scelta di un buon valore 
+		di \math{p} alla scelta di un buon valore di \math{I}: piú \math{I} é 
+		grande, piú la probabilitá che si verifichi un falso positivo si riduce, 
+		ma al contempo aumenta il numero di possibili valori che \math{p} puó 
+		assumere, rendendo piú oneroso il calcolo di \math{H_{p}(P)} e 
+		\math{H_{p}(T_{r}^{n})}. Una regola empirica stabilisce che un buon 
+		candidato per il valore di \math{I} é \math{nm^{2}}.
+
+		\begin{examplebox}
+			Siano dati un pattern \math{P} di lunghezza \math{n = 250} ed un tetso 
+			\math{T} di lunghezza \math{m = 4000}. Ponendo \math{I = nm^{2}} si ha,
+			in virtú del Teorema di Hadamard-Poussin:
+
+			\begin[mode = display]{math}
+				\frac{\pi(nm)}{\pi(I)} = \frac{\pi(nm)}{\pi(nm^{2})} \approx 
+				\frac{\frac{nm}{\mi{ln}(nm)}}{\frac{nm^{2}}{\mi{ln}(nm^{2})}} =
+				\frac{nm \cdot \mi{ln}(nm^{2})}{\mi{ln}(nm) \cdot nm^{2}} = 
+				\frac{1}{m} {[1 + \frac{\mi{ln}(m)}{\mi{ln}(n) + \mi{ln}(m)}]} =
+				\frac{1}{4000} {[1 + \frac{8.3}{5.52 + 8.3}]} = 0.0004
+			\end{math}
+
+			Ovvero, la probabilitá che si verifichi almeno un falso positivo 
+			nella ricerca di \math{P} in \math{T} é circa del 0.04\%.
+		\end{examplebox}
+
+	\subsection{Ottimizzazione: utilizzare piú fingerprint}
+
+		Anziché utilizzare una sola fingerprint, ci si chiede cosa accada se si 
+		ripete l'algoritmo \math{k} volte utilizzando una fingerprint diversa ad
+		ogni iterazione. Come giá detto in precedenza, l'algoritmo Karp-Rabin
+		risolve il problema del pattern matching a meno di un errore sempre in 
+		eccesso; questo significa che, qualsiasi sia il valore di \math{p} scelto,
+		una iterazione dell'algoritmo riporterá sempre tutte le "vere" occorrenze
+		del pattern del testo piú eventualmente delle occorrenze in piú dovute 
+		all'errore. Pertanto, se si eseguono \math{k} iterazioni dell'algoritmo, 
+		ognuna di queste riporterá tutte le "vere" occorrenze piú un errore di 
+		volta in volta diverso. Questo significa che intersecando gli insiemi delle 
+		soluzioni di ciascuna delle \math{k} iterazioni tutte le "vere" occorrenze
+		di \math{P} in \math{T} rimarranno, mentre se un falso positivo é assente 
+		nella soluzione di anche una sola delle \math{k} iterazioni, verrá scartato.
+		Operare \math{k} iterazioni dell'algoritmo permette quindi di "raffinare" il
+		risultato finale, ottenendo un margine di errore via via piú ristretto.
+
+		\begin{theorem}
+			Quando vengono scelti \math{k} numeri primi fra 1 e \math{I} in 
+			maniera casuale ed indipendente, e vengono utilizzate \math{k} 
+			iterazioni dell'algoritmo Karp-Rabin, la probabilitá che si 
+			verifichi lo stesso falso positivo in ciascuna di queste é 
+			\math{{[\frac{\pi {(nm)}}{\pi {(I)}}]}^{k}}.
+
+			\bigskip
+			\bf{Dimostrazione}. Il teorema precedente ha mostrato che la probabilitá
+			che si verifichi un falso positivo é \math{\frac{\pi {(nm)}}{\pi {(I)}}}.
+			Se i numeri primi vengono scelti casualmente ed indipendentemente l'uno
+			dall'altro, ciascuna scelta puó essere vista come un evento indipendente.
+			Pertanto, la probabilitá che si verifichi lo stesso falso positivo su 
+			\math{k} iterazioni é il prodotto delle probabilitá che si verifichi 
+			su ciascuna iterazione. Essendo queste probabilitá tutte uguali, la 
+			probabilitá che si verifichi lo stesso falso positivo in tutte le iterazioni 
+			é semplicemente \math{{[\frac{\pi {(nm)}}{\pi {(I)}}]}^{k}}.
+		\end{theorem}
+
+		Si noti come il ripetere l'algoritmo Karp-Rabin piú volte diminuisca la 
+		probabilitá di errore piú di quanto faccia perdere in termini di tempo di 
+		esecuzione. Questo perché eseguire l'algoritmo \math{k} volte fa aumentare 
+		il tempo di esecuzione linearmente (dato che viene semplicemente moltiplicato
+		per \math{k}), ma la probabilitá di ottenere un errore decresce 
+		esponenzialmente.
+
+	\subsection{Ottimizzazione: azzerare gli errori}
+
+		L'algoritmo Karp-Rabin é un algoritmo probabilistico; in particolare, é un 
+		esempio di \bf{algoritmo Monte Carlo}. Algoritmi di questo tipo sono veloci, 
+		ma corretti a meno di un certo margine di errore; questi si contraddistinguono 
+		dagli \bf{algoritmi Las Vegas}, che sono non sempre veloci ma sempre corretti. 
+		In alcuni casi é possibile convertire un algoritmo di tipo Monte Carlo in un
+		algoritmo di tipo Las Vegas equivalente (e viceversa), ovvero perdere in 
+		termini di tempo di esecuzione per guadagnare in termini di correttezza (o
+		viceversa), e l'algoritmo Karp-Rabin figura fra questi.
+
+\end{sile}

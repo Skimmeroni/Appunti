@@ -1,0 +1,53 @@
+\begin{sile}
+
+	Sebbene sia piú complesso, é possibile fare inferenze sulla proveninenza degli 
+	aplotipi di un individuo senza rifarsi al suo pedigree. Il problema consiste,
+	dato un insieme di read del DNA di un individuo, nel separare l'insieme in due
+	sottoinsiemi, uno per ciascun aplotipo di provenienza.
+
+	Una possibile formulazione viene data dal \bf{grafo dei conflitti}, un grafo 
+	i cui vertici sono le read ed ogni arco é una coppia di read non 
+	compatibili, ovvero che si é certi non possano provenire da uno stesso 
+	aplotipo. Il problema puó essere quindi riformulato come il partizionare il 
+	grafo in due sottografi, tali per cui ciascun sottografo contenga solo read 
+	provenienti da uno dei due aplotipi.
+
+	Un grafo di questo tipo viene detto \bf{grafo bipartito}, dove tutti i 
+	nodi di una partizione ha archi solo e soltanto con nodi dell'altra 
+	partizione. Sebbene a volte si possa dedurre se un grafo sia o non sia 
+	bipartito semplicemente osservandone la topologia, é possibile dimostrare un 
+	risultato piú solido: un grafo é bipartito se e solo se non contiene cicli di 
+	lunghezza dispari. Preso infatti un grafo \math{G} non avente alcun ciclo di
+	lunghezza dispari, si consideri un qualsiasi nodo \math{v}: é possibile 
+	partizionare il grafo in due parti, da una parte il solo \math{v} e dall'altra
+	parte tutti i nodi adiacenti a \math{v}, dopodiché si ripete il ragionamento 
+	per ciascuno di questi nodi fino ad esaurirli tutti. Di fatto, questa é una
+	ricerca in profonditá (breadth-first search). Questa procedura divide il grafo
+	in livelli.
+
+	\begin{examplebox}
+		\begin[width = 50%fw]{parbox}
+			\img[src = Gen_apl/parted1.pdf, width = 100%fw]
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\img[src = Gen_apl/parted2.pdf, width = 100%fw]
+		\end{parbox}
+	\end{examplebox}
+
+	Si noti peró che molto raramente le read di aplotipi sono assimilabili a grafi
+	aventi questa proprietá, pertanto non é possibile riportarli immediatamente 
+	come grafi bipartiti. Ci si chiede allora come si possa modificare un grafo
+	nella maniera meno "invasiva" possibile tale per cui il nuovo grafo é 
+	bipartito, ovvero il minimo numero dgli archi da eliminare tali per cui 
+	un grafo non bipartito diviene bipartito.
+
+	Un approccio alternativo é il \bf{MEC} (\bf{minimal error correction}), 
+	ovvero non eliminare vertici del grafo risultante fino a renderlo bipartito 
+	ma modificando quelli esistenti (che nel contesto della lettura del genoma 
+	significa modificare il minimo numero di caratteri). Questo approccio é 
+	certamente migliore, ma richiede necessariamente un genoma di riferimento su
+	cui effettuare la comparazione. Infatti, altrimenti sarebbe impossibile sapere
+	se un carattere osservato sia parte di un polimorfismo effettivamente esistente
+	(e quindi non modificarlo) oppure non lo é (e quindi modificarlo).
+
+\end{sile}

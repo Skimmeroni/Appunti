@@ -1,0 +1,20 @@
+lineht *= 1.5
+circlerad = 0.075
+circlefill = 0
+
+R: circle at (0,0.5)
+A: circle at (0,0)
+B: circle at (0,-0.5)
+C: circle at (-0.5,-1)
+D: circle at (0.5,-1)
+E: circle at (-0.5,-1.5)
+F: circle at (0.5,-1.5)
+G: circle at (0.5,-2)
+
+line from R.s  to A.n  "A" aligned above
+line from A.s  to B.n  "R" aligned above
+line from B.sw to C.ne "C" aligned below
+line from B.se to D.nw "R" aligned above
+line from C.s  to E.n  "O" aligned below
+line from D.s  to F.n  "A" aligned above
+line from F.s  to G.n  "Y" aligned above

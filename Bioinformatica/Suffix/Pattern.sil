@@ -1,0 +1,84 @@
+\begin{sile}
+
+	Gli alberi dei suffissi si prestano bene ad essere utilizzati per risolvere 
+	il problema del pattern matching. Sia \math{P} un pattern di lunghezza 
+	\math{n} e sia \math{T} un testo di lunghezza \math{m}. Si costruisca in 
+	tempo lineare un albero dei suffissi per \math{T} (o si assuma che ve ne 
+	sia giá uno a disposizione). Partendo dalla radice, si segua di nodo in nodo 
+	il percorso dell'albero dei suffissi etichettato con i caratteri di \math{P}. 
+	In ciascun passo dell'algoritmo possono verificarsi tre possibilitá, 
+	mutualmente esclusive:
+
+	\begin{itemize}
+		\begin{item}
+			Esiste un arco interamente etichettato da un prefisso \math{P[0:i]} di 
+			\math{P}, con \math{P[0:i] \ne P}. In questo caso, ci si sposta lungo 
+			questo arco e si ripete l'algoritmo sul suffisso \math{P[i:m]} sul 
+			sottoalbero dei suffissi che ha per radice il nodo corrente;
+		\end{item}
+		\begin{item}
+			Esiste un arco etichettato con l'intero \math{P}, oppure esiste un arco che 
+			ha l'intero \math{P} come prefisso della sua etichetta. In questo caso, ci 
+			si sposta lungo quest'arco e l'algoritmo termina segnalando che il numero di 
+			occorrenze di \math{P} in \math{T} é dato dal numero di nodi foglia che ha 
+			il sottoalbero dei suffissi che ha per radice il nodo corrente. Inoltre, il 
+			numero che etichetta questi nodi foglia corrisponde alle posizioni di 
+			\math{T} in cui si trova \math{P};
+		\end{item}
+		\begin{item}
+			Non esiste alcun arco etichettato con un prefisso di \math{P}, oppure 
+			non esiste alcun arco che abbia l'intero \math{P} come prefisso della 
+			sua etichetta. In questo caso, l'algoritmo termina segnalando che non 
+			esiste alcuna occorrenza di \math{P} in \math{T}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	L'algoritmo funziona perché, per definizione, una sottostringa di una stringa 
+	é un prefisso di un suo suffisso. Pertanto, \math{P} si trova in \math{T} in 
+	posizione \math{i} se e soltanto se \math{P} é un prefisso di \math{T[i:m]}. 
+	Questo accade se esiste un percorso che dalla radice dell'albero porta al 
+	(univoco) nodo etichettato \math{i}. 
+
+	\begin{examplebox}
+		\center{\img[src = Suffix/suffix_tree4.pdf, width = 75%fw]}
+
+		\begin{itemize}
+			\begin{item}
+				Si consideri il pattern \em{a}. Partendo dalla radice, si percorre l'arco
+				etichettato \em{a}, esaurendo completamente l'input, giungendo in un nodo
+				interno avente tre nodi figli, etichettati rispettivamente con \em{1}, 
+				\em{4}, e \em{8}. É possibile concludere che il pattern \em{a} compare 3 
+				volte nella parola \em{annalisa}, precisamente in prima, quarta e ottava 
+				posizione;
+			\end{item}
+			\begin{item}
+				Si consideri il pattern \em{na}. Partendo dalla radice, si percorre 
+				l'arco etichettato \em{n}, dopodiché vi sono solamente due archi, 
+				etichettati rispettivamente \em{nalisa$} e \em{alisa$}. L'etichetta 
+				del secondo arco ha \em{a} come prefisso, e percorrendola si giunge 
+				al nodo foglia etichettato \em{3}. É possibile concludere che il 
+				pattern \em{nan} compare 1 volta nella parola \em{annalisa}, precisamente
+				in terza posizione;
+			\end{item}
+			\begin{item}
+				Si consideri il pattern \em{nan}. Partendo dalla radice, si percorre 
+				l'arco etichettato \em{n}, dopodiché vi sono solamente due archi, 
+				etichettati rispettivamente \em{nalisa$} e \em{alisa$}. Dato che l'input 
+				non é stato interamente consumato e che nessuna delle due etichette ha 
+				\em{an} come prefisso, é possibile concludere che il pattern \em{nan} 
+				compare 0 volte nella parola \em{annalisa}.
+			\end{item}
+		\end{itemize}
+	\end{examplebox}
+
+	Per raggiungere il nodo radice del sottoalbero di interesse dove l'algoritmo
+	termina occorre compiere al massimo \math{m} passaggi. A questo punto servono
+	ulteriori \math{k} passaggi per attraversare il sottoalbero e individuarne 
+	tutti i nodi foglia. Pertanto, il tempo di esecuzione complessivo per eseguire 
+	l'algoritmo sui suffix tree per il pattern matching é \math{O(m + k)}. 
+	Naturalmente occorre anche tenere conto del tempo impiegato a costruire 
+	l'albero dei suffissi, che si presume essere \math{O(n)}.
+
+\end{sile}

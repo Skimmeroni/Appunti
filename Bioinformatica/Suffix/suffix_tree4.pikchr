@@ -1,0 +1,29 @@
+box at (-1.5,0) ht 0.25 "S = annalisa$"
+
+lineht *= 1.5
+circlerad = 0.075
+
+R:  circle fill black at (0,0)
+U:  circle fill black at (0.25,-0.5)
+V:  circle fill black at (0.75,-0.25)
+O4: circle            at (0,-1)        "4"
+O2: circle            at (1.5,0)       "2"
+O3: circle            at (1.25,-0.75)  "3"
+O1: circle            at (-0.75,-0.75) "1"
+O6: circle            at (-0.75,0.25)  "6"
+O5: circle            at (0.75,0.5)    "5"
+O7: circle            at (0,0.5)       "7"
+O8: circle            at (0.75,-0.75)  "8"
+O9: circle            at (-0.5,-0.25)  "9"
+
+line from R to U     "a"        above aligned
+line from R to V     "n"        above aligned
+line from R to O9.ne "$"        above aligned
+line from R to O5.sw "lisa$"    above aligned
+line from R to O7.s  "sa$"      above aligned
+line from R to O6.e  "isa$"     above aligned
+line from U to O4.ne "lisa$"    above aligned
+line from U to O1.e  "nnalisa$" above aligned
+line from U to O8.nw "$"        above aligned
+line from V to O2.w  "nalisa$"  above aligned
+line from V to O3.nw "alisa$"   above aligned

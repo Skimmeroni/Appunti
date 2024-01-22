@@ -1,0 +1,116 @@
+\begin{sile}
+
+	Viene chiamato \bf{longest common substring} il problema che richiede di 
+	trovare la sottostringa piú lunga in comune fra due stringhe \math{S_{1}} e 
+	\math{S_{2}} (per comoditá, si assuma che entrambe siano di lunghezza 
+	\math{n}). Il problema puó essere risolto in maniera banale prendendo tutte 
+	le possibili sottostringhe di \math{S_{1}} dalla piú lunga alla piú corta, 
+	e verificare se ogni \math{i}-esima sottostringa cosí costruita ha (almeno) 
+	una occorrenza all'interno di \math{S_{2}}; dato che si stanno considerando 
+	le sottostringhe di \math{S_{1}} in ordine decrescente di lunghezza, appena 
+	ne viene individuata una che ha (almeno) una occorrenza in \math{S_{2}} 
+	questa é certamente la piú lunga sottostringa in comune fra \math{S_{1}} e 
+	\math{S_{2}}.
+
+	\begin{examplebox}
+		Date \math{S_{1}} = \em{superiorcalifornialives} e \math{S_{2}} = 
+		\em{sealiver}, la sottostringa comune piú lunga é \em{alive}.
+	\end{examplebox}
+
+	L'algoritmo banale sopra descritto ha un tempo di esecuzione non 
+	inferiore a \math{O(n^{3})}. Infatti, per individuare tutte le 
+	possibili sottostringhe di \math{S_{1}} occorre impiegare un tempo 
+	quadratico (le sottostringhe di lunghezza \math{n - 1} sono 2, le 
+	sottostringhe di lunghezza \math{n - 2} sono 3, le sottostringhe di 
+	lunghezza \math{n - 2} sono 4, ecc\math{\unicodeellipsis}) e su 
+	ciascuna di questa occorre operare un algoritmo di pattern matching, 
+	che nella migliore delle ipotesi ha tempo \math{O(n)}.
+
+	Questo problema puó peró essere risolto in tempo lineare facendo uso 
+	degli alberi dei suffissi generalizzati o degli array dei suffissi 
+	generalizzati. Si consideri il problema della sottostringa comune piú 
+	lunga limitato a due sole stringhe \math{S_{1}} e \math{S_{2}}, e si 
+	costruisca l'albero dei suffissi generalizzato relativo a queste. Un
+	nodo si dice \bf{favorevole} se il sottoalbero avente tale nodo per 
+	radice ha almeno un nodo foglia che corrisponde ad un suffisso di 
+	\math{S_{1}} ed almeno un nodo foglia che corrisponde ad un suffisso 
+	di \math{S_{2}}. Naturalmente, i nodi che hanno per discendenti dei 
+	nodi nella cui etichetta sono riportate informazioni relative ad entrambe 
+	le stringhe sono certamente favorevoli.
+
+	Se un nodo é favorevole, allora la sua path-label é necessariamente una 
+	sottostringa comune ad entrambe le stringhe, perché per definizione di 
+	albero dei suffissi tale path-label é un prefisso di un suffisso sia 
+	della prima stringa che della seconda stringa (non necessariamente la 
+	stess). Non é peró sempre vero l'opposto, ovvero se una sottostringa é 
+	comune ad entrambe le stringhe, allora non é detto che esista un nodo 
+	favorevole dell'albero dei suffissi generalizzato che ha per path-label 
+	tale sottostringa: questo puó accadere se la sottostringa é interamente 
+	contenuta all'interno dell'etichetta di un arco. Tuttavia, dato che si 
+	sta considerando il problema della sottostringa comune piú lunga, una 
+	situazione in cui la sottostringa comune piú lunga sia solo parte 
+	dell'etichetta di un arco non puó accadere, perché l'etichetta intera 
+	é sottostringa di entrambe ed é necessariamente piú lunga di una sua parte.
+
+	Dato che tutti i nodi favorevoli di un albero dei suffissi generalizzato 
+	hanno una path-label che é sottostringa comune ad entrambe le stringhe, 
+	per trovare la sottostringa comune piú lunga é sufficiente individuare il 
+	nodo favorevole avente la maggior string-depth fra tutti i nodi favorevoli. 
+	I nodi favorevoli di un albero dei suffissi generalizzato possono essere
+	ricavati a partire da una visita bottom-up dell'albero: si contrassegni 
+	ciascun nodo dell'albero con un 1 se esiste almeno un nodo foglia nel 
+	sottoalbero avente per radice tale nodo che é relativo ad un suffisso di 
+	\math{S_{1}} e/o con un 2 se esiste almeno un nodo foglia nel sottoalbero 
+	avente per radice tale nodo che é relativo ad un suffisso di \math{S_{2}}.
+
+	\begin{examplebox}
+		Si consideri l'albero dei suffissi generalizzato associato alle stringhe
+		\math{S_{1} = banana$} e \math{S_{2} = panna$}. Le string-depth dei nodi
+		favorevoli sono: \math{\epsilon}, \math{A}, \math{N}, \math{NA}, \math{AN}.
+		Le sottostringhe piú lunghe comuni alle due stringhe sono allora \math{NA} 
+		e \math{AN}, di lunghezza due.
+	\end{examplebox}
+
+	Si consideri invece una situazione in cui si ha a disposizione un array dei
+	suffissi generalizzato anziché un albero. Questo contiene tutti i possibili
+	suffissi delle due stringhe e per ciascun suffisso é specificato a quale 
+	delle due stringhe si riferisce. La sottostringa comune piú lunga puó essere
+	ottenuta a partire da questa struttura dati operando una scansione lineare.
+
+	Per tutte le posizioni \math{i} sull'array dei suffissi generalizzato, si 
+	considerino gli intervalli \math{(i, i)}, \math{(i - 1, i)}, \math{(i - 2, 
+	i)} e cosí via fino a \math{(1, i)}. Per ciascun intervallo, si calcoli il 
+	minimo valore LCP dei suffissi che contiene; se il successivo intervallo ha
+	un LCP minimo piú grande del precedente, allora questo diventa l'intervallo
+	che, per il momento, si presume contenga la sottostringa comune piú lunga.
+	Quando tutti gli intervalli sono stati analizzati, l'algoritmo termina. Dato
+	che il numero di intervalli é lineare ed il tempo per analizzare un qualsiasi
+	intervallo é esso stesso lineare, l'algoritmo in questa forma ha un tempo di
+	esecuzione \math{O(n^{2})}.
+
+	\subsection{Ottimizzazione: saltare gli intervalli che non contengono entrambe le stringhe}
+
+		Gli intervalli sul generalized suffix array che non contengono almeno un 
+		suffisso di entrambe le stringhe non possono contenere una sottostringa
+		comune alle due. Pertanto, una volta analizzato l'intervallo di estremi 
+		\math{(i, j)}, se l'elemento \math{i - 1} é un suffisso della stessa 
+		stringa di cui \math{i} é suffisso, allora l'intervallo \math{(i - 1, j)} 
+		é garantito che non possa contenere una sottostringa comune ad entrambe, 
+		e pertanto non é necessario analizzarlo. Questo puó essere fatto in pratica, 
+		ad esempio, mediante un flag booleano che tenga traccia di quale delle due 
+		stringhe il suffisso in cima al precedente intervallo facesse parte. Si noti 
+		peró che il tempo di esecuzione teorico rimanga comunque \math{O(n^{2})}.
+
+	\subsection{Ottimizzazione: valori LCP in tempo lineare}
+
+		Il calcolo del valore LCP minimo di un intervallo puó essere ottenuto in 
+		tempo costante perché il problema é di fatto identico al problema range 
+		minimum query. Essendo il numero di intervalli lineare e richiedendo 
+		ciascuno un tempo costante per estrarne il minimo dalla matrice RMQ, 
+		l'algoritmo termina in tempo \math{O(n)}. Ricordando peró che la matrice 
+		che risolve questo problema richiede un tempo di esecuzione \math{O(n 
+		\mi{log} {(n)})}, ed essendo questo tempo maggiore di \math{O(n)}, il 
+		tempo complessivo perché l'algoritmo termini tenendo anche conto del 
+		preprocessamento é \math{O(n \mi{log} {(n)})}.
+
+\end{sile}

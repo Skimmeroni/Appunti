@@ -1,0 +1,134 @@
+\begin{sile}
+
+	I suffix tree sono strumenti molto potenti per risolvere il problema del 
+	pattern matching, ma sono anche molto esosi in termini di spazio. Nel caso 
+	in cui l'occupazione di memoria sia un fattore critico per la risoluzione 
+	di un problema, gli alberi dei suffissi potrebbero non rivelarsi lo strumento 
+	migliore. Esiste peró una struttura dati \bf{array dei suffissi} che é piú 
+	conservativa dell'albero dei suffissi in termini di spazio occupato e permette 
+	di risolvere il problema del pattern matching in un tempo comparabile.
+
+	Data una stringa \math{T} di lunghezza \math{m}, l'array dei suffissi 
+	\math{Pos} é un array di interi nell'intervallo \math{[1,m]} che specifica
+	l'ordine lessicografico degli \math{m} suffissi della stringa \math{T}.
+	Ovvero, il suffisso che inizia alla posizione \math{Pos[1]} di \math{T} é
+	il suffisso che lessicalmente si trova in prima posizione, mentre il suffisso 
+	che inizia alla posizione generica \math{Pos[i]} di \math{T} viene prima, 
+	secondo l'ordine lessicografico, del suffisso che inizia alla posizione 
+	\math{Pos[i+1]}.
+
+	\begin{examplebox}
+		Data la stringa \em{T = mississippi$}, si ha 
+		\math{Pos = [12, 11, 8, 5, 2, 1, 10, 9, 7, 4, 6, 3]}. Infatti:
+		% \begin[mode = display]{math}
+			% \table[columnalign = left left left left left 
+				% left left left left left left left]{
+				% 12 & 11 & 8 & 5 & 2 & 1 &
+				% 10 & 9 & 7 & 4 & 6 & 3 \\
+				% $ & i$ & ippi$ & issippi$ & 
+				% ississippi$ & mississippi$ & 
+				% pi$ & ppi$ & sippi$ & sissippi$ 
+				% & ssippi$ & ssissippi$ \\
+			% }
+		% \end{math}
+		\begin[cols = 4%fw 4%fw 7%fw 8%fw 13%fw 15%fw 5%fw 5%fw 8%fw 10%fw 10%fw 13%fw, cellborder = 0]{ptable}
+			\begin{row}
+				\cell{12} \cell{11} \cell{8}
+				\cell{5}  \cell{2}  \cell{1}
+				\cell{10} \cell{9}  \cell{7}
+				\cell{4}  \cell{6}  \cell{3}
+			\end{row}
+			\begin{row}
+				\cell{$} \cell{i$} \cell{ippi$} \cell{issippi$}
+				\cell{ississippi$} \cell{mississippi$} \cell{pi$}
+				\cell{ppi$} \cell{sippi$} \cell{sissippi$}
+				\cell{ssippi$} \cell{ssissippi$}
+			\end{row}
+		\end{ptable}
+	\end{examplebox}
+
+	Costruire un array dei suffissi a partire da una stringa é possibile, ma 
+	estremamente complesso. É peró possibile convertire un albero dei suffissi
+	in un array dei suffissi equivalente in tempo lineare; per farlo, occorre
+	innanzitutto estendere la nozione di ordinamento lessicografico alle 
+	etichette degli archi degli array dei suffissi.
+
+	Dato un albero dei suffissi, siano \math{u, v, w} tre suoi nodi generici. Si 
+	dice che l'arco \math{(v, u)} dell'albero (se esiste) occupa una posizione 
+	inferiore in ordine lessicografico dell'arco \math{(v, w)} (se esiste) se e 
+	soltanto se il primo carattere dell'etichetta di \math{(v, u)} occupa una 
+	posizione inferiore in ordine lessicografico del primo carattere dell'etichetta 
+	del arco \math{(v, w)}. Per convenzione, si assume che il carattere speciale $
+	venga prima di tutti gli altri.
+
+	Dato che, per definizione, in un albero dei suffissi ogni nodo interno 
+	non puó avere due archi uscenti con una etichetta che comincia con lo 
+	stesso carattere, é sempre possibile definire un ordine per queste etichette. 
+	Questo significa che per ottenere l'array dei suffissi é sufficiente visitare 
+	l'albero in profonditá, partendo dalla radice e seguendo di volta in volta 
+	l'arco la cui etichetta viene prima secondo l'ordine lessicografico fino a 
+	raggiungere un nodo foglia, riportare l'etichetta del nodo e fare backtracking 
+	fino ad esaurire tutti nodi dell'albero. Il tempo per ricavare l'array dei 
+	suffissi é lineare perché, per il modo in cui l'albero dei suffissi é 
+	costruito, ogni nodo foglia viene visitato esattamente una sola volta.
+
+	\pagebreak
+
+	\begin{examplebox}
+		\center{\img[src = Suffix/suffix_tree2.pdf, width = 75%fw]}
+
+		\begin{enumerate}
+			\begin{item}
+				Partendo dalla radice, si attraversa l'arco con l'etichetta che 
+				si trova prima in ordine lessicografico, ovvero \math{$}, che 
+				termina subito nel nodo foglia etichettato 7. Occorre quindi fare
+				subito backtracking e tornare alla radice;
+			\end{item}
+			\begin{item}
+				Si procede a percorrere l'arco con l'etichetta che si trova prima in ordine 
+				lessicografico escluso \math{$}, ovvero \math{ar};
+			\end{item}
+			\begin{item}
+				Qui si ha una biforcazione con due possibili cammini, etichettati con
+				\math{$} e \math{tar$}. Dato che \math{$} viene prima di \math{tar$} in
+				ordine lessicografico, va attraversato prima il primo e poi il secondo;
+			\end{item}
+			\begin{item}
+				Entrambi sono nodi foglia, rispettivamente 5 e 2, pertanto occorre fare 
+				backtracking fino alla radice;
+			\end{item}
+			\begin{item}
+				Il arco con l'etichetta che si trova prima in ordine 
+				lessicografico escluso \math{ar} (che é giá stato testato) é \math{r};
+			\end{item}
+			\begin{item}
+				Qui si ha una biforcazione con due possibili cammini, etichettati con
+				\math{$} e \math{tar$}. Dato che \math{$} viene prima di \math{tar$} in
+				ordine lessicografico, va attraversato prima il primo e poi il secondo;
+			\end{item}
+			\begin{item}
+				Entrambi sono nodi foglia, rispettivamente 6 e 3, pertanto occorre fare 
+				backtracking fino alla radice;
+			\end{item}
+			\begin{item}
+				Il arco con l'etichetta che si trova prima in ordine 
+				lessicografico esclusi \math{ar} e \math{r} é \math{tarr};
+			\end{item}
+			\begin{item}
+				Qui si ha una biforcazione con due possibili cammini, etichettati con
+				\math{$} e \math{tar$}. Dato che \math{$} viene prima di \math{tar$} in
+				ordine lessicografico, va attraversato prima il primo e poi il secondo;
+			\end{item}
+			\begin{item}
+				Entrambi sono nodi foglia, rispettivamente 4 e 1, pertanto occorre fare 
+				backtracking fino alla radice;
+			\end{item}
+			\begin{item}
+				Rileggendo l'ordine in cui i nodi foglia sono stati raggiunti, si ha che
+				l'array dei suffissi associato all'albero in alto é \math{Pos = [7, 5, 2, 6, 
+				3, 4, 1]}.
+			\end{item}
+		\end{enumerate}
+	\end{examplebox}
+
+\end{sile}

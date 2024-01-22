@@ -1,0 +1,389 @@
+\begin{sile}
+
+	Il \bf{grande problema di parsimonia} é una generalizzazione del piccolo 
+	problema di parsimonia; é uguale a quest'ultimo in tutto e per tutto ma
+	introduce l'ulteriore difficoltá di non avere a disposizione la topologia 
+	dell'albero \math{T}. Pertanto, il grande problema di parsimonia richiede
+	sia di ricostruire la filogenesi di un insieme di specie, sia di dedurre
+	lo stato dei caratteri dei loro antenati. Questo problema, se approcciato 
+	mediante il metodo di massima parsimonia, diviene un problema NP, quindi 
+	impossibile da modellare in un tempo ragionevole. Per questo motivo, si 
+	preferisce attaccare il problema a partire dalla distanza fra stringhe.
+
+	Sia dato un insieme di specie \math{S = \{S_{1}, S_{2}, \unicodeellipsis, 
+	S_{n}\}} delle quali é noto il sequenziamento del genoma. É possibile 
+	sfruttare la sequenza genomica delle specie in \math{S} per dedurne la
+	filogenesi: infatti, se si assume che specie simili abbiano genomi simili,
+	allora due specie filogeneticamente lontane avranno le rispettive stringhe
+	genomiche distanti, e viceversa. Questo tipo di approccio al problema della
+	ricostruzione della filogenesi prende il nome di \bf{filogenesi basata su
+	distanze}.
+
+	La distanza fra le specie (ovvero, la distanza fra la stringa di DNA dell'una
+	e la stringa di DNA dell'altra) puó essere espressa sia mediante una matrice,
+	sia mediante un albero. Una matrice di distanze é una matrice che riporta 
+	in ciascuna cella \math{(i, j)} la distanza fra la stringa genomica di 
+	\math{S_{i}} e la stringa genomica di \math{S_{j}}. Un albero delle distanze
+	é un albero dove le etichette dell'arco che va dal nodo \math{v_{i}} al nodo 
+	\math{v_{j}} corrisponde alla distanza fra la distanza fra la stringa genomica 
+	della specie (non necessariamente vivente) che etichetta \math{v_{i}} e la 
+	stringa genomica della specie (non necessariamente vivente) che etichetta 
+	\math{v_{j}}.
+
+	\begin{examplebox}
+		\begin[width = 40%fw, strut = character, valign = middle]{parbox}
+			\begin[cols = 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw]{ptable}
+				\begin{row}
+					\cell{}
+					\cell{\emoji{\unichar{U+1F406}}}
+					\cell{\emoji{\unichar{U+1FAB1}}}
+					\cell{\emoji{\unichar{U+1F98E}}}
+					\cell{\emoji{\unichar{U+1F982}}}
+					\cell{\emoji{\unichar{U+1F422}}}
+					\cell{\emoji{\unichar{U+1F41F}}}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F406}}} \cell{0} \cell{11} \cell{20} \cell{20} \cell{21} \cell{20}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1FAB1}}} \cell{11} \cell{0} \cell{13} \cell{13} \cell{14} \cell{13}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F98E}}} \cell{20} \cell{13} \cell{0} \cell{10} \cell{7} \cell{10}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F982}}} \cell{20} \cell{13} \cell{10} \cell{0} \cell{11} \cell{10}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F422}}} \cell{21} \cell{14} \cell{7} \cell{11} \cell{0} \cell{11}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F41F}}} \cell{20} \cell{13} \cell{10} \cell{10} \cell{11} \cell{0}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+		\begin[width = 60%fw, strut = character, valign = middle]{parbox}
+			\center{\img[src = Filogenesi/big1.pdf, width = 50%fw]}
+		\end{parbox}
+	\end{examplebox}
+
+	Noto un albero delle distanze, é possibile ricavare la distanza fra una 
+	specie \math{S_{i}} ed una specie \math{S_{j}} sommando le etichette del 
+	cammino che va da \math{S_{i}} a \math{S_{j}}. Ripetendo il procedimento 
+	per tutte le specie, É possibile costruire una matrice di distanze 
+	equivalente. Si noti peró come il contrario non sia possibile, dato che 
+	esistono infiniti alberi delle distanze, tutti potenzialmente corretti, 
+	equivalenti ad una matrice delle distanze. Non tutte le distanze riportate 
+	su un albero possono considerarsi valide. Verrá studiato un caso particolare 
+	in cui vale un assunto chiamato \bf{teoria dell'orologio molecolare}.
+
+	La \bf{teoria dell'orologio molecolare} é una assunzione sulla natura delle 
+	mutazioni delle biomolecole, secondo la quale il numero di mutazioni positive 
+	che avvengono in una biomolecola in un certo intervallo di tempo é (circa) 
+	proporzionale alla durata dell'intervallo stesso. Pertanto, se sono note 
+	quante mutazioni sono presenti nella biomolecola di una specie A che non 
+	sono presenti nella biomolecola di una specie B (e viceversa), ed é nota 
+	la frequenza con cui avvengono le mutazioni nella biomolecola di A e di B 
+	a paritá di tempo, é possibile dare una stima di quanto tempo é passato da 
+	quando A e B hanno subito una divergenza evolutiva. La distanza fra la 
+	stringa della biomolecola delle due specie diventa allora una buona stima
+	del numero di mutazioni avvenute nell'una che non sono presenti nell'altra
+	\footnote{Prima della diffusione delle genoteche, questo tipo di stima veniva 
+	compiuta mediante metodi chimico-fisici. Si preleva il DNA di A e di B, lo 
+	si denatura in modo che i due filamenti di ciascuno si separino, uno dei 
+	filamenti di A viene ibridato con uno dei filamenti di B e dopodiché si
+	determina quanta energia é necessaria affinché il DNA ibrido cosí ottenuto
+	si denaturi. L'idea é che piú il DNA di A e di B é dissimile, ovvero piú 
+	mutazioni non sono presenti in ambo le specie, piú sará forte la loro 
+	ibridazione e tanto piú alta sará la temperatura necessaria a denaturare 
+	il DNA ibrido.}.
+
+	\subsection{Ultrametricitá}
+
+		Se la teoria dell'orologio molecolare é valida, allora l'albero delle distanze
+		ha una proprietá particolare: preso un qualsiasi nodo interno dell'albero, la 
+		somma dei valori riportati sulle etichette del cammino che inizia in tale nodo 
+		e termina in una qualsiasi foglia sua discendente ha sempre lo stesso valore. 
+		Un albero con questa proprietá prende il nome di \bf{albero ultrametrico}, la 
+		distanza cosí definita é detta \bf{distanza ultrametrica} e la matrice 
+		associata all'albero é detta \bf{matrice ultrametrica}.
+
+		\begin{examplebox}
+			L'albero precedente, e di conseguenza la matrice precedente, non erano 
+			ultrametriche. Lo sono invece, ad esempio, le rispettive versioni 
+			modificate riportate di seguito:
+
+			\begin[width = 40%fw, strut = character, valign = middle]{parbox}
+				\begin[cols = 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw]{ptable}
+					\begin{row}
+						\cell{}
+						\cell{\emoji{\unichar{U+1F406}}}
+						\cell{\emoji{\unichar{U+1FAB1}}}
+						\cell{\emoji{\unichar{U+1F98E}}}
+						\cell{\emoji{\unichar{U+1F982}}}
+						\cell{\emoji{\unichar{U+1F422}}}
+						\cell{\emoji{\unichar{U+1F41F}}}
+					\end{row}
+					\begin{row}
+						\cell{\emoji{\unichar{U+1F406}}} \cell{0} \cell{6} 
+						\cell{14} \cell{12} \cell{14} \cell{14}
+					\end{row}
+					\begin{row}
+						\cell{\emoji{\unichar{U+1FAB1}}} \cell{6} \cell{0} 
+						\cell{14} \cell{14} \cell{14} \cell{14}
+					\end{row}
+					\begin{row}
+						\cell{\emoji{\unichar{U+1F98E}}} \cell{14} \cell{14} 
+						\cell{0} \cell{10} \cell{6} \cell{10}
+					\end{row}
+					\begin{row}
+						\cell{\emoji{\unichar{U+1F982}}} \cell{12} \cell{14} 
+						\cell{10} \cell{0} \cell{10} \cell{10}
+					\end{row}
+					\begin{row}
+						\cell{\emoji{\unichar{U+1F422}}} \cell{14} \cell{14} 
+						\cell{6} \cell{10} \cell{0} \cell{10}
+					\end{row}
+					\begin{row}
+						\cell{\emoji{\unichar{U+1F41F}}} \cell{14} \cell{14} 
+						\cell{10} \cell{10} \cell{10} \cell{0}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+			\begin[width = 60%fw, strut = character, valign = middle]{parbox}
+				\center{\img[src = Filogenesi/big2.pdf, width = 50%fw]}
+			\end{parbox}
+		\end{examplebox}
+
+		La distanza ultrametrica ha, oltre a tutte le proprietá della distanza, una
+		proprietá aggiuntiva. Presi tre elementi \math{a}, \math{b} e \math{c}, il 
+		massimo fra la distanza da \math{a} a \math{b}, la distanza da \math{b} a 
+		\math{c} e la distanza da \math{c} ad \math{a} deve sempre coincidere con 
+		almeno due di queste tre:
+
+		\begin[mode = display]{math}
+			\mo{max} {(d(a, b), d(b, c), d(c, a))} = 
+			\table[columnalign = left]{
+				\{d(a, b), d(b, c)\} \thickspace \mo{oppure} \\
+				\{d(b, c), d(c, a)\} \thickspace \mo{oppure} \\
+				\{d(a, b), d(c, a)\} \thickspace \mo{oppure} \\
+				\{d(a, b), d(b, c), d(c, a)\} \\
+			}
+			\thickspace \forall a, b, c
+		\end{math}
+
+		Le matrici ultrametriche hanno la proprietá di avere associate uno ed un 
+		solo albero ultrametrico, costruibile a partire da questa per via ricorsiva. 
+		Sia \math{D} la matrice ultrametrica a disposizione e sia \math{T} l'albero 
+		ultrametrico desiderato. L'algoritmo banale, che é possibile dimostrare avere
+		tempo di esecuzione \math{O(n^{2})}, é presentato di seguito:
+
+		\begin{enumerate}
+			\begin{item}
+				Si cerchi il valore piú piccolo presente nella matrice ultrametrica; si 
+				assuma che questo si trovi alle coordinate \math{i, j}. Allora l'albero 
+				ultrametrico deve avere due nodi foglia etichettati con le specie \math{i} 
+				e \math{j}, e la distanza complessiva fra i due é \math{D[i, j]}. Vi sono
+				quattro possibilitá:
+
+				\begin{itemize}
+					\begin{item}
+						Sia la specie \math{i} che la specie \math{j} non sono presenti 
+						nell'albero. Occore allora aggiungere due nodi foglia etichettati
+						rispettivamente con \math{i} e \math{j} ed un nodo interno \math{v}
+						avente un arco con entrambi. Sia l'arco che va da \math{v} ad \math{i} 
+						che quello che va da \math{v} a \math{j} devono avere per etichetta 
+						\math{D[i, j]/2}. Questo perché, dovendo l'albero essere ultrametrico, 
+						la somma totale delle distanze sui cammini che vanno da un nodo interno 
+						a tutte le sue foglie deve essere la stessa, ed avendo \math{v} soltanto 
+						due foglie la distanza é equamente divisa fra le due;
+					\end{item}
+					\begin{item}
+						La specie \math{i} é giá presente nell'albero, ma non \math{j}. Allora
+						occorre aggiungere un nodo foglia etichettato \math{j} ed un nodo interno 
+						\math{v} che ha un arco con \math{j} etichettato con \math{D[i, j]}. 
+						Deve inoltre esistere, avendo \math{i} e \math{j} un antenato comune, un 
+						cammino composto da almeno due archi che va da \math{v} a \math{i}, che 
+						passerá per un certo numero di antenati di \math{i}. Affinché l'albero 
+						sia ultrametrico, la somma delle etichette degli archi di tale cammino 
+						deve essere \math{D[i, j]}. Sia \math{u} l'antenato di \math{i} piú 
+						lontano: il cammino che va da \math{v} a \math{i} sará allora composto
+						da un arco che va da \math{v} ad \math{u} e dal cammino che va da \math{u}
+						a \math{i}. Affinché l'albero sia ultrametrico, l'etichetta dell'arco 
+						che va da \math{v} ad \math{u} deve essere data dalla differenza fra
+						\math{D[i, j]} e la somma di tutte le etichette degli archi del cammino
+						da \math{u} a \math{i};
+					\end{item}
+					\begin{item}
+						La specie \math{j} é giá presente nell'albero, ma non \math{i}. La 
+						casistica é analoga alla precedente, ma a parti invertite;
+					\end{item}
+					\begin{item}
+						Sia la specie \math{i} che la specie \math{j} sono giá presenti 
+						nell'albero. Occorre allora aggiungere un nodo interno \math{v}
+						che ha un cammino composto da almeno due archi sia con \math{i} 
+						che con \math{j} etichettato con \math{D[i, j]}. Siano \math{u} 
+						e \math{w} rispettivamente gli antenati di \math{i} e di \math{j} 
+						piú lontani. Il cammino che va da \math{v} a \math{i} sará composto
+						da un arco che va da \math{v} ad \math{u} e dal cammino che va da 
+						\math{u} a \math{i}; allo stesso modo, il cammino che va da \math{v} 
+						a \math{j} sará composto da un arco che va da \math{v} ad \math{w} e 
+						dal cammino che va da \math{w} a \math{j}. Affinché l'albero sia 
+						ultrametrico, l'etichetta dell'arco che va da \math{v} ad \math{u} 
+						deve essere data dalla differenza fra \math{D[i, j]} e la somma di 
+						tutte le etichette degli archi del cammino da \math{u} a \math{i}; 
+						allo stesso modo, l'etichetta dell'arco che va da \math{v} ad \math{w} 
+						deve essere data dalla differenza fra \math{D[i, j]} e la somma di 
+						tutte le etichette degli archi del cammino da \math{w} a \math{j}.
+					\end{item}
+				\end{itemize}
+			\end{item}
+			\begin{item}
+				Si ripeta l'algoritmo escludendo la \math{i}-esima riga o la \math{j}-esima 
+				colonna di \math{D} (la matrice é simmetrica, pertanto é indifferente);
+			\end{item}
+			\begin{item}
+				L'algoritmo termina quando sono state esaurite tutte le righe/colonne. Si 
+				noti come possano essere presenti dei nodi in \math{T} aventi collegamenti
+				etichettati con 0. Se questo accade, é possibile semplicemente unificarli 
+				in un solo nodo.
+			\end{item}
+		\end{enumerate}
+
+	\subsection{Additivitá}
+
+		In un contesto reale, é sostanzialmente impossibile che i dati raccolti 
+		sulle mutazioni a cui le specie vanno incontro possano essere disposti 
+		in una matrice perfettamente ultrametrica, perché l'ipotesi di ultrametricitá
+		é estremamente stringente. É possibile rilassare tale ipotesi e rifarsi ad 
+		una sua forma piú debole, l'ipotesi di \bf{additivitá}.
+
+		Una matrice delle distanze \math{D} si dice \bf{matrice additiva} 
+		se soddisfa la \bf{condizione dei quattro punti}. Presi 4 elementi 
+		qualsiasi \math{x}, \math{y}, \math{v} e \math{w} sulla matrice 
+		\math{D}, si considerino tutte le possibili celle di \math{D} 
+		definibili da tali punti, ovvero \math{D[x, y]}, \math{D[x, v]},
+		\math{D[x, w]}, \math{D[y, w]}, \math{D[y, v]}, \math{D[v, w]}. Si
+		considerino tutte le somme costruibili usando due di queste sei celle
+		tali per cui tutti e quattro i punti compaiono esattamente una volta,
+		ovvero queste tre:
+
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				D[x, y] + D[v, w]
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				D[x, v] + D[y, w]
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				D[x, w] + D[y, v]
+			\end{math}
+		\end{parbox}
+		\par
+
+		La condizione dei quattro punti é valida se due di questi tre valori 
+		sono uguali e sono anche il massimo fra questi:
+
+		\begin[mode = display]{math}
+			\mo{max} {(D[x, y] + D[v, w], D[x, v] + D[y, w], D[x, v] + D[y, w])} = 
+			\table[columnalign = left]{
+				\{D[x, y] + D[v, w]\} \thickspace \mo{oppure} \\
+				\{D[x, v] + D[y, w]\} \thickspace \mo{oppure} \\
+				\{D[x, v] + D[y, w]\} \\
+			}
+			\thickspace \forall x, y, v, w
+		\end{math}
+
+		Se una matrice \math{D} é additiva, allora l'albero delle distanze \math{T} 
+		a questa associato é detto \bf{albero additivo}, e la distanza definita da 
+		\math{D} (e da \math{T}) é detta \bf{distanza additiva}. Essendo l'additivitá
+		una proprietá piú debole dell'ultrametricitá, si ha che qualsiasi matrice 
+		ultrametrica é anche additiva, qualsiasi distanza ultrametrica é anche 
+		additiva e qualsiasi albero ultrametrico é anche additivo.
+
+		La condizione dei quattro punti puó essere definita in maniera equivalente 
+		anche rispetto agli alberi additivi. Siano \math{x}, \math{y}, \math{v}, 
+		\math{w} quattro nodi foglia dell'albero additivo \math{T}, associato alla 
+		matrice additiva \math{D}. Per la relazione che sussiste fra \math{D} e 
+		\math{T}, la distanza totale fra due di questi nodi \math{i} e \math{j}, 
+		ovvero la somma di tutte le etichette del cammino che va da \math{i} a 
+		\math{j}, corrisponde a \math{D[i, j]}. Si considerino allora tutte le 
+		possibili distanze totali fra due dei quattro possibili nodi: quella fra
+		\math{x} e \math{y} (ovvero \math{D[x, y]}), quella fra \math{v} e \math{w}
+		(ovvero \math{D[v, w]}), ecc\math{\unicodeellipsis} Si considerino tutte le 
+		somme costruibili usando due di queste sei distanze totali tali per cui tutti 
+		e quattro i nodi compaiono esattamente una volta, ovvero queste tre:
+
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				d(x, y) + d(v, w)
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				d(x, v) + d(y, w)
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				d(x, w) + d(y, v)
+			\end{math}
+		\end{parbox}
+		\par
+
+		La condizione dei quattro punti é valida se due di questi tre 
+		valori sono uguali e sono anche il massimo fra questi. Si noti 
+		peró come l'albero additivo non ha una radice, a differenza di 
+		quello ultrametrico, pertanto non ha una direzione di percorrenza 
+		privilegiata.
+
+		Prima di introdurre l'algoritmo per la costruzione di un albero additivo, 
+		occorre fare delle considerazioni. Innanzitutto, si considerino tre nodi
+		generici \math{x}, \math{y} e \math{z} di un albero delle distanze (non per 
+		forza additivo o ultrametrico). Dato che la disuguaglianza triangolare é 
+		sempre valida, deve aversi che \math{d(x, y) \leq d(y, z) + d(x, z)}, ovvero 
+		che \math{d(y, z) + d(x, z) - d(x, y) \geq 0}. La quantitá \math{d(y, z) + 
+		d(x, z) - d(x, y)} prende il nome di \bf{sbilancio} della tripla 
+		\math{(x, y, z)}.
+
+		Una tripla \math{(x, y, z)} di nodi su un albero delle distanze si dice 
+		\bf{degenere} se il loro sbilancio é nullo, ovvero se \math{d(y, z) + 
+		d(x, z) = d(x, y)}. É facile verificare come questa situazione possa 
+		presentarsi, ad esempio, nel caso in cui \math{z} é un nodo interno al 
+		cammino che va da \math{x} a \math{y}. Se \math{z'} é un nodo raggiungibile
+		a partire da \math{z} mediante un cammino che ha peso totale 0, ovvero se 
+		vale \math{d(z, z') = 0}, e se \math{(x, y, z)} é una tripla degenere, allora 
+		anche \math{x, y, z'} é degenere. Infatti:
+
+		\begin[mode = display]{math}
+			\table[columnalign = left left]{
+				d(y, z') + d(x, z') - d(x, y) = &
+				{(d(y, z) + d(z, z'))} + {(d(x, z) + d(z, z'))} - d(x, y) = \\
+				& {(d(y, z) + 0)} + {(d(x, z) + 0)} - d(x, y) =
+				d(y, z) + d(x, z) - d(x, y) = 0 \\
+			}
+		\end{math}
+
+		Si considerino gli archi di un albero delle distanze che uniscono un nodo 
+		foglia ad un nodo interno, ciascuno etichettato con una certa distanza. 
+		Sia \math{\delta} un numero intero positivo; se si diminuisce di \math{\delta}
+		il valore riportato su ciascuna etichetta, si ha che ciascun cammino 
+		sull'albero che inizia da un nodo foglia e finisce in un altro nodo foglia
+		sará ridotto di \math{2 \delta}, perché ciascuno di questi cammini deve 
+		attraversare esattamente due archi il cui valore dell'etichetta é stato 
+		diminuito di \math{\delta}. Ma dato che il cammino fra due nodi foglia 
+		\math{x} e \math{y} corrisponde alla cella \math{(x, y)} sulla matrice delle
+		distanze, dovrá aversi che tale matrice, se si diminuisce ciascun arco 
+		dell'albero delle distanze che unisce un nodo foglia ad un nodo interno di 
+		una quantitá \math{\delta}, avrá il valore in ciascuna cella diminuito di
+		\math{2\delta}.
+
+		%%%
+		%%% Aggiungere la parte relativa all'algoritmo
+		%%%
+
+\end{sile}

@@ -1,0 +1,420 @@
+\begin{sile}
+
+	Il problema della filogenesi perfetta richiedeva di dedurre la storia 
+	evolutiva delle specie in base all'ordine in cui hanno acquisito dei
+	caratteri, ovvero in base all'ordine in cui il genoma di ciascuna 
+	specie ha subito la mutazione necessaria affinché quel carattere si 
+	manifestasse. É peró possibile procedere anche in senso contrario, 
+	ovvero dedurre l'ordine in cui si sono verificate le mutazioni sul 
+	DNA di una specie sulla base di quali caratteri ha acquisito lungo la 
+	sua storia evolutiva.
+
+	In altre parole, se sono noti quali caratteri possiedono delle specie 
+	per le quali la filogenesi é nota, l'interesse é quello di determinare 
+	se e quali caratteri possedevano i loro progenitori. Si noti come queste 
+	informazioni non possono essere ottenute con certezza, dato che sarebbe 
+	necessario avere dati biologici su tutti gli antenati delle specie, e non 
+	sempre questo é possibile. Ció che é possibile fare é dedurre se e quali 
+	fossero i caratteri che piú "ragionevolmente" gli antenati avrebbero dovuto 
+	possedere, e assumere che siano quelli effettivamente posseduti da questi
+	ultimi.
+
+	Un approccio spesso usato in contesti come questo é il cosiddetto 
+	\bf{principio di massima parsimonia}, ovvero assumere che il processo 
+	che é avvenuto sia sempre quello che aveva la maggior probabilitá di 
+	avvenire \footnote{Il principio di massima parsimonia adotta lo stesso 
+	principio del Rasoio di Occam: la soluzione piú semplice fra quelle 
+	possibili é quella piú probabile. Naturalmente non é sempre cosí, ma 
+	non é possibile provarlo.}, perché é quello che richiede meno "sforzo" 
+	in termini evolutivi. Il problema basato su questo principio che richiede 
+	di determinare se e quali caratteri erano posseduti dai progenitori delle 
+	specie, conoscendo se e quali caratteri sono posseduti dalle specie attuali 
+	e conoscendo la loro filogenesi, é chiamato \bf{piccolo problema di 
+	parsimonia}.
+
+	\subsection{Peso uniforme: algoritmo di Fitch}
+
+		Sia dato un insieme \math{S} di \math{m} specie \math{S_{1}, S_{2}, 
+		\unicodeellipsis, S_{m}} ed un certo carattere \math{c}. Questo carattere 
+		non é necessariamente binario, ma puó esistere in \math{k} stati distinti.
+		Dato che lo stato del carattere dipende (in buona approssimazione) da quale
+		nucleotide il DNA della specie possiede nel locus relativo a tale espressione
+		fenotipica, con un leggero abuso di notazione si tende ad indicare lo stato 
+		del carattere \math{c} con una delle quattro lettere \math{A}, \math{C}, 
+		\math{G}, \math{T} \footnote{In realtá, nella maggior parte dei casi ciascun 
+		componente del fenotipo di una specie dipende da diverse sezioni di DNA. É 
+		infatti molto raro che un carattere sia determinato da uno ed un solo 
+		nucleotide.}. Si assuma di conoscere lo stato del carattere \math{c} per 
+		ciascuna delle \math{m} specie di \math{S}.
+
+		Sia poi dato un albero filogenetico \math{T} per \math{S} del quale é nota la 
+		\bf{topologia}, ovvero si conosce quanti nodi l'albero ha, come sono disposti, 
+		quanti archi esistono e quali coppie di nodi ciascuno di questi collega. Come 
+		da definizione, le foglie dell'albero rappresentano le specie viventi, mentre 
+		i nodi interni rappresentano gli antenati comuni.
+
+		Si etichetti ciascun nodo foglia con lo stato del carattere \math{c} per la 
+		specie che tale nodo rappresenta (é stato infatti assunto che fosse noto lo
+		stato di \math{c} per ciascuna specie). Il piccolo problema di parsimonia, 
+		formulato a questo contesto, richiederebbe di determinare qual'é lo stato di
+		\math{c} degli antenati delle specie di \math{S}, che di fatto equivale a 
+		determinare qual'é l'etichetta dei nodi interni dell'albero \math{T}. Si noti
+		come questa non é necessariamente univoca, dato che potrebbero esserci diverse
+		etichette per i nodi interni che con uguale probabilitá rappresentano lo stato
+		del carattere per quel nodo.
+
+		\begin{examplebox}
+			Sulla base della matrice a destra, che riporta le informazioni relative 
+			allo stato del carattere \math{c} per ciascuna specie di \math{S}, e sulla
+			base della topologia dell'albero \math{T} fornito, é possibile etichettarne 
+			le foglie come segue:
+
+			\begin[width = 90%fw, strut = character, valign = middle]{parbox}
+				\center{\img[src = Filogenesi/tiny1.pdf, width = 87.5%fw]}
+			\end{parbox}
+			\begin[width = 10%fw, strut = character, valign = middle]{parbox}
+				\begin[cols = 50%fw 50%fw]{ptable}
+					\begin{row}
+						\cell{S1} \cell{A}
+					\end{row}
+					\begin{row}
+						\cell{S2} \cell{T}
+					\end{row}
+					\begin{row}
+						\cell{S3} \cell{G}
+					\end{row}
+					\begin{row}
+						\cell{S4} \cell{G}
+					\end{row}
+					\begin{row}
+						\cell{S5} \cell{T}
+					\end{row}
+					\begin{row}
+						\cell{S6} \cell{A}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+		\end{examplebox}
+
+		Il carattere é presente in tutte le specie in un certo stato (non 
+		necessariamente distinto), pertanto si presume che questo possa o cambiare 
+		stato al verificarsi di una mutazione, e venire ereditato cosí dai figli, 
+		oppure restare nello stesso stato in cui si trova. Il principio di massima 
+		parsimonia prevede che le spiegazioni piú probabili siano quelle piú 
+		plausibili, ed essendo il verificarsi di una mutazione un evento molto raro,
+		si assume che il cambio di stato del carattere di specie in specie avvenga 
+		con una probabilitá molto piú bassa del mantenimento dello stesso stato nei
+		discendenti.
+
+		Se si assume che la probabilitá del cambio di stato di un carattere 
+		sia la stessa a prescindere di quale sia lo stato di arrivo (e che 
+		sia inferiore al non verificarsi del cambio di stato), e se si assume 
+		che l'albero filogenetico \math{T} del quale é nota la topologia sia 
+		binario (ovvero che ogni specie abbia esattamente due discendenti), 
+		il problema di piccola parsimonia cosí formulato é risolvibile 
+		dall'\bf{algoritmo di Fitch}.
+
+		Dato un nodo \math{x \in T}, sia \math{\lambda (x)} l'etichetta che é 
+		stata scelta da assegnare ad \math{x} (o, nel caso dei nodi foglia, 
+		quella nota). Sia poi \math{S(x)} l'insieme formato da tutti gli stati 
+		di \math{c} ottimali per \math{x}, ovvero quelli che hanno la maggior 
+		probabilitá di essere gli effettivi stati del carattere per la specie 
+		relativa a \math{x}. Dato che la parte di etichettatura dell'albero giá 
+		nota é quella delle foglie, l'algoritmo dovrá necessariamente partire 
+		dalle foglie e risalire verso la radice con una visita bottom-up, e 
+		terminare una volta che é stata trovata l'etichetta da assegnare alla 
+		radice.
+
+		Se \math{x} é un nodo foglia, dato che le etichette dei nodi foglia sono 
+		note, si ha che \math{S(x)} é un singoletto formato dal solo elemento 
+		\math{\lambda (x)}. Se \math{x} é invece un nodo generico, dato che si 
+		sta considerando un albero binario questo dovrá avere esattamente due 
+		figli, \math{f_{l}} e \math{f_{r}}, e sono noti (da una iterazione 
+		precedente dell'algoritmo) i valori \math{S(f_{l})} e \math{S(f_{r})}. 
+		Se i due insiemi hanno degli elementi (degli stati) in comune, allora 
+		gli stati di \math{x} che con piú probabilitá rispecchiano il vero stato 
+		della specie associata ad \math{x} sono quelli che si trovano sia in 
+		\math{S(f_{l})} che in \math{S(f_{r})}. Se invece i due insiemi non hanno 
+		alcun elemento (alcuno stato) in comune, allora qualsiasi loro elemento ha 
+		la stessa probabilitá di essere lo stato che etichetta \math{x}, perché non
+		vi sono abbastanza informazioni per poter compiere una scelta. In altre 
+		parole: 
+
+		\begin[mode = display]{math}
+			S{(x)} =
+			\{\table[columnalign = left left]{
+				S{(f_{l})} \cap S{(f_{r})} & \mo[atom = bin]{se} S{(f_{l})} \cap S{(f_{r})} \ne \varnothing \\
+				S{(f_{l})} \cup S{(f_{r})} & \mo[atom = bin]{se} S{(f_{l})} \cap S{(f_{r})}  =  \varnothing \\
+			}
+		\end{math}
+
+		Nel caso in cui vi siano nodi interni etichettati con piú di uno stato e si
+		volesse sceglierne arbitrariamente uno solo, una buona regola pratica consiste
+		nel propagare (quanto possibile) lo stato che é stato scelto per etichettare
+		la radice.
+
+		L'algoritmo di Fitch puó essere esteso in maniera molto semplice anche al
+		caso in cui l'albero \math{T} a disposizione non sia binario, ovvero ciascuna
+		specie puó avere \math{k} discendenti anziché due. Per farlo, é sufficiente 
+		modificare la scelta del valore per \math{S(x)} con \math{x} generico, 
+		imponendo che \math{S(x)} sia composto dai caratteri che compaiono con 
+		maggiore frequenza nei nodi figli. Si noti come questa sia semplicemente una
+		generalizzazione del procedimento finora adottato: sia che si scelga 
+		l'intersezione fra i due insiemi nel caso in cui l'intersezione non sia nulla,
+		sia che si scelga l'unione fra i due insiemi nel caso in cui l'intersezione
+		sia nulla, in entrambi i casi questo corrisponde a scegliere i caratteri che
+		compaiono con maggiore frequenza (in particolare, nel secondo caso tutti hanno
+		la stessa frequenza).
+
+		\begin{examplebox}
+			\img[src = Filogenesi/tiny2.pdf, width = 100%fw]
+
+			\begin{itemize}
+				\begin{item}
+					I nodi \math{S1} e \math{S6} sono entrambi etichettati \math{A}, pertanto 
+					il nodo \math{P1} sará etichettato \math{\{A\}};
+				\end{item}
+				\begin{item}
+					Il nodo \math{P1} é etichettato \math{\{A\}}, mentre il nodo \math{S4} é 
+					etichettato \math{G}. Dato che le due etichette non hanno elementi in 
+					comune, il nodo \math{P4} sará etichettato \math{\{A, G\}};
+				\end{item}
+				\begin{item}
+					I nodi \math{S2} e \math{S5} sono entrambi etichettati \math{T}, pertanto 
+					il nodo \math{P2} sará etichettato \math{\{T\}}; 
+				\end{item}
+				\begin{item}
+					Il nodo \math{P2} é etichettato \math{\{T\}}, mentre il nodo \math{S3} é 
+					etichettato \math{G}. Dato che le due etichette non hanno elementi in 
+					comune, il nodo \math{P3} sará etichettato \math{\{G, T\}};
+				\end{item}
+				\begin{item}
+					Il nodo \math{P3} é etichettato \math{\{G, T\}}, mentre il nodo \math{P4} 
+					é etichettato \math{\{A, G\}}. Dato che l'intersezione fra le due etichette
+					non é vuota, l'etichetta di \math{P6} (la radice) sará \math{\{G, T\} \cap 
+					\{A, G\}= \{G\}}.
+				\end{item}
+			\end{itemize}
+
+			\bigskip
+
+			La regola pratica impone di propagare quanto possibile l'etichetta della 
+			radice nei figli, pertanto se si dovesse scegliere una etichetta per 
+			\math{P3} o per \math{P4}, in entrambi i casi \math{\{G\}} sarebbe la 
+			scelta da preferirsi.
+		\end{examplebox}
+
+	\subsection{Peso non uniforme: algoritmo di Sankoff}
+
+		Si consideri una situazione analoga alla precedente, dove é 
+		dato un insieme \math{S} di \math{m} specie \math{S_{1}, S_{2}, 
+		\unicodeellipsis, S_{m}} ed un carattere \math{c} avente \math{k} 
+		stati distinti per ciascuna. Si introduca peró un vincolo aggiuntivo, 
+		ovvero che la probabilitá che avvenga una transizione da uno stato 
+		all'altro non sia uniforme, ma che sia (potenzialmente) diversa per 
+		qualsiasi coppia di stati.
+
+		Se le probabilitá in questione sono note, possono essere espresse con un
+		numero intero (similmente a quanto é stato fatto per l'allineamento delle 
+		sequenze), che ha un valore tanto alto quanto é bassa la probabilitá che 
+		avvenga tale transizione. Per convenzione, si assume che la probabilitá che 
+		un carattere non cambi valore, che equivale a dire che non va in contro ad 
+		una transizione di stato, sia zero. Questi valori possono essere riportati 
+		in una matrice di score di dimensione \math{k \times k}, dove ciascuna cella
+		\math{(i, j)} contiene il numero intero associato alla probabilitá che il 
+		carattere \math{c} cambi stato da \math{i} a \math{j}, chiamato \bf{score}; 
+		ciascuno di questi valori viene indicato con \math{w(i, j)}.
+
+		Per ogni nodo \math{v \in T}, sia \math{\lambda {(v)}} l'etichetta che é 
+		stata scelta (o fornita) per il nodo \math{v}. Se i nodi \math{v_{1}} e 
+		\math{v_{2}} sono uniti da un arco, é possibile riportare \math{w(\lambda 
+		{(v_{1})}, \lambda {(v_{2})})} sull'etichetta dell'arco \math{v_{1}, v_{2}},
+		ad indicare che la transizione é avvenuta con tale probabilitá. Ricordando 
+		che i valori \math{w(i, j)} sono tanto bassi quanto é alta la probabilitá
+		che avvenga la transizione dallo stato \math{i} allo stato \math{j}, le 
+		migliori scelte per le etichette dei nodi interni dell'albero \math{T} 
+		sono quelle che rendono le etichette dei suoi archi le piú piccole possibili:
+
+		\begin[mode = display]{math}
+			\mi{min} {(\sum_{(v_{1}, v_{2}) \in T} w {(\lambda {(v_{1})}, \lambda {(v_{2})})})}
+		\end{math}
+
+		\begin{examplebox}
+			Si supponga di avere a disposizione 4 specie ed un carattere X, del quale é
+			nota la matrice di score. Sia poi data la topologia dell'albero filogenetico 
+			per queste:
+
+			\begin[width = 50%fw, strut = character, valign = middle]{parbox}
+				\img[src = Filogenesi/tiny3.pdf, width = 75%fw]
+			\end{parbox}
+			\begin[width = 25%fw, strut = character, valign = middle]{parbox}
+				\begin[cols = 20%fw 20%fw]{ptable}
+					\begin{row}
+						\cell{} \cell{X}
+					\end{row}
+					\begin{row}
+						\cell{S1} \cell{A}
+					\end{row}
+					\begin{row}
+						\cell{S2} \cell{G}
+					\end{row}
+					\begin{row}
+						\cell{S3} \cell{T}
+					\end{row}
+					\begin{row}
+						\cell{S4} \cell{T}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+			\begin[width = 25%fw, strut = character, valign = middle]{parbox}
+				\begin[cols = 20%fw 20%fw 20%fw 20%fw 20%fw]{ptable}
+					\begin{row}
+						\cell{} \cell{A} \cell{G} \cell{C} \cell{T}
+					\end{row}
+					\begin{row}
+						\cell{A} \cell{0} \cell{1} \cell{3} \cell{2}
+					\end{row}
+					\begin{row}
+						\cell{G} \cell{1} \cell{0} \cell{1} \cell{2}
+					\end{row}
+					\begin{row}
+						\cell{C} \cell{3} \cell{1} \cell{0} \cell{2}
+					\end{row}
+					\begin{row}
+						\cell{T} \cell{2} \cell{2} \cell{2} \cell{0}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+			\par
+
+			Di seguito sono presentati due possibili alberi, entrambi potenzialmente
+			validi, etichettati dai valori del carattere \math{X} che gli antentati
+			delle specie avevano.
+
+			\begin[width = 50%fw]{parbox}
+				\center{\img[src = Filogenesi/tiny4.pdf, width = 75%fw]}
+			\end{parbox}
+			\begin[width = 50%fw]{parbox}
+				\center{\img[src = Filogenesi/tiny5.pdf, width = 75%fw]}
+			\end{parbox}
+			\par
+
+			La somma di tutti gli score riportati sugli archi dell'albero a sinistra é 
+			7, mentre quella dell'albero a destra é 6. Questo significa che, assumendo 
+			come valido il principio di massima parsimonia, l'albero a destra é una 
+			migliore ricostruzione della filogenesi di tali specie rispetto a quello di
+			sinistra, ed é pertanto quello fra i due da preferire. Si noti come questo 
+			non significhi né che l'albero a destra sia il migliore possibile e né 
+			tantomeno che sia quello che descriva come la filogenesi sia effettivamente 
+			avvenuta.
+		\end{examplebox}
+
+		Il problema puó essere risolto mediante programmazione dinamica. 
+		L'ultima componente della soluzione é determinare quale stato vada 
+		assegnato all'ultimo nodo dell'albero filogenetico in modo che il 
+		peso complessivo dell'albero sia minimizzato (assumendo che gli 
+		altri nodi siano giá stati etichettati di modo che il peso 
+		complessivo sia ottimale). Dato che le etichette dei nodi foglia 
+		sono note, l'algoritmo che risolve il problema dovrá necessariamente
+		iniziare dalle foglie, e l'ultimo nodo sará quindi la radice.
+
+		L'interesse é quindi quello di trovare qual'é lo stato del carattere che
+		etichetta la radice di modo che l'albero che ne risulti sia ottimale. Se
+		vi sono \math{v_{1}, v_{2}, \unicodeellipsis, v_{k}} nodi con i quali la
+		radice ha un arco, e ciascun sottoalbero \math{{T_{v}}_{1}, {T_{v}}_{2},
+		\unicodeellipsis, {T_{v}}_{k}} che ha tali nodi per radice é giá stato
+		etichettato in maniera ottimale, il miglior valore da assegnare alla 
+		radice é quello che minimizza la somma fra il peso complessivo di ciascun 
+		sottoalbero e il peso che si ha dal passare dalla radice ai nodi \math{v_{1}, 
+		v_{2}, \unicodeellipsis, v_{k}}.
+
+		L'algoritmo basato su programmazione dinamica che risolve il problema di
+		piccola parsimonia cosí formulato é l'\bf{algoritmo di Sankoff}. Lo scopo 
+		dell'algoritmo é quello di costruire una matrice \math{P}, dove ciascuna 
+		cella \math{P[x, z]} contiene la soluzione ottimale del sottoalbero 
+		\math{T_{x}} se \math{x} viene etichettato con il valore \math{z}.
+
+		Se \math{v \in T} é un nodo foglia, allora il peso complessivo di \math{T_{v}} 
+		é sempre zero, a prescindere da quale sia l'etichettatura, perché \math{T_{v}} 
+		non contiene alcun arco. In questo problema le etichette dei nodi foglia sono 
+		note, pertanto se \math{x} é un nodo foglia l'unico valore di \math{P[x, z]} 
+		che é ragionevole scegliere é quello per il quale \math{z} é l'effettivo 
+		stato con cui \math{x} é etichettato, perché tutte le altre possibilitá non 
+		possono verificarsi. Si ha allora che \math{P[x, z] = 0} se \math{z} é 
+		l'effettivo stato che etichetta \math{x}, mentre si ha (simbolicamente) 
+		\math{P[x, z] = +\infty} se \math{z} non é l'etichetta di \math{x}.
+
+		\begin[mode = display]{math}
+			P{[x, z]} = 
+			\{\table[columnalign = left left]{
+				0 	  & \mo[atom = bin]{se} z  =  \lambda {(x)} \\
+				+\infty & \mo[atom = bin]{se} z \ne \lambda {(x)} \\
+			}
+		\end{math}
+
+		Il valore di \math{P[x, z]} dove \math{x} non é un nodo qualsiasi dipende sia
+		da quale etichetta si sceglie per \math{x}, sia dalle etichette che sono state
+		assegnate (nelle precedenti iterazioni) ai nodi di \math{T_{x}}. Se il nodo
+		\math{x} ha \math{L} nodi figli \math{v_{1}, v_{2}, \unicodeellipsis, v_{L}},
+		il valore ottimale con cui etichettare \math{x} é quello minimizza la somma
+		fra \math{P[v_{i}, s]}, il peso ottimale del sottoalbero \math{{T_{v}}_{i}} se
+		\math{v_{i}} viene etichettato con \math{s}, e \math{w(z, s)}, il costo che
+		la mutazione dallo stato \math{z} allo stato \math{s} comporta. Ovvero:
+
+		\begin[mode = display]{math}
+			P{[x, z]} = \sum_{i = 1}^{L} \mi{min}_{s} {(w(z, s) + P[v_{i}, s])}
+		\end{math}
+
+		\begin{examplebox}
+			\begin[width = 30%fw, strut = character, valign = middle]{parbox}
+				\begin[cols = 20%fw 20%fw 20%fw 20%fw 20%fw]{ptable}
+					\begin{row}
+						\cell{}  \cell{A} \cell{C} \cell{G} \cell{T}
+					\end{row}
+					\begin{row}
+						\cell{P1} \cell{0} \cell{\math{+\infty}} \cell{\math{+\infty}} \cell{\math{+\infty}}
+					\end{row}
+					\begin{row}
+						\cell{P2} \cell{\math{+\infty}} \cell{\math{+\infty}} \cell{0} \cell{\math{+\infty}}
+					\end{row}
+					\begin{row}
+						\cell{P3} \cell{\math{+\infty}} \cell{0} \cell{\math{+\infty}} \cell{\math{+\infty}}
+					\end{row}
+					\begin{row}
+						\cell{P4} \cell{\math{+\infty}} \cell{0} \cell{\math{+\infty}} \cell{\math{+\infty}}
+					\end{row}
+					\begin{row}
+						\cell{P5} \cell{1} \cell{4} \cell{1} \cell{4}
+					\end{row}
+					\begin{row}
+						\cell{P6} \cell{6} \cell{0} \cell{2} \cell{4}
+					\end{row}
+					\begin{row}
+						\cell{P7} \cell{3} \cell{2} \cell{2} \cell{5}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+			\begin[width = 70%fw, strut = character, valign = middle]{parbox}
+				\center{\img[src = Filogenesi/tiny6.pdf, width = 75%fw]}
+			\end{parbox}
+		\end{examplebox}
+
+		Indicando con \math{k} il numero di stati del carattere e con \math{n} il 
+		numero di nodi dell'albero, la matrice avrá \math{O(nk)} caselle, per 
+		ciascuna delle quali occorre fare \math{k} somme. Il tempo di esecuzione
+		complessivo dell'algoritmo é allora \math{O(nk^{2})}.
+
+		L'algoritmo puó essere esteso ad una situazione in cui si stanno 
+		considerando \math{m} caratteri distinti, ciascuno con la propria 
+		matrice di score, anziché uno solo, ammesso che la topologia 
+		dell'albero sia la stessa a prescindere dal carattere. Infatti, é
+		sufficiente eseguire l'algoritmo \math{m} volte, con \math{m} alberi
+		distinti, che possono poi venire unificati in uno solo. L'unificazione
+		viene effettuata riportando, per ciascun nodo \math{v_{f}} dell'albero
+		risultante, come etichetta la concatenazione delle etichette del nodo
+		di ciascuno degli \math{m} alberi parziali che si trova in quella 
+		posizione. Questo é possibile perché, avendo gli \math{m} alberi la 
+		stessa topologia, hanno gli stessi nodi e gli stessi archi nelle stesse 
+		esatte posizioni, e quindi sono perfettamente "sovrapponibili".
+
+\end{sile}

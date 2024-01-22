@@ -1,0 +1,18 @@
+lineht *= 1.25
+
+G1: box wid 0.5 ht 0.5 at (0,2)    "A/0"
+G2: circle wid 0.5 at (1,2)        "A/A"
+G3: box wid 0.5 ht 0.5 at (2.5,2)  "0/0"
+G4: circle wid 0.5 at (3.5,2)      "A/0"
+
+P1: box wid 0.5 ht 0.5 at (3,1)    "A/0"
+P2: circle wid 0.5 at (0.5,1)      "0/0"
+
+F1: box wid 0.5 ht 0.5 at (1.75,0) "A/0"
+
+line from G1.e to G2.w
+line from G3.e to G4.w
+line from P1.n to (3,2) 
+line from P2.n to (0.5,2)
+line from P1.w to P2.e
+line from F1.n to (1.75,1)

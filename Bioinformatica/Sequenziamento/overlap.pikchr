@@ -1,0 +1,13 @@
+lineht    *= 1.25
+circlerad *= 1.25
+
+A: circle at (0,0) "ACGTGTG"
+B: circle at (1,1) "CGTGTGC"
+C: circle at (2,0) "GTGCCA"
+D: circle at (3,1) "CCACG"
+
+arrow from A.ne to B.sw "A"      aligned above
+arrow from A.e  to C.w  "ACGT"   aligned above
+arrow from B.se to C.nw "CGT"    aligned above
+arrow from B.e  to D.w  "CGTGTG" aligned above
+arrow from C.ne to D.sw "GTG"    aligned above

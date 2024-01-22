@@ -1,0 +1,31 @@
+lineht *= 1.5
+circlerad = 0.075
+
+R:  circle fill black at (+0, +0)
+U:  circle fill black at (-0.5, +0)
+V:  circle fill black at (+0.5, +0)
+X:  circle fill black at (-1, +0)
+Y:  circle fill black at (+1, +0)
+
+O1: circle at (+0.0, -0.75) "1"
+O2: circle at (+1.25, -0.5) "2"
+O3: circle at (-0.75, -0.5) "3"
+O4: circle at (-1.25, -0.5) "4"
+O5: circle at (+1.25, +0.5) "5"
+O6: circle at (-1.25, +0.5) "6"
+O7: circle at (+0.75, +0.5) "7"
+O8: circle at (+0.0, +0.75) "8"
+
+line from R to U "t" above aligned
+line from R to V "a" above aligned
+line from Y to V "t" above aligned
+line from X to U "a" above aligned
+
+line from R.s  to O1.n  "rattata$" above aligned
+line from Y.se to O2.nw "tata$"    above aligned
+line from U.sw to O3.ne "tata$"    above aligned
+line from X.sw to O4.ne "ta$"      above aligned
+line from Y.ne to O5.sw "a$"       above aligned
+line from X.nw to O6.se "$"        above aligned
+line from V.ne to O7.sw "$"        above aligned
+line from R.n  to O8.s  "$"        above aligned

@@ -1,0 +1,210 @@
+\begin{sile}
+
+	Gli esseri viventi piú semplici hanno una sola copia di ciascun loro 
+	cromosoma, e si dicono \bf{aploidi}. Inoltre, si riproducono per 
+	\bf{meiosi}, ovvero un organismo crea una copia identica di sé stessa. 
+	Per questo motivo, é molto semplice determinare la genealogia di esseri 
+	viventi di questo tipo, perché ogni organismo figlio é una copia identica 
+	del genitore.
+
+	Gli esseri viventi piú complessi sono invece \bf{diploidi}: ogni cromosoma é 
+	presente nel DNA in due copie, dove ciascuna copia é ereditata da uno dei due 
+	genitori secondo le \bf{leggi di ereditarietá di Mendel}. La quasi totalitá 
+	delle due copie é funzionalmente identica, nel senso che entrambe contengono 
+	le informazioni necessarie all'esprimere la stessa cosa, ma non hanno 
+	necessariamente la stessa espressione fenotipica, perché potrebbero presentare 
+	\bf{alleli} distinti. Il caso piú comune di differenza fra i due nucleotidi 
+	prende il nome di \bf{SNP} \footnote{Da leggersi "\em{snip}"} (\bf{single 
+	nucleotide polymorfism}), dove un singolo nucleotide é differente nei due 
+	cromosomi per lo stesso locus. 
+
+	Idealmente, ci si aspetterebbe che il padre e la madre trasmettano alla prole 
+	uno dei loro due aplotipi (a loro volta ereditati dai rispettivi genitori) 
+	nella loro integritá. In realtá, durante la meiosi avviene un fenomeno chiamato
+	\bf{ricombinazione}, dove l'aplotipo risultante é un ibrido fra i due aplotipi
+	dei genitori. Se in due loci é presente lo stesso nucleotide, si dice che quel
+	locus é \bf{omozigote}; se invece é presente un nucleotide diverso, si dice 
+	che quel locus é \bf{eterozigote}.
+
+	L'informazione relativa a quale nucleotide si trovi su ciascun cromosoma 
+	per uno stesso locus viene chiamata \bf{aplotipo}. La coppia di basi per 
+	uno stesso locus, senza specificare da quale cromosoma ciascuna base 
+	provenga, viene chiamata \bf{genotipo}. La tecnologia attuale non é in 
+	grado di determinare immediatamente gli aplotipi di un cromosoma, ma é 
+	sufficientemente avanzata da determinare i genotipi (ovvero, é possibile 
+	dedurre quali basi sono presenti su uno stesso locus ma non é possibile 
+	dedurre da quale due cromosomi ciascuna provenga).
+
+	\begin{examplebox}
+		Si consideri uno stesso locus per entrambi i cromosomi di una coppia. Se sul
+		primo é presente la base A e sul secondo la base A, sia il genotipo che 
+		l'aplotipo é AA. Se invece é presente sull'uno C e sull'altro T, il genotipo
+		é sempre lo stesso (indifferentemente CT o TC) mentre l'aplotipo potrebbe
+		essere CT o TC.
+	\end{examplebox}
+
+	Un primo metodo per dedurre l'aplotipo di un individuo é studiare il 
+	genotipo dei suoi antentati. Un diagramma utile a questo scopo é il 
+	\bf{pedigree}, una struttura che riporta, per ciascuno degli antenati 
+	di un individuo, le loro relazioni (padre, madre, figlio, 
+	ecc\math{\unicodeellipsis}), il loro sesso (indicando con un rettangolo 
+	il sesso maschile e con un cerchio il sesso femminile) ed il genotipo 
+	sul quale si vogliono fare inferenze.
+
+	\bigskip
+	\center{\img[src = Gen_apl/pedigree1.pdf, width = 67.5%fw]}
+	\bigskip
+
+	Questa struttura puó essere rassimilata ad un albero quando non sono presenti 
+	cicli, ovvero quando non si é verificato \bf{inbreeding} fra gli antenati 
+	\footnote{Fintanto che si parla di \em{Homo Sapiens}, i pedigree sono quasi 
+	certamente alberi, perché l'inbreeding é estremamente raro. La stessa cosa 
+	non si puó dire per gli animali domestici, specialmente quelli di razza.}.
+
+	\begin{examplebox}
+		\begin[width = 50%fw]{parbox}
+			Si consideri il pedigree qui presentato, dove per ogni individuo é riportato
+			il genotipo relativo al suo gruppo sanguigno. L'individuo della terza 
+			generazione possiede il genotipo A/0, la madre ha genotipo A/0 ed il padre ha
+			genotipo 0/0. Da questo é possibile dedurre che l'individuo ha necessariamente
+			ereditato A dalla madre e 0 dal padre. In particolare, la madre ha un solo A,
+			quindi é certo quale il figlio abbia ereditato, mentre il padre ha due 0, 
+			quindi non vi sono informazioni sufficienti a determinare quale dei due 0 il
+			figlio abbia ereditato.
+		\end{parbox}
+		\begin[width = 50%fw, strut = character, valign = middle]{parbox}
+			\img[src = Gen_apl/pedigree2.pdf, width = 100%fw]
+		\end{parbox}
+	\end{examplebox}
+
+	Si consideri una situazione semplificata in cui, per ogni individuo di una 
+	popolazione, é noto il suo genotipo per ogni locus, é noto il pedigree della 
+	popolazione e non vi é mai ricombinazione, ovvero il cromosoma dei genitori 
+	viene ereditato dai figli "integralmente". Per comoditá, si considerino 
+	esclusivamente loci binari, ovvero che possono avere soltanto due possibili 
+	alleli, indicati con 0 e 1. Per convenzione si indica con 0 l'allele 
+	\bf{maggiore}, ovvero quello piú presente nella popolazione, e con 1 il 
+	\bf{minore}, il meno presente. Si considerino inoltre esclusivamente pedigree 
+	senza cicli.
+
+	Sulla base di queste informazioni, é possibile ricostruire gli aplotipi 
+	della popolazione mediante programmazione lineare. Il problema puó essere 
+	affrontato risolvendo una equazione lineare nella forma \math{Ax = B} 
+	mediante eliminazione gaussiana, dove \math{A} é una matrice di valori 
+	reali, \math{x} é un vettore colonna di incognite e \math{B} é un vettore 
+	colonna di valori reali. Dato che si sta considerando una situazione 
+	semplificata dove gli alleli sono sempre e solo due per ciascun locus, il
+	campo dei numeri che possono presentarsi come termini noti viene ristretto 
+	dall'intero \math{\dsi{R}} ai soli 0 e 1. Piú formalmente, viene ristretto
+	al solo \math{\dsi{Z}_{2}}, ovvero il resto modulo 2 di numeri interi.
+	Nello specifico, siano:
+
+	\begin{itemize}
+		\begin{item}
+			\math{g_{i}[j]} una matrice nota contenente il genotipo dell'individuo 
+			\math{i} nel locus \math{j}. Ogni cella della matrice puó contenere 
+			esclusivamente tre valori: 0 se l'\math{i}-esimo individuo ha genotipo 
+			omozigote maggiore, 1 se l'\math{i}-esimo individuo ha genotipo omozigote 
+			minore, 2 se l'\math{i}-esimo individuo ha genotipo eterozigote;
+		\end{item}
+		\begin{item}
+			\math{w_{i}[j]} una matrice nota con celle a valori binari, dove
+			una cella contiene valore 0 se il locus \math{j} dell'\math{i}-esimo
+			individuo é omozigote e 1 se eterozigote;
+		\end{item}
+		\begin{item}
+			\math{h_{x,i}} una matrice incognita, definita solamente se \math{x} é
+			genitore di \math{i}. \math{i} ha necessariamente un aplotipo ereditato da
+			\math{x}, ma non é noto quale dei due sia. Vale 0 se \math{i} ha ricevuto
+			da \math{x} l'aplotipo da parte paterna e 1 se da parte materna;
+		\end{item}
+		\begin{item}
+			\math{p_{i}[j]} una matrice che contiene l'aplotipo paterno
+			dell'\math{i}-esimo individuo al locus \math{j}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Non é necessario riportare esplicitamente l'aplotipo materno degli individui, 
+	perché questo puó essere interamente dedotto a partire da \math{w_{i}[j]} e 
+	da \math{p_{i}[j]}. Infatti, se \math{w_{i}[j] = 0}, allora l'individuo 
+	\math{i} é omozigote per il locus \math{j}, e quindi l'aplotipo materno e 
+	quello parterno (ovvero \math{p_{i}[j]}) sono uguali, mentre se \math{w_{i}[j] 
+	= 1} allora l'individuo \math{i} é eterozigote per il locus \math{j}, e quindi
+	l'aplotipo materno é dato da \math{1 - p_{i}[j]}, ovvero il complementare di 
+	quello paterno. Ricordando che si stanno considerando esclusivamente valori in
+	\math{\dsi{Z}_{2}}, l'aplotipo materno puó essere ottenuto semplicemente 
+	sommando \math{w_{i}[j]} e \math{p_{i}[j]}.
+
+	Nel caso in cui un individuo abbia un aplotipo omozigote, questo é dato 
+	semplicemente da \math{(g_{i}[j], g_{i}[j])}. Se invece é eterozigote, 
+	potrebbe essere equivalentemente \math{(0,1)} oppure \math{(1,0)}. Si 
+	indichi con \math{p} il padre dell'individuo, con \math{m} la madre e 
+	con \math{x} un genitore generico. In base a come \math{h_{x,i}} é stata 
+	definita, si hanno quattro possibili combinazioni per come ciascun individuo
+	abbia ereditato l'aplotipo dai genitori:
+
+	\begin[width = 50%fw]{parbox}
+		\begin{itemize}
+			\begin{item}
+				Aplotipo del padre da parte paterna;
+			\end{item}
+			\begin{item}
+				Aplotipo del padre da parte materna;
+			\end{item}
+			\begin{item}
+				Aplotipo della madre da parte paterna;
+			\end{item}
+			\begin{item}
+				Aplotipo della madre da parte materna;
+			\end{item}
+		\end{itemize}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			\{\table[columnalign = left left]{
+				h_{p,f} = 0 \Rightarrow & p_{f}[j] = p_{p}[j] \\
+				h_{p,f} = 1 \Rightarrow & p_{f}[j] = p_{p}[j] + w_{p}[j] \\
+				h_{m,f} = 0 \Rightarrow & p_{f}[j] + w_{f}[j] = p_{m}[j] \\
+				h_{m,f} = 1 \Rightarrow & p_{f}[j] + w_{f}[j] = p_{m}[j] + w_{m}[j] \\
+			}
+		\end{math}
+	\end{parbox}
+	\par\bigskip
+
+	Si noti peró come, potendo \math{h_{p,f}} e \math{h_{m,f}} assumere
+	esclusivamente valore 0 oppure 1, le quattro equazioni possono essere
+	ridotte a due:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			p_{f}[j] = p_{p}[j] + w_{p}[j]\math{h_{p,f}}
+		\end{math}
+	\end{parbox}\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			p_{f}[j] + w_{f}[j] = p_{m}[j] + w_{m}[j]\math{h_{m,f}}
+		\end{math}
+	\end{parbox}
+	\par
+
+	Le due equzioni possono poi essere ulteriormente unificate in una sola
+	introducendo la variabile \math{d_{x,f}}, che vale 0 nel caso in cui
+	\math{x = p} (si sta considerando il padre) e vale \math{w_{f}} nel caso
+	in cui \math{x = f} (si sta considerando la madre):
+
+	\begin[mode = display]{math}
+		p_{f}[j] + d_{x,f} = p_{x}[j] + w_{x}[j] h_{x,f}
+	\end{math}
+
+	A questo punto, le uniche due incognite sono \math{h_{x,f}} e 
+	\math{d_{x,f}}. L'equazione lineare cosí scritta sembrerebbe 
+	non essere risolvibile mediante eliminazione gaussiana, perché 
+	le quantitá \math{w_{x}[j]} e \math{h_{x,f}} sono legate da un 
+	prodotto; tuttavia, nonostante il pedice \math{x}, \math{w_{x}[j]} 
+	non é una incognita, pertanto il prodotto fra \math{w_{x}[j]} e 
+	\math{h_{x,f}} non il prodotto di due variabili, bensí il prodotto 
+	di una costante nota per una variabile, pertanto l'eliminazione 
+	gaussiana é ancora valida.
+
+\end{sile}

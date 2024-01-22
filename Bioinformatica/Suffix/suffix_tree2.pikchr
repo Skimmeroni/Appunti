@@ -1,0 +1,27 @@
+box at (-2,0) ht 0.25 "S = tartar$"
+
+lineht *= 1.5
+circlerad = 0.075
+
+R:  circle fill black at (0,0)
+W:  circle fill black at (0.75,0)
+U:  circle fill black at (0.5,-0.5)
+X:  circle fill black at (-0.75,-0.25)
+O1: circle at (1.75,0.25)  "3"
+O2: circle at (1,-1)       "2"
+O3: circle at (-1.5,-0.5)  "1"
+O4: circle at (1.5,-0.5)   "6"
+O5: circle at (0,-1)       "5"
+O6: circle at (-0.5,-0.75) "4"
+O7: circle at (-0.75,0.5)  "7"
+
+line from R to W     "r"       above aligned
+line from W to O1.w  "t a r $" above aligned
+line from R to X     "t a r"   above aligned
+line from X to O3.ne "t a r $" above aligned
+line from X to O6.nw "$"       above aligned
+line from R to U     "a r"     above aligned
+line from W to O4.nw "$"       above aligned
+line from U to O5.ne "$"       above aligned
+line from U to O2.nw "t a r $" above aligned
+line from R to O7.se "$"       above aligned

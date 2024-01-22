@@ -1,0 +1,69 @@
+\begin{sile}
+
+	La struttura ad albero chiamata \bf{trie} é la piú semplice struttura 
+	dati possibile che permette di determinare se una stringa appartiene 
+	o non appartiene ad un determinato insieme chiamato \em{dizionario}. 
+	Un trie é un DAG che ha un singolo carattere riportato sulle etichette 
+	di ciascun arco. Dato che il verso di percorrenza é sempre dall'alto 
+	verso il basso, si tende ad omettere esplicitamente la direzione degli 
+	archi. Concatenando tutte le etichette di un percorso che va dalla 
+	radice ad un nodo foglia si ottiene una delle stringhe che fanno parte 
+	del dizionario associato al trie. In particolare, ogni percorso identifica 
+	univocamente una stringa del dizionario, e viceversa. 
+
+	\begin{examplebox}
+		\begin[width = 60%fw]{parbox}
+			Seguendo tutti i possibili percorsi che esistono nel trie riportato a 
+			destra, si evidenzia come il dizionario a questo associato contenga le 
+			sole due parole \em{array} e \em{arco}.
+		\end{parbox}
+		\begin[width = 40%fw, strut = character, valign = middle]{parbox}
+			\center{\img[src = Suffix/trie.pdf, width = 50%fw]}
+		\end{parbox}
+	\end{examplebox}
+
+	Per determinare se una stringa fa o non fa parte del dizionario associato 
+	ad un trie é sufficiente percorrerlo spostandosi dal \math{i}-esimo nodo 
+	al \math{i+1}-esimo nodo lungo gli archi che hanno per etichetta 
+	l'\math{i}-esimo carattere della stringa fino ad esaurirli tutti. Se si 
+	percorrono solo archi ordinatamente etichettati dai caratteri della 
+	stringa e l'ultimo arco conduce ad un nodo foglia, allora la parola 
+	é effettivamente parte del dizionario, altrimenti non lo é. 
+
+	Questo criterio di appartenenza presenta peró un problema: se nel 
+	dizionario sono presenti due stringhe \math{S_{1}} ed \math{S_{2}} 
+	tali per cui \math{S_{1}} é prefisso di \math{S_{2}}, non é possibile 
+	usare questo criterio per determinare se \math{S_{1}} appartenga al 
+	dizionario. Questo perché passando \math{S_{1}} come input all'algoritmo 
+	per l'appartenenza questo percorre tutti i nodi etichettati da caratteri
+	della parola, ma termina in un nodo non foglia. Il problema puó essere 
+	aggirato semplicemente modificando le stringhe in input e nel dizionario 
+	aggiungendovi un carattere di terminazione speciale (per convenzione si
+	utilizza $) che non fa parte dell'effettivo alfabeto delle stringhe. 
+
+	\begin{examplebox}
+		\begin[width = 50%fw]{parbox}
+			Aggiungendo $ alla fine di ogni parola é possibile rimuovere ogni ambiguitá 
+			legata ai prefissi. Infatti, la parola \em{arc} appartiene al dizionario 
+			relativo al trie riportato a lato perché percorrendo i nodi a partire dalla 
+			radice si ha un percorso etichettato \em{arc$} che termina in un nodo foglia. 
+			D'altro canto, ad esempio, la parola \em{arra} non appartiene al dizionario.
+		\end{parbox}
+		\begin[width = 50%fw, strut = character, valign = middle]{parbox}
+			\center{\img[src = Suffix/trie2.pdf,  width = 50%fw]}
+		\end{parbox}
+	\end{examplebox}
+
+	Un \bf{compact trie} é un tipo particolare di trie dove ciascun cammino che 
+	non ha diramazioni viene accorpato in un unico arco fra due nodi, etichettato 
+	con la stringa che si ottiene concatenando ordinatamente tutti i caratteri 
+	sulle etichette che formavano il cammino. É possibile determinare se una 
+	parola appartiene oppure no al dizionario associato ad un compact trie nello 
+	stesso modo in cui si lo si fa rispetto ai trie, l'unica differenza é che non
+	si procede di carattere in carattere ma per gruppi di caratteri.
+
+	\begin{examplebox}
+		\center{\img[src = Suffix/comptrie.pdf, width = 33%fw]}
+	\end{examplebox}
+
+\end{sile}

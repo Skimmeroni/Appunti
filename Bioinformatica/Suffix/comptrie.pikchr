@@ -1,0 +1,16 @@
+lineht *= 1.5
+circlerad = 0.075
+circlefill = 0
+
+R: circle at (0,0.5)
+A: circle at (0,0)
+B: circle at (0.5,-0.5)
+C: circle at (-0.5,-0.5)
+D: circle at (-0.75,-1)
+E: circle at (-0.25,-1)
+
+line from R.s  to A.n  "AR"   aligned above
+line from A.se to B.nw "RAY$" aligned above
+line from A.sw to C.ne "C"    aligned below
+line from C.sw to D.n  "O$"   aligned below
+line from C.se to E.n  "$"    aligned above

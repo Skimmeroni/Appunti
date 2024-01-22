@@ -1,0 +1,287 @@
+\begin{sile}
+
+	Un primo approccio al problema del sequenziamento del DNA é offerto dallo 
+	\bf{shotgun sequencing}, o \bf{sequenziamento casuale}. Questo si compone
+	di quattro passaggi:
+
+	\begin{enumerate}
+		\begin{item}
+			Avendo a disposizione il DNA da sequenziare, ne
+			vengono create diverse copie (ad esempio tramite PCR);
+		\end{item}
+		\begin{item}
+			Si rompe ciascuna copia in piccoli frammenti, di modo che ciascuna stringa
+			di DNA subisca tagli in punti quanto piú casuali possibile;
+		\end{item}
+		\begin{item}
+			Ciascun frammento viene sequenziato separatamente;
+		\end{item}
+		\begin{item}
+			Se vengono sequenziati abbastanza frammenti che si sovrappongono fra di
+			loro, e queste sovrapposizioni sono abbastanza lunghe da essere certi
+			che siano univoche, allora é possibile sequenziare il DNA unificando i
+			sotto-sequenziamenti cosí ottenuti.
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	Se le read di DNA vengono intese come delle stringhe sull'alfabeto \math{A,
+	C, G, T}, e l'insieme di tutte le read contiene le informazioni sull'intero
+	DNA, allora questo non é altro che una stringa formata dalla concatenazione
+	di sottostringhe di varia lunghezza di tutte le read. Piú formalmente, si ha
+	che l'intero DNA é una \bf{superstringa} delle relative read.
+
+	Dato un insieme di \math{k} stringhe \math{P = \{S_{1}, S_{2}, 
+	\unicodeellipsis, S_{k}\}}, una \bf{superstringa} dell'insieme \math{P}
+	é una stringa che contiene ogni stringa di \math{P} come sua sottostringa.
+	Si noti come la superstringa di un insieme \math{P} non deve necessariamente
+	essere membro di \math{P}. É sempre possibile ottenere una superstringa 
+	triviale per un generico insieme \math{P} concatenando in un qualsiasi ordine 
+	tutte le stringhe che fanno parte di \math{P}. Pertanto, almeno una 
+	superstringa esiste sempre per qualsiasi \math{P}.
+
+	\begin{examplebox}
+		Sia \math{P = \{abcc, efab, bccla\}}. Una superstringa molto semplice per
+		\math{P} é \math{efababccbccla}. Un'altra superstringa per \math{P}, piú 
+		difficile da individuare, é \math{efabccla}.
+	\end{examplebox}
+
+	In relazione al problema del sequenziamento del DNA, la stringa che codifica
+	l'intero DNA é, con molta probabilitá, quella che ha la lunghezza minore 
+	possibile. Questo perché, in linea con l'approccio della massima parsimonia,
+	é la stringa che richiede il minimo "sforzo" per essere costruita. Dato un 
+	insieme di stringhe \math{P}, sia \math{S*(P)} la superstringa di \math{P} 
+	piú piccola possibile
+
+	% \subsection{Risoluzione mediante grafi}
+
+	É possibile approcciare il problema di determinare la superstringa piú corta 
+	di un insieme di stringhe mediante grafi. Dato un insieme di \math{n} read, 
+	un \bf{grafo di overlap} é un grafo che ha i nodi etichettati con le read e 
+	ha archi fra tutte le coppie di read che hanno un overlap "sufficientemente 
+	lungo", etichettati con l'overlap stesso. Di norma si impone un valore soglia 
+	per la lunghezza degli overlap al di sopra del quale si assume che l'overlap 
+	non possa essere dovuto ad una coincidenza ma al fatto che le due read sono 
+	state estratte da porzioni contigue di DNA. Un grafo di overlap a cui vengono 
+	rimossi gli archi transitivi prende il nome di \bf{grafo di stringhe}.
+
+	\begin{examplebox}
+		\begin[width = 50%fw]{parbox}
+			\img[src = Sequenziamento/overlap.pdf, width = 100%fw]
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\img[src = Sequenziamento/string.pdf,  width = 100%fw]
+		\end{parbox}
+	\end{examplebox}
+
+	Noto il grafo di overlap associato ad un insieme di read, il 
+	sequenziamento del DNA puó essere ricavato percorrendo un cammino 
+	sul grafo che visiti ciascun nodo esattamente una volta e che 
+	massimizzi la somma delle lunghezze degli archi attraversati. Alla 
+	stringa cosí ottenuta é sufficiente concatenare in testa il prefisso 
+	della prima read non presente nell'overlap e e concatenare in coda il 
+	suffisso dell'ultima read non presente nell'overlap.
+
+	Il problema del sequenziamento del DNA ha notevoli somiglianze con il 
+	problema del determinare un \bf{cammino hamiltoniano} su un grafo, in 
+	particolare nella sua variante dove le etichette degli archi ne determinano
+	un peso, il \bf{problema del commesso viaggiatore} (\bf{travelling salesman
+	problem}), o \bf{TSP}. Questo problema ha peró una complessitá NP-hard, 
+	peranto non puó esistere un algoritmo in grado di risolverlo in tempo 
+	polinomiale. Nonostante questo, é comunque possibile risolvere piccole 
+	istanze di TSP in tempo accettabile.
+
+	Dato un grafo orientato e completo \math{G = (V, A)}, con archi pesati 
+	\math{w : A \mapsto \dsi{Q}^{+}}, ogni soluzione del problema TSP é un 
+	percorso che visita ogni nodo esattamente una volta e torna al punto di 
+	partenza, dove il costo é dato dalla somma dei pesi di tutti gli archi 
+	attraversati. La soluzione ottimale é la permutazione \math{\Pi = <\pi_{1}, 
+	\unicodeellipsis, \pi_{n}>} di \math{V} che minimizzi la quantitá:
+
+	\begin[mode = display]{math}
+		w{(\pi_{n}, \pi_{1})} + \sum_{i = 1}^{n} w{(\pi_{i}, \pi_{i + 1})}
+	\end{math}
+
+	Se é possibile convertire una istanza del problema del sequenziamento del 
+	DNA in una istanza del problema TSP equivalente, allora i due problemi 
+	possono essere risolti con lo stesso approccio. Fra i due problemi vi sono 
+	due notevoli differenze: nel TSP si cerca una stringa di lunghezza minima, 
+	mentre nell'assemblaggio si cerca una stringa di lunghezza massima; inoltre, 
+	nel primo occorre trovare un percorso che attraversi tutti i nodi esattamente 
+	una volta e abbia nodo iniziale e finale coincidenti, mentre nel secondo é 
+	sufficiente che il percorso attraversi tutti i nodi esattamente una volta.
+
+	La prima differenza puó essere rimossa etichettando il grafo di overlap non
+	con l'overlap fra due read ma con la lunghezza della parte di read che non 
+	fa parte dell'overlap. In questo modo, il problema del sequenziamento del DNA
+	ha la soluzione migliore nel cammino che ha minimo il peso delle etichette.
+
+	La seconda differenza puó essere risolta aggiungendo al grafo di overlap due
+	nodi speciali, uno di partenza ed uno di arrivo, con queste caratteristiche:
+	il nodo di partenza ha solo archi uscenti di peso nullo diretti a tutti i nodi 
+	del grafo tranne a quello di arrivo, mentre il nodo di arrivo ha solo archi 
+	entranti di peso nullo provenienti da tutti i nodi del grafo tranne da quello 
+	di partenza. Si aggiunga poi un arco uscente dal nodo di partenza ed entrante
+	nel nodo di arrivo, avente sempre peso nullo. In questo modo, si ha la certezza 
+	che qualsiasi cammino sul grafo inizi sul nodo di partenza, passi per tutti i 
+	nodi del grafo fino a raggiungere quello di arrivo e poi tornare al nodo di 
+	partenza, ed il costo totale rimane invariato (tutti gli archi introdotti sono 
+	nulli).
+
+	% \subsection{Risoluzione mediante permutazioni circolari}
+
+	% É possibile risolvere il problema della ricerca della superstringa piú corta 
+	% in tempo polinomiale a meno di un certo errore. Nello specifico, l'algoritmo 
+	% piú semplice che risolve il problema in tempo polinomiale ha un fattore di 
+	% errore pari a 3, ovvero produce una stringa che é garantito avere una 
+	% lunghezza che é non piú del triplo di quella della "vera" superstringa piú 
+	% corta.
+
+	% Innanzitutto, nel descrivere un algoritmo per la ricerca della superstringa 
+	% piú corta di un insieme \math{P} di stringhe é utile assumere che nessuna 
+	% stringa facente parte di \math{P} sia sottostringa di un'altra stringa in 
+	% \math{P}. Sottostringhe di questo tipo possono essere trovate ed eliminate 
+	% in maniera efficiente. Inoltre, il nuovo insieme \math{P'} che si ottiene 
+	% da \math{P} eliminando le stringhe di questo tipo ha la stessa superstringa 
+	% piú corta di \math{P}. Pertanto, senza perdita di generalitá, é possibile 
+	% assumere di stare trattando insiemi \math{P} dove nessuna stringa é 
+	% sottostringa di un'altra. Allora, date due stringhe \math{S_{i}} ed 
+	% \math{S_{j}}, siano:
+
+	% \begin{enumerate}
+		% \begin{item}
+			% \math{||P||} la somma delle lunghezze di tutte le stringhe in \math{P};
+		% \end{item}
+		% \begin{item}
+			% \math{\mi{ov}(S_{i}, S_{j})} l'\bf{overlap} di \math{S_{i}} e \math{S_{j}}, 
+			% ovvero la lunghezza del match piú lungo fra un suffisso di \math{S_{i}} ed 
+			% un prefisso di \math{S_{j}};
+		% \end{item}
+		% \begin{item}
+			% \math{p(S_{i}, S_{j}) = |S_{i}| - \mi{ov}(S_{i}, S_{j})}, ovvero la 
+			% differenza fra la lunghezza dell'intera stringa \math{S_{i}} e la 
+			% lunghezza dell'overlap fra \math{S_{i}} e \math{S_{j}};
+		% \end{item}
+		% \begin{item}
+			% \math{\mi{pref}(S_{i}, S_{j}) = S_{i}[1 : |p(S_{i}, S_{j})|]}, ovvero 
+			% il prefisso di \math{S_{i}} avente lunghezza \math{p(S_{i}, S_{j})}.
+		% \end{item}
+	% \end{enumerate}
+
+	% \begin{examplebox}
+		% Siano date le stringhe \math{S_{1} = abacd} e \math{S_{2} = acdef}. Il match
+		% piú lungo fra un suffisso di \math{S_{1}} ed un prefisso di \math{S_{2}} si 
+		% ha fra gli ultimi tre caratteri della prima ed i primi tre caratteri della
+		% seconda, pertanto \math{\mi{ov}(S_{1}, S_{2}) = 3}. Essendo \math{|S_{1}| = 
+		% 5}, si ha \math{p(S_{1}, S_{2}) = 5 - 3  = 2}. Infine, si ha \math{\mi{pref}
+		% (S_{1}, S_{2}) = S[1:2] = ab}.
+	% \end{examplebox}
+
+	% Sia \math{L = o_{1}, o_{2}, \unicodeellipsis, o_{t}} un sottoinsieme 
+	% ordinato dei numeri interi che vanno da 1 a \math{t}. \math{L} definisce 
+	% il sottoinsieme \math{\{S_{o_{1}}, S_{o_{2}}, \unicodeellipsis, S_{o_{t}}\} 
+	% \subseteq P} di \math{t} stringhe estratte da \math{P} ordinate secondo 
+	% \math{L}. Inoltre, \math{L} definisce la stringa \math{S(L)} come la 
+	% concatenazione dei \math{p(S_{o_{i}}, S_{o_{j}})} per ciascuna coppia di 
+	% stringhe \math{(S_{o_{i}}, S_{o_{j}})} adiacenti in \math{L}, con \math{j 
+	% \ne l}, seguite dalla stringa \math{S_{o_{t}}} per intero:
+
+	% \begin[width = 65%fw]{parbox}
+		% \begin[mode = display]{math}
+			% S(L) =
+			% \mi{pref}(S_{o_{1}}, S_{o_{2}}) \cdot 
+			% \mi{pref}(S_{o_{2}}, S_{o_{3}}) \cdot 
+			% \unicodeellipsis \cdot 
+			% \mi{pref}(S_{o_{t-1}}, S_{o_{t}}) \cdot 
+			% S_{o_{t}}
+		% \end{math}
+	% \end{parbox}
+	% \begin[width = 35%fw]{parbox}
+		% \begin[mode = display]{math}
+			% |S{(L)}| = \sum_{i = 1}^{t - 1} p{(S_{o_{i}}, S_{o_{i + 1}})} + |S_{o_{t}}|
+		% \end{math}
+	% \end{parbox}
+
+	% \begin{examplebox}
+		% Siano date le stringhe \math{S_{o_{1}} = azwad}, 
+		% \math{S_{o_{2}} = adcste}, \math{S_{o_{3}} = stee} e 
+		% \math{S_{o_{4}} = eeaz}. Si ha \math{\mi{pref}(S_{o_{1}}, 
+		% S_{o_{2}}) = azw}, \math{\mi{pref}(S_{o_{2}}, S_{o_{3}}) = adc} 
+		% e \math{\mi{pref}(S_{o_{3}}, S_{o_{4}}) = st}. Pertanto, 
+		% \math{S(L) = azwadcsteeaz}.
+	% \end{examplebox}
+
+	% Inoltre, é possibile dimostrare per induzione che \math{S(L)} é 
+	% una superstringa (non necessariamente la piú corta) dell'insieme 
+	% \math{S_{o_{1}}, S_{o_{2}}, \unicodeellipsis, S_{o_{t}} \subseteq P}. 
+	% Si inizi la prova "a rovescio", da \math{i = t} a \math{i = 1}. Il 
+	% lemma é certamente valido per \math{S_{o_{t}}}, perché \math{S(L)} é 
+	% stata costruita includendo esplicitamente la presenza di \math{S_{o_{t}}}.
+	% Supponendo che il lemma sia valido per \math{i + 1}, occorre mostrare 
+	% come il lemma valga anche per \math{i}, ovvero che \math{S_{o_{i}}} sia 
+	% una sottostringa di \math{S(L)}. Sia \math{\rho = |\mi{pref}(S_{o_{i}}, 
+	% S_{o_{i + 1}})|}; dato che \math{\mi{pref}(S_{o_{i}}, S_{o_{i + 1}})} é 
+	% stata esplicitamente inclusa in \math{S(L)} per costruzione, occorre 
+	% mostrare che \math{S_{o_{i}}[\rho:]} si trova in \math{S(L)} precisamente
+	% dopo \math{\mi{pref}(S_{o_{i}}, S_{o_{i + 1}})}. Dato che nessuna stringa
+	% in \math{P} é sottostringa di un'altra, \math{S_{o_{i}}[\rho:]} é certamente 
+	% prefisso di \math{S_{o_{i + 1}}}. Per ipotesi induttiva \math{S_{o_{i + 1}}}
+	% é una sottostringa di \math{S(L)}, pertanto \math{S_{o_{i}}[\rho:]} é
+	% contenuto in \math{S(L)} precisamente dopo \math{\mi{pref}(S_{o_{i}}, 
+	% S_{o_{i + 1}})}.
+
+	% Impostando la lista \math{L} come una permutazione \math{\Pi} di tutti gli
+	% interi da 1 a \math{k}, il teorema appena dimostrato implica che per ciascun
+	% insieme di \math{k} stringhe di \math{P}, qualsiasi permutazione \math{\Pi} 
+	% di tutti gli interi da 1 a \math{k} specifica una superstringa \math{S(\Pi)}
+	% per \math{P}. Similmente, se \math{S^{*}} é la superstringa piú corta per
+	% l'insieme \math{P}, allora \math{S^{*}} deve essere \math{S(\Pi)} per una
+	% qualche permutazione \math{\Pi}. Per verificarlo si noti che, non contenendo 
+	% \math{P} alcuna stringa che sia sottostringa di un'altra, una stringa 
+	% \math{S_{i}} puó iniziare a sinistra di un'altra stringa \math{S_{j}} in 
+	% \math{S^{*}} se e solo se \math{S_{i}} finisce (oltre che iniziare) a sinistra
+	% di \math{S_{j}} in \math{S^{*}}. Pertanto, non possono esservi due stringhe 
+	% che iniziano o finiscono nello stesso punto di \math{S^{*}}. Pertanto la 
+	% permutazione \math{\Pi} tale per cui \math{S(\Pi) = S^{*}} si ottiene a partire 
+	% dall'ordine con cui le estremitá sinistre delle stringhe in \math{P} appaiono 
+	% in \math{S^{*}}. Ciascuna coppia di stringhe che forma \math{S^{*}} deve
+	% necessariamente presentare un overlap, altrimenti \math{S^{*}} potrebbe venire
+	% ulteriormente ridotta. Pertanto, \math{S^{*} = S(\Pi)}.
+
+	% \begin{examplebox}
+		% Sia \math{L = \{eeaz, adcste, azwad, stee\}}. Scambiando la terza stringa di 
+		% \math{P} con la prima e scambiando la (nuova) terza stringa con la quarta, si 
+		% ottiene \math{L^{'} = \{azwad, adcste, stee, eeaz\}}. Si ha allora \math{S(L) 
+		% = S(L^{'}) = azwadcsteeaz}. La permutazione che permette di ottenere 
+		% \math{L^{'}} a partire da \math{L} é \math{\Pi = 3, 2, 4, 1}.
+	% \end{examplebox}
+
+	% Dato che \math{\Pi} definisce un insieme di stringhe ordinate, allo stesso 
+	% modo di \math{L}, Si ha che \math{|S(\Pi)|} si calcola con la stessa formula
+	% introdotta in precedenza. La superstringa piú corta per un insieme \math{P}
+	% é quindi la superstringa definita da una specifica permutazione \math{\Pi} 
+	% delle stringhe di \math{P} tale per cui risulta minima la quantitá:
+
+	% \begin[mode = display]{math}
+		% |S{(\Pi)}| = \sum_{i = 1}^{k - 1} p{(S_{o_{i}}, S_{o_{i + 1}})} + |S_{o_{k}}|
+	% \end{math}
+
+	% Notando peró come
+
+	% \begin[mode = display]{math}
+		% |S{(\Pi)}| = 
+		% \sum_{i = 1}^{k - 1} p{(S_{o_{i}}, S_{o_{i + 1}})} + |S_{o_{k}}| =
+		% \sum_{i = 1}^{k - 1}|S_{o_{i}}| - \sum_{i = 1}^{k - 1} \mi{ov} {(S_{o_{i}}, S_{o_{i + 1}})} =
+		% ||P|| - \sum_{i = 1}^{k - 1} \mi{ov} {(S_{o_{i}}, S_{o_{i + 1}})}
+	% \end{math}
+
+	% Pertanto, la superstringa piú corta per un insieme \math{P} puó anche essere
+	% ottenuta a partire dalla permutazione \math{\Pi} di \math{P} tale per cui viene
+	% massimizzata la quantitá
+
+	% \begin[mode = display]{math}
+		% \sum_{i = 1}^{k - 1} \mi{ov} {(S_{o_{i}}, S_{o_{i + 1}})}
+	% \end{math}
+
+\end{sile}

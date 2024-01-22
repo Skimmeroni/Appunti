@@ -1,0 +1,254 @@
+\begin{sile}
+
+	Siano dati un testo \math{T} del quale si ha costruito un array dei 
+	suffissi ed un pattern \math{P}. Dato che l'array dei suffissi contiene 
+	tutti i suffissi di una stringa in ordine lessicografico, se esiste una 
+	occorrenza di \math{P} in \math{T} alla posizione \math{i} allora tutte 
+	le altre occorrenze (se ce ne sono) di \math{P} in \math{T} vanno cercate 
+	nelle posizioni contigue a \math{i}. 
+
+	\begin{examplebox}
+		Siano \math{T = tartar$} e \math{P = ta}. L'array dei suffissi 
+		associato a \math{T} é \math{Pos = [7, 5, 2, 6, 3, 4, 1]}. Le 
+		occorrenze di \math{P} in \math{T} sono due, rispettivamente in 
+		posizione 1 e 4. Non a caso, i valori 1 e 4 sono adiacenti in 
+		\math{Pos}, e corrispondono ai suffissi \math{tartar$} e 
+		\math{tar$} di \math{T}.
+	\end{examplebox}
+
+	Nello specifico, é possibile trovare le occorrenze di \math{P} in \math{T} 
+	mediante ricerca binaria sull'array dei suffissi. Si considera l'elemento di 
+	\math{Pos} che occupa la posizione centrale, \math{Pos[\frac{m}{2}]}, e si 
+	confronta \math{T[Pos[\frac{m}{2}]:m]}, il suffisso di \math{T} associato a 
+	quella posizione con \math{P}. Possono verificarsi tre situazioni:
+
+	\begin{itemize}
+		\begin{item}
+			\math{T[Pos[\frac{m}{2}]:m]} viene prima di \math{P} in ordine 
+			lessicografico. In questo caso, le eventuali occorrenze di \math{P} 
+			in \math{T} vanno cercate in \math{Pos[1:(\frac{m}{2}-1)]}. Si prende 
+			allora l'elemento centrale di questo sotto-array come nuovo elemento 
+			di confronto e si ripete il procedimento;
+		\end{item}
+		\begin{item}
+			\math{T[Pos[\frac{m}{2}]:m]} viene dopo di \math{P} in ordine 
+			lessicografico. In questo caso, le eventuali occorrenze di \math{P} 
+			in \math{T} vanno cercate in \math{Pos[(\frac{m}{2}+1):m]}. Si prende 
+			allora l'elemento centrale di questo sotto-array come nuovo elemento 
+			di confronto e si ripete il procedimento;
+		\end{item}
+		\begin{item}
+			\math{T[Pos[\frac{m}{2}]:m]} contiene interamente \math{P} come 
+			prefisso. In questo caso, occorre controllare le posizioni contigue 
+			a \math{Pos[\frac{m}{2}]:m} fino ad esaurire posizioni da ambo i 
+			lati che contengano interamente \math{P} come prefisso (o fino a 
+			raggiungere gli estremi di \math{Pos}), tenendo traccia del loro 
+			numero. A questo punto, il procedimento termina.
+		\end{item}
+	\end{itemize}
+
+	\begin{examplebox}
+		Siano \math{T = mississippi$} e \math{P = issi}. Il relativo array dei 
+		suffissi é \math{Pos = [12, 11, 8, 5, 2, 1, 10, 9, 7, 4, 6, 3]}, di 
+		lunghezza \math{m}.
+
+		\begin{itemize}
+			\begin{item}
+				L'elemento centrale di \math{Pos} é 1, e \math{T[1:m] = mississippi$} 
+				viene dopo \math{P} secondo l'ordine lessicografico. Pertanto, le 
+				occorrenze di \math{P} in \math{T} (se esistono) sono da cercarsi in 
+				\math{P_{1} = [12, 11, 8, 5, 2]};
+			\end{item}
+			\begin{item}
+				Si ripete il procedimento con l'elemento centrale di \math{P_{1}}, 
+				ovvero 8. \math{T[8:m] = ippi$} viene prima di \math{P} secondo 
+				l'ordine lessicografico, pertanto le occorrenze di \math{P} in 
+				\math{T} (se esistono) sono da cercarsi in \math{P_{2} = [5, 2]};
+			\end{item}
+			\begin{item}
+				Si ripete il procedimento con l'elemento centrale di \math{P_{2}}, 
+				ovvero 5. \math{T[5:m] = issippi$} contiene interamente \math{P} come
+				prefisso, pertanto le altre occorrenze di \math{P} in \math{T} (se 
+				esistono) sono da cercare nelle posizioni contigue a 5;
+			\end{item}
+			\begin{item}
+				L'unica posizione contigua a 5 in \math{P_{2}} é 2, ed effettivamente 
+				\math{T[5:m] = ississippi$} contiene interamente \math{P} come prefisso.
+				Non avendosi altre posizioni da controllare, é possibile affermare che le
+				occorrenze di \math{P} in \math{T} sono due, precisamente in posizione 2
+				e 5.
+			\end{item}
+		\end{itemize}
+	\end{examplebox}
+
+	Un algoritmo di questo tipo, essendo di fatto una ricerca binaria, ha tempo
+	di esecuzione logaritmico. Nello specifico, il tempo di esecuzione per la 
+	risoluzione del problema del pattern matching mediante ricerca binaria 
+	sull'array dei suffissi é \math{O(m\mi{log}(n))}. Ricordando che il problema
+	del pattern matching viene risolto sfruttando gli alberi dei suffissi in tempo
+	lineare, occorre operare delle ottimizzazioni per rendere i due tempi 
+	comparabili.
+
+	\subsection{Ottimizzazione: ridurre il numero di confronti}
+
+		In ogni iterazione dell'algoritmo di ricerca binaria, si indichi con 
+		\math{L} e \math{R} rispettivamente l'estremo inferiore e superiore 
+		dell'intervallo nell'array dei suffissi che contiene le posizioni delle 
+		possibili occorrenze di \math{P}, e sia \math{M} l'elemento mediano. Se 
+		sono note le quantitá \math{Lcp(M, R)}, \math{Lcp(L, M)} e \math{Lcp(L, R)}, 
+		é possibile utilizzarle per ridurre il numero di confronti necessari per 
+		determinare dove si trova \math{P}. Infatti, se \math{T[Pos[R]:m]} e 
+		\math{T[Pos[L]:m]} hanno un prefisso in comune, allora non é necessario 
+		confrontare tutti i loro caratteri, ma soltanto quelli a partire dalla 
+		posizione \math{Lcp[Pos[L], Pos[R]] + 1}.
+
+		Questa ottimizzazione non abbassa il tempo di esecuzione teorico (che 
+		rimane \math{O(m\mi{log}(n))}), ma permette comunque di rendere l'algoritmo 
+		leggermente piú efficiente sopprimendo alcuni confronti inutili. Il problema 
+		di questo approccio é che i valori \math{LCP} sono noti solamente per 
+		suffissi adiacenti in \math{Pos}, mentre in generale i suffissi che si 
+		trovano in \math{L} e \math{R} non lo sono. Pertanto, vanno calcolati 
+		ed aggiornati manualmente ad ogni iterazione.
+
+	\subsection{Ottimizzazione: analisi caso per caso}
+
+		% L'ottimizzazione appena applicata puó essere ulteriormente raffinata 
+		% effettuando una analisi caso per caso. Siano \math{l = Lcp(L, P)} e 
+		% \math{r = Lcp(R, P)} due variabili che vengono aggiornate ad ogni 
+		% iterazione dell'algoritmo di ricerca. In una qualsiasi iterazione 
+		% possono presentarsi tre casistiche:
+
+		% \begin{itemize}
+			% \begin{item}
+				% \math{l > r}, ovvero il suffisso di \math{T} che inizia in posizione
+				% \math{L} ha piú caratteri in comune con \math{P} di quanti ne abbia
+				% il suffisso di \math{T} che inizia in posizione \math{R}. In base alla
+				% relazione che hanno \math{Lcp(L, M)} e \math{Lcp(L, P)}, si distinguono 
+				% tre sottocasi:
+				% \begin{itemize}
+					% \begin{item}
+						% \math{Lcp(L, M) > l}, ovvero il prefisso in comune fra il suffisso 
+						% \math{T[Pos[L]:m]} ed il suffisso \math{T[Pos[M]:m]} é piú lungo 
+						% del prefisso in comune fra \math{P} ed il suffisso \math{T[Pos[L]:m]}. 
+						% Pertanto, \math{P} ha in comune con \math{T[Pos[M]:m]} i primi \math{l} 
+						% caratteri. In altre parole, l'\math{l + 1}-esimo carattere di 
+						% \math{T[Pos[L]:m]} e di \math{T[Pos[M]:m]} sono uguali e vengono 
+						% prima in ordine lessicografico dell'\math{l + 1}-esimo carattere di 
+						% \math{P}. Pertanto tutte occorrenze di \math{P} in \math{T}, se 
+						% esistono, dovranno certamente trovarsi in \math{Pos} alla destra 
+						% di \math{M}. Se si verifica questa casistica é inutile effettuare 
+						% comparazioni su \math{P}: é sufficiente sostituire \math{L} con 
+						% \math{M} e ripetere l'algoritmo, dato che il valore di \math{l} 
+						% (e di \math{r}) rimane lo stesso;
+					% \end{item}
+					% \begin{item}
+						% \math{Lcp(L, M) < l}, ovvero il prefisso in comune fra il suffisso
+						% \math{T[Pos[L]:m]} ed il suffisso \math{T[Pos[M]:m]} é piú corto del
+						% prefisso in comune fra \math{P} ed il suffisso \math{T[Pos[L]:m]}.
+						% Pertanto, \math{P} ha in comune con \math{T[Pos[M]:m]} i primi
+						% \math{Lcp(L, M)} caratteri. Pertanto, \math{P} ha in comune con
+						% \math{T[Pos[M]:m]} i primi \math{Lcp(L, M)} caratteri. In altre
+						% parole, l'\math{Lcp(L, M) + 1}-esimo carattere di \math{T[Pos[L]:m]}
+						% e di \math{T[Pos[M]:m]} sono uguali e vengono prima in ordine
+						% lessicografico dell'\math{Lcp(L, M)}-esimo carattere di \math{P}.
+						% Pertanto tutte occorrenze di \math{P} in \math{T}, se esistono, 
+						% dovranno certamente trovarsi in \math{Pos} alla sinistra di \math{M}. 
+						% Se si verifica questa casistica é inutile effettuare comparazioni su 
+						% \math{P}: é sufficiente sostituire \math{R} con \math{M}, \math{r} 
+						% con \math{Lcp(L, M)}, e ripetere l'algoritmo.
+					% \end{item}
+					% \begin{item}
+						% \math{Lcp(L, M) = l}, ovvero \math{P} ha i primi \math{l} caratteri 
+						% in comune con il suffisso \math{T[Pos[M]:m]}. L'algoritmo deve allora 
+						% comparare \math{P} con \math{T[Pos[M]:m]} a partire dalla posizione 
+						% \math{l + 1} come di consueto fino a trovarne uno che non sia in 
+						% comune fra i due. Se si ha di nuovo \math{Lcp(L, M) = l}, si ripete 
+						% questo sottocaso, altrimenti ci si troverá necessariamente in uno degli
+						% altri due.
+					% \end{item}
+				% \end{itemize}
+			% \end{item}
+			% \begin{item}
+				% \math{l = r}, ovvero il suffisso di \math{T} che inizia in posizione
+				% \math{L} ha tanti caratteri in comune con \math{P} quanti ne ha il
+				% suffisso di \math{T} che inizia in posizione \math{R}. Sono possibili
+				% tre sottocasi, identici ai precedenti;
+			% \end{item}
+			% \begin{item}
+				% \math{l < r}, ovvero il suffisso di \math{T} che inizia in posizione
+				% \math{L} ha meno caratteri in comune con \math{P} di quanti ne abbia
+				% il suffisso di \math{T} che inizia in posizione \math{R}. Questo caso
+				% é del tutto simmetrico al primo, con \math{L} e \math{R} scambiati di
+				% posto.
+			% \end{item}
+		% \end{itemize}
+
+		%%%
+		%%% AMO MANCA UN PEZZO
+		%%%
+
+	\subsection{Ottimizzazione: Calcolo dei valori LCP in tempo lineare}
+
+		Osservando piú attentamente la struttura dell'algoritmo cosí definito, si 
+		puó notare come gli estremi \math{L} e \math{R} dell'intervallo nell'array 
+		dei suffissi non sono mai del tutto casuali. Infatti:
+
+		\begin[mode = display]{math}
+			\table{
+				(L_{1}, R_{1}) = (1, n) &
+				(L_{2}, R_{2}) = (1, \frac{n}{2}) \cup (\frac{n}{2}, n) &
+				\unicodeellipsis &
+				(L_{k}, R_{k}) = \bigcup_{1 \leq i \leq k - 1} 
+				{(i \frac{n}{2^{k - 1}}, {(i + 1)} \frac{n}{2^{k - 1}})} \\
+			}
+		\end{math}
+
+		L'array dei suffissi si trova allora ad essere ripartito in una 
+		struttura ad albero, dove le foglie sono gli intervalli di ampiezza 
+		2 e la radice é l'intero array. Il numero totale di intervalli é 
+		certamente inferiore ad \math{n}, e in ciascuna iterazione dell'algoritmo 
+		viene calcolato un solo intervallo di ciascuna ampiezza. I valori LCP delle 
+		foglie, essendo consecutivi, corrispondono ai valori \math{Lcp(i, i + 1)} 
+		che sono stati ottenuti direttamente durante la costruzione dell'array dei 
+		suffissi, e pertanto sono giá noti. 
+
+		Occorre allora concentrarsi sul passo ricorsivo, ovvero come combinare 
+		fra loro i valori LCP di diversi intervalli. Si considerino due intervalli 
+		contigui aventi per estremi rispettivamente \math{(L_{1}, R_{1})} e 
+		\math{(L_{2}, R_{2})}, e si determini \math{Lcp(L_{1}, R_{2})}. Si presume
+		che il carattere in posizione \math{L_{1}} ed il carattere in posizione 
+		\math{R_{2}} siano diversi, perché se fossero uguali l'LCP verrebbe esteso
+		di uno. Ci si interroga allora dove si trova il primo carattere diverso da
+		quello in posizione \math{L_{1}}. Vi sono tre possibilitá:
+
+		\begin{itemize}
+			\begin{item}
+				É contenuto nella prima metá. Allora, in questo caso, 
+				\math{Lcp(L_{1}, R_{2}) = Lcp(L_{1}, R_{1})};
+			\end{item}
+			\begin{item}
+				É contenuto nella seconda metá. Allora, in questo caso, 
+				\math{Lcp(L_{1}, R_{2}) = Lcp(L_{2}, R_{2})};
+			\end{item}
+			\begin{item}
+				Si trova esattamente nel mezzo. Allora, in questo caso,
+				\math{Lcp(L_{1}, R_{2}) = Lcp(R_{1}, L_{2})}.
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		Indipendentemente dal caso in cui ci si trovi, \math{Lcp(L_{1}, R_{1}), 
+		Lcp(L_{2}, R_{2}), Lcp(R_{1}, R_{2}) \geq Lcp(L_{1}, R_{2})}, perché la
+		porzione in comune fra due estremi di un sottointervallo non puó essere
+		inferiore alla porzione in comune fra i due estremi dell'intervallo 
+		intero. In particolare:
+
+		\begin[mode = display]{math}
+			Lcp{(L_{1}, R_{2})} = \mi{min} {(Lcp(L_{1}, R_{1}), Lcp(L_{2}, R_{2}), Lcp(R_{1}, R_{2}))}
+		\end{math}
+
+		Pertanto, il calcolo dei valori LCP per qualsiasi intervallo puó essere 
+		calcolato in tempo lineare.
+
+\end{sile}

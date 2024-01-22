@@ -1,0 +1,206 @@
+\begin{sile}
+
+	Un ulteriore elemento che é possibile usare per determinare il valore di 
+	somiglianza tra due stringhe, oltre agli spazi e agli appaiamenti, sono i
+	\bf{gap}. Un gap é una qualsiasi sequenza ininterrotta di spazi che si 
+	presenta in una delle stringhe dell'allineamento. Un gap puó sia iniziare
+	a sinistra della stringa, e quindi avere il primo carattere della stringa 
+	alla sua destra, sia a destra della stringa, e quindi avere l'ultimo 
+	carattere della stringa alla sua sinistra, oppure nel mezzo della stringa.
+
+	\begin{examplebox}
+		\begin[width = 50%fw]{parbox}
+			L'allineamento presentato a lato ha cinque appaiamenti corretti, 
+			un appaiamento non corretto, sette spazi e quattro gap:
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\table{
+					c & t & t & t & a & a & c & - & - & a & - & a & c \\
+					c & - & - & - & c & a & c & c & c & a & t & - & c \\
+				}
+			\end{math}
+		\end{parbox}
+	\end{examplebox}
+
+	Il modo in cui viene assegnato un peso ad un gap influenza notevolmente 
+	il risultato di un allineamento. \footnote{Un possibile esempio di 
+	applicazione dell'allineamento con gap é il confronto fra \bf{DNA} e 
+	\bf{cDNA} (\em{complementary DNA}). Il DNA é composto da piccole sequenze 
+	che codificano per delle proteine, chiamate \bf{introni}, inframezzate da 
+	lunghe sequenze che non codificano nulla, chiamate \bf{esoni}. Quando il 
+	DNA deve essere utilizzato per la codifica, viene creata una copia in 
+	\bf{mRNA} (\em{messenger RNA}) delle parti di DNA che codificano per una 
+	certa proteina, che poi esce dal nucleo della cellula. Per capire per quale 
+	proteina quel tipo di mRNA codifica un semplice approccio consiste nel 
+	catturare l'mRNA all'uscita del nucleo, riconvertirlo in DNA e poi compararlo 
+	con il DNA contenuto nei cromosomi. Il DNA ottenuto a partire dall'mRNA, é 
+	peró composto esclusivamente da introni, ed é pertanto molto piú piccolo del 
+	DNA "puro". Ci si aspetta quindi che un allineamento fra DNA e cDNA sia 
+	composto da lunghi gap alternati da piccole sequenze di caratteri che 
+	combaciano.}. Esistono fondamentalmente quattro tipi di peso assegnabili ai 
+	gap: \em{costante}, \em{affine}, \em{convesso}, \em{arbitrario}.
+
+	\subsection{Peso costante}
+
+		L'approccio piú semplice consiste nell'assegnare a ciascuno spazio 
+		singolo un peso nullo, ovvero \math{s(x, -) = s(-, x) = 0} per qualsiasi 
+		carattere \math{x}, mentre ai gap viene assegnato un peso costante 
+		\math{W_{g}} che non dipende dal numero di spazi di cui é composto. 
+		Un valore di \math{W_{g}} grande incoraggia l'allineamento ad avere 
+		pochi gap, e la porzione allineata delle due stringhe consisterá di 
+		poche sottostringhe. Un valore di \math{W_{g}} piccolo incoraggia
+		l'allineamento ad essere piú frammentato. Il valore di un allineamento 
+		contenente \math{k} gap é dato da:
+
+		\begin[mode = display]{math}
+			\mi{maximize}(\sum_{i = 1}^{l} s{(S^{'}_{1}{(i)}, S^{'}_{2}{(i)})} - k W_{g})
+		\end{math}
+
+	\subsection{Peso affine}
+
+		Una variante del precedente approccio consiste nell'assegnare un peso 
+		fisso ad un gap, indipendentemente dalla sua lunghezza, a cui va sommato 
+		un ulteriore peso che dipende dal numero di spazi di cui é composto, 
+		lasciando comunque nullo il peso degli spazi singoli. Il peso dato da
+		ciascun gap di lunghezza \math{q} é dato dalla funzione lineare \math{W_{g} 
+		+ qW_{s}} (di fatto, un allineamento con peso costante é un allineamento 
+		con peso affine con \math{W_{s} = 0}. Il valore di un allineamento contenente 
+		\math{k} gap e \math{n} spazi é dato da: 
+
+		\begin[mode = display]{math}
+			\mi{maximize}(\sum_{i = 1}^{l} s{(S^{'}_{1}{(i)}, S^{'}_{2}{(i)})} - k W_{g} - n W_{s})
+		\end{math}
+
+		L'aumento di efficienza nel caso di peso affine sta nel fatto che l'aumento
+		del peso totale di un gap aggiungendo uno spazio é un valore costante che non 
+		dipende dal peso che ha il gap fino a quel momento. In altri termini, si ha 
+		\math{w(q + 1) - w(q) = W_{s}} per qualsiasi \math{q > 0}, mentre invece nel
+		modello arbitrario non é possibile predire il valore di \math{w(q + 1)} noto
+		\math{w(q)}. Dato che il peso aumenta in maniera costante, una volta noti 
+		\math{E(i, j)} e \math{F(i, j)} non é necessario chiedersi dove il gap inizi,
+		ma soltanto se il gap é o non é ancora iniziato.
+
+		Se i gap alla fine ed all'inizio dell'allineamento hanno un peso non nullo, 
+		il caso base puó essere facilmente dedotto come:
+
+		\begin[mode = display]{math}
+			\table{
+				V(i, 0) = E(i, 0) = -W_{g} - iW_{s} \\
+				V(0, j) = F(0, j) = -W_{g} - jW_{s} \\
+			}
+		\end{math}
+
+		Se invece gli spazi che si trovano alle estremitá hanno peso nullo, si ha 
+		banalmente \math{V(i,0) = V(0,j) = 0}. Per quanto riguarda la relazione di
+		ricorrenza, si ha:
+
+		\begin[mode = display]{math}
+			\table{
+				V(i, j) = \mi{max}[E(i, j), F(i, j), G(i, j)] \\
+				G(i, j) = \table{
+					V(i - 1, j - 1) + W_{m} & S_{1}[i] = S_{2}[j] \\
+					V(i - 1, j - 1) + W_{ms} & S_{1}[i] \ne S_{2}[j] \\
+				} \\
+				E(i, j) = \mi{max}[E(i, j - 1), V(i, j - 1) - W_{g}] - W_{s} \\
+				F(i, j) = \mi{max}[F(i - 1, j), V(i - 1, j) - W_{g}] - W_{s} \\
+			}
+		\end{math}
+
+	\subsection{Peso convesso}
+
+		Un approccio simile al precedente consiste nell'avere una funzione che lega
+		\math{W_{g}} e \math{W_{s}} che non sia lineare, ma che sia una funzione dove
+		il peso di ciascuno spazio decresce con l'aumentare della lunghezza stringa,
+		anziché rimanere costante. Un esempio di funzione di questo tipo potrebbe 
+		essere \math{W_{g} \mi{ln}(q)}.
+
+	\subsection{Peso arbitrario}
+
+		Il caso piú generale possibile si ha quando il peso di un gap é una funzione
+		arbitraria \math{w(q)} della sua lunghezza \math{q}. Tutti i precedenti 
+		approcci possono essere visti come un caso particolare di questo, pertanto é
+		sufficiente trovare una soluzione a questo approccio per risolverli tutti.
+		Siano \math{S_{1}} ed \math{S_{2}} due stringhe da volersi allineare. Si 
+		considerino, come é stato fatto in precedenza, i prefissi \math{S_{1}[1:i]}
+		di \math{S_{1}} e \math{S_{2}[1:j]} di \math{S_{2}}. Ogni possibile 
+		allineamento di questi due prefissi deve necessariamente rientrare in una di
+		queste tre categorie:
+
+		\begin{enumerate}
+			\begin{item}
+				L'ultimo carattere di \math{S_{1}[1:i]} si trova in corrispondenza di un
+				carattere di \math{S_{2}[1:j]} che non é l'ultimo. Pertanto, l'allineamento
+				si chiude con un gap su \math{S_{1}};
+			\end{item}
+			\begin{item}
+				L'ultimo carattere di \math{S_{1}[1:i]} si trova in corrispondenza di uno
+				spazio vuoto piú a destra dell'ultimo carattere di \math{S_{2}[1:j]}. 
+				Pertanto, l'allineamento si chiude con un gap su \math{S_{2}};
+			\end{item}
+			\begin{item}
+				L'ultimo carattere di \math{S_{1}[1:i]} si trova in corrispondenza 
+				con l'ultimo carattere di \math{S_{2}[1:j]}. Pertanto, deve essere 
+				\math{S_{1}[i] = S_{2}[j]} oppure \math{S_{1}[i] \ne S_{2}[j]}, ma
+				in entrambi i casi \math{S_{1}[i] \ne -} e \math{S_{2}[j] \ne -}.
+			\end{item}
+		\end{enumerate}
+
+		\begin{examplebox}
+			\img[src = Allineamento/Gap1.pdf, width = 100%fw]
+			\par\bigskip
+			\img[src = Allineamento/Gap2.pdf, width = 100%fw]
+			\par\bigskip
+			\img[src = Allineamento/Gap3.pdf, width = 100%fw]
+		\end{examplebox}
+
+		Siano \math{E(i, j)} il massimo valore di un qualsiasi allineamento 
+		di tipo 1, \math{F(i, j)} il massimo valore di un qualsiasi allineamento 
+		di tipo 2 e \math{G(i, j)} il massimo valore di un qualsiasi allineamento 
+		di tipo 3. Sia infine \math{V(i, j)} il massimo fra i tre valori 
+		\math{E(i, j)}, \math{F(i, j)} e \math{G(i, j)}. I quattro valori possono
+		essere ottenuti a partire dalla seguente relazione di ricorrenza:
+
+		\begin[mode = display]{math}
+			\{\table{
+				V(i, j) = \mi{max}[E(i, j), F(i, j), G(i, j)] \\
+				G(i, j) = V(i-1, j-1) + s(S_{1}[i], S_{2}[j]) \\
+				E(i, j) = \mi{max}_{0 \leq k \leq j-1}[V(i, k) - w(j - k)] \\
+				F(i. j) = \mi{max}_{0 \leq l \leq i-1}[V(l, j) - w(i - l)] \\
+			}
+		\end{math}
+
+		Per completare la ricorrenza, occorre specificare i casi base e dove i 
+		valori ottimali di allineamento si trovano. Se tutti gli spazi hanno un 
+		peso non nullo, anche quelli che si trovano all'inizio o alla fine 
+		dell'allineamento, allora il valore ottimale dell'allineamento si trova 
+		nella cella \math{(n, m)} ed i casi base sono dati da:
+
+		\begin[mode = display]{math}
+			\table{
+				V(i, 0) = -w(i) &
+				V(0, j) = -w(j) &
+				E(i, 0) = -w(i) &
+				F(0, j) = -w(j) \\
+			}
+		\end{math}
+
+		Dove \math{G(0, 0) = 0}, ma \math{G(i, j)} é indefinito quando esattamente un
+		solo valore fra \math{i} e \math{j} é 0. Si noti inoltre che \math{V(0, 0) = 
+		w(0)}. Quando invece gli spazi che si trovano alle estremitá hanno peso nullo,
+		allora il valore dell'allineamento ottimale é il massimo valore che si trova
+		in una qualsiasi delle celle della tabella, ed i casi base sono, banalmente:
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				V(i, 0) = 0
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				V(0, j) = 0
+			\end{math}
+		\end{parbox}
+		\par
+
+\end{sile}

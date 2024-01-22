@@ -1,0 +1,271 @@
+\begin{sile}
+
+	Viene chiamato \bf{modello di filogenesi perfetta} un modello di filogenesi 
+	che identifica gli eventi di speciazione nella presenza o assenza di 
+	\bf{caratteri} da parte delle specie. Con carattere si puó intendere 
+	indifferentemente sia una proprietá fenotipica, quindi una proprietá 
+	osservabile che le specie possiedono o non possiedono (avere/non avere le 
+	branchie, avere quattro/cinque/sei/\math{\unicodeellipsis} dita dei piedi, 
+	ecc\math{\unicodeellipsis}) oppure una proprietá genotipica, ovvero una 
+	particolare sequenza di DNA avente una utilitá nota che le cellule della 
+	specie hanno o non hanno (avere/non avere la sequenza che codifica per 
+	l'enzima galattasi, ad esempio).
+  
+	Il modello di filogenesi perfetta é un modello che enfatizza la quantitá di 
+	"differenze" che sussistono fra le specie per determinarne la filogenesi.
+	Inoltre, ha interesse esclusivamente a dedurre l'ordine in cui si sono 
+	verificati gli eventi di speciazione, mentre non fornisce alcuna indicazione 
+	sull'effettivo istante temporale in cui questi sono avvenuti. Questo modello,
+	seppur molto semplice, é piuttosto ristretto, perché si basa su due presupposti 
+	molto forti:
+
+	\begin{enumerate}
+		\begin{item}
+			Si considerano solo caratteri binari, ovvero caratteri che una specie puó 
+			esclusivamente possedere o non possedere;
+		\end{item}
+		\begin{item}
+			Non possono avvenire \bf{backmutations}, ovvero una volta che una 
+			specie ha ereditato un carattere da un antenato non puó piú perderlo 
+			\footnote{Nonostante sia raro, fenomeni di questo tipo possono 
+			effettivamente accadere. Esistono altri modelli di filogenesi, come ad 
+			esempio il \bf{modello Dollo} o il \bf{modello 012}, che contemplano la 
+			possibilitá che si verifichino backmutations, ma hanno un potere 
+			predittivo nettamente inferiore al modello di filogenesi perfetta.}.
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	Il problema della filogenesi perfetta consiste quindi, sulla base di un 
+	insieme di caratteri binari e su un insieme di specie delle quali é noto 
+	quali caratteri ciascuna specie possiede, nel costruire un albero filogenetico 
+	per le suddette specie.
+
+	Innanzitutto, si costruisca una matrice binaria \math{M}, dove ciascuna riga 
+	rappresenta una certa specie mentre ciascuna colonna rappresenta un carattere 
+	che una specie puó avere o non avere. Se una cella \math{(i, j)} contiene il 
+	valore 1, significa che la specie \math{i} possiede il carattere \math{j}, 
+	mentre se contiene il valore \math{0} significa che la specie \math{i} non 
+	possiede il carattere \math{j}.
+
+	\begin{examplebox}
+		Si consideri il seguente gruppo di animali: anguilla, leopardo, 
+		salamandra, scorpione, tartaruga, tonno. Si consideri poi il 
+		seguente insieme di caratteri morfologici: sacca amniotica, fauci, 
+		gambe, pelo, colonna vertebrale. Sulla base delle informazioni 
+		note a destra, é possibile costruire la matrice \math{M} a sinistra.
+
+		\begin[width = 60%fw]{parbox}
+			\begin[cols = 13%fw 20.5%fw 12.5%fw 15%fw 11%fw 20.5%fw]{ptable}
+				\begin{row}
+					\cell{} \cell{sacca \par amniotica} \cell{fauci} 
+					\cell{gambe} \cell{pelo} \cell{colonna \par vertebrale} 
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1FAB1}}} \cell{0} \cell{0} \cell{0} \cell{0} \cell{1}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F406}}} \cell{1} \cell{1} \cell{1} \cell{1} \cell{1}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F98E}}} \cell{0} \cell{1} \cell{1} \cell{0} \cell{1}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F982}}} \cell{0} \cell{0} \cell{0} \cell{0} \cell{0}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F422}}} \cell{1} \cell{1} \cell{1} \cell{0} \cell{1}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F41F}}} \cell{0} \cell{1} \cell{0} \cell{0} \cell{1}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+		\begin[width = 40%fw]{parbox}
+			\begin{itemize}
+				\begin{item}
+					La anguilla possiede la colonna vertebrale;
+				\end{item}
+				\begin{item}
+					Il leopardo possiede la sacca amniotica, 
+					le fauci, le gambe, il pelo e la colonna vertebrale;
+				\end{item}
+				\begin{item}
+					La salamandra possiede le fauci, le gambe e 
+					la colonna vertebrale;
+				\end{item}
+				\begin{item}
+					Lo scorpione non possiede nessuna di queste caratteristiche;
+				\end{item}
+				\begin{item}
+					La tartaruga possiede la sacca amniotica, le fauci, 
+					le gambe e la colonna vertebrale;
+				\end{item}
+				\begin{item}
+					Il tonno possiede le fauci e la colonna vertebrale.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+	\end{examplebox}
+
+	La soluzione del problema della filogenesi perfetta viene allora ad essere un 
+	albero che \bf{spiega} la matrice \math{M}, ovvero che rappresenta le stesse 
+	informazioni della matrice. Se esiste, questo albero filogenetico avrá le 
+	seguenti caratteristiche:
+
+	\begin{enumerate}
+		\begin{item}
+			Ciascuna delle \math{n} specie etichetta una ed una sola foglia dell'albero;
+		\end{item}
+		\begin{item}
+			Ciascuno degli \math{m} caratteri etichetta uno ed un solo arco dell'albero;
+		\end{item}
+		\begin{item}
+			Per ciascuna specie \math{p}, i caratteri che etichettano gli archi lungo 
+			il (solo) percorso che va dalla radice dell'albero alla foglia \math{p} 
+			specificano tutti i caratteri di \math{p} che nella tabella hanno valore 1.
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	Un algoritmo molto semplice che risolve il problema della filogenesi 
+	perfetta, ovvero che permette di costruire un albero filogenetico a 
+	partire da una matrice binaria \math{M}, é l'\bf{algoritmo di Gunsfeld}.
+	L'algoritmo si compone di due parti: prima si ordina la matrice \math{M}
+	in tempo lineare mediante radix sort, poi si costruisce l'albero aggiungendo
+	una specie alla volta dalla piú a sinistra alla piú a destra nella matrice.
+	Essendo radix sort un algoritmo con tempo di esecuzione lineare ed essendo
+	il numero di passaggi necessari ad inserire tutte le specie esso stesso 
+	lineare, il tempo di esecuzione complessivo dell'algoritmo di Gunsfeld é
+	lineare.
+
+	\begin{examplebox}
+		\begin[width = 40%fw, strut = character, valign = middle]{parbox}
+			\begin[cols = 20.5%fw 17.5%fw 16.5%fw 16.5%fw 17.5%fw 16.5%fw]{ptable}
+				\begin{row}
+					\cell{} \cell{CV} \cell{F} 
+					\cell{G} \cell{SA} \cell{P} 
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1FAB1}}} \cell{1} \cell{0} \cell{0} \cell{0} \cell{0}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F406}}} \cell{1} \cell{1} \cell{1} \cell{1} \cell{1}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F98E}}} \cell{1} \cell{1} \cell{1} \cell{0} \cell{0}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F982}}} \cell{0} \cell{0} \cell{0} \cell{0} \cell{0}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F422}}} \cell{1} \cell{1} \cell{1} \cell{1} \cell{0}
+				\end{row}
+				\begin{row}
+					\cell{\emoji{\unichar{U+1F41F}}} \cell{1} \cell{1} \cell{0} \cell{0} \cell{0}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+		\begin[width = 60%fw, strut = character, valign = middle]{parbox}
+			\center{\img[src = Filogenesi/perfect.pdf, width = 75%fw]}
+		\end{parbox}
+	\end{examplebox}
+
+	I motivi per cui l'algoritmo funziona sono essenzialmente due. Il primo é da 
+	cercarsi in una proprietá della matrice \math{M}: per quanto sia possibile 
+	costruire una matrice binaria per qualsiasi insieme di caratteri e di specie, 
+	non é necessariamente detto che esista un albero filogenetico in grado di 
+	spiegarla.
+
+	\begin{theorem}
+		Data una matrice binaria ordinata \math{M}, sia \math{S(i)} l'insieme che 
+		contiene tutti i caratteri posseduti dalla specie \math{i}. Esiste un albero
+		filogenetico che spiega la matrice \math{M} se, per qualsiasi coppia di due 
+		specie \math{(i, j)}, i relativi insiemi \math{S(i)} e \math{S(j)} sono o 
+		disgiunti (nessun elemento dell'uno si trova nell'altro) o uno dei due é 
+		interamente contenuto nell'altro. 
+
+		\bigskip
+		\bf{Dimostrazione}. Sia \math{T} l'albero filogenetico che spiega la matrice 
+		\math{M}, e si consideri la coppia di caratteri distinti \math{(i, j)} di 
+		\math{T} (o di \math{M}). Siano poi \math{e_{i}} e \math{e_{j}} gli archi di 
+		\math{T} etichettati, rispettivamente, \math{i} e \math{j}, ovvero gli archi 
+		a partire dai quali i due caratteri passano dall'avere valore 0 all'avere 
+		valore 1. Tutte le specie che possiedono il carattere \math{i} devono 
+		necessariamente trovarsi nei nodi foglia dopo \math{e_{i}}, cosí come 
+		tutte le specie che possiedono il carattere \math{j} devono necessariamente 
+		trovarsi nei nodi foglia dopo \math{e_{j}}. Si hanno tre possibilitá, 
+		mutualmente esclusive:
+
+		\begin{enumerate}
+			\begin{item}
+				\math{e_{i}} si trova sul percorso che dalla radice di \math{T} arriva a
+				\math{e_{j}}. Questo significa che tutti gli oggetti che possiedono il
+				carattere \math{j} possiedono anche il carattere \math{i}, pertanto
+				\math{S(j)} é un sottoinsieme di \math{S(i)};
+			\end{item}
+			\begin{item}
+				\math{e_{j}} si trova sul percorso che dalla radice di \math{T} arriva a
+				\math{e_{i}}. Questo significa che tutti gli oggetti che possiedono il
+				carattere \math{i} possiedono anche il carattere \math{j}, pertanto
+				\math{S(i)} é un sottoinsieme di \math{S(j)};
+			\end{item}
+			\begin{item}
+				Non c'é un percorso che dalla radice di \math{T} porti sia a \math{e_{i}}
+				e che a \math{e_{j}}. Questo significa che un oggetto non puó possedere
+				contemporaneamente il carattere \math{i} ed il carattere \math{j}, pertanto
+				gli insiemi \math{S(i)} e \math{S(j)} sono disgiunti.
+			\end{item}
+		\end{enumerate}
+
+		\bigskip
+
+		Dato che in ciascuna di queste quattro possibilitá i due insiemi sono o
+		disgiunti o l'uno é interamente contenuto nell'altro, il teorema é dimostrato.
+	\end{theorem}
+
+	\begin{examplebox}
+		\begin[width = 40%fw]{parbox}
+			\begin[cols = 16.5%fw 16.5%fw 16.5%fw 16.5%fw 16.5%fw 16.5%fw]{ptable}
+				\begin{row}
+					\cell{ } \cell{1} \cell{2} \cell{3} \cell{4} \cell{5}
+				\end{row}
+				\begin{row}
+					\cell{A} \cell{1} \cell{1} \cell{0} \cell{0} \cell{0}
+				\end{row}
+				\begin{row}
+					\cell{B} \cell{0} \cell{0} \cell{1} \cell{1} \cell{0}
+				\end{row}
+				\begin{row}
+					\cell{C} \cell{1} \cell{1} \cell{1} \cell{0} \cell{0}
+				\end{row}
+				\begin{row}
+					\cell{D} \cell{0} \cell{0} \cell{0} \cell{1} \cell{1}
+				\end{row}
+				\begin{row}
+					\cell{E} \cell{1} \cell{0} \cell{1} \cell{0} \cell{0}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+		\begin[width = 55%fw, padding = 5%fw]{parbox}
+			Si considerino gli insiemi \math{S(1)} e \math{S(3)} della matrice 
+			riportata a lato (giá ordinata). Questi non sono né disgiunti (il 
+			terzo elemento é comune ad entrambi) né l'uno é sottoinsieme dell'altro 
+			(il secondo elemento differisce nei due insiemi). Pertanto, non puó 
+			esistere un albero filogenetico che spieghi questa matrice.
+		\end{parbox}
+	\end{examplebox}
+
+	Il secondo motivo é legato all'algoritmo di ordinamento impiegato. Si osservi
+	infatti come radix sort, a differenza della maggior parte degli algoritmi di 
+	ordinamento, ordini i numeri in ordine decrescente. Questo significa che le 
+	colonne della matrice \math{M} vengono ordinate da quella che, intesa come una
+	stringa binaria, ha valore maggiore a quella che ha valore minore. Avendo peró 
+	mostrato che ogni colonna a sinistra di un'altra la comprende, l'albero 
+	filogenetico ottenuto avrá gli archi etichettati con caratteri posseduti da
+	molte specie piú in alto, mentre avrá gli archi etichettati con caratteri 
+	posseduti da poche specie piú in basso.
+
+\end{sile}

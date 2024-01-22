@@ -1,0 +1,54 @@
+\begin{sile}
+
+	É spesso utile rappresentare le soluzioni di problemi di programmazione 
+	dinamica sulle stringhe mediante dei \bf{grafi pesati di modifica}. Date 
+	due stringhe \math{S_{1}} ed \math{S_{2}}, rispettivamente di lunghezza 
+	\math{n} e \math{m}, un grafo pesato di modifica é un grafo diretto aciclico 
+	avente \math{(n + 1) \times (m + 1)} nodi, ciascuno etichettato con una 
+	coppia \math{(i, j)} univoca, con \math{0 \leq i \leq n} e \math{0 \leq j 
+	\leq m}. I archi fra nodi ed il loro peso dipendono dalla natura del 
+	problema in questione.
+
+	Nel caso del problema della distanza di modifica, il grafo di modifica contiene
+	un arco che va da ciascun nodo con etichetta \math{(i, j)} ai tre nodi 
+	con etichetta \math{(i + 1, j)}, \math{(i, j + 1)} e \math{(i + 1, j + 1)}, 
+	ammesso che i tre nodi esistano. Il peso dei primi due archi é uno, 
+	mentre il peso del terzo é dato da \math{t(i + 1, j + 1)} (pertanto, é uno 
+	oppure zero). Dato che ciascun arco puó essere etichettato soltanto 
+	con 1 o con 0, spesso per una questione di visibilitá si omette l'etichetta 
+	1 (la piú comune) riportando esplicitamente soltanto gli 0, sottointendendo 
+	che tutti gli archi non etichettati abbiano peso 1.
+
+	\begin{examplebox}
+		\begin[width = 50%fw]{parbox}
+			\begin[cols = 15%fw 15%fw 15%fw 15%fw 15%fw]{ptable}
+				\begin{row}
+					\cell{} \cell{} \cell{\bf{a}} \cell{\bf{n}} \cell{\bf{n}}
+				\end{row}
+				\begin{row}
+					\cell{} \cell{0} \cell{1} \cell{2} \cell{3}
+				\end{row}
+				\begin{row}
+					\cell{\bf{c}} \cell{1} \cell{2} \cell{3} \cell{4}
+				\end{row}
+				\begin{row}
+					\cell{\bf{a}} \cell{2} \cell{1} \cell{2} \cell{3}
+				\end{row}
+				\begin{row}
+					\cell{\bf{n}} \cell{3} \cell{2} \cell{1} \cell{2}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+		\begin[width = 50%fw, strut = character, valign = middle]{parbox}
+			\img[src = Allineamento/graph.pdf, width = 75%fw]
+		\end{parbox}
+	\end{examplebox}
+
+	La proprietá fondamentale di un grafo pesato di modifica é che i percorsi piú
+	corti possibili che vanno da \math{(0, 0)} a \math{(n, m)}, ovvero quelli 
+	formati da archi la cui somma dei pesi é la piú piccola possibile, 
+	rappresentano trascrizioni ottimali. Allo stesso modo, una trascrizione 
+	ottimale é tale se e solo se ha un corrispondente percorso piú corto possibile
+	sul grafo pesato di modifica.
+
+\end{sile}

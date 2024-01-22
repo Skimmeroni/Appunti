@@ -1,0 +1,182 @@
+\begin{sile}
+
+	Viene chiamato \bf{range minimum query} (\bf{RMQ}) la soluzione del problema 
+	computazionale che, dato un vettore \math{A} di lunghezza \math{n}, richiede 
+	di calcolare il valore minimo di \math{A[i : j]}, il sottovettore di \math{A} 
+	che ha per estremi le posizioni \math{i} e \math{j}, con \math{1 \leq i \leq 
+	j \leq n}. Il problema puó essere risolto in maniera banale osservando uno per 
+	uno gli elementi di \math{A[i:j]} fino a trovarne il minimo, ed il tempo di 
+	esecuzione é \math{O(i - j) \approx O(n)}.
+
+	Una versione piú raffinata del problema prevede di calcolare il valore 
+	minimo non soltanto per il singolo sottovettore \math{A[i : j]} ma bensí, 
+	fissato \math{j}, calcolarlo per tutti i sottovettori nella forma \math{A[i : 
+	j]}, \math{A[i - 1: j]}, \math{A[i - 2: j]} fino a \math{A[1: j]}. Dato che 
+	il numero di possibili sottovettori compresi fra 1 e \math{j} con \math{j} 
+	fissato é non superiore ad \math{n}, se si volesse calcolare il valore minimo 
+	di ciascun sottovettore cosí definito usando lo stesso approccio il tempo di 
+	esecuzione sarebbe \math{O(n^{2})}.
+
+	Un diverso approccio prevede di impiegare del tempo per preprocessare il 
+	vettore \math{A} al fine di ottenere una struttura dati ausiliaria che 
+	permetta peró di conoscere il minimo di qualsiasi sottovettore di \math{A} 
+	in tempo costante. Sia a tal proprosito \math{M} una matrice costruita a 
+	partire da \math{A}, dove ciascuna cella \math{(x, y)} contiene il valore 
+	minimo del sottovettore \math{A[x : y]}. Mediante una matrice di questo 
+	tipo é possibile conoscere il valore minimo di qualsiasi sottovettore di 
+	\math{A} semplicemente accedendo alla cella di \math{M} che ha per coordinate 
+	gli estremi dell'intervallo.
+
+	La matrice puó essere costruita in maniera banale semplicemente calcolando
+	il minimo per tutti i possibili sottovettori costruibili a partire da \math{A},
+	ma sarebbe una procedura estremamente inefficiente. Infatti, essendo il numero 
+	di tutti i possibili sottovettori di \math{A} pari a \math{O(n^{2})}, e 
+	richiedendo ciascun valore minimo un tempo \math{O(n)} per essere calcolato,
+	un algoritmo di questo tipo impiegherebbe tempo di esecuzione \math{O(n^{3})}.
+
+	\subsection{Ottimizzazione: programmazione dinamica}
+
+		É possibile velocizzare l'algoritmo mediante programmazione dinamica. 
+		Innanzitutto, é evidente come il valore minimo di un sottovettore di 
+		\math{A} formato da un solo valore é il valore stesso. Inoltre, presi 
+		due estremi \math{x} e \math{y} qualsiasi tali per cui \math{x < y}, 
+		si ha:
+
+		\begin[mode = display]{math}
+			M[x, y] = \mi{min} {(M[x, y - 1], A[y])}
+		\end{math}
+
+		In altre parole, il valore in posizione \math{M[x, y]} deve essere il minimo 
+		fra \math{A[y]}, ovvero l'ultimo elemento del sottovettore \math{A[x : y]}, e 
+		\math{M[x, y - 1]}, ovvero il minimo valore del sottovettore \math{A[x : y - 
+		1]}, cioé il sottovettore \math{A[x : y]} a cui viene tolto l'ultimo elemento. 
+		In questo modo, venendo calcolato il minimo associato ad ogni elemento della 
+		cella una sola volta, il tempo di esecuzione scende a \math{O(n^{2})}.
+
+	\subsection{Ottimizzazione: lettura di due valori alla volta}
+
+		Si noti come non sia strettamente necessario avere una struttura dati
+		che contenga i valori minimi per tutti i sottovettori di un vettore. Se 
+		sono invece noti i valori minimi di solamente alcuni sottovettori (ma non 
+		tutti), é comunque possibile calcolare "sul momento" il valore minimo di 
+		un sottovettore qualsiasi. Naturalmente, piú minimi vengono salvati sulla
+		struttura dati e piú tempo occorre per farlo, ma meno tempo occorrerá per
+		usarli al fine di calcolare il valore minimo di un sottovettore qualsiasi.
+		Viceversa, meno minimi vengono salvati e meno tempo occorre per calcolarli
+		ma piú tempo occorre per calcolare il minimo di un sottovettore qualsiasi.
+
+		Si consideri un sottovettore di \math{A} avente per estremi \math{(a, d)},
+		il cui valore minimo non é noto. Si assuma che siano invece noti i valori
+		minimi di due sottovettori di \math{A}, parzialmente sovrapposti o contigui, 
+		aventi estremi \math{(a, b)} e \math{(c, d)}, con \math{a < c \leq b < d}. 
+		Il valore minimo di \math{A[a : d]} deve essere il minimo fra il minimo di
+		\math{A[a : b]} e \math{A[c : d]}, perché per definizione \math{A[a : b] 
+		\cup A[c : d] = A[a : d]}. 
+
+		Pertanto, é sufficiente che la matrice sia costruita in modo che, preso un 
+		qualsiasi sottovettore di \math{A}, questa contenga il minimo di (almeno) 
+		due sottovettori di \math{A} che lo contengono interamente. In particolare: 
+		preso un sottovettore di \math{A} avente estremi \math{(x, y)}, sia \math{h} 
+		il piú piccolo esponente della potenza di 2 che ha meno elementi di quanti 
+		ne contenga tale intervallo, ovvero:
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				h = \lfloor \mi{log}_{2} {(y - x + 1)} \rfloor
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				2^{h} \leq (y - x + 1) \leq 2^{h + 1}
+			\end{math}
+		\end{parbox}
+		\par
+
+		A partire dal sottovettore \math{A[x : y]}, si considerino i due sottovettori 
+		\math{L = A[x : x + 2^{h} - 1]} e \math{R = A[y - 2^{h} + 1 : y]}, di ampiezza 
+		\math{h}. Per il modo in cui \math{h} é stato definito, i due sottovettori 
+		cosí definiti saranno certamente contenuti all'interno di \math{A[x : y]}, 
+		pertanto il minimo di \math{A[x : y]} puó essere ottenuto ricavando il minimo 
+		di \math{L} ed il minimo di \math{R}, e scegliendo il minimo fra i due valori.
+
+		Si costruisca allora la matrice \math{D(x, h) = \mi{min}_{x \leq i \leq x
+		+ 2^{h}} {(A[i])}}. Dato che \math{x} varia nell'intervallo \math{(1, n)},
+		mentre \math{h} varia nell'intervallo \math{(1, \mi{log}_{2} {(n)})} la 
+		matrice \math{D} avrá dimensione \math{n \times \mi{log}_{2} {(n)}}. Come
+		nella precedente ottimizzazione, la matrice \math{D} puó essere costruita
+		per via ricorsiva. Innanzitutto, anche in questo caso é evidente come 
+		\math{D[i, 0] = A[i]}, perché il minimo di un sottovettore con un solo 
+		elemento é l'elemento stesso. Per quanto riguarda la relazione di ricorrenza:
+
+		\begin[mode = display]{math}
+			D[x, h] = \mi{min} {(D[x, h - 1], D[x + 2^{h - 1}, h - 1])}
+		\end{math}
+
+		La matrice \math{D} richiede un tempo \math{O {(n \mi{log} {(n)}}} per essere
+		costruita, ma ha il vantaggio di permettere di conoscere il valore minimo di
+		un qualsiasi sottovettore in tempo costante. Infatti, é sufficiente scegliere
+		due sottovettori distinti interamente contenuti nel sottovettore di interesse
+		i quali valori minimi siano contenuti in \math{D}, e calcolare il minimo fra
+		questi due.
+
+		\begin{examplebox}
+			\begin[width = 25%fw]{parbox}
+				\begin[cols = 20%fw 20%fw 20%fw 20%fw 20%fw]{ptable}
+					\begin{row}
+						\cell{ } \cell{0} \cell{1} \cell{2} \cell{3}
+					\end{row}
+					\begin{row}
+						\cell{1} \cell{0} \cell{0} \cell{0} \cell{0}
+					\end{row}
+					\begin{row}
+						\cell{2} \cell{5} \cell{2} \cell{2} \cell{1}
+					\end{row}
+					\begin{row}
+						\cell{3} \cell{2} \cell{2} \cell{2} \cell{ }
+					\end{row}
+					\begin{row}
+						\cell{4} \cell{5} \cell{4} \cell{1} \cell{ }
+					\end{row}
+					\begin{row}
+						\cell{5} \cell{4} \cell{3} \cell{1} \cell{ }
+					\end{row}
+					\begin{row}
+						\cell{6} \cell{3} \cell{1} \cell{1} \cell{ }
+					\end{row}
+					\begin{row}
+						\cell{7} \cell{1} \cell{1} \cell{ } \cell{ }
+					\end{row}
+					\begin{row}
+						\cell{8} \cell{6} \cell{3} \cell{ } \cell{ }
+					\end{row}
+					\begin{row}
+						\cell{9} \cell{3} \cell{ } \cell{ } \cell{ }
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+			\begin[width = 70%fw, padding = 5%fw]{parbox}
+				Si consideri il vettore \math{A = [0, 5, 2, 5, 4, 3, 1, 6, 3]}, la cui 
+				matrice \math{D} é riportata a lato. Si voglia trovare il valore minimo 
+				del sottovettore \math{A[3 : 8]}:
+
+				\begin[width = 50%fw]{parbox}
+					\begin[mode = display]{math}
+						h = \lfloor \mi{log}_{2} {(8 - 3 + 1)} \rfloor = 2
+					\end{math}
+				\end{parbox}
+				\begin[width = 50%fw]{parbox}
+					\begin[mode = display]{math}
+						\{\table{
+							A[3 : 3 + 2^{2} - 1] = A[3 : 6] \\
+							A[8 - 2^{2} + 1 : 8] = A[5 : 8] \\
+						}
+					\end{math}
+				\end{parbox}
+				\par
+
+				Leggendo i valori della tabella, il minimo valore di \math{A[3 : 8]} é 
+				dato da \math{\mi{min} {(D[3, 2], D[5, 2])} = \mi{min} {(2, 1)} = 1}.
+			\end{parbox}
+		\end{examplebox}
+
+\end{sile}

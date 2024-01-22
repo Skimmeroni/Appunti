@@ -1,0 +1,19 @@
+lineht *= 1.5   
+circlerad = 0.15 
+boxht *= 0.5 
+boxwid *= 0.5
+
+I0: circle at (+0.00, +0.0) "G"
+I1: circle at (+0.75, -0.5) "T"
+I2: circle at (-0.75, -0.5) "A"
+I3: circle at (+0.25, -1.0) "C"
+I4: circle at (-0.25, -1.0) "G"
+I5: circle at (+1.00, -1.0) "C"
+I6: circle at (-1.00, -1.0) "A"
+
+line from I0.se to I1.nw "2" aligned above
+line from I0.sw to I2.ne "1" aligned above
+line from I1.se to I5.n  "2" aligned above
+line from I1.sw to I3.ne "2" aligned above
+line from I2.se to I4.nw "1" aligned above
+line from I2.sw to I6.n  "0" aligned above

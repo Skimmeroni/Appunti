@@ -1,0 +1,180 @@
+\begin{sile}
+
+	Dato che la soluzione esatta per il problema dell'allineamento SP é ricavabile
+	in un tempo ragionevole soltanto se il numero delle stringhe é molto piccolo,
+	nel caso generale di \math{n} stringhe é piú conveniente ottenere una soluzione
+	(ragionevolmente) approssimata. L'algoritmo che verrá presentato di seguito 
+	permette di ottenere un allineamento SP con un errore di approssimazione 
+	accettabile (il valore SP dell'allineamento approssimato é non superiore al 
+	doppio del valore SP ottimale) in un tempo di esecuzione polinomiale.
+
+	\subsection{Alberi consistenti}
+
+		Sia \math{D(S_{i}, S_{j})} la distanza ottimale fra le stringhe \math{S_{i}} 
+		e \math{S_{j}}. Sia poi \math{S} un insieme di stringhe, e sia \math{T} 
+		un albero i cui nodi sono etichettati con una stringa di \math{S}. Un 
+		allineamento multiplo \math{M} dell'insieme \math{S} si dice \bf{consistente} 
+		rispetto a \math{T} se l'allineamento accoppiato indotto delle stringhe 
+		\math{S_{i}} e \math{S_{j}} vale \math{D(S_{i}, S_{j})} per qualsiasi coppia 
+		di stringhe (\math{S_{i}}, \math{S_{j}}) che etichettano nodi adiacenti di 
+		\math{T}. Si noti come le stringhe di due nodi dell'albero \math{T} non 
+		adiacenti potrebbero avere l'allineamento accoppiato indotto diverso dal 
+		loro allineamento ottimale.
+
+		\begin{examplebox}
+			\begin[width = 50%fw, strut = character, valign = middle]{parbox}
+				\img[src = Allineamento/constree.pdf, width = 87.5%fw]
+			\end{parbox}
+			\begin[width = 45%fw, padding = 5%fw]{parbox}
+				\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw, cellborder = 0]{ptable}
+					\begin{row}
+						\cell{3} \cell{} \cell{A} \cell{X} \cell{X} \cell{-} \cell{Z}
+					\end{row}
+					\begin{row}
+						\cell{1} \cell{} \cell{A} \cell{X} \cell{-} \cell{-} \cell{Z}
+					\end{row}
+					\begin{row}
+						\cell{2} \cell{} \cell{A} \cell{-} \cell{X} \cell{-} \cell{Z}
+					\end{row}
+					\begin{row}
+						\cell{4} \cell{} \cell{A} \cell{Y} \cell{-} \cell{-} \cell{Z}
+					\end{row}
+					\begin{row}
+						\cell{5} \cell{} \cell{A} \cell{Y} \cell{X} \cell{Y} \cell{Z}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+		\end{examplebox}
+
+		A partire da un insieme di stringhe \math{S} e per ogni albero \math{T} i cui 
+		nodi sono etichettati con le stringhe di \math{S}, é possibile trovare un 
+		allineamento \math{M(T)} di \math{S} che sia consistente rispetto a \math{T}.
+		L'allineamento multiplo \math{M(T)} puó venire costruito per induzione. 
+
+		Innanzitutto, siano \math{S_{i}} e \math{S_{j}} due stringhe che etichettano
+		nodi adiacenti dell'albero \math{T} ed il cui allineamento ha distanza 
+		ottimale \math{D(S_{i}, S_{j})}. In questo caso, che funge da caso base 
+		dell'induzione, il teorema é provato, e le due stringhe sono inserite 
+		nell'allineamento \math{M(T)}.
+
+		Si assuma ora che il teorema valga per un arbitrario numero di stringhe 
+		che sono state inserite nell'allineamento. Sia \math{S^{'}} una stringa 
+		non ancora inserita in \math{M(T)} e che etichetta un nodo di \math{T} 
+		adiacente ad un nodo la cui etichetta é la stringa \math{S_{i}}, giá 
+		inserita in \math{M(T)}. Dato che le stringhe che etichettano l'albero non 
+		riportano gli spazi, ma nell'allineamento potrebbero essere presenti, sia 
+		\math{S_{i}^{*}} la stringa \math{S^{i}} alla quale sono stati aggiunti 
+		gli spazi imposti da \math{M(T)}.
+
+		A questo punto si allineino in maniera ottimale \math{S^{'}} e 
+		\math{S_{i}^{*}} con la seguente regola: un match o due spazi vuoti hanno 
+		peso 0, un mismatch o un carattere allineato ad uno spazio ha peso 1. É 
+		evidente come il valore dell'allineamento di \math{S^{'}} e \math{S_{i}^{*}} 
+		sia \math{D(S_{i}, S^{'})}. Sia \math{S^{'*}} la stringa ottenuta 
+		dall'inserimento degli spazi in \math{S^{'}} dopo l'allineamento con 
+		\math{S_{i}^{*}}. Se l'allineamento non ha aggiunto alcuno spazio a 
+		\math{S_{i}}, ovvero se \math{S_{i} = S_{i}^{*}}, allora \math{S^{'*}} puó 
+		venire inserito immediatamente nell'allineamento \math{M(T)}. Il risultato 
+		é un allineamento multiplo a cui é stata aggiunta una stringa, dove il valore 
+		di allineamento indotto di \math{S_{i}} e \math{S^{'}} é \math{D(S_{i}, 
+		S^{'})} e dove i valori di allineamento indotto delle stringhe giá presenti 
+		rimane intatto.
+
+		Se invece l'allineamento ottimale di \math{S^{'}} e \math{S_{i}^{*}} ha 
+		aggiunto uno spazio in \math{S_{i}^{*}} tra due caratteri di posizione 
+		\math{l} e \math{l + 1}, si inserisca uno spazio fra il carattere di 
+		posizione \math{l} ed il carattere di posizione \math{l + 1} in tutte le 
+		stringhe presenti nell'allineamento. Questo creerá delle nuove colonne 
+		occupate esclusivamente da spazi, ma i caratteri nelle altre colonne 
+		rimarrano allineati con i caratteri con cui lo erano in precedenza, ed il
+		valore dell'allineamento indotto di tutte le coppie di stringhe rimane 
+		invariato. A questo punto é possibile inserire \math{S^{'*}} a \math{M(T)},
+		ed il teorema é provato.
+
+		Se ciascuna stringa ha lunghezza \math{n}, il tempo per calcolare ciascun 
+		allineamento accoppiato é \math{O(n^{2})}. Dato che questo tempo é l'unico 
+		tempo effettivamente rilevante nel computo dell'allineamento multiplo, il
+		tempo per costruire \math{M(T)} é \math{O(kn^{2})}, dove \math{k} é il 
+		numero di stringhe.
+
+	\subsection{Alberi a stella}
+
+		Dato un allineamento, sia \math{s(x, y)} il contributo dato al valore 
+		dell'allineamento dall'allineare il carattere \math{x} (che puó anche 
+		essere uno spazio) al carattere \math{y} (che puó anche essere uno 
+		spazio). Si dice che uno scoring scheme soddisfa la \bf{disuguaglianza
+		triangolare} se, per una qualsiasi tripla di caratteri \math{x}, \math{y}
+		e \math{z}, vale la relazione \math{s(x, z) \leq s(x, y) + s(y, z)} 
+		\footnote{Si noti l'analogia con la disuguaglianza triangolare propria
+		dell'algebra: dati due numeri reali \math{x} e \math{y}, vale la relazione
+		\math{|x + y| \leq |x| + |y|}}. Idealmente, la disuguaglianza triangolare
+		evidenzia che, negli scoring scheme che la rispettano, il "costo" per 
+		trasformare il carattere \math{x} nel carattere \math{z} é non piú del 
+		"costo" per trasformare \math{x} in un carattere intermedio \math{y} sommato
+		al "costo" per trasformare \math{y} in \math{z}.
+
+		Dato un insieme \math{S} di \math{k} stringhe, viene definita la 
+		\bf{stringa centrale} \math{S_{c} \in S} come la stringa per la quale 
+		la somma delle distanze ottimali fra \math{S_{c}} e ogni altra stringa 
+		di \math{S} é la piú piccola possibile. In altre parole, indicando 
+		questo valore con \math{\lambda}, si ha che \math{S_{c}} é la stringa 
+		in \math{S} tale per cui \math{\lambda = \mi{min} \sum_{S_{i} \in S 
+		D(S_{c}, S_{i})}}.
+
+		Si definisce \bf{stella centrale} come un albero a stella di \math{k} 
+		nodi, dove il nodo al centro é etichettato con \math{S_{c}} e gli altri
+		\math{k - 1} nodi sono etichettati con le rimanenti stringhe. Si indichi
+		con \math{M_{c}} l'allineamento multiplo di un insieme di \math{k} stringhe 
+		\math{S} che é consistente con la stella centrale; dato che in una stella 
+		centrale tutti i nodi sono adiacenti solo e soltanto al nodo nel mezzo,
+		deve necessariamente valere che \math{d(S_{c}, S_{i}) = D(S_{c}, S_{i})}.
+		Sia \math{d(S_{i}, S_{j})} il valore dell'allineamento accoppiato indotto 
+		delle stringhe \math{S_{i}} e \math{S_{j}} dall'allineamento \math{M_{c}},
+		e sia il valore di un allineamento qualsiasi \math{M} (non necessariamente
+		consistente alla stella centrale) come \math{d(M)}. Naturalmente, deve 
+		valere che \math{d(S_{i}, S_{j}) \geq D(S_{i}, S_{j})} e \math{d(M_{c}) = 
+		\sum_{i < j} d(S_{i}, S_{j})}.
+
+		Sia dato uno scoring scheme che soddisfa la disuguaglianza triangolare.
+		Allora, per qualsiasi coppia di stringhe \math{S_{i}, S_{j}} appartenenti
+		ad \math{S}, vale la relazione \math{d(S_{i}, S_{j}) \leq D(S_{i}, S_{c}) 
+		+ D(S_{c}, S_{j})}. Si consideri infatti una colonna qualsiasi 
+		dell'allineamento \math{M_{c}}, e siano \math{x}, \math{y} e \math{z} i 
+		caratteri rispettivamente delle stringhe \math{S_{i}}, \math{S_{c}} e 
+		\math{S_{j}} che si trovano nella colonna. Dato che é stato assunto per 
+		ipotesi che la disuguaglianza triangolare é soddisfatta, deve valere 
+		\math{s(x, z) \leq s(x, y) + s(y, z)}. Dato che \math{d(S_{i}, S_{j})} é 
+		dato dalla somma di tutti gli \math{s(x, z)}, che \math{d(S_{i}, S_{c})}
+		é dato dalla somma di tutti gli \math{s(x, y)} e \math{d(S_{y}, S_{j})}
+		é dato dalla somma di tutti gli \math{s(y, z)}, deve certamente valere che 
+		\math{d(S_{i}, S_{j}) \leq d(S_{i}, S_{c}) + d(S_{c}, S_{j})}. Inoltre,
+		dato che l'allineamento di riferimento é consistente per una stella centrale,
+		\math{d(S_{i}, S_{j}) \geq D(S_{i}, S_{j})}, \math{d(S_{i}, S_{c}) = D(S_{i}, 
+		S_{c})} e \math{d(S_{c}, S_{j}) = D(S_{c}, S_{j})}. Pertanto, per proprietá
+		transitiva, \math{d(S_{i}, S_{j}) \leq D(S_{i}, S_{c}) + D(S_{c}, S_{j})}.
+
+		Sia \math{M^{*}} l'allineamento multiplo ottimale delle \math{k} stringhe 
+		di \math{S}. Sia poi \math{d^{*}(S_{i}, S_{j})} il valore dell'allineamento 
+		accoppiato delle stringhe \math{S_{i}} e \math{S_{j}} indotto da \math{M^{*}},
+		dove \math{d(M^{*}) = \sum_{i < j} d^{*}(S_{i}, S_{j})}. É possibile 
+		dimostrare che \math{d(M_{c})}, il valore dell'allineamento consistente 
+		rispetto alla stella centrale, é una buona approssimazione di \math{d(M^{*})}.
+		In particolare, \math{d(M_{c})/d(M^{*}) < 2}.
+
+		Siano \math{v(M_{c}) = \sum_{(i, j)} d(S_{i}, S_{j})} e \math{v(M^{*}) = 
+		\sum_{(i, j)} d^{*}(S_{i}, S_{j})}, dove \math{(i, j)} é una coppia 
+		ordinata. Evidentemente \math{v(M_{c}) = 2d(M_{c})} e \math{v(M^{*}) = 
+		2d(M^{*})}, pertanto i rapporti \math{\frac{v(M_{c})}{v(M^{*})}} e 
+		\math{\frac{d(M_{c})}{d(M^{*})}} sono entrambi uguali a 2. Si ricordi che
+		\math{\lambda = \mi{min} \sum_{S_{i} \in S D(S_{c}, S_{i})}}. Per la 
+		disuguaglianza triangolare, deve valere che \math{v(M_{c}) = \sum_{(i, j)} 
+		d(S_{i}, S_{j}) \leq \sum_{(i, j)} [D(S_{i}, S_{c}) + D(S_{c}, S_{j})]}.
+		Per ciascun \math{j} fissato, il valore \math{D(S_{c}, S_{j})} appare 
+		esattamente \math{2(k - 1)} volte nell'espressione precedente. Pertanto,
+		\math{v(M_{c}) \leq 2(k - 1) \times \sum_{j} d(S_{c}, S_{j}) = 2(k - 1)
+		\lambda}. Analogamente, \math{v(M^{*}) = \sum_{(i, j)} d^{*}(S_{i}, S_{j})
+		\geq \sum_{(i, j)} D(S_{i}, S_{j}) = \sum_{i} \sum_{j} D(S_{i}, S_{j}) =
+		k \times \sum_{j} D(S_{c}, S_{j}) = kM}. Si ha quindi che \math{d(M_{c})/
+		d(M^{*}) = v(M_{c})/v(M^{*}) = 2(k - 1)M/kM < 2}.
+
+\end{sile}

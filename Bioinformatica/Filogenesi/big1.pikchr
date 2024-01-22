@@ -1,0 +1,28 @@
+lineht   *= 1.5   
+circlerad = 0.15 
+boxht    *= 0.5 
+boxwid   *= 0.875
+
+I0: circle at (+0.00, +0.50)
+I1: circle at (+0.75, +0.25)
+I2: circle at (+0.00, -0.50)
+I6: circle at (+0.25, -1.75)
+
+I3: box at (+1.25, -0.25) "Anguilla"
+I5: box at (+0.50, -0.25) "Leopardo"
+I7: box at (+0.75, -2.25) "Tartaruga"
+I8: box at (+0.00, -2.25) "Salamandra"
+I9: box at (+0.75, -1.25) "Scorpione"
+
+boxwid *= 0.75 
+I4: box at (-0.25, -1.50) "Tonno"
+
+line from I0.se to I1.w "4" aligned above
+line from I0.s  to I2.n "2" aligned above
+line from I1.sw to I5.n "9" aligned above
+line from I1.se to I3.n "2" aligned above
+line from I2.sw to I4.n "5" aligned above
+line from I2.s  to I6.n "2" aligned above
+line from I6.se to I7.n "4" aligned above
+line from I6.sw to I8.n "3" aligned above
+line from I2.se to I9.n "5" aligned above

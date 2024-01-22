@@ -1,0 +1,30 @@
+lineht *= 1.5 
+circlerad = 0.05
+boxht *= 0.5
+
+Sco: box at (+0.5,  -0.25) "Scorpione"
+Eel: box at (+0.25, -0.75) "Anguilla"
+Tun: box at (+0,    -1.25) "Tonno"
+Sal: box at (-0.25, -1.75) "Salamandra"
+Tur: box at (-0.5,  -2.25) "Tartaruga"
+Leo: box at (-2,    -2.25) "Leopardo"
+
+I0: circle fill black at (-0.25, +0.5)
+I1: circle fill black at (-0.25, +0)
+I2: circle fill black at (-0.5,  -0.5)
+I3: circle fill black at (-0.75, -1)
+I4: circle fill black at (-1,    -1.5)
+I5: circle fill black at (-1.25, -2)
+
+line from I0 to I1 "Colonna" aligned below "Vertebrale" aligned below
+line from I1 to I2 "Fauci" aligned below
+line from I2 to I3 "Gambe" aligned below
+line from I3 to I4 "Sacca" aligned below "Amniotica" aligned below
+line from I4 to I5 "Pelo" aligned below
+
+line from I1 to Sco.w
+line from I2 to Eel.w
+line from I3 to Tun.w
+line from I4 to Sal.w
+line from I5 to Tur.w
+line from I5 to Leo.e
