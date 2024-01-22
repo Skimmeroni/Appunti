@@ -33,9 +33,101 @@
     variazione infinitesimale di \math{\bi{x}} che massimizza il
     tasso a cui la funzione \math{f(\bi{x})} cresce é una variazione
     proporzionale a \math{\nabla f(\bi{x})}. Una efficiente procedura
-    di ricerca consisterebbe quindi nel "muoversi" nella direzione del
-    gradiente identificando punti di \math{f(\bi{x})} in cui il gradiente
-    é sempre piú vicino allo zero per tutte le sue componenti.
+    di ricerca consisterebbe quindi nel "muoversi" nella direzione
+    del gradiente identificando punti di \math{f(\bi{x})} in cui il
+    gradiente é sempre piú vicino allo zero per tutte le sue componenti.
+
+    Di norma non sarebbe pratico modificare \math{\bi{x}} continuamente
+    nella direzione di \math{\nabla f(\bi{x})}, perché questo richiederebbe
+    di ricalcolare tutte le componenti del vettore gradiente ad ogni
+    iterazione. Un approccio migliore consiste nel fissare una direzione,
+    modificare soltanto la componente associata a tale direzione per poi
+    passare ad un'altra.
+
+    Sia \math{\bi{x'}} una certa approssimazione della soluzione ottima.
+    Con questo approccio, ad ogni iterazione tale approssimazione viene
+    sostituita con \math{\bi{x'} + t* \nabla f(\bi{x'})}, dove \math{t*}
+    é il valore (positivo) che massimizza la quantitá \math{f(\bi{x'} +
+    t \nabla f(\bi{x'}))}:
+
+    \begin[mode = display]{math}
+        f(\bi{x'} + t* \nabla f(\bi{x'})) = \mi{max}\{f(\bi{x'} + t \nabla f(\bi{x'}))\}
+    \end{math}
+
+    Si noti che \math{f(\bi{x'} + t \nabla f(\bi{x'}))} é semplicemente
+    \math{f(\bi{x})} dove:
+
+    \begin[mode = display]{math}
+        x_{j} = {x'}_{j} + t {(\frac{\partial f}{\partial x_{j}})}_{\bi{x} = \bi{x'}}
+        \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
+    \end{math}
+
+    e che queste espressioni per \math{x_{j}} dipendono solo da quantitá
+    costanti e da \math{t}, quindi la funzione \math{f(\bi{x})} é una
+    funzione nella sola variabile \math{t}. Tale procedura viene ripetuta
+    finché l'approssimazione ottenuta per tutte le componenti del gradiente
+    restituisce un valore inferiore ad una soglia \math{\epsilon}:
+
+    \begin[mode = display]{math}
+        {|\frac{\partial f}{\partial x_{j}}|} \leq \epsilon
+        \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
+    \end{math}
+
+    Poiché \math{\bi{x}} e \math{\nabla f(\bi{x})} sono fissati e
+    poiché \math{f(\bi{x})} é concava, determinare \math{t*} equivale
+    a massimizzare una funzione concava nella singola variabile \math{t}.
+    Questo puó essere fatto analiticamente (se possibile) oppure applicando
+    le apposite procedure giá trattate, come il metodo di bisezione o il
+    metodo di Newton.
+
+    L'algoritmo procede come segue:
+
+    \begin{enumerate}
+        \begin{item}
+            Si fissi un certo \math{\epsilon};
+        \end{item}
+        \begin{item}
+            Si scelga un punto iniziale \math{\bi{x}};
+        \end{item}
+        \begin{item}
+            Si esprima \math{f(\bi{x'} + t \nabla f(\bi{x'}))} come funzione
+            di \math{t} ponendo
+
+            \begin[mode = display]{math}
+                x_{j} = {x'}_{j} + t {(\frac{\partial f}{\partial x_{j}})}_{\bi{x} = \bi{x'}}
+                \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
+            \end{math}
+        \end{item}
+        \begin{item}
+            Si determini \math{t*}, il valore di \math{t} che massimizza
+            \math{f(\bi{x'} + t \nabla f(\bi{x'}))}, analiticamente o in
+            mediante approssimazione;
+        \end{item}
+        \begin{item}
+            Si sostituisca \math{\bi{x'}} con \math{\bi{x'} + t* \nabla
+            f(\bi{x'})};
+        \end{item}
+        \begin{item}
+            Si calcoli \math{\nabla f(\bi{x'})}. Se ciascuna componente
+            di tale vettore é sufficientemente vicina ad \math{\epsilon}
+            l'algoritmo termina, perché \math{\bi{x'}} é una approssimazione
+            accettabile di \math{\bi{x*}}. Altrimenti si riprende dal punto 3.
+        \end{item}
+    \end{enumerate}
+
+    \bigskip
+
+    Se la funzione \math{f(\bi{x})} fosse invece convessa e si volesse
+    minimizzarla, occorrerebbe modificare la procedura richiedendo di
+    muoversi, ad ogni iterazione, nella direzione opposta a quella
+    del gradiente.
+
+    In questo caso, l'approssimazione successiva per \math{\bi{x*}} non
+    si ottiene sostituendo \math{\bi{x'}} con \math{\bi{x'} + t* \nabla
+    f(\bi{x'})}, bensí con \math{\bi{x'} - t* \nabla f(\bi{x'})}. Inoltre,
+    \math{t*} non sarebbe piú il valore che massimizza \math{f(\bi{x'} +
+    t \nabla f(\bi{x'}))}, bensí quello che minimizza \math{f(\bi{x'} -
+    t \nabla f(\bi{x'}))}.
 
     \begin{example}
         Si consideri la funzione \math{f(\bi{x}) = 2xy + 2y - x^{2} - 2y^{2}}.
