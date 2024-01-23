@@ -154,6 +154,134 @@
             = -2x^{2} + 4xy - 4y^{2}
             = -2 {[{(x - y)}^{2} + y^{2}]}
         \end{math}
+
+        Il punto che massimizza tale funzione puó essere trovato per via
+        analitica, perché le componenti del relativo vettore gradiente sono
+        semplici funzioni polinomiali. Infatti, si ha:
+
+        \begin[mode = display]{math}
+            \nabla f{(\bi{x})} = 0
+            \thickspace \Rightarrow \thickspace
+            (\frac{\partial f{(x, y)}}{\partial x}, \frac{\partial f{(x, y)}}{\partial y}) = 0
+            \thickspace \Rightarrow \thickspace
+            {(-2x + 2y, 2x + 2 - 4y)} = 0
+            \thickspace \Rightarrow \thickspace
+            \{\table{
+                -2x + 2y = 0 \\
+                2x + 2 - 4y = 0 \\
+            }
+            \thickspace \Rightarrow \thickspace
+            \{\table{
+                x = 1 \\
+                y = 1 \\
+            }
+        \end{math}
+
+        Applicando il metodo del gradiente, si ottiene una approssimazione che
+        si avvicina molto a tale valore.
+
+        \begin[cols = 15%fw 15%fw 15%fw 15%fw 17.5%fw 7.5%fw 15%fw]{ptable}
+            \begin{row}
+                \cell{\strong{Iterazione}}
+                \cell{\math{\bi{x'}}}
+                \cell{\math{\nabla f(\bi{x'})}}
+                \cell{\math{\bi{x'} + t \nabla f(\bi{x'})}}
+                \cell{\math{f(\bi{x'} + t \nabla f(\bi{x'}))}}
+                \cell{\math{t*}}
+                \cell{\math{\bi{x'} + t* \nabla f(\bi{x'})}}
+            \end{row}
+            \begin{row}
+                \cell{1}
+                \cell{\math{(0, 0)}}
+                \cell{\math{(0, 2)}}
+                \cell{\math{(0, 2t)}}
+                \cell{\math{4t(1 - 2t)}}
+                \cell{\math{\frac{1}{4}}}
+                \cell{\math{(0, \frac{1}{2})}}
+            \end{row}
+            \begin{row}
+                \cell{2}
+                \cell{\math{(0, \frac{1}{2})}}
+                \cell{\math{(1, 0)}}
+                \cell{\math{(t, \frac{1}{2})}}
+                \cell{\math{-t^{2} + t + \frac{1}{2}}}
+                \cell{\math{\frac{1}{2}}}
+                \cell{\math{(\frac{1}{2}, \frac{1}{2})}}
+            \end{row}
+            \begin{row}
+                \cell{3}
+                \cell{\math{(\frac{1}{2}, \frac{1}{2})}}
+                \cell{\math{(0, 1)}}
+                \cell{\math{(\frac{1}{2}, t + \frac{1}{2})}}
+                \cell{\math{-2t^{2} + t + \frac{3}{4}}}
+                \cell{\math{\frac{1}{4}}}
+                \cell{\math{(\frac{1}{2}, \frac{3}{4})}}
+            \end{row}
+            \begin{row}
+                \cell{4}
+                \cell{\math{(\frac{1}{2}, \frac{3}{4})}}
+                \cell{\math{(\frac{1}{2}, 0)}}
+                \cell{\math{(\frac{1}{2}t + \frac{1}{2}, \frac{3}{4})}}
+                \cell{\math{-\frac{1}{4}t^{2} + \frac{1}{4}t + \frac{7}{8}}}
+                \cell{\math{\frac{1}{2}}}
+                \cell{\math{(\frac{3}{4}, \frac{3}{4})}}
+            \end{row}
+            \begin{row}
+                \cell{5}
+                \cell{\math{(\frac{3}{4}, \frac{3}{4})}}
+                \cell{\math{(0, \frac{1}{2})}}
+                \cell{\math{(\frac{3}{4}, \frac{1}{2}t + \frac{3}{4})}}
+                \cell{\math{-\frac{1}{2}t^{2} + \frac{1}{4}t + \frac{15}{16}}}
+                \cell{\math{\frac{1}{4}}}
+                \cell{\math{(\frac{3}{4}, \frac{7}{8})}}
+            \end{row}
+            \begin{row}
+                \cell{6}
+                \cell{\math{(\frac{3}{4}, \frac{7}{8})}}
+                \cell{\math{(\frac{1}{4}, 0)}}
+                \cell{\math{(\frac{1}{4}t + \frac{3}{4}, \frac{7}{8})}}
+                \cell{\math{-\frac{1}{16}t^{2} + \frac{1}{16}t + \frac{31}{32}}}
+                \cell{\math{\frac{1}{2}}}
+                \cell{\math{(\frac{7}{8}, \frac{7}{8})}}
+            \end{row}
+            \begin{row}
+                \cell{7}
+                \cell{\math{(\frac{7}{8}, \frac{7}{8})}}
+                \cell{\math{(0, \frac{1}{4})}}
+                \cell{\math{(\frac{7}{8}, \frac{1}{4}t + \frac{7}{8})}}
+                \cell{\math{-\frac{1}{8}t^{2} + \frac{1}{16}t + \frac{63}{64}}}
+                \cell{\math{\frac{1}{4}}}
+                \cell{\math{(\frac{7}{8}, \frac{15}{16})}}
+            \end{row}
+            \begin{row}
+                \cell{8}
+                \cell{\math{(\frac{7}{8}, \frac{15}{16})}}
+                \cell{\math{(\frac{1}{8}, 0)}}
+                \cell{\math{(\frac{1}{8}t + \frac{7}{8}, \frac{15}{16})}}
+                \cell{\math{-\frac{1}{64}t^{2} + \frac{1}{64}t + \frac{127}{128}}}
+                \cell{\math{\frac{1}{2}}}
+                \cell{\math{(\frac{15}{16}, \frac{15}{16})}}
+            \end{row}
+            \begin{row}
+                \cell{9}
+                \cell{\math{(\frac{15}{16}, \frac{15}{16})}}
+                \cell{\math{(0, \frac{1}{8})}}
+                \cell{\math{(\frac{15}{16}, \frac{1}{8}t + \frac{15}{16})}}
+                \cell{\math{-\frac{1}{32}t^{2} + \frac{1}{64}t + \frac{255}{256}}}
+                \cell{\math{\frac{1}{4}}}
+                \cell{\math{(\frac{15}{16}, \frac{31}{32})}}
+            \end{row}
+            \begin{row}
+                \cell{10}
+                \cell{\math{(\frac{15}{16}, \frac{31}{32})}}
+                \cell{\math{(\frac{1}{16}, 0)}}
+                \cell{\math{(\frac{1}{16}t + \frac{15}{16}, \frac{31}{32})}}
+                \cell{\math{-\frac{1}{256}t^{2} + \frac{1}{256}t + \frac{511}{512}}}
+                \cell{\math{\frac{1}{2}}}
+                \cell{\math{(\frac{31}{32}, \frac{31}{32})}}
+            \end{row}
+        \end{ptable}
+
     \end{example}
 
 \end{sile}
