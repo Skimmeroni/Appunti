@@ -262,5 +262,25 @@ return {
     link = "dest24",
     number = "4.3",
     pageno = "44"
+  },
+  {
+    label = {
+      "Metodo del gradiente",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest25",
+    number = "4.3.1",
+    pageno = "45"
+  },
+  {
+    label = {
+      "Metodo di Newton",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest26",
+    number = "4.3.2",
+    pageno = "46"
   }
 }

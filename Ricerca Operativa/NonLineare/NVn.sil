@@ -29,259 +29,321 @@
     Se questo non é possibile, una soluzione approssimata puó essere
     comunque ricavata applicando specifici algoritmi.
 
-    In tal senso, si ricordi che per definizione di gradiente la
-    variazione infinitesimale di \math{\bi{x}} che massimizza il
-    tasso a cui la funzione \math{f(\bi{x})} cresce é una variazione
-    proporzionale a \math{\nabla f(\bi{x})}. Una efficiente procedura
-    di ricerca consisterebbe quindi nel "muoversi" nella direzione
-    del gradiente identificando punti di \math{f(\bi{x})} in cui il
-    gradiente é sempre piú vicino allo zero per tutte le sue componenti.
+    \subsection{Metodo del gradiente}
 
-    Di norma non sarebbe pratico modificare \math{\bi{x}} continuamente
-    nella direzione di \math{\nabla f(\bi{x})}, perché questo richiederebbe
-    di ricalcolare tutte le componenti del vettore gradiente ad ogni
-    iterazione. Un approccio migliore consiste nel fissare una direzione,
-    modificare soltanto la componente associata a tale direzione per poi
-    passare ad un'altra.
+        Si ricordi che per definizione di gradiente la variazione
+        infinitesimale di \math{\bi{x}} che massimizza il tasso a
+        cui la funzione \math{f(\bi{x})} cresce é una variazione
+        proporzionale a \math{\nabla f(\bi{x})}. Una efficiente
+        procedura di ricerca consisterebbe quindi nel "muoversi"
+        nella direzione del gradiente identificando punti di
+        \math{f(\bi{x})} in cui il gradiente é sempre piú vicino
+        allo zero per tutte le sue componenti.
 
-    Sia \math{\bi{x'}} una certa approssimazione della soluzione ottima.
-    Con questo approccio, ad ogni iterazione tale approssimazione viene
-    sostituita con \math{\bi{x'} + t* \nabla f(\bi{x'})}, dove \math{t*}
-    é il valore (positivo) che massimizza la quantitá \math{f(\bi{x'} +
-    t \nabla f(\bi{x'}))}:
+        Di norma non sarebbe pratico modificare \math{\bi{x}} continuamente
+        nella direzione di \math{\nabla f(\bi{x})}, perché questo richiederebbe
+        di ricalcolare tutte le componenti del vettore gradiente ad ogni
+        iterazione. Un approccio migliore consiste nel fissare una direzione,
+        modificare soltanto la componente associata a tale direzione per poi
+        passare ad un'altra. Tale approccio é utilizzato dal cosiddetto 
+        \strong{Metodo del gradiente}.
 
-    \begin[mode = display]{math}
-        f(\bi{x'} + t* \nabla f(\bi{x'})) = \mi{max}\{f(\bi{x'} + t \nabla f(\bi{x'}))\}
-    \end{math}
+        Sia \math{\bi{x'}} una certa approssimazione della soluzione ottima.
+        Con questo approccio, ad ogni iterazione tale approssimazione viene
+        sostituita con \math{\bi{x'} + t* \nabla f(\bi{x'})}, dove \math{t*}
+        é il valore (positivo) che massimizza la quantitá \math{f(\bi{x'} +
+        t \nabla f(\bi{x'}))}:
 
-    Si noti che \math{f(\bi{x'} + t \nabla f(\bi{x'}))} é semplicemente
-    \math{f(\bi{x})} dove:
+        \begin[mode = display]{math}
+            f(\bi{x'} + t* \nabla f(\bi{x'})) = \mi{max}\{f(\bi{x'} + t \nabla f(\bi{x'}))\}
+        \end{math}
 
-    \begin[mode = display]{math}
-        x_{j} = {x'}_{j} + t {(\frac{\partial f}{\partial x_{j}})}_{\bi{x} = \bi{x'}}
-        \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
-    \end{math}
+        Si noti che \math{f(\bi{x'} + t \nabla f(\bi{x'}))} é semplicemente
+        \math{f(\bi{x})} dove:
 
-    e che queste espressioni per \math{x_{j}} dipendono solo da quantitá
-    costanti e da \math{t}, quindi la funzione \math{f(\bi{x})} é una
-    funzione nella sola variabile \math{t}. Tale procedura viene ripetuta
-    finché l'approssimazione ottenuta per tutte le componenti del gradiente
-    restituisce un valore inferiore ad una soglia \math{\epsilon}:
+        \begin[mode = display]{math}
+            x_{j} = {x'}_{j} + t {(\frac{\partial f}{\partial x_{j}})}_{\bi{x} = \bi{x'}}
+            \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
+        \end{math}
 
-    \begin[mode = display]{math}
-        {|\frac{\partial f}{\partial x_{j}}|} \leq \epsilon
-        \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
-    \end{math}
+        e che queste espressioni per \math{x_{j}} dipendono solo da quantitá
+        costanti e da \math{t}, quindi la funzione \math{f(\bi{x})} é una
+        funzione nella sola variabile \math{t}. Tale procedura viene ripetuta
+        finché l'approssimazione ottenuta per tutte le componenti del gradiente
+        restituisce un valore inferiore ad una soglia \math{\epsilon}:
 
-    Poiché \math{\bi{x}} e \math{\nabla f(\bi{x})} sono fissati e
-    poiché \math{f(\bi{x})} é concava, determinare \math{t*} equivale
-    a massimizzare una funzione concava nella singola variabile \math{t}.
-    Questo puó essere fatto analiticamente (se possibile) oppure applicando
-    le apposite procedure giá trattate, come il metodo di bisezione o il
-    metodo di Newton.
+        \begin[mode = display]{math}
+            {|\frac{\partial f}{\partial x_{j}}|} \leq \epsilon
+            \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
+        \end{math}
 
-    L'algoritmo procede come segue:
+        Poiché \math{\bi{x}} e \math{\nabla f(\bi{x})} sono fissati e
+        poiché \math{f(\bi{x})} é concava, determinare \math{t*} equivale
+        a massimizzare una funzione concava nella singola variabile \math{t}.
+        Questo puó essere fatto analiticamente (se possibile) oppure applicando
+        le apposite procedure giá trattate, come il metodo di bisezione o il
+        metodo di Newton.
 
-    \begin{enumerate}
-        \begin{item}
-            Si fissi un certo \math{\epsilon};
-        \end{item}
-        \begin{item}
-            Si scelga un punto iniziale \math{\bi{x}};
-        \end{item}
-        \begin{item}
-            Si esprima \math{f(\bi{x'} + t \nabla f(\bi{x'}))} come funzione
-            di \math{t} ponendo
+        L'algoritmo procede come segue:
+
+        \begin{enumerate}
+            \begin{item}
+                Si fissi un certo \math{\epsilon};
+            \end{item}
+            \begin{item}
+                Si scelga un punto iniziale \math{\bi{x}};
+            \end{item}
+            \begin{item}
+                Si esprima \math{f(\bi{x'} + t \nabla f(\bi{x'}))} come funzione
+                di \math{t} ponendo
+
+                \begin[mode = display]{math}
+                    x_{j} = {x'}_{j} + t {(\frac{\partial f}{\partial x_{j}})}_{\bi{x} = \bi{x'}}
+                    \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
+                \end{math}
+            \end{item}
+            \begin{item}
+                Si determini \math{t*}, il valore di \math{t} che massimizza
+                \math{f(\bi{x'} + t \nabla f(\bi{x'}))}, analiticamente o in
+                mediante approssimazione;
+            \end{item}
+            \begin{item}
+                Si sostituisca \math{\bi{x'}} con \math{\bi{x'} + t* \nabla
+                f(\bi{x'})};
+            \end{item}
+            \begin{item}
+                Si calcoli \math{\nabla f(\bi{x'})}. Se ciascuna componente
+                di tale vettore é sufficientemente vicina ad \math{\epsilon}
+                l'algoritmo termina, perché \math{\bi{x'}} é una approssimazione
+                accettabile di \math{\bi{x*}}. Altrimenti si riprende dal punto 3.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        Se la funzione \math{f(\bi{x})} fosse invece convessa e si volesse
+        minimizzarla, occorrerebbe modificare la procedura richiedendo di
+        muoversi, ad ogni iterazione, nella direzione opposta a quella
+        del gradiente.
+
+        In questo caso, l'approssimazione successiva per \math{\bi{x*}} non
+        si ottiene sostituendo \math{\bi{x'}} con \math{\bi{x'} + t* \nabla
+        f(\bi{x'})}, bensí con \math{\bi{x'} - t* \nabla f(\bi{x'})}. Inoltre,
+        \math{t*} non sarebbe piú il valore che massimizza \math{f(\bi{x'} +
+        t \nabla f(\bi{x'}))}, bensí quello che minimizza \math{f(\bi{x'} -
+        t \nabla f(\bi{x'}))}.
+
+        \begin{example}
+            Si consideri la funzione \math{f(\bi{x}) = 2xy + 2y - x^{2} - 2y^{2}}.
+            Tale funzione é concava, in quanto la sua matrice Hessiana é
+            semidefinita negativa:
 
             \begin[mode = display]{math}
-                x_{j} = {x'}_{j} + t {(\frac{\partial f}{\partial x_{j}})}_{\bi{x} = \bi{x'}}
-                \thickspace \mi{per} \thickspace j = 1, 2, \unicodeellipsis, n
+                z^{T}Hz =
+                {[\table{x & y \\}]}
+                {[\table[columnalign = left left]{
+                    \frac{\partial^{2} f(x, y)}{\partial x^{2}} &
+                    \frac{\partial^{2} f(x, y)}{\partial x \partial y} \\
+                    \frac{\partial^{2} f(x, y)}{\partial y \partial x} &
+                    \frac{\partial^{2} f(x, y)}{\partial y^{2}} \\
+                }]}
+                {[\table{x \\ y \\}]}
+                =
+                {[\table{x & y \\}]}
+                {[\table[columnalign = right right]{
+                    -2 & 2 \\
+                    2 & -4 \\
+                }]}
+                {[\table{x \\ y \\}]}
+                = -2x^{2} + 4xy - 4y^{2}
+                = -2 {[{(x - y)}^{2} + y^{2}]}
             \end{math}
-        \end{item}
-        \begin{item}
-            Si determini \math{t*}, il valore di \math{t} che massimizza
-            \math{f(\bi{x'} + t \nabla f(\bi{x'}))}, analiticamente o in
-            mediante approssimazione;
-        \end{item}
-        \begin{item}
-            Si sostituisca \math{\bi{x'}} con \math{\bi{x'} + t* \nabla
-            f(\bi{x'})};
-        \end{item}
-        \begin{item}
-            Si calcoli \math{\nabla f(\bi{x'})}. Se ciascuna componente
-            di tale vettore é sufficientemente vicina ad \math{\epsilon}
-            l'algoritmo termina, perché \math{\bi{x'}} é una approssimazione
-            accettabile di \math{\bi{x*}}. Altrimenti si riprende dal punto 3.
-        \end{item}
-    \end{enumerate}
 
-    \bigskip
+            Il punto che massimizza tale funzione puó essere trovato per via
+            analitica, perché le componenti del relativo vettore gradiente sono
+            semplici funzioni polinomiali. Infatti, si ha:
 
-    Se la funzione \math{f(\bi{x})} fosse invece convessa e si volesse
-    minimizzarla, occorrerebbe modificare la procedura richiedendo di
-    muoversi, ad ogni iterazione, nella direzione opposta a quella
-    del gradiente.
+            \begin[mode = display]{math}
+                \nabla f{(\bi{x})} = 0
+                \thickspace \Rightarrow \thickspace
+                (\frac{\partial f{(x, y)}}{\partial x}, \frac{\partial f{(x, y)}}{\partial y}) = 0
+                \thickspace \Rightarrow \thickspace
+                {(-2x + 2y, 2x + 2 - 4y)} = 0
+                \thickspace \Rightarrow \thickspace
+                \{\table{
+                    -2x + 2y = 0 \\
+                    2x + 2 - 4y = 0 \\
+                }
+                \thickspace \Rightarrow \thickspace
+                \{\table{
+                    x = 1 \\
+                    y = 1 \\
+                }
+            \end{math}
 
-    In questo caso, l'approssimazione successiva per \math{\bi{x*}} non
-    si ottiene sostituendo \math{\bi{x'}} con \math{\bi{x'} + t* \nabla
-    f(\bi{x'})}, bensí con \math{\bi{x'} - t* \nabla f(\bi{x'})}. Inoltre,
-    \math{t*} non sarebbe piú il valore che massimizza \math{f(\bi{x'} +
-    t \nabla f(\bi{x'}))}, bensí quello che minimizza \math{f(\bi{x'} -
-    t \nabla f(\bi{x'}))}.
+            Applicando il metodo del gradiente, si ottiene una approssimazione che
+            si avvicina molto a tale valore.
 
-    \begin{example}
-        Si consideri la funzione \math{f(\bi{x}) = 2xy + 2y - x^{2} - 2y^{2}}.
-        Tale funzione é concava, in quanto la sua matrice Hessiana é
-        semidefinita negativa:
+            \begin[cols = 15%fw 15%fw 15%fw 15%fw 17.5%fw 7.5%fw 15%fw]{ptable}
+                \begin{row}
+                    \cell{\strong{Iterazione}}
+                    \cell{\math{\bi{x'}}}
+                    \cell{\math{\nabla f(\bi{x'})}}
+                    \cell{\math{\bi{x'} + t \nabla f(\bi{x'})}}
+                    \cell{\math{f(\bi{x'} + t \nabla f(\bi{x'}))}}
+                    \cell{\math{t*}}
+                    \cell{\math{\bi{x'} + t* \nabla f(\bi{x'})}}
+                \end{row}
+                \begin{row}
+                    \cell{1}
+                    \cell{\math{(0, 0)}}
+                    \cell{\math{(0, 2)}}
+                    \cell{\math{(0, 2t)}}
+                    \cell{\math{4t(1 - 2t)}}
+                    \cell{\math{\frac{1}{4}}}
+                    \cell{\math{(0, \frac{1}{2})}}
+                \end{row}
+                \begin{row}
+                    \cell{2}
+                    \cell{\math{(0, \frac{1}{2})}}
+                    \cell{\math{(1, 0)}}
+                    \cell{\math{(t, \frac{1}{2})}}
+                    \cell{\math{-t^{2} + t + \frac{1}{2}}}
+                    \cell{\math{\frac{1}{2}}}
+                    \cell{\math{(\frac{1}{2}, \frac{1}{2})}}
+                \end{row}
+                \begin{row}
+                    \cell{3}
+                    \cell{\math{(\frac{1}{2}, \frac{1}{2})}}
+                    \cell{\math{(0, 1)}}
+                    \cell{\math{(\frac{1}{2}, t + \frac{1}{2})}}
+                    \cell{\math{-2t^{2} + t + \frac{3}{4}}}
+                    \cell{\math{\frac{1}{4}}}
+                    \cell{\math{(\frac{1}{2}, \frac{3}{4})}}
+                \end{row}
+                \begin{row}
+                    \cell{4}
+                    \cell{\math{(\frac{1}{2}, \frac{3}{4})}}
+                    \cell{\math{(\frac{1}{2}, 0)}}
+                    \cell{\math{(\frac{1}{2}t + \frac{1}{2}, \frac{3}{4})}}
+                    \cell{\math{-\frac{1}{4}t^{2} + \frac{1}{4}t + \frac{7}{8}}}
+                    \cell{\math{\frac{1}{2}}}
+                    \cell{\math{(\frac{3}{4}, \frac{3}{4})}}
+                \end{row}
+                \begin{row}
+                    \cell{5}
+                    \cell{\math{(\frac{3}{4}, \frac{3}{4})}}
+                    \cell{\math{(0, \frac{1}{2})}}
+                    \cell{\math{(\frac{3}{4}, \frac{1}{2}t + \frac{3}{4})}}
+                    \cell{\math{-\frac{1}{2}t^{2} + \frac{1}{4}t + \frac{15}{16}}}
+                    \cell{\math{\frac{1}{4}}}
+                    \cell{\math{(\frac{3}{4}, \frac{7}{8})}}
+                \end{row}
+                \begin{row}
+                    \cell{6}
+                    \cell{\math{(\frac{3}{4}, \frac{7}{8})}}
+                    \cell{\math{(\frac{1}{4}, 0)}}
+                    \cell{\math{(\frac{1}{4}t + \frac{3}{4}, \frac{7}{8})}}
+                    \cell{\math{-\frac{1}{16}t^{2} + \frac{1}{16}t + \frac{31}{32}}}
+                    \cell{\math{\frac{1}{2}}}
+                    \cell{\math{(\frac{7}{8}, \frac{7}{8})}}
+                \end{row}
+                \begin{row}
+                    \cell{7}
+                    \cell{\math{(\frac{7}{8}, \frac{7}{8})}}
+                    \cell{\math{(0, \frac{1}{4})}}
+                    \cell{\math{(\frac{7}{8}, \frac{1}{4}t + \frac{7}{8})}}
+                    \cell{\math{-\frac{1}{8}t^{2} + \frac{1}{16}t + \frac{63}{64}}}
+                    \cell{\math{\frac{1}{4}}}
+                    \cell{\math{(\frac{7}{8}, \frac{15}{16})}}
+                \end{row}
+                \begin{row}
+                    \cell{8}
+                    \cell{\math{(\frac{7}{8}, \frac{15}{16})}}
+                    \cell{\math{(\frac{1}{8}, 0)}}
+                    \cell{\math{(\frac{1}{8}t + \frac{7}{8}, \frac{15}{16})}}
+                    \cell{\math{-\frac{1}{64}t^{2} + \frac{1}{64}t + \frac{127}{128}}}
+                    \cell{\math{\frac{1}{2}}}
+                    \cell{\math{(\frac{15}{16}, \frac{15}{16})}}
+                \end{row}
+                \begin{row}
+                    \cell{9}
+                    \cell{\math{(\frac{15}{16}, \frac{15}{16})}}
+                    \cell{\math{(0, \frac{1}{8})}}
+                    \cell{\math{(\frac{15}{16}, \frac{1}{8}t + \frac{15}{16})}}
+                    \cell{\math{-\frac{1}{32}t^{2} + \frac{1}{64}t + \frac{255}{256}}}
+                    \cell{\math{\frac{1}{4}}}
+                    \cell{\math{(\frac{15}{16}, \frac{31}{32})}}
+                \end{row}
+                \begin{row}
+                    \cell{10}
+                    \cell{\math{(\frac{15}{16}, \frac{31}{32})}}
+                    \cell{\math{(\frac{1}{16}, 0)}}
+                    \cell{\math{(\frac{1}{16}t + \frac{15}{16}, \frac{31}{32})}}
+                    \cell{\math{-\frac{1}{256}t^{2} + \frac{1}{256}t + \frac{511}{512}}}
+                    \cell{\math{\frac{1}{2}}}
+                    \cell{\math{(\frac{31}{32}, \frac{31}{32})}}
+                \end{row}
+            \end{ptable}
+
+        \end{example}
+
+    \subsection{Metodo di Newton}
+
+        Il metodo di Newton, presentato per la ricerca del massimo di
+        una funzione in una sola variabile, puó essere esteso in maniera
+        molto naturale a funzioni in piú variabili. Il metodo prevede
+        sempre di calcolare un'approssimazione quadratica della funzione
+        obiettivo \math{f(\bi{x})}, dove peró \math{\bi{x} = (x_{1},
+        x_{2}, \unicodeellipsis, x_{n})}. Questa funzione quadratica é
+        ottenuta troncando al secondo termine la serie di Taylor nel
+        punto corrente. Questa funzione approssimante viene quindi
+        massimizzata/minimizzata per ottenere il nuovo punto da cui
+        partire alla successiva iterazione.
+
+        Quando la funzione obiettivo é concava, l'approssimazione
+        \math{\bi{x'}} ha la forma:
 
         \begin[mode = display]{math}
-            z^{T}Hz =
-            {[\table{x & y \\}]}
-            {[\table[columnalign = left left]{
-                \frac{\partial^{2} f(x, y)}{\partial x^{2}} &
-                \frac{\partial^{2} f(x, y)}{\partial x \partial y} \\
-                \frac{\partial^{2} f(x, y)}{\partial y \partial x} &
-                \frac{\partial^{2} f(x, y)}{\partial y^{2}} \\
-            }]}
-            {[\table{x \\ y \\}]}
-            =
-            {[\table{x & y \\}]}
-            {[\table[columnalign = right right]{
-                -2 & 2 \\
-                2 & -4 \\
-            }]}
-            {[\table{x \\ y \\}]}
-            = -2x^{2} + 4xy - 4y^{2}
-            = -2 {[{(x - y)}^{2} + y^{2}]}
+            \bi{x'} =
+            \bi{x} - (\nabla^{2} f(\bi{x}))^{-1} \nabla f(\bi{x}) =
+            \bi{x} - H^{-1} \nabla f(\bi{x})
         \end{math}
 
-        Il punto che massimizza tale funzione puó essere trovato per via
-        analitica, perché le componenti del relativo vettore gradiente sono
-        semplici funzioni polinomiali. Infatti, si ha:
+        Dove \math{H^{-1}} é l'inversa della matrice Hessiana di
+        \math{f(\bi{x})}.
 
-        \begin[mode = display]{math}
-            \nabla f{(\bi{x})} = 0
-            \thickspace \Rightarrow \thickspace
-            (\frac{\partial f{(x, y)}}{\partial x}, \frac{\partial f{(x, y)}}{\partial y}) = 0
-            \thickspace \Rightarrow \thickspace
-            {(-2x + 2y, 2x + 2 - 4y)} = 0
-            \thickspace \Rightarrow \thickspace
-            \{\table{
-                -2x + 2y = 0 \\
-                2x + 2 - 4y = 0 \\
-            }
-            \thickspace \Rightarrow \thickspace
-            \{\table{
-                x = 1 \\
-                y = 1 \\
-            }
-        \end{math}
+        Sia \math{\bi{x}_{i}} l'approssimazione per \math{\bi{x'}} ottenuta
+        alla \math{i}-esima iterazione. Il metodo termina quando la distanza
+        fra \math{\bi{x}_{i + 1}} e \math{\bi{x}_{i}} (che sono ora vettori
+        e non piú scalari) é inferiore ad un valore fissato \math{\epsilon}.
+        L'algoritmo procede come segue:
 
-        Applicando il metodo del gradiente, si ottiene una approssimazione che
-        si avvicina molto a tale valore.
-
-        \begin[cols = 15%fw 15%fw 15%fw 15%fw 17.5%fw 7.5%fw 15%fw]{ptable}
-            \begin{row}
-                \cell{\strong{Iterazione}}
-                \cell{\math{\bi{x'}}}
-                \cell{\math{\nabla f(\bi{x'})}}
-                \cell{\math{\bi{x'} + t \nabla f(\bi{x'})}}
-                \cell{\math{f(\bi{x'} + t \nabla f(\bi{x'}))}}
-                \cell{\math{t*}}
-                \cell{\math{\bi{x'} + t* \nabla f(\bi{x'})}}
-            \end{row}
-            \begin{row}
-                \cell{1}
-                \cell{\math{(0, 0)}}
-                \cell{\math{(0, 2)}}
-                \cell{\math{(0, 2t)}}
-                \cell{\math{4t(1 - 2t)}}
-                \cell{\math{\frac{1}{4}}}
-                \cell{\math{(0, \frac{1}{2})}}
-            \end{row}
-            \begin{row}
-                \cell{2}
-                \cell{\math{(0, \frac{1}{2})}}
-                \cell{\math{(1, 0)}}
-                \cell{\math{(t, \frac{1}{2})}}
-                \cell{\math{-t^{2} + t + \frac{1}{2}}}
-                \cell{\math{\frac{1}{2}}}
-                \cell{\math{(\frac{1}{2}, \frac{1}{2})}}
-            \end{row}
-            \begin{row}
-                \cell{3}
-                \cell{\math{(\frac{1}{2}, \frac{1}{2})}}
-                \cell{\math{(0, 1)}}
-                \cell{\math{(\frac{1}{2}, t + \frac{1}{2})}}
-                \cell{\math{-2t^{2} + t + \frac{3}{4}}}
-                \cell{\math{\frac{1}{4}}}
-                \cell{\math{(\frac{1}{2}, \frac{3}{4})}}
-            \end{row}
-            \begin{row}
-                \cell{4}
-                \cell{\math{(\frac{1}{2}, \frac{3}{4})}}
-                \cell{\math{(\frac{1}{2}, 0)}}
-                \cell{\math{(\frac{1}{2}t + \frac{1}{2}, \frac{3}{4})}}
-                \cell{\math{-\frac{1}{4}t^{2} + \frac{1}{4}t + \frac{7}{8}}}
-                \cell{\math{\frac{1}{2}}}
-                \cell{\math{(\frac{3}{4}, \frac{3}{4})}}
-            \end{row}
-            \begin{row}
-                \cell{5}
-                \cell{\math{(\frac{3}{4}, \frac{3}{4})}}
-                \cell{\math{(0, \frac{1}{2})}}
-                \cell{\math{(\frac{3}{4}, \frac{1}{2}t + \frac{3}{4})}}
-                \cell{\math{-\frac{1}{2}t^{2} + \frac{1}{4}t + \frac{15}{16}}}
-                \cell{\math{\frac{1}{4}}}
-                \cell{\math{(\frac{3}{4}, \frac{7}{8})}}
-            \end{row}
-            \begin{row}
-                \cell{6}
-                \cell{\math{(\frac{3}{4}, \frac{7}{8})}}
-                \cell{\math{(\frac{1}{4}, 0)}}
-                \cell{\math{(\frac{1}{4}t + \frac{3}{4}, \frac{7}{8})}}
-                \cell{\math{-\frac{1}{16}t^{2} + \frac{1}{16}t + \frac{31}{32}}}
-                \cell{\math{\frac{1}{2}}}
-                \cell{\math{(\frac{7}{8}, \frac{7}{8})}}
-            \end{row}
-            \begin{row}
-                \cell{7}
-                \cell{\math{(\frac{7}{8}, \frac{7}{8})}}
-                \cell{\math{(0, \frac{1}{4})}}
-                \cell{\math{(\frac{7}{8}, \frac{1}{4}t + \frac{7}{8})}}
-                \cell{\math{-\frac{1}{8}t^{2} + \frac{1}{16}t + \frac{63}{64}}}
-                \cell{\math{\frac{1}{4}}}
-                \cell{\math{(\frac{7}{8}, \frac{15}{16})}}
-            \end{row}
-            \begin{row}
-                \cell{8}
-                \cell{\math{(\frac{7}{8}, \frac{15}{16})}}
-                \cell{\math{(\frac{1}{8}, 0)}}
-                \cell{\math{(\frac{1}{8}t + \frac{7}{8}, \frac{15}{16})}}
-                \cell{\math{-\frac{1}{64}t^{2} + \frac{1}{64}t + \frac{127}{128}}}
-                \cell{\math{\frac{1}{2}}}
-                \cell{\math{(\frac{15}{16}, \frac{15}{16})}}
-            \end{row}
-            \begin{row}
-                \cell{9}
-                \cell{\math{(\frac{15}{16}, \frac{15}{16})}}
-                \cell{\math{(0, \frac{1}{8})}}
-                \cell{\math{(\frac{15}{16}, \frac{1}{8}t + \frac{15}{16})}}
-                \cell{\math{-\frac{1}{32}t^{2} + \frac{1}{64}t + \frac{255}{256}}}
-                \cell{\math{\frac{1}{4}}}
-                \cell{\math{(\frac{15}{16}, \frac{31}{32})}}
-            \end{row}
-            \begin{row}
-                \cell{10}
-                \cell{\math{(\frac{15}{16}, \frac{31}{32})}}
-                \cell{\math{(\frac{1}{16}, 0)}}
-                \cell{\math{(\frac{1}{16}t + \frac{15}{16}, \frac{31}{32})}}
-                \cell{\math{-\frac{1}{256}t^{2} + \frac{1}{256}t + \frac{511}{512}}}
-                \cell{\math{\frac{1}{2}}}
-                \cell{\math{(\frac{31}{32}, \frac{31}{32})}}
-            \end{row}
-        \end{ptable}
-
-    \end{example}
+        \begin{enumerate}
+            \begin{item}
+                Si fissi un certo \math{\epsilon};
+            \end{item}
+            \begin{item}
+                Si ponga \math{i = 1};
+            \end{item}
+            \begin{item}
+                Si scelga un punto iniziale \math{\bi{x}_{1}};
+            \end{item}
+            \begin{item}
+                Si calcolino il gradiente e l'Hessiana di
+                \math{f(\bi{x})} nel punto \math{\bi{x}_{i}};
+            \end{item}
+            \begin{item}
+                Si calcoli \math{\bi{x}_{i + 1}} come \math{\bi{x}_{i} -
+                (\nabla^{2} f(\bi{x}_{i}))^{-1} \nabla f(\bi{x}_{i})}
+            \end{item}
+            \begin{item}
+                Se \math{|\bi{x}_{i + 1} - \bi{x}_{i}| \leq \epsilon},
+                allora l'algoritmo termina, perché \math{\bi{x} + 1} é
+                una approssimazione accettabile di \math{\bi{x*}}.
+                Altrimenti, si aumenta \math{i} di 1 e si riprende
+                dal punto 4.
+            \end{item}
+        \end{enumerate}
 
 \end{sile}
