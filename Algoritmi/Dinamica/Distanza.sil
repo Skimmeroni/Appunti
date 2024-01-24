@@ -2,13 +2,13 @@
 
 	\subsection{Definizione del problema}
 
-		Il grado di somiglianza fra due stringhe viene genericamente
+		Il grado di somiglianza fra due sequenze viene genericamente
 		chiamato \strong{distanza}. Sebbene vi siano diverse formulazioni
-		della distanza fra due stringhe, tutte possiedono le stesse proprietá
-		di base. Matematicamente, la distanza é una metrica definita come
-		\math{d: S \times S \mapsto R^{+}}, che assegna un valore reale ad
-		ogni coppia di stringhe. La funzione distanza possiede le seguenti
-		tre proprietá:
+		della distanza fra due sequenze, tutte possiedono le stesse proprietá
+		di base. Matematicamente, la distanza é una metrica definita come la
+		funzione \math{d: S \times S \mapsto R^{+}}, che assegna un valore
+		reale ad ogni coppia di sequenze. La funzione distanza possiede le
+		seguenti tre proprietá:
 
 		\begin{enumerate}
 			\begin{item}
@@ -25,28 +25,28 @@
 
 		\bigskip
 
-		La formulazione della distanza fra due stringhe piú semplice
+		La formulazione della distanza fra due sequenze piú semplice
 		e piú utilizzata é la cosiddetta \strong{distanza di modifica}
-		(\strong{edit distance}), o \strong{distanza di Levenshtein}.
-		Date due stringhe \math{S_{1}} e \math{S_{2}}, la distanza di
-		modifica fra le due é data dal numero di operazioni atomiche
-		sui singoli caratteri necessario a trasformare \math{S_{1}}
+		(\strong{edit distance}) \footnote{Anche chiamata \strong{distanza
+		di Levenshtein}.}. Date due sequenze \math{S_{1}} e \math{S_{2}},
+		la distanza di modifica fra le due é data dal numero di operazioni
+		atomiche sui singoli caratteri necessario a trasformare \math{S_{1}}
 		in \math{S_{2}}. Le operazioni ammesse sono quattro:
 
 		\begin{enumerate}
 			\begin{item}
-				\em{Inserire} un carattere della seconda stringa nella prima;  
+				\em{Inserire} un carattere della seconda sequenza nella prima;  
 			\end{item}
 			\begin{item}
-				\em{Rimuovere} un carattere dalla prima stringa;
+				\em{Rimuovere} un carattere dalla prima sequenza;
 			\end{item}
 			\begin{item}
-				\em{Sostituire} un carattere della prima stringa con uno della
+				\em{Sostituire} un carattere della prima sequenza con uno della
 				seconda;
 			\end{item}
 			\begin{item}
 				non fare nulla (o equivalentemente, sostituire un carattere
-				della prima stringa con sé stesso).
+				della prima sequenza con sé stesso).
 			\end{item}
 		\end{enumerate}
 
@@ -54,23 +54,23 @@
 
 		Siano le quattro operazioni sopra citate abbreviate rispettivamente
 		con \math{I}, \math{D} e \math{R} e \math{M}. Una concatenazione di
-		queste operazioni puó essere espressa come una stringa sull'alfabeto
-		\math{\{I, D, M, R\}}. Ovvero, una stringa del tipo \math{op_{1} op_{2}
+		queste operazioni puó essere espressa come una sequenza sull'alfabeto
+		\math{\{I, D, M, R\}}. Ovvero, una sequenza del tipo \math{op_{1} op_{2}
 		op_{3} \unicodeellipsis op_{n}}, costruita usando i quattro caratteri
-		dell'alfabeto sopra descritto, é una stringa dove ciascun carattere
+		dell'alfabeto sopra descritto, é una sequenza dove ciascun carattere
 		\math{op_{i}} indica l'operazione applicata all'\math{i}-esimo
 		carattere di \math{S_{1}} per poterla trasformare in \math{S_{2}}.
-		Una stringa che esprime la sequenza di operazioni necessarie a
-		trasformare una stringa in un'altra viene chiamata
-		\strong{trascrizione} delle due stringhe.
+		Una sequenza che esprime la sequenza di operazioni necessarie a
+		trasformare una sequenza in un'altra viene chiamata
+		\strong{trascrizione} delle due sequenze.
 
-		La distanza di modifica fra due stringhe puó essere allora
+		La distanza di modifica fra due sequenze puó essere allora
 		vista anche come la lunghezza della trascrizione piú corta
-		possibile per tale coppia di stringhe escludendo le operazioni
+		possibile per tale coppia di sequenze escludendo le operazioni
 		\math{M}, ovvero il minimo numero di operazioni "rilevanti"
-		(tutte tranne quelle nulle) necessarie a trasformare una stringa
+		(tutte tranne quelle nulle) necessarie a trasformare una sequenza
 		in un'altra. La trascrizione (o le trascrizioni) che permette di
-		trasformare una stringa in un'altra nella maniera piú efficiente
+		trasformare una sequenza in un'altra nella maniera piú efficiente
 		possibile é quella che contiene il minimo numero di operazioni
 		rilevanti.
 
@@ -96,8 +96,8 @@
 				\end{ptable}
 			\end{parbox}
 			\begin[width = 55%fw, padding = 5%fw]{parbox}
-				La stringa \math{S_{1} = vintner} puó essere trasformata
-				nella stringa \math{S_{2} = writers} mediante 5 operazioni:
+				La sequenza \math{S_{1} = vintner} puó essere trasformata
+				nella sequenza \math{S_{2} = writers} mediante 5 operazioni:
 				sostituire \math{v} con \math{w}, inserire \math{r}, eliminare
 				\math{n}, eliminare \math{n} (di nuovo), inserire \math{s}. Le
 				altre 4 operazioni sono no-op, perché quei caratteri in quelle
@@ -106,31 +106,36 @@
 			\end{parbox}
 		\end{example}
 
-		Il \strong{Problema della distanza di modifica} richiede di trovare,
-		prese due stringhe, la lunghezza di una qualsiasi trascrizione ottimale
-		che permette di trasformare la prima nella seconda.
+		Il \strong{Problema della distanza di modifica} richiede di
+		trovare, prese due sequenze, la lunghezza di una qualsiasi
+		trascrizione ottimale che permette di trasformare la prima
+		nella seconda.
 
 	\subsection{Programmazione dinamica: equazione di ricorrenza}
 
-		Siano \math{X = \{1, 2, \unicodeellipsis, n\}} e \math{Y = \{1, 2,
-		\unicodeellipsis, m\}} due stringhe. Siano poi \math{X_{i} = \{1, 
-		\unicodeellipsis, i\}} e \math{Y_{j} = \{1, \unicodeellipsis, j\}}
-		i due prefissi di \math{X} e di \math{Y} rispettivamente di lunghezza
-		\math{i} e \math{j}. Si indichi la soluzione del problema della
-		distanza di modifica per l'istanza \math{X_{i}, Y_{j}} con
-		\math{S_{ij}}. Sia infine \math{\mi{Opt}(i, j)} la lunghezza della
-		trascrizione \math{S_{ij}}.
+		Date due sequenze \math{X} e \math{Y} rispettivamente di
+		lunghezza \math{m} e \math{n}, siano \math{X_{i} = X[1 : i]}
+		e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i} e
+		\math{j} delle rispettive sequenze. La soluzione \math{S_{i, j}}
+		per l'\math{i, j}-esima istanza del problema corrisponde a
+		trovare la soluzione ottimale per il problema della distanza
+		di modifica rispetto alle sottosequenze \math{X_{i}} e
+		\math{Y_{j}}. La soluzione per le intere sequenze \math{X} e
+		\math{Y} é la soluzione per l'istanza \math{X_{m}, Y_{n}}.
+		La lunghezza trascrizione soluzione per la \math{i, j}-esima
+		istanza del problema viene indicata con \math{\mi{Opt}(i, j)}.
 
-		Il caso base della relazione di ricorrenza é immediato. Il
-		numero di operazioni necessarie a trasformare la stringa
-		vuota in sé stessa é zero, perché non c'é alcuna operazione
-		da compiere. Similmente, per trasformare una stringa generica
-		di lunghezza \math{i} nella stringa vuota sono necessarie
-		\math{i} operazioni di tipo \math{D}, pertanto la lunghezza
-		della relativa trascrizione é \math{i}. Infine, per trasformare
-		la stringa vuota in una stringa generica di lunghezza \math{j}
-		sono necessarie \math{j} operazioni di tipo \math{I}, pertanto
-		la lunghezza della relativa trascrizione é \math{j}.
+		Il caso base della relazione di ricorrenza é immediato. Il numero
+		di operazioni necessarie a trasformare la sequenza vuota in sé
+		stessa é zero, perché non c'é alcuna operazione da compiere, e
+		di conseguenza il relativo trascritto sará la sequenza vuota.
+		Similmente, per trasformare una sequenza generica di lunghezza
+		\math{i} nella sequenza vuota sono necessarie \math{i} operazioni
+		di tipo \math{D}, pertanto la lunghezza della relativa trascrizione
+		é \math{i}. Infine, per trasformare la sequenza vuota in una sequenza
+		generica di lunghezza \math{j} sono necessarie \math{j} operazioni di
+		tipo \math{I}, pertanto la lunghezza della relativa trascrizione é
+		\math{j}.
 
 		\begin[width = 33%fw]{parbox}
 			\begin[mode = display]{math}
@@ -158,467 +163,414 @@
 		\end{parbox}
 		\par
 
-		Per quanto riguarda il passo ricorsivo, si consideri la soluzione 
-		\math{S_{i, j}}, relativa a due prefissi generici \math{X_{i} =
-		\{1, \unicodeellipsis, i\}} e \math{Y_{i} = \{1, \unicodeellipsis,
-		j\}}, di lunghezza rispettivamente \math{i} e \math{j}. L'operazione
-		corretta da compiere per ottenere la trascrizione piú efficiente é
-		quella che, a prescindere da quale sia, minimizza la lunghezza della
-		trascrizione stessa.
+		Per quanto riguarda il passo ricorsivo, si assuma di avere a
+		disposizione tutte le soluzioni nella forma \math{S_{a, b}},
+		con \math{1 \leq a < i} e \math{1 \leq b < j}, e di voler
+		calcolare \math{S_{i, j}}. Possono verificarsi solamente due
+		situazioni, mutualmente esclusive: l'\math{i}-esimo carattere di
+		\math{X_{i}} e uguale al \math{j}-esimo carattere di \math{Y_{j}}
+        oppure l'\math{i}-esimo carattere di \math{X_{i}} é diverso dal
+        \math{j}-esimo carattere di \math{Y_{j}}.
 
-		\begin[mode = display]{math}
-			\table[columnalign = left left]{
-				S_{i, j} = \mi{min} \{S_{i - 1, j} \cup \{D\},
-									  S_{i, j - 1} \cup \{I\},
-									  S_{i - 1, j - 1} \cup \{R\},
-									  S_{i - 1, j - 1}\} \\
-				\mi{Opt}(i, j) = \mi{min} \{\mi{Opt}(i - 1, j) + 1,
-											\mi{Opt}(i, j - 1) + 1,
-											\mi{Opt}(i - 1, j - 1) + 1,
-											\mi{Opt}(i - 1, j - 1)\}
-			}
-		\end{math}
+		Nel primo caso, la \math{i, j}-esima soluzione coincide con
+		la \math{i - 1, j - 1}-esima. Questo perché é l'unica situazione
+		in cui é possibile non aggiungere alcun carattere alla trascrizione,
+		e dato che questa puó solo crescere di lunghezza o rimanere
+		invariata, non aggiungere alcun carattere é la scelta che per
+		definizione ne minimizza la lunghezza.
 
-		Avendo a disposizione sia il caso base che il passo ricorsivo
-		della relazione di ricorrenza, diventa possibile costruire la
-		matrice \math{D} risolutiva. I caratteri della prima stringa
-		occupano la prima riga, mentre quelli della seconda stringa
-		la prima colonna. La seconda riga e la seconda colonna vengono
-		riempite con le informazioni disponibili dal caso base della
-		relazione di ricorrenza, mentre le successive righe/colonne
-		vengono calcolate una alla volta sulla base della precedente.
-		Dato che per calcolare il valore di ogni cella occorre effettuare
-		lo stesso confronto, e dato che il numero di celle complessivo é
-		\math{(n + 1) \times (m + 1)}, si ha che l'algoritmo che calcola
-		la distanza di modifica fra due stringhe ha un tempo di esecuzione
-		di \math{O(mn)}.
+		Nel secondo caso, la soluzione ottimale per la \math{i, j}-esima
+		istanza deve necessariamente essere piú lunga di tutte le soluzioni
+		per istanze precedenti. Le uniche soluzioni candidate per tale
+		istanza sono \math{S_{i - 1, j}}, \math{S_{i - 1, j}} e
+		\math{S_{i - 1, j - 1}}, alle quali viene accodato uno dei
+		caratteri \math{I}, \math{D} o \math{R}. Dato che sono tutte
+		valide, il criterio di scelta consiste nello scegliere la
+		soluzione con lunghezza minore.
 
-		\begin{code}
-			\begin{verbatim}
-				S1 = "..."
-				S2 = "..."
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				S_{i, j} =
+				\{\table[columnalign = left left]{
+					S_{i - 1, j - 1} & \mi{se} \thickspace X[i] = Y[j] \\
+					\mi{min}
+					\{\table[columnalign = left]{
+						S_{i - 1, j} \cup \{D\} \\
+						S_{i, j - 1} \cup \{I\} \\
+						S_{i - 1, j - 1} \cup \{R\} \\
+					} & \mi{altrimenti}
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{Opt} {(i, j)} =
+				\{\table[columnalign = left left]{
+					\mi{Opt} (i - 1, j - 1) & \mi{se} \thickspace X[i] = Y[j] \\
+					1 + \mi{min}
+					\{\table[columnalign = left]{
+						\mi{Opt}(i - 1, j) \\
+						\mi{Opt}(i, j - 1) \\
+						\mi{Opt}(i - 1, j - 1) \\
+					} & \mi{altrimenti} \\
+				}
+			\end{math}
+		\end{parbox}
 
-				\bigskip
-				m = len(S1) + 1
-				n = len(S2) + 1
+	\subsection{Programmazione dinamica: implementazione bottom-up}
 
-				\bigskip
-				Lev = [[0] * (n) for _ in range(m)]
+		L'algoritmo bottom-up viene costruito a partire dall'equazione di
+		ricorrenza sfruttando una tabella \math{c}. In ciascuna cella
+		\math{c[i, j]} viene riportato il valore della soluzione ottimale
+		per la \math{i, j}-esima istanza del problema, che viene utilizzata
+		per calcolare i valori ottimali per le istanze successive. L'algoritmo
+		riceve in input le due sequenze \math{X} e \math{Y} e restituisce in
+		output la tabella \math{c}.
 
-				\bigskip
-				for i in range(1, m):               # The first row and first
-					Lev[i][0] = i                   # column are computed from
-				for j in range(1, n):               # the base case of the
-					Lev[0][j] = j                   # recurrence relation
+		Si noti come le celle che hanno 0 come uno dei due indici possano
+		venire riempite immediatamente con il valore dell'altro indice, come
+		da caso base dell'equazione di ricorrenza.
 
-				\bigskip
-				for i in range(1, m):
-					for j in range(1, n):
-						A = Lev[i - 1][j] + 1       # A generic entry is given by
-						B = Lev[i][j - 1] + 1       # computing its 3 companion values
-						C = Lev[i - 1][j - 1]       # and finding the minimum
+		\begin{verbatim}
+			procedure ED(X, Y)
+			    for i = 0 to |X| do
+			        c[i][0] = i
+			    for j = 0 to |Y| do
+			        c[0][j] = j
 
-				\bigskip
-						if (S1[i - 1] != S2[j - 1]):
-							C = C + 1
+			    \bigskip
+			    for i = 1 to |X| do
+			        for j = 1 to |Y| do
+			            if X[i] == Y[j] then
+			                c[i][j] = c[i - 1][j - 1]
+			            else
+			                c[i][j] = 1 + min\{c[i - 1][j], c[i][j - 1], c[i - 1][j - 1]\}
 
-				\bigskip
-						Lev[i][j] = min(A, B, C)
+			    \bigskip
+			    return c
+		\end{verbatim}
 
-				\bigskip
-				print(Lev[m - 1][n - 1])            # The solution is the last entry
-			\end{verbatim}
-		\end{code}
-
-		\begin{example}
-			\begin[width = 50%fw]{parbox}
-				\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
-					\begin{row}
-						\cell{} \cell{} \cell{\strong{s}} \cell{\strong{u}}
-						\cell{\strong{n}} \cell{\strong{d}} \cell{\strong{a}}
-						\cell{\strong{y}}
-					\end{row}
-					\begin{row}
-						\cell{} \cell{0} \cell{1} \cell{2}
-						\cell{3} \cell{4} \cell{5} \cell{6}
-					\end{row}
-					\begin{row}
-						\cell{\strong{s}} \cell{1} \cell{} \cell{}
-						\cell{} \cell{} \cell{} \cell{}
-					\end{row}
-					\begin{row}
-						\cell{\strong{a}} \cell{2} \cell{} \cell{}
-						\cell{} \cell{} \cell{} \cell{}
-					\end{row}
-					\begin{row}
-						\cell{\strong{t}} \cell{3} \cell{} \cell{}
-						\cell{} \cell{} \cell{} \cell{}
-					\end{row}
-					\begin{row}
-						\cell{\strong{u}} \cell{4} \cell{} \cell{}
-						\cell{} \cell{} \cell{} \cell{}
-					\end{row}
-					\begin{row}
-						\cell{\strong{r}} \cell{5} \cell{} \cell{}
-						\cell{} \cell{} \cell{} \cell{}
-					\end{row}
-					\begin{row}
-						\cell{\strong{d}} \cell{6} \cell{} \cell{}
-						\cell{} \cell{} \cell{} \cell{}
-					\end{row}
-					\begin{row}
-						\cell{\strong{a}} \cell{7} \cell{} \cell{}
-						\cell{} \cell{} \cell{} \cell{}
-					\end{row}
-					\begin{row}
-						\cell{\strong{y}} \cell{8} \cell{} \cell{}
-						\cell{} \cell{} \cell{} \cell{}
-					\end{row}
-				\end{ptable}
-			\end{parbox}
-			\begin[width = 50%fw]{parbox}
-				\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
-					\begin{row}
-						\cell{} \cell{} \cell{\strong{s}} \cell{\strong{u}}
-						\cell{\strong{n}} \cell{\strong{d}} \cell{\strong{a}}
-						\cell{\strong{y}}
-					\end{row}
-					\begin{row}
-						\cell{} \cell{0} \cell{1} \cell{2}
-						\cell{3} \cell{4} \cell{5} \cell{6}
-					\end{row}
-					\begin{row}
-						\cell{\strong{s}} \cell{1} \cell{0} \cell{1}
-						\cell{2} \cell{3} \cell{4} \cell{5}
-					\end{row}
-					\begin{row}
-						\cell{\strong{a}} \cell{2} \cell{1} \cell{1}
-						\cell{2} \cell{3} \cell{3} \cell{4}
-					\end{row}
-					\begin{row}
-						\cell{\strong{t}} \cell{3} \cell{2} \cell{2}
-						\cell{2} \cell{3} \cell{4} \cell{4}
-					\end{row}
-					\begin{row}
-						\cell{\strong{u}} \cell{4} \cell{3} \cell{2}
-						\cell{3} \cell{3} \cell{4} \cell{5}
-					\end{row}
-					\begin{row}
-						\cell{\strong{r}} \cell{5} \cell{4} \cell{3}
-						\cell{3} \cell{4} \cell{4} \cell{5}
-					\end{row}
-					\begin{row}
-						\cell{\strong{d}} \cell{6} \cell{5} \cell{4}
-						\cell{4} \cell{3} \cell{4} \cell{5}
-					\end{row}
-					\begin{row}
-						\cell{\strong{a}} \cell{7} \cell{6} \cell{5}
-						\cell{5} \cell{4} \cell{3} \cell{4}
-					\end{row}
-					\begin{row}
-						\cell{\strong{y}} \cell{8} \cell{7} \cell{6}
-						\cell{6} \cell{5} \cell{4} \cell{3}
-					\end{row}
-				\end{ptable}
-			\end{parbox}
-		\end{example}
-
-		Oltre a calcolare la lunghezza delle trascrizioni ottimali, é
-		possibile estendere l'algoritmo per ricavare tali trascrizioni.
-		Mentre la tabella viene costruita, é possibile aggiungere dei
-		puntatori alle celle in modo da poter ricostruire a ritroso la
-		trascrizione che trasforma una stringa nell'altra. In particolare,
-		una volta che é stato calcolato il valore della cella \math{(i, j)}
-		della tabella, viene messo un puntatore che va da quest'ultima alla
-		cella di posizione \math{(i, j - 1)} se \math{D(i, j) = D(i, j - 1)
-		+ 1}, alla cella di posizione \math{(i - 1, j)} se \math{D(i, j) =
-		D(i - 1, j) + 1}, alla cella di posizione \math{(i - 1, j - 1)} se 
-		\math{D(i, j) = D(i - 1, j - 1) + 1} oppure alla cella di posizione 
-		\math{(i - 1, j - 1)} se \math{D(i, j) = D(i - 1, j - 1)}. Si noti
-		come sia possibile che da una stessa cella si diramino piú puntatori,
-		perché piú di una delle quattro condizioni possono verificarsi
-		contemporaneamente.
-
-		Per ricavare una trascrizione ottimale a partire dalla
-		tabella, é sufficiente seguire un qualsiasi percorso
-		definito dai puntatori dalla cella \math{(n, m)} alla
-		cella \math{(0, 0)}. Se ci si sposta \em{orizzontalmente},
-		ovvero da una cella \math{(i, j)} ad una cella \math{(i,
-		j - 1)}, allora significa che l'operazione piú efficiente 
-		per quel passaggio é un inserimento. Se ci si sposta
-		\em{verticalmente}, ovvero da una cella \math{(i, j)} ad
-		una cella \math{(i - 1, j)} allora significa che l'operazione
-		piú efficiente per quel passaggio é una rimozione. Se ci si
-		sposta \em{diagonalmente}, ovvero da una cella \math{(i, j)}
-		ad una cella \math{(i - 1, j - 1)}, allora significa che
-		l'operazione piú efficiente per quel passaggio é una
-		sostituzione se \math{S_{1}[i] \ne S_{2}[j]} o una no-op
-		altrimenti.
-
-		Una trascrizione viene costruita concatenando alla stringa,
-		inizialmente vuota, il carattere \math{I} ogni volta che si
-		incontra \math{\math{\leftarrow}}, il carattere \math{D} ogni
-		volta che si incontra \math{\math{\uparrow}}, il carattere
-		\math{R} ogni volta che si incontra \math{\math{\nwarrow}} e
-		\math{S_{1}[i] \ne S_{2}[j]} oppure il carattere \math{M} ogni
-		volta che si incontra \math{\math{\nwarrow}} e \math{S_{1}[i] =
-		S_{2}[j]}. Dato che le operazioni stanno venendo lette dall'ultima
-		alla prima, la trascrizione ottimale si ottiene leggendo tale stringa
-		in ordine inverso.
+		É facile notare come il tempo di esecuzione dell'algoritmo
+		sia \math{O(nm)}, dove \math{n} e \math{m} sono le lunghezze
+		di rispettivamente la stringa \math{X} e la stringa \math{Y}.
+		I primi due cicli eseguono una operazione immediata rispettivamente
+		per \math{n} e per \math{m} volte, dopodiché si presenta un doppio
+		ciclo innestato: il ciclo esterno esegue il ciclo interno \math{m}
+		volte, mentre il ciclo interno esegue \math{n} volte un blocco di
+		decisione il cui tempo di esecuzione puó considerarsi immediato.
+		Si ha allora che, asintoticamente, \math{O(m) + O(n) + O(mn) = O(mn)}.
 
 		\begin{example}
-			\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw]{ptable}
+			\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
 				\begin{row}
-					\cell{} \cell{} \cell{\strong{w}} \cell{\strong{r}}
-					\cell{\strong{i}} \cell{\strong{t}} \cell{\strong{e}}
-					\cell{\strong{r}} \cell{\strong{s}}
+					\cell{} \cell{} \cell{\strong{s}} \cell{\strong{u}}
+					\cell{\strong{n}} \cell{\strong{d}} \cell{\strong{a}}
+					\cell{\strong{y}}
 				\end{row}
 				\begin{row}
-					\cell{} \cell{0} \cell{\math{\leftarrow} 1}
-					\cell{\math{\leftarrow} 2} \cell{\math{\leftarrow} 3}
-					\cell{\math{\leftarrow} 4} \cell{\math{\leftarrow} 5}
-					\cell{\math{\leftarrow} 6} \cell{\math{\leftarrow} 7}
+					\cell{} \cell{0} \cell{1} \cell{2}
+					\cell{3} \cell{4} \cell{5} \cell{6}
 				\end{row}
 				\begin{row}
-					\cell{\strong{v}}
-					\cell{\math{\uparrow} 1}
-					\cell{\math{\nwarrow} 1}
-					\cell{\math{\nwarrow} \math{\leftarrow} 2}
-					\cell{\math{\nwarrow} \math{\leftarrow} 3}
-					\cell{\math{\nwarrow} \math{\leftarrow} 4}
-					\cell{\math{\nwarrow} \math{\leftarrow} 5}
-					\cell{\math{\nwarrow} \math{\leftarrow} 6}
-					\cell{\math{\nwarrow} \math{\leftarrow} 7}
+					\cell{\strong{s}} \cell{1} \cell{0} \cell{1}
+					\cell{2} \cell{3} \cell{4} \cell{5}
 				\end{row}
 				\begin{row}
-					\cell{\strong{i}}
-					\cell{\math{\uparrow} 2}
-					\cell{\math{\nwarrow} \math{\uparrow} 2}
-					\cell{\math{\nwarrow} 2}
-					\cell{\math{\nwarrow} 2}
-					\cell{\math{\leftarrow} 3}
-					\cell{\math{\leftarrow} 4}
-					\cell{\math{\leftarrow} 5}
-					\cell{\math{\leftarrow} 6}
+					\cell{\strong{a}} \cell{2} \cell{1} \cell{1}
+					\cell{2} \cell{3} \cell{3} \cell{4}
 				\end{row}
 				\begin{row}
-					\cell{\strong{n}}
-					\cell{\math{\uparrow} 3}
-					\cell{\math{\nwarrow} \math{\uparrow} 3}
-					\cell{\math{\nwarrow} \math{\uparrow} 3}
-					\cell{\math{\nwarrow} \math{\uparrow} 3}
-					\cell{\math{\uparrow} 3}
-					\cell{\math{\uparrow} \math{\leftarrow} 4}
-					\cell{\math{\uparrow} \math{\leftarrow} 5}
-					\cell{\math{\uparrow} \math{\leftarrow} 6}
+					\cell{\strong{t}} \cell{3} \cell{2} \cell{2}
+					\cell{2} \cell{3} \cell{4} \cell{4}
 				\end{row}
 				\begin{row}
-					\cell{\strong{t}}
-					\cell{\math{\uparrow} 4}
-					\cell{\math{\nwarrow} \math{\uparrow} 4}
-					\cell{\math{\nwarrow} \math{\uparrow} 4}
-					\cell{\math{\nwarrow} \math{\uparrow} 4}
-					\cell{\math{\nwarrow} 3}
-					\cell{\math{\nwarrow} \math{\leftarrow} 4}
-					\cell{\math{\nwarrow} \math{\leftarrow} 5}
-					\cell{\math{\nwarrow} \math{\leftarrow} 6}
+					\cell{\strong{u}} \cell{4} \cell{3} \cell{2}
+					\cell{3} \cell{3} \cell{4} \cell{5}
 				\end{row}
 				\begin{row}
-					\cell{\strong{n}}
-					\cell{\math{\uparrow} 5}
-					\cell{\math{\nwarrow} \math{\uparrow} 5}
-					\cell{\math{\nwarrow} \math{\uparrow} 5}
-					\cell{\math{\nwarrow} \math{\uparrow} 5}
-					\cell{\math{\uparrow} 4}
-					\cell{\math{\nwarrow} 4}
-					\cell{\math{\nwarrow} \math{\leftarrow} 5}
-					\cell{\math{\nwarrow} \math{\leftarrow} 6}
+					\cell{\strong{r}} \cell{5} \cell{4} \cell{3}
+					\cell{3} \cell{4} \cell{4} \cell{5}
 				\end{row}
 				\begin{row}
-					\cell{\strong{e}}
-					\cell{\math{\uparrow} 6}
-					\cell{\math{\nwarrow} \math{\uparrow} 6}
-					\cell{\math{\nwarrow} \math{\uparrow} 6}
-					\cell{\math{\nwarrow} \math{\uparrow} 6}
-					\cell{\math{\uparrow} 5}
-					\cell{\math{\nwarrow} 4}
-					\cell{\math{\nwarrow} \math{\leftarrow} 5}
-					\cell{\math{\nwarrow} \math{\leftarrow} 6}
+					\cell{\strong{d}} \cell{6} \cell{5} \cell{4}
+					\cell{4} \cell{3} \cell{4} \cell{5}
 				\end{row}
 				\begin{row}
-					\cell{\strong{r}}
-					\cell{\math{\uparrow} 7}
-					\cell{\math{\nwarrow} \math{\uparrow} 7}
-					\cell{\math{\nwarrow} 6}
-					\cell{\math{\nwarrow} \math{\leftarrow} \math{\uparrow} 7}
-					\cell{\math{\uparrow} 6}
-					\cell{\math{\uparrow} 5}
-					\cell{\math{\nwarrow} 4}
-					\cell{\math{\leftarrow} 5}
+					\cell{\strong{a}} \cell{7} \cell{6} \cell{5}
+					\cell{5} \cell{4} \cell{3} \cell{4}
+				\end{row}
+				\begin{row}
+					\cell{\strong{y}} \cell{8} \cell{7} \cell{6}
+					\cell{6} \cell{5} \cell{4} \cell{3}
 				\end{row}
 			\end{ptable}
-
-			Seguendo tutti i possibili percorsi definiti dai puntatori, si ha
-			che vi sono tre possibili trascrizioni ottimali: \math{RIMDMDMMI},
-			\math{IRMDMDMMI} e \math{RRRMDMMI}. Come ci si aspettava, tutte e
-			tre hanno la stessa lunghezza.
 		\end{example}
 
-		Una volta che la tabella é stata costruita, ripercorrerla per
-		ricavare le trascrizioni ottimali richiede un tempo di esecuzione
-		\math{O(n + m)}, pertanto il tempo complessivo dell'algoritmo non
-		ne viene inficiato.
+	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
-	\subsection{Programmazione dinamica: sottostruttura ottima}
+		Una volta calcolata la lunghezza della trascrizione ottima, é
+		possibile individuarne una ripercorrendo la tabella a ritroso.
+		In particolare, questo viene fatto estendendo l'algoritmo per il
+		calcolo della lunghezza introducendo una nuova tabella \math{b}
+		di puntatori. In particolare, nella cella \math{(i, j)} della
+		tabella \math{b} viene inserito:
 
-		\begin{theorem}
-			Una cella generica \math{(i, j)} della matrice \math{D}
-			puó assumere esclusivamente uno fra questi quattro valori: 
-			\math{D(i - 1, j) + 1}, \math{D(i, j - 1) + 1}, 
-			\math{D(i - 1, j - 1) + 1} \math{D(i - 1, j - 1)}.
+		\begin{itemize}
+			\begin{item}
+				Un puntatore \math{\nwarrow} se \math{c(i, j) =
+				c(i - 1, j - 1) + 1} o se \math{c(i, j) = c(i - 1, j - 1)}
+			\end{item}
+			\begin{item}
+				un puntatore \math{\leftarrow} se \math{c(i, j) =
+				c(i - 1, j) + 1}
+			\end{item}
+			\begin{item}
+				Un puntatore \math{\uparrow} se \math{c(i, j) =
+				c(i, j - 1) + 1},
+			\end{item}
+		\end{itemize}
 
-			\bigskip
-			\strong{Dimostrazione}. Si consideri una trascrizione
-			ottimale qualsiasi associata alla trasformazione di una
-			stringa \math{S_{1}} in una stringa \math{S_{2}}. Ci si
-			concentri sull'ultimo carattere della trascrizione, che
-			dovrá necessariamente essere \math{I}, \math{D}, \math{R}
-			o \math{M}:
+		\bigskip
 
-			\begin{itemize}
-				\begin{item}
-					Se é \math{I}, questo significa che l'ultima operazione
-					che il processo di trasformazione ha compiuto é stata
-					l'inserimento del \math{j}-esimo carattere della seconda
-					stringa alla fine della prima stringa trasformata. Questo
-					significa che i simboli della trascrizione precedenti
-					costituiscono una trascrizione ottimale che trasforma
-					\math{S[1:i]} in \math{S[1:j - 1]}, e questa trascrizione
-					avrá per definizione lunghezza \math{D(i, j - 1)}.
-					Pertanto, se l'ultimo carattere della trascrizione é
-					\math{I}, allora deve aversi \math{D(i, j) = D(i, j - 1)
-					+ 1};
-				\end{item}
-				\begin{item}
-					Se é \math{D}, questo significa che l'ultima operazione
-					che il processo di trasformazione ha compiuto é stata
-					l'eliminazione del \math{i}-esimo carattere della prima
-					stringa. Questo significa che i simboli della trascrizione
-					precedenti costituiscono una trascrizione ottimale che
-					trasforma \math{S[1:i - 1]} in \math{S[1:j]}, e questa
-					trascrizione avrá per definizione lunghezza \math{D(i - 1,
-					j)}. Pertanto, se l'ultimo carattere della trascrizione é
-					\math{D}, allora deve aversi \math{D(i, j) = D(i - 1, j)
-					+ 1};
-				\end{item}
-				\begin{item}
-					Se é \math{R}, questo significa che l'ultima operazione
-					che il processo di trasformazione ha compiuto é stata
-					sostituire l'\math{i}-esimo carattere della prima
-					stringa con il \math{j}-esimo carattere della seconda
-					stringa. Questo significa che i simboli della trascrizione
-					precedenti costituiscono una trascrizione ottimale che
-					trasforma \math{S[1:i - 1]} in \math{S[1:j - 1]}, e
-					questa trascrizione avrá per definizione lunghezza 
-					\math{D(i - 1, j - 1)}. Pertanto, se l'ultimo carattere
-					della trascrizione é \math{R}, allora deve aversi
-					\math{D(i, j) = D(i - 1, j - 1) + 1};
-				\end{item}
-				\begin{item}
-					Se é \math{M}, questo significa che l'ultima operazione
-					che il processo di trasformazione ha compiuto é stata
-					una no-op, e che l'\math{i}-esimo carattere della prima
-					stringa era uguale al \math{j}-esimo carattere della
-					seconda. Quindi \math{D(i, j) = D(i - 1, j - 1)}, perché
-					il valore della distanza nello step precedente é rimasto
-					lo stesso.
-				\end{item}
-			\end{itemize}
-		\end{theorem}
+		Si noti come vi siano celle in cui potrebbero essere
+		inseriti piú puntatori, perché piú condizioni possono
+		verificarsi contemporaneamente. Per convenzione, é
+		possibile stabilire un ordine di prioritá con cui
+		scegliere un puntatore piuttosto che un altro; questo
+		porta a diverse possibili ricostruzioni, ma queste
+		avranno comunque la stessa lunghezza.
 
-		Una volta noti quali possono essere i valori che le celle della matrice 
-		\math{D} puó assumere, occorre determinare quale fra questi é il valore
-		che, per ciascuna iterazione dell'algoritmo, rende la trascrizione 
-		(parziale) ottimale.
+		Per ricavare una trascrizione ottimale a partire dalla tabella, é
+		sufficiente seguire un qualsiasi percorso definito dai puntatori
+		dalla cella \math{(n, m)} alla cella \math{(0, 0)}. Se ci si sposta
+		orizzontalmente, ovvero da una cella \math{(i, j)} ad una cella
+		\math{(i, j - 1)}, allora significa che l'operazione piú efficiente 
+		per quel passaggio é un inserimento. Se ci si sposta verticalmente,
+		ovvero da una cella \math{(i, j)} ad una cella \math{(i - 1, j)}
+		allora significa che l'operazione piú efficiente per quel passaggio
+		é una rimozione. Se ci si sposta diagonalmente, ovvero da una cella
+		\math{(i, j)} ad una cella \math{(i - 1, j - 1)}, allora significa
+		che l'operazione piú efficiente per quel passaggio é una
+		sostituzione se \math{X[i] \ne Y[j]} o una no-op altrimenti.
 
-		\begin{theorem}
-			Il valore ottimale da porre nella cella generica \math{(i, j)}
-			della matrice \math{D} é il minimo dei quattro possibili.
+		Alla vecchia procedura opportunamente modificata ne viene
+		aggiunta un'altra, \tt{PRINT-ED}. Questa ha in input la
+		tabella \math{b}, la stringa \math{X}, la stringa \math{Y}
+		e due indici di posizione \math{i} e \math{j}, mentre in
+		output ha una delle possibili trascrizioni ottimali per
+		le stringhe in input. La prima chiamata alla procedura ha
+		\math{\abs{X}} come valore per \math{i} e \math{\abs{Y}}
+		come valore per \math{j}, in modo da ottenere la soluzione
+		per l'istanza \math{\abs{X}, \abs{Y}}. Si noti come la
+		trascrizione restituita dalla procedura abbia l'ordine dei
+		caratteri invertito, perché questi sono restituiti dall'ultimo
+		al primo.
 
-			\bigskip
-			\strong{Dimostrazione}. Sia \math{S_{1}} una qualsiasi stringa
-			che si vuole trasformare, in maniera ottimale, in una stringa
-			\math{S_{2}}. Si consideri il passaggio intermedio (obbligato)
-			dove il prefisso \math{S_{1}[1:i]} viene trasformato nel prefisso
-			\math{S_{2}[1:j]}:
+		\begin[width = 62.5%fw]{parbox}
+			\begin{verbatim}
+				procedure ED(X, Y)
+				    for i = 0 to |X| do
+				        c[i, 0] = i
+				        b[i, j] = "\unichar{U+2190}"
+				    for j = 0 to |Y| do
+				        c[0, j] = j
+				        b[i, j] = "\unichar{U+2191}"
 
-			\begin{enumerate}
-				\begin{item}
-					É possibile trasformare \math{S_{1}[1:i]} in \math{S_{2}
-					[1:j]} in maniera ottimale impiegando \math{D(i, j - 1)
-					+ 1} operazioni. Per fare questo occorre trasformare
-					\math{S_{1}[1:i]} in \math{S_{2}[1:j - 1]} in maniera
-					ottimale, per poi compiere un'ultima operazione inserendo
-					il \math{j}-esimo carattere di \math{S_{2}} alla fine di
-					\math{S_{1}}. Dato che trasformare \math{S_{1}[1:i]} in
-					\math{S_{2}[1:j - 1]} in maniera ottimale richiede 
-					\math{D(i, j - 1)} operazioni, trasformare \math{S_{1}
-					[1:i]} in \math{S_{2}[1:j]} richiederá \math{D(i, j - 1)
-					+ 1} operazioni;
-				\end{item}
-				\begin{item}
-					É possibile trasformare \math{S_{1}[1:i]} in \math{S_{2}
-					[1:j]} in maniera ottimale impiegando \math{D(i - 1, j)
-					+ 1} operazioni. Per fare questo occorre trasformare
-					\math{S_{1}[1:i - 1]} in \math{S_{2}[1:j]} in maniera 
-					ottimale, per poi compiere un'ultima operazione eliminando
-					l'\math{i}-esimo carattere di \math{S_{1}}. Dato che
-					trasformare \math{S_{1}[1:i - 1]} in \math{S_{2}[1:j]} in
-					maniera ottimale richiede \math{D(i - 1, j)} operazioni,
-					trasformare \math{S_{1}[1:i]} in \math{S_{2}[1:j]}
-					richiederá \math{D(i - 1, j) + 1} operazioni;
-				\end{item}
-				\begin{item}
-					É possibile trasformare \math{S_{1}[1:i]} in
-					\math{S_{2}[1:j]} in maniera ottimale impiegando
-					\math{D(i - 1, j - 1) + 1} operazioni. Per fare
-					questo occorre trasformare \math{S_{1}[1:i - 1]}
-					in \math{S_{2}[1:j - 1]} in maniera ottimale, per
-					poi compiere un'ultima operazione sostituendo 
-					l'\math{i}-esimo carattere di \math{S_{1}} con il
-					\math{j}-esimo carattere di \math{S_{2}}. Dato che
-					trasformare \math{S_{1}[1:i - 1]} in \math{S_{2}
-					[1:j - 1]} in maniera ottimale richiede \math{D(i - 1,
-					j - 1)} operazioni, trasformare \math{S_{1}[1:i]} in
-					\math{S_{2}[1:j]} richiederá \math{D(i - 1, j - 1) + 1}
-					operazioni;
-				\end{item}
-				\begin{item}
-					É possibile trasformare \math{S_{1}[1:i]} in
-					\math{S_{2}[1:j]} in maniera ottimale impiegando
-					\math{D(i - 1, j - 1)} operazioni, ma solo nel caso
-					in cui \math{S_{1}[i] = S_{2}[j]}. Per fare questo
-					occorre trasformare \math{S_{1}[1:i - 1]} in \math{S_{2}
-					[1:j - 1]} in maniera ottimale, dopodiché essendo
-					\math{S_{1}[i] = S_{2}[j]} non é necessario compiere 
-					alcuna operazione perché \math{S_{1}[i]} é giá prefisso
-					ottimale. Dato che trasformare \math{S_{1}[1:i - 1]} in
-					\math{S_{2}[1:j - 1]} in maniera ottimale richiede
-					\math{D(i - 1, j - 1)} operazioni, trasformare 
-					\math{S_{1}[1:i]} in \math{S_{2}[1:j]} quando
-					\math{S_{1}[i] = S_{2}[j]} richiederá \math{D(i - 1,
-					j - 1)} operazioni;
-				\end{item}
-			\end{enumerate}
+				    \bigskip
+				    for i = 1 to |X| do
+				        for j = 1 to |Y| do
+				            if X[i] == Y[j] then
+				                c[i, j] = c[i - 1, j - 1]
+				                b[i, j] = "\unichar{U+2196}"
+				            else
+				                if (c[i - 1, j - 1] <= c[i, j - 1]) and
+				                   (c[i - 1, j - 1] <= c[i - 1, j]) then
+				                    c[i, j] = c[i - 1, j - 1] + 1
+				                    b[i, j] = "\unichar{U+2196}"
+				                else if (c[i - 1, j] <= c[i, j - 1]) and
+				                        (c[i - 1, j] <= c[i - 1, j - 1]) then
+				                    c[i, j] = c[i - 1, j] + 1
+				                    b[i, j] = "\unichar{U+2190}"
+				                else
+				                    c[i, j] = c[i, j - 1] + 1
+				                    b[i, j] = "\unichar{U+2191}"
 
-			\bigskip
+				    \bigskip
+				    return c, b
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 37.5%fw]{parbox}
+			\begin{verbatim}
+				procedure PRINT-ED(X, Y, i, j, b)
+				    if i == 0 or j == 0
+				        return
 
-			Questo significa che \math{D(i, j)} é certamente non
-			superiore a \math{D(i - 1, j) + 1}, a \math{D(i, j - 1)
-			+ 1}, a \math{D(i - 1, j - 1)} e a \math{D(i - 1, j - 1)
-			+ 1}. Essendo questi quattro valori anche gli unici che
-			\math{D(i, j)} puó assumere, deve allora aversi che il
-			valore ottimale per \math{D(i, j)} é il minimo fra questi.
-		\end{theorem}
+				    \bigskip
+				    if b[i, j] == "\unichar{U+2190}" then
+				        print "I"
+				        PRINT-ED(X, Y, i - 1, j, b)
+				    else if b[i, j] == "\unichar{U+2191}" then
+				        print "D"
+				        PRINT-ED(X, Y, i, j - 1, b)
+				    else
+				        if X[i] != Y[j] then
+				            print "R"
+				        PRINT-ED(X, Y, i - 1, j - 1, b)
+			\end{verbatim}
+		\end{parbox}
+		\par
+
+		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione é 
+		comunque proporzionale alle dimensioni della tabella \math{b},
+		perché la ricorsione é una tail-recursion.
+
+		\begin{example}
+			\begin[width = 50%fw]{parbox}
+				\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
+					\begin{row}
+						\cell{} \cell{} \cell{\strong{w}} \cell{\strong{r}}
+						\cell{\strong{i}} \cell{\strong{t}} \cell{\strong{e}}
+						\cell{\strong{r}} \cell{\strong{s}}
+					\end{row}
+					\begin{row}
+						\cell{ }
+						\cell{0} \cell{1} \cell{2} \cell{3}
+						\cell{4} \cell{5} \cell{6} \cell{7}
+					\end{row}
+					\begin{row}
+						\cell{\strong{v}}
+						\cell{1} \cell{1} \cell{2} \cell{3}
+						\cell{4} \cell{5} \cell{6} \cell{7}
+					\end{row}
+					\begin{row}
+						\cell{\strong{i}}
+						\cell{2} \cell{2} \cell{2} \cell{2}
+						\cell{3} \cell{4} \cell{5} \cell{6}
+					\end{row}
+					\begin{row}
+						\cell{\strong{n}}
+						\cell{3} \cell{3} \cell{3} \cell{3}
+						\cell{3} \cell{4} \cell{5} \cell{6}
+					\end{row}
+					\begin{row}
+						\cell{\strong{t}}
+						\cell{4} \cell{4} \cell{4} \cell{4}
+						\cell{3} \cell{4} \cell{5} \cell{6}
+					\end{row}
+					\begin{row}
+						\cell{\strong{n}}
+						\cell{5} \cell{5} \cell{5} \cell{5}
+						\cell{4} \cell{4} \cell{5} \cell{6}
+					\end{row}
+					\begin{row}
+						\cell{\strong{e}}
+						\cell{6} \cell{6} \cell{6} \cell{6}
+						\cell{5} \cell{4} \cell{5} \cell{6}
+					\end{row}
+					\begin{row}
+						\cell{\strong{r}}
+						\cell{7} \cell{7} \cell{6} \cell{7}
+						\cell{6} \cell{5} \cell{4} \cell{5}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+			\begin[width = 50%fw]{parbox}
+				\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
+					\begin{row}
+						\cell{} \cell{} \cell{\strong{w}} \cell{\strong{r}}
+						\cell{\strong{i}} \cell{\strong{t}} \cell{\strong{e}}
+						\cell{\strong{r}} \cell{\strong{s}}
+					\end{row}
+					\begin{row}
+						\cell{}
+						\cell{}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+					\end{row}
+					\begin{row}
+						\cell{\strong{v}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+					\end{row}
+					\begin{row}
+						\cell{\strong{i}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+					\end{row}
+					\begin{row}
+						\cell{\strong{n}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+						\cell{\math{\leftarrow}}
+					\end{row}
+					\begin{row}
+						\cell{\strong{t}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+					\end{row}
+					\begin{row}
+						\cell{\strong{n}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+					\end{row}
+					\begin{row}
+						\cell{\strong{e}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+					\end{row}
+					\begin{row}
+						\cell{\strong{r}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\uparrow}}
+						\cell{\math{\nwarrow}}
+						\cell{\math{\leftarrow}}
+					\end{row}
+				\end{ptable}
+			\end{parbox}
+		\end{example}
 
 \end{sile}

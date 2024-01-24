@@ -202,13 +202,13 @@
 			procedure LCS(X, Y)
 			    for i = 0 to m do
 			        c[i, 0] = 0
-			    for j = 1 to n do
+			    for j = 0 to n do
 			        c[0, j] = 0
 
 			    \bigskip
 			    for i = 1 to m do
 			        for j = 1 to n do
-			            if x\textsubscript{i} = y\textsubscript{j} then
+			            if X[i] == Y[j] then
 			                c[i, j] = 1 + c[i - 1, j - 1]
 			            else
 			                c[i, j] = max(c[i, j - 1], c[i - 1, j])
@@ -320,13 +320,13 @@
 				procedure LCS(X, Y)
 				    for i = 0 to m do
 				        c[i, 0] = 0
-				    for j = 1 to n do
+				    for j = 0 to n do
 				        c[0, j] = 0
 
 				    \bigskip
 				    for i = 1 to m do
 				        for j = 1 to n do
-				            if x\textsubscript{i} = y\textsubscript{j} then
+				            if X[i] == Y[j] then
 				                c[i, j] = 1 + c[i - 1, j - 1]
 				                b[i, j] = "\unichar{U+2196}"
 				            else if c[i - 1, j] > c[i, j - 1]
@@ -349,7 +349,7 @@
 				    \bigskip
 				    if b[i, j] == "\unichar{U+2196}"
 				        PRINT-LCS(b, X, i - 1, j - 1)
-				        print x\textsubscript{i}
+				        print X[i]
 				    else if b[i, j] == "\unichar{U+2191}"
 				        PRINT-LCS(b, X, i - 1, j)
 				    else
