@@ -76,57 +76,64 @@
             \begin{itemize}
                 \begin{item}
                     \math{x_{i} \notin S_{i}}. Si supponga per assurdo
-                    che la soluzione presentata per questo caso, ovvero
-                    \math{S_{i - 1}}, non sia la soluzione al problema
-                    per l'istanza \math{X_{i}}.
+                    che \math{S_{i - 1}} non sia la soluzione ottimale
+                    del problema per l'istanza \math{X_{i}}. Se cosí é,
+                    allora la soluzione ottimale per tale istanza (quale
+                    che sia) deve necessariamente avere un valore maggiore
+                    di quello della soluzione ottimale \math{S_{i - 1}},
+                    ovvero deve valere \math{\mi{Opt}(i) > \mi{Opt}(i - 1)}.
 
-                    Se, come da ipotesi, \math{x_{i}} non appartiene
-                    ad \math{S_{i}}, deve aversi che, come \math{S_{i - 1}},
-                    \math{S_{i} \subseteq X_{i - 1}}. Se \math{S_{i - 1}} non
-                    é la soluzione per la \math{i}-esima istanza del problema,
-                    allora la seconda deve avere associato un valore maggiore
-                    di quello associato alla prima, ovvero \math{\mi{Opt}(i)
-                    > \mi{Opt}(i - 1)}.
-                    
-                    Essendo peró \math{S_{i} \subseteq X_{i - 1}}, il fatto
-                    che \math{\mi{Opt}(i)} sia maggiore di \math{\mi{Opt}(i
-                    - 1)} equivale a dire che \math{S_{i}} sia una soluzione
-                    migliore per la \math{i - 1}-esima istanza del problema
-                    di quanto lo sia \math{S_{i - 1}}, e questo é in
-                    contraddizione con le ipotesi. Occorre allora assumere
-                    che \math{S_{i - 1}} sia l'effettiva soluzione per la
-                    \math{i}-esima istanza del problema quando \math{x_{i}
-                    \notin S_{i}}.
+                    Se, come da ipotesi, \math{x_{i}} non appartiene ad
+                    \math{S_{i}}, deve aversi \math{S_{i} \subseteq X_{i
+                    - 1}}. Ma allora \math{S_{i}} é una potenziale soluzione
+                    per la \math{i - 1}-esima istanza del problema. Ricordando
+                    peró che \math{\mi{Opt}(i) > \mi{Opt}(i - 1)}, questo
+                    equivale a dire che \math{S_{i}} é una soluzione migliore
+                    per la \math{i - 1}-esima istanza del problema di quanto
+                    lo sia \math{S_{i - 1}}, e questo é in contraddizione con
+                    l'ipotesi che la soluzione ottimale per l'istanza
+                    \math{X_{i - 1}} sia \math{S_{i - 1}}. Occorre allora
+                    assumere che \math{S_{i - 1}} sia l'effettiva soluzione
+                    ottimale per la \math{i}-esima istanza del problema
+                    quando \math{x_{i} \notin S_{i}}.
                 \end{item}
                 \begin{item}
-                    \math{x_{i} \in S_{i}}. Si supponga per assurdo
-                    che la soluzione presentata per questo caso, ovvero
-                    \math{S_{i - 2} \cup \{x_{i}\}}, non sia la soluzione
-                    al problema per l'istanza \math{X_{i}}.
+                    \math{x_{i} \in S_{i}}. Si supponga per assurdo che
+                    \math{S_{i - 2} \cup \{x_{i}\}} non sia la soluzione
+                    ottimale al problema per l'istanza \math{X_{i}}. Se
+                    cosí é, allora la soluzione ottimale per tale istanza
+                    (quale che sia) deve avere un valore maggiore di quello
+                    della soluzione ottimale \math{S_{i - 2} \cup x_{i}},
+                    ovvero deve valere \math{\mi{Opt}(i) > \mi{Opt}(i - 2)
+                    + d_{i}}.
 
-                    Se \math{S_{i - 2} \cup \{x_{i}\}} non é la soluzione
-                    per la \math{i}-esima istanza del problema, allora
-                    la seconda deve avere associato un valore maggiore di
-                    quello associato alla prima, ovvero \math{\mi{Opt}(i)
-                    > \mi{Opt}(i - 2) + d_{i})}. Deve pertanto esistere 
-                    una soluzione \math{S_{h}}, distinta da \math{S_{i - 2}},
-                    tale per cui \math{S_{i} = S_{h} \cup \{x_{i}\}}. Dato
-                    che \math{S_{h}} deve essere costituita da elementi
-                    mutualmente compatibili, tale soluzione non puó
-                    contenere \math{x_{i - 1}}. Si ha allora che, come 
-                    \math{S_{i - 2}}, \math{S_{h} \subseteq X_{i - 2}}.
+                    Dato che, per ipotesi, \math{x_{i}} appartiene ad
+                    \math{S_{i}}, é possibile scomporre tale soluzione
+                    in \math{S_{h} \cup \{x_{i}\}}, con \math{S_{h}
+                    \ne S_{i}}, cosí come é possibile scomporre
+                    \math{\mi{Opt}(i)} in \math{\mi{Opt}(h) + d_{i}}.
+                    Essendo peró \math{\mi{Opt}(i) > \mi{Opt}(i - 2) +
+                    d_{i}}, deve valere \math{\mi{Opt}(h) + d_{i} >
+                    \mi{Opt}(i - 2) + d_{i}}, cioé \math{\mi{Opt}(h)
+                    > \mi{Opt}(i - 2)}.
 
-                    Se \math{S_{h}} é soluzione per la \math{i}-esima istanza,
-                    allora vale \math{\mi{Opt}(h) + d_{i} = \mi{Opt}(i)}.
-                    Ma questo significa che \math{\mi{Opt}(h) + d_{i} >
-                    \mi{Opt}(i - 2) + d_{i}}, ovvero \math{\mi{Opt}(h) >
-                    \mi{Opt}(i - 2)}. Questo implica che \math{S_{h}} sia
-                    una soluzione migliore di \math{S_{i - 2}} per la
-                    \math{i - 2}-esima istanza, e questo é in contraddizione
-                    con le ipotesi. Occorre allora assumere che \math{S_{i - 2}
-                    \cup \{x_{i}\}} sia l'effettiva soluzione per la
+                    Dovendo essere \math{S_{h} \cup \{x_{i}\}} un insieme
+                    costituito da elementi mutualmente compatibili, la
+                    soluzione \math{S_{h}} non puó contenere \math{x_{i
+                    - 1}} (cosí come non puó contenere \math{x_{i}}),
+                    pertanto si ha \math{S_{h} \subseteq X_{i - 2}}. Ma
+                    allora \math{S_{h}} é una potenziale soluzione per la
+                    \math{i - 2}-esima istanza del problema. Ricordando
+                    peró che \math{\mi{Opt}(h) > \mi{Opt}(i - 2)}, questo
+                    equivale a dire che \math{S_{h}} é una soluzione
+                    migliore per la \math{i - 2}-esima istanza del
+                    problema di quanto lo sia \math{S_{i - 2}}, e questo
+                    é in contraddizione con l'ipotesi che la soluzione
+                    ottimale per l'istanza \math{X_{i - 2}} sia \math{S_{i
+                    - 2}}. Occorre allora assumere che \math{S_{i - 2} \cup
+                    \{x_{i}\}} sia l'effettiva soluzione ottimale per la
                     \math{i}-esima istanza del problema quando \math{x_{i}
-                    \in S_{i}}.
+                    \notin S_{i}}.
                 \end{item}
             \end{itemize}
 		\end{theorem}

@@ -170,11 +170,11 @@
 		per la \math{i}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive.
 		L'algoritmo riceve in input la sequenza \math{X} e restituisce
-		in output la tabella \math{c}.
+		in output il vettore \math{c}.
 
-        Si noti come tutte le celle della tabella \math{c} possono essere
-        inizializzate subito ad 1, perché questo é il minimo valore che in
-        una cella puó essere presente.
+        Si noti come tutte le celle del vettore \math{c} possono essere
+        inizializzate subito ad 1, perché questo é il minimo valore che
+        in una cella puó essere presente.
 
         \begin{verbatim}
 			procedure LIS(X)
@@ -195,7 +195,7 @@
         \end{verbatim}
 
         É facile notare come il tempo di esecuzione dell'algoritmo
-		sia \math{O(n^{2})}, dove \math{n} é la lunghezza della stringa
+		sia \math{O(n^{2})}, dove \math{n} é la lunghezza della sequenza
 		\math{X}. Il primo ciclo esegue una operazione immediata per
 		\math{n} volte, dopodiché si presenta un doppio ciclo innestato:
 		il ciclo esterno esegue il ciclo interno \math{n} volte, mentre
@@ -291,7 +291,7 @@
     \subsection{Osservazioni}
 
         Il problema LIS non vincolato puó essere ridotto al problema LIS
-        vincolato. Infatti, la soluzione del problema LIS vincolato non é
-        altro che la maggior soluzione parziale del problema LIS vincolato.
+        vincolato. Infatti, la soluzione del problema LIS non vincolato non
+        é altro che la maggior soluzione parziale del problema LIS vincolato.
 
 \end{sile}
