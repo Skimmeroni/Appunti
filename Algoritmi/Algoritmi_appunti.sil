@@ -94,16 +94,16 @@
 		\include[src = Dinamica/LIS.sil]
 		\section{Longest Increasing Common Subsequence}
 		\include[src = Dinamica/LICS.sil]
+		\section{Sottovettore di peso massimo}
+		\include[src = Dinamica/Sottovettore.sil]
 		\section{Knapsack 0/1}
 		\include[src = Dinamica/Knapsack.sil]
 		\section{Chiusura palindroma}
 		\include[src = Dinamica/Palindroma.sil]		
 		\section{Distanza di modifica}
 		\include[src = Dinamica/Distanza.sil]
-		%\section{Sottovettore di peso massimo}
-		%\include[src = Dinamica/.sil]
 		%\section{Problema Interleaving}
-		%\include[src = Dinamica/.sil]
+		%\include[src = Dinamica/Interleaving.sil]
 		\section{Cammino su un grafo}
 		\include[src = Dinamica/Grafo.sil]
 	\chapter{Tecnica greedy}

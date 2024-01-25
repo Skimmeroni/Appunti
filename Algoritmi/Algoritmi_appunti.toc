@@ -331,7 +331,7 @@ return {
   },
   {
     label = {
-      "Knapsack 0/1",
+      "Sottovettore di peso massimo",
       id = "stuff"
     },
     level = 2,
@@ -351,7 +351,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima",
+      "Programmazione dinamica: equazione di ricorrenza",
       id = "stuff"
     },
     level = 3,
@@ -361,7 +361,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza",
+      "Programmazione dinamica: implementazione bottom-up",
       id = "stuff"
     },
     level = 3,
@@ -371,7 +371,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up",
+      "Programmazione dinamica: ricostruzione della soluzione",
       id = "stuff"
     },
     level = 3,
@@ -381,23 +381,23 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: ricostruzione di una soluzione",
+      "Osservazioni",
       id = "stuff"
     },
     level = 3,
     link = "dest39",
     number = "1.6.5",
-    pageno = "17"
+    pageno = "16"
   },
   {
     label = {
-      "Chiusura palindroma",
+      "Knapsack 0/1",
       id = "stuff"
     },
     level = 2,
     link = "dest40",
     number = "1.7",
-    pageno = "17"
+    pageno = "16"
   },
   {
     label = {
@@ -407,11 +407,11 @@ return {
     level = 3,
     link = "dest41",
     number = "1.7.1",
-    pageno = "17"
+    pageno = "16"
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza",
+      "Programmazione dinamica: sottostruttura ottima",
       id = "stuff"
     },
     level = 3,
@@ -421,23 +421,43 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up",
+      "Programmazione dinamica: equazione di ricorrenza",
       id = "stuff"
     },
     level = 3,
     link = "dest43",
     number = "1.7.3",
+    pageno = "17"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest44",
+    number = "1.7.4",
     pageno = "18"
   },
   {
     label = {
-      "Distanza di modifica",
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest45",
+    number = "1.7.5",
+    pageno = "18"
+  },
+  {
+    label = {
+      "Chiusura palindroma",
       id = "stuff"
     },
     level = 2,
-    link = "dest44",
+    link = "dest46",
     number = "1.8",
-    pageno = "18"
+    pageno = "19"
   },
   {
     label = {
@@ -445,9 +465,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest45",
+    link = "dest47",
     number = "1.8.1",
-    pageno = "18"
+    pageno = "19"
   },
   {
     label = {
@@ -455,7 +475,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest46",
+    link = "dest48",
     number = "1.8.2",
     pageno = "19"
   },
@@ -465,29 +485,19 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest47",
+    link = "dest49",
     number = "1.8.3",
     pageno = "19"
   },
   {
     label = {
-      "Programmazione dinamica: ricostruzione di una soluzione",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest48",
-    number = "1.8.4",
-    pageno = "20"
-  },
-  {
-    label = {
-      "Cammino su un grafo",
+      "Distanza di modifica",
       id = "stuff"
     },
     level = 2,
-    link = "dest49",
+    link = "dest50",
     number = "1.9",
-    pageno = "21"
+    pageno = "20"
   },
   {
     label = {
@@ -495,19 +505,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest50",
-    number = "1.9.1",
-    pageno = "21"
-  },
-  {
-    label = {
-      "Programmazione dinamica: sottostruttura ottima",
-      id = "stuff"
-    },
-    level = 3,
     link = "dest51",
-    number = "1.9.2",
-    pageno = "23"
+    number = "1.9.1",
+    pageno = "20"
   },
   {
     label = {
@@ -516,8 +516,8 @@ return {
     },
     level = 3,
     link = "dest52",
-    number = "1.9.3",
-    pageno = "24"
+    number = "1.9.2",
+    pageno = "21"
   },
   {
     label = {
@@ -526,8 +526,8 @@ return {
     },
     level = 3,
     link = "dest53",
-    number = "1.9.4",
-    pageno = "25"
+    number = "1.9.3",
+    pageno = "21"
   },
   {
     label = {
@@ -536,8 +536,68 @@ return {
     },
     level = 3,
     link = "dest54",
-    number = "1.9.5",
+    number = "1.9.4",
+    pageno = "22"
+  },
+  {
+    label = {
+      "Cammino su un grafo",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest55",
+    number = "1.10",
+    pageno = "23"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest56",
+    number = "1.10.1",
+    pageno = "23"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest57",
+    number = "1.10.2",
     pageno = "25"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest58",
+    number = "1.10.3",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest59",
+    number = "1.10.4",
+    pageno = "26"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest60",
+    number = "1.10.5",
+    pageno = "27"
   },
   {
     label = {
@@ -545,9 +605,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest55",
-    number = "1.9.6",
-    pageno = "26"
+    link = "dest61",
+    number = "1.10.6",
+    pageno = "28"
   },
   {
     label = {
@@ -555,9 +615,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest56",
+    link = "dest62",
     number = "2",
-    pageno = "27"
+    pageno = "29"
   },
   {
     label = {
@@ -565,9 +625,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest57",
+    link = "dest63",
     number = "2.1",
-    pageno = "27"
+    pageno = "29"
   },
   {
     label = {
@@ -575,9 +635,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest58",
+    link = "dest64",
     number = "2.2",
-    pageno = "27"
+    pageno = "29"
   },
   {
     label = {
@@ -585,9 +645,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest59",
+    link = "dest65",
     number = "2.3",
-    pageno = "29"
+    pageno = "31"
   },
   {
     label = {
@@ -595,9 +655,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest60",
+    link = "dest66",
     number = "2.4",
-    pageno = "32"
+    pageno = "34"
   },
   {
     label = {
@@ -605,9 +665,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest61",
+    link = "dest67",
     number = "2.5",
-    pageno = "33"
+    pageno = "35"
   },
   {
     label = {
@@ -615,9 +675,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest62",
+    link = "dest68",
     number = "2.5.1",
-    pageno = "36"
+    pageno = "38"
   },
   {
     label = {
@@ -625,9 +685,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest63",
+    link = "dest69",
     number = "2.5.2",
-    pageno = "37"
+    pageno = "39"
   },
   {
     label = {
@@ -635,9 +695,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest64",
+    link = "dest70",
     number = "2.6",
-    pageno = "38"
+    pageno = "40"
   },
   {
     label = {
@@ -645,9 +705,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest65",
+    link = "dest71",
     number = "3",
-    pageno = "41"
+    pageno = "43"
   },
   {
     label = {
@@ -655,9 +715,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest66",
+    link = "dest72",
     number = "3.1",
-    pageno = "41"
+    pageno = "43"
   },
   {
     label = {
@@ -665,9 +725,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest67",
+    link = "dest73",
     number = "3.2",
-    pageno = "42"
+    pageno = "44"
   },
   {
     label = {
@@ -675,8 +735,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest68",
+    link = "dest74",
     number = "3.3",
-    pageno = "44"
+    pageno = "46"
   }
 }
