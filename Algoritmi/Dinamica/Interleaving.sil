@@ -1,0 +1,287 @@
+\begin{sile}
+
+    \subsection{Definizione del problema}
+
+        Date le sequenze \math{X = \langle x_{1}, \unicodeellipsis, x_{m}
+        \rangle} e \math{Y = \langle y_{1}, \unicodeellipsis, y_{n} \rangle},
+        la sequenza \math{W = \langle w_{1}, \unicodeellipsis, w_{m + n}
+        \rangle} é detta \strong{interleaving} di \math{X} e di \math{Y}
+        se é possibile trovarle entrambe come sottosequenze disgiunte
+        all'interno di \math{W}.
+
+        Piú formalmente, \math{W} é interleaving di \math{X} e di \math{Y}
+        se esistono:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \{i_{1}, \unicodeellipsis, i_{m}\} \subseteq \{1,
+                \unicodeellipsis, m + n\} \thickspace \mi{con}
+                \thickspace i_{1} < i_{2} < \unicodeellipsis < i_{m}
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \{j_{1}, \unicodeellipsis, j_{n}\} \subseteq \{1,
+                \unicodeellipsis, m + n\} \thickspace \mi{con}
+                \thickspace j_{1} < j_{2} < \unicodeellipsis < j_{n}
+            \end{math}
+        \end{parbox}
+        \par
+
+        Tali per cui:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                 \table[columnalign = left]{
+                    \{i_{1}, \unicodeellipsis, i_{m}\} \cap
+                    \{j_{1}, \unicodeellipsis, j_{n}\} =
+                    \varnothing \\
+                    \{i_{1}, \unicodeellipsis, i_{m}\} \cup
+                    \{j_{1}, \unicodeellipsis, j_{n}\} =
+                    \{1, \unicodeellipsis, m + n\} \\
+                 }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    \forall k \in \{1, \unicodeellipsis, m\}:
+                    x_{k} = {w_{i}}_{k} \\
+                    \forall h \in \{1, \unicodeellipsis, n\}:
+                    y_{h} = {w_{j}}_{h} \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        Il \strong{problema interleaving} chiede di determinare se, per
+        una tripla di sequenze \math{W}, \math{X} e \math{Y}, la sequenza
+        \math{W} é interleaving di \math{X} e di \math{Y}.
+
+        \begin{example}
+            Date le sequenze \math{Y = \langle D, E, E, P \rangle} e
+            \math{X = \langle L, O, R, E \rangle}, un interleaving di
+            \math{X} e di \math{Y} é la sequenza \math{W = \langle D,
+            L, O, E, R, E, P, E \rangle}.
+        \end{example}
+
+    \subsection{Programmazione dinamica: equazione di ricorrenza}
+
+        Date tre sequenze \math{X}, \math{Y} e \math{W}, rispettivamente
+        di lunghezza \math{m}, \math{n} e \math{m + n}, siano \math{X_{i} =
+        X[1 : i]} e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i}
+        e \math{j} delle rispettive sequenze. La soluzione \math{S_{i, j}}
+        per l'\math{i, j}-esima istanza del problema corrisponde a determinare
+        se \math{W_{i + j}} é interleaving per le sottosequenze \math{X_{i}} e
+        \math{Y_{j}}. La soluzione per le intere sequenze \math{X} e \math{Y}
+        é la soluzione per l'istanza \math{X_{m}, Y_{n}}.
+
+        \smallskip
+        \begin{center}
+            \math{S_{i, j} = T} se \math{W_{i + j}} é interleaving di
+            \math{X_{i}} e \math{Y_{j}}, altrimenti \math{S_{i, j} = F}.
+        \end{center}
+        \bigskip
+
+        Approcciare il problema direttamente a partire dal determinare
+        casi base e passi ricorsivi é ostico; é piú semplice trattare
+        il problema in termini di prefissi delle tre stringhe. Si
+        consideri innanzitutto il caso in cui almeno una delle due
+        sequenze é la sequenza vuota:
+
+        \begin{itemize}
+            \begin{item}
+                Se \math{X_{i}} e \math{Y_{j}} sono entrambe la sequenza
+                vuota, allora l'unica sequenza \math{W_{i + j}} costruibile
+                a partire da queste é essa stessa la sequenza vuota, che per
+                definizione é interleaving di \math{X_{i}} e di \math{Y_{j}};
+            \end{item}
+            \begin{item}
+                Se \math{X_{i}} é la sequenza vuota ma \math{Y_{j}} non lo
+                é, occorre distinguere due situazioni diverse:
+
+                \begin{enumerate}
+                    \begin{item}
+                        Se \math{W[j] = Y[j]}, allora \math{W_{j}} é
+                        interleaving di \math{X_{i}} e \math{Y_{j}}
+                        soltanto se \math{W_{i + j - 1}} era interleaving
+                        di \math{X_{i}} e \math{Y_{j} - 1};
+                    \end{item}
+                    \begin{item}
+                        Se \math{W[j] \ne Y[j]}, allora \math{W_{j}} non puó
+                        essere interleaving di \math{X_{i}} e \math{Y_{j}}.
+                    \end{item}
+                \end{enumerate}
+            \end{item}
+            \begin{item}
+                Se \math{Y_{j}} é la sequenza vuota ma \math{X_{i}} non lo
+                é, occorre distinguere due situazioni diverse:
+
+                \begin{enumerate}
+                    \begin{item}
+                        Se \math{W[i] = X[i]}, allora \math{W_{i}} é
+                        interleaving di \math{X_{i}} e \math{Y_{j}}
+                        soltanto se \math{W_{i + j - 1}} era interleaving
+                        di \math{X_{i} - 1} e \math{Y_{j}};
+                    \end{item}
+                    \begin{item}
+                        Se \math{W[i] \ne X[i]}, allora \math{W_{i}} non puó
+                        essere interleaving di \math{X_{i}} e \math{Y_{j}}.
+                    \end{item}
+                \end{enumerate}
+            \end{item}
+        \end{itemize}
+
+        \bigskip
+
+        Riassumendo:
+
+        \begin[mode = display]{math}
+            S_{i, j} =
+            \{\table[columnalign = left left]{
+                T &            \mi{se} \thickspace i = 0 \wedge j = 0 \\
+                S_{i, j - 1} & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge W[j] =   Y[j] \\
+                F &            \mi{se} \thickspace i = 0 \wedge j > 0 \wedge W[j] \ne Y[j] \\
+                S_{i - 1, j} & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge W[i] =   X[i] \\
+                F &            \mi{se} \thickspace i > 0 \wedge j = 0 \wedge W[i] \ne X[i] \\
+            }
+        \end{math}
+
+        Si consideri invece il caso in cui entrambe le sequenze non sono la
+        sequenza vuota. In tal senso, si assuma di avere a disposizione tutte
+        le soluzioni nella forma \math{S_{a, b}}, con \math{1 \leq a < i} e
+        \math{1 \leq b < j}, e di voler calcolare \math{S_{i, j}}. Possono
+        presentarsi quattro possibilitá mutualmente esclusive:
+
+        \begin{itemize}
+            \begin{item}
+                \math{W[i + j] \ne X[i]} e \math{W[i + j] \ne Y[j]}. Se
+                non é possibile accodare né \math{X[i]} né \math{Y[j]} a
+                \math{W[i + j]} allora \math{W_{i + j}} non puó essere
+                interleaving di \math{X_{i}} e di \math{Y_{j}};
+            \end{item}
+            \begin{item}
+                \math{W[i + j] = X[i]} e \math{W[i + j] \ne Y[j]}. Siccome
+                l'elemento \math{W[i + j]} é uguale all'elemento \math{X[i]}
+                e diverso da \math{Y[j]}, allora l'unico carattere valido per
+                la posizione \math{i + j} in \math{W} é proprio \math{X[i]}.
+                Quindi \math{W_{i + j}} é interleaving di \math{X_{i}} e di
+                \math{Y_{j}} solo se \math{W_{i + j - 1}} era interleaving
+                di \math{X_{i - 1}} e \math{Y_{j}};
+            \end{item}
+            \begin{item}
+                \math{W[i + j] \ne X[i]} e \math{W[i + j] = Y[j]}. Siccome
+                l'elemento \math{W[i + j]} é uguale all'elemento \math{Y[j]}
+                e diverso da \math{X[i]}, allora l'unico carattere valido per
+                la posizione \math{i + j} in \math{W} é proprio \math{Y[j]}.
+                Quindi \math{W_{i + j}} é interleaving di \math{X_{i}} e di
+                \math{Y_{j}} solo se \math{W_{i + j - 1}} era interleaving
+                di \math{X_{i}} e \math{Y_{j - 1}};
+            \end{item}
+            \begin{item}
+                \math{W[i + j] = X[i]} e \math{W[i + j] = Y[j]}. In questo
+                caso, é possibile accodare sia \math{X[i]} che \math{Y[j]}
+                al simbolo in posizione \math{i + j} in \math{W}. Pertanto,
+                la soluzione all'\math{i, j}-esima istanza é data dall'OR
+                logico fra la \math{i, j - 1}-esima soluzione e la
+                \math{i - 1, j}-esima. 
+            \end{item}
+        \end{itemize}
+
+        \bigskip
+
+        Riassumendo:
+
+        \begin[mode = display]{math}
+            S_{i, j} =
+            \{\table[columnalign = left left]{
+                F & \mi{se} \thickspace W[i + j] \ne X[i] \wedge W[i + j] \ne Y[j] \\
+                S_{i - 1, j} & \mi{se} \thickspace W[i + j] = X[i] \wedge W[i + j] \ne Y[j] \\
+                S_{i, j - 1} & \mi{se} \thickspace W[i + j] \ne X[i] \wedge W[i + j] = Y[j] \\
+                S_{i - 1, j} \vee S_{i, j - 1} & \mi{se} \thickspace W[i + j] = X[i] \wedge W[i + j] = Y[j] \\
+            }
+        \end{math}
+
+        Alla luce di quanto analizzato finora, é possibile mettere a sistema
+        le differenti equazioni e definire un caso base ed un passo ricorsivo:
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                S_{i, j} =
+                \{\table[columnalign = left left]{
+                    T & \mi{se} \thickspace i = 0 \wedge j = 0 \\
+                    F & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge W[j] \ne Y[j] \\
+                    F & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge W[i] \ne X[i] \\
+                    F & \mi{se} \thickspace W[i + j] \ne X[i] \wedge W[i + j] \ne Y[j] \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                S_{i, j} =
+                \{\table[columnalign = left left]{
+                    S_{i, j - 1} & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge W[j] = Y[j] \\
+                    S_{i - 1, j} & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge W[i] = X[i] \\
+                    S_{i - 1, j} & \mi{se} \thickspace W[i + j] = X[i] \wedge W[i + j] \ne Y[j] \\
+                    S_{i, j - 1} & \mi{se} \thickspace W[i + j] \ne X[i] \wedge W[i + j] = Y[j] \\
+                    S_{i - 1, j} \vee S_{i, j - 1} & \mi{se} \thickspace W[i + j] = X[i] \wedge W[i + j] = Y[j] \\
+                }
+            \end{math}
+        \end{parbox}
+
+    \subsection{Programmazione dinamica: implementazione bottom-up}
+
+        L'algoritmo bottom-up viene costruito a partire dall'equazione
+        di ricorrenza sfruttando una tabella \math{c}. In ciascuna cella
+		\math{c[i, j]} viene riportato il valore della soluzione ottimale
+		per la \math{i, j}-esima istanza del problema, che viene utilizzata
+		per calcolare i valori ottimali per le istanze successive. L'algoritmo
+		riceve in input le due sequenze \math{X} e \math{Y} e restituisce in
+		output il valore \math{c[|X|, |Y|]}, che corrisponde alla soluzione 
+		del problema per l'istanza completa.
+
+        \begin{verbatim}
+		procedure INTERLEAVING(X, Y, W)
+		    c[0, 0] = T
+
+		    \bigskip
+		    for i = 1 to |X| do
+		        if (W[i] == X[i]) then
+		            c[i, 0] = c[i - 1, 0]
+		        else
+		            c[i, 0] = F
+
+		    \bigskip
+		    for j = 1 to |Y| do
+		        if (W[j] == Y[j]) then
+		            c[0, j] = c[0, j - 1]
+		        else
+		            c[0, j] = F
+
+		    \bigskip
+		    for i = 1 to |X| do
+		        for j = 1 to |Y| do
+		            if (W[i + j] != X[i] and W[i + j] != Y[j]) then
+		                c[i, j] = F
+		            else if (W[i + j] == X[i] and W[i + j] != Y[j]) then
+		                c[i, j] = c[i - 1, j]
+		            else if (W[i + j] != X[i] and W[i + j] == Y[j]) then
+		                c[i, j] = c[i, j - 1]
+		            else 
+		                c[i, j] = (c[i - 1, j] or c[i, j - 1])
+
+		    \bigskip
+		    return c[|X|, |Y|]
+        \end{verbatim}
+
+        É facile notare come il tempo di esecuzione dell'algoritmo
+		sia \math{O(nm)}, dove \math{m} e \math{n} sono le lunghezze
+		di rispettivamente la stringa \math{X} e la stringa \math{Y}.
+		I primi due cicli eseguono una operazione immediata rispettivamente
+		per \math{m} e per \math{n} volte, dopodiché si presenta un doppio
+		ciclo innestato: il ciclo esterno esegue il ciclo interno \math{m}
+		volte, mentre il ciclo interno esegue \math{n} volte un blocco di
+		decisione il cui tempo di esecuzione puó considerarsi immediato.
+		Si ha allora che, asintoticamente, \math{O(m) + O(n) + O(mn) = O(mn)}.
+
+\end{sile}

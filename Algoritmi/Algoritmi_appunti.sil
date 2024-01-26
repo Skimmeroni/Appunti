@@ -102,8 +102,8 @@
 		\include[src = Dinamica/Palindroma.sil]		
 		\section{Distanza di modifica}
 		\include[src = Dinamica/Distanza.sil]
-		%\section{Problema Interleaving}
-		%\include[src = Dinamica/Interleaving.sil]
+		\section{Problema Interleaving}
+		\include[src = Dinamica/Interleaving.sil]
 		\section{Cammino su un grafo}
 		\include[src = Dinamica/Grafo.sil]
 	\chapter{Tecnica greedy}

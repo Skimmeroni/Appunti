@@ -541,7 +541,7 @@ return {
   },
   {
     label = {
-      "Cammino su un grafo",
+      "Problema Interleaving",
       id = "stuff"
     },
     level = 2,
@@ -561,23 +561,13 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima",
+      "Programmazione dinamica: equazione di ricorrenza",
       id = "stuff"
     },
     level = 3,
     link = "dest57",
     number = "1.10.2",
-    pageno = "25"
-  },
-  {
-    label = {
-      "Programmazione dinamica: equazione di ricorrenza",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest58",
-    number = "1.10.3",
-    pageno = "25"
+    pageno = "23"
   },
   {
     label = {
@@ -585,9 +575,59 @@ return {
       id = "stuff"
     },
     level = 3,
+    link = "dest58",
+    number = "1.10.3",
+    pageno = "24"
+  },
+  {
+    label = {
+      "Cammino su un grafo",
+      id = "stuff"
+    },
+    level = 2,
     link = "dest59",
-    number = "1.10.4",
-    pageno = "26"
+    number = "1.11",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest60",
+    number = "1.11.1",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest61",
+    number = "1.11.2",
+    pageno = "27"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest62",
+    number = "1.11.3",
+    pageno = "27"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest63",
+    number = "1.11.4",
+    pageno = "29"
   },
   {
     label = {
@@ -595,9 +635,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest60",
-    number = "1.10.5",
-    pageno = "27"
+    link = "dest64",
+    number = "1.11.5",
+    pageno = "29"
   },
   {
     label = {
@@ -605,9 +645,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest61",
-    number = "1.10.6",
-    pageno = "28"
+    link = "dest65",
+    number = "1.11.6",
+    pageno = "30"
   },
   {
     label = {
@@ -615,9 +655,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest62",
+    link = "dest66",
     number = "2",
-    pageno = "29"
+    pageno = "31"
   },
   {
     label = {
@@ -625,9 +665,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest63",
+    link = "dest67",
     number = "2.1",
-    pageno = "29"
+    pageno = "31"
   },
   {
     label = {
@@ -635,9 +675,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest64",
+    link = "dest68",
     number = "2.2",
-    pageno = "29"
+    pageno = "31"
   },
   {
     label = {
@@ -645,9 +685,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest65",
+    link = "dest69",
     number = "2.3",
-    pageno = "31"
+    pageno = "33"
   },
   {
     label = {
@@ -655,9 +695,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest66",
+    link = "dest70",
     number = "2.4",
-    pageno = "34"
+    pageno = "36"
   },
   {
     label = {
@@ -665,9 +705,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest67",
+    link = "dest71",
     number = "2.5",
-    pageno = "35"
+    pageno = "37"
   },
   {
     label = {
@@ -675,9 +715,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest68",
+    link = "dest72",
     number = "2.5.1",
-    pageno = "38"
+    pageno = "40"
   },
   {
     label = {
@@ -685,9 +725,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest69",
+    link = "dest73",
     number = "2.5.2",
-    pageno = "39"
+    pageno = "41"
   },
   {
     label = {
@@ -695,9 +735,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest70",
+    link = "dest74",
     number = "2.6",
-    pageno = "40"
+    pageno = "42"
   },
   {
     label = {
@@ -705,9 +745,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest71",
+    link = "dest75",
     number = "3",
-    pageno = "43"
+    pageno = "45"
   },
   {
     label = {
@@ -715,9 +755,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest72",
+    link = "dest76",
     number = "3.1",
-    pageno = "43"
+    pageno = "45"
   },
   {
     label = {
@@ -725,9 +765,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest73",
+    link = "dest77",
     number = "3.2",
-    pageno = "44"
+    pageno = "46"
   },
   {
     label = {
@@ -735,8 +775,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest74",
+    link = "dest78",
     number = "3.3",
-    pageno = "46"
+    pageno = "48"
   }
 }
