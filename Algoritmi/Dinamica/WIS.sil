@@ -68,7 +68,7 @@
 		compatibili e cercando il peso massimo.
 
 		\begin{example}
-			\begin[width = 50%fw]{parbox}
+			\begin[width = 40%fw, valign = middle]{parbox}
 				\begin[cols = 25%fw 25%fw 25%fw 25%fw]{ptable}
 					\begin{row}
 						\cell{\strong{Attivitá}}
@@ -114,8 +114,8 @@
 					\end{row}
 				\end{ptable}
 			\end{parbox}
-			\begin[width = 50%fw]{parbox}
-				\img[src = Dinamica/wis.pdf, width = 75%fw]
+			\begin[width = 60%fw, strut = character, valign = middle]{parbox}
+				\img[src = Dinamica/wis.pdf, width = 100%fw]
 			\end{parbox}
 			\par
 
@@ -129,77 +129,87 @@
 
 		\begin{theorem}
 			\strong{Proprietá della sottostruttura ottima per il
-			problema Weighted Interval Scheduling}. Siano \math{S_{0},
-			S_{1}, \unicodeellipsis, S_{i - 1}} con \math{i > 0} gli
-			insiemi soluzione rispettivamente dell'istanza \math{X_{0},
-			X_{1}, \unicodeellipsis, X_{i - 1}} del problema Weighted
-			Interval Scheduling. Allora l'insieme \math{S_{i}}, soluzione
-			dell'istanza \math{X_{i}}, é data da:
-		
+			problema Weighted Interval Scheduling}. Sia data una
+			istanza \math{X_{i} = \{x_{1}, x_{2}, \unicodeellipsis,
+			x_{i}\}} del problema Weighted Interval Scheduling, con
+			\math{i \geq 1}. Assunto di avere a disposizione tutte
+			le soluzioni per le istanze precedenti ad \math{X_{i}},
+			ovvero \math{S_{1}, S_{2}, \unicodeellipsis, S_{i - 1}},
+			si ha:
+
 			\begin[mode = display]{math}
 				S_{i} =
 				\{\table[columnalign = left left]{
 					S_{\mi{p}(i)} \cup \{i\} & 
-					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} \geq \mi{Opt}(i - 1) \\
+					\mi{se} \thickspace i \in S_{i} \\
 					S_{i - 1} & 
-					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} < \mi{Opt}(i - 1) \\
+					\mi{se} \thickspace i \notin S_{i} \\
 				}
 			\end{math}
 
-			\strong{Dimostrazione}. Il caso base é banale e viene dimostrato
-			vero immediatamente. Il passo ricorsivo viene dimostrato caso per
-			caso:
+			\strong{Dimostrazione}. L'\math{i}-esimo elemento dell'istanza
+            \math{X_{i}} puó oppure non puó fare parte della \math{i}-esima
+            soluzione. Si distinguono allora due casi:
 
 			\begin{itemize}
 				\begin{item}
-					\math{i} é parte della \math{i}-esima soluzione,
-					ovvero \math{i \in S_{i}}. Si supponga per assurdo
-					che \math{S_{\mi{p}(i)} \cup \{i\}} non sia la
-					soluzione dell'\math{i}-esima istanza del problema,
-					ovvero \math{S_{i} \ne S_{\mi{p}(i)} \cup \{i\}}.
-					Deve allora aversi che \math{\mi{Opt}(i) > \mi{Opt}
-					(\mi{p}(i)) + v_{i}}. Essendo \math{i} membro di
-					\math{S_{i}}, é possibile esprimere \math{S_{i}}
-					come \math{S_{\delta} \cup \{i\}}, dove \math{S_{\delta}}
-					é un insieme i cui elementi non sono noti (ma che,
-					certamente, non contiene \math{i}). Si ha allora:
+					\math{i \notin S_{i}}. Si supponga per assurdo che
+					\math{S_{i - 1}} non sia la soluzione ottimale del
+					problema per l'istanza \math{X_{i}}. Se cosí é, allora
+					la soluzione ottimale per tale istanza (quale che sia)
+					deve necessariamente avere un valore maggiore di quello
+					della soluzione ottimale \math{S_{i - 1}}, ovvero deve
+					valere \math{\mi{Opt}(i) > \mi{Opt}(i - 1)}.
 
-					\begin[mode = display]{math}
-						V(S_{\delta} \cup \{i\}) >
-						V(S_{\mi{p}(i)} \cup \{i\})
-						\thickspace \Rightarrow \thickspace
-						\mi{Opt}(\delta) + v_{i} > \mi{Opt}(\mi{p}(i)) + v_{i}
-						\thickspace \Rightarrow \thickspace
-						\mi{Opt}(\delta) > \mi{Opt}(\mi{p}(i))
-					\end{math}
-
-					Avendosi \math{\mi{p}(i) < i}, si ha che \math{S_{\delta}
-					\subseteq \{1, \unicodeellipsis, \mi{p}(i)\}}. Essendo
-					peró \math{\mi{Opt} (\delta) > \mi{Opt}(\mi{p}(i))}, si
-					ha che \math{S_{\delta}} é un miglior candidato di
-					\math{S_{\mi{p}(i)}} ad essere la soluzione dell'istanza
-					\math{X_{\mi{p}(i)}} del problema, che é in contraddizione
-					con l'ipotesi di partenza. Pertanto, se \math{i} é parte
-					della \math{i}-esima soluzione, deve necessariamente valere
-					che \math{S_{i} = S_{\mi{p}(i)} \cup \{i\}}.
+                    Se, come da ipotesi, \math{i} non appartiene ad
+                    \math{S_{i}}, deve aversi \math{S_{i} \subseteq
+                    X_{i - 1}}. Ma allora \math{S_{i}} é una potenziale
+                    soluzione per la \math{i - 1}-esima istanza del problema.
+                    Ricordando peró che \math{\mi{Opt}(i) > \mi{Opt}(i - 1)},
+                    questo equivale a dire che \math{S_{i}} é una soluzione
+                    migliore per la \math{i - 1}-esima istanza del problema
+                    di quanto lo sia \math{S_{i - 1}}, e questo é in
+                    contraddizione con l'ipotesi che la soluzione ottimale
+                    per l'istanza \math{X_{i - 1}} sia \math{S_{i - 1}}.
+                    Occorre allora assumere che \math{S_{i - 1}} sia
+                    l'effettiva soluzione ottimale per la \math{i}-esima
+                    istanza del problema quando \math{i \notin S_{i}}.
 				\end{item}
 				\begin{item}
-					\math{i} non é parte della \math{i}-esima soluzione,
-					ovvero \math{i \notin S_{i}}. Si supponga per
-					assurdo che \math{S_{i - 1}} non sia la soluzione
-					dell'\math{i}-esima istanza del problema, ovvero
-					\math{S_{i} \ne S_{i - 1}}. Deve allora aversi che
-					\math{\mi{Opt}(i) > \mi{Opt}(i - 1)}. Per definizione
-					\math{S_{i} \subseteq \{1, \unicodeellipsis, i - 1, i\}},
-					ma dato che per ipotesi \math{i \notin S_{i}} si ha
-					\math{S_{i} \subseteq \{1, \unicodeellipsis, i - 1\}}.
-					Questo, unito al fatto che \math{\mi{Opt}(i) > \mi{Opt}(i -
-					1)}, comporta che \math{S_{i}} sia un miglior candidato
-					di \math{S_{i - 1}} ad essere la soluzione dell'istanza
-					\math{X_{i - 1}} del problema, che é in contraddizione
-					con l'ipotesi di partenza. Pertanto, se \math{i} non é
-					parte della \math{i}-esima soluzione, deve necessariamente
-					valere che \math{S_{i} = S_{i - 1}}.
+					\math{i \in S_{i}}. Si supponga per assurdo che
+                    \math{S_{\mi{p}(i)} \cup \{i\}} non sia la soluzione
+                    ottimale al problema per l'istanza \math{X_{i}}. Se
+                    cosí é, allora la soluzione ottimale per tale istanza
+                    (quale che sia) deve avere un valore maggiore di quello
+                    della soluzione ottimale \math{S_{\mi{p}(i)} \cup \{i\}},
+                    ovvero deve valere \math{\mi{Opt}(i) > \mi{Opt}(\mi{p}(i))
+                    + v_{i}}.
+
+					Dato che, per ipotesi, \math{i} appartiene ad
+					\math{S_{i}}, é possibile scomporre tale soluzione
+					in \math{S_{h} \cup \{i\}}, con \math{S_{h} \ne
+					S_{\mi{p}(i)}}, cosí come é possibile scomporre
+					\math{\mi{Opt}(i)} in \math{\mi{Opt}(h) + v_{i}}.
+					Essendo peró \math{\mi{Opt}(i) > \mi{Opt}(\mi{p}(i))
+					+ v_{i}}, deve valere \math{\mi{Opt}(h) + v_{i} >
+					\mi{Opt}(\mi{p}(i)) + v_{i}}, cioé \math{\mi{Opt}(h)
+                    > \mi{Opt}(\mi{p}(i))}.
+
+					Dovendo essere \math{S_{h} \cup \{x_{i}\}} un
+					insieme costituito da elementi mutualmente compatibili,
+					deve necessariamente valere \math{S_{h} \subseteq
+					X_{\mi{p}(i)}}. Ma allora \math{S_{h}} é una potenziale
+					soluzione per la \math{\mi{p}(i)}-esima istanza del
+					problema. Ricordando peró che \math{\mi{Opt}(h) >
+					\mi{Opt}(\mi{p}(i))}, questo equivale a dire che
+					\math{S_{h}} é una soluzione migliore per la
+					\math{\mi{p}(i)}-esima istanza del problema di quanto
+					lo sia \math{S_{\mi{p}(i)}}, e questo é in contraddizione
+					con l'ipotesi che la soluzione ottimale per l'istanza
+					\math{X_{\mi{p}(i)}} sia \math{S_{\mi{p}(i)}}. Occorre
+					allora assumere che \math{S_{\mi{p}(i)} \cup \{i\}} sia
+					l'effettiva soluzione ottimale per la \math{i}-esima
+					istanza del problema quando \math{x_{i} \notin S_{i}}.
 				\end{item}
 			\end{itemize}
 		\end{theorem}

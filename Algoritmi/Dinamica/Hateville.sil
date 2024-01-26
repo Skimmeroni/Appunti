@@ -110,7 +110,7 @@
                     Dato che, per ipotesi, \math{x_{i}} appartiene ad
                     \math{S_{i}}, é possibile scomporre tale soluzione
                     in \math{S_{h} \cup \{x_{i}\}}, con \math{S_{h}
-                    \ne S_{i}}, cosí come é possibile scomporre
+                    \ne S_{i - 2}}, cosí come é possibile scomporre
                     \math{\mi{Opt}(i)} in \math{\mi{Opt}(h) + d_{i}}.
                     Essendo peró \math{\mi{Opt}(i) > \mi{Opt}(i - 2) +
                     d_{i}}, deve valere \math{\mi{Opt}(h) + d_{i} >

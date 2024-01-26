@@ -218,10 +218,10 @@
 		\end{verbatim}
 
 		É facile notare come il tempo di esecuzione dell'algoritmo
-		sia \math{O(nm)}, dove \math{n} e \math{m} sono le lunghezze
+		sia \math{O(nm)}, dove \math{m} e \math{n} sono le lunghezze
 		di rispettivamente la stringa \math{X} e la stringa \math{Y}.
 		I primi due cicli eseguono una operazione immediata rispettivamente
-		per \math{n} e per \math{m} volte, dopodiché si presenta un doppio
+		per \math{m} e per \math{n} volte, dopodiché si presenta un doppio
 		ciclo innestato: il ciclo esterno esegue il ciclo interno \math{m}
 		volte, mentre il ciclo interno esegue \math{n} volte un blocco di
 		decisione il cui tempo di esecuzione puó considerarsi immediato.
