@@ -109,8 +109,8 @@
 	\chapter{Tecnica greedy}
 		\section{Introduzione alla tecnica greedy}
 		\include[src = Greedy/Introduzione.sil]
-		%\section{Weighted interval scheduling (rivisitato)}
-		%\include[src = Greedy/WIS.sil]
+		\section{Interval scheduling}
+		\include[src = Greedy/IS.sil]
 		%\section{Zaino frazionario}
 		%\include[src = Greedy/Zaino.sil]
 		\section{Matroidi e sistemi di indipendenza}

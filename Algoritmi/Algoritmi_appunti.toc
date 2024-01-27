@@ -671,7 +671,7 @@ return {
   },
   {
     label = {
-      "Matroidi e sistemi di indipendenza",
+      "Interval scheduling",
       id = "stuff"
     },
     level = 2,
@@ -681,27 +681,27 @@ return {
   },
   {
     label = {
-      "Algoritmo Greedy Standard",
+      "Matroidi e sistemi di indipendenza",
       id = "stuff"
     },
     level = 2,
     link = "dest69",
     number = "2.3",
-    pageno = "33"
+    pageno = "32"
   },
   {
     label = {
-      "Strutture dati per insiemi disgiunti",
+      "Algoritmo Greedy Standard",
       id = "stuff"
     },
     level = 2,
     link = "dest70",
     number = "2.4",
-    pageno = "36"
+    pageno = "35"
   },
   {
     label = {
-      "Minimum Spanning Tree",
+      "Strutture dati per insiemi disgiunti",
       id = "stuff"
     },
     level = 2,
@@ -711,13 +711,23 @@ return {
   },
   {
     label = {
+      "Minimum Spanning Tree",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest72",
+    number = "2.6",
+    pageno = "38"
+  },
+  {
+    label = {
       "Algoritmo di Kruskal",
       id = "stuff"
     },
     level = 3,
-    link = "dest72",
-    number = "2.5.1",
-    pageno = "40"
+    link = "dest73",
+    number = "2.6.1",
+    pageno = "41"
   },
   {
     label = {
@@ -725,9 +735,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest73",
-    number = "2.5.2",
-    pageno = "41"
+    link = "dest74",
+    number = "2.6.2",
+    pageno = "42"
   },
   {
     label = {
@@ -735,9 +745,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest74",
-    number = "2.6",
-    pageno = "42"
+    link = "dest75",
+    number = "2.7",
+    pageno = "43"
   },
   {
     label = {
@@ -745,9 +755,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest75",
+    link = "dest76",
     number = "3",
-    pageno = "45"
+    pageno = "47"
   },
   {
     label = {
@@ -755,9 +765,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest76",
+    link = "dest77",
     number = "3.1",
-    pageno = "45"
+    pageno = "47"
   },
   {
     label = {
@@ -765,9 +775,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest77",
+    link = "dest78",
     number = "3.2",
-    pageno = "46"
+    pageno = "48"
   },
   {
     label = {
@@ -775,8 +785,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest78",
+    link = "dest79",
     number = "3.3",
-    pageno = "48"
+    pageno = "50"
   }
 }
