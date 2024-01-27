@@ -69,7 +69,7 @@
 
 		\begin{example}
 			\begin[width = 40%fw, valign = middle]{parbox}
-				\begin[cols = 25%fw 25%fw 25%fw 25%fw]{ptable}
+				\begin[cols = 22.5%fw 22.5%fw 22.5%fw 17.5%fw]{ptable}
 					\begin{row}
 						\cell{\strong{Attivitá}}
 						\cell{\strong{Tempo} \par \strong{iniziale}}
@@ -115,7 +115,7 @@
 				\end{ptable}
 			\end{parbox}
 			\begin[width = 60%fw, strut = character, valign = middle]{parbox}
-				\img[src = Dinamica/wis.pdf, width = 100%fw]
+				\img[src = Dinamica/wis.pdf, width = 87.5%fw]
 			\end{parbox}
 			\par
 
@@ -209,7 +209,7 @@
 					\math{X_{\mi{p}(i)}} sia \math{S_{\mi{p}(i)}}. Occorre
 					allora assumere che \math{S_{\mi{p}(i)} \cup \{i\}} sia
 					l'effettiva soluzione ottimale per la \math{i}-esima
-					istanza del problema quando \math{x_{i} \notin S_{i}}.
+					istanza del problema quando \math{i \in S_{i}}.
 				\end{item}
 			\end{itemize}
 		\end{theorem}

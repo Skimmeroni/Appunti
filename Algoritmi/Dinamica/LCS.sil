@@ -200,14 +200,14 @@
 
 		\begin{verbatim}
 			procedure LCS(X, Y)
-			    for i = 0 to m do
+			    for i = 0 to |X| do
 			        c[i, 0] = 0
-			    for j = 0 to n do
+			    for j = 0 to |Y| do
 			        c[0, j] = 0
 
 			    \bigskip
-			    for i = 1 to m do
-			        for j = 1 to n do
+			    for i = 1 to |X| do
+			        for j = 1 to |Y| do
 			            if X[i] == Y[j] then
 			                c[i, j] = 1 + c[i - 1, j - 1]
 			            else
@@ -318,14 +318,14 @@
 		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
 				procedure LCS(X, Y)
-				    for i = 0 to m do
+				    for i = 0 to |X| do
 				        c[i, 0] = 0
-				    for j = 0 to n do
+				    for j = 0 to |Y| do
 				        c[0, j] = 0
 
 				    \bigskip
-				    for i = 1 to m do
-				        for j = 1 to n do
+				    for i = 1 to |X| do
+				        for j = 1 to |Y| do
 				            if X[i] == Y[j] then
 				                c[i, j] = 1 + c[i - 1, j - 1]
 				                b[i, j] = "\unichar{U+2196}"
