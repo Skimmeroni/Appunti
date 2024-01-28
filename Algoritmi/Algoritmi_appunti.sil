@@ -111,8 +111,8 @@
 		\include[src = Greedy/Introduzione.sil]
 		\section{Interval scheduling}
 		\include[src = Greedy/IS.sil]
-		%\section{Zaino frazionario}
-		%\include[src = Greedy/Zaino.sil]
+		\section{Zaino frazionario}
+		\include[src = Greedy/Zaino.sil]
 		\section{Matroidi e sistemi di indipendenza}
 		\include[src = Greedy/Matroidi.sil]
 		\section{Algoritmo Greedy Standard}

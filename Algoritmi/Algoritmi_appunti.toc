@@ -681,7 +681,7 @@ return {
   },
   {
     label = {
-      "Matroidi e sistemi di indipendenza",
+      "Zaino frazionario",
       id = "stuff"
     },
     level = 2,
@@ -691,27 +691,27 @@ return {
   },
   {
     label = {
-      "Algoritmo Greedy Standard",
+      "Matroidi e sistemi di indipendenza",
       id = "stuff"
     },
     level = 2,
     link = "dest70",
     number = "2.4",
-    pageno = "35"
+    pageno = "34"
   },
   {
     label = {
-      "Strutture dati per insiemi disgiunti",
+      "Algoritmo Greedy Standard",
       id = "stuff"
     },
     level = 2,
     link = "dest71",
     number = "2.5",
-    pageno = "37"
+    pageno = "36"
   },
   {
     label = {
-      "Minimum Spanning Tree",
+      "Strutture dati per insiemi disgiunti",
       id = "stuff"
     },
     level = 2,
@@ -721,13 +721,23 @@ return {
   },
   {
     label = {
+      "Minimum Spanning Tree",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest73",
+    number = "2.7",
+    pageno = "39"
+  },
+  {
+    label = {
       "Algoritmo di Kruskal",
       id = "stuff"
     },
     level = 3,
-    link = "dest73",
-    number = "2.6.1",
-    pageno = "41"
+    link = "dest74",
+    number = "2.7.1",
+    pageno = "42"
   },
   {
     label = {
@@ -735,9 +745,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest74",
-    number = "2.6.2",
-    pageno = "42"
+    link = "dest75",
+    number = "2.7.2",
+    pageno = "43"
   },
   {
     label = {
@@ -745,9 +755,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest75",
-    number = "2.7",
-    pageno = "43"
+    link = "dest76",
+    number = "2.8",
+    pageno = "44"
   },
   {
     label = {
@@ -755,7 +765,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest76",
+    link = "dest77",
     number = "3",
     pageno = "47"
   },
@@ -765,7 +775,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest77",
+    link = "dest78",
     number = "3.1",
     pageno = "47"
   },
@@ -775,7 +785,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest78",
+    link = "dest79",
     number = "3.2",
     pageno = "48"
   },
@@ -785,7 +795,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest79",
+    link = "dest80",
     number = "3.3",
     pageno = "50"
   }

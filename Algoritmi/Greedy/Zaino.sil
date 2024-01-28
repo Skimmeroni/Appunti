@@ -1,0 +1,142 @@
+\begin{sile}
+
+    Siano dati \math{n} oggetti \math{X = \langle 1, 2, \unicodeellipsis,
+    n \rangle}, un valore intero \math{C} e due funzioni \math{V} e
+    \math{W}. Tali funzioni associano a ciascun oggetto un numero
+    intero, rispettivamente un valore ed un peso. La definizione di 
+    peso e di valore viene poi generalizzata ad un sottoinsieme di
+    oggetti come la somma dei pesi e dei valori di ciascun oggetto
+    di cui é costituito.
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \table{
+                V : X \mapsto N \\
+                V(i) = v_{i} \\
+            }
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \table{
+                W : X \mapsto N \\
+                W(i) = w_{i} \\
+            }
+        \end{math}
+    \end{parbox}
+    \par
+
+    Il \strong{problema dello Zaino Frazionario} chiede di trovare una 
+    sequenza di quantitá di ciascun oggetto che permette di massimizzare
+    il valore complessivo di tale sequenza ed al contempo essere inferiore
+    alla capacitá dello zaino.
+
+    Piú formalmente, indicando con \math{P = \langle p_{1}, p_{2},
+    \unicodeellipsis, p_{n} \rangle} con \math{p_{i} \in [0, 1]}
+    per ogni \math{1 \leq i \leq n} la sequenza di percentuali con
+    cui ciascun \math{i}-esimo oggetto viene aggiunto ad una certa
+    soluzione, il problema chiede di trovare la sequenza \math{P*}
+    tale per cui:
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \sum_{i = 1}^{n} {p*}_{i} w_{i} \leq C
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            P* = \{P | \mi{max} {\{\sum_{i = 1}^{n} p_{i} v_{i}\}}\} 
+        \end{math}
+    \end{parbox}
+    \par    
+
+    \begin{example}
+        Sia dato l'insieme di tre oggetti \math{X = \langle (10, 20), (9, 8),
+        (8, 5) \rangle} ed una capacitá \math{C = 20}. Una soluzione ottimale
+        al problema dello Zaino Frazionario é data dalla sequenza \math{P* =
+        \langle 0.35, 1, 1\rangle}, avente valore complessivo \math{V(P*)
+        = 0.35 * 10 + 1 * 9 + 1 * 8 = 20.5} e peso complessivo \math{W(P*)
+        = 0.35 * 20 + 1 * 8 + 1 * 5 = 20}.
+    \end{example}
+
+    Il problema puó essere risolto applicando la tecnica greedy.
+    Innanzitutto, dato un certo insieme di oggetti \math{X =
+    \langle 1, 2, \unicodeellipsis, n \rangle}, per ciascun 
+    \math{i}-esimo oggetto sia \math{s_{i} = v_{i} / w_{i}} il
+    \em{valore specifico} \footnote{Il nome "valore specifico"
+    é dato in analogia con il concetto di \strong{peso specifico},
+    ovvero il peso di un metro cubo di una certa sostanza.} di
+    tale oggetto, ovvero il valore che ha una unitá di peso
+    dell'\math{i}-esimo oggetto.
+
+    Si ordini l'insieme \math{X} in ordine non crescente rispetto ai
+    valori specifici degli oggetti di cui é costituito. Ad ogni iterazione
+    dell'algoritmo greedy viene selezionata la quantitá dell'\math{i}-esimo
+    oggetto che viene scelta (non superiore ad 1) e la capacitá dello zaino
+    viene ridotta di tanto quanto é il peso di tale quantitá. L'algoritmo
+    prevede di prendere, per ciascun oggetto, la massima quantitá compatibile
+    con la capacitá residua dello zaino, fermandosi quando é stata raggiunta
+    la capacitá massima.
+
+    \begin{verbatim}
+        procedure FRACTIONAL-KNAPSACK(n, V, W, C)
+         1    for i = 1 to n do
+         2        S[i] = V[i] / W[i]
+
+              \bigskip
+         3    S = S ordinato per valore specifico non crescente
+         4    i = 1
+         5    c = C
+
+              \bigskip
+         6    while i \unichar{U+2264} n and c > 0 do
+         7        P[i] = min\{c / W[i], 1\}
+         8        c = c - P[i] * W[i]
+         9        i = i + 1
+
+              \bigskip
+        10    return P
+    \end{verbatim}
+
+    Tale algoritmo é effettivamente un algoritmo greedy, perché la scelta
+	localmente ottima viene considerata anche globalmente ottima. Tuttavia,
+	affinché questo possa considerarsi corretto, occorre dimostrare la
+	validitá della proprietá della scelta greedy, ovvero che la percentuale
+	di oggetto che viene scelta per ciascuna iterazione (soluzione ottimale
+	locale) é effettivamente membro della soluzione ottimale globale. A dire
+	il vero, dato che ad ogni iterazione viene sempre considerato il primo
+	oggetto e la capacitá dello zaino diminuisce sempre di una quantitá
+	relativa al peso di quest'ultimo, per dimostrare la validitá della
+	proprietá della scelta greedy é sufficiente dimostrare che la massima 
+	quantitá compatibile con l'intera capacitá \math{C} del primo oggetto,
+	quello che ha il valore specifico maggiore di tutti, é sempre parte
+	della soluzione ottima.
+
+	\begin{theorem}
+		\strong{Proprietá della scelta greedy per il problema dello Zaino
+		Frazionario}. Sia dato un insieme di oggetti \math{X = \langle 1,
+		2, \unicodeellipsis, n \rangle} ordinati per valore specifico non
+		crescente ed una capacitá \math{C}. La massima percentuale del
+		primo oggetto compatibile \math{C} che puó essere aggiunta alla
+		soluzione ottima é sempre parte di quest'ultima.
+
+        \bigskip
+        \strong{Dimostrazione}. La percentuale che viene scelta per il
+        primo oggetto é \math{p_{1} = \mi{min} (C / w_{1}, 1)}, la massima
+        possibile. Sia \math{P} una soluzione ottima: dato che l'algoritmo 
+        sceglie sempre la massima percentuale possibile, la percentuale 
+        \math{{p'}_{1}} che si trova in \math{P} puó essere esclusivamente
+        uguale oppure inferiore a \math{p_{1}}.
+
+        Se \math{{p'}_{1}} e \math{p_{1}} sono uguali, la dimostrazione
+        é terminata. Se \math{{p'}_{1}} é inferiore a \math{p_{1}}, é
+        possibile costruire una nuova soluzione in cui la percentuale 
+        del primo oggetto é uguale a \math{p_{1}}. La proporzione di uno
+        o piú oggetti aggiunti successivamente sará ridotta di conseguenza.
+        Dato che il valore specifico del primo oggetto é superiore o uguale
+        a quello dei successivi non é possibile ottenere una soluzione avente
+        valore inferiore. Si conclude quindi che \math{p_{1}} é sempre parte
+        di una soluzione ottima.
+    \end{theorem}
+
+\end{sile}
