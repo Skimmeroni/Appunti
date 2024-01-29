@@ -46,13 +46,14 @@
 		sequenza di \math{n} numeri interi e sia \math{Y_{j}} un suo
 		prefisso di lunghezza \math{j}, con \math{1 \leq j \leq n}.
 
-		Sia \math{Z^{i,j}} una LICS di \math{X_{i}} e di \math{Y_{j}} tale
-		che termini con \math{x_{i} = y_{j}}. Sia infine \math{W_{i,j}}
-		l'insieme di tutte le sottosequenze crescenti comuni (non
-		necessariamente le piú lunghe) di \math{X_{h}} e di \math{Y_{k}}
-		che finiscono con \math{x_{h} = y_{k}} e a cui é possibile
-		concatenare \math{x_{i}} (o \math{y_{j}}) ottenendo ancora una
-		sequenza crescente comune, ovvero:
+		Sia \math{Z^{i,j}} una LICS di \math{X_{i}} e di
+		\math{Y_{j}} tale che termini con \math{x_{i} = y_{j}}.
+		Sia infine \math{W_{i,j}} l'insieme di tutte le possibili
+		sottosequenze crescenti comuni (non necessariamente le piú
+		lunghe) di \math{X_{h}} e di \math{Y_{k}} che finiscono
+		con \math{x_{h} = y_{k}} e a cui é possibile concatenare
+		\math{x_{i}} (o \math{y_{j}}) ottenendo ancora una sequenza
+		crescente comune, ovvero:
 
 		\smallskip
             \begin{center}
@@ -65,36 +66,39 @@
             \end{center}
             \bigskip
 
-            Allora vale che \math{Z^{i, j} = Z* | x_{i} = Z* | y_{j}} , con
-	    \math{Z* \in W_{i, j}} e \math{|Z*| = \mi{max}_{W \in W_{i, j}}
-	    \{|W|\}}.
+            Allora la LICS \math{Z^{i, j}} é data dalla concatenazione
+            fra l'elemento di \math{W_{i, j}} avente la maggior cardinalitá
+            con il carattere \math{x_{i}} o con il carattere \math{y_{j}},
+            ovvero \math{Z^{i, j} = Z* | x_{i} = Z* | y_{j}} con \math{Z*
+            \in W_{i, j}} e \math{\abs{Z*} = \mi{max}_{W \in W_{i, j}}
+            \{\abs{W}\}}.
 
             \bigskip
             \strong{Dimostrazione}. Si supponga per assurdo che
-            \math{Z^{i} = Z* | x_{i} = Z* | y_{j}} non sia la
-            soluzione per l'\math{i,j}-esimo problema. Questa
-            deve allora essere \math{Z^{i} = Z' | x_{i} = Z' | y_{j}},
-            dove \math{Z'} é una sottosequenza crescente comune distinta
-            da \math{Z*}. Naturalmente deve aversi \math{|Z'| > |Z*|},
-            perché se \math{Z^{i}} si ottiene a partire da \math{Z'} e
-            non da \math{Z*} e \math{Z^{i}} é la sottosequenza crescente
-            comune piú lunga, allora \math{Z'} deve essere piú lunga di
-            \math{Z*}.
+            \math{Z^{i, j} = Z* | x_{i} = Z* | y_{j}} non sia la
+            soluzione ottimale per l'\math{i, j}-esima istanza
+            del problema. Questa deve allora essere \math{Z^{i, j}
+            = Z' | x_{i} = Z' | y_{j}}, dove \math{Z'} é una
+            sottosequenza crescente comune avente cardinalitá
+            maggiore di \math{Z*}.
 
-            Sia \math{z'} l'elemento in coda a \math{Z'}. É chiaro che
-            \math{z' < x_{i} = y_{j}}, perché se é stato possibile accodare
-            \math{x_{i} = y_{j}} a \math{Z'} ottenendo ancora una sequenza
-            crescente allora \math{z'} deve venire prima di \math{x_{i} =
-            y_{j}}.
-
-            Siano poi \math{r < i} e \math{s < j} la piú grande coppia di
-	    indici tali per cui \math{x_{r} = y_{s} = z'}. Di conseguenza,
-            per come é stato definito \math{W_{i}}, si ottiene che \math{Z'
-	    \in W_{i, j}}. Infatti, \math{Z'} é una sottosequenza crescente
-	    comune di \math{X_{r}} e di \math{Y_{s}}, la quale termina con
-            \math{x_{r} < x_{i} = y_{j}}. Ció porta peró ad una contraddizione: 
-            infatti si ha \math{|Z'| > |Z*|} ma al contempo \math{|Z*| =
-            \mi{max}_{W \in W_{i, j}} \{|W|\}}.
+            Sia \math{z'} l'elemento in coda a \math{Z'}. Essendo
+            \math{Z^{i, j}} costruito accodando \math{x_{i} = y_{j}}
+            a \math{Z'} ottenendo ancora una sequenza crescente,
+            deve aversi \math{z' < x_{i} = y_{j}}. Siano poi
+            \math{r < i} e \math{s < j} la piú grande coppia di
+            indici tali per cui \math{x_{r} = y_{s} = z'}. Di
+            conseguenza, per come é stato definito \math{W_{i}},
+            si ottiene che \math{Z' \in W_{i, j}}. Infatti, \math{Z'}
+            é una sottosequenza crescente comune di \math{X_{r}} e di
+            \math{Y_{s}}, la quale termina con \math{x_{r} < x_{i} =
+            y_{j}}. Ció porta peró ad una contraddizione: infatti si
+            ha \math{\abs{Z*} = \mi{max}_{W \in W_{i, j}} \{\abs{W}\}},
+            ma al contempo \math{Z'} é membro di \math{W_{i, j}} ed é
+            stato dimostrato che \math{\abs{Z'} > \abs{Z*}}. Occorre
+            allora assumere che \math{Z^{i, j} = Z* | x_{i} = Z* | y_{j}}
+            sia effettivamente la soluzione ottimale alla \math{i}-esima
+            istanza del problema.
         \end{theorem}
 
         \subsection{Programmazione dinamica: equazione di ricorrenza}

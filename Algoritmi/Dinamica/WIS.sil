@@ -342,14 +342,14 @@
 
 		\begin{verbatim}
 			procedure WIS(X)
-			    c[0] = 0
+			   c[0] = 0
 
-			    \bigskip
-			    for i = 1 to |X| do
-			        c[i] = max(c[i - 1], c[p[i]] + X[i])
+			   \bigskip
+			   for i = 1 to |X| do
+			       c[i] = max(c[i - 1], c[p[i]] + X[i])
 
-			    \bigskip
-			    return c
+			   \bigskip
+			   return c
 		\end{verbatim}
 
 		É facile notare come il tempo di esecuzione dell'algoritmo sia
@@ -361,51 +361,74 @@
 
 	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
-		Una volta calcolato il valore dell'insieme ottimale di intervalli,
-		é possibile individuarne uno ripercorrendo la tabella a ritroso. In
-		particolare, questo viene fatto introducendo una nuova procedura,
-		\tt{PRINT-WIS}, che ha in input la tabella \math{c}, il vettore
-		\math{X} ed un indice \math{i}, mentre in output ha uno dei possibili
-		insiemi di attivitá mutualmente compatibili aventi massimo valore
-		totale. La prima chiamata alla procedura ha \math{\abs{X}} come
-		valore per \math{i}, in modo da ottenere la soluzione per l'istanza
-		\math{\abs{X}}.
+		Un primo modo per ricavare una soluzione ottimale consiste nel
+		calcolarla direttamente durante il calcolo del valore ottimale,
+		modificando la procedura precedente introducendo l'insieme soluzione
+		\math{S}. Il tempo di esecuzione dell'algorimo rimane invariato.
 
-		La procedura ripercorre il vettore \math{c} dalla cella \math{i}
-		verso la cella 0; ogni volta che si ha \math{c[p[i]] + X[i] \geq
-		c[i - 1]}, si ha che l'\math{i}-esima attivitá é un elemento della
-		soluzione.
+		\begin{verbatim}
+		    procedure WIS(X)
+		        c[0] = 0
+		        S = \unichar{U+2205}
 
-		\begin[width = 50%fw]{parbox}
-			\begin{verbatim}
-				procedure WIS(X)
-				    c[0] = 0
+		        \bigskip
+		        for i = 1 to |X| do
+		            if (c[i - 1] > c[p[i]] + X[i]) then
+		                c[i] = c[i - 1]
+		                S[i] = S[i - 1]
+		            else
+		                c[i] = c[p[i]] + X[i]
+		                S[i] = S[p[i]] \unichar{U+222A} \{i\}
 
-				    \bigskip
-				    for i = 1 to |X| do
-				        c[i] = max(c[i - 1], c[p[i]] + X[i])
+		        \bigskip
+		        return (c[|X|], S[|X|])
+		\end{verbatim}
 
-				    \bigskip
-				    return c
-			\end{verbatim}
-		\end{parbox}
-		\begin[width = 50%fw]{parbox}
-			\begin{verbatim}
-				procedure PRINT-WIS(c, X, i)
-				    if i \unichar{U+2260} 0
-				        if c[p[i]] + X[i] \unichar{U+2265} c[i - 1]
-				            PRINT-WIS(c, X, p[i])
-				            print i
-				        else
-				            PRINT-WIS(c, X, i - 1)
-				    else
-				        return
-			\end{verbatim}
-		\end{parbox}
-		\par
+		%Una volta calcolato il valore dell'insieme ottimale di intervalli,
+		%é possibile individuarne uno ripercorrendo la tabella a ritroso. In
+		%particolare, questo viene fatto introducendo una nuova procedura,
+		%\tt{PRINT-WIS}, che ha in input la tabella \math{c}, il vettore
+		%\math{X} ed un indice \math{i}, mentre in output ha uno dei possibili
+		%insiemi di attivitá mutualmente compatibili aventi massimo valore
+		%totale. La prima chiamata alla procedura ha \math{\abs{X}} come
+		%valore per \math{i}, in modo da ottenere la soluzione per l'istanza
+		%\math{\abs{X}}.
 
-		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione é 
-		comunque proporzionale alla lunghezza del vettore \math{c}, perché
-		la ricorsione é una tail-recursion.
+		%La procedura ripercorre il vettore \math{c} dalla cella \math{i}
+		%verso la cella 0; ogni volta che si ha \math{c[p[i]] + X[i] \geq
+		%c[i - 1]}, si ha che l'\math{i}-esima attivitá é un elemento della
+		%soluzione.
+
+		%\begin[width = 50%fw]{parbox}
+		%	\begin{verbatim}
+		%		procedure WIS(X)
+		%		   c[0] = 0
+
+		%		   \bigskip
+		%		   for i = 1 to |X| do
+		%		       c[i] = max(c[i - 1], c[p[i]] + X[i])
+
+		%		   \bigskip
+		%		   return c
+		%	\end{verbatim}
+		%\end{parbox}
+		%\begin[width = 50%fw]{parbox}
+		%	\begin{verbatim}
+		%		procedure PRINT-WIS(c, X, i)
+		%		   if i \unichar{U+2260} 0
+		%		       if c[p[i]] + X[i] \unichar{U+2265} c[i - 1]
+		%		           PRINT-WIS(c, X, p[i])
+		%		           print i
+		%		       else
+		%		           PRINT-WIS(c, X, i - 1)
+		%		   else
+		%		       return
+		%	\end{verbatim}
+		%\end{parbox}
+		%\par
+
+		%Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione é 
+		%comunque proporzionale alla lunghezza del vettore \math{c}, perché
+		%la ricorsione é una tail-recursion.
 
 \end{sile}

@@ -242,22 +242,23 @@
 		\math{c[i]} viene riportato il valore della soluzione ottimale
 		per la \math{i}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive.
-		L'algoritmo riceve in input il vettore \math{A} e la funzione
-		peso \math{W} e restituisce in output il vettore \math{c}.
+		L'algoritmo riceve in input il vettore \math{A} che contiene i 
+		valori di ciascun membro dell'istanza e restituisce in output il
+		vettore \math{c}.
 
         Si noti come la prima cella del vettore \math{c} possa venire
-        riempito immediatamente con 0, mentre la seconda con il valore
-        associato al primo elemento di \math{A}, come da caso base
-        dell'equazione di ricorrenza.
+        riempito immediatamente con 0, mentre la seconda con il primo
+        elemento di \math{A}, come da caso base dell'equazione di
+        ricorrenza.
 
 		\begin{verbatim}
-			procedure HATEVILLE(A, W)
+			procedure HATEVILLE(A)
 			    c[0] = 0
-			    c[1] = W(A[1])
+			    c[1] = A[1]
 
 			    \bigskip
 			    for i = 2 to |A|
-			        c[i] = max\{c[i - 1] > c[i - 2] + W(A[i - 1])\}
+			        c[i] = max(c[i - 1], c[i - 2] + A[i - 1])
 
 			    \bigskip
 			    return c
@@ -269,5 +270,29 @@
 		in tempo immediato esattamente \math{\abs{A}} volte.
 
     \subsection{Programmazione dinamica: ricostruzione di una soluzione}
+
+        Un primo modo per ricavare una soluzione ottimale consiste nel
+		calcolarla direttamente durante il calcolo del valore ottimale,
+		modificando la procedura precedente introducendo l'insieme soluzione
+		\math{S}. Il tempo di esecuzione dell'algorimo rimane invariato.
+
+		\begin{verbatim}
+			procedure HATEVILLE(A)
+			    c[0] = 0
+			    c[1] = A[1]
+			    S = \unichar{U+2205}
+
+			    \bigskip
+			    for i = 2 to |A|
+			        if (c[i - 1] > c[i - 2] + A[i - 1]) then 
+			            c[i] = c[i - 1]
+			            S[i] = S[i - 1]
+			        else
+			            c[i] = c[i - 2] + A[i - 1]
+			            S[i] = S[i - 2] \unichar{U+222A} \{i\}
+
+			    \bigskip
+			    return (c[|A|], S[|A|])
+		\end{verbatim}
 
 \end{sile}

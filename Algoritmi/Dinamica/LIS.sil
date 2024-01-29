@@ -40,11 +40,11 @@
 			Longest Increasing Subsequence}. Sia \math{X} una sequenza di
 			\math{m} numeri interi e sia \math{X_{i}} un suo prefisso di
 			lunghezza \math{i}, con \math{1 \leq i \leq m}. Sia \math{Z^{i}}
-			una LIS di \math{X_{i}}, che termina con \math{x_{i}}. Sia infine
-			\math{W_{i}} l'insieme di tutte le sottosequenze crescenti (non
-			necessariamente le piú lunghe) di \math{X_{j}} che finiscono
-			con \math{x_{j}} e a cui é possibile concatenare \math{x_{i}}
-			ottenendo ancora una sequenza crescente, ovvero:
+			una LIS di \math{X_{i}}, che termina con \math{x_{i}}. Sia
+			infine \math{W_{i}} l'insieme di tutte le possibili sottosequenze
+			crescenti (non necessariamente le piú lunghe) di \math{X_{j}} che
+			finiscono con \math{x_{j}} e a cui é possibile concatenare
+			\math{x_{i}} ottenendo ancora una sequenza crescente, ovvero:
 
             \smallskip
             \begin{center}
@@ -56,31 +56,32 @@
             \end{center}
             \bigskip
 
-			Allora vale che \math{Z^{i} = Z* | x_{i}}, con \math{Z* \in W_{i}}
-			e \math{|Z*| = \mi{max}_{W \in W_{i}} \{|W|\}}.
+            Allora la LIS \math{Z^{i}} é data dalla concatenazione fra
+            l'elemento di \math{W_{i}} avente la maggior cardinalitá
+            con il carattere \math{x_{i}}, ovvero \math{Z^{i} = Z* |
+            x_{i}} con \math{Z* \in W_{i}} e \math{\abs{Z*} =
+            \mi{max}_{W \in W_{i}} \{\abs{W}\}}.
 
             \bigskip
             \strong{Dimostrazione}. Si supponga per assurdo che \math{Z^{i}
-            = Z* | x_{i}} non sia la soluzione per l'\math{i}-esimo problema.
-            Questa deve allora essere \math{Z^{i} = Z' | x_{i}}, dove \math{Z'}
-            é una sottosequenza crescente distinta da \math{Z*}. Naturalmente
-            deve aversi \math{\abs{Z} > \abs{Z*}}, perché se \math{Z^{i}} si
-            ottiene a partire da \math{Z'} e non da \math{Z*} e \math{Z^{i}}
-            é la sottosequenza crescente piú lunga, allora \math{Z'} deve
-            essere piú lunga di \math{Z*}.
+            = Z* | x_{i}} non sia la soluzione ottimale per l'\math{i}-esima
+            istanza del problema. Questa deve allora essere \math{Z^{i} = Z'
+            | x_{i}}, dove \math{Z'} é una sottosequenza crescente avente
+            cardinalitá maggiore di \math{Z*}.
 
-            Sia \math{z'} l'elemento in coda a \math{Z'}. É chiaro che
-            \math{z' < x_{i}}, perché se é stato possibile accodare
-            \math{x_{i}} a \math{Z'} ottenendo ancora una sequenza
-            crescente allora \math{z'} deve venire prima di \math{x_{i}}.
-
-            Sia poi \math{h < i} il piú grande indice tale che \math{x_{h}
-            = z'}. Di conseguenza, per come é stato definito \math{W_{i}},
-            si ottiene che \math{Z' \in W_{i}}. Infatti, \math{Z'} é una
-            sottosequenza crescente di \math{X_{h}}, la quale termina con
-            \math{x_{h} < x_{i}}. Ció porta peró ad una contraddizione: 
-            infatti si ha \math{|Z'| > |Z*|} ma al contempo \math{|Z*| =
-            \mi{max}_{W \in W_{i}} \{|W|\}}.
+            Sia \math{z'} l'elemento in coda a \math{Z'}. Essendo \math{Z^{i}}
+            costruito accodando \math{x_{i}} a \math{Z'} ottenendo ancora una
+            sequenza crescente, deve aversi \math{z' < x_{i}}. Sia poi
+            \math{h < i} il piú grande indice tale che \math{x_{h} = z'}. Di
+            conseguenza, per come é stato definito \math{W_{i}}, si ottiene
+            che \math{Z' \in W_{i}}. Infatti, \math{Z'} é una sottosequenza
+            crescente di \math{X_{h}}, la quale termina con \math{x_{h} <
+            x_{i}}. Ció porta peró ad una contraddizione: infatti si ha
+            \math{\abs{Z*} = \mi{max}_{W \in W_{i}} \{\abs{W}\}}, ma al
+            contempo \math{Z'} é membro di \math{W_{i}} ed é stato
+            dimostrato che \math{\abs{Z'} > \abs{Z*}}. Occorre allora
+            assumere che \math{Z^{i} = Z* | x_{i}} sia effettivamente la
+            soluzione ottimale alla \math{i}-esima istanza del problema.
 		\end{theorem}
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
