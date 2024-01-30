@@ -12,8 +12,9 @@
     piccolo, l'elemento che ha associato il valore maggiore,
     ecc\math{\unicodeellipsis}).
 
-    Indicando con \math{x} un generico elemento di uno degli insiemi, si vuole
-    costruire una struttura dati che supporti le seguenti tre operazioni:
+    Indicando con \math{x} un generico elemento di uno degli insiemi,
+    si vuole costruire una struttura dati che supporti le seguenti
+    tre operazioni:
 
     \begin{itemize}
         \begin{item}
@@ -42,73 +43,216 @@
         \end{item}
     \end{itemize}
 
-    \bigskip
+    \subsection{Implementazione mediante liste concatenate}
 
-    Una prima implementazione di una struttura dati per insiemi disgiunti
-    prevede di rappresentare ciascun insieme mediante una lista concatenata.
-    L'oggetto di ciascun insieme ha gli attributi \tt{head}, che punta al
-    primo oggetto della lista, e \tt{tail}, che punta all'ultimo oggetto.
-    Ogni oggetto nella lista contiene un elemento dell'insieme, un puntatore
-    al successivo oggetto della lista e un puntatore che ritorna all'oggetto
-    dell'insieme. All'interno di ciascuna lista concatenata, gli oggetti
-    possono apparire in qualsiasi ordine. Il rappresentante é l'elemento
-    dell'insieme nel primo oggetto della lista.
+        Una prima implementazione di una struttura dati per insiemi
+        disgiunti prevede di rappresentare ciascun insieme mediante
+        una lista concatenata. L'oggetto di ciascun insieme ha gli
+        attributi \tt{head}, che punta al primo oggetto della lista,
+        e \tt{tail}, che punta all'ultimo oggetto. Ogni oggetto nella
+        lista contiene un elemento dell'insieme, un puntatore 
+        al successivo oggetto della lista e un puntatore che ritorna
+        all'oggetto dell'insieme. All'interno di ciascuna lista concatenata,
+        gli oggetti possono apparire in qualsiasi ordine. Il rappresentante
+        é l'elemento dell'insieme nel primo oggetto della lista.
 
-    Con questa rappresentazione, entrambe le operazioni \tt{MAKE-SET} e
-    \tt{FIND-SET} possono essere implementate per avere tempo di esecuzione
-    unitario. Per implementare \tt{MAKE-SET} é sufficiente creare una nuova
-    lista concatenata il cui unico oggetto é \math{x}. Per implementare 
-    \tt{FIND-SET} occorre seguire il puntatore da \math{x} per arrivare
-    all'oggetto del suo insieme e poi ritornare all'elemento nell'oggetto
-    cui punta \tt{head}.
+        Con questa rappresentazione, entrambe le operazioni \tt{MAKE-SET}
+        e \tt{FIND-SET} possono essere implementate per avere tempo di
+        esecuzione unitario. Per implementare \tt{MAKE-SET} é sufficiente
+        creare una nuova lista concatenata il cui unico oggetto é \math{x}.
+        Per implementare \tt{FIND-SET} occorre seguire il puntatore da
+        \math{x} per arrivare all'oggetto del suo insieme e poi ritornare
+        all'elemento nell'oggetto cui punta \tt{head}.
 
-    \bigskip
-    \center{\img[src = Greedy/union-find.pdf, width = 75%fw]}
-    \bigskip
+        \bigskip
+        \center{\img[src = Greedy/union-find.pdf, width = 75%fw]}
+        \bigskip
 
-    La piú semplice implementazione dell'operazione \tt{UNION(x, y)} richiede
-    un tempo di esecuzione nettamente superiore a quello di \tt{MAKE-SET(x)} e
-    di \tt{FIND-SET(x)}. Per eseguire \tt{UNION(x, y)} viene aggiunta la lista
-    di \math{y} alla fine della lista di \math{x}, ed il rappresentante di
-    \math{x} diviene rappresentante dell'insieme risultante. Questo richiede
-    di aggiornare il puntatore all'oggetto dell'insieme per ogni oggetto che 
-    si trovava in \math{y}, e questa operazione richiede tempo lineare nella
-    lunghezza della lista di \math{y}.
+        La piú semplice implementazione dell'operazione \tt{UNION(x, y)}
+        richiede un tempo di esecuzione nettamente superiore a quello di
+        \tt{MAKE-SET(x)} e di \tt{FIND-SET(x)}. Per eseguire \tt{UNION(x, y)}
+        viene aggiunta la lista di \math{y} alla fine della lista di \math{x},
+        ed il rappresentante di \math{x} diviene rappresentante dell'insieme
+        risultante. Questo richiede di aggiornare il puntatore all'oggetto
+        dell'insieme per ogni oggetto che si trovava in \math{y}, e questa
+        operazione richiede tempo lineare nella lunghezza della lista di
+        \math{y}.
 
-    Una delle tante applicazioni delle strutture dati per insiemi disgiunti
-    consiste nel determinare le componenti connesse di un grafo non orientato.
-    La procedura \tt{CONNECTED-COMPONENTS} usa le operazioni degli insiemi
-    disgiunti per calcolare le componenti connesse di un grafo. Una volta
-    che \tt{CONNECTED-COMPONENTS} ha preprocessato il grafo, la procedura 
-    \tt{SAME-COMPONENT} é in grado di determinare se due vertici sono nella
-    stessa componente connessa.
+        Si supponga di avere un insieme di \math{n} oggetti \math{x_{1},
+        x_{2}, \unicodeellipsis, x_{n}}. Si eseguano \math{n} operazioni
+        \tt{MAKE-SET} seguite da \math{n - 1} operazioni \tt{FIND-SET}. Il
+        tempo per eseguire le \math{n} operazioni \tt{MAKE-SET} é lineare
+        in \math{n}. Poiché l'\math{i}-esima operazione \tt{UNION} aggiorna
+        \math{i} oggetti, il numero totale di oggetti aggiornati da tutte le
+        \math{n - 1} operazioni \tt{UNION} é \math{\sum_{i = 1}^{n - 1} i =
+        O(n^{2})}. Il numero totale di operazioni é \math{2n - 1}, pertanto
+        ciascuna operazione richiede in media un tempo \math{\Theta (n)}.
 
-	\begin[width = 50%fw]{parbox}
-		\begin{verbatim}
-			procedure CONNECTED-COMPONENTS(V, E)
-			1    foreach v \unichar{U+2208} V
-			2        MAKE-SET(v)
-			3    foreach (u, v) \unichar{U+2208} E
-			4        if (FIND-SET(u) \unichar{U+2260} FIND-SET(v)) then
-			5            UNION(u, v)
+        Nel caso peggiore, l'implementazione dell'operazione \tt{UNION}
+        richiede un tempo medio \math{\Theta (n)} per chiamata, perché 
+        potrebbe venire unita una lista piú lunga ad una piú corta. Se
+        si introducesse un campo aggiuntivo a ciascuna lista che ne
+        riporta la lunghezza (é sufficiente aggiungere un contatore che
+        viene aggiornato ad ogni \tt{UNION}), sarebbe sempre possibile
+        scegliere di unire la lista piú corta a quella piú lunga. Con 
+        questa euristica, chiamata \strong{euristica dell'unione pesata},
+        una singola operazione \tt{UNION} richiederebbe ancora un tempo
+        \math{\Omega (n)} se entrambi gli insiemi hanno \math{\Omega (n)}
+        elementi.
+
+        \begin{theorem}
+            Utilizzando la rappresentazione degli insiemi disgiunti mediante
+            liste concatenate e sfruttando l'euristica dell'unione pesata,
+            una sequenza di \math{m} operazioni \tt{MAKE-SET}, \tt{FIND-SET}
+            e \tt{UNION}, dove \math{n} di queste sono \tt{MAKE-SET},
+            richiede un tempo complessivo \math{O (m + n \mi{log}(n))}.
+        \end{theorem}
+
+    \subsection{Implementazione mediante foreste}
+
+        Una implementazione piú efficiente degli insiemi disgiunti prevede
+        di utilizzare degli alberi radicati. Ciascun albero rappresenta un
+        insieme, ciascun nodo contiene un oggetto ed il nodo radice contiene
+        l'oggetto rappresentante. Ogni nodo che non sia la radice punta al
+        nodo padre, mentre il nodo radice ha un puntatore a sé stesso.
+
+        Con questa implementazione, l'operazione \tt{MAKE-SET} ha ancora
+        tempo di esecuzione unitario, perché consiste nel creare un albero
+        avente un solo nodo, con un puntatore a sé stesso, che contiene un
+        oggetto (che sará rappresentante del relativo insieme). L'operazione
+        \tt{FIND-SET} scorre i puntatori fino a trovare un oggetto
+        che puntatore a sé stesso, che per definizione é la radice
+        dell'albero; tale cammino semplice verso la radice prende
+        il nome di \strong{cammino di ricerca}. L'operazione \tt{UNION}
+        consiste semplicemente nello sganciare il puntatore dalla radice
+        a sé stesso di uno dei due alberi e collegarlo all'altra radice.
+
+        \bigskip
+        \center{\img[src = Greedy/union-find2.pdf, width = 25%fw]}
+        \bigskip
+
+        L'operazione di \tt{UNION} cosí come descritta finora non fornisce
+        un miglioramento in termini di prestazioni in confronto a \tt{UNION}
+        rispetto all'implementazione con liste concatenate. Infatti,
+        applicando \math{n - 1} volte \tt{UNION} puó creare un albero
+        che é una catena lineare di \math{n} nodi. Inoltre, l'operazione
+        \tt{FIND-SET} cosí definita ha tempo lineare, mentre la versione
+        dell'implementazione mediante liste aveva tempo unitario.
+
+        Per migliorare il tempo di esecuzione dell'operazione \tt{UNION}
+        viene introdotta l'euristica \strong{unione per rango}. Questa
+        prevede di fare in modo che, quando é necessario unire due alberi,
+        l'albero da cui viene sganciato il puntatore sia sempre quello con
+        meno nodi. In ciascun nodo, anziché tenere traccia della dimensione
+        del sottoalbero che ha tale nodo per radice, é sufficiente conoscerne
+        il \strong{rango}, ovvero il numero di archi nel cammino semplice
+        piú lungo fra \math{x} e una foglia sua discendente. Tale valore
+        viene sfruttato come limite superiore all'altezza del nodo. Durante
+        l'operazione di \tt{UNION} fra due alberi, l'unione per rango prevede
+        che la radice con il rango piú piccolo venga fatta puntare alla
+        radice con il rango piú grande.
+
+        Quando \tt{MAKE-SET} crea un insieme, il rango iniziale dell'unico
+        nodo nel corrispondente albero é 0. Quando viene applicata \tt{UNION}
+        a due alberi si presentano due possibili casi: le radici dei due
+        alberi hanno ranghi diversi oppure hanno lo stesso rango. Nel primo
+        caso, la radice di rango piú basso viene collegata alla radice di
+        rango piú alto, ottenendo un solo albero e lasciando tutti i ranghi
+        inalterati. Nel secondo caso, viene arbitrariamente scelta una delle
+        due radici come radice del nuovo albero ed il rango di questa viene
+        incrementato di uno.
+
+        Dato un nodo \tt{x}, siano \tt{x.rank} il valore intero che
+        ne riporta il rango, e sia \tt{x.p} il padre del nodo \tt{x}.
+        La procedura \tt{LINK}, una subroutine chiamata da \tt{UNION},
+        riceve in input i puntatori a due radici.
+
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure MAKE-SET(x)
+				1    x.p = x
+				2    x.rank = 0
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure UNION(x, y)
+				3    LINK(FIND-SET(x), FIND-SET(y))
+
+				\bigskip
+				procedure LINK(x, y)
+				4    if x.rank > y.rank
+				5        y.p = x
+				6    else x.p = y
+				7        if x.rank == y.rank
+				8            y.rank = y.rank + 1
+			\end{verbatim}
+		\end{parbox}
+		\par
+
+        Per migliorare il tempo di esecuzione dell'operazione \tt{FIND-SET}
+        viene invece introdotta l'euristica \strong{compressione del cammino}.
+        Questa fa in modo che ciascun nodo del cammino di ricerca punti
+        direttamente alla radice lasciando inalterati i ranghi dei nodi.
+
+        \begin{verbatim}
+			procedure FIND-SET(x)
+			1    if x \unichar{U+2260} x.p
+			2        x.p = FIND-SET(x.p)
+			3    return x.p
 		\end{verbatim}
-	\end{parbox}
-	\begin[width = 50%fw]{parbox}
-		\begin{verbatim}
-			procedure SAME-COMPONENT(u, v)
-			6    if (FIND-SET(u) == FIND-SET(v))
-			7        return TRUE
-			8    else
-			9        return FALSE
-		\end{verbatim}
-	\end{parbox}
-	\par
 
-    La procedura \tt{CONNECTED-COMPONENTS} costruisce un insieme per ciascun
-    vertice. Dopodiché, unisce tutti gli insiemi i cui rappresentanti hanno
-    un arco nel grafo che li unisce. In questo modo, vengono a crearsi tanti
-    insiemi quante sono le componenti connesse di un grafo. A questo punto é
-    posssibile utilizzare la procedura \tt{SAME-COMPONENT} per sapere se due
-    vertici si trovano nella stessa componente.
+        La procedura \tt{FIND-SET} é un \strong{metodo a doppio passaggio}.
+        Durante il primo passaggio, risale il cammino di ricerca per trovare
+        la radice, mentre durante il secondo passaggio discende il cammino
+        di ricerca per aggiornare i modi in modo che puntino direttamente
+        alla radice. Ogni chiamata di \tt{FIND-SET(x)} restituisce \tt{x.p}
+        nella riga 3. Se \tt{x} é la radice, allora la riga 2 non viene
+        eseguita e viene restituito \tt{x.p} che é uguale a \tt{x}. Questo
+        é il caso in cui la ricorsione tocca il fondo. Altrimenti, viene
+        eseguita la riga 2 e la chiamata ricorsiva con il parametro \tt{x.p}
+        restituisce un puntatore alla radice. La riga 2 aggiorna il nodo
+        \tt{x} in modo che punti direttamente alla radice, mentre la riga 3
+        restituisce questo puntatore.
+
+        Utilizzando sia l'unione per rango sia la compressione del cammino é
+        possibile ottenere un tempo di esecuzione per le operazioni \tt{UNION}
+        e \tt{FIND-SET} approssimativamente lineare. Infatti, date \math{m} 
+        operazioni (di cui \math{n} \tt{MAKE-SET} e \math{n - 1} \tt{UNION})
+        su \math{n} oggetti, il tempo di esecuzione nel caso peggiore é
+        \math{O(m \alpha(n))}, dove \math{\alpha(n)} é la \strong{funzione
+        di Ackermann inversa}. Questa funzione cresce estremamente lentamente,
+        tanto che per qualsiasi applicazione pratica il valore restituito
+        da tale funzione é \math{\leq 4}. Pertanto, il tempo di esecuzione 
+        é ragionevolmente approssimabile come \math{O(m \alpha(n)) \approx
+        O(4m) = O(m)}.
+
+        Una delle tante applicazioni delle strutture dati per insiemi
+        disgiunti consiste nel determinare le componenti connesse di
+        un grafo non orientato. La procedura \tt{CONNECTED-COMPONENTS}
+        usa le operazioni degli insiemi disgiunti per calcolare le componenti
+        connesse di un grafo. Una volta che \tt{CONNECTED-COMPONENTS} ha
+        preprocessato il grafo, la procedura \tt{SAME-COMPONENT} é in grado
+        di determinare se due vertici sono nella stessa componente connessa.
+
+        \begin[width = 50%fw]{parbox}
+            \begin{verbatim}
+                procedure CONNECTED-COMPONENTS(V, E)
+                1    foreach v \unichar{U+2208} V
+                2        MAKE-SET(v)
+                3    foreach (u, v) \unichar{U+2208} E
+                4        if (FIND-SET(u) \unichar{U+2260} FIND-SET(v)) then
+                5            UNION(u, v)
+            \end{verbatim}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin{verbatim}
+                procedure SAME-COMPONENT(u, v)
+                6    if (FIND-SET(u) == FIND-SET(v))
+                7        return TRUE
+                8    else
+                9        return FALSE
+            \end{verbatim}
+        \end{parbox}
 
 \end{sile}

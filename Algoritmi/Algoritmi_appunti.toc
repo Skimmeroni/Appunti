@@ -721,13 +721,33 @@ return {
   },
   {
     label = {
+      "Implementazione mediante liste concatenate",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest73",
+    number = "2.6.1",
+    pageno = "39"
+  },
+  {
+    label = {
+      "Implementazione mediante foreste",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest74",
+    number = "2.6.2",
+    pageno = "39"
+  },
+  {
+    label = {
       "Minimum Spanning Tree",
       id = "stuff"
     },
     level = 2,
-    link = "dest73",
+    link = "dest75",
     number = "2.7",
-    pageno = "39"
+    pageno = "41"
   },
   {
     label = {
@@ -735,9 +755,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest74",
+    link = "dest76",
     number = "2.7.1",
-    pageno = "42"
+    pageno = "44"
   },
   {
     label = {
@@ -745,9 +765,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest75",
+    link = "dest77",
     number = "2.7.2",
-    pageno = "43"
+    pageno = "45"
   },
   {
     label = {
@@ -755,9 +775,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest76",
+    link = "dest78",
     number = "2.8",
-    pageno = "44"
+    pageno = "46"
   },
   {
     label = {
@@ -765,9 +785,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest77",
+    link = "dest79",
     number = "3",
-    pageno = "47"
+    pageno = "49"
   },
   {
     label = {
@@ -775,9 +795,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest78",
+    link = "dest80",
     number = "3.1",
-    pageno = "47"
+    pageno = "49"
   },
   {
     label = {
@@ -785,9 +805,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest79",
+    link = "dest81",
     number = "3.2",
-    pageno = "48"
+    pageno = "50"
   },
   {
     label = {
@@ -795,8 +815,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest80",
+    link = "dest82",
     number = "3.3",
-    pageno = "50"
+    pageno = "52"
   }
 }

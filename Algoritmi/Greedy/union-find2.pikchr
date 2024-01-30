@@ -1,0 +1,22 @@
+lineht *= 1.5 
+circlerad = 0.125 
+circlefill = 0 
+
+C: circle at (0,0) 
+H: circle at (-0.5,-0.75) 
+E: circle at (0.5,-0.75) 
+B: circle at (-0.5,-1.5)
+
+"C" at C
+"H" at H
+"E" at E
+"B" at B
+
+arrow from B.n to H.s
+arrow from H.ne to C.sw
+arrow from E.nw to C.se
+
+spline -> from C.ne to (C.n.x + 0.125, C.n.y + 0.25) \
+                    to (C.n.x, C.n.y + 0.375) \
+                    to (C.n.x - 0.125, C.n.y + 0.25) \
+                    to C.nw
