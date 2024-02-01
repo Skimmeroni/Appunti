@@ -88,10 +88,10 @@
     Sia \math{M = (S, F)} un matroide. Un elemento \math{s \in S} é detto 
     \strong{estensione} dell'insieme \math{A \in F} se \math{s \notin A}
     e \math{A \cup \{s\} \in F}, ovvero aggiungendo \math{s} ad \math{A}
-    si ottiene ancora un sottoinsieme indipendente di \math{S}. Se non
-    esiste alcun elemento \math{s} che possa essere aggiunto ad \math{A}
-    tale che \math{A \cup \{s\} \in F}, si dice che \math{A} é
-    \strong{massimale}.
+    (ed \math{A} non contiene \math{s}) si ottiene ancora un sottoinsieme
+    indipendente di \math{S}. Se non esiste alcun elemento \math{s} che
+    possa essere aggiunto ad \math{A} tale che \math{A \cup \{s\} \in F},
+    si dice che \math{A} é \strong{massimale}.
 
     \begin{theorem}
         Tutti i sottoinsiemi indipendenti massimali in un matroide hanno la

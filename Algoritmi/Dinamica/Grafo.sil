@@ -376,7 +376,7 @@
 			    D\textsuperscript{(0)} = W
 			    for i = 1 to n do
 			        for j = 1 to n do
-			            if D\textsuperscript{(0)}[i, j] \unichar{U+2260} \unichar{U+221E} and i \unichar{U+2260} j
+			            if D\textsuperscript{(0)}[i, j] \unichar{U+2260} \unichar{U+221E} and i \unichar{U+2260} j then
 			                \unichar{U+03A0}\textsuperscript{(0)} = i
 			            else
 			                \unichar{U+03A0}\textsuperscript{(0)} = NULL
@@ -387,7 +387,7 @@
 			        \unichar{U+03A0}\textsuperscript{(k)} nuova matrice n x n
 			        for i = 1 to n do
 			            for j = 1 to n do
-			                if (D\textsuperscript{(k - 1)}[i, j] \unichar{U+2264} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j])
+			                if (D\textsuperscript{(k - 1)}[i, j] \unichar{U+2264} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]) then
 			                    D\textsuperscript{(k)}[i, j] = D\textsuperscript{(k - 1)}[i, j]
 			                    \unichar{U+03A0}\textsuperscript{k}[i, j] = \unichar{U+03A0}\textsuperscript{(k - 1)}[i, j]
 			                else

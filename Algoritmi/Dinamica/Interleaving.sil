@@ -261,11 +261,11 @@
 		    \bigskip
 		    for i = 1 to |X| do
 		        for j = 1 to |Y| do
-		            if (W[i + j] != X[i] and W[i + j] != Y[j]) then
+		            if (W[i + j] \unichar{U+2260} X[i] and W[i + j] \unichar{U+2260} Y[j]) then
 		                c[i, j] = F
-		            else if (W[i + j] == X[i] and W[i + j] != Y[j]) then
+		            else if (W[i + j] == X[i] and W[i + j] \unichar{U+2260} Y[j]) then
 		                c[i, j] = c[i - 1, j]
-		            else if (W[i + j] != X[i] and W[i + j] == Y[j]) then
+		            else if (W[i + j] \unichar{U+2260} X[i] and W[i + j] == Y[j]) then
 		                c[i, j] = c[i, j - 1]
 		            else 
 		                c[i, j] = (c[i - 1, j] or c[i, j - 1])

@@ -51,15 +51,15 @@
 
 	\begin{verbatim}
 		procedure GENERIC-MST(G, W)
-		    1    A \unichar{U+2190} \unichar{U+2205}
+		1    A \unichar{U+2190} \unichar{U+2205}
 
-		    \bigskip
-		    2    while G\textsubscript{A} = (V, A) \unichar{U+2260} MST do
-		    3        trova arco (u, v) sicuro per A
-		    4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
+		\bigskip
+		2    while G\textsubscript{A} = (V, A) \unichar{U+2260} MST do
+		3        trova arco (u, v) sicuro per A
+		4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
 
-		    \bigskip
-		    5    return A
+		\bigskip
+		5    return A
 	\end{verbatim}
 
     L'algoritmo é effettivamente un algoritmo greedy perché ad ogni

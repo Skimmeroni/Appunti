@@ -26,7 +26,7 @@
 		2    S \unichar{U+2190} S ordinato per peso W decrescente
 
 		\bigskip
-		3    for i from 1 to |S| do
+		3    for i = 1 to |S| do
 		4        if (\{s\textsubscript{i}\} \unichar{U+222A} A) \unichar{U+2208} F then
 		5            A \unichar{U+2190} \{s\textsubscript{i}\} \unichar{U+222A} A
 
@@ -51,21 +51,30 @@
         indipendente.
     \end{theorem}
 
-    Il tempo di esecuzione dell'algoritmo puó essere calcolato osservando
-    che questo puó essere diviso in tre parti: l'ordinamento dell'insieme
-    \math{S} (riga 2), il ciclo for (riga 3) e la condizione di appartenenza
-    dell'elemento in esame alla soluzione del problema (righe 4 e 5). La
-    prima ha tempo di esecuzione pari a quella di un normale ordinamento,
-    ovvero \math{O(n \mi{log}(n))}, mentre la seconda ha tempo di esecuzione
-    proporzionale alla dimensione dell'input, ovvero \math{O(n)}. La terza
-    non ha un tempo di esecuzione predefinito, ma varia da problema a
-    problema, e viene indicata con un generico \math{O(f(n))}.
+    Per adattare l'algoritmo greedy standard ad un certo problema occorre
+    solamente, se é possibile farlo, determinare una condizione (riga 4)
+    che permetta di discriminare gli elementi dell'istanza del problema
+    che fanno parte del sottoinsieme ottimo da quelli che non ne fanno
+    parte. Il restante corpo dell'algoritmo é sostanzialmente sempre lo 
+    stesso. Molti algoritmi greedy (ma non tutti) sono infatti riducibili
+    all'algoritmo greedy standard, dove la generica funzione di valutazione
+    dell'istanza viene sostituita da una funzione specifica che varia da 
+    problema a problema.
 
-    La condizione di appartenenza viene esaminata \math{n} volte, pertanto
+    Il tempo di esecuzione dell'algoritmo greedy standard puó essere
+    calcolato osservando che questo puó essere diviso in tre parti:
+    l'ordinamento dell'insieme \math{S} (riga 2), il ciclo for (riga 3)
+    e la condizione di appartenenza dell'elemento in esame alla soluzione
+    del problema (righe 4 e 5). La prima ha tempo di esecuzione pari a
+    quella di un normale ordinamento, ovvero \math{O(n \mi{log}(n))},
+    mentre la seconda ha tempo di esecuzione proporzionale alla dimensione
+    dell'input, ovvero \math{O(n)}. La terza non ha un tempo di esecuzione
+    predefinito, ma varia da problema a problema, e viene indicata con un
+    generico \math{O(f(n))}. Questa viene esaminata \math{n} volte, pertanto
     il tempo di esecuzione complessivo della seconda e della terza parte é
-    \math{O(n) \times O(f(n)) = O(n f(n))}. Il tempo di esecuzione complessivo
-    si ottiene sommando questa quantitá al tempo di esecuzione necessario per
-    l'ordinamento, ovvero \math{O(n \mi{log}(n)) + O(n f(n))}.
+    \math{O(n) \times O(f(n)) = O(n f(n))}. Si ha quindi che il tempo di
+    esecuzione dell'intero algoritmo é dato da \math{O(n \mi{log}(n)) +
+    O(n f(n))}.
 
     \begin{theorem}
         \strong{Teorema di Rado (I)}. Un sistema di indipendenza é (anche)

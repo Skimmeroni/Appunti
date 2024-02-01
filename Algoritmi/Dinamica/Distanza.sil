@@ -402,7 +402,7 @@
 		\begin[width = 37.5%fw]{parbox}
 			\begin{verbatim}
 				procedure PRINT-ED(X, Y, i, j, b)
-				    if i == 0 or j == 0
+				    if i == 0 or j == 0 then
 				        return
 
 				    \bigskip
@@ -413,7 +413,7 @@
 				        print "D"
 				        PRINT-ED(X, Y, i, j - 1, b)
 				    else
-				        if X[i] != Y[j] then
+				        if X[i] \unichar{U+2260} Y[j] then
 				            print "R"
 				        PRINT-ED(X, Y, i - 1, j - 1, b)
 			\end{verbatim}

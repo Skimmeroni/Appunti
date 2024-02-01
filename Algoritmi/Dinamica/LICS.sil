@@ -222,7 +222,7 @@
 			                t = 0
 			                for h = 1 to i - 1 do
 			                    for k = 1 to j - 1 do
-			                        if (X[h] < X[i]) \unichar{U+2227} (c[h, k] > t) then
+			                        if (X[h] < X[i]) and (c[h, k] > t) then
 			                            t = c[h, k]
 			                c[i, j] = 1 + t
 			            if c[i, j] > max then

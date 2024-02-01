@@ -186,9 +186,9 @@
 			    for i = 0 to |X| do
 			        p = 0
 			        for j = 0 to i do
-			            if (X[j] < X[i]) and (c[j] >= c[p])
+			            if (X[j] < X[i]) and (c[j] >= c[p]) then
 			                p = j
-			        if (p \unichar{U+2260} 0)
+			        if (p \unichar{U+2260} 0) then
 			            c[i] = c[p] + 1
 
 			    \bigskip
@@ -239,9 +239,9 @@
 				    for i = 0 to |X| do
 				        p = 0
 				        for j = 0 to i do
-				            if (X[j] < X[i]) and (c[j] >= c[p])
+				            if (X[j] < X[i]) and (c[j] >= c[p]) then
 				            p = j
-				        if (p \unichar{U+2260} 0)
+				        if (p \unichar{U+2260} 0) then
 				            c[i] = c[p] + 1
 				            h[i] = p
 

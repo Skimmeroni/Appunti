@@ -257,7 +257,7 @@
 			    c[1] = A[1]
 
 			    \bigskip
-			    for i = 2 to |A|
+			    for i = 2 to |A| do
 			        c[i] = max(c[i - 1], c[i - 2] + A[i - 1])
 
 			    \bigskip
@@ -283,7 +283,7 @@
 			    S = \unichar{U+2205}
 
 			    \bigskip
-			    for i = 2 to |A|
+			    for i = 2 to |A| do
 			        if (c[i - 1] > c[i - 2] + A[i - 1]) then 
 			            c[i] = c[i - 1]
 			            S[i] = S[i - 1]

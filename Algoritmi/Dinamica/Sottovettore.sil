@@ -181,7 +181,7 @@
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
 		    procedure PRINT-HSV(V, c, i)
-		        if c[i] != V[i] then
+		        if c[i] \unichar{U+2260} V[i] then
 		            PRINT-HSV(V, c, i - 1)
 		        print V[i]
 		\end{verbatim}

@@ -53,19 +53,20 @@
 
 	Sia \math{X_{i,j}} il sottoinsieme di \math{A'} composto da tutte le
 	attivitá che vengono dopo \math{a_{i}} e prima di \math{a_{j}}, ovvero
-	\math{X = \langle a_{i + 1}, a_{i + 2}, \unicodeellipsis, a_{j - 2},
-	a_{j - 1} \rangle}. La soluzione \math{S_{i,j}} per la \math{i, j}-esima
-	istanza del problema corrisponde a trovare il sottoinsieme di attivitá
-	mutualmente compatibili di cardinalitá massima rispetto al sottoinsieme
-	\math{X_{i,j}}. La cardinalitá del sottoinsieme di attivitá mutualmente
-	compatibili di cardinalitá massima per la \math{i, j}-esima istanza del
-	problema viene indicata con \math{\mi{Opt}(i, j)}.
+	\math{X_{i, j} = \langle a_{i + 1}, a_{i + 2}, \unicodeellipsis, a_{j -
+	2}, a_{j - 1} \rangle}. La soluzione \math{S_{i, j}} per la \math{i,
+	j}-esima istanza del problema corrisponde a trovare il sottoinsieme
+	di attivitá mutualmente compatibili di cardinalitá massima rispetto
+	al sottoinsieme \math{X_{i, j}}. La cardinalitá del sottoinsieme di
+	attivitá mutualmente compatibili di cardinalitá massima per la
+	\math{i, j}-esima istanza del problema viene indicata con
+	\math{\mi{Opt}(i, j)}.
 
-	La soluzione ottimale per il problema principale é data da \math{S_{0,
-	n + 1}}. Infatti, tale insieme é la soluzione per l'insieme che contiene
-	gli elementi di \math{A'} che vengono dopo \math{a_{0}} e prima di
-	\math{a_{n + 1}}, che corrisponde esattamente a \math{A = \langle
-	a_{1}, a_{2}, \unicodeellipsis, a_{n} \rangle}.
+	La soluzione ottimale per il problema principale é data da
+	\math{S_{0, n + 1}}. Infatti, tale insieme é la soluzione
+	per l'insieme che contiene gli elementi di \math{A'} che
+	vengono dopo \math{a_{0}} e prima di \math{a_{n + 1}}, che
+	corrisponde esattamente a \math{A' - \{a_{0}, a_{n + 1}\} = A}.
 
 	Il caso base si ha per l'insieme \math{X_{i, i + 1}}, ovvero quando
 	\math{i + 1 = j}. Infatti, l'insieme costituito da tutte le attivitá
@@ -85,11 +86,11 @@
 	\par
 
 	Per quanto riguarda il passo ricorsivo, si consideri una generica
-	soluzione \math{S_{i, j}}. Tale soluzione puó essere suddivisa come
-	\math{S_{i, k} \cup \{a_{k}\} \cup S_{k, j}}, dove \math{S_{i, k}}
-	e \math{S_{k, j}} sono le soluzioni rispettivamente delle istanze
-	\math{X_{i, k}} e \math{X_{k, j}} e dove \math{a_{k}} é il valore 
-	che permette di restituire tali soluzioni ottimali.
+	soluzione ottimale \math{S_{i, j}}. Tale soluzione puó essere scritta
+	come \math{S_{i, k} \cup \{a_{k}\} \cup S_{k, j}}, dove \math{S_{i, k}}
+	e \math{S_{k, j}} sono le soluzioni ottimali rispettivamente delle
+	istanze \math{X_{i, k}} e \math{X_{k, j}} e dove \math{a_{k}} é il
+	valore che permette di restituire tali soluzioni ottimali.
 
 	\begin[width = 50%fw]{parbox}
 		\begin[mode = display]{math}
@@ -116,18 +117,18 @@
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
 			procedure INTERVAL-SCHEDULING(A)
-			1	A = A ordinato per tempo di fine non descrescente
-			2	X = \{a\textsubscript{1}\}
-			3	k = 1
+			1    A = A ordinato per tempo di fine non descrescente
+			2    X = \{a\textsubscript{1}\}
+			3    k = 1
 
-				 \bigskip
-			5	for i from 2 to |A| do
-			6		if s\textsubscript{i} \unichar{U+2265} e\textsubscript{k} then
-			7			X = \{a\textsubscript{s}\} \unichar{U+222A} X
-			8			k = i
+			     \bigskip
+			5    for i from 2 to |A| do
+			6        if s\textsubscript{i} \unichar{U+2265} f\textsubscript{k} then
+			7            X = \{a\textsubscript{s}\} \unichar{U+222A} X
+			8            k = i
 
-				 \bigskip
-			9	return X
+			     \bigskip
+			9    return X
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}

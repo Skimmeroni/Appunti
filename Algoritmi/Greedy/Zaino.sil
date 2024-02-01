@@ -29,7 +29,7 @@
     Il \strong{problema dello Zaino Frazionario} chiede di trovare una 
     sequenza di quantitá di ciascun oggetto che permette di massimizzare
     il valore complessivo di tale sequenza ed al contempo essere inferiore
-    alla capacitá dello zaino.
+    o uguale alla capacitá dello zaino.
 
     Piú formalmente, indicando con \math{P = \langle p_{1}, p_{2},
     \unicodeellipsis, p_{n} \rangle} con \math{p_{i} \in [0, 1]}
@@ -66,8 +66,7 @@
     \em{valore specifico} \footnote{Il nome "valore specifico"
     é dato in analogia con il concetto di \strong{peso specifico},
     ovvero il peso di un metro cubo di una certa sostanza.} di
-    tale oggetto, ovvero il valore che ha una unitá di peso
-    dell'\math{i}-esimo oggetto.
+    tale oggetto, ovvero il suo valore per unitá di peso.
 
     Si ordini l'insieme \math{X} in ordine non crescente rispetto ai
     valori specifici degli oggetti di cui é costituito. Ad ogni iterazione
