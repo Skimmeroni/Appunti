@@ -367,21 +367,21 @@
 		\math{S}. Il tempo di esecuzione dell'algorimo rimane invariato.
 
 		\begin{verbatim}
-		    procedure WIS(X)
-		        c[0] = 0
-		        S = \unichar{U+2205}
+			procedure WIS(X)
+			    c[0] = 0
+			    S = \unichar{U+2205}
 
-		        \bigskip
-		        for i = 1 to |X| do
-		            if (c[i - 1] > c[p[i]] + X[i]) then
-		                c[i] = c[i - 1]
-		                S[i] = S[i - 1]
-		            else
-		                c[i] = c[p[i]] + X[i]
-		                S[i] = S[p[i]] \unichar{U+222A} \{i\}
+			    \bigskip
+			    for i = 1 to |X| do
+			        if (c[i - 1] > c[p[i]] + X[i]) then
+			            c[i] = c[i - 1]
+			            S[i] = S[i - 1]
+			        else
+			            c[i] = c[p[i]] + X[i]
+			            S[i] = S[p[i]] \unichar{U+222A} \{i\}
 
-		        \bigskip
-		        return (c[|X|], S[|X|])
+			    \bigskip
+			    return (c[|X|], S[|X|])
 		\end{verbatim}
 
 		%Una volta calcolato il valore dell'insieme ottimale di intervalli,

@@ -33,38 +33,34 @@
     dall'insieme massimale del matroide grafico con peso minimo. In
     termini molto generici, l'algoritmo puó essere descritto come segue:
 
-    \begin[width = 55%fw]{parbox}
-        \begin{enumerate}
-            \begin{item}
-                Viene inizializzato un insieme \math{A} vuoto;
-            \end{item}
-            \begin{item}
-                Viene scelto l'arco \math{(u, v)} di modo che \math{A \cup (u, v)}
-                sia un sottoinsieme dell'insieme \math{T} degli archi del MST. Un 
-                arco che aggiunto ad \math{A} restituisce un insieme di archi ancora
-                sottoinsieme dell'MST é detto \strong{arco sicuro} per \math{A};
-            \end{item}
-            \begin{item}
-                Se \math{A = T}, ovvero se \math{G_{A} = (V, T)} é il MST,
-                l'algoritmo termina, altrimenti si torna al punto precedente.
-            \end{item}
-        \end{enumerate}
-    \end{parbox}
-    \begin[width = 45%fw]{parbox}
-        \begin{verbatim}
-            procedure GENERIC-MST(G, W)
-            1    A \unichar{U+2190} \unichar{U+2205}
+    \begin{enumerate}
+        \begin{item}
+            Viene inizializzato un insieme \math{A} vuoto;
+        \end{item}
+        \begin{item}
+            Viene scelto l'arco \math{(u, v)} di modo che \math{A \cup (u, v)}
+            sia un sottoinsieme dell'insieme \math{T} degli archi del MST. Un 
+            arco che aggiunto ad \math{A} restituisce un insieme di archi ancora
+            sottoinsieme dell'MST é detto \strong{arco sicuro} per \math{A};
+        \end{item}
+        \begin{item}
+            Se \math{A = T}, ovvero se \math{G_{A} = (V, T)} é il MST,
+            l'algoritmo termina, altrimenti si torna al punto precedente.
+        \end{item}
+    \end{enumerate}
 
-            \bigskip
-            2    while G\textsubscript{A} = (V, A) \unichar{U+2260} MST do
-            3        trova arco (u, v) sicuro per A
-            4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
+	\begin{verbatim}
+		procedure GENERIC-MST(G, W)
+		    1    A \unichar{U+2190} \unichar{U+2205}
 
-            \bigskip
-            5    return A
-        \end{verbatim}
-    \end{parbox}
-    \par\bigskip
+		    \bigskip
+		    2    while G\textsubscript{A} = (V, A) \unichar{U+2260} MST do
+		    3        trova arco (u, v) sicuro per A
+		    4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
+
+		    \bigskip
+		    5    return A
+	\end{verbatim}
 
     L'algoritmo é effettivamente un algoritmo greedy perché ad ogni
     iterazione viene operata una scelta localmente ottima assumendo
@@ -84,18 +80,18 @@
     tale condizione é verificata quando la differenza fra i due é pari ad 1,
     perché questo significa che é rimasto un solo albero.
 
-    \begin{verbatim}
-        procedure GENERIC-MST(G, W)
-        1    A \unichar{U+2190} \unichar{U+2205}
+	\begin{verbatim}
+		procedure GENERIC-MST(G, W)
+		1    A \unichar{U+2190} \unichar{U+2205}
 
-        \bigskip
-        2    while |V| - |A| > 1 do
-        3        trova arco (u, v) sicuro per A
-        4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
+		     \bigskip
+		2    while |V| - |A| > 1 do
+		3        trova arco (u, v) sicuro per A
+		4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
 
-        \bigskip
-        5    return A
-    \end{verbatim}
+		     \bigskip
+		5    return A
+	\end{verbatim}
 
     Per rendere l'algoritmo effettivamente utilizzabile é infine necessario
     capire come compiere la scelta greedy, ovvero definire un metodo che
@@ -240,38 +236,38 @@
         elementi rispetto a \math{W} ma in ordine inverso (in ordine
         crescente), pertanto é possibile applicare tale semplificazione.
 
-        \begin{verbatim}
-            KRUSKAL-MST(E)
-                A \unichar{U+2190} \unichar{U+2205}
-                E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+	\begin{verbatim}
+		procedure KRUSKAL-MST(E)
+		1    A \unichar{U+2190} \unichar{U+2205}
+		2    E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
 
-                \bigskip
-                for i from 1 to n do
-                    if e\textsubscript{i} é arco sicuro then
-                        A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+		     \bigskip
+		3    for i from 1 to n do
+		4        if e\textsubscript{i} é arco sicuro then
+		5            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
 
-                \bigskip
-                return A
-        \end{verbatim}
+		     \bigskip
+		6    return A
+	\end{verbatim}
 
         Per sapere se l'\math{i}-esimo arco é un arco sicuro occorre
         applicare il corollario al teorema dell'arco sicuro: un arco
         é sicuro se connette due alberi distinti di \math{G_{A}}.
 
-        \begin{verbatim}
-            KRUSKAL-MST(V, E, W)
-                A \unichar{U+2190} \unichar{U+2205}
-                E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+	\begin{verbatim}
+		procedure KRUSKAL-MST(V, E, W)
+		1    A \unichar{U+2190} \unichar{U+2205}
+		2    E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
 
-                \bigskip
-                for i from 1 to n do
-                    (u, v) \unichar{U+2190} e\textsubscript{i} 
-                    if u e v \unichar{U+2209} stesso albero in G\textsubscript{A} = (V, A) then
-                        A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+		     \bigskip
+		3    for i from 1 to n do
+		4        (u, v) \unichar{U+2190} e\textsubscript{i} 
+		5        if u e v \unichar{U+2209} stesso albero in G\textsubscript{A} = (V, A) then
+		6            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
 
-                \bigskip
-                return A
-        \end{verbatim}
+		     \bigskip
+		7    return A
+	\end{verbatim}
 
         L'algoritmo funziona perché, ordinando gli elementi in ordine
         crescente, é garantito che fra tutti i possibili archi che
@@ -288,23 +284,23 @@
         stato trovato un arco che unisce due alberi distinti. A questo punto
         é sufficiente sostituire i due insiemi con la loro unione.
 
-        \begin{verbatim}
-            KRUSKAL-MST(V, E, W)
-             1    A \unichar{U+2190} \unichar{U+2205}
-             2    E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
-             3    foreach v \unichar{U+2208} V do
-             4        MAKE_SET(v)
+	\begin{verbatim}
+		procedure KRUSKAL-MST(V, E, W)
+		 1    A \unichar{U+2190} \unichar{U+2205}
+		 2    E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+		 3    foreach v \unichar{U+2208} V do
+		 4        MAKE_SET(v)
 
-                  \bigskip
-             5    for i from 1 to n do
-             6        (u, v) \unichar{U+2190} e\textsubscript{i} 
-             7        if FIND_SET(u) \unichar{U+2260} FIND_SET(v) then
-             8            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
-             9            UNION(u, v)
+		      \bigskip
+		 5    for i from 1 to n do
+		 6        (u, v) \unichar{U+2190} e\textsubscript{i} 
+		 7        if FIND_SET(u) \unichar{U+2260} FIND_SET(v) then
+		 8            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+		 9            UNION(u, v)
 
-                  \bigskip
-            10    return A
-        \end{verbatim}
+		      \bigskip
+		10    return A
+	\end{verbatim}
 
         Per quanto riguarda il tempo di esecuzione dell'algoritmo, é
         possibile distinguere tre sezioni dello stesso: l'ordinamento
@@ -436,32 +432,32 @@
 
         \bigskip
 
-        \begin{verbatim}
-            PRIM-MST(V, E, W, r)
-             1    foreach v \unichar{U+2208} V do
-             2        v.key \unichar{U+2190} \unichar{U+221E}
-             3        v.\unichar{U+03C0} \unichar{U+2190} NULL
-             4    r.key \unichar{U+2190} 0
+	\begin{verbatim}
+		procedure PRIM-MST(V, E, W, r)
+		 1    foreach v \unichar{U+2208} V do
+		 2        v.key \unichar{U+2190} \unichar{U+221E}
+		 3        v.\unichar{U+03C0} \unichar{U+2190} NULL
+		 4    r.key \unichar{U+2190} 0
 
-                  \bigskip
-             5    Aggiungi tutti i vertici di V alla coda Q
+		      \bigskip
+		 5    Aggiungi tutti i vertici di V alla coda Q
 
-                  \bigskip
-             6    while Q \unichar{U+2260} \unichar{U+2205} do
-             7        u \unichar{U+2190} POP(Q)
-             8        foreach v \unichar{U+2208} ADJ(u) do
-             9            if v \unichar{U+2208} Q and W(u, v) < v.key then
-            10                v.key \unichar{U+2190} W(u, v)
-            11                v.\unichar{U+03C0} \unichar{U+2190} u
+		      \bigskip
+		 6    while Q \unichar{U+2260} \unichar{U+2205} do
+		 7        u \unichar{U+2190} POP(Q)
+		 8        foreach v \unichar{U+2208} ADJ(u) do
+		 9            if v \unichar{U+2208} Q and W(u, v) < v.key then
+		10                v.key \unichar{U+2190} W(u, v)
+		11                v.\unichar{U+03C0} \unichar{U+2190} u
 
-                  \bigskip
-            12    A \unichar{U+2190} \unichar{U+2205}
-            13    foreach v \unichar{U+2208} V do
-            14        A \unichar{U+2190} A \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
+		      \bigskip
+		12    A \unichar{U+2190} \unichar{U+2205}
+		13    foreach v \unichar{U+2208} V do
+		14        A \unichar{U+2190} A \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
 
-                  \bigskip
-            15    return A
-        \end{verbatim}
+		      \bigskip
+		15    return A
+	\end{verbatim}
 
         Per quanto riguarda il tempo di esecuzione dell'algoritmo, é
         possibile distinguere quattro sezioni dello stesso: la costruzione

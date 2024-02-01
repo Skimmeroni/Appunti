@@ -235,24 +235,24 @@
         preprocessato il grafo, la procedura \tt{SAME-COMPONENT} é in grado
         di determinare se due vertici sono nella stessa componente connessa.
 
-        \begin[width = 50%fw]{parbox}
-            \begin{verbatim}
-                procedure CONNECTED-COMPONENTS(V, E)
-                1    foreach v \unichar{U+2208} V
-                2        MAKE-SET(v)
-                3    foreach (u, v) \unichar{U+2208} E
-                4        if (FIND-SET(u) \unichar{U+2260} FIND-SET(v)) then
-                5            UNION(u, v)
-            \end{verbatim}
-        \end{parbox}
-        \begin[width = 50%fw]{parbox}
-            \begin{verbatim}
-                procedure SAME-COMPONENT(u, v)
-                6    if (FIND-SET(u) == FIND-SET(v))
-                7        return TRUE
-                8    else
-                9        return FALSE
-            \end{verbatim}
-        \end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure CONNECTED-COMPONENTS(V, E)
+			1    foreach v \unichar{U+2208} V
+			2        MAKE-SET(v)
+			3    foreach (u, v) \unichar{U+2208} E
+			4        if (FIND-SET(u) \unichar{U+2260} FIND-SET(v)) then
+			5            UNION(u, v)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure SAME-COMPONENT(u, v)
+			6    if (FIND-SET(u) == FIND-SET(v))
+			7        return TRUE
+			8    else
+			9        return FALSE
+		\end{verbatim}
+	\end{parbox}
 
 \end{sile}

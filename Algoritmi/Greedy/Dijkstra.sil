@@ -104,26 +104,26 @@
 
     \bigskip
 
-    \begin{verbatim}
-        DIJKSTRA(V, E, W, s)
-         1    foreach v \unichar{U+2208} V do
-         2        v.d \unichar{U+2190} \unichar{U+221E}
-         3        v.\unichar{U+03C0} \unichar{U+2190} NULL
-         4    s.d \unichar{U+2190} 0
+	\begin{verbatim}
+		procedure DIJKSTRA(V, E, W, s)
+		 1    foreach v \unichar{U+2208} V do
+		 2        v.d \unichar{U+2190} \unichar{U+221E}
+		 3        v.\unichar{U+03C0} \unichar{U+2190} NULL
+		 4    s.d \unichar{U+2190} 0
 
-              \bigskip
-         5    Aggiungi tutti i vertici di V alla coda Q
-         6    S \unichar{U+2190} \unichar{U+2205}
+		      \bigskip
+		 5    Aggiungi tutti i vertici di V alla coda Q
+		 6    S \unichar{U+2190} \unichar{U+2205}
 
-              \bigskip
-         7    while Q \unichar{U+2260} \unichar{U+2205} do
-         8        u \unichar{U+2190} POP(Q)
-         9        S \unichar{U+2190} \unichar{U+222A} \{u\}
-        10        foreach v \unichar{U+2208} ADJ(u) do
-        11            if v.d > u.d + W(u, v) then
-        12                v.d \unichar{U+2190} u.d + W(u, v)
-        13                v.\unichar{U+03C0} \unichar{U+2190} u
-    \end{verbatim}
+		      \bigskip
+		 7    while Q \unichar{U+2260} \unichar{U+2205} do
+		 8        u \unichar{U+2190} POP(Q)
+		 9        S \unichar{U+2190} \unichar{U+222A} \{u\}
+		10        foreach v \unichar{U+2208} ADJ(u) do
+		11            if v.d > u.d + W(u, v) then
+		12                v.d \unichar{U+2190} u.d + W(u, v)
+		13                v.\unichar{U+03C0} \unichar{U+2190} u
+	\end{verbatim}
 
     \begin{theorem}
         Dato un grafo connesso, non orientato e pesato \math{G = (V, E,

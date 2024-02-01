@@ -109,9 +109,9 @@
 	\chapter{Tecnica greedy}
 		\section{Introduzione alla tecnica greedy}
 		\include[src = Greedy/Introduzione.sil]
-		\section{Interval scheduling}
+		\section{Problema interval scheduling}
 		\include[src = Greedy/IS.sil]
-		\section{Zaino frazionario}
+		\section{Problema dello zaino frazionario}
 		\include[src = Greedy/Zaino.sil]
 		\section{Matroidi e sistemi di indipendenza}
 		\include[src = Greedy/Matroidi.sil]
@@ -124,6 +124,8 @@
 		\section{Cammini minimi da sorgente unica}
 		\include[src = Greedy/Dijkstra.sil]
 	\chapter{Visite di grafi}
+		\section{Definizione di grafo}
+		\include[src = Visita/Definizione.sil]
 		\section{Visita in ampiezza}
 		\include[src = Visita/Ampiezza.sil]
 		\section{Visita in profonditá}

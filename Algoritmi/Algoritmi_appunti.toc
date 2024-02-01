@@ -607,7 +607,7 @@ return {
     level = 3,
     link = "dest61",
     number = "1.11.2",
-    pageno = "27"
+    pageno = "26"
   },
   {
     label = {
@@ -617,7 +617,7 @@ return {
     level = 3,
     link = "dest62",
     number = "1.11.3",
-    pageno = "28"
+    pageno = "26"
   },
   {
     label = {
@@ -627,7 +627,7 @@ return {
     level = 3,
     link = "dest63",
     number = "1.11.4",
-    pageno = "29"
+    pageno = "27"
   },
   {
     label = {
@@ -637,7 +637,7 @@ return {
     level = 3,
     link = "dest64",
     number = "1.11.5",
-    pageno = "29"
+    pageno = "27"
   },
   {
     label = {
@@ -647,7 +647,7 @@ return {
     level = 3,
     link = "dest65",
     number = "1.11.6",
-    pageno = "30"
+    pageno = "29"
   },
   {
     label = {
@@ -671,7 +671,7 @@ return {
   },
   {
     label = {
-      "Interval scheduling",
+      "Problema interval scheduling",
       id = "stuff"
     },
     level = 2,
@@ -681,7 +681,7 @@ return {
   },
   {
     label = {
-      "Zaino frazionario",
+      "Problema dello zaino frazionario",
       id = "stuff"
     },
     level = 2,
@@ -791,7 +791,7 @@ return {
   },
   {
     label = {
-      "Visita in ampiezza",
+      "Definizione di grafo",
       id = "stuff"
     },
     level = 2,
@@ -801,13 +801,23 @@ return {
   },
   {
     label = {
-      "Visita in profonditá",
+      "Visita in ampiezza",
       id = "stuff"
     },
     level = 2,
     link = "dest81",
     number = "3.2",
-    pageno = "50"
+    pageno = "51"
+  },
+  {
+    label = {
+      "Visita in profonditá",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest82",
+    number = "3.3",
+    pageno = "52"
   },
   {
     label = {
@@ -815,8 +825,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest82",
-    number = "3.3",
-    pageno = "52"
+    link = "dest83",
+    number = "3.4",
+    pageno = "54"
   }
 }

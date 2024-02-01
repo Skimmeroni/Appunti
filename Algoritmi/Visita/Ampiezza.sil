@@ -93,41 +93,41 @@
         hanno bianco come colore e come archi tutti gli archi formati da un
         vertice di \math{V_{T}} e dal rispettivo predecessore.
 
-        \begin{verbatim}
-            BFS(V, E, s)
-             1    foreach v \unichar{U+2208} (V - \{s\}) do
-             2       v.color \unichar{U+2190} W
-             3       v.d \unichar{U+2190} \unichar{U+221E}
-             4       v.\unichar{U+03C0} \unichar{U+2190} NULL
+	\begin{verbatim}
+		procedure BFS(V, E, s)
+		 1    foreach v \unichar{U+2208} (V - \{s\}) do
+		 2       v.color \unichar{U+2190} W
+		 3       v.d \unichar{U+2190} \unichar{U+221E}
+		 4       v.\unichar{U+03C0} \unichar{U+2190} NULL
 
-                 \bigskip
-             5   s.color \unichar{U+2190} G
-             6   s.d \unichar{U+2190} 0
+		     \bigskip
+		 5   s.color \unichar{U+2190} G
+		 6   s.d \unichar{U+2190} 0
 
-                 \bigskip
-             7   Q \unichar{U+2190} \unichar{U+2205}
-             8   enqueue(Q, s)
+		     \bigskip
+		 7   Q \unichar{U+2190} \unichar{U+2205}
+		 8   enqueue(Q, s)
 
-                 \bigskip
-             9   while Q \unichar{U+2260} \unichar{U+2205} do
-            10        v \unichar{U+2190} head(Q)
-            11        foreach v \unichar{U+2208} adj(v) do
-            12            if u.color == W then
-            13                u.color \unichar{U+2190} G
-            14                enqueue(Q, u)
-            15                u.d \unichar{U+2190} v.d + 1
-            16                u.\unichar{U+03C0} \unichar{U+2190} v
-            17        v.color \unichar{U+2190} B
-            18        dequeue(Q)
+		     \bigskip
+		 9   while Q \unichar{U+2260} \unichar{U+2205} do
+		10        v \unichar{U+2190} head(Q)
+		11        foreach v \unichar{U+2208} adj(v) do
+		12            if u.color == W then
+		13                u.color \unichar{U+2190} G
+		14                enqueue(Q, u)
+		15                u.d \unichar{U+2190} v.d + 1
+		16                u.\unichar{U+03C0} \unichar{U+2190} v
+		17        v.color \unichar{U+2190} B
+		18        dequeue(Q)
 
-                 \bigskip
-            19   Et \unichar{U+2190} \unichar{U+2205}
-            20   Vt \unichar{U+2190} \unichar{U+2205}
-            21   foreach v \unichar{U+2208} (V - \{s\}) do
-            22       if v.\unichar{U+03C0} \unichar{U+2260} NULL then
-            23           Vt \unichar{U+2190} Vt \unichar{U+222A} \{v\}
-            24           Et \unichar{U+2190} Et \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
-        \end{verbatim}
+		     \bigskip
+		19   Et \unichar{U+2190} \unichar{U+2205}
+		20   Vt \unichar{U+2190} \unichar{U+2205}
+		21   foreach v \unichar{U+2208} (V - \{s\}) do
+		22       if v.\unichar{U+03C0} \unichar{U+2260} NULL then
+		23           Vt \unichar{U+2190} Vt \unichar{U+222A} \{v\}
+		24           Et \unichar{U+2190} Et \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
+	\end{verbatim}
 
         Il costo di inizializzazione dell'algoritmo in termini di tempo di
         esecuzione é \math{O(\abs{V})}, perché viene compiuto un numero

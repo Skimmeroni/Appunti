@@ -20,19 +20,19 @@
     all'insieme \math{A} se \math{A \cup \{x\}} é esso stesso
     indipendente. 
 
-    \begin{verbatim}
-        Procedure GREEDY(S, F, W)
-        1    A \unichar{U+2190} \unichar{U+2205}
-        2    S \unichar{U+2190} S ordinato per peso W decrescente
+	\begin{verbatim}
+		procedure STANDARD-GREEDY-ALGORITHM(S, F, W)
+		1    A \unichar{U+2190} \unichar{U+2205}
+		2    S \unichar{U+2190} S ordinato per peso W decrescente
 
-             \bigskip
-        3    for i from 1 to |S| do
-        4        if (\{s\textsubscript{i}\} \unichar{U+222A} A) \unichar{U+2208} F then
-        5            A \unichar{U+2190} \{s\textsubscript{i}\} \unichar{U+222A} A
+		\bigskip
+		3    for i from 1 to |S| do
+		4        if (\{s\textsubscript{i}\} \unichar{U+222A} A) \unichar{U+2208} F then
+		5            A \unichar{U+2190} \{s\textsubscript{i}\} \unichar{U+222A} A
 
-             \bigskip
-        6    return A
-    \end{verbatim}
+		\bigskip
+		6    return A
+	\end{verbatim}
 
     \begin{theorem}
         L'algoritmo greedy standard restituisce sempre un sottoinsieme

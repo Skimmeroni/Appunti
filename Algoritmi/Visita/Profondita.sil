@@ -224,21 +224,21 @@
 
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			DFS(G)
-			1    foreach v ∈ V do
-			2        color[v] = W
-			3        π[v] = NULL
-			4        d[v] = 0
-			5        f[v] = 0
-			6    time = 0
-			7    foreach v ∈ V do
-			8        if color[v] is W then
-			9            DFS_visit(G, v)
+			procedure DFS(G)
+			 1    foreach v ∈ V do
+			 2        color[v] = W
+			 3        π[v] = NULL
+			 4        d[v] = 0
+			 5        f[v] = 0
+			 6    time = 0
+			 7    foreach v ∈ V do
+			 8        if color[v] is W then
+			 9            DFS_visit(G, v)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			DFS_visit(G, u)
+			procedure DFS_visit(G, u)
 			10    time = time + 1
 			11    d[u] = time
 			12    color[u] = G
@@ -266,21 +266,21 @@
 
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			DFS(G)
-			1    foreach v ∈ V do
-			2        color[v] = W
-			3        π[v] = NULL
-			4        d[v] = 0
-			5        f[v] = 0
-			6    time = 0
-			7    foreach v ∈ V do
-			8        if color[v] is W then
-			9            DFS_visit(G, v)
+			procedure DFS(G)
+			 1    foreach v ∈ V do
+			 2        color[v] = W
+			 3        π[v] = NULL
+			 4        d[v] = 0
+			 5        f[v] = 0
+			 6    time = 0
+			 7    foreach v ∈ V do
+			 8        if color[v] is W then
+			 9            DFS_visit(G, v)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			DFS_visit(G, u)
+			procedure DFS_visit(G, u)
 			10    time = time + 1
 			11    d[u] = time
 			12    color[u] = G
@@ -318,21 +318,21 @@
 
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			DFS(G)
-			1    foreach v ∈ V do
-			2        color[v] = W
-			3        π[v] = NULL
-			4        d[v] = 0
-			5        f[v] = 0
-			6    time = 0
-			7    foreach v ∈ V do
-			8        if color[v] is W then
-			9            DFS_visit(G, v)
+			procedure DFS(G)
+			 1    foreach v ∈ V do
+			 2        color[v] = W
+			 3        π[v] = NULL
+			 4        d[v] = 0
+			 5        f[v] = 0
+			 6    time = 0
+			 7    foreach v ∈ V do
+			 8        if color[v] is W then
+			 9            DFS_visit(G, v)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			DFS_visit(G, u)
+			procedure DFS_visit(G, u)
 			10    time = time + 1
 			11    d[u] = time
 			12    color[u] = G

@@ -67,11 +67,11 @@
 		in output \math{c[1, |X|]}, la cella che contiene la soluzione del
 		problema.
 
-		\begin{verbatim}
-		    procedure PAL-CLOSURE(X)
-		        for i = 0 to |X| do
-		            for j = 0 to |X| do
-		                c[i, j] = 0
+	\begin{verbatim}
+		procedure PAL-CLOSURE(X)
+		    for i = 0 to |X| do
+		        for j = 0 to |X| do
+		            c[i, j] = 0
 
 		    \bigskip
 		    for i = |X| down to 1 do
@@ -84,6 +84,6 @@
 
 		    \bigskip
 		    return c[1, |X|]
-		\end{verbatim}
+	\end{verbatim}
 
 \end{sile}

@@ -28,16 +28,16 @@
 
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			DFS(G)
-			1    foreach v ∈ V do
-			2        color[v] = W
-			3        π[v] = NULL
-			4        d[v] = 0
-			5        f[v] = 0
-			6    time = 0
-			7    S = []
-			8    foreach v ∈ V do
-			9        if color[v] is W then
+			procedure DFS(G)
+			 1    foreach v ∈ V do
+			 2        color[v] = W
+			 3        π[v] = NULL
+			 4        d[v] = 0
+			 5        f[v] = 0
+			 6    time = 0
+			 7    S = []
+			 8    foreach v ∈ V do
+			 9        if color[v] is W then
 			10            DFS_visit(G, v)
 			11    while not isEmpty(S) do
 			12        pop(S)
@@ -45,7 +45,7 @@
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			DFS_visit(G, u)
+			procedure DFS_visit(G, u)
 			13    time = time + 1
 			14    d[u] = time
 			15    color[u] = G
