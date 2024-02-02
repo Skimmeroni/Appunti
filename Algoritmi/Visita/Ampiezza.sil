@@ -1,97 +1,75 @@
 \begin{sile}
 
-        Una breadth-first search di un grafo \math{G = (V, E)} non orientato
-        e non pesato a partire da una sorgente \math{s} viene indicata come
-        \math{\mi{BFS}(G, s)}. Concettualmente, una BFS opera come segue:
+        Dato un grafo \math{G = (V, E)} ed un vertice distinto \math{s
+        \in V} detto \strong{sorgente}, una \strong{visita in ampiezza},
+        o \strong{Breadth-First Search} (\strong{BFS}) ispeziona tutti
+        gli archi di \math{G} per individuare tutti quei vertici di
+        \math{G} che é possibile raggiungere seguendo un cammino che ha
+        inizio in \math{s}.
+
+        Concettualmente, una BFS opera come segue: prima viene visitata
+        la sorgente \math{s}, poi vengono visitati uno dopo l'altro tutti
+        i vertici adiacenti ad \math{s}, poi vengono visitati uno dopo
+        l'altro tutti i vertici adiacenti dei vertici adiacenti ad \math{s
+        \unicodeellipsis} In altri termini, vengono prima individuati i
+        vertici che distano 0 da \math{s} (sé stesso), poi i vertici che
+        distano 1 da \math{s}, poi i vertici che distano 2 da \math{s},
+        \math{\unicodeellipsis} dove con \strong{distanza fra due vertici}
+        si intende il numero minimo di archi che compongono un cammino fra
+        i due.
+
+        L'algoritmo per la visita in ampiezza di un grafo necessita di 
+        assegnare degli attributi ai suoi vertici. Per ciascun vertice
+        \math{v}, gli attributi sono i seguenti:
 
         \begin{enumerate}
-            \begin{item}
-                Viene visitata la sorgente \math{s};
-            \end{item}
-            \begin{item}
-                Vengono visitati uno dopo l'altro tutti
-                i vertici adiacenti ad \math{s};
-            \end{item}
-            \begin{item}
-                Vengono visitati uno dopo l'altro tutti
-                i vertici adiacenti dei vertici adiacenti
-                ad \math{s \unicodeellipsis};
-            \end{item}
+                \begin{item}
+                        Un colore, indicato con \math{v.color}, che
+                        rappresenta lo stato del vertice all'iterazione
+                        corrente. I possibili colori sono tre:
+
+                        \begin{itemize}
+                                \begin{item}
+                                        Bianco: il vertice non é stato ancora visitato;
+                                \end{item}
+                                \begin{item}
+                                        Grigio: il vertice é stato \strong{scoperto}, ovvero
+                                        é stato visitato ma alcuni vertici a questo adiacenti
+                                        non lo sono ancora stati;
+                                \end{item}
+                                \begin{item}
+                                        Nero: il vertice é stato visitato e tutti vertici
+                                        a questo adiacenti sono stati visitati;
+                                \end{item}
+                        \end{itemize}
+                \end{item}
+                \begin{item}
+                        La distanza dalla sorgente, indicata con \math{v.d};
+                \end{item}
+                \begin{item}
+                        Il predecessore di tale vertice nel cammino dalla
+                        sorgente, indicato con \math{v.\pi};
+                \end{item}
         \end{enumerate}
 
         \bigskip
 
-        In altri termini, vengono prima calcolati i vertici che distano
-        0 da \math{s} (sé stesso), poi i vertici che distano 1 da \math{s},
-        poi i vertici che distano 2 da \math{s}, \math{\unicodeellipsis}
-        dove con \strong{distanza fra due vertici} si intende il numero
-        minimo di archi che compongono un cammino fra i due.
+        All'inizio della visita, a ciascun vertice viene assegnato
+        il colore bianco, un valore \math{d} pari a \math{\infty} (ad
+        eccezione della sorgente \math{s}, che ha \math{s.d = 0}) ed
+        un valore \math{\pi} pari a NULL. Alla fine della visita, a
+        tutti i vertici raggiungibili dalla sorgente sará assegnato il
+        colore nero ed i relativi valori di \math{d} e di \math{\pi}.
+        Se alla fine della visita sono ancora presenti dei vertici di
+        colore bianco che hanno \math{\infty} come attributo distanza
+        e NULL come attributo predecessore, allora significa che non vi
+        é modo di raggiungerli a partire dalla sorgente.
 
-        In una visita in ampiezza vengono raggiunti una ed una sola volta
-        tutti e i soli vertici raggiungibili a partire dalla sorgente, e
-        permette di ricavarne la distanza dalla sorgente. Nel fare questo
-        viene a costituirsi una struttura ad albero, con la sorgente come
-        radice e dove al livello \math{i}-esimo dell'albero si trovano
-        tutti i vertici che distano \math{i} dalla sorgente.
-
-        L'algoritmo per la costruzione di una BFS prevede di associare tre
-        campi a ciascun vertice:
-
-        \begin{itemize}
-            \begin{item}
-                Un campo \math{c}, che contiene il \em{colore} associato al
-                vertice. Tale colore indica lo stato del vertice all'iterazione
-                corrente dell'algoritmo. I colori in questione sono tre:
-
-                \begin{itemize}
-                    \begin{item}
-                        Bianco: il vertice non é stato ancora visitato;
-                    \end{item}
-                    \begin{item}
-                        Grigio: il vertice é stato visitato ma alcuni vertici
-                        a questo adiacenti non sono stati ancora visitati;
-                    \end{item}
-                    \begin{item}
-                        Nero: il vertice é stato visitato e tutti vertici
-                        a questo adiacenti sono stati visitati;
-                    \end{item}
-                \end{itemize}
-            \end{item}
-            \begin{item}
-                Un campo \math{d}, che contiene la distanza del vertice dalla
-                sorgente;
-            \end{item}
-            \begin{item}
-                Un campo \math{\pi}, che contiene il predecessore del vertice
-                nell'albero indotto dalla visita.
-            \end{item}
-        \end{itemize}
-
-        \bigskip
-
-        All'inizio della visita, tutti i vertici hanno assegnato il colore
-        bianco, un valore \math{d} pari a \math{\infty} (ad eccezione della
-        sorgente che ha assegnato 0) ed un valore \math{\pi} pari a NULL.
-        Alla fine della visita, tutti i vertici raggiungibili dalla sorgente
-        avranno assegnato il colore nero ed i relativi valori per \math{d} e
-        per \math{\pi}, mentre i vertici non raggiungibili dalla sorgente 
-        avranno ancora assegnato il colore bianco, un valore \math{d} ancora
-        pari a \math{\infty} ed un valore \math{\pi} ancora pari a NULL.
-
-        L'algoritmo per la costruzione di una BFS utilizza una coda di
-        prioritá, nella quale vengono messi i vertici non appena vengono
-        visitati e nella quale rimangono fino a quando estratti per
-        esplorarne gli adiacenti. L'algoritmo termina quando la coda é
-        vuota, ovvero quando non esistono piú vertici grigi. Infatti, un
-        vertice puó venire associato il colore grigio solamente durante
-        la visita, mai prima e mai dopo.
-
-        Una volta assegnati i valori corretti ai tre campi per ciascun
-        vertice é possibile costruire l'albero \math{T = (V_{T}, E_{T})}
-        indotto dalla visita a partire dai valori \math{\pi}. Tale albero
-        conterrá tutti i vertici che alla fine dell'esecuzione dell'algoritmo
-        hanno bianco come colore e come archi tutti gli archi formati da un
-        vertice di \math{V_{T}} e dal rispettivo predecessore.
+        L'algoritmo per la visita in ampiezza di un grafo é presentato di 
+        seguto. Questo, dopo aver inizializzato gli attributi di ciascun 
+        vertice (righe 1-6) fa uso di una coda di prioritá, nella quale
+        vengono messi i vertici non appena vengono visitati e nella quale
+        rimangono fino a quando estratti per esplorarne gli adiacenti.
 
 	\begin{verbatim}
 		procedure BFS(V, E, s)
@@ -106,28 +84,36 @@
 
 		     \bigskip
 		 7   Q \unichar{U+2190} \unichar{U+2205}
-		 8   enqueue(Q, s)
+		 8   ENQUEUE(Q, s)
 
 		     \bigskip
 		 9   while Q \unichar{U+2260} \unichar{U+2205} do
-		10        v \unichar{U+2190} head(Q)
+		10        v \unichar{U+2190} HEAD(Q)
 		11        foreach v \unichar{U+2208} adj(v) do
 		12            if u.color == W then
 		13                u.color \unichar{U+2190} G
-		14                enqueue(Q, u)
+		14                ENQUEUE(Q, u)
 		15                u.d \unichar{U+2190} v.d + 1
 		16                u.\unichar{U+03C0} \unichar{U+2190} v
 		17        v.color \unichar{U+2190} B
-		18        dequeue(Q)
-
-		     \bigskip
-		19   Et \unichar{U+2190} \unichar{U+2205}
-		20   Vt \unichar{U+2190} \unichar{U+2205}
-		21   foreach v \unichar{U+2208} (V - \{s\}) do
-		22       if v.\unichar{U+03C0} \unichar{U+2260} NULL then
-		23           Vt \unichar{U+2190} Vt \unichar{U+222A} \{v\}
-		24           Et \unichar{U+2190} Et \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
+		18        DEQUEUE(Q)
 	\end{verbatim}
+
+        L'algoritmo continua fintanto che vi sono ancora vertici nella
+        coda di prioritá. Il primo vertice \math{v} fra questi viene
+        estratto dalla coda, ed il loop interno (righe 11-16) analizza
+        ciascun vertice adiacente a \math{v}. Ognuno di questi viene
+        esplorato, assegnandogli il colore grigio, incrementando di
+        uno la sua distanza dalla sorgente e ponendo \math{v} come suo
+        predecessore. Dopodiché, viene assegnato a \math{v} il colore
+        nero e viene rimosso dalla coda.
+
+        L'algoritmo termina quando la coda di prioritá é vuota, ovvero
+        quando non esistono piú vertici grigi, perché significa che tutti
+        i vertici visitabili sono stati visitati e tutti i vertici rimasti
+        bianchi non sono raggiungibili. É infatti facile verificare che
+        ad un vertice puó venire assegnato il colore grigio solamente
+        \em{durante} la visita, mai prima e mai dopo.
 
         Il costo di inizializzazione dell'algoritmo in termini di tempo di
         esecuzione é \math{O(\abs{V})}, perché viene compiuto un numero
@@ -139,5 +125,66 @@
         principale dell'algoritmo in termini di tempo di esecuzione é
         \math{O(\abs{E})}. Il tempo di esecuzione complessivo dell'algoritmo
         viene allora ad essere \math{O(\abs{V} + \abs{E})}.
+
+        Per un grafo \math{G = (V, E)} con sorgente \math{s \in V}, é
+        detto \strong{sottografo dei predecessori} di \math{G} il grafo
+        \math{G_{\pi} = (V_{\pi}, E_{\pi})} dove
+
+        \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                        V_{\pi} = \{v \in V: v.\pi \ne \mi{NULL}\} \cup \{s\}
+                \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+                \begin[mode = display]{math}
+                        E_{\pi} = \{(v.\pi, v): v \in V_{\pi} - \{s\}\}
+                \end{math}
+        \end{parbox}
+        \par
+
+        Il sottografo dei predecessori \math{G_{\pi}} é un \strong{albero BF}
+        se \math{V_{\pi}} é formato dai vertici raggiungibili da \math{s} e,
+        per ogni \math{v \in V_{\pi}}, c'é un solo cammino semplice da
+        \math{s} a \math{v} in \math{G_{\pi}} che é anche un cammino minimo 
+        da \math{s} a \math{v} in \math{G}. Un albero BF ha la sorgente come
+        radice ed al suo livello \math{i}-esimo si trovano tutti i vertici
+        che distano \math{i} dalla sorgente. Si noti come una struttura di
+        questo tipo sia effettivamente un albero, perché é un grafo connesso
+        e \math{\abs{E_{\pi}} = \abs{V_{\pi}} - 1}
+
+        Una volta operata una visita in ampiezza e aver assegnato a ciascun
+        vertice i valori per i tre attributi, é possibile costruire l'albero
+        BF associato alla visita. Per farlo, occorre costruire un algortimo
+        che restituisca un insieme \math{V_{\pi}} in cui sono presenti tutti
+        i vertici che sono stati raggiunti dalla visita in ampiezza ed un
+        insieme \math{E_{\pi}} in cui sono presenti tutti gli archi che dalla
+        sorgente portano a tali vertici. Tale algoritmo avrá in input la
+        sorgente \math{s} e l'insieme \math{V'}, ovvero l'insieme dei vertici
+        \math{V} dove ciascuno di questi é stato arricchito con i valori dei
+        tre attributi.
+
+        I vertici raggiunti dalla visita in ampiezza sono tutti ed i
+        soli vertici di colore nero, pertanto é sufficiente aggiungere
+        a \math{V_{\pi}} tutti i vertici neri. Per quanto riguarda
+        \math{E_{\pi}}, questo sará costituito da tutti gli archi che
+        connettono un vertice ad un suo predecessore, perché ripercorrendo
+        a ritroso tutti i predecessori da ciascun vertice alla sorgente
+        si ottengono tutti i cammini che vanno dalla sorgente a tale
+        vertice.
+
+	\begin{verbatim}
+		procedure BUILD-BF-TREE(V', s)
+		1    E\unichar{U+03C0} \unichar{U+2190} \unichar{U+2205}
+		2    V\unichar{U+03C0} \unichar{U+2190} \unichar{U+2205}
+
+                     \bigskip
+		3    foreach v \unichar{U+2208} (V' - \{s\}) do
+		4        if v.\unichar{U+03C0} \unichar{U+2260} NULL and v.color == B then
+		5            V\unichar{U+03C0} \unichar{U+2190} V\unichar{U+03C0} \unichar{U+222A} \{v\}
+		6            E\unichar{U+03C0} \unichar{U+2190} E\unichar{U+03C0} \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
+
+                     \bigskip
+		7    return E\unichar{U+03C0}, V\unichar{U+03C0}
+	\end{verbatim}
 
 \end{sile}
