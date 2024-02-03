@@ -262,15 +262,15 @@
 
 	\begin{verbatim}
 		procedure FW(W)
-		    n = W.rows
-		    D\textsuperscript{(0)} = W
+		    n \unichar{U+2190} W.rows
+		    D\textsuperscript{(0)} \unichar{U+2190} W
 
 		    \bigskip
-		    for k = 1 to n do
+		    for k \unichar{U+2190} 1 to n do
 		        D\textsuperscript{(k)} nuova matrice n x n
-		        for i = 1 to n do
-		            for j = 1 to n do
-		                D\textsuperscript{(k)}[i, j] = min(D\textsuperscript{(k - 1)}[i, j], D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j])
+		        for i \unichar{U+2190} 1 to n do
+		            for j \unichar{U+2190} 1 to n do
+		                D\textsuperscript{(k)}[i, j] \unichar{U+2190} min(D\textsuperscript{(k - 1)}[i, j], D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j])
 
 		    \bigskip
 		    return D\textsuperscript{(n)}
@@ -372,27 +372,27 @@
 	\begin[width = 60%fw]{parbox}
 		\begin{verbatim}
 			procedure FW(W)
-			    n = W.rows
-			    D\textsuperscript{(0)} = W
-			    for i = 1 to n do
-			        for j = 1 to n do
+			    n \unichar{U+2190} W.rows
+			    D\textsuperscript{(0)} \unichar{U+2190} W
+			    for i \unichar{U+2190} 1 to n do
+			        for j \unichar{U+2190} 1 to n do
 			            if D\textsuperscript{(0)}[i, j] \unichar{U+2260} \unichar{U+221E} and i \unichar{U+2260} j then
-			                \unichar{U+03A0}\textsuperscript{(0)} = i
+			                \unichar{U+03A0}\textsuperscript{(0)} \unichar{U+2190} i
 			            else
-			                \unichar{U+03A0}\textsuperscript{(0)} = NULL
+			                \unichar{U+03A0}\textsuperscript{(0)} \unichar{U+2190} NULL
 
 			    \bigskip
-			    for k = 1 to n do
+			    for k \unichar{U+2190} 1 to n do
 			        D\textsuperscript{(k)} nuova matrice n x n
 			        \unichar{U+03A0}\textsuperscript{(k)} nuova matrice n x n
-			        for i = 1 to n do
-			            for j = 1 to n do
+			        for i \unichar{U+2190} 1 to n do
+			            for j \unichar{U+2190} 1 to n do
 			                if (D\textsuperscript{(k - 1)}[i, j] \unichar{U+2264} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]) then
-			                    D\textsuperscript{(k)}[i, j] = D\textsuperscript{(k - 1)}[i, j]
-			                    \unichar{U+03A0}\textsuperscript{k}[i, j] = \unichar{U+03A0}\textsuperscript{(k - 1)}[i, j]
+			                    D\textsuperscript{(k)}[i, j] \unichar{U+2190} D\textsuperscript{(k - 1)}[i, j]
+			                    \unichar{U+03A0}\textsuperscript{k}[i, j] \unichar{U+2190} \unichar{U+03A0}\textsuperscript{(k - 1)}[i, j]
 			                else
-			                    D\textsuperscript{(k)}[i, j] = D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]
-			                    \unichar{U+03A0}\textsuperscript{(k)}[i, j] = \unichar{U+03A0}\textsuperscript{(k - 1)}[k, j]
+			                    D\textsuperscript{(k)}[i, j] \unichar{U+2190} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]
+			                    \unichar{U+03A0}\textsuperscript{(k)}[i, j] \unichar{U+2190} \unichar{U+03A0}\textsuperscript{(k - 1)}[k, j]
 
 			    \bigskip
 			    return D\textsuperscript{(n)}, \unichar{U+03A0}\textsuperscript{(n)}
@@ -401,15 +401,15 @@
 	\begin[width = 40%fw]{parbox}
 		\begin{verbatim}
 			procedure PRINT-FW(\unichar{U+03A0})
-			    for i = 1 to \unichar{U+03A0}.rows do
-			        for j = 1 to \unichar{U+03A0}.columns do
+			    for i \unichar{U+2190} 1 to \unichar{U+03A0}.rows do
+			        for j \unichar{U+2190} 1 to \unichar{U+03A0}.columns do
 			            PRINT-PATH(\unichar{U+03A0}, i, j)
 
 			    \bigskip
 			    procedure PRINT-PATH(\unichar{U+03A0}, i, j)
-			        if i == j then
+			        if i = j then
 			            print i
-			        else if \unichar{U+03A0}[i, j] == NULL then
+			        else if \unichar{U+03A0}[i, j] = NULL then
 			            print NULL
 			        else
 			            PRINT-PATH(\unichar{U+03A0}, i, \unichar{U+03A0}[i, j])

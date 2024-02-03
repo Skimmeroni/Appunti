@@ -5,18 +5,27 @@
         o \strong{Breadth-First Search} (\strong{BFS}) ispeziona tutti
         gli archi di \math{G} per individuare tutti quei vertici di
         \math{G} che é possibile raggiungere seguendo un cammino che ha
-        inizio in \math{s}.
+        inizio in \math{s}. Concettualmente, una BFS opera come segue:
 
-        Concettualmente, una BFS opera come segue: prima viene visitata
-        la sorgente \math{s}, poi vengono visitati uno dopo l'altro tutti
-        i vertici adiacenti ad \math{s}, poi vengono visitati uno dopo
-        l'altro tutti i vertici adiacenti dei vertici adiacenti ad \math{s
-        \unicodeellipsis} In altri termini, vengono prima individuati i
-        vertici che distano 0 da \math{s} (sé stesso), poi i vertici che
-        distano 1 da \math{s}, poi i vertici che distano 2 da \math{s},
-        \math{\unicodeellipsis} dove con \strong{distanza fra due vertici}
-        si intende il numero minimo di archi che compongono un cammino fra
-        i due.
+        \begin{enumerate}
+                \begin{item}
+                        Viene visitata la sorgente \math{s}, ovvero il vertice
+                        che ha distanza 0 dalla sorgente;
+                \end{item}
+                \begin{item}
+                        Vengono visitati uno dopo l'altro tutti i vertici
+                        adiacenti ad \math{s}, ovvero quei vertici che
+                        distano 1 dalla sorgente;
+                \end{item}
+                \begin{item}
+                        Vengono visitati uno dopo l'altro tutti i vertici
+                        adiacenti ai vertici adiacenti ad \math{s}, ovvero
+                        quei vertici che distano 2 dalla sorgente,
+                        ecc\math{\unicodeellipsis}
+                \end{item}
+        \end{enumerate}
+
+        \bigskip
 
         L'algoritmo per la visita in ampiezza di un grafo necessita di 
         assegnare degli attributi ai suoi vertici. Per ciascun vertice
@@ -38,8 +47,8 @@
                                         non lo sono ancora stati;
                                 \end{item}
                                 \begin{item}
-                                        Nero: il vertice é stato visitato e tutti vertici
-                                        a questo adiacenti sono stati visitati;
+                                        Nero: il vertice é stato visitato e tutti i
+                                        vertici a questo adiacenti sono stati visitati;
                                 \end{item}
                         \end{itemize}
                 \end{item}
@@ -48,7 +57,7 @@
                 \end{item}
                 \begin{item}
                         Il predecessore di tale vertice nel cammino dalla
-                        sorgente, indicato con \math{v.\pi};
+                        sorgente, indicato con \math{v.\pi}.
                 \end{item}
         \end{enumerate}
 
@@ -90,7 +99,7 @@
 		 9   while Q \unichar{U+2260} \unichar{U+2205} do
 		10        v \unichar{U+2190} HEAD(Q)
 		11        foreach v \unichar{U+2208} adj(v) do
-		12            if u.color == W then
+		12            if u.color = W then
 		13                u.color \unichar{U+2190} G
 		14                ENQUEUE(Q, u)
 		15                u.d \unichar{U+2190} v.d + 1
@@ -179,7 +188,7 @@
 
                      \bigskip
 		3    foreach v \unichar{U+2208} (V' - \{s\}) do
-		4        if v.\unichar{U+03C0} \unichar{U+2260} NULL and v.color == B then
+		4        if v.\unichar{U+03C0} \unichar{U+2260} NULL and v.color = B then
 		5            V\unichar{U+03C0} \unichar{U+2190} V\unichar{U+03C0} \unichar{U+222A} \{v\}
 		6            E\unichar{U+03C0} \unichar{U+2190} E\unichar{U+03C0} \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
 

@@ -200,16 +200,16 @@
 
 		\begin{verbatim}
 			procedure LCS(X, Y)
-			    for i = 0 to |X| do
-			        c[i, 0] = 0
-			    for j = 0 to |Y| do
-			        c[0, j] = 0
+			    for i \unichar{U+2190} 0 to |X| do
+			        c[i, 0] \unichar{U+2190} 0
+			    for j \unichar{U+2190} 0 to |Y| do
+			        c[0, j] \unichar{U+2190} 0
 
 			    \bigskip
-			    for i = 1 to |X| do
-			        for j = 1 to |Y| do
-			            if X[i] == Y[j] then
-			                c[i, j] = 1 + c[i - 1, j - 1]
+			    for i \unichar{U+2190} 1 to |X| do
+			        for j \unichar{U+2190} 1 to |Y| do
+			            if X[i] = Y[j] then
+			                c[i, j] \unichar{U+2190} 1 + c[i - 1, j - 1]
 			            else
 			                c[i, j] = max(c[i, j - 1], c[i - 1, j])
 
@@ -318,23 +318,23 @@
 		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
 				procedure LCS(X, Y)
-				    for i = 0 to |X| do
-				        c[i, 0] = 0
-				    for j = 0 to |Y| do
-				        c[0, j] = 0
+				    for i \unichar{U+2190} 0 to |X| do
+				        c[i, 0] \unichar{U+2190} 0
+				    for j \unichar{U+2190} 0 to |Y| do
+				        c[0, j] \unichar{U+2190} 0
 
 				    \bigskip
-				    for i = 1 to |X| do
-				        for j = 1 to |Y| do
-				            if X[i] == Y[j] then
-				                c[i, j] = 1 + c[i - 1, j - 1]
-				                b[i, j] = "\unichar{U+2196}"
+				    for i \unichar{U+2190} 1 to |X| do
+				        for j \unichar{U+2190} 1 to |Y| do
+				            if X[i] = Y[j] then
+				                c[i, j] \unichar{U+2190} 1 + c[i - 1, j - 1]
+				                b[i, j] \unichar{U+2190} "\unichar{U+2196}"
 				            else if c[i - 1, j] > c[i, j - 1] then
-				                c[i, j] = c[i - 1, j]
-				                b[i, j] = "\unichar{U+2191}"
+				                c[i, j] \unichar{U+2190} c[i - 1, j]
+				                b[i, j] \unichar{U+2190} "\unichar{U+2191}"
 				            else
-				                c[i, j] = c[i, j - 1]
-				                b[i, j] = "\unichar{U+2190}"
+				                c[i, j] \unichar{U+2190} c[i, j - 1]
+				                b[i, j] \unichar{U+2190} "\unichar{U+2190}"
 
 				    \bigskip
 				    return c, b
@@ -343,14 +343,14 @@
 		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
 				procedure PRINT-LCS(b, X, i, j)
-				    if i == 0 or j == 0 then
+				    if i = 0 or j = 0 then
 				        return
 
 				    \bigskip
-				    if b[i, j] == "\unichar{U+2196}" then
+				    if b[i, j] = "\unichar{U+2196}" then
 				        PRINT-LCS(b, X, i - 1, j - 1)
 				        print X[i]
-				    else if b[i, j] == "\unichar{U+2191}" then
+				    else if b[i, j] = "\unichar{U+2191}" then
 				        PRINT-LCS(b, X, i - 1, j)
 				    else
 				        PRINT-LCS(b, X, i, j - 1)							

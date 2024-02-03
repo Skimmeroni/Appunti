@@ -26,7 +26,7 @@
 		2    S \unichar{U+2190} S ordinato per peso W decrescente
 
 		\bigskip
-		3    for i = 1 to |S| do
+		3    for i \unichar{U+2190} 1 to |S| do
 		4        if (\{s\textsubscript{i}\} \unichar{U+222A} A) \unichar{U+2208} F then
 		5            A \unichar{U+2190} \{s\textsubscript{i}\} \unichar{U+222A} A
 

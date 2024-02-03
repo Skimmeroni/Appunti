@@ -253,12 +253,12 @@
 
 		\begin{verbatim}
 			procedure HATEVILLE(A)
-			    c[0] = 0
-			    c[1] = A[1]
+			    c[0] \unichar{U+2190} 0
+			    c[1] \unichar{U+2190} A[1]
 
 			    \bigskip
-			    for i = 2 to |A| do
-			        c[i] = max(c[i - 1], c[i - 2] + A[i - 1])
+			    for i \unichar{U+2190} 2 to |A| do
+			        c[i] \unichar{U+2190} max(c[i - 1], c[i - 2] + A[i - 1])
 
 			    \bigskip
 			    return c
@@ -278,18 +278,18 @@
 
 		\begin{verbatim}
 			procedure HATEVILLE(A)
-			    c[0] = 0
-			    c[1] = A[1]
-			    S = \unichar{U+2205}
+			    c[0] \unichar{U+2190} 0
+			    c[1] \unichar{U+2190} A[1]
+			    S \unichar{U+2190} \unichar{U+2205}
 
 			    \bigskip
-			    for i = 2 to |A| do
+			    for i \unichar{U+2190} 2 to |A| do
 			        if (c[i - 1] > c[i - 2] + A[i - 1]) then 
-			            c[i] = c[i - 1]
-			            S[i] = S[i - 1]
+			            c[i] \unichar{U+2190} c[i - 1]
+			            S[i] \unichar{U+2190} S[i - 1]
 			        else
-			            c[i] = c[i - 2] + A[i - 1]
-			            S[i] = S[i - 2] \unichar{U+222A} \{i\}
+			            c[i] \unichar{U+2190} c[i - 2] + A[i - 1]
+			            S[i] \unichar{U+2190} S[i - 2] \unichar{U+222A} \{i\}
 
 			    \bigskip
 			    return (c[|A|], S[|A|])

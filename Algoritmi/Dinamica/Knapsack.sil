@@ -262,17 +262,17 @@
 
         \begin{verbatim}
 		procedure KNAPSACK(V, W, C)
-		    for i = 0 to |V| do
-		        for c = 0 to C do
-		            d[i, c] = 0
+		    for i \unichar{U+2190} 0 to |V| do
+		        for c \unichar{U+2190} 0 to C do
+		            d[i, c] \unichar{U+2190} 0
 
 		    \bigskip
-		    for i = 1 to |V| do
-		        for c = 1 to C do
-		            d[i, c] = d[i - 1, c]
-		            temp = d[i - 1, c - W[i]] + V[i]
-		            if (c >= W[i]) and (temp > d[i, c]) then
-		                d[i, c] = temp
+		    for i \unichar{U+2190} 1 to |V| do
+		        for c \unichar{U+2190} 1 to C do
+		            d[i, c] \unichar{U+2190} d[i - 1, c]
+		            temp \unichar{U+2190} d[i - 1, c - W[i]] + V[i]
+		            if (c \unichar{U+2265} W[i]) and (temp > d[i, c]) then
+		                d[i, c] \unichar{U+2190} temp
 
 		    \bigskip
 		    return d
@@ -373,8 +373,8 @@
         \begin{verbatim}
 		procedure PRINT-KNAPSACK(D, W, i, c)
 		    if i > 0 and c > 0 then
-		        if c >= W[i] then
-		            if D[i, c] == D[i - 1, c] then
+		        if c \unichar{U+2265} W[i] then
+		            if D[i, c] = D[i - 1, c] then
 		                PRINT-KNAPSACK(D, W, i - 1, c)
 		            else
 		                PRINT-KNAPSACK(D, W, i - 1, c - W[i])

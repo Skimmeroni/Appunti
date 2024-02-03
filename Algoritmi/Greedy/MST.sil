@@ -54,7 +54,7 @@
 		1    A \unichar{U+2190} \unichar{U+2205}
 
 		\bigskip
-		2    while G\textsubscript{A} = (V, A) \unichar{U+2260} MST do
+		2    while G\textsubscript{A} \unichar{U+2260} MST do
 		3        trova arco (u, v) sicuro per A
 		4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
 
@@ -239,10 +239,10 @@
 	\begin{verbatim}
 		procedure KRUSKAL-MST(E)
 		1    A \unichar{U+2190} \unichar{U+2205}
-		2    E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+		2    E \unichar{U+2190} <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
 
 		     \bigskip
-		3    for i from 1 to n do
+		3    for i \unichar{U+2190} 1 to n do
 		4        if e\textsubscript{i} é arco sicuro then
 		5            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
 
@@ -257,12 +257,12 @@
 	\begin{verbatim}
 		procedure KRUSKAL-MST(V, E, W)
 		1    A \unichar{U+2190} \unichar{U+2205}
-		2    E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+		2    E \unichar{U+2190} <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
 
 		     \bigskip
-		3    for i from 1 to n do
+		3    for i \unichar{U+2190} 1 to n do
 		4        (u, v) \unichar{U+2190} e\textsubscript{i} 
-		5        if u e v \unichar{U+2209} stesso albero in G\textsubscript{A} = (V, A) then
+		5        if u e v \unichar{U+2209} stesso albero in G\textsubscript{A} then
 		6            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
 
 		     \bigskip
@@ -287,12 +287,12 @@
 	\begin{verbatim}
 		procedure KRUSKAL-MST(V, E, W)
 		 1    A \unichar{U+2190} \unichar{U+2205}
-		 2    E = <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+		 2    E \unichar{U+2190} <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
 		 3    foreach v \unichar{U+2208} V do
 		 4        MAKE_SET(v)
 
 		      \bigskip
-		 5    for i from 1 to n do
+		 5    for i \unichar{U+2190} 1 to n do
 		 6        (u, v) \unichar{U+2190} e\textsubscript{i} 
 		 7        if FIND_SET(u) \unichar{U+2260} FIND_SET(v) then
 		 8            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}

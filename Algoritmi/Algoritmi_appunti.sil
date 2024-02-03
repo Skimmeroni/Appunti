@@ -79,7 +79,6 @@
 	\pdf:metadata[key = Author, value = Shania]
 	\math{\def{abs}{\mn{|} #1 \mn{|}}}
 
-
 	% \center{\img[src = Algoritmi_copertina.jpg, width = 75%pw]}
 
 	\pagebreak

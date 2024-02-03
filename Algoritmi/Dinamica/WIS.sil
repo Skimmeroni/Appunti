@@ -342,11 +342,11 @@
 
 		\begin{verbatim}
 			procedure WIS(X)
-			   c[0] = 0
+			   c[0] \unichar{U+2190} 0
 
 			   \bigskip
-			   for i = 1 to |X| do
-			       c[i] = max(c[i - 1], c[p[i]] + X[i])
+			   for i \unichar{U+2190} 1 to |X| do
+			       c[i] \unichar{U+2190} max(c[i - 1], c[p[i]] + X[i])
 
 			   \bigskip
 			   return c
@@ -368,17 +368,17 @@
 
 		\begin{verbatim}
 			procedure WIS(X)
-			    c[0] = 0
-			    S = \unichar{U+2205}
+			    c[0] \unichar{U+2190} 0
+			    S \unichar{U+2190} \unichar{U+2205}
 
 			    \bigskip
-			    for i = 1 to |X| do
+			    for i \unichar{U+2190} 1 to |X| do
 			        if (c[i - 1] > c[p[i]] + X[i]) then
-			            c[i] = c[i - 1]
-			            S[i] = S[i - 1]
+			            c[i] \unichar{U+2190} c[i - 1]
+			            S[i] \unichar{U+2190} S[i - 1]
 			        else
-			            c[i] = c[p[i]] + X[i]
-			            S[i] = S[p[i]] \unichar{U+222A} \{i\}
+			            c[i] \unichar{U+2190} c[p[i]] + X[i]
+			            S[i] \unichar{U+2190} S[p[i]] \unichar{U+222A} \{i\}
 
 			    \bigskip
 			    return (c[|X|], S[|X|])

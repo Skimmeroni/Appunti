@@ -242,33 +242,33 @@
 
         \begin{verbatim}
 		procedure INTERLEAVING(X, Y, W)
-		    c[0, 0] = T
+		    c[0, 0] \unichar{U+2190} T
 
 		    \bigskip
-		    for i = 1 to |X| do
-		        if (W[i] == X[i]) then
-		            c[i, 0] = c[i - 1, 0]
+		    for i \unichar{U+2190} 1 to |X| do
+		        if (W[i] = X[i]) then
+		            c[i, 0] \unichar{U+2190} c[i - 1, 0]
 		        else
-		            c[i, 0] = F
+		            c[i, 0] \unichar{U+2190} F
 
 		    \bigskip
-		    for j = 1 to |Y| do
-		        if (W[j] == Y[j]) then
-		            c[0, j] = c[0, j - 1]
+		    for j \unichar{U+2190} 1 to |Y| do
+		        if (W[j] = Y[j]) then
+		            c[0, j] \unichar{U+2190} c[0, j - 1]
 		        else
-		            c[0, j] = F
+		            c[0, j] \unichar{U+2190} F
 
 		    \bigskip
-		    for i = 1 to |X| do
-		        for j = 1 to |Y| do
+		    for i \unichar{U+2190} 1 to |X| do
+		        for j \unichar{U+2190} 1 to |Y| do
 		            if (W[i + j] \unichar{U+2260} X[i] and W[i + j] \unichar{U+2260} Y[j]) then
-		                c[i, j] = F
-		            else if (W[i + j] == X[i] and W[i + j] \unichar{U+2260} Y[j]) then
-		                c[i, j] = c[i - 1, j]
-		            else if (W[i + j] \unichar{U+2260} X[i] and W[i + j] == Y[j]) then
-		                c[i, j] = c[i, j - 1]
+		                c[i, j] \unichar{U+2190} F
+		            else if (W[i + j] = X[i] and W[i + j] \unichar{U+2260} Y[j]) then
+		                c[i, j] \unichar{U+2190} c[i - 1, j]
+		            else if (W[i + j] \unichar{U+2260} X[i] and W[i + j] = Y[j]) then
+		                c[i, j] \unichar{U+2190} c[i, j - 1]
 		            else 
-		                c[i, j] = (c[i - 1, j] or c[i, j - 1])
+		                c[i, j] \unichar{U+2190} (c[i - 1, j] or c[i, j - 1])
 
 		    \bigskip
 		    return c[|X|, |Y|]

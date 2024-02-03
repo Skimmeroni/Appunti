@@ -100,29 +100,29 @@
 		\begin{verbatim}
 			procedure DFS(G)
 			 1    foreach v ∈ V do
-			 2        v.color = W
-			 3        v.π = NULL
-			 4        v.d = 0
-			 5        v.f = 0
-			 6    time = 0
+			 2        v.color \unichar{U+2190} W
+			 3        v.π \unichar{U+2190} NULL
+			 4        v.d \unichar{U+2190} 0
+			 5        v.f \unichar{U+2190} 0
+			 6    time \unichar{U+2190} 0
 			 7    foreach v ∈ V do
-			 8        if v.color == W then
+			 8        if v.color = W then
 			 9            DFS-VISIT(G, v)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
 			procedure DFS-VISIT(G, u)
-			10    time = time + 1
-			11    u.d = time
-			12    u.color = G
+			10    time \unichar{U+2190} time + 1
+			11    u.d \unichar{U+2190} time
+			12    u.color \unichar{U+2190} G
 			14    foreach v ∈ adj(u) do
-			15        if v.color == W then
-			16            v.π = u
+			15        if v.color = W then
+			16            v.π \unichar{U+2190} u
 			17            DFS-VISIT(G, v)
-			18    u.color = B
-			19    time = time + 1
-			20    u.f = time
+			18    u.color \unichar{U+2190} B
+			19    time \unichar{U+2190} time + 1
+			20    u.f \unichar{U+2190} time
 		\end{verbatim}
 	\end{parbox}
 	\par
@@ -191,6 +191,8 @@
         completamento come una parentesi chiusa, allora l'insieme di tutti i
         tempi di tutti i vertici produce una formula ben formata per la
         grammatica delle parentesi.
+
+        \pagebreak
 
         \begin{theorem}
             \strong{Teorema delle parentesi}. Dato un grafo \math{G = (V, E)}
@@ -324,7 +326,6 @@
                         é un discentente di \math{u} in uno stesso albero;
                 \end{item}
                 \begin{item}
-                \end{item}
                         Se \math{v} é nero \math{(u.d > v.d)}, allora
                         \math{(u, v)} é un arco trasversale. Questo perché
                         \math{v} é stato completamente esplorato ma \math{u}
@@ -339,38 +340,38 @@
 		\begin{verbatim}
 			procedure DFS(G)
 			 1    foreach v ∈ V do
-			 2        v.color = W
-			 3        v.π = NULL
-			 4        v.d = 0
-			 5        v.f = 0
-			 6    time = 0
+			 2        v.color \unichar{U+2190} W
+			 3        v.π \unichar{U+2190} NULL
+			 4        v.d \unichar{U+2190} 0
+			 5        v.f \unichar{U+2190} 0
+			 6    time \unichar{U+2190} 0
 			 7    foreach v ∈ V do
-			 8        if v.color == W then
+			 8        if v.color = W then
 			 9            DFS-VISIT(G, v)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
 			procedure DFS-VISIT(G, u)
-			10    time = time + 1
-			11    u.d = time
-			12    u.color = G
+			10    time \unichar{U+2190} time + 1
+			11    u.d \unichar{U+2190} time
+			12    u.color \unichar{U+2190} G
 			13    foreach v ∈ adj(u) do
 			14        if v.color = W then
-			15            (u, v) = "arco T"
-			16            v.π = u
+			15            (u, v) \unichar{U+2190} "arco T"
+			16            v.π \unichar{U+2190} u
 			17            DFS-VISIT(G, v)
 			18        else
 			19            if v.color = G then
-			20                (u, v) = "arco B"
+			20                (u, v) \unichar{U+2190} "arco B"
 			21            else
 			22                if u.d < v.d then
-			23                    (u, v) = "arco F"
+			23                    (u, v) \unichar{U+2190} "arco F"
 			24                else
-			25                    (u, v) = "arco C"
-			26    u.color = B
-			27    time = time + 1
-			28    u.f = time
+			25                    (u, v) \unichar{U+2190} "arco C"
+			26    u.color \unichar{U+2190} B
+			27    time \unichar{U+2190} time + 1
+			28    u.f \unichar{U+2190} time
 		\end{verbatim}
 	\end{parbox}
 	\par
@@ -385,32 +386,32 @@
 		\begin{verbatim}
 			procedure DFS(G)
 			 1    foreach v ∈ V do
-			 2        v.color = W
-			 3        v.π = NULL
-			 4        v.d = 0
-			 5        v.f = 0
-			 6    time = 0
+			 2        v.color \unichar{U+2190} W
+			 3        v.π \unichar{U+2190} NULL
+			 4        v.d \unichar{U+2190} 0
+			 5        v.f \unichar{U+2190} 0
+			 6    time \unichar{U+2190} 0
 			 7    foreach v ∈ V do
-			 8        if v.color == W then
+			 8        if v.color = W then
 			 9            DFS-VISIT(G, v)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
 			procedure DFS-VISIT(G, u)
-			10    time = time + 1
-			11    u.d = time
-			12    u.color = G
+			10    time \unichar{U+2190} time + 1
+			11    u.d \unichar{U+2190} time
+			12    u.color \unichar{U+2190} G
 			13    foreach v ∈ adj(u) - \{u.π\} do
-			14        if v.color == W then
+			14        if v.color = W then
 			15            print "arco T"
-			16            v.π = u
+			16            v.π \unichar{U+2190} u
 			17            DFS-VISIT(G, v)
 			18        else
 			19            print "arco B"
-			20    u.color = B
-			21    time = time + 1
-			22    u.f = time
+			20    u.color \unichar{U+2190} B
+			21    time \unichar{U+2190} time + 1
+			22    u.f \unichar{U+2190} time
 		\end{verbatim}
 	\end{parbox}
 	\par

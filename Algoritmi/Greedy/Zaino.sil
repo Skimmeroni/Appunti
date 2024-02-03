@@ -79,19 +79,19 @@
 
 	\begin{verbatim}
 		procedure FRACTIONAL-KNAPSACK(n, V, W, C)
-		 1    for i = 1 to n do
-		 2        S[i] = V[i] / W[i]
+		 1    for i \unichar{U+2190} 1 to n do
+		 2        S[i] \unichar{U+2190} V[i] / W[i]
 
 		      \bigskip
-		 3    S = S ordinato per valore specifico non crescente
-		 4    i = 1
-		 5    c = C
+		 3    S \unichar{U+2190} S ordinato per valore specifico non crescente
+		 4    i \unichar{U+2190} 1
+		 5    c \unichar{U+2190} C
 
 		      \bigskip
 		 6    while i \unichar{U+2264} n and c > 0 do
-		 7        P[i] = min\{c / W[i], 1\}
-		 8        c = c - P[i] * W[i]
-		 9        i = i + 1
+		 7        P[i] \unichar{U+2190} min\{c / W[i], 1\}
+		 8        c \unichar{U+2190} c - P[i] * W[i]
+		 9        i \unichar{U+2190} i + 1
 
 		      \bigskip
 		10    return P

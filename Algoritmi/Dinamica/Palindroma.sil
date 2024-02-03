@@ -69,18 +69,18 @@
 
 	\begin{verbatim}
 		procedure PAL-CLOSURE(X)
-		    for i = 0 to |X| do
-		        for j = 0 to |X| do
-		            c[i, j] = 0
+		    for i \unichar{U+2190} 0 to |X| do
+		        for j \unichar{U+2190} 0 to |X| do
+		            c[i, j] \unichar{U+2190} 0
 
 		    \bigskip
-		    for i = |X| down to 1 do
-		        for j = 1 to |X| do
+		    for i \unichar{U+2190} |X| down to 1 do
+		        for j \unichar{U+2190} 1 to |X| do
 		            if (i < j) then
-		                if (X[i] == X[j]) then
-		                    c[i, j] = c[i + 1, j - 1]
+		                if (X[i] = X[j]) then
+		                    c[i, j] \unichar{U+2190} c[i + 1, j - 1]
 		                else
-		                    c[i, j] = 1 + min(c[i + 1, j], c[i, j - 1])
+		                    c[i, j] \unichar{U+2190} 1 + min(c[i + 1, j], c[i, j - 1])
 
 		    \bigskip
 		    return c[1, |X|]

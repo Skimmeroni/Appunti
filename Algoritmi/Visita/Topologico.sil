@@ -30,33 +30,33 @@
 		\begin{verbatim}
 			procedure DFS(G)
 			 1    foreach v ∈ V do
-			 2        color[v] = W
-			 3        π[v] = NULL
-			 4        d[v] = 0
-			 5        f[v] = 0
-			 6    time = 0
-			 7    S = []
+			 2        v.color \unichar{U+2190} W
+			 3        v.π \unichar{U+2190} NULL
+			 4        v.d \unichar{U+2190} 0
+			 5        v.f \unichar{U+2190} 0
+			 6    time \unichar{U+2190} 0
+			 7    S \unichar{U+2190} []
 			 8    foreach v ∈ V do
-			 9        if color[v] is W then
-			10            DFS_visit(G, v)
-			11    while not isEmpty(S) do
-			12        pop(S)
+			 9        if v.color = W then
+			10            DFS-VISIT(G, v)
+			11    while not IS-EMPTY(S) do
+			12        POP(S)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			procedure DFS_visit(G, u)
-			13    time = time + 1
-			14    d[u] = time
-			15    color[u] = G
+			procedure DFS-VISIT(G, u)
+			13    time \unichar{U+2190} time + 1
+			14    u.d \unichar{U+2190} time
+			15    u.color \unichar{U+2190} G
 			16    foreach v ∈ adj(u) do
-			17        if color[v] = W then
-			18            π[v] = u
-			19            DFS_visit(G, v)
-			20    color[u] = B
-			21    push(S, u)
-			22    time = time + 1
-			23    f[u] = time
+			17        if v.color = W then
+			18            v.π \unichar{U+2190} u
+			19            DFS-VISIT(G, v)
+			20    u.color \unichar{U+2190} B
+			21    PUSH(S, u)
+			22    time \unichar{U+2190} time + 1
+			23    u.f \unichar{U+2190} time
 		\end{verbatim}
 	\end{parbox}
 	\par

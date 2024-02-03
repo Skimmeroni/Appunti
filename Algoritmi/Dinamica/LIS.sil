@@ -179,17 +179,17 @@
 
         \begin{verbatim}
 			procedure LIS(X)
-			    for i = 0 to |X| do
-			        c[i] = 1
+			    for i \unichar{U+2190} 0 to |X| do
+			        c[i] \unichar{U+2190} 1
 
 			    \bigskip
-			    for i = 0 to |X| do
-			        p = 0
-			        for j = 0 to i do
-			            if (X[j] < X[i]) and (c[j] >= c[p]) then
-			                p = j
+			    for i \unichar{U+2190} 0 to |X| do
+			        p \unichar{U+2190} 0
+			        for j \unichar{U+2190} 0 to i do
+			            if (X[j] < X[i]) and (c[j] \unichar{U+2265} c[p]) then
+			                p \unichar{U+2190} j
 			        if (p \unichar{U+2260} 0) then
-			            c[i] = c[p] + 1
+			            c[i] \unichar{U+2190} c[p] + 1
 
 			    \bigskip
 			    return c
@@ -231,19 +231,19 @@
 		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
 				procedure LIS(X)
-				    for i = 0 to |X| do
-				        c[i] = 1
-				        h[i] = 0
+				    for i \unichar{U+2190} 0 to |X| do
+				        c[i] \unichar{U+2190} 1
+				        h[i] \unichar{U+2190} 0
 
 				    \bigskip
-				    for i = 0 to |X| do
-				        p = 0
-				        for j = 0 to i do
-				            if (X[j] < X[i]) and (c[j] >= c[p]) then
-				            p = j
+				    for i \unichar{U+2190} 0 to |X| do
+				        p \unichar{U+2190} 0
+				        for j \unichar{U+2190} 0 to i do
+				            if (X[j] < X[i]) and (c[j] \unichar{U+2265} c[p]) then
+				            p \unichar{U+2190} j
 				        if (p \unichar{U+2260} 0) then
-				            c[i] = c[p] + 1
-				            h[i] = p
+				            c[i] \unichar{U+2190} c[p] + 1
+				            h[i] \unichar{U+2190} p
 
 				    \bigskip
 				    return c, h

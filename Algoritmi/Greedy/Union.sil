@@ -170,8 +170,8 @@
 		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
 				procedure MAKE-SET(x)
-				1    x.p = x
-				2    x.rank = 0
+				1    x.p \unichar{U+2190} x
+				2    x.rank \unichar{U+2190} 0
 			\end{verbatim}
 		\end{parbox}
 		\begin[width = 50%fw]{parbox}
@@ -182,10 +182,11 @@
 				\bigskip
 				procedure LINK(x, y)
 				4    if x.rank > y.rank then
-				5        y.p = x
-				6    else x.p = y
-				7        if x.rank == y.rank then
-				8            y.rank = y.rank + 1
+				5        y.p \unichar{U+2190} x
+				6    else
+				7        x.p \unichar{U+2190} y
+				8        if x.rank = y.rank then
+				9            y.rank \unichar{U+2190} y.rank + 1
 			\end{verbatim}
 		\end{parbox}
 		\par
@@ -198,7 +199,7 @@
         \begin{verbatim}
 			procedure FIND-SET(x)
 			1    if x \unichar{U+2260} x.p then
-			2        x.p = FIND-SET(x.p)
+			2        x.p \unichar{U+2190} FIND-SET(x.p)
 			3    return x.p
 		\end{verbatim}
 
@@ -248,7 +249,7 @@
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
 			procedure SAME-COMPONENT(u, v)
-			6    if (FIND-SET(u) == FIND-SET(v)) then
+			6    if (FIND-SET(u) = FIND-SET(v)) then
 			7        return TRUE
 			8    else
 			9        return FALSE
