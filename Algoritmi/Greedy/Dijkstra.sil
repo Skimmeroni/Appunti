@@ -109,16 +109,16 @@
 		 1    foreach v \unichar{U+2208} V do
 		 2        v.d \unichar{U+2190} \unichar{U+221E}
 		 3        v.\unichar{U+03C0} \unichar{U+2190} NULL
-		 4    s.d \unichar{U+2190} 0
+		 4        ENQUEUE(v, Q)
 
-		      \bigskip
-		 5    Aggiungi tutti i vertici di V alla coda Q
+              \bigskip
+         5    s.d \unichar{U+2190} 0
 		 6    S \unichar{U+2190} \unichar{U+2205}
 
 		      \bigskip
 		 7    while Q \unichar{U+2260} \unichar{U+2205} do
 		 8        u \unichar{U+2190} POP(Q)
-		 9        S \unichar{U+2190} \unichar{U+222A} \{u\}
+		 9        S \unichar{U+2190} S \unichar{U+222A} \{u\}
 		10        foreach v \unichar{U+2208} ADJ(u) do
 		11            if v.d > u.d + W(u, v) then
 		12                v.d \unichar{U+2190} u.d + W(u, v)
@@ -135,10 +135,11 @@
         \strong{Dimostrazione}. Sia \math{\langle v_{1} = s, v_{2},
         \unicodeellipsis, v_{n} \rangle} l'ordine con cui i vertici
         del grafo vengono estratti dalla coda durante l'esecuzione
-        dell'algoritmo di Dijkstra. L'algoritmo é corretto se, quando
-        viene estratto il \math{k}-esimo vertice, si ha \math{v_{k}.d
-        = \delta (s, v_{k})} per tutti i \math{k \in \{1, n\}}. Tale
-        proprietá puó essere dimostrata per induzione.
+        dell'algoritmo di Dijkstra. L'algoritmo é corretto se,
+        quando viene estratto il \math{k}-esimo vertice, si ha
+        \math{v_{k}.d = \delta (s, v_{k})} per tutti i \math{k =
+        1, 2, \unicodeellipsis, n}. Tale proprietá puó essere
+        dimostrata per induzione.
 
         Il caso base é dimostrato se \math{s.d = \delta (s, s)} quando
         viene estratto \math{s}. Dato che per raggiungere \math{s} da
@@ -153,9 +154,6 @@
         la relazione valga per \math{v_{k - 1}}. Si supponga
         per assurdo che questo non sia vero, e che quindi
         \math{v_{k}.d \ne \delta (s, v_{k})}.
-        %Naturalmente non
-        %puó aversi \math{v_{k}.d < \delta (s, v_{k})}, quindi
-        %deve aversi \math{v_{k}.d > \delta (s, v_{k})}.
 
         Il vertice \math{v_{k}} non puó essere \math{s}, perché é
         stato appena mostrato che il teorema per \math{s} é valido.
@@ -163,9 +161,9 @@
         e deve necessariamente esistere un cammino che va da \math{s}
         a \math{v_{k}}, dato che altrimenti si avrebbe \math{\delta
         (s, v_{k}) = \infty} e questo contraddirebbe l'ipotesi assunta
-        per assurdo \math{v_{k}.d \ne \delta (s, v_{k})}. Esistendo
-        (almeno) un cammino da \math{s} a \math{v_{k}}, esisterá
-        anche (almeno) un cammino minimo da \math{s} a \math{v_{k}}.
+        per assurdo. Esistendo (almeno) un cammino da \math{s} a
+        \math{v_{k}}, esisterá anche (almeno) un cammino minimo da
+        \math{s} a \math{v_{k}}.
 
         Sia \math{v_{y}} il primo vertice lungo il cammino minimo da
         \math{s} a \math{v_{k}} ad essere ancora parte della coda di
@@ -182,8 +180,9 @@
         predecessore di \math{v_{y}} ed essendo per ipotesi \math{v_{x}}
         un vertice giá estratto dalla coda, si avrá \math{v_{y}.d = \delta
         (s, \math{v_{y}})}. Poiché \math{v_{y}} precede \math{v_{k}} nel
-        cammino minimo da \math{s} a \math{v_{k}}, deve aversi \math{\delta
-        (s, v_{y}) \leq \delta (s, v_{k})}. Quindi:
+        cammino minimo da \math{s} a \math{v_{k}} e poiché tutti i pesi
+        degli archi sono non negativi, deve aversi \math{\delta (s, v_{y})
+        \leq \delta (s, v_{k})}. Quindi:
 
         \begin[mode = display]{math}
             v_{y}.d = \delta (s, v_{y}) \leq \delta (s, v_{k}) \leq v_{k}.d
@@ -203,5 +202,40 @@
         quindi concludere che effettivamente \math{\delta (s, v_{k})
         = v_{k}.d}, ed il teorema é provato.
     \end{theorem}
+
+    Il tempo di esecuzione dell'algoritmo di Dijkstra puó essere
+    calcolato osservando che questo si compone di tre operazioni
+    principali: l'inizializzazione (righe 2-4), l'estrazione di
+    un vertice dalla coda (riga 8) ed il rilassamento (righe 11-13).
+    Si assuma che la coda di prioritá sia implementata utilizzando
+    una struttura dati efficiente (ad esempio un min-heap binario).
+
+    L'inizializzazione richiede un tempo di esecuzione immediato, dato che
+    sia assegnare valori ai campi di un vertice che l'inserirlo nella coda
+    di prioritá che inizializzare i suoi campi hanno tempo di esecuzione
+    immediato. Per motivi analoghi, il rilassamento di un vertice ha tempo
+    di esecuzione unitario. D'altro canto, estrarre un vertice da una coda
+    di prioritá é una operazione che ha tempo di esecuzione logaritmico
+    nel numero dei vertici.
+
+    Dato che l'inizializzazione viene eseguita per ciascun vertice una
+    sola volta, il primo ciclo (1-4) ha tempo di esecuzione complessivo
+    \math{O(\abs{V})}. Il secondo ciclo (riga 7) esegue il suo corpo
+    una sola volta per ciascun vertice, dato che nella coda di prioritá
+    vengono inseriti tutti i vertici e ad ogni iterazione uno di questi
+    viene sempre rimosso. Infine, dato ciascun vertice viene inserito in
+    \math{S} esattamente una sola volta e dato che il numero totale di
+    archi del grafo é \math{\abs{E}}, l'algoritmo ispeziona ciascun arco
+    esattamente una sola volta. Pertanto il ciclo piú interno (righe
+    10-13) ha tempo di esecuzione lineare nel numero degli archi.
+
+    Il tempo di esecuzione complessivo della seconda parte dell'algoritmo
+    (righe 7-13) viene allora ad essere \math{O(\abs{E} \mi{log}(\abs{V}))},
+    al quale va sommato il tempo di esecuzione dell'inizializzazione per
+    ciascun vertice. Il tempo di esecuzione dell'algoritmo di Dijkstra
+    viene allora ad essere \math{O(\abs{V}) + O(\abs{E} \mi{log}(\abs{V}))
+    = O(\abs{E} \mi{log}(\abs{V})) = O(\abs{E} \mi{log}(\abs{E}))}, dato
+    che si sta considerando un grafo connesso e quindi é possibile
+    maggiorare \math{\abs{V}} con \math{\abs{E}}.
 
 \end{sile}

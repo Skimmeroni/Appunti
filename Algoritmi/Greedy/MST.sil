@@ -503,11 +503,11 @@
         equivale a \math{O(\abs{V}) + O(\abs{V} \mi{log}(\abs{V})}. Essendo
         il tempo logaritmico piú influente sul tempo complessivo rispetto a
         quello lineare, si ha che l'equazione equivale asintoticamente a
-        \math{\abs{V} \mi{log}(\abs{V})}. Dato che si sta considerando un
+        \math{O(\abs{V} \mi{log}(\abs{V}))}. Dato che si sta considerando un
         grafo connesso, il numero di archi é necessariamente superiore al
         numero di vertici, pertanto é possibile effettuare una maggiorazione
         e sostituire \math{\abs{V}} con \math{\abs{E}}. Si ha allora che il
-        tempo di esecuzione dell'algoritmo di Prim é \math{\abs{E}
-        \mi{log}(\abs{E})}.
+        tempo di esecuzione dell'algoritmo di Prim é \math{O(\abs{E}
+        \mi{log}(\abs{E}))}.
 
 \end{sile}
