@@ -20,11 +20,11 @@
         del problema per considerarne una versione semplificata.
 
         Una versione piú semplice del problema LICS, chiamato \strong{LICS
-        vincolato}, prevede di trovare la piú lunga sottosequenza comune a 
-        due sequenze i cui elementi (nell'ordine in cui si trovano) hanno
-        valore strettamente crescente e dove l'ultimo elemento di tale
-        sottosequenza coincide con l'ultimo elemento di entrambe le sequenze
-        originarie.
+        vincolato} (\strong{LICSV}), prevede di trovare la piú lunga
+        sottosequenza comune a due sequenze i cui elementi (nell'ordine
+        in cui si trovano) hanno valore strettamente crescente e dove
+        l'ultimo elemento di tale sottosequenza coincide con l'ultimo
+        elemento di entrambe le sequenze originarie.
 
         \begin{example}
             Siano date le sequenze \math{X = \langle 14, 2, 4, 6, 13, 15,
@@ -39,14 +39,15 @@
     \subsection{Programmazione dinamica: sottostruttura ottima}
 
         \begin{theorem}
-                \strong{Proprietá della sottostruttura ottima per il problema
-		Longest Increasing Common Subsequence}. Sia \math{X} una sequenza
-		di \math{m} numeri interi e sia \math{X_{i}} un suo prefisso di
-		lunghezza \math{i}, con \math{1 \leq i \leq m}. Sia \math{Y} una
-		sequenza di \math{n} numeri interi e sia \math{Y_{j}} un suo
-		prefisso di lunghezza \math{j}, con \math{1 \leq j \leq n}.
+                \strong{Proprietá della sottostruttura ottima per il
+                problema Longest Increasing Common Subsequence (Vincolato)}.
+                Sia \math{X} una sequenza di \math{m} numeri interi e sia
+                \math{X_{i}} un suo prefisso di lunghezza \math{i}, con
+                \math{1 \leq i \leq m}. Sia \math{Y} una sequenza di
+                \math{n} numeri interi e sia \math{Y_{j}} un suo prefisso
+                di lunghezza \math{j}, con \math{1 \leq j \leq n}.
 
-		Sia \math{Z^{i,j}} una LICS di \math{X_{i}} e di
+		Sia \math{Z^{i,j}} una LICSV di \math{X_{i}} e di
 		\math{Y_{j}} tale che termini con \math{x_{i} = y_{j}}.
 		Sia infine \math{W_{i,j}} l'insieme di tutte le possibili
 		sottosequenze crescenti comuni (non necessariamente le piú
@@ -66,7 +67,7 @@
             \end{center}
             \bigskip
 
-            Allora la LICS \math{Z^{i, j}} é data dalla concatenazione
+            Allora la LICSV \math{Z^{i, j}} é data dalla concatenazione
             fra l'elemento di \math{W_{i, j}} avente la maggior cardinalitá
             con il carattere \math{x_{i}} o con il carattere \math{y_{j}},
             ovvero \math{Z^{i, j} = Z* | x_{i} = Z* | y_{j}} con \math{Z*
@@ -112,9 +113,9 @@
         vincolato rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}.
         La soluzione per le intere sequenze \math{X} e \math{Y} é la soluzione
         per le istanze \math{X_{n}} e \math{Y_{m}}. La lunghezza della
-        sottosequenza strettamente crescente piú lunga comune soluzione
-        per la \math{i, j}-esima istanza del problema viene indicata con
-        \math{\mi{Opt}(i, j)}.
+        sottosequenza strettamente crescente piú lunga comune vincolata
+        soluzione per la \math{i, j}-esima istanza del problema viene
+        indicata con \math{\mi{Opt}(i, j)}.
 
         Certamente, la soluzione per tutte le coppie di indici \math{i, j}
         con \math{i = 0} oppure \math{j = 0} si rivela immediatamente essere 
@@ -209,25 +210,25 @@
 		per la \math{i, j}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive. L'algoritmo
 		riceve in input le due sequenze \math{X} e \math{Y} e restituisce in
-		output la tabella \math{c} ed il valore ottimale. 
+		output la tabella \math{c}. 
 
 		\begin{verbatim}
-			procedure LICS(X, Y)
-			    max \unichar{U+2190} 0
+			procedure BOUNDED-LICS(X, Y)
 			    for i \unichar{U+2190} 1 to m do
 			        for j \unichar{U+2190} 1 to n do
 			            if X[i] \unichar{U+2260} Y[j] then
 			                c[i, j] \unichar{U+2190} 0
 			            else
-			                t \unichar{U+2190} 0
-			                for h \unichar{U+2190} 1 to i - 1 do
-			                    for k \unichar{U+2190} 1 to j - 1 do
-			                        if (X[h] < X[i]) and (c[h, k] > t) then
-			                            t \unichar{U+2190} c[h, k]
-			                c[i, j] \unichar{U+2190} 1 + t
-			            if c[i, j] > max then
-			                max \unichar{U+2190} c[i, j]
-			    return c, max
+			                p \unichar{U+2190} 0
+			                q \unichar{U+2190} 0
+			                for a \unichar{U+2190} 1 to i - 1 do
+			                    for b \unichar{U+2190} 1 to j - 1 do
+			                        if (X[a] < X[i]) and (c[a, b] > c[p, q]) then
+			                            p \unichar{U+2190} a
+			                            q \unichar{U+2190} b
+			                if (p \unichar{U+2260} 0) and (q \unichar{U+2260} 0) then
+			                    c[i, j] \unichar{U+2190} c[p, q] + 1
+			    return c
 		\end{verbatim}
 
                 Il tempo di esecuzione dell'algoritmo é \math{O(m^{2}n^{2})},
@@ -243,10 +244,81 @@
 
         \subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
+        Una volta calcolata la lunghezza della LICSV, é possibile
+        individuarne una ripercorrendo la tabella a ritroso. In
+        particolare, questo viene fatto estendendo l'algoritmo per
+        il calcolo della lunghezza introducendo una tabella \math{h}.
+        Nella \math{i, j}-esima cella di \math{h} viene riportato
+        l'indice della cella di \math{c} in cui si trova l'elemento
+        predecessore dell'elemento nella \math{i, j}-esima cella di
+        \math{c}. Se l'elemento predecessore non esiste, nella
+        \math{i, j}-esima cella di \math{h} viene riportato (0, 0).
+
+        Alla vecchia procedura opportunamente modificata ne viene aggiunta
+        un'altra, \tt{PRINT-BOUNDED-LICS}. Questa ha in input la tabella
+        \math{h}, le due sequenze \math{X} e \math{Y} e due indici di
+        posizione \math{i} e \math{j}, mentre in output ha una delle
+        possibili LICSV per la stringa in input.
+
+        La procedura restituisce la soluzione per la \math{i, j}-esima
+        istanza del problema ripercorrendo la tabella \math{h} dalla
+        cella \math{(i, j)} verso la cella \math{(0, 0)}; ogni volta che
+        si incontra un elemento non nullo di \math{h}, l'elemento della
+        sequenza in tale posizione é un elemento della soluzione.
+
+	\begin[width = 60%fw]{parbox}
+		\begin{verbatim}
+			procedure BOUNDED-LICS(X, Y)
+			    for i \unichar{U+2190} 1 to m do
+			        for j \unichar{U+2190} 1 to n do
+			            if X[i] \unichar{U+2260} Y[j] then
+			                c[i, j] \unichar{U+2190} 0
+			                h[i, j] \unichar{U+2190} 0
+			            else
+			                p \unichar{U+2190} 0
+			                q \unichar{U+2190} 0
+			                for a \unichar{U+2190} 1 to i - 1 do
+			                    for b \unichar{U+2190} 1 to j - 1 do
+			                        if (X[a] < X[i]) and (c[a, b] > c[p, q]) then
+			                            p \unichar{U+2190} a
+			                            q \unichar{U+2190} b
+			                if (p \unichar{U+2260} 0) and (q \unichar{U+2260} 0) then
+			                    c[i, j] \unichar{U+2190} c[p, q] + 1
+			                    h[i, j] \unichar{U+2190} (p, q)
+			    return c
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 40%fw]{parbox}
+		\begin{verbatim}
+			procedure PRINT-BOUNDED-LICS(h, X, Y, i, j)
+			    if h[i, j] \unichar{U+2260} (0, 0) then
+			        a, b \unichar{U+2190} h[i, j]
+			        PRINT-BOUNDED-LICS(h, X, Y, a, b)
+			        print X[i], Y[j]
+		\end{verbatim}
+	\end{parbox}
+	\par
+
         \subsection{Osservazioni}
 
         Il problema LICS non vincolato puó essere ridotto al problema LICS
         vincolato. Infatti, la soluzione del problema LICS vincolato non é
         altro che la maggior soluzione parziale del problema LICS vincolato.
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure LICS(X, Y)
+			    C, H \unichar{U+2190} BOUNDED-LICS(X)
+			    return max(C)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure PRINT-LICS(h, X, Y, i, j)
+			    p, q \unichar{U+2190} LICS(X)
+			    PRINT-BOUNDED-LICS(h, X, Y, p, q)
+		\end{verbatim}
+	\end{parbox}
+	\par
 
 \end{sile}

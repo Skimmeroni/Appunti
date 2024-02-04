@@ -19,10 +19,11 @@
         del problema per considerarne una versione semplificata.
 
         Una versione piú semplice del problema LIS, chiamato \strong{LIS
-        vincolato}, prevede di trovare la piú lunga sottosequenza di una
-        sequenza i cui elementi (nell'ordine in cui si trovano) hanno valore
-        strettamente crescente e dove l'ultimo elemento di tale sottosequenza
-        coincide con l'ultimo elemento della sequenza originaria.
+        vincolato} (\strong{LISV}), prevede di trovare la piú lunga
+        sottosequenza di una sequenza i cui elementi (nell'ordine in cui
+        si trovano) hanno valore strettamente crescente e dove l'ultimo
+        elemento di tale sottosequenza coincide con l'ultimo elemento
+        della sequenza originaria.
 
         \begin{example}
             Sia data la sequenza \math{X = \langle 14, 1, 4, 6, 13, 15, 0, 13,
@@ -37,14 +38,15 @@
 
         \begin{theorem}
 			\strong{Proprietá della sottostruttura ottima per il problema
-			Longest Increasing Subsequence}. Sia \math{X} una sequenza di
-			\math{m} numeri interi e sia \math{X_{i}} un suo prefisso di
-			lunghezza \math{i}, con \math{1 \leq i \leq m}. Sia \math{Z^{i}}
-			una LIS di \math{X_{i}}, che termina con \math{x_{i}}. Sia
-			infine \math{W_{i}} l'insieme di tutte le possibili sottosequenze
-			crescenti (non necessariamente le piú lunghe) di \math{X_{j}} che
-			finiscono con \math{x_{j}} e a cui é possibile concatenare
-			\math{x_{i}} ottenendo ancora una sequenza crescente, ovvero:
+			Longest Increasing Subsequence (Vincolato)}. Sia \math{X} una
+			sequenza di \math{m} numeri interi e sia \math{X_{i}} un suo
+			prefisso di lunghezza \math{i}, con \math{1 \leq i \leq m}.
+			Sia \math{Z^{i}} una LISV di \math{X_{i}}, che termina con
+			\math{x_{i}}. Sia infine \math{W_{i}} l'insieme di tutte le
+			possibili sottosequenze crescenti (non necessariamente le
+			piú lunghe) di \math{X_{j}} che finiscono con \math{x_{j}}
+			e a cui é possibile concatenare \math{x_{i}} ottenendo ancora
+			una sequenza crescente, ovvero:
 
             \smallskip
             \begin{center}
@@ -56,7 +58,7 @@
             \end{center}
             \bigskip
 
-            Allora la LIS \math{Z^{i}} é data dalla concatenazione fra
+            Allora la LISV \math{Z^{i}} é data dalla concatenazione fra
             l'elemento di \math{W_{i}} avente la maggior cardinalitá
             con il carattere \math{x_{i}}, ovvero \math{Z^{i} = Z* |
             x_{i}} con \math{Z* \in W_{i}} e \math{\abs{Z*} =
@@ -93,8 +95,8 @@
         vincolato rispetto alla sottosequenza \math{X_{i}}. La soluzione
         per l'intera sequenza \math{X} é la soluzione per l'istanza
         \math{X_{n}}. La lunghezza della sottosequenza strettamente
-        crescente piú lunga soluzione per la \math{i}-esima istanza
-        del problema viene indicata con \math{\mi{Opt}(i)}.
+        crescente piú lunga vincolata soluzione per la \math{i}-esima
+        istanza del problema viene indicata con \math{\mi{Opt}(i)}.
 
         Il caso base dell'equazione di ricorrenza é immediato: se
         la sequenza é la sequenza vuota, allora la sottosequenza
@@ -178,7 +180,7 @@
         in una cella puó essere presente.
 
         \begin{verbatim}
-			procedure LIS(X)
+			procedure BOUNDED-LIS(X)
 			    for i \unichar{U+2190} 0 to |X| do
 			        c[i] \unichar{U+2190} 1
 
@@ -207,30 +209,30 @@
 
     \subsection{Programmazione dinamica: ricostruzione della soluzione}
 
-        Una volta calcolata la lunghezza della LIS, é possibile individuarne
-        una ripercorrendo il vettore a ritroso. In particolare, questo
-        viene fatto estendendo l'algoritmo per il calcolo della lunghezza
-        introducendo un vettore \math{h} Nella \math{i}-esima cella di
-        \math{h} viene riportato l'indice della cella di \math{c} in cui
-        si trova l'elemento predecessore dell'elemento nella \math{i}-esima
-        cella di \math{c}. Se l'elemento predecessore non esiste, nella
-        \math{i}-esima cella di \math{h} viene riportato 0.
+        Una volta calcolata la lunghezza della LISV, é possibile
+        individuarne una ripercorrendo il vettore a ritroso. In
+        particolare, questo viene fatto estendendo l'algoritmo per
+        il calcolo della lunghezza introducendo un vettore \math{h}.
+        Nella \math{i}-esima cella di \math{h} viene riportato l'indice
+        della cella di \math{c} in cui si trova l'elemento predecessore
+        dell'elemento nella \math{i}-esima cella di \math{c}. Se l'elemento
+        predecessore non esiste, nella \math{i}-esima cella di \math{h}
+        viene riportato 0.
 
         Alla vecchia procedura opportunamente modificata ne viene aggiunta
-        un'altra, \tt{PRINT-LIS}. Questa ha in input il vettore \math{h},
-        la sequenza \math{X} ed un indice di posizione \math{i}, mentre in
-        output ha una delle possibili LIS per la stringa in input. La prima
-        chiamata alla procedura ha \math{\abs{X}} come valore per \math{i},
-        in modo da ottenere la soluzione per l'istanza \math{\abs{X}}.
+        un'altra, \tt{PRINT-BOUNDED-LIS}. Questa ha in input il vettore
+        \math{h}, la sequenza \math{X} ed un indice di posizione \math{i},
+        mentre in output ha una delle possibili LISV per la stringa in input.
 
-        La procedura ripercorre il vettore \math{h} dalla cella \math{i}
+        La procedura restituisce la soluzione per la \math{i}-esima istanza
+        del problema ripercorrendo il vettore \math{h} dalla cella \math{i}
 		verso la cella \math{0}; ogni volta che si incontra un elemento
 		non nullo di \math{h}, l'elemento della sequenza in tale posizione 
 		é un elemento della soluzione.
 
-		\begin[width = 50%fw]{parbox}
+		\begin[width = 60%fw]{parbox}
 			\begin{verbatim}
-				procedure LIS(X)
+				procedure BOUNDED-LIS(X)
 				    for i \unichar{U+2190} 0 to |X| do
 				        c[i] \unichar{U+2190} 1
 				        h[i] \unichar{U+2190} 0
@@ -240,7 +242,7 @@
 				        p \unichar{U+2190} 0
 				        for j \unichar{U+2190} 0 to i do
 				            if (X[j] < X[i]) and (c[j] \unichar{U+2265} c[p]) then
-				            p \unichar{U+2190} j
+				                p \unichar{U+2190} j
 				        if (p \unichar{U+2260} 0) then
 				            c[i] \unichar{U+2190} c[p] + 1
 				            h[i] \unichar{U+2190} p
@@ -249,11 +251,11 @@
 				    return c, h
 			\end{verbatim}
 		\end{parbox}
-		\begin[width = 50%fw]{parbox}
+		\begin[width = 40%fw]{parbox}
 			\begin{verbatim}
-				procedure PRINT-LIS(h, X, i)
+				procedure PRINT-BOUNDED-LIS(h, X, i)
 				    if h[i] \unichar{U+2260} 0 then
-				        PRINT-LIS(h, X, h[i])
+				        PRINT-BOUNDED-LIS(h, X, h[i])
 				    print X[i]
 			\end{verbatim}
 		\end{parbox}
@@ -294,5 +296,21 @@
         Il problema LIS non vincolato puó essere ridotto al problema LIS
         vincolato. Infatti, la soluzione del problema LIS non vincolato non
         é altro che la maggior soluzione parziale del problema LIS vincolato.
+
+        \begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure LIS(X)
+				    C, H \unichar{U+2190} BOUNDED-LIS(X)
+				    return max(C)
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+            \begin{verbatim}
+                procedure PRINT-LIS(h, X, i)
+                    t \unichar{U+2190} LIS(X)
+                    PRINT-BOUNDED-LIS(h, X, t)
+			\end{verbatim}
+		\end{parbox}
+		\par
 
 \end{sile}
