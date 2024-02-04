@@ -130,7 +130,5 @@
 		\include[src = Visita/Ampiezza.sil]
 		\section{Visita in profonditá}
 		\include[src = Visita/Profondita.sil]
-		\section{Ordinamento topologico}
-		\include[src = Visita/Topologico.sil]
 
 \end{document}

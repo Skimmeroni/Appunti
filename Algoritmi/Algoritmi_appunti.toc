@@ -818,15 +818,5 @@ return {
     link = "dest82",
     number = "3.3",
     pageno = "52"
-  },
-  {
-    label = {
-      "Ordinamento topologico",
-      id = "stuff"
-    },
-    level = 2,
-    link = "dest83",
-    number = "3.4",
-    pageno = "55"
   }
 }

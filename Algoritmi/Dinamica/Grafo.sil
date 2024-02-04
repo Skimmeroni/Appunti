@@ -478,10 +478,10 @@
 
         \subsection{Osservazioni}
 
-                L'algoritmo Floyd-Warshall puó essere utilizzato anche
-                per calcolare la chiusura transitiva di un grafo. La
-                \strong{chiusura transitiva} di un grafo \math{G = (V, E)}
-                é definita come il grafo \math{G* = (V, E*)}, dove
+                L'algoritmo Floyd-Warshall puó essere utilizzato
+                anche per calcolare la \strong{chiusura transitiva}
+                di un grafo \math{G = (V, E)}, definita come il grafo
+                \math{G* = (V, E*)} dove
 
                 \smallskip
                 \begin{center}
@@ -490,9 +490,69 @@
                 \end{center}
                 \bigskip
 
-                Il metodo consiste nell'assegnare un peso 1 ad ogni arco di
-                \math{E} e nell'eseguire l'algoritmo di Floyd-Warshall. Se
-                esiste un cammino dal vertice \math{i} al vertice \math{j},
-                si ha \math{d_{ij} < n}, altrimenti \math{d_{ij} = \infty}.
+                Il metodo consiste nell'assegnare un peso 1 ad ogni arco
+                di \math{E} e nell'eseguire normalmente l'algoritmo di
+                Floyd-Warshall. Sia \math{n = \abs{V}}: se esiste un
+                cammino dal vertice \math{i} al vertice \math{j}, si
+                avrá \math{D^{n}[i, j] < n}, altrimenti \math{D^{n}[i, j]
+                = \infty}.
+
+                Un metodo simile che permette di raffinare ulteriormente il
+                costo in termini di tempo e spazio prevede di sostituire le
+                operazioni aritmetiche usate nell'algoritmo di Floyd-Warshall
+                con gli operatori logici AND e OR. Dato un grafo \math{G =
+                (V, E)} con \math{\abs{V} = n}, sia \math{T^{k}} con \math{k
+                \leq n} una matrice la cui cella \math{[i, j]} contiene il
+                valore 1 se esiste un cammino da \math{v_{i}} a \math{v_{j}}
+                in \math{G} i cui vertici intermedi sono tutti estratti dal
+                sottoinsieme \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}\}}
+                di \math{V} e 0 altrimenti. Le celle di \math{T^{k}} sono 
+                definite a partire dalla seguente equazione di ricorrenza:
+
+                \begin[width = 50%fw]{parbox}
+                    \begin[mode = display]{math}
+                        T^{0}[i, j] =
+                        \table[columnalign = left left]{
+                            0 & \mi{se} \thickspace i \ne j \wedge (i, j) \notin E \\
+                            1 & \mi{se} \thickspace i = j \vee (i, j) \in E \\
+                        }
+                    \end{math}
+                \end{parbox}
+                \begin[width = 50%fw]{parbox}
+                    \begin[mode = display]{math}
+                        T^{k}[i, j] = T^{k - 1}[i, j] \vee (T^{k - 1}[i, k] \wedge T^{k - 1}[k, j])
+                    \end{math}
+                \end{parbox}
+                \par
+
+                Come nell'algoritmo di Floyd-Warshall, vengono calcolate le
+                matrici \math{T^{k}} per valori crescenti di \math{k}.
+
+                \begin{verbatim}
+                    procedure FW(G)
+                        n \unichar{U+2190} |G.V|
+                        T\textsuperscript{(0)} nuova matrice n x n
+                        for i \unichar{U+2190} 1 to n do
+                            for j \unichar{U+2190} 1 to n do
+                                if i = j or (i, j) in G.E then
+                                    T\textsuperscript{(0)} \unichar{U+2190} 1
+                                else
+                                    T\textsuperscript{(0)} \unichar{U+2190} 0
+
+                        \bigskip
+                        for k \unichar{U+2190} 1 to n do
+                            T\textsuperscript{(k)} nuova matrice n x n
+                            for i \unichar{U+2190} 1 to n do
+                                for j \unichar{U+2190} 1 to n do
+                                    T\textsuperscript{(k)}[i, j] \unichar{U+2190} T\textsuperscript{(k - 1)}[i, j] or (T\textsuperscript{(k - 1)}[i, k] and T\textsuperscript{(k - 1)}[k, j])
+                        \bigskip
+                        return T\textsuperscript{(n)}
+                \end{verbatim}
+
+                Sebbene il tempo di esecuzione e lo spazio occupato
+                dall'algoritmo siano teoricamente rimasti invariati,
+                i calcolatori sono comunque in grado di eseguire tale
+                algoritmo piú velocemente perché le operazioni logiche
+                vengono tradotte in istruzioni assembly molto efficienti.
 
 \end{sile}

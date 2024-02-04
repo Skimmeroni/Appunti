@@ -383,12 +383,12 @@
 				                c[i, j] \unichar{U+2190} c[i - 1, j - 1]
 				                b[i, j] \unichar{U+2190} "\unichar{U+2196}"
 				            else
-				                if (c[i - 1, j - 1] \unichar{U+2265} c[i, j - 1]) and
-				                   (c[i - 1, j - 1] \unichar{U+2265} c[i - 1, j]) then
+				                if (c[i - 1, j - 1] \unichar{U+2264} c[i, j - 1]) and
+				                   (c[i - 1, j - 1] \unichar{U+2264} c[i - 1, j]) then
 				                    c[i, j] \unichar{U+2190} c[i - 1, j - 1] + 1
 				                    b[i, j] \unichar{U+2190} "\unichar{U+2196}"
-				                else if (c[i - 1, j] \unichar{U+2265} c[i, j - 1]) and
-				                        (c[i - 1, j] \unichar{U+2265} c[i - 1, j - 1]) then
+				                else if (c[i - 1, j] \unichar{U+2264} c[i, j - 1]) and
+				                        (c[i - 1, j] \unichar{U+2264} c[i - 1, j - 1]) then
 				                    c[i, j] \unichar{U+2190} c[i - 1, j] + 1
 				                    b[i, j] \unichar{U+2190} "\unichar{U+2190}"
 				                else
