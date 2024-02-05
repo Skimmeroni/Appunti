@@ -1,16 +1,16 @@
 \begin{sile}
 
 	Sia dato un insieme \math{A = \{a_{1}, a_{2}, \unicodeellipsis,
-	a_{n}\}} costituito da "attivitá". Ciascuna attivitá \math{a_{i}}
-	é definita come una coppia \math{(s_{i}, f_{i})}, dove i due valori
-	indicano rispettivamente il tempo di inizio dell'attivitá ed il
+	a_{n}\}} costituito da "attività". Ciascuna attività \math{a_{i}}
+	è definita come una coppia \math{(s_{i}, f_{i})}, dove i due valori
+	indicano rispettivamente il tempo di inizio dell'attività ed il
 	tempo di fine.
 
-	Due attivitá \math{a_{i}} e \math{a_{j}} distinte si dicono
+	Due attività \math{a_{i}} e \math{a_{j}} distinte si dicono
 	\em{compatibili} se \math{a_{i}} termina prima che \math{a_{j}}
-	inizi, ovvero se \math{f_{i} \leq s_{j}}. Piú in generale, un 
-	sottoinsieme \math{X} di \math{A} é detto \em{compatibile} se 
-	é costituito da attivitá fra di loro mutualmente compatibili,
+	inizi, ovvero se \math{f_{i} \leq s_{j}}. Più in generale, un 
+	sottoinsieme \math{X} di \math{A} è detto \em{compatibile} se 
+	è costituito da attività fra di loro mutualmente compatibili,
 	o equivalentemente se non contiene alcuna coppia di elementi
 	di \math{A} fra di loro non compatibili.
 
@@ -37,40 +37,40 @@
 	\par
 
 	Il problema \strong{Interval Scheduling} chiede di trovare il
-	sottoinsieme \math{X} di \math{A} di cardinalitá massima composto
-	da attivitá mutualmente compatibili \footnote{Si noti la differenza
+	sottoinsieme \math{X} di \math{A} di cardinalità massima composto
+	da attività mutualmente compatibili \footnote{Si noti la differenza
 	con il problema Wait Interval Scheduling: tale problema chiede di 
 	trovare il sottoinsieme di valore totale massimo, mentre il problema
-	Interval Scheduling chiede di trovare quello di cardinalitá massima.}.
+	Interval Scheduling chiede di trovare quello di cardinalità massima.}.
 
-	Il problema Interval Scheduling é risolvibile mediante programmazione
+	Il problema Interval Scheduling è risolvibile mediante programmazione
 	dinamica. Dato un insieme \math{A = \{a_{1}, a_{2}, \unicodeellipsis,
-	a_{n}\}} di attivitá, si ordinino tali attivitá per tempo di fine non
+	a_{n}\}} di attività, si ordinino tali attività per tempo di fine non
 	decrescente. Affinché un algoritmo di programmazione dinamica possa 
-	essere applicabile é necessario aggiungere due attivitá "slack",
+	essere applicabile è necessario aggiungere due attività "slack",
 	\math{a_{0}} e \math{a_{n + 1}}, rispettivamente in prima ed in
 	ultima posizione. Sia allora \math{A' = A \cup \{a_{0}, a_{n + 1}\}}.
 
 	Sia \math{X_{i,j}} il sottoinsieme di \math{A'} composto da tutte le
-	attivitá che vengono dopo \math{a_{i}} e prima di \math{a_{j}}, ovvero
+	attività che vengono dopo \math{a_{i}} e prima di \math{a_{j}}, ovvero
 	\math{X_{i, j} = \langle a_{i + 1}, a_{i + 2}, \unicodeellipsis, a_{j -
 	2}, a_{j - 1} \rangle}. La soluzione \math{S_{i, j}} per la \math{i,
 	j}-esima istanza del problema corrisponde a trovare il sottoinsieme
-	di attivitá mutualmente compatibili di cardinalitá massima rispetto
-	al sottoinsieme \math{X_{i, j}}. La cardinalitá del sottoinsieme di
-	attivitá mutualmente compatibili di cardinalitá massima per la
+	di attività mutualmente compatibili di cardinalità massima rispetto
+	al sottoinsieme \math{X_{i, j}}. La cardinalità del sottoinsieme di
+	attività mutualmente compatibili di cardinalità massima per la
 	\math{i, j}-esima istanza del problema viene indicata con
 	\math{\mi{Opt}(i, j)}.
 
-	La soluzione ottimale per il problema principale é data da
-	\math{S_{0, n + 1}}. Infatti, tale insieme é la soluzione
+	La soluzione ottimale per il problema principale è data da
+	\math{S_{0, n + 1}}. Infatti, tale insieme è la soluzione
 	per l'insieme che contiene gli elementi di \math{A'} che
 	vengono dopo \math{a_{0}} e prima di \math{a_{n + 1}}, che
 	corrisponde esattamente a \math{A' - \{a_{0}, a_{n + 1}\} = A}.
 
 	Il caso base si ha per l'insieme \math{X_{i, i + 1}}, ovvero quando
-	\math{i + 1 = j}. Infatti, l'insieme costituito da tutte le attivitá
-	che vengono dopo \math{a_{i}} e prima di \math{a_{i + 1}} é, per
+	\math{i + 1 = j}. Infatti, l'insieme costituito da tutte le attività
+	che vengono dopo \math{a_{i}} e prima di \math{a_{i + 1}} è, per
 	definizione, l'insieme vuoto.
 
 	\begin[width = 50%fw]{parbox}
@@ -86,10 +86,10 @@
 	\par
 
 	Per quanto riguarda il passo ricorsivo, si consideri una generica
-	soluzione ottimale \math{S_{i, j}}. Tale soluzione puó essere scritta
+	soluzione ottimale \math{S_{i, j}}. Tale soluzione può essere scritta
 	come \math{S_{i, k} \cup \{a_{k}\} \cup S_{k, j}}, dove \math{S_{i, k}}
 	e \math{S_{k, j}} sono le soluzioni ottimali rispettivamente delle
-	istanze \math{X_{i, k}} e \math{X_{k, j}} e dove \math{a_{k}} é il
+	istanze \math{X_{i, k}} e \math{X_{k, j}} e dove \math{a_{k}} è il
 	valore che permette di restituire tali soluzioni ottimali.
 
 	\begin[width = 50%fw]{parbox}
@@ -104,15 +104,15 @@
 	\end{parbox}
 	\par
 
-	É facile verificare che un algoritmo di programmazione dinamica basato
+	È facile verificare che un algoritmo di programmazione dinamica basato
 	su tale equazione avrebbe un tempo di esecuzione (almeno) quadratico.
 	Questo perché per ottenere la soluzione ottimale per una intera istanza
-	é necessario calcolare le soluzioni ottimali per tutte le istanze
+	è necessario calcolare le soluzioni ottimali per tutte le istanze
 	\math{X_{a, b}} con \math{a, b \in [1, n]}.
 
-	Il problema Interval Scheduling puó essere risolto in maniera piú
-	semplice e piú efficiente applicando la tecnica greedy. Dato un
-	insieme \math{A} di attivitá, l'algoritmo greedy procede come segue:
+	Il problema Interval Scheduling può essere risolto in maniera più
+	semplice e più efficiente applicando la tecnica greedy. Dato un
+	insieme \math{A} di attività, l'algoritmo greedy procede come segue:
 
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
@@ -143,13 +143,13 @@
 			\end{item}
 			\begin{item}
 				Sia \math{x'} l'ultimo elemento dell'insieme
-				\math{X}. Viene aggiunta ad \math{X} l'attivitá
+				\math{X}. Viene aggiunta ad \math{X} l'attività
 				\math{a_{i} \in A} compatibile con \math{x'} che
 				viene per prima (quella che ha tempo di inizio
 				minore);
 			\end{item}
 			\begin{item}
-				Se tutte le attivitá di \math{A} sono state
+				Se tutte le attività di \math{A} sono state
 				considerate l'algoritmo termina, altrimenti
 				si riprende dal punto precedente.
 			\end{item}
@@ -157,42 +157,42 @@
 	\end{parbox}
 	\par
 
-	Tale algoritmo é effettivamente un algoritmo greedy, perché la scelta
+	Tale algoritmo è effettivamente un algoritmo greedy, perché la scelta
 	localmente ottima viene considerata anche globalmente ottima. Tuttavia,
 	affinché questo possa considerarsi corretto, occorre dimostrare la
-	validitá della proprietá della scelta greedy, ovvero che l'attivitá che
-	viene per prima in una certa iterazione (soluzione ottimale locale) é
+	validità della proprietà della scelta greedy, ovvero che l'attività che
+	viene per prima in una certa iterazione (soluzione ottimale locale) è
 	effettivamente membro della soluzione ottimale globale. A dire il vero,
-	dato che ad ogni iterazione l'insieme \math{A} viene ridotto e l'attivitá
-	che viene considerata é sempre la prima, per dimostrare la validitá
-	della proprietá della scelta greedy é sufficiente dimostrare che
-	l'attivitá \math{a_{1}}, quella che nell'ordine temporale viene
-	prima di tutte, é sempre parte della soluzione ottima.
+	dato che ad ogni iterazione l'insieme \math{A} viene ridotto e l'attività
+	che viene considerata è sempre la prima, per dimostrare la validità
+	della proprietà della scelta greedy è sufficiente dimostrare che
+	l'attività \math{a_{1}}, quella che nell'ordine temporale viene
+	prima di tutte, è sempre parte della soluzione ottima.
 
 	\begin{theorem}
-		\strong{Proprietá della scelta greedy per il problema Interval
-		Schedule}. Sia dato un insieme di attivitá \math{A = \langle
+		\strong{Proprietà della scelta greedy per il problema Interval
+		Schedule}. Sia dato un insieme di attività \math{A = \langle
 		a_{1}, a_{2}, \unicodeellipsis, a_{n} \rangle} ordinate per
-		tempo di fine non decrescente. L'attivitá \math{a_{1}} é
+		tempo di fine non decrescente. L'attività \math{a_{1}} è
 		sempre parte della soluzione ottima.
 
 		\bigskip
 		\strong{Dimostrazione}. Sia \math{X} la soluzione ottima
-		per l'insieme \math{A}. Sia poi \math{{a'}_{1}} l'attivitá
+		per l'insieme \math{A}. Sia poi \math{{a'}_{1}} l'attività
 		in \math{X} avente minor tempo di fine. Naturalmente, se
 		\math{{a'}_{1}} coincide con \math{a_{1}}, allora la
-		dimostrazione é terminata; altrimenti, si sostituisca in
-		\math{X} l'attivitá \math{{a'}_{1}} con \math{a_{1}}. Il
-		nuovo insieme \math{X} ha mantenuto la stessa cardinalitá
-		ed é ancora costituito da attivitá mutualmente compatibili,
-		pertanto il nuovo \math{X} é un sottoinsieme massimo di
-		attivitá compatibili di \math{A} che include ora \math{a_{1}}.
+		dimostrazione è terminata; altrimenti, si sostituisca in
+		\math{X} l'attività \math{{a'}_{1}} con \math{a_{1}}. Il
+		nuovo insieme \math{X} ha mantenuto la stessa cardinalità
+		ed è ancora costituito da attività mutualmente compatibili,
+		pertanto il nuovo \math{X} è un sottoinsieme massimo di
+		attività compatibili di \math{A} che include ora \math{a_{1}}.
 	\end{theorem}
 
 	Si noti come l'algoritmo che risolve il problema Interval Scheduling 
-	applicando la tecnica greedy é nettamente piú veloce di quello che lo
+	applicando la tecnica greedy è nettamente più veloce di quello che lo
 	risolve applicando la programmazione dinamica. Infatti, indicando con
-	\math{n} la cardinalitá di \math{A}, si ha che il loop principale
+	\math{n} la cardinalità di \math{A}, si ha che il loop principale
 	(righe 5-8) esegue esattamente \math{\abs{n}} volte un blocco di
 	codice con tempo di esecuzione unitario, mentre l'ordinamento di
 	\math{A} avviene (assumendo di usare un algoritmo di ordinamento

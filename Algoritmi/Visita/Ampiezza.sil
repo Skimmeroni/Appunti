@@ -4,7 +4,7 @@
         \in V} detto \strong{sorgente}, una \strong{visita in ampiezza},
         o \strong{Breadth-First Search} (\strong{BFS}) ispeziona tutti
         gli archi di \math{G} per individuare tutti quei vertici di
-        \math{G} che é possibile raggiungere seguendo un cammino che ha
+        \math{G} che è possibile raggiungere seguendo un cammino che ha
         inizio in \math{s}. Concettualmente, una BFS opera come segue:
 
         \begin{enumerate}
@@ -39,15 +39,15 @@
 
                         \begin{itemize}
                                 \begin{item}
-                                        Bianco: il vertice non é stato ancora visitato;
+                                        Bianco: il vertice non è stato ancora visitato;
                                 \end{item}
                                 \begin{item}
-                                        Grigio: il vertice é stato \strong{scoperto}, ovvero
-                                        é stato visitato ma alcuni vertici a questo adiacenti
+                                        Grigio: il vertice è stato \strong{scoperto}, ovvero
+                                        è stato visitato ma alcuni vertici a questo adiacenti
                                         non lo sono ancora stati;
                                 \end{item}
                                 \begin{item}
-                                        Nero: il vertice é stato visitato e tutti i
+                                        Nero: il vertice è stato visitato e tutti i
                                         vertici a questo adiacenti sono stati visitati;
                                 \end{item}
                         \end{itemize}
@@ -67,16 +67,16 @@
         il colore bianco, un valore \math{d} pari a \math{\infty} (ad
         eccezione della sorgente \math{s}, che ha \math{s.d = 0}) ed
         un valore \math{\pi} pari a NULL. Alla fine della visita, a
-        tutti i vertici raggiungibili dalla sorgente sará assegnato il
+        tutti i vertici raggiungibili dalla sorgente sarà assegnato il
         colore nero ed i relativi valori di \math{d} e di \math{\pi}.
         Se alla fine della visita sono ancora presenti dei vertici di
         colore bianco che hanno \math{\infty} come attributo distanza
         e NULL come attributo predecessore, allora significa che non vi
-        é modo di raggiungerli a partire dalla sorgente.
+        è modo di raggiungerli a partire dalla sorgente.
 
-        L'algoritmo per la visita in ampiezza di un grafo é presentato di 
-        seguto. Questo, dopo aver inizializzato gli attributi di ciascun 
-        vertice (righe 1-6) fa uso di una coda di prioritá, nella quale
+        L'algoritmo per la visita in ampiezza di un grafo è presentato di 
+        seguito. Questo, dopo aver inizializzato gli attributi di ciascun 
+        vertice (righe 1-6) fa uso di una coda di priorità, nella quale
         vengono messi i vertici non appena vengono visitati e nella quale
         rimangono fino a quando estratti per esplorarne gli adiacenti.
 
@@ -109,7 +109,7 @@
 	\end{verbatim}
 
         L'algoritmo continua fintanto che vi sono ancora vertici nella
-        coda di prioritá. Il primo vertice \math{v} fra questi viene
+        coda di priorità. Il primo vertice \math{v} fra questi viene
         estratto dalla coda, ed il loop interno (righe 11-16) analizza
         ciascun vertice adiacente a \math{v}. Ognuno di questi viene
         esplorato, assegnandogli il colore grigio, incrementando di
@@ -117,25 +117,25 @@
         predecessore. Dopodiché, viene assegnato a \math{v} il colore
         nero e viene rimosso dalla coda.
 
-        L'algoritmo termina quando la coda di prioritá é vuota, ovvero
-        quando non esistono piú vertici grigi, perché significa che tutti
+        L'algoritmo termina quando la coda di priorità è vuota, ovvero
+        quando non esistono più vertici grigi, perché significa che tutti
         i vertici visitabili sono stati visitati e tutti i vertici rimasti
-        bianchi non sono raggiungibili. É infatti facile verificare che
-        ad un vertice puó venire assegnato il colore grigio solamente
+        bianchi non sono raggiungibili. È infatti facile verificare che
+        ad un vertice può venire assegnato il colore grigio solamente
         \em{durante} la visita, mai prima e mai dopo.
 
         Il costo di inizializzazione dell'algoritmo in termini di tempo di
-        esecuzione é \math{O(\abs{V})}, perché viene compiuto un numero
+        esecuzione è \math{O(\abs{V})}, perché viene compiuto un numero
         costante di operazioni per ciascun vertice. Una singola operazione
-        sulla coda puó considerarsi eseguita in un tempo costante. Ciascun
-        vertice viene inserito e/o estratto dalla coda non piú di una sola
+        sulla coda può considerarsi eseguita in un tempo costante. Ciascun
+        vertice viene inserito e/o estratto dalla coda non più di una sola
         volta. Questo significa che il numero massimo di volte che l'algoritmo
-        ispeziona un vertice é \math{2E}, e che quindi il costo del loop
-        principale dell'algoritmo in termini di tempo di esecuzione é
+        ispeziona un vertice è \math{2E}, e che quindi il costo del loop
+        principale dell'algoritmo in termini di tempo di esecuzione è
         \math{O(\abs{E})}. Il tempo di esecuzione complessivo dell'algoritmo
         viene allora ad essere \math{O(\abs{V} + \abs{E})}.
 
-        Per un grafo \math{G = (V, E)} con sorgente \math{s \in V}, é
+        Per un grafo \math{G = (V, E)} con sorgente \math{s \in V}, è
         detto \strong{sottografo dei predecessori} di \math{G} il grafo
         \math{G_{\pi} = (V_{\pi}, E_{\pi})} dove
 
@@ -151,31 +151,31 @@
         \end{parbox}
         \par
 
-        Il sottografo dei predecessori \math{G_{\pi}} é un \strong{albero BF}
-        se \math{V_{\pi}} é formato dai vertici raggiungibili da \math{s} e,
-        per ogni \math{v \in V_{\pi}}, c'é un solo cammino semplice da
-        \math{s} a \math{v} in \math{G_{\pi}} che é anche un cammino minimo 
+        Il sottografo dei predecessori \math{G_{\pi}} è un \strong{albero BF}
+        se \math{V_{\pi}} è formato dai vertici raggiungibili da \math{s} e,
+        per ogni \math{v \in V_{\pi}}, c'è un solo cammino semplice da
+        \math{s} a \math{v} in \math{G_{\pi}} che è anche un cammino minimo 
         da \math{s} a \math{v} in \math{G}. Un albero BF ha la sorgente come
         radice ed al suo livello \math{i}-esimo si trovano tutti i vertici
         che distano \math{i} dalla sorgente. Si noti come una struttura di
-        questo tipo sia effettivamente un albero, perché é un grafo connesso
+        questo tipo sia effettivamente un albero, perché è un grafo connesso
         e \math{\abs{E_{\pi}} = \abs{V_{\pi}} - 1}
 
         Una volta operata una visita in ampiezza e aver assegnato a ciascun
-        vertice i valori per i tre attributi, é possibile costruire l'albero
-        BF associato alla visita. Per farlo, occorre costruire un algortimo
+        vertice i valori per i tre attributi, è possibile costruire l'albero
+        BF associato alla visita. Per farlo, occorre costruire un algoritmo
         che restituisca un insieme \math{V_{\pi}} in cui sono presenti tutti
         i vertici che sono stati raggiunti dalla visita in ampiezza ed un
         insieme \math{E_{\pi}} in cui sono presenti tutti gli archi che dalla
-        sorgente portano a tali vertici. Tale algoritmo avrá in input la
+        sorgente portano a tali vertici. Tale algoritmo avrà in input la
         sorgente \math{s} e l'insieme \math{V'}, ovvero l'insieme dei vertici
-        \math{V} dove ciascuno di questi é stato arricchito con i valori dei
+        \math{V} dove ciascuno di questi è stato arricchito con i valori dei
         tre attributi.
 
         I vertici raggiunti dalla visita in ampiezza sono tutti ed i
-        soli vertici di colore nero, pertanto é sufficiente aggiungere
+        soli vertici di colore nero, pertanto è sufficiente aggiungere
         a \math{V_{\pi}} tutti i vertici neri. Per quanto riguarda
-        \math{E_{\pi}}, questo sará costituito da tutti gli archi che
+        \math{E_{\pi}}, questo sarà costituito da tutti gli archi che
         connettono un vertice ad un suo predecessore, perché ripercorrendo
         a ritroso tutti i predecessori da ciascun vertice alla sorgente
         si ottengono tutti i cammini che vanno dalla sorgente a tale

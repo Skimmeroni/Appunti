@@ -2,26 +2,26 @@
 
     \subsection{Definizione del problema}
 
-        Si consideri una via di una cittá, composta da \math{n} case. Per
+        Si consideri una via di una città, composta da \math{n} case. Per
         la costruzione di un ospedale si richiede agli \math{n} residenti
-        una donazione. Ciascun \math{i}-esimo residente é disposto a donare
+        una donazione. Ciascun \math{i}-esimo residente è disposto a donare
         una certa somma di denaro \math{d_{i}}, ma a condizione che entrambi
         i suoi vicini, l'\math{i - 1}-esimo e il \math{i + 1}-esimo residente,
         si rifiutino di partecipare. Il problema \strong{Hateville} richiede
-        di trovare l'insieme di residenti tale per cui nessuno di questi é
+        di trovare l'insieme di residenti tale per cui nessuno di questi è
         vicino di un altro ed al contempo permette di ricavare la massima
-        quantitá di denaro dalle donazioni.
+        quantità di denaro dalle donazioni.
 
         Sia \math{X = \{1, 2, \unicodeellipsis, n\}} un insieme di
-        \math{n} entitá: a ciascuno é associato un valore \math{d_{i}}.
-        Per qualsiasi insieme \math{A \subseteq X} é possibile definire
-        un valore \math{D(A)} come la somma dei valori di tutte le entitá
-        costituiscono \math{A}. Due entitá \math{x_{i}} e \math{x_{j}},
+        \math{n} entità: a ciascuno è associato un valore \math{d_{i}}.
+        Per qualsiasi insieme \math{A \subseteq X} è possibile definire
+        un valore \math{D(A)} come la somma dei valori di tutte le entità
+        costituiscono \math{A}. Due entità \math{x_{i}} e \math{x_{j}},
         con \math{i > j}, si dicono \em{compatibili} se \math{x_{j} \ne
-        x_{i - 1}} e \math{x_{j} \ne x_{i + 1}}. La nozione di compatibilitá
+        x_{i - 1}} e \math{x_{j} \ne x_{i + 1}}. La nozione di compatibilità
         viene estesa ad un qualsiasi insieme \math{A \subseteq X} assegnandovi
-        un valore booleano \math{\mi{Comp}(A)}, che ha valore di veritá
-        \math{T} se tutte le entitá che compongo \math{A} sono fra loro
+        un valore booleano \math{\mi{Comp}(A)}, che ha valore di verità
+        \math{T} se tutte le entità che compongo \math{A} sono fra loro
         compatibili, e \math{F} altrimenti.
 
         \begin[width = 50%fw]{parbox}
@@ -41,7 +41,7 @@
         \end{parbox}
         \par
 
-        La risoluzione del problema é data dall'insieme \math{A* \subset X}
+        La risoluzione del problema è data dall'insieme \math{A* \subset X}
         formato esclusivamente da elementi fra loro compatibili che ha il
         massimo valore fra tutti gli insiemi con questa caratteristica:
 
@@ -54,7 +54,7 @@
     \subsection{Programmazione dinamica: sottostruttura ottima}
 
         \begin{theorem}
-			\strong{Proprietá della sottostruttura ottima per il problema
+			\strong{Proprietà della sottostruttura ottima per il problema
 			Hateville}. Sia data una istanza \math{X_{i} = \{x_{1}, x_{2},
 			\unicodeellipsis, x_{i}\}} del problema Hateville, con \math{i
 			\geq 2}. Assunto di avere a disposizione tutte le soluzioni per
@@ -70,14 +70,14 @@
             \end{math}
 
             \strong{Dimostrazione}. L'\math{i}-esimo elemento dell'istanza
-            \math{X_{i}} puó oppure non puó fare parte della \math{i}-esima
+            \math{X_{i}} può oppure non può fare parte della \math{i}-esima
             soluzione. Si distinguono allora due casi:
 
             \begin{itemize}
                 \begin{item}
                     \math{x_{i} \notin S_{i}}. Si supponga per assurdo
                     che \math{S_{i - 1}} non sia la soluzione ottimale
-                    del problema per l'istanza \math{X_{i}}. Se cosí é,
+                    del problema per l'istanza \math{X_{i}}. Se così è,
                     allora la soluzione ottimale per tale istanza (quale
                     che sia) deve necessariamente avere un valore maggiore
                     di quello della soluzione ottimale \math{S_{i - 1}},
@@ -85,12 +85,12 @@
 
                     Se, come da ipotesi, \math{x_{i}} non appartiene ad
                     \math{S_{i}}, deve aversi \math{S_{i} \subseteq X_{i
-                    - 1}}. Ma allora \math{S_{i}} é una potenziale soluzione
+                    - 1}}. Ma allora \math{S_{i}} è una potenziale soluzione
                     per la \math{i - 1}-esima istanza del problema. Ricordando
-                    peró che \math{\mi{Opt}(i) > \mi{Opt}(i - 1)}, questo
-                    equivale a dire che \math{S_{i}} é una soluzione migliore
+                    però che \math{\mi{Opt}(i) > \mi{Opt}(i - 1)}, questo
+                    equivale a dire che \math{S_{i}} è una soluzione migliore
                     per la \math{i - 1}-esima istanza del problema di quanto
-                    lo sia \math{S_{i - 1}}, e questo é in contraddizione con
+                    lo sia \math{S_{i - 1}}, e questo è in contraddizione con
                     l'ipotesi che la soluzione ottimale per l'istanza
                     \math{X_{i - 1}} sia \math{S_{i - 1}}. Occorre allora
                     assumere che \math{S_{i - 1}} sia l'effettiva soluzione
@@ -101,34 +101,34 @@
                     \math{x_{i} \in S_{i}}. Si supponga per assurdo che
                     \math{S_{i - 2} \cup \{x_{i}\}} non sia la soluzione
                     ottimale al problema per l'istanza \math{X_{i}}. Se
-                    cosí é, allora la soluzione ottimale per tale istanza
+                    così è, allora la soluzione ottimale per tale istanza
                     (quale che sia) deve avere un valore maggiore di quello
                     della soluzione ottimale \math{S_{i - 2} \cup x_{i}},
                     ovvero deve valere \math{\mi{Opt}(i) > \mi{Opt}(i - 2)
                     + d_{i}}.
 
                     Dato che, per ipotesi, \math{x_{i}} appartiene ad
-                    \math{S_{i}}, é possibile scomporre tale soluzione
+                    \math{S_{i}}, è possibile scomporre tale soluzione
                     in \math{S_{h} \cup \{x_{i}\}}, con \math{S_{h}
-                    \ne S_{i - 2}}, cosí come é possibile scomporre
+                    \ne S_{i - 2}}, così come è possibile scomporre
                     \math{\mi{Opt}(i)} in \math{\mi{Opt}(h) + d_{i}}.
-                    Essendo peró \math{\mi{Opt}(i) > \mi{Opt}(i - 2) +
+                    Essendo però \math{\mi{Opt}(i) > \mi{Opt}(i - 2) +
                     d_{i}}, deve valere \math{\mi{Opt}(h) + d_{i} >
-                    \mi{Opt}(i - 2) + d_{i}}, cioé \math{\mi{Opt}(h)
+                    \mi{Opt}(i - 2) + d_{i}}, cioè \math{\mi{Opt}(h)
                     > \mi{Opt}(i - 2)}.
 
                     Dovendo essere \math{S_{h} \cup \{x_{i}\}} un insieme
                     costituito da elementi mutualmente compatibili, la
-                    soluzione \math{S_{h}} non puó contenere \math{x_{i
-                    - 1}} (cosí come non puó contenere \math{x_{i}}),
+                    soluzione \math{S_{h}} non può contenere \math{x_{i
+                    - 1}} (così come non può contenere \math{x_{i}}),
                     pertanto si ha \math{S_{h} \subseteq X_{i - 2}}. Ma
-                    allora \math{S_{h}} é una potenziale soluzione per la
+                    allora \math{S_{h}} è una potenziale soluzione per la
                     \math{i - 2}-esima istanza del problema. Ricordando
-                    peró che \math{\mi{Opt}(h) > \mi{Opt}(i - 2)}, questo
-                    equivale a dire che \math{S_{h}} é una soluzione
+                    però che \math{\mi{Opt}(h) > \mi{Opt}(i - 2)}, questo
+                    equivale a dire che \math{S_{h}} è una soluzione
                     migliore per la \math{i - 2}-esima istanza del
                     problema di quanto lo sia \math{S_{i - 2}}, e questo
-                    é in contraddizione con l'ipotesi che la soluzione
+                    è in contraddizione con l'ipotesi che la soluzione
                     ottimale per l'istanza \math{X_{i - 2}} sia \math{S_{i
                     - 2}}. Occorre allora assumere che \math{S_{i - 2} \cup
                     \{x_{i}\}} sia l'effettiva soluzione ottimale per la
@@ -140,24 +140,24 @@
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
-        Il problema puó essere risolto mediante programmazione dinamica.
+        Il problema può essere risolto mediante programmazione dinamica.
         Si consideri \math{X_{i} = \{x_{1}, x_{2}, \unicodeellipsis, x_{i}\}
         \subseteq X}, l'insieme costituito dai primi \math{i} elementi di 
         \math{X}, che corrisponde alla \math{i}-esima istanza del problema.
-        A tale insieme é associato l'insieme \math{S_{i} = \{x_{1}, x_{2},
+        A tale insieme è associato l'insieme \math{S_{i} = \{x_{1}, x_{2},
         \unicodeellipsis, x_{i}\} \subseteq X_{i}}, la soluzione ottimale
         per la \math{i}-esima istanza del problema. Il valore della
         soluzione \math{S_{i}} viene indicato con \math{\mi{Opt}(i)}. La
-        soluzione finale del problema é \math{S_{n}}, in quanto associata
+        soluzione finale del problema è \math{S_{n}}, in quanto associata
         all'istanza \math{X_{n}}, che coincide con l'intero insieme \math{X}.
 
         L'insieme \math{S_{i}} ed il valore \math{\mi{Opt}(i)} vengono
         calcolati a partire da una equazione di ricorrenza. Il caso base
-        di tale equazione é immediato: si consideri l'istanza \math{X_{0}}
-        del problema, che non contiene alcuna entitá. Tale insieme é
-        certamente composto esclusivamente da entitá fra loro compatibili,
+        di tale equazione è immediato: si consideri l'istanza \math{X_{0}}
+        del problema, che non contiene alcuna entità. Tale insieme è
+        certamente composto esclusivamente da entità fra loro compatibili,
         non contenendone alcuno. Inoltre, per lo stesso motivo, il valore
-        di tale insieme é nullo.
+        di tale insieme è nullo.
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
@@ -178,8 +178,8 @@
         x_{i}\}} assumendo di avere a disposizione tutte le soluzioni ottimali
         \math{S_{j} \subseteq \{x_{1}, x_{2}, \unicodeellipsis, x_{j}\}} tali
         per cui \math{j < i}. Possono presentarsi due casistiche: \math{x_{i}}
-        puó oppure non puó fare parte di \math{S_{i}}. Se \math{x_{i} \notin
-        S_{i}}, allora é possibile assumere che la soluzione ottimale per la
+        può oppure non può fare parte di \math{S_{i}}. Se \math{x_{i} \notin
+        S_{i}}, allora è possibile assumere che la soluzione ottimale per la
         \math{i}-esima istanza sia la medesima della \math{i - 1}-istanza.
 
         Se invece \math{x_{i} \in S_{i}}, allora la soluzione ottimale
@@ -188,11 +188,11 @@
         e \math{x_{i - 1}} sono elementi certamente incompatibili e
         \math{S_{i - 1}} potrebbe contenere \math{x_{i - 1}}. D'altro
         canto, \math{x_{i}} e \math{x_{i - 2}} sono certamente compatibili,
-        pertanto \math{S_{i - 2}} é una possibile soluzione per la
-        \math{i}-esima istanza, dato che non puó contenere \math{x_{i - 1}}.
+        pertanto \math{S_{i - 2}} è una possibile soluzione per la
+        \math{i}-esima istanza, dato che non può contenere \math{x_{i - 1}}.
         Tuttavia, proprio per il fatto che \math{x_{i}} e \math{x_{i - 2}}
-        sono compatibili, anche \math{S_{i - 2} \cup \{x_{i}\}} é una
-        soluzione, ed é certamente una soluzione migliore di \math{S_{i - 2}}.
+        sono compatibili, anche \math{S_{i - 2} \cup \{x_{i}\}} è una
+        soluzione, ed è certamente una soluzione migliore di \math{S_{i - 2}}.
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
@@ -214,8 +214,8 @@
         \end{parbox}
         \par
 
-        Naturalmente non é possibile sapere a priori se \math{x_{i}} fa
-        oppure non fa parte di \math{S_{i}}, tuttavia é possibile scegliere
+        Naturalmente non è possibile sapere a priori se \math{x_{i}} fa
+        oppure non fa parte di \math{S_{i}}, tuttavia è possibile scegliere
         se includere oppure non includere \math{x_{i}} nella \math{i}-esima
         soluzione ottimale in base a quale delle due scelte rende maggiore
         il valore di \math{S_{i}}:
@@ -264,9 +264,9 @@
 			    return c
 		\end{verbatim}
 
-        É facile notare come il tempo di esecuzione dell'algoritmo sia
-		\math{O(n)}, dove \math{n} é la lunghezza del vettore \math{A}.
-		Questo perché é presente un ciclo che esegue una istruzione 
+        È facile notare come il tempo di esecuzione dell'algoritmo sia
+		\math{O(n)}, dove \math{n} è la lunghezza del vettore \math{A}.
+		Questo perché è presente un ciclo che esegue una istruzione 
 		in tempo immediato esattamente \math{\abs{A}} volte.
 
     \subsection{Programmazione dinamica: ricostruzione di una soluzione}
@@ -274,7 +274,7 @@
         Un primo modo per ricavare una soluzione ottimale consiste nel
 		calcolarla direttamente durante il calcolo del valore ottimale,
 		modificando la procedura precedente introducendo l'insieme soluzione
-		\math{S}. Il tempo di esecuzione dell'algorimo rimane invariato.
+		\math{S}. Il tempo di esecuzione dell'algoritmo rimane invariato.
 
 		\begin{verbatim}
 			procedure HATEVILLE(A)

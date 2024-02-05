@@ -6,7 +6,7 @@
     intero, rispettivamente un valore ed un peso. La definizione di 
     peso e di valore viene poi generalizzata ad un sottoinsieme di
     oggetti come la somma dei pesi e dei valori di ciascun oggetto
-    di cui é costituito.
+    di cui è costituito.
 
     \begin[width = 50%fw]{parbox}
         \begin[mode = display]{math}
@@ -27,11 +27,11 @@
     \par
 
     Il \strong{problema dello Zaino Frazionario} chiede di trovare una 
-    sequenza di quantitá di ciascun oggetto che permette di massimizzare
+    sequenza di quantità di ciascun oggetto che permette di massimizzare
     il valore complessivo di tale sequenza ed al contempo essere inferiore
-    o uguale alla capacitá dello zaino.
+    o uguale alla capacità dello zaino.
 
-    Piú formalmente, indicando con \math{P = \langle p_{1}, p_{2},
+    Più formalmente, indicando con \math{P = \langle p_{1}, p_{2},
     \unicodeellipsis, p_{n} \rangle} con \math{p_{i} \in [0, 1]}
     per ogni \math{1 \leq i \leq n} la sequenza di percentuali con
     cui ciascun \math{i}-esimo oggetto viene aggiunto ad una certa
@@ -52,30 +52,30 @@
 
     \begin{example}
         Sia dato l'insieme di tre oggetti \math{X = \langle (10, 20), (9, 8),
-        (8, 5) \rangle} ed una capacitá \math{C = 20}. Una soluzione ottimale
-        al problema dello Zaino Frazionario é data dalla sequenza \math{P* =
+        (8, 5) \rangle} ed una capacità \math{C = 20}. Una soluzione ottimale
+        al problema dello Zaino Frazionario è data dalla sequenza \math{P* =
         \langle 0.35, 1, 1\rangle}, avente valore complessivo \math{V(P*)
         = 0.35 * 10 + 1 * 9 + 1 * 8 = 20.5} e peso complessivo \math{W(P*)
         = 0.35 * 20 + 1 * 8 + 1 * 5 = 20}.
     \end{example}
 
-    Il problema puó essere risolto applicando la tecnica greedy.
+    Il problema può essere risolto applicando la tecnica greedy.
     Innanzitutto, dato un certo insieme di oggetti \math{X =
     \langle 1, 2, \unicodeellipsis, n \rangle}, per ciascun 
     \math{i}-esimo oggetto sia \math{s_{i} = v_{i} / w_{i}} il
     \em{valore specifico} \footnote{Il nome "valore specifico"
-    é dato in analogia con il concetto di \strong{peso specifico},
+    è dato in analogia con il concetto di \strong{peso specifico},
     ovvero il peso di un metro cubo di una certa sostanza.} di
-    tale oggetto, ovvero il suo valore per unitá di peso.
+    tale oggetto, ovvero il suo valore per unità di peso.
 
     Si ordini l'insieme \math{X} in ordine non crescente rispetto ai
-    valori specifici degli oggetti di cui é costituito. Ad ogni iterazione
-    dell'algoritmo greedy viene selezionata la quantitá dell'\math{i}-esimo
-    oggetto che viene scelta (non superiore ad 1) e la capacitá dello zaino
-    viene ridotta di tanto quanto é il peso di tale quantitá. L'algoritmo
-    prevede di prendere, per ciascun oggetto, la massima quantitá compatibile
-    con la capacitá residua dello zaino, fermandosi quando é stata raggiunta
-    la capacitá massima.
+    valori specifici degli oggetti di cui è costituito. Ad ogni iterazione
+    dell'algoritmo greedy viene selezionata la quantità dell'\math{i}-esimo
+    oggetto che viene scelta (non superiore ad 1) e la capacità dello zaino
+    viene ridotta di tanto quanto è il peso di tale quantità. L'algoritmo
+    prevede di prendere, per ciascun oggetto, la massima quantità compatibile
+    con la capacità residua dello zaino, fermandosi quando è stata raggiunta
+    la capacità massima.
 
 	\begin{verbatim}
 		procedure FRACTIONAL-KNAPSACK(n, V, W, C)
@@ -97,44 +97,44 @@
 		10    return P
 	\end{verbatim}
 
-    Tale algoritmo é effettivamente un algoritmo greedy, perché la scelta
+    Tale algoritmo è effettivamente un algoritmo greedy, perché la scelta
 	localmente ottima viene considerata anche globalmente ottima. Tuttavia,
 	affinché questo possa considerarsi corretto, occorre dimostrare la
-	validitá della proprietá della scelta greedy, ovvero che la percentuale
+	validità della proprietà della scelta greedy, ovvero che la percentuale
 	di oggetto che viene scelta per ciascuna iterazione (soluzione ottimale
-	locale) é effettivamente membro della soluzione ottimale globale. A dire
+	locale) è effettivamente membro della soluzione ottimale globale. A dire
 	il vero, dato che ad ogni iterazione viene sempre considerato il primo
-	oggetto e la capacitá dello zaino diminuisce sempre di una quantitá
-	relativa al peso di quest'ultimo, per dimostrare la validitá della
-	proprietá della scelta greedy é sufficiente dimostrare che la massima 
-	quantitá compatibile con l'intera capacitá \math{C} del primo oggetto,
-	quello che ha il valore specifico maggiore di tutti, é sempre parte
+	oggetto e la capacità dello zaino diminuisce sempre di una quantità
+	relativa al peso di quest'ultimo, per dimostrare la validità della
+	proprietà della scelta greedy è sufficiente dimostrare che la massima 
+	quantità compatibile con l'intera capacità \math{C} del primo oggetto,
+	quello che ha il valore specifico maggiore di tutti, è sempre parte
 	della soluzione ottima.
 
 	\begin{theorem}
-		\strong{Proprietá della scelta greedy per il problema dello Zaino
+		\strong{Proprietà della scelta greedy per il problema dello Zaino
 		Frazionario}. Sia dato un insieme di oggetti \math{X = \langle 1,
 		2, \unicodeellipsis, n \rangle} ordinati per valore specifico non
-		crescente ed una capacitá \math{C}. La massima percentuale del
-		primo oggetto compatibile \math{C} che puó essere aggiunta alla
-		soluzione ottima é sempre parte di quest'ultima.
+		crescente ed una capacità \math{C}. La massima percentuale del
+		primo oggetto compatibile \math{C} che può essere aggiunta alla
+		soluzione ottima è sempre parte di quest'ultima.
 
         \bigskip
         \strong{Dimostrazione}. La percentuale che viene scelta per il
-        primo oggetto é \math{p_{1} = \mi{min} (C / w_{1}, 1)}, la massima
+        primo oggetto è \math{p_{1} = \mi{min} (C / w_{1}, 1)}, la massima
         possibile. Sia \math{P} una soluzione ottima: dato che l'algoritmo 
         sceglie sempre la massima percentuale possibile, la percentuale 
-        \math{{p'}_{1}} che si trova in \math{P} puó essere esclusivamente
+        \math{{p'}_{1}} che si trova in \math{P} può essere esclusivamente
         uguale oppure inferiore a \math{p_{1}}.
 
         Se \math{{p'}_{1}} e \math{p_{1}} sono uguali, la dimostrazione
-        é terminata. Se \math{{p'}_{1}} é inferiore a \math{p_{1}}, é
+        è terminata. Se \math{{p'}_{1}} è inferiore a \math{p_{1}}, è
         possibile costruire una nuova soluzione in cui la percentuale 
-        del primo oggetto é uguale a \math{p_{1}}. La proporzione di uno
-        o piú oggetti aggiunti successivamente sará ridotta di conseguenza.
-        Dato che il valore specifico del primo oggetto é superiore o uguale
-        a quello dei successivi non é possibile ottenere una soluzione avente
-        valore inferiore. Si conclude quindi che \math{p_{1}} é sempre parte
+        del primo oggetto è uguale a \math{p_{1}}. La proporzione di uno
+        o più oggetti aggiunti successivamente sarà ridotta di conseguenza.
+        Dato che il valore specifico del primo oggetto è superiore o uguale
+        a quello dei successivi non è possibile ottenere una soluzione avente
+        valore inferiore. Si conclude quindi che \math{p_{1}} è sempre parte
         di una soluzione ottima.
     \end{theorem}
 

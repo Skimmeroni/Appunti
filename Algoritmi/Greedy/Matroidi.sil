@@ -2,7 +2,7 @@
 
     Siano dati un insieme finito \math{S} ed un insieme non vuoto \math{F},
     sottoinsieme dell'insieme potenza di \math{S}. La coppia \math{(S, F)}
-    é detta \strong{sistema di indipendenza} se, per ciascun elemento di
+    è detta \strong{sistema di indipendenza} se, per ciascun elemento di
     \math{F}, anche tutti i sottoinsiemi di tale elemento appartengono ad
     \math{F}.
 
@@ -13,14 +13,14 @@
         \thickspace \forall A \in F, \forall B \subset A
     \end{math}
 
-    Ciascun elemento dell'insieme \math{F} é detto \strong{sottoinsieme
+    Ciascun elemento dell'insieme \math{F} è detto \strong{sottoinsieme
     indipendente} di \math{S}. Si noti come, affinché una coppia \math{(S,
     F)} possa essere un sistema di indipendenza, l'insieme \math{F} deve
-    almeno contenere l'insieme vuoto, perché l'insieme vuoto é sottoinsieme
+    almeno contenere l'insieme vuoto, perché l'insieme vuoto è sottoinsieme
     di ogni insieme.
 
     \begin{example}
-        Si considerino gli insiemi \math{S} e \math{F} cosí definiti:
+        Si considerino gli insiemi \math{S} e \math{F} così definiti:
 
         \begin[width = 40%fw]{parbox}
             \begin[mode = display]{math}
@@ -47,9 +47,9 @@
         (\math{\{1\}}, \math{\{3\}} e l'insieme vuoto).
     \end{example}
 
-    Un sistema di indipendenza \math{(S, F)} é detto \strong{matroide} se
-    possiede la \strong{proprietá di scambio}, ovvero per qualsiasi coppia
-    di sottoinsiemi di \math{F}, dove il primo ha un elemento in piú del
+    Un sistema di indipendenza \math{(S, F)} è detto \strong{matroide} se
+    possiede la \strong{proprietà di scambio}, ovvero per qualsiasi coppia
+    di sottoinsiemi di \math{F}, dove il primo ha un elemento in più del
     secondo, esiste almeno un elemento del secondo insieme non presente
     nel primo tale che aggiunto al primo insieme restituisce un insieme
     che appartiene ancora ad \math{F}.
@@ -65,13 +65,13 @@
     \begin{example}
         Siano \math{S} un insieme finito generico e \math{F} il sottoinsieme
         dell'insieme potenza di \math{S} che contiene tutti gli elementi
-        di \math{\mi{Pow}(S)} con cardinalitá inferiore o uguale a \math{k},
+        di \math{\mi{Pow}(S)} con cardinalità inferiore o uguale a \math{k},
         con \math{k} numero naturale fissato.
 
         La coppia \math{(S, F)} costituisce un sistema di indipendenza
         perché, preso un qualsiasi insieme \math{f \in F}, tutti i suoi
-        sottoinsiemi hanno cardinalitá inferiore a \math{f}, che a sua
-        volta ha cardinalitá inferiore o uguale a \math{k}. Pertanto,
+        sottoinsiemi hanno cardinalità inferiore a \math{f}, che a sua
+        volta ha cardinalità inferiore o uguale a \math{k}. Pertanto,
         anche tutti i sottoinsiemi di \math{f} fanno parte di \math{F}.
 
         Inoltre, la coppia \math{(S, F)} costituisce un matroide.
@@ -79,23 +79,23 @@
         che \math{\abs{B} = \abs{A} + 1}. Avendo \math{A} un elemento
         in meno di \math{B}, si ha \math{\abs{A} < k}. Aggiungendo un
         qualsiasi elemento \math{b \in B - A} all'insieme \math{A} si
-        ottiene l'insieme \math{\{b\} \cup A} che ha cardinalitá
-        \math{\abs{A} + 1 = \abs{B}}, che per ipotesi é un valore
+        ottiene l'insieme \math{\{b\} \cup A} che ha cardinalità
+        \math{\abs{A} + 1 = \abs{B}}, che per ipotesi è un valore
         inferiore o uguale a \math{k}, e che quindi appartiene ad
         \math{F}.
     \end{example}
 
-    Sia \math{M = (S, F)} un matroide. Un elemento \math{s \in S} é detto 
+    Sia \math{M = (S, F)} un matroide. Un elemento \math{s \in S} è detto 
     \strong{estensione} dell'insieme \math{A \in F} se \math{s \notin A}
     e \math{A \cup \{s\} \in F}, ovvero aggiungendo \math{s} ad \math{A}
     (ed \math{A} non contiene \math{s}) si ottiene ancora un sottoinsieme
     indipendente di \math{S}. Se non esiste alcun elemento \math{s} che
     possa essere aggiunto ad \math{A} tale che \math{A \cup \{s\} \in F},
-    si dice che \math{A} é \strong{massimale}.
+    si dice che \math{A} è \strong{massimale}.
 
     \begin{theorem}
         Tutti i sottoinsiemi indipendenti massimali in un matroide hanno la
-        stessa cardinalitá.
+        stessa cardinalità.
 
         \bigskip
         \strong{Dimostrazione}. Sia \math{M = (S, F)} un matroide.
@@ -104,54 +104,54 @@
         che \math{\abs{A} < \abs{B}}.
 
         Essendo \math{M} un matroide ed essendo \math{\abs{A} \ne \abs{B}},
-        deve essere a questi applicabile la proprietá di scambio. Ovvero,
+        deve essere a questi applicabile la proprietà di scambio. Ovvero,
         deve esistere un elemento \math{b \in B - A} tale che \math{\{b\}
         \cup A \in F}, tuttavia questo contraddice l'ipotesi che \math{A}
         sia massimale e che quindi non possa esistere alcun \math{b}. Si
-        deduce quindi che due (o piú) sottoinsiemi \math{A} e \math{B} 
-        indipendenti massimali in uno stesso matroide aventi cardinalitá
+        deduce quindi che due (o più) sottoinsiemi \math{A} e \math{B} 
+        indipendenti massimali in uno stesso matroide aventi cardinalità
         diversa non possano esistere.
     \end{theorem}
 
     Sia \math{(S, F)} un sistema di indipendenza e sia \math{C}
     un sottoinsieme di \math{S}. La coppia \math{(C, F_{C})} con
     \math{F_{C} = \{A \in F \thickspace \mi{t.c.} \thickspace A
-    \subseteq C\}} é il \strong{sottosistema di indipendenza
+    \subseteq C\}} è il \strong{sottosistema di indipendenza
     indotto} da \math{C}.
 
     \begin{theorem}
         Un qualsiasi sottosistema indotto \math{(C, F_{C})} di un matroide
-        \math{(S, F)} é esso stesso un matroide se i suoi insiemi massimali
-        hanno la stessa cardinalitá.
+        \math{(S, F)} è esso stesso un matroide se i suoi insiemi massimali
+        hanno la stessa cardinalità.
     \end{theorem}
 
     \begin{theorem}
-        Un sistema di indipendenza \math{(S, F)} é (anche) un matroide se
+        Un sistema di indipendenza \math{(S, F)} è (anche) un matroide se
         e solo se per ogni \math{C \subseteq S} gli insiemi massimali di
-        \math{(C, F_{C})} hanno la stessa cardinalitá.
+        \math{(C, F_{C})} hanno la stessa cardinalità.
     \end{theorem}
 
     Dato un grafo \math{G = (V, E)} non orientato e connesso, si dice
     \strong{matroide grafico} la coppia di insiemi \math{M_{G} = (S, F)},
     dove \math{S} coincide con l'insieme degli archi \math{E} e \math{F}
-    é costituito da tutti i sottoinsiemi di \math{S} che non presentano
+    è costituito da tutti i sottoinsiemi di \math{S} che non presentano
     cicli, ovvero da tutti ed i soli sottoinsiemi di \math{S} che
     definiscono dei sottografi che formano una \strong{foresta}.
 
     \begin{theorem}
-        Un matroide grafico é un matroide.
+        Un matroide grafico è un matroide.
 
         \bigskip
         \strong{Dimostrazione}. Dato un grafo non orientato e connesso
         \math{G = (V, E)}, sia \math{M_{G} = (S, F)} il matroide grafico
-        a questo associato. Si dimostri innanzitutto che \math{M_{G}} é
+        a questo associato. Si dimostri innanzitutto che \math{M_{G}} è
         un sistema di indipendenza: preso un qualsiasi \math{A \in F},
         sia \math{B} un suo sottoinsieme. Tale sottoinsieme viene costruito
-        eliminando da \math{A} uno o piú archi; essendo peró \math{A} privo
-        di cicli per ipotesi, anche \math{B} dovrá esserlo, e quindi anche
-        \math{B} é un elemento di \math{F}. Questo significa che qualsiasi
+        eliminando da \math{A} uno o più archi; essendo però \math{A} privo
+        di cicli per ipotesi, anche \math{B} dovrà esserlo, e quindi anche
+        \math{B} è un elemento di \math{F}. Questo significa che qualsiasi
         sottoinsieme di un elemento di \math{F} fa a sua volta parte di
-        \math{F}, pertanto \math{M_{G}} é un sistema di indipendenza.
+        \math{F}, pertanto \math{M_{G}} è un sistema di indipendenza.
 
         Siano poi \math{A, B \in F} due sottoinsiemi tali per cui
         \math{\abs{B} = \abs{A} + 1}, i quali definiscono rispettivamente
@@ -171,11 +171,11 @@
         dagli stessi vertici, esiste in \math{G_{B}} un arco \math{(u, v)}
         che connette due vertici \math{u} e \math{v} che in \math{G_{B}} si
         trovano in un solo albero ma che in \math{G_{A}} si trovano in due
-        alberi diversi. Allora tale arco puó essere aggiunto a \math{G_{A}}
+        alberi diversi. Allora tale arco può essere aggiunto a \math{G_{A}}
         senza creare un ciclo, ottenendo quindi un nuovo sottografo i cui
         vertici formano ancora un insieme che appartiene ad \math{F}. Questa
-        é peró precisamente la definizione di proprietá di scambio, e quindi
-        é possibile affermare che \math{M_{G}} sia un matroide.
+        è però precisamente la definizione di proprietà di scambio, e quindi
+        è possibile affermare che \math{M_{G}} sia un matroide.
     \end{theorem}
 
     \begin{example}
@@ -183,7 +183,7 @@
 
         Si consideri il grafo \math{G = (V, E)} sopra presentato. A
         partire dall'insieme \math{F}, che contiene tutti i sottoinsiemi
-        di \math{E} che non hanno cicli. Da \math{F} é estratto il
+        di \math{E} che non hanno cicli. Da \math{F} è estratto il
         sottoinsieme di archi \math{A = \{(a, b), (b, c), (c, d), (d, e),
         (i, g), (f, g), (g, h)\}}. Il sottografo \math{G_{A} = (V, A)}
         definisce una foresta di \math{\abs{V} - \abs{A} = 2} alberi, il
@@ -192,9 +192,9 @@
     \end{example}
 
     Dato il matroide grafico \math{M_{G} = (S, F)}, l'insieme \math{A \in
-    F} é massimale se non é possibile aggiungere un arco ad \math{A} (che 
-    non faccia giá parte di \math{A}) senza formare un ciclo. Questo equivale
-    a dire che il sottografo \math{G_{A}} indotto da \math{A} é una foresta
+    F} è massimale se non è possibile aggiungere un arco ad \math{A} (che 
+    non faccia già parte di \math{A}) senza formare un ciclo. Questo equivale
+    a dire che il sottografo \math{G_{A}} indotto da \math{A} è una foresta
     formata da un solo albero, avente \math{\abs{V} - 1} archi che connette 
     tutti i vertici del grafo. Un albero con queste caratteristiche viene
     chiamato \strong{albero di copertura}, o \strong{Spanning Tree}
@@ -203,11 +203,11 @@
     \begin{example}
         \center{\img[src = Greedy/matroid2.pdf, width = 87.5%fw]}
 
-        L'insieme di archi sopra evidenziato é uno spanning tree per il grafo
+        L'insieme di archi sopra evidenziato è uno spanning tree per il grafo
         dell'esempio precedente.
     \end{example}
 
-    Un \strong{matroide pesato} é un matroide \math{M = (S, F)} a cui
+    Un \strong{matroide pesato} è un matroide \math{M = (S, F)} a cui
     viene aggiunta una funzione peso \math{W}, la quale associa ad ogni
     elemento dell'insieme \math{S} un numero reale strettamente positivo.
     Tale funzione viene estesa ad un generico insieme \math{A} membro di

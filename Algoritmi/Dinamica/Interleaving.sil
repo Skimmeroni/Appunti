@@ -5,11 +5,11 @@
         Date le sequenze \math{X = \langle x_{1}, \unicodeellipsis, x_{m}
         \rangle} e \math{Y = \langle y_{1}, \unicodeellipsis, y_{n} \rangle},
         la sequenza \math{W = \langle w_{1}, \unicodeellipsis, w_{m + n}
-        \rangle} é detta \strong{interleaving} di \math{X} e di \math{Y}
-        se é possibile trovarle entrambe come sottosequenze disgiunte
+        \rangle} è detta \strong{interleaving} di \math{X} e di \math{Y}
+        se è possibile trovarle entrambe come sottosequenze disgiunte
         all'interno di \math{W}.
 
-        Piú formalmente, \math{W} é interleaving di \math{X} e di \math{Y}
+        Più formalmente, \math{W} è interleaving di \math{X} e di \math{Y}
         se esistono:
 
         \begin[width = 50%fw]{parbox}
@@ -56,12 +56,12 @@
 
         Il \strong{problema interleaving} chiede di determinare se, per
         una tripla di sequenze \math{W}, \math{X} e \math{Y}, la sequenza
-        \math{W} é interleaving di \math{X} e di \math{Y}.
+        \math{W} è interleaving di \math{X} e di \math{Y}.
 
         \begin{example}
             Date le sequenze \math{Y = \langle D, E, E, P \rangle} e
             \math{X = \langle L, O, R, E \rangle}, un interleaving di
-            \math{X} e di \math{Y} é la sequenza \math{W = \langle D,
+            \math{X} e di \math{Y} è la sequenza \math{W = \langle D,
             L, O, E, R, E, P, E \rangle}.
         \end{example}
 
@@ -72,60 +72,60 @@
         X[1 : i]} e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i}
         e \math{j} delle rispettive sequenze. La soluzione \math{S_{i, j}}
         per l'\math{i, j}-esima istanza del problema corrisponde a determinare
-        se \math{W_{i + j}} é interleaving per le sottosequenze \math{X_{i}} e
+        se \math{W_{i + j}} è interleaving per le sottosequenze \math{X_{i}} e
         \math{Y_{j}}. La soluzione per le intere sequenze \math{X} e \math{Y}
-        é la soluzione per l'istanza \math{X_{m}, Y_{n}}.
+        è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
 
         \smallskip
         \begin{center}
-            \math{S_{i, j} = T} se \math{W_{i + j}} é interleaving di
+            \math{S_{i, j} = T} se \math{W_{i + j}} è interleaving di
             \math{X_{i}} e \math{Y_{j}}, altrimenti \math{S_{i, j} = F}.
         \end{center}
         \bigskip
 
         Approcciare il problema direttamente a partire dal determinare
-        casi base e passi ricorsivi é ostico; é piú semplice trattare
+        casi base e passi ricorsivi è ostico; è più semplice trattare
         il problema in termini di prefissi delle tre stringhe. Si
         consideri innanzitutto il caso in cui almeno una delle due
-        sequenze é la sequenza vuota:
+        sequenze è la sequenza vuota:
 
         \begin{itemize}
             \begin{item}
                 Se \math{X_{i}} e \math{Y_{j}} sono entrambe la sequenza
                 vuota, allora l'unica sequenza \math{W_{i + j}} costruibile
-                a partire da queste é essa stessa la sequenza vuota, che per
-                definizione é interleaving di \math{X_{i}} e di \math{Y_{j}};
+                a partire da queste è essa stessa la sequenza vuota, che per
+                definizione è interleaving di \math{X_{i}} e di \math{Y_{j}};
             \end{item}
             \begin{item}
-                Se \math{X_{i}} é la sequenza vuota ma \math{Y_{j}} non lo
-                é, occorre distinguere due situazioni diverse:
+                Se \math{X_{i}} è la sequenza vuota ma \math{Y_{j}} non lo
+                è, occorre distinguere due situazioni diverse:
 
                 \begin{enumerate}
                     \begin{item}
-                        Se \math{W[j] = Y[j]}, allora \math{W_{j}} é
+                        Se \math{W[j] = Y[j]}, allora \math{W_{j}} è
                         interleaving di \math{X_{i}} e \math{Y_{j}}
                         soltanto se \math{W_{i + j - 1}} era interleaving
                         di \math{X_{i}} e \math{Y_{j} - 1};
                     \end{item}
                     \begin{item}
-                        Se \math{W[j] \ne Y[j]}, allora \math{W_{j}} non puó
+                        Se \math{W[j] \ne Y[j]}, allora \math{W_{j}} non può
                         essere interleaving di \math{X_{i}} e \math{Y_{j}}.
                     \end{item}
                 \end{enumerate}
             \end{item}
             \begin{item}
-                Se \math{Y_{j}} é la sequenza vuota ma \math{X_{i}} non lo
-                é, occorre distinguere due situazioni diverse:
+                Se \math{Y_{j}} è la sequenza vuota ma \math{X_{i}} non lo
+                è, occorre distinguere due situazioni diverse:
 
                 \begin{enumerate}
                     \begin{item}
-                        Se \math{W[i] = X[i]}, allora \math{W_{i}} é
+                        Se \math{W[i] = X[i]}, allora \math{W_{i}} è
                         interleaving di \math{X_{i}} e \math{Y_{j}}
                         soltanto se \math{W_{i + j - 1}} era interleaving
                         di \math{X_{i} - 1} e \math{Y_{j}};
                     \end{item}
                     \begin{item}
-                        Se \math{W[i] \ne X[i]}, allora \math{W_{i}} non puó
+                        Se \math{W[i] \ne X[i]}, allora \math{W_{i}} non può
                         essere interleaving di \math{X_{i}} e \math{Y_{j}}.
                     \end{item}
                 \end{enumerate}
@@ -151,38 +151,38 @@
         sequenza vuota. In tal senso, si assuma di avere a disposizione tutte
         le soluzioni nella forma \math{S_{a, b}}, con \math{1 \leq a < i} e
         \math{1 \leq b < j}, e di voler calcolare \math{S_{i, j}}. Possono
-        presentarsi quattro possibilitá mutualmente esclusive:
+        presentarsi quattro possibilità mutualmente esclusive:
 
         \begin{itemize}
             \begin{item}
                 \math{W[i + j] \ne X[i]} e \math{W[i + j] \ne Y[j]}. Se
-                non é possibile accodare né \math{X[i]} né \math{Y[j]} a
-                \math{W[i + j]} allora \math{W_{i + j}} non puó essere
+                non è possibile accodare né \math{X[i]} né \math{Y[j]} a
+                \math{W[i + j]} allora \math{W_{i + j}} non può essere
                 interleaving di \math{X_{i}} e di \math{Y_{j}};
             \end{item}
             \begin{item}
                 \math{W[i + j] = X[i]} e \math{W[i + j] \ne Y[j]}. Siccome
-                l'elemento \math{W[i + j]} é uguale all'elemento \math{X[i]}
+                l'elemento \math{W[i + j]} è uguale all'elemento \math{X[i]}
                 e diverso da \math{Y[j]}, allora l'unico carattere valido per
-                la posizione \math{i + j} in \math{W} é proprio \math{X[i]}.
-                Quindi \math{W_{i + j}} é interleaving di \math{X_{i}} e di
+                la posizione \math{i + j} in \math{W} è proprio \math{X[i]}.
+                Quindi \math{W_{i + j}} è interleaving di \math{X_{i}} e di
                 \math{Y_{j}} solo se \math{W_{i + j - 1}} era interleaving
                 di \math{X_{i - 1}} e \math{Y_{j}};
             \end{item}
             \begin{item}
                 \math{W[i + j] \ne X[i]} e \math{W[i + j] = Y[j]}. Siccome
-                l'elemento \math{W[i + j]} é uguale all'elemento \math{Y[j]}
+                l'elemento \math{W[i + j]} è uguale all'elemento \math{Y[j]}
                 e diverso da \math{X[i]}, allora l'unico carattere valido per
-                la posizione \math{i + j} in \math{W} é proprio \math{Y[j]}.
-                Quindi \math{W_{i + j}} é interleaving di \math{X_{i}} e di
+                la posizione \math{i + j} in \math{W} è proprio \math{Y[j]}.
+                Quindi \math{W_{i + j}} è interleaving di \math{X_{i}} e di
                 \math{Y_{j}} solo se \math{W_{i + j - 1}} era interleaving
                 di \math{X_{i}} e \math{Y_{j - 1}};
             \end{item}
             \begin{item}
                 \math{W[i + j] = X[i]} e \math{W[i + j] = Y[j]}. In questo
-                caso, é possibile accodare sia \math{X[i]} che \math{Y[j]}
+                caso, è possibile accodare sia \math{X[i]} che \math{Y[j]}
                 al simbolo in posizione \math{i + j} in \math{W}. Pertanto,
-                la soluzione all'\math{i, j}-esima istanza é data dall'OR
+                la soluzione all'\math{i, j}-esima istanza è data dall'OR
                 logico fra la \math{i, j - 1}-esima soluzione e la
                 \math{i - 1, j}-esima. 
             \end{item}
@@ -202,7 +202,7 @@
             }
         \end{math}
 
-        Alla luce di quanto analizzato finora, é possibile mettere a sistema
+        Alla luce di quanto analizzato finora, è possibile mettere a sistema
         le differenti equazioni e definire un caso base ed un passo ricorsivo:
 
         \begin[width = 50%fw]{parbox}
@@ -274,14 +274,14 @@
 		    return c[|X|, |Y|]
         \end{verbatim}
 
-        É facile notare come il tempo di esecuzione dell'algoritmo
+        È facile notare come il tempo di esecuzione dell'algoritmo
 		sia \math{O(nm)}, dove \math{m} e \math{n} sono le lunghezze
 		di rispettivamente la stringa \math{X} e la stringa \math{Y}.
 		I primi due cicli eseguono una operazione immediata rispettivamente
 		per \math{m} e per \math{n} volte, dopodiché si presenta un doppio
 		ciclo innestato: il ciclo esterno esegue il ciclo interno \math{m}
 		volte, mentre il ciclo interno esegue \math{n} volte un blocco di
-		decisione il cui tempo di esecuzione puó considerarsi immediato.
+		decisione il cui tempo di esecuzione può considerarsi immediato.
 		Si ha allora che, asintoticamente, \math{O(m) + O(n) + O(mn) = O(mn)}.
 
 \end{sile}

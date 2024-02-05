@@ -2,13 +2,13 @@
 
     Una \strong{struttura dati per insiemi disgiunti} mantiene
     una collezione \math{\{S_{1}, S_{2}, \unicodeellipsis, S_{k}\}}
-    di insiemi dinamici disgiunti, ovvero insiemi di cardinalitá non
-    fissata i cui elementi non possono trovarsi in piú di un insieme
-    contemporaneamente. Ciascun insieme é identificato da un
-    \strong{rappresentante}, che é un elemento dell'insieme.
-    Quale elemento questo debba essere é lasciato all'implementazione:
-    puó sia essere un elemento qualunque, sia un elemento che possiede
-    una certa caratteristica all'interno dell'insieme (l'elemento piú
+    di insiemi dinamici disgiunti, ovvero insiemi di cardinalità non
+    fissata i cui elementi non possono trovarsi in più di un insieme
+    contemporaneamente. Ciascun insieme è identificato da un
+    \strong{rappresentante}, che è un elemento dell'insieme.
+    Quale elemento questo debba essere è lasciato all'implementazione:
+    può sia essere un elemento qualunque, sia un elemento che possiede
+    una certa caratteristica all'interno dell'insieme (l'elemento più
     piccolo, l'elemento che ha associato il valore maggiore,
     ecc\math{\unicodeellipsis}).
 
@@ -19,13 +19,13 @@
     \begin{itemize}
         \begin{item}
             \tt{MAKE-SET(x)} crea un nuovo insieme il cui unico elemento e
-            rappresentante é \math{x}. Poiché gli insiemi sono disgiunti,
-            \math{x} non puó trovarsi in un'altro insieme.
+            rappresentante è \math{x}. Poiché gli insiemi sono disgiunti,
+            \math{x} non può trovarsi in un altro insieme.
         \end{item}
         \begin{item}
             \tt{UNION(x, y)} unisce gli insiemi (univoci) che contengono
             gli elementi \math{x} e \math{y}, siano questi \math{S_{x}}
-            e \math{S_{y}}, in un unico insieme, che é l'unione di questi
+            e \math{S_{y}}, in un unico insieme, che è l'unione di questi
             due, che viene poi aggiunto alla collezione. Naturalmente, si
             assume che \math{S_{x}} e \math{S_{y}} siano disgiunti prima
             di applicare l'operazione. Il rappresentante di \math{S_{x}
@@ -33,7 +33,7 @@
             o di \math{S_{y}} \footnote{In alcune implementazioni si richiede
             che il rappresentante dell'insieme unione sia sempre un elemento
             del primo insieme o sempre un elemento del secondo insieme.}. Al
-            fine di mantenere la proprietá di disgiunzione degli insiemi
+            fine di mantenere la proprietà di disgiunzione degli insiemi
             della collezione, occorre eliminare dalla collezione \math{S_{x}}
             e \math{S_{y}}.
         \end{item}
@@ -54,12 +54,12 @@
         al successivo oggetto della lista e un puntatore che ritorna
         all'oggetto dell'insieme. All'interno di ciascuna lista concatenata,
         gli oggetti possono apparire in qualsiasi ordine. Il rappresentante
-        é l'elemento dell'insieme nel primo oggetto della lista.
+        è l'elemento dell'insieme nel primo oggetto della lista.
 
         Con questa rappresentazione, entrambe le operazioni \tt{MAKE-SET}
         e \tt{FIND-SET} possono essere implementate per avere tempo di
-        esecuzione unitario. Per implementare \tt{MAKE-SET} é sufficiente
-        creare una nuova lista concatenata il cui unico oggetto é \math{x}.
+        esecuzione unitario. Per implementare \tt{MAKE-SET} è sufficiente
+        creare una nuova lista concatenata il cui unico oggetto è \math{x}.
         Per implementare \tt{FIND-SET} occorre seguire il puntatore da
         \math{x} per arrivare all'oggetto del suo insieme e poi ritornare
         all'elemento nell'oggetto cui punta \tt{head}.
@@ -68,7 +68,7 @@
         \center{\img[src = Greedy/union-find.pdf, width = 75%fw]}
         \bigskip
 
-        La piú semplice implementazione dell'operazione \tt{UNION(x, y)}
+        La più semplice implementazione dell'operazione \tt{UNION(x, y)}
         richiede un tempo di esecuzione nettamente superiore a quello di
         \tt{MAKE-SET(x)} e di \tt{FIND-SET(x)}. Per eseguire \tt{UNION(x, y)}
         viene aggiunta la lista di \math{y} alla fine della lista di \math{x},
@@ -81,20 +81,20 @@
         Si supponga di avere un insieme di \math{n} oggetti \math{x_{1},
         x_{2}, \unicodeellipsis, x_{n}}. Si eseguano \math{n} operazioni
         \tt{MAKE-SET} seguite da \math{n - 1} operazioni \tt{FIND-SET}. Il
-        tempo per eseguire le \math{n} operazioni \tt{MAKE-SET} é lineare
+        tempo per eseguire le \math{n} operazioni \tt{MAKE-SET} è lineare
         in \math{n}. Poiché l'\math{i}-esima operazione \tt{UNION} aggiorna
         \math{i} oggetti, il numero totale di oggetti aggiornati da tutte le
-        \math{n - 1} operazioni \tt{UNION} é \math{\sum_{i = 1}^{n - 1} i =
-        O(n^{2})}. Il numero totale di operazioni é \math{2n - 1}, pertanto
+        \math{n - 1} operazioni \tt{UNION} è \math{\sum_{i = 1}^{n - 1} i =
+        O(n^{2})}. Il numero totale di operazioni è \math{2n - 1}, pertanto
         ciascuna operazione richiede in media un tempo \math{\Theta (n)}.
 
         Nel caso peggiore, l'implementazione dell'operazione \tt{UNION}
         richiede un tempo medio \math{\Theta (n)} per chiamata, perché 
-        potrebbe venire unita una lista piú lunga ad una piú corta. Se
+        potrebbe venire unita una lista più lunga ad una più corta. Se
         si introducesse un campo aggiuntivo a ciascuna lista che ne
-        riporta la lunghezza (é sufficiente aggiungere un contatore che
+        riporta la lunghezza (è sufficiente aggiungere un contatore che
         viene aggiornato ad ogni \tt{UNION}), sarebbe sempre possibile
-        scegliere di unire la lista piú corta a quella piú lunga. Con 
+        scegliere di unire la lista più corta a quella più lunga. Con 
         questa euristica, chiamata \strong{euristica dell'unione pesata},
         una singola operazione \tt{UNION} richiederebbe ancora un tempo
         \math{\Omega (n)} se entrambi gli insiemi hanno \math{\Omega (n)}
@@ -110,7 +110,7 @@
 
     \subsection{Implementazione mediante foreste}
 
-        Una implementazione piú efficiente degli insiemi disgiunti prevede
+        Una implementazione più efficiente degli insiemi disgiunti prevede
         di utilizzare degli alberi radicati. Ciascun albero rappresenta un
         insieme, ciascun nodo contiene un oggetto ed il nodo radice contiene
         l'oggetto rappresentante. Ogni nodo che non sia la radice punta al
@@ -119,9 +119,9 @@
         Con questa implementazione, l'operazione \tt{MAKE-SET} ha ancora
         tempo di esecuzione unitario, perché consiste nel creare un albero
         avente un solo nodo, con un puntatore a sé stesso, che contiene un
-        oggetto (che sará rappresentante del relativo insieme). L'operazione
+        oggetto (che sarà rappresentante del relativo insieme). L'operazione
         \tt{FIND-SET} scorre i puntatori fino a trovare un oggetto
-        che puntatore a sé stesso, che per definizione é la radice
+        che puntatore a sé stesso, che per definizione è la radice
         dell'albero; tale cammino semplice verso la radice prende
         il nome di \strong{cammino di ricerca}. L'operazione \tt{UNION}
         consiste semplicemente nello sganciare il puntatore dalla radice
@@ -131,33 +131,33 @@
         \center{\img[src = Greedy/union-find2.pdf, width = 25%fw]}
         \bigskip
 
-        L'operazione di \tt{UNION} cosí come descritta finora non fornisce
+        L'operazione di \tt{UNION} così come descritta finora non fornisce
         un miglioramento in termini di prestazioni in confronto a \tt{UNION}
         rispetto all'implementazione con liste concatenate. Infatti,
-        applicando \math{n - 1} volte \tt{UNION} puó creare un albero
-        che é una catena lineare di \math{n} nodi. Inoltre, l'operazione
-        \tt{FIND-SET} cosí definita ha tempo lineare, mentre la versione
+        applicando \math{n - 1} volte \tt{UNION} può creare un albero
+        che è una catena lineare di \math{n} nodi. Inoltre, l'operazione
+        \tt{FIND-SET} così definita ha tempo lineare, mentre la versione
         dell'implementazione mediante liste aveva tempo unitario.
 
         Per migliorare il tempo di esecuzione dell'operazione \tt{UNION}
         viene introdotta l'euristica \strong{unione per rango}. Questa
-        prevede di fare in modo che, quando é necessario unire due alberi,
+        prevede di fare in modo che, quando è necessario unire due alberi,
         l'albero da cui viene sganciato il puntatore sia sempre quello con
         meno nodi. In ciascun nodo, anziché tenere traccia della dimensione
-        del sottoalbero che ha tale nodo per radice, é sufficiente conoscerne
+        del sottoalbero che ha tale nodo per radice, è sufficiente conoscerne
         il \strong{rango}, ovvero il numero di archi nel cammino semplice
-        piú lungo fra \math{x} e una foglia sua discendente. Tale valore
+        più lungo fra \math{x} e una foglia sua discendente. Tale valore
         viene sfruttato come limite superiore all'altezza del nodo. Durante
         l'operazione di \tt{UNION} fra due alberi, l'unione per rango prevede
-        che la radice con il rango piú piccolo venga fatta puntare alla
-        radice con il rango piú grande.
+        che la radice con il rango più piccolo venga fatta puntare alla
+        radice con il rango più grande.
 
         Quando \tt{MAKE-SET} crea un insieme, il rango iniziale dell'unico
-        nodo nel corrispondente albero é 0. Quando viene applicata \tt{UNION}
+        nodo nel corrispondente albero è 0. Quando viene applicata \tt{UNION}
         a due alberi si presentano due possibili casi: le radici dei due
         alberi hanno ranghi diversi oppure hanno lo stesso rango. Nel primo
-        caso, la radice di rango piú basso viene collegata alla radice di
-        rango piú alto, ottenendo un solo albero e lasciando tutti i ranghi
+        caso, la radice di rango più basso viene collegata alla radice di
+        rango più alto, ottenendo un solo albero e lasciando tutti i ranghi
         inalterati. Nel secondo caso, viene arbitrariamente scelta una delle
         due radici come radice del nuovo albero ed il rango di questa viene
         incrementato di uno.
@@ -203,29 +203,29 @@
 			3    return x.p
 		\end{verbatim}
 
-        La procedura \tt{FIND-SET} é un \strong{metodo a doppio passaggio}.
+        La procedura \tt{FIND-SET} è un \strong{metodo a doppio passaggio}.
         Durante il primo passaggio, risale il cammino di ricerca per trovare
         la radice, mentre durante il secondo passaggio discende il cammino
         di ricerca per aggiornare i modi in modo che puntino direttamente
         alla radice. Ogni chiamata di \tt{FIND-SET(x)} restituisce \tt{x.p}
-        nella riga 3. Se \tt{x} é la radice, allora la riga 2 non viene
-        eseguita e viene restituito \tt{x.p} che é uguale a \tt{x}. Questo
-        é il caso in cui la ricorsione tocca il fondo. Altrimenti, viene
+        nella riga 3. Se \tt{x} è la radice, allora la riga 2 non viene
+        eseguita e viene restituito \tt{x.p} che è uguale a \tt{x}. Questo
+        è il caso in cui la ricorsione tocca il fondo. Altrimenti, viene
         eseguita la riga 2 e la chiamata ricorsiva con il parametro \tt{x.p}
         restituisce un puntatore alla radice. La riga 2 aggiorna il nodo
         \tt{x} in modo che punti direttamente alla radice, mentre la riga 3
         restituisce questo puntatore.
 
-        Utilizzando sia l'unione per rango sia la compressione del cammino é
+        Utilizzando sia l'unione per rango sia la compressione del cammino è
         possibile ottenere un tempo di esecuzione per le operazioni \tt{UNION}
         e \tt{FIND-SET} approssimativamente lineare. Infatti, date \math{m} 
         operazioni (di cui \math{n} \tt{MAKE-SET} e \math{n - 1} \tt{UNION})
-        su \math{n} oggetti, il tempo di esecuzione nel caso peggiore é
-        \math{O(m \alpha(n))}, dove \math{\alpha(n)} é la \strong{funzione
+        su \math{n} oggetti, il tempo di esecuzione nel caso peggiore è
+        \math{O(m \alpha(n))}, dove \math{\alpha(n)} è la \strong{funzione
         di Ackermann inversa}. Questa funzione cresce estremamente lentamente,
         tanto che per qualsiasi applicazione pratica il valore restituito
-        da tale funzione é \math{\leq 4}. Pertanto, il tempo di esecuzione 
-        é ragionevolmente approssimabile come \math{O(m \alpha(n)) \approx
+        da tale funzione è \math{\leq 4}. Pertanto, il tempo di esecuzione 
+        è ragionevolmente approssimabile come \math{O(m \alpha(n)) \approx
         O(4m) = O(m)}.
 
         Una delle tante applicazioni delle strutture dati per insiemi
@@ -233,7 +233,7 @@
         un grafo non orientato. La procedura \tt{CONNECTED-COMPONENTS}
         usa le operazioni degli insiemi disgiunti per calcolare le componenti
         connesse di un grafo. Una volta che \tt{CONNECTED-COMPONENTS} ha
-        preprocessato il grafo, la procedura \tt{SAME-COMPONENT} é in grado
+        preprocessato il grafo, la procedura \tt{SAME-COMPONENT} è in grado
         di determinare se due vertici sono nella stessa componente connessa.
 
 	\begin[width = 50%fw]{parbox}

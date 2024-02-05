@@ -1,23 +1,23 @@
 \begin{sile}
 
     Il legame fra matroidi e problemi risolvibili mediante tecnica greedy
-    é molto forte. Infatti, molti problemi per i quali un metodo greedy
+    è molto forte. Infatti, molti problemi per i quali un metodo greedy
     fornisce soluzioni ottime possono essere riformulati come la ricerca
     di un sottoinsieme indipendente di peso massimo in un matroide pesato.
-    Tale sottoinsieme, che é indipendente ed ha assegnato il peso piú grande
-    possibile, é detto \strong{sottoinsieme ottimo} del matroide. Poiché la
-    funzione peso é stata definita per restituire solo valori strettamente
-    positivi, un sottoinsieme ottimo é sempre un sottoinsieme indipendente
+    Tale sottoinsieme, che è indipendente ed ha assegnato il peso più grande
+    possibile, è detto \strong{sottoinsieme ottimo} del matroide. Poiché la
+    funzione peso è stata definita per restituire solo valori strettamente
+    positivi, un sottoinsieme ottimo è sempre un sottoinsieme indipendente
     massimale.
 
     L'algoritmo che permette di ricavare il sottoinsieme ottimo di
     un matroide pesato, presentato di seguito, prende il nome di
     \strong{algoritmo greedy standard}. Tale algoritmo riceve in
     input un matroide pesato \math{M = (S, F, W)} e restituisce un
-    sottoinsieme ottimo \math{A}. L'algoritmo é effettivamente un
+    sottoinsieme ottimo \math{A}. L'algoritmo è effettivamente un
     algoritmo greedy perché esamina uno dopo l'altro in ordine di
     peso ogni elemento \math{x \in S} e lo aggiunge immediatamente
-    all'insieme \math{A} se \math{A \cup \{x\}} é esso stesso
+    all'insieme \math{A} se \math{A \cup \{x\}} è esso stesso
     indipendente. 
 
 	\begin{verbatim}
@@ -44,25 +44,25 @@
         un elemento \math{s_{i}} ad \math{A}, l'insieme \math{A} resta
         indipendente. Se \math{A} resta indipendente, la riga 5 aggiunge
         \math{s_{i}} ad \math{A}, altrimenti viene scartato. Poiché l'insieme
-        vuoto é per definizione un sottoinsieme indipendente e poiché ogni
+        vuoto è per definizione un sottoinsieme indipendente e poiché ogni
         esecuzione del corpo del ciclo for lascia \math{A} indipendente, il
-        sottoinsieme \math{A} é indipendente per induzione. Di conseguenza,
+        sottoinsieme \math{A} è indipendente per induzione. Di conseguenza,
         l'algoritmo greedy standard restituisce sempre un sottoinsieme
         indipendente.
     \end{theorem}
 
     Per adattare l'algoritmo greedy standard ad un certo problema occorre
-    solamente, se é possibile farlo, determinare una condizione (riga 4)
+    solamente, se è possibile farlo, determinare una condizione (riga 4)
     che permetta di discriminare gli elementi dell'istanza del problema
     che fanno parte del sottoinsieme ottimo da quelli che non ne fanno
-    parte. Il restante corpo dell'algoritmo é sostanzialmente sempre lo 
+    parte. Il restante corpo dell'algoritmo è sostanzialmente sempre lo 
     stesso. Molti algoritmi greedy (ma non tutti) sono infatti riducibili
     all'algoritmo greedy standard, dove la generica funzione di valutazione
     dell'istanza viene sostituita da una funzione specifica che varia da 
     problema a problema.
 
-    Il tempo di esecuzione dell'algoritmo greedy standard puó essere
-    calcolato osservando che questo puó essere diviso in tre parti:
+    Il tempo di esecuzione dell'algoritmo greedy standard può essere
+    calcolato osservando che questo può essere diviso in tre parti:
     l'ordinamento dell'insieme \math{S} (riga 2), il ciclo for (riga 3)
     e la condizione di appartenenza dell'elemento in esame alla soluzione
     del problema (righe 4 e 5). La prima ha tempo di esecuzione pari a
@@ -71,13 +71,13 @@
     dell'input, ovvero \math{O(n)}. La terza non ha un tempo di esecuzione
     predefinito, ma varia da problema a problema, e viene indicata con un
     generico \math{O(f(n))}. Questa viene esaminata \math{n} volte, pertanto
-    il tempo di esecuzione complessivo della seconda e della terza parte é
+    il tempo di esecuzione complessivo della seconda e della terza parte è
     \math{O(n) \times O(f(n)) = O(n f(n))}. Si ha quindi che il tempo di
-    esecuzione dell'intero algoritmo é dato da \math{O(n \mi{log}(n)) +
+    esecuzione dell'intero algoritmo è dato da \math{O(n \mi{log}(n)) +
     O(n f(n))}.
 
     \begin{theorem}
-        \strong{Teorema di Rado (I)}. Un sistema di indipendenza é (anche)
+        \strong{Teorema di Rado (I)}. Un sistema di indipendenza è (anche)
         un matroide se, per qualsiasi funzione peso, l'algoritmo greedy
         standard fornisce il sottoinsieme ottimo per tale sistema.
 
@@ -89,24 +89,24 @@
         ordine decrescente di peso, ovvero \math{W(s_{1}) \geq W(s_{2}) \geq
         \unicodeellipsis W(s_{p})}. Naturalmente, essendo il risultato
         dell'applicazione dell'algoritmo greedy standard, l'insieme \math{X}
-        é massimale per \math{(S, F)}.
+        è massimale per \math{(S, F)}.
 
         Sia allora \math{X' = \{s_{1}', s_{2}', \unicodeellipsis, s_{p}'\}}
         un altro insieme massimale, distinto da \math{X}, avente anch'esso
         gli elementi ordinati in ordine decrescente di peso. Avendo \math{X}
-        e \math{X'} la stessa cardinalitá, é possibile mettere in
+        e \math{X'} la stessa cardinalità, è possibile mettere in
         corrispondenza biunivoca l'\math{i}-esimo elemento di \math{X} con
-        l'\math{i}-esimo elemento di \math{X'}. Il teorema é dimostrato se,
+        l'\math{i}-esimo elemento di \math{X'}. Il teorema è dimostrato se,
         per un qualsiasi insieme \math{X'} massimale per \math{(S, F)}, il
-        peso \math{W(X)} é almeno pari al peso \math{W(X')}.
+        peso \math{W(X)} è almeno pari al peso \math{W(X')}.
 
         Se ciascun elemento di \math{X} ha peso maggiore del corrispettivo
         elemento di \math{X'} allora certamente \math{W(X) \geq W(X')}. Ma
         questo significa che \math{X}, l'insieme restituito dall'algoritmo
         greedy standard, ha peso almeno pari a quello di un generico insieme
-        massimale \math{X'}, ed il teorema é dimostrato.
+        massimale \math{X'}, ed il teorema è dimostrato.
 
-        Si consideri il caso piú generico in cui non tutti gli elementi di
+        Si consideri il caso più generico in cui non tutti gli elementi di
         \math{X} hanno peso maggiore dei loro corrispettivi in \math{X'}.
         Ricordando che gli elementi di \math{X} e di \math{X'} sono disposti
         in ordine di peso, deve esistere almeno un elemento con indice \math{k}
@@ -117,7 +117,7 @@
 
         In particolare, deve certamente aversi \math{W(s_{k})
         \leq W(s_{k - 1})} e \math{W(s_{k}') \leq W(s_{k - 1}')}.
-        Ricordando peró che vale \math{W(s_{k}) < W(s_{k}')}, si
+        Ricordando però che vale \math{W(s_{k}) < W(s_{k}')}, si
         ha allora \math{W(s_{k}) < W(s_{k}') \leq W(s_{k - 1}')
         \leq W(s_{k - 1})}. Si consideri allora \math{C = \{s \in
         S \thickspace \mi{t.c} \thickspace W(s) \geq W(s_{k}')\}},
@@ -128,36 +128,36 @@
         L'elemento \math{s_{k}'} appartiene certamente a \math{C}, perché
         evidentemente \math{W(s_{k}') \geq W(s_{k}')}. Ma allora \math{X'
         \cap C = \{s_{1}', s_{2}', \unicodeellipsis, s_{k - 1}', s_{k}'\}}.
-        D'altro canto, l'elemento \math{s_{k}} non puó appartenere a \math{C},
-        perché per ipotesi é stato assunto che \math{W(s_{k}) < W(s_{k}')}.
+        D'altro canto, l'elemento \math{s_{k}} non può appartenere a \math{C},
+        perché per ipotesi è stato assunto che \math{W(s_{k}) < W(s_{k}')}.
         Ma allora \math{X \cap C = \{s_{1}, s_{2}, \unicodeellipsis,
         s_{k - 1}\}}. Questo significa che \math{X' \cap C} ha un elemento
-        in piú di \math{X cap C}, e quindi \math{\abs{X' \cap C} > \abs{X
-        \cap C}}. Questo contraddice peró l'ipotesi che \math{X} e \math{X'}
+        in più di \math{X cap C}, e quindi \math{\abs{X' \cap C} > \abs{X
+        \cap C}}. Questo contraddice però l'ipotesi che \math{X} e \math{X'}
         siano insiemi massimali per \math{(S, F)}, ed implica che non possa
         esistere un \math{k} tale per cui \math{W(s_{k}) < W(s_{k}')}.
 
         Occorre allora concludere che ciascun elemento di \math{X} deve per
         forza avere peso maggiore o uguale al peso del rispettivo elemento
         di \math{X'}. Ma questa situazione coincide con la situazione
-        precedente, ed il teorema é dimostrato.
+        precedente, ed il teorema è dimostrato.
     \end{theorem}
 
     \begin{theorem}
         \strong{Teorema di Rado (II)}. Se l'algoritmo greedy standard
         fornisce, per qualsiasi funzione peso, il sottoinsieme ottimo
         per un sistema di indipendenza, allora tale sistema di indipendenza
-        é (anche) un matroide.
+        è (anche) un matroide.
 
         \bigskip
         \strong{Dimostrazione}. Sia \math{(S, F)} un sistema di indipendenza
-        che non é un matroide. Allora esiste un insieme \math{C \subseteq S}
-        e due insiemi massimali \math{A, B \in (C, F_{C})} con cardinalitá
+        che non è un matroide. Allora esiste un insieme \math{C \subseteq S}
+        e due insiemi massimali \math{A, B \in (C, F_{C})} con cardinalità
         diversa. Sia \math{\abs{B} = p} e \math{\abs{A} > \abs{B}}. La seconda
-        parte del teorema é dimostrata se é possibile costruire almeno una
+        parte del teorema è dimostrata se è possibile costruire almeno una
         funzione peso per la quale l'algoritmo greedy standard applicato a
         \math{(S, F)} restituisce un insieme non ottimo. Si consideri a tal
-        proposito la funzione peso \math{W} cosí costruita:
+        proposito la funzione peso \math{W} così costruita:
 
         \begin[mode = display]{math}
             W{(s)} =
@@ -175,12 +175,12 @@
         ipotesi \math{\abs{A} > \abs{B}} e \math{\abs{B} = p}. Inoltre,
         ciascun elemento presente in \math{A} ma non in \math{B} (almeno
         uno certamente esiste) ha peso \math{p + 1}. Pertanto, il peso
-        complessivo di \math{A} é certamente almeno pari a
+        complessivo di \math{A} è certamente almeno pari a
         \math{(p + 1)(p + 1)}.
 
         L'insieme \math{B} ha, per ipotesi, \math{p} elementi ciascuno di peso
-        \math{p + 2}, pertanto il peso complessivo di \math{B} é \math{p + 2}.
-        Si noti peró come:
+        \math{p + 2}, pertanto il peso complessivo di \math{B} è \math{p + 2}.
+        Si noti però come:
 
         \begin[mode = display]{math}
             W(A) \geq (p + 1)(p + 1) =
@@ -191,18 +191,18 @@
         Ovvero, \math{W(A) > W(B)}. Questo significa che, per questa funzione
         peso, l'algoritmo greedy standard non restituisce l'insieme di peso
         maggiore per il sistema di indipendenza \math{(S, F)}, ed il teorema
-        é provato. 
+        è provato. 
     \end{theorem}
 
-    Il Teorema di Rado implica che se un problema puó essere formulato come
+    Il Teorema di Rado implica che se un problema può essere formulato come
     un matroide pesato allora esiste un algoritmo greedy che lo risolve per
-    qualsiasi funzione peso. Se invece non é possibile, potrebbe comunque 
+    qualsiasi funzione peso. Se invece non è possibile, potrebbe comunque 
     esistere un algoritmo greedy che risolve il problema, ma solo per alcune
     specifiche funzioni peso, non tutte.
 
     \begin{example}
         Sia \math{V = v_{1}, v_{2}, \unicodeellipsis, v_{n}} un insieme
-        di vettori \math{m}-dimensionali. Ciascun vettore \math{v_{i}} é
+        di vettori \math{m}-dimensionali. Ciascun vettore \math{v_{i}} è
         costituito da \math{m - 1} componenti e da un peso, assegnato da
         una funzione \math{W}. Si richiede di determinare il sottoinsieme
         di vettori linearmente indipendenti che ha peso massimo, applicando
@@ -212,25 +212,25 @@
         famiglia dei sottoinsiemi di \math{S} composti da vettori linearmente
         indipendenti. Affinché l'algoritmo greedy standard sia applicabile,
         la tripla \math{(S, F, W)} deve essere codificabile come un matroide,
-        che a sua volta richiede di dimostrare che la tripla é un sistema di
+        che a sua volta richiede di dimostrare che la tripla è un sistema di
         indipendenza.
 
         Sia \math{A \in F} un qualsiasi insieme di vettori linearmente
         indipendenti estratti da \math{F}. Se da \math{A} vengono
-        eliminati uno o piú vettori, si ottiene un insieme \math{A'}
+        eliminati uno o più vettori, si ottiene un insieme \math{A'}
         ancora costituito da vettori linearmente indipendenti, pertanto
         anche \math{A'} appartiene ad \math{F}. Pertanto, \math{(S, F, W)}
-        é un sistema di indipendenza.
+        è un sistema di indipendenza.
 
         Siano \math{A, B \in F} due insiemi di vettori linearmente
         indipendenti estratti da \math{F}, dove \math{\abs{A} =
-        \abs{B} + 1}. É sempre possibile scegliere un elemento
+        \abs{B} + 1}. È sempre possibile scegliere un elemento
         \math{b_{i} \in B} tale per cui \math{A \cup \{b_{i}\} \in F},
         perché se non esistesse tale vettore allora l'insieme \math{B}
         non sarebbe costituito da vettori linearmente indipendenti.
 
-        É quindi possibile risolvere il problema utilizzando l'algoritmo
-        greedy standard; é sufficiente utilizzare l'appartenenza ad un
+        È quindi possibile risolvere il problema utilizzando l'algoritmo
+        greedy standard; è sufficiente utilizzare l'appartenenza ad un
         insieme di vettori linearmente indipendenti come condizione di
         appartenenza.
 
@@ -250,13 +250,13 @@
     \end{example}
 
     Nonostante l'algoritmo greedy standard restituisca sempre il sottoinsieme
-    ottimo di peso massimo, é comunque possibile utilizzarlo per risolvere
+    ottimo di peso massimo, è comunque possibile utilizzarlo per risolvere
     problemi di ottimizzazione di minimo (ammesso che questo sia risolvibile
     mediante tecnica greedy). Una volta convertito il problema in esame in un
     matroide pesato \math{M = (S, F, W)} equivalente, viene selezionato il
     peso \math{w_{0} \in W} di valore massimo. A questo punto la funzione
     peso \math{W} viene sostituita con un'altra funzione \math{W'}, il cui
-    elemento \math{i}-esimo \math{w_{i}'} é dato dalla differenza fra
+    elemento \math{i}-esimo \math{w_{i}'} è dato dalla differenza fra
     \math{w_{0}} e \math{w_{i}}, l'\math{i}-esimo elemento di \math{W}.
 
     In questo modo, ordinare gli elementi di \math{S} rispetto a \math{W'}

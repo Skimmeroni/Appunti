@@ -8,23 +8,23 @@
 
     Ogni arco \math{e_{k}} indica l'esistenza di una relazione
     \math{R} tra i due vertici \math{v_{i}} e \math{v_{j}}. Se
-    la relazione \math{R} é simmetrica, ovvero se per qualsiasi
+    la relazione \math{R} è simmetrica, ovvero se per qualsiasi
     coppia \math{(v_{i}, v_{j})} l'esistenza di \math{v_{i} R v_{j}}
     implica l'esistenza di \math{v_{j} R v_{i}}, il grafo si dice
-    \strong{non orientato}. Se invece la relazione non é simmetrica,
+    \strong{non orientato}. Se invece la relazione non è simmetrica,
     il grafo si dice \strong{orientato}. Un vertice si dice
-    \strong{adiacente} ad un'altro vertice se esiste un arco che
-    ha tali vertici come elementi. Ovvero, \math{u} é adiacente a
+    \strong{adiacente} ad un altro vertice se esiste un arco che
+    ha tali vertici come elementi. Ovvero, \math{u} è adiacente a
     \math{v} in un grafo \math{G = (V, E)} se \math{(u, v) \in E}.
     Un arco \math{(v_{i}, v_{i})}, ovvero un arco che unisce un
     vertice con sé stesso, viene chiamato \strong{cappio}.
 
-    Un grafo puó venire rappresentato in forma estensionale
-    elencando gli elementi dei due insiemi di cui é costituito.
-    In alternativa, puó essere rappresentato graficamente riportando
+    Un grafo può venire rappresentato in forma estensionale
+    elencando gli elementi dei due insiemi di cui è costituito.
+    In alternativa, può essere rappresentato graficamente riportando
     i nodi come cerchi numerati e gli archi come frecce che connettono
-    tali cerchi. Se il grafo é orientato, le frecce hanno una punta,
-    mentre se non é orientato sono piatte.
+    tali cerchi. Se il grafo è orientato, le frecce hanno una punta,
+    mentre se non è orientato sono piatte.
 
     \begin{example}
         \math{V = \{1, 2, 3, 4, 5\}, E = \{(1, 2), (1, 5), (2, 3), (2, 4),
@@ -45,9 +45,9 @@
     \begin{itemize}
         \begin{item}
             \strong{Liste di adiacenza}: vettore \math{L_{v}} di
-            dimensione \math{\abs{V}} dove \math{V[i]} é una lista
+            dimensione \math{\abs{V}} dove \math{V[i]} è una lista
             che contiene tutti i vettori rispetto a cui \math{v_{i}}
-            é adiacente. 
+            è adiacente. 
         \end{item}
         \begin{item}
             \strong{Matrice di adiacenza}: matrice \math{M_{v}}
@@ -61,24 +61,24 @@
 
     Le liste di adiacenza riportano solamente le informazioni
     relative a quali nodi e quali archi esistono all'interno
-    del grafo, ed infatti il numero di elementi che contiene é
+    del grafo, ed infatti il numero di elementi che contiene è
     \math{\abs{V} + \abs{E}}. D'altro canto, per sapere se una
     certa coppia di vertici del grafo che rappresenta sono adiacenti
-    é una operazione eseguibile in tempo lineare, perché occorre
+    è una operazione eseguibile in tempo lineare, perché occorre
     "scorrere" le liste relative ai due vertici fino a trovare (se
     esistono) una corrispondenza. Pertanto, le liste di adiacenza
     sono una codifica vantaggiosa per i grafi \strong{sparsi}, ovvero
-    i grafi il cui numero di archi é di molto inferiore al numero di
+    i grafi il cui numero di archi è di molto inferiore al numero di
     vertici.
 
     La matrice di adiacenza deve riportare esplicitamente informazioni
     in merito all'esistenza o alla non esistenza di ogni arco, ed infatti
-    il numero di elementi che contiene é \math{\abs{V^{2}}}. D'altro
+    il numero di elementi che contiene è \math{\abs{V^{2}}}. D'altro
     canto, sapere se una certa coppia di vertici del grafo che rappresenta
-    sono adiacenti é una operazione eseguibile in tempo costante, perché
-    é sufficiente leggere il valore della cella che ha tale vertici per
+    sono adiacenti è una operazione eseguibile in tempo costante, perché
+    è sufficiente leggere il valore della cella che ha tale vertici per
     indici. Pertanto, le matrici di adiacenza sono una codifica vantaggiosa
-    per i grafi \strong{densi}, ovvero i grafi il cui numero di archi é
+    per i grafi \strong{densi}, ovvero i grafi il cui numero di archi è
     vicino al numero di vertici.
 
     \begin{example}
@@ -141,7 +141,7 @@
     cui un generico \math{{v_{i}}_{j}} appartiene a \math{V} per ogni
     \math{1 \leq j \leq k} e \math{({v_{i}}_{j}, {v_{i}}_{j + 1})}
     appartiene ad \math{E} per \math{1 \leq j < k}. La \strong{lunghezza}
-    del cammino é \math{k - 1}, dove \math{k} é il numero di archi.
+    del cammino è \math{k - 1}, dove \math{k} è il numero di archi.
 
     Un cammino \math{P} in cui si ha che \math{{v_{i}}_{1}} coincide
     con \math{{v_{i}}_{k}} viene detto \strong{ciclo}. Un cammino in
@@ -154,17 +154,17 @@
     \rangle} diversi da \math{{v_{i}}_{1}} e da \math{{v_{i}}_{k}}
     sono detti \strong{vertici intermedi}.
 
-    Un \strong{grafo orientato pesato} é costituito da una tripla
+    Un \strong{grafo orientato pesato} è costituito da una tripla
     \math{G = (V, E, W)} dove, oltre all'insieme \math{V = \{v_{1},
     \unicodeellipsis, v_{n}\}} di vertici e all'insieme \math{E =
     \{e_{1}, \unicodeellipsis, e_{m}\}} di archi, figura la funzione
     \math{W : V \times V \mapsto \dsi{R}^{+}}. Tale funzione restituisce,
     per ciascuna coppia di vertici in \math{V \times V}, un numero
     positivo \math{w_{ij}} chiamato \strong{peso} dell'arco \math{(v_{i},
-    v_{j})}. Per convenzione, se l'arco \math{(v_{i}, v_{j})} non é
+    v_{j})}. Per convenzione, se l'arco \math{(v_{i}, v_{j})} non è
     presente nel grafo, si ha \math{W(v_{i}, v_{j}) = \infty}, mentre se
     \math{v_{i} = v_{j}} si ha \math{W(v_{i}, v_{j}) = 0}. Il peso di un
-    cammino é dato dalla somma dei pesi degli archi che costituiscono il
+    cammino è dato dalla somma dei pesi degli archi che costituiscono il
     cammino.
 
     \begin[width = 50%fw]{parbox}
@@ -188,7 +188,7 @@
 
     \begin{example}
         Il cammino blu ha peso 2 + 3 + 1 = 6, mentre il cammino rosa ha peso
-        8 + 9 + 7 = 24. Il primo é un cammino semplice, mentre il secondo no.
+        8 + 9 + 7 = 24. Il primo è un cammino semplice, mentre il secondo no.
 
         \begin[width = 50%fw]{parbox}
             \center{\img[src = Dinamica/graph2_path1.pdf, width = 75%fw]}

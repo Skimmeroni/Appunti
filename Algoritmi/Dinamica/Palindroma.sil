@@ -3,8 +3,8 @@
     \subsection{Definizione del problema}
 
         Una stringa \math{X = \{x_{1}, x_{2}, \unicodeellipsis, x_{n}\}}
-        é detta \strong{palindroma} se é uguale alla stringa \math{X' =
-        \{x_{n}, \unicodeellipsis, x_{2}, x_{1}\}}, che é composta dagli
+        è detta \strong{palindroma} se è uguale alla stringa \math{X' =
+        \{x_{n}, \unicodeellipsis, x_{2}, x_{1}\}}, che è composta dagli
         stessi caratteri di \math{X} ma in ordine inverso. Il \strong{problema
         della chiusura palindroma} chiede di trovare, per una generica stringa
         \math{X}, il numero minimo di caratteri da inserirvi per renderla
@@ -18,17 +18,17 @@
         soluzione \math{S_{i, j}} per l'\math{i, j}-esima istanza del problema
         corrisponde a trovare la soluzione ottimale per il problema della
         chiusura palindroma rispetto alla sottostringa \math{X_{i, j}}. La
-        soluzione per l'intera stringa \math{X} é la soluzione per l'istanza
+        soluzione per l'intera stringa \math{X} è la soluzione per l'istanza
         \math{X_{1, n}}.
 
-        Il caso base é immediato. Se la sottostringa \math{X_{i, j}} é
-        la stringa vuota, ovvero se \math{i > j}, non vi é bisogno di
+        Il caso base è immediato. Se la sottostringa \math{X_{i, j}} è
+        la stringa vuota, ovvero se \math{i > j}, non vi è bisogno di
         aggiungere alcun carattere a \math{X_{i, j}} per renderla
-        palindroma, perché la stringa vuota é per definizione palindroma.
-        Similmente, se la sottostringa é formata da un solo carattere,
-        ovvero se \math{i = j}, non vi é bisogno di aggiungere alcun
+        palindroma, perché la stringa vuota è per definizione palindroma.
+        Similmente, se la sottostringa è formata da un solo carattere,
+        ovvero se \math{i = j}, non vi è bisogno di aggiungere alcun
         carattere a \math{X_{i, j}} per renderla palindroma, perché una
-        stringa di lunghezza unitaria é per definizione palindroma.
+        stringa di lunghezza unitaria è per definizione palindroma.
 
         \begin[mode = display]{math}
             S_{i, j} = 0 \thickspace \mi{se} \thickspace i \geq j
@@ -41,10 +41,10 @@
 		due situazioni: il primo ed ultimo carattere di \math{X_{i, j}}
 		sono uguali oppure sono diversi.
 
-        Se sono uguali, allora tale stringa é palindroma solo se lo é
+        Se sono uguali, allora tale stringa è palindroma solo se lo è
         anche la sottostringa ottenuta eliminandovi tali caratteri,
-        ovvero se lo é anche \math{X_{i + 1, j - 1}}. Se invece sono
-        distinti, allora tale stringa é palindroma solo se lo é anche
+        ovvero se lo è anche \math{X_{i + 1, j - 1}}. Se invece sono
+        distinti, allora tale stringa è palindroma solo se lo è anche
         la sottostringa ottenuta eliminandovi il primo oppure l'ultimo
         carattere.        
 

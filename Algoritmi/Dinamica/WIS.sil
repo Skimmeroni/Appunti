@@ -2,11 +2,11 @@
 
 	\subsection{Definizione del problema}
 
-		Sia dato un insieme \math{X} costituito da "attivitá". Ciascuna
-		attivitá \math{i \in X} é definita a partire da una tripla
+		Sia dato un insieme \math{X} costituito da "attività". Ciascuna
+		attività \math{i \in X} è definita a partire da una tripla
 		\math{(s_{i}, f_{i}, v_{i})}, dove i tre valori indicano
-		rispettivamente il tempo di inizio dell'attivitá, il tempo di
-		fine ed il suo peso. Due attivitá \math{i} e \math{j} distinte
+		rispettivamente il tempo di inizio dell'attività, il tempo di
+		fine ed il suo peso. Due attività \math{i} e \math{j} distinte
 		si dicono \em{compatibili} se \math{i} termina prima che \math{j}
 		inizi, ovvero se \math{f_{i} \leq s_{j}}.
 
@@ -26,11 +26,11 @@
 		\end{parbox}
 		\par
 
-		La nozioni di peso e di compatibilitá vengono poi estese dai singoli
+		La nozioni di peso e di compatibilità vengono poi estese dai singoli
 		elementi di \math{X} a sottoinsiemi \math{A} di \math{X}. Il peso di
-		un insieme \math{A \subseteq X} é dato dalla somma dei pesi di tutte
-		le attivitá di cui é costituito (per convenzione, se \math{A} é 
-		l'insieme vuoto, il suo peso é 0). Similmente, un insieme \math{A 
+		un insieme \math{A \subseteq X} è dato dalla somma dei pesi di tutte
+		le attività di cui è costituito (per convenzione, se \math{A} è 
+		l'insieme vuoto, il suo peso è 0). Similmente, un insieme \math{A 
 		\subseteq X} si dice compatibile se contiene solo ed esclusivamente
 		elementi di \math{X} tutti compatibili fra di loro o, equivalentemente,
 		non contiene nemmeno una coppia di elementi di \math{X} che non sono
@@ -59,11 +59,11 @@
 		\par
 
 		Il problema \strong{Weighted Interval Scheduling} richiede di
-		individuare qual'é, dato un insieme di attivitá, il sottoinsieme
-		di attivitá fra loro compabili che ha peso maggiore. Il problema
-		puó essere risolto in maniera banale osservando l'insieme potenza
-		dell'insieme di attivitá (che ne contiene tutti i possibili
-		sottoinsiemi), scartando tutti gli insiemi di cui é costituito
+		individuare qual'è, dato un insieme di attività, il sottoinsieme
+		di attività fra loro compatibili che ha peso maggiore. Il problema
+		può essere risolto in maniera banale osservando l'insieme potenza
+		dell'insieme di attività (che ne contiene tutti i possibili
+		sottoinsiemi), scartando tutti gli insiemi di cui è costituito
 		che non sono compatibili, calcolando il peso di tutti gli insiemi
 		compatibili e cercando il peso massimo.
 
@@ -71,7 +71,7 @@
 			\begin[width = 40%fw, valign = middle]{parbox}
 				\begin[cols = 22.5%fw 22.5%fw 22.5%fw 17.5%fw]{ptable}
 					\begin{row}
-						\cell{\strong{Attivitá}}
+						\cell{\strong{Attività}}
 						\cell{\strong{Tempo} \par \strong{iniziale}}
 						\cell{\strong{Tempo} \par \strong{finale}}
 						\cell{\strong{Peso}}
@@ -119,16 +119,16 @@
 			\end{parbox}
 			\par
 
-			Il sottoinsieme \math{A = \{a_{2}, a_{4}, a_{6}\}} é un insieme
-			compatibile, ma non é il sottoinsieme con peso maggiore. Si osserva
-			infatti che il sottoinsieme con queste caratteristiche é \math{B =
+			Il sottoinsieme \math{A = \{a_{2}, a_{4}, a_{6}\}} è un insieme
+			compatibile, ma non è il sottoinsieme con peso maggiore. Si osserva
+			infatti che il sottoinsieme con queste caratteristiche è \math{B =
 			\{a_{1}, a_{3}, a_{6}\}}, che ha peso pari a 21.
 		\end{example}
 
 	\subsection{Programmazione dinamica: sottostruttura ottima}
 
 		\begin{theorem}
-			\strong{Proprietá della sottostruttura ottima per il
+			\strong{Proprietà della sottostruttura ottima per il
 			problema Weighted Interval Scheduling}. Sia data una
 			istanza \math{X_{i} = \{x_{1}, x_{2}, \unicodeellipsis,
 			x_{i}\}} del problema Weighted Interval Scheduling, con
@@ -148,14 +148,14 @@
 			\end{math}
 
 			\strong{Dimostrazione}. L'\math{i}-esimo elemento dell'istanza
-            \math{X_{i}} puó oppure non puó fare parte della \math{i}-esima
+            \math{X_{i}} può oppure non può fare parte della \math{i}-esima
             soluzione. Si distinguono allora due casi:
 
 			\begin{itemize}
 				\begin{item}
 					\math{i \notin S_{i}}. Si supponga per assurdo che
 					\math{S_{i - 1}} non sia la soluzione ottimale del
-					problema per l'istanza \math{X_{i}}. Se cosí é, allora
+					problema per l'istanza \math{X_{i}}. Se così è, allora
 					la soluzione ottimale per tale istanza (quale che sia)
 					deve necessariamente avere un valore maggiore di quello
 					della soluzione ottimale \math{S_{i - 1}}, ovvero deve
@@ -163,12 +163,12 @@
 
                     Se, come da ipotesi, \math{i} non appartiene ad
                     \math{S_{i}}, deve aversi \math{S_{i} \subseteq
-                    X_{i - 1}}. Ma allora \math{S_{i}} é una potenziale
+                    X_{i - 1}}. Ma allora \math{S_{i}} è una potenziale
                     soluzione per la \math{i - 1}-esima istanza del problema.
-                    Ricordando peró che \math{\mi{Opt}(i) > \mi{Opt}(i - 1)},
-                    questo equivale a dire che \math{S_{i}} é una soluzione
+                    Ricordando però che \math{\mi{Opt}(i) > \mi{Opt}(i - 1)},
+                    questo equivale a dire che \math{S_{i}} è una soluzione
                     migliore per la \math{i - 1}-esima istanza del problema
-                    di quanto lo sia \math{S_{i - 1}}, e questo é in
+                    di quanto lo sia \math{S_{i - 1}}, e questo è in
                     contraddizione con l'ipotesi che la soluzione ottimale
                     per l'istanza \math{X_{i - 1}} sia \math{S_{i - 1}}.
                     Occorre allora assumere che \math{S_{i - 1}} sia
@@ -179,32 +179,32 @@
 					\math{i \in S_{i}}. Si supponga per assurdo che
                     \math{S_{\mi{p}(i)} \cup \{i\}} non sia la soluzione
                     ottimale al problema per l'istanza \math{X_{i}}. Se
-                    cosí é, allora la soluzione ottimale per tale istanza
+                    così è, allora la soluzione ottimale per tale istanza
                     (quale che sia) deve avere un valore maggiore di quello
                     della soluzione ottimale \math{S_{\mi{p}(i)} \cup \{i\}},
                     ovvero deve valere \math{\mi{Opt}(i) > \mi{Opt}(\mi{p}(i))
                     + v_{i}}.
 
 					Dato che, per ipotesi, \math{i} appartiene ad
-					\math{S_{i}}, é possibile scomporre tale soluzione
+					\math{S_{i}}, è possibile scomporre tale soluzione
 					in \math{S_{h} \cup \{i\}}, con \math{S_{h} \ne
-					S_{\mi{p}(i)}}, cosí come é possibile scomporre
+					S_{\mi{p}(i)}}, così come è possibile scomporre
 					\math{\mi{Opt}(i)} in \math{\mi{Opt}(h) + v_{i}}.
-					Essendo peró \math{\mi{Opt}(i) > \mi{Opt}(\mi{p}(i))
+					Essendo però \math{\mi{Opt}(i) > \mi{Opt}(\mi{p}(i))
 					+ v_{i}}, deve valere \math{\mi{Opt}(h) + v_{i} >
-					\mi{Opt}(\mi{p}(i)) + v_{i}}, cioé \math{\mi{Opt}(h)
+					\mi{Opt}(\mi{p}(i)) + v_{i}}, cioè \math{\mi{Opt}(h)
                     > \mi{Opt}(\mi{p}(i))}.
 
 					Dovendo essere \math{S_{h} \cup \{x_{i}\}} un
 					insieme costituito da elementi mutualmente compatibili,
 					deve necessariamente valere \math{S_{h} \subseteq
-					X_{\mi{p}(i)}}. Ma allora \math{S_{h}} é una potenziale
+					X_{\mi{p}(i)}}. Ma allora \math{S_{h}} è una potenziale
 					soluzione per la \math{\mi{p}(i)}-esima istanza del
-					problema. Ricordando peró che \math{\mi{Opt}(h) >
+					problema. Ricordando però che \math{\mi{Opt}(h) >
 					\mi{Opt}(\mi{p}(i))}, questo equivale a dire che
-					\math{S_{h}} é una soluzione migliore per la
+					\math{S_{h}} è una soluzione migliore per la
 					\math{\mi{p}(i)}-esima istanza del problema di quanto
-					lo sia \math{S_{\mi{p}(i)}}, e questo é in contraddizione
+					lo sia \math{S_{\mi{p}(i)}}, e questo è in contraddizione
 					con l'ipotesi che la soluzione ottimale per l'istanza
 					\math{X_{\mi{p}(i)}} sia \math{S_{\mi{p}(i)}}. Occorre
 					allora assumere che \math{S_{\mi{p}(i)} \cup \{i\}} sia
@@ -216,17 +216,17 @@
 
 	\subsection{Programmazione dinamica: equazione di ricorrenza}
 
-		Dato un insieme di attivitá \math{X} avente cardinalitá \math{n},
+		Dato un insieme di attività \math{X} avente cardinalità \math{n},
 		ordinate per tempo di fine, sia \math{X_{i}} l'insieme costituito
-		dalle prime \math{i} attivitá di \math{X}. La soluzione \math{S_{i}}
+		dalle prime \math{i} attività di \math{X}. La soluzione \math{S_{i}}
 		per la \math{i}-esima istanza del problema corrisponde a trovare
 		la soluzione ottimale per il problema WIS rispetto al sottoinsieme
-		\math{X_{i}}. La soluzione per l'intero insieme \math{X} é la
+		\math{X_{i}}. La soluzione per l'intero insieme \math{X} è la
 		soluzione per l'istanza \math{X_{n}}. Il valore totale della
 		soluzione ottimale per la \math{i}-esima istanza del problema
 		viene indicata con \math{\mi{Opt}(i)}.
 
-		Il caso base é semplice da determinare; l'istanza \math{X_{0}},
+		Il caso base è semplice da determinare; l'istanza \math{X_{0}},
 		che corrisponde all'insieme vuoto, ha per soluzione l'insieme
 		vuoto stesso, che per definizione ha associato il valore 0.
 
@@ -246,27 +246,27 @@
 		avere a disposizione tutte le soluzioni \math{S_{1},
 		S_{2}, \unicodeellipsis, S_{i - 1}} e di voler calcolare
 		\math{S_{i}}. Possono verificarsi solamente due situazioni,
-		mutualmente esclusive: l'\math{i}-esima attivitá fa parte
+		mutualmente esclusive: l'\math{i}-esima attività fa parte
 		della soluzione ottimale \math{S_{i}} oppure non ne fa parte.
 
-		Nel primo caso, é evidente come \math{S_{i}} e \math{S_{i - 1}}
+		Nel primo caso, è evidente come \math{S_{i}} e \math{S_{i - 1}}
 		debbano essere lo stesso insieme. Questo perché, essendo sia
 		\math{S_{i}} sia \math{S_{i - 1}} soluzioni ottimali, se \math{i}
-		non é uno dei componenti della soluzione ottimale dell'istanza
-		\math{X_{i}}, allora la soluzione ottimale di tale istanza dovrá
+		non è uno dei componenti della soluzione ottimale dell'istanza
+		\math{X_{i}}, allora la soluzione ottimale di tale istanza dovrà
 		essere la stessa dell'insieme \math{X_{i}} a cui viene tolto
-		l'elemento \math{i}, ovvero \math{X_{i - 1}}, la cui soluzione é
+		l'elemento \math{i}, ovvero \math{X_{i - 1}}, la cui soluzione è
 		proprio \math{S_{i - 1}}.
 
 		Nel secondo caso, la soluzione ottimale dell'istanza \math{X_{i}} 
-		deve essere un insieme che contiene \math{i} e tutte le attivitá 
+		deve essere un insieme che contiene \math{i} e tutte le attività 
 		precedenti ad \math{i} che sono con questa compatibili. Tuttavia, 
-		dato che l'insieme \math{S_{i}} é soprainsieme di tutti gli insiemi
+		dato che l'insieme \math{S_{i}} è soprainsieme di tutti gli insiemi
 		\math{S_{j}} con \math{j < i}, per individuare il sottoinsieme
-		di \math{S_{i}} che contiene tutte le attivitá compatibili con
-		\math{i} é sufficiente cercare quello di indice maggiore, perché
-		per definizione conterrá anche tutti i sottoinsiemi di elementi
-		compatibili con \math{i} a loro volta piú piccoli. L'indice con
+		di \math{S_{i}} che contiene tutte le attività compatibili con
+		\math{i} è sufficiente cercare quello di indice maggiore, perché
+		per definizione conterrà anche tutti i sottoinsiemi di elementi
+		compatibili con \math{i} a loro volta più piccoli. L'indice con
 		queste caratteristiche viene indicato con \math{\mi{p}(i)}.
 
 		\begin[mode = display]{math}
@@ -297,16 +297,16 @@
 		\end{parbox}
 		\par
 
-		Naturalmente non é possibile sapere a priori se l'\math{i}-esimo
+		Naturalmente non è possibile sapere a priori se l'\math{i}-esimo
 		elemento appartiene oppure non appartiene ad \math{S_{i}}; l'unica
-		informazione nota é il peso complessivo degli insiemi \math{S_{j}}
-		con \math{j < i}. Dovendo peró ricavare l'insieme avente valore
-		ottimale, é sufficiente scegliere di volta in volta l'insieme
+		informazione nota è il peso complessivo degli insiemi \math{S_{j}}
+		con \math{j < i}. Dovendo però ricavare l'insieme avente valore
+		ottimale, è sufficiente scegliere di volta in volta l'insieme
 		\math{S} che permette di avere il valore massimo. Ovvero, se
 		il valore dell'insieme \math{S_{\mi{p}(i)}} a cui viene unito
-		\math{\{i\}} é maggiore del valore dell'insieme \math{S_{i - 1}},
-		allora \math{S_{\mi{p}(i)} \cup \{i\}} é la scelta migliore,
-		altrimenti é l'insieme \math{S_{i - 1}} ad esserlo.
+		\math{\{i\}} è maggiore del valore dell'insieme \math{S_{i - 1}},
+		allora \math{S_{\mi{p}(i)} \cup \{i\}} è la scelta migliore,
+		altrimenti è l'insieme \math{S_{i - 1}} ad esserlo.
 
 		\begin[width = 50%fw]{parbox}
 			\begin[mode = display]{math}
@@ -334,7 +334,7 @@
 		soluzione ottimale per la \math{i}-esima istanza del problema,
 		che viene utilizzata per calcolare i valori ottimali per le
 		istanze successive. Tale procedura ha in input i valori associati
-		alle attivitá (ordinate per tempo di fine) e restituisce in output
+		alle attività (ordinate per tempo di fine) e restituisce in output
 		il vettore \math{c}.
 
 		Si noti come la prima cella del vettore \math{c} possa venire riempito
@@ -352,11 +352,11 @@
 			   return c
 		\end{verbatim}
 
-		É facile notare come il tempo di esecuzione dell'algoritmo sia
-		\math{O(n)}, dove \math{n} é la lunghezza del vettore \math{X}.
-		Questo perché é presente un ciclo che esegue una istruzione 
+		È facile notare come il tempo di esecuzione dell'algoritmo sia
+		\math{O(n)}, dove \math{n} è la lunghezza del vettore \math{X}.
+		Questo perché è presente un ciclo che esegue una istruzione 
 		in tempo immediato esattamente \math{\abs{X}} volte. Naturalmente,
-		questo é possibile solamente se il vettore \math{p} é noto,
+		questo è possibile solamente se il vettore \math{p} è noto,
 		altrimenti il tempo di esecuzione salirebbe a \math{O(n^{2})}.
 
 	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
@@ -364,7 +364,7 @@
 		Un primo modo per ricavare una soluzione ottimale consiste nel
 		calcolarla direttamente durante il calcolo del valore ottimale,
 		modificando la procedura precedente introducendo l'insieme soluzione
-		\math{S}. Il tempo di esecuzione dell'algorimo rimane invariato.
+		\math{S}. Il tempo di esecuzione dell'algoritmo rimane invariato.
 
 		\begin{verbatim}
 			procedure WIS(X)
@@ -385,18 +385,18 @@
 		\end{verbatim}
 
 		%Una volta calcolato il valore dell'insieme ottimale di intervalli,
-		%é possibile individuarne uno ripercorrendo la tabella a ritroso. In
+		%è possibile individuarne uno ripercorrendo la tabella a ritroso. In
 		%particolare, questo viene fatto introducendo una nuova procedura,
 		%\tt{PRINT-WIS}, che ha in input la tabella \math{c}, il vettore
 		%\math{X} ed un indice \math{i}, mentre in output ha uno dei possibili
-		%insiemi di attivitá mutualmente compatibili aventi massimo valore
+		%insiemi di attività mutualmente compatibili aventi massimo valore
 		%totale. La prima chiamata alla procedura ha \math{\abs{X}} come
 		%valore per \math{i}, in modo da ottenere la soluzione per l'istanza
 		%\math{\abs{X}}.
 
 		%La procedura ripercorre il vettore \math{c} dalla cella \math{i}
 		%verso la cella 0; ogni volta che si ha \math{c[p[i]] + X[i] \geq
-		%c[i - 1]}, si ha che l'\math{i}-esima attivitá é un elemento della
+		%c[i - 1]}, si ha che l'\math{i}-esima attività è un elemento della
 		%soluzione.
 
 		%\begin[width = 50%fw]{parbox}
@@ -427,8 +427,8 @@
 		%\end{parbox}
 		%\par
 
-		%Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione é 
+		%Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione è 
 		%comunque proporzionale alla lunghezza del vettore \math{c}, perché
-		%la ricorsione é una tail-recursion.
+		%la ricorsione è una tail-recursion.
 
 \end{sile}

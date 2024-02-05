@@ -4,25 +4,25 @@
 
 		Data una sequenza \math{S}, si dice \strong{sottosequenza}
 		di \math{S} un qualsiasi sottoinsieme degli elementi di
-		\math{S}, disposti secondo l'ordine in cui appaiono. Piú
+		\math{S}, disposti secondo l'ordine in cui appaiono. Più
 		formalmente, una sottosequenza di lunghezza \math{n} di
-		una sequenza \math{S} é definita da un insieme di indici
+		una sequenza \math{S} è definita da un insieme di indici
 		\math{i_{1} < i_{2} < \unicodeellipsis < i_{k}}, tale per
 		cui \math{k \leq n}; la sottosequenza che si ricava da questi
-		indici é \math{S[i_{1}] | S[i_{2}] | \unicodeellipsis | S[i_{k}]}.
+		indici è \math{S[i_{1}] | S[i_{2}] | \unicodeellipsis | S[i_{k}]}.
 
 		Date due sequenze \math{X} e \math{Y}, una sottosequenza si
 		dice comune ad entrambe le sequenze se appare sia in \math{X}
-		che in \math{Y}. Il problema della sottosequenza comune piú
+		che in \math{Y}. Il problema della sottosequenza comune più
 		lunga consiste nel trovare, in due stringhe \math{X} ed \math{Y},
-		qual'é (se esiste) la sottosequenza comune ad entrambe che sia di
+		qual'è (se esiste) la sottosequenza comune ad entrambe che sia di
 		lunghezza maggiore, abbreviata con \math{LCS} (\em{longest common
 		subsequence}).
 
 	\subsection{Programmazione dinamica: sottostruttura ottima}
 
 		\begin{theorem}
-			\strong{Proprietá della sottostruttura ottima per il problema
+			\strong{Proprietà della sottostruttura ottima per il problema
 			Longest Common Subsequence}. Siano \math{X = \langle x_{1},
 			x_{2}, \unicodeellipsis, x_{m} \rangle} e \math{Y = \langle
 			y_{1}, y_{2}, \unicodeellipsis, y_{n} \rangle} due sequenze.
@@ -33,17 +33,17 @@
 			\begin{enumerate}
 				\begin{item}
 					Se \math{x_{m} = y_{n}}, allora \math{z_{k} = x_{m} =
-					y_{n}} e \math{Z_{k - 1}} é una LCS di \math{X_{m - 1}}
+					y_{n}} e \math{Z_{k - 1}} è una LCS di \math{X_{m - 1}}
 					e \math{Y_{n - 1}};
 				\end{item}
 				\begin{item}
 					Se \math{x_{m} \ne y_{n}}, allora \math{z_{k} \ne x_{m}}
-					implica che \math{Z} é una LCS di \math{X_{m - 1}} e
+					implica che \math{Z} è una LCS di \math{X_{m - 1}} e
 					\math{Y};
 				\end{item}
 				\begin{item}
 					Se \math{x_{m} \ne y_{n}}, allora \math{z_{k} \ne y_{n}}
-					implica che \math{Z} é una LCS di \math{X} e
+					implica che \math{Z} è una LCS di \math{X} e
 					\math{Y_{n - 1}};
 				\end{item}
 			\end{enumerate}
@@ -59,43 +59,43 @@
 					ottenendo la stringa \math{Z' = \langle z_{1}, z_{2},
 					\unicodeellipsis, z_{k}, x_{m} \rangle}. Tale stringa
 					ha lunghezza \math{k + 1} e, essendo \math{x_{m} =
-					y_{n}}, é una LCS per \math{X} e \math{Y}. Ma allora
-					\math{Z} non puó essere una LCS per \math{X} e \math{Y},
+					y_{n}}, è una LCS per \math{X} e \math{Y}. Ma allora
+					\math{Z} non può essere una LCS per \math{X} e \math{Y},
 					perché \math{Z} ha lunghezza \math{k} mentre \math{Z'}
-					ha lunghezza \math{k + 1}. Questo é in contraddizione 
-					con l'ipotesi di partenza secondo cui \math{Z} é
+					ha lunghezza \math{k + 1}. Questo è in contraddizione 
+					con l'ipotesi di partenza secondo cui \math{Z} è
 					effettivamente una LCS, pertanto deve aversi \math{x_{m}
 					= y_{n} = z_{k}}.
 
 					Dato che per ipotesi \math{x_{m} = y_{n}}, il
-					prefisso \math{Z_{k - 1}} é una sottosequenza
+					prefisso \math{Z_{k - 1}} è una sottosequenza
 					comune di \math{X_{m - 1}} e \math{Y_{n - 1}}
 					avente lunghezza \math{k - 1}. Si vuole dimostrare
-					che \math{Z_{k - 1}} é una LCS di \math{X_{m - 1}} e
+					che \math{Z_{k - 1}} è una LCS di \math{X_{m - 1}} e
 					\math{Y_{n - 1}}. Si supponga per assurdo che questo
 					non sia vero, e che esista quindi una sequenza \math{W}
-					che é LCS di \math{X_{m - 1}} e \math{Y_{n - 1}} avente
+					che è LCS di \math{X_{m - 1}} e \math{Y_{n - 1}} avente
 					lunghezza maggiore di \math{k - 1}. Allora, accodando 
 					\math{x_{m} = y_{n}} a \math{W} si ottiene la sequenza
-					\math{W'}, che é sottosequenza comune di \math{X} e di
+					\math{W'}, che è sottosequenza comune di \math{X} e di
 					\math{Y} avente lunghezza maggiore di \math{k}. Questo
-					é peró in contraddizione con il fatto che \math{Z} sia
-					una LCS per \math{X} e \math{Y}, dato che questa é lunga
-					\math{k}. Occorre allora assumere che \math{Z_{k - 1}} é
+					è però in contraddizione con il fatto che \math{Z} sia
+					una LCS per \math{X} e \math{Y}, dato che questa è lunga
+					\math{k}. Occorre allora assumere che \math{Z_{k - 1}} è
 					una LCS di \math{X_{m - 1}} e \math{Y_{n - 1}}.
 				\end{item}
 				\begin{item}
 					Si supponga per assurdo che, se \math{z_{k} \ne x_{m}},
 					allora \math{Z} non sia una LCS di \math{X_{m - 1}} e
 					\math{Y}. Deve allora esistere una sequenza \math{W}
-					di lunghezza maggiore di \math{k} che é LCS di
-					\math{X_{m - 1}} e \math{Y}. Ma allora \math{W} é anche
+					di lunghezza maggiore di \math{k} che è LCS di
+					\math{X_{m - 1}} e \math{Y}. Ma allora \math{W} è anche
 					LCS per \math{X} e \math{Y}, contraddicendo l'ipotesi che
 					lo sia \math{Z}. Occorre allora assumere che \math{Z} sia
 					una LCS di \math{X_{m - 1}} e \math{Y}.
 				\end{item}
 				\begin{item}
-					La dimostrazione é simmetrica a quella del punto
+					La dimostrazione è simmetrica a quella del punto
 					precedente.
 				\end{item}
 			\end{enumerate}
@@ -110,12 +110,12 @@
 		per l'\math{i, j}-esima istanza del problema corrisponde a trovare
 		la soluzione ottimale per il problema LCS rispetto alle sottosequenze
 		\math{X_{i}} e \math{Y_{j}}. La soluzione per le intere sequenze
-		\math{X} e \math{Y} é la soluzione per l'istanza \math{X_{m}, Y_{n}}.
-		La lunghezza della sottosequenza comune piú lunga soluzione per la
+		\math{X} e \math{Y} è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
+		La lunghezza della sottosequenza comune più lunga soluzione per la
 		\math{i, j}-esima istanza del problema viene indicata con
 		\math{\mi{Opt}(i, j)}.
 
-		Il caso base é semplice da determinare; é evidente come due sequenze
+		Il caso base è semplice da determinare; è evidente come due sequenze
 		vuote non abbiano alcun elemento in comune. Inoltre, una qualsiasi
 		sequenza non vuota non ha alcun carattere in comune con la sequenza
 		vuota.
@@ -138,11 +138,11 @@
 		voler calcolare \math{S_{i, j}}. Possono verificarsi solamente
 		due situazioni, mutualmente esclusive: l'\math{i}-esimo carattere
         di \math{X_{i}} e uguale al \math{j}-esimo carattere di \math{Y_{j}}
-        oppure l'\math{i}-esimo carattere di \math{X_{i}} é diverso dal
+        oppure l'\math{i}-esimo carattere di \math{X_{i}} è diverso dal
         \math{j}-esimo carattere di \math{Y_{j}}.
 
 		Nel primo caso, per definizione, tale carattere deve essere parte
-		della sottosequenza comune piu lunga. Pertanto, in questo caso, la
+		della sottosequenza comune più lunga. Pertanto, in questo caso, la
 		soluzione ottimale per la \math{i, j}-esima istanza si ottiene
 		semplicemente accodando l'ultimo carattere alla soluzione ottimale
 		dell'istanza precedente, ovvero \math{S_{i - 1, j - 1}}.
@@ -150,7 +150,7 @@
 		Nel secondo caso, la soluzione ottimale per la \math{i, j}-esima
 		istanza deve necessariamente essere di lunghezza maggiore o uguale
 		(ma non minore) alla lunghezza di tutte le soluzioni per istanze
-		precedenti, e non puó, per definizione, contenere l'\math{i}-esimo
+		precedenti, e non può, per definizione, contenere l'\math{i}-esimo
 		elemento di \math{X} (o il \math{j}-esimo elemento di \math{Y}).
 		In particolare, le uniche soluzioni candidate ad essere le soluzioni
 		per la \math{i, j}-esima istanza sono la \math{i - 1, j}-esima e la
@@ -217,14 +217,14 @@
 			    return c
 		\end{verbatim}
 
-		É facile notare come il tempo di esecuzione dell'algoritmo
+		È facile notare come il tempo di esecuzione dell'algoritmo
 		sia \math{O(nm)}, dove \math{m} e \math{n} sono le lunghezze
 		di rispettivamente la stringa \math{X} e la stringa \math{Y}.
 		I primi due cicli eseguono una operazione immediata rispettivamente
 		per \math{m} e per \math{n} volte, dopodiché si presenta un doppio
 		ciclo innestato: il ciclo esterno esegue il ciclo interno \math{m}
 		volte, mentre il ciclo interno esegue \math{n} volte un blocco di
-		decisione il cui tempo di esecuzione puó considerarsi immediato.
+		decisione il cui tempo di esecuzione può considerarsi immediato.
 		Si ha allora che, asintoticamente, \math{O(m) + O(n) + O(mn) = O(mn)}.
 
 		\begin{example}
@@ -267,7 +267,7 @@
 
 	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
-		Una volta calcolata la lunghezza della LCS, é possibile
+		Una volta calcolata la lunghezza della LCS, è possibile
 		individuarne una ripercorrendo la tabella a ritroso. In
 		particolare, questo viene fatto estendendo l'algoritmo
 		per il calcolo della lunghezza introducendo una nuova
@@ -277,14 +277,14 @@
 		\begin{itemize}
 			\begin{item}
 				Un puntatore \math{\nwarrow} quando l'\math{i}-esimo
-				elemento della prima sequenza é uguale al \math{j}-esimo
+				elemento della prima sequenza è uguale al \math{j}-esimo
 				elemento della seconda;
 			\end{item}
 			\begin{item}
 				un puntatore \math{\uparrow} quando l'\math{i}-esimo elemento
-				della prima sequenza é distinto dal \math{j}-esimo elemento
+				della prima sequenza è distinto dal \math{j}-esimo elemento
 				della seconda ed il valore nella cella \math{[i - 1, j]} della
-				tabella principale é maggiore di quello nella cella \math{[i,
+				tabella principale è maggiore di quello nella cella \math{[i,
 				j - 1]};
 			\end{item}
 			\begin{item}
@@ -296,7 +296,7 @@
 
 		Alla vecchia procedura opportunamente modificata ne viene aggiunta
 		un'altra, \tt{PRINT-LCS}. Questa ha in input la tabella \math{b},
-		la stringa \math{X} (o la stringa \math{Y}, é indifferente) e due
+		la stringa \math{X} (o la stringa \math{Y}, è indifferente) e due
 		indici di posizione \math{i} e \math{j}, mentre in output ha una
 		delle possibili LCS per la stringa in input. La prima chiamata alla
 		procedura ha \math{\abs{X}} come valore per \math{i} e \math{\abs{Y}}
@@ -306,14 +306,14 @@
 		La procedura ripercorre la tabella \math{b} dalla cella \math{(i, j)}
 		verso la cella \math{(0, 0)}; ogni volta che si incontra il puntatore
 		\math{\nwarrow}, il valore delle due sequenze in corrispondenza della
-		cella di partenza é un elemento della soluzione.
+		cella di partenza è un elemento della soluzione.
 
-		Si noti come possano esistere piú percorsi all'interno della
+		Si noti come possano esistere più percorsi all'interno della
 		tabella. Il numero di percorsi dipende dal numero \math{k} di
 		biforcazioni. Ogni biforcazione indica una possibile soluzione
 		al problema LCS, eventualmente ridonanti. Il numero di percorsi
-		non puó essere superiore a \math{2^{k}}, ed il numero di possibili
-		soluzioni distinte é non superiore al numero di possibili percorsi.
+		non può essere superiore a \math{2^{k}}, ed il numero di possibili
+		soluzioni distinte è non superiore al numero di possibili percorsi.
 
 		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
@@ -358,8 +358,8 @@
 		\end{parbox}
 		\par
 
-		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione é 
+		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione è 
 		comunque proporzionale alle dimensioni della tabella \math{b},
-		perché la ricorsione é una tail-recursion. 
+		perché la ricorsione è una tail-recursion. 
 
 \end{sile}

@@ -1,6 +1,6 @@
 \begin{sile}
 
-    La \strong{tecnica greedy} é un tipo di approccio alla costruzione di
+    La \strong{tecnica greedy} è un tipo di approccio alla costruzione di
     algoritmi che risolvono problemi di ottimizzazione. La tecnica greedy
     permette di calcolare la soluzione ottima (di una istanza) di un problema
     attraverso una sequenza di scelte localmente ottime, dove ogni scelta 
@@ -22,13 +22,13 @@
             \cell{Top-down}
         \end{row}
         \begin{row}
-            \cell{Il problema é scomposto in molti sottoproblemi}
-            \cell{Il problema é scomposto in pochi sottoproblemi}       
+            \cell{Il problema è scomposto in molti sottoproblemi}
+            \cell{Il problema è scomposto in pochi sottoproblemi}       
         \end{row}
         \begin{row}
-            \cell{L'algoritmo é complesso e, in genere, non troppo
+            \cell{L'algoritmo è complesso e, in genere, non troppo
             efficiente}
-            \cell{L'algoritmo é semplice e, in genere, efficiente}
+            \cell{L'algoritmo è semplice e, in genere, efficiente}
         \end{row}
         \begin{row}
             \cell{Permette di risolvere molti problemi}
@@ -36,12 +36,12 @@
         \end{row}
     \end{ptable}
 
-    L'approccio greedy alla risoluzione di un problema é possibile
-    solamente se viene dimostrata matematicamente la \strong{proprietá
+    L'approccio greedy alla risoluzione di un problema è possibile
+    solamente se viene dimostrata matematicamente la \strong{proprietà
     della scelta greedy}, ovvero se la scelta che viene compiuta ad ogni
     iterazione appartiene ad una soluzione ottima del sottoproblema in
-    esame. A sua volta, affinche tale proprietá sia vera, é necessario
-    dimostrare che il problema possiede la proprietá della sottostruttura
+    esame. A sua volta, affinché tale proprietà sia vera, è necessario
+    dimostrare che il problema possiede la proprietà della sottostruttura
     ottima (come per la programmazione dinamica).
 
 \end{sile}

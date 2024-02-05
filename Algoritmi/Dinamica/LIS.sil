@@ -3,23 +3,23 @@
     \subsection{Definizione del problema}
 
         Il problema della \strong{Longest Increasing Subsequence}
-        (\strong{LIS}) prevede di trovare la piú lunga sottosequenza
+        (\strong{LIS}) prevede di trovare la più lunga sottosequenza
         di una sequenza i cui elementi (nell'ordine in cui si trovano)
         hanno valore strettamente crescente.
 
         \begin{example}
             Sia data la sequenza \math{X = {\langle 14, 2, 4, 2, 7, 0, 13, 21,
             11 \rangle}}. Una sottosequenza strettamente crescente di \math{X}
-            é \math{\langle 2, 7, 11 \rangle}, ma non é la piú lunga; tale
-            sottosequenza é infatti \math{\langle 2, 4, 7, 13, 21 \rangle}.
+            è \math{\langle 2, 7, 11 \rangle}, ma non è la più lunga; tale
+            sottosequenza è infatti \math{\langle 2, 4, 7, 13, 21 \rangle}.
         \end{example}
 
         Attaccare il problema LIS direttamente tramite programmazione dinamica
-        é complesso. Un miglior approccio consiste nel restringere i requisiti
+        è complesso. Un miglior approccio consiste nel restringere i requisiti
         del problema per considerarne una versione semplificata.
 
-        Una versione piú semplice del problema LIS, chiamato \strong{LIS
-        vincolato} (\strong{LISV}), prevede di trovare la piú lunga
+        Una versione più semplice del problema LIS, chiamato \strong{LIS
+        vincolato} (\strong{LISV}), prevede di trovare la più lunga
         sottosequenza di una sequenza i cui elementi (nell'ordine in cui
         si trovano) hanno valore strettamente crescente e dove l'ultimo
         elemento di tale sottosequenza coincide con l'ultimo elemento
@@ -27,9 +27,9 @@
 
         \begin{example}
             Sia data la sequenza \math{X = \langle 14, 1, 4, 6, 13, 15, 0, 13,
-            29, 8 \rangle}. La piú lunga sottosequenza strettamente crescente
+            29, 8 \rangle}. La più lunga sottosequenza strettamente crescente
             di \math{X} si rivela essere \math{\langle 1, 4, 6, 13, 15, 29
-            \rangle}. D'altro canto, la piú lunga sottosequenza strettamente
+            \rangle}. D'altro canto, la più lunga sottosequenza strettamente
             crescente di \math{X} vincolata si rivela invece essere
             \math{\langle 1, 4, 6, 8 \rangle}.
         \end{example}
@@ -37,15 +37,15 @@
     \subsection{Programmazione dinamica: sottostruttura ottima}
 
         \begin{theorem}
-			\strong{Proprietá della sottostruttura ottima per il problema
+			\strong{Proprietà della sottostruttura ottima per il problema
 			Longest Increasing Subsequence (Vincolato)}. Sia \math{X} una
 			sequenza di \math{m} numeri interi e sia \math{X_{i}} un suo
 			prefisso di lunghezza \math{i}, con \math{1 \leq i \leq m}.
 			Sia \math{Z^{i}} una LISV di \math{X_{i}}, che termina con
 			\math{x_{i}}. Sia infine \math{W_{i}} l'insieme di tutte le
 			possibili sottosequenze crescenti (non necessariamente le
-			piú lunghe) di \math{X_{j}} che finiscono con \math{x_{j}}
-			e a cui é possibile concatenare \math{x_{i}} ottenendo ancora
+			più lunghe) di \math{X_{j}} che finiscono con \math{x_{j}}
+			e a cui è possibile concatenare \math{x_{i}} ottenendo ancora
 			una sequenza crescente, ovvero:
 
             \smallskip
@@ -58,8 +58,8 @@
             \end{center}
             \bigskip
 
-            Allora la LISV \math{Z^{i}} é data dalla concatenazione fra
-            l'elemento di \math{W_{i}} avente la maggior cardinalitá
+            Allora la LISV \math{Z^{i}} è data dalla concatenazione fra
+            l'elemento di \math{W_{i}} avente la maggior cardinalità
             con il carattere \math{x_{i}}, ovvero \math{Z^{i} = Z* |
             x_{i}} con \math{Z* \in W_{i}} e \math{\abs{Z*} =
             \mi{max}_{W \in W_{i}} \{\abs{W}\}}.
@@ -68,19 +68,19 @@
             \strong{Dimostrazione}. Si supponga per assurdo che \math{Z^{i}
             = Z* | x_{i}} non sia la soluzione ottimale per l'\math{i}-esima
             istanza del problema. Questa deve allora essere \math{Z^{i} = Z'
-            | x_{i}}, dove \math{Z'} é una sottosequenza crescente avente
-            cardinalitá maggiore di \math{Z*}.
+            | x_{i}}, dove \math{Z'} è una sottosequenza crescente avente
+            cardinalità maggiore di \math{Z*}.
 
             Sia \math{z'} l'elemento in coda a \math{Z'}. Essendo \math{Z^{i}}
             costruito accodando \math{x_{i}} a \math{Z'} ottenendo ancora una
             sequenza crescente, deve aversi \math{z' < x_{i}}. Sia poi
-            \math{h < i} il piú grande indice tale che \math{x_{h} = z'}. Di
-            conseguenza, per come é stato definito \math{W_{i}}, si ottiene
-            che \math{Z' \in W_{i}}. Infatti, \math{Z'} é una sottosequenza
+            \math{h < i} il più grande indice tale che \math{x_{h} = z'}. Di
+            conseguenza, per come è stato definito \math{W_{i}}, si ottiene
+            che \math{Z' \in W_{i}}. Infatti, \math{Z'} è una sottosequenza
             crescente di \math{X_{h}}, la quale termina con \math{x_{h} <
-            x_{i}}. Ció porta peró ad una contraddizione: infatti si ha
+            x_{i}}. Ciò porta però ad una contraddizione: infatti si ha
             \math{\abs{Z*} = \mi{max}_{W \in W_{i}} \{\abs{W}\}}, ma al
-            contempo \math{Z'} é membro di \math{W_{i}} ed é stato
+            contempo \math{Z'} è membro di \math{W_{i}} ed è stato
             dimostrato che \math{\abs{Z'} > \abs{Z*}}. Occorre allora
             assumere che \math{Z^{i} = Z* | x_{i}} sia effettivamente la
             soluzione ottimale alla \math{i}-esima istanza del problema.
@@ -93,14 +93,14 @@
         La soluzione \math{S_{i}} per l'\math{i}-esima istanza del problema
         corrisponde a trovare la soluzione ottimale per il problema LIS
         vincolato rispetto alla sottosequenza \math{X_{i}}. La soluzione
-        per l'intera sequenza \math{X} é la soluzione per l'istanza
+        per l'intera sequenza \math{X} è la soluzione per l'istanza
         \math{X_{n}}. La lunghezza della sottosequenza strettamente
-        crescente piú lunga vincolata soluzione per la \math{i}-esima
+        crescente più lunga vincolata soluzione per la \math{i}-esima
         istanza del problema viene indicata con \math{\mi{Opt}(i)}.
 
-        Il caso base dell'equazione di ricorrenza é immediato: se
-        la sequenza é la sequenza vuota, allora la sottosequenza
-        comune piú lunga vincolata é essa stessa la sequenza vuota.
+        Il caso base dell'equazione di ricorrenza è immediato: se
+        la sequenza è la sequenza vuota, allora la sottosequenza
+        comune più lunga vincolata è essa stessa la sequenza vuota.
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
@@ -118,7 +118,7 @@
         disposizione tutte le soluzioni \math{S_{i - 1}, S_{i - 2},
         \unicodeellipsis} e di voler calcolare \math{S_{i}}. Dato che
         il problema LIS vincolato richiede di trovare la sottosequenza
-        strettamente crescente piú lunga che termini con l'ultimo termine
+        strettamente crescente più lunga che termini con l'ultimo termine
         della sequenza, deve per forza aversi \math{x_{i} \in S_{i}}.
 
         Una generica soluzione per la \math{i}-esima istanza del problema
@@ -127,19 +127,19 @@
         sottosequenza vengono prima, in ordine lessicografico, di
         \math{x_{i}}. Questo perché l'aggiunta di \math{x_{i}} in coda
         ad una tale sottosequenza restituisce ancora una sottosequenza
-        strettamente crescente. La soluzione ottimale \math{S_{i}} é data
-        dalla sottosequenza con queste caratteristiche piú lunga possibile
+        strettamente crescente. La soluzione ottimale \math{S_{i}} è data
+        dalla sottosequenza con queste caratteristiche più lunga possibile
         a cui viene aggiunto \math{x_{i}} in coda.
 
-        La sottosequenza strettamente crescente piú lunga possibile con
+        La sottosequenza strettamente crescente più lunga possibile con
         tutti gli elementi che vengono prima, in ordine lessicografico,
-        di \math{x_{i}} sará a sua volta soluzione di una certa istanza
+        di \math{x_{i}} sarà a sua volta soluzione di una certa istanza
         \math{h} del problema, con \math{h < i}. La soluzione \math{S_{i}}
-        é allora il risultato dell'accodare l'elemento \math{x_{i}} alla
+        è allora il risultato dell'accodare l'elemento \math{x_{i}} alla
         soluzione \math{S_{h}}. Se \math{x_{i}} viene dopo tutti gli altri
         elementi di \math{X_{i}} nell'ordine lessicografico, allora l'elemento
         \math{x_{h}} non esiste. In questo caso, la soluzione per la
-        \math{i}-esima istanza del problema é formata dal solo elemento
+        \math{i}-esima istanza del problema è formata dal solo elemento
         \math{x_{i}}.
 
         \begin[width = 50%fw]{parbox}
@@ -176,8 +176,8 @@
 		in output il vettore \math{c}.
 
         Si noti come tutte le celle del vettore \math{c} possono essere
-        inizializzate subito ad 1, perché questo é il minimo valore che
-        in una cella puó essere presente.
+        inizializzate subito ad 1, perché questo è il minimo valore che
+        in una cella può essere presente.
 
         \begin{verbatim}
 			procedure BOUNDED-LIS(X)
@@ -197,19 +197,19 @@
 			    return c
         \end{verbatim}
 
-        É facile notare come il tempo di esecuzione dell'algoritmo
-		sia \math{O(n^{2})}, dove \math{n} é la lunghezza della sequenza
+        È facile notare come il tempo di esecuzione dell'algoritmo
+		sia \math{O(n^{2})}, dove \math{n} è la lunghezza della sequenza
 		\math{X}. Il primo ciclo esegue una operazione immediata per
 		\math{n} volte, dopodiché si presenta un doppio ciclo innestato:
 		il ciclo esterno esegue il ciclo interno \math{n} volte, mentre
-		il ciclo interno esegue al piú \math{n} volte (dovendo potenzialmente
+		il ciclo interno esegue al più \math{n} volte (dovendo potenzialmente
 		ripercorrere l'intera sequenza a ritroso) un blocco di decisione il
-		cui tempo di esecuzione puó considerarsi immediato. Si ha allora che,
+		cui tempo di esecuzione può considerarsi immediato. Si ha allora che,
 		asintoticamente, \math{O(n) + O(n^{2}) = O(n^{2})}.
 
     \subsection{Programmazione dinamica: ricostruzione della soluzione}
 
-        Una volta calcolata la lunghezza della LISV, é possibile
+        Una volta calcolata la lunghezza della LISV, è possibile
         individuarne una ripercorrendo il vettore a ritroso. In
         particolare, questo viene fatto estendendo l'algoritmo per
         il calcolo della lunghezza introducendo un vettore \math{h}.
@@ -228,7 +228,7 @@
         del problema ripercorrendo il vettore \math{h} dalla cella \math{i}
 		verso la cella \math{0}; ogni volta che si incontra un elemento
 		non nullo di \math{h}, l'elemento della sequenza in tale posizione 
-		é un elemento della soluzione.
+		è un elemento della soluzione.
 
 		\begin[width = 60%fw]{parbox}
 			\begin{verbatim}
@@ -262,8 +262,8 @@
 		\par
 
         Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione
-        é comunque proporzionale alle dimensioni del vettore \math{h},
-		perché la ricorsione é una tail-recursion. 
+        è comunque proporzionale alle dimensioni del vettore \math{h},
+		perché la ricorsione è una tail-recursion. 
 
         \begin{example}
             \begin[width = 30%fw]{parbox}
@@ -293,9 +293,9 @@
 
     \subsection{Osservazioni}
 
-        Il problema LIS non vincolato puó essere ridotto al problema LIS
+        Il problema LIS non vincolato può essere ridotto al problema LIS
         vincolato. Infatti, la soluzione del problema LIS non vincolato non
-        é altro che la maggior soluzione parziale del problema LIS vincolato.
+        è altro che la maggior soluzione parziale del problema LIS vincolato.
 
         \begin[width = 50%fw]{parbox}
 			\begin{verbatim}

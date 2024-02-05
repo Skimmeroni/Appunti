@@ -6,25 +6,25 @@
         pesato, il \strong{problema dei cammini minimi} richiede, per
         ogni coppia di vertici \math{(v_{i}, v_{j}) \in V \times V},
         di trovare il cammino che ha inizio in \math{v_{i}} e fine in
-        \math{v_{j}} avente il minimo peso. Il problema puó essere
+        \math{v_{j}} avente il minimo peso. Il problema può essere
         formulato come un problema di ottimizzazione di minimo:
 
         \begin{itemize}
             \begin{item}
                 Per ciascuna coppia di vertici \math{(v_{i}, v_{j})},
-                l'insieme delle soluzioni possibili é dato da tutti i
+                l'insieme delle soluzioni possibili è dato da tutti i
                 possibili cammini che hanno \math{v_{i}} come primo
                 vertice e \math{v_{j}} come ultimo;
             \end{item}
             \begin{item}
-                La funzione obiettivo é il peso del cammino;
+                La funzione obiettivo è il peso del cammino;
             \end{item}
             \begin{item}
-                Il valore ottimo per \math{v_{i}} e \math{v_{j}} é il
+                Il valore ottimo per \math{v_{i}} e \math{v_{j}} è il
                 peso del cammino minimo da \math{v_{i}} a \math{v_{j}};
             \end{item}
             \begin{item}
-                La soluzione ottimale é data da uno qualsiasi dei cammini
+                La soluzione ottimale è data da uno qualsiasi dei cammini
                 di peso minimo fra i vertici \math{v_{i}} e \math{v_{j}};
             \end{item}
         \end{itemize}
@@ -32,17 +32,17 @@
     \subsection{Programmazione dinamica: sottostruttura ottima}
 
         \begin{theorem}
-            \strong{Proprietá della sottostruttura ottima per il problema
+            \strong{Proprietà della sottostruttura ottima per il problema
             dei cammini minimi}. Sia dato un grafo orientato e pesato
             \math{G = (V, E, W)}. Sia \math{P_{0k}} un cammino minimo
             su \math{G} per i vertici \math{v_{0}} e \math{v_{k}}. Si
             considerino due indici \math{i, j} qualsiasi tali per cui
             \math{0 \leq i \leq j \leq k}: il sottocammino \math{P_{ij}}
-            di \math{P_{0k}} é un cammino minimo per i vertici \math{v_{i}}
+            di \math{P_{0k}} è un cammino minimo per i vertici \math{v_{i}}
             e \math{v_{j}}.
 
             \bigskip
-            \strong{Dimostrazione}. Il cammino \math{P_{0k}} puó essere
+            \strong{Dimostrazione}. Il cammino \math{P_{0k}} può essere
             separato in tre sottocammini: il cammino \math{P_{0i}} da
             \math{v_{0}} a \math{v_{i}}, il cammino \math{P_{ij}} da 
             \math{v_{i}} a \math{v_{j}} ed il cammino \math{P_{jk}} da 
@@ -64,9 +64,9 @@
 
             Si supponga per assurdo che esista un cammino \math{{P'}_{ij}} tale che
             \math{W({P'}_{ij}) < W(P_{ij})}. Allora \math{P_{0i} \rightsquigarrow
-            {P'}_{ij} \rightsquigarrow P_{jk}} é un cammino da \math{v_{0}} a
-            \math{v_{k}} il cui peso é inferiore a \math{P_{0k}}, ma questo va
-            contro l'ipotesi secondo la quale \math{P_{0k}} é un cammino minimo
+            {P'}_{ij} \rightsquigarrow P_{jk}} è un cammino da \math{v_{0}} a
+            \math{v_{k}} il cui peso è inferiore a \math{P_{0k}}, ma questo va
+            contro l'ipotesi secondo la quale \math{P_{0k}} è un cammino minimo
             da \math{v_{0}} a \math{v_{k}}.
         \end{theorem}
 
@@ -84,7 +84,7 @@
 
         Parametrizzando il problema rispetto ai \math{k} vertici
         intermedi si ottiene un algoritmo di programmazione dinamica
-        chiamato \strong{Algoritmo di Floyd-Warshall}. L'algoritmo puó
+        chiamato \strong{Algoritmo di Floyd-Warshall}. L'algoritmo può
         essere descritto in maniera informale come segue:
 
         \begin{enumerate}
@@ -104,7 +104,7 @@
                 v_{k} \}}. Si noti come l'insieme dei vertici intermedi
                 di tale cammino minimo non deve necessariamente coincidere
                 con l'intero \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}
-                \}}, ma ne é certamente un sottoinsieme;
+                \}}, ma ne è certamente un sottoinsieme;
             \end{item}
             \begin{item}
                 L'algoritmo termina quando viene calcolato, per tutte
@@ -121,12 +121,12 @@
         il cammino minimo da \math{v_{i}} a \math{v_{j}} che non ha alcun
         vertice intermedio, l'arco che connette direttamente \math{v_{i}}
         e \math{v_{j}}. Se i due vertici sono coincidenti, ovvero se
-        \math{v_{i} = v_{j}}, l'unico cammino possibile é il cammino
+        \math{v_{i} = v_{j}}, l'unico cammino possibile è il cammino
         degenere che va da \math{v_{i}} a sé stesso. Tale cammino non
         solo effettivamente non possiede alcun vertice intermedio,
-        rispettando la definizione, ma essendo l'unico cammino possibile é
+        rispettando la definizione, ma essendo l'unico cammino possibile è
         anche certamente quello di peso minimo. Se i due vertici \math{v_{i}}
-        e \math{v_{j}} sono distinti ma non é presente nel grafo un arco fra
+        e \math{v_{j}} sono distinti ma non è presente nel grafo un arco fra
         i due, si ha per convenzione \math{P^{0}_{ij} =} NULL.
 
         \begin[width = 50%fw]{parbox}
@@ -158,34 +158,34 @@
         i cui vertici intermedi sono estratti dall'insieme \math{\{v_{1},
         v_{2}, \unicodeellipsis, v_{k}\}}. Si indichi con \math{\mi{Opt}_{k} 
         (i, j)} il peso totale del cammino minimo \math{P^{k}_{i, j}}.
-        Possono verificarsi due situazioni: \math{v_{k}} é oppure non é
+        Possono verificarsi due situazioni: \math{v_{k}} è oppure non è
         uno dei vertici intermedi del cammino.
 
-        Se \math{v_{k}} non é uno dei vertici del cammino, allora questo
+        Se \math{v_{k}} non è uno dei vertici del cammino, allora questo
         equivale a dire che i vertici intermedi di \math{P^{k}_{ij}} sono
         estratti dall'insieme \math{\{v_{1}, v_{2}, \unicodeellipsis,
-        v_{k - 1}\}}, che é lo stesso insieme da cui sono stati estratti
+        v_{k - 1}\}}, che è lo stesso insieme da cui sono stati estratti
         i vertici intermedi di \math{P^{k - 1}_{ij}}. Questo significa
         che un cammino minimo che va da \math{i} a \math{j} i cui vertici
         intermedi sono stati estratti da \math{\{v_{1}, v_{2},
-        \unicodeellipsis, v_{k - 1}\}} é anche un cammino minimo che va da
+        \unicodeellipsis, v_{k - 1}\}} è anche un cammino minimo che va da
         \math{i} a \math{j} i cui vertici intermedi sono stati estratti da
         \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}\}}.
 
-        Se invece \math{v_{k}} é uno dei vertici intermedi di
-        \math{P^{k}_{ij}}, allora tale cammino puó essere certamente
+        Se invece \math{v_{k}} è uno dei vertici intermedi di
+        \math{P^{k}_{ij}}, allora tale cammino può essere certamente
         diviso in due parti: \math{v_{i} \rightsquigarrow v_{k}} e
-        \math{v_{k} \rightsquigarrow v_{j}}. Il primo sottocammino é
+        \math{v_{k} \rightsquigarrow v_{j}}. Il primo sottocammino è
         a sua volta un cammino minimo che ha inizio in \math{v_{i}} e
-        fine in \math{v_{k}}, mentre il secondo sottocammino é un cammino
+        fine in \math{v_{k}}, mentre il secondo sottocammino è un cammino
         minimo che ha inizio in \math{v_{k}} e fine in \math{v_{j}}. 
 
         Dato che entrambi i sottocammini provengono da un cammino i cui
         vertici intermedi sono stati estratti dall'insieme \math{\{v_{1},
         v_{2}, \unicodeellipsis, v_{k}\}}, anche questi avranno i loro
-        vertici intermedi estratti da tale insieme. Dato che peró in
+        vertici intermedi estratti da tale insieme. Dato che però in
         nessuno dei due sottocammini figura \math{v_{k}} come vertice
-        intermedio, essendo sempre agli estremi, allora é possibile
+        intermedio, essendo sempre agli estremi, allora è possibile
         affermare con certezza che i vertici intermedi di entrambi i
         sottocammini sono estratti dall'insieme \math{\{v_{1}, v_{2},
         \unicodeellipsis, v_{k - 1}\}}.
@@ -214,7 +214,7 @@
         \end{parbox}
         \par
 
-        Naturalmente non é possibile sapere, se non a posteriori, se
+        Naturalmente non è possibile sapere, se non a posteriori, se
         \math{v_{k}} fa o non fa parte della \math{k}-esima soluzione
         ottimale. La scelta migliore fa l'includere o il non includere
         \math{v_{k}} nella soluzione dipende da quale rende ottimale,
@@ -276,22 +276,22 @@
 		    return D\textsuperscript{(n)}
 	\end{verbatim}
 
-    É facile notare come il tempo di esecuzione dell'algoritmo
+    È facile notare come il tempo di esecuzione dell'algoritmo
 	sia \math{O(\abs{V^{3}})}, perché sono presenti tre cicli
-	dove in quello piú interno viene eseguita una operazione
+	dove in quello più interno viene eseguita una operazione
 	con costo unitario.
 
     \subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
         Per la restituzione di una soluzione ottima al problema dei cammini
-        minimi é necessario calcolare, oltre alla matrice \math{D^{(n)}},
+        minimi è necessario calcolare, oltre alla matrice \math{D^{(n)}},
         anche la \strong{matrice dei predecessori} \math{\Pi^{(n)}}. In
-        ciascuna cella \math{i, j} é riportato NULL se \math{i} coincide
+        ciascuna cella \math{i, j} è riportato NULL se \math{i} coincide
         con \math{j} oppure se non esiste un cammino fra \math{v_{i}} e 
         \math{v_{j}}, altrimenti riporta il predecessore di \math{v_{j}} in
         qualche cammino minimo che ha inizio in \math{v_{i}}.
 
-        Tale matrice, cosí come la matrice \math{D^{(n)}}, viene calcolata
+        Tale matrice, così come la matrice \math{D^{(n)}}, viene calcolata
         parametrizzando il problema rispetto ai \math{k} vertici intermedi.
         Sia allora \math{\Pi^{(k)}} la matrice dei predecessori dove i
         vertici intermedi dei cammini a cui fa riferimento sono stati
@@ -311,7 +311,7 @@
         non ha un predecessore in tale cammino. Se i due vertici
         sono distinti e \math{P^{(0)}_{ij}} esiste, allora deve
         aversi che \math{\Pi^{(0)}[i, j] = v_{i}}, perché
-        \math{P^{(0)}_{ij}} é costituito da un arco che connette
+        \math{P^{(0)}_{ij}} è costituito da un arco che connette
         i due vertici direttamente.
 
         \begin[mode = display]{math}
@@ -334,7 +334,7 @@
         vertici intermedi estratti dall'insieme \math{\{v_{1}, v_{2},
         \unicodeellipsis, v_{k - 1}\}} ha la stessa lunghezza di quello
         avente i vertici intermedi estratti dall'insieme \math{\{v_{1},
-        v_{2}, \unicodeellipsis, v_{k}\}}, allora é possibile inferire
+        v_{2}, \unicodeellipsis, v_{k}\}}, allora è possibile inferire
         che il cammino minimo \math{P^{(k)}_{ij}} ed il cammino minimo
         \math{P^{(k - 1)}_{ij}} abbiano lo stesso penultimo vertice,
         ovvero che \math{\Pi^{(k)}[i, j] = \Pi^{(k - 1)}[i, j]}. Questo
@@ -358,9 +358,9 @@
                 }
         \end{math}
 
-        Il calcolo delle matrici dei predecessori puó venire fatto
+        Il calcolo delle matrici dei predecessori può venire fatto
         direttamente durante la costruzione delle matrici \math{D}.
-        Una volta che é stata calcolata \math{\Pi^{(n)}} é possibile
+        Una volta che è stata calcolata \math{\Pi^{(n)}} è possibile
         ottenere una soluzione ottima. Alla vecchia procedura opportunamente
         modificata ne viene aggiunta un'altra, \tt{PRINT-FW}. A questa viene
         passata in input la matrice \math{\Pi^{(n)}} e restituisce in output
@@ -418,7 +418,7 @@
 	\end{parbox}
 	\par
 
-    Il tempo di esecuzione della procedura di stampa é comunque
+    Il tempo di esecuzione della procedura di stampa è comunque
     \math{O(\abs{V^{3}})}, perché i due cicli innestati eseguono
     una procedura tail-ricorsiva che ha tempo di esecuzione lineare
     nel numero di vertici del grafo.
@@ -453,15 +453,15 @@
         \end{parbox}
     \end{example}
 
-        La procedura \tt{PRINT-FW} é molto simile alle procedure usate
+        La procedura \tt{PRINT-FW} è molto simile alle procedure usate
         per ottenere i cammini minimi negli alberi indotti dalle visite
         ai grafi. Infatti, ciascuna riga \math{i} della matrice \math{\Pi}
         definisce un \strong{sottografo dei predecessori} \math{G_{i} =
         ({V_{i}}_{\pi}, {E_{i}}_{\pi})}, ovvero un albero di cammini
-        minimi avente \math{v_{i}} come radice. \math{{V_{i}}_{\pi}} é
+        minimi avente \math{v_{i}} come radice. \math{{V_{i}}_{\pi}} è
         definito come l'insieme dei vertici di \math{G} con predecessori
         diversi da NULL a cui viene aggiunto \math{i}. L'insieme degli
-        archi orientati \math{{E_{i}}_{\pi}} é l'insieme degli archi
+        archi orientati \math{{E_{i}}_{\pi}} è l'insieme degli archi
         indotto dai valori \math{\pi} per i vertici in \math{{V_{i}}_{\pi}}:
 
         \begin[width = 50%fw]{parbox}
@@ -478,7 +478,7 @@
 
         \subsection{Osservazioni}
 
-                L'algoritmo Floyd-Warshall puó essere utilizzato
+                L'algoritmo Floyd-Warshall può essere utilizzato
                 anche per calcolare la \strong{chiusura transitiva}
                 di un grafo \math{G = (V, E)}, definita come il grafo
                 \math{G* = (V, E*)} dove
@@ -494,7 +494,7 @@
                 di \math{E} e nell'eseguire normalmente l'algoritmo di
                 Floyd-Warshall. Sia \math{n = \abs{V}}: se esiste un
                 cammino dal vertice \math{i} al vertice \math{j}, si
-                avrá \math{D^{n}[i, j] < n}, altrimenti \math{D^{n}[i, j]
+                avrà \math{D^{n}[i, j] < n}, altrimenti \math{D^{n}[i, j]
                 = \infty}.
 
                 Un metodo simile che permette di raffinare ulteriormente il
@@ -552,7 +552,7 @@
                 Sebbene il tempo di esecuzione e lo spazio occupato
                 dall'algoritmo siano teoricamente rimasti invariati,
                 i calcolatori sono comunque in grado di eseguire tale
-                algoritmo piú velocemente perché le operazioni logiche
+                algoritmo più velocemente perché le operazioni logiche
                 vengono tradotte in istruzioni assembly molto efficienti.
 
 \end{sile}

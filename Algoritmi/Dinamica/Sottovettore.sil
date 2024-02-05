@@ -4,7 +4,7 @@
 
         Sia \math{V = (v_{1}, v_{2}, \unicodeellipsis, v_{n})} un vettore 
         composto da numeri interi (positivi e/o negativi). Il peso di un
-        vettore é definito come la somma dei suoi elementi; per convenzione,
+        vettore è definito come la somma dei suoi elementi; per convenzione,
         il peso del vettore nullo si assume essere zero.
 
         \begin[mode = display]{math}
@@ -28,19 +28,19 @@
         Il \strong{problema del sottovettore di peso massimo}
         (\strong{HSV}) richiede di trovare, per un vettore \math{V},
         il sottovettore \math{V*} che, fra tutti i sottovettori di
-        \math{\mi{SV}(V)}, é quello avente peso complessivo massimo.
+        \math{\mi{SV}(V)}, è quello avente peso complessivo massimo.
 
         \begin{example}
             Dato il vettore \math{V = (3, -5, 10, 2, -3, 1, 4, -8, 7, -6, 1)},
-            il sottovettore di peso massimo é \math{V* = (10, 2, -3, 1, 4)},
+            il sottovettore di peso massimo è \math{V* = (10, 2, -3, 1, 4)},
             avente peso 14.
         \end{example}
 
         Attaccare il problema HSV direttamente tramite programmazione
-        dinamica é complesso. Un miglior approccio consiste nel restringere
+        dinamica è complesso. Un miglior approccio consiste nel restringere
         i requisiti del problema per considerarne una versione semplificata.
 
-        Una versione piú semplice del problema HSV, chiamato \strong{HSV
+        Una versione più semplice del problema HSV, chiamato \strong{HSV
         vincolato}, richiede di trovare, fra tutti i sottovettori costruibili
         a partire da un vettore \math{V}, quello avente peso complessivo
         massimo e avente l'ultimo elemento coincidente con l'ultimo elemento
@@ -48,23 +48,23 @@
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
-        Dato un vettore \math{V} avente cardinalitá \math{n},
+        Dato un vettore \math{V} avente cardinalità \math{n},
         sia \math{V_{i}} il sottovettore \math{(v_{1}, v_{2},
         \unicodeellipsis, v_{i})}. La soluzione \math{S_{i}}
         per l'\math{i}-esima istanza del problema corrisponde
         a trovare la soluzione ottimale per il problema HSV
         vincolato rispetto al sottovettore \math{V_{i}}. La
-        soluzione per l'intero vettore \math{V} é la soluzione
+        soluzione per l'intero vettore \math{V} è la soluzione
         per l'istanza \math{V_{n}}. Il peso del sottovettore di
         peso massimo per la \math{i}-esima istanza del problema
         viene indicato con \math{\mi{Opt}(i)}.
 
-        Il caso base dell'equazione di ricorrenza é immediato: se il
-        vettore é il vettore nullo, allora il sottovettore di peso massimo
-        piú lungo vincolato é esso stesso il vettore nullo. D'altro canto,
-        se il vettore é composto da un solo elemento, tale elemento deve
+        Il caso base dell'equazione di ricorrenza è immediato: se il
+        vettore è il vettore nullo, allora il sottovettore di peso massimo
+        più lungo vincolato è esso stesso il vettore nullo. D'altro canto,
+        se il vettore è composto da un solo elemento, tale elemento deve
         essere parte per definizione della soluzione ottima per tale istanza
-        del problema, ed é inoltre l'unico elemento di tale soluzione.
+        del problema, ed è inoltre l'unico elemento di tale soluzione.
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
@@ -91,7 +91,7 @@
         di peso massimo che termini con l'ultimo elemento del vettore,
         deve per forza aversi \math{v_{i} \in S_{i}}.
 
-        L'unica scelta da compiere in merito a tale soluzione é se includere
+        L'unica scelta da compiere in merito a tale soluzione è se includere
         o non includere anche la \math{i - 1}-esima soluzione ottimale. Se
         tale soluzione ha un peso negativo, allora accodando \math{S_{i - 1}}
         a \math{v_{i}} si otterrebbe un vettore con peso inferiore del solo
@@ -146,15 +146,15 @@
 		    return c
 	\end{verbatim}
 
-        É facile notare come il tempo di esecuzione dell'algoritmo sia
-        \math{O(n)}, dove \math{n} é la lunghezza del vettore \math{V}.
-        Questo perché tale algoritmo é composto da un solo ciclo che
+        È facile notare come il tempo di esecuzione dell'algoritmo sia
+        \math{O(n)}, dove \math{n} è la lunghezza del vettore \math{V}.
+        Questo perché tale algoritmo è composto da un solo ciclo che
         esegue per \math{n} volte una istruzione con tempo di esecuzione
         immediato.
 
     \subsection{Programmazione dinamica: ricostruzione della soluzione}
 
-        Una volta calcolate le lunghezze degli HSV vincolate, é possibile
+        Una volta calcolate le lunghezze degli HSV vincolate, è possibile
         ricostruire ciascuna di queste a partire il vettore \math{c}. Alla
         vecchia procedura ne viene aggiunta un'altra, \tt{PRINT-HSV}. Questa
         ha in input il vettore \math{c}, il vettore \math{V} ed un indice
@@ -189,13 +189,13 @@
 	\par
 
         Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione
-        é comunque proporzionale alle dimensioni del vettore \math{c},
-		perché la ricorsione é una tail-recursion.
+        è comunque proporzionale alle dimensioni del vettore \math{c},
+		perché la ricorsione è una tail-recursion.
 
     \subsection{Osservazioni}
 
-        Il problema HSV non vincolato puó essere ridotto al problema HSV
+        Il problema HSV non vincolato può essere ridotto al problema HSV
         vincolato. Infatti, la soluzione del problema HSV non vincolato non
-        é altro che la maggior soluzione parziale del problema HSV vincolato.
+        è altro che la maggior soluzione parziale del problema HSV vincolato.
 
 \end{sile}
