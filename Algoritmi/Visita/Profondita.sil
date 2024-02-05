@@ -120,9 +120,9 @@
 			15        if v.color = W then
 			16            v.π \unichar{U+2190} u
 			17            DFS-VISIT(G, v)
-			18    u.color \unichar{U+2190} B
-			19    time \unichar{U+2190} time + 1
-			20    u.f \unichar{U+2190} time
+			18    time \unichar{U+2190} time + 1
+			19    u.f \unichar{U+2190} time
+			20    u.color \unichar{U+2190} B
 		\end{verbatim}
 	\end{parbox}
 	\par
@@ -160,7 +160,8 @@
         il numero complessivo di tutti i vertici adiacenti ad un vertice è
         al massimo pari al numero di archi del grafo, tale ciclo ha un 
         tempo di esecuzione pari a \math{O(\abs{E})}. Il tempo di esecuzione
-        complessivo dell'algoritmo è allora \math{O(\abs{V}) + O(\abs{E})}.
+        complessivo dell'algoritmo è allora \math{O(\abs{V}) + O(\abs{E})
+        = O(\abs{V} + \abs{E})}.
  
         Diversamente da ciò che accade in una visita in ampiezza, una
         visita in profondità induce una foresta di alberi, non un albero
@@ -326,7 +327,7 @@
                         è un discendente di \math{u} in uno stesso albero;
                 \end{item}
                 \begin{item}
-                        Se \math{v} è nero \math{(u.d > v.d)}, allora
+                        Se \math{v} è nero e \math{(u.d > v.d)}, allora
                         \math{(u, v)} è un arco trasversale. Questo perché
                         \math{v} è stato completamente esplorato ma \math{u}
                         è stato scoperto dopo \math{v}, quindi \math{v} e
@@ -358,20 +359,20 @@
 			12    u.color \unichar{U+2190} G
 			13    foreach v ∈ adj(u) do
 			14        if v.color = W then
-			15            (u, v) \unichar{U+2190} "arco T"
+			15            (u, v) \unichar{U+2190} "T"
 			16            v.π \unichar{U+2190} u
 			17            DFS-VISIT(G, v)
 			18        else
 			19            if v.color = G then
-			20                (u, v) \unichar{U+2190} "arco B"
+			20                (u, v) \unichar{U+2190} "B"
 			21            else
 			22                if u.d < v.d then
-			23                    (u, v) \unichar{U+2190} "arco F"
+			23                    (u, v) \unichar{U+2190} "F"
 			24                else
-			25                    (u, v) \unichar{U+2190} "arco C"
-			26    u.color \unichar{U+2190} B
-			27    time \unichar{U+2190} time + 1
-			28    u.f \unichar{U+2190} time
+			25                    (u, v) \unichar{U+2190} "C"
+			26    time \unichar{U+2190} time + 1
+			27    u.f \unichar{U+2190} time
+			28    u.color \unichar{U+2190} B
 		\end{verbatim}
 	\end{parbox}
 	\par
@@ -404,14 +405,14 @@
 			12    u.color \unichar{U+2190} G
 			13    foreach v ∈ adj(u) - \{u.π\} do
 			14        if v.color = W then
-			15            print "arco T"
+			15            (u, v) \unichar{U+2190} "T"
 			16            v.π \unichar{U+2190} u
 			17            DFS-VISIT(G, v)
 			18        else
-			19            print "arco B"
-			20    u.color \unichar{U+2190} B
-			21    time \unichar{U+2190} time + 1
-			22    u.f \unichar{U+2190} time
+			19            (u, v) \unichar{U+2190} "B"
+			20    time \unichar{U+2190} time + 1
+			21    u.f \unichar{U+2190} time
+			22    u.color \unichar{U+2190} B
 		\end{verbatim}
 	\end{parbox}
 	\par
@@ -476,10 +477,10 @@
 			17        if v.color = W then
 			18            v.π \unichar{U+2190} u
 			19            DFS-VISIT(G, v)
-			20    u.color \unichar{U+2190} B
-			21    PUSH(S, u)
-			22    time \unichar{U+2190} time + 1
-			23    u.f \unichar{U+2190} time
+			20    time \unichar{U+2190} time + 1
+			21    u.f \unichar{U+2190} time
+			22    u.color \unichar{U+2190} B
+			23    PUSH(S, u)
 		\end{verbatim}
 	\end{parbox}
 	\par
