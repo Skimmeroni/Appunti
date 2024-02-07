@@ -230,21 +230,23 @@
         è determinata da quale delle due restituisce un insieme
         \math{S_{i, c}} avente valore maggiore.
 
-        \begin[width = 50%fw]{parbox}
+        \begin[width = 55%fw]{parbox}
             \begin[mode = display]{math}
                 S_{i, c} = \{\table[columnalign = left left]{
-                    S_{i - 1, c} & \mi{se} \thickspace c > 0 \wedge w_{i} > c \\
-                    \mi{max} \{S_{i - 1, c - w_{i}} \cup \{i\},
-                    S_{i - 1, c}\} & \mi{se} \thickspace c > 0 \wedge w_{i} \leq c \\
+                    S_{i - 1, c} & \mi{se} \thickspace w_{i} > c \\
+                    S_{i - 1, c - w_{i}} \cup \{i\} & \mi{se} \thickspace w_{i} \leq c \wedge \mi{Opt}(i - 1, c - w_{i}) + v_{i} \geq \mi{Opt}(i - 1, c) \\
+                    S_{i - 1, c} & \mi{se} \thickspace w_{i} \leq c \wedge \mi{Opt}(i - 1, c - w_{i}) + v_{i} < \mi{Opt}(i - 1, c) \\
+                    %\mi{max} \{S_{i - 1, c - w_{i}} \cup \{i\},
+                    %S_{i - 1, c}\} & \mi{se} \thickspace w_{i} \leq c \\
                 }
             \end{math}
         \end{parbox}
-        \begin[width = 50%fw]{parbox}
+        \begin[width = 45%fw]{parbox}
             \begin[mode = display]{math}
                 \mi{Opt} {(i, c)} = \{\table[columnalign = left left]{
-                    \mi{Opt}(i - 1, c) & \mi{se} \thickspace c > 0 \wedge w_{i} > c \\
+                    \mi{Opt}(i - 1, c) & \mi{se} \thickspace w_{i} > c \\
                     \mi{max} \{\mi{Opt}(i - 1, c - w_{i}) + v_{i},
-                    \mi{Opt}(i - 1, c)\} & \mi{se} \thickspace c > 0 \wedge w_{i} \leq c \\
+                    \mi{Opt}(i - 1, c)\} & \mi{se} \thickspace w_{i} \leq c \\
                 }
             \end{math}
         \end{parbox}
@@ -269,10 +271,10 @@
 		    \bigskip
 		    for i \unichar{U+2190} 1 to |V| do
 		        for c \unichar{U+2190} 1 to C do
-		            d[i, c] \unichar{U+2190} d[i - 1, c]
-		            temp \unichar{U+2190} d[i - 1, c - W[i]] + V[i]
-		            if (c \unichar{U+2265} W[i]) and (temp > d[i, c]) then
-		                d[i, c] \unichar{U+2190} temp
+		            if (c \unichar{U+2265} W[i]) and (d[i - 1, c - W[i]] + V[i] \unichar{U+2264} d[i, c]) then
+		                d[i, c] \unichar{U+2190} d[i - 1, c - W[i]] + V[i]
+		            else
+		                d[i, c] \unichar{U+2190} d[i - 1, c]
 
 		    \bigskip
 		    return d
