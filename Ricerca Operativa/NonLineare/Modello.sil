@@ -69,197 +69,60 @@
     (e anche sempre concave), pertanto la regione ammissibile di un problema
     di programmazione lineare é sempre un insieme convesso.}.
 
-    Data una funzione \math{f(x)}, siano \math{x_{p}} e \math{x_{q}} due
-    punti appartenenti all'intervallo \math{[a, b] \subseteq \mi{Dom}(f(x))}
-    tali per cui \math{x_{p} < x_{q}}. Sia poi \math{\lambda} un qualsiasi
-    valore strettamente compreso fra 0 e 1. Se vale la disuguaglianza in
-    basso a sinistra, la funzione \math{f(x)} é detta \strong{convessa
-    nell'intervallo [a, b]}; se vale invece quella in basso a destra, é
-    detta \strong{concava nell'intervallo [a, b]}:
+    Vi sono diverse classi di problemi di programmazione non
+    lineare, a seconda delle caratteristiche di \math{f(\bi{x})}
+    e \math{g_{i}(\bi{x})}. Per ciascuna di queste, esistono
+    algoritmi ad hoc in grado di risolverli: questi fanno uso
+    di una strategia di tipo \strong{line-search}, ovvero
+    generano una successione di punti all'interno dello spazio
+    \math{\dsi{R}^{n}} in modo che il punto successivo é ottenuto
+    a partire dal precedente muovendosi lungo una \strong{direzione
+    di salita} o \strong{direzione di discesa}.
 
-    \begin[width = 50%fw]{parbox}
-        \begin[mode = display]{math}
-            f(\lambda x_{q} + (1 - \lambda) x_{p}) \leq
-            \lambda f(x_{q}) + (1 - \lambda) f(x_{p})
-        \end{math}
-    \end{parbox}
-    \begin[width = 50%fw]{parbox}
-        \begin[mode = display]{math}
-            f(\lambda x_{q} + (1 - \lambda) x_{p}) \geq
-            \lambda f(x_{q}) + (1 - \lambda) f(x_{p})
-        \end{math}
-    \end{parbox}
-    \par
+    Data una funzione \math{f : X \subseteq \dsi{R}^{n} \mapsto
+    \dsi{R}} ed un punto \math{\bi{x} \in \dsi{R}^{n}} in cui
+    \math{f} é differenziabile, una direzione di discesa é definita
+    come un generico vettore \math{\bi{v} \in \dsi{R}^{n}} tale per
+    cui il prodotto scalare fra quest'ultimo ed il gradiente di 
+    \math{f} nel punto \math{\bi{x}} é strettamente negativo. Allo
+    stesso modo, una direzione di salita é definita come un generico
+    vettore \math{\bi{v} \in \dsi{R}^{n}} tale per cui il prodotto
+    scalare fra quest'ultimo ed il gradiente di \math{f} nel punto
+    \math{\bi{x}} é strettamente positivo.
 
-    Le definizioni di funzione concava e funzione convessa in un intervallo
-    non sono mutualmente esclusive. Infatti, una funzione potrebbe non essere
-    né concava né convessa in un intervallo cosí come essere sia concava sia
-    convessa in un intervallo.
+    Data una funzione \math{f : X \subseteq \dsi{R}^{n} \mapsto \dsi{R}} ed
+    un punto \math{\bi{x} \in \dsi{R}^{n}} in cui \math{f} é differenziabile,
+    gli algoritmi che applicano la strategia line-search possono essere tutti
+    ridotti a questo insieme di passaggi:
 
-    Piú in generale, una funzione viene semplicemente detta \strong{funzione
-    convessa} se é convessa su tutto il suo dominio; allo stesso modo, una
-    funzione viene semplicemente detta \strong{funzione concava} se é concava
-    su tutto il suo dominio.
+    \begin{enumerate}
+        \begin{item}
+            Un indice \math{k}, che indica l'iterazione corrente,
+            viene inizializzato a 0. Il punto \math{\bi{x}^{k}}
+            indica l'approssimazione finora trovata per il massimo 
+            o il minimo di \math{f};
+        \end{item}
+        \begin{item}
+            Viene calcolata la direzione di discesa \math{\bi{d}^{k}} sulla
+            base di \math{\bi{x}^{k}};
+        \end{item}
+        \begin{item}
+            Viene determinato il punto successivo \math{\bi{x}^{k + 1}} lungo
+            la direzione \math{\bi{x}^{k}} come \math{\bi{x}^{k} \pm \alpha^{k}
+            \bi{d}^{k}}, dove \math{\alpha^{k}} é una quantitá scalare positiva
+            chiamata \strong{step-size};
+        \end{item}
+        \begin{item}
+            Se \math{\bi{x}^{k + 1}} é una approssimazione accettabile per il
+            massimo o il minimo di \math{f} l'algoritmo termina, altrimenti 
+            si riprende dal punto 2 con \math{\bi{x}^{k + 1}} come nuovo punto
+            in considerazione.
+        \end{item}
+    \end{enumerate}
 
-    \begin{theorem}
-        \strong{Criterio di concavitá e convessitá per funzioni ad
-        una variabile}. Una funzione ad una variabile due volte derivabile
-        é convessa in un intervallo se la sua derivata seconda é nulla o
-        negativa in tutti i punti di tale intervallo. Similmente, tale
-        funzione é concava in un intervallo se la sua derivata seconda é
-        nulla o positiva in tutti i punti di tale intervallo.
-    \end{theorem}
+    \bigskip
 
-    Si noti come la non esistenza della derivata seconda di una funzione
-    ad una variabile in un intervallo non implichi l'impossibilitá di
-    determinare in toto se questa sia concava o convessa in tale intervallo.
-    Infatti, sebbene il criterio sopra presentato non sia applicabile, la
-    definizione di concavitá/convessitá potrebbe essere comunque rispettata.
-
-    Sostituendo i punti \math{x_{p}} e \math{x_{q}} nelle definizioni
-    di concavitá e convessitá con i vettori \math{n}-dimensionali
-    \math{\bi{x}_{p}} e \math{\bi{x}_{q}}, si estendono tali definizioni
-    alle funzioni a piú di una variabile:
-
-    \begin[width = 50%fw]{parbox}
-        \begin[mode = display]{math}
-            f(\lambda \bi{x}_{q} + (1 - \lambda) \bi{x}_{p}) \leq
-            \lambda f(\bi{x}_{q}) + (1 - \lambda) f(\bi{x}_{p})
-        \end{math}
-    \end{parbox}
-    \begin[width = 50%fw]{parbox}
-        \begin[mode = display]{math}
-            f(\lambda \bi{x}_{q} + (1 - \lambda) \bi{x}_{p}) \leq
-            \lambda f(\bi{x}_{q}) + (1 - \lambda) f(\bi{x}_{p})
-        \end{math}
-    \end{parbox}
-    \par
-
-    \begin{theorem}
-        \strong{Criterio di concavitá e convessitá per funzioni a piú
-        variabili}. Una funzione ad \math{n} variabili per la quale
-        esistono tutte le derivate parziali seconde é convessa in un 
-        intervallo se la sua matrice Hessiana é semidefinita positiva 
-        per tutti i punti che appartengono a tale intervallo. Similmente,
-        tale funzione é concava in un intervallo se la sua matrice Hessiana
-        é semidefinita negativa per tutti i punti che appartengono
-        all'intervallo.
-    \end{theorem}
-
-    \begin{example}
-        Data la funzione \math{f(x, y) = x^{2} - 2xy + y^{2}}, se ne calcoli
-        la matrice Hessiana:
-
-        \begin[mode = display]{math}
-            H =
-            {[\table[columnalign = left left]{
-                \frac{\partial^{2} f(x, y)}{\partial x^{2}} &
-                \frac{\partial^{2} f(x, y)}{\partial x \partial y} \\
-                \frac{\partial^{2} f(x, y)}{\partial y \partial x} &
-                \frac{\partial^{2} f(x, y)}{\partial y^{2}} \\
-            }]}
-            =
-            {[\table[columnalign = left left]{
-               \frac{\partial}{\partial x} {(\frac{\partial}{\partial x} {(x^{2} - 2xy + y^{2})})} &
-               \frac{\partial}{\partial y} {(\frac{\partial}{\partial x} {(x^{2} - 2xy + y^{2})})} \\
-               \frac{\partial}{\partial x} {(\frac{\partial}{\partial y} {(x^{2} - 2xy + y^{2})})} &
-               \frac{\partial}{\partial y} {(\frac{\partial}{\partial y} {(x^{2} - 2xy + y^{2})})} \\              
-            }]}
-            =
-            {[\table[columnalign = left left]{
-               \frac{\partial}{\partial x} {(2x - 2y)} &
-               \frac{\partial}{\partial y} {(2x - 2y)} \\
-               \frac{\partial}{\partial x} {(-2x + 2y)} &
-               \frac{\partial}{\partial y} {(-2x + 2y)}  \\
-            }]}
-            =
-            {[\table[columnalign = right right]{
-                2 & -2 \\
-               -2 & 2 \\
-            }]}
-        \end{math}
-
-        Tale matrice é semidefinita positiva. Infatti:
-
-        \begin[mode = display]{math}
-            z^{T}Hz =
-            {[\table{x & y \\}]}
-            {[\table[columnalign = right right]{2 & -2 \\ -2 & 2 \\}]}
-            {[\table{x \\ y \\}]} =
-            {[\table{2x - 2y & -2x + 2y \\}]}
-            {[\table{x \\ y \\}]} =
-            {(2x - 2y)}x + {(-2x + 2y)}y =
-            2x^{2} - 4xy + 2y^{2} =
-            2{(x - y)}^{2}
-        \end{math}
-
-        Che é una quantitá non negativa per qualsiasi valore di \math{x}
-        e di \math{y}. La funzione \math{f(x, y)} é allora una funzione
-        convessa.
-    \end{example}
-
-    \begin{theorem}
-        Se \math{f(x_{1}, x_{2}, \unicodeellipsis, x_{n})} é una funzione
-        convessa, allora \math{-f(x_{1}, x_{2}, \unicodeellipsis, x_{n})}
-        é una funzione concava, e viceversa.
-
-        \bigskip
-        \strong{Dimostrazione}. Sia \math{f(x_{1}, x_{2}, \unicodeellipsis,
-        x_{n})} una funzione convessa. Allora, per qualsiasi \math{\bi{x}_{p},
-        \bi{x}_{q} \in \mi{Dom}(f)} e per qualsiasi \math{\lambda \in (0, 1)},
-        deve valere:
-
-        \begin[mode = display]{math}
-            f(\lambda x_{q} + (1 - \lambda) x_{p}) \leq
-            \lambda f(x_{q}) + (1 - \lambda) f(x_{p})
-        \end{math}
-
-        Moltiplicando ambo i membri per -1, si ha:
-
-        \begin[mode = display]{math}
-            -(f(\lambda x_{q} + (1 - \lambda) x_{p})) \geq
-            -(\lambda f(x_{q}) + (1 - \lambda) f(x_{p}))
-            \thickspace \Rightarrow \thickspace
-            -f(\lambda x_{q} + (1 - \lambda) x_{p}) \geq
-            \lambda (-f(x_{q})) + (1 - \lambda) (-f(x_{p}))
-        \end{math}
-
-        Che é la definizione di funzione concava per \math{-f(x_{1}, x_{2},
-        \unicodeellipsis, x_{n})}. La dimostrazione in senso inverso é
-        sostanzialmente analoga.
-    \end{theorem}
-
-    \begin{theorem}
-        La somma di piú funzioni convesse é una funzione convessa; la somma
-        di piú funzioni concave é una funzione concava.
-    \end{theorem}
-
-    \begin{theorem}
-        I massimi locali di una funzione convessa sono anche massimi globali;
-        I minimi locali di una funzione concava sono anche minimi globali.
-    \end{theorem}
-
-    \begin{theorem}
-        Una funzione lineare é sempre sia concava sia convessa.
-
-        \bigskip
-        \strong{Dimostrazione}. La derivata seconda di una funzione lineare
-        generica ad una variabile \math{ax + b} é sempre nulla:
-
-        \begin[mode = display]{math}
-            \frac{d^{2}f}{dx} {(ax + b)} =
-            \frac{df}{dx} {(\frac{df}{dx} {(ax + b)})} =
-            \frac{df}{dx} {(\frac{df}{dx} {(ax)} + \frac{df}{dx} {(b)})} =
-            \frac{df}{dx} {(a + 0)} = 0
-        \end{math}
-
-        Pertanto, per definizione, la sua derivata seconda é sempre sia
-        positiva o nulla (quindi é convessa) e sempre sia negativa o nulla
-        (quindi é concava). 
-    \end{theorem}
-
-    Vi sono diverse classi di problemi di programmazione non lineare, a
-    seconda delle caratteristiche di \math{f(\bi{x})} e \math{g_{i}(\bi{x})}.
-    Per ciascuna di queste, esistono algoritmi ad hoc in grado di risolverli.
+    Di fatto, la differenza fra gli algoritmi di line-search sta nel modo in
+    cui questi calcolano lo step-size.
 
 \end{sile}

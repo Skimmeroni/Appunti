@@ -927,4 +927,29 @@
 		\end{parbox}
 	\end{example}
 
+	Una matrice quadrata puó essere classificata sulla base del segno dei
+	suoi autovalori:
+
+	\begin{itemize}
+		\begin{item}
+			Se sono tutti strettamente positivi, si dice che la matrice é
+			\strong{definita positiva};
+		\end{item}
+		\begin{item}
+			Se sono tutti strettamente negativi, si dice che la matrice é
+			\strong{definita negativa};
+		\end{item}
+		\begin{item}
+			Se sono tutti positivi o nulli, si dice che la matrice é
+			\strong{semidefinita positiva};
+		\end{item}
+		\begin{item}
+			Se sono tutti negativi o nulli, si dice che la matrice é
+			\strong{semidefinita negativa};
+		\end{item}
+		\begin{item}
+			Altrimenti, si dice che la matrice é \strong{indefinita}.
+		\end{item}
+	\end{itemize}
+
 \end{sile}

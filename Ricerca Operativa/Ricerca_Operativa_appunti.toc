@@ -41,13 +41,23 @@ return {
   },
   {
     label = {
+      "Gradiente ed Hessiano",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest5",
+    number = "1.4",
+    pageno = "13"
+  },
+  {
+    label = {
       "Programmazione lineare",
       id = "stuff"
     },
     level = 1,
-    link = "dest5",
+    link = "dest6",
     number = "2",
-    pageno = "15"
+    pageno = "19"
   },
   {
     label = {
@@ -55,9 +65,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest6",
+    link = "dest7",
     number = "2.1",
-    pageno = "15"
+    pageno = "19"
   },
   {
     label = {
@@ -65,9 +75,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest7",
+    link = "dest8",
     number = "2.2",
-    pageno = "16"
+    pageno = "20"
   },
   {
     label = {
@@ -75,9 +85,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest8",
+    link = "dest9",
     number = "2.3",
-    pageno = "18"
+    pageno = "22"
   },
   {
     label = {
@@ -85,9 +95,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest9",
+    link = "dest10",
     number = "2.4",
-    pageno = "25"
+    pageno = "29"
   },
   {
     label = {
@@ -95,9 +105,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest10",
+    link = "dest11",
     number = "3",
-    pageno = "33"
+    pageno = "37"
   },
   {
     label = {
@@ -105,9 +115,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest11",
+    link = "dest12",
     number = "3.1",
-    pageno = "33"
+    pageno = "37"
   },
   {
     label = {
@@ -115,9 +125,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest12",
+    link = "dest13",
     number = "3.2",
-    pageno = "34"
+    pageno = "38"
   },
   {
     label = {
@@ -125,9 +135,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest13",
+    link = "dest14",
     number = "3.2.1",
-    pageno = "34"
+    pageno = "38"
   },
   {
     label = {
@@ -151,9 +161,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest14",
+    link = "dest15",
     number = "3.2.2",
-    pageno = "34"
+    pageno = "38"
   },
   {
     label = {
@@ -169,9 +179,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest15",
+    link = "dest16",
     number = "3.2.3",
-    pageno = "35"
+    pageno = "39"
   },
   {
     label = {
@@ -179,9 +189,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest16",
+    link = "dest17",
     number = "3.2.4",
-    pageno = "35"
+    pageno = "39"
   },
   {
     label = {
@@ -189,9 +199,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest17",
+    link = "dest18",
     number = "3.2.5",
-    pageno = "37"
+    pageno = "41"
   },
   {
     label = {
@@ -199,9 +209,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest18",
+    link = "dest19",
     number = "3.3",
-    pageno = "37"
+    pageno = "41"
   },
   {
     label = {
@@ -209,9 +219,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest19",
+    link = "dest20",
     number = "4",
-    pageno = "41"
+    pageno = "45"
   },
   {
     label = {
@@ -219,9 +229,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest20",
+    link = "dest21",
     number = "4.1",
-    pageno = "41"
+    pageno = "45"
   },
   {
     label = {
@@ -229,9 +239,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest21",
+    link = "dest22",
     number = "4.2",
-    pageno = "43"
+    pageno = "46"
   },
   {
     label = {
@@ -239,9 +249,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest22",
+    link = "dest23",
     number = "4.2.1",
-    pageno = "43"
+    pageno = "46"
   },
   {
     label = {
@@ -249,9 +259,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest23",
+    link = "dest24",
     number = "4.2.2",
-    pageno = "44"
+    pageno = "47"
   },
   {
     label = {
@@ -259,9 +269,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest24",
+    link = "dest25",
     number = "4.3",
-    pageno = "44"
+    pageno = "47"
   },
   {
     label = {
@@ -269,9 +279,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest25",
+    link = "dest26",
     number = "4.3.1",
-    pageno = "45"
+    pageno = "48"
   },
   {
     label = {
@@ -279,8 +289,8 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest26",
+    link = "dest27",
     number = "4.3.2",
-    pageno = "46"
+    pageno = "49"
   }
 }

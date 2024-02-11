@@ -61,6 +61,8 @@
 		\include[src = Prerequisiti/Matrici.sil]
 		\section{Algebra lineare}
 		\include[src = Prerequisiti/Algebra.sil]
+		\section{Gradiente ed Hessiano}
+		\include[src = Prerequisiti/Direzionale.sil]
 	\chapter{Programmazione lineare}
 		\section{Modello di programmazione matematica}
 		\include[src = Lineare/Modello.sil]
