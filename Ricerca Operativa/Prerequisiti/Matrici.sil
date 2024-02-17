@@ -952,4 +952,26 @@
 		\end{item}
 	\end{itemize}
 
+	Una matrice quadrata a coefficienti interi é detta \strong{unimodulare}
+	se il suo determinante é 1 oppure -1. Una matrice (non necessariamente
+	quadrata) é detta \strong{totalmente unimodulare} se tutti i suoi minori
+	sono una matrice unimodulari (determinante = \math{\pm 1}) o matrici
+	singolari (determinante = 0).
+
+	\begin{example}
+		La generica matrice presentata di seguito é una matrice totalmente
+		unimodulare. É inoltre facile verificare che la matrice identitá
+		di un qualsiasi ordine é sempre una matrice totalmente unimodulare.
+
+		\begin[mode = display]{math}
+			A =
+			\table{
+				-1 & -1 &  0 &  0 &  0 & +1 \\
+				+1 &  0 & -1 & -1 &  0 &  0 \\
+				 0 & +1 & +1 &  0 & -1 &  0 \\
+				 0 &  0 &  0 & +1 & +1 & -1 \\
+			}
+		\end{math}
+	\end{example}
+
 \end{sile}

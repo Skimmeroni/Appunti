@@ -234,11 +234,10 @@
         \end{item}
         \begin{item}
             \em{Bounding}. Per ogni nuovo sottoproblema si ottenga un limite
-            superiore alla soluzione del problema originale applicando il
-            metodo del simplesso al sottoproblema rilassato. Se la soluzione
-            approssimata cosí ottenuta non fornisce un valore intero per
-            la soluzione obiettivo, tale valore viene approssimato per
-            difetto;
+            superiore alla soluzione del problema originale (applicando, ad
+            esempio, il metodo del simplesso). Se la soluzione approssimata
+            cosí ottenuta non fornisce un valore intero per la soluzione
+            obiettivo, tale valore viene approssimato per difetto;
         \end{item}
         \begin{item}
             \em{Fathoming}. Per ogni nuovo sottoproblema si valuti se é

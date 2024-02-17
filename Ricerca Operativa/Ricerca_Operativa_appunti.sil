@@ -79,6 +79,8 @@
 		\include[src = Intera/Adattamento.sil]
 		\section{Metodo Branch-and-Bound per la programmazione binaria}
 		\include[src = Intera/BaB-binaria.sil]
+		\section{Metodo Branch-and-Bound per la programmazione intera}
+		\include[src = Intera/BaB-intera.sil]
 	\chapter{Programmazione nonlineare}
 		\section{Modello di programmazione nonlineare}
 		\include[src = NonLineare/Modello.sil]

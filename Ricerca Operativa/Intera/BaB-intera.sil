@@ -1,0 +1,104 @@
+\begin{sile}
+
+	L'algoritmo branch-and-bound applicato alla risoluzione di problemi
+	di programmazione binaria puó essere rielaborato per la risoluzione
+	di problemi di programmazione lineare intera pura. Per adattare
+	l'algoritmo branch-and-bound a questo tipo di problemi é sufficiente
+	operare tre modifiche.
+
+	Il primo cambiamento riguarda la scelta della variabile in esame
+	in ciascuna iterazione. Nell'algoritmo branch-and-bound per la
+	programmazione binaria ad ogni \math{i}-esima iterazione viene
+	sempre presa in esame l'\math{i}-esima variabile. Nell'algoritmo
+	branch-and-bound per la PLI viene considerata la prima variabile
+	disponibile che nella soluzione per l'iterazione corrente non
+	assume un valore intero. Puó infatti capitare che una stessa
+	variabile venga scelta piú di una volta in iterazioni successive.
+
+	Il secondo cambiamento riguarda il valore che viene assegnato
+	alla variabile in esame nell'iterazione corrente. Nell'algoritmo
+	branch-and-bound per la programmazione binaria ad ogni \math{i}-esima
+	iterazione vengono generati due sottoproblemi: uno in cui \math{x_{i}
+	= 1} ed uno in cui \math{x_{i} = 0}. Se si applicasse lo stesso
+	approccio per la programmazione intera si dovrebbero creare tanti
+	sottoproblemi quanti sono i possibili valori che tale variabile puó
+	assumere; sebbene questo sia possibile, spesso risulta in un numero
+	di sottoproblemi troppo grande per poter essere gestibile. L'approccio
+	usato dall'algoritmo branch-and-bound per la PLI prevede di generare
+	comunque due sottoproblemi, uno in cui viene aggiunto il vincolo 
+	supplementare \math{x_{i} \leq \lfloor x_{i} \rfloor} ed uno in cui
+	viene aggiunto il vincolo supplementare \math{x_{i} \geq \lceil x_{i}
+	\rceil}.
+
+	Il terzo cambiamento riguarda il passo di bounding. Se nell'algoritmo
+	branch-and-bound per la programmazione binaria il confronto con il
+	valore della soluzione incombente veniva fatto con l'approssimazione
+	(se necessario) del valore di \math{Z} per la soluzione in esame, mentre
+	nell'algoritmo branch-and-bound per la PLI il confronto viene fatto
+	direttamente con il valore di \math{Z} non approssimato.
+
+	\begin{enumerate}
+        \begin{item}
+            \math{Z*}, il valore della funzione obiettivo per la soluzione
+            incombente, viene inizializzato a \math{-\infty};
+        \end{item}
+        \begin{item}
+            Se il problema originale é un problema di ottimizzazione di
+            minimo, lo si converta in un problema di ottimizzazione di 
+            massimo equivalente;
+        \end{item}
+        \begin{item}
+            \em{Branching}. Si scelga uno fra tutti i possibili sottoproblemi
+            ancora aperti (se questa é la prima iterazione, il problema é uno
+            solo e coincide con il problema originale). Si scelga la prima 
+            variabile che non assume un valore intero nella soluzione del
+            problema corrente, sia questa \math{x_{i}}. Vengono generati due
+            sottoproblemi: uno in cui é aggiunto il vincolo \math{x_{i} \leq
+            \lfloor x_{i} \rfloor} ed uno in cui é aggiunto il vincolo
+            \math{x_{i} \leq \lceil x_{i} \rceil};
+        \end{item}
+        \begin{item}
+            \em{Bounding}. Per ogni nuovo sottoproblema si ottenga un limite
+            superiore alla soluzione del problema originale (applicando, ad
+            esempio, il metodo del simplesso);
+        \end{item}
+        \begin{item}
+            \em{Fathoming}. Per ogni nuovo sottoproblema si valuti se é
+            possibile scartarlo. Questo avviene se é rispettato uno dei
+            tre criteri:
+
+            \begin{itemize}
+                \begin{item}
+                    Il sottoproblema rilassato non possiede alcuna soluzione
+                    ottima;
+                \end{item}
+                \begin{item}
+                    La soluzione fornita dal sottoproblema rilassato
+                    restituisce un valore per la funzione obiettivo
+                    inferiore a quello della soluzione incombente;
+                \end{item}
+                \begin{item}
+                    La soluzione fornita dal sottoproblema rilassato é una
+                    soluzione intera.
+                \end{item}
+            \end{itemize}
+        \end{item}
+        \begin{item}
+            Se la soluzione approssimata fornita dal sottoproblema
+            rilassato é una soluzione intera ed il valore della
+            funzione obiettivo a questa associata é superiore al 
+            valore di \math{Z*}, tale valore sostituisce \math{Z*};
+        \end{item}
+        \begin{item}
+            Se vi sono ancora dei sottoproblemi da eliminare, l'algoritmo
+            riprende dal punto 3, altrimenti si procede oltre;
+        \end{item}
+        \begin{item}
+            L'algoritmo termina e \math{Z*} é il valore della funzione
+            obiettivo associato alla soluzione ottimale. Tale soluzione
+            puó venire eventualmente ricostruita ripercorrendo a ritroso
+            l'albero delle soluzioni.
+        \end{item}
+    \end{enumerate}
+
+\end{sile}
