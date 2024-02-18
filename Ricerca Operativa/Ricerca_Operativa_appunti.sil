@@ -88,5 +88,7 @@
 		\include[src = NonLineare/NV1.sil]
 		\section{Ottimizzazione non vincolata in piú variabili}
 		\include[src = NonLineare/NVn.sil]
+		\section{Ottimizzazione non vincolata in piú variabili}
+		\include[src = NonLineare/KKT.sil]
 
 \end{document}

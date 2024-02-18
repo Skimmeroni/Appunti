@@ -1,0 +1,401 @@
+\begin{sile}
+
+	Un problema di programmazione non lineare in cui sono presenti dei
+	vincoli non ha un metodo generale in grado di essere risolti. É peró
+	possibile impiegare diversi metodi che permettono di approssimarne 
+	le soluzioni.
+
+	\subsection{Riduzione del numero di variabili libere}
+
+		Si supponga che il problema di programmazione non lineare in esame 
+		abbia \math{n} variabili e presenti \math{l} vincoli di uguaglianza,
+		con \math{n > l}. Nel caso in cui sia possibile esplicitare \math{l}
+		variabili in funzione delle restanti \math{n - l} utilizzando tali
+		vincoli di uguaglianza é possibile semplificare il problema
+		trasformandolo in un problema di programmazione non lineare
+		in \math{n - l} variabili.
+
+		\begin{example}
+			Si consideri un problema di programmazione non lineare
+			avente per funzione obiettivo \math{\mi{min} \thickspace
+			(x_{1} - 2)^{2} + 2(x_{2} - 1)^{2}} e come unico vincolo
+			il vincolo di uguaglianza \math{x_{1} + 4x_{2} = 3}. É
+			possibile semplificare nettamente tale problema esplicitando
+			\math{x_{1}} nel vincolo di uguaglianza e sostituendolo nella
+			funzione obiettivo, ottenendo un problema di programmazione
+			non lineare nella sola variabile \math{x_{2}} avente per
+			funzione obiettivo \math{\mi{min} \thickspace 18x_{2}^{2}
+			- 12x_{2} + 3}.
+		\end{example}
+
+		Naturalmente questo approccio non é sempre applicabile, dato
+		che non tutti i problemi di programmazione non lineare presentano
+		vincoli di uguaglianza e, se ne hanno, non necessariamente questi
+		permettono di rendere esplicite delle variabili.
+
+	\subsection{metodo dei moltiplicatori di Lagrange}
+
+		Si supponga che il problema di programmazione non lineare in
+		esame abbia una certa funzione obiettivo \math{\mi{min}/\mi{max}
+		\thickspace f(x_{1}, \unicodeellipsis, x_{n})} e sia soggetto ad
+		\math{m} vincoli di uguaglianza \math{g_{i}(x_{1}, \unicodeellipsis,
+		x_{n}) = 0} con \math{i = 1, \unicodeellipsis, m}. Prende il nome di
+		\strong{funzione Lagrangiana}, o semplicemente \strong{Lagrangiana},
+		la funzione in \math{n + m} variabili:
+
+		\begin[mode = display]{math}
+			L{(x_{1}, \unicodeellipsis, x_{n}, \lambda_{1},
+			\unicodeellipsis, \lambda_{m})} = f{(x_{1},
+			\unicodeellipsis, x_{n})} + \sum_{i = 0}^{m}
+			\lambda_{i} \cdot g_{i}{(x_{1}, \unicodeellipsis,
+			x_{n})}
+		\end{math}
+
+		Dove le \math{n} variabili \math{x_{1}, \unicodeellipsis,
+		x_{n}} sono le medesime \math{n} variabili presenti nella
+		funzione obiettivo e nei vincoli mentre le \math{m} variabili
+		\math{\lambda_{1}, \unicodeellipsis, \lambda_{m}}, ciascuna
+		associata ad un vincolo, prendono il nome di \strong{moltiplicatori
+		di Lagrange}.
+
+		\begin{example}
+			La Lagrangiana associata al problema di programmazione
+			non lineare dell'esempio precedente é:
+
+			\begin[mode = display]{math}
+				L(x_{1}, x_{2}, \lambda_{1}) =
+				(x_{1} - 2)^{2} + 2(x_{2} - 1)^{2} +
+				\lambda_{1} (x_{1} + 4x_{2} - 3)
+			\end{math}
+		\end{example}
+
+		I punti stazionari della Lagrangiana sono fortemente legati
+		ai punti di massimo/minimo della funzione obiettivo del problema
+		a cui é associata.
+
+		\begin{theorem}
+			Sia \math{P} un problema di programmazione non lineare
+			avente per funzione obiettivo \math{\mi{min}/\mi{max}
+			\thickspace f(x_{1}, \unicodeellipsis, x_{n})} ed avente
+			\math{m} vincoli \math{g_{i}(x_{1}, \unicodeellipsis,
+			x_{n}) = 0} con \math{i = 1, \unicodeellipsis, m}. Sia
+			\math{L(\bi{x}, \bi{\lambda})} la Lagrangiana associata
+			a \math{P}; se \math{\bi{x}* = (x_{1}*, \unicodeellipsis,
+			x_{n}*)} é un punto stazionario per \math{f}, allora esistono
+			\math{m} moltiplicatori di Lagrange \math{\bi{\lambda}* =
+			(\lambda_{1}*, \unicodeellipsis, \lambda_{m}*)} tali per
+			cui \math{(\bi{x}*, \bi{\lambda}*)} é un punto stazionario
+			(non necessariamente dello stesso tipo) per \math{L(\bi{x},
+			\bi{\lambda})}.
+		\end{theorem}
+
+		Il teorema fornisce un possibile approccio per la risoluzione di un
+		problema di programmazione non lineare con vincoli di uguaglianza:
+		essendo la Lagrangiana una funzione sola, é possibile trasformare
+		il problema in un problema di programmazione non lineare non
+		vincolato, dove la soluzione é data dai punti che annullano il
+		vettore gradiente della Lagrangiana.
+
+		Il punto di massimo della Lagrangiana é, come di consueto, il punto
+		che annulla la derivata prima parziale rispetto a tutte le sue 
+		componenti, sia quelle relative alle variabili \math{x} che quelle
+		relative ai moltiplicatori \math{\lambda}:
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{\partial L(\bi{x}*, \bi{\lambda}*)}{\partial \lambda_{i}} = 0
+				\thickspace j = 1, \unicodeellipsis, m
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{\partial L(\bi{x}*, \bi{\lambda}*)}{\partial x_{i}} = 0				
+				\thickspace i = 1, \unicodeellipsis, n
+			\end{math}
+		\end{parbox}
+		\par
+
+		Si osservi come le condizioni a sinistra non siano altro che i
+		vincoli stessi. Infatti:
+
+		\begin[mode = display]{math}
+			\table[columnalign = left left]{
+				\frac{\partial L(\bi{x}*, \bi{\lambda}*)}{\partial \lambda_{i}} = 0 
+				& \Rightarrow
+				\frac{\partial}{\partial \lambda_{i}}
+				{(f{(x_{1}, \unicodeellipsis, x_{n})} +
+				\sum_{i = 0}^{m} \lambda_{i} \cdot
+				g_{i}{(x_{1}, \unicodeellipsis, x_{n})})}
+				= 0
+				\Rightarrow
+				\frac{\partial}{\partial \lambda_{i}}
+				{(f{(x_{1}, \unicodeellipsis, x_{n})})} +
+				\frac{\partial}{\partial \lambda_{i}}			
+				{(\sum_{i = 0}^{m} \lambda_{i} \cdot
+				g_{i}{(x_{1}, \unicodeellipsis, x_{n})})}
+				= 0
+				\Rightarrow
+				\\
+				& \Rightarrow
+				0 + \frac{\partial}{\partial \lambda_{i}}
+				{(\lambda_{1} g_{1}{(x_{1}, \unicodeellipsis, x_{n})})} +
+				\unicodeellipsis +
+				\frac{\partial}{\partial \lambda_{i}}
+				{(\lambda_{i} g_{i}{(x_{1}, \unicodeellipsis, x_{n})})} +
+				\unicodeellipsis +
+				\frac{\partial}{\partial \lambda_{i}}
+				{(\lambda_{n} g_{n}{(x_{1}, \unicodeellipsis, x_{n})})}
+				= 0
+				\Rightarrow
+				\\
+				& \Rightarrow
+				0 + 0 + \unicodeellipsis + \frac{\partial}{\partial \lambda_{i}}
+				{(\lambda_{i} g_{i}{(x_{1}, \unicodeellipsis, x_{n})})} + \unicodeellipsis + 0
+				= 0
+				\Rightarrow
+				g_{i}{(x_{1}, \unicodeellipsis, x_{n})} = 0
+				\\
+			}
+		\end{math}
+
+		D'altro canto, le condizioni a destra possono essere riscritte come:
+
+		\begin[mode = display]{math}
+			\frac{\partial L(\bi{x}*, \bi{\lambda}*)}{\partial \lambda_{i}}
+			= \frac{\partial f(\bi{x}*)}{\partial x_{i}} + \sum_{i = 1}^{m}
+			\lambda_{i}* \cdot \frac{\partial g_{i}(\bi{x}*)}{\partial x_{i}}
+			 = 0
+		\end{math}
+
+		Da cui si ricava una relazione fra il gradiente di \math{f} valutato
+		in \math{\bi{x}*} ed il gradiente dei vincoli:
+
+		\begin[mode = display]{math}
+			\nabla L{(\bi{x}*, \bi{\lambda}*)} = \nabla f{(\bi{x}*)} +
+			\sum_{i = 1}^{m} \lambda_{i}* \cdot \nabla g_{i} {(\bi{x}*)} = 0
+			\thickspace \Rightarrow \thickspace \nabla f{(\bi{x}*)} =
+			-\sum_{i = 1}^{m} \lambda_{i}* \cdot \nabla g_{i} {(\bi{x}*)}
+		\end{math}
+
+		Questo significa che il gradiente della funzione \math{f}
+		valutato nel punto di massimo \math{\bi{x}*} puó essere
+		riscritto come combinazione lineare dei gradienti dei
+		vincoli valutati in \math{\bi{x}*}.
+
+		Oltre ad una condizione necessaria per garantire che un punto
+		di massimo di una Lagrangiana sia punto di massimo anche della
+		funzione a cui si riferisce, occorre disporre anche di una
+		condizione sufficiente. A tal proposito, sia \math{J} una matrice,
+		detta \strong{matrice Jacobiana}, costruita disponendo in ciascuna
+		cella \math{i, j} la derivata parziale dell'\math{i}-esimo vincolo
+		rispetto alla \math{j}-esima componente:
+
+		\begin[mode = display]{math}
+			J =
+			\table[columnalign = center center center]{
+				\frac{\partial g_{1}}{\partial x_{1}} &
+				\unicodecdots &
+				\frac{\partial g_{1}}{\partial x_{n}} \\
+				\vdots & \ddots &
+				\vdots \\
+				\frac{\partial g_{m}}{\partial x_{1}} &
+				\unicodecdots &
+				\frac{\partial g_{m}}{\partial x_{n}} \\
+			}
+		\end{math}
+
+		Si indichi con \math{J(\bi{x})} la matrice Jacobiana valutata nel
+		punto \math{x}. Si consideri l'insieme dei vettori \math{\bi{y}
+		\in \dsi{R}^{n}} tali per cui il prodotto scalare fra questi e
+		la Jacobiana valutata in \math{\bi{x}*} sia nullo:
+
+		\begin[mode = display]{math}
+			J{(\bi{x}*)} \cdot \bi{y} = 0
+			\thickspace \Rightarrow \thickspace
+			\{\table[columnalign = left]{
+				\nabla g_{1}(\bi{x}*) y_{1} = 0 \\
+				\unicodeellipsis \\
+				\nabla g_{m}(\bi{x}*) y_{m} = 0 \\				
+			}
+		\end{math}
+
+		Tale sottospazio rappresenta l'insieme dei vettori perpendicolari
+		ai gradienti dei vari vincoli. Sia allora \math{H_{L}'(\bi{x}*, 
+		\bi{\lambda}*)} la matrice Hessiana della Lagrangiana ristretta
+		alle sole variabili iniziali \math{x_{1}, \unicodeellipsis, x_{n}}:
+
+		\begin[mode = display]{math}
+			H_{L}'{(\bi{x}*, \bi{\lambda}*)} =
+			\table[columnalign = center center center]{
+				\frac{\partial^{2} L}{\partial x^{2}_{1}} &
+				\unicodecdots &
+				\frac{\partial^{2} L}{\partial x_{1}x_{n}} \\
+				\vdots & \ddots &
+				\vdots \\
+				\frac{\partial^{2} L}{\partial x_{1}x_{n}} &
+				\unicodecdots &
+				\frac{\partial^{2} L}{\partial x^{2}_{n}} \\
+			}
+		\end{math}
+
+		La condizione sufficiente affinché \math{\bi{x}*} sia un punto di
+		minimo é che il prodotto matriciale fra il vettore \math{\bi{y}}
+		trasposto, la matrice \math{H_{L}'(\bi{x}*, \bi{\lambda}*)} ed il
+		vettore \math{\bi{y}} originale sia strettamente positivo, mentre
+		la condizione sufficiente affinché \math{\bi{x}*} sia un punto di
+		massimo é che tale prodotto sia strettamente negativo.
+
+		\begin{example}
+			Si consideri un problema di programmazione non lineare
+			avente per funzione obiettivo \math{\mi{min} x_{1} +
+			x_{2}} e come unico vincolo il vincolo di uguaglianza
+			\math{x_{1}^{2} + x_{2}^{2} = 1}. Se ne calcoli la 
+			Lagrangiana ed i relativi punti stazionari:
+
+			\begin[width = 30%fw]{parbox}
+				\begin[mode = display]{math}
+					L(x_{1}, x_{2}, \lambda_{1}) =
+					x_{1} + x_{2} + \lambda_{1} (x_{1}^{2} + x_{2}^{2} - 1)
+				\end{math}
+			\end{parbox}
+			\begin[width = 70%fw]{parbox}
+				\begin[mode = display]{math}
+					\nabla L =
+					\table[columnalign = left]{
+						\frac{\partial L}{\partial x_{1}} = 1 + 2 \lambda_{1} x_{1} = 0 \\
+						\frac{\partial L}{\partial x_{2}} = 1 + 2 \lambda_{1} x_{2} = 0 \\
+						\frac{\partial L}{\partial \lambda_{1}} = (x_{1}^{2} + x_{2}^{2} - 1) = 0 \\
+					}
+					\thickspace \Rightarrow \thickspace
+					\table[columnalign = left]{
+						x_{1} = -\frac{1}{2 \lambda_{1}} \\
+						x_{2} = -\frac{1}{2 \lambda_{1}} \\
+						{(-\frac{1}{2 \lambda_{1}})}^{2} + {(-\frac{1}{2 \lambda_{1}})}^{2} - 1 = 0 \\
+					}
+					\thickspace \Rightarrow \thickspace
+					\table[columnalign = left]{
+						x_{1} = \pm \frac{1}{\sqrt 2} \\
+						x_{2} = \pm \frac{1}{\sqrt 2} \\
+						\lambda_{1} = \mp \frac{\sqrt 2}{2} \\
+					}
+				\end{math}
+			\end{parbox}
+			\par
+
+			Da cui si ottengono i punti stazionari \math{A =
+			(\frac{1}{\sqrt 2}, \frac{1}{\sqrt 2}, -\frac{\sqrt 2}{2})}
+			e \math{B = (-\frac{1}{\sqrt 2}, -\frac{1}{\sqrt 2},
+			\frac{\sqrt 2}{2})}. Il vettore \math{\bi{y}} é dato da:
+
+			\begin[mode = display]{math}
+				J{(\bi{x}*)} \cdot \bi{y} = 0
+				\thickspace \Rightarrow \thickspace
+				(\frac{\partial g_{1}}{\partial x_{1}},
+				\frac{\partial g_{2}}{\partial x_{2}}) \cdot \bi{y} = 0
+				\thickspace \Rightarrow \thickspace
+				{[2x_{1}*, 2x_{2}*]} \cdot [\table{y_{1} \\ y_{2} \\}] = 0
+				\thickspace \Rightarrow \thickspace
+				\bi{y} = [\table{\pm 1 \\ \mp 1}]
+			\end{math}
+		\end{example}
+
+	\subsection{Condizioni di Karush-Kuhn-Tucker}
+
+		Si supponga che il problema di programmazione non lineare in
+		esame abbia una certa funzione obiettivo \math{\mi{min}/\mi{max}
+		\thickspace f(x_{1}, \unicodeellipsis, x_{n})} e sia soggetto ad
+		\math{m + p} vincoli funzionali, dove \math{m} di questi sono 
+		vincoli di uguaglianza \math{g_{i}(x_{1}, \unicodeellipsis,
+		x_{n}) = 0} con \math{i = 1, \unicodeellipsis, m} e \math{p} 
+		vincoli di disuguaglianza \math{h_{j}(x_{1}, \unicodeellipsis,
+		x_{n}) \leq 0} con \math{j = 1, \unicodeellipsis, p}.
+
+		É comunque possibile costruire una Lagrangiana associata ad un
+		problema di programmazione non lineare di questo tipo introducendo,
+		oltre alle \math{m} variabili \math{\lambda_{i}} associate ai vincoli
+		di uguaglianza, \math{p} variabili \math{\mu_{1}, \unicodeellipsis,
+		\mu_{p}} associate ai vincoli di disuguaglianza:
+
+		\begin[mode = display]{math}
+			L{(x_{1}, \unicodeellipsis, x_{n}, \lambda_{1}, \unicodeellipsis,
+			\lambda_{m}, \mu_{1}, \unicodeellipsis, \mu_{p})} = f{(x_{1},
+			\unicodeellipsis, x_{n})} + \sum_{i = 1}^{m} \lambda_{i} \cdot
+			g_{i} {(x_{1}, \unicodeellipsis, x_{n})} + \sum_{j = 1}^{p} \mu_{j}
+			\cdot g_{j} {(x_{1}, \unicodeellipsis, x_{n})}
+		\end{math}
+
+		Sia \math{\bi{x}*} un generico punto di minimo o di massimo
+		per \math{f}. Affinché tale punto possa essere una soluzione
+		ottimale per il problema di programmazione non lineare vincolata,
+		i vincoli in questo valutati devono essere rispettati. In tal senso,
+		deve valere \math{g_{i}(\bi{x}*) = 0} per qualsiasi \math{i = 1,
+		\unicodeellipsis, m}. Inoltre, per alcuni \math{j = 1,
+		\unicodeellipsis, p} varrá \math{h_{j}(\bi{x}*) = 0},
+		mentre per gli altri \math{j} varrá \math{h_{j}(\bi{x}*) < 0}.
+
+		Se rispetto al \math{j}-esimo vincolo é valida la prima situazione,
+		ovvero \math{h_{j}(\bi{x}*) = 0}, allora il vincolo é un vincolo 
+		attivo, mentre se si verifica \math{h_{j}(\bi{x}*) < 0} allora tale
+		vincolo é un vincolo inattivo. Se un vincolo é inattivo, questo 
+		significa che un piccolo cambiamento nel valore di \math{\bi{x}*}
+		non lo invalida. Sia \math{I(\bi{x}*)} l'insieme dei vincoli
+		\math{h_{j}} che sono attivi per \math{\bi{x}*}.
+
+		\begin{theorem}
+			\strong{Condizioni di Karush-Kuhn-Tucker}. Sia dato un
+			problema di programmazione lineare avente una funzione
+			obiettivo \math{f(\bi{x})}, \math{m} vincoli di uguaglianza
+			\math{g_{i}(x_{1}, \unicodeellipsis, x_{n}) = 0} e \math{p}
+			vincoli di disuguaglianza \math{h_{j}(x_{1}, \unicodeellipsis,
+			x_{n}) \leq 0}.
+
+			Sia \math{\bi{x}* = (x_{1}*, \unicodeellipsis, x_{n}*)} un punto
+			di massimo o di minimo per \math{f}. Allora esistono \math{m}
+			moltiplicatori \math{\lambda_{1}*, \unicodeellipsis, \lambda_{m}*}
+			e \math{p} moltiplicatori \math{\mu_{1}*, \unicodeellipsis,
+			\mu_{p}*} tali per cui valga la \strong{condizione di
+			stazionarietá} riportata di seguito; quella a sinistra é relativa
+			ai problemi di minimo mentre quella destra ai problemi di massimo:
+
+			\begin[width = 50%fw]{parbox}
+				\begin[mode = display]{math}
+					\nabla f{(\bi{x}*, \bi{\lambda}*, \bi{\mu}*)} +
+					\sum_{i = 1}^{m} \lambda_{i}* \nabla g_{i} {(\bi{x}*)} +
+					\sum_{j = 1}^{p} \mu_{j}* \nabla h_{j} {(\bi{x}*)} = 0
+				\end{math}
+			\end{parbox}
+			\begin[width = 50%fw]{parbox}
+				\begin[mode = display]{math}
+					\nabla f{(\bi{x}*, \bi{\lambda}*, \bi{\mu}*)} -
+					\sum_{i = 1}^{m} \lambda_{i}* \nabla g_{i} {(\bi{x}*)} -
+					\sum_{j = 1}^{p} \mu_{j}* \nabla h_{j} {(\bi{x}*)} = 0
+				\end{math}
+			\end{parbox}
+			\par
+
+			Oltre a queste devono valere altre tre condizioni,
+			rispettivamente indicate come \strong{ammissibilitá
+			primale}, \strong{ammissibilitá duale} e
+			\strong{condizioni di complementarietá}:
+
+			\begin[width = 33%fw]{parbox}
+				\begin[mode = display]{math}
+					\table[columnalign = left left]{
+						g_{i}{(\bi{x}*)} = 0 & \forall i = 1, \unicodeellipsis, m \\
+						h_{j}{(\bi{x}*)} \leq 0 & \forall j = 1, \unicodeellipsis, p \\
+					}
+				\end{math}
+			\end{parbox}
+			\begin[width = 33%fw]{parbox}
+				\begin[mode = display]{math}
+					\mu_{j}* \geq 0 \thickspace \forall j = 1, \unicodeellipsis, p
+				\end{math}
+			\end{parbox}
+			\begin[width = 33%fw]{parbox}
+				\begin[mode = display]{math}
+					\mu_{j}* \cdot h_{j}(\bi{x}*) = 0 \thickspace \forall j = 1, \unicodeellipsis, p
+				\end{math}
+			\end{parbox}
+		\end{theorem}
+
+\end{sile}

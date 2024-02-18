@@ -302,5 +302,45 @@ return {
     link = "dest28",
     number = "4.3.2",
     pageno = "51"
+  },
+  {
+    label = {
+      "Ottimizzazione non vincolata in piú variabili",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest29",
+    number = "4.4",
+    pageno = "52"
+  },
+  {
+    label = {
+      "Riduzione del numero di variabili libere",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest30",
+    number = "4.4.1",
+    pageno = "52"
+  },
+  {
+    label = {
+      "metodo dei moltiplicatori di Lagrange",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest31",
+    number = "4.4.2",
+    pageno = "52"
+  },
+  {
+    label = {
+      "Condizioni di Karush-Kuhn-Tucker",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest32",
+    number = "4.4.3",
+    pageno = "54"
   }
 }
