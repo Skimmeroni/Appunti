@@ -74,6 +74,8 @@
     al descrivere la relazione fra i due, prende il nome di \strong{tabella
     primale-duale}.
 
+    \pagebreak
+
     \begin{center}
         \begin[cols = 7.5%fw 7.5%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 7.5%fw, cellborder = 0]{ptable}
             \begin{row}
@@ -94,7 +96,7 @@
                         \cell[border = 1pt 1pt 0 1pt]{\math{x_{n}}} 
                     \end{row}
                 \end{celltable}
-                \cell[border = 0 0 0 1pt]{\strong{termine noto}}
+                \cell[border = 0 0 0 1pt]{\strong{termine} \par \strong{noto}}
                 \cell{}
             \end{row}
             \begin{row}
@@ -757,8 +759,8 @@
         \end{item}
     \end{enumerate}
 
-    \begin[width = 55%fw]{parbox}
-        \begin[cols = 20%fw 40%fw 40%fw, cellborder = 0 0 1pt 1pt]{ptable}
+    \begin[width = 65%fw]{parbox}
+        \begin[cols = 15%fw 30%fw 30%fw, cellborder = 0 0 1pt 1pt]{ptable}
             \begin{row}
                 \cell[border = 1pt 1pt 1pt 1pt]{\strong{Etichetta}}
                 \cell[border = 1pt 1pt 1pt 1pt]{\strong{Problema primale} \par \strong{(o duale)}}
@@ -811,7 +813,7 @@
             \end{row}
         \end{ptable}
     \end{parbox}
-    \begin[padding = 10%fw, width = 35%fw]{parbox}
+    \begin[width = 35%fw]{parbox}
         \begin[cols = 50%fw 50%fw, cellborder = 1pt 1pt 1pt 1pt]{ptable}
             \begin{row}
                 \cell{\strong{problema 1#}}
@@ -827,6 +829,16 @@
             \end{row}
         \end{ptable}
     \end{parbox}
+
+    \begin{theorem}
+        Sia \math{P} un problema di programmazione lineare in forma
+        non standard, e sia \math{D} il rispettivo problema duale.
+        Si ha allora che \math{D'}, il problema \math{D} riscritto
+        in forma standard, é il duale di \math{P'}, il problema
+        \math{P} riscritto in forma standard.
+    \end{theorem}
+
+    \pagebreak
 
     \begin{example}
         \begin[width = 60%fw]{parbox}

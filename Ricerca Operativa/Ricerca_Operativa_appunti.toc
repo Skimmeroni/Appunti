@@ -305,7 +305,7 @@ return {
   },
   {
     label = {
-      "Ottimizzazione non vincolata in piú variabili",
+      "Ottimizzazione con vincoli",
       id = "stuff"
     },
     level = 2,
