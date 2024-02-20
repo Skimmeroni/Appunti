@@ -472,8 +472,8 @@
     \end{theorem}
 
     \begin{theorem}
-        I massimi locali di una funzione convessa sono anche massimi globali;
-        I minimi locali di una funzione concava sono anche minimi globali.
+        I minimi locali di una funzione convessa sono anche minimi globali;
+        I massimi locali di una funzione concava sono anche massimi globali.
     \end{theorem}
 
     \begin{theorem}
