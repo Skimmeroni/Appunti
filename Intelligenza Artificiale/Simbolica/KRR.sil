@@ -1,0 +1,87 @@
+\begin{sile}
+
+	Gli esseri umani sono in grado di compiere azioni anche sulla
+	base del fatto che possiedono delle \strong{conoscenze} utilizzate
+	per operare dei \strong{ragionamenti} su una \strong{rappresentazione}
+	interna della conoscenza. Nel campo della AI questo si traduce nella
+	costruzione di \strong{agenti basati sulla conoscenza}.
+
+	Il componente principale di un agente basato sulla conoscenza
+	é la \strong{base di conoscenza}, o KB. Una KB é composta da
+	un insieme di \strong{fatti}, che rappresentano delle asserzioni
+	sul mondo. Un agente basato sulla conoscenza deve essere in grado
+	di fare \strong{inferenze}, ovvero essere in grado di aggiungere
+	dei nuovi fatti alla KB sulla base di quelli presenti applicando
+	delle \strong{regole}. Affinché questo sia possibile, é necessario
+	che alcuni fatti siano presenti nella KB fin da subito. Questi
+	vengono detti \strong{assiomi}; l'unione di tutti gli assiomi
+	prende il nome di \strong{conoscenza pregressa} (\strong{background
+	knowledge}).
+
+	Sia i fatti (le asserzioni sul mondo) che le regole (le trasformazioni
+	che aggiungono nuovi fatti alla KB sulla base di quelli presenti) vengono
+	espressi in genere espressi in linguaggi specifici. Tali linguaggi sono
+	detti \strong{linguaggi di Knowledge Representation and Reasoning}, o
+	\strong{linguaggi KRR} (\strong{linguaggi di rappresentazione della
+	conoscenza}). Un linguaggio KRR deve necessariamente basarsi su una
+	qualche formalizzazione della logica, e ci si chiede allora quale
+	formalizzazione della logica potrebbe ben adattarsi ad essere quella
+	utilizzata dagli agenti basati sulla conoscenza.
+
+	La logica proposizionale (logica di ordine zero) puó venire scartata
+	subito: nonostante abbia il pregio di essere decidibile, é troppo
+	semplicistica, dato che non supporta i quantificatori universali "per
+	ogni" e "esiste". Un miglior candidato potrebbe allora essere la logica
+	proposizionale (logica del primo ordine), ma anche questa presenta dei
+	problemi:
+
+	\begin{itemize}
+		\begin{item}
+			\em{Decidibilitá}. Come mostrato dai Teoremi di Incompletezza
+			di Godel, la logica proposizionale é \strong{indecidibile},
+			ovvero non tutte le formule possono essere provate vere o false
+			all'interno della logica stessa \footnote{Piú correttamente, si
+			dice che la logica proposizionale é \strong{semidecidibile}, in
+			quanto é sempre possibile dimostrare se una proposizione é vera
+			sulla base delle premesse ma non é sempre possibile dimostrare
+			se sia falsa.}. Questo significa che un sistema di deduzione
+			automatico, essendo limitato dall'Halting Problem, potrebbe
+			rimanere eternamente bloccato nel computare se una data
+			proposizione segua dalle premesse senza essere in grado di
+			fornire una risposta;
+		\end{item}
+		\begin{item}
+			\em{Complessitá}. La logica proposizionale é estremamente
+			espressiva, pertanto alcune inferenze possono richiedere
+			molto tempo computazionale (per quanto finito) per essere
+			completate;
+		\end{item}
+		\begin{item}
+			\em{Approssimazione}. Per lo stesso motivo, non tutte le
+			proprietá della logica proposizionale sono strettamente 
+			necessarie nel campo della IA. Cercare di implementarle
+			tutte risulterebbe in uno spreco di risorse e nella
+			costruzione di un sistema di deduzione inefficiente.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	La scelta di un formalismo logico adatto al campo delle IA sembrerebbe
+	allora ricadere in una logica che si trovi "nel mezzo" fra la logica
+	proposizionale e la logica predicativa.
+
+	%%% ???
+
+	%Esistono due approcci principali alla costruzione di agenti
+	%basati sulla conoscenza. Il primo approccio é l'approccio
+	%\strong{procedurale}, in cui gli agenti vengono istruiti
+	%"manualmente" dal designer e nuovi fatti vengono aggiunti 
+	%sulla base delle conoscenze del designer stesso. Il secondo
+	%approccio, detto \strong{dichiarativo}, i fatti e le regole
+	%sono definiti separatamente, e nuovi fatti vengono ottenuti
+	%operando inferenze sulla base di conoscenza.
+
+	%%% ???
+
+\end{sile}

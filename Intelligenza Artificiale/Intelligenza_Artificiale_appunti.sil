@@ -63,5 +63,8 @@
 	\chapter{Introduzione}
 		\section{Agente intelligente}
 		\include[src = Introduzione/Agente.sil]
+	\chapter{Intelligenza artificiale simbolica}
+		\section{Knowledge representation and reasoning}
+		\include[src = Simbolica/KKR.sil]
 
 \end{document}
