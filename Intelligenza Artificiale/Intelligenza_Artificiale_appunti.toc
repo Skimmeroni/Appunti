@@ -1,0 +1,72 @@
+return {
+  {
+    label = {
+      "Introduzione",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest1",
+    number = "1",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Agente intelligente",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest2",
+    number = "1.1",
+    pageno = "3"
+  },
+  {
+    label = {
+      "Agenti con riflessi semplici",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest3",
+    number = "1.1.1",
+    pageno = "4"
+  },
+  {
+    label = {
+      "Agenti con riflessi, ma basati su un modello",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest4",
+    number = "1.1.2",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Agenti basati su un modello, ma basati su obiettivi",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest5",
+    number = "1.1.3",
+    pageno = "5"
+  },
+  {
+    label = {
+      "Agenti basati su un modello e guidati da utilitá",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest6",
+    number = "1.1.4",
+    pageno = "6"
+  },
+  {
+    label = {
+      "Agenti che apprendono",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest7",
+    number = "1.1.5",
+    pageno = "7"
+  }
+}

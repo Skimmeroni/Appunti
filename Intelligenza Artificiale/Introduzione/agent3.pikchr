@@ -1,0 +1,45 @@
+X: line fill LightCyan thick from (-3.5, -2) to (1, -2) to (1, 2.5) to (-3.5, 2.5) to (-3.5, -2) close
+Y: line fill LightCyan thick from (1.5, -2) to (2.5, -2) to (2.5, 2.5) to (1.5, 2.5) to (1.5, -2) close
+
+A: box wid 0.75 fill white at (-2.5, -1)
+"Obiettivi" at A
+
+B: box color LightCyan ht 0.25 at (0, 2.25)
+"Sensori" at B
+
+C: box wid 1.25 fill white at (0, 1.25)
+"Qual'é lo stato" "attuale dell'ambiente" at C
+
+D: box wid 1.25 fill white at (0, -1)
+"Quale azione" "dovrei compiere" at D
+
+E: box color LightCyan ht 0.25 at (0, -1.75)
+"Attuatori" at E
+
+F: box wid 1.75 fill white at (-2.5, 0.25)
+"Come l'ambiente evolve" at F
+
+G: box wid 1.75 fill white at (-2.5, 1.25)
+"Che effetto hanno le mie azioni" at G
+
+H: ellipse wid 0.75 fill white at (-1.25, 2)
+"Stato" "interno" at H
+
+I: box wid 1.25 fill white at (0, 0.125)
+"Che cosa succederá" "se compio l'azione A" at I
+
+arrow from A.e to D.w
+arrow from B.s to C.n
+arrow from C.s to I.n
+arrow from I.s to D.n
+arrow from D.s to E.n
+arrow from E.e to (2, E.y)
+arrow from (2, B.y) to B.e
+arrow from (F.e.x, F.e.y + 0.125) to (C.w.x, C.w.y - 0.125)
+arrow from (G.e.x, G.e.y + 0.125) to (C.w.x, C.w.y + 0.125)
+arrow from (F.e.x, F.e.y - 0.125) to (I.w.x, I.w.y - 0.125)
+arrow from (G.e.x, G.e.y - 0.125) to (I.w.x, I.w.y + 0.125)
+spline <-> from H.e to ((C.n.x + C.nw.x) / 2, H.e.y) to ((C.n.x + C.nw.x) / 2, C.n.y)
+
+"AMBIENTE" italic at Y
+"AGENTE" italic at (-2.75, -1.75)

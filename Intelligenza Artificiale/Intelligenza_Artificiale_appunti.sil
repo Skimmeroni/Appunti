@@ -1,0 +1,67 @@
+\begin[class = book, papersize = a3]{document}
+
+	\script[src = packages/pdf]
+	\script[src = packages/framebox]
+	\script[src = packages/parbox]
+	\script[src = packages/ptable]
+	\script[src = packages/lists]
+	\script[src = packages/image]
+	\script[src = packages/verbatim]
+	\script[src = packages/math]
+	\script[src = packages/textsubsuper]
+	\script[src = packages/rules]
+	\script[src = packages/rotate]
+
+	\define[command = tt]{
+		\font[family = Hack,
+			size = 9pt,
+			style = roman]{\process}
+	}
+
+	\define[command = example]{
+		\smallskip
+		\begin[borderwidth = 0.5mm, 
+			 padding = 5mm, 
+			 shadow = true, 
+			 bordercolor = #00ffff, 
+			 fillcolor = #ffffff,
+			 shadowcolor = 220]{roundbox}
+            	\begin[width = 51%pmax]{parbox}
+            		\process
+            	\end{parbox}
+		\end{roundbox}
+		\bigskip
+	}
+
+	\define[command = theorem]{ 
+		\smallskip 
+		\begin[borderwidth = 0.5mm,  
+			padding = 5mm,  
+			shadow = true,  
+			bordercolor = #00ff00, 
+			fillcolor = #ffffff, 
+			shadowcolor = 220]{roundbox} 
+			\begin[width = 51%pmax]{parbox} 
+				\process 
+			\end{parbox} 
+		\end{roundbox} 
+		\bigskip 
+	}
+
+	\neverindent
+	\language[main = it]
+	\tableofcontents[depth = 2]
+	\font[size = 11pt]
+	\set[parameter = math.font.size, value = 11]
+	\pdf:metadata[key = Title, value = Appunti di Intelligenza Artificiale]
+	\pdf:metadata[key = Author, value = Shania]
+
+	% \center{\img[src = Intelligenza_artificiale_copertina.jpg, width = 75%pw]}
+
+	\pagebreak
+
+	\chapter{Introduzione}
+		\section{Agente intelligente}
+		\include[src = Introduzione/Agente.sil]
+
+\end{document}

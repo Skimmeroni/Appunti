@@ -1,0 +1,418 @@
+\begin{sile}
+
+	Si definisce \strong{agente intelligente}, o semplicemente
+	\strong{agente}, qualsiasi entitá in grado di percepire
+	l'ambiente in cui si trova mediante sensori e modificando
+	tale ambiente compiendo delle azioni, mappando percezioni
+	ad azioni. Con \strong{ambiente} si intende la parte di
+	universo a disposizione delle percezioni dell'agente e
+	da questa influenzabile. L'intelligenza artificiale é
+	definibile come lo studio degli agenti.
+
+	\begin{example}
+		Un essere umano puó essere modellato come un agente, potendo
+		percepire l'ambiente tramite occhi, orecchie e altri organi
+		e agendo su di esso per mezzo dei suoi arti. Allo stesso modo,
+		un robot puó essere modellato come un agente, percependo
+		l'ambiente attraverso telecamere o sensori infrarossi e agendo
+		su di esso mediante appendici e/o motori elettrici. Infine, 
+		anche un programma per computer puó essere modellato come un 
+		agente, se si considera l'input umano (tramite tastiera, mouse,
+		touchscreen o voce) come percezione ed il suo output (scrivere
+		su un file, mostrare un contenuto a schermo, generare un suono,
+		eccetera) come azione compiuta sull'ambiente.
+	\end{example}
+
+	La sequenza di percezioni di un agente é la storia completa
+	di tutto ció che l'agente ha percepito. In generale, la scelta
+	dell'azione compiuta da un agente in un certo istante dipende
+	dalla sua conoscenza a priori e/o dall'intera sequenza di
+	percezioni precedente. Formalmente, il comportamento di un
+	agente é descritto da una funzione agente che mappa sequenze
+	di percezioni in azioni: \math{f: \mi{Pow}(P) \rightarrow A}.
+	Tale funzione é un concetto astratto, una caratterizzazione
+	\em{esterna} di un agente: \em{internamente}, la funzione
+	agente di un agente intelligente é implementata da un
+	\strong{programma agente}; tale funzione viene eseguita da
+	un dispositivo elettronico dotato di sensori di sorta, chiamato
+	\strong{architettura}.
+
+	Un \strong{agente razionale} é un agente che "fa la scelta giusta".
+	La nozione di "scelta giusta" comunemente adottata nel campo
+	dell'intelligenza artificiale é il \strong{consequenzialismo}: il
+	comportamento dell'agente é valutato sulla base delle conseguenze
+	delle sue azioni. Se un agente, in relazione ad un certa percezione,
+	compie una azione desiderabile dal punto di vista dell'utilizzatore,
+	allora tale agente ha compiuto la "scelta giusta", ed é definibile
+	agente razionale. La nozione di desiderabilitá viene descritta da
+	una \strong{misura di prestazione} che valuta ogni sequenza di stati
+	in cui l'ambiente si trova. In genere, é preferibile definire una
+	misura di prestazione rispetto a ció che si vuole accada all'ambiente
+	piuttosto che rispetto al modo in cui ci si aspetta che funzioni.
+
+	É allora possibile fornire una definizione operativa di agente razionale:
+	per ogni possibile sequenza di percezioni, un agente razionale sceglierá
+	di compiere l'azione che, sulla base delle percezioni precedenti e sulla
+	base della conoscenza che possiede a priori, restituisce il massimo valore
+	possibile in termini di misura di prestazione. Si noti come "razionale"
+	non significhi "onniscente", ovvero in grado di prevedere con assoluta
+	certezza ció che accadrá in futuro, dato che questo é realisticamente
+	impossibile; un agente razionale deve limitarsi a compiere azioni che
+	massimizzano la prestazione \em{attesa}.
+
+	La definizione di agente razionale sopra presentata prevede che questo
+	possieda anche una qualche nozione di \strong{apprendimento}: per quanto
+	la sua configurazione iniziale possa essere fissata, questa puó venire
+	modificata e potenziata con l'esperienza. Nel caso in cui l'ambiente sia
+	interamente conosciuto a priori, l'agente non ha alcuna forma di 
+	apprendimento, limitandosi a compiere le azioni preimpostate.
+
+	Un agente che compie azioni esclusivamente sulla base della sua
+	conoscenza a priori e non fa uso di apprendimento si dice che non
+	é \strong{autonomo}. Un agente razionale dovrebbe invece essere
+	autonomo, ovvero partire sí da una base di conoscenza pregressa ma,
+	attraverso l'apprendimento, colmarne le lacune. Dopo abbastanza
+	esperienza, ci si aspetta che un agente razionale diventi di fatto
+	indipendente dalla sua conoscenza a priori.
+
+	É possibile classificare gli ambienti rispetto a cinque metriche
+	informali, utili a ragionare sulla difficoltá del problema e sulla
+	modalitá risolutiva da adottare:
+
+	\begin{itemize}
+		\begin{item}
+			\strong{Accessibile} o \strong{inaccessibile}. Un ambiente
+			é tanto accessibile quanto un agente é in grado di ottenere
+			le informazioni sul suo stato di cui necessita con completa
+			accuratezza. Un ambiente puó essere inaccessibile perché i
+			sensori dell'agente non sono precisi oppure perché parte 
+			dell'ambiente é del tutto preclusa ai sensori dell'agente.
+			Gli ambienti nel mondo reale hanno necessariamente un certo
+			grado di inaccessibilitá;
+		\end{item}
+		\begin{item}
+			\strong{Deterministico} o \strong{non deterministico}.
+			Un ambiente é deterministico (in riferimento alle azioni
+			dell'agente) se la sua evoluzione é completamente determinata
+			dal suo stato attuale e dalle azioni dell'agente. Un ambiente
+			é non deterministico se la sua evoluzione é anche influenzata
+			da forze al di lá dell'agente. Il mondo fisico da modellare ha
+			sempre un certo grado di non determinismo;
+		\end{item}
+		\begin{item}
+			\strong{Episodico} o \strong{sequenziale}. In un ambiente
+			episodico l'esperienza di un agente puó essere divisa in
+			step atomici dove la scelta di un azione dipende esclusivamente
+			dalla percezione attuale. In un ambiente sequenziale le azioni
+			che un agente compie possono dipendere del tutto o in parte da
+			quali azioni sono state prese in precedenza;
+		\end{item}
+		\begin{item}
+			\strong{Statico} o \strong{dinamico}. Un ambiente é statico
+			se non subisce modifiche mentre l'agente sta deliberando,
+			altrimenti é dinamico;
+		\end{item}
+		\begin{item}
+			\strong{Discreto} o \strong{continuo}. Un ambiente é
+			discreto se il numero di stati in cui questo puó trovarsi
+			é finito, ovvero se é possibile (almeno in linea teorica)
+			enumerare tutti i suoi possibili stati, altrimenti é continuo.
+			Essendo i computer discreti per definizione, modellare un
+			ambiente continuo attraverso un sistema automatico richiederá
+			sempre un certo grado di approssimazione.
+		\end{item}
+	\end{itemize}
+
+	\begin{example}
+		\begin{itemize}
+			\begin{item}
+				Si consideri come ambiente il gioco degli scacchi e come
+				agenti i giocatori umani (si assuma che le mosse non abbiano
+				alcun limite di tempo). Tale ambiente é:
+				\begin{enumerate}
+					\begin{item}
+						Accessibile, perché ciascun giocatore ha completa
+						conoscenza dello stato della partita;
+					\end{item}
+					\begin{item}
+						Deterministico, perché l'evoluzione degli stati 
+						dipende esclusivamente da quali mosse scelgono di
+						compiere i giocatori;
+					\end{item}
+					\begin{item}
+						Sequenziale, perché le mosse di un giocatore
+						possono anche dipendere da quali mosse ha
+						compiuto in precedenza;
+					\end{item}
+					\begin{item}
+						Statico, perché durante l'esecuzione di una mossa
+						e durante la scelta della stessa lo stato della
+						partita rimane invariato;
+					\end{item}
+					\begin{item}
+						Discreto, perché il numero di possibili stati in cui
+						la partita puó trovarsi é finito.
+					\end{item}
+				\end{enumerate}
+			\end{item}
+			\begin{item}
+				Si consideri come ambiente le strade di una cittá e come
+				agente un sistema di guida automatico per automobili. Tale
+				ambiente é:
+				\begin{enumerate}
+					\begin{item}
+						Inaccessibile, perché non é possibile conoscere 
+						l'intero stato del traffico di tutta la cittá in
+						ciascun istante;
+					\end{item}
+					\begin{item}
+						Non deterministico, perché l'evoluzione del traffico
+						non dipende esclusivamente dalle scelte dell'agente;
+					\end{item}
+					\begin{item}
+						Sequenziale, perché la scelta di quale strada
+						percorrere puó dipendere anche da quali strade
+						ha percorso in precedenza;
+					\end{item}
+					\begin{item}
+						Dinamico, perché lo stato della cittá e del traffico
+						cambiano anche mentre l'agente é in movimento;
+					\end{item}
+					\begin{item}
+						Continuo, perché lo stato della cittá e del traffico
+						si modificano costantemente.
+					\end{item}
+				\end{enumerate}
+			\end{item}
+		\end{itemize}
+	\end{example}
+
+	Gli agenti intelligenti possono essere informalmente classificati in
+	quattro categorie, di crescente ordine di complessitá.
+
+	\subsection{Agenti con riflessi semplici}
+
+		Gli agenti piú facili da realizzare sono gli \strong{agenti
+		con riflessi semplici}. Questi agenti non hanno alcun modello
+		dell'ambiente: scelgono che azione compiere esclusivamente
+		sulla base della percezione attuale e non hanno cognizione
+		delle percezioni precedenti.
+
+		Agenti di questo tipo scelgono che azioni compiere seguendo
+		\strong{regole condizione-azione}: \em{se} si verifica una
+		certa condizione, \em{allora} viene compiuta l'azione associata
+		a tale condizione.
+
+		Una rappresentazione schematica di un agente con riflessi
+		semplici é presentata in basso. La funzione \tt{INTERPRET-INPUT}
+		genera una descrizione astratta della percezione ricevuta
+		dall'agente, mentre la funzione \tt{RULE-MATCH} restituisce
+		la prima azione associata a tale rappresentazione di percezione
+		nel set di regole \tt{rules}.
+
+		\begin{verbatim}
+			rules <= set of condition-action rules
+
+			\bigskip
+			function SIMPLE-REFLEX-AGENT(percept)
+				state <= INTERPRETER-INPUT(percept)
+				rule <= RULE-MATCH(state, rules)
+				action <= rule.action
+				return action
+		\end{verbatim}
+
+		\bigskip
+		\center{\img[src = Introduzione/agent1.pdf, width = 65%fw]}
+		\bigskip
+
+		Gli agenti con riflessi semplici hanno una intelligenza limitata.
+		Infatti, agenti di questo tipo operano correttamente solamente se
+		l'azione da compiere che massimizza la funzione di prestazione puó
+		essere determinata solo sulla base delle proprie percezioni, ovvero
+		se l'ambiente é completamente accessibile. Se nella propria conoscenza
+		a priori sono presenti errori o se l'ambiente é accessibile solo in 
+		parte, l'agente sará destinato ad operare in maniera non razionale.
+
+		Ancora piú problematica é la situazione in cui agenti con
+		riflessi semplici entrano in loop infiniti, dato che non
+		sono in grado di determinarli. L'unica contromisura che
+		possono adottare é randomizzare le proprie azioni, dato che
+		in questo modo si riduce la probabilitá che l'agente compia
+		le stesse azioni piú volte di fila. Tuttavia, sebbene questo
+		approccio possa mettere una pezza al problema del loop infinito
+		in maniera semplice, in genere comporta uno spreco di risorse,
+		e pertanto risulta difficilmente in un comportamento razionale
+		da parte dell'agente.
+
+	\subsection{Agenti con riflessi, ma basati su un modello}
+
+		Il modo piú efficiente per risolvere il problema dell'avere a
+		che fare con un agente parzialmente accessibile é tenere traccia
+		della parte di ambiente di cui questo non ha conoscenza. Ovvero,
+		l'agente dovrebbe avere una qualche sorta di \strong{stato interno}
+		che dipende dalle percezioni che questo ha captato in precedenza,
+		di modo da avere informazioni su alcuni degli stati diversi da
+		quello corrente. Agenti di questo tipo sono detti \strong{agenti
+		con riflessi ma basati su un modello}.
+
+		Aggiornare periodicamente tale stato interno richiede che l'agente
+		possieda due forme di conoscenza. Innanzitutto, é necessario avere
+		informazioni relative al modo in cui l'ambiente si evolve nel
+		tempo, sia in termini di come le azioni dell'agente influenzano
+		l'ambiente che in termini di come l'ambiente si evolve in maniera
+		indipendente dall'agente. Questo corpo di informazioni prende il 
+		nome di \strong{modello di transizione}. Inoltre, é necessario 
+		avere informazioni relative a come l'evoluzione dell'ambiente
+		si riflette sulle percezioni dell'agente, nel complesso chiamate
+		\strong{modello sensoriale}.  
+
+		Una rappresentazione schematica di un agente con riflessi ma
+		basati su un modello é presentata in basso, dove la funzione
+		\tt{UPDATE-STATE} aggiorna lo stato interno dell'agente prima
+		di restituire l'azione da compiere.
+
+		\begin{verbatim}
+			state <= the agent's current conception of the environment state
+			transition_model <= a description on how the next state depends on the current state and action
+			sensor_model <= a description on how the current world state is reflected in the agent's percepts
+			rules <= set of condition-action rules
+			action <= the most recent action (starts NULL)
+
+			\bigskip
+			function MODEL-BASED-REFLEX-AGENT(percept)
+				state <= UPDATE-STATE(state, action, percept, transition_model, sensor_model)
+				rule <= RULE-MATCH(state, rules)
+				action <= rule.action
+				return action
+		\end{verbatim}
+
+		\bigskip
+		\center{\img[src = Introduzione/agent2.pdf, width = 65%fw]}
+		\bigskip
+
+		Si noti come difficilmente un agente con riflesso basato
+		su un modello puó determinare con certezza lo stato attuale
+		dell'ambiente. In genere, un agente puó limitarsi ad averne
+		una descrizione parziale.
+
+	\subsection{Agenti basati su un modello, ma basati su obiettivi}
+
+		Vi sono situazioni in cui la scelta di quale sia l'azione migliore
+		da compiere da parte di un agente dipenda anche da un qualche tipo
+		di obiettivo a lungo termine. Non sempre questo obiettivo viene
+		raggiunto nell'operare una sola azione, ma puó richiedere diverse
+		azioni intermedie. In agenti di questo tipo, la medesima azione ed
+		il medesimo stato interno possono risultare in azioni diverse se é
+		diverso l'obiettivo.
+
+		\bigskip
+		\center{\img[src = Introduzione/agent3.pdf, width = 65%fw]}
+		\bigskip
+
+	%	Un problema di ricerca consiste di: uno spazio degli stati,
+	%	una funzione che definisce l'evoluzione da uno stato ad un
+	%	altro facendo una certa azione (con eventualmente associato
+	%	un costo), uno stato iniziale ed un test obiettivo raggiunto.
+	%	Una soluzione é una sequenza di azioni che trasforma lo stato
+	%	iniziale in uno stato finale.
+	%	Lo stato del mondo non é lo spazio degli stati: lo stato del
+	%	mondo é l'insieme di tutte le informazioni relative a come si
+	%	trova il mondo in questo momento. Uno stato di ricerca tiene
+	%	traccia esclusivamente delle informazioni necessarie a
+	%	raggiungere l'obiettivo (quale che sia).
+	%	Da ciascuno stato se ne generano altri secondo una struttura ad
+	%	albero. La radice é lo stato in cui ci si trova ed i nodi figli 
+	%	sono tutti i nodi che contengono stati raggiungibili a partire 
+	%	dalla radice applicando la funzione di transizione di stato.
+	%	Oppure a grafo (state space graph). Ciascun nodo corrisponde ad
+	%	uno stato nello spazio degli stati, ma cosí facendo diviene 
+	%	difficile costruire un grafo con dimensioni di questo tipo.
+
+	\subsection{Agenti basati su un modello e guidati da utilitá}
+
+		Non sempre é possibile costruire un agente razionale
+		semplicemente spingendolo a raggiungere un obiettivo.
+		Infatti, se tale obiettivo puó essere raggiunto tramite
+		diverse sequenze di azioni, una potrebbe essere preferibile
+		ad un'altra. Inoltre, un agente potrebbe dover perseguire
+		piú obiettivi contemporaneamente fra di loro incompatibili,
+		ovvero compiere azioni che lo "avvicinano" ad un obiettivo 
+		ma al contempo "allontanarlo" da un altro.
+
+		Un obiettivo permette di discriminare gli stati dell'ambiente
+		esclusivamente come "favorevoli" e "sfavorevoli", senza alcuna
+		sfumatura nel mezzo. Un migliore approccio prevede invece di
+		introdurre una misura di \strong{utilitá}, che influenza la
+		scelta dell'agente nello scegliere quale azione compiere (insieme
+		alla misura di prestazione, all'obiettivo da seguire e dal proprio
+		stato interno).
+
+		La misura di utilitá permette all'agente di, nel dover perseguire
+		piú obiettivi fra di loro incompatibili, scegliere l'azione che 
+		comporta il miglior compromesso nell'avanzamento di tutti loro.
+		Inoltre, non sempre la struttura dell'ambiente garantisce che
+		sia possibile raggiungere con assoluta certezza un obiettivo
+		semplicemente eseguendo le azioni appropriate; anche in questo
+		caso, la misura di utilitá permette di valutare quanto sia
+		"conveniente" per l'agente compiere una certa azione in vista di
+		un determinato obiettivo sulla base di quanto sia ragionevole che
+		tale obiettivo venga effettivamente raggiunto.
+
+		\bigskip
+		\center{\img[src = Introduzione/agent4.pdf, width = 65%fw]}
+		\bigskip
+
+	\subsection{Agenti che apprendono}
+
+		Gli agenti piú interessanti sono indubbiamente quelli in grado
+		di \strong{apprendere}; tutti i tipi di agenti presentati finora
+		possono essere costruiti come agenti che apprendono. Il notevole
+		vantaggio che presentano é che possono operare in un ambiente del
+		tutto sconosciuto apprendendo da questo, di modo da compiere le
+		azioni migliori anche in situazioni dove lo stesso designer non ha
+		modo di poter prevedere quali queste possano essere.
+
+		Un agente in grado di apprendere puó essere concettualmente suddiviso
+		in quattro componenti:
+
+		\begin{itemize}
+			\begin{item}
+				La \strong{componente di apprendimento}, che si
+				occupa di migliorare la performance dell'agente;
+			\end{item}
+			\begin{item}
+				La \strong{componente di performance}, che sceglie
+				quale azione compiere sulla base delle percezioni e
+				dello stato di conoscenza interno. Di fatto, questa
+				componente costituiva l'intero agente dei modelli
+				precedenti;
+			\end{item}
+			\begin{item}
+				Il \strong{critico}, che informa la componente di
+				apprendimento di quanto l'agente si sta comportando
+				in maniera ottimale (razionale) sulla base di uno
+				standard di performance prestabilito. Questa componente
+				é necessaria perché le percezioni, di per loro, non sono
+				in grado di informare l'agente sull'ottimalitá del proprio
+				comportamento;
+			\end{item}
+			\begin{item}
+				Il \strong{generatore di problemi}, che suggerisce
+				azioni all'agente che possono comportare nuove ed
+				informative esperienze. Questa componente é necessaria
+				perché se l'agente si affidasse esclusivamente alla
+				componente di performance sceglierebbe sempre le azioni
+				migliori sulla base della sua conoscenza attuale, che 
+				non sono necessariamente complete. Il generatore di
+				problemi puó portare l'agente a compiere azioni che
+				possono potenzialmente essere localmente subottimali ma
+				che sul lungo termine possono portare a compiere azioni
+				ancora migliori.
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+		\center{\img[src = Introduzione/agent5.pdf, width = 65%fw]}
+		\bigskip
+
+\end{sile}

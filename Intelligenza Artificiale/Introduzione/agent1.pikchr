@@ -1,0 +1,27 @@
+X: line fill LightCyan thick from (-3, -1) to (1, -1) to (1, 2.5) to (-3, 2.5) to (-3, -1) close
+Y: line fill LightCyan thick from (1.5, -1) to (2.5, -1) to (2.5, 2.5) to (1.5, 2.5) to (1.5, -1) close
+
+A: box wid 1.5 fill white at (-2, 0)
+"Regole condizione-azione" at A
+
+B: box color LightCyan ht 0.25 at (0, 2.25)
+"Sensori" at B
+
+C: box wid 1.25 fill white at (0, 1.5)
+"Qual'é lo stato" "attuale dell'ambiente" at C
+
+D: box wid 1.25 fill white at (0, 0)
+"Quale azione" "dovrei compiere" at D
+
+E: box color LightCyan ht 0.25 at (0, -0.75)
+"Attuatori" at E
+
+arrow from A.e to D.w
+arrow from B.s to C.n
+arrow from C.s to D.n
+arrow from D.s to E.n
+arrow from E.e to (2, E.y)
+arrow from (2, B.y) to B.e
+
+"AMBIENTE" italic at Y
+"AGENTE" italic at (-2.5, -0.75)

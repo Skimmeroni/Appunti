@@ -1,0 +1,38 @@
+X: line fill LightCyan thick from (-3, -1.25) to (1, -1.25) to (1, 2.5) to (-3, 2.5) to (-3, -1.25) close
+Y: line fill LightCyan thick from (1.5, -1.25) to (2.5, -1.25) to (2.5, 2.5) to (1.5, 2.5) to (1.5, -1.25) close
+
+A: box wid 1.25 fill white at (-2, -0.5)
+"Generatore" "di problemi" at A
+
+B: box color LightCyan ht 0.25 at (0, 2)
+"Sensori" at B
+
+C: box wid 1.25 fill white at (0, 0.875)
+"Componente di" "performance" at C
+
+D: box color LightCyan ht 0.25 at (0, -1)
+"Attuatori" at D
+
+E: box wid 1.25 fill white at (-2, 0.875)
+"Componente di" "apprendimento" at E
+
+F: box wid 1.25 fill white at (-2, 2)
+"Critico" at F
+
+G: box color white ht 0.25 at (-2, 2.75)
+"Standard di performance" at G
+
+arrow from A.e to ((C.s.x + C.sw.x) / 2, C.s.y)
+arrow from B.s to C.n
+arrow from C.s to D.n
+arrow from D.e to (2, D.y)
+arrow from (2, B.y) to B.e
+arrow from B.w to F.e
+arrow from F.s to E.n "feedback" aligned above
+arrow from E.s to A.n "obiettivi di" aligned above "apprendimento" aligned below
+arrow from (C.w.x, (C.w.y + C.nw.y) / 2) to (E.e.x, (E.e.y + E.ne.y) / 2) "cambiamenti" aligned above
+arrow from (E.e.x, (E.e.y + E.se.y) / 2) to (C.w.x, (C.w.y + C.sw.y) / 2) "conoscenza" aligned below
+arrow from G.s to F.n
+
+"AMBIENTE" italic at Y
+"AGENTE" italic at (-2.5, -1)
