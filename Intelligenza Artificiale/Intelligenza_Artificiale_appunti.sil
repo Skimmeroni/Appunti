@@ -11,6 +11,11 @@
 	\script[src = packages/textsubsuper]
 	\script[src = packages/rules]
 	\script[src = packages/rotate]
+	\script[src = packages/unichar]
+
+	\define[command = ddd]{
+		\unichar{U+2026}
+	}
 
 	\define[command = tt]{
 		\font[family = Hack,
@@ -65,6 +70,12 @@
 		\include[src = Introduzione/Agente.sil]
 	\chapter{Intelligenza artificiale simbolica}
 		\section{Knowledge representation and reasoning}
-		\include[src = Simbolica/KKR.sil]
+		\include[src = Simbolica/KRR.sil]
+		\section{Knowledge Graphs}
+		\include[src = Simbolica/KG.sil]
+		\section{Resource Description Framework}
+		\include[src = Simbolica/RDF.sil]
+		\section{SPARQL Protocol And RDF Query Language}
+		\include[src = Simbolica/SPARQL.sil]
 
 \end{document}

@@ -1,0 +1,36 @@
+ovalht    = 0.25
+boxht     = 0.25
+boxwid    = 1.25
+circlerad = 0.375
+
+EJ: oval fill 0xFF3030 at (0, 0)      "dbr:Kurt_Cobain"
+SA: oval fill 0xFF3030 at (1.75, 0.5) "dbr:In_Bloom"
+ES: oval fill 0xFF3030 at (2.5, -0.5) "dbr:Nevermind"
+EP: oval fill 0xFF3030 at (0, -1.25)  "dbr:Electric_Guitar"
+
+MA: circle fill 0xA44CD3 at (0, 0.75)   "dbo:Musical_" "Artist"
+PE: circle fill 0xA44CD3 at (0, 2.25)   "dbo:Person"
+AR: circle fill 0xA44CD3 at (0.75, 1.5) "dbo:Artist"
+SI: circle fill 0xA44CD3 at (1.75, 1.5) "dbo:Single" 
+MW: circle fill 0xA44CD3 at (2.5, 2.25) "dbo:Musical_" "Work"
+AL: circle fill 0xA44CD3 at (2.75, 1)   "dbo:Album"
+
+EN: box fill 0x99FF1D at (1.75, -1)   "Electric Guitar @en" 
+IT: box fill 0x99FF1D at (1.75, -1.5) "Chitarra Elettrica @it"
+
+arrow dashed from MA.ne to AR.sw
+arrow dashed from AR.nw to PE.se
+arrow dashed from SI.ne to MW.sw
+arrow dashed from AL.n  to MW.s
+
+arrow from EJ.n to MA.s
+arrow from SA.n to SI.s
+arrow from ES.n to AL.s
+
+arrow from SA.s  to ES.nw  "dbo:album"          aligned above
+arrow from ES.w  to EJ.e   "dbo:artist"         aligned below
+arrow from EJ.s  to EP.n   "dbo:instrument"     aligned above
+arrow from SA.w  to EJ.ne  "dbo:musicalArtist"  aligned below
+
+arrow from EP.e  to EN.w "dbo:label" aligned above
+arrow from EP.se to IT.w "dbo:label" aligned above

@@ -1,0 +1,86 @@
+\begin{sile}
+
+	Un \strong{Knowledge Graph} (\strong{KG}) é un grafo diretto ed
+	etichettato il cui scopo é riportare e trasmettere conoscenze sul
+	mondo reale. I nodi del grafo rappresentano delle \strong{entitá},
+	ovvero degli oggetti che appartengono al mondo di interesse, mentre
+	gli archi del grafo rappresentano delle \strong{relazioni} che
+	intercorrono fra queste entitá.
+
+	Con "conoscenza" si intende genericamente qualsiasi cosa sia
+	\em{nota}: tale conoscenza puó essere ricavata da dal mondo
+	che il grafo vuole modellare oppure estratta dal grafo stesso.
+	La conoscenza puó essere composta sia da semplici asserzioni
+	che coinvolgono due entitá ("A possiede/fa uso di/fa parte
+	di/... B") oppure asserzioni che coinvolgono gruppi di entitá
+	("tutti i membri di A possiedono/fanno uso/fanno parte di/...
+	B"). Le asserzioni semplici sono riportate come etichette degli
+	archi del grafo: se esiste un arco fra i nodi A e B, significa
+	che A e B sono legati dalla relazione che etichetta l'arco che
+	li unisce.
+
+	Formalmente, un Knowledge Graph é definito a partire dalla quintupla
+	\math{\langle E, L, T, P, A\rangle}:
+
+	\begin{itemize}
+		\begin{item}
+			Un insieme \math{E} di simboli, che rappresentano gli
+			identificativi associati alle entitá;
+		\end{item}
+		\begin{item}
+			Un insieme \math{L} di \strong{letterali}, che rappresentano
+			tutti i dati "grezzi" che il modello necessita di rappresentare
+			(stringhe, numeri, eccettera);
+		\end{item}
+		\begin{item}
+			Un insieme \math{T} di tipi;
+		\end{item}
+		\begin{item}
+			Un insieme \math{P} di simboli di relazione;
+		\end{item}
+		\begin{item}
+			Un insieme \math{A} di assiomi.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	A loro volta, gli assiomi vengono distinti in due sottogruppi:
+
+	\begin{itemize}
+		\begin{item}
+			I fatti, ovvero assiomi che riguardano le singole entita.
+			Indicano:
+
+			\begin{itemize}
+				\begin{item}
+					Se una certa entitá appartiene ad un certo tipo, ovvero
+					\math{t(e) | t(l)} con \math{e \in E} e \math{l \in L};
+				\end{item}
+				\begin{item}
+					Se due entitá sono legate da una certa relazione, ovvero
+					\math{r(e_{1}, e_{2}) | r(e, l)} con \math{e_{i} \in E} e
+					\math{l \in L}.
+				\end{item}
+			\end{itemize}
+		\end{item}
+		\begin{item}
+			Gli assiomi generali, ovvero assiomi che non riguardano
+			singole entitá ma riguardano classi. La loro espressivitá
+			dipende dal linguaggio logico a cui il KG fa riferimento,
+			ma in genere sono nella forma \math{\forall x (t_{1}(x)
+			\rightarrow t_{2}(x))}, ovvero che specificano una relazione
+			di ordine parziale rispetto ai tipi.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Essendo un KG un grafo, é possibile studiarne le proprietá
+	tipiche dei grafi (simmetria, antisimmetria, transitivitá,
+	eccetera) e metterle in relazione con il significato che
+	hanno nel modello che questi rappresentano. É inoltre possibile
+	\em{visitare} il grafo per ricavare informazioni piú elaborate
+	di quelle riportate nei soli archi.
+
+\end{sile}

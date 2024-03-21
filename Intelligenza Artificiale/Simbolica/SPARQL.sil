@@ -1,0 +1,108 @@
+\begin{sile}
+
+	Avendo a disposizione un grafo RDF, ci si chiede come
+	sia possibile formulare domande sullo stesso, ad esempio
+	determinare se esiste una tripla in cui figura un certo
+	IRI. Dato che porre questo tipo di domande in linguaggio
+	naturale è di difficile interpretazione per una macchina,
+	queste vanno riformulate in un \strong{linguaggio di query}.
+	In particolare, un linguaggio di query appositamente pensato
+	per estrarre informazioni da grafi RDF è \strong{SPARQL}
+	(\strong{SPARQL Protocol And RDF Query Language}) \footnote{Sia
+	il nome che la struttura delle query di SPARQL hanno molto in
+	comune con \strong{SQL}, che è invece un linguaggio di query
+	per database relazionali.}.
+
+	Una query SPARQL è costituita dalle seguenti sei componenti,
+	non tutte strettamente obbligatorie:
+
+	\begin{enumerate}
+		\begin{item}
+			\em{Dichiarazione dei prefissi}. Similmente
+			a Turtle, è possibile dichiarare dei prefissi
+			mediante la direttiva \tt{PREFIX}, seguita dal
+			nome scelto per il prefisso e dall'URI a cui il
+			prefisso è associato;
+		\end{item}
+		\begin{item}
+			\em{Costruzione del dataset}. mediante la direttiva
+			\tt{FROM} è possibile specificare su quale/i grafo/i
+			si vuole operare la query. Se vengono specificati più
+			grafi, la query verrà operata sulla loro unione;
+		\end{item}
+		\begin{item}
+			\em{Tipo di query}. SPARQL supporta
+			quattro tipi di query:
+
+			\begin{itemize}
+				\begin{item}
+					\tt{SELECT}, che restituisce
+					il risultato della query sotto
+					forma di tabella. Questa supporta
+					l'eliminazione delle soluzioni 
+					duplicate per mezzo delle direttive
+					\tt{REDUCED} (possono essere rimosse)
+					e \tt{DISTINCT} (devono essere rimosse);
+				\end{item}
+				\begin{item}
+					\tt{ASK}, che restituisce true se
+					la query ha un risultato non nullo
+					e false altrimenti;
+				\end{item}
+				\begin{item}
+					\tt{CONSTRUCT}, che restituisce il
+					risultato della query sotto forma di
+					(sotto) grafo;
+				\end{item}
+				\begin{item}
+					\tt{DESCRIBE}, che restituisce il 
+					risultato della query sotto forma
+					di grafo che descrive termini e 
+					soluzioni.
+				\end{item}
+			\end{itemize}
+		\end{item}
+		\begin{item}
+			\em{Pattern}. La direttiva \tt{WHERE} specifica il 
+			pattern che discrimina un elemento del grafo che è
+			parte della soluzione da uno che non lo è;
+		\end{item}
+		\begin{item}
+			\em{Aggregazione}. Le direttive \tt{GROUP BY} e
+			\tt{HAVING}, analoghe alle direttive omonime di
+			SQL permettono di raggruppare o di filtrare gli
+			elementi della soluzione secondo specifiche regole; 
+		\end{item}
+		\begin{item}
+			\em{Modificatori della soluzione}. Alcune direttive
+			permettono di modificare gli elementi della soluzione
+			disponendoli secondo un certo ordine (\tt{ORDER BY})
+			oppure restituendone solo una parte. 
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	La nozione più importante nel linguaggio SPARQL è il
+	\strong{pattern di tripla RDF}. Questa è di fatto analoga
+	ad una tripla RDF, ma oltre ad ammettere IRI, letterali e
+	nodi blank può contenere anche \strong{variabili di query},
+	che ha il carattere "?" come prefisso. Tale pattern viene
+	riportato nel quarto campo di una query SPARQL dopo la 
+	direttiva \tt{WHERE}.
+
+	I risultati delle query SPARQL sono ottenuti mediante
+	\strong{pattern matching}: quando un client SPARQL invia
+	una query ad un server SPARQL, questo analizza il pattern
+	di tripla contenuto nella query e restituisce tutte le
+	triple dei grafi specificati nella query che coincidono
+	con tale pattern. Nello specifico, gli IRI ed i letterali
+	hanno un match solamente con, rispettivamente, un IRI ed
+	un letterale a loro identico, mentre i blank node e le
+	variabili di query hanno un match con qualsiasi termine.
+	La differenza fra i due sta nel fatto che i termini che
+	hanno un match con una variabile di query possono venire
+	restituiti come parte della soluzione, mentre quelli che
+	hanno un match con un blank node non possono.
+
+\end{sile}

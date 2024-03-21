@@ -68,5 +68,95 @@ return {
     link = "dest7",
     number = "1.1.5",
     pageno = "7"
+  },
+  {
+    label = {
+      "Intelligenza artificiale simbolica",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest8",
+    number = "2",
+    pageno = "9"
+  },
+  {
+    label = {
+      "Knowledge representation and reasoning",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest9",
+    number = "2.1",
+    pageno = "9"
+  },
+  {
+    label = {
+      "Knowledge Graphs",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest10",
+    number = "2.2",
+    pageno = "9"
+  },
+  {
+    label = {
+      "Resource Description Framework",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest11",
+    number = "2.3",
+    pageno = "10"
+  },
+  {
+    label = {
+      "Termini",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest12",
+    number = "2.3.1",
+    pageno = "10"
+  },
+  {
+    label = {
+      "Triple",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest13",
+    number = "2.3.2",
+    pageno = "11"
+  },
+  {
+    label = {
+      "Grafi",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest14",
+    number = "2.3.3",
+    pageno = "11"
+  },
+  {
+    label = {
+      "Sintassi: N-triples e Turtle",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest15",
+    number = "2.4",
+    pageno = "12"
+  },
+  {
+    label = {
+      "SPARQL Protocol And RDF Query Language",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest16",
+    number = "2.5",
+    pageno = "12"
   }
 }

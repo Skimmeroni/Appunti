@@ -1,0 +1,280 @@
+\begin{sile}
+
+	\strong{Resource Description Framework} (\strong{RDF}) é un modello
+	di dati strutturato a grafo; sebbene inizialmente concepito per il
+	web (é infatti parte di un insieme di protocolli piú grande noto
+	come \strong{Semantic Web Stack}), trova uso anche come formato per
+	la rappresentazione della conoscenza.
+
+	RDF é un modello di dati pensato per descrivere risorse. Con
+	\strong{risorsa} si intende qualsiasi entitá a cui sia possibile
+	associare un'identitá, che siano entitá virtuali (pagine web, siti
+	web, file, \ddd), entitá concrete (libri, persone, luoghi, \ddd) o
+	entitá astratte (specie animali, categorie, ere geologiche, \ddd)
+	\footnote{Si noti come questo comporti che diverse risorse che in 
+	un dataset RDF sono presenti quasi con certezza debbano venire 
+	reimplementati da capo. Fortunatamente, esistono servizi che si
+	prefiggono di "standardizzare" la definizione di diverse risorse,
+	di modo che siano riutilizzabili. Un esempio di questi é FOAF:
+	\tt{xmlns.com/foaf/spec}.}.
+
+	\subsection{Termini}
+
+		Ad una risorsa RDF viene fatto riferimento attraverso un
+		\strong{termine}. In genere, un termine non é una semplice
+		stringa di caratteri, dato che é facile trovarsi in una
+		situazione in cui diversi dataset si riferiscono con lo
+		stesso nome a risorse diverse, in particolare se tali
+		dataset provengono dal Web da fonti diverse. In RDF esistono
+		tre tipi di termini: \strong{IRI}, \strong{letterali} e
+		\strong{nodi blank}. 
+
+		Un IRI (\strong{International Resource Identifier}) é una stringa di
+		caratteri Unicode che identifica univocamente una qualsiasi risorsa;
+		se due risorse hanno lo stesso IRI, allora sono in realtá la stessa
+		risorsa. Gli IRI sono un superset degli \strong{URI} (\strong{Unique
+		Resource Identifier}), che hanno la medesima funzione ma sono limitati
+		ai soli caratteri ASCII.
+
+		Gli URI costituiscono a loro volta un soprainsieme sia degli
+		\strong{URL} (\strong{Universal Resource Locator}) sia degli
+		\strong{URN} (\strong{Uniform Resource Name}). Il primo serve
+		ad indicare la locazione di una risorsa (sul web), mentre il
+		secondo il nome proprio della risorsa, scritto con una sintassi
+		specifica. Pertanto, ad una risorsa é possibile riferirsi
+		indifferentemente per locazione (URL) o per nome (URN).
+
+		Si noti come gli IRI risolvono il problema di avere a che fare con
+		risorse diverse aventi lo stesso nome, ma non risolvono il problema
+		inverso, ovvero dove IRI distinti si riferiscono alla stessa risorsa.
+		RDF permette che una situazione di questo tipo si verifichi, ma in 
+		genere é preferibile risolvere questo tipo di conflitti adottando
+		uno degli IRI che si riferiscono alla stessa risorsa a discapito
+		degli altri.
+
+		Piú IRI provenienti dallo stesso dataset hanno molto spesso dei prefissi
+		in comune. Inoltre, gli IRI tendono ad essere stringhe molto lunghe. Per
+		risolvere entrambi i problemi, RDF ammette la possibilitá di assegnare
+		delle abbreviazioni ai prefissi.
+
+		Si noti inoltre come gli IRI non possano fornire (in maniera efficiente)
+		informazioni relative a descrizioni, date, valori numerici, ecc\ddd Tali
+		dati sono riportati come letterali. In RDF, un letterale é costituito
+		dalle seguenti tre componenti:
+
+		\begin{itemize}
+			\begin{item}
+				Una \strong{forma lessicale}, ovvero una stringa di
+				caratteri Unicode;
+			\end{item}
+			\begin{item}
+				Un \strong{datatype IRI} che indica il tipo di dato del
+				letterale, definendo un dominio di possibili valori che
+				questo puó assumere. Viene preceduto da "^^";
+			\end{item}
+			\begin{item}
+				Un \strong{language tag} che indica la lingua in cui il
+				termine viene espresso. Viene preceduto da "@"
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		I letterali piú semplici sono quelli composti dalla sola forma
+		lessicale; il datatype ed il language tag sono opzionali, ma
+		spesso utili a dare l'interpretazione corretta del letterale
+		a cui si riferiscono. I tipi di dato definiti da RDF sono un
+		sottoinsieme dallo standard XSD, a cui si aggiungono i tipi di
+		dato \tt{rdf:XML} e \tt{rdf:XMLLiteral} propri di RDF. Questi
+		possono essere raggruppati in quattro categorie:
+
+		\begin{itemize}
+			\begin{item}
+				\strong{Booleani}, (\tt{xsd:boolean});
+			\end{item}
+			\begin{item}
+				\strong{Numerici}, sia interi (\tt{xsd:decimal}, \tt{xsd:byte},
+				\tt{xsd:unsignedInt}, ecc\ddd) che razionali (\tt{xsd:float}
+				e \tt{xsd:double});
+			\end{item}
+			\begin{item}
+				\strong{Temporali}, che siano istanti di tempo (\tt{xsd:time},
+				\ddd), lassi di tempo (\tt{xsd:duration}, \ddd) o una data
+				specifica (\tt{xsd:gDay}, \tt{xsd:gMonth}, \tt{xsd:gYear},
+				\ddd);
+			\end{item}
+			\begin{item}
+				\strong{Testuali}, sequenze di caratteri generiche
+				(\tt{xsd:string}) oppure conformi rispetto ad una
+				certa sintassi (\tt{rdf:XML}, \tt{rdf:XMLLiteral},
+				\tt{xsd:anyURI}, ecc\ddd).
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		Alcuni tipi di dato sono derivati da altri tipi di dato, ovvero
+		restringono i valori ammissibili dal dato da cui derivano ad un
+		sottoinsieme piú piccolo (e piú specifico); i tipi di dato che 
+		non derivano da altri sono detti \strong{primitivi}. Inoltre, 
+		mentre alcuni tipi di dato (come \tt{xsd:decimal}) hanno una
+		cardinalitá infinita numerabile, altri (come \tt{xsd:unsignedLong})
+		hanno un numero finito di valori ammissibili.
+
+		Se ad un letterale non é associato un tipo di dato, si assume
+		che sia di tipo \tt{xsd:string}; l'unica eccezione sono i letterali
+		che presentano un language tag, a cui viene implicitamente assegnato
+		il tipo \tt{rdf:langString}. Sebbene RDF ammetta la possibilitá
+		di definire dei tipi di dato custom, non fornisce un meccanismo
+		standard per riportare esplicitamente che tale tipo di dato derivi
+		da un altro, o per definire un dominio di valori ammissibili.
+
+		Vi sono situazioni in cui é preferibile che una certa risorsa
+		non venga identificata per mezzo di un IRI, ad esempio perché
+		un'informazione é mancante oppure perché non é rilevante. RDF
+		gestisce tali casistiche per mezzo dei \strong{blank nodes},
+		che per convenzione hanno come prefisso il carattere "_". Se
+		una risorsa é identificata da un blank node, significa che tale
+		risorsa esiste, ma non si ha modo o interesse di assegnarle un
+		nome. I blank node operano come variabili esistenziali locali
+		al loro dataset; due blank node di due dataset distinti si
+		riferiscono a due risorse distinte.
+
+	\subsection{Triple}
+
+		Mentre i termini RDF sono usati per identificare le risorse,
+		le \strong{triple} sono usati per descriverle. Una tripla RDF
+		é nella forma soggetto-predicato-oggetto \footnote{La struttura
+		segue quella delle lingue anglosassoni.}, dove tutti e tre gli
+		elementi sono termini RDF. Nello specifico, il soggetto deve
+		essere un IRI o un blank node, il predicato deve essere un IRI
+		e l'oggetto puó essere di qualsiasi tipo di termine.
+
+		\begin{example}
+			\begin[width = 50%fw]{parbox}
+				\center{\tt{ex:Boston ex:hasPopulation "646000"^^xsd:integer}}
+			\end{parbox}
+			\begin[width = 50%fw]{parbox}
+				\center{\tt{ex:VoynichManuscript ex:hasAuthor _:b}}
+			\end{parbox}
+		\end{example}
+
+		Queste restrizioni sono in linea con lo scopo che RDF si
+		prefissa. Ai predicati deve necessariamente venire fornito
+		un nome, dato che l'informazione "un soggetto ed un oggetto
+		sono legati da un predicato ignoto" non é particolarmente
+		rilevante. Inoltre, tale nome deve essere unico, perché i
+		predicati devono poter essere univocamente identificati in
+		qualsiasi dataset. Infine, per RDF, i letterali sono risorse
+		di minore importanza rispetto agli IRI, pertanto sarebbe poco
+		sensato averli come soggetto di una tripla.
+
+		Sebbene, per convenzione, il soggetto di una tripla sia la
+		"risorsa primaria" che viene descritta dalla tripla stessa,
+		la distinzione é del tutto arbitraria, in quanto é possibile
+		invertire l'ordine del soggetto e dell'oggetto di una tripla
+		per ottenerne una che descrive la stessa cosa.
+
+	\subsection{Grafi}
+
+		Un insieme di triple RDF costituisce un \strong{grafo RDF}. Il
+		nome grafo deriva dall'osservazione che ciascuna tripla RDF puó
+		essere rappresentata in maniera equivalente come una coppia di
+		nodi di un grafo uniti da un arco: l'etichetta di tale arco é
+		il predicato della tripla, il soggetto é il nodo di partenza
+		dell'arco e l'oggetto é il nodo di arrivo. Piú triple RDF danno
+		allora vita ad un grafo diretto ed etichettato.
+
+		Il fatto che RDF sia un modello di dati strutturato a grafo lo
+		rende molto flessibile. Infatti, per introdurre nuovi predicati
+		in un grafo RDF é sufficiente aggiungere un arco che ha tale 
+		predicato come etichetta, cosí come per introdurre nuovi soggetti
+		o oggetti é sufficiente aggiungere dei nodi. Similmente, due grafi
+		diversi (che corrispondono a due dataset diversi) possono essere 
+		unificati in maniera diretta mediante l'operazione di unione sui
+		due insiemi di triple; l'unica eccezione sono i grafi che contengono
+		dei blank node, perché il loro significato dipende dal grafo in cui
+		si trovano, ed é quindi necessario prendere misure aggiuntive.
+
+		\begin{example}
+			\center{\img[src = Simbolica/kg.pdf, width = 50%fw]}
+		\end{example}
+
+	\section{Sintassi: N-triples e Turtle}
+
+		RDF fornisce solamente una semantica per le triple, ma
+		ne non specifica una sintassi. A tal scopo, sono state
+		definite diverse sintassi per le triple RDF, in genere
+		fra loro intercompatibili.
+
+		Una rappresentazione testuale estremamente semplice é
+		\strong{N-triples}; questa prevede di riportare per
+		intero ciascun elemento di ogni tripla, una tripla per
+		riga, terminandole con un punto. Le tre componenti di
+		ciascuna tripla ed il punto alla fine della tripla sono
+		separate da uno o piú spazi. Se un elemento é un IRI,
+		viene riportato fra parentesi angolate, mentre se é un
+		letterale viene riportato fra doppi apici. I blank node,
+		i language tag ed i datatype IRI vengono riportati come
+		di consueto. Una riga che inizia con il carattere "#"
+		viene interpretata come un commento.
+
+		\begin{example}
+			\begin{verbatim}
+				# Le tre triple riportate di seguito sono sintatticamente valide per N-triples
+
+				\bigskip
+				<http://www.example.org/alice>                  <http://schema.org/knows>          <http://www.example.org/bob>   .
+				_:dave                                          <http://xmlns.com/foaf/0.1/name>   "Dave Beckett"^^xsd:string     .
+				<http://www.w3.org/2001/sw/RDFCore/ntriples/>   <http://purl.org/dc/terms/title>   "N-Triples"@en-US              .
+			\end{verbatim}
+		\end{example}
+
+		N-triples é tanto intuitivo quanto poco leggibile, perché gli IRI
+		sono sempre riportati per intero, e gli IRI tendono ad essere molto
+		lunghi. Una rappresentazione testuale leggermente piú complessa é
+		\strong{Turtle}, che eredita la sintassi di N-triples estendendola
+		ed aggiungendovi delle abbreviazioni per migliorarne la leggibilitá.
+
+		Ai prefissi puó essere associata una parola chiave mediante
+		la direttiva \tt{@prefix:}. Se due triple consecutive hanno
+		in comune il soggetto, é possibile terminare la prima con un
+		punto e virgola e non riportare il soggetto nella seconda. Se
+		due triple consecutive hanno in comune sia il soggetto che il
+		predicato, é possibile terminare la prima con una virgola e
+		non riportare soggetto e predicato nella seconda.
+
+		\begin{example}
+			\begin{verbatim}
+				# Turtle permette di definire triple RDF molto piú facilmente rispetto a N-triples
+
+				\bigskip
+				@prefix dbr:   <http://dbpedia.org/resource/>   .
+				@prefix dbo:   <http://dbpedia.org/ontology/>   .
+
+				\bigskip
+				dbr:Kurt_Cobain   dbo:instrument      dbr:Electric_guitar .
+				dbr:In_Bloom      dbo:musicalArtist   dbr:Kurt_Cobain     ;
+				                  dbo:album           dbr:Nevermind       .
+				dbr:Nevermind     dbo:artist          dbr:Kurt_Cobain     .
+			\end{verbatim}
+		\end{example}
+
+	%\subsection{Classi}
+	%
+	%	\begin{example}
+	%		\begin{verbatim}
+	%			@prefix dbr:  <http://dbpedia.org/resource/> .
+	%			@prefix dbo:  <http://dbpedia.org/ontology/> .
+	%			@prefix rdf:  <http://www.w3.org/2000/01/rdf-schema#> .
+	%			@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+	%	
+	%			\bigskip
+	%			dbr:Nevermind   rdf:type          dbo:Album        ;
+	%			                dbo:artist        dbr:Kurt_Cobain  .
+	%			dbo:Artist      rdfs:subclassOf   dbo:Person       .
+	%			dbo:Album       rdfs:subclassOf   dbo:Musical_Work .
+	%		\end{verbatim}
+	%	\end{example}
+
+\end{sile}
