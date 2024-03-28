@@ -13,6 +13,293 @@
 	comune con \strong{SQL}, che è invece un linguaggio di query
 	per database relazionali.}.
 
+	La nozione più importante nel linguaggio SPARQL è il
+	\strong{pattern di tripla RDF}. Questa è di fatto analoga
+	ad una tripla RDF, ma oltre ad ammettere IRI, letterali e
+	nodi blank può contenere anche \strong{variabili di query},
+	che ha il carattere "?" come prefisso. Tale pattern viene
+	riportato nel quarto campo di una query SPARQL dopo la 
+	direttiva \tt{WHERE}.
+
+	Un pattern di tripla viene valutato mappando le variabili/costanti 
+	del pattern alle costanti del grafo, di modo che l'immagine del 
+	pattern rispetto alla mappa (dove le variabili del pattern sono 
+	sostituite con le rispettive costanti del grafo) sia un sottografo 
+	del grafo. Nello specifico, gli IRI ed i letterali hanno un match 
+	solamente con, rispettivamente, un IRI ed un letterale a loro 
+	identico, mentre i blank node e le variabili di query hanno un 
+	match con qualsiasi termine. La differenza fra i due sta nel
+	fatto che i termini che hanno un match con una variabile di
+	query possono venire restituiti come parte della soluzione,
+	mentre quelli che hanno un match con un blank node non possono.
+
+	Sia \math{Con} un insieme infinito numerabile di costanti, e sia
+	invece \math{Var} un insieme infinito numerabile di variabili: i 
+	due insiemi sono disgiunti. L'insieme dei termini \math{Term} é
+	formulato come \math{Term = Con \cup Var}. Un grafo diretto ed
+	etichettato é definito come una tupla \math{G = (V, E, L)}, dove
+	\math{V \subseteq Con} é un insieme di nodi, \math{L \subseteq
+	Con} é un insieme di etichette e \math{E \subseteq V \times L
+	\times V} é un insieme di archi.
+
+	Un pattern di tripla é formalmente definito come una tupla \math{Q
+	= (V, E, L)}, dove \math{V \subseteq Term} é un insieme di termini 
+	assegnabili ai nodi (IRI e blank nodes), \math{L \subseteq Term}
+	é un insieme di termini assegnabili agli archi (IRI) e e \math{E
+	\subseteq V \times L \times V} é un insieme di archi (triple
+	pattern).
+
+	Sia \math{\mu : Var \mapsto Con} una mappa, il cui dominio é
+	indicato con \math{\mi{Dom}(\mu)}. Dato un pattern di tripla
+	\math{Q}, sia \math{Var(Q)} l'insieme di tutte le variabili
+	che compaiono in \math{Q}. Sia poi \math{\mu(Q)} l'immagine
+	di \math{Q} rispetto ad \math{\mu}, ovvero il sottografo indotto
+	da \math{Q} dove tutte le variabili \math{v \in \mi{Var}(Q) \cap
+	\mi{Dom}(\mu)} vengono sostituite con \math{\mu(v)}.
+
+	Dati due grafi diretti ed etichettati \math{G_{1} = (V_{1},
+	E_{1}, L_{1})} e \math{G_{2} = (V_{2}, E_{2}, L_{2})}, si dice
+	che \math{G_{1}} é sottografo di \math{G_{2}} se \math{V_{1} 
+	\subseteq V_{2}, E_{1} \subseteq E_{2}, L_{1} \subseteq L_{2}}.
+
+	Formalmente, sia \math{Q} un pattern di tripla e sia \math{G} un
+	grafo diretto ed etichettato. La valutazione del pattern \math{Q}
+	sul grafo \math{G}, indicato con \math{Q(G)}, viene definito
+	dall'insieme \math{Q(G) = \{\mu | \mu(Q) \subseteq G \wedge
+	\mi{Dom}(\mu) = \mi{Var}(Q)\}}.
+
+	Un pattern di tripla restituisce una tabella. Per questo motivo,
+	un pattern di tripla puó venire poi esteso con gli operatori propri
+	dell'algebra relazionale per creare \strong{pattern complessi}. Gli
+	operatori elementari dell'algebra relazionale sono i seguenti:
+
+	\begin{itemize}
+		\begin{item}
+			\math{\pi}, che restituisce la tabella con una o piú colonne
+			rimosse;
+		\end{item}
+		\begin{item}
+			\math{\sigma}, che restituisce solo le righe della tabella
+			che rispettano una determinata condizione;
+		\end{item}
+		\begin{item}
+			\math{\rho}, che restituisce la tabella con una o piú colonne
+			cambiate di nome;
+		\end{item}
+		\begin{item}
+			\math{\cup}, che unisce le righe di due tabelle in un'unica 
+			tabella;
+		\end{item}
+		\begin{item}
+			\math{-}, che rimuove le righe della prima tabella che compaiono
+			nella seconda;
+		\end{item}
+		\begin{item}
+			\math{\bowtie}, che estendono le righe della prima tabella con le
+			righe della seconda tabella che rispettano una determinata condizione;
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	I pattern complessi sono definiti in maniera ricorsiva come segue:
+
+	\begin{itemize}
+		\begin{item}
+			Se \math{Q} é un pattern semplice, allora \math{Q} é un
+			pattern complesso;
+		\end{item}
+		\begin{item}
+			Se \math{Q} é un pattern complesso e \math{V \subseteq
+			\mi{Var}(Q)}, allora \math{\pi_{v}(Q)} é un pattern 
+			complesso;
+		\end{item}
+		\begin{item}
+			Se \math{Q} é un pattern complesso e \math{R} é una
+			condizione di selezione espressa per mezzo di operatori
+			booleani (\math{\wedge, \vee, \neg, =}), allora 
+			\math{\sigma_{R}(Q)} é un pattern complesso;
+		\end{item}
+		\begin{item}
+			Se \math{Q_{1}} e \math{Q_{2}} sono due pattern complessi,
+			allora \math{Q_{1} \bowtie Q_{2}}, \math{Q_{1} \cup Q_{2}}
+			e \math{Q_{1} - Q_{2}} sono pattern complessi.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Data una mappa \math{\mu}, per un insieme di variabili \math{V \subseteq
+	\mi{Var}} sia \math{\mu[V]} la proiezione delle variabili \math{V} da 
+	\math{\mu}, ovvero la mappatura \math{\mu'} tale per cui \math{\mi{Dom}
+	(\mu') = \mi{Dom}(\mu) \cap V} e \math{\mu'(v) = \mu(v)} per ogni
+	\math{v \in \mi{Dom}(\mu')}. Data la condizione di selezione \math{R}
+	ed una mappa \math{\mu}, si indica con \math{\mu \vdash R} che la mappa
+	\math{\mu} soddisfa \math{R}. Infine, due mappe \math{\mu_{1}} e
+	\math{\mu_{2}} vengono dette \em{compatibili} se \math{\mu_{1}(v) =
+	\mu_{2}(v) per ogni \math{v} \in \mi{Dom}(\mu_{1}) \cap \mi{Dom}(\mu_{2})},
+	ovvero se mappano le variabili che hanno in comune alle medesime costanti.
+	Due mappe compatibili \math{\mu_{1}} e \math{\mu_{2}} si indicano con 
+	\math{\mu_{1} ~ \mu_{2}}.
+
+	Le operazioni sui pattern semplici, che restituiscono pattern complessi,
+	si indicano allora come segue:
+
+	\begin{itemize}
+		\begin{item}
+			\begin{math}
+				\pi_{V}(Q) (G) = \{\mu{V} |
+				\mu \in Q(G)\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				\sigma_{R}(Q) (G) = \{\mu |
+				\mu \in Q(G) \wedge \mu \vdash R\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				Q_{1} \bowtie Q_{2} (G) = \{\mu_{1} \cup \mu_{2} |
+				\mu_{1} \in Q_{2}(G) \wedge \mu_{2} \in Q_{1}(G) \wedge \mu_{1} ~ \mu_{2}\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				Q_{1} \cup Q_{2} (G) = \{\mu |
+				\mu \in Q_{1}(G) \vee \mu \in Q_{2}(G)\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				Q_{1} - Q_{2} (G) = \{\mu |
+				\mu \in Q_{1}(G) \wedge \mu \notin Q_{2}(G)\}
+			\end{math}
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Una funzionalitá che distingue i linguaggi di query é la
+	possibilitá di includere le \strong{path expression} nelle
+	query. Una path expression é una espressione regolare che
+	permette di avere un match su percorsi di lunghezza variabile
+	fra due nodi mediante una \strong{path query} \math{(x, r, y)},
+	dove \math{x} e \math{y} possono essere sia variabili che 
+	costanti. Le path expression \em{semplici} sono quelle dove 
+	\math{r} é una costante, ovvero l'etichetta di un arco; si
+	noti come le path expression siano sempre invertibili. É poi
+	possibile costruire path expression \em{complesse} mediante
+	i noti operatori delle espressioni regolari oppure mediante
+	inversione:
+
+	\begin{itemize}
+		\begin{item}
+			Se \math{r} é una path expression (l'etichetta di
+			un arco), allora \math{r*} é una path expression
+			(un certo numero di archi etichettati \math{r} o
+			anche nessuno);
+		\end{item}
+		\begin{item}
+			Se \math{r} é una path expression, allora \math{r^{-}}
+			é una path expression (l'etichetta \math{r} letta a 
+			rovescio);
+		\end{item}
+		\begin{item}
+			Se \math{r_{1}} e \math{r_{2}} sono due path expression,
+			allora \math{r_{1} | r_{2}} é una path expression (é
+			presente l'etichetta \math{r_{1}} di un arco oppure é
+			presente l'etichetta \math{r_{2}} di un arco);
+		\end{item}
+		\begin{item}
+			Se \math{r_{1}} e \math{r_{2}} sono due path expression,
+			allora \math{r_{1} \cdot r_{2}} é una path expression (é
+			presente l'etichetta \math{r_{1}} di un arco seguita
+			dall'etichetta \math{r_{2}} di un arco).
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Dato un grafo diretto ed etichetato \math{G = (V, E, L)} ed una 
+	path expression \math{r}, si definisce l'applicazione di \math{r}
+	su \math{G}, ovvero \math{r[G]}, come segue:
+
+	\begin{itemize}
+		\begin{item}
+			\begin{math}
+				r[G] = \{(u, v) | (u, r, v) \in E\} (r \in Con)
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				r^{-}[G] = \{(u, v) | (v, u) \in r[G]\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				r_{1} | r_{2} [G] = r_{1}[G] \cup r_{2}[G]
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				r_{1} \cdot r_{2} [G] = \{(u, v) | \exists w \in V: (u, w) \in r_{1}[G] \wedge (w, v) \in r_{2}[G]\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				r*[G] = \{(u, u) | u \in V\} \bigcup_{n \in \dsi{N}^{+}} r^{n}[G]
+			\end{math}
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Dato un grafo diretto ed etichettato \math{G}, delle costanti
+	\math{c_{i} \in Con} e delle variabili \math{z_{i} \in Var},
+	una \strong{path query} semplice é una tripla \math{(x, y, z)}
+	dove \math{x, y \in Con \cup Var} e \math{r} é una path expression.
+	La valutazione di una path query é definita come segue:
+
+	\begin{itemize}
+		\begin{item}
+			\begin{math}
+				(c_{1}, r, c_{2}) (G) = \{\mu_{\varnothing} |
+				(c_{1}, c_{2}) \in r[G]\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				(c, r, z) (G) = \{\mu |
+				\mi{Dom}(\mu) = \{z\} \wedge (c, \mu(z)) \in r[G]\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				(z, r, c) (G) = \{\mu |
+				\mi{Dom}(\mu) = \{z\} \wedge (\mu(z), c) \in r[G]\}
+			\end{math}
+		\end{item}
+		\begin{item}
+			\begin{math}
+				(z_{1}, r, z_{2}) (G) = \{\mu |
+				\mi{Dom}(\mu) = \{z_{1}, z_{2}\} \wedge (\mu(z_{1}), \mu(z_{2})) \in r[G]\}
+			\end{math}
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Dove \math{\mu_{\varnothing}} indica la mappatura vuota,
+	ovvero \math{\mi{Dom}(\mu_{\varnothing}) = \varnothing}.
+
+	Path query semplici possono essere usate come pattern di
+	tripla per ottenere \strong{graph pattern di navigazione}.
+	Se \math{Q} é un pattern di tripla, allora é anche un graph
+	pattern di navigazione. Se \math{Q} é un graph pattern di
+	navigazione e \math{(x, r, y)} é una path query, allora
+	\math{Q \bowtie (x, r, y)} é un graph pattern di navigazione.
+
 	Una query SPARQL è costituita dalle seguenti sei componenti,
 	non tutte strettamente obbligatorie:
 
@@ -23,12 +310,6 @@
 			mediante la direttiva \tt{PREFIX}, seguita dal
 			nome scelto per il prefisso e dall'URI a cui il
 			prefisso è associato;
-		\end{item}
-		\begin{item}
-			\em{Costruzione del dataset}. mediante la direttiva
-			\tt{FROM} è possibile specificare su quale/i grafo/i
-			si vuole operare la query. Se vengono specificati più
-			grafi, la query verrà operata sulla loro unione;
 		\end{item}
 		\begin{item}
 			\em{Tipo di query}. SPARQL supporta
@@ -42,7 +323,11 @@
 					l'eliminazione delle soluzioni 
 					duplicate per mezzo delle direttive
 					\tt{REDUCED} (possono essere rimosse)
-					e \tt{DISTINCT} (devono essere rimosse);
+					e \tt{DISTINCT} (devono essere rimosse).
+					É possibile restituire l'intera tabella
+					con tutte le colonne con "*" oppure 
+					specificando solo parte delle colonne
+					mediante proiezione;
 				\end{item}
 				\begin{item}
 					\tt{ASK}, che restituisce true se
@@ -63,15 +348,26 @@
 			\end{itemize}
 		\end{item}
 		\begin{item}
+			\em{Costruzione del dataset}. mediante la direttiva
+			\tt{FROM} è possibile specificare su quale/i grafo/i
+			si vuole operare la query. Se vengono specificati più
+			grafi, la query verrà operata sulla loro unione;
+		\end{item}
+		\begin{item}
 			\em{Pattern}. La direttiva \tt{WHERE} specifica il 
 			pattern che discrimina un elemento del grafo che è
-			parte della soluzione da uno che non lo è;
+			parte della soluzione da uno che non lo è. Le condizioni
+			sono riportate in un blocco di parentesi graffe seguendo
+			la sintassi Turtle;
 		\end{item}
 		\begin{item}
 			\em{Aggregazione}. Le direttive \tt{GROUP BY} e
 			\tt{HAVING}, analoghe alle direttive omonime di
 			SQL permettono di raggruppare o di filtrare gli
-			elementi della soluzione secondo specifiche regole; 
+			elementi della soluzione secondo specifiche regole.
+			I valori possono venire aggregati sulla base di diverse
+			direttive quali \tt{COUNT}, \tt{SUM}, \tt{MIN}, \tt{MAX},
+			\tt{AVG}; 
 		\end{item}
 		\begin{item}
 			\em{Modificatori della soluzione}. Alcune direttive
@@ -83,26 +379,110 @@
 
 	\bigskip
 
-	La nozione più importante nel linguaggio SPARQL è il
-	\strong{pattern di tripla RDF}. Questa è di fatto analoga
-	ad una tripla RDF, ma oltre ad ammettere IRI, letterali e
-	nodi blank può contenere anche \strong{variabili di query},
-	che ha il carattere "?" come prefisso. Tale pattern viene
-	riportato nel quarto campo di una query SPARQL dopo la 
-	direttiva \tt{WHERE}.
+	\begin{example}
+		\begin{verbatim}
+			PREFIX dbpedia: <http://dbpedia.org/resource/>
+			PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+			PREFIX dc: <http://purl.org/dc/elements/1.1/>
+			PREFIX mo: <http://purl.org/ontology/mo/>
 
-	I risultati delle query SPARQL sono ottenuti mediante
-	\strong{pattern matching}: quando un client SPARQL invia
-	una query ad un server SPARQL, questo analizza il pattern
-	di tripla contenuto nella query e restituisce tutte le
-	triple dei grafi specificati nella query che coincidono
-	con tale pattern. Nello specifico, gli IRI ed i letterali
-	hanno un match solamente con, rispettivamente, un IRI ed
-	un letterale a loro identico, mentre i blank node e le
-	variabili di query hanno un match con qualsiasi termine.
-	La differenza fra i due sta nel fatto che i termini che
-	hanno un match con una variabile di query possono venire
-	restituiti come parte della soluzione, mentre quelli che
-	hanno un match con un blank node non possono.
+			\bigskip
+			SELECT ?album_name ?track_title
+			WHERE {
+			    dbpedia:The_Beatles foaf:made ?album       .
+			    ?album              dc:title  ?album_name  ;
+			                        mo:track  ?track       .
+			    ?track              dc:title  ?track_title .
+			}
+		\end{verbatim}
+	\end{example}
+
+	I modificatori di soluzione sono diversi, fra cui figurano:
+
+	\begin{itemize}
+		\begin{item}
+			\tt{OPTIONAL} quando una parte del grafo non é
+			obbligatoria;
+		\end{item}
+		\begin{item}
+			\tt{UNION} quando si vuole ricavare l'unione di due
+			o piú sottografi risultanti;
+		\end{item}
+		\begin{item}
+			\tt{MINUS} quando si vuole eliminare i risultati che
+			hanno una corrispondenza con un pattern;
+		\end{item}
+		\begin{item}
+			\tt{VALUES} quando parte del match é predefinito;
+		\end{item}
+		\begin{item}
+			\tt{BIND} quando parte del match é precalcolato;
+		\end{item}
+		\begin{item}
+			\tt{FILTER} quando occorre rimuovere i risultati che 
+			rispecchiano un certo pattern espresso sottoforma di
+			espressione booleana;
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Le espressioni booleane ammesse in SPARQL possono contenere i
+	seguenti elementi:
+
+	\begin{itemize}
+		\begin{item}
+			Variabili e costanti;
+		\end{item}
+		\begin{item}
+			Operatori di uguaglianza e disuguaglianza:
+			\tt{=}, \tt{<=}, \tt{>=}, \tt{!=};
+		\end{item}
+		\begin{item}
+			Connettori: \tt{&&}, \tt{||},
+			\tt{(}, \tt{)}, \tt{!};
+		\end{item}
+		\begin{item}
+			Espressioni regolari:
+			\tt{regex(?x, "A.*")};
+		\end{item}
+		\begin{item}
+			Test sulla natura delle variabili:
+			\tt{isURI(?x)}, \tt{isBlank(?x)},
+			\tt{isLiteral(?x)}, \tt{bound(?x)}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	\begin{itemize}
+		\begin{item}
+			Inclusione di una stringa
+
+			\tt{CONTAINS(literal1, literal2),
+			STRSTARTS(literal1, literal2),
+			STRENDS(literal1, literal2)}
+		\end{item}
+		\begin{item}
+			Crea un letterale con un tipo di dato associato
+
+			\tt{STRDT(value, type)}
+		\end{item}
+		\begin{item}
+			Crea un letterale con un language tag associato
+
+			\tt{STRLANG(value, lang)}
+		\end{item}
+		\begin{item}
+			Concatena piú stringhe
+
+			\tt{CONCAT(literal1, literal2, ..., literaln)}
+		\end{item}
+		\begin{item}
+			Estrai una sottostringa
+
+			\tt{SUBSTR(literal, start [, length])}
+		\end{item}
+	\end{itemize}
 
 \end{sile}

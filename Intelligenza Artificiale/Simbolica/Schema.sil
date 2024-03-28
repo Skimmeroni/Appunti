@@ -1,0 +1,373 @@
+\begin{sile}
+
+	Come giá detto, il terzo membro di una tripla RDF puó essere
+	un IRI o un letterale. Nel primo caso, é possibile vedere tale
+	tripla come la descrizione di una relazione fra l'entitá primo
+	membro della tripla e l'entitá terzo membro della tripla, mentre
+	nel secondo caso la tripla riporta che il primo membro della
+	tripla ha come attributo il terzo membro. Si noti peró come RDF
+	non fornisca esplicitamente un'interpretazione di questo tipo,
+	ma é piú una assunzione implicita.
+
+	La semantica definita da RDF si limita soltanto al vincolo
+	di tripla (tutte le risorse devono essere nella forma
+	soggetto-predicato-oggetto) ed il tipo di ciascun termine
+	(il predicato non puó essere un blank node, il soggetto non
+	puó essere un letterale, ecc\ddd). Al di lá di questo, RDF
+	non fornisce alcun tipo di \strong{ontologia}. Una ontologia
+	é una descrizione dei concetti e delle relazioni che possono
+	formalmente esistere per un agente o per un insieme di agenti.
+
+	\strong{Resource Description Framework Schema} (\strong{RDFS})
+	é un semplice linguaggio che permette di associare uno schema
+	ad un insieme di dati scritti in formato RDF. Questo permette
+	di descrivere le risorse RDF in termini di classi e di proprietá.
+	Queste hanno \tt{rdfs:} come prefisso.
+
+	RDFS si compone di due elementi concettuali ad alto livello: le
+	\strong{proprietá} e le \strong{classi}. Le proprietá sono le 
+	relazioni che sussistono fra coppie di risorse: sono i termini
+	in genere presenti come predicati nelle triple. Le classi sono
+	gruppi di risorse che hanno caratteristiche in comune. Una risorsa
+	puó essere membro di piú classi. Un membro di una classe é detto
+	\strong{istanza} di tale classe. La classe di una risorsa viene
+	anche chiamata il suo \strong{tipo}. Per convenzione, le classi
+	hanno un nome con la prima lettera maiuscola, mentre le proprietá
+	hanno un nome con la prima lettera minuscola.
+
+	RDFS permette inoltre di fare \strong{inferenze} a partire
+	dalle informazioni a disposizione. Nello specifico, a partire
+	da una certa semantica, é possibile definire una nozione di
+	\strong{entailment} tra due grafi RDF di modo che se il primo
+	grafo contiene triple vere, allora anche il secondo conterrá
+	triple vere (rispetto alla medesima semantica). In questo caso,
+	il secondo grafo non aggiunge alcuna informazione che non sia
+	giá presente, eventualmente implicitamente, nel primo grafo.
+	RDFS mette a disposizione 13 regole di inferenza:
+
+	\begin[cols = 10%fw 55%fw 35%fw]{ptable}
+		\begin{row}
+			\begin{cell}
+				\strong{Regola}
+			\end{cell}
+			\begin{cell}
+				\strong{Se vale\ddd}
+			\end{cell}
+			\begin{cell}
+				\strong{\ddd allora si deduce}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 1
+			\end{cell}
+			\begin{cell}
+				\tt{xxx aaa yyy .}
+			\end{cell}
+			\begin{cell}
+				\tt{aaa rdf:type rdfs:Property .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 2
+			\end{cell}
+			\begin{cell}
+				\tt{aaa rdfs:domain xxx .} \par
+				\tt{yyy aaa zzz .}
+			\end{cell}
+			\begin{cell}
+				\tt{yyy rdf:type xxx .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 3
+			\end{cell}
+			\begin{cell}
+				\tt{aaa rdfs:range xxx .} \par
+				\tt{yyy aaa zzz .}
+			\end{cell}
+			\begin{cell}
+				\tt{zzz rdf:type xxx .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 4a
+			\end{cell}
+			\begin{cell}
+				\tt{xxx aaa yyy .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdfs:Resource .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 4b
+			\end{cell}
+			\begin{cell}
+				\tt{xxx aaa yyy .}
+			\end{cell}
+			\begin{cell}
+				\tt{yyy rdf:type rdfs:Resource .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 5
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subPropertyOf yyy .} \par
+				\tt{yyy rdfs:subPropertyOf zzz .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subPropertyOf zzz .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 6
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdf:Property .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subPropertyOf xxx .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 7
+			\end{cell}
+			\begin{cell}
+				\tt{aaa rdfs:subPropertyOf bbb .} \par
+				\tt{xxx aaa yyy .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx bbb yyy .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 8
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdfs:Class .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf rdfs:Resource .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 9
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf yyy .} \par
+				\tt{zzz rdf:type xxx .}
+			\end{cell}
+			\begin{cell}
+				\tt{zzz rdf:type yyy .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 10
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdfs:Class .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf xxx .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 11
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf yyy .} \par
+				\tt{yyy rdfs:subClassOf zzz .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf zzz .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 12
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdfs:ContainerMembershipProperty .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subPropertyOf rdfs:member .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Regola 13
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdfs:DataType .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf rdfs:Literal .}
+			\end{cell}
+		\end{row}
+	\end{ptable}
+
+	\bigskip
+
+	La proprietá \tt{rdf:type} permette di istanziare una
+	classe. La tripla \tt{A rdf:type B} indica che l'entitá
+	\tt{A} é una istanza della classe \tt{B}. Diverse entitá
+	in RDFS sono istanze di metaclassi predefinite:
+
+	\begin{itemize}
+		\begin{item}
+			Ogni risorsa (classi, entitá, proprietá, letterali,
+			ecc\ddd) é implicitamente istanza della metaclasse
+			\tt{rdfs:Resource};
+		\end{item}
+		\begin{item}
+			Tutte le proprietá sono istanza di \tt{rdf:Property};
+		\end{item}
+		\begin{item}
+			Le classi sono istanza di \tt{rdfs:Class};
+		\end{item}
+		\begin{item}
+			I letterali sono istanza di \tt{rdfs:Literal};
+		\end{item}
+		\begin{item}
+			I tipi di dato (\tt{xsd:string}, \tt{xsd:integer},
+			ecc\ddd) sono istanza di \tt{rdfs:Datatype}.
+		\end{item}
+	\end{itemize}
+
+	\begin{example}
+		\begin{verbatim}
+			ex:LemonCheesecake   ex:contains   ex:Lemon
+			ex:LemonCheesecake   ex:contains   ex:Cheese
+			ex:LemonCheesecake   rdf:type      ex:DessertRecipe
+			ex:Lemon             rdf:type      ex:Ingredient
+			ex:Lemon             rdf:type      ex:Fruit
+			ex:Cheese            rdf:type      ex:Ingredient
+			ex:Cheese            rdf:type      ex:Dairy
+		\end{verbatim}
+	\end{example}
+
+	\tt{rdfs:subClassOf} mette due classi nella relazione di sottoclasse.
+	La tripla \tt{C rdfs:subClassOf D} indica che la classe \tt{C} é una
+	sottoclasse della classe \tt{D}, ovvero che tutte le istanze di \tt{C}
+	sono automaticamente anche istanze di \tt{D}. Questa relazione é sia
+	riflessiva (ogni classe é sottoclasse di sé stessa) che transitiva
+	(se \tt{C} é sottoclasse di \tt{D} e \tt{D} é sottoclasse di \tt{E},
+	allora \tt{C} é sottoclasse di \tt{E}).
+
+	\begin{example}
+		Si consideri il seguente insieme di triple:
+
+		\begin{verbatim}
+			ex:DessertRecipe      rdfs:subClassOf   ex:Recipe
+			ex:VeganRecipe        rdfs:subClassOf   ex:VegetarianRecipe
+			ex:VegetarianRecipe   rdfs:subClassOf   ex:Recipe
+			ex:LemonPie           rdfs:subClassOf   ex:DessertRecipe
+			ex:LemonPie           rdfs:subClassOf   ex:VeganRecipe
+		\end{verbatim}
+
+		Per simmetricitá, sono automaticamente vere anche
+		le seguenti triple:
+
+		\begin{verbatim}
+			ex:DessertRecipe      rdfs:subClassOf   ex:Recipe
+			ex:Recipe             rdfs:subClassOf   ex:Recipe
+			ex:VeganRecipe        rdfs:subClassOf   ex:VeganRecipe
+			ex:VegetarianRecipe   rdfs:subClassOf   ex:VegetarianRecipe
+			ex:LemonPie           rdfs:subClassOf   ex:LemonPie
+		\end{verbatim}
+
+		Inoltre, per transitivitá, vale:
+
+		\begin{verbatim}
+			ex:VeganRecipe        rdfs:subClassOf   ex:Recipe
+			ex:LemonPie           rdfs:subClassOf   ex:VegetarianRecipe
+			ex:LemonPie           rdfs:subClassOf   ex:Recipe
+		\end{verbatim}
+	\end{example}
+
+	\tt{rdfs:subPropertyOf} mette due proprietá nella relazione di
+	sottoproprietá. La tripla \tt{C rdfs:subPropertyOf D} indica che
+	la proprietá \tt{P} é una sottoproprietá della proprietá \tt{Q},
+	ovvero che tutte le coppie di entitá legate da \tt{P} sono 
+	automaticamente legate anche da \tt{Q}. Cosí come la relazione
+	di sottoclasse, la relazione di sottoproprietá é é sia riflessiva
+	che transitiva.
+
+	\begin{example}
+		A partire dalle triple:
+
+		\begin{verbatim}
+			ex:hasTopping      rdfs:subPropertyOf   ex:hasIngredient
+			ex:hasIngredient   rdfs:subPropertyOf   ex:contains
+		\end{verbatim}
+
+		É possibile inferire:
+
+		\begin{verbatim}
+			ex:hasTopping      rdfs:subPropertyOf   ex:hasTopping
+			ex:hasIngredient   rdfs:subPropertyOf   ex:hasIngredient
+			ex:contains        rdfs:subPropertyOf   ex:contains
+			ex:hasTopping      rdfs:subPropertyOf   ex:contains
+		\end{verbatim}
+	\end{example}
+
+	\tt{rdfs:domain} mette in relazione una proprietá \tt{P} ed
+	una classe \tt{C}. La tripla \tt{P rdfs:domain C} indica che
+	se due elementi \tt{x} e \tt{y} sono messi in relazione dalla
+	proprietá \tt{P}, allora \tt{x} é una istanza di \tt{C}.
+
+	\begin{example}
+		A partire dalle triple:
+
+		\begin{verbatim}
+			ex:hasIngredient   rdfs:domain        ex:Recipe
+			ex:LemonPie        ex:hasIngredient   ex:Lemon
+		\end{verbatim}
+
+		É possibile inferire:
+
+		\begin{verbatim}
+			ex:LemonPie   rdf:type   ex:Recipe
+		\end{verbatim}
+	\end{example}
+
+	\tt{rdfs:range} mette in relazione una proprietá \tt{P} ed
+	una classe \tt{C}. La tripla \tt{P rdfs:range C} indica che
+	se due elementi \tt{x} e \tt{y} sono messi in relazione dalla
+	proprietá \tt{P}, allora \tt{y} é una istanza di \tt{C}.
+
+	\begin{example}
+		A partire dalle triple:
+
+		\begin{verbatim}
+			ex:hasIngredient   rdfs:range         ex:Ingredient
+			ex:LemonPie        ex:hasIngredient   ex:Lemon
+		\end{verbatim}
+
+		É possibile inferire:
+
+		\begin{verbatim}
+			ex:Lemon   rdf:type   ex:Ingredient
+		\end{verbatim}
+	\end{example}
+
+	Le classi e le proprietá forniscono un \strong{vocabolario}, ovvero
+	un insieme di termini RDF per descrizioni generali. Una singola
+	proprietá o una classe puó essere usata per descrivere un numero
+	arbitrario di istanze. É facile riutilizzare uno stesso vocabolario
+	in diversi grafi RDF.
+
+\end{sile}

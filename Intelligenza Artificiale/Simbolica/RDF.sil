@@ -1,33 +1,22 @@
 \begin{sile}
 
-	\strong{Resource Description Framework} (\strong{RDF}) é un modello
-	di dati strutturato a grafo; sebbene inizialmente concepito per il
+	\strong{Resource Description Framework} (\strong{RDF}) é un esempio
+	di modello di dati a grafo; sebbene inizialmente concepito per il
 	web (é infatti parte di un insieme di protocolli piú grande noto
 	come \strong{Semantic Web Stack}), trova uso anche come formato per
 	la rappresentazione della conoscenza.
 
-	RDF é un modello di dati pensato per descrivere risorse. Con
-	\strong{risorsa} si intende qualsiasi entitá a cui sia possibile
-	associare un'identitá, che siano entitá virtuali (pagine web, siti
-	web, file, \ddd), entitá concrete (libri, persone, luoghi, \ddd) o
-	entitá astratte (specie animali, categorie, ere geologiche, \ddd)
-	\footnote{Si noti come questo comporti che diverse risorse che in 
-	un dataset RDF sono presenti quasi con certezza debbano venire 
-	reimplementati da capo. Fortunatamente, esistono servizi che si
-	prefiggono di "standardizzare" la definizione di diverse risorse,
-	di modo che siano riutilizzabili. Un esempio di questi é FOAF:
-	\tt{xmlns.com/foaf/spec}.}.
+	\section{Termini}
 
-	\subsection{Termini}
-
-		Ad una risorsa RDF viene fatto riferimento attraverso un
-		\strong{termine}. In genere, un termine non é una semplice
-		stringa di caratteri, dato che é facile trovarsi in una
-		situazione in cui diversi dataset si riferiscono con lo
-		stesso nome a risorse diverse, in particolare se tali
-		dataset provengono dal Web da fonti diverse. In RDF esistono
-		tre tipi di termini: \strong{IRI}, \strong{letterali} e
-		\strong{nodi blank}. 
+		RDF é un modello di dati pensato per descrivere risorse.
+		Con \strong{risorsa} si intende qualsiasi entitá a cui sia
+		possibile associare un'identitá, che siano entitá virtuali
+		(pagine web, siti web, file, \ddd), entitá concrete (libri,
+		persone, luoghi, \ddd) o entitá astratte (specie animali,
+		categorie, ere geologiche, \ddd). Ad una risorsa RDF viene
+		fatto riferimento attraverso un \strong{termine}; RDF
+		ammette l'esistenza di tre tipi di termini: \strong{IRI},
+		\strong{letterali} e \strong{nodi blank}. 
 
 		Un IRI (\strong{International Resource Identifier}) é una stringa di
 		caratteri Unicode che identifica univocamente una qualsiasi risorsa;
@@ -43,24 +32,25 @@
 		secondo il nome proprio della risorsa, scritto con una sintassi
 		specifica. Pertanto, ad una risorsa é possibile riferirsi
 		indifferentemente per locazione (URL) o per nome (URN).
+		\footnote{Si noti come gli IRI risolvono il problema di avere
+		a che fare con risorse diverse aventi lo stesso nome, ma non
+		risolvono il problema inverso, ovvero dove IRI distinti si
+		riferiscono alla stessa risorsa. RDF permette che una situazione
+		di questo tipo si verifichi, ma in genere é preferibile risolvere
+		questo tipo di conflitti adottando uno degli IRI che si riferiscono
+		alla stessa risorsa a discapito degli altri.}.
 
-		Si noti come gli IRI risolvono il problema di avere a che fare con
-		risorse diverse aventi lo stesso nome, ma non risolvono il problema
-		inverso, ovvero dove IRI distinti si riferiscono alla stessa risorsa.
-		RDF permette che una situazione di questo tipo si verifichi, ma in 
-		genere é preferibile risolvere questo tipo di conflitti adottando
-		uno degli IRI che si riferiscono alla stessa risorsa a discapito
-		degli altri.
+		\begin{example}
+			Le seguenti stringhe alfanumeriche sono degli IRI validi:
 
-		Piú IRI provenienti dallo stesso dataset hanno molto spesso dei prefissi
-		in comune. Inoltre, gli IRI tendono ad essere stringhe molto lunghe. Per
-		risolvere entrambi i problemi, RDF ammette la possibilitá di assegnare
-		delle abbreviazioni ai prefissi.
+			\begin{verbatim}
+				https://www.example.org/alice   https://en.wikipedia.org/wiki/Ice_cream   https://www.nyc.org
+			\end{verbatim}
+		\end{example}
 
-		Si noti inoltre come gli IRI non possano fornire (in maniera efficiente)
-		informazioni relative a descrizioni, date, valori numerici, ecc\ddd Tali
-		dati sono riportati come letterali. In RDF, un letterale é costituito
-		dalle seguenti tre componenti:
+		I letterali forniscono informazioni relative a descrizioni, date,
+		valori numerici, ecc\ddd. In RDF, un letterale é costituito dalle
+		seguenti tre componenti:
 
 		\begin{itemize}
 			\begin{item}
@@ -142,13 +132,13 @@
 
 	\subsection{Triple}
 
-		Mentre i termini RDF sono usati per identificare le risorse,
-		le \strong{triple} sono usati per descriverle. Una tripla RDF
-		é nella forma soggetto-predicato-oggetto \footnote{La struttura
-		segue quella delle lingue anglosassoni.}, dove tutti e tre gli
-		elementi sono termini RDF. Nello specifico, il soggetto deve
-		essere un IRI o un blank node, il predicato deve essere un IRI
-		e l'oggetto puó essere di qualsiasi tipo di termine.
+		I dati in formato RDF non possono riportare risorse singole, ma 
+		solo ed esclusivamente \strong{triple}. Una tripla RDF é nella
+		forma soggetto-predicato-oggetto \footnote{La struttura segue
+		quella delle lingue anglosassoni.}, dove tutti e tre gli elementi
+		sono termini RDF. Nello specifico, il soggetto deve essere un IRI
+		o un blank node, il predicato deve essere un IRI e l'oggetto puó
+		essere di qualsiasi tipo di termine.
 
 		\begin{example}
 			\begin[width = 50%fw]{parbox}
@@ -169,13 +159,22 @@
 		di minore importanza rispetto agli IRI, pertanto sarebbe poco
 		sensato averli come soggetto di una tripla.
 
-		Sebbene, per convenzione, il soggetto di una tripla sia la
-		"risorsa primaria" che viene descritta dalla tripla stessa,
-		la distinzione é del tutto arbitraria, in quanto é possibile
-		invertire l'ordine del soggetto e dell'oggetto di una tripla
-		per ottenerne una che descrive la stessa cosa.
-
-	\subsection{Grafi}
+		Sebbene le triple RDF non abbiano di per loro una
+		semantica, le restrizioni sui tipi di termini che
+		possono comparire in ciascuna tripla porta portano
+		a due tipi di interpretazioni. Se il primo elemento
+		é un IRI o un blank node ed terzo elemento é un letterale,
+		la tripla é da interpretarsi come una descrizione: la tripla
+		\math{(A, B, C)} é da intendersi come "All'entitá A é associata
+		la proprietá C". Se il primo elemento é un IRI o un blank node
+		ed terzo elemento é un IRI, la tripla é da interpretarsi come
+		una relazione: la tripla \math{(A, B, C)} é da intendersi
+		come "L'entitá A é legata per mezzo di B all'entitá C"
+		\footnote{Sebbene, per convenzione, il soggetto di una
+		tripla sia la "risorsa primaria" che viene descritta dalla
+		tripla stessa, la distinzione é del tutto arbitraria, in quanto
+		é possibile invertire l'ordine del soggetto e dell'oggetto di
+		una tripla per ottenerne una che descrive la stessa cosa.}.
 
 		Un insieme di triple RDF costituisce un \strong{grafo RDF}. Il
 		nome grafo deriva dall'osservazione che ciascuna tripla RDF puó
@@ -183,7 +182,8 @@
 		nodi di un grafo uniti da un arco: l'etichetta di tale arco é
 		il predicato della tripla, il soggetto é il nodo di partenza
 		dell'arco e l'oggetto é il nodo di arrivo. Piú triple RDF danno
-		allora vita ad un grafo diretto ed etichettato.
+		allora vita ad un grafo diretto ed etichettato. Tale grafo é un
+		esempio di knowledge graph.
 
 		Il fatto che RDF sia un modello di dati strutturato a grafo lo
 		rende molto flessibile. Infatti, per introdurre nuovi predicati
@@ -202,28 +202,30 @@
 
 	\section{Sintassi: N-triples e Turtle}
 
-		RDF fornisce solamente una semantica per le triple, ma
-		ne non specifica una sintassi. A tal scopo, sono state
-		definite diverse sintassi per le triple RDF, in genere
-		fra loro intercompatibili.
+		Le uniche forme di sintassi specificate da RDF sono il vincolo
+		di tripla ed i tipi di termine che possono comparire nelle tre
+		posizioni delle triple. A parte queste restrizioni, RDF non
+		fornisce alcun formalismo su come, ad esempio, riportare gli
+		IRI ed i letterali. A tal scopo, sono stati definiti diversi
+		formalismi per le triple RDF.
 
 		Una rappresentazione testuale estremamente semplice é
 		\strong{N-triples}; questa prevede di riportare per
 		intero ciascun elemento di ogni tripla, una tripla per
 		riga, terminandole con un punto. Le tre componenti di
 		ciascuna tripla ed il punto alla fine della tripla sono
-		separate da uno o piú spazi. Se un elemento é un IRI,
-		viene riportato fra parentesi angolate, mentre se é un
-		letterale viene riportato fra doppi apici. I blank node,
-		i language tag ed i datatype IRI vengono riportati come
-		di consueto. Una riga che inizia con il carattere "#"
-		viene interpretata come un commento.
+		separate da uno o piú caratteri di spaziatura (spazi, 
+		tab, a capo, ecc\ddd). Se un elemento é un IRI, viene
+		riportato fra parentesi angolate, mentre se é un letterale
+		viene riportato fra doppi apici. I blank node, i language
+		tag ed i datatype IRI vengono riportati come di consueto.
+		Una riga che inizia con il carattere "#" viene interpretata
+		come un commento.
 
 		\begin{example}
-			\begin{verbatim}
-				# Le tre triple riportate di seguito sono sintatticamente valide per N-triples
+			Le tre triple riportate di seguito sono sintatticamente valide per N-triples.
 
-				\bigskip
+			\begin{verbatim}
 				<http://www.example.org/alice>                  <http://schema.org/knows>          <http://www.example.org/bob>   .
 				_:dave                                          <http://xmlns.com/foaf/0.1/name>   "Dave Beckett"^^xsd:string     .
 				<http://www.w3.org/2001/sw/RDFCore/ntriples/>   <http://purl.org/dc/terms/title>   "N-Triples"@en-US              .
@@ -245,10 +247,9 @@
 		non riportare soggetto e predicato nella seconda.
 
 		\begin{example}
-			\begin{verbatim}
-				# Turtle permette di definire triple RDF molto piú facilmente rispetto a N-triples
+			Turtle permette di definire triple RDF molto piú facilmente rispetto a N-triples.
 
-				\bigskip
+			\begin{verbatim}
 				@prefix dbr:   <http://dbpedia.org/resource/>   .
 				@prefix dbo:   <http://dbpedia.org/ontology/>   .
 
@@ -259,22 +260,5 @@
 				dbr:Nevermind     dbo:artist          dbr:Kurt_Cobain     .
 			\end{verbatim}
 		\end{example}
-
-	%\subsection{Classi}
-	%
-	%	\begin{example}
-	%		\begin{verbatim}
-	%			@prefix dbr:  <http://dbpedia.org/resource/> .
-	%			@prefix dbo:  <http://dbpedia.org/ontology/> .
-	%			@prefix rdf:  <http://www.w3.org/2000/01/rdf-schema#> .
-	%			@prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-	%	
-	%			\bigskip
-	%			dbr:Nevermind   rdf:type          dbo:Album        ;
-	%			                dbo:artist        dbr:Kurt_Cobain  .
-	%			dbo:Artist      rdfs:subclassOf   dbo:Person       .
-	%			dbo:Album       rdfs:subclassOf   dbo:Musical_Work .
-	%		\end{verbatim}
-	%	\end{example}
 
 \end{sile}

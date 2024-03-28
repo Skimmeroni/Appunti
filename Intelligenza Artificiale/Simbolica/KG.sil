@@ -76,6 +76,48 @@
 
 	\bigskip
 
+	Nei modelli di database relazionale, i dati sono rigidamente
+	strutturati; la struttura é data dallo schema del database
+	(che definisce le relazioni, le entitá, gli attributi, ecc\ddd).
+	I dati e lo schema sono \em{fortemente accoppiati}, dato che
+	lo schema deve necessariamente venire definito prima di poter
+	inserire i dati. Inoltre, lo schema é prescrittivo, dato che
+	i dati non conformi allo schema non possono venire inseriti nel
+	database.
+
+	Nei modelli di database a grafo, i dati sono parzialmente
+	strutturati, dato che lo schema "emerge" in maniera implicita
+	dal modo in cui sono scritte le triple. I dati e lo schema
+	sono \em{debolmente accoppiati}, dato che i dati possono venire
+	inseriti prima ancora di definire lo schema \footnote{Questa non
+	é comunque una buona pratica, dato che é comunque preferibile
+	definire lo schema prima dei dati.}. Inoltre, lo schema non é
+	prescrittivo, dato che i dati non conformi alla forma attuale
+	dello schema possono venire inseriti comunque (e modificano lo
+	schema).
+
+	Lo schema di un grafo RDF puó essere visto sotto due aspetti.
+	Il primo aspetto é lo schema come "patto sociale", dove i
+	costruttori di grafi si impegnano a seguire degli standard
+	(non obbligatori) per fare in modo che diversi grafi siano
+	fra loro compatibili. Il secondo aspetto é lo schema é uno
+	schema deduttivo, dato che fornisce solamente il significato
+	dei termini e permette di fare inferenze (anche false).
+
+	Un primo approccio al fare in modo che i grafi siano compatibili
+	é quello di costruire dei vocabolari standard che vengono impiegati
+	per modellare domini diversi. Questo approccio funziona se esistono
+	degli enti autorevoli che forniscono tali vocabolari; fra questi 
+	figurano \strong{FOAF} (\strong{friend of a friend}) e \tt{schema.org}.
+
+	Modellare i dati sotto forma di grafo offre maggior flessibilità
+	per integrare nuovi dataset rispetto ai modelli relazionali standard,
+	dove uno schema deve essere definito prima che i dati possano essere
+	inseriti. Nonostante anche modelli di dato ad albero (XML, JSON,
+	ecc\ddd) offrano questa flessibilità, i modelli a grafo non necessitano
+	di dover organizzare i dati in una gerarchia. Inoltre, i modelli a grafo
+	permettono facilmente di rappresentare relazioni cicliche. 
+
 	Essendo un KG un grafo, é possibile studiarne le proprietá
 	tipiche dei grafi (simmetria, antisimmetria, transitivitá,
 	eccetera) e metterle in relazione con il significato che

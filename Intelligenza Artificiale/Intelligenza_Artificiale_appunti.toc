@@ -114,9 +114,9 @@ return {
       "Termini",
       id = "stuff"
     },
-    level = 3,
+    level = 2,
     link = "dest12",
-    number = "2.3.1",
+    number = "2.4",
     pageno = "10"
   },
   {
@@ -126,17 +126,7 @@ return {
     },
     level = 3,
     link = "dest13",
-    number = "2.3.2",
-    pageno = "11"
-  },
-  {
-    label = {
-      "Grafi",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest14",
-    number = "2.3.3",
+    number = "2.4.1",
     pageno = "11"
   },
   {
@@ -145,8 +135,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest15",
-    number = "2.4",
+    link = "dest14",
+    number = "2.5",
     pageno = "12"
   },
   {
@@ -155,8 +145,18 @@ return {
       id = "stuff"
     },
     level = 2,
+    link = "dest15",
+    number = "2.6",
+    pageno = "13"
+  },
+  {
+    label = {
+      "RDFS",
+      id = "stuff"
+    },
+    level = 2,
     link = "dest16",
-    number = "2.5",
-    pageno = "12"
+    number = "2.7",
+    pageno = "15"
   }
 }

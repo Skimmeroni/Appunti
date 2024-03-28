@@ -71,17 +71,4 @@
 	allora ricadere in una logica che si trovi "nel mezzo" fra la logica
 	proposizionale e la logica predicativa.
 
-	%%% ???
-
-	%Esistono due approcci principali alla costruzione di agenti
-	%basati sulla conoscenza. Il primo approccio é l'approccio
-	%\strong{procedurale}, in cui gli agenti vengono istruiti
-	%"manualmente" dal designer e nuovi fatti vengono aggiunti 
-	%sulla base delle conoscenze del designer stesso. Il secondo
-	%approccio, detto \strong{dichiarativo}, i fatti e le regole
-	%sono definiti separatamente, e nuovi fatti vengono ottenuti
-	%operando inferenze sulla base di conoscenza.
-
-	%%% ???
-
 \end{sile}
