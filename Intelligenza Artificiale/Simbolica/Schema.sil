@@ -14,9 +14,26 @@
 	soggetto-predicato-oggetto) ed il tipo di ciascun termine
 	(il predicato non puó essere un blank node, il soggetto non
 	puó essere un letterale, ecc\ddd). Al di lá di questo, RDF
-	non fornisce alcun tipo di \strong{ontologia}. Una ontologia
-	é una descrizione dei concetti e delle relazioni che possono
-	formalmente esistere per un agente o per un insieme di agenti.
+	non permette la costruzione di una vera e propria 
+	\strong{ontologia}.
+
+	L'ontologia é una branca della filosofia che si occupa di
+	comprendere la natura delle cose e come categorizzarle. Nel
+	contesto dell'informatica, con ontologia si intende una
+	rappresentazione formale della conoscenza rispetto ad un 
+	determinato dominio; si occupa quindi di determinare quali
+	sono le entitá che appartengono a tale dominio, come possono
+	essere categorizzate, quali sono le loro proprietá, quali 
+	di queste proprietá sono rilevanti e quali no, ecc\ddd
+
+	L'obiettivo di una ontologia informatica non é quello di trovare
+	la modellazione "corretta" (qualunque cosa questo significhi) per
+	un determinato dominio, quanto piú trovare una rappresentazione 
+	che sia funzionale per tutte le parti interessate. Nel contesto
+	di un sistema distribuito, costruire ontologie dettagliate le cui
+	definizioni sono state prese di comune accordo da tutti i nodi
+	fornisce loro una concettualizzazione comune, sulla base della
+	quale potersi scambiare informazioni.
 
 	\strong{Resource Description Framework Schema} (\strong{RDFS})
 	é un semplice linguaggio che permette di associare uno schema
@@ -223,8 +240,9 @@
 
 	La proprietá \tt{rdf:type} permette di istanziare una
 	classe. La tripla \tt{A rdf:type B} indica che l'entitá
-	\tt{A} é una istanza della classe \tt{B}. Diverse entitá
-	in RDFS sono istanze di metaclassi predefinite:
+	\tt{A} é una istanza della classe \tt{B}. Spesso
+	\tt{rdf:type} viene abbreviato con \tt{a}. Diverse
+	entitá in RDFS sono istanze di metaclassi predefinite:
 
 	\begin{itemize}
 		\begin{item}
@@ -369,5 +387,74 @@
 	proprietá o una classe puó essere usata per descrivere un numero
 	arbitrario di istanze. É facile riutilizzare uno stesso vocabolario
 	in diversi grafi RDF.
+
+	RDFS permette di fare query SPARQL su grafi RDF ed ottenere
+	informazioni che non sono esplicitamente contenute nel grafo,
+	applicando le regole di inferenza.
+
+	\begin{example}
+		Si consideri il seguente grafo RDF (espresso in notazione Turtle):
+
+		\begin{verbatim}
+			@prefix dbr:  https://dbpedia.org/resource/
+			@prefix dbo:  https://dbpedia.org/ontology/
+			@prefix rdfs: https://www.w3.org/2000/01/rdfs-schema#
+
+			\bigskip
+			dbo:Singer                           rdfs:subClassOf     dbo:MusicalArtist     .
+			dbr:Come_As_You_Are_(Nirvana_Song)   dbo:Singer          dbr:Kurt_Cobain       .
+			dbr:Come_As_You_Are_(Nirvana_Song)   dbo:MusicalArtist   dbr:Dave_Grohl        .
+			dbr:Come_As_You_Are_(Nirvana_Song)   dbo:MusicalArtist   dbr:Krist_Novoselic   .
+		\end{verbatim}
+
+		É possibile derivare che le entitá \tt{dbr:Kurt_Cobain} e
+		\tt{dbr:Come_As_You_Are_(Nirvana_Song)} sono legate da
+		\tt{dbo:MusicalArtist} applicando le regole di entailment
+		RDFS. Questo perché le due entitá sono legate da \tt{dbo:Singer}
+		e tale classe é una sottoclasse di \tt{dbo:MusicalArtist}.
+		Infatti, tale tripla é presente nel risultato dalla seguente
+		query SPARQL nonostante nel grafo non sia riportata esplicitamente:
+
+		\begin[width = 65%fw]{parbox}
+			\begin{verbatim}
+				SELECT ?name
+				WHERE \{
+				   dbr:Come_As_You_Are_(Nirvana_Song)   dbo:MusicalArtist   ?name   .
+				\}
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 35%fw]{parbox}
+			\begin[cols = 75%fw]{ptable}
+				\begin{row}
+					\cell{\strong{?name}}
+				\end{row}
+				\begin{row}
+					\cell{\tt{dbr:Kurt_Cobain}}
+				\end{row}
+				\begin{row}
+					\cell{\tt{dbr:Dave_Grohl}}
+				\end{row}
+				\begin{row}
+					\cell{\tt{dbr:Krist_Novoselic}}
+				\end{row}
+			\end{ptable}
+		\end{parbox}
+	\end{example}
+
+	Esistono due approcci in merito al combinare le inferenze e le
+	query. Il primo prevede di applicare le regole di inferenza su
+	tutte le triple del grafo prima che questo venga pubblicato e
+	salvare tutte le triple inferite all'interno dello stesso. In
+	questo modo, quando viene effettuata una query, tutte le triple
+	sono giá presenti nel grafo ed é sufficiente restituirle. Questo
+	comporta peró che ogni volta che il grafo viene modificato, ad
+	esempio perché viene introdotta o rimossa una tripla, occorre
+	riapplicare le regole di inferenza per aggiornarlo.
+
+	Il secondo approccio prevede di applicare le regole di inferenza
+	quando viene effettuata una query che le richiede. In questo modo
+	non é necessario aggiornare il grafo ogni volta che questo viene
+	modificato, ma d'altra parte ogni query sará piú lenta perché é
+	necessario spendere ulteriore tempo per il calcolo delle inferenze.
 
 \end{sile}

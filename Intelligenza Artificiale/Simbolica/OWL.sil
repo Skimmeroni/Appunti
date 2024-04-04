@@ -1,0 +1,634 @@
+\begin{sile}
+
+	Le ontologie che RDFS permette di costruire non sono particolarmente
+	espressive. Ad esempio, RDFS presenta le seguenti limitazioni:
+
+	\begin{itemize}
+		\begin{item}
+			Non é possibile modellare le \strong{classi disgiunte}, ovvero
+			non é possibile definire delle classi a cui sia impedito avere
+			istanze in comune;
+		\end{item}
+		\begin{item}
+			Non é possibile specificare che una proprietá sia transitiva,
+			inversa e/o simmetrica; 
+		\end{item}
+		\begin{item}
+			Non é possibile specificare un vincolo di \strong{cardinalitá},
+			ad esempio che l'istanza di una classe possa essere in relazione
+			con al massimo \math{n} istanze di un'altra classe;
+		\end{item}
+		\begin{item}
+			Non é possibile costruire classi applicando gli operatori 
+			dell'insiemistica (unione, intersezione, complemento) sulle
+			classi esistenti;
+		\end{item}
+		\begin{item}
+			Non é possibile definire un range/dominio che vari in base 
+			a quale entitá si riferisce.
+		\end{item}
+	\end{itemize}
+
+	\begin{example}
+		Si consideri il grafo RDF presentato di seguito, che contiene
+		informazioni relative a cittá, regioni e paesi:
+
+		\begin{verbatim}
+			@prefix rdf:  https://www.w3.org/1999/02/22-rdf-syntax-ns#
+			@prefix rdfs: https://www.w3.org/2000/01/rdfs-schema#
+			@prefix dbr:  https://dbpedia.org/resource/
+			@prefix dbo:  https://dbpedia.org/ontology/
+
+			\bigskip
+			capitalOf      rdfs:domain   dbo:Capital    .
+			capitalOf      rdfs:range    dbo:Country    .
+			cityOf         rdfs:range    dbo:Country    .
+			cityOf         rdfs:range    dbo:Region     .
+
+			\bigskip
+			dbr:Milan      cityOf        dbr:Lombardy   .
+			dbr:Milan      cityOf        dbr:Italy      .
+			dbr:Rome       capitalOf     dbr:Italy      .
+			dbr:Italy      rdf:type      dbo:Country    .
+			dbr:Lombardy   rdf:type      dbo:Region     .
+		\end{verbatim}
+
+		Nonostante le triple siano tutte logicamente valide, é comunque
+		possibile applicare le regole di inferenza di RDFS per derivare
+		delle triple che non lo sono.
+
+		Ad esempio, \tt{dbr:Milan} é legato sia a \tt{dbr:Italy} che a
+		\tt{dbr:Lombardy} per mezzo del predicato \tt{cityOf}. Tuttavia,
+		l'esistenza della tripla \tt{cityOf rdfs:range dbo:Country .}
+		permette di applicare la regola di inferenza 3, a partire dalla
+		quale si deriva che \tt{dbr:Lombardy} é una istanza della classe
+		\tt{dbo:Country}.
+	\end{example}
+
+	Per sopperirvi é necessario utilizzare un linguaggio piú
+	ricco. A tal scopo é stato definito \strong{Ontology Web
+	Language} (\strong{OWL}), che opera come RDFS su triple
+	conformi allo standard RDF ma permettendo una modellazione
+	piú fine.
+
+	A differenza di RDFS, che si compone di "sole" 13 regole di
+	inferenza, OWL si prefigge di modellare una ontologia molto
+	complessa, ed un insieme di regole di inferenza dedicate 
+	non sarebbe sufficiente. Per questo motivo, OWL utilizza un
+	linguaggio logico vero e proprio, ispirato ad una famiglia di
+	linguaggi chiamati \strong{Description Logic} (\strong{DL}).
+	Tali linguaggi non sono altro che restrizioni della logica
+	del primo ordine. Nel caso specifico di OWL2, la versione
+	attuale\footnote{Per comoditá, da ora in poi con "OWL" si
+	intenderá la specifica completa della seconda versione del
+	linguaggio (se non diversamente specificato).}, la DL di
+	riferimento é chiamata \strong{SROIQ}: sebbene SROIQ e OWL
+	siano intimamente collegati, i due hanno terminologie distinte,
+	ma mappabili uno-ad-uno.
+
+	A partire dalla specifica completa di OWL sono stati definiti
+	tre \strong{profili}. Questi sono dei "dialetti" di OWL 2,
+	ovvero delle restrizioni al linguaggio pensati per distinti
+	casi d'uso. Ogni profilo ha una propria ricchezza espressiva
+	ed una propria capacitá computazionale. \footnote{In genere,
+	i reasoner commerciali utilizzano una intersezione di questi
+	dialetti di modo da bilanciare efficienza ed espressivitá.}.
+	I profili sono tre:
+
+	\begin{itemize}
+		\begin{item}
+			\strong{OWL 2 EL} permette di modellare classificazioni semplici
+			(comunque piú sofisticate di quanto possa fare RDFS), ma viene 
+			garantito il calcolo delle inferenze in tempo polinomiale;
+		\end{item}
+		\begin{item}
+			\strong{OWL 2 QL} é costruito di modo che le inferenze siano
+			automaticamente traducibili come query su database relazionali;
+		\end{item}
+		\begin{item}
+			\strong{OWL 2 RL} é pensato per essere implementato in maniera 
+			efficiente in sistemi a regole.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Se RDFS metteva a disposizione la relazione di sottoclasse, OWL fornisce
+	il predicato \tt{owl:equivalentClass}, che indica che le due classi che
+	mette in relazione hanno gli stessi membri. Tale predicato é piú ricco
+	di \tt{rdfs:subClassOf}, perché oltre allo specificare che una classe
+	é sottoclasse di un'altra é anche possibile introdurre dei vincoli
+	aggiuntivi. Inoltre, il predicato \tt{owl:disjointWith} indica che 
+	due classi non possono avere una istanza in comune.
+
+	\begin{example}
+		L'inconsistenza nell'esempio precedente viene risolta introducendo
+		la tripla \tt{dbo:Region owl:disjointWith dbo:Country .}, perché
+		in questo modo si impedisce che \tt{dbr:Lombardy} possa essere
+		istanza di \tt{dbo:Country}.
+	\end{example}
+
+	L'istanza di una classe in OWL prende il nome di \strong{individuo}.
+	Un individuo é legato alla propria classe per mezzo di \tt{rdfs:type}.
+	OWL permette di specificare che due individui sono in realtá lo stesso
+	individuo (nonostante abbiano due IRI distinti) per mezzo del predicato
+	\tt{owl:sameAs}. Inoltre, é possibile specificare che due individui sono
+	distinti per mezzo del predicato \tt{owl:differentFrom}. OWL, infatti,
+	non adotta la politica \math{Unique Name Assumption} (\strong{UNA}),
+	ovvero l'idea che due entitá a cui sono stati assegnati due nomi diversi
+	(due URI diversi, in questo caso) siano necessariamente distinte esse
+	stesse.
+
+	\begin{example}
+		\begin{verbatim}
+			@prefix dbr:  https://dbpedia.org/resource/
+			@prefix msb:  https://musicbrainz.org/artist/
+			@prefix owl:  https://www.w3.org/2002/07/owl#
+
+			\bigskip
+			msb:5b11f4ce-a62d-471e-81fc-a69a8278c7da   owl:sameAs          dbr:Nirvana_(band)   .
+			dbr:Nirvana                                owl:differentFrom   dbr:Nirvana_(band)   .
+		\end{verbatim}
+	\end{example}
+
+	Sebbene le proprietá in RDF(S) siano in genere modellate come
+	attributi di una entitá o come relazione fra due entitá, non
+	esiste un costrutto che permetta di fare esplicitamente questa
+	distinzione. In OWL si distingue invece fra \tt{owl:ObjectProperty},
+	ovvero proprietá i cui valori sono risorse, e \tt{owl:DatatypeProperty},
+	ovvero proprietá i cui valori sono letterali.
+
+	Cosí come per le classi, OWL permette di stabilire che due proprietá
+	(con diverso IRI) si riferiscono alla medesima proprietá per mezzo del
+	predicato \tt{owl:equivalentProperty}, e stabilire che due proprietá
+	sono distinte per mezzo di \tt{owl:propertyDisjointWith}.
+
+	OWL permette di assegnare delle caratteristiche alle proprietá che
+	permettono di inferire nuovi fatti sulla base delle stesse:
+
+	\begin{itemize}
+		\begin{item}
+			Se una proprietá \tt{p} appartiene alla classe
+			\tt{owl:SymmetricProperty}, allora tale proprietá
+			é simmetrica. Ovvero:
+
+			\smallskip
+			\begin[width = 27.5%fw]{parbox}
+				Se in un grafo sono presenti le triple
+			\end{parbox}
+			\begin[width = 37.5%fw]{parbox}
+				\tt{p rdf:type owl:SymmetricProperty .} \par
+				\tt{x p y .}
+			\end{parbox}
+			\begin[width = 20%fw]{parbox}
+				Allora é possibile inferire
+			\end{parbox}
+			\begin[width = 15%fw]{parbox}
+					\tt{y p x .}
+			\end{parbox}
+			\smallskip
+		\end{item}
+		\begin{item}
+			Se due proprietá \tt{p} e \tt{q} sono messe in relazione
+			dal predicato \tt{owl:inverseOf}, allora tali proprietá
+			sono l'una l'inversa dell'altra. Ovvero:
+
+			\smallskip
+			\begin[width = 27.5%fw]{parbox}
+				Se in un grafo sono presenti le triple
+			\end{parbox}
+			\begin[width = 37.5%fw]{parbox}
+				\tt{p owl:inverseOf q .} \par
+				\tt{x p y .}
+			\end{parbox}
+			\begin[width = 20%fw]{parbox}
+				Allora é possibile inferire
+			\end{parbox}
+			\begin[width = 15%fw]{parbox}
+					\tt{y q x .}
+			\end{parbox}
+			\smallskip
+		\end{item}
+		\begin{item}
+			Se una proprietá \tt{p} appartiene alla classe
+			\tt{owl:TransitiveProperty}, allora tale proprietá
+			é transitiva. Ovvero:
+
+			\smallskip
+			\begin[width = 27.5%fw]{parbox}
+				Se in un grafo sono presenti le triple
+			\end{parbox}
+			\begin[width = 37.5%fw]{parbox}
+				\tt{p rdf:type owl:TransitiveProperty .} \par
+				\tt{x p y .} \par
+				\tt{y p z .}
+			\end{parbox}
+			\begin[width = 20%fw]{parbox}
+				Allora é possibile inferire
+			\end{parbox}
+			\begin[width = 15%fw]{parbox}
+					\tt{x p z .}
+			\end{parbox}
+			\smallskip
+		\end{item}
+		\begin{item}
+			Se una proprietá \tt{p} appartiene alla classe
+			\tt{owl:FunctionalProperty}, allora tale proprietá
+			é una relazione funzionale, ovvero una relazione
+			il cui argomento é associato ad al piú un valore.
+			Ovvero:
+
+			\smallskip
+			\begin[width = 27.5%fw]{parbox}
+				Se in un grafo sono presenti le triple
+			\end{parbox}
+			\begin[width = 37.5%fw]{parbox}
+				\tt{p rdf:type owl:FunctionalProperty .} \par
+				\tt{x p y .} \par
+				\tt{x p z .}
+			\end{parbox}
+			\begin[width = 20%fw]{parbox}
+				Allora é possibile inferire
+			\end{parbox}
+			\begin[width = 15%fw]{parbox}
+					\tt{y owl:sameAs z .}
+			\end{parbox}
+			\smallskip
+		\end{item}
+		\begin{item}
+			Se una proprietá \tt{p} appartiene alla classe
+			\tt{owl:InverseFunctionalProperty}, allora l'inverso
+			di tale proprietá é una relazione funzionale.
+			Ovvero:
+
+			\smallskip
+			\begin[width = 27.5%fw]{parbox}
+				Se in un grafo sono presenti le triple
+			\end{parbox}
+			\begin[width = 37.5%fw]{parbox}
+				\tt{p rdf:type owl:InverseFunctionalProperty .} \par
+				\tt{x p z .} \par
+				\tt{y p z .}
+			\end{parbox}
+			\begin[width = 20%fw]{parbox}
+				Allora é possibile inferire
+			\end{parbox}
+			\begin[width = 15%fw]{parbox}
+					\tt{x owl:sameAs y .}
+			\end{parbox}
+			\smallskip
+		\end{item}
+	\end{itemize}
+
+	\begin{example}
+		Si consideri il grafo RDF presentato di seguito:
+
+		\begin{verbatim}
+			@prefix rdf:  https://www.w3.org/1999/02/22-rdf-syntax-ns#
+			@prefix rdfs: https://www.w3.org/2000/01/rdfs-schema#
+			@prefix dbr:  https://dbpedia.org/resource/
+			@prefix dc:   https://purl.org/dc/elements/1.1/
+			@prefix foaf: https://xmlns.org/foaf/0.1/
+
+			\bigskip
+			foaf:knows   rdfs:domain   foaf:Person   ;
+			             rdfs:range    foaf:Person   .
+			foaf:made    rdfs:domain   foaf:Agent    .
+
+			\bigskip
+			dbr:Kurt_Cobain   foaf:made     dbr:Heart-Shaped_Box   ;
+			                  foaf:knows    dbr:Dave_Grohl         .
+		\end{verbatim}
+
+		Sia in RDFS che in OWL é possibile inferire:
+
+		\begin{verbatim}
+			dbr:Kurt_Cobain   a   foaf:Agent    ;
+			                  a   foaf:Person   .
+			dbr:Dave_Grohl    a   foaf:Person   .
+		\end{verbatim}
+
+		OWL permette peró di derivare molte piú informazioni.
+		Aggiungendo al grafo le triple:
+
+		\begin{verbatim}
+			dc:creator   owl:inverseOf   foaf:Made               .
+			foaf:knows   a               owl:SymmetricProperty   .
+		\end{verbatim}
+
+		É possibile inferire anche:
+
+		\begin{verbatim}
+			dbr:Heart-Shaped_Box   dc:creator   dbr:Kurt_Cobain   .
+			dbr:Dave_Grohl         foaf:knows   dbr:Kurt_Cobain   .
+		\end{verbatim}
+	\end{example}
+
+	Per poter costruire classi mediante operatori booleani é necessario
+	che queste siano organizzate in una struttura a \strong{reticolo},
+	con un top ed un bottom. A tal scopo, ogni entitá in OWL (classi,
+	proprietá, letterali, ecc\ddd) é implicitamente istanza della
+	classe \tt{owl:Thing}, mentre la classe \tt{owl:Nothing} é la
+	classe che non ha istanze. Similmente, ogni proprietá é implicitamente
+	istanza della classe \tt{owl:TopObjectProperty}, mentre nessuna 
+	proprietá é istanza della classe \tt{owl:BottomObjectProperty}. Le
+	classi possono avere piú superclassi dirette; le proprietá possono
+	avere piú superproprietá dirette.
+
+	La sintassi di SROIQ é composta da tre elementi: \strong{concetti}, 
+	\strong{ruoli} e \strong{asserzioni}. Un concetto SROIQ corrisponde
+	ad una classe OWL, un ruolo SROIQ ad una proprietá OWL ed una asserzione
+	SROIQ ad un individuo. Si distinguono poi le \strong{definizioni} dagli
+	\strong{assiomi}: le definizioni permettono di fare riferimento ad un
+	concetto/ruolo/asserzione o di definirne di nuovi, mentre gli assiomi
+	specificano una proprietá di un certo concetto/ruolo/asserzione.
+
+	Le asserzioni che si riferiscono ai concetti e ai ruoli costituiscono
+	la \strong{Terminological Box} (\strong{T-box}), mentre le asserzioni
+	che si riferiscono agli assiomi costituiscono la \strong{Assertional
+	Box} (\strong{A-box}). La A-box riporta le informazioni relative agli
+	individui OWL; a tutti gli individui é necessario associare un nome
+	univoco (non sono ammessi blank node come in RDF(S)). La T-box definisce
+	la semantica relativa alle classi OWL.
+
+	La semantica di una Description Logic, e quindi anche di SROIQ,
+	é definita a partire da una \strong{teoria dei modelli}. Una
+	interpretazione \math{I} di una Description Logic é tipicamente
+	definita come una coppia \math{(\Delta^{I}, \cdot^{I})}, dove
+	\math{\Delta^{I}} é il \strong{dominio di interpretazione} e
+	\math{\cdot^{I}} é la \strong{funzione di interpretazione}. Il
+	dominio di interpretazione contiene un insieme di individui. La
+	funzione di interpretazione mappa la definizione di un individuo,
+	di un concetto o di un ruolo e li mappa, rispettivamente, ad un
+	elemento del dominio, ad un sottoinsieme del dominio o ad un 
+	insieme di coppie ordinate estratte dal dominio. D'altra parte, 
+	gli assiomi sono interpretati come condizioni semantiche. Dalla
+	semantica di una Description Logic discende una "classica" nozione
+	di entailment, ovvero dove per due ontologie \math{O_{1}} e
+	\math{O_{2}} vale \math{O_{1} \vDash O_{2}} se e solo se ogni
+	interpretazione che soddisfa \math{O_{1}} soddisfa anche \math{O_{2}}.
+
+	Vi sono diverse possibili tecniche per costruire inferenze sulla
+	base di una DL. Fra queste, figura la \strong{tecnica a tableau},
+	una tecnica generale utilizzata in diverse logiche per testare la
+	soddisfacibilitá di una o piú formule. L'idea alla base della
+	tecnica consiste nell'esplorare lo spazio delle possibilitá che
+	possono soddisfare tali formule: le possibilitá che conducono ad
+	una contraddizione vengono scartate, e se tutte le possibilitá
+	vengono scartate la formula é considerata una contraddizione. Nel
+	caso specifico delle Description Logic, ad esempio, la tecnica a
+	tableau prevede di esplorare tutte le possibilitá che possono
+	condurre ad un modello per l'ontologia in esame; questa é allora
+	soddisfacibile se (almeno) un modello esiste ed una contraddizione
+	in caso contrario.
+
+	Si noti come non sia sempre possibile \em{chiudere} un tableau,
+	ovvero esaurire tutte le possibilitá ed ottenere una risposta.
+	Questo perché, essendo SROIQ una logica \strong{indecidibile},
+	possono presentarsi dei cicli infiniti in cui vengono continuamente
+	eseguite le stesse sostituzioni senza poter proseguire oltre. Un
+	ciclo di questo tipo puó essere facilmente individuabile da un
+	umano, ma un risolutore automatico fatica a distinguere una 
+	computazione molto onerosa (ma che giungerá a termine) da un
+	ciclo infinito. 
+
+	\pagebreak
+
+	\begin[cols = 10%fw 10%fw 7.5%fw 22.5%fw 50%fw]{ptable}
+		\begin{row}
+			\cell{}
+			\cell{\strong{Nome}}
+			\cell{\strong{Espr.}}
+			\cell{\strong{Semantica}}
+			\cell{\strong{Equivalente in OWL}}
+		\end{row}
+		\begin{row}
+			\cell{\strong{Simboli} \par \strong{di base}}
+			\begin[span = 3]{celltable}
+				\begin{row}
+					\cell{Individuo}
+					\cell{\math{a}}
+					\cell{\math{a^{I} \in \Delta^{I}}}
+					\cell{}
+				\end{row}
+				\begin{row}
+					\cell{Concetto}
+					\cell{\math{C}}
+					\cell{\math{C^{I} \subseteq \Delta^{I}}}
+					\cell{Classe}
+				\end{row}
+				\begin{row}
+					\cell{Ruolo}
+					\cell{\math{R}}
+					\cell{\math{R^{I} \subseteq \Delta^{I} \times \Delta^{I}}}
+					\cell{Proprietá}
+				\end{row}
+			\end{celltable}
+		\end{row}
+		\begin{row}
+			\cell{\strong{Assiomi} \par \strong{della Abox}}
+			\begin[span = 3]{celltable}
+				\begin{row}
+					\cell{Asserzione \par di concetto}
+					\cell{\math{C(a)}}
+					\cell{\math{a^{I} \in C^{I}}}
+					\cell{\tt{:a :rdfType :C}}
+				\end{row}
+				\begin{row}
+					\cell{Asserzione \par di ruolo}
+					\cell{\math{R(a, b)}}
+					\cell{\math{(a^{I}, b^{I}) \in R^{I}}}
+					\cell{\tt{:a :R :b}}
+				\end{row}
+			\end{celltable}
+		\end{row}
+		\begin{row}
+			\cell{\strong{Assiomi} \par \strong{della Tbox}}
+			\begin[span = 3]{celltable}
+				\begin{row}
+					\cell{Inclusione \par di concetto}
+					\cell{\math{C \sqsubset D}}
+					\cell{\math{C^{I} \subseteq D^{I}}}
+					\cell{\tt{:C :rdfsSubclassOf :D}}
+				\end{row}
+				\begin{row}
+					\cell{Equivalenza \par di concetto}
+					\cell{\math{C = D}}
+					\cell{\math{C^{I} = D^{I}}}
+					\cell{\tt{:C owl:EquivalentClass :D}}
+				\end{row}
+			\end{celltable}
+		\end{row}
+		\begin{row}
+			\cell{\strong{Costruttori} \par \strong{di ruolo}}
+			\cell{Inversione \par di ruolo}
+			\cell{\math{R^{-}}}
+			\cell{\math{(R^{-})^{I} = \{(y, x) | (x, y) \in R^{I}\}}}
+			\cell{}
+		\end{row}
+		\begin{row}
+			\cell{\strong{Costruttori} \par \strong{di concetto}}
+			\begin[span = 3]{celltable}
+				\begin{row}
+					\cell{Top}
+					\cell{\math{\top}}
+					\cell{\math{\Delta^{I}}}
+					\cell{\tt{owl:Thing}}
+				\end{row}
+				\begin{row}
+					\cell{Bottom}
+					\cell{\math{\perp}}
+					\cell{\math{\varnothing}}
+					\cell{\tt{owl:Nothing}}
+				\end{row}
+				\begin{row}
+					\cell{Negazione}
+					\cell{\math{\neg C}}
+					\cell{\math{\Delta^{I} - C^{I}}}
+					\cell{
+						\tt{[ rdf:type owl:Class ;} \par
+						\tt{owl:complementOf :C ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Intersezione}
+					\cell{\math{C \sqcap D}}
+					\cell{\math{C^{I} \cap D^{I}}}
+					\cell{
+						\tt{[ rdf:type owl:Class ;} \par
+						\tt{owl:intersectionOf ( :C :D ) ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Unione}
+					\cell{\math{C \sqcup D}}
+					\cell{\math{C^{I} \cup D^{I}}}
+					\cell{
+						\tt{[ rdf:type owl:Class ;} \par
+						\tt{owl:unionOf ( :C :D ) ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Nominale}
+					\cell{\math{\{a\}}}
+					\cell{\math{\{a^{I}\}}}
+					\cell{
+						\tt{[ a owl:Class ;} \par
+						\tt{owl:oneOf ( :a ) ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Restrizione \par esistenziale}
+					\cell{\math{\exists R.C}}
+					\cell{\math{\{x \in \Delta^{I} | R^{I}(x) \cap C^{I} \ne \varnothing\}}}
+					\cell{
+						\tt{[ rdf:type owl:Restriction ;} \par
+						\tt{owl:onProperty :R ;} \par
+						\tt{owl:someValuesFrom :C ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Restrizione \par universale}
+					\cell{\math{\forall R.C}}
+					\cell{\math{\{x \in \Delta^{I} | R^{I}(x) \subseteq C^{I}\}}}
+					\cell{
+						\tt{[ rdf:type owl:Restriction ;} \par
+						\tt{owl:onProperty :R ;} \par
+						\tt{owl:allValuesFrom :C ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Restrizione \par 'al piú'}
+					\cell{\math{\leq n R.C}}
+					\cell{\math{\{x \in \Delta^{I} | |R^{I}(x) \cap C^{I}| \leq n\}}}
+					\cell{
+						\tt{[ rdf:type owl:Restriction ;} \par
+						\tt{owl:minQualifiedCardinality "n"^^xsd:nonNegativeInteger ;} \par
+						\tt{owl:onProperty :R ;} \par
+						\tt{owl:onClass :C ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Restrizione \par 'almeno'}
+					\cell{\math{\geq n R.C}}
+					\cell{\math{\{x \in \Delta^{I} | |R^{I}(x) \cap C^{I}| \geq n\}}}
+					\cell{
+						\tt{[ rdf:type owl:Restriction ;} \par
+						\tt{owl:maxQualifiedCardinality "n"^^xsd:nonNegativeInteger ;} \par
+						\tt{owl:onProperty :R ;} \par
+						\tt{owl:onClass :C ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Restrizione \par esatta}
+					\cell{\math{=n R.C}}
+					\cell{\math{\{x \in \Delta^{I} | |R^{I}(x) \cap C^{I}| = n\}}}
+					\cell{
+						\tt{[ rdf:type owl:Restriction ;} \par
+						\tt{owl:qualifiedCardinality "n"^^xsd:nonNegativeInteger ;} \par
+						\tt{owl:onProperty :R ;} \par
+						\tt{owl:onClass :C ]}
+					}
+				\end{row}
+				\begin{row}
+					\cell{Riflessivitá \par locale}
+					\cell{\math{\exists R.\mi{Self}}}
+					\cell{\math{\{x \in \Delta^{I} | (x, x) \in R^{I}\}}}
+					\cell{
+						\tt{[ rdf:type owl:Restriction ;} \par
+						\tt{owl:onProperty :R ;} \par
+						\tt{owl:hasSelf "true"^^xsd:boolean ]}
+					}
+				\end{row}
+			\end{celltable}
+		\end{row}
+	\end{ptable}
+
+	\begin{example}
+		\begin[cols = 40%fw 60%fw]{ptable}
+			\begin{row}
+				\begin{cell}
+					\center{\strong{A-box}}
+				\end{cell}
+				\begin{cell}
+					\center{\strong{T-box}}
+				\end{cell}
+			\end{row}
+			\begin{row}
+				\begin{cell}
+					\begin{verbatim}
+						GenitoreEquinoMaschio(Zia, Marty)
+						GenitoreEquinoMaschio(Zach, Marty)
+						GenitoreEquinoFemmina(Zia, Lea)
+						GenitoreEquinoFemmina(Zach, Lea)
+						Zebroide(Zach)
+					\end{verbatim}
+				\end{cell}
+				\begin{cell}
+					\begin{verbatim}
+						GenitoreEquinoMaschio \unichar{U+2291} Genitore
+						GenitoreEquinoFemmina \unichar{U+2291} Genitore
+						CavalloMaschio \unichar{U+2291} EquinoMaschio
+						CavalloFemmina \unichar{U+2291} EquinoFemmina
+						Equino \unichar{U+2261} EquinoMaschio \unichar{U+2294} EquinoFemmina
+						EquinoMaschio \unichar{U+2293} EquinoFemmina \unichar{U+2291} \unichar{U+27C2}
+						\unichar{U+22A4} \unichar{U+2291} \unichar{U+2200}GenitoreEquinoMaschio\textsuperscript{-}.Equino
+						\unichar{U+22A4} \unichar{U+2291} \unichar{U+2200}GenitoreEquinoFemmina\textsuperscript{-}.Equino
+						\unichar{U+22A4} \unichar{U+2291} \unichar{U+2200}GenitoreEquinoMaschio.CavalloMaschio
+						\unichar{U+22A4} \unichar{U+2291} \unichar{U+2200}GenitoreEquinoFemmina.CavalloFemmina
+						Equino \unichar{U+2291} =2Genitore
+						NonZebraEquino \unichar{U+2261} Equino \unichar{U+2293} \unichar{U+00AC}Zebra
+						Zebroide \unichar{U+2261} \unichar{U+2203}Genitore.Zebra \unichar{U+2293} \unichar{U+2203}Genitore.NonZebraEquino
+					\end{verbatim}
+				\end{cell}
+			\end{row}
+		\end{ptable}
+	\end{example}
+
+	Si noti come OWL e le Description Logic adottino la politica
+	\strong{Open World Semantic}, ovvero tutto ció che non é
+	esplicitamente contenuto nella Knowledge Base e non é deducibile
+	dagli assiomi (ovvero, tutto ció su cui non si ha informazione)
+	viene assunto come vero. 
+
+\end{sile}

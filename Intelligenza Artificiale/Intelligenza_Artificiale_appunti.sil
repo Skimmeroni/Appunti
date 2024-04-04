@@ -79,5 +79,7 @@
 		\include[src = Simbolica/SPARQL.sil]
 		\section{RDFS}
 		\include[src = Simbolica/Schema.sil]
+		\section{OWL}
+		\include[src = Simbolica/OWL.sil]
 
 \end{document}
