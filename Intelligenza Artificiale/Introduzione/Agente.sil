@@ -309,25 +309,6 @@
 		\center{\img[src = Introduzione/agent3.pdf, width = 65%fw]}
 		\bigskip
 
-	%	Un problema di ricerca consiste di: uno spazio degli stati,
-	%	una funzione che definisce l'evoluzione da uno stato ad un
-	%	altro facendo una certa azione (con eventualmente associato
-	%	un costo), uno stato iniziale ed un test obiettivo raggiunto.
-	%	Una soluzione é una sequenza di azioni che trasforma lo stato
-	%	iniziale in uno stato finale.
-	%	Lo stato del mondo non é lo spazio degli stati: lo stato del
-	%	mondo é l'insieme di tutte le informazioni relative a come si
-	%	trova il mondo in questo momento. Uno stato di ricerca tiene
-	%	traccia esclusivamente delle informazioni necessarie a
-	%	raggiungere l'obiettivo (quale che sia).
-	%	Da ciascuno stato se ne generano altri secondo una struttura ad
-	%	albero. La radice é lo stato in cui ci si trova ed i nodi figli 
-	%	sono tutti i nodi che contengono stati raggiungibili a partire 
-	%	dalla radice applicando la funzione di transizione di stato.
-	%	Oppure a grafo (state space graph). Ciascun nodo corrisponde ad
-	%	uno stato nello spazio degli stati, ma cosí facendo diviene 
-	%	difficile costruire un grafo con dimensioni di questo tipo.
-
 	\subsection{Agenti basati su un modello e guidati da utilitá}
 
 		Non sempre é possibile costruire un agente razionale

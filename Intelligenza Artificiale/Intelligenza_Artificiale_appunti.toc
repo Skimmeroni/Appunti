@@ -168,5 +168,95 @@ return {
     link = "dest17",
     number = "2.8",
     pageno = "18"
+  },
+  {
+    label = {
+      "Search and plan",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest18",
+    number = "3",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Risolvere problemi con la ricerca",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest19",
+    number = "3.1",
+    pageno = "25"
+  },
+  {
+    label = {
+      "Ricerca non informata",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest20",
+    number = "3.2",
+    pageno = "27"
+  },
+  {
+    label = {
+      "Breadth-First search",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest21",
+    number = "3.2.1",
+    pageno = "27"
+  },
+  {
+    label = {
+      "Depth-First search",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest22",
+    number = "3.2.2",
+    pageno = "28"
+  },
+  {
+    label = {
+      "Ricerca informata",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest23",
+    number = "3.3",
+    pageno = "28"
+  },
+  {
+    label = {
+      "Greedy search",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest24",
+    number = "3.3.1",
+    pageno = "28"
+  },
+  {
+    label = {
+      "A* search",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest25",
+    number = "3.3.2",
+    pageno = "28"
+  },
+  {
+    label = {
+      "Classical planning",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest26",
+    number = "3.4",
+    pageno = "29"
   }
 }

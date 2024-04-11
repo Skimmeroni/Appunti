@@ -1,0 +1,136 @@
+\begin{sile}
+
+	Un algoritmo di ricerca \strong{non informato} non possiede informazioni
+	in merito a "quanto vicino" sia uno stato rispetto agli obiettivi.
+
+	\subsection{Breadth-First search}
+
+	Quando tutte le azioni hanno il medesimo costo, un algoritmo di ricerca
+	non informato che conviene utilizzare é \strong{Breadth-First search}.
+	In questo algoritmo, il nodo radice dell'albero di ricerca viene espanso,
+	dopodiché ciascuno dei nodi che questo genera viene espanso, dopodiché
+	ciascuno dei nodi che questi a loro volta generano viene espanso, ecc\ddd
+	fino ad esaurire tutti i nodi. Questa strategia rispetta la proprietá di
+	sistematicitá, e pertanto garantisce che l'algoritmo sia completo anche 
+	se lo spazio degli stati é infinito.
+
+	L'algoritmo \tt{BREADTH-FIRST-SEARCH} puó essere implementato, in
+	prima analisi, come una versione di \tt{BEST-FIRST-SEARCH} in cui
+	la funzione di valutazione \math{f(n)} é la profonditá di \math{n},
+	ovvero il numero di azioni che é stato necessario per arrivare dalla
+	radice a \math{n}. Come struttura dati atta a contenere i nodi della
+	frontiera é bene scegliere una coda FIFO. Questo perché i nuovi nodi
+	che vengono aggiunti, che si trovano necessariamente dopo i nodi che
+	li hanno generati, vengono posti in fondo alla coda, mentre i nodi
+	giá nella coda, che sono stati quindi aggiunti prima, vengono espansi
+	prima.
+
+	É possibile ottimizzare ulteriormente l'algoritmo osservando
+	come non sia necessario tenere traccia dei percorsi precedentemente
+	usati per raggiungere un certo nodo, perché per come l'algoritmo é
+	strutturato, una volta che un nodo viene raggiunto non é possibile
+	trovare un percorso migliore per raggiungerlo. Pertanto, non é
+	necessario implementare \tt{reached} come una hash table, ma é 
+	sufficiente che sia un insieme non ordinato. Inoltre, per lo stesso
+	motivo, é possibile valutare se un nodo é un nodo obiettivo prima di
+	controllare se tale nodo é giá stato raggiunto.
+
+	\begin{verbatim}
+		function BREADTH-FIRST-SEARCH(problem)
+		    node <= /a new empty node/
+		    node.state <= initial-state
+		    frontier <= /a FIFO queue, with/ node /as an element/
+		    reached <= \{initial-state\}
+		    while not IS-EMPTY(frontier) do
+		        node <= POP(frontier)
+		        ex <= EXPAND(node)
+		        foreach child in ex do
+		            s <= child.state
+					if (IS-GOAL(s) = True) then
+		                return child
+		            if (s not in reached) then
+		                reached <= reached \unichar{U+222A} \{s\}
+		                ADD(frontier, child)
+		    return error
+	\end{verbatim}
+
+	Breadth-first search, quando trova una soluzione, tale soluzione sará
+	necessariamente trovata con il minor numero di passi possibili. Questo
+	perché quando viene generato un nodo alla profonditá \math{d}, tutti i
+	nodi a profonditá \math{d - 1}, \math{d - 2}, ecc\ddd sono giá stati 
+	generati (ed espansi). Pertanto, se uno di questi nodi avesse contenuto
+	uno stato obiettivo, sarebbe giá stato trovato. Pertanto, se il costo
+	di tutte le azioni del problema é lo stesso, Breadth-first search é
+	necessariamente l'algoritmo piú efficiente possibile dal punto di vista
+	del costo. Inoltre, é un algorimo completo, perché prima o poi tutti i
+	nodi verranno raggiunti.
+
+	Per quanto riguarda la complessitá di breadth-first search, si osservi
+	come a partire dal nodo iniziale vengano allora generati al piú \math{b}
+	nodi, ed a sua volta a partire da ciascuno di questi vengono generati al
+	piú \math{b} nodi, ecc\ddd Questo significa che ad una certa profonditá
+	\math{d}, vengono generati al piú \math{b^{d}} nodi. L'algoritmo prevede
+	che tutti questi nodi debbano potenzialmente venire generati ed esplorati,
+	a meno di trovare una soluzione prima di averli esauriti, pertanto
+	la complessitá in termini sia di tempo che di spazio della ricerca
+	breadth-first é \math{O(b^{d})}. Questo significa che, per quanto
+	breadth-first search sia completo, é molto inefficiente, a meno di
+	operare su istanze molto piccole.
+
+	\subsection{Depth-First search}
+
+	Un algoritmo piú efficiente in termini di complessitá rispetto a
+	Breadth-First search é \strong{Depth-First search}. A differenza
+	del precedente, che prevede di espandere i nodi della frontiera
+	uno alla volta, Depth-First search prevede di espandere sempre
+	il nodo piú profondo. Questo potrebbe essere implementato a partire
+	da \tt{Best-First search} scegliendo come funzione di valutazione
+	il negativo della profonditá.
+
+	In realtá, Depth-First search viene in genere implementato non come
+	una ricerca su grafo, ma come una ricerca ad albero che non tiene
+	traccia degli stati raggiunti. Depth-First search procede immediatamente
+	fino alla massima profonditá raggiungibile a partire dal nodo iniziale.
+	Dopodiché, l'algoritmo opera un \strong{backtracking}, ovvero "ritorna"
+	al primo nodo lungo il percorso che non é stato ancora interamente
+	espanso. Depth-First search restituisce comunque la prima soluzione
+	che viene trovata, ma non é detto che questa sia la soluzione ottimale,
+	perché potrebbe esserci una soluzione migliore a partire da uno dei
+	nodi inesplorati.
+
+	Se lo spazio degli stati é finito, Depth-First search é
+	completo fintanto che non esistono cicli; sebbene possa
+	esplorare gli stessi stati piú volte negli stessi percorsi,
+	prima o poi tutti gli stati vengono raggiunti. Se sono
+	presenti dei cicli, l'algoritmo potrebbe rimanere bloccato
+	in un loop infinito, ma é possibile ottimizzare l'algoritmo
+	per individuare tali cicli ed evitarli. Se lo spazio degli
+	stati é infinito, l'algoritmo non é né sistematico né completo,
+	perché l'algoritmo potrebbe rimanere bloccato nell'espandere lo
+	stesso percorso indefinitamente, anche se non sono presenti cicli.
+
+	Per impedire che l'algoritmo si blocchi in una discesa infinita,
+	é possibile impostare una profonditá massima, oltre la quale
+	all'algoritmo viene impedito di procedere, obbligandolo a fare
+	backtracking anche se il nodo in esame potrebbe venire espanso.
+	In questo modo, si garantisce che l'algoritmo non possa bloccarsi
+	indefinitamente, ma potrebbe potenzialmente perdere parte delle
+	soluzioni se queste esistono ma molto in profonditá.
+
+	Sebbene Depth-First search possa potenzialmente non essere
+	completo, nella pratica viene comunque spesso preferito a
+	Breadth-First search. Questo perché la complessitá in tempo
+	e spazio di Depth-First search ha un bound infinitamente
+	inferiore: se l'albero é finito, la complessitá in tempo
+	dell'algoritmo é proporzionale al numero degli stati, mentre
+	la complessitá in spazio é \math{O(bm)}, dove \math{b} é il
+	fattore di branching e \math{m} é la massima profonditá
+	dell'albero.
+
+	%\begin{verbatim}
+	%	function DEPTH-FIRST-SEARCH(problem, f)
+	%\end{verbatim}
+
+	%\subsection{Uniformed-Cost search}
+
+\end{sile}

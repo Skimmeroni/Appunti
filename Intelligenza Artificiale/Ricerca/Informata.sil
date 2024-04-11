@@ -1,0 +1,140 @@
+\begin{sile}
+
+	Un algoritmo di ricerca \strong{informato} possiede informazioni
+	in merito a "quanto vicino" sia uno stato rispetto agli obiettivi.
+	A differenza degli algoritmi di ricerca non informati, che procedono
+	in ogni direzione ("a caso"), gli algoritmi di ricerca informati 
+	possono orientare la loro computazione verso una determinata direzione.
+
+	Viene detta \strong{euristica} una funzione che fornisce informazioni
+	piú o meno precise su quanto lo stato generico di un problema sia
+	vicino ad uno stato obiettivo del medesimo problema. Nello specifico:
+	tale funzione, indicata con \math{h(n)}, restituisce una stima numerica
+	del percorso a costo minimo che ha inizio in \math{n} e ha fine nello
+	stato obiettivo piú vicino. Tale funzione é in genere specifica
+	per ogni possibile istanza del problema in esame. Si noti come
+	l'informazione restituita dalla euristica non suggerisca necessariamente
+	di intraprendere l'azione che risulta in un percorso efficiente.
+
+	\subsection{Greedy search}
+
+	L'algoritmo \strong{Greedy search} é un algoritmo di ricerca informato
+	che sceglie sempre il nodo che ha il minor valore di \math{h(n)} fra 
+	tutti i nodi raggiungibili, assumendo che sia anche uno dei nodi che
+	costituiscono il percorso piú efficiente. Puó essere quindi implementato
+	a partire da Best-First search scegliendo \math{h(n)} come \math{f(n)}.
+
+	La performance di Greedy search dipende molto da quanto l'algoritmo é
+	in grado di fare una buona predizione sulla base dell'euristica. Se 
+	l'euristica porta quasi sempre ad un percorso favorevole, la complessitá
+	in termini di tempo e spazio puó scendere fino a \math{O(bm)}. Se
+	l'euristica porta quasi sempre ad un percorso sfavorevole, di fatto 
+	Greedy search opera in maniera quasi indistinguibile da Depth-first
+	search, perché vengono esplorati molti (se non tutti) nodi in profonditá,
+	e la complessitá diviene \math{O(\abs{V})}. Per lo stesso motivo, 
+	Greedy search é completo se lo spazio degli stati é finito, mentre é
+	incompleto se lo spazio degli stati é infinito.
+
+	\subsection{A* search}
+
+	Il piú comune algoritmo di ricerca informato é \strong{A* search}
+	(pronuncia: "A-star search"), implementabile a partire da Best-first
+	search usando come funzione di valutazione \math{f(n) = g(n) + h(n)},
+	dove \math{g(n)} é il costo totale del percorso che va dal nodo radice
+	a \math{n}. Di fatto, A* search é una combinazione di Uniformed Cost
+	search e di Greedy Search.
+
+	A* search é un algoritmo completo; se A* search sia anche ottimale
+	dipende dalle caratteristiche della funzione di euristica. In particolare,
+	una euristica si dice \strong{ammissibile} se approssima sempre i costi
+	per difetto.
+
+	\begin{theorem}
+		Fintanto che come euristica di A* search viene scelta una
+		euristica ammissibile, A* search é ottimale.
+
+		\bigskip
+		\strong{Dimostrazione}. Si supponga per assurdo che A* search
+		possa restituire un percorso non ottimale anche se viene scelta
+		una euristica ammissibile. Sia \math{C*} l'effettivo costo del
+		percorso ottimale di una qualche applicazione di A* search dallo
+		stato radice ad un certo stato obiettivo e sia \math{C} il costo
+		stimato dalla funzione di valutazione per il medesimo percorso.
+
+		\bigskip
+		Per quanto assunto nell'ipotesi di assurdo, deve aversi \math{C
+		> C*}. Deve allora esistere un certo nodo \math{n} sul percorso
+		ottimale ma che non é stato espanso: questo perché se tutti i
+		nodi sul percorso ottimale fossero stati espansi, allora la
+		funzione di valutazione avrebbe restituito \math{C*} e non
+		\math{C}. Siano \math{g*(n)} e \math{h*(n)} rispettivamente
+		l'effettivo costo del sottopercorso ottimale che va dallo stato
+		di partenza a \math{n} e l'effettivo costo del sottopercorso
+		ottimale che va da \math{n} al piú vicino stato obiettivo.
+
+		\bigskip
+		Si ha quindi \math{C* = g*(n) + h*(n)}. Inoltre, avendo assunto
+		che \math{n} si trovi su un sottopercorso ottimale, deve aversi
+		che \math{g(n)} e \math{g*(n)} coincidono. É quindi possibile
+		scrivere \math{f(n) = g(n) + h(n) = g*(n) + h(n)}. Avendo assunto
+		che l'euristica é ammissibile, deve aversi \math{h(n) \leq h*(n)},
+		e pertanto \math{C = f(n) \leq g*(n) + h*(n)}. Questo é peró in
+		contraddizione con l'ipotesi di assurdo, pertanto occorre assumere
+		che A* search restituisca sempre una soluzione ottimale quando
+		viene scelta una euristica ammissibile.
+	\end{theorem}
+
+	Una euristica \math{h(n)} si dice \strong{consistente} se, per ogni
+	nodo \math{n} e per ogni successore \math{n'} di \math{n} generato
+	dall'azione \math{a}, vale \footnote{É facile verificare che questa
+	é una forma di disuguaglianza triangolare.}:
+
+	\begin[mode = display]{math}
+		h(n) \leq \mi{Cost}(n, a, n') + h(n')
+	\end{math}
+
+	La proprietá di consistenza é piú forte dell'ammissibilitá,
+	perché ogni euristica consistente é anche ammissibile, ma non
+	tutte le euristiche ammissibili sono consistenti. Inoltre, se
+	l'euristica é consistente, quando viene raggiunto un nodo per
+	la prima volta si ha la certezza che questo si trovi su uno
+	dei percorsi ottimali, e non verrá mai aggiunto alla frontiera
+	piú di una volta.
+
+	Ci si chiede allora come si possa costruire una euristica per un
+	dato problema. Se a partire da un problema se ne costruisce una
+	versione "semplificata" rimuovendo le restrizioni imposte all'agente,
+	ovvero aumentando il numero di azioni a questo disponibili, si dice
+	che si ottiene un \strong{problema rilassato}.
+
+	Il grafo dello spazio degli stati del problema rilassato é un
+	supergrafo del grafo dello spazio degli stati del problema originale,
+	perché aumentare il numero di azioni disponibili all'agente comporta
+	l'aggiunta di nuovi archi al grafo. Per questo motivo, ogni soluzione
+	ottimale del problema originale é anche una soluzione per il problema
+	rilassato, ma il problema rilassato potrebbe avere soluzioni di costo
+	ancora inferiore che nel problema originale non sono presenti, perché
+	l'aggiunta di nuove azioni potrebbe condurre a delle scorciatoie.
+	Quindi, il costo di una soluzione ottimale di un problema rilassato 
+	fornisce un limite inferiore al costo delle soluzioni del problema
+	originale, e puó essere quindi usata come euristica per il problema
+	originale.
+
+	Date piú euristiche ammissibili per il medesimo problema, é
+	possibile compararle per valutare quale sia la migliore. Se
+	date due euristiche \math{h_{1}} e \math{h_{2}} vale \math{h_{1}(n)
+	\geq h_{2}(n)} per ogni valore di \math{n}, si dice che \math{h_{1}}
+	\strong{domina} \math{h_{2}}. Se l'euristica \math{h_{1}} domina
+	\math{h_{2}}, allora \math{h_{1}} é sempre una euristica migliore
+	di \math{h_{2}}, perché il bound restituito da \math{h_{1}} sará
+	sempre maggiore di quello restituito da \math{h_{2}}, e sará quindi
+	piú vicino all'effettivo valore della soluzione ottimale. Se vale
+	\math{h_{1}(n) \geq h_{2}(n)} solo per alcuni valori di \math{n},
+	una euristica che certamente domina entrambe é \math{h(n) = \mi{max}
+	(h_{1}(n), h_{2}(n))}, perché per tutti i possibili \math{n} varrá
+	sempre \math{h(n) = h_{1}(n)} e \math{h(n) \geq h_{2}(n)} oppure
+	\math{h(n) = h_{2}(n)} e \math{h(n) \geq h_{1}(n)}. Inoltre, il
+	massimo di piú euristiche ammissibili é sempre un'euristica
+	ammissibile a sua volta.
+
+\end{sile}

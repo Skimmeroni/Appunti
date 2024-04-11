@@ -60,6 +60,7 @@
 	\set[parameter = math.font.size, value = 11]
 	\pdf:metadata[key = Title, value = Appunti di Intelligenza Artificiale]
 	\pdf:metadata[key = Author, value = Shania]
+	\math{\def{abs}{\mn{|} #1 \mn{|}}}
 
 	% \center{\img[src = Intelligenza_artificiale_copertina.jpg, width = 75%pw]}
 
@@ -81,5 +82,14 @@
 		\include[src = Simbolica/Schema.sil]
 		\section{OWL}
 		\include[src = Simbolica/OWL.sil]
+	\chapter{Search and plan}
+		\section{Risolvere problemi con la ricerca}
+		\include[src = Ricerca/Introduzione.sil]
+		\section{Ricerca non informata}
+		\include[src = Ricerca/Non_informata.sil]
+		\section{Ricerca informata}
+		\include[src = Ricerca/Informata.sil]
+		\section{Classical planning}
+		\include[src = Ricerca/Classical.sil]
 
 \end{document}

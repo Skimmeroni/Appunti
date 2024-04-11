@@ -1,0 +1,172 @@
+\begin{sile}
+
+	Il \strong{Planning Classico} consiste nel trovare una sequenza
+	di azioni che permettono di raggiungere un determinato obiettivo
+	in un ambiente discreto, deterministico, statico e accessibile.
+	A differenza dei problemi di ricerca, che richiedono una euristica
+	ad-hoc per ciascun dominio, il linguaggio del planning é indipendente
+	dal dominio del problema in esame.
+
+	Similmente ai problemi di ricerca, un \strong{problema di planning} é
+	definito a partire dai seguenti elementi:
+
+	\begin{itemize}
+		\begin{item}
+			Uno \strong{spazio degli stati} \math{S},
+			finito e discreto; 
+		\end{item}
+		\begin{item}
+			Uno \strong{stato iniziale} (noto)
+			\math{s_{0} \in S};
+		\end{item}
+		\begin{item}
+			Un insieme di \strong{stati obiettivo}
+			\math{S_{G} \subseteq S};
+		\end{item}
+		\begin{item}
+			Un insieme di \strong{azioni} \math{A(s)
+			\subseteq A} applicabile in ciascuno stato
+			\math{s \in S};
+		\end{item}
+		\begin{item}
+			Una \strong{funzione di transizione deterministica}
+			\math{s^{j} = f(a, s)} per ogni \math{a \in A(s)};
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Un \strong{plan} é una sequenza di azioni \math{a_{0},
+	\unicodeellipsis, a_{n}} che mappa \math{s_{0}} su
+	\math{S_{G}}. In altri termini, esiste una sequenza di
+	stati \math{s_{0} \unicodeellipsis, s_{n + 1}} di modo
+	che \math{a_{i} \in A(s_{i}), s_{i + 1} = f(a_{i}, s_{i})}
+	e \math{s_{n + 1} \in S_{G}} per \math{i = 0, \unicodeellipsis, n}.
+
+	Un plan viene detto \strong{ottimale} se minimizza la somma
+	\math{\sum_{i = 0}^{n} c(a_{i}, s_{i})}, ovvero la somma dei
+	costi di ciascuna azione di cui tale plan é costituito.
+
+	Il problema viene codificato in un linguaggio indipendente dal
+	dominio; tali linguaggi costituiscono una famiglia chiamata 
+	\strong{Planning Domain Definition Language} (\strong{PDDL})
+	\footnote{La sintassi dei linguaggi PDDL é simile a quella
+	di Lisp.}. Questi permettono di descrivere azioni, sensori,
+	obiettivi e situazione iniziale mediante delle rappresentazioni
+	schematiche che non necessitano di alcuna conoscenza specifica
+	sul dominio del problema.
+
+	Una volta definito il linguaggio, é possibile utilizzarlo
+	per codificare un insieme di informazioni in una knowledge
+	base. L'approccio usato per la costruzione di un agente é
+	\strong{dichiarativo}: é sufficiente istruirlo con le nozioni
+	contenute nella KB per poi fare deduzioni ed ottenere risposte.
+	In questo modo, é possibile focalizzare l'attenzione sulla sola
+	conoscenza, tralasciando i dettagli implementativi dell'agente,
+	come ad esempio quale algoritmo usa per formulare le deduzioni.
+	In questo modo, ogni inferenza puó essere potenzialemente
+	calcolata dall'agente, fintanto che é possibile formularla nel
+	linguaggio formale di riferimento. L'approccio opposto é quello
+	\strong{imperativo}, dove l'agente viene istruito nel dettaglio
+	su quali passi compiere per ciascuno stato in cui l'agente si
+	trova \footnote{I nomi \em{dichiarativo} e \em{imperativo} sono
+	in analogia con gli omonomimi paradigmi di programmazione.}.
+
+	Un PDDL molto semplice é \strong{STRIPS} (\strong{Stanford Research
+	Institute Problem Solver}). Un problema codificato nel linguaggio
+	STRIPS é una quadrupla \math{P = (F, O, I, G)}:
+
+	\begin{itemize}
+		\begin{item}
+			Un insieme \math{F} di \strong{condizioni} (variabili
+			proposizionali);
+		\end{item}
+		\begin{item}
+			Un insieme \math{O} di \strong{operatori} (azioni).
+			Ogni operatore \math{a} é a sua volta una tripla
+			\math{\mi{Prec}(a) = \alpha, \mi{Add}(a) = \beta,
+			\mi{Del}(a) = \gamma}. \math{\alpha} é un insieme
+			di \strong{precondizioni}, ovvero di condizioni che
+			devono essere vere affinché sia possibile applicare
+			l'operatore. \math{\beta} é un insieme di condizioni
+			che vengono rese vere dall'azione (vengono aggiunte
+			allo stato corrente). \math{\gamma} é un insieme di
+			condizioni che vengono rese false dall'azione (vengono
+			rimosse dallo stato corrente); 
+		\end{item}
+		\begin{item}
+			Uno \strong{stato iniziale} \math{I \subseteq F},
+			costituito da tutte le condizioni che sono inizialmente
+			vere (vale la closed-world assumpion; tutto ció che non
+			é inizialmente vero é assunto falso);
+		\end{item}
+		\begin{item}
+			Una specifica dello \strong{stato obiettivo}, riportato
+			come una coppia \math{\langle N, M \rangle} la quale
+			riporta, rispettivamente, quali condizioni devono essere
+			vere e false affinché uno stato possa essere considerato
+			uno stato obiettivo.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Un problema \math{P = (F, O, I , G)} scritto nel formalismo di STRIPS
+	puó essere tradotto in un problema di ricerca equivalente \math{S(P)}
+	nel seguente modo:
+
+	\begin{itemize}
+		\begin{item}
+			Gli stati \math{s \in S(P)} equivalgono a collezioni
+			di atomi di \math{F};
+		\end{item}
+		\begin{item}
+			Lo stato iniziale \math{s_{0}} di \math{S(P)} equivale
+			a \math{I};
+		\end{item}
+		\begin{item}
+			Gli stati obiettivo di \math{S(P)} equivalgono agli
+			\math{s} tali per cui \math{G \subseteq s};
+		\end{item}
+		\begin{item}
+			Le azioni \math{a} in \math{A(s)} equivalgono alle
+			operazioni \math{O}, di modo che \math{\mi{Prec}(a)
+			\subseteq s};
+		\end{item}
+		\begin{item}
+			Lo stato successivo \math{s^{j}} é dato da
+			\math{s - \mi{Del}(a) + \mi{Add}(a)};
+		\end{item}
+		\begin{item}
+			I costi delle azioni \math{c(a, s)} sono tutti pari a 1;
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Naturalmente, una soluzione (ottimale) per \math{P} é anche una
+	soluzione ottimale per \math{S(P)}.
+
+	\begin{example}
+		Si consideri il problema \math{P = (F, I, O, G)} formulato
+		nel linguaggio STRIPS, cosí costruito:
+
+		\begin[mode = display]{math}
+			F = \{p, q, r\}
+			\thickspace\thickspace
+			I = \{p\}
+			\thickspace\thickspace
+			\table[columnalign = left]{
+				\mi{Prec}(a) = \{p\},
+				\mi{Add}(a) = \{q\},
+				\mi{Del}(a) = \{\} \\
+				\mi{Prec}(b) = \{q\},
+				\mi{Add}(b) = \{r\},
+				\mi{Del}(b) = \{q\} \\
+			}
+			\thickspace\thickspace
+			G = \{q, r\}
+		\end{math}
+	\end{example}
+
+\end{sile}
