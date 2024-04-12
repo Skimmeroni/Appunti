@@ -47,14 +47,11 @@
 	\math{\sum_{i = 0}^{n} c(a_{i}, s_{i})}, ovvero la somma dei
 	costi di ciascuna azione di cui tale plan é costituito.
 
-	Il problema viene codificato in un linguaggio indipendente dal
-	dominio; tali linguaggi costituiscono una famiglia chiamata 
-	\strong{Planning Domain Definition Language} (\strong{PDDL})
-	\footnote{La sintassi dei linguaggi PDDL é simile a quella
-	di Lisp.}. Questi permettono di descrivere azioni, sensori,
-	obiettivi e situazione iniziale mediante delle rappresentazioni
-	schematiche che non necessitano di alcuna conoscenza specifica
-	sul dominio del problema.
+	Il problema viene codificato in un linguaggio indipendente
+	dal dominio. Questi linguaggi permettono di descrivere azioni,
+	sensori, obiettivi e situazione iniziale mediante delle
+	rappresentazioni schematiche che non necessitano di alcuna
+	conoscenza specifica sul dominio del problema.
 
 	Una volta definito il linguaggio, é possibile utilizzarlo
 	per codificare un insieme di informazioni in una knowledge
@@ -72,14 +69,15 @@
 	trova \footnote{I nomi \em{dichiarativo} e \em{imperativo} sono
 	in analogia con gli omonomimi paradigmi di programmazione.}.
 
-	Un PDDL molto semplice é \strong{STRIPS} (\strong{Stanford Research
-	Institute Problem Solver}). Un problema codificato nel linguaggio
-	STRIPS é una quadrupla \math{P = (F, O, I, G)}:
+	Un linguaggio molto semplice appartenente a questa famiglia é
+	\strong{STRIPS} (\strong{Stanford Research Institute Problem
+	Solver}). Un problema codificato nel linguaggio STRIPS é una
+	quadrupla \math{P = (F, O, I, G)}:
 
 	\begin{itemize}
 		\begin{item}
 			Un insieme \math{F} di \strong{condizioni} (variabili
-			proposizionali);
+			proposizionali, istanziate);
 		\end{item}
 		\begin{item}
 			Un insieme \math{O} di \strong{operatori} (azioni).
@@ -144,8 +142,13 @@
 
 	\bigskip
 
-	Naturalmente, una soluzione (ottimale) per \math{P} é anche una
-	soluzione ottimale per \math{S(P)}.
+	Naturalmente, una soluzione (ottimale) per \math{P} é anche
+	una soluzione ottimale per \math{S(P)}. Dato che gli stati
+	di \math{S(P)} equivalgono a "combinazioni" di elementi di
+	\math{P}, é facile verificare che se \math{P} ha \math{n}
+	condizioni, il problema di ricerca equivalente \math{S(P)}
+	ha \math{2^{n}} stati; il risparmio in termini di spazio che
+	offre STRIPS é quindi notevole.
 
 	\begin{example}
 		Si consideri il problema \math{P = (F, I, O, G)} formulato
@@ -167,6 +170,177 @@
 			\thickspace\thickspace
 			G = \{q, r\}
 		\end{math}
+
+		\begin{itemize}
+			\begin{item}
+				Partendo dallo stato iniziale, l'operazione \math{b}
+				non é applicabile, perché le precondizioni non sono
+				soddisfatte. É peró possibile applicare \math{a},
+				essendo le precondizioni soddisfatte, e \math{q}
+				viene aggiunto allo stato iniziale. Lo stato
+				attuale diventa \math{\{p, q\}};
+			\end{item}
+			\begin{item}
+				L'operazione \math{b} diventa applicabile, perché
+				le precondizioni sono ora soddisfatte. Applicando
+				\math{b} viene aggiunto \math{r} e viene tolto
+				\math{q}, ottenendo \math{\{p, r\}};
+			\end{item}
+			\begin{item}
+				Applicando nuovamente \math{a} viene (ri)-aggiunto
+				\math{p}, ottenendo \math{\{q, r, p\}} e raggiungendo
+				lo stato obiettivo.
+			\end{item}
+		\end{itemize}
 	\end{example}
+
+	STRIPS non permette di usare variabili, perché tutti i componenti
+	devono essere nominati esplicitamente. Questo rende STRIPS molto
+	semplice, ma al contempo molto prolisso (per quanto non prolisso
+	quanto riportare tutti gli stati esplicitamente).
+
+	Una estensione di STRIPS che permette l'uso di variabili é
+	\strong{Planning Domain Definition Language} (\strong{PDDL})
+	\footnote{La sintassi di PDDL é simile a quella di Lisp.}.
+	Un problema in PDDL é formato da due componenti: un \strong{dominio}
+	ed una \strong{istanza}. Il dominio contiene lo schema delle azioni,
+	degli atomi ed i tipi degli argomenti:
+
+	\begin{verbatim}
+		(define (domain DOMAIN_NAME)
+		    (:predicates (PREDICATE_1_NAME ?A1 ?A2 \ddd ?AN)
+		                 (PREDICATE_2_NAME ?A1 ?A2 \ddd ?AN)
+		                 \ddd)
+
+		\bigskip
+		    (:action ACTION_1_NAME
+		        [:parameters (?P1 ?P2 \ddd ?PN)]
+		        [:precondition PRECOND_FORMULA]
+		        [:effect EFFECT_FORMULA]
+		    )
+		    (:action ACTION_2_NAME
+		       \ddd)
+		    \ddd)
+	\end{verbatim}
+
+	I nomi dei predicati e delle azioni sono costituiti da caratteri
+	alfanumerici e/o da trattini. I parametri dei predicati e delle
+	azioni si distinguono dai nomi perché hanno un "?" come prefisso.
+	I parametri usati nella dichiarazione dei predicati non hanno altra
+	utilitá al di fuori di specificare il numero di argomenti che il
+	predicato debba avere; fintanto che hanno nomi distinti, il nome
+	scelto per i parametri non é rilevante. I predicati possono anche
+	avere zero parametri.
+
+	Una precondizione puó essere espressa come:
+
+	\begin{itemize}
+		\begin{item}
+			Una formula atomica:
+			\tt{(PREDICATE_NAME ARG1 \ddd ARGN)}
+		\end{item}
+		\begin{item}
+			Una congiunzione di formule atomiche:
+			\tt{(and ATOM1 \ddd ATOMN)}
+		\end{item}
+		\begin{item}
+			Una disgiunzione di formule atomiche:
+			\tt{(or ATOM1 \ddd ATOMN)}
+		\end{item}
+		\begin{item}
+			La negazione di una formula atomica:
+			\tt{(not CONDITION_FORMULA)}
+		\end{item}
+		\begin{item}
+			Una formula con quantificatore universale:
+			\tt{(forall (?V1 ?V2 \ddd) CONDITION_FORMULA)}
+		\end{item}
+		\begin{item}
+			Una formula con quantificatore esistenziale:
+			\tt{(exists (?V1 ?V2 \ddd) CONDITION_FORMULA)}
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	In PDDL, gli effetti di una azione non sono distinti in \em{Add} e
+	\em{Delete}. Le rimozioni vengono espresse sotto forma di negazioni.
+	L'effetto di una azione puó essere espresso come:
+
+	\begin{itemize}
+		\begin{item}
+			Una aggiunta:
+			\tt{(PREDICATE_NAME ARG1 \ddd ARGN)}
+		\end{item}
+		\begin{item}
+			Una rimozione:
+			\tt{(not (PREDICATE_NAME ARG1 \ddd ARGN))}
+		\end{item}
+		\begin{item}
+			Una congiunzione di effetti atomici:
+			\tt{(and ATOM1 \ddd ATOMN)}
+		\end{item}
+		\begin{item}
+			Un effetto condizionale:
+			\tt{(when CONDITION_FORMULA EFFECT_FORMULA)}
+		\end{item}
+		\begin{item}
+			Una formula con quantificatore universale:
+			\tt{(forall (?V1 ?V2 \ddd) EFFECT_FORMULA)}
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	L'istanza contiene lo stato iniziale, lo stato obiettivo e tutti
+	gli oggetti che figurano nel problema. Una istanza puó essere
+	espressa come:
+
+	\begin{verbatim}
+		(define problem PROBLEM_NAME)
+		    (:domain DOMAIN_NAME)
+		    (:objects OBJ1 OBJ2 \ddd OBJN)
+		    (:init ATOM1 ATOM2 \ddd ATOMN)
+		    (:goal CONDITION_FORMULA)
+		)
+	\end{verbatim}
+
+	La descrizione dello stato iniziale (\tt{:init}) é semplicemente
+	una lista di tutti i predicati che sono veri nello stato iniziale;
+	tutti gli altri sono assunti falsi. A differenza delle precondizioni
+	delle azioni, gli stati iniziali e obiettivo devono necessariamente
+	essere \em{grounded}, ovvero non possono avere delle variabili come
+	argomenti.
+
+	I tipi devono essere dichiarati prima che possano essere utilizzati.
+	La dichiarazione di un tipo puó essere espressa come:
+
+	\begin{verbatim}
+		(:types NAME1 \ddd NAMEN)
+	\end{verbatim}
+
+	Per dichiarare il tipo di un parametro di un predicato o di una azione,
+	si riporta \tt{?X - TYPE_OF_X}. Una lista di parametri dello stesso tipo
+	puó essere abbreviata come \tt{?X ?Y ?Z - TYPE_OF_XYZ}.
+
+	I problemi di planning possono essere risolti come problemi di
+	ricerca euristica \footnote{Un approccio alternativo prevede
+	di riformulare i problemi di planning come \strong{problemi di
+	soddisfacibilitá booleana} (\strong{boolean satisfiability
+	problem}, \strong{SAT}), ovvero il problema di determinare
+	se esiste una interpretazione che soddisfi una data formula
+	booleana.}. I problemi di ricerca euristica sono problemi
+	NP-Completi, per quanto comunque risolvibili in tempo accettabile
+	anche per grandi istanze.
+
+	COME RISOLVO UN PROBLEMA DI PLANNING HELLO???
+
+	Come giá anticipato, non tutti i problemi non possono essere
+	formulati in un linguaggio di planning. Altri problemi sono
+	invece intrinsecamente complessi e, sebbene sia possibile
+	formularli in PDDL o STRIPS, verrebbero comunque risolti in
+	maniera subottimale. In questi casi, é preferibile un approccio
+	imperativo, dove il codice é pensato ad-hoc per il problema
+	in esame.
 
 \end{sile}
