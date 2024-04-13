@@ -333,7 +333,18 @@
 	NP-Completi, per quanto comunque risolvibili in tempo accettabile
 	anche per grandi istanze.
 
-	COME RISOLVO UN PROBLEMA DI PLANNING HELLO???
+	Sia \math{P} un problema scritto utilizzando il formalismo di PDDL.
+	L'idea alla base di questo approccio prevede di convertire \math{P}
+	in \math{S(P)}, un problema di ricerca equivalente, ed applicare a
+	questo un algoritmo di ricerca. Dato che, in genere, \math{S(P)} é
+	infinitamente piú complesso di \math{P}, per risolverlo in maniera
+	efficiente é necessario adoperare un algoritmo di ricerca che fa
+	uso di una euristica (come A* search, ad esempio). Questo sembrerebbe
+	essere un ostacolo, perché come visto in precedenza ogni problema di
+	ricerca che fa uso di euristiche richiede una euristica specifica. Per
+	il modo in cui PDDL é strutturato, é invece possibile derivare in
+	maniera del tutto automatica una euristica applicabile ad \math{S(P)}
+	a partire da \math{P}, a prescindere da quale problema \math{P} sia.
 
 	Come giá anticipato, non tutti i problemi non possono essere
 	formulati in un linguaggio di planning. Altri problemi sono
