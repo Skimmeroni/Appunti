@@ -89,7 +89,9 @@
 		\include[src = Ricerca/Non_informata.sil]
 		\section{Ricerca informata}
 		\include[src = Ricerca/Informata.sil]
-		\section{Classical planning}
+		\section{Planning classico}
 		\include[src = Ricerca/Classical.sil]
+		\section{Planning probabilistico}
+		\include[src = Ricerca/Probabilistic.sil]
 
 \end{document}

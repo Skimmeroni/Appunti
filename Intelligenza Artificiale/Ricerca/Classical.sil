@@ -319,9 +319,10 @@
 		(:types NAME1 \ddd NAMEN)
 	\end{verbatim}
 
-	Per dichiarare il tipo di un parametro di un predicato o di una azione,
-	si riporta \tt{?X - TYPE_OF_X}. Una lista di parametri dello stesso tipo
-	puó essere abbreviata come \tt{?X ?Y ?Z - TYPE_OF_XYZ}.
+	Per dichiarare il tipo di un parametro di un predicato o di una
+	azione, si riporta \tt{?X - TYPE_OF_X}. Una lista di parametri
+	dello stesso tipo puó essere abbreviata come \tt{?X ?Y ?Z -
+	TYPE_OF_XYZ}.
 
 	I problemi di planning possono essere risolti come problemi di
 	ricerca euristica \footnote{Un approccio alternativo prevede
@@ -345,6 +346,39 @@
 	il modo in cui PDDL é strutturato, é invece possibile derivare in
 	maniera del tutto automatica una euristica applicabile ad \math{S(P)}
 	a partire da \math{P}, a prescindere da quale problema \math{P} sia.
+
+	Per costruire una euristica per \math{S(P)} é possibile
+	utilizzare il medesimo metodo usato finora, ovvero ricavare
+	un problema rilassato e usare la funzione di costo di tale
+	problema come euristica per il problema principale. Il vantaggio
+	dei problemi di planning é che possono operare su problemi piú
+	semplici e dal formalismo definito, pertanto é piú vantaggioso
+	ricavare una versione rilassata di \math{S(P)} direttamente a
+	partire da (una versione rilassata di) \math{P}. Si ricordi che,
+	per un problema di ricerca, é possibile costruire un problema
+	rilassato aggiungendo ulteriori azioni al problema principale.
+
+	Per un problema di planning, questo puó equivalere ad
+	eliminare tutte le precondizioni dalle operazioni, di
+	modo che queste siano applicabili in (circa) ogni momento:
+	questo approccio viene chiamato \strong{ignore-precondition
+	heuristic}. Innanzitutto, tutte le azioni vengono rilassate
+	rimuovendo tutte le precondizioni e tutti gli effetti ad
+	eccezione di quelli che sono presenti nell'obiettivo. Dopodiché,
+	si conta qual'é il numero minimo di azioni necessarie affinché
+	l'unione di tali azioni soddisfi l'obiettivo \footnote{Questo
+	é un esempio di \strong{problema di copertura}.} e si usa tale
+	valore come euristica.
+
+	In alternativa, é possibile eliminare le rimozioni da
+	tutte le operazioni del problema, di modo che il progresso
+	verso il goal proceda in maniera monotona e senza che un'azione
+	influisca sul progresso di un'altra: questo approccio é chiamato
+	\strong{ignore-delete-lists heuristic}. Si modifica il problema
+	di modo che tutti gli obiettivi e tutte le precondizioni contengano
+	solo aggiunte, dopodiché se vengono eliminate tutte le rimozioni da
+	ogni azione. La lunghezza di un percorso ottimale per il problema
+	rilassato cosí costruito viene utilizzata come euristica.
 
 	Come giá anticipato, non tutti i problemi non possono essere
 	formulati in un linguaggio di planning. Altri problemi sono

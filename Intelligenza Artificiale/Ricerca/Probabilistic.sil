@@ -1,0 +1,171 @@
+\begin{sile}
+
+	Siano \math{A} e \math{B} due eventi, e siano \math{P(A)} e \math{P(B)}
+	le probabilitá che gli eventi rispettivamente \math{A} e \math{B} si 
+	verifichino. Valgono i seguenti assiomi:
+
+	\begin[mode = display]{math}
+		0 \leq P(A) \leq 1
+		\thickspace\thickspace\thickspace
+		P(\mi{True}) = 1
+		\thickspace\thickspace\thickspace
+		P(\mi{False}) = 0
+		\thickspace\thickspace\thickspace
+		P(A \vee B) = P(A) + P(B) - P(A \wedge B)
+	\end{math}
+
+	É possibile dimostrare che la probabilitá che un evento \math{A}
+	avvenga é uguale alla somma tra la probabilitá che sia l'evento
+	\math{A} che un certo evento \math{B} avvengano e la probabilitá
+	che sia l'evento \math{A} che l'evento \math{\neg B} avvengano.
+	Questa proprietá é anche detta \strong{formula di disintegrazione}:
+
+	\begin[mode = display]{math}
+		P(A) = P(A \vee B) + P(A \vee \neg B)
+	\end{math}
+
+	Combinando la formula di disintegrazione con la formula per la probabilitá 
+	condizionata si ottiene la cosiddetta \strong{formula delle probabilitá
+	totali}:
+
+	\begin[mode = display]{math}
+		P(A) = P(A | B) \cdot P(B) + P(A | \neg B) \cdot P(\neg B)
+	\end{math}
+
+	\math{P(A | B)} e \math{P(B | A)} devono necessariamente soddisfare i due
+	assiomi fondamentali della probabilitá, pertanto dovrá valere:
+
+	\par
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			P(A | \neg B) = 1 - P(\neg A | \neg B)
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			P(B | \neg A) = 1 - P(\neg B | \neg A)
+		\end{math}
+	\end{parbox}
+	\par
+
+	É importante puntualizzare che \math{P(A|B)}, la probabilitá che
+	\math{A} si verifichi sapendo che si é verificato \math{B}, non é
+	necessariamente uguale a \math{P(B|A)}, la probabilitá che \math{B}
+	si verifichi sapendo che si é verificato \math{A}. Le due sono peró
+	collegate dalla \strong{formula di Bayes}:
+
+	\begin[mode = display]{math}
+		P(X | Y) = \frac{P(Y | X) \cdot P(X)}{P(Y)}
+	\end{math}
+
+	Tale formula riveste grande importanza nel campo dell'intelligenza
+	artificiale perché é alla base di una tecnica di inferenza statistica
+	chiamata \strong{inferenza Bayesiana}. Data una certa ipotesi, é
+	possibile aggiornarla mano a mano che nuove osservazioni vengono
+	condotte, pesando quanto ciascuna osservazione debba essere presa
+	in considerazione. In tal senso, la formula puó essere interpretata
+	in questo modo:
+
+	\begin{itemize}
+		\begin{item}
+			\math{X} é una ipotesi la cui probabilitá é stata
+			stimata sulla base di un certo numero di osservazioni
+			precedenti;
+		\end{item}
+		\begin{item}
+			\math{P(X)} é la \strong{probabilitá a priori}, ovvero
+			la stima della probabilitá di \math{X} \em{prima} di
+			aver integrato l'informazione portata da \math{Y};
+		\end{item}
+		\begin{item}
+			\math{Y} é una nuova osservazione, che influirá in maniera
+			piú o meno incisiva sul futuro valore di \math{P(X)};
+		\end{item}
+		\begin{item}
+			\math{P(X | Y)} é la \strong{probabilitá a posteriori},
+			ovvero la stima della probabilitá di \math{X} \em{dopo}
+			aver integrato l'informazione portata da \math{Y};
+		\end{item}
+		\begin{item}
+			\math{P(Y | X)} é la \strong{funzione di verosimiglianza}.
+			In funzione di \math{Y} con \math{X} fissato, indica quanto
+			é compatibile la presenza dell'osservazione \math{Y} rispetto
+			all'ipotesi \math{X};
+		\end{item}
+		\begin{item}
+			\math{P(Y)} é la \strong{verosimiglianza marginale}, ed
+			indica la probabilitá di osservare \math{Y} a prescindere
+			da quale sia l'ipotesi \math{X}. Viene anche chiamata
+			semplicemente \strong{evidenza}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Riassumendo \footnote{Questo approccio viene spesso usato nelle
+	neuroscienze per rappresentare matematicamente il modo in cui il
+	cervello apprende nuove informazioni.}:
+
+	\begin[mode = display]{math}
+		\mi{Posteriori} = \frac{\mi{Verosimiglianza} \times \mi{Priori}}{\mi{Evidenza}}
+	\end{math}
+
+	Esistono due situazioni (non mutualmente esclusive) in cui l'agente
+	puó fare uso del calcolo delle probabilitá. Il primo é determinare
+	quanto é probabile che esso si trovi in un determinato stato, quando
+	non é possibile saperlo con certezza. Il secondo é di scegliere una
+	azione non sulla base di dove si trova lo stato obiettivo rispetto
+	allo stato corrente, dato che non sempre é possibile saperlo, ma
+	rispetto a quanto é ottimale sul lungo termine trovarsi nello stato
+	che verrá raggiunto.
+
+	%
+	% APPLICARE IL FILTRO BAYESIANO ALLA AI SPEEDRUN ANY %
+	%
+
+	Viene chiamato \strong{Markov Decision Process} (\strong{MDP})
+	un problema di ricerca dove l'ambiente é accessibile ma non
+	deterministico, ovvero dove l'agente sa sempre in che stato si
+	trova ma non ha la certezza che compiere una azione porterá allo
+	stato che si aspetta. Un MDP \footnote{La formulazione di MDP é
+	la stessa che sottende il \strong{reinforcement learning}, ovvero
+	il problema di determinare qual'é la miglior azione da compiere
+	in un ambiente sconosciuto.} é costituito da:
+
+	\begin{itemize}
+		\begin{item}
+			Un insieme di stati \math{S};
+		\end{item}
+		\begin{item}
+			Un insieme di azioni \math{A};
+		\end{item}
+		\begin{item}
+			Uno stato iniziale \math{s_{0} \in S};
+		\end{item}			
+		\begin{item}
+			Un modello di transizione \math{T(s, a, s')}, con \math{a \in A} e
+			\math{s, s' \in S}. Questo indica qual'é la probabilitá che venga
+			effettivamente raggiunto lo stato \math{s'} eseguendo \math{a} mentre
+			ci si trova in \math{s}. In termini di calcolo delle probabilitá,
+			\math{T(s, a, s')} equivale di fatto a scrivere \math{P(s' | s, a)};
+		\end{item}
+		\begin{item}
+			Una \strong{funzione di ricompensa} \math{R(s, a, s')}, che
+			associa un valore numerico (in genere positivo) a ciascuna
+			transizione. Tale valore rappresenta quanto é "vantaggioso"
+			per l'agente compiere la transizione da \math{s} a \math{s'}
+			mediante \math{a}. A differenza dei problemi di ricerca, dove
+			si cerca di minimizzare la funzione di costo, negli MDP si
+			cerca di massimizzare la funzione di ricompensa.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	In un problema di ricerca, la soluzione é una sequenza di azioni
+	che conducono dallo stato iniziale ad uno stato obiettivo. In un
+	MDP questo non é possibile, perché una certa sequenza di azioni
+	é in grado di portare da uno stato ad un altro solamente con una
+	certa probabilitá.
+
+\end{sile}

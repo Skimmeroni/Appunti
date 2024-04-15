@@ -251,12 +251,22 @@ return {
   },
   {
     label = {
-      "Classical planning",
+      "Planning classico",
       id = "stuff"
     },
     level = 2,
     link = "dest26",
     number = "3.4",
     pageno = "29"
+  },
+  {
+    label = {
+      "Planning probabilistico",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest27",
+    number = "3.5",
+    pageno = "32"
   }
 }
