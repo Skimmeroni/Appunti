@@ -93,5 +93,10 @@
 		\include[src = Ricerca/Classical.sil]
 		\section{Planning probabilistico}
 		\include[src = Ricerca/Probabilistic.sil]
+	\chapter{Intelligenza artificiale sub-simbolica}
+		\section{Apprendimento}
+		\include[src = Subsimbolica/Apprendimento.sil]
+		\section{Reinforcement learning}
+		\include[src = Subsimbolica/Reinforcement.sil]
 
 \end{document}

@@ -1,0 +1,44 @@
+\begin{sile}
+
+	Nel reinforcement learning, l'agente interagisce con l'ambiente e
+	riceve periodicamente delle ricompense o delle punizioni, sotto forma
+	di \strong{segnali}, che riflettono il modo in cui sta operando. 
+
+	Il concetto di ricompensa era giá presente nei Markov Decision
+	Process, e l'obiettivo degli MDP é il medesimo del reinforcement
+	learning: massimizzare la ricompensa attesa. Tuttavia, il reinforcement
+	learning non consiste semplicemente nel risolvere un MDP: l'agente é
+	parte dell'MDP. Infatti, non conosce a priori la funzione di transizione
+	e la funzione di ricompensa: il massimo che puó fare é stimarle sulla
+	base delle sue osservazioni. Esistono fondamentalmente due approcci al
+	reinforcement learning:
+
+	\begin{itemize}
+		\begin{item}
+			\strong{Model-based Reinforcement learning}, dove l'agente
+			ipotizza, a partire dalle sue osservazioni sull'ambiente, quale
+			possa essere una funzione di transizione in grado di interpretare
+			i segnali di ricompensa. In genere, gli agenti che adottano questo
+			approccio cercano di imparare una funzione di utilitá \math{U(s)}
+			definita in termini di somma delle ricompense dallo stato \math{s}
+			in poi;
+		\end{item}
+		\begin{item}
+			\strong{Model-free reinforcement learning}, dove l'agente
+			non solo non conosce la funzione di transizione dell'ambiente,
+			ma nemmeno la modellizza, apprendendo invece una rappresentazione
+			piú diretta su come agire.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	La forma di model-free reinforcement learning piú comune é
+	chiamata \strong{Q-learning}, dove l'agente apprende una
+	Q-function \math{Q(s, a)}, che indica la somma delle ricompense
+	che si avranno a partire dallo stato \math{s} se viene intrapresa
+	l'azione \math{a}. Data una Q-function, l'agente puó scegliere
+	che azione compiere mentre si trova in \math{s} sulla base di
+	quale di queste restituisce il Q-value maggiore.
+
+\end{sile}

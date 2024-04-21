@@ -208,19 +208,19 @@
 
 	\begin{verbatim}
 		(define (domain DOMAIN_NAME)
-		    (:predicates (PREDICATE_1_NAME ?A1 ?A2 \ddd ?AN)
-		                 (PREDICATE_2_NAME ?A1 ?A2 \ddd ?AN)
-		                 \ddd)
+		    (:predicates (PREDICATE_1_NAME ?A1 ?A2 \unichar{U+2026} ?AN)
+		                 (PREDICATE_2_NAME ?A1 ?A2 \unichar{U+2026} ?AN)
+		                 \unichar{U+2026})
 
 		\bigskip
 		    (:action ACTION_1_NAME
-		        [:parameters (?P1 ?P2 \ddd ?PN)]
+		        [:parameters (?P1 ?P2 \unichar{U+2026} ?PN)]
 		        [:precondition PRECOND_FORMULA]
 		        [:effect EFFECT_FORMULA]
 		    )
 		    (:action ACTION_2_NAME
-		       \ddd)
-		    \ddd)
+		       \unichar{U+2026})
+		    \unichar{U+2026})
 	\end{verbatim}
 
 	I nomi dei predicati e delle azioni sono costituiti da caratteri
@@ -299,8 +299,8 @@
 	\begin{verbatim}
 		(define problem PROBLEM_NAME)
 		    (:domain DOMAIN_NAME)
-		    (:objects OBJ1 OBJ2 \ddd OBJN)
-		    (:init ATOM1 ATOM2 \ddd ATOMN)
+		    (:objects OBJ1 OBJ2 \unichar{U+2026} OBJN)
+		    (:init ATOM1 ATOM2 \unichar{U+2026} ATOMN)
 		    (:goal CONDITION_FORMULA)
 		)
 	\end{verbatim}
@@ -316,7 +316,7 @@
 	La dichiarazione di un tipo puó essere espressa come:
 
 	\begin{verbatim}
-		(:types NAME1 \ddd NAMEN)
+		(:types NAME1 \unichar{U+2026} NAMEN)
 	\end{verbatim}
 
 	Per dichiarare il tipo di un parametro di un predicato o di una

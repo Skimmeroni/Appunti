@@ -1,0 +1,53 @@
+\begin{sile}
+
+	Si dice che un agente compie un \strong{apprendimento} se
+	migliora le proprie prestazioni dopo aver compiuto delle
+	osservazioni sull'ambiente. Quando l'agente in questione
+	é un computer, si parla di \strong{machine learning}: il
+	computer ricava dei dati, costruisce un modello sulla base
+	di questi ultimi ed utilizza tale modello sia come ipotesi
+	sul mondo che come software in grado di risolvere problemi.
+
+	I motivi per investire su un agente in grado di apprendere
+	sono fondamentalmente due. Il primo é che il designer non é
+	in grado di anticipare ogni possibile situazione futura, ed
+	é quindi necessario che sia l'agente stesso (eventualmente
+	guidato) a prendersene carico. Il secondo é che alcuni
+	problemi sono cosí complessi che nemmeno il designer é in
+	grado di determinare come risolverli, eppure sufficientemente
+	approcciabili da poter fornire gli strumenti all'agente per
+	poterlo fare.
+
+	Si tende a distinguere i problemi risolvibili mediante apprendimento
+	in due categorie, sulla base di quale sia l'output richiesto. Se
+	l'output del problema é un insieme finito di valori, allora é detto
+	\strong{problema di classificazione}; se é invece un numero, é detto
+	\strong{problema di regressione}.
+
+	Vi sono tre tipi di \strong{feedback} che accompagnano l'input, e 
+	questi determinano i tre tipi principali di apprendimento:
+
+	\begin{itemize}
+		\begin{item}
+			Nel \strong{supervised learning} l'agente osserva diverse
+			coppie di input-output e cerca di determinare la funzione
+			che meglio mappa ogni input al relativo output;
+		\end{item}
+		\begin{item}
+			Nel \strong{unsupervised learning} l'agente cerca di
+			determinare dei pattern dagli input senza un feedback
+			specifico associato. Un esempio di unsupervised learning
+			é il \strong{clustering}, l'individuare delle proprietá
+			comuni (cluster) nell'input e raggruppare l'input sulla
+			base di tali proprietá;
+		\end{item}
+		\begin{item}
+			Nel \strong{reinforcement learning} l'agente apprende mediante
+			una serie di rinforzi, sia positivi (ricompense) che negativi
+			(punizioni). In sostanza, l'agente cerca di determinare quali
+			sono le azioni che minimizzano le punizioni e massimizzano le
+			ricompense per poi applicarle.
+		\end{item}
+	\end{itemize}
+
+\end{sile}

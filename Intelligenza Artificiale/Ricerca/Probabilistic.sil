@@ -1,171 +1,879 @@
 \begin{sile}
 
-	Siano \math{A} e \math{B} due eventi, e siano \math{P(A)} e \math{P(B)}
-	le probabilitá che gli eventi rispettivamente \math{A} e \math{B} si 
-	verifichino. Valgono i seguenti assiomi:
+	Spesso, per il modo in cui l'ambiente é strutturato, non é possibile
+	per l'agente ottenere informazioni con certezza. Nello specifico,
+	le situazioni di questo tipo piú comuni sono due (non mutualmente
+	esclusive): la prima é non poter essere in grado di determinare in
+	che stato ci si trova, la seconda é non poter sapere con certezza
+	l'effetto delle proprie azioni. In questi casi, l'agente é costretto
+	a fare delle \em{predizioni probabilistiche}.
 
-	\begin[mode = display]{math}
-		0 \leq P(A) \leq 1
-		\thickspace\thickspace\thickspace
-		P(\mi{True}) = 1
-		\thickspace\thickspace\thickspace
-		P(\mi{False}) = 0
-		\thickspace\thickspace\thickspace
-		P(A \vee B) = P(A) + P(B) - P(A \wedge B)
-	\end{math}
+	\subsection{Complementi di teoria della probabilitá}
 
-	É possibile dimostrare che la probabilitá che un evento \math{A}
-	avvenga é uguale alla somma tra la probabilitá che sia l'evento
-	\math{A} che un certo evento \math{B} avvengano e la probabilitá
-	che sia l'evento \math{A} che l'evento \math{\neg B} avvengano.
-	Questa proprietá é anche detta \strong{formula di disintegrazione}:
+		Siano \math{A} e \math{B} due eventi, e siano \math{P(A)}
+		e \math{P(B)} le probabilitá che gli eventi rispettivamente
+		\math{A} e \math{B} si verifichino. Valgono i seguenti assiomi:
 
-	\begin[mode = display]{math}
-		P(A) = P(A \vee B) + P(A \vee \neg B)
-	\end{math}
-
-	Combinando la formula di disintegrazione con la formula per la probabilitá 
-	condizionata si ottiene la cosiddetta \strong{formula delle probabilitá
-	totali}:
-
-	\begin[mode = display]{math}
-		P(A) = P(A | B) \cdot P(B) + P(A | \neg B) \cdot P(\neg B)
-	\end{math}
-
-	\math{P(A | B)} e \math{P(B | A)} devono necessariamente soddisfare i due
-	assiomi fondamentali della probabilitá, pertanto dovrá valere:
-
-	\par
-	\begin[width = 50%fw]{parbox}
 		\begin[mode = display]{math}
-			P(A | \neg B) = 1 - P(\neg A | \neg B)
+			0 \leq P(A) \leq 1
+			\thickspace\thickspace\thickspace
+			P(\mi{True}) = 1
+			\thickspace\thickspace\thickspace
+			P(\mi{False}) = 0
+			\thickspace\thickspace\thickspace
+			P(A \vee B) = P(A) + P(B) - P(A \wedge B)
 		\end{math}
-	\end{parbox}
-	\begin[width = 50%fw]{parbox}
+
+		É possibile dimostrare che la probabilitá che un evento \math{A}
+		avvenga é uguale alla somma tra la probabilitá che sia l'evento
+		\math{A} che un certo evento \math{B} avvengano e la probabilitá
+		che sia l'evento \math{A} che l'evento \math{\neg B} avvengano.
+		Questa proprietá é anche detta \strong{formula di disintegrazione}:
+
 		\begin[mode = display]{math}
-			P(B | \neg A) = 1 - P(\neg B | \neg A)
+			P(A) = P(A \vee B) + P(A \vee \neg B)
 		\end{math}
-	\end{parbox}
-	\par
 
-	É importante puntualizzare che \math{P(A|B)}, la probabilitá che
-	\math{A} si verifichi sapendo che si é verificato \math{B}, non é
-	necessariamente uguale a \math{P(B|A)}, la probabilitá che \math{B}
-	si verifichi sapendo che si é verificato \math{A}. Le due sono peró
-	collegate dalla \strong{formula di Bayes}:
+		Combinando la formula di disintegrazione con la formula per la
+		probabilitá condizionata si ottiene la cosiddetta \strong{formula
+		delle probabilitá totali}:
 
-	\begin[mode = display]{math}
-		P(X | Y) = \frac{P(Y | X) \cdot P(X)}{P(Y)}
-	\end{math}
+		\begin[mode = display]{math}
+			P(A) = P(A | B) \cdot P(B) + P(A | \neg B) \cdot P(\neg B)
+		\end{math}
 
-	Tale formula riveste grande importanza nel campo dell'intelligenza
-	artificiale perché é alla base di una tecnica di inferenza statistica
-	chiamata \strong{inferenza Bayesiana}. Data una certa ipotesi, é
-	possibile aggiornarla mano a mano che nuove osservazioni vengono
-	condotte, pesando quanto ciascuna osservazione debba essere presa
-	in considerazione. In tal senso, la formula puó essere interpretata
-	in questo modo:
+		\math{P(A | B)} e \math{P(B | A)} devono necessariamente soddisfare
+		i due assiomi fondamentali della probabilitá, pertanto dovrá valere:
 
-	\begin{itemize}
-		\begin{item}
-			\math{X} é una ipotesi la cui probabilitá é stata
-			stimata sulla base di un certo numero di osservazioni
-			precedenti;
-		\end{item}
-		\begin{item}
-			\math{P(X)} é la \strong{probabilitá a priori}, ovvero
-			la stima della probabilitá di \math{X} \em{prima} di
-			aver integrato l'informazione portata da \math{Y};
-		\end{item}
-		\begin{item}
-			\math{Y} é una nuova osservazione, che influirá in maniera
-			piú o meno incisiva sul futuro valore di \math{P(X)};
-		\end{item}
-		\begin{item}
-			\math{P(X | Y)} é la \strong{probabilitá a posteriori},
-			ovvero la stima della probabilitá di \math{X} \em{dopo}
-			aver integrato l'informazione portata da \math{Y};
-		\end{item}
-		\begin{item}
-			\math{P(Y | X)} é la \strong{funzione di verosimiglianza}.
-			In funzione di \math{Y} con \math{X} fissato, indica quanto
-			é compatibile la presenza dell'osservazione \math{Y} rispetto
-			all'ipotesi \math{X};
-		\end{item}
-		\begin{item}
-			\math{P(Y)} é la \strong{verosimiglianza marginale}, ed
-			indica la probabilitá di osservare \math{Y} a prescindere
-			da quale sia l'ipotesi \math{X}. Viene anche chiamata
-			semplicemente \strong{evidenza}.
-		\end{item}
-	\end{itemize}
+		\par
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				P(A | \neg B) = 1 - P(\neg A | \neg B)
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				P(B | \neg A) = 1 - P(\neg B | \neg A)
+			\end{math}
+		\end{parbox}
+		\par
 
-	\bigskip
+		É importante puntualizzare che \math{P(A|B)}, la probabilitá che
+		\math{A} si verifichi sapendo che si é verificato \math{B}, non é
+		necessariamente uguale a \math{P(B|A)}, la probabilitá che \math{B}
+		si verifichi sapendo che si é verificato \math{A}. Le due sono peró
+		collegate dalla \strong{formula di Bayes}:
 
-	Riassumendo \footnote{Questo approccio viene spesso usato nelle
-	neuroscienze per rappresentare matematicamente il modo in cui il
-	cervello apprende nuove informazioni.}:
+		\begin[mode = display]{math}
+			P{(X | Y)} = \frac{P(Y | X) \cdot P(X)}{P(Y)}
+		\end{math}
 
-	\begin[mode = display]{math}
-		\mi{Posteriori} = \frac{\mi{Verosimiglianza} \times \mi{Priori}}{\mi{Evidenza}}
-	\end{math}
+		Nel caso in cui \math{P(Y)} sia una costante, dato che questa non
+		dipende da \math{X} (o da \math{P(X)}) viene spesso riportata come
+		costante di normalizzazione. In particolare, con \math{P(Y)^{-1} =
+		\eta}, si ha:
 
-	Esistono due situazioni (non mutualmente esclusive) in cui l'agente
-	puó fare uso del calcolo delle probabilitá. Il primo é determinare
-	quanto é probabile che esso si trovi in un determinato stato, quando
-	non é possibile saperlo con certezza. Il secondo é di scegliere una
-	azione non sulla base di dove si trova lo stato obiettivo rispetto
-	allo stato corrente, dato che non sempre é possibile saperlo, ma
-	rispetto a quanto é ottimale sul lungo termine trovarsi nello stato
-	che verrá raggiunto.
+		\begin[mode = display]{math}
+			P(X | Y) = \eta P(Y | X) P(X)
+		\end{math}
 
-	%
-	% APPLICARE IL FILTRO BAYESIANO ALLA AI SPEEDRUN ANY %
-	%
+		Tale formula riveste grande importanza nel campo dell'intelligenza
+		artificiale perché é alla base di una tecnica di inferenza statistica
+		chiamata \strong{inferenza Bayesiana}. Data una certa ipotesi, é
+		possibile aggiornarla mano a mano che nuove osservazioni vengono
+		condotte, pesando quanto ciascuna osservazione debba essere presa
+		in considerazione. In tal senso, la formula puó essere interpretata
+		in questo modo:
 
-	Viene chiamato \strong{Markov Decision Process} (\strong{MDP})
-	un problema di ricerca dove l'ambiente é accessibile ma non
-	deterministico, ovvero dove l'agente sa sempre in che stato si
-	trova ma non ha la certezza che compiere una azione porterá allo
-	stato che si aspetta. Un MDP \footnote{La formulazione di MDP é
-	la stessa che sottende il \strong{reinforcement learning}, ovvero
-	il problema di determinare qual'é la miglior azione da compiere
-	in un ambiente sconosciuto.} é costituito da:
+		\begin{itemize}
+			\begin{item}
+				\math{X} é una ipotesi la cui probabilitá é stata
+				stimata sulla base di un certo numero di osservazioni
+				precedenti;
+			\end{item}
+			\begin{item}
+				\math{P(X)} é la \strong{probabilitá a priori}, ovvero
+				la stima della probabilitá di \math{X} \em{prima} di
+				aver integrato l'informazione portata da \math{Y};
+			\end{item}
+			\begin{item}
+				\math{Y} é una nuova osservazione, che influirá in maniera
+				piú o meno incisiva sul futuro valore di \math{P(X)};
+			\end{item}
+			\begin{item}
+				\math{P(X | Y)} é la \strong{probabilitá a posteriori},
+				ovvero la stima della probabilitá di \math{X} \em{dopo}
+				aver integrato l'informazione portata da \math{Y};
+			\end{item}
+			\begin{item}
+				\math{P(Y | X)} é la \strong{funzione di verosimiglianza}.
+				In funzione di \math{Y} con \math{X} fissato, indica quanto
+				é compatibile la presenza dell'osservazione \math{Y} rispetto
+				all'ipotesi \math{X};
+			\end{item}
+			\begin{item}
+				\math{P(Y)} é la \strong{verosimiglianza marginale}, ed
+				indica la probabilitá di osservare \math{Y} a prescindere
+				da quale sia l'ipotesi \math{X}. Viene anche chiamata
+				semplicemente \strong{evidenza}.
+			\end{item}
+		\end{itemize}
 
-	\begin{itemize}
-		\begin{item}
-			Un insieme di stati \math{S};
-		\end{item}
-		\begin{item}
-			Un insieme di azioni \math{A};
-		\end{item}
-		\begin{item}
-			Uno stato iniziale \math{s_{0} \in S};
-		\end{item}			
-		\begin{item}
-			Un modello di transizione \math{T(s, a, s')}, con \math{a \in A} e
-			\math{s, s' \in S}. Questo indica qual'é la probabilitá che venga
-			effettivamente raggiunto lo stato \math{s'} eseguendo \math{a} mentre
-			ci si trova in \math{s}. In termini di calcolo delle probabilitá,
-			\math{T(s, a, s')} equivale di fatto a scrivere \math{P(s' | s, a)};
-		\end{item}
-		\begin{item}
-			Una \strong{funzione di ricompensa} \math{R(s, a, s')}, che
-			associa un valore numerico (in genere positivo) a ciascuna
-			transizione. Tale valore rappresenta quanto é "vantaggioso"
-			per l'agente compiere la transizione da \math{s} a \math{s'}
-			mediante \math{a}. A differenza dei problemi di ricerca, dove
-			si cerca di minimizzare la funzione di costo, negli MDP si
-			cerca di massimizzare la funzione di ricompensa.
-		\end{item}
-	\end{itemize}
+		\bigskip
 
-	\bigskip
+		Riassumendo \footnote{Questo approccio viene spesso usato nelle
+		neuroscienze per rappresentare matematicamente il modo in cui il
+		cervello apprende nuove informazioni.}:
 
-	In un problema di ricerca, la soluzione é una sequenza di azioni
-	che conducono dallo stato iniziale ad uno stato obiettivo. In un
-	MDP questo non é possibile, perché una certa sequenza di azioni
-	é in grado di portare da uno stato ad un altro solamente con una
-	certa probabilitá.
+		\begin[mode = display]{math}
+			\mi{Posteriori} = \frac{\mi{Verosimiglianza} \times
+			\mi{Priori}}{\mi{Evidenza}}
+		\end{math}
+
+		Data una variabile aleatoria \math{X}, viene detto \strong{valore
+		atteso} (o \strong{valore medio} o \strong{speranza matematica})
+		di \math{X} il valore \math{E[X]} cosí calcolato:
+
+		\begin[mode = display]{math}
+			E{[X]} =
+			\{\table[columnalign = left left]{
+				\sum_{s \in S} s p{(s)} &
+				\mi{se} \thickspace \mi{discreta} \\
+				\int_{-\infty}^{+\infty} u f{(u)} \thickspace du &
+				\mi{se} \thickspace \mi{continua}
+			}
+		\end{math}
+
+		Nel caso in cui \math{X} sia una variabile discreta, \math{E[X]}
+		é dato dalla sommatoria di tutti i valori che \math{X} puó assumere
+		moltiplicati per la probabilitá che assumano quel valore. Se invece
+		\math{X} é una variabile aleatoria continua, \math{E[X]} é dato
+		dall'integrale calcolato su tutti i punti su cui é definita
+		moltiplicati per la funzione di densitá calcolata in quel punto.
+
+		É interessante notare come \math{E[X]} sia un valore che dipende dai 
+		risultati dell'esperimento a cui é associato, pertanto é esso stesso 
+		una variabile aleatoria (e quindi una funzione). Inoltre, il valore 
+		medio non é necessariamente uno dei valori assunti dalla variabile 
+		aleatoria stessa, e nemmeno é garantito che esista. Nello specifico,
+		questo accade quando la sommatoria o l'integrale da cui viene ricavato
+		non convergono.
+
+		\begin{theorem}
+			Il valore atteso é una funzione lineare: prese due variabili
+			aleatorie \math{X} e \math{Y} e due coefficienti reali \math{a}
+			e \math{b}, vale \math{E[aX + bY] = aE[X] + bE[Y]}.
+		\end{theorem}
+
+	\subsection{Incertezza sugli stati: filtri Bayesiani}
+
+		Si consideri una situazione in cui l'agente non é in
+		grado di sapere con certezza se lo stato in cui si trova
+		é effettivamente lo stato in cui questo crede di trovarsi.
+
+		Si indichi con \math{t} un \strong{istante temporale}, un
+		valore intero che indica l'evoluzione dell'agente e delle
+		sue percezioni in un dato momento, contando a partire da
+		un certo istante iniziale \math{t_{0} = 0}. L'agente ottiene
+		informazioni dall'ambiente ad ogni istante, ed usa tali 
+		informazioni per migliorare la stima che ha di quale stato
+		si trova. Siano allora:
+
+		\begin{itemize}
+			\begin{item}
+				\math{x_{t}} lo stato in cui l'agente effettivamente
+				si trova allo stato \math{t};
+			\end{item}
+			\begin{item}
+				\math{z_{t}} la misurazione compiuta dall'agente
+				all'istante \math{t} per mezzo dei suoi sensori.
+				Si assuma, per semplicitá, che ad ogni istante
+				l'agente effettui una ed una sola misura. La notazione
+				\math{z_{t_{1}:t_{2}}} indica l'insieme di tutte le
+				misurazioni compiute dall'agente dal tempo \math{t_{1}}
+				al tempo \math{t_{2}}, con \math{t_{1} \leq t_{2}};
+			\end{item}
+			\begin{item}
+				\math{\mu_{t}} l'informazione sul cambio di stato che
+				avviene nell'ambiente. La variabile \math{\mu_{t}}
+				corrisponde al cambio di stato nell'intervallo di tempo
+				\math{(t - 1; t]}. La notazione \math{\mu_{t_{1}:t_{2}}}
+				indica l'insieme di tutti i cambiamenti che avvengono
+				nell'ambiente dal tempo \math{t_{1}} al tempo \math{t_{2}},
+				con \math{t_{1} \leq t_{2}}. Si noti come l'ambiente puó
+				cambiare anche al di lá delle azioni compiute dall'agente.
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		Come giá detto, l'agente non puó conoscere con certezza in
+		quale stato si trova, e deve limitarsi a dare una stima
+		probabilistica. Sia allora \math{P(x_{t})} la probabilitá
+		"in assoluto" che l'agente si trovi nello stato \math{x_{t}}
+		al tempo \math{t}. É ragionevole assumere che la probabilitá
+		che l'agente si trovi in un certo stato in un certo istante
+		dipenda in una qualche misura dagli stati, dalle misurazioni
+		e dai cambi di stato precedenti. In tal senso, ció che si ha
+		interesse a calcolare non é tanto \math{P(x_{t})} quanto: 
+
+		\begin[mode = display]{math}
+			P(x_{t} | x_{0 : t - 1}, z_{1 : t - 1}, \mu_{1 : t})
+		\end{math}
+
+		Si noti come \math{z_{t}} parta da \math{t = 1} e non da
+		\math{t = 0}, dato che si assume che lo stato \math{x_{0}}
+		venga determinato a priori, prima di effettuare qualsiasi
+		osservazione. 
+
+		Similmente, si ha interesse anche a calcolare la probabilitá
+		che, in un certo istante \math{t}, l'agente compia la misurazione
+		\math{z_{t}}. Anche questa potrebbe dipendere in una qualche
+		misura dagli stati, dalle misurazioni e dai cambi di stato
+		precedenti:
+
+		\begin[mode = display]{math}
+			P(z_{t} | x_{0 : t}, z_{1 : t - 1}, \mu_{1 : t})
+		\end{math}
+
+		Una assunzione molto forte che é possibile fare é che la
+		probabilitá che l'agente si trovi in un certo stato o compia
+		una certa misurazione al tempo \math{t} non sia influenzato
+		da \em{tutti} gli stati, misurazioni e cambi di stato precedenti,
+		ma solo da quelli avvenuti nell'istante \math{t - 1}, ovvero
+		quello immediatamente precedente. Se vale questa assunzione,
+		chiamata \strong{assunzione Markoviana}, allora é possibile
+		semplificare l'espressione come:
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				P(x_{t} | x_{0 : t - 1}, z_{1 : t - 1}, \mu_{1 : t}) =
+				P(x_{t} | x_{t - 1}, \mu_{t})
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				P(z_{t} | x_{0 : t}, z_{1 : t - 1}, \mu_{1 : t}) =
+				P(z_{t} | x_{t})
+			\end{math}
+		\end{parbox}
+		\par
+
+		Gli agenti probabilistici mantengono al loro interno un "grado di
+		fiducia" sullo stato in cui si trovano (in cui credono di trovarsi).
+		Tale probabilitá, indicata con \math{bel(x_{t})}, é una probabilitá
+		a posteriori condizionata rispetto alle misurazioni ed ai cambi di
+		stato precedenti a \math{t}:
+
+		\begin[mode = display]{math}
+			bel(x_{t}) = P(x_{t} | z_{1 : t}, \mu_{1 : t})
+		\end{math}
+
+		Occasionalmente, é utile anche calcolare la probabilitá a
+		posteriori \em{prima} di incorporare \math{z_{t}}. Tale
+		probabilitá é indicata con \math{bel^{-}(x_{t})}:
+
+		\begin[mode = display]{math}
+			bel^{-}(x_{t}) = P(x_{t} | z_{1 : t - 1}, \mu_{1 : t})
+		\end{math}
+
+		\begin{theorem}
+			\strong{Filtro Bayesiano}. Se sono valide le assunzioni
+			Markoviane, allora vale:
+
+			\begin[mode = display]{math}
+				bel{(x_{t})} = \eta P{(z_{t} | x_{t})} \int P{(x_{t} |
+				\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1}
+			\end{math}
+
+			\strong{Dimostrazione}. Applicando la formula di Bayes a
+			\math{bel(x_{t})}, si ha:
+
+			\begin[mode = display]{math}
+				bel{(x_{t})} = P{(x_{t} | z_{1 : t}, \mu_{1 : t})} =
+				\frac{P(z_{t} | x_{t}, z_{1 : t - 1}, \mu_{1 : t})
+				\cdot P(x_{t} | z_{1 : t - 1}, \mu_{1 : t})}{P(z_{t} |
+				z_{1 : t - 1}, \mu_{1 : t})} =
+				\eta P{(z_{t} | x_{t}, z_{1 : t - 1}, \mu_{1 : t})}
+				P{(x_{t} | z_{1 : t - 1}, \mu_{1 : t})}
+			\end{math}
+
+			Per assunzione Markoviana \math{P(z_{t} | x_{t},
+			z_{1 : t - 1}, \mu_{1 : t}) = P(z_{t} | x_{t})}. Pertanto,
+			é possibile semplificare l'espressione precedente come:
+
+			\begin[mode = display]{math}
+				bel{(x_{t})} =
+				P{(x_{t} | z_{1 : t}, \mu_{1 : t})} =
+				\eta P(z_{t} | x_{t})
+				P(x_{t} | z_{1 : t - 1}, \mu_{1 : t}) =
+				\eta P(z_{t} | x_{t}) bel^{-}{(x_{t})}
+			\end{math}
+
+			Applicando a \math{bel^{-} (x_{t})} la formula delle
+			probabilitá totali:
+
+			\begin[mode = display]{math}
+				bel^{-} {(x_{t})} = P{(x_{t} | z_{1 : t - 1}, \mu_{1 : t})} =
+				\int P{(x_{t} | x_{t - 1}, z_{1 : t - 1}, \mu_{1 : t})}
+				P{(x_{t - 1} | z_{1 : t - 1}, \mu_{1 : t})} d x_{t - 1} =
+				\int P{(x_{t} | x_{t - 1}, z_{1 : t - 1}, \mu_{1 : t})}
+				bel{(x_{t - 1})} d x_{t - 1}
+			\end{math}
+
+			Per assunzione Markoviana \math{P(x_{t} | x_{0 : t - 1},
+			z_{1 : t - 1}, \mu_{1 : t}) = P(x_{t} | x_{t - 1}, \mu_{t})}.
+			Pertanto, é possibile semplificare l'espressione precedente
+			come:
+
+			\begin[mode = display]{math}
+				bel^{-} {(x_{t})} = P{(x_{t} | z_{1 : t - 1}, \mu_{1 : t})} =
+				\int P{(x_{t} | x_{t - 1}, z_{1 : t - 1}, \mu_{1 : t})}
+				bel{(x_{t - 1})} d x_{t - 1} = \int P{(x_{t} | x_{t - 1},
+				\mu_{t})} bel{(x_{t - 1})} d x_{t - 1}
+			\end{math}
+
+			Sostituendo l'espressione per \math{bel^{-} (x_{t})}
+			nell'espressione per \math{bel (x_{t})}, si ottiene:
+
+			\begin[mode = display]{math}
+				bel{(x_{t})} = \eta P{(z_{t} | x_{t})} bel^{-} {(x_{t})} =
+				\eta P{(z_{t} | x_{t})} \int P{(x_{t} | \mu_{t}, x_{t - 1})}
+				bel{(x_{t - 1})} d x_{t - 1}
+			\end{math}
+		\end{theorem}
+
+		L'utilitá del filtro Bayesiano sta nel fatto che é possibile
+		esprimere il grado di certezza dell'agente sullo stato in cui
+		si trova esclusivamente rispetto allo stato precedente.
+
+	\subsection{Incertezza sulle azioni: Markov Decision Process}
+
+		Viene chiamato \strong{Markov Decision Process} (\strong{MDP})
+		un problema di ricerca dove l'ambiente é accessibile ma non
+		deterministico, ovvero dove l'agente sa sempre in che stato si
+		trova ma non ha la certezza che compiere una azione porterá allo
+		stato che si aspetta. Un MDP é costituito da:
+
+		\begin{itemize}
+			\begin{item}
+				Un insieme di stati \math{S};
+			\end{item}
+			\begin{item}
+				Un insieme di azioni \math{A};
+			\end{item}
+			\begin{item}
+				Uno stato iniziale \math{s_{0} \in S};
+			\end{item}			
+			\begin{item}
+				Un modello di transizione \math{T(s, a, s')}, con
+				\math{a \in A} e \math{s, s' \in S}. Questo indica
+				qual'é la probabilitá che venga effettivamente
+				raggiunto lo stato \math{s'} eseguendo \math{a}
+				mentre ci si trova in \math{s}. In termini di calcolo
+				delle probabilitá,\math{T(s, a, s')} equivale di fatto
+				a scrivere \math{P(s' | s, a)}. In un MDP vale l'assunzione
+				Markoviana, ovvero la probabilitá di raggiungere uno stato
+				di arrivo dipende solamente dallo stato attuale e non da
+				tutti gli stati che sono stati raggiunti in precedenza (se 
+				ve ne sono);
+			\end{item}
+			\begin{item}
+				Una \strong{funzione di ricompensa} \math{R(s, a, s')},
+				che associa un valore numerico a ciascuna transizione.
+				Tale valore rappresenta quanto é "vantaggioso" per l'agente
+				compiere la transizione da \math{s} a \math{s'} mediante
+				\math{a}. A differenza dei problemi di ricerca, dove si
+				cerca di minimizzare la funzione di costo, negli MDP si
+				cerca di massimizzare la funzione di ricompensa.
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		Risolvere un problema MDP consiste, come di consueto, nel trovare
+		una sequenza di azioni che permetta di passare dallo stato iniziale
+		ad uno degli stati obiettivo. Tuttavia, gli MDP presentano delle
+		criticitá che nei problemi di ricerca sono assenti.
+
+		In un problema di ricerca, la soluzione é una sequenza di azioni
+		che conducono dallo stato iniziale ad uno stato obiettivo. In un
+		MDP questo non é possibile, perché una certa sequenza di azioni
+		é in grado di portare da uno stato ad un altro solamente con una
+		certa probabilitá. L'azione da eseguire in un certo stato puó
+		essere pensata come una variabile aleatoria, alla quale é associata
+		una probabilitá per ciascun valore che questa puó assumere.
+		Pertanto, una soluzione per agenti probabilistici deve specificare
+		cosa un agente debba fare in \em{ogni} stato in cui l'agente potrebbe
+		trovarsi.
+
+		Negli MDP é necessario introdurre il concetto di \strong{politica}.
+		Per convenzione, una politica viene indicata con \math{\pi}: dato
+		uno stato \math{s}, \math{\pi(s)} é l'azione raccomandata dalla
+		politica \math{\pi} per lo stato \math{s}. La qualitá di una
+		politica é pertanto misurata sulla base di qual'é
+
+		Ogni volta che una determinata politica viene eseguita a partire
+		dallo stato iniziale, la natura stocastica dell'ambiente porta a
+		generare diverse sequenze di azioni, ciascuna con una propria
+		probabilità. La "qualità" di una politica viene pertanto misurata
+		a partire dall'utilità \em{attesa} delle possibili sequenze di
+		azioni generate da tali politiche. Una \strong{politica ottimale}
+		è una politica che restituisce il più alto valore di utilità
+		possibile, a prescindere da quale sia l'effetto dell'azione
+		che l'agente esegue. Una politica ottimale viene indicata con
+		\math{\pi *}. L'agente, sulla base della percezione corrente,
+		determina lo stato \math{s} in cui si trova ed esegue l'azione
+		\math{\pi * (s)}.
+
+		%% Esempio preso dal libro. Sulla base di come costruisco \math{R(s)}
+		%% cambia la politica ottimale. Se \math{R(s) \leq -1.6284} per tutti
+		%% gli stati tranne quelli terminali, la politica migliore prevede che
+		%% l'agente si diriga allo stato \math{-1} perchè è comunque preferibile
+		%% a raggiungere lo stato con \math{+1}. Se \math{-0.4278 < -0.0850} la
+		%% politica migliore prevede che l'agente si accolli il rischio perchè
+		%% la penalità è comunque troppo alta. Se \math{-0.0221 < R(s) \leq 0}
+		%% la politica migliore prevede che l'agente non si accolli il rischio
+		%% perchè la penalità è bassa e non ne vale la pena. Se \math{R(s) > 0},
+		%% la politica migliore prevede che l'agente continui a muoversi a caso
+		%% senza mai andare negli stati terminali perchè così continua a guadagnare
+		%% ricompensa all'infinito. CORREDARE IL TUTTO CON I DISEGNINI.
+
+		Data una sequenza di \math{n} stati \math{[s_{0}, s_{1},
+		\unicodeellipsis, s_{n}]}, sia \math{U_{h}([s_{0}, s_{1},
+		\unicodeellipsis, s_{n}])} la ricompensa complessiva di
+		tale sequenza, rispetto ad una certa \em{regola} \math{h}.
+		La regola più semplice è la \strong{ricompensa additiva},
+		dove la ricompensa totale è semplicemente la somma delle
+		ricompense associate ai singoli stati:
+
+		\begin[mode = display]{math}
+			U_{h}([s_{0}, s_{1}, \unicodeellipsis]) = R(s_{0}, \pi(s_{0}),
+			s_{1}) + R(s_{1}, \pi(s_{1}), s_{2}) + \unicodeellipsis
+		\end{math}
+
+		Una regola alternativa è la \strong{ricompensa con discount},
+		dove la ricompensa associata al trovarsi in un determinato stato
+		decresce di una certa percentuale lungo le iterazioni. Questa
+		regola è utile per modellare situazioni in cui si vuole impedire
+		che la ricompensa cresca indefinitamente, introducendo una
+		"penalitá" che aumenta mano a mano. Indicando con \math{\gamma}
+		un valore compreso fra 0 e 1, la ricompensa totale adoperando tale
+		regola è data da:
+
+		\begin[mode = display]{math}
+			U_{h}([s_{0}, s_{1}, s_{2}, \unicodeellipsis]) =
+			R(s_{0}, \pi(s_{0}), s_{1}) +
+			\gamma R(s_{1}, \pi(s_{1}), s_{2}) +
+			\gamma^{2} R(s_{2}, \pi(s_{2}), s_{3}) +
+			\unicodeellipsis
+		\end{math}
+
+		\math{\gamma} determina quanta priorità debba dare l'agente al
+		raggiungere determinati stati in una determinata iterazione. Se
+		\math{\gamma} è un valore prossimo a 0, le ricompense date dagli
+		stati raggiunti nelle prime iterazioni hanno un peso molto maggiore
+		sul valore di ricompensa complessivo rispetto a quelle fornite dagli
+		stati raggiunti nelle ultime iterazioni. Se \math{\gamma} è un valore
+		prossimo ad 1, le ricompense date dagli stati raggiunti nelle prime
+		iterazioni e nelle ultime iterazioni hanno un peso comparabile. Se
+		\math{\gamma} è esattamente 1, non vi è alcuna differenza nel
+		raggiungere uno stato in una certa iterazione piuttosto che in
+		un'altra, e la regola con discount coincide di fatto con la regola
+		additiva.
+
+		\begin{theorem}
+			Usando la regola con discount, se il numero di stati
+			é finito, la ricompensa complessiva \math{U_{h}} è un
+			valore limitato.
+
+			\bigskip
+			\strong{Dimostrazione}. Sia \math{\{s_{0}, s_{1},
+			\unicodeellipsis, s_{n}\}} un insieme finito di
+			stati. Essendo finito, deve esserlo anche \math{\{R(s_{0},
+			\pi(s_{0}), s_{1}), R(s_{1}, \pi(s_{1}), s_{2}), R(s_{n - 1},
+			\pi(s_{n - 1}), s_{n})\}}, che associa a ciascuna transizione
+			una ricompensa. Pertanto, tale insieme deve avere un massimo;
+			sia questo \math{R_{max}}.
+
+			Si noti come \math{1 + \gamma + \gamma^{2} + \unicodeellipsis
+			+ \gamma^{n}} sia una serie geometrica; se \math{\gamma} è un
+			valore compreso fra 0 e 1, vale:
+
+			\begin[mode = display]{math}
+				\mi{lim}_{n \rightarrow +\infty} 1 + \gamma + \gamma^{2} +
+				\unicodeellipsis + \gamma^{n} = \mi{lim}_{n \rightarrow
+				+\infty} \sum_{i = 0}^{n} \gamma^{i} = \frac{1}{1 - \gamma}
+				\thickspace\Rightarrow\thickspace
+				1 + \gamma + \gamma^{2} + \unicodeellipsis + \gamma^{n}
+				\leq \frac{1}{1 - \gamma}
+			\end{math}
+
+			Moltiplicando ambo i membri per \math{R_{max}}:
+
+			\begin[mode = display]{math}
+				R_{max} \sum_{i = 0}^{n} \gamma^{i} \leq
+				R_{max} {(\frac{1}{1 - \gamma})}
+				\thickspace\Rightarrow\thickspace
+				R_{max} + R_{max}\gamma + R_{max}\gamma^{2} +
+				\unicodeellipsis + R_{max}\gamma^{n}
+				\leq \frac{R_{max}}{1 - \gamma}
+			\end{math}
+
+			Essendo \math{R_{max}} maggiore di tutti i valori in
+			\math{\{R(s_{0}, \pi(s_{0}), s_{1}), R(s_{1}, \pi(s_{1}),
+			s_{2}), R(s_{n - 1}, \pi(s_{n - 1}), s_{n})\}}, é possibile
+			effettuare la seguente minorazione:
+
+			\begin[mode = display]{math}
+				R{(s_{0}, \pi(s_{0}), s_{1})} + \gamma R{(s_{1},
+				\pi(s_{1}), s_{2})} + \gamma^{2} R{(s_{2}, \pi(s_{2}),
+				s_{3})} + \unicodeellipsis + \gamma^{n - 1} R{(s_{n - 1},
+				\pi(s_{n - 1}), s_{n})} \leq \frac{R_{max}}{1 - \gamma} 
+			\end{math}
+		\end{theorem}
+
+		É possibile comparare diverse politiche comparando fra loro
+		le rispettive utilitá attese. Assumendo che l'agente si trovi
+		in un certo stato \math{s_{0}}, sia \math{S^{\pi}_{t}} una
+		variabile aleatoria che indica lo stato che raggiunge l'agente
+		adoperando una certa politica \math{\pi} a partire dallo stato
+		\math{s_{0}} al tempo \math{t}. La distribuzione di probabilitá
+		lungo la sequenza di stati \math{S_{1}, S_{2}, \unicodeellipsis}
+		é determinata a partire dallo stato \math{s_{0}}, dalla politica
+		\math{\pi} e dal modello di transizione, e viene indicata con
+		\math{U^{\pi}(s_{0})}:
+
+		\begin[mode = display]{math}
+			U^{\pi} {(s_{0})} = E{[R(s_{0}, \pi(s_{0}), s_{1}) + \gamma
+			R(s_{1}, \pi(s_{1}), s_{2}) + \gamma^{2} R(s_{2}, \pi(s_{2}),
+			s_{3}) + \unicodeellipsis]} = E{[\sum_{t = 0}^{\infty}
+			\gamma^{t} R{(s_{t}, \pi{(s_{t})}, s_{t + 1})}]}
+		\end{math}
+
+		Dove il valore atteso é calcolato rispetto alla distribuzione
+		della sequenza di stati indotta dall'applicare \math{\pi} a
+		\math{s_{0}}. Sia \math{\pi^{*}_{s_{0}}} la politica migliore
+		fra tutte quelle applicabili a partire da \math{s_{0}}: questa
+		non é altro che la politica \math{\pi} che massimizza
+		\math{U^{\pi} (s_{0})}:
+
+		\begin[mode = display]{math}
+			\pi^{*}_{s_{0}} = \mi{argmax}_{\pi} {(U^{\pi} {(s)})}
+		\end{math}
+
+		Fintanto che viene impiegata la regola con discount, é possibile
+		dimostrare che la politica ottimale non dipende da quale stato 
+		viene usato come stato di partenza. Questo significa che, per
+		qualsiasi stato \math{s}, il valore di utilita associato a tale
+		stato é semplicemente \math{U^{\pi^{*}}(s)}, a prescindere di
+		come tale stato viene raggiunto.
+
+		La funzione \math{U(s)} permette all'agente di scegliere la
+		prossima azione da compiere sulla base del principio di massima
+		utilitá attesa, ovvero che massimizza la somma pesata dalla 
+		probabilitá di compiere una transizione verso un certo stato
+		fra la ricompensa che viene ottenuta raggiungendolo e la penalitá
+		introdotta dalla regola con discount:
+
+		\begin[mode = display]{math}
+			\pi^{*} {(s)} = \mi{argmax}_{a \in A(s)} \sum_{s'} T{(s, a, s')}
+			[R{(s, a, s')} + \gamma U{(s')}]
+		\end{math}
+
+		Da questo segue una diretta relazione che sussiste fra
+		l'utilitá di uno stato e l'utilitá degli stati vicini,
+		ovvero quelli che l'agente puó raggiungere a partire da
+		questo: il valore di utilitá di uno stato é dato dalla
+		somma fra il valore atteso della ricompensa portata dalla
+		prossima transizione sommata all'utilitá (scontata) dello
+		stato di arrivo, assumendo che l'agente scelga una politica
+		ottimale. L'equazione risultante, che permette di esprimere
+		la funzione di utilitá degli stati in forma ricorsiva, prende
+		il nome di \strong{equazione di Bellman}:
+
+		\begin[mode = display]{math}
+			U{(s)} = \mi{max}_{a \in A(s)} \sum_{s'} T{(s, a, s')}
+			[R{(s, a, s')} + \gamma U{(s')}]
+		\end{math}
+
+		%%
+		%% Altro esempio da prendere dal libro.
+		%%
+
+		Un'altra quantitá importante é la \strong{funzione di
+		azione-utilitá}, o \strong{Q-function}, che riporta
+		l'utilitá attesa dal compiere una certa azione in un
+		certo stato. Il legame fra Q-function e funzione di
+		utilitá é immediato:
+
+		\begin[mode = display]{math}
+			U(s) = \mi{max}_{a} Q(s, a)
+		\end{math}
+
+		Inoltre, é possibile estrarre la politica ottimale a partire
+		dalla Q-function come segue:
+
+		\begin[mode = display]{math}
+			\pi^{*}(s) = \mi{argmax}_{a} Q(s, a)
+		\end{math}
+
+		É possibile costruire una equazione di Bellman anche per la
+		Q-function, notando come il valore atteso totale per il compiere
+		una azione é dato dalla somma fra la ricompensa immediata e la
+		penalitá del raggiungere il nuovo stato, che a sua volta é
+		esprimibile in termini della Q-function:
+
+		\begin[mode = display]{math}
+			Q{(s, a)} = \sum_{s'} T{(s, a, s')} [R{(s, a, s')} +
+			\gamma U{(s')}] = \sum_{s'} T{(s, a, s')} [R{(s, a, s')} +
+			\gamma \mi{max}_{a'} Q{(s', a')}]
+		\end{math}
+
+		Risolvendo una equazione di Bellman per \math{U} o per \math{Q}
+		é possibile ricavare una politica ottima per un problema di
+		planning probabilistico. Nello specifico, le equazioni di Bellman
+		sono alla base di uno dei metodi usati per risolvere un problema
+		MDP chiamato \strong{value iteration}.
+
+		Per ciascuno stato \math{s} di un MDP dovrebbe venire calcolato
+		\math{U(s)} attraverso l'equazione di Bellman. Se il numero di
+		stati dell'MDP é \math{n}, questo consiste nel risolvere un
+		sistema di \math{n} equazioni in \math{n} incognite. Se tale 
+		sistema fosse un sistema di equazioni lineari questo sarebbe
+		computazionalmente possibile, ma tale sistema non é lineare,
+		perché nell'equazione di Bellman compare l'operatore max, che
+		non é lineare.
+
+		Value iteration aggira il problema "stimando" il valore di \math{U(s)}
+		per ciascuno stato di iterazione in iterazione fino ad ottenerne una
+		approssimazione accettabile. Sia \math{U_{i}(s)} il valore di utilitá
+		per lo stato \math{s} alla \math{i}-esima iterazione; viene chiamato
+		\strong{aggiornamento di Bellman} l'aggiornamento di tale valore sulla
+		base del precedente:
+
+		\begin[mode = display]{math}
+			U_{i + 1} {(s)} \leftarrow \mi{max}_{a \in A(s)}
+			\sum_{s'} T{(s, a, s')} [R{(s, a, s')} + \gamma U_{i} {(s')}]
+		\end{math}
+
+		Inizialmente, i valori di \math{U(s)} vengono impostati ad
+		un valore casuale (in genere a 0), e le iterazioni proseguono
+		fintanto che la differenza fra l'utilitá stimata fra una
+		iterazione e quella successiva non é trascurabile.
+
+		\begin{verbatim}
+			S <= a set of states
+			A <= a set of actions A(s)
+			T <= the transition function T(s', a, s)
+			R <= the reward function R(s', a, s)
+			\unichar{U+03B3} <= the discount function
+			\unichar{U+03B5} <= the maximum error allowed in the utility of any state
+
+			\bigskip
+			function VALUE-ITERATION(S, A, T, R, \unichar{U+03B3}, \unichar{U+03B5})
+			    \unichar{U+03B4} <= 0
+			    foreach s in S do
+			        U[s] <= 0
+			        U'[s] <= 0
+
+			    \bigskip
+			    do
+			        foreach s in S do
+			            foreach a in A[s] do
+			                U'[s] <= max(Q-VALUE(S, A, T, R, U, \unichar{U+03B3}))
+			            if (|U'[s] - U[s]| > \unichar{U+03B4}) then
+			                \unichar{U+03B4} <= |U'[s] - U[s]|
+			    while (\unichar{U+03B4} > \unichar{U+03B5} (1 - \unichar{U+03B3}) / \unichar{U+03B3})
+
+			    \bigskip
+			    return U
+		\end{verbatim}
+
+		Occorre peró dimostrare che, dopo un numero sufficiente di
+		iterazioni, value iteration restituisce effettivamente una
+		stima corretta dei valori di \math{U(s)}.
+
+		Siano date una metrica \math{d} ed un fattore \math{c < 1}. Un
+		operatore \math{F} viene detto \strong{contrazione} se, applicandolo
+		a due elementi del suo dominio, si ottengono due valori la cui 
+		distanza (rispetto a \math{d}) é inferiore al prodotto fra
+		\math{c} e la distanza (rispetto a \math{d}) fra i due valori
+		originari. Formalmente, si ha che \math{F} é una contrazione se vale:
+
+		\begin[mode = display]{math}
+			d(F(x), F(y)) \leq c \cdot d(x, y) \thickspace \forall x, y \in \mi{Dom}(F)
+		\end{math}
+
+		\begin{theorem}
+			Se un operatore é una contrazione, allora ammette al piú un solo
+			punto fisso.
+
+			\bigskip
+			\strong{Dimostrazione}. Si supponga per assurdo che l'operatore
+			\math{F} ammetta due punti fissi, siano questi \math{z} e
+			\math{z'}. La distanza fra i due é data da \math{d(z, z')},
+			mentre la distanza fra le rispettive applicazioni di \math{F}
+			é data da \math{d(F(z), F(z'))}. Per definizione di punto fisso,
+			si ha peró \math{F(z) = z} e \math{F(z') = z'}; questo significa
+			che \math{d(z, z') = d(F(z), F(z'))}, ovvero che la distanza
+			fra \math{z} e \math{z'} non cambia quando \math{F} viene a 
+			questi applicata. Dato che questo viola la proprietá di
+			contrazione, deve aversi che tale coppia di punti fissi non
+			possa esistere.
+
+			É facile verificare che la stessa situazione si presenta se
+			viene scelto un qualsiasi numero di punti fissi superiore a
+			2, pertanto occorre concludere che il numero di punti fissi
+			di una contrazione possa essere esclusivamente 1 oppure 0.
+		\end{theorem}
+
+		\begin{theorem}
+			Se una contrazione ammette un punto fisso, allora una sua
+			applicazione ripetuta ad un qualsiasi elemento del suo dominio
+			converge a tale punto fisso. Ovvero, dato un operatore \math{F}
+			ed il suo punto fisso \math{x_{0}}, vale:
+
+			\begin[mode = display]{math}
+				\mi{lim}_{n \rightarrow +\infty} F^{n}(x) =
+				F(F(F(\unicodeellipsis(F(x))))) =
+				x_{0} \thickspace \forall x \in \mi{Dom}(F)
+			\end{math}
+		\end{theorem}
+
+		\begin{example}
+			La funzione \math{f(x) = x/2}, che dimezza il valore passato
+			in input, é una contrazione rispetto alla distanza euclidea.
+			Infatti, dati due elementi del suo dominio \math{x} e \math{y}
+			dove \math{x \leq y}:
+
+			\begin[mode = display]{math}
+				d{(F{(x)}, F{(y)})} \leq c \cdot d{(x, y)}
+				\thickspace\Rightarrow\thickspace
+				d{(\frac{x}{2}, \frac{y}{2})} \leq c \cdot d{(x, y)}
+				\thickspace\Rightarrow\thickspace
+				\frac{x}{2} - \frac{y}{2} \leq c {(x - y)}
+				\thickspace\Rightarrow\thickspace
+				\frac{x}{2} - \frac{y}{2} - cx + cy \leq 0
+				\thickspace\Rightarrow\thickspace
+				{(\frac{1}{2} - c)}x \leq {(\frac{1}{2} - c)}y
+				\thickspace\Rightarrow\thickspace
+				x \leq y
+			\end{math}
+
+			Ha inoltre uno ed un solo punto fisso in 0. Infatti,
+			\math{f(0) = 0/2 = 0}.
+		\end{example}
+
+		\begin{theorem}
+			L'aggiornamento di Bellman é una contrazione.
+
+			\bigskip
+			\strong{Dimostrazione}. Per semplicitá, si consideri
+			l'aggiornamento di Bellman come un operatore \math{B}.
+			É quindi possibile scrivere:
+
+			\begin[mode = display]{math}
+				U_{i + 1} \leftarrow BU_{i}
+			\end{math}
+
+			Occorre definire una metrica per lo spazio dei vettori \math{U}.
+			Sia \math{\abs{\abs{U}}} il valore assoluto della componente
+			di \math{U} avente modulo maggiore:
+
+			\begin[mode = display]{math}
+				\abs{\abs{U}} = \mi{max}_{s} \abs{U(s)}
+			\end{math}
+
+			La metrica \math{d(U, U')} viene allora definita come
+			\math{\abs{\abs{U - U'}}}, ovvero il valore assoluto
+			della differenza fra le componenti aventi modulo
+			maggiore delle due utilitá. Allora:
+
+			\begin[mode = display]{math}
+				\abs{\abs{BU - BU'}} \leq \gamma \abs{\abs{U - U'}}
+			\end{math}
+
+			Essendo \math{\gamma \in (0, 1)}, si ha che l'aggiornamento
+			di Bellman é una contrazione rispetto al fattore \math{\gamma}
+			e alla metrica \math{d}.
+		\end{theorem}
+
+		Un approccio alternativo a value iteration é \strong{policy
+		iteration}. Questo si basa sul presupposto che una politica
+		ottimale puó essere ottenuta anche da una funzione di utilitá
+		inaccurata. Policy iteration alterna i seguenti due step in
+		ciascuna iterazione \math{i}:
+
+		\begin{itemize}
+			\begin{item}
+				\strong{Policy evaluation}: data una politica \math{\pi_{i}},
+				viene calcolato \math{U_{i} = U^{\pi_{i}}}, la funzione di
+				utilitá in ciascuno stato se venisse applicata \math{\pi_{i}};
+			\end{item}
+			\begin{item}
+				\strong{Policy improvement}: viene calcolata una nuova politica
+				\math{\pi_{i + 1}}, migliore di \math{\pi_{i}}, a partire da
+				\math{U_{i}}.
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		L'algoritmo termina quando la politica \math{\pi_{i}} non é piú
+		in grado di influire sul risultato di \math{U_{i}}. Quando questo
+		accade, si ha che \math{U_{i}} é (approssimativamente) un punto
+		fisso per l'aggiornamento di Bellman, ed é quindi una soluzione
+		per l'equazione di Bellman, e la politica \math{\pi_{i}} che la
+		ha generata é una politica ottima. Essendo il numero di politiche
+		finito e venendo le politiche migliorate ad ogni iterazione, é
+		garantito che l'algoritmo termini.
+
+		\begin{verbatim}
+			S <= a set of states
+			A <= a set of actions A(s)
+			T <= the transition function T(s', a, s)
+			R <= the reward function R(s', a, s)
+			\unichar{U+03B3} <= the discount function
+
+			\bigskip
+			function POLICY-ITERATION(S, A, T, R, \unichar{U+03B3})
+			    foreach s in S do
+			        U[s] <= 0
+			    stop <= true
+			    \unichar{U+03C0} <= RANDOM-POLICY()
+
+			    \bigskip
+			    do
+			        U <= POLICY-EVALUATION(S, A, T, R, \unichar{U+03B3})
+			        foreach s in S do
+			            foreach a in A[S] do
+			                a* <= argmax(Q-VALUE(S, A, T, R, \unichar{U+03B3}))
+			            if (Q-VALUE(S, a*, T, R, \unichar{U+03B3}) > Q-VALUE(S, \unichar{U+03B3}[s], T, R, \unichar{U+03B3})) then
+			                \unichar{U+03C0}[s] <= a*
+			                stop <= false
+			    while (stop)
+
+			    \bigskip
+			    return \unichar{U+03C0}
+		\end{verbatim}
+
+		Implementare \tt{POLICY-EVALUATION} é piú semplice che
+		risolvere l'equazione di Bellman "per intero" (come viene
+		fatto da value iteration), perché l'azione che compare
+		nell'equazione non é una incognita. Infatti, questa é la
+		azione che viene raccomandata dalla politica \math{\pi_{i}}
+		nello stato \math{s}, quindi é una informazione nota:
+
+		\begin[mode = display]{math}
+			U_{i} {(s)} = \sum_{s'} T{(s, \pi_{i}(s), s')}
+			[R{(s, \pi_{i}(s), s')} + \gamma U_{i} {(s')}]
+		\end{math}
+
+		Questo semplifica l'equazione eliminando l'operatore max e
+		rendendola una equazione lineare. Se il numero di stati é
+		\math{n} vi saranno \math{n} equazioni lineari in \math{n}
+		incognite, e risolverle con metodi algebrici standard richiede
+		un tempo di esecuzione pari a \math{\mi{O}(n^{3})}.
 
 \end{sile}

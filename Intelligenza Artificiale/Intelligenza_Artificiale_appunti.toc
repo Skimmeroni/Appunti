@@ -268,5 +268,65 @@ return {
     link = "dest27",
     number = "3.5",
     pageno = "32"
+  },
+  {
+    label = {
+      "Complementi di teoria della probabilitá",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest28",
+    number = "3.5.1",
+    pageno = "32"
+  },
+  {
+    label = {
+      "Incertezza sugli stati: filtri Bayesiani",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest29",
+    number = "3.5.2",
+    pageno = "33"
+  },
+  {
+    label = {
+      "Incertezza sulle azioni: Markov Decision Process",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest30",
+    number = "3.5.3",
+    pageno = "35"
+  },
+  {
+    label = {
+      "Intelligenza artificiale sub-simbolica",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest31",
+    number = "4",
+    pageno = "41"
+  },
+  {
+    label = {
+      "Apprendimento",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest32",
+    number = "4.1",
+    pageno = "41"
+  },
+  {
+    label = {
+      "Reinforcement learning",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest33",
+    number = "4.2",
+    pageno = "41"
   }
 }
