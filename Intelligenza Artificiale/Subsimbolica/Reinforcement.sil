@@ -33,12 +33,13 @@
 
 	\bigskip
 
-	La forma di model-free reinforcement learning piú comune é
-	chiamata \strong{Q-learning}, dove l'agente apprende una
-	Q-function \math{Q(s, a)}, che indica la somma delle ricompense
-	che si avranno a partire dallo stato \math{s} se viene intrapresa
-	l'azione \math{a}. Data una Q-function, l'agente puó scegliere
-	che azione compiere mentre si trova in \math{s} sulla base di
-	quale di queste restituisce il Q-value maggiore.
+	La forma di model-free reinforcement learning piú comune
+	é chiamata \strong{Q-learning}, dove l'agente apprende
+	una Q-function \math{Q(s, a)}, che indica la somma delle
+	ricompense che si avranno a partire dallo stato \math{s}
+	se viene intrapresa l'azione \math{a}. Data una Q-function,
+	l'agente puó scegliere che azione compiere mentre si trova
+	in \math{s} sulla base di quale di queste restituisce il
+	Q-value maggiore.
 
 \end{sile}

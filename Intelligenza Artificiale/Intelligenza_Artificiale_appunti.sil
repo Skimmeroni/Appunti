@@ -96,6 +96,8 @@
 	\chapter{Intelligenza artificiale sub-simbolica}
 		\section{Apprendimento}
 		\include[src = Subsimbolica/Apprendimento.sil]
+		\section{Supervised learning}
+		\include[src = Subsimbolica/Supervised.sil]
 		\section{Reinforcement learning}
 		\include[src = Subsimbolica/Reinforcement.sil]
 

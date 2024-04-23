@@ -321,12 +321,22 @@ return {
   },
   {
     label = {
-      "Reinforcement learning",
+      "Supervised learning",
       id = "stuff"
     },
     level = 2,
     link = "dest33",
     number = "4.2",
     pageno = "41"
+  },
+  {
+    label = {
+      "Reinforcement learning",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest34",
+    number = "4.3",
+    pageno = "42"
   }
 }
