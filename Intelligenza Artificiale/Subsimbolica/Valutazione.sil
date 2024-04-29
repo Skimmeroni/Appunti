@@ -1,0 +1,206 @@
+\begin{sile}
+
+	Una volta costruito un modello per risolvere un problema di 
+	classificazione, si ha interesse a valutarne le prestazioni,
+	eventualmente per compararlo con altri modelli analoghi.
+	Esistono otto parametri rispetto ai quali valutare la qualitá
+	di un modello:
+
+	\begin{itemize}
+		\begin{item}
+			\strong{Accuratezza predittiva}, ovvero il rapporto fra il
+			numero di classificazioni corrette ed il numero totale di
+			dataset usati per testare il modello:
+
+			\begin[mode = display]{math}
+				\mi{Accuratezza} = \frac{\mi{Numero} \thickspace
+				\mi{di} \thickspace \mi{classificazioni} \thickspace
+				\mi{corrette}}{\mi{Numero} \thickspace \mi{totale}
+				\thickspace \mi{di} \thickspace \mi{test}}
+			\end{math}
+
+			Naturalmente, il modello é tanto piú accurato quanto
+			piú il rapporto tende ad 1;
+		\end{item}
+		\begin{item}
+			\strong{Efficienza}, ovvero sia il tempo di esecuzione
+			necessario per la costruzione del modello, sia il tempo
+			di esecuzione impiegato dal modello nel venire utilizzato;
+		\end{item}
+		\begin{item}
+			\strong{Robustezza}, ovvero quanto bene il modello
+			é in grado di gestire dati rumorosi (non cadere nel
+			sovradattamento) e se é in grado di gestire i dati
+			mancanti (e come lo fa);
+		\end{item}
+		\begin{item}
+			\strong{Scalabilitá}, ovvero quanto il modello riesce a
+			contenere la crescita al crescere della dimensione dei
+			dataset;
+		\end{item}
+		\begin{item}
+			\strong{Interpretabilitá}, ovvero quanto il modello é
+			in grado di "spiegare" il suo risultato a chi lo utilizza.
+		\end{item}
+		\begin{item}
+			\strong{Compattezza}, ovvero quanto il modello riesce
+			a descrivere il dataset in maniera conservativa (senza 
+			componenti ridondanti);
+		\end{item}
+		\begin{item}
+			\strong{Bias}, ovvero la tendenza di una ipotesi predittiva
+			a deviare dal valore atteso quando viene valutata sulla media
+			di diversi training set. Se l'ipotesi non é in grado di
+			individuare alcun pattern nei dati che le vengono forniti,
+			si parla di \strong{sottoadattamento}. Questo si verifica,
+			in genere, quando il modello si basa su troppi pochi parametri.
+		\end{item}
+		\begin{item}
+			\strong{Varianza}, ovvero il grado di "flessibilitá" dell'ipotesi
+			dovuto alle fluttuazioni presenti nel training set. Se l'ipotesi
+			si é troppo precisa nel modellare il dataset su cui é stata
+			allenata, tanto da non poter essere adattata a dataset
+			leggermente diversi, si parla di \strong{sovradattamento}.
+			Questo si verifica, in genere, quando il modello si basa su
+			troppi parametri.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	La tecnica piú semplice per allenare un dataset é quella che
+	viene chiamata \strong{holdout set}, applicabile quando la
+	dimensione del dataset a disposizione é grande. Questa prevede
+	di separare il dataset in due sotto-dataset, un dataset che
+	verrá usato per allenare il modello e uno che verrá utilizzato
+	per testarlo.
+
+	Una tecnica alternativa, chiamata \strong{n-fold
+	cross-validation}, é preferibile quando la grandezza del
+	dataset a disposizione é limitata. Questa prevede di
+	scegliere uno degli \math{n} sotto-dataset a disposizione
+	per la costruzione del modello e usare i restanti \math{n
+	- 1} per il testing, dopodiché ripetere la procedura \math{n}
+	volte scegliendo sempre un sotto-dataset diverso per la
+	costruzione del modello. Ciascuna iterazione della procedura
+	avrá una sua accuratezza; l'accuratezza complessiva viene
+	calcolata come media di tutte le \math{n} accuratezze cosí
+	ottenute \footnote{In genere, sono comuni partizionamenti in
+	5 (5-fold cross-validation) o in 10 (10-fold cross validation)
+	sotto-dataset.}.
+
+	Nel caso in cui la dimensione del dataset a disposizione
+	sia estremamente limitata, é possibile adottare un approccio
+	chiamato \strong{leave-one-out cross-validation}, o \strong{LOOCV}.
+	L'approccio é di fatto un n-fold cross-validation dove la dimensione
+	del test set é unitaria, ovvero se il dataset é composto da \math{n}
+	elementi, il sotto-dataset utilizzato per la costruzione del modello
+	ha dimensione \math{n - 1} mentre quello utilizzato per il testing
+	ha dimensione 1. L'operazione viene ripetuta \math{n} volte e si
+	ricava l'accuratezza a partire dalla media delle \math{n}
+	accuratezze parziali.
+
+	Idealmente, occorre assumere che la distribuzione dei dati
+	utilizzati come modello e quella dei dati usati come test 
+	siano simili, altrimenti il modello costruito mediante 
+	allenamento non sará in grado di predire correttamente i
+	dati futuri. Allo stesso tempo, i dati utilizzati per costruire
+	il modello non devono essere usati anche per testarlo, altrimenti
+	si avrebbe certamente che il modello fa predizioni corrette ma
+	semplicemente perché il modello viene testato su sé stesso.
+
+	L'accuratezza é solo una delle possibili misurazioni per valutare
+	le prestazioni del modello. Talvolta, si ha invece interesse a
+	conoscere la grandezza di una classe: la classe di interesse é
+	chiamata \strong{classe positiva}, mentre tutte le altre sono
+	dette \strong{classi negative}. Un membro della classe positiva
+	prende il nome di \strong{esempio positivo}, mentre un membro
+	della classe negativa prende il nome di \strong{esempio negativo}.
+	A partire da questa definizione viene costruita una \strong{matrice
+	di confusione}:
+
+	\begin[cols = 20%fw 40%fw 40%fw, cellborder = 0]{ptable}
+		\begin{row}
+			\begin{cell}
+			\end{cell}
+			\begin{cell}
+				Classificato come positivo
+			\end{cell}
+			\begin{cell}
+				Classificato come negativo
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Effettivamente positivo
+			\end{cell}
+			\begin{cell}
+				TP (\strong{True Positive}): il numero di esempi positivi
+				\par classificati correttamente
+			\end{cell}
+			\begin{cell}
+				FN (\strong{False Negative}): il numero di esempi positivi
+				\par classificati erroneamente
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Effettivamente negativo
+			\end{cell}
+			\begin{cell}
+				FP (\strong{False Positive}): il numero di esempi negativi
+				\par classificati erroneamente
+			\end{cell}
+			\begin{cell}
+				TN (\strong{True Negative}): il numero di esempi negativi
+				\par classificati correttamente
+			\end{cell}
+		\end{row}
+	\end{ptable}
+	\smallskip
+
+	A partire dai quattro valori tabellati nella matrice sono definite
+	due metriche, \strong{precision} \math{p} e \strong{recall} \math{r}:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			p = \frac{TP}{TP + FP} =
+			\frac{\mi{Esempi} \thickspace \mi{positivi} \thickspace
+			\mi{classificati} \thickspace \mi{correttamente}}{\mi{Esempi}
+			\thickspace \mi{classificati} \thickspace \mi{positivi}}
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			r = \frac{TP}{TP + FN} =
+			\frac{\mi{Esempi} \thickspace \mi{positivi} \thickspace
+			\mi{classificati} \thickspace \mi{correttamente}}{\mi{Esempi}
+		\thickspace \mi{effettivamente} \thickspace \mi{positivi}}
+		\end{math}
+	\end{parbox}
+	\par
+
+	\math{p} rappresenta quanto bene il modello é in grado di
+	classificare i dati correttamente, mentre \math{r} rappresenta
+	quanto il modello é in grado di "coprire" i dati (quanto poco
+	tralascia gli esempi positivi, anche a costo di commettere un
+	errore). Per comoditá, é possibile combinare le due metriche
+	in una sola, chiamata \strong{F\textsubscript{1}-value} (o
+	\strong{F\textsubscript{1}-score}), che non é altro che la
+	loro media armonica:
+
+	\begin[mode = display]{math}
+		F_{1} = {(\frac{p^{-1} + r^{-1}}{2})}^{-1} =
+		\frac{2}{p^{-1} + r^{-1}} =
+		\frac{2}{\frac{1}{p} + \frac{1}{r}} =
+		\frac{2pr}{p + r}
+	\end{math}
+
+	Questa metrica é di particolare interesse perché la media
+	armonica di due valori tende ad essere vicina al piú piccolo
+	dei due. Inoltre, dato che \math{p} e \math{q} compaiono sia
+	al numeratore che al denominatore, il valore di \math{F_{1}}
+	é grande solamente se sia \math{p} che \math{q} sono a loro
+	volta grandi.
+
+\end{sile}

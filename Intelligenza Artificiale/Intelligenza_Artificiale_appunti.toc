@@ -324,10 +324,40 @@ return {
       "Supervised learning",
       id = "stuff"
     },
-    level = 2,
+    level = 3,
     link = "dest33",
-    number = "4.2",
+    number = "4.1.1",
     pageno = "41"
+  },
+  {
+    label = {
+      "Alberi di decisione",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest34",
+    number = "4.2",
+    pageno = "42"
+  },
+  {
+    label = {
+      "Valutare modelli di classificazione",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest35",
+    number = "4.3",
+    pageno = "43"
+  },
+  {
+    label = {
+      "K-nearest neighbour",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest36",
+    number = "4.4",
+    pageno = "45"
   },
   {
     label = {
@@ -335,8 +365,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest34",
-    number = "4.3",
-    pageno = "42"
+    link = "dest37",
+    number = "4.5",
+    pageno = "45"
   }
 }

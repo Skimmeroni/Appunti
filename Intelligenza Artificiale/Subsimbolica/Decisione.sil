@@ -1,0 +1,259 @@
+\begin{sile}
+
+	Un \strong{albero di decisione} (\strong{decision tree}) é la
+	rappresentazione di una funzione che mappa un vettore di valori
+	attributo ad un singolo valore, che rappresenta la "decisione".
+	Un albero di decisione raggiunge la sua conclusione compiendo
+	una serie di test, partendo dal nodo radice e seguendo un
+	determinato percorso fino a raggiungere un nodo foglia.
+
+	In genere, i valori di input e output legati all'albero di
+	decisione possono essere sia discreti che continui. Per
+	semplicitá, si assuma che in input vi siano valori discreti
+	e in output valori che possono essere \em{vero} (un esempio
+	\strong{positivo}) oppure \em{falso} (un esempio \strong{negativo}).
+	Questa classificazione prende il nome di \strong{classificazione
+	booleana}. Si indichino con \math{\bi{x}_{j}} il vettore che
+	rappresenta il \math{j}-esimo input, con \math{x_{i, j}}
+	l'\math{i}-esimo attributo del \math{j}-esimo input e con
+	\math{y_{j}} il \math{j}-esimo output.
+
+	%%%
+	%%% Esempio preso dal libro, relativo al ristorante, con grafo
+	%%%
+
+	Un albero di decisione è costruito a partire da una rappresentazione
+	tabellare dei dati. Data una tabella avente \math{n} colonne, si ha
+	che le prime \math{n - 1} sono le features, mentre l'ultima è
+	l'annotazione. Se tale annotazione è un valore booleano, si parla
+	di \strong{classificazione}, mentre se è un valore numerico si
+	parla di \strong{regressione}.
+
+	Si considerino output aventi valori booleani; per analogia,
+	gli alberi così generati prendono il nome di \strong{alberi
+	di decisione booleani}. Un albero di decisione booleano è un
+	albero in cui, ad ogni nodo, viene presa in esame una delle
+	features. Da ciascun nodo si diramano tanti figli quanti sono
+	i possibili valori che tale feature può assumere. Nei nodi
+	foglia viene scelto il valore dell'annotazione.
+
+	Un percorso che va dalla radice ad un nodo foglia può essere
+	tradotto in una \em{regola} ovvero indica quali valori devono
+	assumere le features che compaiono lungo i nodi affinchè la
+	sequenza di valori porti ad una decisione affermativa (il nodo
+	foglia contiene \em{true}) o ad una decisione negativa (il nodo
+	foglia contiene \em{false}). Più in generale, un albero di
+	decisione booleano è equivalente ad una asserzione logica nella
+	forma:
+
+	\begin[mode = display]{math}
+		Output \Leftrightarrow (Path_{1} \vee Path_{2} \vee \unicodeellipsis)
+	\end{math}
+
+	Dove ciascun \math{Path_{i}} è una congiunzione di coppie
+	attributo-valore nella forma \math{A_{m} = v_{x} \wedge
+	A_{n} = v_{y} \wedge \unicodeellipsis}, corrispondenti ad
+	un percorso dalla radice ad una foglia. Interessante notare
+	come tale espressione sia in forma normale a clausole, nello
+	specifico nella forma normale disgiunta.
+
+	Esistono diversi alberi di decisione che rappresentano la stessa
+	tabella, alcuni più efficienti di altri. Trovare l'albero di
+	decisione \em{migliore} per una tabella, ovvero quello avente
+	il minimo numero di nodi, è un problema NP-completo. Esistono
+	però algoritmi euristici che permettono di trovare un albero di
+	decisione generico (non necessariamente ottimale) con tempo di
+	esecuzione approcciabile.
+
+	É possibile costruire un albero di decisione ricorsivamente
+	mediante un algoritmo greedy di tipo divide-et-impera. L'albero
+	viene costruito in maniera top-down: inizialmente viene preso in
+	considerazione l'intero dataset, e ad ogni passaggio viene scelto
+	un attributo che partiziona il dataset. La scelta dell'attributo
+	avviene per mezzo di una funzione di "impurità".
+
+	\begin{verbatim}
+		DECISION-TREE(D, A, T)
+		1    if (tutti gli esempi appartengono alla stessa classe c\textsubscript{j} in C) then
+		2        crea un nodo foglia T avente c\textsubscript{j} come etichetta
+		3    else if (A = \unichar{U+2205}) then
+		4	    crea un nodo foglia T avente c\textsubscript{j} come etichetta, dove c\textsubscript{j} è la classe avente più membri in D
+		5	 else
+		6        p0 = COMPUTE-ENTROPY(D)
+		7        foreach Ai in \{A1, A2, \unichar{U+2026}, An\} do
+		8            pi = COMPUTE-P-ENTROPY(Ai, D)
+		9        done
+		10       A\textsubscript{g} <= l'attributo in {A1, A2, \unichar{U+2026}, An} che ha il massimo guadagno, ovvero massimo p0 - pi
+		11       // Se A\textsubscript{g} comunque non permette un guadagno ragionevole, allora si crea una classe subito
+		12       if (p0 - pi) < threshold then
+		13           crea un nodo foglia T avente c\textsubscript{j} come etichetta, dove c\textsubscript{j} è la classe avente più membri in D
+		14       else
+		15           crea un nodo decisione T sulla base di A\textsubscript{g}
+		16           partiziona D in m sotto-dataset disgiunti D\textsubscript{1}, D\textsubscript{2}, \unichar{U+2026}, D\textsubscript{m}, dove m sono i valori assumibili da A\textsubscript{g}
+		17           foreach Dj in \{D1, D2, \unichar{U+2026}, Dm\} do
+		18               if (Dj != \unichar{U+2205}) then
+		19                   crea un nodo Tj figlio di T relativo al j-esimo valore assumibile da Ag
+		20                   // Rimuovi Ag
+		21                   DECISION-TREE(Dj, A - \{Ag\}, Tj)
+	\end{verbatim}
+
+	L'algoritmo ha in input tre variabili: \tt{D}, \tt{A} e
+	\tt{T}. La prima rappresenta l'insieme di individui considerati
+	all'iterazione corrente (inizialmente tutti, poi verranno
+	partizionati col proseguire delle iterazioni). La seconda
+	rappresenta l'insieme di attributi ancora da analizzare
+	(inizialmente tutti, poi verranno eliminati mano a mano
+	che il dataset viene partizionato). La terza rappresenta
+	la foglia che viene generata come sostituto al restante
+	insieme di elementi a questo livello.
+
+	I casi base figurano nelle righe da 1 a 4. Il primo
+	caso corrisponde alla condizione in cui tutti gli elementi
+	di D hanno il medesimo valore per la \math{j}-esima classe;
+	in questo caso la classificazione non ha ambiguità, ed è
+	sufficiente creare un nodo foglia che ha tale classe come
+	etichetta. Il secondo caso si verifica non ci sono più
+	attributi da analizzare; in questo caso, occorre scegliere
+	come etichetta del nodo foglia la classe che compare più di
+	frequente.
+
+	Se non si ricade in un caso base, si ha che i membri del
+	dataset appartengono ad una varietà di classi. Occorre
+	allora scegliere un attributo sulla base del quale eseguire
+	la partizione e chiamare ricorsivamente l'algoritmo. Scegliere
+	un attributo "buono" permette di avere alberi di decisione
+	dove le classi presentano il minimo numero di impurità possibili.
+	Per determinare quale sia l'attributo occorre introdurre la teoria
+	dell'informazione.
+
+	La \strong{teoria dell'informazione} fornisce una base
+	matematica per misurare la quantità di informazione. Il
+	valore dell'informazione viene misurato in \strong{bit}:
+	un bit è una unità di informazione sufficiente a discriminare
+	fra due eventi equiprobabili.
+
+	A ciascun dataset \math{D} è possibile associare una misura
+	di "impurità" o "disordine" chiamata \strong{entropia}
+	\footnote{Il termine è associato al concetto analogo in
+	fisica.}:
+
+	\begin[mode = display]{math}
+		\mi{entropy} {(D)} =
+		- \sum_{j = 1}^{\abs{C}} P{(c_{j})} \mi{log}_{2} {(P{(c_{j})})}
+	\end{math}
+
+	Il valore \math{P(c_{j})} indica la probabilitá che, scelto un
+	elemento casuale dal dataset \math{D}, questo appartenga alla
+	classe \math{c_{j}}. Questo valore, moltiplicato per il logaritmo
+	in base due di sé stesso, viene calcolato per ogni classe esistente
+	e sommati fra di loro. Essendo \math{P(c_{j}) \in (0, 1)}, si ha
+	che \math{\mi{log}(P(c_{j}))} é un numero negativo; questo viene 
+	peró reso positivo dal segno meno davanti alla sommatoria. 
+
+	Il prodotto \math{P{(c_{j})} \mi{log}_{2}{(P{(c_{j})})}} é
+	complessivamente nullo sia nel caso in cui \math{P(c_{j})
+	= 0}, ovvero é certo che non esista alcun elemento di \math{D}
+	che appartenga a \math{c_{j}}, sia nel caso in cui \math{P(c_{j})
+	= 1}, ovvero é certo che qualsiasi elemento di \math{D} appartiene
+	a \math{c_{j}}. Infatti:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			0 \cdot \mi{log}_{2}(0) = 0 \cdot (-\infty) = 0
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			1 \cdot \mi{log}_{2}(1) = 1 \cdot 0 = 0
+		\end{math}
+	\end{parbox}
+	\par
+
+	Questo significa che il contributo portato dalla classe
+	\math{c_{j}} all'entropia complessiva associata a \math{D}
+	ha un valore non nullo solamente se la probabilitá che un
+	elemento di \math{D} appartenga a \math{c_{j}} é un valore
+	che non é né 1 né 0. In altre parole, \math{c_{j}} fa aumentare
+	l'entropia associata a \math{D} solamente se un elemento di
+	\math{D} \em{potrebbe} appartenere a \math{c_{j}}. In particolare,
+	il massimo del contributo all'entropia di \math{D} fornito da
+	\math{c_{j}} si ha quando la probabilitá che un elemento di
+	\math{D} appartenga a \math{c_{j}} é circa un terzo:
+
+	\begin[mode = display]{math}
+		\frac{d}{dx} {(P{(c_{j})} \mi{log}_{2} {(P{(c_{j})})})} = 0
+		\thickspace\Rightarrow\thickspace
+		\mi{log}_{2} {(P{(c_{j})})} + \frac{1}{\mi{ln} {(2)}} = 0
+		\thickspace\Rightarrow\thickspace
+		\mi{log}_{2} {(P{(c_{j})})} = \frac{-1}{\mi{ln} {(2)}}
+		\thickspace\Rightarrow\thickspace
+		P{(c_{j})} = 2^{-1/\mi{ln} {(2)}} \approx 0.3679		
+	\end{math}
+
+	Se in una certa iterazione \math{i} viene scelto per compiere il
+	partizionamento del dataset \math{D} l'attributo \math{A_{i}}, che
+	puó assumere \math{v} valori distinti, questo genererá \math{v}
+	sotto-dataset \math{D_{1}, D_{2}, \unicodeellipsis, D_{v}}. É allora
+	possibile calcolare l'entropia di \math{D} dopo aver eseguito la
+	partizione sulla base di \math{A_{i}} come:
+
+	\begin[mode = display]{math}
+		\mi{entropy}_{A_{i}} {(D)} =
+		\sum_{j = 1}^{v} \frac{\abs{D_{j}}}{\abs{D}}
+		\mi{entropy} {(D_{j})}
+	\end{math}
+
+	Dove ciascun termine della sommatoria corrisponde all'entropia
+	nel \math{j}-esimo sotto-dataset "pesata" con il rapporto fra
+	la sua dimensione e la dimensione dell'intero \math{D}. In questo
+	modo, affinché un sotto-dataset contribuisca considerevolmente al
+	valore totale dell'entropia di \math{D} dopo la partizione secondo
+	\math{A_{i}} deve sia avere una sua alta entropia intrinseca
+	sia essere grande (in rapporto all'intero \math{D}).
+
+	La differenza fra l'entropia di \math{D} prima che avvenga la
+	partizione (\math{\mi{entropy}(D)}) e l'entropia di \math{D}
+	dopo che questo é stato partizionato sulla base di \math{A_{i}}
+	(\math{\mi{entropy}_{A_{i}} (D)}) indica quanta informazione viene
+	"guadagnata" all'operare della partizione:
+
+	\begin[mode = display]{math}
+		\mi{gain}(D, A_{i}) = \mi{entropy}(D) - \mi{entropy}_{A_{i}}(D)
+	\end{math}
+
+	Questo significa che l'attributo che meglio conviene scegliere
+	per partizionare \math{D} in una certa iterazione é quello che
+	massimizza il valore di \math{\mi{gain}(D, A_{i})}.
+
+	Sebbene l'approccio sia stato illustrato per variabili
+	discrete, questo puó essere usato anche per la costruzione
+	di alberi dove il dataset contiene variabili continue. L'idea
+	é quella di scegliere un valore soglia per tale variabile e
+	costruire due rami: uno per gli elementi che hanno un valore
+	inferiore a tale soglia come valore dell'attributo ed uno per
+	gli elementi che hanno un valore superiore. Una scelta semplice
+	per il valore soglia di un attributo potrebbe essere la sua
+	mediana.
+
+	Essendo gli alberi di decisione una tecnica per risolvere problemi
+	di classificazione, si puó incorrere in overfitting, ovvero dove
+	l'albero costruito ben rappresenta il dataset usato per costruirlo
+	ma mal rappresenta i dataset usati per testarlo. In genere questo
+	accade quando l'albero ha troppi livelli e/o dei nodi con troppi
+	figli, perché in genere questo si verifica se il dataset é molto
+	rumoroso e quindi un certo attributo lo partiziona in troppi 
+	sotto-dataset.
+
+	Esistono fondamentalmente due approcci per ridurre
+	l'overfitting. Il primo prevede di bloccare l'espansione
+	di un nodo, di modo che l'albero non cresca; questo é molto
+	difficile da fare nella pratica, dato che non é possibile
+	sapere a priori di quanto crescerá un albero dopo che un
+	nodo viene espanso. Il secondo approccio prevede di operare
+	uno o piú \strong{pruning}, ovvero rimuovere uno o piú rami
+	dall'albero dopo che é stato costruito. Ad esempio, viene 
+	scelto un massimo livello di profonditá ammissibile e tutto
+	ció che sta al di sotto di questa viene unificato, andando
+	per maggioranza.
+
+\end{sile}
