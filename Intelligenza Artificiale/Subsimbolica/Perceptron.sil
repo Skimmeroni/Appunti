@@ -1,0 +1,252 @@
+\begin{sile}
+
+	\strong{Deep Learning} é una ampia famiglia di tecniche per il
+	machine learning dove le ipotesi prendono la forma di complessi
+	circuiti algebrici fra loro interconnessi. Il termine "deep" si
+	riferisce al fatto che i circuiti sono in genere organizzati in
+	strati detti \strong{layer}, il che significa che i percorsi
+	computazionali dagli input agli output sono costituiti da diversi
+	step.
+
+	Il deep learning ha origini nella modellazione matematica dei
+	neuroni del cervello umano sotto forma di circuiti elettrici.
+	Per questo motivo, le reti allenate mediante metodi di deep
+	learning sono spesso anche chiamate \strong{reti neurali}
+	(\strong{neural network}).
+
+	L'esempio di rete neurale piú semplice (e storicamente piú datata)
+	é il \strong{percettrone}, una rete neurale in grado di risolvere
+	il problema di classificazione binaria. Questo opera su un input
+	\math{\bi{x}}, il quale possiede \math{k} features, e determina se
+	tale input appartiene ad una certa classe (é un esempio positivo)
+	oppure se non vi appartiene (é un esempio negativo). Matematicamente,
+	un percettrone é costituito da tre elementi:
+
+	\begin{itemize}
+		\begin{item}
+			Una funzione \math{f(\bi{x})}, che restituisce un vettore
+			\math{k}-dimensionale. Ciascuna componente di tale vettore
+			é un numero intero (positivo o negativo) che rappresenta il
+			valore che ha \math{\bi{x}} rispetto a tale feature;
+		\end{item}
+		\begin{item}
+			Un vettore \math{k}-dimensionale \math{w}, dove ciascuna
+			sua componente é un numero intero che rappresenta il peso
+			da assegnare a ciascuna feature, ovvero quanto quella feature
+			é "rilevante" nel computo della classificazione dell'input;
+		\end{item}
+		\begin{item}
+			Una funzione \math{\mi{out}_{w} {(\bi{x})}}, che
+			restituisce il responso del percettrone.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	L'output del percettrone é un esclusivamente +1 oppure -1. Nel primo
+	caso, significa che l'input appartiene alla classe, mentre nel secondo
+	caso che non vi appartiene. Tale output é cosí calcolato:
+
+	\begin[mode = display]{math}
+		\mi{out}_{w} {(\bi{x})} =
+		\mi{sign} {(\sum_{i = 1}^{k} w_{i} \cdot f_{i} {(x)})} =
+		\mi{sign} {(w_{1}f_{1} {(x)} + \unicodeellipsis w_{k}f_{k} {(x)})}	
+	\end{math}
+
+	Si noti come la sommatoria nella formula non sia altro che il
+	prodotto scalare fra il vettore \math{k}-dimensionale dei pesi
+	\math{w} ed il prodotto \math{k}-dimensionale delle features
+	\math{f(x)}. Pertanto, la formula ha anche una interpretazione
+	geometrica: il valore di \math{\mi{out}_{w}(\bi{x})} sará positivo
+	quando l'angolo formato dai vettori \math{w} e \math{f(x)} é
+	acuto, mentre sará negativo se questo é ottuso.
+
+	Sia la funzione \math{f(x)} che l'input \math{x} stesso
+	possono essere considerate note, ma lo stesso non si puó
+	dire di \math{w}. Ovvero, quanto ciascuna feature debba
+	essere "rilevante" agli occhi del percettrone non é
+	necessariamente una informazione nota a priori. É possibile
+	costruire un percettrone in grado di generare \math{w} a
+	partire dai dati che gli vengono forniti. Per farlo, si
+	assuma di avere a disposizione \math{n} input \math{x_{1},
+	x_{2}, \unicodeellipsis, x_{n}} per i quali giá é nota la
+	loro classificazione, sia questa rispettivamente \math{y_{1}*,
+	y_{2}*, \unicodeellipsis, y_{n}*}. Questo training set puó
+	essere costruito utilizzando una qualsiasi tecnica di training
+	(holdout set, k-fold cross validation, ecc\ddd).
+
+	Sia il vettore \math{w} \math{k}-dimensionale inizialmente
+	nullo (tutte le sue componenti hanno valore 0). Ciascun input
+	\math{x_{i}} viene classificato sulla base di \math{w}: se
+	il risultato fornito dal percettrone coincide con la vera
+	classificazione, ovvero se \math{\mi{out}_{w}(x_{i}) = y_{i}*},
+	non viene fatto nulla; se invece la classificazione restituita
+	dal percettrone non é corretta, \math{w} viene modificato di
+	modo che, se si tenta di riclassificare \math{\bi{x}}, il
+	percettrone fornisce la risposta corretta. Nello specifico,
+	\math{w} viene sostituito con:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			w + {(\sum_{i = 1}^{k} w_{i} \cdot f_{i} {(x)})}
+			\thickspace \mi{se} \thickspace y_{i}* = +1
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			w - {(\sum_{i = 1}^{k} w_{i} \cdot f_{i} {(x)})}
+			\thickspace \mi{se} \thickspace y_{i}* = -1
+		\end{math}
+	\end{parbox}
+	\par
+
+	Il motivo per cui questa sostituzione corregge la classificazione
+	va cercata nell'interpretazione geometrica della sommatoria prima
+	citata. Infatti, operando tale sostituzione si garantisce di ottenere
+	un vettore risultante che ha la direzione opposta del precedente, e
+	quindi il risultato \math{\mi{out}_{w}(\bi{x})} viene cambiato di
+	segno.
+
+	Si noti peró come un vettore \math{w} cosí costruito sará sempre
+	un vettore che passa per l'origine, e questo limita di molto le
+	capacitá del percettrone. Per fare in modo che \math{w} si discosti
+	dall'origine é necessario introdurre un \strong{bias}, ovvero una
+	quantitá che ne modifica il valore ma che non ha alcuna correlazione
+	con i valori delle features del dataset in esame. Indicando tale 
+	valore con \math{b}, si modifica la funzione del percettrone come:
+
+	\begin[mode = display]{math}
+		\mi{out}_{w} {(\bi{x})} =
+		\mi{sign} {(b + \sum_{i = 1}^{k} w_{i} \cdot f_{i} {(x)})} =
+		\mi{sign} {(b + w_{1}f_{1} {(x)} + \unicodeellipsis w_{k}f_{k} {(x)})}	
+	\end{math}
+
+	Di conseguenza, per correggere il valore di \math{w} durante la sua
+	costruzione sulla base dei dati, viene usata l'espressione:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			w + b + {(\sum_{i = 1}^{k} w_{i} \cdot f_{i} {(x)})}
+			\thickspace \mi{se} \thickspace y_{i}* = +1
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			w - b - {(\sum_{i = 1}^{k} w_{i} \cdot f_{i} {(x)})}
+			\thickspace \mi{se} \thickspace y_{i}* = -1
+		\end{math}
+	\end{parbox}
+	\par
+
+	Il percettrone é un esempio di \strong{classificatore lineare},
+	ovvero un classificatore che discrimina gli input sulla base
+	di una combinazione lineare. Nello specifico, il percettrone
+	costruisce una retta nell'iperpiano \math{k}-dimensionale che
+	lo partiziona in due regioni: una che contiene tutti gli
+	elementi positivi ed una che contiene tutti gli elementi
+	negativi. Un dataset per il quale esiste (almeno) una retta
+	avente questa caratteristica é detto \strong{linearmente
+	separabile}, e non tutti i dataset possiedono questa proprietá.
+
+	\begin{theorem}
+		\strong{Teorema di convergenza del percettrone}. Se un dataset
+		\math{D} é linearmente separabile, allora é garantito che un
+		percettrone, compiendo un numero finito di errori, sia in grado
+		di classificarlo.
+	\end{theorem}
+
+	É possibile estendere il percettrone per permettergli di classificare
+	un dataset in piú classi, fintanto che il loro numero é noto a priori.
+	Si assuma pertanto di avere un dataset i cui elementi sono da suddividere
+	in \math{m} classi, enumerate a partire da 1. Un percettrone di questo
+	tipo non ha un solo vettore \math{w}, ma bensí \math{m} vettori
+	\math{w_{1}, w_{2}, \unicodeellipsis, w_{m}}.
+
+	Indicando con \math{b} il bias, con \math{k} il numero di features
+	e con \math{y'} il numero che identifica la classe, si ha:
+
+	\begin[mode = display]{math}
+		y' = \mi{argmax}_{y} {(b + \sum_{i = 1}^{k} w_{y, i}
+		\cdot f_{i} {(x)})} = \mi{argmax}_{y} {(b + w_{y, 1}f_{1} {(x)} +
+		\unicodeellipsis w_{y, k}f_{k} {(x)})}	
+	\end{math}
+
+	Ovvero, la classe a cui viene assegnato \math{\bi{x}} é quella
+	che massimizza la somma fra il bias ed il prodotto scalare fra
+	il vettore dei pesi di tale classe e \math{f(\bi{x})}.
+
+	Per costruire i vettori dei pesi \math{w_{y}} a partire dai dati,
+	si procede come é stato fatto per il percettrone a singola classe,
+	con la differenza che in questo caso occorre correggere i valori
+	di ciascun vettore. Si assuma di avere a disposizione \math{n}
+	input \math{x_{1}, x_{2}, \unicodeellipsis, x_{n}} per i quali giá
+	é nota la classe a cui appartengono, siano queste rispettivamente
+	\math{y_{1}*, y_{2}*, \unicodeellipsis, y_{n}*}.
+	
+	A partire da \math{m} vettori \math{w_{1}, \unicodeellipsis, w_{m}}
+	tutti inizialmente nulli, si cerca di classificare ciascun input
+	\math{x_{i}} sulla base di tali vettori. Sia \math{y_{i}'} il
+	risultato del percettrone: se questa coincide con la vera classe
+	a cui \math{x_{i}} appartiene, ovvero se \math{y_{i}' = y_{i}*},
+	non viene fatto nulla; se invece la classificazione restituita
+	dal percettrone non é corretta, ciascun vettore \math{w_{j}} viene
+	modificato di modo che, se si tenta di riclassificare \math{\bi{x}},
+	il percettrone fornisce la risposta corretta. Nello specifico:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			w_{j} + b + {(\sum_{i = 1}^{k} w_{i, j} \cdot f_{i} {(x)})}
+			\thickspace \mi{per} \thickspace \mi{la} \thickspace \mi{classe}
+			\thickspace y_{i}*
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			w_{j} - b - {(\sum_{i = 1}^{k} w_{i, j} \cdot f_{i} {(x)})}
+			\thickspace \mi{per} \thickspace \mi{tutte} \thickspace
+			\mi{le} \thickspace \mi{altre}
+		\end{math}
+	\end{parbox}
+	\par
+
+	Si noti inoltre come, dato un dataset linearmente separabile,
+	possa esistere piú di una retta in grado di partizionarlo.
+	Fra queste, quella da considerarsi migliore é quella che ha
+	la massima distanza dagli elementi del dataset piú "esterni",
+	ovvero quelli che si trovano piú vicino alla partizione opposta.
+	L'algoritmo per la costruzione di un vettore dei pesi non garantisce
+	di trovare la retta migliore, restituendone invece una qualsiasi
+	(per quanto comunque corretta).
+
+	Per avere la garanzia di ottenere sempre la retta migliore,
+	é possibile rifarsi ad un algoritmo chiamato \strong{MIRA}
+	(\strong{Margin Infused Relaxed Algorithm}), che non é altro
+	che un raffinamento dell'algoritmo di generazione dei vettori
+	\math{w}. MIRA introduce una costante \math{\tau} che modifica
+	le componenti dei vettori \math{w} in maniera abbastanza incisiva
+	da correggere la classificazione dell'input ma al contempo abbastanza
+	conservativa da non far discostare troppo la direzione di \math{w}:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			w_{j} + b + \tau {(\sum_{i = 1}^{k} w_{i, j} \cdot f_{i} {(x)})}
+			\thickspace \mi{per} \thickspace \mi{la} \thickspace \mi{classe}
+			\thickspace y_{i}*
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			w_{j} - b - \tau {(\sum_{i = 1}^{k} w_{i, j} \cdot f_{i} {(x)})}
+			\thickspace \mi{per} \thickspace \mi{tutte} \thickspace
+			\mi{le} \thickspace \mi{altre}
+		\end{math}
+	\end{parbox}
+	\par
+
+	Questa costante viene ricavata a partire da:
+
+	\begin[mode = display]{math}
+		\tau = \mi{min}_{w} \frac{1}{2} \sum_{y} {(\abs{\abs{w_{y} - w_{y}'}})}^{2}
+	\end{math}
+
+\end{sile}

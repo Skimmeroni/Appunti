@@ -102,6 +102,10 @@
 		\include[src = Subsimbolica/Valutazione.sil]
 		\section{K-nearest neighbour}
 		\include[src = Subsimbolica/Knn.sil]
+		\section{Metodi ensemble}
+		\include[src = Subsimbolica/Ensemble.sil]
+		\section{Percettrone}
+		\include[src = Subsimbolica/Perceptron.sil]
 		\section{Reinforcement learning}
 		\include[src = Subsimbolica/Reinforcement.sil]
 

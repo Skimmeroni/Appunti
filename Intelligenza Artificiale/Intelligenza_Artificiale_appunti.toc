@@ -361,12 +361,52 @@ return {
   },
   {
     label = {
-      "Reinforcement learning",
+      "Metodi ensemble",
       id = "stuff"
     },
     level = 2,
     link = "dest37",
     number = "4.5",
     pageno = "45"
+  },
+  {
+    label = {
+      "Bagging",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest38",
+    number = "4.5.1",
+    pageno = "46"
+  },
+  {
+    label = {
+      "Boosting",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest39",
+    number = "4.5.2",
+    pageno = "46"
+  },
+  {
+    label = {
+      "Percettrone",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest40",
+    number = "4.6",
+    pageno = "47"
+  },
+  {
+    label = {
+      "Reinforcement learning",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest41",
+    number = "4.7",
+    pageno = "48"
   }
 }
