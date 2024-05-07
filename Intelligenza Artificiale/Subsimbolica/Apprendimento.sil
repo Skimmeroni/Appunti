@@ -41,15 +41,12 @@
 			Nel \strong{unsupervised learning} l'agente cerca di
 			individuare dei pattern solo a partire dall'input ma
 			non dall'output. Un esempio di unsupervised learning
-			é il \strong{clustering}: l'individuare delle proprietá
-			comuni (cluster) nell'input e raggruppare l'input sulla
-			base di tali proprietá. Il clustering é simile alla
-			classificazione, ma i nomi delle classi non sono
-			predeterminati. Un secondo esempio di unsupervised
-			learning é l'\strong{anomaly detection}: individuare
-			un qualche tratto comune in un dataset per poi capire
-			se un dato generico é compatibile con tale tratto oppure
-			no.
+			é il \strong{clustering} \footnote{Talvolta, i termini
+			"unsupervised learning" e "clustering" sono intesi
+			come sinonimi, ma questo non é formalmente corretto.}:
+			l'individuare delle proprietá comuni (cluster) nell'input
+			e raggruppare l'input sulla base di tali proprietá, senza
+			che i cluster siano noti a priori. 
 		\end{item}
 		\begin{item}
 			Nel \strong{reinforcement learning} l'agente apprende
@@ -93,18 +90,6 @@
 	rapidamente debba l'algoritmo adattarsi alle nuove informazioni che
 	vengono introdotte.
 
-	%\begin{example}
-	%	Un esempio di unsupervised learning, in particolare di 
-	%	anomaly detection, é il modo in cui le banche determinano
-	%	se un pagamento é (potenzialmente) avvenuto senza la
-	%	consapevolezza del titolare del conto bancario. L'idea é
-	%	quella di individuare dei pattern negli acquisti fatti 
-	%	usando una determinata carta (cosa viene comprato, a che
-	%	orario, quanti soldi vengono spesi, ecc\ddd) e notificare
-	%	il responsabile se viene effettuato un pagamento che devia
-	%	sensibilmente dalla routine.
-	%\end{example}
-
 	\subsection{Supervised learning}
 
 		L'obiettivo del supervised learning é il seguente: dato
@@ -139,5 +124,70 @@
 			al filtro una mail qualsiasi, questo é (dovrebbe essere) in
 			grado di determinare autonomamente se la mail é o non é spam. 
 		\end{example}
+
+	\subsection{Unsupervised learning}
+
+		A differenza del supervised learning, nell'unsupervised
+		learning non sono note a priori le classi in cui gli
+		elementi del dataset vanno catalogati. L'idea é che i
+		dati debbano prima venire esplorati per individuare se
+		esistono fra loro dei pattern comuni, e poi classificare
+		i dati sulla base di questi.
+
+		Per determinati problemi, esistono soluzioni che sono
+		intrinsecamente legate all'unsupervised learning. Un
+		esempio é quello che viene chiamato \strong{dimensionality
+		reduction}, ovvero la trasformazione di dati da uno spazio
+		dimensionale ampio ad uno spazio dimensionale piú ristretto,
+		senza che questo comporti una perdita (troppo) significativa
+		di informazione. Un altro esempio é dato da \strong{anomaly
+		detection}, ovvero riuscire ad identificare, dato un insieme
+		di dati, quei (pochi) elementi che deviano in maniera
+		significativa dalla maggioranza e la cui presenza non é
+		giustificabile.
+
+		\begin{example}
+			Un esempio di unsupervised learning, in particolare di 
+			anomaly detection, é il modo in cui le banche determinano
+			se un pagamento é (potenzialmente) avvenuto senza la
+			consapevolezza del titolare del conto bancario. L'idea é
+			quella di individuare dei pattern negli acquisti fatti 
+			usando una determinata carta (cosa viene comprato, a che
+			orario, quanti soldi vengono spesi, ecc\ddd) e notificare
+			il responsabile se viene effettuato un pagamento che devia
+			sensibilmente dalla routine.
+		\end{example}
+
+		Sebbene le tecniche di clustering siano molto diverse, tutte
+		fanno uso di una funzione (non necessariamente una metrica)
+		di distanza, utilizzata per definire quanto due elementi del
+		dataset siano \em{simili}: minore é la distanza, maggiore é
+		la somiglianza.
+
+		É evidente come il clustering e la classificazione siano fra
+		loro legate: entrambe si occupano di determinare, fornito un
+		certo input, a quale classe questo appartiene, ed entrambe
+		portano a termine il compito mediante tecniche di machine
+		learning. Eppure, le due differiscono notevolmente.
+
+		Innanzitutto, nella classificazione, le classi sono note,
+		mentre nel clustering queste non sono note (e devono venire
+		invece dedotte a partire dal dataset stesso). Inoltre, nella
+		classificazione é possibile tenere da parte dei dati ed
+		utilizzarli per valutare le performance del modello, mentre
+		nel clustering é molto piú complicato un approccio di questo
+		tipo. Infine, dato che i nomi delle classi non sono noti a
+		priori, un problema di clustering richiede che venga anche
+		dato un "senso" alle classi che questo induce (ammesso che
+		sia possibile farlo).
+
+		Il clustering é molto piú "esplorativo" della classificazione,
+		tanto che puó essere usato prima di operare un algoritmo di
+		classificazione di modo da fornirgli una base d'appoggio.
+		Ovvero, prima si approccia il problema come un problema di
+		clustering, si analizzano le classi che questo induce,
+		eventualmente se ne cambiano e/o se ne eliminano alcune e
+		poi sulla base di questa etichettatura si opera un algoritmo
+		di classificazione.
 
 \end{sile}

@@ -331,11 +331,21 @@ return {
   },
   {
     label = {
+      "Unsupervised learning",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest34",
+    number = "4.1.2",
+    pageno = "42"
+  },
+  {
+    label = {
       "Alberi di decisione",
       id = "stuff"
     },
     level = 2,
-    link = "dest34",
+    link = "dest35",
     number = "4.2",
     pageno = "42"
   },
@@ -345,9 +355,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest35",
+    link = "dest36",
     number = "4.3",
-    pageno = "43"
+    pageno = "44"
   },
   {
     label = {
@@ -355,7 +365,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest36",
+    link = "dest37",
     number = "4.4",
     pageno = "45"
   },
@@ -365,9 +375,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest37",
+    link = "dest38",
     number = "4.5",
-    pageno = "45"
+    pageno = "46"
   },
   {
     label = {
@@ -375,7 +385,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest38",
+    link = "dest39",
     number = "4.5.1",
     pageno = "46"
   },
@@ -385,7 +395,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest39",
+    link = "dest40",
     number = "4.5.2",
     pageno = "46"
   },
@@ -395,9 +405,19 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest40",
+    link = "dest41",
     number = "4.6",
     pageno = "47"
+  },
+  {
+    label = {
+      "Algoritmo K-means",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest42",
+    number = "4.7",
+    pageno = "49"
   },
   {
     label = {
@@ -405,8 +425,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest41",
-    number = "4.7",
-    pageno = "48"
+    link = "dest43",
+    number = "4.8",
+    pageno = "50"
   }
 }

@@ -106,6 +106,10 @@
 		\include[src = Subsimbolica/Ensemble.sil]
 		\section{Percettrone}
 		\include[src = Subsimbolica/Perceptron.sil]
+		%\section{Deep Learning}
+		%\include[src = Subsimbolica/Deep.sil]
+		\section{Algoritmo K-means}
+		\include[src = Subsimbolica/Kmeans.sil]
 		\section{Reinforcement learning}
 		\include[src = Subsimbolica/Reinforcement.sil]
 
