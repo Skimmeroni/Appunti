@@ -411,7 +411,7 @@ return {
   },
   {
     label = {
-      "Algoritmo K-means",
+      "Clustering basato su partizioni: K-means",
       id = "stuff"
     },
     level = 2,
@@ -421,12 +421,22 @@ return {
   },
   {
     label = {
-      "Reinforcement learning",
+      "Clustering basato su densitá: DBSCAN",
       id = "stuff"
     },
     level = 2,
     link = "dest43",
     number = "4.8",
     pageno = "50"
+  },
+  {
+    label = {
+      "Reinforcement learning",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest44",
+    number = "4.9",
+    pageno = "51"
   }
 }

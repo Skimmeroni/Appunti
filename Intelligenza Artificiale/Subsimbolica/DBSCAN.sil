@@ -1,0 +1,166 @@
+\begin{sile}
+
+	Il \strong{clustering basato su densitá} prevede di costruire
+	dei cluster a partire da un dataset sulla base di come questi
+	sono aggregati. I cluster sono regioni di spazio densamente 
+	popolate, separate da spazio poco popolato, di forma del tutto
+	arbitraria.
+
+	Sia \math{p} un punto \math{n}-dimensionale e siano
+	\math{\epsilon} e MinPts due numeri strettamente
+	positivi fissati. A partire da una data nozione di
+	distanza, si definisce \math{\epsilon}\strong{-neighbourhood}
+	(o \math{\epsilon}\strong{-vicinato}) l'insieme
+	\math{N_{\epsilon}(p)} costituito da tutti i punti
+	\math{q} che distano meno o pari a \math{\epsilon}
+	da \math{p}:
+
+	\begin[mode = display]{math}
+		N_{\epsilon} (p) = \{q | d(p, q) \leq \epsilon\}
+	\end{math}
+
+	Si dice che un punto \math{p} ha una densitá alta se
+	\math{N_{\epsilon}(p)} contiene almeno MinPts punti.
+	Sulla base di MinPts é possibile classificare i punti
+	di un insieme in tre categorie:
+
+	\begin{itemize}
+		\begin{item}
+			Se un punto ha piú punti di MinPts nel suo
+			\math{\epsilon}-vicinato, é detto \strong{core
+			point}. Un core point é un punto che verrá scelto
+			come centroide di un cluster;
+		\end{item}
+		\begin{item}
+			Se un punto ha meno punti di MinPts nel suo
+			\math{\epsilon}-vicinato ma si trova nell'
+			\math{\epsilon}-vicinato di un core point,
+			é detto \strong{border point};
+		\end{item}
+		\begin{item}
+			Se un punto non é né un core point né un border
+			point, é detto \strong{noise point}. Un noise 
+			point é considerato rumore, un punto "non
+			interessante" che verrá escluso dal clustering.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Un punto \math{q} é detto \strong{direttamente raggiungibile} a
+	partire da \math{p} se math{p} é un core point e \math{q} si trova
+	nell'\math{\epsilon}-vicinato di \math{p}. Se un punto \math{r} é
+	direttamente raggiungibile a partire da \math{q} e \math{q} é
+	direttamente raggiungibile a partire da un punto \math{p} allora
+	si dice che \math{r} é \strong{indirettamente raggiungibile} a
+	partire da \math{p} (a prescindere che \math{r} sia direttamente
+	raggiungibile da \math{p} o meno). Si noti come la raggiungibilitá,
+	sia diretta che indiretta, non é una proprietá necessariamente
+	simmetrica.
+
+	Un algoritmo di clustering basato su densitá molto semplice é
+	\strong{DBSCAN}. Dato un dataset \math{D} e fissati due valori
+	strettamente positivi \math{\epsilon} e MinPts, a ciascun elemento
+	\math{p} di \math{D} é possibile associare un tipo: \tt{not visited},
+	\tt{visited} oppure \tt{noise}. L'algoritmo é presentato di seguito:
+
+	\begin[width = 47.5%fw]{parbox}
+		\begin{verbatim}
+			DBSCAN(D, \unichar{U+03B5}, MinPts)
+			    C \unichar{U+2190} nuovo cluster
+			    foreach p \unichar{U+2208} D do
+			        if p.type = "not visited" then
+			        p.type \unichar{U+2190} "visited"
+			        NeighbourOfP \unichar{U+2190} REGION-QUERY(p, \unichar{U+03B5})
+			        if (|NeighbourOfP| < MinPts) then
+			            p.type \unichar{U+2190} "noise"
+			        else
+			            C \unichar{U+2190} nuovo cluster
+			            EXPAND-CLUSTER(p, NeighbourOfP, C, \unichar{U+03B5}, MinPts)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 52.5%fw]{parbox}
+		\begin{verbatim}
+			EXPAND-CLUSTER(p, NeighbourOfP, C, \unichar{U+03B5}, MinPts)
+			    C \unichar{U+2190} C \unichar{U+222A} \{p\}
+			    foreach q \unichar{U+2208} NeighbourOfP do
+			        if (q.type = "not visited") then
+			            q.type \unichar{U+2190} "visited"
+			            NeighbourOfQ \unichar{U+2190} REGION-QUERY(q, \unichar{U+03B5})
+			            if (|NeighbourOfQ| >= MinPts) then
+			                NeighbourOfP \unichar{U+2190} NeighbourOfP \unichar{U+222A} NeighbourOfQ
+			        if (q non é membro di alcun cluster) then
+			            C \unichar{U+2190} C \unichar{U+222A} \{q\}
+		\end{verbatim}
+		\begin{verbatim}
+			REGION-QUERY(p, \unichar{U+03B5})
+			    return tutti i punti nell'\unichar{U+03B5}-vicinato di q, compreso p stesso
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+	Quando \tt{DBSCAN} viene invocato, viene inizializzato un cluster
+	\tt{C}, dopodiché viene iterativamente esaminato ogni elemento
+	\tt{p} del dataset \tt{D} di tipo \tt{not visited}. All'elemento
+	\tt{p} viene innanzitutto cambiato tipo in \tt{visited}, dopodiché
+	viene costruito l'\math{\epsilon}-vicinato di tale elemento. Se tale
+	insieme contiene meno elementi di \tt{MinPts}, allora quel punto é
+	certamente un noise point. Questo perché da una parte é troppo isolato
+	per essere un core point, ma d'altra parte non é stato ancora visitato,
+	e quindi non si trova nell'\math{\epsilon}-vicinato di nessun altro
+	punto, pertanto non puó nemmeno essere un border point.
+
+	Se l'\math{\epsilon}-vicinato di \tt{p} ha invece abbastanza
+	elementi, allora tale punto deve essere un core point, e viene
+	a tal scopo chiamata la procedura \tt{EXPAND-CLUSTER}. Questa
+	innanzitutto aggiunge \tt{p} al cluster, dopodiché osserva tutti
+	i punti \tt{q} che si trovano nell'\math{\epsilon}-vicinato di
+	\tt{p}. Se \tt{q} é di tipo \tt{not visited}, viene cambiato il
+	loro tipo in \tt{visited} e si osserva l'\math{\epsilon}-vicinato
+	di \tt{q} a sua volta. Se l'\math{\epsilon}-vicinato di \tt{q}
+	contiene piú elementi dell'\math{\epsilon}-vicinato di \tt{p}, i due
+	insiemi vengono uniti, perché gli elementi dell'\math{\epsilon}-vicinato
+	di \tt{q} sono indirettamente raggiungibili a partire da \tt{p}. Se
+	\tt{q} non appartiene ad alcun cluster, allora viene aggiunto al cluster
+	in esame.
+
+	I valori di \math{\epsilon} e di MinPts devono essere scelti
+	con cura, dato che influenzano di molto il clustering che ne
+	risulta. Un valore di \math{\epsilon} o di MinPts troppo
+	piccolo potrebbe indurre un clustering dove quasi tutti i
+	punti sono considerati noise point, e quindi dove quasi nessun
+	punto viene effettivamente preso in considerazione. Un valore
+	di \math{\epsilon} o di MinPts troppo grande potrebbe indurre
+	un clustering dove quasi tutti i punti sono inclusi nello stesso
+	cluster. I valori dei parametri devono essere ricavati a partire
+	dai dati stessi.
+
+	Come regola pratica, MinPts deve essere almeno pari al numero di
+	attributi degli oggetti piú uno. Piú nello specifico, una scelta
+	sicura per MinPts é il doppio del numero degli attributi, ma per 
+	dataset particolarmente grandi e/o rumorosi un valore maggiore si
+	rivela essere una scelta migliore. Si noti come si scegliesse MinPts
+	= 1, tutti i punti verrebbero identificati come core point, pertanto
+	il clustering non avrebbe alcun senso. 
+
+	Il valore di \math{\epsilon} puó essere stimato costruendo un
+	\strong{k-distance plot}: fissato \math{k} come MinPts meno uno,
+	lungo l'asse delle ascisse si riportano gli oggetti ordinati in
+	ordine crescente per distanza dal loro \math{k}-esimo vicino,
+	mentre sull'asse delle ordinate la distanza stessa. In genere,
+	una curva costruita sulla base di questi dati ha inizialmente
+	un andamento stabile per poi avere una crescita rapida: il valore
+	di \math{\epsilon} é scelto il punto della curva in cui si ha
+	tale variazione di pendenza.
+
+	A differenza di altri algoritmi di clustering, come ad esempio
+	K-means, DBSCAN ha una tolleranza al rumore nettamente superiore,
+	ed é inoltre in grado di generare cluster di forma arbitraria (non
+	solo insiemi convessi). Tuttavia, é molto sensibile al modo in cui
+	i parametri \math{\epsilon} e MinPts vengono fissati. Inoltre, mentre
+	K-means é un algoritmo con tempo di esecuzione lineare nel numero
+	degli elementi, DBSCAN é quadratico, perché un'implementazione (naive)
+	dell'algoritmo richiede di calcolare la distanza da ogni elemento ad
+	ogni altro elemento.
+
+\end{sile}

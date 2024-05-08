@@ -108,8 +108,10 @@
 		\include[src = Subsimbolica/Perceptron.sil]
 		%\section{Deep Learning}
 		%\include[src = Subsimbolica/Deep.sil]
-		\section{Algoritmo K-means}
+		\section{Clustering basato su partizioni: K-means}
 		\include[src = Subsimbolica/Kmeans.sil]
+		\section{Clustering basato su densitá: DBSCAN}
+		\include[src = Subsimbolica/DBSCAN.sil]
 		\section{Reinforcement learning}
 		\include[src = Subsimbolica/Reinforcement.sil]
 
