@@ -112,7 +112,7 @@
 		\include[src = Subsimbolica/Kmeans.sil]
 		\section{Clustering basato su densitá: DBSCAN}
 		\include[src = Subsimbolica/DBSCAN.sil]
-		\section{Reinforcement learning}
-		\include[src = Subsimbolica/Reinforcement.sil]
+		%\section{Q-learning}
+		%\include[src = Subsimbolica/Q.sil]
 
 \end{document}

@@ -341,11 +341,21 @@ return {
   },
   {
     label = {
+      "Reinforcement learning",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest35",
+    number = "4.1.3",
+    pageno = "42"
+  },
+  {
+    label = {
       "Alberi di decisione",
       id = "stuff"
     },
     level = 2,
-    link = "dest35",
+    link = "dest36",
     number = "4.2",
     pageno = "42"
   },
@@ -355,7 +365,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest36",
+    link = "dest37",
     number = "4.3",
     pageno = "44"
   },
@@ -365,9 +375,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest37",
+    link = "dest38",
     number = "4.4",
-    pageno = "45"
+    pageno = "46"
   },
   {
     label = {
@@ -375,7 +385,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest38",
+    link = "dest39",
     number = "4.5",
     pageno = "46"
   },
@@ -385,9 +395,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest39",
+    link = "dest40",
     number = "4.5.1",
-    pageno = "46"
+    pageno = "47"
   },
   {
     label = {
@@ -395,9 +405,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest40",
+    link = "dest41",
     number = "4.5.2",
-    pageno = "46"
+    pageno = "47"
   },
   {
     label = {
@@ -405,9 +415,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest41",
+    link = "dest42",
     number = "4.6",
-    pageno = "47"
+    pageno = "48"
   },
   {
     label = {
@@ -415,7 +425,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest42",
+    link = "dest43",
     number = "4.7",
     pageno = "49"
   },
@@ -425,18 +435,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest43",
-    number = "4.8",
-    pageno = "50"
-  },
-  {
-    label = {
-      "Reinforcement learning",
-      id = "stuff"
-    },
-    level = 2,
     link = "dest44",
-    number = "4.9",
+    number = "4.8",
     pageno = "51"
   }
 }
