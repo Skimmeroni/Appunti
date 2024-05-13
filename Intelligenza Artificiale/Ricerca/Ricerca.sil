@@ -1,0 +1,221 @@
+\begin{sile}
+
+	La ricerca di una soluzione per un problema di ricerca puó
+	essere descritta sotto forma di algoritmo. Un \strong{algoritmo
+	di ricerca} é un algoritmo che, avendo in input un problema di
+	ricerca, restituisce in output una soluzione per tale problema
+	se tale soluzione esiste, oppure un errore se tale soluzione
+	non esiste.
+
+	Un algoritmo di ricerca sovrimpone una struttura ad albero sul
+	grafo dello spazio degli stati, formando vari percorsi a partire
+	dallo stato iniziale, fra i quali si distingue quello che porta
+	ad uno degli stati obiettivo. Ciascun nodo di tale albero corrisponde
+	agli stati nello spazio degli stati, mentre gli archi corrispondono
+	alle azioni che costituiscono le transizioni. La radice dell'albero
+	corrisponde allo stato iniziale del problema.
+
+	Si noti come lo spazio degli stati e l'albero di ricerca sono
+	distinti. Lo stato degli spazi descrive il (potenzialmente
+	infinito) insieme degli stati in cui l'ambiente puó trovarsi,
+	e le azioni che permettono di operare le transizioni da uno
+	stato all'altro. L'albero di ricerca descrive i percorsi che
+	si snodano lungo questi stati che raggiungono lo stato obiettivo.
+	Un albero di ricerca potrebbe avere piú percorsi che portano allo
+	stesso stato, ma ogni nodo ha uno ed un solo percorso che permette
+	di risalire da questo alla radice (come in ogni albero).
+
+	L'albero di ricerca, inizialmente costituito dal solo stato
+	iniziale, viene costruito iterativamente. Dato un nodo dell'albero
+	(rappresentante uno stato), é possibile \strong{espanderlo} applicando
+	la funzione \tt{ACTIONS}, ottenendo quindi l'insieme di azioni che
+	é possibile compiere se ci si trova in tale stato, ed applicando
+	\tt{RESULT} allo stato attuale e a ciascuna di tali azioni. Tutti i
+	nodi cosí \strong{generati}, detti \strong{nodi figli} o \strong{nodi
+	successori}, vengono uniti al nodo attuale, detto \strong{nodo genitore},
+	da un arco.
+
+	Una volta espanso un nodo, si sceglie uno dei nodi dell'albero da
+	questo raggiungibile come nuovo nodo attuale (ovvero, si opera una
+	transizione verso lo stato che tale nodo rappresenta) e si ripete
+	l'operazione di espansione. L'insieme di tutti i nodi che possono
+	essere scelti come nuovo nodo da espandere viene detto \strong{frontiera}
+	dell'albero di ricerca. Uno stato dello spazio degli stati si dice
+	\strong{raggiunto} se esiste un nodo nell'albero di ricerca a questo
+	associato. Si noti come la frontiera separi il grafo dello spazio 
+	degli stati in due regioni: una \em{interna} dove ogni nodo (e lo
+	stato ad esso legato) é stato espanso ed una \em{esterna} dove ogni
+	nodo non é stato ancora raggiunto.
+
+	Ci si chiede allora quale criterio si dovrebbe adottare per scegliere
+	quale nodo della frontiera deve diventare il nuovo nodo da espandere.
+	Un approccio molto generico é detto \strong{best-first search}: data
+	una frontiera costituita dai nodi \math{\{a_{1}, \unicodeellipsis,
+	a_{n}\}}, viene scelto il nodo \math{a_{i}} che minimizza una certa
+	\strong{funzione di valutazione} \math{f(n)}. Si noti come possano 
+	esistere diversi nodi appartenenti alla frontiera che minimizzano tale
+	funzione; in questo caso, la scelta di uno di questi non é rilevante.
+
+	A ciascuna iterazione dell'algoritmo, viene scelto il nodo (o uno
+	dei nodi) che minimizza la funzione di valutazione: se lo stato che
+	rappresenta é uno stato obiettivo, allora questo viene restituito,
+	altrimenti vi si applica l'operazione di espansione. Ciascun nodo 
+	cosí generato viene aggiunto alla frontiera se non é stato ancora
+	raggiunto, oppure viene riaggiunto se sta venendo raggiunto da un
+	percorso avente costo complessivo inferiore di quello finora
+	memorizzato per raggiungerlo. L'algoritmo restituisce un messaggio
+	di errore se uno stato obiettivo é irraggiungibile oppure uno
+	stato obiettivo non appena viene raggiunto. Diverse funzioni di
+	valutazione danno origine a diversi algoritmi di ricerca.
+
+	\begin{verbatim}
+		function BEST-FIRST-SEARCH(initial-state, f)
+		    node <= /a new empty node/
+		    node.state <= initial-state
+		    frontier <= /a priority queue ordered by/ f/, with/ node /as an element/
+		    reached <= /a lookup table, with one entry with key/ initial-state /and value/ node
+		    while not IS-EMPTY(frontier) do
+		        node <= POP(frontier)
+		        if (IS-GOAL(node.state) = True) then
+		            return node
+		        ex <= EXPAND(node)
+		        foreach child in ex do
+		            s <= child.state
+		            if (s not in reached) or (child.path-cost < reached[s].path-cost) then
+		                reached[s] <= child
+		                ADD(frontier, child)
+		    return error
+
+		\bigskip
+		function EXPAND(node)
+		    s <= node.state
+		    foreach action in ACTIONS(s) do
+		        s' <= RESULT(s, action)
+		        cost <= node.path-cost + ACTION-COST(s, action, s')
+		        n_node <= a new empty node
+		        n_node.state <= s'
+		        n_node.parent <= node
+		        n_node.action <= action
+		        n_node.path-cost <= cost
+		        return n_node
+	\end{verbatim}
+
+	Gli algoritmi di ricerca necessitano di una struttura dati per
+	poter tenere traccia della struttura dell'albero di ricerca. Un
+	nodo \tt{node} dell'albero é rappresentato mediante una struttura
+	dati avente quattro componenti:
+
+	\begin{itemize}
+		\begin{item}
+			\tt{node.state}: lo stato nello spazio degli stati a cui
+			il nodo corrisponde;
+		\end{item}
+		\begin{item}
+			\tt{node.parent}: il nodo dell'albero di ricerca che ha
+			generato \tt{node}; 
+		\end{item}
+		\begin{item}
+			\tt{node.action}: l'azione che é stata applicata a
+			\tt{node.parent.state} per generare \tt{node};
+		\end{item}
+		\begin{item}
+			\tt{node.path-cost}: il costo complessivo del percorso
+			dallo stato iniziale a \tt{node}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	La frontiera puó venire salvata all'interno di una coda; le 
+	operazioni da eseguire su tale coda sono:
+
+	\begin{itemize}
+		\begin{item}
+			\tt{IS-EMPTY(frontier)} restituisce \tt{True} se non vi
+			sono piú nodi all'interno di \tt{frontier} e \tt{False}
+			altrimenti;
+		\end{item}
+		\begin{item}
+			\tt{POP(frontier)} rimuove il primo elemento di
+			\tt{frontier} e lo restituisce;
+		\end{item}
+		\begin{item}
+			\tt{TOP(frontier)} restituisce il primo elemento di
+			\tt{frontier} senza rimuoverlo;
+		\end{item}
+		\begin{item}
+			\tt{ADD(frontier, node)} aggiunge \tt{node} nella posizione
+			appropriata di \tt{frontier}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Gli stati raggiunti possono essere invece salvati all'interno
+	di una hash table, dove ciascuna coppia chiave-valore é costituita
+	da uno stato e dal nodo che questo rappresenta.
+
+	Si noti come uno stato possa essere rappresentato da piú di un nodo
+	dell'albero di ricerca. In questo caso, si dice che tale stato é uno
+	\strong{stato ripetuto}; gli stati ripetuti possono dare origine a
+	dei \strong{cicli} nell'albero di ricerca nel momento in cui compaiono
+	piú volte all'interno di uno stesso percorso. Nonostante il numero di
+	stati dello spazio degli stati sia finito, la presenza di uno o piú
+	cicli comporta che l'albero di ricerca sia infinito, perché é sempre
+	possibile percorrere un percorso contenente un ciclo infinite volte.
+
+	Un ciclo é un caso particolare di \strong{percorso ridontante},
+	ovvero di un percorso che inizia e finisce negli stessi nodi di
+	un altro percorso ma ha un costo maggiore, e quindi é del tutto
+	irrilevante al fine di trovare un percorso ottimale. In genere,
+	eliminare i percorsi ridondanti permette di portare a termine
+	la ricerca molto piú velocemente, perché si evita di ripetere
+	per piú volte la stessa computazione, ma l'individuare percorsi
+	ridondanti richiede a sua volta di spendere risorse computazionali
+	aggiuntive.
+
+	L'approccio che adotta la ricerca best-first é di tenere traccia
+	di tutti gli stati giá raggiunti, potendo quindi individuare 
+	subito i percorsi ridondanti. Se l'unica forma di percorso
+	ridontante che compare nel problema sono i cicli, un approccio
+	piú conservativo prevede di risalire da un nodo a tutti i suoi
+	nodi genitori fino a trovare un nodo che rappresenta il medesimo
+	stato. Se invece il problema non presenta mai, o comunque quasi
+	mai, dei percorsi ridontanti, allora l'algoritmo puó anche non
+	implementare alcun tipo di verifica.
+
+	Un algoritmo di ricerca si dice \strong{completo} se garantisce,
+	per qualsiasi istanza del problema di ricerca, di trovare una
+	soluzione, sia che questa sia uno stato raggiunto (soluzione
+	trovata) sia che questa sia un messaggio di errore (soluzione
+	non trovata). Se invece esiste almeno una istanza del problema
+	per il quale questo non é in grado di fornire una risposta e si
+	blocca indefinitamente, allora si dice che tale algoritmo é
+	\strong{incompleto}.
+
+	Un algoritmo di ricerca che opera su uno spazio degli stati finito
+	é certamente completo, perché prima o poi tutti gli stati verrano
+	raggiunti e, se nessuno di questi é uno stato obiettivo, restituisce
+	un messaggio d'errore. Per poter essere completo, un algoritmo di
+	ricerca che opera su uno spazio degli stati infinito deve essere
+	\strong{sistematico}, ovvero esplorare lo spazio in modo da poter
+	raggiungere tutti gli stati che possono essere raggiunti a partire
+	dallo stato iniziale.
+
+	Nell'ambito dell'informatica, si tende a misurare le prestazioni
+	di un algoritmo che opera su un grafo in termini di \math{\abs{E}}
+	e di \math{\abs{V}}, ovvero rispettivamente la cardinalitá del suo
+	insieme di archi e del suo insieme di vertici. Questo é l'approccio
+	migliore nel caso in cui il grafo sia esplicitamente rappresentato
+	da una struttura dati, mentre nel caso dei problemi di ricerca il
+	grafo é reso implicitamente a partire dagli stati, dalle azioni e
+	dal modello di transizione.
+
+	Per uno spazio degli stati implicito, si predilige misurare le 
+	prestazioni in termini di \math{d}, la \strong{profonditá}, ovvero
+	il numero di azioni in una soluzione ottimale; \math{m}, il massimo
+	numero di azioni che possono comparire in un percorso; e \math{b},
+	il \strong{fattore di branching}, ovvero il massimo numero di
+	successori di un nodo che é necessario considerare.
+
+\end{sile}

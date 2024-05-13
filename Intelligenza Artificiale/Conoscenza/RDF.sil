@@ -197,7 +197,7 @@
 		si trovano, ed é quindi necessario prendere misure aggiuntive.
 
 		\begin{example}
-			\center{\img[src = Simbolica/kg.pdf, width = 50%fw]}
+			\center{\img[src = Conoscenza/kg.pdf, width = 50%fw]}
 		\end{example}
 
 	\section{Sintassi: N-triples e Turtle}

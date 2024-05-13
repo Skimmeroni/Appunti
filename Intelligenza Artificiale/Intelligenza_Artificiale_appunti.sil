@@ -69,22 +69,24 @@
 	\chapter{Introduzione}
 		\section{Agente intelligente}
 		\include[src = Introduzione/Agente.sil]
-	\chapter{Intelligenza artificiale simbolica}
+	\chapter{Rappresentazione della conoscenza}
 		\section{Knowledge representation and reasoning}
-		\include[src = Simbolica/KRR.sil]
+		\include[src = Conoscenza/KRR.sil]
 		\section{Knowledge Graphs}
-		\include[src = Simbolica/KG.sil]
+		\include[src = Conoscenza/KG.sil]
 		\section{Resource Description Framework}
-		\include[src = Simbolica/RDF.sil]
+		\include[src = Conoscenza/RDF.sil]
 		\section{SPARQL Protocol And RDF Query Language}
-		\include[src = Simbolica/SPARQL.sil]
+		\include[src = Conoscenza/SPARQL.sil]
 		\section{RDFS}
-		\include[src = Simbolica/Schema.sil]
+		\include[src = Conoscenza/Schema.sil]
 		\section{OWL}
-		\include[src = Simbolica/OWL.sil]
+		\include[src = Conoscenza/OWL.sil]
 	\chapter{Search and plan}
 		\section{Risolvere problemi con la ricerca}
 		\include[src = Ricerca/Introduzione.sil]
+		\section{Algoritmi di ricerca}
+		\include[src = Ricerca/Ricerca.sil]
 		\section{Ricerca non informata}
 		\include[src = Ricerca/Non_informata.sil]
 		\section{Ricerca informata}
