@@ -1,188 +1,280 @@
 \begin{sile}
 
-	La ricerca di una soluzione per un problema di ricerca puó
-	essere descritta sotto forma di algoritmo. Un \strong{algoritmo
-	di ricerca} é un algoritmo che, avendo in input un problema di
-	ricerca, restituisce in output una soluzione per tale problema
-	se tale soluzione esiste, oppure un errore se tale soluzione
-	non esiste.
+	Prende il nome di \strong{algoritmo di ricerca} un
+	algoritmo che, avendo in input un problema di ricerca
+	con una data istanza, restituisce in output una soluzione
+	a tale problema se (almeno) una soluzione esiste, oppure
+	un errore se non esiste alcuna soluzione.
 
-	Un algoritmo di ricerca sovrimpone una struttura ad albero sul
-	grafo dello spazio degli stati, formando vari percorsi a partire
-	dallo stato iniziale, fra i quali si distingue quello che porta
-	ad uno degli stati obiettivo. Ciascun nodo di tale albero corrisponde
-	agli stati nello spazio degli stati, mentre gli archi corrispondono
-	alle azioni che costituiscono le transizioni. La radice dell'albero
-	corrisponde allo stato iniziale del problema.
+	In termini molto generali, é possibile descrivere un algoritmo
+	di ricerca in questo modo. Viene innanzitutto creato l'insieme
+	\tt{PartialSolutionSet}, che inizialmente contiene il solo stato
+	iniziale. Fintanto che l'insieme \tt{PartialSolutionSet} non é
+	vuoto, l'algoritmo cerca di trovare una soluzione; se l'insieme
+	si svuota, allora una soluzione non esiste.
 
-	Si noti come lo spazio degli stati e l'albero di ricerca sono
-	distinti. Lo stato degli spazi descrive il (potenzialmente
-	infinito) insieme degli stati in cui l'ambiente puó trovarsi,
-	e le azioni che permettono di operare le transizioni da uno
-	stato all'altro. L'albero di ricerca descrive i percorsi che
-	si snodano lungo questi stati che raggiungono lo stato obiettivo.
-	Un albero di ricerca potrebbe avere piú percorsi che portano allo
-	stesso stato, ma ogni nodo ha uno ed un solo percorso che permette
-	di risalire da questo alla radice (come in ogni albero).
-
-	L'albero di ricerca, inizialmente costituito dal solo stato
-	iniziale, viene costruito iterativamente. Dato un nodo dell'albero
-	(rappresentante uno stato), é possibile \strong{espanderlo} applicando
-	la funzione \tt{ACTIONS}, ottenendo quindi l'insieme di azioni che
-	é possibile compiere se ci si trova in tale stato, ed applicando
-	\tt{RESULT} allo stato attuale e a ciascuna di tali azioni. Tutti i
-	nodi cosí \strong{generati}, detti \strong{nodi figli} o \strong{nodi
-	successori}, vengono uniti al nodo attuale, detto \strong{nodo genitore},
-	da un arco.
-
-	Una volta espanso un nodo, si sceglie uno dei nodi dell'albero da
-	questo raggiungibile come nuovo nodo attuale (ovvero, si opera una
-	transizione verso lo stato che tale nodo rappresenta) e si ripete
-	l'operazione di espansione. L'insieme di tutti i nodi che possono
-	essere scelti come nuovo nodo da espandere viene detto \strong{frontiera}
-	dell'albero di ricerca. Uno stato dello spazio degli stati si dice
-	\strong{raggiunto} se esiste un nodo nell'albero di ricerca a questo
-	associato. Si noti come la frontiera separi il grafo dello spazio 
-	degli stati in due regioni: una \em{interna} dove ogni nodo (e lo
-	stato ad esso legato) é stato espanso ed una \em{esterna} dove ogni
-	nodo non é stato ancora raggiunto.
-
-	Ci si chiede allora quale criterio si dovrebbe adottare per scegliere
-	quale nodo della frontiera deve diventare il nuovo nodo da espandere.
-	Un approccio molto generico é detto \strong{best-first search}: data
-	una frontiera costituita dai nodi \math{\{a_{1}, \unicodeellipsis,
-	a_{n}\}}, viene scelto il nodo \math{a_{i}} che minimizza una certa
-	\strong{funzione di valutazione} \math{f(n)}. Si noti come possano 
-	esistere diversi nodi appartenenti alla frontiera che minimizzano tale
-	funzione; in questo caso, la scelta di uno di questi non é rilevante.
-
-	A ciascuna iterazione dell'algoritmo, viene scelto il nodo (o uno
-	dei nodi) che minimizza la funzione di valutazione: se lo stato che
-	rappresenta é uno stato obiettivo, allora questo viene restituito,
-	altrimenti vi si applica l'operazione di espansione. Ciascun nodo 
-	cosí generato viene aggiunto alla frontiera se non é stato ancora
-	raggiunto, oppure viene riaggiunto se sta venendo raggiunto da un
-	percorso avente costo complessivo inferiore di quello finora
-	memorizzato per raggiungerlo. L'algoritmo restituisce un messaggio
-	di errore se uno stato obiettivo é irraggiungibile oppure uno
-	stato obiettivo non appena viene raggiunto. Diverse funzioni di
-	valutazione danno origine a diversi algoritmi di ricerca.
+	Il corpo del ciclo principale inizia estraendo uno dei
+	percorsi di \tt{PartialSolutionSet} ed analizzando l'ultimo
+	stato di tale percorso. Per ciascuna azione applicabile in
+	tale stato, viene creato un insieme \tt{Successors} che
+	contiene tutti gli stati raggiungibili a partire da tale
+	stato compiendo tali azioni. Per ciascuno degli stati cosí
+	raggiunti, si costruisce una \tt{potentialSolution} accodando
+	tale stato al percorso corrente e si valuta se lo stato in
+	questione é uno stato obiettivo: se lo é, allora
+	\tt{potentialSolution} é effettivamente una soluzione e
+	l'algoritmo la restituisce, altrimenti \tt{potentialSolution}
+	viene aggiunta a \tt{PartialSolutionSet}.
 
 	\begin{verbatim}
-		function BEST-FIRST-SEARCH(initial-state, f)
-		    node <= /a new empty node/
-		    node.state <= initial-state
-		    frontier <= /a priority queue ordered by/ f/, with/ node /as an element/
-		    reached <= /a lookup table, with one entry with key/ initial-state /and value/ node
-		    while not IS-EMPTY(frontier) do
-		        node <= POP(frontier)
-		        if (IS-GOAL(node.state) = True) then
-		            return node
-		        ex <= EXPAND(node)
-		        foreach child in ex do
-		            s <= child.state
-		            if (s not in reached) or (child.path-cost < reached[s].path-cost) then
-		                reached[s] <= child
-		                ADD(frontier, child)
-		    return error
-
-		\bigskip
-		function EXPAND(node)
-		    s <= node.state
-		    foreach action in ACTIONS(s) do
-		        s' <= RESULT(s, action)
-		        cost <= node.path-cost + ACTION-COST(s, action, s')
-		        n_node <= a new empty node
-		        n_node.state <= s'
-		        n_node.parent <= node
-		        n_node.action <= action
-		        n_node.path-cost <= cost
-		        return n_node
+		procedure GENERIC-SEARCH(initialState, choosingStrategy, insertingStrategy)
+		    PartialSolutionSet = [initialState]
+		    while (PartialSolutionSet \unichar{U+2260} []) do
+		        path \unichar{U+2190} CHOOSE-PATH(PartialSolutionSet, choosingStrategy)
+		        lastState \unichar{U+2190} path[-1]
+		        Successors \unichar{U+2190} []
+		        foreach action in ACTIONS(lastState) do
+		            Successors \unichar{U+2190} Successors \unichar{U+222A} \{RESULT(lastState, action)\}
+		        foreach state in Successors do
+		            potentialSolution \unichar{U+2190} path + state
+		            if (state.type = "goal") then
+		                return potentialSolution
+		            else
+		                PartialSolutionSet \unichar{U+2190} INSERT-PATH(PartialSolutionSet, potentialSolution, insertingStrategy)
+		    return "No solution found"
 	\end{verbatim}
 
-	Gli algoritmi di ricerca necessitano di una struttura dati per
-	poter tenere traccia della struttura dell'albero di ricerca. Un
-	nodo \tt{node} dell'albero é rappresentato mediante una struttura
-	dati avente quattro componenti:
+	La funzione \tt{CHOOSE-PATH} determina quale dei percorsi finora
+	costruiti debba essere quella da analizzare nell'iterazione corrente,
+	mentre la funzione \tt{INSERT-PATH} inserisce il nuovo percorso appena
+	costruito in una determinata posizione di \tt{PartialSolutionSet}.
+	Entrambe dipendono da una certa \strong{strategia}, ovvero da un set
+	di regole usate per determinare la scelta. L'adottare una strategia
+	piuttosto che un'altra influisce notevolmente sulle prestazioni
+	dell'algoritmo, perché prima un percorso che si rivelerá poi
+	essere una soluzione viene analizzato e prima l'algoritmo termina
+	(naturalmente, l'algoritmo non puó sapere in anticipo se il percorso
+	in analisi é oppure non é una soluzione, altrimenti il problema non
+	si porrebbe proprio).
 
-	\begin{itemize}
-		\begin{item}
-			\tt{node.state}: lo stato nello spazio degli stati a cui
-			il nodo corrisponde;
-		\end{item}
-		\begin{item}
-			\tt{node.parent}: il nodo dell'albero di ricerca che ha
-			generato \tt{node}; 
-		\end{item}
-		\begin{item}
-			\tt{node.action}: l'azione che é stata applicata a
-			\tt{node.parent.state} per generare \tt{node};
-		\end{item}
-		\begin{item}
-			\tt{node.path-cost}: il costo complessivo del percorso
-			dallo stato iniziale a \tt{node}.
-		\end{item}
-	\end{itemize}
+	L'algoritmo ha due cicli for innestati, pertanto il tempo di
+	esecuzione é approssimativamente quadratico nel numero degli
+	stati. Ogni volta che all'algoritmo viene passato in input
+	uno stato, questo ricalcola (se esiste) una soluzione che
+	abbia quello stato come stato iniziale. Un algoritmo di
+	questo tipo rientra nella categoria degli agenti guidati da
+	modello e basati su obiettivi.
 
-	\bigskip
+	Ci si chiede se é possibile costruire un algoritmo che rientri
+	nella categoria degli agenti semplici. Tecnicamente, sarebbe
+	possibile utilizzare l'algoritmo per costruire una sorta di
+	lookup table, dove a ciascuno stato iniziale é associata la
+	relativa soluzione; in questo modo, sarebbe necessario richiamare
+	l'algoritmo una sola volta per ciascuno stato, dopodiché la soluzione
+	per uno stato giá passato in input verrebbe restituita immediatamente.
+	Difficilmente questo approccio potrebbe funzionare, perché un problema
+	reale ha un numero di stati troppo grande; una singola esecuzione
+	dell'algoritmo ripetuta per ogni possibile stato iniziale sarebbe
+	comunque insostenibile. Inoltre, l'algoritmo presuppone che sia
+	possibile ottenere tutte le informazioni dall'ambiente, ma questo
+	é vero solamente se l'ambiente é accessibile.
 
-	La frontiera puó venire salvata all'interno di una coda; le 
-	operazioni da eseguire su tale coda sono:
+	\begin{example}
+		Nella prima versione del problema di Pacman dell'esempio
+		precedente, un approccio di questo tipo é effettivamente
+		possibile. Essendo il numero totale di stati 16, a ciascuno
+		di questi é possibile associare uno dei possibili percorsi
+		ottimali in una tabella di questo tipo:
 
-	\begin{itemize}
-		\begin{item}
-			\tt{IS-EMPTY(frontier)} restituisce \tt{True} se non vi
-			sono piú nodi all'interno di \tt{frontier} e \tt{False}
-			altrimenti;
-		\end{item}
-		\begin{item}
-			\tt{POP(frontier)} rimuove il primo elemento di
-			\tt{frontier} e lo restituisce;
-		\end{item}
-		\begin{item}
-			\tt{TOP(frontier)} restituisce il primo elemento di
-			\tt{frontier} senza rimuoverlo;
-		\end{item}
-		\begin{item}
-			\tt{ADD(frontier, node)} aggiunge \tt{node} nella posizione
-			appropriata di \tt{frontier}.
-		\end{item}
-	\end{itemize}
+		\begin{center}
+			\begin[cols = 15%fw 70%fw]{ptable}
+				\begin{row}
+					\cell{\strong{Stato iniziale}} \cell{\strong{Soluzione}}
+				\end{row}
+				\begin{row}
+					\cell{\tt{(1, 1)}}
+					\begin{cell}
+						\begin{tt}
+							(1, 1) \unichar{U+2192} (2, 1) \unichar{U+2192}
+							(2, 2) \unichar{U+2192} (2, 3) \unichar{U+2192}
+							(3, 3) \unichar{U+2192} (3, 4) \unichar{U+2192}
+							(4, 4) 
+						\end{tt}
+					\end{cell}
+				\end{row}
+				\begin{row}
+					\cell{\tt{(2, 1)}}
+					\begin{cell}
+						\begin{tt}
+							(2, 1) \unichar{U+2192} (2, 2) \unichar{U+2192}
+							(2, 3) \unichar{U+2192} (3, 3) \unichar{U+2192}
+							(3, 4) \unichar{U+2192} (4, 4) 
+						\end{tt}
+					\end{cell}
+				\end{row}
+				\begin{row}
+					\cell{\tt{(3, 1)}}
+					\begin{cell}
+						\begin{tt}
+							(3, 1) \unichar{U+2192} (3, 2) \unichar{U+2192}
+							(3, 3) \unichar{U+2192} (3, 4) \unichar{U+2192}
+							(4, 4) 
+						\end{tt}
+					\end{cell}
+				\end{row}
+				\begin{row}
+					\cell{\tt{\ddd}}
+					\cell{\tt{\ddd}}
+				\end{row}
+				\begin{row}
+					\cell{\tt{(3, 4)}}
+					\begin{cell}
+						\begin{tt}
+							(3, 4) \unichar{U+2192} (4, 4) 
+						\end{tt}
+					\end{cell}
+				\end{row}
+				\begin{row}
+					\cell{\tt{(4, 4)}}
+					\begin{cell}
+						\begin{tt}
+							(4, 4) 
+						\end{tt}
+					\end{cell}
+				\end{row}
+			\end{ptable}
+		\end{center}
+		\par\smallskip
 
-	\bigskip
+		Applicare un approccio simile alla seconda versione del problema
+		diviene invece del tutto irrealistico, dato che il numero totale
+		di stati é troppo grande.
+	\end{example}
 
-	Gli stati raggiunti possono essere invece salvati all'interno
-	di una hash table, dove ciascuna coppia chiave-valore é costituita
-	da uno stato e dal nodo che questo rappresenta.
+	I percorsi generati dall'algoritmo possono essere rappresentati
+	attraverso una struttura ad albero, detta \strong{albero di
+	ricerca}. Ciascun nodo di tale albero corrisponde ad uno degli
+	stati nello spazio degli stati, mentre gli archi corrispondono
+	alle azioni che costituiscono le transizioni. La radice dell'albero
+	corrisponde allo stato iniziale del problema. Una soluzione non é
+	altro che un percorso nell'albero che va dal nodo iniziale ad un
+	nodo foglia che ha associato uno stato obiettivo.
 
-	Si noti come uno stato possa essere rappresentato da piú di un nodo
-	dell'albero di ricerca. In questo caso, si dice che tale stato é uno
-	\strong{stato ripetuto}; gli stati ripetuti possono dare origine a
-	dei \strong{cicli} nell'albero di ricerca nel momento in cui compaiono
-	piú volte all'interno di uno stesso percorso. Nonostante il numero di
-	stati dello spazio degli stati sia finito, la presenza di uno o piú
-	cicli comporta che l'albero di ricerca sia infinito, perché é sempre
-	possibile percorrere un percorso contenente un ciclo infinite volte.
+	É possibile tradurre l'algoritmo di ricerca generico in termini di
+	alberi. L'albero, \tt{Tree}, inizialmente contiene il solo nodo
+	radice, cosí come l'insieme \tt{Leaves}, detto \strong{frontiera},
+	che riporta tutti i nodi foglia. Fintanto che l'insieme \tt{Leaves}
+	non é vuoto, l'algoritmo cerca di trovare una soluzione; se l'insieme
+	si svuota, allora una soluzione non esiste. Ciascun nodo puó essere
+	pensato come una struttura a due campi: un campo \tt{parent} che
+	indica il rispettivo nodo genitore ed un campo \tt{state} che
+	indica lo stato a cui il nodo é associato. \tt{Leaves} é, in
+	genere, una coda di prioritá, mentre \tt{Tree} puó essere una
+	qualsiasi rappresentazione usata per gli alberi.
 
-	Un ciclo é un caso particolare di \strong{percorso ridontante},
-	ovvero di un percorso che inizia e finisce negli stessi nodi di
-	un altro percorso ma ha un costo maggiore, e quindi é del tutto
-	irrilevante al fine di trovare un percorso ottimale. In genere,
-	eliminare i percorsi ridondanti permette di portare a termine
-	la ricerca molto piú velocemente, perché si evita di ripetere
-	per piú volte la stessa computazione, ma l'individuare percorsi
-	ridondanti richiede a sua volta di spendere risorse computazionali
-	aggiuntive.
+	Il corpo del ciclo principale inizia estraendo \tt{nodeToExpand},
+	uno dei nodi in \tt{Leaves}, attraverso una determinata strategia;
+	il nodo viene rimosso da \tt{Leaves}. Viene poi analizzato lo stato
+	associato a tale nodo, ovveor \tt{nodeToExpand.state}: se questo é
+	uno stato obiettivo, allora si ricostruisce una soluzione salendo di
+	nodo in nodo attraverso il campo \tt{parent} fino a trovare la radice,
+	che é identificabile univocamente essendo l'unico nodo ad avere
+	\tt{NULL} come valore per questo campo.
 
-	L'approccio che adotta la ricerca best-first é di tenere traccia
-	di tutti gli stati giá raggiunti, potendo quindi individuare 
-	subito i percorsi ridondanti. Se l'unica forma di percorso
-	ridontante che compare nel problema sono i cicli, un approccio
-	piú conservativo prevede di risalire da un nodo a tutti i suoi
-	nodi genitori fino a trovare un nodo che rappresenta il medesimo
-	stato. Se invece il problema non presenta mai, o comunque quasi
-	mai, dei percorsi ridontanti, allora l'algoritmo puó anche non
-	implementare alcun tipo di verifica.
+	Se invece \tt{nodeToExpand.state} non é uno stato obiettivo, viene
+	applicata a \tt{nodeToExpand} l'operazione di \strong{espansione}.
+	Questa consiste nel costruire tanti nodi \tt{newNode} per ciascuna
+	azione applicabile in \tt{nodeToExpand.state}, ciascuno avente tale
+	azione come campo \tt{action} e avente \tt{nodeToExpand} come campo
+	\tt{parent}. Tale nodo viene poi aggiunto a \tt{Leaves}, mentre a
+	\tt{Tree} viene aggiunta una tupla che ha \tt{nodeToExpand} e
+	\tt{newNode} come elementi, che rappresenta la transizione compiuta
+	dagli stati riferiti ai due nodi.
+
+	\begin{verbatim}
+		procedure GENERIC-TREE-SEARCH(initialState, strategy)
+		    root.parent \unichar{U+2190} NULL
+		    root.state \unichar{U+2190} initialState
+		    Leaves \unichar{U+2190} [root]
+		    Tree \unichar{U+2190} [root]
+			while (Leaves \unichar{U+2260} []) do
+			    nodeToExpand \unichar{U+2190} EXTRACT-LEAF(Leaves, strategy)
+			    if (nodeToExpand.state.type = "goal") then
+				    thisNode = nodeToExpand
+				    Solution = []
+				    do
+				        Solution \unichar{U+2190} Solution + thisNode
+					    thisNode \unichar{U+2190} thisNode.parent
+				    while (thisNode.parent \unichar{U+2260} NULL)
+					return Solution
+			    else
+			        foreach action in ACTIONS(nodeToExpand.state) do
+					    newLeaf.state \unichar{U+2190} RESULT(nodeToExpand.state, action)
+					    newLeaf.parent \unichar{U+2190} nodeToExpand
+					    Leaves \unichar{U+2190} Leaves \unichar{U+222A} \{newLeaf\}
+					    Tree \unichar{U+2190} Tree \unichar{U+222A} (nodeToExpand, newLeaf)
+			return "No solution found"
+	\end{verbatim}
+
+	\tt{GENERIC-SEARCH} e \tt{GENERIC-TREE-SEARCH} sono di fatto
+	equivalenti. Il vantaggio di \tt{GENERIC-TREE-SEARCH} é che
+	utilizza una rappresentazione "standardizzata", quella ad 
+	albero, che permette di utilizzare strutture dati note per
+	tenere traccia delle computazioni (\tt{GENERIC-SEARCH} non
+	specifica che strutture dati utilizzare). Infatti, é presente
+	un solo parametro \tt{strategy} anziché due, perché non c'é
+	ambiguitá né nello scegliere in che posizione inserire la tupla
+	nell'albero in costruzione, né nello scegliere in che posizione
+	inserire il nodo nella frontiera (INSERT-PATH richiedeva di
+	esplicitare una strategia).
+
+	\tt{GENERIC-TREE-SEARCH} introduce peró uno svantaggio, ovvero
+	che non vi é garanzia che l'algoritmo termini. Infatti, é sufficiente
+	che esista sia una transizione da uno stato A ad uno stato B che una
+	transizione da B ad A perché l'algoritmo entri in un loop infinito.
+	La mappatura fra nodi dell'albero di ricerca e stati dello spazio
+	degli stati non é uno-ad-uno, perché uno stato puó figurare diverse
+	volte come nodo dell'albero.
+
+	Si noti inoltre come, anche se l'algoritmo dovesse trovare una
+	soluzione, non c'é garanzia che questa sia la migliore, ovvero
+	quella costituita dal minimo numero di nodi. Se il numero di 
+	soluzioni é finito, un possibile approccio consisterebbe nel 
+	modificare \tt{GENERIC-TREE-SEARCH} per farlo terminare non 
+	nel momento in cui viene trovata una soluzione, ma quando sono
+	state trovate tutte e sono state comparate.
+
+	\begin{verbatim}
+		procedure BACKTRACKING-SEARCH(s, path)
+		    if (IS-END(s)) then
+		        update bestPath
+		    foreach a in ACTIONS(s) do
+		        Extend path with SUCCESSOR(s, a)
+		        BACKTRACKING-SEARCH(SUCCESSOR(s, a), path)
+		    return bestPath
+	\end{verbatim}
+
+	Se peró si verifica anche un solo loop, dato che tutti i
+	possibili percorsi devono per forza essere esplorati, prima
+	o poi tale loop verrá raggiunto. Questa criticitá potrebbe
+	essere aggirata introducendo una profonditá massima \math{D},
+	oltre la quale la computazione viene interrotta immediatamente.
+	Questo garantisce di non poter incappare un loop infinito, ma
+	non garantisce piú che una soluzione venga effettivamente trovata.
+	Questo perché se le soluzioni si trovano ad una profonditá maggiore
+	di \math{D} queste non verranno mai raggiunte.
+
+	\begin{verbatim}
+		procedure BACKTRACKING-SEARCH(s, path, D)
+		    if (|path| > D) then
+		        return NULL
+		    if (IS-END(s)) then
+		        update bestPath
+		    foreach a in ACTIONS(s) do
+		        Extend path with SUCCESSOR(s, a)
+		        BACKTRACKING-SEARCH(SUCCESSOR(s, a), path, D)
+		    return bestPath
+	\end{verbatim}
 
 	Un algoritmo di ricerca si dice \strong{completo} se garantisce,
 	per qualsiasi istanza del problema di ricerca, di trovare una
@@ -202,20 +294,22 @@
 	raggiungere tutti gli stati che possono essere raggiunti a partire
 	dallo stato iniziale.
 
-	Nell'ambito dell'informatica, si tende a misurare le prestazioni
-	di un algoritmo che opera su un grafo in termini di \math{\abs{E}}
-	e di \math{\abs{V}}, ovvero rispettivamente la cardinalitá del suo
-	insieme di archi e del suo insieme di vertici. Questo é l'approccio
-	migliore nel caso in cui il grafo sia esplicitamente rappresentato
-	da una struttura dati, mentre nel caso dei problemi di ricerca il
-	grafo é reso implicitamente a partire dagli stati, dalle azioni e
-	dal modello di transizione.
+	In genere, le prestazioni di un algoritmo che opera su un
+	grafo sono espresse in termini della cardinalitá del suo
+	insieme di archi e della cardinalitá del suo insieme di
+	vertici. Per misurare le prestazioni di un algoritmo di
+	ricerca si preferisce invece misurare le prestazioni in
+	termini di: \math{D}, la \strong{profonditá}, ovvero
+	il numero di azioni in una soluzione ottimale; \math{m},
+	il massimo numero di azioni che possono comparire in un
+	percorso; e \math{b}, il \strong{fattore di branching},
+	ovvero il massimo numero di successori di un nodo che é
+	necessario considerare.
 
-	Per uno spazio degli stati implicito, si predilige misurare le 
-	prestazioni in termini di \math{d}, la \strong{profonditá}, ovvero
-	il numero di azioni in una soluzione ottimale; \math{m}, il massimo
-	numero di azioni che possono comparire in un percorso; e \math{b},
-	il \strong{fattore di branching}, ovvero il massimo numero di
-	successori di un nodo che é necessario considerare.
+	Nel caso specifico di \tt{BACKTRACKING-SEARCH}, lo spazio
+	occupato in termini di memoria é \math{O(b D)}, che é
+	un limite contenuto. In termini di tempo di esecuzione,
+	il limite é invece \math{O(b^{D})}, che rende l'algoritmo
+	molto inefficiente in termini di tempo.
 
 \end{sile}
