@@ -197,22 +197,22 @@
 		    root.state \unichar{U+2190} initialState
 		    Leaves \unichar{U+2190} [root]
 		    Tree \unichar{U+2190} [root]
-			while (Leaves \unichar{U+2260} []) do
+		    while (Leaves \unichar{U+2260} []) do
 			    nodeToExpand \unichar{U+2190} EXTRACT-LEAF(Leaves, strategy)
 			    if (nodeToExpand.state.type = "goal") then
-				    thisNode = nodeToExpand
-				    Solution = []
-				    do
-				        Solution \unichar{U+2190} Solution + thisNode
-					    thisNode \unichar{U+2190} thisNode.parent
-				    while (thisNode.parent \unichar{U+2260} NULL)
-					return Solution
+			        thisNode = nodeToExpand
+			        Solution = []
+			        do
+			            Solution \unichar{U+2190} Solution + thisNode
+			    	    thisNode \unichar{U+2190} thisNode.parent
+			        while (thisNode.parent \unichar{U+2260} NULL)
+			        return Solution
 			    else
 			        foreach action in ACTIONS(nodeToExpand.state) do
-					    newLeaf.state \unichar{U+2190} RESULT(nodeToExpand.state, action)
-					    newLeaf.parent \unichar{U+2190} nodeToExpand
-					    Leaves \unichar{U+2190} Leaves \unichar{U+222A} \{newLeaf\}
-					    Tree \unichar{U+2190} Tree \unichar{U+222A} (nodeToExpand, newLeaf)
+			            newLeaf.state \unichar{U+2190} RESULT(nodeToExpand.state, action)
+			            newLeaf.parent \unichar{U+2190} nodeToExpand
+			            Leaves \unichar{U+2190} Leaves \unichar{U+222A} \{newLeaf\}
+			            Tree \unichar{U+2190} Tree \unichar{U+222A} (nodeToExpand, newLeaf)
 			return "No solution found"
 	\end{verbatim}
 
@@ -236,80 +236,46 @@
 	degli stati non é uno-ad-uno, perché uno stato puó figurare diverse
 	volte come nodo dell'albero.
 
-	Si noti inoltre come, anche se l'algoritmo dovesse trovare una
-	soluzione, non c'é garanzia che questa sia la migliore, ovvero
-	quella costituita dal minimo numero di nodi. Se il numero di 
-	soluzioni é finito, un possibile approccio consisterebbe nel 
-	modificare \tt{GENERIC-TREE-SEARCH} per farlo terminare non 
-	nel momento in cui viene trovata una soluzione, ma quando sono
-	state trovate tutte e sono state comparate.
+	Le diverse incarnazioni di \tt{GENERIC-TREE-SEARCH} vengono valutate
+	sulla base di quattro metriche:
 
-	\begin{verbatim}
-		procedure BACKTRACKING-SEARCH(s, path)
-		    if (IS-END(s)) then
-		        update bestPath
-		    foreach a in ACTIONS(s) do
-		        Extend path with SUCCESSOR(s, a)
-		        BACKTRACKING-SEARCH(SUCCESSOR(s, a), path)
-		    return bestPath
-	\end{verbatim}
+	\begin{itemize}
+		\begin{item}
+			\strong{Completezza}. Un algoritmo di ricerca si dice
+			\strong{completo} se garantisce, per qualsiasi istanza,
+			di fornire una risposta, a prescindere che questa sia
+			affermativa (soluzione trovata) o negativa (soluzione
+			non trovata); altrimenti, é detto \strong{incompleto};
+		\end{item}
+		\begin{item}
+			\strong{Ottimalitá}. Un algoritmo di ricerca si dice
+			\strong{ottimale} se garantisce di trovare una soluzione
+			ottima;
+		\end{item}
+		\begin{item}
+			\strong{Complessitá in tempo}, nel caso peggiore; 
+		\end{item}
+		\begin{item}
+			\strong{Complessitá in spazio}, nel caso peggiore. 
+		\end{item}
+	\end{itemize}
 
-	Se peró si verifica anche un solo loop, dato che tutti i
-	possibili percorsi devono per forza essere esplorati, prima
-	o poi tale loop verrá raggiunto. Questa criticitá potrebbe
-	essere aggirata introducendo una profonditá massima \math{D},
-	oltre la quale la computazione viene interrotta immediatamente.
-	Questo garantisce di non poter incappare un loop infinito, ma
-	non garantisce piú che una soluzione venga effettivamente trovata.
-	Questo perché se le soluzioni si trovano ad una profonditá maggiore
-	di \math{D} queste non verranno mai raggiunte.
-
-	\begin{verbatim}
-		procedure BACKTRACKING-SEARCH(s, path, D)
-		    if (|path| > D) then
-		        return NULL
-		    if (IS-END(s)) then
-		        update bestPath
-		    foreach a in ACTIONS(s) do
-		        Extend path with SUCCESSOR(s, a)
-		        BACKTRACKING-SEARCH(SUCCESSOR(s, a), path, D)
-		    return bestPath
-	\end{verbatim}
-
-	Un algoritmo di ricerca si dice \strong{completo} se garantisce,
-	per qualsiasi istanza del problema di ricerca, di trovare una
-	soluzione, sia che questa sia uno stato raggiunto (soluzione
-	trovata) sia che questa sia un messaggio di errore (soluzione
-	non trovata). Se invece esiste almeno una istanza del problema
-	per il quale questo non é in grado di fornire una risposta e si
-	blocca indefinitamente, allora si dice che tale algoritmo é
-	\strong{incompleto}.
-
-	Un algoritmo di ricerca che opera su uno spazio degli stati finito
-	é certamente completo, perché prima o poi tutti gli stati verrano
-	raggiunti e, se nessuno di questi é uno stato obiettivo, restituisce
-	un messaggio d'errore. Per poter essere completo, un algoritmo di
-	ricerca che opera su uno spazio degli stati infinito deve essere
-	\strong{sistematico}, ovvero esplorare lo spazio in modo da poter
-	raggiungere tutti gli stati che possono essere raggiunti a partire
-	dallo stato iniziale.
+	\bigskip
 
 	In genere, le prestazioni di un algoritmo che opera su un
 	grafo sono espresse in termini della cardinalitá del suo
 	insieme di archi e della cardinalitá del suo insieme di
-	vertici. Per misurare le prestazioni di un algoritmo di
-	ricerca si preferisce invece misurare le prestazioni in
-	termini di: \math{D}, la \strong{profonditá}, ovvero
-	il numero di azioni in una soluzione ottimale; \math{m},
-	il massimo numero di azioni che possono comparire in un
-	percorso; e \math{b}, il \strong{fattore di branching},
-	ovvero il massimo numero di successori di un nodo che é
-	necessario considerare.
+	vertici. Questa é la scelta migliore nel caso in cui il
+	grafo sia \strong{esplicito}, ovvero dove é effettivamente
+	rappresentato sotto forma di stati e di archi. Gli algoritmi
+	di ricerca operano invece su un grafo "indotto", ovvero
+	\strong{implicito}.
 
-	Nel caso specifico di \tt{BACKTRACKING-SEARCH}, lo spazio
-	occupato in termini di memoria é \math{O(b D)}, che é
-	un limite contenuto. In termini di tempo di esecuzione,
-	il limite é invece \math{O(b^{D})}, che rende l'algoritmo
-	molto inefficiente in termini di tempo.
+	Per misurare le prestazioni di un algoritmo di ricerca si preferisce
+	farlo in termini di: \math{d}, la \strong{profonditá}, ovvero il numero
+	di nodi che compongono una soluzione ottimale; \math{m}, il massimo
+	numero di azioni che possono comparire in un percorso; e \math{b}, il
+	\strong{fattore di branching}, ovvero il massimo numero di successori
+	di un nodo che é necessario considerare.
 
 \end{sile}
