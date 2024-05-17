@@ -21,26 +21,84 @@
 		al primo nodo lungo il percorso che non é stato ancora
 		interamente espanso.
 
-		\begin{verbatim}
-			procedure BACKTRACKING-SEARCH(s, path)
-			    if (IS-END(s)) then
-			        update bestPath
-			    foreach a in ACTIONS(s) do
-			        Extend path with SUCCESSOR(s, a)
-			        BACKTRACKING-SEARCH(SUCCESSOR(s, a), path)
-			    return bestPath
-		\end{verbatim}
+		\begin[width = 45%fw]{parbox}
+			\begin{verbatim}
+			    // Recursive, high level
+			    procedure BACKTRACKING-SEARCH(s, path)
+			        if (IS-END(s)) then
+			            update bestPath
+			        foreach a in ACTIONS(s) do
+			            Extend path with SUCCESSOR(s, a)
+			            BACKTRACKING-SEARCH(SUCCESSOR(s, a), path)
+			        return bestPath
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 55%fw]{parbox}
+			\begin{verbatim}
+				// Iterative, based on GENERIC-TREE-SEARCH
+				procedure BACKTRACKING-SEARCH(initialState)
+				    root.parent \unichar{U+2190} NULL
+				    root.state \unichar{U+2190} initialState
+				    Leaves \unichar{U+2190} [root]
+				    Tree \unichar{U+2190} [root]
+				    Solutions \unichar{U+2190} []
 
-		Se lo spazio degli stati é finito, Backtracking search
-		é completo fintanto che non esistono cicli; sebbene
-		possa esplorare gli stessi stati piú volte negli stessi
-		percorsi, prima o poi tutti gli stati vengono raggiunti.
-		Se sono presenti dei cicli, l'algoritmo potrebbe rimanere
-		bloccato in un loop infiniti. Se lo spazio degli stati é
-		infinito, l'algoritmo non é né sistematico né completo,
-		perché l'algoritmo potrebbe rimanere bloccato nell'espandere
-		lo stesso percorso indefinitamente, anche se non sono presenti
-		cicli.
+				    \bigskip
+				    while (Leaves \unichar{U+2260} []) do
+				        nodeToExpand \unichar{U+2190} POP(Leaves)
+				        if (nodeToExpand.state.type = "goal") then
+				            thisNode = nodeToExpand
+				            thisSolution = []
+				            do
+				                thisSolution \unichar{U+2190} thisSolution + thisNode
+				                thisNode \unichar{U+2190} thisNode.parent
+				            while (thisNode.parent \unichar{U+2260} NULL)
+				            Solutions \unichar{U+2190} Solutions \unichar{U+222A} \{thisSolution\}
+				        else
+				            foreach action in ACTIONS(nodeToExpand.state) do
+				                newLeaf.state \unichar{U+2190} RESULT(nodeToExpand.state, action)
+				                newLeaf.parent \unichar{U+2190} nodeToExpand
+				                PUSH(Leaves, newLeaf)
+				                Tree \unichar{U+2190} Tree \unichar{U+222A} \{(nodeToExpand, newLeaf)\}
+
+				    \bigskip
+				    if (Solutions = []) then
+				        return "No solution found"
+				    else
+				        bestSolution \unichar{U+2190} Solutions[0]
+				        foreach potentialSolution in Solutions do
+				            if (|potentialSolution| < |bestSolution|) then
+				                bestSolution \unichar{U+2190} potentialSolution
+				        return bestSolution
+			\end{verbatim}
+		\end{parbox}
+		\par
+
+		Per quanto riguarda il tempo di esecuzione dell'algoritmo,
+		si osservi come, nel caso peggiore, la soluzione ottimale
+		venga trovata nell'ultimo nodo espanso dell'albero. Infatti,
+		non c'é modo di sapere, una volta trovata una soluzione, se
+		esista una soluzione migliore. Questo significa che Backtracking
+		search necessita di espandere l'albero per intero, e quindi il
+		suo tempo di esecuzione sia \math{O(b^{m})}, assumendo che non
+		si verifichino cicli.
+
+		Per quanto riguarda lo spazio occupato, Backtracking search
+		necessita di memorizzare esclusivamente la frontiera dell'albero
+		e tutte le soluzioni parziali. Dato che la frontiera dell'albero
+		non puó essere superiore al branching factor, e dato che é
+		necessario memorizzare al piú \math{m} frontiere distinte,
+		la complessitá in termini di spazio di Backtracking search é
+		\math{O(bm)}.
+
+		Se lo spazio degli stati é finito, Backtracking search é
+		completo fintanto che non esistono cicli; sebbene possa
+		esplorare gli stessi stati piú volte negli stessi percorsi,
+		prima o poi tutti gli stati vengono raggiunti. Se sono presenti
+		dei cicli, l'algoritmo potrebbe rimanere bloccato in un loop
+		infiniti. Se lo spazio degli stati é infinito, l'algoritmo
+		potrebbe rimanere bloccato nell'espandere lo stesso percorso
+		indefinitamente, anche se non sono presenti cicli.
 
 		Un possibile modo per garantire la completezza di Backtracking
 		search consiste nel fissare una profonditá massima \math{D},
@@ -64,118 +122,199 @@
 			    return bestPath
 		\end{verbatim}
 
-		Lo spazio occupato in termini di memoria é \math{O(b D)},
-		che é un limite contenuto. In termini di tempo di esecuzione,
-		il limite é invece \math{O(b^{D})}, che rende l'algoritmo
-		molto inefficiente in termini di tempo.
+		In questo caso, essendo \math{D} necessariamente inferiore a
+		\math{m}, é ragionevole esprimere la complessitá in termini di
+		tempo e di spazio in funzione di \math{D}, rispettivamente
+		\math{O(b^{D})} e \math{O(bD)}.
 
 	\subsection{Depth-First search}
 
 		Una variante di Backtracking search é \strong{Depth-First search},
 		che opera con la stessa strategia ma si interrompe immediatamente
-		appena viene trovata una soluzione.
+		appena viene trovata una soluzione. Come struttura dati atta a
+		contenere i nodi della frontiera é bene scegliere una coda LIFO.
+		Questo perché i nuovi nodi che vengono aggiunti, che si trovano
+		necessariamente dopo i nodi che li hanno generati, vengono posti
+		prima di questi ultimi.
 
-		\begin{verbatim}
-			procedure DEPTH-FIRST-SEARCH(s, path, D)
-			    if (|path| > D) then
-			        return NULL
-			    if (IS-END(s)) then
-			        return path
-			    foreach a in ACTIONS(s) do
-			        Extend path with SUCCESSOR(s, a)
-			        DEPTH-FIRST-SEARCH(SUCCESSOR(s, a), path, D)
-		\end{verbatim}
+		\begin[width = 45%fw]{parbox}
+			\begin{verbatim}
+				// Recursive, high level
+				procedure DEPTH-FIRST-SEARCH(s, path, D)
+				    if (|path| > D) then
+				        return NULL
+				    if (IS-END(s)) then
+				        return path
+				    foreach a in ACTIONS(s) do
+				        Extend path with SUCCESSOR(s, a)
+				        DEPTH-FIRST-SEARCH(SUCCESSOR(s, a), path, D)
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 55%fw]{parbox}
+			\begin{verbatim}
+				// Iterative, based on GENERIC-TREE-SEARCH
+				procedure DEPTH-FIRST-SEARCH(initialState)
+				    root.parent \unichar{U+2190} NULL
+				    root.state \unichar{U+2190} initialState
+				    Leaves \unichar{U+2190} [root]
+				    Tree \unichar{U+2190} [root]
 
-		La soluzione restituita da Depth-First search é la prima che viene
-		trovata, ma non vi é alcuna garanzia che questa sia una soluzione
-		ottimale. Infatti, potrebbe esserci una soluzione migliore di quella
-		trovata lungo i nodi lasciati inesplorati, ma questi non verranno mai
-		raggiunti. Fintanto che lo spazio degli stati é finito e fintanto che
-		le soluzioni si trovano a meno profonditá di \math{D}, Depth-First
-		search é comunque completo, perché una soluzione (per quanto non
-		necessariamente ottimale) verrá sempre trovata.
+				    \bigskip
+				    while (Leaves \unichar{U+2260} []) do
+				        nodeToExpand \unichar{U+2190} POP(Leaves)
+				        if (nodeToExpand.state.type = "goal") then
+				            thisNode = nodeToExpand
+				            Solution = []
+				            do
+				                Solution \unichar{U+2190} Solution + thisNode
+				                thisNode \unichar{U+2190} thisNode.parent
+				            while (thisNode.parent \unichar{U+2260} NULL)
+				            return Solution
+				        else
+				            foreach action in ACTIONS(nodeToExpand.state) do
+				                newLeaf.state \unichar{U+2190} RESULT(nodeToExpand.state, action)
+				                newLeaf.parent \unichar{U+2190} nodeToExpand
+				                PUSH(Leaves, newLeaf)
+				                Tree \unichar{U+2190} Tree \unichar{U+222A} (nodeToExpand, newLeaf)
 
-		Depth-First search ha peró il vantaggio di dover tenere traccia,
-		in genere in una coda FIFO, solamente dei nodi in esame e dei vari
-		punti di scelta, non di tutti i percorsi finora trovati. Inoltre,
-		sebbene il tempo di esecuzione teorico nel caso peggiore sia comunque
-		\math{O(T^{D})}, nella pratica questo tende ad essere molto inferiore,
-		perché una soluzione viene trovata molto prima di esplorare l'albero
-		per intero.
+				    \bigskip
+				    return "No solution found"
+			\end{verbatim}
+		\end{parbox}
+		\par
+
+		La soluzione restituita da Depth-First search é la prima che
+		viene trovata, ma non vi é alcuna garanzia che questa sia una
+		soluzione ottimale. Infatti, potrebbe esserci una soluzione
+		migliore di quella trovata lungo i nodi lasciati inesplorati,
+		ma questi non verranno mai raggiunti. Fintanto che lo spazio
+		degli stati é finito e fintanto che le soluzioni si trovano
+		a meno profonditá di \math{D}, Depth-First search é comunque
+		completo, perché una soluzione (per quanto non necessariamente
+		ottimale) verrá sempre trovata.
+
+		Depth-First search ha peró il vantaggio di dover tenere
+		traccia solamente del percorso in esame e dei vari punti
+		di scelta, non di tutti i percorsi finora trovati. Inoltre,
+		sebbene il tempo di esecuzione teorico nel caso peggiore sia
+		comunque \math{O(b^{D})}, nella pratica questo tende ad essere
+		molto inferiore, perché una soluzione viene in genere trovata
+		molto prima di esplorare l'albero per intero.
+
+		Ci si chiede se sia possibile estendere Depth-First search
+		per renderlo immune alla presenza dei cicli. Si osservi come,
+		nell'espandere un certo nodo, si conoscano giá tutti i nodi
+		progenitori del nodo in esame e di conseguenza tutti gli 
+		stati a cui questi si riferiscono. Pertanto, se si tenta di
+		espandere un nodo che si riferisce allo stesso stato di
+		un nodo suo progenitore, allora si ha la certezza che
+		quell'espansione condurrá ad un ciclo.
+
+		Pertanto, un possibile approccio consisterebbe nell'inserire
+		un controllo all'interno di \tt{DEPTH-FIRST-SEARCH} che, prima
+		di espandere un nodo, controlla ricorsivamente in tutti i nodi
+		precedenti per verificare che lo stato associato a ciascuno di
+		questi sia distinto dallo stato associato al nodo in esame. Se
+		esiste almeno un nodo con queste caratteristiche, allora viene
+		eseguito backtracking immediatamente, tornando a prima che
+		venisse fatta la scelta di tale nodo.
+
+		Questo approccio é certamente corretto, ma é accettabile in
+		termini di risorse solamente se il percorso di cui si tiene
+		traccia finora viene memorizzato in una struttura dati che
+		permette accesso in tempo costante, come ad esempio una hash
+		table. 
 
 	\subsection{Breadth-First search}
 
-		Quando tutte le azioni hanno il medesimo costo, un algoritmo di ricerca
-		non informato che conviene utilizzare é \strong{Breadth-First search}.
-		In questo algoritmo, il nodo radice dell'albero di ricerca viene espanso,
-		dopodiché ciascuno dei nodi che questo genera viene espanso, dopodiché
-		ciascuno dei nodi che questi a loro volta generano viene espanso, ecc\ddd
-		fino ad esaurire tutti i nodi. Questa strategia rispetta la proprietá di
-		sistematicitá, e pertanto garantisce che l'algoritmo sia completo anche 
-		se lo spazio degli stati é infinito.
+		\strong{Breadth-First search} é un algoritmo di ricerca dove
+		la strategia usata consiste essenzialmente nell'espandere
+		sempre il nodo meno profondo.
 
-		L'algoritmo \tt{BREADTH-FIRST-SEARCH} puó essere implementato, in
-		prima analisi, come una versione di \tt{BEST-FIRST-SEARCH} in cui
-		la funzione di valutazione \math{f(n)} é la profonditá di \math{n},
-		ovvero il numero di azioni che é stato necessario per arrivare dalla
-		radice a \math{n}. Come struttura dati atta a contenere i nodi della
-		frontiera é bene scegliere una coda FIFO. Questo perché i nuovi nodi
-		che vengono aggiunti, che si trovano necessariamente dopo i nodi che
-		li hanno generati, vengono posti in fondo alla coda, mentre i nodi
-		giá nella coda, che sono stati quindi aggiunti prima, vengono espansi
-		prima.
+		Nello specifico, Breadth-First search espande prima la radice,
+		poi sceglie il primo nodo cosí generato e lo espande, dopodiché
+		espande il secondo nodo cosí generato, fino ad espandere tutti i
+		successori della radice. A questo punto, opera backtracking ed
+		espande i nodi del livello successivo. L'algoritmo termina quando
+		si tenta di espandere un nodo con associato uno stato obiettivo o
+		quando non é piú possibile espandere alcun nodo.
 
-		É possibile ottimizzare ulteriormente l'algoritmo osservando
-		come non sia necessario tenere traccia dei percorsi precedentemente
-		usati per raggiungere un certo nodo, perché per come l'algoritmo é
-		strutturato, una volta che un nodo viene raggiunto non é possibile
-		trovare un percorso migliore per raggiungerlo. Pertanto, non é
-		necessario implementare \tt{reached} come una hash table, ma é 
-		sufficiente che sia un insieme non ordinato. Inoltre, per lo stesso
-		motivo, é possibile valutare se un nodo é un nodo obiettivo prima di
-		controllare se tale nodo é giá stato raggiunto.
+		Come struttura dati atta a contenere i nodi della frontiera é
+		bene scegliere una coda FIFO. Questo perché i nuovi nodi che
+		vengono aggiunti, che si trovano necessariamente dopo i nodi
+		che li hanno generati, vengono posti in fondo alla coda, mentre
+		i nodi giá nella coda, che sono stati quindi aggiunti prima,
+		vengono espansi prima.
 
 		\begin{verbatim}
-			function BREADTH-FIRST-SEARCH(problem)
-				node <= /a new empty node/
-				node.state <= initial-state
-				frontier <= /a FIFO queue, with/ node /as an element/
-				reached <= \{initial-state\}
-				while not IS-EMPTY(frontier) do
-					node <= POP(frontier)
-					ex <= EXPAND(node)
-					foreach child in ex do
-						s <= child.state
-						if (IS-GOAL(s) = True) then
-							return child
-						if (s not in reached) then
-							reached <= reached \unichar{U+222A} \{s\}
-							ADD(frontier, child)
-				return error
+			procedure BREADTH-FIRST-SEARCH(initialState)
+			    root.parent \unichar{U+2190} NULL
+			    root.state \unichar{U+2190} initialState
+			    Leaves \unichar{U+2190} [root]
+			    Tree \unichar{U+2190} [root]
+
+			    \bigskip
+			    while (Leaves \unichar{U+2260} []) do
+			        nodeToExpand \unichar{U+2190} HEAD(Leaves)
+			        if (nodeToExpand.state.type = "goal") then
+			            thisNode = nodeToExpand
+			            Solution = []
+			            do
+			                Solution \unichar{U+2190} Solution + thisNode
+			                thisNode \unichar{U+2190} thisNode.parent
+			            while (thisNode.parent \unichar{U+2260} NULL)
+			            return Solution
+			        else
+			            foreach action in ACTIONS(nodeToExpand.state) do
+			                newLeaf.state \unichar{U+2190} RESULT(nodeToExpand.state, action)
+			                newLeaf.parent \unichar{U+2190} nodeToExpand
+			                APPEND(Leaves, newLeaf)
+			                Tree \unichar{U+2190} Tree \unichar{U+222A} (nodeToExpand, newLeaf)
+
+			    \bigskip
+			    return "No solution found"
 		\end{verbatim}
 
-		Breadth-first search, quando trova una soluzione, tale soluzione sará
-		necessariamente trovata con il minor numero di passi possibili. Questo
-		perché quando viene generato un nodo alla profonditá \math{d}, tutti i
-		nodi a profonditá \math{d - 1}, \math{d - 2}, ecc\ddd sono giá stati 
-		generati (ed espansi). Pertanto, se uno di questi nodi avesse contenuto
-		uno stato obiettivo, sarebbe giá stato trovato. Pertanto, se il costo
-		di tutte le azioni del problema é lo stesso, Breadth-first search é
-		necessariamente l'algoritmo piú efficiente possibile dal punto di vista
-		del costo. Inoltre, é un algorimo completo, perché prima o poi tutti i
-		nodi verranno raggiunti.
+		%É possibile ottimizzare ulteriormente l'algoritmo osservando
+		%come non sia necessario tenere traccia dei percorsi precedentemente
+		%usati per raggiungere un certo nodo, perché per come l'algoritmo é
+		%strutturato, una volta che un nodo viene raggiunto non é possibile
+		%trovare un percorso migliore per raggiungerlo. Pertanto, non é
+		%necessario implementare \tt{reached} come una hash table, ma é 
+		%sufficiente che sia un insieme non ordinato. Inoltre, per lo stesso
+		%motivo, é possibile valutare se un nodo é un nodo obiettivo prima di
+		%controllare se tale nodo é giá stato raggiunto.
 
-		Per quanto riguarda la complessitá di breadth-first search, si osservi
-		come a partire dal nodo iniziale vengano allora generati al piú \math{b}
-		nodi, ed a sua volta a partire da ciascuno di questi vengono generati al
-		piú \math{b} nodi, ecc\ddd Questo significa che ad una certa profonditá
-		\math{d}, vengono generati al piú \math{b^{d}} nodi. L'algoritmo prevede
-		che tutti questi nodi debbano potenzialmente venire generati ed esplorati,
-		a meno di trovare una soluzione prima di averli esauriti, pertanto
-		la complessitá in termini sia di tempo che di spazio della ricerca
-		breadth-first é \math{O(b^{d})}. Questo significa che, per quanto
-		breadth-first search sia completo, é molto inefficiente, a meno di
-		operare su istanze molto piccole.
+		Breadth-first search, nonostante restituisca immediatamente la
+		prima soluzione che trova, é comunque un algoritmo ottimale.
+		Questo perché quando viene esplorato un nodo alla profonditá
+		\math{d}, tutti i nodi a profonditá \math{d - 1}, \math{d - 2},
+		ecc\ddd sono giá stati espansi; se uno di questi nodi avesse
+		contenuto uno stato obiettivo, sarebbe giá stato trovato.
+		Si noti peró come questo sia vero solamente se il problema di
+		ricerca non ha associata una funzione di costo, perché altrimenti
+		la prima soluzione trovata non é necessariamente quella avente
+		costo minimo. Inoltre, se lo spazio di stati é finito, Breadth-first
+		search é un algorimo completo, perché prima o poi tutti i nodi
+		verranno raggiunti ed é garantito che non possa verificarsi un
+		ciclo.
+
+		Per quanto riguarda il tempo di esecuzione dell'algoritmo,
+		si osservi come, nel caso peggiore, la soluzione ottimale
+		(che é anche la prima soluzione trovata) venga trovata
+		nell'ultimo nodo espanso dell'albero. Tuttavia, nella pratica
+		é possibile assumere che la soluzione ottimale venga trovata
+		ad una profonditá \math{s}, prima di raggiungere il fondo.
+		Dato che Breadth-first search necessita di espandere interamente
+		l'albero fino ad \math{s}, il suo tempo di esecuzione sia
+		\math{O(b^{s})}.
+
+		Per quanto riguarda lo spazio occupato, Breadth-first search
+		necessita di memorizzare tutti i nodi espansi fino al nodo
+		attuale. Assumendo nuovamente che la profonditá dell'ultimo
+		nodo sia \math{s}, dato che ogni nodo genera a sua volta al
+		piú \math{b} nodi la complessitá in termini di spazio di
+		Backtracking search é ancora \math{O(b^{s})}.
 
 	%\subsection{Uniformed-Cost search}
 

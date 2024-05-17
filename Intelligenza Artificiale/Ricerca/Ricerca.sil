@@ -27,10 +27,10 @@
 	viene aggiunta a \tt{PartialSolutionSet}.
 
 	\begin{verbatim}
-		procedure GENERIC-SEARCH(initialState, choosingStrategy, insertingStrategy)
+		procedure GENERIC-SEARCH(initialState, strategy)
 		    PartialSolutionSet = [initialState]
 		    while (PartialSolutionSet \unichar{U+2260} []) do
-		        path \unichar{U+2190} CHOOSE-PATH(PartialSolutionSet, choosingStrategy)
+		        path \unichar{U+2190} CHOOSE-PATH(PartialSolutionSet, strategy)
 		        lastState \unichar{U+2190} path[-1]
 		        Successors \unichar{U+2190} []
 		        foreach action in ACTIONS(lastState) do
@@ -40,7 +40,7 @@
 		            if (state.type = "goal") then
 		                return potentialSolution
 		            else
-		                PartialSolutionSet \unichar{U+2190} INSERT-PATH(PartialSolutionSet, potentialSolution, insertingStrategy)
+		                PartialSolutionSet \unichar{U+2190} INSERT-PATH(PartialSolutionSet, potentialSolution, strategy)
 		    return "No solution found"
 	\end{verbatim}
 
@@ -64,6 +64,10 @@
 	abbia quello stato come stato iniziale. Un algoritmo di
 	questo tipo rientra nella categoria degli agenti guidati da
 	modello e basati su obiettivi.
+
+	Si noti come non esiste garanzia che l'algoritmo termini, perché
+	é del tutto ammissibile poter ritornare ad uno stato giá visitato
+	in precedenza, e l'algoritmo potrebbe bloccarsi in un loop infinito.
 
 	Ci si chiede se é possibile costruire un algoritmo che rientri
 	nella categoria degli agenti semplici. Tecnicamente, sarebbe
@@ -151,14 +155,23 @@
 		di stati é troppo grande.
 	\end{example}
 
-	I percorsi generati dall'algoritmo possono essere rappresentati
-	attraverso una struttura ad albero, detta \strong{albero di
-	ricerca}. Ciascun nodo di tale albero corrisponde ad uno degli
-	stati nello spazio degli stati, mentre gli archi corrispondono
-	alle azioni che costituiscono le transizioni. La radice dell'albero
-	corrisponde allo stato iniziale del problema. Una soluzione non é
-	altro che un percorso nell'albero che va dal nodo iniziale ad un
-	nodo foglia che ha associato uno stato obiettivo.
+	Lo space state graph non si adatta bene a rappresentare le
+	soluzioni fornite da \tt{GENERIC-SEARCH}, perché i percorsi
+	e le soluzioni sono difficili da evidenziare esplicitamente.
+	Una rappresentazione migliore é quella offerta da una struttura
+	ad albero detta \strong{albero di ricerca}; ciascun nodo corrisponde
+	ad uno degli stati nello spazio degli stati, mentre gli archi
+	corrispondono alle azioni che costituiscono le transizioni. La
+	radice dell'albero corrisponde allo stato iniziale del problema.
+
+	A differenza dello state space graph, dove ogni nodo é univocamente
+	uno stato, nell'albero di ricerca diversi nodi possono riferirsi 
+	allo stesso stato. Questo rende gli alberi di ricerca meno efficienti
+	in termini di spazio occupato, perché questi avranno un numero di nodi
+	pari o superiore allo state space graph equivalente. Il vantaggio degli
+	alberi di ricerca é che per identificare una soluzione é sufficiente 
+	seguire un percorso che va dal nodo iniziale ad un nodo foglia che ha
+	associato uno stato obiettivo.
 
 	É possibile tradurre l'algoritmo di ricerca generico in termini di
 	alberi. L'albero, \tt{Tree}, inizialmente contiene il solo nodo
@@ -169,8 +182,8 @@
 	pensato come una struttura a due campi: un campo \tt{parent} che
 	indica il rispettivo nodo genitore ed un campo \tt{state} che
 	indica lo stato a cui il nodo é associato. \tt{Leaves} é, in
-	genere, una coda di prioritá, mentre \tt{Tree} puó essere una
-	qualsiasi rappresentazione usata per gli alberi.
+	genere, implementato con una coda, mentre \tt{Tree} puó essere
+	una qualsiasi rappresentazione usata per gli alberi.
 
 	Il corpo del ciclo principale inizia estraendo \tt{nodeToExpand},
 	uno dei nodi in \tt{Leaves}, attraverso una determinata strategia;
@@ -197,6 +210,8 @@
 		    root.state \unichar{U+2190} initialState
 		    Leaves \unichar{U+2190} [root]
 		    Tree \unichar{U+2190} [root]
+
+		    \bigskip
 		    while (Leaves \unichar{U+2260} []) do
 			    nodeToExpand \unichar{U+2190} EXTRACT-LEAF(Leaves, strategy)
 			    if (nodeToExpand.state.type = "goal") then
@@ -211,9 +226,11 @@
 			        foreach action in ACTIONS(nodeToExpand.state) do
 			            newLeaf.state \unichar{U+2190} RESULT(nodeToExpand.state, action)
 			            newLeaf.parent \unichar{U+2190} nodeToExpand
-			            Leaves \unichar{U+2190} Leaves \unichar{U+222A} \{newLeaf\}
+			            Leaves \unichar{U+2190} ADD-TO-QUEUE(Leaves, newLeaf, strategy)
 			            Tree \unichar{U+2190} Tree \unichar{U+222A} (nodeToExpand, newLeaf)
-			return "No solution found"
+
+			\bigskip
+		    return "No solution found"
 	\end{verbatim}
 
 	\tt{GENERIC-SEARCH} e \tt{GENERIC-TREE-SEARCH} sono di fatto
@@ -221,23 +238,13 @@
 	utilizza una rappresentazione "standardizzata", quella ad 
 	albero, che permette di utilizzare strutture dati note per
 	tenere traccia delle computazioni (\tt{GENERIC-SEARCH} non
-	specifica che strutture dati utilizzare). Infatti, é presente
-	un solo parametro \tt{strategy} anziché due, perché non c'é
-	ambiguitá né nello scegliere in che posizione inserire la tupla
-	nell'albero in costruzione, né nello scegliere in che posizione
-	inserire il nodo nella frontiera (INSERT-PATH richiedeva di
-	esplicitare una strategia).
+	specifica che strutture dati utilizzare). Assumendo che la
+	frontiera sia implementata per mezzo di una coda, \tt{strategy}
+	determina solamente il tipo di coda in questione e qual'é il
+	nodo scelto di volta in volta per essere espanso.
 
-	\tt{GENERIC-TREE-SEARCH} introduce peró uno svantaggio, ovvero
-	che non vi é garanzia che l'algoritmo termini. Infatti, é sufficiente
-	che esista sia una transizione da uno stato A ad uno stato B che una
-	transizione da B ad A perché l'algoritmo entri in un loop infinito.
-	La mappatura fra nodi dell'albero di ricerca e stati dello spazio
-	degli stati non é uno-ad-uno, perché uno stato puó figurare diverse
-	volte come nodo dell'albero.
-
-	Le diverse incarnazioni di \tt{GENERIC-TREE-SEARCH} vengono valutate
-	sulla base di quattro metriche:
+	Le diverse incarnazioni di \tt{GENERIC-TREE-SEARCH} vengono
+	valutate sulla base di quattro metriche:
 
 	\begin{itemize}
 		\begin{item}
@@ -245,7 +252,7 @@
 			\strong{completo} se garantisce, per qualsiasi istanza,
 			di fornire una risposta, a prescindere che questa sia
 			affermativa (soluzione trovata) o negativa (soluzione
-			non trovata); altrimenti, é detto \strong{incompleto};
+			non trovata);
 		\end{item}
 		\begin{item}
 			\strong{Ottimalitá}. Un algoritmo di ricerca si dice
@@ -267,15 +274,24 @@
 	insieme di archi e della cardinalitá del suo insieme di
 	vertici. Questa é la scelta migliore nel caso in cui il
 	grafo sia \strong{esplicito}, ovvero dove é effettivamente
-	rappresentato sotto forma di stati e di archi. Gli algoritmi
-	di ricerca operano invece su un grafo "indotto", ovvero
-	\strong{implicito}.
+	rappresentato sotto forma di stati e di archi.
 
-	Per misurare le prestazioni di un algoritmo di ricerca si preferisce
-	farlo in termini di: \math{d}, la \strong{profonditá}, ovvero il numero
-	di nodi che compongono una soluzione ottimale; \math{m}, il massimo
-	numero di azioni che possono comparire in un percorso; e \math{b}, il
-	\strong{fattore di branching}, ovvero il massimo numero di successori
-	di un nodo che é necessario considerare.
+	Gli algoritmi di ricerca operano invece su un grafo "indotto",
+	ovvero \strong{implicito}. Per questo motivo, si preferisce
+	valutare le prestazioni dell'algoritmo in termini di
+	\strong{profonditá}, indicato con \math{m}, e \strong{branching
+	factor}, indicato con \math{b}: la prima indica massimo numero
+	di nodi che puó andare a costituire una soluzione, mentre la
+	seconda indica il massimo numero di successori che ciascun nodo
+	puó avere.
+
+	Idealmente é possibile visualizzare questi parametri "inscrivendo"
+	l'albero in un triangolo avente altezza \math{m} e base \math{b}.
+	Se ogni nodo puó avere al piú \math{b} nodi successori, al primo
+	livello dell'albero vi saranno \math{b^{0}} nodi (la sola radice),
+	al secondo livello dell'albero vi saranno \math{b^{1}} nodi, al
+	terzo livello dell'albero \math{b^{2}} nodi, ecc\ddd Questo
+	significa che il numero di nodi dell'intero albero di ricerca é
+	certamente non superiore a \math{O(b^{m})}.
 
 \end{sile}

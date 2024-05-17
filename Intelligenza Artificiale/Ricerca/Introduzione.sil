@@ -104,13 +104,17 @@
 			\tt{a} mentre ci si trova in \tt{s};
 		\end{item}
 		\begin{item}
-			Opzionalmente, una \strong{funzione di costo}, che associa un
-			valore numerico a ciascuna transizione. Dati due stati \tt{s}
-			e \tt{s'} ed una azione \tt{a}, la funzione \tt{ACTION-COST(s,
-			a, s')} restituisce il \em{costo} che comporta il passare da
-			\tt{s} a \tt{s'} applicando \tt{a}. La funzione di costo 
-			rappresenta il "disincentivo" che l'agente ha nel compiere
-			una determinata azione.
+			Opzionalmente, una \strong{funzione di costo}, che associa
+			un valore numerico a ciascuna transizione. Dati due stati
+			\tt{s} e \tt{s'} ed una azione \tt{a}, la funzione
+			\tt{ACTION-COST(s, a, s')} restituisce il \em{costo} che
+			comporta il passare da \tt{s} a \tt{s'} applicando \tt{a}.
+			La funzione di costo rappresenta il "disincentivo" che
+			l'agente ha nel compiere una determinata azione, per quanto
+			possa essere necessaria a raggiungere lo stato obiettivo.
+			Un problema di ricerca in cui la funzione di costo non é
+			specificata puó essere pensato come avente una funzione di
+			costo che assegna il medesimo costo a tutte le azioni.
 		\end{item}
 	\end{itemize}
 
@@ -130,14 +134,8 @@
 	di azioni. Se invece é presente una funzione di costo, la soluzione
 	ottimale é quella che ha il costo complessivo piú piccolo: tale costo
 	é dato dalla somma, eventualmente pesata, dei costi che comporta
-	ciascuna transizione che avviene nel percorso. Si noti come anche
-	le soluzioni ottimali possano non essere univoche.
-
-	Lo spazio degli stati puó venire rappresentato sotto forma di
-	grafo: i nodi del grafo corrispondono agli stati, gli archi
-	corrispondono alle azioni che permettono di passare da uno stato
-	all'altro ed il costo delle azioni é, se il problema ha associato
-	una funzione di costo, l'etichetta dell'arco.
+	ciascuna transizione che avviene nel percorso. Anche le soluzioni
+	ottimali possono non essere univoche.
 
 	\begin{example}
 		Si consideri una versione semplificata del gioco del Pacman,
@@ -281,5 +279,21 @@
 		codice. Tuttavia, da un punto di vista strettamente matematico,
 		la rappresentazione é corretta.
 	\end{example}
+
+	Lo spazio degli stati puó venire rappresentato sotto forma
+	di grafo, detto \strong{state space graph}: i nodi del grafo
+	corrispondono agli stati, gli archi corrispondono alle azioni
+	che permettono di passare da uno stato all'altro ed il costo
+	delle azioni é, se il problema ha associato una funzione di
+	costo, l'etichetta dell'arco.
+
+	Se lo spazio degli stati é un insieme finito, allora lo state
+	space graph conterrá esattamente tanti nodi quanti sono gli
+	stati; se lo spazio degli stati é un insieme infinito, non vi
+	é modo di costruire il grafo per intero. Si noti peró come, in
+	genere, uno space state graph é troppo grande per essere
+	rappresentato per intero, anche se il numero di stati é finito;
+	é invece preferibile costruire il grafo on-the-fly, sulla base
+	di quali nodi é necessario rappresentare.
 
 \end{sile}
