@@ -3,13 +3,13 @@
 	Un algoritmo di ricerca \strong{non informato} non possiede informazioni
 	in merito a "quanto vicino" sia uno stato rispetto agli obiettivi.
 
-	\subsection{Backtracking search}
+	\subsection{Backtracking Search}
 
-		\strong{Backtracking search} é un algoritmo di ricerca dove
+		\strong{Backtracking Search} é un algoritmo di ricerca dove
 		la strategia usata consiste essenzialmente nell'espandere
 		sempre il nodo piú profondo.
 
-		Nello specifico, Backtracking search espande prima la
+		Nello specifico, Backtracking Search espande prima la
 		radice, poi sceglie il primo nodo cosí generato e lo
 		espande, dopodiché sceglie il primo nodo da questo
 		generato e lo espande, ecc\ddd Se viene raggiunto un
@@ -79,19 +79,19 @@
 		venga trovata nell'ultimo nodo espanso dell'albero. Infatti,
 		non c'é modo di sapere, una volta trovata una soluzione, se
 		esista una soluzione migliore. Questo significa che Backtracking
-		search necessita di espandere l'albero per intero, e quindi il
+		Search necessita di espandere l'albero per intero, e quindi il
 		suo tempo di esecuzione sia \math{O(b^{m})}, assumendo che non
 		si verifichino cicli.
 
-		Per quanto riguarda lo spazio occupato, Backtracking search
+		Per quanto riguarda lo spazio occupato, Backtracking Search
 		necessita di memorizzare esclusivamente la frontiera dell'albero
 		e tutte le soluzioni parziali. Dato che la frontiera dell'albero
 		non puó essere superiore al branching factor, e dato che é
 		necessario memorizzare al piú \math{m} frontiere distinte,
-		la complessitá in termini di spazio di Backtracking search é
+		la complessitá in termini di spazio di Backtracking Search é
 		\math{O(bm)}.
 
-		Se lo spazio degli stati é finito, Backtracking search é
+		Se lo spazio degli stati é finito, Backtracking Search é
 		completo fintanto che non esistono cicli; sebbene possa
 		esplorare gli stessi stati piú volte negli stessi percorsi,
 		prima o poi tutti gli stati vengono raggiunti. Se sono presenti
@@ -101,14 +101,16 @@
 		indefinitamente, anche se non sono presenti cicli.
 
 		Un possibile modo per garantire la completezza di Backtracking
-		search consiste nel fissare una profonditá massima \math{D},
+		Search consiste nel fissare una profonditá massima \math{D},
 		oltre la quale l'algoritmo compie backtracking a prescindere
 		dal nodo in esame. Tuttavia, cosí facendo, l'algoritmo non é
 		piú in grado di garantire la correttezza, perché tutte le
 		soluzioni che si trovano ad una profonditá maggiore di \math{D}
 		sono perdute. Un approccio di questo tipo é preferibile solamente
 		se la natura del problema permette di conoscere in anticipo che
-		non puó esistere una soluzione piú in profonditá di \math{D}.
+		non puó esistere una soluzione piú in profonditá di \math{D}, e
+		nella maggior parte dei casi reali la profonditá massima é
+		sconosciuta fino alla risoluzione del problema.
 
 		\begin{verbatim}
 			procedure BOUNDED-BACKTRACKING-SEARCH(s, path, D)
@@ -127,15 +129,15 @@
 		tempo e di spazio in funzione di \math{D}, rispettivamente
 		\math{O(b^{D})} e \math{O(bD)}.
 
-	\subsection{Depth-First search}
+	\subsection{Depth-First Search}
 
-		Una variante di Backtracking search é \strong{Depth-First search},
-		che opera con la stessa strategia ma si interrompe immediatamente
-		appena viene trovata una soluzione. Come struttura dati atta a
-		contenere i nodi della frontiera é bene scegliere una coda LIFO.
-		Questo perché i nuovi nodi che vengono aggiunti, che si trovano
-		necessariamente dopo i nodi che li hanno generati, vengono posti
-		prima di questi ultimi.
+		Una variante di Backtracking Search é \strong{Depth-First Search},
+		o \strong{DFS}, che opera con la stessa strategia ma si interrompe
+		immediatamente appena viene trovata una soluzione. Come struttura
+		dati atta a contenere i nodi della frontiera é bene scegliere una
+		coda LIFO. Questo perché i nuovi nodi che vengono aggiunti, che si
+		trovano necessariamente dopo i nodi che li hanno generati, vengono
+		posti prima di questi ultimi.
 
 		\begin[width = 45%fw]{parbox}
 			\begin{verbatim}
@@ -183,32 +185,30 @@
 		\end{parbox}
 		\par
 
-		La soluzione restituita da Depth-First search é la prima che
-		viene trovata, ma non vi é alcuna garanzia che questa sia una
-		soluzione ottimale. Infatti, potrebbe esserci una soluzione
-		migliore di quella trovata lungo i nodi lasciati inesplorati,
-		ma questi non verranno mai raggiunti. Fintanto che lo spazio
-		degli stati é finito e fintanto che le soluzioni si trovano
-		a meno profonditá di \math{D}, Depth-First search é comunque
-		completo, perché una soluzione (per quanto non necessariamente
-		ottimale) verrá sempre trovata.
+		La soluzione restituita da DFS é la prima che viene trovata,
+		ma non vi é alcuna garanzia che questa sia una soluzione
+		ottimale. Infatti, potrebbe esserci una soluzione migliore
+		di quella trovata lungo i nodi lasciati inesplorati, ma questi
+		non verranno mai raggiunti. Fintanto che lo spazio degli stati
+		é finito e fintanto che le soluzioni si trovano a meno profonditá
+		di \math{D}, DFS é comunque completo, perché una soluzione (per
+		quanto non necessariamente ottimale) verrá sempre trovata.
 
-		Depth-First search ha peró il vantaggio di dover tenere
-		traccia solamente del percorso in esame e dei vari punti
-		di scelta, non di tutti i percorsi finora trovati. Inoltre,
-		sebbene il tempo di esecuzione teorico nel caso peggiore sia
-		comunque \math{O(b^{D})}, nella pratica questo tende ad essere
-		molto inferiore, perché una soluzione viene in genere trovata
-		molto prima di esplorare l'albero per intero.
+		DFS ha peró il vantaggio di dover tenere traccia solamente del
+		percorso in esame e dei vari punti di scelta, non di tutti i
+		percorsi finora trovati. Inoltre, sebbene il tempo di esecuzione
+		teorico nel caso peggiore sia comunque \math{O(b^{D})}, nella
+		pratica questo tende ad essere molto inferiore, perché una
+		soluzione viene in genere trovata molto prima di esplorare
+		l'albero per intero.
 
-		Ci si chiede se sia possibile estendere Depth-First search
-		per renderlo immune alla presenza dei cicli. Si osservi come,
-		nell'espandere un certo nodo, si conoscano giá tutti i nodi
-		progenitori del nodo in esame e di conseguenza tutti gli 
-		stati a cui questi si riferiscono. Pertanto, se si tenta di
-		espandere un nodo che si riferisce allo stesso stato di
-		un nodo suo progenitore, allora si ha la certezza che
-		quell'espansione condurrá ad un ciclo.
+		Ci si chiede se sia possibile estendere DFS per renderlo immune
+		alla presenza dei cicli. Si osservi come, nell'espandere un certo
+		nodo, si conoscano giá tutti i nodi progenitori del nodo in esame
+		e di conseguenza tutti gli stati a cui questi si riferiscono.
+		Pertanto, se si tenta di espandere un nodo che si riferisce allo
+		stesso stato di un nodo suo progenitore, allora si ha la certezza
+		che quell'espansione condurrá ad un ciclo.
 
 		Pertanto, un possibile approccio consisterebbe nell'inserire
 		un controllo all'interno di \tt{DEPTH-FIRST-SEARCH} che, prima
@@ -219,25 +219,28 @@
 		eseguito backtracking immediatamente, tornando a prima che
 		venisse fatta la scelta di tale nodo.
 
-		Questo approccio é certamente corretto, ma é accettabile in
-		termini di risorse solamente se il percorso di cui si tiene
-		traccia finora viene memorizzato in una struttura dati che
-		permette accesso in tempo costante, come ad esempio una hash
-		table. 
+		Questo approccio é certamente corretto, ma richiede un numero
+		di controlli che cresce con la profonditá: al primo livello
+		serve controllare solo il nodo precedente, al secondo livello
+		i due nodi precedenti, ecc\ddd Per prevenire questa penalitá
+		in termini di tempo di esecuzione, é possibile salvare il
+		percorso finora costruito non nel solo albero ma anche in una
+		struttura dati di supporto che permetta un accesso ai suoi
+		membri in tempo costante, come ad esempio una hash table.
 
-	\subsection{Breadth-First search}
+	\subsection{Breadth-First Search}
 
-		\strong{Breadth-First search} é un algoritmo di ricerca dove
-		la strategia usata consiste essenzialmente nell'espandere
-		sempre il nodo meno profondo.
+		\strong{Breadth-First Search}, o \strong{BFS}, é un algoritmo
+		di ricerca dove la strategia usata consiste essenzialmente
+		nell'espandere sempre il nodo meno profondo.
 
-		Nello specifico, Breadth-First search espande prima la radice,
-		poi sceglie il primo nodo cosí generato e lo espande, dopodiché
-		espande il secondo nodo cosí generato, fino ad espandere tutti i
-		successori della radice. A questo punto, opera backtracking ed
-		espande i nodi del livello successivo. L'algoritmo termina quando
-		si tenta di espandere un nodo con associato uno stato obiettivo o
-		quando non é piú possibile espandere alcun nodo.
+		Nello specifico, BFS espande prima la radice, poi sceglie il
+		primo nodo cosí generato e lo espande, dopodiché espande il
+		secondo nodo cosí generato, fino ad espandere tutti i successori
+		della radice. A questo punto, opera backtracking ed espande i nodi
+		del livello successivo. L'algoritmo termina quando si tenta di
+		espandere un nodo con associato uno stato obiettivo o quando non
+		é piú possibile espandere alcun nodo.
 
 		Come struttura dati atta a contenere i nodi della frontiera é
 		bene scegliere una coda FIFO. Questo perché i nuovi nodi che
@@ -275,29 +278,24 @@
 			    return "No solution found"
 		\end{verbatim}
 
-		%É possibile ottimizzare ulteriormente l'algoritmo osservando
-		%come non sia necessario tenere traccia dei percorsi precedentemente
-		%usati per raggiungere un certo nodo, perché per come l'algoritmo é
-		%strutturato, una volta che un nodo viene raggiunto non é possibile
-		%trovare un percorso migliore per raggiungerlo. Pertanto, non é
-		%necessario implementare \tt{reached} come una hash table, ma é 
-		%sufficiente che sia un insieme non ordinato. Inoltre, per lo stesso
-		%motivo, é possibile valutare se un nodo é un nodo obiettivo prima di
-		%controllare se tale nodo é giá stato raggiunto.
-
-		Breadth-first search, nonostante restituisca immediatamente la
-		prima soluzione che trova, é comunque un algoritmo ottimale.
-		Questo perché quando viene esplorato un nodo alla profonditá
+		BFS, nonostante restituisca immediatamente la prima soluzione
+		che trova, é comunque un algoritmo ottimale, perché la soluzione
+		ottenuta é necessariamente quella costituita dal minimo numero
+		di azioni. Infatti, quando viene esplorato un nodo alla profonditá
 		\math{d}, tutti i nodi a profonditá \math{d - 1}, \math{d - 2},
 		ecc\ddd sono giá stati espansi; se uno di questi nodi avesse
-		contenuto uno stato obiettivo, sarebbe giá stato trovato.
-		Si noti peró come questo sia vero solamente se il problema di
+		contenuto uno stato obiettivo, sarebbe giá stato trovato. Si
+		noti peró come questo sia vero solamente se il problema di
 		ricerca non ha associata una funzione di costo, perché altrimenti
-		la prima soluzione trovata non é necessariamente quella avente
-		costo minimo. Inoltre, se lo spazio di stati é finito, Breadth-first
-		search é un algorimo completo, perché prima o poi tutti i nodi
-		verranno raggiunti ed é garantito che non possa verificarsi un
-		ciclo.
+		la soluzione costituita dal minimo numero di azioni potrebbe non
+		essere quella che minimizza il costo totale.
+
+		Se lo spazio di stati é finito ed almeno una soluzione esiste,
+		BFS é un algoritmo completo, perché prima o poi tutti i nodi
+		verranno raggiunti ed é garantito che non possa verificarsi
+		un ciclo. Se lo spazio di stati é infinito ma esiste comunque
+		almeno una soluzione, BFS mantiene comunque la proprietá di
+		completezza.
 
 		Per quanto riguarda il tempo di esecuzione dell'algoritmo,
 		si osservi come, nel caso peggiore, la soluzione ottimale
@@ -305,17 +303,92 @@
 		nell'ultimo nodo espanso dell'albero. Tuttavia, nella pratica
 		é possibile assumere che la soluzione ottimale venga trovata
 		ad una profonditá \math{s}, prima di raggiungere il fondo.
-		Dato che Breadth-first search necessita di espandere interamente
-		l'albero fino ad \math{s}, il suo tempo di esecuzione sia
-		\math{O(b^{s})}.
+		Dato che BFS necessita di espandere interamente l'albero fino
+		ad \math{s}, il suo tempo di esecuzione sia \math{O(b^{s})}.
 
-		Per quanto riguarda lo spazio occupato, Breadth-first search
-		necessita di memorizzare tutti i nodi espansi fino al nodo
-		attuale. Assumendo nuovamente che la profonditá dell'ultimo
-		nodo sia \math{s}, dato che ogni nodo genera a sua volta al
+		Per quanto riguarda lo spazio occupato, BFS necessita di
+		memorizzare tutti i nodi espansi fino al nodo attuale.
+		Assumendo nuovamente che la profonditá dell'ultimo nodo
+		sia \math{s}, dato che ogni nodo genera a sua volta al
 		piú \math{b} nodi la complessitá in termini di spazio di
-		Backtracking search é ancora \math{O(b^{s})}.
+		BFS é ancora \math{O(b^{s})}.
 
-	%\subsection{Uniformed-Cost search}
+		BFS si rivela migliore di DFS nel caso in cui le soluzioni
+		sono poche e si trovano a bassa profonditá. DFS si rivela
+		migliore di BFS quando le soluzioni sono molte e si trovano
+		molto in profonditá, perché aumenta la probabilitá di trovarne
+		una. Inoltre, DFS é preferibile nelle situazioni in cui non si
+		ha interesse a trovare la soluzione ottimale, ma é sufficiente
+		trovarne una qualsiasi.
+
+	\subsection{Iterative-Deepening Search}
+
+		\strong{Iterative-Deepening Search}, o \strong{IDS}, é una
+		variante di DFS che ne combina i vantaggi con la completezza
+		di BFS. IDS opera come DFS, ma la profonditá massima aumenta
+		ad ogni iterazione. Nello specifico, IDS opera DFS con profonditá
+		massima 0 (sulla sola radice), se trova una soluzione la restituisce,
+		altrimenti ricomincia da capo con profonditá massima 1, e continua
+		in questo modo fino a che una soluzione viene trovata.
+
+		IDS é un algoritmo ottimale fintanto che il problema di ricerca
+		su cui é applicato non ha associata una funzione di costo, perché
+		come in BFS se una soluzione fosse esistita ad una profonditá
+		maggiore di quella in esame in un qualsiasi momento allora sarebbe
+		giá stata trovata. É inoltre, come DFS, un algoritmo completo
+		fintanto che non si presentano cicli (che é comunque possibile
+		individuare e prevenire).
+
+		Il costo in termini di tempo é il medesimo di DFS, ovvero
+		\math{O(b^{d})}, perché di fatto consiste nell'applicare
+		tale algoritmo per \math{d} volte. Inoltre, il costo in
+		termini di spazio é comunque \math{O(bd)}, perché in ogni
+		iterazione dell'algoritmo é necessario espandere solamente
+		il sottoalbero in esame, e tutte le computazioni fatte nelle
+		iterazioni precedenti possono essere scartate. Infatti, dato
+		che la dimensione dell'albero cresce esponenzialmente di
+		livello in livello, l'unico costo effettivamente rilevante
+		é quello relativo all'ultimo albero, ovvero \math{O(bd)},
+		perché sará infinitamente maggiore del costo necessario a
+		costruire gli alberi fino ai livelli precedenti.
+
+	\subsection{Uniform Cost Search}
+
+		\strong{Uniform Cost Search} \footnote{Di fatto, Uniform Cost
+		Search non é altro che l'\strong{Algoritmo di Dijkstra} applicato
+		a grafi senza cicli.}, o \strong{UCS}, é un algoritmo di ricerca
+		pensato per problemi con associata una funzione di costo. Questo
+		consiste essenzialmente nell'espandere sempre il nodo che ha il
+		minimizza il costo complessivo nel percorso dalla radice al nodo
+		stesso.
+
+		Nello specifico, UCS calcola per ogni nodo ad ogni iterazione
+		il valore di \math{g(n)}, ovvero il costo complessivo che si
+		avrebbe nel raggiungere \math{n} a partire dalla radice, e
+		sceglie di espandere il nodo che minimizza \math{g(n)}. La
+		frontiera viene salvata in un coda di prioritá ordinata in
+		ordine decrescente rispetto a \math{g(n)}, di modo che il
+		nodo estratto sia sempre quello che minimizza tale funzione.
+
+		La complessità in tempo di UCS è espressa in termini di
+		\math{C*}, il costo di una soluzione ottimale, e di
+		\math{\epsilon}, il limite inferiore al costo di una
+		singola azione. Si osservi infatti come UCS espanda tutti
+		i nodi che hanno come costo complessivo inferiore alla
+		soluzione ottimale: approssimativamente, la profondità di
+		tale soluzione sarà \math{C* / \epsilon}. Dato che UCS
+		adotta una strategia simile a BFS, il tempo di esecuzione
+		sarà \math{O(b^{C* / \epsilon})}. Si noti infatti che, se
+		tutte le azioni hanno il medesimo costo, \math{(C* / \epsilon)
+		\approx d}, e UCS diventa indistinguibile da BFS. Inoltre,
+		l'algoritmo deve memorizzare l'intera frontiera, la cui
+		dimensione è approssimativamente \math{C* / \epsilon}; per
+		questo motivo, la complessità in termini di spazio è
+		\math{O(b^{C* / \epsilon})}.
+
+		É facile verificare come UCS sia un algoritmo completo.
+		Inoltre, se i costi delle azioni sono tutti positivi, é
+		un algoritmo ottimale, perché la soluzione trovata é
+		necessariamente quella che minimizza la funzione di costo.
 
 \end{sile}

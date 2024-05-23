@@ -73,7 +73,8 @@
 		\begin{item}
 			Un insieme di \strong{stati}, ovvero di \em{configurazioni}
 			in cui l'ambiente puó trovarsi. Tale insieme viene chiamato 
-			\strong{spazio degli stati}; 
+			\strong{spazio degli stati}, e puó essere sia finito che
+			infinito; 
 		\end{item}
 		\begin{item}
 			Uno \strong{stato iniziale}, ovvero lo stato in cui l'agente
@@ -114,7 +115,10 @@
 			possa essere necessaria a raggiungere lo stato obiettivo.
 			Un problema di ricerca in cui la funzione di costo non é
 			specificata puó essere pensato come avente una funzione di
-			costo che assegna il medesimo costo a tutte le azioni.
+			costo che assegna il medesimo costo a tutte le azioni
+			\footnote{Da questo momento in poi, se non riportato
+			esplicitamente, si assume di stare trattando problemi
+			dove la funzione di ricerca non é definita.}.
 		\end{item}
 	\end{itemize}
 
