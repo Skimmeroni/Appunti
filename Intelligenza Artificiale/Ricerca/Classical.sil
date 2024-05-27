@@ -1,14 +1,21 @@
 \begin{sile}
 
-	Il \strong{Planning Classico} consiste nel trovare una sequenza
-	di azioni che permettono di raggiungere un determinato obiettivo
-	in un ambiente discreto, deterministico, statico e accessibile.
-	A differenza dei problemi di ricerca, che richiedono una euristica
-	ad-hoc per ciascun dominio, il linguaggio del planning é indipendente
-	dal dominio del problema in esame.
+	Si definisce \strong{Problema di Planning} un problema dove si richiede
+	di trovare una strategia che permetta ad un agente di raggiungere un
+	determinato stato obiettivo. Sebbene possa sembrare indistinguibile da
+	un problema di ricerca, ha con questo due notevoli differenze: la prima
+	e che i problemi di planning sono rappresentati mediante linguaggi 
+	specifici, detti \strong{linguaggi di planning}, il secondo che il
+	focus del problema e maggiormente improntato sugli stati, sulle azioni
+	e sul concetto di \em{tempo}.
 
-	Similmente ai problemi di ricerca, un \strong{problema di planning} é
-	definito a partire dai seguenti elementi:
+	Il problemi di planning piu semplici sono quelli in cui lo stato iniziale
+	e completamente conosciuto, in cui l'effetto delle azioni e prevedibile ed
+	in cui le percezioni dell'agente sono infallibili (in altri termini, i
+	problemi che operano su un ambiente discreto, deterministico, statico e
+	accessibile). Problemi di planning con queste caratteristiche sono chiamati
+	\strong{problemi di planning classico}, e sono costituiti dai seguenti
+	elementi:
 
 	\begin{itemize}
 		\begin{item}
@@ -42,350 +49,377 @@
 	stati \math{s_{0} \unicodeellipsis, s_{n + 1}} di modo
 	che \math{a_{i} \in A(s_{i}), s_{i + 1} = f(a_{i}, s_{i})}
 	e \math{s_{n + 1} \in S_{G}} per \math{i = 0, \unicodeellipsis, n}.
-
 	Un plan viene detto \strong{ottimale} se minimizza la somma
 	\math{\sum_{i = 0}^{n} c(a_{i}, s_{i})}, ovvero la somma dei
 	costi di ciascuna azione di cui tale plan é costituito.
 
-	Il problema viene codificato in un linguaggio indipendente
-	dal dominio. Questi linguaggi permettono di descrivere azioni,
-	sensori, obiettivi e situazione iniziale mediante delle
-	rappresentazioni schematiche che non necessitano di alcuna
-	conoscenza specifica sul dominio del problema.
+	I linguaggi di planning hanno il vantaggio di essere
+	indipendenti dal dominio del problema in esame. Questo
+	permette a problemi completamente diversi di essere
+	approcciati con le stesse metodologie, fintanto che e
+	possibile rappresentare mediante tale linguaggio tutti
+	i suoi elementi \footnote{Diversi problemi reali, come
+	ad esempio la risoluzione del cubo di Rubik, sono effettivamente
+	rappresentabili in forme di questo tipo.}. Inoltre, questa
+	rappresentazione e molto piu ricca della rappresentazione
+	estensionale degli insiemi, pertanto, ad esempio non e piu
+	necessario enumerare esplicitamente tutte le transizioni degli
+	stati nella funzioni di transizione.
 
-	Una volta definito il linguaggio, é possibile utilizzarlo
-	per codificare un insieme di informazioni in una knowledge
-	base. L'approccio usato per la costruzione di un agente é
-	\strong{dichiarativo}: é sufficiente istruirlo con le nozioni
-	contenute nella KB per poi fare deduzioni ed ottenere risposte.
-	In questo modo, é possibile focalizzare l'attenzione sulla sola
-	conoscenza, tralasciando i dettagli implementativi dell'agente,
-	come ad esempio quale algoritmo usa per formulare le deduzioni.
-	In questo modo, ogni inferenza puó essere potenzialemente
-	calcolata dall'agente, fintanto che é possibile formularla nel
-	linguaggio formale di riferimento. L'approccio opposto é quello
-	\strong{imperativo}, dove l'agente viene istruito nel dettaglio
-	su quali passi compiere per ciascuno stato in cui l'agente si
-	trova \footnote{I nomi \em{dichiarativo} e \em{imperativo} sono
-	in analogia con gli omonomimi paradigmi di programmazione.}.
+	Una volta definito il linguaggio di planning, é possibile
+	utilizzarlo per codificare un insieme di informazioni in
+	una knowledge base. L'approccio usato per la costruzione
+	di un agente é \em{dichiarativo}: é sufficiente istruirlo
+	con le nozioni contenute nella KB per poi fare deduzioni
+	ed ottenere risposte.
 
-	Un linguaggio molto semplice appartenente a questa famiglia é
-	\strong{STRIPS} (\strong{Stanford Research Institute Problem
-	Solver}). Un problema codificato nel linguaggio STRIPS é una
-	quadrupla \math{P = (F, O, I, G)}:
+	Questi linguaggi sono fondamentalmente delle derivazioni delle
+	logiche classiche, come la logica proposizionale o la logica
+	predicativa. Il motivo per cui non vengano usate direttamente
+	queste ultime e che il loro formalismo male si adatta a questo
+	tipo di problemi, dato che per descrivere un certo stato sarebbe
+	necessario enumerare esplicitamente ogni condizione che puo
+	verificarsi ed assegnarvi un valore di verita.
 
-	\begin{itemize}
-		\begin{item}
-			Un insieme \math{F} di \strong{condizioni} (variabili
-			proposizionali, istanziate);
-		\end{item}
-		\begin{item}
-			Un insieme \math{O} di \strong{operatori} (azioni).
-			Ogni operatore \math{a} é a sua volta una tripla
-			\math{\mi{Prec}(a) = \alpha, \mi{Add}(a) = \beta,
-			\mi{Del}(a) = \gamma}. \math{\alpha} é un insieme
-			di \strong{precondizioni}, ovvero di condizioni che
-			devono essere vere affinché sia possibile applicare
-			l'operatore. \math{\beta} é un insieme di condizioni
-			che vengono rese vere dall'azione (vengono aggiunte
-			allo stato corrente). \math{\gamma} é un insieme di
-			condizioni che vengono rese false dall'azione (vengono
-			rimosse dallo stato corrente); 
-		\end{item}
-		\begin{item}
-			Uno \strong{stato iniziale} \math{I \subseteq F},
-			costituito da tutte le condizioni che sono inizialmente
-			vere (vale la closed-world assumpion; tutto ció che non
-			é inizialmente vero é assunto falso);
-		\end{item}
-		\begin{item}
-			Una specifica dello \strong{stato obiettivo}, riportato
-			come una coppia \math{\langle N, M \rangle} la quale
-			riporta, rispettivamente, quali condizioni devono essere
-			vere e false affinché uno stato possa essere considerato
-			uno stato obiettivo.
-		\end{item}
-	\end{itemize}
+	Avere problemi codificati in linguaggi standard permette di
+	risolverli usando procedure a loro volta standard. Infatti,
+	la descrizione del problema viene fornita ad un \strong{planner},
+	in genere un software che usa tale descrizione per dedurre in
+	maniera del tutto automatica una soluzione. L'ulteriore vantaggio
+	e che per risolvere il problema non e necessario concentrarsi sui
+	dettagli implementativi del planner, come ad esempio quale algoritmo
+	usa per calcolare una soluzione, ma solamente sulla descrizione del
+	problema.
 
-	\bigskip
-
-	Un problema \math{P = (F, O, I , G)} scritto nel formalismo di STRIPS
-	puó essere tradotto in un problema di ricerca equivalente \math{S(P)}
-	nel seguente modo:
-
-	\begin{itemize}
-		\begin{item}
-			Gli stati \math{s \in S(P)} equivalgono a collezioni
-			di atomi di \math{F};
-		\end{item}
-		\begin{item}
-			Lo stato iniziale \math{s_{0}} di \math{S(P)} equivale
-			a \math{I};
-		\end{item}
-		\begin{item}
-			Gli stati obiettivo di \math{S(P)} equivalgono agli
-			\math{s} tali per cui \math{G \subseteq s};
-		\end{item}
-		\begin{item}
-			Le azioni \math{a} in \math{A(s)} equivalgono alle
-			operazioni \math{O}, di modo che \math{\mi{Prec}(a)
-			\subseteq s};
-		\end{item}
-		\begin{item}
-			Lo stato successivo \math{s^{j}} é dato da
-			\math{s - \mi{Del}(a) + \mi{Add}(a)};
-		\end{item}
-		\begin{item}
-			I costi delle azioni \math{c(a, s)} sono tutti pari a 1;
-		\end{item}
-	\end{itemize}
-
-	\bigskip
-
-	Naturalmente, una soluzione (ottimale) per \math{P} é anche
-	una soluzione ottimale per \math{S(P)}. Dato che gli stati
-	di \math{S(P)} equivalgono a "combinazioni" di elementi di
-	\math{P}, é facile verificare che se \math{P} ha \math{n}
-	condizioni, il problema di ricerca equivalente \math{S(P)}
-	ha \math{2^{n}} stati; il risparmio in termini di spazio che
-	offre STRIPS é quindi notevole.
-
-	\begin{example}
-		Si consideri il problema \math{P = (F, I, O, G)} formulato
-		nel linguaggio STRIPS, cosí costruito:
-
-		\begin[mode = display]{math}
-			F = \{p, q, r\}
-			\thickspace\thickspace
-			I = \{p\}
-			\thickspace\thickspace
-			\table[columnalign = left]{
-				\mi{Prec}(a) = \{p\},
-				\mi{Add}(a) = \{q\},
-				\mi{Del}(a) = \{\} \\
-				\mi{Prec}(b) = \{q\},
-				\mi{Add}(b) = \{r\},
-				\mi{Del}(b) = \{q\} \\
-			}
-			\thickspace\thickspace
-			G = \{q, r\}
-		\end{math}
-
-		\begin{itemize}
-			\begin{item}
-				Partendo dallo stato iniziale, l'operazione \math{b}
-				non é applicabile, perché le precondizioni non sono
-				soddisfatte. É peró possibile applicare \math{a},
-				essendo le precondizioni soddisfatte, e \math{q}
-				viene aggiunto allo stato iniziale. Lo stato
-				attuale diventa \math{\{p, q\}};
-			\end{item}
-			\begin{item}
-				L'operazione \math{b} diventa applicabile, perché
-				le precondizioni sono ora soddisfatte. Applicando
-				\math{b} viene aggiunto \math{r} e viene tolto
-				\math{q}, ottenendo \math{\{p, r\}};
-			\end{item}
-			\begin{item}
-				Applicando nuovamente \math{a} viene (ri)-aggiunto
-				\math{p}, ottenendo \math{\{q, r, p\}} e raggiungendo
-				lo stato obiettivo.
-			\end{item}
-		\end{itemize}
-	\end{example}
-
-	STRIPS non permette di usare variabili, perché tutti i componenti
-	devono essere nominati esplicitamente. Questo rende STRIPS molto
-	semplice, ma al contempo molto prolisso (per quanto non prolisso
-	quanto riportare tutti gli stati esplicitamente).
-
-	Una estensione di STRIPS che permette l'uso di variabili é
-	\strong{Planning Domain Definition Language} (\strong{PDDL})
-	\footnote{La sintassi di PDDL é simile a quella di Lisp.}.
-	Un problema in PDDL é formato da due componenti: un \strong{dominio}
-	ed una \strong{istanza}. Il dominio contiene lo schema delle azioni,
-	degli atomi ed i tipi degli argomenti:
-
-	\begin{verbatim}
-		(define (domain DOMAIN_NAME)
-		    (:predicates (PREDICATE_1_NAME ?A1 ?A2 \unichar{U+2026} ?AN)
-		                 (PREDICATE_2_NAME ?A1 ?A2 \unichar{U+2026} ?AN)
-		                 \unichar{U+2026})
-
-		\bigskip
-		    (:action ACTION_1_NAME
-		        [:parameters (?P1 ?P2 \unichar{U+2026} ?PN)]
-		        [:precondition PRECOND_FORMULA]
-		        [:effect EFFECT_FORMULA]
-		    )
-		    (:action ACTION_2_NAME
-		       \unichar{U+2026})
-		    \unichar{U+2026})
-	\end{verbatim}
-
-	I nomi dei predicati e delle azioni sono costituiti da caratteri
-	alfanumerici e/o da trattini. I parametri dei predicati e delle
-	azioni si distinguono dai nomi perché hanno un "?" come prefisso.
-	I parametri usati nella dichiarazione dei predicati non hanno altra
-	utilitá al di fuori di specificare il numero di argomenti che il
-	predicato debba avere; fintanto che hanno nomi distinti, il nome
-	scelto per i parametri non é rilevante. I predicati possono anche
-	avere zero parametri.
-
-	Una precondizione puó essere espressa come:
-
-	\begin{itemize}
-		\begin{item}
-			Una formula atomica:
-			\tt{(PREDICATE_NAME ARG1 \ddd ARGN)}
-		\end{item}
-		\begin{item}
-			Una congiunzione di formule atomiche:
-			\tt{(and ATOM1 \ddd ATOMN)}
-		\end{item}
-		\begin{item}
-			Una disgiunzione di formule atomiche:
-			\tt{(or ATOM1 \ddd ATOMN)}
-		\end{item}
-		\begin{item}
-			La negazione di una formula atomica:
-			\tt{(not CONDITION_FORMULA)}
-		\end{item}
-		\begin{item}
-			Una formula con quantificatore universale:
-			\tt{(forall (?V1 ?V2 \ddd) CONDITION_FORMULA)}
-		\end{item}
-		\begin{item}
-			Una formula con quantificatore esistenziale:
-			\tt{(exists (?V1 ?V2 \ddd) CONDITION_FORMULA)}
-		\end{item}
-	\end{itemize}
-
-	\bigskip
-
-	In PDDL, gli effetti di una azione non sono distinti in \em{Add} e
-	\em{Delete}. Le rimozioni vengono espresse sotto forma di negazioni.
-	L'effetto di una azione puó essere espresso come:
-
-	\begin{itemize}
-		\begin{item}
-			Una aggiunta:
-			\tt{(PREDICATE_NAME ARG1 \ddd ARGN)}
-		\end{item}
-		\begin{item}
-			Una rimozione:
-			\tt{(not (PREDICATE_NAME ARG1 \ddd ARGN))}
-		\end{item}
-		\begin{item}
-			Una congiunzione di effetti atomici:
-			\tt{(and ATOM1 \ddd ATOMN)}
-		\end{item}
-		\begin{item}
-			Un effetto condizionale:
-			\tt{(when CONDITION_FORMULA EFFECT_FORMULA)}
-		\end{item}
-		\begin{item}
-			Una formula con quantificatore universale:
-			\tt{(forall (?V1 ?V2 \ddd) EFFECT_FORMULA)}
-		\end{item}
-	\end{itemize}
-
-	\bigskip
-
-	L'istanza contiene lo stato iniziale, lo stato obiettivo e tutti
-	gli oggetti che figurano nel problema. Una istanza puó essere
-	espressa come:
-
-	\begin{verbatim}
-		(define problem PROBLEM_NAME)
-		    (:domain DOMAIN_NAME)
-		    (:objects OBJ1 OBJ2 \unichar{U+2026} OBJN)
-		    (:init ATOM1 ATOM2 \unichar{U+2026} ATOMN)
-		    (:goal CONDITION_FORMULA)
-		)
-	\end{verbatim}
-
-	La descrizione dello stato iniziale (\tt{:init}) é semplicemente
-	una lista di tutti i predicati che sono veri nello stato iniziale;
-	tutti gli altri sono assunti falsi. A differenza delle precondizioni
-	delle azioni, gli stati iniziali e obiettivo devono necessariamente
-	essere \em{grounded}, ovvero non possono avere delle variabili come
-	argomenti.
-
-	I tipi devono essere dichiarati prima che possano essere utilizzati.
-	La dichiarazione di un tipo puó essere espressa come:
-
-	\begin{verbatim}
-		(:types NAME1 \unichar{U+2026} NAMEN)
-	\end{verbatim}
-
-	Per dichiarare il tipo di un parametro di un predicato o di una
-	azione, si riporta \tt{?X - TYPE_OF_X}. Una lista di parametri
-	dello stesso tipo puó essere abbreviata come \tt{?X ?Y ?Z -
-	TYPE_OF_XYZ}.
-
-	I problemi di planning possono essere risolti come problemi di
-	ricerca euristica \footnote{Un approccio alternativo prevede
-	di riformulare i problemi di planning come \strong{problemi di
+	I problemi di planning possono essere risolti come problemi
+	di ricerca \footnote{Un approccio alternativo prevede di
+	riformulare i problemi di planning come \strong{problemi di
 	soddisfacibilitá booleana} (\strong{boolean satisfiability
 	problem}, \strong{SAT}), ovvero il problema di determinare
 	se esiste una interpretazione che soddisfi una data formula
-	booleana.}. I problemi di ricerca euristica sono problemi
-	NP-Completi, per quanto comunque risolvibili in tempo accettabile
-	anche per grandi istanze.
+	booleana.}; infatti, e sempre possibile convertire un problema
+	di planning \math{P} in un problema di ricerca su grafi
+	equivalente \math{S(P)}, mappando ciascuno stato (insieme di
+	atomi) sui nodi di un grafo direzionato. Una soluzione per
+	\math{S(P)} sara, in una forma opportuna, una soluzione per
+	\math{P}.
 
-	Sia \math{P} un problema scritto utilizzando il formalismo di PDDL.
-	L'idea alla base di questo approccio prevede di convertire \math{P}
-	in \math{S(P)}, un problema di ricerca equivalente, ed applicare a
-	questo un algoritmo di ricerca. Dato che, in genere, \math{S(P)} é
-	infinitamente piú complesso di \math{P}, per risolverlo in maniera
-	efficiente é necessario adoperare un algoritmo di ricerca che fa
-	uso di una euristica (come A* search, ad esempio). Questo sembrerebbe
-	essere un ostacolo, perché come visto in precedenza ogni problema di
-	ricerca che fa uso di euristiche richiede una euristica specifica. Per
-	il modo in cui PDDL é strutturato, é invece possibile derivare in
-	maniera del tutto automatica una euristica applicabile ad \math{S(P)}
-	a partire da \math{P}, a prescindere da quale problema \math{P} sia.
-
-	Per costruire una euristica per \math{S(P)} é possibile
-	utilizzare il medesimo metodo usato finora, ovvero ricavare
-	un problema rilassato e usare la funzione di costo di tale
-	problema come euristica per il problema principale. Il vantaggio
-	dei problemi di planning é che possono operare su problemi piú
-	semplici e dal formalismo definito, pertanto é piú vantaggioso
-	ricavare una versione rilassata di \math{S(P)} direttamente a
-	partire da (una versione rilassata di) \math{P}. Si ricordi che,
-	per un problema di ricerca, é possibile costruire un problema
-	rilassato aggiungendo ulteriori azioni al problema principale.
-
-	Per un problema di planning, questo puó equivalere ad
-	eliminare tutte le precondizioni dalle operazioni, di
-	modo che queste siano applicabili in (circa) ogni momento:
-	questo approccio viene chiamato \strong{ignore-precondition
-	heuristic}. Innanzitutto, tutte le azioni vengono rilassate
-	rimuovendo tutte le precondizioni e tutti gli effetti ad
-	eccezione di quelli che sono presenti nell'obiettivo. Dopodiché,
-	si conta qual'é il numero minimo di azioni necessarie affinché
-	l'unione di tali azioni soddisfi l'obiettivo \footnote{Questo
-	é un esempio di \strong{problema di copertura}.} e si usa tale
-	valore come euristica.
-
-	In alternativa, é possibile eliminare le rimozioni da
-	tutte le operazioni del problema, di modo che il progresso
-	verso il goal proceda in maniera monotona e senza che un'azione
-	influisca sul progresso di un'altra: questo approccio é chiamato
-	\strong{ignore-delete-lists heuristic}. Si modifica il problema
-	di modo che tutti gli obiettivi e tutte le precondizioni contengano
-	solo aggiunte, dopodiché se vengono eliminate tutte le rimozioni da
-	ogni azione. La lunghezza di un percorso ottimale per il problema
-	rilassato cosí costruito viene utilizzata come euristica.
+	Dato che, in genere, \math{S(P)} é infinitamente piú complesso
+	di \math{P}, per risolverlo in maniera efficiente é necessario
+	adoperare un algoritmo di ricerca che fa uso di una euristica.
+	Per costruire una euristica per \math{S(P)} é possibile utilizzare
+	il medesimo metodo usato finora, ovvero costruendo, a partire da
+	\math{S(P)}, un problema rilassato. Tuttavia, per il modo in cui
+	i linguaggi di planning sono strutturati, é invece possibile derivare
+	in maniera del tutto automatica una euristica applicabile ad \math{S(P)}
+	a partire da \math{P}, a prescindere da quale problema \math{P} sia. 
+	Inoltre, essendo \math{P} piu semplice di \math{S(P)}, ricavare una
+	euristica per \math{S(P)} a partire da \math{P} e anche piu efficiente
+	che ricavarla da una versione rilassata di \math{S(P)}.
 
 	Come giá anticipato, non tutti i problemi non possono essere
-	formulati in un linguaggio di planning. Altri problemi sono
-	invece intrinsecamente complessi e, sebbene sia possibile
-	formularli in PDDL o STRIPS, verrebbero comunque risolti in
+	formulati in un linguaggio di planning, e non sono pertanto
+	risolvibili con questo approccio. Altri problemi sono invece
+	intrinsecamente complessi e, sebbene sia possibile formularli
+	come problemi di planning, verrebbero comunque risolti in
 	maniera subottimale. In questi casi, é preferibile un approccio
-	imperativo, dove il codice é pensato ad-hoc per il problema
-	in esame.
+	imperativo, dove il codice é pensato ad-hoc per il problema in
+	esame.
+
+	\subsection{STRIPS}
+
+		Un linguaggio molto semplice per la definizione di
+		problemi di ricerca e \strong{STRIPS} (\strong{Stanford
+		Research Institute Problem Solver}). Un problema codificato
+		in STRIPS é una quadrupla \math{P = (F, O, I, G)}:
+
+		\begin{itemize}
+			\begin{item}
+				Un insieme \math{F} di \strong{atomi}, ovvero di
+				variabili booleane;
+			\end{item}
+			\begin{item}
+				Un insieme \math{O} di \strong{operatori} (azioni).
+				Ciascun operatore \math{o} e costituito da una tripla:
+
+				\begin{itemize}
+					\begin{item}
+						\math{Prec(o)}, una lista che contiene
+						tutti gli atomi che devono essere veri
+						affinche \math{o} possa essere eseguito;
+					\end{item}
+					\begin{item}
+						\math{Add(o)}, una lista che contiene
+						tutti gli atomi che, dopo l'applicazione
+						di \math{o}, diverranno veri;
+					\end{item}
+					\begin{item}
+						\math{Del(o)}, una lista che contiene
+						tutti gli atomi che, dopo l'applicazione
+						di \math{o}, diverranno falsi.
+					\end{item}
+				\end{itemize}
+			\end{item}
+			\begin{item}
+				Uno \strong{stato iniziale} \math{I \subseteq F},
+				costituito da tutti gli atomi che sono inizialmente
+				veri (vale la closed-world assumpion; tutto ció che non
+				é inizialmente vero é assunto falso);
+			\end{item}
+			\begin{item}
+				Uno \strong{stato finale} \math{G \subseteq F}, costituito
+				da tutti gli atomi che devono essere veri affinche sia 
+				possibile enunciare il raggiungimento dell'obiettivo.
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		Una soluzione per STRIPS non e altro che una sequenza ordinata
+		di azioni che permette di trasformare la lista di atomi iniziali
+		in una delle liste di atomi obiettivo.
+
+		STRIPS e simile alla logica proposizionale, ma e meno espressivo.
+		Infatti, sebbene sia possibile imporre che lo stato obiettivo debba
+		essere costituito da certi atomi veri, non e possibile imporre
+		che debba essere costituito da certi atomi falsi. Allo stesso modo,
+		sebbene sia possibile imporre una precondizione positiva (l'azione e
+		applicabile se determinati atomi sono positivi) non e possibile imporre
+		una precondizione negativa (l'azione non e applicabile se determinati
+		atomi sono negativi) \footnote{Esistono varianti di STRIPS che estendono
+		il linguaggio per colmare queste e altre lacune rappresentative.}. 
+		Inoltre, STRIPS non permette la definizione di variabili, perche in
+		ciascun operatore gli atomi coinvolti devono essere sempre nominati
+		esplicitamente.
+
+		Un problema \math{P = (F, O, I , G)} scritto nel formalismo di STRIPS
+		puó essere tradotto in un problema di ricerca equivalente \math{S(P)}
+		nel seguente modo:
+
+		\begin{itemize}
+			\begin{item}
+				Gli stati \math{s \in S(P)} equivalgono a collezioni
+				di atomi di \math{F};
+			\end{item}
+			\begin{item}
+				Lo stato iniziale \math{s_{0}} di \math{S(P)} equivale
+				a \math{I};
+			\end{item}
+			\begin{item}
+				Gli stati obiettivo di \math{S(P)} equivalgono agli
+				\math{s} tali per cui \math{G \subseteq s};
+			\end{item}
+			\begin{item}
+				Le azioni \math{a} in \math{A(s)} equivalgono alle
+				operazioni \math{O}, di modo che \math{Prec(a)
+				\subseteq s};
+			\end{item}
+			\begin{item}
+				Lo stato successivo \math{s^{j}} é dato da
+				\math{s - Del(a) + Add(a)};
+			\end{item}
+			\begin{item}
+				I costi delle azioni \math{c(a, s)} sono tutti pari a 1;
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		Naturalmente, una soluzione (ottimale) per \math{P} é anche
+		una soluzione ottimale per \math{S(P)}. Dato che gli stati
+		di \math{S(P)} equivalgono a "combinazioni" di elementi di
+		\math{P}, é facile verificare che se \math{P} ha \math{n}
+		condizioni, il problema di ricerca equivalente \math{S(P)}
+		ha \math{2^{n}} stati; il risparmio in termini di spazio che
+		offre STRIPS é quindi notevole.
+
+		\begin{example}
+			Si consideri il problema \math{P = (F, I, O, G)} formulato
+			nel linguaggio STRIPS, cosí costruito:
+
+			\begin[mode = display]{math}
+				F = \{p, q, r\}
+				\thickspace\thickspace
+				I = \{p\}
+				\thickspace\thickspace
+				\table[columnalign = left]{
+					Prec(a) = \{p\},
+					Add(a) = \{q\},
+					Del(a) = \{\} \\
+					Prec(b) = \{q\},
+					Add(b) = \{r\},
+					Del(b) = \{q\} \\
+				}
+				\thickspace\thickspace
+				G = \{q, r\}
+			\end{math}
+
+			\begin{itemize}
+				\begin{item}
+					Partendo dallo stato iniziale, l'operazione \math{b}
+					non é applicabile, perché le precondizioni non sono
+					soddisfatte. É peró possibile applicare \math{a},
+					essendo le precondizioni soddisfatte, e \math{q}
+					viene aggiunto allo stato iniziale. Lo stato
+					attuale diventa \math{\{p, q\}};
+				\end{item}
+				\begin{item}
+					L'operazione \math{b} diventa applicabile, perché
+					le precondizioni sono ora soddisfatte. Applicando
+					\math{b} viene aggiunto \math{r} e viene tolto
+					\math{q}, ottenendo \math{\{p, r\}};
+				\end{item}
+				\begin{item}
+					Applicando nuovamente \math{a} viene (ri)-aggiunto
+					\math{p}, ottenendo \math{\{q, r, p\}} e raggiungendo
+					lo stato obiettivo.
+				\end{item}
+			\end{itemize}
+		\end{example}
+
+		Per costruire una euristica per \math{S(P)} a partire da un problema \math{P}
+		codificato in linguaggio STRIPS, e possibile eliminare tutte le precondizioni
+		dalle operazioni di \math{P}, di modo che queste siano applicabili in (circa)
+		ogni istante: questo approccio viene chiamato \strong{ignore-precondition
+		heuristic}. Innanzitutto, tutte le azioni vengono rilassate rimuovendo tutte
+		le precondizioni e tutti gli effetti ad eccezione di quelli che sono presenti
+		nell'obiettivo. Dopodiché, si conta qual'é il numero minimo di azioni necessarie
+		affinché l'unione di tali azioni soddisfi l'obiettivo \footnote{Questo é un
+		esempio di \strong{problema di copertura}.} e si usa tale valore come euristica.
+
+		In alternativa, é possibile eliminare le rimozioni da tutte le operazioni di
+		\math{P}, di modo che il progresso verso il goal proceda in maniera monotona
+		e senza che un'azione influisca sul progresso di un'altra: questo approccio
+		é chiamato \strong{ignore-delete-lists heuristic}. Si modifica \math{P} di
+		modo che tutti gli obiettivi e tutte le precondizioni contengano solo aggiunte,
+		dopodiché se vengono eliminate tutte le rimozioni da ogni azione. La lunghezza
+		di un percorso ottimale per il problema rilassato cosí costruito viene utilizzata
+		come euristica.
+
+	\subsection{PDDL}
+
+		Una estensione di STRIPS che permette l'uso di variabili é
+		\strong{Planning Domain Definition Language} (\strong{PDDL}).
+		Un problema in PDDL é formato da due componenti: un \strong{dominio}
+		ed una \strong{istanza}. Il dominio contiene lo schema delle azioni,
+		degli atomi ed i tipi degli argomenti:
+
+		\begin{verbatim}
+			(define (domain DOMAIN_NAME)
+			    (:predicates (PREDICATE_1_NAME ?A1 ?A2 \unichar{U+2026} ?AN)
+			                 (PREDICATE_2_NAME ?A1 ?A2 \unichar{U+2026} ?AN)
+			                 \unichar{U+2026})
+
+			\bigskip
+			    (:action ACTION_1_NAME
+			        [:parameters (?P1 ?P2 \unichar{U+2026} ?PN)]
+			        [:precondition PRECOND_FORMULA]
+			        [:effect EFFECT_FORMULA]
+			    )
+			    (:action ACTION_2_NAME
+			       \unichar{U+2026})
+			    \unichar{U+2026})
+		\end{verbatim}
+
+		I nomi dei predicati e delle azioni sono costituiti da caratteri
+		alfanumerici e/o da trattini. I parametri dei predicati e delle
+		azioni si distinguono dai nomi perché hanno un "?" come prefisso.
+		I parametri usati nella dichiarazione dei predicati non hanno altra
+		utilitá al di fuori di specificare il numero di argomenti che il
+		predicato debba avere; fintanto che hanno nomi distinti, il nome
+		scelto per i parametri non é rilevante. I predicati possono anche
+		avere zero parametri.
+
+		Una precondizione puó essere espressa come:
+
+		\begin{itemize}
+			\begin{item}
+				Una formula atomica:
+				\tt{(PREDICATE_NAME ARG1 \ddd ARGN)}
+			\end{item}
+			\begin{item}
+				Una congiunzione di formule atomiche:
+				\tt{(and ATOM1 \ddd ATOMN)}
+			\end{item}
+			\begin{item}
+				Una disgiunzione di formule atomiche:
+				\tt{(or ATOM1 \ddd ATOMN)}
+			\end{item}
+			\begin{item}
+				La negazione di una formula atomica:
+				\tt{(not CONDITION_FORMULA)}
+			\end{item}
+			\begin{item}
+				Una formula con quantificatore universale:
+				\tt{(forall (?V1 ?V2 \ddd) CONDITION_FORMULA)}
+			\end{item}
+			\begin{item}
+				Una formula con quantificatore esistenziale:
+				\tt{(exists (?V1 ?V2 \ddd) CONDITION_FORMULA)}
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		In PDDL, gli effetti di una azione non sono distinti in \em{Add} e
+		\em{Delete}. Le rimozioni vengono espresse sotto forma di negazioni.
+		L'effetto di una azione puó essere espresso come:
+
+		\begin{itemize}
+			\begin{item}
+				Una aggiunta:
+				\tt{(PREDICATE_NAME ARG1 \ddd ARGN)}
+			\end{item}
+			\begin{item}
+				Una rimozione:
+				\tt{(not (PREDICATE_NAME ARG1 \ddd ARGN))}
+			\end{item}
+			\begin{item}
+				Una congiunzione di effetti atomici:
+				\tt{(and ATOM1 \ddd ATOMN)}
+			\end{item}
+			\begin{item}
+				Un effetto condizionale:
+				\tt{(when CONDITION_FORMULA EFFECT_FORMULA)}
+			\end{item}
+			\begin{item}
+				Una formula con quantificatore universale:
+				\tt{(forall (?V1 ?V2 \ddd) EFFECT_FORMULA)}
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		L'istanza contiene lo stato iniziale, lo stato obiettivo e tutti
+		gli oggetti che figurano nel problema. Una istanza puó essere
+		espressa come:
+
+		\begin{verbatim}
+			(define problem PROBLEM_NAME)
+			    (:domain DOMAIN_NAME)
+			    (:objects OBJ1 OBJ2 \unichar{U+2026} OBJN)
+			    (:init ATOM1 ATOM2 \unichar{U+2026} ATOMN)
+			    (:goal CONDITION_FORMULA)
+			)
+		\end{verbatim}
+
+		La descrizione dello stato iniziale (\tt{:init}) é semplicemente
+		una lista di tutti i predicati che sono veri nello stato iniziale;
+		tutti gli altri sono assunti falsi. A differenza delle precondizioni
+		delle azioni, gli stati iniziali e obiettivo devono necessariamente
+		essere \em{grounded}, ovvero non possono avere delle variabili come
+		argomenti.
+
+		I tipi devono essere dichiarati prima che possano essere utilizzati.
+		La dichiarazione di un tipo puó essere espressa come:
+
+		\begin{verbatim}
+			(:types NAME1 \unichar{U+2026} NAMEN)
+		\end{verbatim}
+
+		Per dichiarare il tipo di un parametro di un predicato o di una
+		azione, si riporta \tt{?X - TYPE_OF_X}. Una lista di parametri
+		dello stesso tipo puó essere abbreviata come \tt{?X ?Y ?Z -
+		TYPE_OF_XYZ}.
 
 \end{sile}
