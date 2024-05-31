@@ -1,12 +1,22 @@
 \begin{sile}
 
 	Spesso, per il modo in cui l'ambiente é strutturato, non é possibile
-	per l'agente ottenere informazioni con certezza. Nello specifico,
-	le situazioni di questo tipo piú comuni sono due (non mutualmente
-	esclusive): la prima é non poter essere in grado di determinare in
-	che stato ci si trova, la seconda é non poter sapere con certezza
-	l'effetto delle proprie azioni. In questi casi, l'agente é costretto
-	a fare delle \em{predizioni probabilistiche}.
+	per l'agente ottenere informazioni con certezza. In questi casi,
+	l'agente é costretto a fare delle \em{predizioni probabilistiche}.
+	Verranno considerate due situazioni:
+
+	\begin{itemize}
+		\begin{item}
+			L'agente conosce con certezza l'effetto che hanno le
+			sue azioni, ma non conosce con certezza lo stato in
+			cui si trova;
+		\end{item}
+		\begin{item}
+			L'agente conosce con certezza lo stato in cui si trova,
+			ma non conosce con certezza l'effetto che hanno le
+			sue azioni.
+		\end{item}
+	\end{itemize}
 
 	\subsection{Complementi di teoria della probabilitá}
 
@@ -130,6 +140,36 @@
 			\mi{Priori}}{\mi{Evidenza}}
 		\end{math}
 
+		Un'assunzione molto forte che e possibile fare e la cosiddetta
+		\strong{assunzione Markoviana}. In termini molto generali,
+		questa prevede che un processo stocastico che si evolve nel
+		tempo non dipenda da tutte le osservazioni effettuate prima
+		di un un certo istante di tempo, ma solamente da quella
+		immediatamente precedente.
+
+		Si consideri la probabilita \math{P(x | z_{1}, \unicodeellipsis, z_{n})},
+		ovvero la probabilita che si verifichi l'evento \math{x} sapendo che si
+		sono verificati \math{z_{1}, \unicodeellipsis, z_{n}}. Se e valida
+		l'assunzione Markoviana, e possibile applicare la regola di Bayes per
+		esprimere \math{P(x | z_{1}, \unicodeellipsis, z_{n})} come:
+
+		\begin[mode = display]{math}
+			P(x | z_{1}, \unicodeellipsis, z_{n}) =
+			\frac{P(z_{n} | x) P(x | z_{1}, \unicodeellipsis,
+			z_{n - 1})}{P(z_{n} | z_{1}, \unicodeellipsis,
+			z_{n - 1})} = \eta_{n} P(z_{n} | x) P(x | z_{1},
+			\unicodeellipsis, z_{n - 1}) = \eta_{n} P(z_{n} | x)
+			\frac{P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis,
+			z_{n - 2})}{P(z_{n - 1} | z_{1}, \unicodeellipsis,
+			z_{n - 2})} = \eta_{n} P(z_{n} | x) \eta_{n - 1}
+			P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis, z_{n - 2})
+			= \unicodeellipsis = p(x) \prod_{i = 1}^{n} \eta_{i}
+			P(z_{i} | x) 
+		\end{math}
+
+		Questo e un esempio di inferenza statistica chiamata \strong{filtro
+		Bayesiano}.
+
 		Data una variabile aleatoria \math{X}, viene detto \strong{valore
 		atteso} (o \strong{valore medio} o \strong{speranza matematica})
 		di \math{X} il valore \math{E[X]} cosí calcolato:
@@ -170,14 +210,14 @@
 		Si consideri una situazione in cui l'agente non é in
 		grado di sapere con certezza se lo stato in cui si trova
 		é effettivamente lo stato in cui questo crede di trovarsi.
+		In ogni istante temporale \math{t} l'agente opera una
+		misurazione, che usa per fornire una stima probabilistica
+		del trovarsi nello stato che si aspetta. In risposta alla
+		misurazione, compie una azione e cambia di stato 
+		(introducendo ulteriore rumore).
 
-		Si indichi con \math{t} un \strong{istante temporale}, un
-		valore intero che indica l'evoluzione dell'agente e delle
-		sue percezioni in un dato momento, contando a partire da
-		un certo istante iniziale \math{t_{0} = 0}. L'agente ottiene
-		informazioni dall'ambiente ad ogni istante, ed usa tali 
-		informazioni per migliorare la stima che ha di quale stato
-		si trova. Siano allora:
+		Si consideri come istante di tempo iniziale \math{t_{0} = 0}.
+		Siano:
 
 		\begin{itemize}
 			\begin{item}
@@ -186,174 +226,212 @@
 			\end{item}
 			\begin{item}
 				\math{z_{t}} la misurazione compiuta dall'agente
-				all'istante \math{t} per mezzo dei suoi sensori.
-				Si assuma, per semplicitá, che ad ogni istante
-				l'agente effettui una ed una sola misura. La notazione
-				\math{z_{t_{1}:t_{2}}} indica l'insieme di tutte le
-				misurazioni compiute dall'agente dal tempo \math{t_{1}}
-				al tempo \math{t_{2}}, con \math{t_{1} \leq t_{2}};
+				all'istante \math{t};
 			\end{item}
 			\begin{item}
-				\math{\mu_{t}} l'informazione sul cambio di stato che
-				avviene nell'ambiente. La variabile \math{\mu_{t}}
-				corrisponde al cambio di stato nell'intervallo di tempo
-				\math{(t - 1; t]}. La notazione \math{\mu_{t_{1}:t_{2}}}
-				indica l'insieme di tutti i cambiamenti che avvengono
-				nell'ambiente dal tempo \math{t_{1}} al tempo \math{t_{2}},
-				con \math{t_{1} \leq t_{2}}. Si noti come l'ambiente puó
-				cambiare anche al di lá delle azioni compiute dall'agente.
+				\math{\mu_{t}} l'azione compiuta dall'agente in
+				risposta alla percezione nell'intervallo di tempo
+				\math{(t - 1; t]}.
 			\end{item}
 		\end{itemize}
 
 		\bigskip
 
-		Come giá detto, l'agente non puó conoscere con certezza in
-		quale stato si trova, e deve limitarsi a dare una stima
-		probabilistica. Sia allora \math{P(x_{t})} la probabilitá
-		"in assoluto" che l'agente si trovi nello stato \math{x_{t}}
-		al tempo \math{t}. É ragionevole assumere che la probabilitá
-		che l'agente si trovi in un certo stato in un certo istante
-		dipenda in una qualche misura dagli stati, dalle misurazioni
-		e dai cambi di stato precedenti. In tal senso, ció che si ha
-		interesse a calcolare non é tanto \math{P(x_{t})} quanto: 
-
-		\begin[mode = display]{math}
-			P(x_{t} | x_{0 : t - 1}, z_{1 : t - 1}, \mu_{1 : t})
-		\end{math}
-
-		Si noti come \math{z_{t}} parta da \math{t = 1} e non da
-		\math{t = 0}, dato che si assume che lo stato \math{x_{0}}
-		venga determinato a priori, prima di effettuare qualsiasi
-		osservazione. 
-
-		Similmente, si ha interesse anche a calcolare la probabilitá
-		che, in un certo istante \math{t}, l'agente compia la misurazione
-		\math{z_{t}}. Anche questa potrebbe dipendere in una qualche
-		misura dagli stati, dalle misurazioni e dai cambi di stato
-		precedenti:
-
-		\begin[mode = display]{math}
-			P(z_{t} | x_{0 : t}, z_{1 : t - 1}, \mu_{1 : t})
-		\end{math}
-
-		Una assunzione molto forte che é possibile fare é che la
-		probabilitá che l'agente si trovi in un certo stato o compia
-		una certa misurazione al tempo \math{t} non sia influenzato
-		da \em{tutti} gli stati, misurazioni e cambi di stato precedenti,
-		ma solo da quelli avvenuti nell'istante \math{t - 1}, ovvero
-		quello immediatamente precedente. Se vale questa assunzione,
-		chiamata \strong{assunzione Markoviana}, allora é possibile
-		semplificare l'espressione come:
+		Come giá detto, l'agente non puó conoscere con certezza in quale
+		stato si trova, e deve limitarsi a dare una stima probabilistica. Sia
+		allora \math{P(x_{t})} la probabilitá "in assoluto" che l'agente si
+		trovi nello stato \math{x} al tempo \math{t}. É ragionevole
+		assumere che la probabilitá che l'agente si trovi in un certo stato
+		in un certo istante dipenda in una qualche misura dalle misurazioni
+		e dalle azioni compiute in precedenza. In tal senso, ció che si ha
+		interesse a calcolare non é tanto \math{P(x_{t})}, quanto quella
+		che viene detta \strong{belief} ("fiducia"):
 
 		\begin[width = 50%fw]{parbox}
 			\begin[mode = display]{math}
-				P(x_{t} | x_{0 : t - 1}, z_{1 : t - 1}, \mu_{1 : t}) =
-				P(x_{t} | x_{t - 1}, \mu_{t})
+				\mi{bel}(x_{t}) = P(x_{t} | \mu_{1}, z_{1}, \mu_{2}, z_{2},
+				\unicodeellipsis, \mu_{t - 1}, z_{t - 1}, \mu_{t}, z_{t})
 			\end{math}
 		\end{parbox}
 		\begin[width = 50%fw]{parbox}
 			\begin[mode = display]{math}
-				P(z_{t} | x_{0 : t}, z_{1 : t - 1}, \mu_{1 : t}) =
-				P(z_{t} | x_{t})
+				\mi{bel}^{-}(x_{t}) = P(x_{t} | \mu_{1}, z_{1}, \mu_{2}, z_{2},
+				\unicodeellipsis, \mu_{t - 1}, z_{t - 1}, \mu_{t})
 			\end{math}
 		\end{parbox}
 		\par
 
-		Gli agenti probabilistici mantengono al loro interno un "grado di
-		fiducia" sullo stato in cui si trovano (in cui credono di trovarsi).
-		Tale probabilitá, indicata con \math{bel(x_{t})}, é una probabilitá
-		a posteriori condizionata rispetto alle misurazioni ed ai cambi di
-		stato precedenti a \math{t}:
+		La funzione a sinistra indica la probabilita che l'agente si trovi nello
+		stato \math{x} al tempo \math{t} condizionata da tutte le azioni
+		finora intraprese e da tutte le misurazioni compiute. La funzione a
+		destra indica la stessa probabilita ma \em{prima} che l'ultima
+		misurazione venga effettuata. 
 
-		\begin[mode = display]{math}
-			bel(x_{t}) = P(x_{t} | z_{1 : t}, \mu_{1 : t})
-		\end{math}
+		Si noti come \math{\mu_{t}} e \math{z_{t}} partano da \math{t = 1}
+		e non da \math{t = 0}, dato che si assume che lo stato \math{x_{0}}
+		venga determinato a priori. Ovvero, lo stato iniziale dell'agente deve
+		venirgli fornito "dall'esterno", assumendo che questo sia corretto con
+		certezza, e poi sulla base di questo aggiorna di volta in volta la propria
+		conoscenza sul mondo in termini probabilistici.
 
-		Occasionalmente, é utile anche calcolare la probabilitá a
-		posteriori \em{prima} di incorporare \math{z_{t}}. Tale
-		probabilitá é indicata con \math{bel^{-}(x_{t})}:
+		Un'assunzione molto forte (e in genere valida) che e possibile fare
+		e la cosiddetta \strong{assunzione Markoviana}. In termini molto
+		generali, questa prevede che un processo stocastico che si evolve
+		nel tempo non dipenda da tutte le osservazioni effettuate prima di
+		un un certo istante di tempo, ma solamente da quella immediatamente
+		precedente. Nel contesto in esame, questo equivale a dire che il grado
+		di fiducia dell'agente al tempo \math{t} dipende solamente dalla
+		misurazione compiuta e dall'azione intrapresa al tempo \math{t - 1}.
+		Se tale assunzione vale, e possibile semplificare le espressioni
+		precedenti come:
 
-		\begin[mode = display]{math}
-			bel^{-}(x_{t}) = P(x_{t} | z_{1 : t - 1}, \mu_{1 : t})
-		\end{math}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{bel}(x_{t}) = P(x_{t} | \mu_{t}, z_{t})
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{bel}^{-}(x_{t}) = P(x_{t} | \mu_{t})
+			\end{math}
+		\end{parbox}
+		\par
+
+		Al fine di costruire un agente in grado di aggiornare la
+		propria conoscenza sul mondo di volta in volta (prendendo
+		per buona l'assunzione Markoviana), e necessario che questo
+		possa esprimere il proprio grado di fiducia in un certo istante
+		in funzione del suo grado di fiducia nell'istante precedente
+		\footnote{Questo tipo di approccio viene spesso utilizzato nella
+		robotica, dove la posizione di un robot in un ambiente ignoto
+		parte da un valore noto e viene mano a mano aggiornata ogni
+		qual volta che l'agente si sposta, ricalcolando la probabilita
+		che l'agente si trovi nella coordinata spaziale che i suoi calcoli
+		rilevano.}.
 
 		\begin{theorem}
-			\strong{Filtro Bayesiano}. Se sono valide le assunzioni
-			Markoviane, allora vale:
+			\strong{Filtro Bayesiano per agenti probabilistici}. Se sono
+			valide le assunzioni Markoviane, e possibile esprimere il
+			grado di fiducia dell'agente al tempo \math{t} in funzione
+			del grado di fiducia dell'agente al tempo \math{t - 1} secondo
+			la seguente equazione:
 
 			\begin[mode = display]{math}
 				bel{(x_{t})} = \eta P{(z_{t} | x_{t})} \int P{(x_{t} |
 				\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1}
 			\end{math}
 
-			\strong{Dimostrazione}. Applicando la formula di Bayes a
-			\math{bel(x_{t})}, si ha:
+			\strong{Dimostrazione}. Sia il grado di fiducia dell'agente
+			al tempo \math{t} espresso come di consueto:
 
 			\begin[mode = display]{math}
-				bel{(x_{t})} = P{(x_{t} | z_{1 : t}, \mu_{1 : t})} =
-				\frac{P(z_{t} | x_{t}, z_{1 : t - 1}, \mu_{1 : t})
-				\cdot P(x_{t} | z_{1 : t - 1}, \mu_{1 : t})}{P(z_{t} |
-				z_{1 : t - 1}, \mu_{1 : t})} =
-				\eta P{(z_{t} | x_{t}, z_{1 : t - 1}, \mu_{1 : t})}
-				P{(x_{t} | z_{1 : t - 1}, \mu_{1 : t})}
+				\mi{bel}(x_{t}) = P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}, z_{t})			
 			\end{math}
 
-			Per assunzione Markoviana \math{P(z_{t} | x_{t},
-			z_{1 : t - 1}, \mu_{1 : t}) = P(z_{t} | x_{t})}. Pertanto,
-			é possibile semplificare l'espressione precedente come:
+			Applicando la regola di Bayes:
 
 			\begin[mode = display]{math}
-				bel{(x_{t})} =
-				P{(x_{t} | z_{1 : t}, \mu_{1 : t})} =
-				\eta P(z_{t} | x_{t})
-				P(x_{t} | z_{1 : t - 1}, \mu_{1 : t}) =
-				\eta P(z_{t} | x_{t}) bel^{-}{(x_{t})}
+				\mi{bel}(x_{t}) = \eta
+				P(z_{t} | x_{t}, \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t})
+				P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t})
 			\end{math}
 
-			Applicando a \math{bel^{-} (x_{t})} la formula delle
-			probabilitá totali:
+			Prendendo come valida l'assunzione Markoviana, e possibile
+			semplificare l'espressione come:
 
 			\begin[mode = display]{math}
-				bel^{-} {(x_{t})} = P{(x_{t} | z_{1 : t - 1}, \mu_{1 : t})} =
-				\int P{(x_{t} | x_{t - 1}, z_{1 : t - 1}, \mu_{1 : t})}
-				P{(x_{t - 1} | z_{1 : t - 1}, \mu_{1 : t})} d x_{t - 1} =
-				\int P{(x_{t} | x_{t - 1}, z_{1 : t - 1}, \mu_{1 : t})}
-				bel{(x_{t - 1})} d x_{t - 1}
+				\mi{bel}(x_{t}) = \eta P(z_{t} | x_{t})
+				P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t})
 			\end{math}
 
-			Per assunzione Markoviana \math{P(x_{t} | x_{0 : t - 1},
-			z_{1 : t - 1}, \mu_{1 : t}) = P(x_{t} | x_{t - 1}, \mu_{t})}.
-			Pertanto, é possibile semplificare l'espressione precedente
-			come:
+			Applicando la formula delle probabilitá totali:
 
 			\begin[mode = display]{math}
-				bel^{-} {(x_{t})} = P{(x_{t} | z_{1 : t - 1}, \mu_{1 : t})} =
-				\int P{(x_{t} | x_{t - 1}, z_{1 : t - 1}, \mu_{1 : t})}
-				bel{(x_{t - 1})} d x_{t - 1} = \int P{(x_{t} | x_{t - 1},
-				\mu_{t})} bel{(x_{t - 1})} d x_{t - 1}
+				\mi{bel}(x_{t}) = \eta P(z_{t} | x_{t})
+				\int P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}, x_{t - 1})
+				P(x_{t - 1} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}) dx_{t - 1}
 			\end{math}
 
-			Sostituendo l'espressione per \math{bel^{-} (x_{t})}
-			nell'espressione per \math{bel (x_{t})}, si ottiene:
+			Prendendo come valida l'assunzione Markoviana, e possibile
+			semplificare l'espressione come:
 
 			\begin[mode = display]{math}
-				bel{(x_{t})} = \eta P{(z_{t} | x_{t})} bel^{-} {(x_{t})} =
-				\eta P{(z_{t} | x_{t})} \int P{(x_{t} | \mu_{t}, x_{t - 1})}
-				bel{(x_{t - 1})} d x_{t - 1}
+				\mi{bel}(x_{t}) = \eta P(z_{t} | x_{t}) \int P(x_{t} | \mu_{t}, x_{t - 1})
+				P(x_{t - 1} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}) dx_{t - 1}
+			\end{math}
+
+			Che equivale a scrivere:
+
+			\begin[mode = display]{math}
+				bel{(x_{t})} = \eta P{(z_{t} | x_{t})} \int P{(x_{t} |
+				\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1}
 			\end{math}
 		\end{theorem}
 
-		L'utilitá del filtro Bayesiano sta nel fatto che é possibile
-		esprimere il grado di certezza dell'agente sullo stato in cui
-		si trova esclusivamente rispetto allo stato precedente.
+		Questa e una forma di filtro Bayesiano. Nel contesto degli agenti
+		probabilistici, per implementarlo nella forma di un algoritmo, si
+		preferisce separare il procedimento in due parti, l'osservazione e
+		l'attuazione.
+
+		L'attuazione corrisponde al ricavare \math{\mi{bel}(x_{t})} a
+		partire da \math{\mi{bel}^{-}(x_{t})}. Questo puo essere
+		fatto banalmente applicando la regola di Bayes all'espressione
+		per \math{\mi{bel}(x_{t})}:
+
+		\begin[mode = display]{math}
+			\mi{bel}(x_{t}) = P(x_{t} | \mu_{t}, z_{t}) =
+			\eta P(z_{t} | x_{t}) P(x_{t} | \mu_{t}) =
+			\eta P(z_{t} | x_{t}) \mi{bel}^{-1}(x_{t})
+		\end{math}
+
+		L'osservazione corrisponde al ricavare \math{\mi{bel}^{-}(x_{t})}
+		a partire da \math{\mi{bel}(x_{t - 1})}. Questo puo essere fatto
+		combinando il risultato appena ottenuto con la formula completa per
+		il filtro Bayesiano:
+
+		\begin[mode = display]{math}
+			bel{(x_{t})} = \eta P{(z_{t} | x_{t})} \int P{(x_{t} |
+			\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1} =
+			\eta P(z_{t} | x_{t}) \mi{bel}^{-1}(x_{t})
+			\thickspace \Rightarrow \thickspace
+			\mi{bel}^{-1}(x_{t}) = \int P{(x_{t} |
+			\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1}
+		\end{math}
+
+		Traducendo la ricorsione in una iterazione, si ottiene il seguente
+		algoritmo:
+
+		\begin{verbatim}
+			procedure BAYESIAN-FILTER(bel(X), d)
+			    \unichar{U+03B7} \unichar{U+2190} 0
+			    if (d e una percezione z) then
+			        foreach x in X do
+			            bel'(x) \unichar{U+2190} p(z | x) bel(x)
+			            \unichar{U+03B7} \unichar{U+2190} \unichar{U+03B7} + bel'(x)
+			        foreach x in X do
+			            bel'(x) \unichar{U+2190} {\unichar{U+03B7}}\textsuperscript{-1} bel'(x)
+			    else if (d e una azione \unichar{U+03B7}) then
+			        foreach x in X do
+			            bel'(x) \unichar{U+2190} \integral P(x | \unichar{U+03B7}, x') bel(x') dx'
+			    \thickspace 
+			    return bel'(X)
+		\end{verbatim}
+
+		Si noti come il calcolo di \math{\mi{bel}(x_{t})} debba venire ripetuto
+		per tutti i possibili stati \math{x \in X} in ciascuna iterazione. Questo puo
+		essere un calcolo estremamente esoso, specialmente se il numero di stati
+		sono molti. In genere, il procedimento viene ottimizzato escludendo tutti
+		gli stati che hanno associata una probabilita molto bassa, ed effettuando
+		l'aggiornamento solamente degli stati che hanno probabilita oltre una certa
+		soglia minima.
 
 	\subsection{Incertezza sulle azioni: Markov Decision Process}
 
 		Viene chiamato \strong{Markov Decision Process} (\strong{MDP})
-		un problema di ricerca dove l'ambiente é accessibile ma non
-		deterministico, ovvero dove l'agente sa sempre in che stato si
-		trova ma non ha la certezza che compiere una azione porterá allo
-		stato che si aspetta. Un MDP é costituito da:
+		un problema di ricerca in cui vale l'assunzione Markoviana e dove
+		l'ambiente é accessibile ma non deterministico. Ovvero, l'agente
+		sa sempre in che stato si trova ma non ha la certezza che compiere
+		una azione porterá allo stato che si aspetta. Un MDP é costituito da:
 
 		\begin{itemize}
 			\begin{item}
@@ -372,11 +450,10 @@
 				raggiunto lo stato \math{s'} eseguendo \math{a}
 				mentre ci si trova in \math{s}. In termini di calcolo
 				delle probabilitá,\math{T(s, a, s')} equivale di fatto
-				a scrivere \math{P(s' | s, a)}. In un MDP vale l'assunzione
-				Markoviana, ovvero la probabilitá di raggiungere uno stato
-				di arrivo dipende solamente dallo stato attuale e non da
-				tutti gli stati che sono stati raggiunti in precedenza (se 
-				ve ne sono);
+				a scrivere \math{P(s' | s, a)}. Valendo l'assunzione
+				Markoviana, la probabilitá di raggiungere uno stato
+				di arrivo dipende solamente dallo stato attuale e non
+				da tutti gli stati che sono stati raggiunti in precedenza;
 			\end{item}
 			\begin{item}
 				Una \strong{funzione di ricompensa} \math{R(s, a, s')},

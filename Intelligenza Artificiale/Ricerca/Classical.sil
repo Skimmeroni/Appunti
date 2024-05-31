@@ -292,9 +292,9 @@
 		e senza che un'azione influisca sul progresso di un'altra: questo approccio
 		é chiamato \strong{ignore-delete-lists heuristic}. Si modifica \math{P} di
 		modo che tutti gli obiettivi e tutte le precondizioni contengano solo aggiunte,
-		dopodiché se vengono eliminate tutte le rimozioni da ogni azione. La lunghezza
-		di un percorso ottimale per il problema rilassato cosí costruito viene utilizzata
-		come euristica.
+		dopodiché vengono eliminate tutte le rimozioni da ogni azione. La lunghezza di
+		un plan ottimale per il problema rilassato cosí costruito viene utilizzata come
+		euristica \footnote{Questo e l'approccio adottato dal planner \strong{FF}}.
 
 	\subsection{PDDL}
 
