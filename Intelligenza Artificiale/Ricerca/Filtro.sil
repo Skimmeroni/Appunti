@@ -3,7 +3,7 @@
 	Spesso, per il modo in cui l'ambiente é strutturato, non é
 	possibile per l'agente ottenere informazioni con certezza.
 	In questi casi, l'agente é costretto a fare delle \em{predizioni
-	probabilistiche.
+	probabilistiche}.
 
 	Siano \math{A} e \math{B} due eventi, e siano \math{P(A)}
 	e \math{P(B)} le probabilitá che gli eventi rispettivamente
@@ -410,8 +410,9 @@
 		            bel'(x) \unichar{U+2190} {\unichar{U+03B7}}\textsuperscript{-1} bel'(x)
 		    else if (d e una azione \unichar{U+03B7}) then
 		        foreach x in X do
-		            bel'(x) \unichar{U+2190} \integral P(x | \unichar{U+03B7}, x') bel(x') dx'
-		    \thickspace 
+		            bel'(x) \unichar{U+2190} \unichar{U+222B} P(x | \unichar{U+03B7}, x') bel(x') dx'
+
+		    \bigskip 
 		    return bel'(X)
 	\end{verbatim}
 

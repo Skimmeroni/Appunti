@@ -247,7 +247,7 @@ return {
     level = 3,
     link = "dest25",
     number = "3.3.4",
-    pageno = "32"
+    pageno = "31"
   },
   {
     label = {
@@ -257,7 +257,7 @@ return {
     level = 3,
     link = "dest26",
     number = "3.3.5",
-    pageno = "32"
+    pageno = "31"
   },
   {
     label = {
@@ -271,23 +271,23 @@ return {
   },
   {
     label = {
-      "Greedy search",
+      "Greedy Search",
       id = "stuff"
     },
     level = 3,
     link = "dest28",
     number = "3.4.1",
-    pageno = "32"
+    pageno = "33"
   },
   {
     label = {
-      "A* search",
+      "A* Search",
       id = "stuff"
     },
     level = 3,
     link = "dest29",
     number = "3.4.2",
-    pageno = "32"
+    pageno = "33"
   },
   {
     label = {
@@ -301,42 +301,42 @@ return {
   },
   {
     label = {
-      "Planning probabilistico",
+      "STRIPS",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest31",
+    number = "3.5.1",
+    pageno = "34"
+  },
+  {
+    label = {
+      "PDDL",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest32",
+    number = "3.5.2",
+    pageno = "35"
+  },
+  {
+    label = {
+      "Planning probabilistico: filtri Bayesiani",
       id = "stuff"
     },
     level = 2,
-    link = "dest31",
+    link = "dest33",
     number = "3.6",
     pageno = "36"
   },
   {
     label = {
-      "Complementi di teoria della probabilitá",
+      "Planning probabilistico: MDP",
       id = "stuff"
     },
-    level = 3,
-    link = "dest32",
-    number = "3.6.1",
-    pageno = "36"
-  },
-  {
-    label = {
-      "Incertezza sugli stati: filtri Bayesiani",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest33",
-    number = "3.6.2",
-    pageno = "37"
-  },
-  {
-    label = {
-      "Incertezza sulle azioni: Markov Decision Process",
-      id = "stuff"
-    },
-    level = 3,
+    level = 2,
     link = "dest34",
-    number = "3.6.3",
+    number = "3.7",
     pageno = "39"
   },
   {
