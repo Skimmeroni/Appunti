@@ -1,0 +1,199 @@
+\begin{sile}
+
+	Siano \math{A} e \math{B} due eventi, e siano \math{P(A)}
+	e \math{P(B)} le probabilitá che gli eventi rispettivamente
+	\math{A} e \math{B} si verifichino. Valgono i seguenti
+	assiomi:
+
+	\begin[mode = display]{math}
+		0 \leq P(A) \leq 1
+		\thickspace\thickspace\thickspace
+		P(\mi{True}) = 1
+		\thickspace\thickspace\thickspace
+		P(\mi{False}) = 0
+		\thickspace\thickspace\thickspace
+		P(A \vee B) = P(A) + P(B) - P(A \wedge B)
+	\end{math}
+
+	É possibile dimostrare che la probabilitá che un evento
+	\math{A} avvenga é uguale alla somma tra la probabilitá
+	che sia l'evento \math{A} che un certo evento \math{B}
+	avvengano e la probabilitá che sia l'evento \math{A} che
+	l'evento \math{\neg B} avvengano. Questa proprietá é anche
+	detta \strong{formula di disintegrazione}:
+
+	\begin[mode = display]{math}
+		P(A) = P(A \vee B) + P(A \vee \neg B)
+	\end{math}
+
+	Combinando la formula di disintegrazione con la formula
+	per la probabilitá condizionata si ottiene la cosiddetta
+	\strong{formula delle probabilitá totali}:
+
+	\begin[mode = display]{math}
+		P(A) = P(A | B) \cdot P(B) + P(A | \neg B) \cdot P(\neg B)
+	\end{math}
+
+	\math{P(A | B)} e \math{P(B | A)} devono necessariamente
+	soddisfare i due assiomi fondamentali della probabilitá,
+	pertanto dovrá valere:
+
+	\par
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			P(A | \neg B) = 1 - P(\neg A | \neg B)
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			P(B | \neg A) = 1 - P(\neg B | \neg A)
+		\end{math}
+	\end{parbox}
+	\par
+
+	É importante puntualizzare che \math{P(A|B)}, la probabilitá
+	che \math{A} si verifichi sapendo che si é verificato \math{B},
+	non é necessariamente uguale a \math{P(B|A)}, la probabilitá
+	che \math{B} si verifichi sapendo che si é verificato \math{A}.
+	Le due sono peró collegate dalla \strong{formula di Bayes}:
+
+	\begin[mode = display]{math}
+		P{(X | Y)} = \frac{P(Y | X) \cdot P(X)}{P(Y)}
+	\end{math}
+
+	Nel caso in cui \math{P(Y)} sia una costante, dato che
+	questa non dipende da \math{X} (o da \math{P(X)}) viene
+	spesso riportata come costante di normalizzazione. In
+	particolare, con \math{P(Y)^{-1} = \eta}, si ha:
+
+	\begin[mode = display]{math}
+		P(X | Y) = \eta P(Y | X) P(X)
+	\end{math}
+
+	Tale formula riveste grande importanza nel campo
+	dell'intelligenza artificiale perché é alla base
+	di una tecnica di inferenza statistica chiamata
+	\strong{inferenza Bayesiana}. Data una certa ipotesi,
+	é possibile aggiornarla mano a mano che nuove osservazioni
+	vengono condotte, pesando quanto ciascuna osservazione
+	debba essere presa in considerazione. In tal senso, la
+	formula puó essere interpretata in questo modo:
+
+	\begin{itemize}
+		\begin{item}
+			\math{X} é una ipotesi la cui probabilitá é
+			stata stimata sulla base di un certo numero
+			di osservazioni precedenti;
+		\end{item}
+		\begin{item}
+			\math{P(X)} é la \strong{probabilitá a priori},
+			ovvero la stima della probabilitá di \math{X}
+			\em{prima} di aver integrato l'informazione
+			portata da \math{Y};
+		\end{item}
+		\begin{item}
+			\math{Y} é una nuova osservazione, che influirá in
+			maniera piú o meno incisiva sul futuro valore di
+			\math{P(X)};
+		\end{item}
+		\begin{item}
+			\math{P(X | Y)} é la \strong{probabilitá a posteriori},
+			ovvero la stima della probabilitá di \math{X} \em{dopo}
+			aver integrato l'informazione portata da \math{Y};
+		\end{item}
+		\begin{item}
+			\math{P(Y | X)} é la \strong{funzione di
+			verosimiglianza}. In funzione di \math{Y}
+			con \math{X} fissato, indica quanto é
+			compatibile la presenza dell'osservazione
+			\math{Y} rispetto all'ipotesi \math{X};
+		\end{item}
+		\begin{item}
+			\math{P(Y)} é la \strong{verosimiglianza marginale},
+			ed indica la probabilitá di osservare \math{Y} a
+			prescindere da quale sia l'ipotesi \math{X}. Viene
+			anche chiamata semplicemente \strong{evidenza}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Riassumendo:
+
+	\begin[mode = display]{math}
+		\mi{Posteriori} = \frac{\mi{Verosimiglianza} \times
+		\mi{Priori}}{\mi{Evidenza}}
+	\end{math}
+
+	Un'assunzione molto forte che e possibile fare e la cosiddetta
+	\strong{assunzione Markoviana}. In termini molto generali,
+	questa prevede che un processo stocastico che si evolve nel
+	tempo non dipenda da tutte le osservazioni effettuate prima
+	di un un certo istante di tempo, ma solamente da quella
+	immediatamente precedente.
+
+	Si consideri la probabilita \math{P(x | z_{1},
+	\unicodeellipsis, z_{n})}, ovvero la probabilita
+	che si verifichi l'evento \math{x} sapendo che
+	si sono verificati \math{z_{1}, \unicodeellipsis,
+	z_{n}}. Se e valida l'assunzione Markoviana, e
+	possibile applicare la regola di Bayes per esprimere
+	\math{P(x | z_{1}, \unicodeellipsis, z_{n})} come:
+
+	\begin[mode = display]{math}
+		P(x | z_{1}, \unicodeellipsis, z_{n}) =
+		\frac{P(z_{n} | x) P(x | z_{1}, \unicodeellipsis,
+		z_{n - 1})}{P(z_{n} | z_{1}, \unicodeellipsis,
+		z_{n - 1})} = \eta_{n} P(z_{n} | x) P(x | z_{1},
+		\unicodeellipsis, z_{n - 1}) = \eta_{n} P(z_{n} | x)
+		\frac{P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis,
+		z_{n - 2})}{P(z_{n - 1} | z_{1}, \unicodeellipsis,
+		z_{n - 2})} = \eta_{n} P(z_{n} | x) \eta_{n - 1}
+		P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis, z_{n - 2})
+		= \unicodeellipsis = p(x) \prod_{i = 1}^{n} \eta_{i}
+		P(z_{i} | x) 
+	\end{math}
+
+	Questo e un esempio di inferenza statistica chiamata
+	\strong{filtro Bayesiano}.
+
+	Data una variabile aleatoria \math{X}, viene detto
+	\strong{valore atteso} (o \strong{valore medio} o
+	\strong{speranza matematica}) di \math{X} il valore
+	\math{E[X]} cosí calcolato:
+
+	\begin[mode = display]{math}
+		E{[X]} =
+		\{\table[columnalign = left left]{
+			\sum_{s \in S} s p{(s)} &
+			\mi{se} \thickspace \mi{discreta} \\
+			\int_{-\infty}^{+\infty} u f{(u)} \thickspace du &
+			\mi{se} \thickspace \mi{continua}
+		}
+	\end{math}
+
+	Nel caso in cui \math{X} sia una variabile discreta,
+	\math{E[X]} é dato dalla sommatoria di tutti i valori
+	che \math{X} puó assumere moltiplicati per la probabilitá
+	che assumano quel valore. Se invece \math{X} é una variabile
+	aleatoria continua, \math{E[X]} é dato dall'integrale calcolato
+	su tutti i punti su cui é definita moltiplicati per la funzione
+	di densitá calcolata in quel punto.
+
+	É interessante notare come \math{E[X]} sia un valore che
+	dipende dai risultati dell'esperimento a cui é associato,
+	pertanto é esso stesso una variabile aleatoria (e quindi
+	una funzione). Inoltre, il valore medio non é necessariamente
+	uno dei valori assunti dalla variabile aleatoria stessa, e
+	nemmeno é garantito che esista. Nello specifico, questo accade
+	quando la sommatoria o l'integrale da cui viene ricavato
+	non convergono.
+
+	\begin{theorem}
+		Il valore atteso é una funzione lineare: prese due
+		variabili aleatorie \math{X} e \math{Y} e due coefficienti
+		reali \math{a} e \math{b}, vale \math{E[aX + bY] = aE[X] +
+		bE[Y]}.
+	\end{theorem}
+
+\end{sile}

@@ -1,0 +1,74 @@
+\begin{sile}
+	
+	Siano date una metrica \math{d} ed un fattore \math{c < 1}. Un
+	operatore \math{F} viene detto \strong{contrazione} se, applicandolo
+	a due elementi del suo dominio, si ottengono due valori la cui 
+	distanza (rispetto a \math{d}) é inferiore al prodotto fra
+	\math{c} e la distanza (rispetto a \math{d}) fra i due valori
+	originari. Formalmente, si ha che \math{F} é una contrazione se vale:
+
+	\begin[mode = display]{math}
+		d(F(x), F(y)) \leq c \cdot d(x, y) \thickspace \forall x, y \in \mi{Dom}(F)
+	\end{math}
+
+	\begin{theorem}
+		Se un operatore é una contrazione, allora ammette al piú un solo
+		punto fisso.
+
+		\bigskip
+		\strong{Dimostrazione}. Si supponga per assurdo che l'operatore
+		\math{F} ammetta due punti fissi, siano questi \math{z} e
+		\math{z'}. La distanza fra i due é data da \math{d(z, z')},
+		mentre la distanza fra le rispettive applicazioni di \math{F}
+		é data da \math{d(F(z), F(z'))}. Per definizione di punto fisso,
+		si ha peró \math{F(z) = z} e \math{F(z') = z'}; questo significa
+		che \math{d(z, z') = d(F(z), F(z'))}, ovvero che la distanza
+		fra \math{z} e \math{z'} non cambia quando \math{F} viene a 
+		questi applicata. Dato che questo viola la proprietá di
+		contrazione, deve aversi che tale coppia di punti fissi non
+		possa esistere.
+
+		É facile verificare che la stessa situazione si presenta se
+		viene scelto un qualsiasi numero di punti fissi superiore a
+		2, pertanto occorre concludere che il numero di punti fissi
+		di una contrazione possa essere esclusivamente 1 oppure 0.
+	\end{theorem}
+
+	\begin{theorem}
+		Se una contrazione ammette un punto fisso, allora una sua
+		applicazione ripetuta ad un qualsiasi elemento del suo dominio
+		converge a tale punto fisso. Ovvero, dato un operatore \math{F}
+		ed il suo punto fisso \math{x_{0}}, vale:
+
+		\begin[mode = display]{math}
+			\mi{lim}_{n \rightarrow +\infty} F^{n}(x) =
+			F(F(F(\unicodeellipsis(F(x))))) =
+			x_{0} \thickspace \forall x \in \mi{Dom}(F)
+		\end{math}
+	\end{theorem}
+
+	\begin{example}
+		La funzione \math{f(x) = x/2}, che dimezza il valore passato
+		in input, é una contrazione rispetto alla distanza euclidea.
+		Infatti, dati due elementi del suo dominio \math{x} e \math{y}
+		dove \math{x \leq y}:
+
+		\begin[mode = display]{math}
+			d{(F{(x)}, F{(y)})} \leq c \cdot d{(x, y)}
+			\thickspace\Rightarrow\thickspace
+			d{(\frac{x}{2}, \frac{y}{2})} \leq c \cdot d{(x, y)}
+			\thickspace\Rightarrow\thickspace
+			\frac{x}{2} - \frac{y}{2} \leq c {(x - y)}
+			\thickspace\Rightarrow\thickspace
+			\frac{x}{2} - \frac{y}{2} - cx + cy \leq 0
+			\thickspace\Rightarrow\thickspace
+			{(\frac{1}{2} - c)}x \leq {(\frac{1}{2} - c)}y
+			\thickspace\Rightarrow\thickspace
+			x \leq y
+		\end{math}
+
+		Ha inoltre uno ed un solo punto fisso in 0. Infatti,
+		\math{f(0) = 0/2 = 0}.
+	\end{example}
+
+\end{sile}

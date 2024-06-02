@@ -118,5 +118,10 @@
 		\include[src = Subsimbolica/DBSCAN.sil]
 		%\section{Q-learning}
 		%\include[src = Subsimbolica/Q.sil]
+	\chapter[numbering = false]{Appendice}
+		\section{Teoria della probabilita}
+		\include[src = Appendice/Probabilita.sil]
+		\section{Contrazioni}
+		\include[src = Appendice/Contrazione.sil]
 
 \end{document}
