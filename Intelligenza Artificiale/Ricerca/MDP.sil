@@ -1,0 +1,607 @@
+\begin{sile}
+
+	Viene chiamato \strong{Markov Decision Process} (\strong{MDP})
+	un problema di ricerca in cui vale l'assunzione Markoviana e
+	dove l'ambiente é accessibile ma non deterministico. Ovvero,
+	l'agente sa sempre in che stato si trova ma non ha la certezza
+	che compiere una azione porterá allo stato che si aspetta. Un
+	MDP é costituito da:
+
+	\begin{itemize}
+		\begin{item}
+			Un insieme discreto di stati \math{S};
+		\end{item}
+		\begin{item}
+			Un insieme discreto di azioni \math{A};
+		\end{item}
+		\begin{item}
+			Uno stato iniziale \math{s_{0} \in S};
+		\end{item}			
+		\begin{item}
+			Un modello di transizione \math{T(s, a, s')}, con
+			\math{a \in A} e \math{s, s' \in S}. Questo indica
+			qual'é la probabilitá che venga effettivamente
+			raggiunto lo stato \math{s'} eseguendo \math{a}
+			mentre ci si trova in \math{s}. In termini di calcolo
+			delle probabilitá, essendo valida l'assunzione
+			Markoviana, \math{T(s, a, s')} equivale a
+			\math{P(s' | s, a)}.
+		\end{item}
+		\begin{item}
+			Una \strong{funzione di ricompensa} \math{R(s, a, s')},
+			che associa un valore numerico a ciascuna transizione.
+			Tale valore rappresenta quanto é "vantaggioso" per
+			l'agente compiere la transizione da \math{s} a
+			\math{s'} mediante \math{a};
+		\end{item}
+		\begin{item}
+			Opzionalmente, uno stato finale \math{s_{f} \in S}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	A differenza dei problemi di ricerca, dove si cerca di
+	minimizzare la funzione di costo, negli MDP si cerca di
+	massimizzare la funzione di ricompensa. Infatti, negli
+	MDP lo stato finale non e sempre presente, perche l'obiettivo
+	dell'agente potrebbe semplicemente consistere nel raggiungere
+	un certo valore per \math{R(s, a, s')}, a prescindere da
+	quale sia lo stato in cui si trova quando questo accade.
+
+	La differenza piu rilevante fra i due si ha pero nella forma
+	della loro soluzione. Nei problemi di ricerca la soluzione é
+	una sequenza di azioni che conducono dallo stato iniziale
+	ad uno stato obiettivo; negli MDP, questo approccio non e
+	possibile, perché una certa sequenza di azioni é in grado
+	di portare da uno stato ad un altro solamente con una certa
+	probabilitá. Questo significa che eseguendo piu volte la
+	stessa sequenza di azioni potrebbe venire raggiunto uno
+	stato completamente diverso da esecuzione ad esecuzione.
+
+	L'azione da eseguire in un certo stato puó essere pensata
+	come una variabile aleatoria, alla quale é associata una
+	probabilitá per ciascun valore che questa puó assumere.
+	Pertanto, una soluzione per agenti probabilistici deve
+	specificare cosa un agente debba fare in \em{ogni} stato
+	in cui l'agente potrebbe trovarsi. A tale scopo, é necessario
+	introdurre il concetto di \strong{politica}.
+
+	Una politica \math{\pi} e una funzione che mappa ciascuno
+	stato del problema ad un'azione \footnote{Il motivo per
+	cui e stato specificato che gli MDP hanno un numero finito
+	di stati e che altrimenti non sarebbe possibile definire una
+	politica.}; dato uno stato \math{s}, \math{\pi(s)} é l'azione
+	che la politica \math{\pi} "raccomanda" di eseguire se ci si
+	trova in \math{s}. La politica migliore \math{\pi *}, detta
+	\strong{politica ottimale}, e quella che in ogni stato
+	raccomanda l'azione che restituisce il massimo valore di
+	ricompensa possibile.
+
+	Ogni volta che una determinata politica viene eseguita
+	a partire dallo stato iniziale, la natura stocastica
+	dell'ambiente porta a generare diverse sequenze di azioni,
+	ciascuna con una propria probabilità. La "qualità" di una
+	politica viene pertanto misurata a partire dall'utilità
+	\em{attesa} delle possibili sequenze di azioni generate
+	da tali politiche. Pertanto, la politica ottimale e
+	quella che massimizza tale valore di utilita attesa.
+
+	%% Esempio preso dal libro. Sulla base di come costruisco \math{R(s)}
+	%% cambia la politica ottimale. Se \math{R(s) \leq -1.6284} per tutti
+	%% gli stati tranne quelli terminali, la politica migliore prevede che
+	%% l'agente si diriga allo stato \math{-1} perchè è comunque preferibile
+	%% a raggiungere lo stato con \math{+1}. Se \math{-0.4278 < -0.0850} la
+	%% politica migliore prevede che l'agente si accolli il rischio perchè
+	%% la penalità è comunque troppo alta. Se \math{-0.0221 < R(s) \leq 0}
+	%% la politica migliore prevede che l'agente non si accolli il rischio
+	%% perchè la penalità è bassa e non ne vale la pena. Se \math{R(s) > 0},
+	%% la politica migliore prevede che l'agente continui a muoversi a caso
+	%% senza mai andare negli stati terminali perchè così continua a guadagnare
+	%% ricompensa all'infinito. CORREDARE IL TUTTO CON I DISEGNINI.
+
+	Data la sequenza ordinata \math{S} di \math{n} stati
+	\math{[s_{0}, s_{1}, \unicodeellipsis, s_{n}]}, sia
+	\math{U(S)} la ricompensa complessiva ricavata
+	dall'attraversare ordinatamente tale sequenza di stati.
+	Esistono diverse regole per calcolare la ricompensa
+	complessiva; la piu semplice è la \strong{ricompensa
+	additiva}, dove la ricompensa totale è semplicemente
+	la somma delle ricompense associate ai singoli stati:
+
+	\begin[mode = display]{math}
+		U(S) = U([s_{0}, s_{1}, \unicodeellipsis, s_{n}]) =
+		R(s_{0}, \pi(s_{0}), s_{1}) + R(s_{1}, \pi(s_{1}), s_{2}) +
+		\unicodeellipsis + R(s_{n - 1}, \pi(s_{n - 1}), s_{n})
+		= \sum_{i = 0}^{n - 1} R(s_{i}, \pi(s_{i}), s_{i + 1})
+	\end{math}
+
+	Il problema di questa forma di assegnazione della ricompensa e
+	che, in molte situazioni, incentiva l'agente a non raggiungere
+	mai l'obiettivo, perche puo guadagnare ricompensa quasi
+	indefinitamente. Una regola alternativa è la \strong{ricompensa
+	con discount}, dove la ricompensa associata al trovarsi in un
+	determinato stato decresce di una certa percentuale ad ogni
+	cambio di stato.  Indicando con \math{\gamma} un valore
+	compreso fra 0 e 1, la ricompensa totale adoperando tale
+	metodo è data da:
+
+	\begin[mode = display]{math}
+		U(S) = U([s_{0}, s_{1}, \unicodeellipsis, s_{n}]) =
+		R(s_{0}, \pi(s_{0}), s_{1}) + \gamma R(s_{1}, \pi(s_{1}), s_{2}) +
+		\unicodeellipsis + \gamma^{n - 1} R(s_{n - 1}, \pi(s_{n - 1}), s_{n})
+		= \sum_{i = 0}^{n - 1} \gamma^{i} R(s_{i}, \pi(s_{i}), s_{i + 1})
+	\end{math}
+
+	\math{\gamma} determina quanta priorità debba dare l'agente
+	al raggiungere determinati stati in una determinata iterazione.
+	Se \math{\gamma} è un valore prossimo a 0, le ricompense date
+	dagli stati raggiunti nelle prime iterazioni hanno un peso
+	molto maggiore sul valore di ricompensa complessivo rispetto a
+	quelle fornite dagli stati raggiunti nelle ultime iterazioni.
+	Se \math{\gamma} è un valore prossimo ad 1, le ricompense date
+	dagli stati raggiunti nelle prime iterazioni e nelle ultime
+	iterazioni hanno un peso comparabile. Se \math{\gamma} è
+	esattamente 1, non vi è alcuna differenza nel raggiungere uno
+	stato in una certa iterazione piuttosto che in un'altra, e la
+	regola con discount coincide di fatto con la regola additiva.
+
+	\begin{theorem}
+		Usando la regola con discount, la ricompensa complessiva
+		\math{U} è un valore limitato, e pertanto non puo crescere
+		indefinitamente.
+
+		\bigskip
+		\strong{Dimostrazione}. Sia data la sequenza \math{S}
+		di \math{n} stati \math{[s_{0}, s_{1}, \unicodeellipsis,
+		s_{n}]} che l'agente attraversa in un problema MDP. Essendo
+		per questo \math{S} finita, deve esserlo anche la sequenza
+		di ricompense \math{[R(s_{0}, \pi(s_{0}), s_{1}), R(s_{1},
+		\pi(s_{1}), s_{2}), R(s_{n - 1}, \pi(s_{n - 1}), s_{n})]}.
+		Ne consegue che esiste un elemento di tale sequenza, sia
+		questo \math{R_{max}}, che e maggiore o uguale a tutte le
+		altre ricompense.
+
+		Si noti come \math{1 + \gamma + \gamma^{2} +
+		\unicodeellipsis + \gamma^{n}} sia una serie
+		geometrica; se \math{\gamma} è un valore compreso
+		fra 0 e 1, vale:
+
+		\begin[mode = display]{math}
+			\mi{lim}_{n \rightarrow +\infty} 1 + \gamma + \gamma^{2} +
+			\unicodeellipsis + \gamma^{n} = \mi{lim}_{n \rightarrow
+			+\infty} \sum_{i = 0}^{n} \gamma^{i} = \frac{1}{1 - \gamma}
+			\thickspace\Rightarrow\thickspace
+			1 + \gamma + \gamma^{2} + \unicodeellipsis + \gamma^{n - 1}
+			\leq \frac{1}{1 - \gamma}
+		\end{math}
+
+		Moltiplicando ambo i membri per \math{R_{max}}:
+
+		\begin[mode = display]{math}
+			R_{max} \sum_{i = 0}^{n - 1} \gamma^{i} \leq
+			R_{max} {(\frac{1}{1 - \gamma})}
+			\thickspace\Rightarrow\thickspace
+			R_{max} + R_{max}\gamma + R_{max}\gamma^{2} +
+			\unicodeellipsis + R_{max}\gamma^{n - 1}
+			\leq \frac{R_{max}}{1 - \gamma}
+		\end{math}
+
+		Essendo \math{R_{max}} maggiore di tutti i valori
+		in \math{[R(s_{0}, \pi(s_{0}), s_{1}), \unicodeellipsis,
+		R(s_{n - 1}, \pi(s_{n - 1}), s_{n})]}, é possibile
+		effettuare la seguente minorazione:
+
+		\begin[mode = display]{math}
+			R{(s_{0}, \pi(s_{0}), s_{1})} + \gamma R{(s_{1},
+			\pi(s_{1}), s_{2})} + \gamma^{2} R{(s_{2}, \pi(s_{2}),
+			s_{3})} + \unicodeellipsis + \gamma^{n - 1} R{(s_{n - 1},
+			\pi(s_{n - 1}), s_{n})} \leq \frac{R_{max}}{1 - \gamma} 
+		\end{math}
+
+		Ovvero, \math{U \leq R_{max} / (1 - \gamma)}. Essendo
+		\math{0 < \gamma < 1} ed essendo sia \math{R_{max}}
+		che \math{U} valori positivi, \math{U} e effettivamente 
+		limitato, e non puo crescere oltre tale limite.
+	\end{theorem}
+
+	Si assuma di utilizzare la regola con discount. Ci
+	si chiede come ricavare, dato un MDP, la politica
+	migliore. Innanzitutto, per ricavare la politica
+	migliore non e possibile semplicemente massimizzare
+	la funzione \math{U}, perche questa opera su una
+	sequenza di stati e, come gia detto, una sequenza
+	di stati non e una soluzione accettabile per un MDP.
+	La politica migliore e invece quella che massimizza
+	la ricompensa totale \em{attesa}.
+
+	Sia \math{r_{t}} la ricompensa ottenuta dall'agente
+	in un MDP al tempo \math{t} (a prescindere da quale
+	sia lo stato raggiunto che la ha indotta). \math{r_{t}}
+	puo essere pensato come una variabile aleatoria che
+	assume un valore diverso a seconda di ciascuna esecuzione
+	dell'MDP. Sia \math{R_{t}} la somma parziale con discount
+	di tutte le ricompense ottenute a partire da \math{r_{t}}:
+
+	\begin[mode = display]{math}
+		R_{t} = r_{t} + \gamma r_{t + 1} + \gamma^{2} r_{t + 2}
+		+ \unicodeellipsis = \sum_{i = 0}^{+\infty} \gamma^{i}
+		r_{t + i}
+	\end{math}
+
+	\math{R_{t}} e essa stessa una variabile aleatoria. Per
+	indicarne il valore a cui tende per \math{i \rightarrow
+	+\infty}, se ne calcola il valore atteso:
+
+	\begin[mode = display]{math}
+		\dsi{R}_{t} = E{[R_{t}]} = E{[\sum_{i = 0}^{+\infty}
+		\gamma^{i} r_{t + i}]} = \sum_{i = 0}^{+\infty}
+		E{[\gamma^{i} r_{t + i}]}
+	\end{math}
+
+	Per la linearita del valore atteso, e possibile riscrivere
+	l'equazione in forma ricorsiva:
+
+	\begin[mode = display]{math}
+		\dsi{R}_{t} = \sum_{i = 0}^{+\infty}
+		E{[\gamma^{i} r_{t + i}]} = 
+		E[r_{t}] + \sum_{i = 1}^{+\infty}
+		E{[\gamma^{i} r_{t + i}]} = E[r_{t}] +
+		\gamma R_{t + 1}
+	\end{math}
+
+	Sia \math{s_{0}} lo stato in cui viene ottenuta la
+	ricompensa \math{r_{t}}. La ricompensa complessiva
+	ottenuta dall'agente partendo dallo stato \math{s_{0}}
+	e seguendo le azioni suggerite dalla politica \math{\pi}
+	viene indicata con \math{U^{\pi}(s_{0})}.
+
+	\begin[mode = display]{math}
+		U^{\pi}(s_{0}) = E{[\sum_{t = 0}^{+\infty} \gamma^{t}
+		R(s_{t}, \pi (s_{t}), s_{t + 1})]}
+	\end{math}
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	sia \math{S^{\pi}_{t}} una
+	variabile aleatoria che indica lo stato che raggiunge l'agente
+	adoperando una certa politica \math{\pi} a partire dallo stato
+	\math{s_{0}} al tempo \math{t}. La distribuzione di probabilitá
+	lungo la sequenza di stati \math{S_{1}, S_{2}, \unicodeellipsis}
+	é determinata a partire dallo stato \math{s_{0}}, dalla politica
+	\math{\pi} e dal modello di transizione, e viene indicata con
+	\math{U^{\pi}(s_{0})}:
+
+	\begin[mode = display]{math}
+		U^{\pi} {(s_{0})} = E{[R(s_{0}, \pi(s_{0}), s_{1}) + \gamma
+		R(s_{1}, \pi(s_{1}), s_{2}) + \gamma^{2} R(s_{2}, \pi(s_{2}),
+		s_{3}) + \unicodeellipsis]} = E{[\sum_{t = 0}^{\infty}
+		\gamma^{t} R{(s_{t}, \pi{(s_{t})}, s_{t + 1})}]}
+	\end{math}
+
+	Dove il valore atteso é calcolato rispetto alla distribuzione
+	della sequenza di stati indotta dall'applicare \math{\pi} a
+	\math{s_{0}}. Sia \math{\pi^{*}_{s_{0}}} la politica migliore
+	fra tutte quelle applicabili a partire da \math{s_{0}}: questa
+	non é altro che la politica \math{\pi} che massimizza
+	\math{U^{\pi} (s_{0})}:
+
+	\begin[mode = display]{math}
+		\pi^{*}_{s_{0}} = \mi{argmax}_{\pi} {(U^{\pi} {(s)})}
+	\end{math}
+
+	Fintanto che viene impiegata la regola con discount, é possibile
+	dimostrare che la politica ottimale non dipende da quale stato 
+	viene usato come stato di partenza. Questo significa che, per
+	qualsiasi stato \math{s}, il valore di utilita associato a tale
+	stato é semplicemente \math{U^{\pi^{*}}(s)}, a prescindere di
+	come tale stato viene raggiunto.
+
+	La funzione \math{U(s)} permette all'agente di scegliere la
+	prossima azione da compiere sulla base del principio di massima
+	utilitá attesa, ovvero che massimizza la somma pesata dalla 
+	probabilitá di compiere una transizione verso un certo stato
+	fra la ricompensa che viene ottenuta raggiungendolo e la penalitá
+	introdotta dalla regola con discount:
+
+	\begin[mode = display]{math}
+		\pi^{*} {(s)} = \mi{argmax}_{a \in A(s)} \sum_{s'} T{(s, a, s')}
+		[R{(s, a, s')} + \gamma U{(s')}]
+	\end{math}
+
+	Da questo segue una diretta relazione che sussiste fra
+	l'utilitá di uno stato e l'utilitá degli stati vicini,
+	ovvero quelli che l'agente puó raggiungere a partire da
+	questo: il valore di utilitá di uno stato é dato dalla
+	somma fra il valore atteso della ricompensa portata dalla
+	prossima transizione sommata all'utilitá (scontata) dello
+	stato di arrivo, assumendo che l'agente scelga una politica
+	ottimale. L'equazione risultante, che permette di esprimere
+	la funzione di utilitá degli stati in forma ricorsiva, prende
+	il nome di \strong{equazione di Bellman}:
+
+	\begin[mode = display]{math}
+		U{(s)} = \mi{max}_{a \in A(s)} \sum_{s'} T{(s, a, s')}
+		[R{(s, a, s')} + \gamma U{(s')}]
+	\end{math}
+
+	%%
+	%% Altro esempio da prendere dal libro.
+	%%
+
+	Un'altra quantitá importante é la \strong{funzione di
+	azione-utilitá}, o \strong{Q-function}, che riporta
+	l'utilitá attesa dal compiere una certa azione in un
+	certo stato. Il legame fra Q-function e funzione di
+	utilitá é immediato:
+
+	\begin[mode = display]{math}
+		U(s) = \mi{max}_{a} Q(s, a)
+	\end{math}
+
+	Inoltre, é possibile estrarre la politica ottimale a partire
+	dalla Q-function come segue:
+
+	\begin[mode = display]{math}
+		\pi^{*}(s) = \mi{argmax}_{a} Q(s, a)
+	\end{math}
+
+	É possibile costruire una equazione di Bellman anche per la
+	Q-function, notando come il valore atteso totale per il compiere
+	una azione é dato dalla somma fra la ricompensa immediata e la
+	penalitá del raggiungere il nuovo stato, che a sua volta é
+	esprimibile in termini della Q-function:
+
+	\begin[mode = display]{math}
+		Q{(s, a)} = \sum_{s'} T{(s, a, s')} [R{(s, a, s')} +
+		\gamma U{(s')}] = \sum_{s'} T{(s, a, s')} [R{(s, a, s')} +
+		\gamma \mi{max}_{a'} Q{(s', a')}]
+	\end{math}
+
+	Risolvendo una equazione di Bellman per \math{U} o per \math{Q}
+	é possibile ricavare una politica ottima per un problema di
+	planning probabilistico. Nello specifico, le equazioni di Bellman
+	sono alla base di uno dei metodi usati per risolvere un problema
+	MDP chiamato \strong{value iteration}.
+
+	Per ciascuno stato \math{s} di un MDP dovrebbe venire calcolato
+	\math{U(s)} attraverso l'equazione di Bellman. Se il numero di
+	stati dell'MDP é \math{n}, questo consiste nel risolvere un
+	sistema di \math{n} equazioni in \math{n} incognite. Se tale 
+	sistema fosse un sistema di equazioni lineari questo sarebbe
+	computazionalmente possibile, ma tale sistema non é lineare,
+	perché nell'equazione di Bellman compare l'operatore max, che
+	non é lineare.
+
+	Value iteration aggira il problema "stimando" il valore di \math{U(s)}
+	per ciascuno stato di iterazione in iterazione fino ad ottenerne una
+	approssimazione accettabile. Sia \math{U_{i}(s)} il valore di utilitá
+	per lo stato \math{s} alla \math{i}-esima iterazione; viene chiamato
+	\strong{aggiornamento di Bellman} l'aggiornamento di tale valore sulla
+	base del precedente:
+
+	\begin[mode = display]{math}
+		U_{i + 1} {(s)} \leftarrow \mi{max}_{a \in A(s)}
+		\sum_{s'} T{(s, a, s')} [R{(s, a, s')} + \gamma U_{i} {(s')}]
+	\end{math}
+
+	Inizialmente, i valori di \math{U(s)} vengono impostati ad
+	un valore casuale (in genere a 0), e le iterazioni proseguono
+	fintanto che la differenza fra l'utilitá stimata fra una
+	iterazione e quella successiva non é trascurabile.
+
+	\begin{verbatim}
+		S <= a set of states
+		A <= a set of actions A(s)
+		T <= the transition function T(s', a, s)
+		R <= the reward function R(s', a, s)
+		\unichar{U+03B3} <= the discount function
+		\unichar{U+03B5} <= the maximum error allowed in the utility of any state
+
+		\bigskip
+		function VALUE-ITERATION(S, A, T, R, \unichar{U+03B3}, \unichar{U+03B5})
+		    \unichar{U+03B4} <= 0
+		    foreach s in S do
+		        U[s] <= 0
+		        U'[s] <= 0
+
+		    \bigskip
+		    do
+		        foreach s in S do
+		            foreach a in A[s] do
+		                U'[s] <= max(Q-VALUE(S, A, T, R, U, \unichar{U+03B3}))
+		            if (|U'[s] - U[s]| > \unichar{U+03B4}) then
+		                \unichar{U+03B4} <= |U'[s] - U[s]|
+		    while (\unichar{U+03B4} > \unichar{U+03B5} (1 - \unichar{U+03B3}) / \unichar{U+03B3})
+
+		    \bigskip
+		    return U
+	\end{verbatim}
+
+	Occorre peró dimostrare che, dopo un numero sufficiente di
+	iterazioni, value iteration restituisce effettivamente una
+	stima corretta dei valori di \math{U(s)}.
+
+	Siano date una metrica \math{d} ed un fattore \math{c < 1}. Un
+	operatore \math{F} viene detto \strong{contrazione} se, applicandolo
+	a due elementi del suo dominio, si ottengono due valori la cui 
+	distanza (rispetto a \math{d}) é inferiore al prodotto fra
+	\math{c} e la distanza (rispetto a \math{d}) fra i due valori
+	originari. Formalmente, si ha che \math{F} é una contrazione se vale:
+
+	\begin[mode = display]{math}
+		d(F(x), F(y)) \leq c \cdot d(x, y) \thickspace \forall x, y \in \mi{Dom}(F)
+	\end{math}
+
+	\begin{theorem}
+		Se un operatore é una contrazione, allora ammette al piú un solo
+		punto fisso.
+
+		\bigskip
+		\strong{Dimostrazione}. Si supponga per assurdo che l'operatore
+		\math{F} ammetta due punti fissi, siano questi \math{z} e
+		\math{z'}. La distanza fra i due é data da \math{d(z, z')},
+		mentre la distanza fra le rispettive applicazioni di \math{F}
+		é data da \math{d(F(z), F(z'))}. Per definizione di punto fisso,
+		si ha peró \math{F(z) = z} e \math{F(z') = z'}; questo significa
+		che \math{d(z, z') = d(F(z), F(z'))}, ovvero che la distanza
+		fra \math{z} e \math{z'} non cambia quando \math{F} viene a 
+		questi applicata. Dato che questo viola la proprietá di
+		contrazione, deve aversi che tale coppia di punti fissi non
+		possa esistere.
+
+		É facile verificare che la stessa situazione si presenta se
+		viene scelto un qualsiasi numero di punti fissi superiore a
+		2, pertanto occorre concludere che il numero di punti fissi
+		di una contrazione possa essere esclusivamente 1 oppure 0.
+	\end{theorem}
+
+	\begin{theorem}
+		Se una contrazione ammette un punto fisso, allora una sua
+		applicazione ripetuta ad un qualsiasi elemento del suo dominio
+		converge a tale punto fisso. Ovvero, dato un operatore \math{F}
+		ed il suo punto fisso \math{x_{0}}, vale:
+
+		\begin[mode = display]{math}
+			\mi{lim}_{n \rightarrow +\infty} F^{n}(x) =
+			F(F(F(\unicodeellipsis(F(x))))) =
+			x_{0} \thickspace \forall x \in \mi{Dom}(F)
+		\end{math}
+	\end{theorem}
+
+	\begin{example}
+		La funzione \math{f(x) = x/2}, che dimezza il valore passato
+		in input, é una contrazione rispetto alla distanza euclidea.
+		Infatti, dati due elementi del suo dominio \math{x} e \math{y}
+		dove \math{x \leq y}:
+
+		\begin[mode = display]{math}
+			d{(F{(x)}, F{(y)})} \leq c \cdot d{(x, y)}
+			\thickspace\Rightarrow\thickspace
+			d{(\frac{x}{2}, \frac{y}{2})} \leq c \cdot d{(x, y)}
+			\thickspace\Rightarrow\thickspace
+			\frac{x}{2} - \frac{y}{2} \leq c {(x - y)}
+			\thickspace\Rightarrow\thickspace
+			\frac{x}{2} - \frac{y}{2} - cx + cy \leq 0
+			\thickspace\Rightarrow\thickspace
+			{(\frac{1}{2} - c)}x \leq {(\frac{1}{2} - c)}y
+			\thickspace\Rightarrow\thickspace
+			x \leq y
+		\end{math}
+
+		Ha inoltre uno ed un solo punto fisso in 0. Infatti,
+		\math{f(0) = 0/2 = 0}.
+	\end{example}
+
+	\begin{theorem}
+		L'aggiornamento di Bellman é una contrazione.
+
+		\bigskip
+		\strong{Dimostrazione}. Per semplicitá, si consideri
+		l'aggiornamento di Bellman come un operatore \math{B}.
+		É quindi possibile scrivere:
+
+		\begin[mode = display]{math}
+			U_{i + 1} \leftarrow BU_{i}
+		\end{math}
+
+		Occorre definire una metrica per lo spazio dei vettori \math{U}.
+		Sia \math{\abs{\abs{U}}} il valore assoluto della componente
+		di \math{U} avente modulo maggiore:
+
+		\begin[mode = display]{math}
+			\abs{\abs{U}} = \mi{max}_{s} \abs{U(s)}
+		\end{math}
+
+		La metrica \math{d(U, U')} viene allora definita come
+		\math{\abs{\abs{U - U'}}}, ovvero il valore assoluto
+		della differenza fra le componenti aventi modulo
+		maggiore delle due utilitá. Allora:
+
+		\begin[mode = display]{math}
+			\abs{\abs{BU - BU'}} \leq \gamma \abs{\abs{U - U'}}
+		\end{math}
+
+		Essendo \math{\gamma \in (0, 1)}, si ha che l'aggiornamento
+		di Bellman é una contrazione rispetto al fattore \math{\gamma}
+		e alla metrica \math{d}.
+	\end{theorem}
+
+	Un approccio alternativo a value iteration é \strong{policy
+	iteration}. Questo si basa sul presupposto che una politica
+	ottimale puó essere ottenuta anche da una funzione di utilitá
+	inaccurata. Policy iteration alterna i seguenti due step in
+	ciascuna iterazione \math{i}:
+
+	\begin{itemize}
+		\begin{item}
+			\strong{Policy evaluation}: data una politica \math{\pi_{i}},
+			viene calcolato \math{U_{i} = U^{\pi_{i}}}, la funzione di
+			utilitá in ciascuno stato se venisse applicata \math{\pi_{i}};
+		\end{item}
+		\begin{item}
+			\strong{Policy improvement}: viene calcolata una nuova politica
+			\math{\pi_{i + 1}}, migliore di \math{\pi_{i}}, a partire da
+			\math{U_{i}}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	L'algoritmo termina quando la politica \math{\pi_{i}} non é piú
+	in grado di influire sul risultato di \math{U_{i}}. Quando questo
+	accade, si ha che \math{U_{i}} é (approssimativamente) un punto
+	fisso per l'aggiornamento di Bellman, ed é quindi una soluzione
+	per l'equazione di Bellman, e la politica \math{\pi_{i}} che la
+	ha generata é una politica ottima. Essendo il numero di politiche
+	finito e venendo le politiche migliorate ad ogni iterazione, é
+	garantito che l'algoritmo termini.
+
+	\begin{verbatim}
+		S <= a set of states
+		A <= a set of actions A(s)
+		T <= the transition function T(s', a, s)
+		R <= the reward function R(s', a, s)
+		\unichar{U+03B3} <= the discount function
+
+		\bigskip
+		function POLICY-ITERATION(S, A, T, R, \unichar{U+03B3})
+		    foreach s in S do
+		        U[s] <= 0
+		    stop <= true
+		    \unichar{U+03C0} <= RANDOM-POLICY()
+
+		    \bigskip
+		    do
+		        U <= POLICY-EVALUATION(S, A, T, R, \unichar{U+03B3})
+		        foreach s in S do
+		            foreach a in A[S] do
+		                a* <= argmax(Q-VALUE(S, A, T, R, \unichar{U+03B3}))
+		            if (Q-VALUE(S, a*, T, R, \unichar{U+03B3}) > Q-VALUE(S, \unichar{U+03B3}[s], T, R, \unichar{U+03B3})) then
+		                \unichar{U+03C0}[s] <= a*
+		                stop <= false
+		    while (stop)
+
+		    \bigskip
+		    return \unichar{U+03C0}
+	\end{verbatim}
+
+	Implementare \tt{POLICY-EVALUATION} é piú semplice che
+	risolvere l'equazione di Bellman "per intero" (come viene
+	fatto da value iteration), perché l'azione che compare
+	nell'equazione non é una incognita. Infatti, questa é la
+	azione che viene raccomandata dalla politica \math{\pi_{i}}
+	nello stato \math{s}, quindi é una informazione nota:
+
+	\begin[mode = display]{math}
+		U_{i} {(s)} = \sum_{s'} T{(s, \pi_{i}(s), s')}
+		[R{(s, \pi_{i}(s), s')} + \gamma U_{i} {(s')}]
+	\end{math}
+
+	Questo semplifica l'equazione eliminando l'operatore max e
+	rendendola una equazione lineare. Se il numero di stati é
+	\math{n} vi saranno \math{n} equazioni lineari in \math{n}
+	incognite, e risolverle con metodi algebrici standard richiede
+	un tempo di esecuzione pari a \math{\mi{O}(n^{3})}.
+
+\end{sile}

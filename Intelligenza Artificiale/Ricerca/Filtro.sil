@@ -1,0 +1,427 @@
+\begin{sile}
+
+	Spesso, per il modo in cui l'ambiente é strutturato, non é
+	possibile per l'agente ottenere informazioni con certezza.
+	In questi casi, l'agente é costretto a fare delle \em{predizioni
+	probabilistiche.
+
+	Siano \math{A} e \math{B} due eventi, e siano \math{P(A)}
+	e \math{P(B)} le probabilitá che gli eventi rispettivamente
+	\math{A} e \math{B} si verifichino. Valgono i seguenti
+	assiomi:
+
+	\begin[mode = display]{math}
+		0 \leq P(A) \leq 1
+		\thickspace\thickspace\thickspace
+		P(\mi{True}) = 1
+		\thickspace\thickspace\thickspace
+		P(\mi{False}) = 0
+		\thickspace\thickspace\thickspace
+		P(A \vee B) = P(A) + P(B) - P(A \wedge B)
+	\end{math}
+
+	É possibile dimostrare che la probabilitá che un evento
+	\math{A} avvenga é uguale alla somma tra la probabilitá
+	che sia l'evento \math{A} che un certo evento \math{B}
+	avvengano e la probabilitá che sia l'evento \math{A} che
+	l'evento \math{\neg B} avvengano. Questa proprietá é anche
+	detta \strong{formula di disintegrazione}:
+
+	\begin[mode = display]{math}
+		P(A) = P(A \vee B) + P(A \vee \neg B)
+	\end{math}
+
+	Combinando la formula di disintegrazione con la formula
+	per la probabilitá condizionata si ottiene la cosiddetta
+	\strong{formula delle probabilitá totali}:
+
+	\begin[mode = display]{math}
+		P(A) = P(A | B) \cdot P(B) + P(A | \neg B) \cdot P(\neg B)
+	\end{math}
+
+	\math{P(A | B)} e \math{P(B | A)} devono necessariamente
+	soddisfare i due assiomi fondamentali della probabilitá,
+	pertanto dovrá valere:
+
+	\par
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			P(A | \neg B) = 1 - P(\neg A | \neg B)
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			P(B | \neg A) = 1 - P(\neg B | \neg A)
+		\end{math}
+	\end{parbox}
+	\par
+
+	É importante puntualizzare che \math{P(A|B)}, la probabilitá
+	che \math{A} si verifichi sapendo che si é verificato \math{B},
+	non é necessariamente uguale a \math{P(B|A)}, la probabilitá
+	che \math{B} si verifichi sapendo che si é verificato \math{A}.
+	Le due sono peró collegate dalla \strong{formula di Bayes}:
+
+	\begin[mode = display]{math}
+		P{(X | Y)} = \frac{P(Y | X) \cdot P(X)}{P(Y)}
+	\end{math}
+
+	Nel caso in cui \math{P(Y)} sia una costante, dato che
+	questa non dipende da \math{X} (o da \math{P(X)}) viene
+	spesso riportata come costante di normalizzazione. In
+	particolare, con \math{P(Y)^{-1} = \eta}, si ha:
+
+	\begin[mode = display]{math}
+		P(X | Y) = \eta P(Y | X) P(X)
+	\end{math}
+
+	Tale formula riveste grande importanza nel campo
+	dell'intelligenza artificiale perché é alla base
+	di una tecnica di inferenza statistica chiamata
+	\strong{inferenza Bayesiana}. Data una certa ipotesi,
+	é possibile aggiornarla mano a mano che nuove osservazioni
+	vengono condotte, pesando quanto ciascuna osservazione
+	debba essere presa in considerazione. In tal senso, la
+	formula puó essere interpretata in questo modo:
+
+	\begin{itemize}
+		\begin{item}
+			\math{X} é una ipotesi la cui probabilitá é
+			stata stimata sulla base di un certo numero
+			di osservazioni precedenti;
+		\end{item}
+		\begin{item}
+			\math{P(X)} é la \strong{probabilitá a priori},
+			ovvero la stima della probabilitá di \math{X}
+			\em{prima} di aver integrato l'informazione
+			portata da \math{Y};
+		\end{item}
+		\begin{item}
+			\math{Y} é una nuova osservazione, che influirá in
+			maniera piú o meno incisiva sul futuro valore di
+			\math{P(X)};
+		\end{item}
+		\begin{item}
+			\math{P(X | Y)} é la \strong{probabilitá a posteriori},
+			ovvero la stima della probabilitá di \math{X} \em{dopo}
+			aver integrato l'informazione portata da \math{Y};
+		\end{item}
+		\begin{item}
+			\math{P(Y | X)} é la \strong{funzione di
+			verosimiglianza}. In funzione di \math{Y}
+			con \math{X} fissato, indica quanto é
+			compatibile la presenza dell'osservazione
+			\math{Y} rispetto all'ipotesi \math{X};
+		\end{item}
+		\begin{item}
+			\math{P(Y)} é la \strong{verosimiglianza marginale},
+			ed indica la probabilitá di osservare \math{Y} a
+			prescindere da quale sia l'ipotesi \math{X}. Viene
+			anche chiamata semplicemente \strong{evidenza}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Riassumendo:
+
+	\begin[mode = display]{math}
+		\mi{Posteriori} = \frac{\mi{Verosimiglianza} \times
+		\mi{Priori}}{\mi{Evidenza}}
+	\end{math}
+
+	Un'assunzione molto forte che e possibile fare e la cosiddetta
+	\strong{assunzione Markoviana}. In termini molto generali,
+	questa prevede che un processo stocastico che si evolve nel
+	tempo non dipenda da tutte le osservazioni effettuate prima
+	di un un certo istante di tempo, ma solamente da quella
+	immediatamente precedente.
+
+	Si consideri la probabilita \math{P(x | z_{1},
+	\unicodeellipsis, z_{n})}, ovvero la probabilita
+	che si verifichi l'evento \math{x} sapendo che
+	si sono verificati \math{z_{1}, \unicodeellipsis,
+	z_{n}}. Se e valida l'assunzione Markoviana, e
+	possibile applicare la regola di Bayes per esprimere
+	\math{P(x | z_{1}, \unicodeellipsis, z_{n})} come:
+
+	\begin[mode = display]{math}
+		P(x | z_{1}, \unicodeellipsis, z_{n}) =
+		\frac{P(z_{n} | x) P(x | z_{1}, \unicodeellipsis,
+		z_{n - 1})}{P(z_{n} | z_{1}, \unicodeellipsis,
+		z_{n - 1})} = \eta_{n} P(z_{n} | x) P(x | z_{1},
+		\unicodeellipsis, z_{n - 1}) = \eta_{n} P(z_{n} | x)
+		\frac{P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis,
+		z_{n - 2})}{P(z_{n - 1} | z_{1}, \unicodeellipsis,
+		z_{n - 2})} = \eta_{n} P(z_{n} | x) \eta_{n - 1}
+		P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis, z_{n - 2})
+		= \unicodeellipsis = p(x) \prod_{i = 1}^{n} \eta_{i}
+		P(z_{i} | x) 
+	\end{math}
+
+	Questo e un esempio di inferenza statistica chiamata
+	\strong{filtro Bayesiano}.
+
+	Data una variabile aleatoria \math{X}, viene detto
+	\strong{valore atteso} (o \strong{valore medio} o
+	\strong{speranza matematica}) di \math{X} il valore
+	\math{E[X]} cosí calcolato:
+
+	\begin[mode = display]{math}
+		E{[X]} =
+		\{\table[columnalign = left left]{
+			\sum_{s \in S} s p{(s)} &
+			\mi{se} \thickspace \mi{discreta} \\
+			\int_{-\infty}^{+\infty} u f{(u)} \thickspace du &
+			\mi{se} \thickspace \mi{continua}
+		}
+	\end{math}
+
+	Nel caso in cui \math{X} sia una variabile discreta,
+	\math{E[X]} é dato dalla sommatoria di tutti i valori
+	che \math{X} puó assumere moltiplicati per la probabilitá
+	che assumano quel valore. Se invece \math{X} é una variabile
+	aleatoria continua, \math{E[X]} é dato dall'integrale calcolato
+	su tutti i punti su cui é definita moltiplicati per la funzione
+	di densitá calcolata in quel punto.
+
+	É interessante notare come \math{E[X]} sia un valore che
+	dipende dai risultati dell'esperimento a cui é associato,
+	pertanto é esso stesso una variabile aleatoria (e quindi
+	una funzione). Inoltre, il valore medio non é necessariamente
+	uno dei valori assunti dalla variabile aleatoria stessa, e
+	nemmeno é garantito che esista. Nello specifico, questo accade
+	quando la sommatoria o l'integrale da cui viene ricavato
+	non convergono.
+
+	\begin{theorem}
+		Il valore atteso é una funzione lineare: prese due
+		variabili aleatorie \math{X} e \math{Y} e due coefficienti
+		reali \math{a} e \math{b}, vale \math{E[aX + bY] = aE[X] +
+		bE[Y]}.
+	\end{theorem}
+
+	Si consideri una situazione in cui l'agente conosce con
+	certezza l'effetto che hanno le sue azioni, ma non conosce
+	con certezza lo stato in cui si trova. In ogni istante
+	temporale \math{t} l'agente opera una misurazione, che usa
+	per fornire una stima probabilistica del trovarsi nello
+	stato che si aspetta. In risposta alla misurazione, compie
+	una azione e cambia di stato (introducendo ulteriore rumore).
+
+	Si consideri come istante di tempo iniziale \math{t_{0} = 0}.
+	Siano:
+
+	\begin{itemize}
+		\begin{item}
+			\math{x_{t}} lo stato in cui l'agente effettivamente
+			si trova allo stato \math{t};
+		\end{item}
+		\begin{item}
+			\math{z_{t}} la misurazione compiuta dall'agente
+			all'istante \math{t};
+		\end{item}
+		\begin{item}
+			\math{\mu_{t}} l'azione compiuta dall'agente in
+			risposta alla percezione nell'intervallo di tempo
+			\math{(t - 1; t]}.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Come giá detto, l'agente non puó conoscere con certezza
+	in quale stato si trova, e deve limitarsi a dare una stima
+	probabilistica. Sia allora \math{P(x_{t})} la probabilitá
+	"in assoluto" che l'agente si trovi nello stato \math{x} al
+	tempo \math{t}. É ragionevole assumere che la probabilitá
+	che l'agente si trovi in un certo stato in un certo istante
+	dipenda in una qualche misura dalle misurazioni e dalle azioni
+	compiute in precedenza. In tal senso, ció che si ha interesse
+	a calcolare non é tanto \math{P(x_{t})}, quanto quella che
+	viene detta \strong{belief} ("fiducia"):
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			\mi{bel}(x_{t}) = P(x_{t} | \mu_{1}, z_{1}, \mu_{2}, z_{2},
+			\unicodeellipsis, \mu_{t - 1}, z_{t - 1}, \mu_{t}, z_{t})
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			\mi{bel}^{-}(x_{t}) = P(x_{t} | \mu_{1}, z_{1}, \mu_{2}, z_{2},
+			\unicodeellipsis, \mu_{t - 1}, z_{t - 1}, \mu_{t})
+		\end{math}
+	\end{parbox}
+	\par
+
+	La funzione a sinistra indica la probabilita che l'agente si
+	trovi nello stato \math{x} al tempo \math{t} condizionata da
+	tutte le azioni finora intraprese e da tutte le misurazioni
+	compiute. La funzione a destra indica la stessa probabilita
+	ma \em{prima} che l'ultima misurazione venga effettuata. 
+
+	Si noti come \math{\mu_{t}} e \math{z_{t}} partano da
+	\math{t = 1} e non da \math{t = 0}, dato che si assume
+	che lo stato \math{x_{0}} venga determinato a priori.
+	Ovvero, lo stato iniziale dell'agente deve venirgli
+	fornito "dall'esterno", assumendo che questo sia corretto
+	con certezza, e poi sulla base di questo aggiorna di volta
+	in volta la propria conoscenza sul mondo in termini
+	probabilistici.
+
+	Un'assunzione molto forte (e in genere valida) che e possibile
+	fare e la cosiddetta \strong{assunzione Markoviana}. In termini
+	molto generali, questa prevede che un processo stocastico che
+	si evolve nel tempo non dipenda da tutte le osservazioni
+	effettuate prima di un un certo istante di tempo, ma solamente
+	da quella immediatamente precedente. Nel contesto in esame,
+	questo equivale a dire che il grado di fiducia dell'agente al
+	tempo \math{t} dipende solamente dalla misurazione compiuta
+	e dall'azione intrapresa al tempo \math{t - 1}. Se tale
+	assunzione vale, e possibile semplificare le espressioni
+	precedenti come:
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			\mi{bel}(x_{t}) = P(x_{t} | \mu_{t}, z_{t})
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			\mi{bel}^{-}(x_{t}) = P(x_{t} | \mu_{t})
+		\end{math}
+	\end{parbox}
+	\par
+
+	Al fine di costruire un agente in grado di aggiornare la
+	propria conoscenza sul mondo di volta in volta (prendendo
+	per buona l'assunzione Markoviana), e necessario che questo
+	possa esprimere il proprio grado di fiducia in un certo
+	istante in funzione del suo grado di fiducia nell'istante
+	precedente \footnote{Questo tipo di approccio viene spesso
+	utilizzato nella robotica, dove la posizione di un robot in
+	un ambiente ignoto parte da un valore noto e viene mano a
+	mano aggiornata ogni qual volta che l'agente si sposta,
+	ricalcolando la probabilita che l'agente si trovi nella
+	coordinata spaziale che i suoi calcoli rilevano.}.
+
+	\begin{theorem}
+		\strong{Filtro Bayesiano per agenti probabilistici}. Se sono
+		valide le assunzioni Markoviane, e possibile esprimere il
+		grado di fiducia dell'agente al tempo \math{t} in funzione
+		del grado di fiducia dell'agente al tempo \math{t - 1} secondo
+		la seguente equazione:
+
+		\begin[mode = display]{math}
+			bel{(x_{t})} = \eta P{(z_{t} | x_{t})} \int P{(x_{t} |
+			\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1}
+		\end{math}
+
+		\strong{Dimostrazione}. Sia il grado di fiducia dell'agente
+		al tempo \math{t} espresso come di consueto:
+
+		\begin[mode = display]{math}
+			\mi{bel}(x_{t}) = P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}, z_{t})			
+		\end{math}
+
+		Applicando la regola di Bayes:
+
+		\begin[mode = display]{math}
+			\mi{bel}(x_{t}) = \eta
+			P(z_{t} | x_{t}, \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t})
+			P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t})
+		\end{math}
+
+		Prendendo come valida l'assunzione Markoviana, e possibile
+		semplificare l'espressione come:
+
+		\begin[mode = display]{math}
+			\mi{bel}(x_{t}) = \eta P(z_{t} | x_{t})
+			P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t})
+		\end{math}
+
+		Applicando la formula delle probabilitá totali:
+
+		\begin[mode = display]{math}
+			\mi{bel}(x_{t}) = \eta P(z_{t} | x_{t})
+			\int P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}, x_{t - 1})
+			P(x_{t - 1} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}) dx_{t - 1}
+		\end{math}
+
+		Prendendo come valida l'assunzione Markoviana, e possibile
+		semplificare l'espressione come:
+
+		\begin[mode = display]{math}
+			\mi{bel}(x_{t}) = \eta P(z_{t} | x_{t}) \int P(x_{t} | \mu_{t}, x_{t - 1})
+			P(x_{t - 1} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}) dx_{t - 1}
+		\end{math}
+
+		Che equivale a scrivere:
+
+		\begin[mode = display]{math}
+			bel{(x_{t})} = \eta P{(z_{t} | x_{t})} \int P{(x_{t} |
+			\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1}
+		\end{math}
+	\end{theorem}
+
+	Questa e una forma di filtro Bayesiano. Nel contesto degli
+	agenti probabilistici, per implementarlo nella forma di un
+	algoritmo, si preferisce separare il procedimento in due
+	parti, l'osservazione e l'attuazione.
+
+	L'attuazione corrisponde al ricavare \math{\mi{bel}(x_{t})} a
+	partire da \math{\mi{bel}^{-}(x_{t})}. Questo puo essere
+	fatto banalmente applicando la regola di Bayes all'espressione
+	per \math{\mi{bel}(x_{t})}:
+
+	\begin[mode = display]{math}
+		\mi{bel}(x_{t}) = P(x_{t} | \mu_{t}, z_{t}) =
+		\eta P(z_{t} | x_{t}) P(x_{t} | \mu_{t}) =
+		\eta P(z_{t} | x_{t}) \mi{bel}^{-1}(x_{t})
+	\end{math}
+
+	L'osservazione corrisponde al ricavare \math{\mi{bel}^{-}(x_{t})}
+	a partire da \math{\mi{bel}(x_{t - 1})}. Questo puo essere fatto
+	combinando il risultato appena ottenuto con la formula completa
+	per il filtro Bayesiano:
+
+	\begin[mode = display]{math}
+		bel{(x_{t})} = \eta P{(z_{t} | x_{t})} \int P{(x_{t} |
+		\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1} =
+		\eta P(z_{t} | x_{t}) \mi{bel}^{-1}(x_{t})
+		\thickspace \Rightarrow \thickspace
+		\mi{bel}^{-1}(x_{t}) = \int P{(x_{t} |
+		\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1}
+	\end{math}
+
+	Traducendo la ricorsione in una iterazione, si ottiene il
+	seguente
+	algoritmo:
+
+	\begin{verbatim}
+		procedure BAYESIAN-FILTER(bel(X), d)
+		    \unichar{U+03B7} \unichar{U+2190} 0
+		    if (d e una percezione z) then
+		        foreach x in X do
+		            bel'(x) \unichar{U+2190} p(z | x) bel(x)
+		            \unichar{U+03B7} \unichar{U+2190} \unichar{U+03B7} + bel'(x)
+		        foreach x in X do
+		            bel'(x) \unichar{U+2190} {\unichar{U+03B7}}\textsuperscript{-1} bel'(x)
+		    else if (d e una azione \unichar{U+03B7}) then
+		        foreach x in X do
+		            bel'(x) \unichar{U+2190} \integral P(x | \unichar{U+03B7}, x') bel(x') dx'
+		    \thickspace 
+		    return bel'(X)
+	\end{verbatim}
+
+	Si noti come il calcolo di \math{\mi{bel}(x_{t})} debba venire
+	ripetuto per tutti i possibili stati \math{x \in X} in ciascuna
+	iterazione. Questo puo essere un calcolo estremamente esoso,
+	specialmente se il numero di stati sono molti. In genere, il
+	procedimento viene ottimizzato escludendo tutti gli stati che
+	hanno associata una probabilita molto bassa, ed effettuando
+	l'aggiornamento solamente degli stati che hanno probabilita
+	oltre una certa soglia minima.
+
+\end{sile}

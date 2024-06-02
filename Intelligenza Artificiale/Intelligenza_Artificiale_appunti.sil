@@ -93,8 +93,10 @@
 		\include[src = Ricerca/Informata.sil]
 		\section{Planning classico}
 		\include[src = Ricerca/Classical.sil]
-		\section{Planning probabilistico}
+		\section{Planning probabilistico: filtri Bayesiani}
 		\include[src = Ricerca/Probabilistic.sil]
+		\section{Planning probabilistico: MDP}
+		\include[src = Ricerca/MDP.sil]
 	\chapter{Intelligenza artificiale sub-simbolica}
 		\section{Apprendimento}
 		\include[src = Subsimbolica/Apprendimento.sil]
