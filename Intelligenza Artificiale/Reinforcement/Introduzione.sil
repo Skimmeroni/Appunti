@@ -1,0 +1,67 @@
+\begin{sile}
+
+	Nel \strong{reinforcement learning} l'agente apprende
+	mediante una serie di rinforzi, sia positivi (ricompense)
+	che negativi (punizioni). In sostanza, l'agente cerca
+	di determinare quali sono le azioni che minimizzano le
+	punizioni e massimizzano le ricompense per poi applicarle.
+
+	Nel reinforcement learning, l'agente interagisce con
+	l'ambiente e riceve periodicamente delle ricompense o
+	delle punizioni, sotto forma di \strong{segnali}, che
+	riflettono il modo in cui sta operando. Non é presente
+	alcun supervisore. In genere il \strong{feedback}, ovvero
+	la reazione dell'agente al segnale, non é immediata, ma
+	impiega del tempo per essere elaborata. Possono presentarsi
+	delle situazioni in cui il guadagno sul breve termine deve
+	essere sacrificato per ottenere un guadagno sul lungo termine.
+
+	L'operato dell'agente si traduce quindi nel massimizzare
+	la ricompensa che gli viene fornita e minimizzare la
+	punizione. Questo tipo di apprendimento richiede che sia
+	valida (o che, piú correttamente, venga assunto essere
+	valida) la cosiddetta \strong{reward hypothesis}, ovvero
+	che tutti gli obiettivi possano essere espressi in termini
+	di valore atteso di ricompensa. Questo non solo non é sempre
+	possibile, ma spesso ha anche un risultato non neutrale.
+
+	Il concetto di ricompensa era giá presente nei Markov
+	Decision Process, e l'obiettivo degli MDP é il medesimo
+	del reinforcement learning: massimizzare la ricompensa
+	attesa migliorando la propria politica. Tuttavia, il
+	reinforcement learning non consiste semplicemente nel
+	risolvere un MDP: l'agente é parte dell'MDP. Infatti,
+	non conosce a priori la funzione di transizione e la
+	funzione di ricompensa: il massimo che puó fare é
+	stimarle sulla base delle sue osservazioni.
+
+	Esistono fondamentalmente due approcci al reinforcement learning:
+
+	\begin{itemize}
+		\begin{item}
+			\strong{Model-based Reinforcement learning}, dove
+			l'agente ipotizza, a partire dalle sue osservazioni
+			sull'ambiente, quale possa essere una funzione di
+			transizione in grado di interpretare i segnali di
+			ricompensa. In genere, gli agenti che adottano questo
+			approccio cercano di imparare una funzione di utilitá
+			\math{U(s)} definita in termini di somma delle
+			ricompense dallo stato \math{s} in poi;
+		\end{item}
+		\begin{item}
+			\strong{Model-free reinforcement learning},
+			dove l'agente non solo non conosce la funzione
+			di transizione dell'ambiente, ma nemmeno la
+			modellizza, apprendendo invece una rappresentazione
+			piú diretta su come agire.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
+
+	Essendo i problemi di reinforcement learning intrinsecamente
+	sequenziali (ad ogni passaggio, l'agente subisce l'effetto di
+	un segnale), é in genere preferibile una situazione in cui
+	vale l'assunzione Markoviana.
+
+\end{sile}

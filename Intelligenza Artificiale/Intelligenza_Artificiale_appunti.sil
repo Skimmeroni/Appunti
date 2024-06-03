@@ -82,7 +82,7 @@
 		\include[src = Conoscenza/Schema.sil]
 		\section{OWL}
 		\include[src = Conoscenza/OWL.sil]
-	\chapter{Search and plan}
+	\chapter{Problemi di ricerca}
 		\section{Risolvere problemi con la ricerca}
 		\include[src = Ricerca/Introduzione.sil]
 		\section{Algoritmi di ricerca}
@@ -91,33 +91,41 @@
 		\include[src = Ricerca/Non_informata.sil]
 		\section{Ricerca informata}
 		\include[src = Ricerca/Informata.sil]
+	\chapter{Problemi di planning}
 		\section{Planning classico}
-		\include[src = Ricerca/Classical.sil]
+		\include[src = Planning/Classical.sil]
 		\section{Planning probabilistico: filtri Bayesiani}
-		\include[src = Ricerca/Filtro.sil]
+		\include[src = Planning/Filtro.sil]
 		\section{Planning probabilistico: MDP}
-		\include[src = Ricerca/MDP.sil]
-	\chapter{Apprendimento Automatico}
-		\section{Apprendimento}
-		\include[src = Subsimbolica/Apprendimento.sil]
+		\include[src = Planning/MDP.sil]
+	\chapter{Supervised Learning}
+		\section{Introduzione all'apprendimento supervisionato}
+		\include[src = Supervised/Introduzione.sil]
 		\section{Alberi di decisione}
-		\include[src = Subsimbolica/Decisione.sil]
+		\include[src = Supervised/Decisione.sil]
 		\section{Valutare modelli di classificazione}
-		\include[src = Subsimbolica/Valutazione.sil]
+		\include[src = Supervised/Valutazione.sil]
 		\section{K-nearest neighbour}
-		\include[src = Subsimbolica/Knn.sil]
+		\include[src = Supervised/Knn.sil]
 		\section{Metodi ensemble}
-		\include[src = Subsimbolica/Ensemble.sil]
-		\section{Percettrone}
-		\include[src = Subsimbolica/Perceptron.sil]
-		%\section{Deep Learning}
-		%\include[src = Subsimbolica/Deep.sil]
+		\include[src = Supervised/Ensemble.sil]
+	\chapter{Unsupervised Learning}
+		\section{Introduzione all'apprendimento non supervisionato}
+		\include[src = Supervised/Introduzione.sil]
 		\section{Clustering basato su partizioni: K-means}
-		\include[src = Subsimbolica/Kmeans.sil]
+		\include[src = Unsupervised/Kmeans.sil]
 		\section{Clustering basato su densitá: DBSCAN}
-		\include[src = Subsimbolica/DBSCAN.sil]
+		\include[src = Unsupervised/DBSCAN.sil]
+	\chapter{Deep Learning}
+		\section{Percettrone}
+		\include[src = Deep/Perceptron.sil]
+		%\section{Deep Learning}
+		%\include[src = Deep/Deep.sil]
+	%\chapter{Reinforcement Learning}
+		\section{Introduzione all'apprendimento con rinforzo}
+		\include[src = Supervised/Introduzione.sil]
 		%\section{Reinforcement Learning}
-		%\include[src = Subsimbolica/RL.sil]
+		%\include[src = Reinforcement/RL.sil]
 	\chapter[numbering = false]{Appendice}
 		\section{Teoria della probabilita}
 		\include[src = Appendice/Probabilita.sil]

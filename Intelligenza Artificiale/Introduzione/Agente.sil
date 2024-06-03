@@ -396,4 +396,59 @@
 		\center{\img[src = Introduzione/agent5.pdf, width = 65%fw]}
 		\bigskip
 
+		Si dice che un agente compie un \strong{apprendimento} se
+		migliora le proprie prestazioni dopo aver compiuto delle
+		osservazioni sull'ambiente. Quando l'agente in questione
+		é un computer, si parla di \strong{machine learning}: il
+		computer ricava dei dati, costruisce un modello sulla base
+		di questi ultimi ed utilizza tale modello sia come ipotesi
+		sul mondo che come software in grado di risolvere problemi.
+
+		La programmazione tradizionale prevede essenzialmente di
+		descrivere delle regole che, fornite ad un computer, risolvono
+		un problema. Questo presuppone che il programmatore sappia
+		\em{giá}, in una qualche misura, come risolverlo. Nel machine
+		learning, il programmatore stabilisce un modo per produrre dati
+		che addestri un algoritmo di apprendimento a descrivere tali
+		regole in maniera automatica al suo posto.
+
+		I motivi per investire su un agente in grado di apprendere
+		sono fondamentalmente due. Il primo é che il designer non é
+		in grado di anticipare ogni possibile situazione futura, ed
+		é quindi necessario che sia l'agente stesso (eventualmente
+		guidato) a prendersene carico. Il secondo é che alcuni
+		problemi sono cosí complessi che nemmeno il designer é in
+		grado di determinare come risolverli, eppure sufficientemente
+		approcciabili da poter fornire gli strumenti all'agente per
+		poterlo fare.
+
+		Si noti come, nella maggior parte dei casi, un algoritmo di
+		machine learning non prevede che questo debba costantemente
+		apprendere, cosí come non debba necessariamente apprendere
+		piú di una volta. Nonostante esistano alcuni algoritmi di
+		machine learning basati sull'apprendimento continuo, in
+		genere questi apprendono a partire da uno o piú dataset
+		e mantengono indefinitamente la conoscenza acquisita.
+		Similmente, le prestazioni di un algoritmo di machine
+		learning non necessariamente migliorano aggiungendo
+		nuovi dati alla sua conoscenza. Tali dati potrebbero
+		infatti non fare altro che "confondere" l'immagine del
+		mondo che l'algoritmo si é fatto.
+
+		Nello specifico, esistono due metodi per far apprendere
+		ad algoritmo di machine learning: \strong{batch learning}
+		e \strong{online learning}. Nel primo, l'algoritmo viene
+		addestrato a partire dall'intero dataset, mentre nel
+		secondo l'algoritmo viene addestrato fornendogli i dati
+		sequenzialmente, in maniera individuale o in piccoli gruppi
+		detti mini-batch. L'online learning permette di addestrare
+		un algoritmo con un ammontare di dati che, se considerati
+		tutti in una sola volta, richiederebbero risorse computazionali
+		proibitive, ma richiede maggiore attenzione perché le
+		informazioni apprese in ciascun istante possono influenzare
+		ció che viene appreso negli istanti successivi. A tale
+		scopo é necessario definire un \strong{learning rate}, ovvero
+		quanto rapidamente debba l'algoritmo adattarsi alle nuove
+		informazioni che vengono introdotte.
+
 \end{sile}

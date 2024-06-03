@@ -1,0 +1,45 @@
+\begin{sile}
+		
+	Nel \strong{supervised learning} l'agente sviluppa
+	modelli predittivi sia sulla base dell'input che
+	dell'output. Nello specifico, osserva diverse coppie
+	di input-output e cerca di determinare la funzione che
+	meglio mappa ogni input al relativo output. Un esempio
+	di supervised learning é la \strong{classificazione}:
+	ai dati in input viene associata una \strong{label} ed
+	i dati vengono raggruppati sulla base di tali label.
+
+	L'obiettivo del supervised learning é il seguente: dato
+	un \strong{training set} di \math{N} esempi, costituiti
+	da coppie input-output \math{(x_{1}, y_{1}), (x_{2}, y_{2}),
+	\unicodeellipsis, (x_{n}, y_{n})} generati da una funzione
+	ignota \math{y = f(x)}, si trovi la funzione \math{h} che
+	meglio approssima \math{f}. Si noti come \math{x_{i}} possa
+	essere indifferentemente uno scalare oppure un vettore a
+	\math{k} componenti.
+
+	La funzione \math{h} viene chiamata \strong{ipotesi}, ed
+	é estratta da uno \strong{spazio di ipotesi} \math{H} di
+	possibili funzioni. Con un diverso vocabolario é possibile
+	chiamare \math{h} il \strong{modello} dei dati, estratto da
+	una \strong{classe di modelli} \math{H}, oppure come una
+	\strong{funzione} estratta da una \strong{classe di funzioni}.
+	I valori dell'output \math{y_{i}} vengono chiamati \strong{veritá
+	di base}: rappresentano i valori "reali" che il modello deve
+	cercare di prevedere. In prima battuta, é possibile considerare
+	buona un'ipotesi \math{h} se, per ogni coppia input-output
+	\math{(x_{i}, y_{i})}, \math{h(x_{i})} restituisce un valore
+	che approssima bene \math{y_{i}}.
+
+	\begin{example}
+		Un esempio di supervised learning si ha nei filtri antispam
+		dei client di posta elettronica. L'idea é quella di fornire
+		al filtro un grande quantitativo di email contrassegnate come
+		spam ed un grande quantitativo di email contrassegnate come
+		non spam, di modo che questo possa estrarre dei pattern comuni
+		nelle email spam e non spam. A questo punto, se viene fornita
+		al filtro una mail qualsiasi, questo é (dovrebbe essere) in
+		grado di determinare autonomamente se la mail é o non é spam. 
+	\end{example}
+
+\end{sile}
