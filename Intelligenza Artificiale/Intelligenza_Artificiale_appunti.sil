@@ -97,7 +97,7 @@
 		\include[src = Ricerca/Filtro.sil]
 		\section{Planning probabilistico: MDP}
 		\include[src = Ricerca/MDP.sil]
-	\chapter{Intelligenza artificiale sub-simbolica}
+	\chapter{Apprendimento Automatico}
 		\section{Apprendimento}
 		\include[src = Subsimbolica/Apprendimento.sil]
 		\section{Alberi di decisione}
