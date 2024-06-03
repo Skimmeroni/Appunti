@@ -116,8 +116,8 @@
 		\include[src = Subsimbolica/Kmeans.sil]
 		\section{Clustering basato su densitá: DBSCAN}
 		\include[src = Subsimbolica/DBSCAN.sil]
-		%\section{Q-learning}
-		%\include[src = Subsimbolica/Q.sil]
+		%\section{Reinforcement Learning}
+		%\include[src = Subsimbolica/RL.sil]
 	\chapter[numbering = false]{Appendice}
 		\section{Teoria della probabilita}
 		\include[src = Appendice/Probabilita.sil]

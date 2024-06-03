@@ -65,7 +65,8 @@
 	Pertanto, una soluzione per agenti probabilistici deve
 	specificare cosa un agente debba fare in \em{ogni} stato
 	in cui l'agente potrebbe trovarsi. A tale scopo, é necessario
-	introdurre il concetto di \strong{politica}.
+	introdurre il concetto di \strong{politica}, la soluzione di
+	un MDP.
 
 	Una politica \math{\pi} e una funzione che mappa ciascuno
 	stato del problema ad un'azione \footnote{Il motivo per
