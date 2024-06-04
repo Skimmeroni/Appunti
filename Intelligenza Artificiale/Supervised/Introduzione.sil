@@ -42,4 +42,22 @@
 		grado di determinare autonomamente se la mail é o non é spam. 
 	\end{example}
 
+	Vi sono due situazioni patologiche molto comuni che possono
+	presentarsi nella costruzione di un modello supervisionato,
+	\strong{underfitting} e \strong{overfitting}. La prima si 
+	verifica quando il modello costruito predice male i dati
+	passati, mentre la seconda si verifica quando il modello
+	predice "cosi bene" i dati su cui e allenato da non tollerare
+	alcun grado di impurita, tanto da fallire per molti dataset
+	solo leggermente differenti Naturalmente, la prima situazione
+	e peggiore della seconda, perche se l'overfitting produce
+	un modello scadente ma comunque funzionante, l'underfitting
+	produce un modello del tutto inutilizzabile.
+
+	Sia data una tabella avente \math{n} colonne, e le prime
+	\math{n - 1} sono le features, mentre l'ultima è l'annotazione.
+	Se tale annotazione è un valore booleano, si parla di
+	\strong{classificazione}, mentre se è un valore numerico
+	si parla di \strong{regressione}.
+
 \end{sile}
