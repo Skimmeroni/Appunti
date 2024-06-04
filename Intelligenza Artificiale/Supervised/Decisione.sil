@@ -8,7 +8,10 @@
 	attributi di ciascun elemento del dataset, mentre l'ultima
 	riporta il valore booleano che determina se tale elemento
 	deve venire classificato positivamente (\tt{True}) o
-	negativamente (\tt{False}).
+	negativamente (\tt{False}). Gli elementi che come valore
+	dell'ultima colonna hanno \tt{True} vengono anche detti
+	\strong{elementi positivi}, mentre quelli che hanno
+	\tt{False} vengono anche detti \strong{elementi negativi}.
 
 	I valori riportati nelle prime \math{n - 1} colonne
 	della tabella possono essere sia discreti che continui;
