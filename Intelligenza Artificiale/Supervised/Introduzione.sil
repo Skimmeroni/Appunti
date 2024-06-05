@@ -116,4 +116,17 @@
 	iperparametri sono i piu performanti viene poi allenato con
 	il training set e testato con il test set come di consueto.
 
+	Alcuni metodi di apprendimento operano esclusivamente su dati
+	numerici, mentre altri possono operare su dati di qualsiasi
+	tipo. E comunque possibile convertire un dato generico in uno
+	o piu dati numerici equivalenti a partire da una \strong{codifica}.
+	Una codifica molto semplice prende il nome di \strong{one hot
+	encoding}, applicabile quando il dominio dell'attributo generico
+	e discreto e non troppo grande. Questa prevede di sostituire
+	l'attributo con tante variabili binarie quanti sono i valori
+	che l'attributo puo assumere: se un elemento del dataset aveva
+	come \math{i} come valore dell'attributo, allora la \math{i}-esima
+	di queste variabili binarie avra valore 1 e tutte le rimanenti
+	valore 0.
+
 \end{sile}

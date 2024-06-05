@@ -1,65 +1,66 @@
 \begin{sile}
 
-	Fino ad ora sono stati considerati metodi di apprendimento che
-	costruiscono un'ipotesi sulla base della quale vengono fatte 
-	delle predizioni. Alcune ipotesi hanno ottima precision che e
-	bassa recall (tutti i positivi sono effettivamente positivi, ma
-	alcuni vengono tralasciati), mentre altre hanno ottima recall
-	e bassa precision (non tralascia alcun caso ma parte dei positivi
-	sono falsi positivi). L'idea dei \strong{metodi ensemble} é
-	di costruire una collezione di ipotesi \math{h_{1}, h_{2},
-	\unicodeellipsis, h_{n}}, detta \strong{ensemble}, e combinare
-	le loro predizioni.
+	Fino ad ora sono stati considerati metodi di apprendimento
+	che costruiscono un'ipotesi sulla base della quale vengono
+	fatte delle predizioni. Alcune ipotesi hanno ottima precision
+	e bassa recall (tutti i positivi sono effettivamente positivi,
+	ma alcuni vengono tralasciati), mentre altre hanno ottima
+	recall e bassa precision (non tralascia alcun caso ma parte
+	dei positivi sono falsi positivi). L'idea dei \strong{metodi
+	ensemble} é di costruire una collezione di ipotesi \math{h_{1},
+	h_{2}, \unicodeellipsis, h_{n}}, detta \strong{ensemble}, e
+	combinare le loro predizioni, ottenendo una nuova ipotesi piu
+	preciso di quanto possa esserla ciascuna presa singolarmente.
 
-	Questo puó venire fatto calcolando la media sulle predizioni di
-	ciascuna, scegliendone una di volta in volta o con un "ulteriore
-	livello" di machine learning, che analizza le ipotesi e apprende
-	quali ipotesi tendono ad essere migliori. Ciascuna ipotesi prende
-	il nome di \strong{modello base}, mentre la loro combinazione
+	Questo puó venire fatto in diversi modi, ad esempio calcolando la
+	media sulle predizioni di ciascuna, scegliendone una di volta in
+	volta secondo un sistema di voti oppure con un "ulteriore livello"
+	di apprendimento, che analizza le ipotesi e apprende quali ipotesi
+	tendono ad essere migliori. Ciascuna ipotesi singola prende il
+	nome di \strong{modello base}, mentre la loro combinazione
 	\strong{modello ensemble}.
-
-	I metodi ensemble permettono di ridurre il bias. Lo spazio di
-	ipotesi di un modello base potrebbe essere troppo restrittivo,
-	imponendo un forte bias; un modello ensemble combina piú modelli
-	base, pertanto é piú flessibile e piú espressivo di un singolo
-	modello. Inoltre, i metodi ensemble permettono di ridurre la 
-	varianza, perché una parte dello spazio di ipotesi non catturata
-	da un modello base puó essere catturata da un altro modello base.
 
 	Si noti come sia del tutto irrealistico assumere che le ipotesi
 	siano fra loro indipendenti, dato che condividono sia gli stessi
-	dati che le stesse assunzioni. Per questo motivo, se un errore é
-	presente nella maggior parte dei modelli base, questo sará presente
-	anche nel modello ensemble. Inoltre, per costruire un modello ensemble
-	é necessario costruire \math{n} modelli base, e se il costo in termini
-	di prestazione per la costruzione di un singolo modello é proibitiva
-	quello per la costruzione di \math{n} modelli lo é ancor di piu.
+	dati che le stesse assunzioni. Per questo motivo, se un errore
+	é presente nella maggior parte dei modelli base, questo sará
+	presente anche nel modello ensemble. Inoltre, per costruire un
+	modello ensemble é necessario costruire \math{n} modelli base,
+	e se il costo in termini di prestazione per la costruzione di
+	un singolo modello é proibitiva, quello per la costruzione di
+	\math{n} modelli lo é ancor di piu. Nonostante questo, il
+	miglioramento qualitativo di un modello ensemple potrebbe
+	comunque giustificare l'investimento.
 
 	\subsection{Bagging}
 
-		Il \strong{Bagging} (contrazione di \strong{Bootstrap AGGregatING})
-		é un metodo ensemble che prevede di generare \math{K} training
-		set distinti a partire dal dataset originale \math{D} operando
-		\math{\abs{D}} estrazioni con reimmissione sullo stesso \math{D}.
-		Ovvero, vengono costruiti \math{K} dataset scegliendo casualmente
-		un elemento di \math{D} per \math{\abs{D}} volte, con la possibilitá
-		che venga scelto piú volte uno stesso elemento.
+		Il \strong{Bagging} (contrazione di \strong{Bootstrap
+		AGGregatING}) é un metodo ensemble che prevede di generare
+		diversi training set distinti da uno di partenza mediante
+		estrazioni con reimmissione. Nello specifico, sia \math{D}
+		il dataset a disposizione: per \math{k} volte, viene costruito
+		un dataset \math{S_{i}} con \math{1 \leq i \leq k} scegliendo
+		per \math{\abs{D}} volte un elemento qualsiasi di \math{D}.
+		Si noti come uno stesso elemento possa trovarsi piu volte
+		all'interno dello stesso \math{S_{i}}.
 
-		Per ciascuno dei \math{K} dataset viene poi costruita un'ipotesi,
-		ottenendo \math{K} ipotesi distinte. Quando é necessario testare
-		un nuovo input, questo viene valutato su tutte le ipotesi ed il
-		giudizio finale é ottenuto combinando i risultati di tutte queste.
-		Per un problema di classificazione, questo di fatto significa
-		scegliere il risultato su cui la maggior parte delle ipotesi
-		concordano.
+		Ciascun \math{S_{i}} viene utilizzato come training
+		set per un'ipotesi \math{h_{i}}, ottenendo cosi \math{k}
+		ipotesi distinte. Quando é necessario testare un input,
+		questo viene valutato su tutte e \math{k} le ipotesi ed
+		il giudizio finale é ottenuto combinando i risultati di
+		tutte. Per un problema di classificazione, questo consiste
+		nello scegliere il risultato su cui la maggior parte delle
+		ipotesi concordano.
 
-		Il bagging puó essere applicato a qualsiasi classe di ipotesi,
-		ma é particolarmente efficiente nei modelli \strong{instabili}
-		(come gli alberi di decisione), ovvero i modelli dove una piccola
-		variazione nel training set comporta una variazione consistente
-		nel modello. Nei modelli \strong{stabili} (come k-nearest neighbour),
-		il bagging puó addirittura generare un ensemble di ipotesi con una
-		performance peggiore dei singoli modelli base.
+		Il bagging puó essere applicato a qualsiasi classe di
+		ipotesi, ma é particolarmente efficiente nei modelli
+		\strong{instabili} (come gli alberi di decisione),
+		ovvero i modelli dove una piccola variazione nel training
+		set comporta una variazione consistente nel modello. Nei
+		modelli \strong{stabili} (come k-nearest neighbour), il
+		bagging puó addirittura generare un ensemble di ipotesi
+		con una performance peggiore dei singoli modelli base.
 
 	\subsection{Boosting}
 
@@ -71,24 +72,27 @@
 		i cui elementi hanno associato un peso é detto
 		\strong{dataset pesato}.
 
-		Inizialmente, a tutti gli elementi di \math{D} é associato
-		un peso pari ad 1. Viene costruita una prima ipotesi \math{h_{1}}
-		usando un certo algoritmo di apprendimento; questa inevitabilmente
-		classificherá incorrettamente una parte (idealmente piccola) del
-		dataset. A tali dati viene incrementato il peso e viene costruita
-		una nuova ipotesi sul dataset cosí modificato. Il procedimento
-		viene ripetuto per \math{k} volte, con \math{k} fissato, generando
-		\math{k} ipotesi. I valori di \math{D} difficili da classificare
-		aumenteranno costantemente di peso fino a quando l'algoritmo non
-		sará costretto a prendere in considerazione tali valori e
-		generare un'ipotesi che la classifichi correttamente.
+		Inizialmente, a tutti gli elementi di \math{D} é
+		associato un peso pari ad 1. Viene costruita una
+		prima ipotesi \math{h_{1}} usando un certo algoritmo
+		di apprendimento; questa inevitabilmente classificherá
+		incorrettamente una parte (idealmente piccola) del
+		dataset. A tali dati viene incrementato il peso e viene
+		costruita una nuova ipotesi sul dataset cosí modificato.
+		Il procedimento viene ripetuto per \math{k} volte, con
+		\math{k} fissato, generando \math{k} ipotesi. I valori
+		di \math{D} difficili da classificare aumenteranno
+		costantemente di peso fino a quando l'algoritmo non
+		sará costretto a prendere in considerazione tali valori
+		e generare un'ipotesi che la classifichi correttamente.
 
-		Il modello ensemble cosí costruito classifica i dati sulla base
-		dei voti dei modelli base, come nel bagging, ma in questo caso i
-		voti sono pesati: alle ipotesi che hanno performato meglio sui
-		rispettivi training set vengono dati piú voti. Indicando con 
-		\math{z_{i}} il peso assegnato a ciascuna ipotesi, il risultato
-		finale é dato da:
+		Il modello ensemble cosí costruito classifica i dati
+		sulla base dei voti dei modelli base, come nel bagging,
+		ma in questo caso i voti sono pesati: alle ipotesi che
+		hanno performato meglio sui rispettivi training set
+		vengono dati piú voti. Indicando con \math{z_{i}} il
+		peso assegnato a ciascuna ipotesi, il risultato finale
+		é dato da:
 
 		\begin[mode = display]{math}
 			h{(\bi{x})} = \sum_{i = 1}^{K} z_{i}h_{i} {(\bi{x})}
@@ -97,18 +101,20 @@
 		L'idea alla base del boosting é implementata in diversi
 		algoritmi. Fra questi, \tt{ADABOOST} é quello in genere
 		utilizzato quando i modelli base sono alberi di decisione.
-		\tt{ADABOOST} possiede una importante proprietá: se l'algoritmo
-		di apprendimento che costruisce l'ipotesi é un \strong{algoritmo
-		di apprendimento debole}, ovvero che l'algoritmo restituisce una
-		ipotesi la cui accuratezza sul training set é leggermente migliore
-		dello scegliere a caso, allora il modello ensemble restituito da
-		\tt{ADABOOST} classifica i dati perfettamente se il numero di
-		modelli base é sufficientemente grande.
+		\tt{ADABOOST} possiede una importante proprietá: se
+		l'algoritmo di apprendimento che costruisce l'ipotesi é
+		un \strong{algoritmo di apprendimento debole}, ovvero che
+		l'algoritmo restituisce una ipotesi la cui accuratezza sul
+		training set é leggermente migliore dello scegliere a caso,
+		allora il modello ensemble restituito da \tt{ADABOOST}
+		classifica i dati perfettamente se il numero di modelli
+		base é sufficientemente grande.
 
-		Sia dato un insieme di \math{m} esempi \math{\langle (x_{1},
-		y_{1}), \unicodeellipsis, (x_{m}, y_{m}) \rangle}, con etichette
-		\math{y_{i} \in Y = \{1, \unicodeellipsis, k\}}. Fissato un numero
-		di iterazioni \math{T}, l'algoritmo é il seguente:
+		Sia dato un insieme di \math{m} esempi \math{\langle
+		(x_{1}, y_{1}), \unicodeellipsis, (x_{m}, y_{m}) \rangle},
+		con etichette \math{y_{i} \in Y = \{1, \unicodeellipsis,
+		k\}}. Fissato un numero di iterazioni \math{T}, l'algoritmo
+		é il seguente:
 
 		\begin{enumerate}
 			\begin{item}
@@ -128,7 +134,8 @@
 				\math{h_{t}} su \math{D_{t}}:
 
 				\begin[mode = display]{math}
-					\epsilon_{t} = \sum_{h_{t}(x_{i}) \ne y_{i}} D_{t} {(i)}
+					\epsilon_{t} = \sum_{h_{t}(x_{i}) \ne y_{i}}
+					D_{t} {(i)}
 				\end{math}
 			\end{item}
 			\begin{item}
@@ -140,30 +147,41 @@
 				Sia \math{\beta_{t} = \epsilon_{t}(1 - \epsilon_{t})};
 			\end{item}
 			\begin{item}
-				Si costruisca il dataset \math{D_{t + 1}(i)} da utilizzare
-				per l'iterazione successiva:
+				Si costruisca il dataset \math{D_{t + 1}(i)}
+				da utilizzare per l'iterazione successiva:
 
 				\begin[mode = display]{math}
 					D_{t + 1} {(i)} = \frac{D_{t}(i)}{Z_{t}} \times
 					\{\table{
-						\beta_{t} & \mi{se} \thickspace h_{t}(x_{i}) = y_{i} \\
+						\beta_{t} & \mi{se} \thickspace h_{t}(x_{i}) =
+									 y_{i} \\
 						1         & \mi{altrimenti} \\
 					}
 				\end{math}
 
-				Dove \math{Z_{t}} é una costante di normalizzazione scelta
-				di modo che \math{D_{t + 1}} sia ancora una distribuzione;
+				Dove \math{Z_{t}} é una costante di normalizzazione
+				scelta di modo che \math{D_{t + 1}} sia ancora una
+				distribuzione;
 			\end{item}
 			\begin{item}
-				Se \math{t < T}, si pone \math{t = t + 1} e l'algoritmo
-				riprende dal punto 3. Altrimenti, il modello ensemble é
-				cosí costruito:
+				Se \math{t < T}, si pone \math{t = t + 1} e
+				l'algoritmo riprende dal punto 3. Altrimenti,
+				il modello ensemble é cosí costruito:
 
 				\begin[mode = display]{math}
-					h_{\mi{fin}} {(x)} = \mi{argmax}_{y \in Y} {(\sum_{h_{t}(x) = y}
+					h_{\mi{fin}} {(x)} = \mi{argmax}_{y \in Y}
+					{(\sum_{h_{t}(x) = y}
 					\mi{log} {(\frac{1}{\beta_{t}})})}
 				\end{math}
 			\end{item}
 		\end{enumerate}
+
+		\bigskip
+
+		Come nel caso del bagging, il boosting e particolarmente
+		indicato quando le ipotesi base sono instabili. Si noti
+		inoltre come il boosting sia molto suscettibile alla
+		presenza di rumore, perche agli esempi molto distanti
+		dalla varianza potrebbe venire data molta priorita.
 
 \end{sile}
