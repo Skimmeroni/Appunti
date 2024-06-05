@@ -5,14 +5,18 @@
 	testandolo con uno o piu dataset di prova. Questo puo essere
 	fatto sia mediante delle metriche \strong{quantitative}, che
 	forniscono un numero, che \strong{qualitative}, che forniscono
-	una descrizione. Le principali metriche qualitative sono le
-	seguenti:
+	una descrizione. E importante sottolineare che tali metriche
+	si riferiscono esclusivamente ai test set, mai ai training
+	set, perche altrimenti si avrebbe un evidente bias.
+
+	Le principali metriche qualitative sono le seguenti:
 
 	\begin{itemize}
 		\begin{item}
 			\strong{Efficienza}, ovvero sia il tempo di esecuzione
-			necessario per la costruzione del modello, sia il tempo
-			di esecuzione impiegato dal modello nel venire utilizzato;
+			necessario per la costruzione del modello (\strong{tempo
+			di induzione}), sia il tempo di esecuzione impiegato dal
+			modello nel venire utilizzato (\strong{tempo di inferenza});
 		\end{item}
 		\begin{item}
 			\strong{Robustezza}, ovvero quanto bene il modello
@@ -97,9 +101,13 @@
 	\end{math}
 
 	Naturalmente, l'accuratezza predittiva é tanto maggiore
-	quanto piú il suo valore tende ad 1. Oltre a questa,
-	sulla base della matrice di confusione e possibile definire
-	le metriche \strong{precision} \math{p} (anche detta
+	quanto piú il suo valore tende ad 1.
+
+	L'accuratezza predittiva e piuttosto omnicomprensiva, nel senso
+	che riassume tutti gli aspetti del dataset in un solo numero.
+	Talvolta, si preferisce avere metriche quantitative che si
+	riferiscono ai soli esempi positivi. A tale scopo, e possibile
+	definire le metriche \strong{precision} \math{p} (anche detta
 	\strong{sensitivity}) e \strong{recall} \math{r}:
 
 	\begin[width = 50%fw]{parbox}
@@ -122,14 +130,11 @@
 	\end{parbox}
 	\par
 
-	A differenza dell'accuratezza predittiva, che e piuttosto
-	omnicomprensiva, Entrambe le metriche sono focalizzate
-	esclusivamente sugli esempi positivi. \math{p} rappresenta
-	quanto bene il modello é in grado di classificare correttamente
-	gli esempi positivi (tralasciando i falsi negativi), mentre
-	\math{r} rappresenta quanto il modello é in grado di "coprire"
-	i dati (quanto poco tralascia gli esempi positivi, anche a costo
-	di commettere un errore).
+	\math{p} rappresenta quanto bene il modello é in grado di
+	classificare correttamente gli esempi positivi (tralasciando
+	i falsi negativi), mentre \math{r} rappresenta quanto il modello
+	é in grado di "coprire" i dati (quanto poco tralascia gli esempi
+	positivi, anche a costo di commettere un errore).
 
 	Per comoditá, é possibile combinare le due metriche
 	in una sola, chiamata \strong{F\textsubscript{1}-value} (o
@@ -164,55 +169,5 @@
 
 	Questa e la "controparte" di \math{p} rispetto agli esempi
 	negativi.
-
-	La tecnica piú semplice per allenare un dataset, che e anche
-	quella implicitamente utilizzata finora, prende il nome di
-	\strong{holdout set}. Questa prevede di separare il dataset
-	in due sotto-dataset: uno, chiamato \strong{training set},
-	verrá usato per allenare il modello, mentre l'altro, chiamato
-	\strong{test set}, verra usato per testarlo. Questa tecnica e
-	applicabile quando la dimensione del dataset a disposizione é
-	sufficientemente grande da avere due sotto-dataset a loro volta
-	grandi. Naturalmente, gli elementi del training set non devono
-	figurare nella fase di test, cosi come gli elementi del test
-	set non devono figurare nella fase di apprendimento, perche in
-	entrambi i casi il modello avrebbe un evidente bias. Separare
-	nettamente i due sotto-dataset permette di avere un modello
-	funzionante ma che al contempo tollera un minimo margine di
-	errore.
-
-	Una tecnica alternativa, chiamata \strong{n-fold
-	cross-validation}, é preferibile quando la grandezza
-	del dataset a disposizione é limitata. Questa prevede
-	di partizionare il dataset a disposizione in \math{m}
-	sotto-dataset di uguale grandezza. Per \math{m} volte,
-	viene scelto uno degli \math{m} sotto-dataset come test
-	set ed i restanti \math{m - 1} sotto-dataset vengono 
-	combinati in un training set. A ciascuna iterazione
-	della procedura e possibile associare una accuratezza;
-	l'accuratezza complessiva viene calcolata come media di
-	tutte le \math{m} accuratezze cosí ottenute. In genere,
-	sono comuni partizionamenti in 5 (5-fold cross-validation)
-	o in 10 (10-fold cross validation) sotto-dataset.
-
-	Nel caso in cui la dimensione del dataset a disposizione
-	sia estremamente limitata, é possibile adottare un approccio
-	radicale chiamato \strong{leave-one-out cross-validation}, o
-	\strong{LOOCV}. L'approccio é di fatto un n-fold cross-validation
-	dove la dimensione del test set é unitaria, ovvero se il dataset
-	é composto da \math{n} elementi, il sotto-dataset utilizzato per
-	la costruzione del modello ha dimensione \math{n - 1} mentre
-	quello utilizzato per il testing ha dimensione 1. Come per il
-	caso precedente, si ripete l'operazione \math{n} volte e si
-	ricava l'accuratezza complessiva a partire dalla media delle
-	\math{n} accuratezze parziali.
-
-	Talvolta, trasversalmente a questi approcci, viene introdotto
-	un terzo sotto-dataset, chiamato \strong{validation set}.
-	Questo viene utilizzato per valutare le prestazioni degli
-	\strong{iperparametri}, ovvero i parametri che determinano
-	la scelta stessa del tipo di modello. Il modello i cui
-	iperparametri sono i piu performanti viene poi allenato con
-	il training set e testato con il test set come di consueto.
 
 \end{sile}

@@ -54,10 +54,66 @@
 	un modello scadente ma comunque funzionante, l'underfitting
 	produce un modello del tutto inutilizzabile.
 
+	Esistono sia algoritmi che costruiscono un modello, e che 
+	quindi distinguono fra fase di training e fase di test, 
+	chiamati \strong{model-based learning}, sia algoritmi che
+	non lo costruiscono, dove tutto e insieme, chiamati
+	\strong{individual-based learning}.
+
 	Sia data una tabella avente \math{n} colonne, e le prime
 	\math{n - 1} sono le features, mentre l'ultima è l'annotazione.
 	Se tale annotazione è un valore booleano, si parla di
 	\strong{classificazione}, mentre se è un valore numerico
 	si parla di \strong{regressione}.
+
+	La tecnica piú semplice per allenare un dataset, che e anche
+	quella implicitamente utilizzata finora, prende il nome di
+	\strong{holdout set}. Questa prevede di separare il dataset
+	in due sotto-dataset: uno, chiamato \strong{training set},
+	verrá usato per allenare il modello, mentre l'altro, chiamato
+	\strong{test set}, verra usato per testarlo. Questa tecnica e
+	applicabile quando la dimensione del dataset a disposizione é
+	sufficientemente grande da avere due sotto-dataset a loro volta
+	grandi. Naturalmente, gli elementi del training set non devono
+	figurare nella fase di test, cosi come gli elementi del test
+	set non devono figurare nella fase di apprendimento, perche in
+	entrambi i casi il modello avrebbe un evidente bias. Separare
+	nettamente i due sotto-dataset permette di avere un modello
+	funzionante ma che al contempo tollera un minimo margine di
+	errore.
+
+	Una tecnica alternativa, chiamata \strong{n-fold
+	cross-validation}, é preferibile quando la grandezza
+	del dataset a disposizione é limitata. Questa prevede
+	di partizionare il dataset a disposizione in \math{m}
+	sotto-dataset di uguale grandezza. Per \math{m} volte,
+	viene scelto uno degli \math{m} sotto-dataset come test
+	set ed i restanti \math{m - 1} sotto-dataset vengono 
+	combinati in un training set. A ciascuna iterazione
+	della procedura e possibile associare una accuratezza;
+	l'accuratezza complessiva viene calcolata come media di
+	tutte le \math{m} accuratezze cosí ottenute. In genere,
+	sono comuni partizionamenti in 5 (5-fold cross-validation)
+	o in 10 (10-fold cross validation) sotto-dataset.
+
+	Nel caso in cui la dimensione del dataset a disposizione
+	sia estremamente limitata, é possibile adottare un approccio
+	radicale chiamato \strong{leave-one-out cross-validation}, o
+	\strong{LOOCV}. L'approccio é di fatto un n-fold cross-validation
+	dove la dimensione del test set é unitaria, ovvero se il dataset
+	é composto da \math{n} elementi, il sotto-dataset utilizzato per
+	la costruzione del modello ha dimensione \math{n - 1} mentre
+	quello utilizzato per il testing ha dimensione 1. Come per il
+	caso precedente, si ripete l'operazione \math{n} volte e si
+	ricava l'accuratezza complessiva a partire dalla media delle
+	\math{n} accuratezze parziali.
+
+	Talvolta, trasversalmente a questi approcci, viene introdotto
+	un terzo sotto-dataset, chiamato \strong{validation set}.
+	Questo viene utilizzato per valutare le prestazioni degli
+	\strong{iperparametri}, ovvero i parametri che determinano
+	la scelta stessa del tipo di modello. Il modello i cui
+	iperparametri sono i piu performanti viene poi allenato con
+	il training set e testato con il test set come di consueto.
 
 \end{sile}

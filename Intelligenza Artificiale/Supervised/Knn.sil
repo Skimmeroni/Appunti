@@ -1,31 +1,34 @@
 \begin{sile}
 
-	Non tutte le tecniche di supervised learning atte a risolvere
-	problemi di classificazione necessitano di costruire un modello.
-	Infatti, non é nemmeno necessaria una fase di training. Fra
-	queste tecniche figura \strong{K-nearest neighbour} (\strong{kNN}),
-	che permette di classificare un dataset con il solo requisito
-	di avere a disposizione una metrica per definire una distanza fra
-	gli elementi di un dataset.
+	\strong{K-nearest neighbour} (\strong{kNN}) e una tecnica
+	di individual-based learning che permette di classificare
+	un dataset con il solo requisito di avere a disposizione
+	una metrica per definire una distanza fra gli elementi di
+	un dataset.
 
 	Si assuma di avere a disposizione un dataset \math{D} giá
-	parzialmente classificato. Dato un numero fissato di vicini
-	\math{k}, l'algoritmo é il seguente:
+	parzialmente classificato. Fissato un numero di vicini
+	\math{k} e scelta una metrica opportuna per gli elementi
+	di \math{D}, l'algoritmo procede come segue:
 
 	\begin{enumerate}
 		\begin{item}
-			Preso un elemento \math{d \in D}, non classificato,
+			Preso un elemento \math{d \in D} non ancora classificato,
 			si calcoli la distanza fra \math{d} e tutti gli altri
 			elementi di \math{D};
 		\end{item}
 		\begin{item}
-			Si costruisca l'insieme \math{P \subseteq D} formato
+			Si costruisca l'insieme \math{N \subseteq D} formato
 			dai \math{k} elementi di \math{D} che hanno la piú
 			piccola distanza da \math{d};
 		\end{item}
 		\begin{item}
-			Sia \math{c} la classe che figura piú spesso fra gli
-			elementi di \math{P}. All'elemento \math{d} viene
+			Sia \math{c} la classe che figura piú spesso fra
+			gli elementi di \math{N}. Se si verifica un conflitto,
+			ovvero se esistono due o piu classi che figurano piu
+			di tutte le altre in \math{N} ma che hanno fra loro
+			la stessa cardinalita, \math{c} viene scelta come
+			una qualsiasi di queste. All'elemento \math{d} viene
 			assegnata la classe \math{c};
 		\end{item}
 		\begin{item}
@@ -36,37 +39,30 @@
 	\end{enumerate}
 	\bigskip
 
-	L'idea dell'algoritmo é di stimare \math{P(c | d)}, ovvero la
-	probabilitá che la classificazione corretta sia scegliere la
-	classe \math{c} dato l'individuo \math{d}, con \math{abs{P}/k},
+	L'idea dell'algoritmo é di stimare \math{P(c | d)}, ovvero
+	la probabilitá che la classificazione corretta sia scegliere
+	la classe \math{c} dato l'individuo \math{d}, con \math{abs{P}/k},
 	ovvero il rapporto fra il numero di vicini di \math{d} con piú
 	rappresentanti ed il numero totale di vicini di \math{d}. Essendo
-	\math{P} un insieme estratto dai \math{k} vicini di \math{d}, il
-	valore \math{abs{P}/k} é certamente compreso fra 0 e 1, ed é quindi
-	un valore di probabilitá.
+	\math{N} un insieme estratto dai \math{k} vicini di \math{d},
+	il valore \math{abs{N}/k} é certamente compreso fra 0 e 1, ed
+	é quindi un valore di probabilitá.
 
 	Il valore di \math{k} viene in genere scelto in maniera
 	empirica, operando ad esempio un \math{k}-fold cross
 	validation ed osservando quale valore di \math{k} rende
 	i risultati migliori. É preferibile scegliere un numero
 	dispari come valore di \math{k}, perché in questo modo é
-	piú raro che possa verificarsi una situazione di conflitto,
-	ovvero dove ci sono piú classi fra i vicini di \math{d} con
-	lo stesso numero di elementi. Nel caso in cui si verifichi
-	un conflitto nel classificare \math{d}, di fatto é possibile
-	assegnare a \math{d} una classe qualsiasi fra tutte quelle
-	con pari rappresentanti fra i vicini di \math{d}.
+	piú raro che possa verificarsi una situazione di conflitto.
 
-	Per quanto riguarda la nozione di distanza, la metrica
-	concettualmente piú semplice é la \strong{distanza di
-	Minkowski}, ovvero una generalizzazione della distanza
-	"classica" (distanza euclidea) a \math{p} dimensioni.
-	Dato un dataset \math{D} dove ciascun elemento \math{d
-	\in D} ha \math{p} attributi, sia \math{\bi{d}_{q}}
-	l'elemento sul quale l'algoritmo kNN sta operando. La
-	distanza di Minkowski fra \math{\bi{d}_{q}} ed un altro
-	elemento \math{\bi{d}_{j} \in D} é indicata con
-	\math{L^{p}(\bi{d}_{q}, \bi{d}_{j})}, ed é data da:
+	La funzione di distanza dipende dal dominio del dataset
+	in esame. Nel caso limite in cui gli attributi del dataset
+	siano valori numerici e vada loro assegnato lo stesso peso,
+	e possibile utilizzare la \strong{distanza di Minkowski}.
+	Indicando con \math{p} e il numero di attributi del dataset
+	e con \math{\bi{d}_{q}} l'elemento sul quale l'algoritmo kNN
+	sta operando, la distanza di Minkowski fra \math{\bi{d}_{q}}
+	ed un altro elemento \math{\bi{d}_{j} \in D} é data da:
 
 	\begin[mode = display]{math}
 		L^{p} {(\bi{d}_{q}, \bi{d}_{j})} =
@@ -76,40 +72,26 @@
 	Dove \math{\bi{d}_{j, i}} indica l'\math{i}-esimo attributo
 	dell'elemento \math{\bi{d}_{j}}.
 
-	Si noti come la distanza di Minkowski é influenzata da tutti 
-	gli attributi in maniera equa; in altri termini, tutti gli
-	attributi hanno lo stesso peso. Vi sono peró situazioni in
-	cui é preferibile che un attributo sia piú o meno rilevante
-	di altri nel calcolo della distanza; in questo caso, conviene
-	utilizzare una metrica che assegni un peso agli attributi e non
-	ne conti solamente il valore.
+	Non dovendo costruire alcun modello, il tempo di induzione
+	di k-nearest neighbour é, tecnicamente, nullo. D'altro canto,
+	in ciascuna esecuzione dell'algoritmo occorre calcolare la
+	distanza fra ciascun elemento del dataset e tutti gli altri
+	elementi: anche applicando tecniche di programmazione dinamica,
+	non e possibile scendere sotto un tempo di esecuzione lineare
+	nella dimensione del dataset.
 
-	Una approccio alternativo é offerto dalla \strong{normalizzazione}.
-	Per ciascun attributo \math{i} viene calcolata la media \math{\mu_{i}}
-	e la deviazione standard \math{\sigma_{i}}, ed al posto di \math{x_{i,
-	j}} se ne usa la versione normalizzata, ovvero \math{(x_{i, j} -
-	\mu_{i})/\sigma_{i}}.
+	Si noti come non su tutti i domini sia possibile definire una
+	nozione di distanza, pertanto in tali situazioni K-nearest
+	neighbour e inapplicabile. Inoltre, anche avendo una distanza
+	a disposizione, il semplice fatto che degli elementi del dataset
+	siano vicini fra loro non implica necessariamente che esista fra
+	loro una qualche correlazione semantica.
 
-	Non dovendo costruire alcun modello, il tempo di esecuzione
-	per la fase di addestramento dell'algoritmo k-nearest neighbour
-	é, tecnicamente, nullo. Lo stesso non si puó dire per il suo
-	utilizzo: dato che per ciascun elemento dell'esempio occorre
-	calcolare la distanza fra questo e tutti gli altri elementi, il
-	tempo di esecuzione della fase di inferenza é, nella migliore 
-	delle ipotesi, lineare nella dimensione del dataset.
-
-	Si noti come l'esistenza di una distanza per un dominio non
-	sia una condizione scontata. Talvolta la costruzione di una
-	distanza non é propio possibile. Inoltre, il semplice fatto 
-	che due elementi di un dataset abbiano una distanza piccola
-	fra di loro non implica necessariamente che appartengano alla
-	stessa classe. Per questo motivo, kNN ha una applicabilitá piú
-	limitata rispetto, ad esempio, agli alberi di decisione, che
-	richiedono molte meno assunzioni. Inoltre, quando il numero di
-	dimensioni é grande, diventa molto difficile trovare dei punti
-	che siano vicini fra di loro.
-
-	Nonostante questo, le prestazioni di kNN sono comunque molto
+	Per questi e altri motivi, kNN ha una applicabilitá piú limitata
+	rispetto, ad esempio, agli alberi di decisione, che richiedono
+	molte meno assunzioni. Inoltre, quando il numero di dimensioni é
+	grande, diventa molto difficile trovare dei punti che siano vicini
+	fra di loro. Nonostante questo, le prestazioni di kNN sono comunque
 	competitive, addirittura superando, in certe situazioni, algoritmi
 	molto piú elaborati.
 

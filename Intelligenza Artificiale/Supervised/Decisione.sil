@@ -1,17 +1,16 @@
 \begin{sile}
 
-	Gli \strong{alberi di decisione} sono uno strumento atto
-	a risolvere i problemi di classificazione. I dati di
-	partenza su cui allenare il modello sono forniti in una
-	rappresentazione tabellare. Sia pertanto data una tabella
-	ad \math{n} colonne: le prime \math{n - 1} riportano gli
-	attributi di ciascun elemento del dataset, mentre l'ultima
-	riporta il valore booleano che determina se tale elemento
-	deve venire classificato positivamente (\tt{True}) o
-	negativamente (\tt{False}). Gli elementi che come valore
-	dell'ultima colonna hanno \tt{True} vengono anche detti
-	\strong{elementi positivi}, mentre quelli che hanno
-	\tt{False} vengono anche detti \strong{elementi negativi}.
+	Gli \strong{alberi di decisione} sono un esempio di model-based
+	learning. I dati di partenza su cui allenare il modello sono
+	forniti in una rappresentazione tabellare. Sia pertanto data
+	una tabella ad \math{n} colonne: le prime \math{n - 1} riportano
+	gli attributi di ciascun elemento del dataset, mentre l'ultima
+	riporta il valore booleano che determina se tale elemento deve
+	venire classificato positivamente (\tt{True}) o negativamente
+	(\tt{False}). Gli elementi che come valore dell'ultima colonna
+	hanno \tt{True} vengono anche detti \strong{elementi positivi},
+	mentre quelli che hanno \tt{False} vengono anche detti
+	\strong{elementi negativi}.
 
 	I valori riportati nelle prime \math{n - 1} colonne
 	della tabella possono essere sia discreti che continui;
@@ -299,5 +298,13 @@
 	fosse un valore discreto. Il numero e l'ampiezza di
 	tali intervalli deve essere scelta sulla base della
 	distribuzione statistica dei valori dell'attributo.
+
+	Essendo un algoritmo divide-et-impera, il tempo
+	di esecuzione per la costruzione dell'albero di
+	decisione e indicativamente logaritmico. Anche il
+	tempo per un'utilizzo dell'albero e indicativamente
+	logaritmico, perche ad ogni nodo interno (ad ogni
+	decisione) lo spazio di possibilita viene quantomeno
+	dimezzato.
 
 \end{sile}
