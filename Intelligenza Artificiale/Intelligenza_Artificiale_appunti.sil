@@ -68,20 +68,20 @@
 
 	\chapter{Introduzione}
 		\section{Agente intelligente}
-		\include[src = Introduzione/Agente.sil]
+		\include[src = Introduzione/Agente.sil] % da rivedere
 	\chapter{Rappresentazione della conoscenza}
 		\section{Knowledge representation and reasoning}
-		\include[src = Conoscenza/KRR.sil]
+		\include[src = Conoscenza/KRR.sil] % da rivedere
 		\section{Knowledge Graphs}
-		\include[src = Conoscenza/KG.sil]
+		\include[src = Conoscenza/KG.sil] % da rivedere
 		\section{Resource Description Framework}
-		\include[src = Conoscenza/RDF.sil]
+		\include[src = Conoscenza/RDF.sil] % da rivedere
 		\section{SPARQL Protocol And RDF Query Language}
-		\include[src = Conoscenza/SPARQL.sil]
+		\include[src = Conoscenza/SPARQL.sil] % da rivedere
 		\section{RDFS}
-		\include[src = Conoscenza/Schema.sil]
+		\include[src = Conoscenza/Schema.sil] % da rivedere
 		\section{OWL}
-		\include[src = Conoscenza/OWL.sil]
+		\include[src = Conoscenza/OWL.sil] % da rivedere
 	\chapter{Problemi di ricerca}
 		\section{Risolvere problemi con la ricerca}
 		\include[src = Ricerca/Introduzione.sil]
@@ -108,24 +108,24 @@
 		\section{Apprendimento senza modello: K-nearest neighbour}
 		\include[src = Supervised/Knn.sil]
 		\section{Metodi ensemble}
-		\include[src = Supervised/Ensemble.sil]
+		\include[src = Supervised/Ensemble.sil] % da rivedere
 	\chapter{Unsupervised Learning}
 		\section{Introduzione all'apprendimento non supervisionato}
-		\include[src = Supervised/Introduzione.sil]
+		\include[src = Supervised/Introduzione.sil] % da rivedere
 		\section{Clustering basato su partizioni: K-means}
-		\include[src = Unsupervised/Kmeans.sil]
+		\include[src = Unsupervised/Kmeans.sil] % da rivedere
 		\section{Clustering basato su densitá: DBSCAN}
-		\include[src = Unsupervised/DBSCAN.sil]
+		\include[src = Unsupervised/DBSCAN.sil] % da rivedere
 	\chapter{Deep Learning}
 		\section{Percettrone}
-		\include[src = Deep/Perceptron.sil]
+		\include[src = Deep/Perceptron.sil] % da rivedere
 		%\section{Deep Learning}
-		%\include[src = Deep/Deep.sil]
+		%\include[src = Deep/Deep.sil] % da rivedere
 	%\chapter{Reinforcement Learning}
 		\section{Introduzione all'apprendimento con rinforzo}
-		\include[src = Supervised/Introduzione.sil]
+		\include[src = Supervised/Introduzione.sil] % da rivedere
 		%\section{Reinforcement Learning}
-		%\include[src = Reinforcement/RL.sil]
+		%\include[src = Reinforcement/RL.sil] % da rivedere
 	\chapter[numbering = false]{Appendice}
 		\section{Teoria della probabilita}
 		\include[src = Appendice/Probabilita.sil]
