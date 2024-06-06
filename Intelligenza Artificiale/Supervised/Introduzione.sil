@@ -1,35 +1,73 @@
 \begin{sile}
-		
-	Nel \strong{supervised learning} l'agente sviluppa
-	modelli predittivi sia sulla base dell'input che
-	dell'output. Nello specifico, osserva diverse coppie
-	di input-output e cerca di determinare la funzione che
-	meglio mappa ogni input al relativo output. Un esempio
-	di supervised learning é la \strong{classificazione}:
-	ai dati in input viene associata una \strong{label} ed
-	i dati vengono raggruppati sulla base di tali label.
 
-	L'obiettivo del supervised learning é il seguente: dato
-	un \strong{training set} di \math{N} esempi, costituiti
-	da coppie input-output \math{(x_{1}, y_{1}), (x_{2}, y_{2}),
-	\unicodeellipsis, (x_{n}, y_{n})} generati da una funzione
-	ignota \math{y = f(x)}, si trovi la funzione \math{h} che
-	meglio approssima \math{f}. Si noti come \math{x_{i}} possa
-	essere indifferentemente uno scalare oppure un vettore a
-	\math{k} componenti.
+	Il \strong{supervised learning} e una tecnica di apprendimento
+	in cui l'agente apprende sia sulla base dell'input che sulla
+	base dell'output. Il nome supervised viene dal fatto che tale
+	tecnica prevede una fase di addestramento. In termini molto
+	generali, prima l'agente viene allenato su dei dati che presentano
+	una certa caratteristica, poi viene testato su un altro insieme
+	di dati generici per valutare se e in grado di determinare se
+	tali dati possiedono oppure non possiedono tale caratteristica.
 
-	La funzione \math{h} viene chiamata \strong{ipotesi}, ed
-	é estratta da uno \strong{spazio di ipotesi} \math{H} di
-	possibili funzioni. Con un diverso vocabolario é possibile
-	chiamare \math{h} il \strong{modello} dei dati, estratto da
-	una \strong{classe di modelli} \math{H}, oppure come una
-	\strong{funzione} estratta da una \strong{classe di funzioni}.
-	I valori dell'output \math{y_{i}} vengono chiamati \strong{veritá
-	di base}: rappresentano i valori "reali" che il modello deve
-	cercare di prevedere. In prima battuta, é possibile considerare
-	buona un'ipotesi \math{h} se, per ogni coppia input-output
-	\math{(x_{i}, y_{i})}, \math{h(x_{i})} restituisce un valore
-	che approssima bene \math{y_{i}}.
+	Piu formalmente, sia \math{D} un insieme di \math{n} elementi.
+	Ciascun elemento possiede \math{m} attributi ed e membro di una
+	classe. Ciascuno di questi elementi puo essere rappresentato
+	da una \math{m + 1}-upla, ovvero come \math{(\bi{x}_{1}, y_{1}),
+	(\bi{x}_{2}, y_{2}), \unicodeellipsis, (\bi{x}_{n}, y_{n})}.
+	\math{\bi{x}_{i}} rappresenta i valori degli attributi
+	dell'\math{i}-esimo elemento, mentre \math{y_{i}}
+	rappresenta la classe a cui l'elemento appartiene.
+	Il valore del \math{j}-esimo attributo dell'\math{i}-esimo
+	elemento viene indicato con \math{x_{i, j}}.
+
+	Si assuma l'esistenza di un legame fra i valori di
+	\math{\bi{x}_{i}} e quelli di \math{y_{i}}. Deve
+	allora esistere una funzione (ignota) \math{f} tale
+	che \math{f(\bi{x}_{i}) = y_{i}}, ovvero in grado di
+	determinare qual'e il valore di \math{y_{i}} anche se
+	questo non e noto, solamente sulla base di \math{\bi{x}_{i}}.
+
+	Il supervised learning costruisce una funzione \math{h},
+	chiamata \strong{ipotesi}, che cerca di stimare \math{f}
+	osservando i pattern che sussistono fra i valori di
+	\math{\bi{x}_{i}} e quelli di \math{y_{i}}. In questo
+	modo, se viene fornito in input ad \math{h} una \math{m}-upla
+	qualsiasi, questa funzione e in grado di determinare il valore
+	di \math{y_{i}} anche se questo e ignoto. Il supervised learning
+	apprende sia dall'input che dall'output in questo senso: l'input
+	\math{(\bi{x}_{i})} e l'output \math{(y_{i})} sono riferiti alla
+	funzione \math{h}, ed entrambi sono necessari alla sua costruzione.
+
+	Il problema risolto dal supervised learning prende una propria
+	denominazione in base a qual'e il tipo di dato di \math{y_{i}}.
+	Se \math{y_{i}} e un valore numerico, il problema e detto
+	\strong{problema di regressione}, in analogia con il concetto
+	di regressione matematica. Se \math{y_{i}} e un valore booleano,
+	il problema e detto \strong{problema di classificazione},
+	perche e possibile interpretare \math{y_{i}} come una variabile
+	che indica se l'\math{i}-esimo elemento di \math{D} appartiene
+	(\tt{True}) o non appartiene (\tt{False}) ad una certa classe.
+	Per convenzione, gli elementi che hanno \tt{True} come valore
+	di tale attributo sono detti \strong{elementi positivi}, mentre
+	mentre quelli che hanno \tt{False} vengono detti \strong{elementi
+	negativi}.
+
+	Il tipo di dato degli attributi determina solamente se questi
+	possano essere usati come input di un determinato algoritmo
+	oppure no. Infatti, alcuni metodi di apprendimento operano
+	esclusivamente su attributi di tipi specifici, mentre altri
+	possono operare su attributi eterogenei. E comunque possibile,
+	in genere, convertire un attributo di un tipo in uno o piu
+	attributi equivalenti mediante una \strong{codifica}.
+
+	Una codifica molto semplice prende il nome di \strong{one hot
+	encoding}, applicabile quando il dominio dell'attributo generico
+	e discreto e non troppo grande. Questa prevede di sostituire
+	l'attributo con tante variabili binarie quanti sono i valori
+	che l'attributo puo assumere: se un elemento del dataset aveva
+	come \math{i} come valore dell'attributo, allora la \math{i}-esima
+	di queste variabili binarie avra valore 1 e tutte le rimanenti
+	valore 0.
 
 	\begin{example}
 		Un esempio di supervised learning si ha nei filtri antispam
@@ -60,17 +98,10 @@
 	non lo costruiscono, dove tutto e insieme, chiamati
 	\strong{individual-based learning}.
 
-	Sia data una tabella avente \math{n} colonne, e le prime
-	\math{n - 1} sono le features, mentre l'ultima è l'annotazione.
-	Se tale annotazione è un valore booleano, si parla di
-	\strong{classificazione}, mentre se è un valore numerico
-	si parla di \strong{regressione}.
-
-	La tecnica piú semplice per allenare un dataset, che e anche
-	quella implicitamente utilizzata finora, prende il nome di
-	\strong{holdout set}. Questa prevede di separare il dataset
-	in due sotto-dataset: uno, chiamato \strong{training set},
-	verrá usato per allenare il modello, mentre l'altro, chiamato
+	La tecnica piú semplice per allenare un dataset prende il nome
+	di \strong{holdout set}. Questa prevede di separare il dataset
+	in due sotto-dataset: uno, chiamato \strong{training set}, verrá
+	usato per allenare il modello, mentre l'altro, chiamato
 	\strong{test set}, verra usato per testarlo. Questa tecnica e
 	applicabile quando la dimensione del dataset a disposizione é
 	sufficientemente grande da avere due sotto-dataset a loro volta
@@ -115,18 +146,5 @@
 	la scelta stessa del tipo di modello. Il modello i cui
 	iperparametri sono i piu performanti viene poi allenato con
 	il training set e testato con il test set come di consueto.
-
-	Alcuni metodi di apprendimento operano esclusivamente su dati
-	numerici, mentre altri possono operare su dati di qualsiasi
-	tipo. E comunque possibile convertire un dato generico in uno
-	o piu dati numerici equivalenti a partire da una \strong{codifica}.
-	Una codifica molto semplice prende il nome di \strong{one hot
-	encoding}, applicabile quando il dominio dell'attributo generico
-	e discreto e non troppo grande. Questa prevede di sostituire
-	l'attributo con tante variabili binarie quanti sono i valori
-	che l'attributo puo assumere: se un elemento del dataset aveva
-	come \math{i} come valore dell'attributo, allora la \math{i}-esima
-	di queste variabili binarie avra valore 1 e tutte le rimanenti
-	valore 0.
 
 \end{sile}

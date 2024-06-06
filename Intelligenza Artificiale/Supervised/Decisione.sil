@@ -1,27 +1,7 @@
 \begin{sile}
 
 	Gli \strong{alberi di decisione} sono un esempio di model-based
-	learning. I dati di partenza su cui allenare il modello sono
-	forniti in una rappresentazione tabellare. Sia pertanto data
-	una tabella ad \math{n} colonne: le prime \math{n - 1} riportano
-	gli attributi di ciascun elemento del dataset, mentre l'ultima
-	riporta il valore booleano che determina se tale elemento deve
-	venire classificato positivamente (\tt{True}) o negativamente
-	(\tt{False}). Gli elementi che come valore dell'ultima colonna
-	hanno \tt{True} vengono anche detti \strong{elementi positivi},
-	mentre quelli che hanno \tt{False} vengono anche detti
-	\strong{elementi negativi}.
-
-	I valori riportati nelle prime \math{n - 1} colonne
-	della tabella possono essere sia discreti che continui;
-	per semplicitá, si assuma che siano discreti. Gli attributi
-	di ciascun elemento della tabella possono essere pensati
-	come un vettore multidimensionale ad \math{n - 1}
-	componenti. Si indichi con \math{\bi{x}_{j}} il vettore
-	\math{(n - 1)}-dimensionale del \math{j}-esimo elemento
-	della tabella, con \math{x_{i, j}} l'\math{i}-esimo attributo
-	del \math{j}-esimo elemento e con \math{y_{j}} l'ultimo campo
-	della tabella per il \math{j}-esimo elemento.
+	learning. 
 
 	Un albero di decisione raggiunge la sua conclusione compiendo
 	una serie di test, partendo dal nodo radice e seguendo un
