@@ -345,16 +345,17 @@
 
 	\subsection{Agenti che apprendono}
 
-		Gli agenti piú interessanti sono indubbiamente quelli in grado
-		di \strong{apprendere}; tutti i tipi di agenti presentati finora
-		possono essere costruiti come agenti che apprendono. Il notevole
-		vantaggio che presentano é che possono operare in un ambiente del
-		tutto sconosciuto apprendendo da questo, di modo da compiere le
-		azioni migliori anche in situazioni dove lo stesso designer non ha
-		modo di poter prevedere quali queste possano essere.
+		Gli agenti piú interessanti sono indubbiamente quelli
+		in grado di \strong{apprendere}; tutti i tipi di agenti
+		presentati finora possono essere costruiti come agenti
+		che apprendono. Il notevole vantaggio che presentano é
+		che possono operare in un ambiente del tutto sconosciuto
+		apprendendo da questo, di modo da compiere le azioni
+		migliori anche in situazioni dove lo stesso designer
+		non ha modo di poter prevedere quali queste possano essere.
 
-		Un agente in grado di apprendere puó essere concettualmente suddiviso
-		in quattro componenti:
+		Un agente in grado di apprendere puó essere concettualmente
+		suddiviso in quattro componenti:
 
 		\begin{itemize}
 			\begin{item}
@@ -369,26 +370,28 @@
 				precedenti;
 			\end{item}
 			\begin{item}
-				Il \strong{critico}, che informa la componente di
-				apprendimento di quanto l'agente si sta comportando
-				in maniera ottimale (razionale) sulla base di uno
-				standard di performance prestabilito. Questa componente
-				é necessaria perché le percezioni, di per loro, non sono
-				in grado di informare l'agente sull'ottimalitá del proprio
-				comportamento;
+				Il \strong{critico}, che informa la componente
+				di apprendimento di quanto l'agente si sta
+				comportando in maniera ottimale (razionale)
+				sulla base di uno standard di performance
+				prestabilito. Questa componente é necessaria
+				perché le percezioni, di per loro, non sono
+				in grado di informare l'agente sull'ottimalitá
+				del proprio comportamento;
 			\end{item}
 			\begin{item}
 				Il \strong{generatore di problemi}, che suggerisce
-				azioni all'agente che possono comportare nuove ed
-				informative esperienze. Questa componente é necessaria
-				perché se l'agente si affidasse esclusivamente alla
-				componente di performance sceglierebbe sempre le azioni
-				migliori sulla base della sua conoscenza attuale, che 
-				non sono necessariamente complete. Il generatore di
-				problemi puó portare l'agente a compiere azioni che
-				possono potenzialmente essere localmente subottimali ma
-				che sul lungo termine possono portare a compiere azioni
-				ancora migliori.
+				azioni all'agente che possono comportare nuove
+				ed informative esperienze. Questa componente é
+				necessaria perché se l'agente si affidasse
+				esclusivamente alla componente di performance
+				sceglierebbe sempre le azioni migliori sulla
+				base della sua conoscenza attuale, che non sono
+				necessariamente complete. Il generatore di
+				problemi puó portare l'agente a compiere azioni
+				che possono potenzialmente essere localmente
+				subottimali ma che sul lungo termine possono
+				portare a compiere azioni ancora migliori.
 			\end{item}
 		\end{itemize}
 
@@ -429,11 +432,14 @@
 		machine learning basati sull'apprendimento continuo, in
 		genere questi apprendono a partire da uno o piú dataset
 		e mantengono indefinitamente la conoscenza acquisita.
-		Similmente, le prestazioni di un algoritmo di machine
-		learning non necessariamente migliorano aggiungendo
-		nuovi dati alla sua conoscenza. Tali dati potrebbero
-		infatti non fare altro che "confondere" l'immagine del
-		mondo che l'algoritmo si é fatto.
+		Similmente, le prestazioni di un algoritmo di machine learning
+		non necessariamente migliorano aggiungendo nuovi dati alla sua
+		conoscenza. Tali dati potrebbero infatti non fare altro che
+		"confondere" l'immagine del mondo che l'algoritmo si é fatto.
+		Cio non toglie che possano esserci situazioni in cui il
+		modello che l'agente ha appreso debba venire aggiornato,
+		ovvero sostituito con un nuovo modello che meglio predice
+		lo scopo per cui l'agente sta apprendendo.
 
 		Nello specifico, esistono due metodi per far apprendere
 		ad algoritmo di machine learning: \strong{batch learning}

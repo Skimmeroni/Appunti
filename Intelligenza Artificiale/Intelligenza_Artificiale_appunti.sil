@@ -100,9 +100,9 @@
 		\include[src = Planning/MDP.sil]  % manca la parte sulle equazioni di Bellman
 	\chapter{Supervised Learning}
 		\section{Introduzione all'apprendimento supervisionato}
-		\include[src = Supervised/Introduzione.sil] % ancora da sistemare
+		\include[src = Supervised/Introduzione.sil]
 		\section{Apprendimento con modello: alberi di decisione}
-		\include[src = Supervised/Decisione.sil] % manca la parte iniziale
+		\include[src = Supervised/Decisione.sil]
 		\section{Valutare modelli di classificazione}
 		\include[src = Supervised/Valutazione.sil]
 		\section{Apprendimento senza modello: K-nearest neighbour}

@@ -1,43 +1,55 @@
 \begin{sile}
 
-	Gli \strong{alberi di decisione} sono un esempio di model-based
-	learning. 
-
-	Un albero di decisione raggiunge la sua conclusione compiendo
-	una serie di test, partendo dal nodo radice e seguendo un
-	determinato percorso fino a raggiungere un nodo foglia.
+	L'\strong{apprendimento mediante alberi di decisione} e un
+	esempio di model-based supervised learning pensato per la
+	risoluzione di problemi di classificazione. Il modello
+	generato da tale apprendimento e, per l'appunto, una
+	struttura ad albero chiamato \strong{albero di decisione}.
 
 	%%%
 	%%% Esempio preso dal libro, relativo al ristorante, con grafo
 	%%%
 
-	Un albero di decisione è un
-	albero in cui, ad ogni nodo, viene presa in esame una delle
-	features. Da ciascun nodo si diramano tanti figli quanti sono
-	i possibili valori che tale feature può assumere. Nei nodi
-	foglia viene scelto il valore dell'annotazione.
+	Sia i nodi interni che la radice di un albero di decisione sono
+	etichettati con gli attributi \math{A_{1}, A_{2}, \unicodeellipsis,
+	A_{m}} del dataset \math{D} usato per costruirlo. Da ogni nodo
+	interno e dalla radice si diramano tanti archi quanti sono i
+	valori che l'attributo del nodo da cui escono puo assumere,
+	ciascuno etichettato con uno dei suddetti valori. I nodi foglia
+	sono invece etichettati con \tt{True} oppure con \tt{False}. Si
+	noti come possano esserci piu noti interni etichettati con lo
+	stesso attributo.
 
-	Un percorso che va dalla radice ad un nodo foglia può essere
-	tradotto in una \em{regola} ovvero indica quali valori devono
-	assumere le features che compaiono lungo i nodi affinchè la
-	sequenza di valori porti ad una decisione affermativa (il nodo
-	foglia contiene \em{true}) o ad una decisione negativa (il nodo
-	foglia contiene \em{false}). Più in generale, un albero di
-	decisione booleano è equivalente ad una asserzione logica nella
-	forma:
+	Un percorso che va dalla radice ad un nodo foglia corrisponde
+	ad uno degli elementi del dataset usato per costruire l'albero:
+	ciascun arco che viene attraversato corrisponde al valore del
+	relativo attributo, mentre il nodo foglia indica se l'elemento
+	in questione appartiene oppure non appartiene alla classe.
+	Quando all'algoritmo viene fornito un dato generico, questo
+	percorre l'albero seguendo il percorso descritto dai suoi
+	attributi ed emette un verdetto di conseguenza.
+
+	Ciascun percorso che va dalla radice ad un nodo foglia può
+	essere tradotto in una formula equivalente nella logica
+	proposizionale:
+
+	\begin{center}
+		Se attributo1 vale \ddd e attributo2 vale \ddd e \ddd
+		e attributo k vale \ddd allora appartiene / non appartiene
+		alla classe
+	\end{center}
+
+	Formalmente, siano \math{A_{1}, A_{2}, \unicodeellipsis, A_{k}}
+	gli attributi che figurano come etichette dei nodi non foglia
+	lungo un certo percorso, e siano \math{a_{1}, a_{2},
+	\unicodeellipsis, a_{k} i valori che questi assumono (letti
+	lungo gli archi dell'albero). Sia poi \math{b} l'etichetta del
+	nodo foglia. Si ha:
 
 	\begin[mode = display]{math}
-		Output \Leftrightarrow (Path_{1} \vee Path_{2} \vee \unicodeellipsis)
+		a_{1} \wedge a_{2} \wedge \unicodeellipsis \wedge a_{k}
+		\rightarrow b
 	\end{math}
-
-	Dove ciascun \math{Path_{i}} è una congiunzione di coppie
-	attributo-valore nella forma \math{A_{m} = v_{x} \wedge
-	A_{n} = v_{y} \wedge \unicodeellipsis}, corrispondenti ad
-	un percorso dalla radice ad una foglia. Interessante notare
-	come tale espressione sia in forma normale a clausole, nello
-	specifico nella forma normale disgiunta.
-
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	Esistono diversi alberi di decisione che rappresentano la stessa
 	tabella, alcuni più efficienti di altri. Trovare l'albero di

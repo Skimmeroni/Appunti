@@ -1,33 +1,35 @@
 \begin{sile}
-		
+	
 	Nel \strong{unsupervised learning} l'agente cerca di
 	individuare dei pattern solo a partire dall'input ma
-	non dall'output. Un esempio di unsupervised learning
-	é il \strong{clustering} \footnote{Talvolta, i termini
-	"unsupervised learning" e "clustering" sono intesi
-	come sinonimi, ma questo non é formalmente corretto.}:
-	l'individuare delle proprietá comuni (cluster) nell'input
-	e raggruppare l'input sulla base di tali proprietá, senza
-	che i cluster siano noti a priori.
+	non dall'output. A differenza del supervised learning,
+	nell'unsupervised learning non sono note a priori le
+	classi in cui gli elementi del dataset vanno catalogati.
+	L'idea é che i dati debbano prima venire esplorati per
+	individuare se esistono fra loro dei pattern comuni, e
+	poi classificare i dati sulla base di questi. Esempi di
+	unsupervised learning sono:
 
-	A differenza del supervised learning, nell'unsupervised
-	learning non sono note a priori le classi in cui gli
-	elementi del dataset vanno catalogati. L'idea é che i
-	dati debbano prima venire esplorati per individuare se
-	esistono fra loro dei pattern comuni, e poi classificare
-	i dati sulla base di questi.
-
-	Per determinati problemi, esistono soluzioni che sono
-	intrinsecamente legate all'unsupervised learning. Un
-	esempio é quello che viene chiamato \strong{dimensionality
-	reduction}, ovvero la trasformazione di dati da uno spazio
-	dimensionale ampio ad uno spazio dimensionale piú ristretto,
-	senza che questo comporti una perdita (troppo) significativa
-	di informazione. Un altro esempio é dato da \strong{anomaly
-	detection}, ovvero riuscire ad identificare, dato un insieme
-	di dati, quei (pochi) elementi che deviano in maniera
-	significativa dalla maggioranza e la cui presenza non é
-	giustificabile.
+	\begin{itemize}
+		\begin{item}
+			\strong{clustering}: individuare delle proprietá
+			comuni nell'input e raggruppare l'input in insiemi
+			detti cluster sulla base di tali proprietá, senza
+			che i cluster siano noti a priori;
+		\end{item}
+		\begin{item}
+			\strong{dimensionality reduction}: trasformare
+			dati da uno spazio dimensionale ampio ad uno
+			spazio dimensionale piú ristretto, senza che
+			questo comporti una perdita (troppo) significativa
+			di informazione;
+		\begin{item}
+			\strong{anomaly detection}: riuscire ad identificare,
+			dato un insieme di dati, quei (pochi) elementi che
+			deviano in maniera significativa dalla maggioranza e
+			la cui presenza non é giustificabile;
+		\end{item}
+	\end{itemize}
 
 	\begin{example}
 		Un esempio di unsupervised learning, in particolare di 
@@ -40,6 +42,11 @@
 		il responsabile se viene effettuato un pagamento che devia
 		sensibilmente dalla routine.
 	\end{example}
+
+	La forma di unsupervised learning piu rilevante e indubbiamente
+	il clustering, tanto che i termini "unsupervised learning"
+	e "clustering" sono talvolta usati (non correttamente) come
+	sinonimi.
 
 	Sebbene le tecniche di clustering siano molto diverse, tutte
 	fanno uso di una funzione (non necessariamente una metrica)

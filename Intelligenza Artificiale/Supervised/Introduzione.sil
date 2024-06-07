@@ -2,23 +2,27 @@
 
 	Il \strong{supervised learning} e una tecnica di apprendimento
 	in cui l'agente apprende sia sulla base dell'input che sulla
-	base dell'output. Il nome supervised viene dal fatto che tale
-	tecnica prevede una fase di addestramento. In termini molto
-	generali, prima l'agente viene allenato su dei dati che presentano
-	una certa caratteristica, poi viene testato su un altro insieme
-	di dati generici per valutare se e in grado di determinare se
-	tali dati possiedono oppure non possiedono tale caratteristica.
+	base dell'output. Il nome "supervised" viene dal fatto che
+	tale tecnica necessita di dei dati che presentano gia la
+	caratteristica che l'agente deve individuare, in modo da
+	apprendere quali sono i pattern che portano un dato a possedere
+	tale caratteristica. Il supervised learning prevede sia una fase
+	di \strong{addestramento}, in cui i pattern vengono individuati,
+	ed una fase di \strong{testing}, in cui si valuta se l'algoritmo
+	e in grado di prevedere il valore della caratteristica su dati
+	ignoti. Naturalmente, e necessario assumere che i dati noti ed
+	i dati ignoti abbiano la stessa distribuzione statistica.
 
 	Piu formalmente, sia \math{D} un insieme di \math{n} elementi.
-	Ciascun elemento possiede \math{m} attributi ed e membro di una
-	classe. Ciascuno di questi elementi puo essere rappresentato
-	da una \math{m + 1}-upla, ovvero come \math{(\bi{x}_{1}, y_{1}),
-	(\bi{x}_{2}, y_{2}), \unicodeellipsis, (\bi{x}_{n}, y_{n})}.
-	\math{\bi{x}_{i}} rappresenta i valori degli attributi
-	dell'\math{i}-esimo elemento, mentre \math{y_{i}}
-	rappresenta la classe a cui l'elemento appartiene.
-	Il valore del \math{j}-esimo attributo dell'\math{i}-esimo
-	elemento viene indicato con \math{x_{i, j}}.
+	Ciascun elemento possiede \math{m} attributi \math{A_{1}, A_{2},
+	\unicodeellipsis, A_{m}} ed e membro di una classe. Ciascuno di
+	questi elementi puo essere rappresentato da una \math{m + 1}-upla,
+	ovvero come \math{(\bi{x}_{1}, y_{1}), (\bi{x}_{2}, y_{2}),
+	\unicodeellipsis, (\bi{x}_{n}, y_{n})}. \math{\bi{x}_{i}}
+	rappresenta i valori degli attributi dell'\math{i}-esimo
+	elemento, mentre \math{y_{i}} rappresenta la classe a cui
+	l'elemento appartiene. Il valore del \math{j}-esimo attributo
+	dell'\math{i}-esimo elemento viene indicato con \math{x_{i, j}}.
 
 	Si assuma l'esistenza di un legame fra i valori di
 	\math{\bi{x}_{i}} e quelli di \math{y_{i}}. Deve
