@@ -114,6 +114,8 @@
 		\include[src = Supervised/Introduzione.sil] % da rivedere
 		\section{Clustering basato su partizioni: K-means}
 		\include[src = Unsupervised/Kmeans.sil] % da rivedere
+		\section{Valutare il clustering}
+		\include[src = Unsupervised/Valutazione.sil] % da rivedere
 		\section{Clustering basato su densitá: DBSCAN}
 		\include[src = Unsupervised/DBSCAN.sil] % da rivedere
 	\chapter{Deep Learning}
@@ -122,8 +124,8 @@
 		%\section{Deep Learning}
 		%\include[src = Deep/Deep.sil] % da rivedere
 	%\chapter{Reinforcement Learning}
-		\section{Introduzione all'apprendimento con rinforzo}
-		\include[src = Supervised/Introduzione.sil] % da rivedere
+		%\section{Introduzione all'apprendimento con rinforzo}
+		%\include[src = Supervised/Introduzione.sil] % da rivedere
 		%\section{Reinforcement Learning}
 		%\include[src = Reinforcement/RL.sil] % da rivedere
 	\chapter[numbering = false]{Appendice}

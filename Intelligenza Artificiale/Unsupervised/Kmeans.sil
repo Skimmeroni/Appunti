@@ -1,57 +1,53 @@
 \begin{sile}
 
-	Sia \math{D} un dataset costituito da \math{n} elementi
-	\math{\bi{x}_{1}, \bi{x}_{2}, \unicodeellipsis, \bi{x}_{n}},
-	dove ciascun elemento \math{\bi{x}_{i} = x_{i, 1}, x_{i, 2},
-	\unicodeellipsis, x_{i, r}} é una \math{r}-upla nello spazio
-	\math{\bi{X} \subseteq \dsi{R}^{r}}. La dicitura \math{x_{i, j}}
-	indica il \math{j}-esimo attributo dell'\math{i}-esimo elemento
-	di \math{\bi{X}}. 
-
-	L'algoritmo \strong{k-means} partiziona il dataset fornito in
-	\math{k} cluster: il valore di \math{k} deve venire specificato
-	da chi fa uso dell'algoritmo. Ciascun cluster ha un baricento,
-	chiamato \strong{centroide}; si noti come il centroide non sia
-	necessariamente un elemento del dataset. L'algoritmo é presentato
-	di seguito:
+	\strong{k-means} e un esempio di algoritmo di clustering
+	basato su partizioni, che opera su dati esclusivamente
+	numerici. L'algoritmo partiziona il dataset fornito in
+	\math{k} cluster, con \math{k} fissato. Ciascun cluster
+	ha un baricento, chiamato \strong{centroide} (non
+	necessariamente un elemento del dataset). L'algoritmo
+	é presentato di seguito:
 
 	\begin{enumerate}
 		\begin{item}
 			Sia scelga un valore \math{k};
 		\end{item}
 		\begin{item}
-			Si scelgano \math{k} elementi qualsiasi a partire dal dataset
-			(detti \strong{seed}): questi saranno i centroidi iniziali dei
-			\math{k} cluster;
+			Si scelgano \math{k} elementi qualsiasi a partire
+			dal dataset (detti \strong{seed}): questi saranno
+			i centroidi iniziali dei \math{k} cluster;
 		\end{item}
 		\begin{item}
-			Per ciascun elemento del dataset che non é un centroide, si
-			calcoli la distanza fra tale elemento e tutti i centroidi. 
-			L'elemento viene assegnato alla partizione il cui centroide
-			ha la piú piccola distanza da questo. La distanza fra un
-			elemento \math{\bi{x}_{i}} ed un centroide \math{\bi{m}_{j}}
-			é data dalla consueta formula:
+			Per ciascun elemento del dataset che non é un
+			centroide, si calcoli la distanza fra tale elemento
+			e tutti i centroidi. L'elemento viene assegnato alla
+			partizione il cui centroide ha la piú piccola distanza
+			da questo. La distanza fra un elemento \math{\bi{x}_{i}}
+			ed un centroide \math{\bi{m}_{j}} é data dalla consueta
+			formula:
 
 			\begin[mode = display]{math}
 				\mi{dist}(\bi{x}_{i}, \bi{m}_{j}) =
 				\abs{\abs{\bi{x}_{j} - \bi{m}_{j}}} =
-				{({(x_{i, 1} - m_{j, 1})}^{2} + {(x_{i, 2} - m_{j, 2})}^{2} +
-				\unicodeellipsis + {(x_{i, r} - m_{j, r})}^{2})}^{1 / 2}
+				{({(x_{i, 1} - m_{j, 1})}^{2} + {(x_{i, 2} -
+				m_{j, 2})}^{2} + \unicodeellipsis + {(x_{i, r} -
+				m_{j, r})}^{2})}^{1 / 2}
 			\end{math}
 		\end{item}
 		\begin{item}
-			Si ricalcolino i centroidi sulla base dell'assegnazione ai
-			cluster cosí effettuata. Naturalmente, nello spazio euclideo,
-			la media di un cluster é data dalla media aritmetica dei suoi
-			valori:
+			Si ricalcolino i centroidi sulla base dell'assegnazione
+			ai cluster cosí effettuata. Naturalmente, nello spazio
+			euclideo, la media di un cluster é data dalla media
+			aritmetica dei suoi valori:
 
 			\begin[mode = display]{math}
-				\bi{m}_{j} = \frac{1}{\abs{C_{j}}} \sum_{\bi{x}_{i} \in C_{j}} \bi{x}_{j}
+				\bi{m}_{j} = \frac{1}{\abs{C_{j}}}
+				\sum_{\bi{x}_{i} \in C_{j}} \bi{x}_{j}
 			\end{math}
 		\end{item}
 		\begin{item}
-			Se é stato raggiunto un criterio di terminazione, l'algoritmo
-			termina. Altrimenti, si riprende dal punto 3.
+			Se é stato raggiunto un criterio di terminazione,
+			l'algoritmo termina. Altrimenti, si riprende dal punto 3.
 		\end{item}
 	\end{enumerate}
 
@@ -59,101 +55,23 @@
 
 	I criteri di terminazione sono molteplici. Un criterio molto
 	semplice consiste nel fissare un certo \math{\epsilon} e valutare
-	di quanto si discosta il nuovo valore dei centroidi (calcolato al
-	punto 4) dal valore precedente: se questo scostamento é inferiore
-	ad \math{\epsilon}, l'algoritmo termina. Oppure, similmente, terminare
-	l'algoritmo se il numero di elementi che vengono spostati di cluster
-	alla fine della corrente iterazione é inferiore ad \math{\epsilon}.
+	di quanto si discosta il nuovo valore dei centroidi (calcolato
+	al punto 4) dal valore precedente: se questo scostamento é
+	inferiore ad \math{\epsilon}, l'algoritmo termina. Oppure,
+	similmente, terminare l'algoritmo se il numero di elementi che
+	vengono spostati di cluster alla fine della corrente iterazione
+	é inferiore ad \math{\epsilon}.
 
-	Approcci piú raffinati prevedono di definire dei parametri
-	oggettivi sulla qualitá dei cluster, e terminare l'algoritmo
-	quando tale qualitá raggiunge un valore accettabile. Idealmente,
-	un cluster é considerabile un buon cluster quando ha sia una alta
-	\strong{coesione intra-cluster}, ovvero quando é un \strong{cluster
-	compatto} che una alta \strong{coesione inter-cluster}, ovvero quando
-	é un \strong{cluster isolato}. Un cluster si dice compatto quando é
-	piccola la distanza che hanno tutti i punti del cluster dal loro
-	centroide, mentre si dice isolato quando é grande la distanza di
-	ogni punto da tutti i punti dei cluster diversi dal proprio.
-
-	Siano \math{C_{j}} é il \math{j}-esimo cluster, \math{\bi{m}_{j}}
-	il centroide del cluster \math{C_{j}} e \math{\mi{dist}(\bi{x},
-	\bi{m}_{j})} la distanza fra il punto \math{\bi{x}} ed il centroide
-	\math{\bi{m}_{j}}. \strong{Sum of Squared Error}, o \strong{SSE}
-	(\em{Somma degli Errori Quadratici}), é una possibile metrica
-	che indica la compattezza di un cluster:
-
-	\begin[mode = display]{math}
-		\mi{SSE} = \sum_{j = 1}^{k} \sum_{\bi{x} \in C_{j}} \mi{dist} {(\bi{x}, \bi{m}_{j})}^{2}
-	\end{math}
-
-	Per quanto riguarda quanto un cluster é isolato, si consideri
-	un elemento \math{\bi{x}_{i}}, che é stato assegnato al cluster
-	\math{C_{I}}. Sia \math{A(\bi{x}_{i})} il valore del centroide
-	del cluster a cui \math{\bi{x}_{i}} appartiene, e sia invece
-	\math{B(\bi{x}_{i})} la minima distanza media fra \math{\bi{x}_{i}}
-	e tutti i punti di \math{D} che non si trovano in \math{C_{I}}. Il
-	cluster che ha tale distanza é detto \strong{neighbouring cluster},
-	perché é il cluster in cui sarebbe piú ragionevole inserire
-	\math{\bi{x}_{i}} ad eccezione di \math{C_{I}}, essendo quello
-	a questo piú vicino.
-
-	\begin[width = 50%fw]{parbox}
-		\begin[mode = display]{math}
-			A{(\bi{x}_{i})} = \bi{m}_{I} = \frac{1}{\abs{C_{I}}} \sum_{\bi{x}_{i} \in C_{I}} \bi{x}_{i}
-		\end{math}
-	\end{parbox}
-	\begin[width = 50%fw]{parbox}
-		\begin[mode = display]{math}
-			B{(\bi{x}_{i})} = \mi{min}_{J \ne I} \frac{1}{\abs{C_{J}}} \sum_{\bi{x}_{j} \in C_{J}} \mi{dist} {(\bi{x}_{i}, \bi{x}_{j})}
-		\end{math}
-	\end{parbox}
-	\par
-
-	\math{A(\bi{x}_{i})} é una misura di quanto un elemento del
-	dataset é vicino al centroide del cluster a cui appartiene,
-	mentre \math{B(\bi{x}_{i})} é una misura di quanto un elemento
-	del cluster é dissimile dagli elementi degli altri cluster.
-	Pertanto, \math{\bi{x}_{i}} si trova in un cluster adatto
-	se \math{A(\bi{x}_{i})} é un valore piccolo mentre
-	\math{B(\bi{x}_{i})} é un valore grande.
-
-	Prende il nome di \strong{Silhouette} associata a \math{i} la
-	quantitá \math{S(\bi{x}_{i})} cosí calcolata:
-
-	\begin[mode = display]{math}
-		S{(\bi{x}_{i})} =
-		\{\table[columnalign = left left]{
-			1 - A(\bi{x}_{i}) / B(\bi{x}_{i}) &
-			\mi{se} \thickspace A(\bi{x}_{i}) < B(\bi{x}_{i}) \\
-			0 &
-			\mi{se} \thickspace A(\bi{x}_{i}) = B(\bi{x}_{i}) \\
-			B(\bi{x}_{i}) / A(\bi{x}_{i}) - 1 &
-			\mi{se} \thickspace A(\bi{x}_{i}) > B(\bi{x}_{i}) \\
-		}
-	\end{math}
-
-	É facile verificare che \math{S(\bi{x}_{i})} é un valore
-	strettamente compreso fra -1 e 1. Affinché \math{S(\bi{x}_{i})}
-	sia vicino ad 1, \math{A(\bi{x}_{i})} deve essere un valore piccolo
-	e \math{B(\bi{x}_{i})} deve essere un valore grande, pertanto se
-	\math{S(\bi{x}_{i}) \approx 1} allora \math{\bi{x}_{i}} é stato ben
-	classificato. Se invece \math{S(\bi{x}_{i}) \approx -1}, allora
-	\math{A(\bi{x}_{i})} é grande e \math{B(\bi{x}_{i})} é piccolo, e
-	quindi la classificazione é scadente. Se invece \math{S(\bi{x}_{i})
-	\approx 0}, allora \math{A(\bi{x}_{i}) \approx B(\bi{x}_{i})}, e
-	quindi l'elemento \math{\bi{x}_{i}} potrebbe indifferentemente
-	appartenere al suo cluster o al neighbouring cluster.
-
-	K-means é indubbiamente molto semplice sia da comprendere che da 
-	implementare, ma é applicabile solamente a dataset con determinate
-	caratteristiche. Innanzitutto, é applicabile solamente a dataset
-	i cui elementi hanno esclusivamente attributi con valori numerici;
-	se non lo sono, occorre preprocessare i dati per convertire gli
-	attributi categoriali in attributi numerici equivalenti, e la
-	semantica non puó essere sempre mantenuta. Inoltre, k-means é
-	applicabile ai soli dataset sui quali é possibile definire
-	sia una distanza che una media fra i suoi elementi.
+	K-means é indubbiamente molto semplice sia da comprendere
+	che da implementare, ma é applicabile solamente a dataset
+	con determinate caratteristiche. Innanzitutto, é applicabile
+	solamente a dataset i cui elementi hanno esclusivamente
+	attributi con valori numerici; se non lo sono, occorre
+	preprocessare i dati per convertire gli attributi categoriali
+	in attributi numerici equivalenti, e la semantica non puó essere
+	sempre mantenuta. Inoltre, k-means é applicabile ai soli dataset
+	sui quali é possibile definire sia una distanza che una media fra
+	i suoi elementi.
 
 	Inoltre, l'algoritmo é efficiente, dato che il suo tempo di
 	esecuzione é \math{O(tkn)}, dove \math{k} é il numero di
@@ -162,26 +80,17 @@
 	\math{t} (generalmente) piccolo, il tempo di esecuzione di
 	k-means é quasi-lineare.
 
-	K-means é una tecnica di \strong{clustering partizionale}, ovvero
-	dove tutto il dataset viene preso in esame a prescindere da quanto
-	sia rumoroso. Questo semplifica l'algoritmo, perché di per sé non
-	compie alcun preprocessing sul dataset utilizzandolo subito, ma
-	questo comporta che i cluster generati da k-means siano molto
-	influenzati sia dalla scelta dei seed (cambiare i seed genera dei
-	cluster diversi anche a partire dallo stesso dataset), sia dagli
-	\strong{outlier}, i dati isolati molto distanti dal resto degli
-	elementi del dataset.
-
-	Dato che ogni elemento ha lo stesso peso nel computo della distanza
-	dai centroidi, la presenza degli outlier destabilizza notevolmente
-	il modo in cui i cluster vengono costruiti. Il problema puó essere
-	mitigato operando anomaly detection sul dataset, prima di operare
-	k-means, di modo da individuare quanti piú outlier possibili ed
-	eliminarli. Oppure, in particolar modo se il dataset é molto grande
-	e gli outlier non sono (o si assume che non siano) molti, é possibile
-	estrarne un sottoinsieme mediante random sampling ed applicare k-means
-	su questo, di modo da ridurre il piú possibile l'eventualitá che il
-	sottoinsieme contenga un outlier.
+	Dato che ogni elemento ha lo stesso peso nel computo della
+	distanza dai centroidi, la presenza degli outlier destabilizza
+	notevolmente il modo in cui i cluster vengono costruiti. Il
+	problema puó essere mitigato operando anomaly detection sul
+	dataset, prima di operare k-means, di modo da individuare
+	quanti piú outlier possibili ed eliminarli. Oppure, in particolar
+	modo se il dataset é molto grande e gli outlier non sono (o si
+	assume che non siano) molti, é possibile estrarne un sottoinsieme
+	mediante random sampling ed applicare k-means su questo, di modo
+	da ridurre il piú possibile l'eventualitá che il sottoinsieme
+	contenga un outlier.
 
 	Infine, il raggruppamento di piú elementi sulla base di una
 	distanza genera dei cluster che sono necessariamente delle
@@ -191,19 +100,22 @@
 	insiemi convessi), ed in questo caso k-means non sará mai in
 	grado di fornire dei cluster che ben partizionano tale dataset.
 
-	Nonostante tutti i difetti sopra citati, k-means (e le sue
-	varianti) rimane comunque l'algoritmo piú utilizzato per
-	risolvere il problema del clustering grazie alla sua semplicitá
-	ed alla sua efficienza. Inoltre, non sembrano esserci prove che
-	un algoritmo di clustering sia migliore degli altri a prescindere
-	dal dataset: in genere, le loro performance dipendono dalla forma
-	del dataset e dal tipo dei loro attributi.
+	Nonostante tutti i difetti sopra citati, k-means (e le
+	sue varianti) rimane comunque l'algoritmo piú utilizzato
+	per risolvere il problema del clustering grazie alla sua
+	semplicitá ed alla sua efficienza. Inoltre, non sembrano
+	esserci prove che un algoritmo di clustering sia migliore
+	degli altri a prescindere dal dataset: in genere, le loro
+	performance dipendono dalla forma del dataset e dal tipo
+	dei loro attributi.
 
 	\begin{example}
 		\begin[width = 25%fw]{parbox}
 			\begin[cols = 15%fw 35%fw 35%fw]{ptable}
 				\begin{row}
-					\cell{\strong{ID}} \cell{\strong{X}} \cell{\strong{Y}}
+					\cell{\strong{ID}}
+					\cell{\strong{X}}
+					\cell{\strong{Y}}
 				\end{row}
 				\begin{row}
 					\cell{1} \cell{35.19} \cell{12.189}
@@ -225,7 +137,9 @@
 		\begin[width = 25%fw]{parbox}
 			\begin[cols = 15%fw 35%fw 35%fw]{ptable}
 				\begin{row}
-					\cell{\strong{ID}} \cell{\strong{X}} \cell{\strong{Y}}
+					\cell{\strong{ID}}
+					\cell{\strong{X}}
+					\cell{\strong{Y}}
 				\end{row}
 				\begin{row}
 					\cell{6} \cell{23.606} \cell{15.402}
@@ -247,7 +161,9 @@
 		\begin[width = 25%fw]{parbox}
 			\begin[cols = 15%fw 35%fw 35%fw]{ptable}
 				\begin{row}
-					\cell{\strong{ID}} \cell{\strong{X}} \cell{\strong{Y}}
+					\cell{\strong{ID}}
+					\cell{\strong{X}}
+					\cell{\strong{Y}}
 				\end{row}
 				\begin{row}
 					\cell{11} \cell{39.634} \cell{42.23}
@@ -269,7 +185,9 @@
 		\begin[width = 25%fw]{parbox}
 			\begin[cols = 15%fw 35%fw 35%fw]{ptable}
 				\begin{row}
-					\cell{\strong{ID}} \cell{\strong{X}} \cell{\strong{Y}}
+					\cell{\strong{ID}}
+					\cell{\strong{X}}
+					\cell{\strong{Y}}
 				\end{row}
 				\begin{row}
 					\cell{16} \cell{32.986} \cell{3.412}
@@ -289,29 +207,5 @@
 			\end{ptable}
 		\end{parbox}
 	\end{example}
-
-	Per quanto sia possibile definire metriche oggettive per valutare
-	la qualitá dei singoli cluster (SSE, silhouette, ecc\ddd), valutare
-	la qualitá del clustering nel suo complesso é un problema non banale,
-	dato che una ground truth con cui testare il modello é generalmente
-	assente. Infatti, a differenza della classificazione, non sono noti
-	quali sono effettivamente i cluster, pertanto non vi é modo di
-	compararli con i cluster indotti da k-means.
-
-	In alcuni contesti, della ground truth per un problema di clustering
-	esiste, ma spesso si tratta di informazioni che si trovano al di
-	fuori del dataset. In questo caso, é possibile valutare la
-	qualitá del clustering come fosse un problema di classificazione.
-	L'idea é quella di trattare ciascun cluster come fosse una classe
-	in un problema di classificazione, costruire sulla base di queste
-	una matrice di confusione ed a sua volta calcolare a partire da
-	questa le statistiche di sorta (precision, F-score, ecc\ddd).
-
-	Come giá anticipato, molto spesso il clustering figura nella
-	fase esplorativa della risoluzione di un problema piú complesso.
-	Pertanto, un possibile modo per valutare la qualitá del clustering
-	é farlo in maniera indiretta sulla base della qualitá del risultato
-	finale: se questa é buona, allora il clustering che é stato fatto a
-	monte del procedimento deve essere stato buono a sua volta.
 
 \end{sile}

@@ -7,8 +7,30 @@
 	classi in cui gli elementi del dataset vanno catalogati.
 	L'idea é che i dati debbano prima venire esplorati per
 	individuare se esistono fra loro dei pattern comuni, e
-	poi classificare i dati sulla base di questi. Esempi di
-	unsupervised learning sono:
+	poi classificare i dati sulla base di questi.
+
+	Piu formalmente, sia \math{D} un insieme di \math{n}
+	elementi. Ciascun elemento possiede \math{m} attributi
+	\math{A_{1}, A_{2}, \unicodeellipsis, A_{m}}. Ciascuno
+	di questi elementi puo essere rappresentato da una
+	\math{m}-upla, ovvero come \math{\bi{x}_{1}, \bi{x}_{2},
+	\unicodeellipsis, \bi{x}_{n}}. Il valore del \math{j}-esimo
+	attributo dell'\math{i}-esimo elemento viene indicato con
+	\math{x_{i, j}}.
+
+	Si supponga di poter associare a ciascun \math{i}-esimo
+	elemento di \math{D} un valore \math{y_{i}}: tale valore
+	dipende da una certa funzione definibile a partire dai
+	valori di \math{\bi{x}_{i}}. \math{y_{i}} rappresenta
+	la classe a cui l'\math{i}-esimo elemento di \math{D}
+	appartiene; si noti come i valori di \math{y_{i}}, a
+	differenza del supervised learning, non sono noti.
+
+	L'unsupervised learning apprende solo dall'input in
+	questo senso: l'input \math{(\bi{x}_{i})} permette di
+	dedurre l'output \math{(y_{i})}, ma i dati di \math{D}
+	non contengono gia l'output. Esempi di unsupervised
+	learning sono i seguenti:
 
 	\begin{itemize}
 		\begin{item}
@@ -46,30 +68,49 @@
 	La forma di unsupervised learning piu rilevante e indubbiamente
 	il clustering, tanto che i termini "unsupervised learning"
 	e "clustering" sono talvolta usati (non correttamente) come
-	sinonimi.
+	sinonimi. 
 
 	Sebbene le tecniche di clustering siano molto diverse, tutte
 	fanno uso di una funzione (non necessariamente una metrica)
 	di distanza, utilizzata per definire quanto due elementi del
 	dataset siano \em{simili}: minore é la distanza, maggiore é
-	la somiglianza.
+	la somiglianza. Fra le diverse tecniche di clustering e
+	possibile citare:
 
-	É evidente come il clustering e la classificazione siano fra
-	loro legate: entrambe si occupano di determinare, fornito un
-	certo input, a quale classe questo appartiene, ed entrambe
-	portano a termine il compito mediante tecniche di machine
-	learning. Eppure, le due differiscono notevolmente.
+	\begin{itemize}
+		\begin{item}
+			\strong{Clustering basato su partizioni}, che a partire
+			da un dataset uniforme lo partiziona in insiemi sempre
+			piu piccoli. In questo tipo di clustering il dataset
+			viene preso in esame per intero, a prescindere da quanto
+			questo sia rumoroso. Questo semplifica il procedimento,
+			perché non e necessario alcun preprocessing, ma allo
+			tesso tempo rende i cluster molto suscettibili al rumore
+			del dataset, in particolare, agli \strong{outlier}, i
+			dati isolati molto distanti dal resto;
+		\end{item}
+		\begin{item}
+			\strong{Clustering basato su densita}, che aggrega in
+			cluster elementi che hanno una alta similitudine;
+		\end{item}
+		\begin{item}
+			\strong{Clustering basato su gerarchie}.
+		\end{item}
+	\end{itemize}
 
-	Innanzitutto, nella classificazione, le classi sono note,
-	mentre nel clustering queste non sono note (e devono venire
-	invece dedotte a partire dal dataset stesso). Inoltre, nella
-	classificazione é possibile tenere da parte dei dati ed
-	utilizzarli per valutare le performance del modello, mentre
-	nel clustering é molto piú complicato un approccio di questo
-	tipo. Infine, dato che i nomi delle classi non sono noti a
-	priori, un problema di clustering richiede che venga anche
-	dato un "senso" alle classi che questo induce (ammesso che
-	sia possibile farlo).
+	\bigskip
+
+	Sia il clustering sia la classificazione sono tecniche di
+	machine learning in grado di determinare, fornito un certo
+	input, a quale classe questo appartiene; eppure, le due
+	presentano notevoli differenze. Innanzitutto, come gia detto,
+	nel clustering le classi non sono note, dovendo invece venire
+	dedotte a partire dal dataset stesso, mentre nella classificazione
+	e gia noto quali siano le classi. Questo introduce un'ulteriore
+	difficolta, perche ci si aspetta che le classi indotte da un
+	algoritmo di clustering abbiano una semantica, mentre se le
+	classi sono gia fornite questa e (dovrebbe essere) deducibile
+	dalle stesse.
 
 	Il clustering é molto piú "esplorativo" della classificazione,
 	tanto che puó essere usato prima di operare un algoritmo di

@@ -1,0 +1,123 @@
+\begin{sile}
+
+	Approcci di terminazione piú raffinati prevedono di definire
+	dei parametri oggettivi sulla qualitá dei cluster, e terminare
+	l'algoritmo quando tale qualitá raggiunge un valore accettabile.
+	Idealmente, un cluster é considerabile un buon cluster quando
+	ha sia una alta \strong{coesione intra-cluster}, ovvero quando
+	é un \strong{cluster compatto} che una alta \strong{coesione
+	inter-cluster}, ovvero quando é un \strong{cluster isolato}.
+	Un cluster si dice compatto quando é piccola la distanza che
+	hanno tutti i punti del cluster dal loro centroide, mentre si
+	dice isolato quando é grande la distanza di ogni punto da tutti
+	i punti dei cluster diversi dal proprio.
+
+	Siano \math{C_{j}} é il \math{j}-esimo cluster, \math{\bi{m}_{j}}
+	il centroide del cluster \math{C_{j}} e \math{\mi{dist}(\bi{x},
+	\bi{m}_{j})} la distanza fra il punto \math{\bi{x}} ed il centroide
+	\math{\bi{m}_{j}}. \strong{Sum of Squared Error}, o \strong{SSE}
+	(\em{Somma degli Errori Quadratici}), é una possibile metrica
+	che indica la compattezza di un cluster:
+
+	\begin[mode = display]{math}
+		\mi{SSE} = \sum_{j = 1}^{k}
+		\sum_{\bi{x} \in C_{j}} \mi{dist} {(\bi{x}, \bi{m}_{j})}^{2}
+	\end{math}
+
+	Per quanto riguarda quanto un cluster é isolato, si consideri
+	un elemento \math{\bi{x}_{i}}, che é stato assegnato al cluster
+	\math{C_{I}}. Sia \math{A(\bi{x}_{i})} il valore del centroide
+	del cluster a cui \math{\bi{x}_{i}} appartiene, e sia invece
+	\math{B(\bi{x}_{i})} la minima distanza media fra \math{\bi{x}_{i}}
+	e tutti i punti di \math{D} che non si trovano in \math{C_{I}}.
+	Il cluster che ha tale distanza é detto \strong{neighbouring
+	cluster}, perché é il cluster in cui sarebbe piú ragionevole
+	inserire \math{\bi{x}_{i}} ad eccezione di \math{C_{I}}, essendo
+	quello a questo piú vicino.
+
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			A{(\bi{x}_{i})} = \bi{m}_{I} =
+			\frac{1}{\abs{C_{I}}}
+			\sum_{\bi{x}_{i} \in C_{I}} \bi{x}_{i}
+		\end{math}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin[mode = display]{math}
+			B{(\bi{x}_{i})} = \mi{min}_{J \ne I}
+			\frac{1}{\abs{C_{J}}} \sum_{\bi{x}_{j} \in C_{J}}
+			\mi{dist} {(\bi{x}_{i}, \bi{x}_{j})}
+		\end{math}
+	\end{parbox}
+	\par
+
+	\math{A(\bi{x}_{i})} é una misura di quanto un elemento del
+	dataset é vicino al centroide del cluster a cui appartiene,
+	mentre \math{B(\bi{x}_{i})} é una misura di quanto un elemento
+	del cluster é dissimile dagli elementi degli altri cluster.
+	Pertanto, \math{\bi{x}_{i}} si trova in un cluster adatto
+	se \math{A(\bi{x}_{i})} é un valore piccolo mentre
+	\math{B(\bi{x}_{i})} é un valore grande.
+
+	Prende il nome di \strong{Silhouette} associata a \math{i} la
+	quantitá \math{S(\bi{x}_{i})} cosí calcolata:
+
+	\begin[mode = display]{math}
+		S{(\bi{x}_{i})} =
+		\{\table[columnalign = left left]{
+			1 - A(\bi{x}_{i}) / B(\bi{x}_{i}) &
+			\mi{se} \thickspace A(\bi{x}_{i}) < B(\bi{x}_{i}) \\
+			0 &
+			\mi{se} \thickspace A(\bi{x}_{i}) = B(\bi{x}_{i}) \\
+			B(\bi{x}_{i}) / A(\bi{x}_{i}) - 1 &
+			\mi{se} \thickspace A(\bi{x}_{i}) > B(\bi{x}_{i}) \\
+		}
+	\end{math}
+
+	É facile verificare che \math{S(\bi{x}_{i})} é un
+	valore strettamente compreso fra -1 e 1. Affinché
+	\math{S(\bi{x}_{i})} sia vicino ad 1, \math{A(\bi{x}_{i})}
+	deve essere un valore piccolo e \math{B(\bi{x}_{i})} deve
+	essere un valore grande, pertanto se \math{S(\bi{x}_{i})
+	\approx 1} allora \math{\bi{x}_{i}} é stato ben classificato.
+	Se invece \math{S(\bi{x}_{i}) \approx -1}, allora
+	\math{A(\bi{x}_{i})} é grande e \math{B(\bi{x}_{i})} é
+	piccolo, e quindi la classificazione é scadente. Se invece
+	\math{S(\bi{x}_{i}) \approx 0}, allora \math{A(\bi{x}_{i})
+	\approx B(\bi{x}_{i})}, e quindi l'elemento \math{\bi{x}_{i}}
+	potrebbe indifferentemente appartenere al suo cluster o al
+	neighbouring cluster.
+
+	Per quanto sia possibile definire metriche oggettive per
+	valutare la qualitá dei singoli cluster (SSE, silhouette,
+	ecc\ddd), valutare la qualitá del clustering nel suo complesso
+	é un problema non banale, dato che una ground truth con cui
+	testare il modello é generalmente assente. Infatti, a differenza
+	della classificazione, non sono noti quali sono effettivamente i
+	cluster, pertanto non vi é modo di compararli con i cluster
+	indotti da k-means. A differenza della classificazione, dove sui
+	valori di testing e possibile definire delle metriche: qui non
+	ho distinzione tra testing e modello, quindi dovrei operare le
+	metriche sugli stessi dati con cui addestro il modello. Quello
+	che posso fare e solamente valutare le prestazioni dei singoli
+	cluster, ma non quanto il modello in se sia affidabile.
+
+	In alcuni contesti, della ground truth per un problema di
+	clustering esiste, ma spesso si tratta di informazioni che
+	si trovano al di fuori del dataset. In questo caso, é possibile
+	valutare la qualitá del clustering come fosse un problema di
+	classificazione. L'idea é quella di trattare ciascun cluster
+	come fosse una classe in un problema di classificazione,
+	costruire sulla base di queste una matrice di confusione ed a
+	sua volta calcolare a partire da questa le statistiche di sorta
+	(precision, F-score, ecc\ddd).
+
+	Come giá anticipato, molto spesso il clustering figura
+	nella fase esplorativa della risoluzione di un problema
+	piú complesso. Pertanto, un possibile modo per valutare
+	la qualitá del clustering é farlo in maniera indiretta
+	sulla base della qualitá del risultato finale: se questa
+	é buona, allora il clustering che é stato fatto a monte
+	del procedimento deve essere stato buono a sua volta.
+
+\end{sile}
