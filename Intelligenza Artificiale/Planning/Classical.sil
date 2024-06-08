@@ -362,25 +362,25 @@
 		base della sua lunghezza. Nella variabile \tt{M} viene
 		salvato l'ultimo passo con cui e stata soddisfatta la
 		condizione del goal. Per ogni passo temporale da 0 ad
-		\tt{M}, viene costruito un insieme \tt{G\testsubscript{t}}
+		\tt{M}, viene costruito un insieme \tt{G\textsubscript{t}}
 		che contiene tutti gli atomi del goal che vengono soddisfatti
 		nel \tt{t}-esimo passo temporale. Infine, a partire dall'ultimo
-		\tt{G\testsubscript{t}}, vengono propagate all'indietro le
+		\tt{G\textsubscript{t}}, vengono propagate all'indietro le
 		precondizioni delle azioni che hanno permesso di soddifare
-		gli atomi contenuti in \tt{G\testsubscript{t}}.
+		gli atomi contenuti in \tt{G\textsubscript{t}}.
 
 		\begin{verbatim}
 			procedure extractRPSize([F\textsubscript{0}, A\textsubscript{1}, F\textsubscript{1}, \unichar{U+2026}, A\textsubscript{k}, F\textsubscript{k}], g)
 			    // if (g \unichar{U+2288} F\textsubscript{k}) then
 			    //    return err
-			    M \unichar{U+2190} max(firstLevel(g\textsubscript{i}, [F\textsubscript{0}, \unichar{U+2026}, F\textsubscript{k}]) | g\textsubscript{i} \in g)
+			    M \unichar{U+2190} max(firstLevel(g\textsubscript{i}, [F\textsubscript{0}, \unichar{U+2026}, F\textsubscript{k}]) | g\textsubscript{i} \unichar{U+2208} g)
 			    for t \unichar{U+2190} 0 to M do
-			        G\textsubscript{t} \unichar{U+2190} \{g\textsubscript{i} \in g | firstLevel(g\textsubscript{i}, [F\textsubscript{0}, \unichar{U+2026}, F\textsubscript{k}]) = t\}
+			        G\textsubscript{t} \unichar{U+2190} \{g\textsubscript{i} \unichar{U+2208} g | firstLevel(g\textsubscript{i}, [F\textsubscript{0}, \unichar{U+2026}, F\textsubscript{k}]) = t\}
 			    for t \unichar{U+2190} M to 1 do
 			        foreach g\textsubscript{t} \unichar{U+2208} G\textsubscript{t} do
 			            select a : firstLevel(a, [A\textsubscript{1}, \unichar{U+2026}, A\textsubscript{t}]) = t and g\textsubscript{t} \unichar{U+2208} effects\textsuperscript{+}(a)
 			            foreach p \unichar{U+2208} precond(a) do
-			                G\textsubscript{firstLevel(p, [F\textsubscript{0}, \unichar{U+2026}, F\textsubscript{k}])} \unichar{U+2190} G\textsubscript{firstLevel(p, [F\textsubscript{0}, \unichar{U+2026}, F\textsubscript{k}])} \unichar{U+222A} \{p\}
+			                G\textsubscript{firstLevel(p, [F\textsubscript{0}, ..., F\textsubscript{k}])} <- G\textsubscript{firstLevel(p, [F\textsubscript{0}, ..., F\textsubscript{k}])} \unichar{U+222A} \{p\}
 			    return number of selected actions
 		\end{verbatim}
 
