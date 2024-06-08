@@ -1,5 +1,14 @@
 \begin{sile}
 
+	Il \strong{clustering basato su partizioni} suddivide un
+	dataset in insiemi sempre piu piccoli. In questo tipo di
+	clustering il dataset viene preso in esame per intero, a
+	prescindere da quanto questo sia rumoroso. Questo semplifica
+	il procedimento, perché non e necessario alcun preprocessing,
+	ma allo stesso tempo rende i cluster molto suscettibili al
+	rumore del dataset, in particolare, agli \strong{outlier}, i
+	dati isolati molto distanti dal resto;
+
 	\strong{k-means} e un esempio di algoritmo di clustering
 	basato su partizioni, che opera su dati esclusivamente
 	numerici. L'algoritmo partiziona il dataset fornito in

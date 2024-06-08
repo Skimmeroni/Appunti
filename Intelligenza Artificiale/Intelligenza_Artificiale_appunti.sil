@@ -111,11 +111,11 @@
 		\include[src = Supervised/Ensemble.sil] % da rivedere il boosting
 	\chapter{Unsupervised Learning}
 		\section{Introduzione all'apprendimento non supervisionato}
-		\include[src = Supervised/Introduzione.sil] % da rivedere
+		\include[src = Supervised/Introduzione.sil]
 		\section{Clustering basato su partizioni: K-means}
 		\include[src = Unsupervised/Kmeans.sil]
 		\section{Clustering basato su densitá: DBSCAN}
-		\include[src = Unsupervised/DBSCAN.sil] % da rivedere
+		\include[src = Unsupervised/DBSCAN.sil]
 	\chapter{Deep Learning}
 		\section{Percettrone}
 		\include[src = Deep/Perceptron.sil] % da rivedere

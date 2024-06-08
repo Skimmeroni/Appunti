@@ -75,30 +75,9 @@
 	di distanza, utilizzata per definire quanto due elementi del
 	dataset siano \em{simili}: minore é la distanza, maggiore é
 	la somiglianza. Fra le diverse tecniche di clustering e
-	possibile citare:
-
-	\begin{itemize}
-		\begin{item}
-			\strong{Clustering basato su partizioni}, che a partire
-			da un dataset uniforme lo partiziona in insiemi sempre
-			piu piccoli. In questo tipo di clustering il dataset
-			viene preso in esame per intero, a prescindere da quanto
-			questo sia rumoroso. Questo semplifica il procedimento,
-			perché non e necessario alcun preprocessing, ma allo
-			tesso tempo rende i cluster molto suscettibili al rumore
-			del dataset, in particolare, agli \strong{outlier}, i
-			dati isolati molto distanti dal resto;
-		\end{item}
-		\begin{item}
-			\strong{Clustering basato su densita}, che aggrega in
-			cluster elementi che hanno una alta similitudine;
-		\end{item}
-		\begin{item}
-			\strong{Clustering basato su gerarchie}.
-		\end{item}
-	\end{itemize}
-
-	\bigskip
+	possibile citare il \strong{clustering basato su partizioni},
+	il \strong{clustering basato su densita} ed il \strong{clustering
+	basato su gerarchie}.
 
 	Sia il clustering sia la classificazione sono tecniche di
 	machine learning in grado di determinare, fornito un certo

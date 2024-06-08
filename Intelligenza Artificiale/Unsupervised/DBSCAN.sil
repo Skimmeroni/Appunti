@@ -47,22 +47,23 @@
 
 	\bigskip
 
-	Un punto \math{q} é detto \strong{direttamente raggiungibile} a
-	partire da \math{p} se math{p} é un core point e \math{q} si trova
-	nell'\math{\epsilon}-vicinato di \math{p}. Se un punto \math{r} é
-	direttamente raggiungibile a partire da \math{q} e \math{q} é
-	direttamente raggiungibile a partire da un punto \math{p} allora
-	si dice che \math{r} é \strong{indirettamente raggiungibile} a
-	partire da \math{p} (a prescindere che \math{r} sia direttamente
-	raggiungibile da \math{p} o meno). Si noti come la raggiungibilitá,
-	sia diretta che indiretta, non é una proprietá necessariamente
-	simmetrica.
+	Un punto \math{q} é detto \strong{direttamente raggiungibile}
+	a partire da \math{p} se math{p} é un core point e \math{q} si
+	trova nell'\math{\epsilon}-vicinato di \math{p}. Se un punto
+	\math{r} é direttamente raggiungibile a partire da \math{q} e
+	\math{q} é direttamente raggiungibile a partire da un punto
+	\math{p} allora si dice che \math{r} é \strong{indirettamente
+	raggiungibile} a partire da \math{p} (a prescindere che \math{r}
+	sia direttamente raggiungibile da \math{p} o meno). Si noti come
+	la raggiungibilitá, sia diretta che indiretta, non é una proprietá
+	necessariamente simmetrica.
 
-	Un algoritmo di clustering basato su densitá molto semplice é
-	\strong{DBSCAN}. Dato un dataset \math{D} e fissati due valori
-	strettamente positivi \math{\epsilon} e MinPts, a ciascun elemento
-	\math{p} di \math{D} é possibile associare un tipo: \tt{not visited},
-	\tt{visited} oppure \tt{noise}. L'algoritmo é presentato di seguito:
+	Un algoritmo di clustering basato su densitá molto semplice
+	é \strong{DBSCAN}. Dato un dataset \math{D} e fissati due
+	valori strettamente positivi \math{\epsilon} e MinPts, a
+	ciascun elemento \math{p} di \math{D} é possibile associare
+	un tipo: \tt{not visited}, \tt{visited} oppure \tt{noise}.
+	L'algoritmo é presentato di seguito:
 
 	\begin[width = 47.5%fw]{parbox}
 		\begin{verbatim}
@@ -99,16 +100,18 @@
 	\end{parbox}
 	\par
 
-	Quando \tt{DBSCAN} viene invocato, viene inizializzato un cluster
-	\tt{C}, dopodiché viene iterativamente esaminato ogni elemento
-	\tt{p} del dataset \tt{D} di tipo \tt{not visited}. All'elemento
-	\tt{p} viene innanzitutto cambiato tipo in \tt{visited}, dopodiché
-	viene costruito l'\math{\epsilon}-vicinato di tale elemento. Se tale
-	insieme contiene meno elementi di \tt{MinPts}, allora quel punto é
-	certamente un noise point. Questo perché da una parte é troppo isolato
-	per essere un core point, ma d'altra parte non é stato ancora visitato,
-	e quindi non si trova nell'\math{\epsilon}-vicinato di nessun altro
-	punto, pertanto non puó nemmeno essere un border point.
+	Quando \tt{DBSCAN} viene invocato, viene inizializzato un
+	cluster \tt{C}, dopodiché viene iterativamente esaminato
+	ogni elemento \tt{p} del dataset \tt{D} di tipo \tt{not
+	visited}. All'elemento \tt{p} viene innanzitutto cambiato
+	tipo in \tt{visited}, dopodiché viene costruito
+	l'\math{\epsilon}-vicinato di tale elemento. Se tale insieme
+	contiene meno elementi di \tt{MinPts}, allora quel punto é
+	certamente un noise point. Questo perché da una parte é troppo
+	isolato per essere un core point, ma d'altra parte non é stato
+	ancora visitato, e quindi non si trova
+	nell'\math{\epsilon}-vicinato di nessun altro punto, pertanto
+	non puó nemmeno essere un border point.
 
 	Se l'\math{\epsilon}-vicinato di \tt{p} ha invece abbastanza
 	elementi, allora tale punto deve essere un core point, e viene
@@ -118,11 +121,11 @@
 	\tt{p}. Se \tt{q} é di tipo \tt{not visited}, viene cambiato il
 	loro tipo in \tt{visited} e si osserva l'\math{\epsilon}-vicinato
 	di \tt{q} a sua volta. Se l'\math{\epsilon}-vicinato di \tt{q}
-	contiene piú elementi dell'\math{\epsilon}-vicinato di \tt{p}, i due
-	insiemi vengono uniti, perché gli elementi dell'\math{\epsilon}-vicinato
-	di \tt{q} sono indirettamente raggiungibili a partire da \tt{p}. Se
-	\tt{q} non appartiene ad alcun cluster, allora viene aggiunto al cluster
-	in esame.
+	contiene piú elementi dell'\math{\epsilon}-vicinato di \tt{p},
+	i due insiemi vengono uniti, perché gli elementi
+	dell'\math{\epsilon}-vicinato di \tt{q} sono indirettamente
+	raggiungibili a partire da \tt{p}. Se \tt{q} non appartiene ad
+	alcun cluster, allora viene aggiunto al cluster in esame.
 
 	I valori di \math{\epsilon} e di MinPts devono essere scelti
 	con cura, dato che influenzano di molto il clustering che ne
@@ -135,13 +138,13 @@
 	cluster. I valori dei parametri devono essere ricavati a partire
 	dai dati stessi.
 
-	Come regola pratica, MinPts deve essere almeno pari al numero di
-	attributi degli oggetti piú uno. Piú nello specifico, una scelta
-	sicura per MinPts é il doppio del numero degli attributi, ma per 
-	dataset particolarmente grandi e/o rumorosi un valore maggiore si
-	rivela essere una scelta migliore. Si noti come si scegliesse MinPts
-	= 1, tutti i punti verrebbero identificati come core point, pertanto
-	il clustering non avrebbe alcun senso. 
+	Come regola pratica, MinPts deve essere almeno pari al numero
+	di attributi degli oggetti piú uno. Piú nello specifico, una
+	scelta sicura per MinPts é il doppio del numero degli attributi,
+	ma per dataset particolarmente grandi e/o rumorosi un valore
+	maggiore si rivela essere una scelta migliore. Si noti come si
+	scegliesse MinPts = 1, tutti i punti verrebbero identificati
+	come core point, pertanto il clustering non avrebbe alcun senso. 
 
 	Il valore di \math{\epsilon} puó essere stimato costruendo un
 	\strong{k-distance plot}: fissato \math{k} come MinPts meno uno,
@@ -149,18 +152,23 @@
 	ordine crescente per distanza dal loro \math{k}-esimo vicino,
 	mentre sull'asse delle ordinate la distanza stessa. In genere,
 	una curva costruita sulla base di questi dati ha inizialmente
-	un andamento stabile per poi avere una crescita rapida: il valore
-	di \math{\epsilon} é scelto il punto della curva in cui si ha
-	tale variazione di pendenza.
+	un andamento stabile per poi avere una crescita rapida: il
+	valore di \math{\epsilon} é scelto il punto della curva in
+	cui si ha tale variazione di pendenza.
 
 	A differenza di altri algoritmi di clustering, come ad esempio
 	K-means, DBSCAN ha una tolleranza al rumore nettamente superiore,
-	ed é inoltre in grado di generare cluster di forma arbitraria (non
-	solo insiemi convessi). Tuttavia, é molto sensibile al modo in cui
-	i parametri \math{\epsilon} e MinPts vengono fissati. Inoltre, mentre
-	K-means é un algoritmo con tempo di esecuzione lineare nel numero
-	degli elementi, DBSCAN é quadratico, perché un'implementazione (naive)
-	dell'algoritmo richiede di calcolare la distanza da ogni elemento ad
-	ogni altro elemento.
+	ed é inoltre in grado di generare cluster di forma arbitraria
+	(non solo insiemi convessi). Tuttavia, é molto sensibile al
+	modo in cui i parametri \math{\epsilon} e MinPts vengono fissati.
+	Inoltre, mentre K-means é un algoritmo con tempo di esecuzione
+	lineare nel numero degli elementi, DBSCAN é piu lento:
+	un'implementazione naive dell'algoritmo calcolare 
+	la distanza per ciascuna coppia di elementi, quindi avente
+	tempo quadratico; alcune implementazioni riescono a scendere
+	a \math{O(n\mi{log}(n))}, ma comunque meno performante di K-means.
+	Infine, DBSCAN non e in grado di costruire buoni cluster se la
+	densita dei cluster differisce, perche DBSCAN assume che le
+	regioni di spazio fortemente dense lo siano tutte allo stesso modo.
 
 \end{sile}
