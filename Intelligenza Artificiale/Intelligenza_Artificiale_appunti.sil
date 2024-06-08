@@ -113,9 +113,7 @@
 		\section{Introduzione all'apprendimento non supervisionato}
 		\include[src = Supervised/Introduzione.sil] % da rivedere
 		\section{Clustering basato su partizioni: K-means}
-		\include[src = Unsupervised/Kmeans.sil] % da rivedere
-		\section{Valutare il clustering}
-		\include[src = Unsupervised/Valutazione.sil] % da rivedere
+		\include[src = Unsupervised/Kmeans.sil]
 		\section{Clustering basato su densitá: DBSCAN}
 		\include[src = Unsupervised/DBSCAN.sil] % da rivedere
 	\chapter{Deep Learning}

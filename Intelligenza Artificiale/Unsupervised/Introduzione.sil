@@ -102,15 +102,33 @@
 
 	Sia il clustering sia la classificazione sono tecniche di
 	machine learning in grado di determinare, fornito un certo
-	input, a quale classe questo appartiene; eppure, le due
-	presentano notevoli differenze. Innanzitutto, come gia detto,
-	nel clustering le classi non sono note, dovendo invece venire
-	dedotte a partire dal dataset stesso, mentre nella classificazione
-	e gia noto quali siano le classi. Questo introduce un'ulteriore
-	difficolta, perche ci si aspetta che le classi indotte da un
-	algoritmo di clustering abbiano una semantica, mentre se le
-	classi sono gia fornite questa e (dovrebbe essere) deducibile
-	dalle stesse.
+	input, a quale classe questo appartiene. La differenza
+	fondamentale fra le due sta nel fatto che nel clustering
+	le classi non sono note, dovendo invece venire dedotte a
+	partire dal dataset stesso, mentre nella classificazione
+	e gia noto quali siano le classi.
+
+	Questo comporta delle difficolta, innanzitutto perche ci si
+	aspetta che le classi indotte da un algoritmo di clustering
+	abbiano una semantica, mentre se le classi sono gia fornite
+	questa e (dovrebbe essere) deducibile dalle stesse. Inoltre,
+	nella classificazione e possibile comparare i risultati forniti
+	dall'algoritmo con i valori del dataset di partenza e valutare
+	quanto e buona la predizione. Nel clustering, sebbene sia
+	possibile definire delle metriche per valutare i singoli cluster,
+	diventa molto difficile determinare la qualita del clustering
+	come modello in se, perche non c'e alcun dato di riferimento
+	con cui effettuare una comparazione.
+
+	In alcuni contesti, dei dati da utilizzare come comparazione
+	per un problema di clustering esiste, ma spesso si tratta di
+	informazioni che si trovano al di fuori del dataset. In questo
+	caso, é possibile valutare la qualitá del clustering come fosse
+	un problema di classificazione. L'idea é quella di trattare
+	ciascun cluster come fosse una classe in un problema di
+	classificazione, costruire sulla base di queste una matrice
+	di confusione ed a sua volta calcolare a partire da questa le
+	statistiche di sorta (precision, F-score, ecc\ddd).
 
 	Il clustering é molto piú "esplorativo" della classificazione,
 	tanto che puó essere usato prima di operare un algoritmo di
@@ -119,6 +137,14 @@
 	clustering, si analizzano le classi che questo induce,
 	eventualmente se ne cambiano e/o se ne eliminano alcune e
 	poi sulla base di questa etichettatura si opera un algoritmo
-	di classificazione.
+	di classificazione. Per questo motivo, un possibile modo per
+	valutare la qualitá del clustering é farlo in maniera indiretta
+	sulla base della qualitá del risultato finale: se questa é buona,
+	allora il clustering che é stato fatto a monte del procedimento
+	deve essere stato buono a sua volta.
+
+	In genere, l'unico vero modo per valutare la qualita del
+	clustering e l'intervento umano, ad esempio mediante plotting,
+	ed osservando il risultato.
 
 \end{sile}
