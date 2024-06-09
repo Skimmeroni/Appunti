@@ -246,8 +246,8 @@
 	\begin[mode = display]{math}
 		\dsi{R}_{t} = \sum_{i = 0}^{+\infty}
 		E{[\gamma^{i} r_{t + i}]} = 
-		E[r_{t}] + \sum_{i = 1}^{+\infty}
-		E{[\gamma^{i} r_{t + i}]} = E[r_{t}] +
+		E{[r_{t}]} + \sum_{i = 1}^{+\infty}
+		E{[\gamma^{i} r_{t + i}]} = E{[r_{t}]} +
 		\gamma \dsi{R}_{t + 1}
 	\end{math}
 
@@ -258,114 +258,30 @@
 	viene indicata con \math{U^{\pi}(s_{0})}:
 
 	\begin[mode = display]{math}
-		U^{\pi}(s_{0}) = E{[\sum_{t = 0}^{+\infty} \gamma^{t}
-		R(s_{t}, \pi (s_{t}), s_{t + 1})]}
+		U^{\pi} {(s_{0})} = E{[\sum_{t = 0}^{+\infty} \gamma^{t}
+		R{(s_{t}, \pi {(s_{t})}, s_{t + 1})}]}
 	\end{math}
 
 	\math{U^{\pi}} puo essere calcolato per tutti gli stati possibili.
 
+	Viene chiamata \strong{funzione di azione-utilità} o
+	\strong{Q-function} la funzione così definita:
+
+	\begin[mode = display]{math}
+		Q^{\pi}(s, a) = \dsi{R}_{t} | (s_{t}, a_{t}, \pi) =
+		E[r_{t} | s_{t}, a_{t}] + \gamma \dsi{R}_{t} | s_{t}, a_{t},
+		\pi
+	\end{math}
+
+	Ovvero, la ricompensa cumulativa attesa nell'istante di tempo
+	\math{t} se ci si trova nello stato \math{s_{t}} avendo compiuto
+	l'azione \math{a_{t}} suggerita da \math{\pi}.
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-	sia \math{S^{\pi}_{t}} una
-	variabile aleatoria che indica lo stato che raggiunge l'agente
-	adoperando una certa politica \math{\pi} a partire dallo stato
-	\math{s_{0}} al tempo \math{t}. La distribuzione di probabilitá
-	lungo la sequenza di stati \math{S_{1}, S_{2}, \unicodeellipsis}
-	é determinata a partire dallo stato \math{s_{0}}, dalla politica
-	\math{\pi} e dal modello di transizione, e viene indicata con
-	\math{U^{\pi}(s_{0})}:
-
-	\begin[mode = display]{math}
-		U^{\pi} {(s_{0})} = E{[R(s_{0}, \pi(s_{0}), s_{1}) + \gamma
-		R(s_{1}, \pi(s_{1}), s_{2}) + \gamma^{2} R(s_{2}, \pi(s_{2}),
-		s_{3}) + \unicodeellipsis]} = E{[\sum_{t = 0}^{\infty}
-		\gamma^{t} R{(s_{t}, \pi{(s_{t})}, s_{t + 1})}]}
-	\end{math}
-
-	Dove il valore atteso é calcolato rispetto alla distribuzione
-	della sequenza di stati indotta dall'applicare \math{\pi} a
-	\math{s_{0}}. Sia \math{\pi^{*}_{s_{0}}} la politica migliore
-	fra tutte quelle applicabili a partire da \math{s_{0}}: questa
-	non é altro che la politica \math{\pi} che massimizza
-	\math{U^{\pi} (s_{0})}:
-
-	\begin[mode = display]{math}
-		\pi^{*}_{s_{0}} = \mi{argmax}_{\pi} {(U^{\pi} {(s)})}
-	\end{math}
-
-	Fintanto che viene impiegata la regola con discount, é possibile
-	dimostrare che la politica ottimale non dipende da quale stato 
-	viene usato come stato di partenza. Questo significa che, per
-	qualsiasi stato \math{s}, il valore di utilita associato a tale
-	stato é semplicemente \math{U^{\pi^{*}}(s)}, a prescindere di
-	come tale stato viene raggiunto.
-
-	La funzione \math{U(s)} permette all'agente di scegliere la
-	prossima azione da compiere sulla base del principio di massima
-	utilitá attesa, ovvero che massimizza la somma pesata dalla 
-	probabilitá di compiere una transizione verso un certo stato
-	fra la ricompensa che viene ottenuta raggiungendolo e la penalitá
-	introdotta dalla regola con discount:
-
-	\begin[mode = display]{math}
-		\pi^{*} {(s)} = \mi{argmax}_{a \in A(s)} \sum_{s'} T{(s, a, s')}
-		[R{(s, a, s')} + \gamma U{(s')}]
-	\end{math}
-
-	Da questo segue una diretta relazione che sussiste fra
-	l'utilitá di uno stato e l'utilitá degli stati vicini,
-	ovvero quelli che l'agente puó raggiungere a partire da
-	questo: il valore di utilitá di uno stato é dato dalla
-	somma fra il valore atteso della ricompensa portata dalla
-	prossima transizione sommata all'utilitá (scontata) dello
-	stato di arrivo, assumendo che l'agente scelga una politica
-	ottimale. L'equazione risultante, che permette di esprimere
-	la funzione di utilitá degli stati in forma ricorsiva, prende
-	il nome di \strong{equazione di Bellman}:
-
-	\begin[mode = display]{math}
-		U{(s)} = \mi{max}_{a \in A(s)} \sum_{s'} T{(s, a, s')}
-		[R{(s, a, s')} + \gamma U{(s')}]
-	\end{math}
 
 	%%
 	%% Altro esempio da prendere dal libro.
 	%%
-
-	Un'altra quantitá importante é la \strong{funzione di
-	azione-utilitá}, o \strong{Q-function}, che riporta
-	l'utilitá attesa dal compiere una certa azione in un
-	certo stato. Il legame fra Q-function e funzione di
-	utilitá é immediato:
-
-	\begin[mode = display]{math}
-		U(s) = \mi{max}_{a} Q(s, a)
-	\end{math}
-
-	Inoltre, é possibile estrarre la politica ottimale a partire
-	dalla Q-function come segue:
-
-	\begin[mode = display]{math}
-		\pi^{*}(s) = \mi{argmax}_{a} Q(s, a)
-	\end{math}
-
-	É possibile costruire una equazione di Bellman anche per la
-	Q-function, notando come il valore atteso totale per il compiere
-	una azione é dato dalla somma fra la ricompensa immediata e la
-	penalitá del raggiungere il nuovo stato, che a sua volta é
-	esprimibile in termini della Q-function:
-
-	\begin[mode = display]{math}
-		Q{(s, a)} = \sum_{s'} T{(s, a, s')} [R{(s, a, s')} +
-		\gamma U{(s')}] = \sum_{s'} T{(s, a, s')} [R{(s, a, s')} +
-		\gamma \mi{max}_{a'} Q{(s', a')}]
-	\end{math}
-
-	Risolvendo una equazione di Bellman per \math{U} o per \math{Q}
-	é possibile ricavare una politica ottima per un problema di
-	planning probabilistico. Nello specifico, le equazioni di Bellman
-	sono alla base di uno dei metodi usati per risolvere un problema
-	MDP chiamato \strong{value iteration}.
 
 	Per ciascuno stato \math{s} di un MDP dovrebbe venire calcolato
 	\math{U(s)} attraverso l'equazione di Bellman. Se il numero di
