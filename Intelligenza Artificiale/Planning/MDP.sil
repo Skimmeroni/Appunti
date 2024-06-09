@@ -111,10 +111,10 @@
 	la somma delle ricompense associate ai singoli stati:
 
 	\begin[mode = display]{math}
-		U(S) = U([s_{0}, s_{1}, \unicodeellipsis, s_{n}]) =
-		R(s_{0}, \pi(s_{0}), s_{1}) + R(s_{1}, \pi(s_{1}), s_{2}) +
-		\unicodeellipsis + R(s_{n - 1}, \pi(s_{n - 1}), s_{n})
-		= \sum_{i = 0}^{n - 1} R(s_{i}, \pi(s_{i}), s_{i + 1})
+		U{(S)} = U{({[s_{0}, s_{1}, \unicodeellipsis, s_{n}]})} =
+		R{(s_{0}, \pi(s_{0}), s_{1})} + R{(s_{1}, \pi(s_{1}), s_{2})} +
+		\unicodeellipsis + R{(s_{n - 1}, \pi(s_{n - 1}), s_{n})}
+		= \sum_{i = 0}^{n - 1} R{(s_{i}, \pi{(s_{i})}, s_{i + 1})}
 	\end{math}
 
 	Il problema di questa forma di assegnazione della ricompensa e
@@ -128,10 +128,10 @@
 	metodo è data da:
 
 	\begin[mode = display]{math}
-		U(S) = U([s_{0}, s_{1}, \unicodeellipsis, s_{n}]) =
-		R(s_{0}, \pi(s_{0}), s_{1}) + \gamma R(s_{1}, \pi(s_{1}), s_{2}) +
-		\unicodeellipsis + \gamma^{n - 1} R(s_{n - 1}, \pi(s_{n - 1}), s_{n})
-		= \sum_{i = 0}^{n - 1} \gamma^{i} R(s_{i}, \pi(s_{i}), s_{i + 1})
+		U{(S)} = U{({[s_{0}, s_{1}, \unicodeellipsis, s_{n}]})} =
+		R{(s_{0}, \pi{(s_{0})}, s_{1})} + \gamma R{(s_{1}, \pi{(s_{1})}, s_{2})} +
+		\unicodeellipsis + \gamma^{n - 1} R{(s_{n - 1}, \pi{(s_{n - 1})}, s_{n})}
+		= \sum_{i = 0}^{n - 1} \gamma^{i} R{(s_{i}, \pi{(s_{i})}, s_{i + 1})}
 	\end{math}
 
 	\math{\gamma} determina quanta priorità debba dare l'agente

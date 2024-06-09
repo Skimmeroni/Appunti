@@ -143,9 +143,9 @@
 		Applicando la formula delle probabilitá totali:
 
 		\begin[mode = display]{math}
-			\mi{bel}(x_{t}) = \eta P(z_{t} | x_{t})
-			\int P(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}, x_{t - 1})
-			P(x_{t - 1} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}) dx_{t - 1}
+			\mi{bel} {(x_{t})} = \eta P{(z_{t} | x_{t})}
+			\int P{(x_{t} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t}, x_{t - 1})}
+			P{(x_{t - 1} | \mu_{1}, z_{1}, \unicodeellipsis, \mu_{t})} dx_{t - 1}
 		\end{math}
 
 		Prendendo come valida l'assunzione Markoviana, e possibile
@@ -188,9 +188,9 @@
 	\begin[mode = display]{math}
 		bel{(x_{t})} = \eta P{(z_{t} | x_{t})} \int P{(x_{t} |
 		\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1} =
-		\eta P(z_{t} | x_{t}) \mi{bel}^{-1}(x_{t})
+		\eta P{(z_{t} | x_{t})} \mi{bel}^{-1} {(x_{t})}
 		\thickspace \Rightarrow \thickspace
-		\mi{bel}^{-1}(x_{t}) = \int P{(x_{t} |
+		\mi{bel}^{-1} {(x_{t})} = \int P{(x_{t} |
 		\mu_{t}, x_{t - 1})} bel{(x_{t - 1})} d x_{t - 1}
 	\end{math}
 

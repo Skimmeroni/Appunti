@@ -160,8 +160,8 @@
 
 	\begin[width = 65%fw]{parbox}
 		\begin[mode = display]{math}
-			\mi{lim}_{x \rightarrow 0^{+}} P(c_{j}) \cdot
-			\mi{log}_{2}(P(c_{j})) = \mi{lim}_{x \rightarrow 0^{+}}
+			\mi{lim}_{x \rightarrow 0^{+}} P{(c_{j})} \cdot
+			\mi{log}_{2} {(P{(c_{j})})} = \mi{lim}_{x \rightarrow 0^{+}}
 			\frac{\mi{log}_{2}(P(c_{j}))}{\frac{1}{P(c_{j})}} =
 			\mi{lim}_{x \rightarrow 0^{+}} \frac{\frac{1}{\mi{ln}(2)P(c_{j})}}{-
 			\frac{1}{P(c_{j})^{2}}} = \mi{lim}_{x \rightarrow 0^{+}}

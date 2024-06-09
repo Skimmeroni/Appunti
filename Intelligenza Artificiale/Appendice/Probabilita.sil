@@ -141,17 +141,20 @@
 	\math{P(x | z_{1}, \unicodeellipsis, z_{n})} come:
 
 	\begin[mode = display]{math}
-		P(x | z_{1}, \unicodeellipsis, z_{n}) =
-		\frac{P(z_{n} | x) P(x | z_{1}, \unicodeellipsis,
-		z_{n - 1})}{P(z_{n} | z_{1}, \unicodeellipsis,
-		z_{n - 1})} = \eta_{n} P(z_{n} | x) P(x | z_{1},
-		\unicodeellipsis, z_{n - 1}) = \eta_{n} P(z_{n} | x)
-		\frac{P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis,
-		z_{n - 2})}{P(z_{n - 1} | z_{1}, \unicodeellipsis,
-		z_{n - 2})} = \eta_{n} P(z_{n} | x) \eta_{n - 1}
-		P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis, z_{n - 2})
-		= \unicodeellipsis = p(x) \prod_{i = 1}^{n} \eta_{i}
-		P(z_{i} | x) 
+		\table[columnalign = left left]{
+			P{(x | z_{1}, \unicodeellipsis, z_{n})} & =
+			\frac{P(z_{n} | x) P(x | z_{1}, \unicodeellipsis,
+			z_{n - 1})}{P(z_{n} | z_{1}, \unicodeellipsis,
+			z_{n - 1})} = \eta_{n} P{(z_{n} | x)} P{(x | z_{1},
+			\unicodeellipsis, z_{n - 1})} = \eta_{n} P{(z_{n} | x)}
+			\frac{P(z_{n - 1} | x) P(x | z_{1}, \unicodeellipsis,
+			z_{n - 2})}{P(z_{n - 1} | z_{1}, \unicodeellipsis,
+			z_{n - 2})} \\
+			& = \eta_{n} P{(z_{n} | x)} \eta_{n - 1} P{(z_{n - 1} | x)}
+			P{(x | z_{1}, \unicodeellipsis, z_{n - 2})}
+			= \unicodeellipsis = p{(x)} \prod_{i = 1}^{n} \eta_{i}
+			P{(z_{i} | x)} \\
+		}
 	\end{math}
 
 	Questo e un esempio di inferenza statistica chiamata

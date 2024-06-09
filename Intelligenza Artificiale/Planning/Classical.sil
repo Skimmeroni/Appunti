@@ -246,22 +246,34 @@
 			Si consideri il problema \math{P = (F, I, O, G)}
 			formulato nel linguaggio STRIPS, cosí costruito:
 
-			\begin[mode = display]{math}
-				F = \{p, q, r\}
-				\thickspace\thickspace
-				I = \{p\}
-				\thickspace\thickspace
-				\table[columnalign = left]{
-					Prec(a) = \{p\},
-					Add(a) = \{q\},
-					Del(a) = \{\} \\
-					Prec(b) = \{q\},
-					Add(b) = \{r\},
-					Del(b) = \{q\} \\
-				}
-				\thickspace\thickspace
-				G = \{q, r\}
-			\end{math}
+			\begin[width = 25%fw]{parbox}
+				\begin[mode = display]{math}
+					F = \{p, q, r\}
+				\end{math}
+			\end{parbox}
+			\begin[width = 25%fw]{parbox}
+				\begin[mode = display]{math}
+					I = \{p\}
+				\end{math}
+			\end{parbox}
+			\begin[width = 25%fw]{parbox}
+				\begin[mode = display]{math}
+					\table[columnalign = left]{
+						Prec(a) = \{p\},
+						Add(a) = \{q\},
+						Del(a) = \{\} \\
+						Prec(b) = \{q\},
+						Add(b) = \{r\},
+						Del(b) = \{q\} \\
+					}
+				\end{math}
+			\end{parbox}
+			\begin[width = 25%fw]{parbox}
+				\begin[mode = display]{math}
+					G = \{q, r\}
+				\end{math}
+			\end{parbox}
+			\par
 
 			\begin{itemize}
 				\begin{item}
@@ -380,7 +392,7 @@
 			        foreach g\textsubscript{t} \unichar{U+2208} G\textsubscript{t} do
 			            select a : firstLevel(a, [A\textsubscript{1}, \unichar{U+2026}, A\textsubscript{t}]) = t and g\textsubscript{t} \unichar{U+2208} effects\textsuperscript{+}(a)
 			            foreach p \unichar{U+2208} precond(a) do
-			                G\textsubscript{firstLevel(p, [F\textsubscript{0}, ..., F\textsubscript{k}])} <- G\textsubscript{firstLevel(p, [F\textsubscript{0}, ..., F\textsubscript{k}])} \unichar{U+222A} \{p\}
+			                G\textsubscript{firstLevel(p, [F\textsubscript{0}, ..., F\textsubscript{k}])} \unichar{U+2190} G\textsubscript{firstLevel(p, [F\textsubscript{0}, ..., F\textsubscript{k}])} \unichar{U+222A} \{p\}
 			    return number of selected actions
 		\end{verbatim}
 
