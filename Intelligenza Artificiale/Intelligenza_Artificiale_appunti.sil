@@ -121,9 +121,9 @@
 		\include[src = Deep/Perceptron.sil] % da rivedere
 		%\section{Deep Learning}
 		%\include[src = Deep/Deep.sil] % da rivedere
-	%\chapter{Reinforcement Learning}
-		%\section{Introduzione all'apprendimento con rinforzo}
-		%\include[src = Supervised/Introduzione.sil] % da rivedere
+	\chapter{Reinforcement Learning}
+		\section{Introduzione all'apprendimento con rinforzo}
+		\include[src = Supervised/Introduzione.sil]
 		%\section{Reinforcement Learning}
 		%\include[src = Reinforcement/RL.sil] % da rivedere
 	\chapter[numbering = false]{Appendice}

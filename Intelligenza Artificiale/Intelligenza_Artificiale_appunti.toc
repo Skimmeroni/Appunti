@@ -491,12 +491,32 @@ return {
   },
   {
     label = {
-      "Appendice",
+      "Reinforcement Learning",
       id = "stuff"
     },
     level = 1,
     link = "dest50",
+    number = "8",
     pageno = "59"
+  },
+  {
+    label = {
+      "Introduzione all'apprendimento con rinforzo",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest51",
+    number = "8.1",
+    pageno = "59"
+  },
+  {
+    label = {
+      "Appendice",
+      id = "stuff"
+    },
+    level = 1,
+    link = "dest52",
+    pageno = "61"
   },
   {
     label = {
@@ -504,9 +524,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest51",
-    number = "7.2",
-    pageno = "59"
+    link = "dest53",
+    number = "8.2",
+    pageno = "61"
   },
   {
     label = {
@@ -514,8 +534,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest52",
-    number = "7.3",
-    pageno = "60"
+    link = "dest54",
+    number = "8.3",
+    pageno = "62"
   }
 }

@@ -1,13 +1,7 @@
 \begin{sile}
 
-	Nel \strong{reinforcement learning} l'agente apprende
-	mediante una serie di rinforzi, sia positivi (ricompense)
-	che negativi (punizioni). In sostanza, l'agente cerca
-	di determinare quali sono le azioni che minimizzano le
-	punizioni e massimizzano le ricompense per poi applicarle.
-
-	Nel reinforcement learning, l'agente interagisce con
-	l'ambiente e riceve periodicamente delle ricompense o
+	Nel \strong{reinforcement learning}, l'agente interagisce
+	con l'ambiente e riceve periodicamente delle ricompense o
 	delle punizioni, sotto forma di \strong{segnali}, che
 	riflettono il modo in cui sta operando. Non é presente
 	alcun supervisore. In genere il \strong{feedback}, ovvero
@@ -16,52 +10,70 @@
 	delle situazioni in cui il guadagno sul breve termine deve
 	essere sacrificato per ottenere un guadagno sul lungo termine.
 
-	L'operato dell'agente si traduce quindi nel massimizzare
-	la ricompensa che gli viene fornita e minimizzare la
-	punizione. Questo tipo di apprendimento richiede che sia
-	valida (o che, piú correttamente, venga assunto essere
-	valida) la cosiddetta \strong{reward hypothesis}, ovvero
-	che tutti gli obiettivi possano essere espressi in termini
-	di valore atteso di ricompensa. Questo non solo non é sempre
-	possibile, ma spesso ha anche un risultato non neutrale.
+	La ricompensa, indicata con \math{R_{t}}, è un segnale di
+	feedback scalare che indica quanto bene si sta comportando
+	l'agente all'istante di tempo \math{t}. Lo scopo dell'agente
+	è massimizzare la stima della ricompensa cumulativa che si
+	guadagnerà da ora fino al raggiungimento dell'obiettivo. Questo
+	sottostà ad un assunto, la \strong{reward hypothesis}, ovvero
+	che tutti gli obiettivi possano essere espressi come
+	massimizzazione della ricompensa cumulativa attesa. Si noti 
+	come questo assunto non solo non sia sempre valido, possibile,
+	ma spesso ha anche un risultato non neutrale.
 
-	Il concetto di ricompensa era giá presente nei Markov
-	Decision Process, e l'obiettivo degli MDP é il medesimo
-	del reinforcement learning: massimizzare la ricompensa
-	attesa migliorando la propria politica. Tuttavia, il
-	reinforcement learning non consiste semplicemente nel
-	risolvere un MDP: l'agente é parte dell'MDP. Infatti,
-	non conosce a priori la funzione di transizione e la
-	funzione di ricompensa: il massimo che puó fare é
-	stimarle sulla base delle sue osservazioni.
+	Ad ogni istante \math{t}, l'agente esegue una certa azione
+	\math{A_{t}}, percepisce l'osservazione \math{O_{t}} e riceve
+	la ricompensa \math{R_{t}}. D'altro canto, l'ambiente riceve
+	l'azione \math{A_{t}}, emette l'osservazione \math{O_{t + 1}}
+	ed emette la ricompensa \math{R_{t + 1}}. \math{t} viene
+	incrementato di 1 ed il ciclo si ripete. Una sequenza ordinata
+	di azioni, osservazioni e ricompense prende il nome di
+	\strong{storia}:
 
-	Esistono fondamentalmente due approcci al reinforcement learning:
+	\begin[mode = display]{math}
+		H_{t} = A_{1}, O_{1}, R_{1}, \unicodeellipsis,
+				A_{t - 1}, O_{t - 1}, R_{t - 1},
+				A_{t}, O_{t}, R_{t}
+	\end{math}
 
-	\begin{itemize}
-		\begin{item}
-			\strong{Model-based Reinforcement learning}, dove
-			l'agente ipotizza, a partire dalle sue osservazioni
-			sull'ambiente, quale possa essere una funzione di
-			transizione in grado di interpretare i segnali di
-			ricompensa. In genere, gli agenti che adottano questo
-			approccio cercano di imparare una funzione di utilitá
-			\math{U(s)} definita in termini di somma delle
-			ricompense dallo stato \math{s} in poi;
-		\end{item}
-		\begin{item}
-			\strong{Model-free reinforcement learning},
-			dove l'agente non solo non conosce la funzione
-			di transizione dell'ambiente, ma nemmeno la
-			modellizza, apprendendo invece una rappresentazione
-			piú diretta su come agire.
-		\end{item}
-	\end{itemize}
+	Dove \math{H_{t}} indica la storia dal primo istante all'istante
+	\math{t}. Cosa accadrà all'istante \math{t + 1} dipende in qualche
+	misura da \math{H_{t}}; nello specifico, si usa il termine
+	\strong{stato} per indicare una funzione della storia che
+	determina il futuro operato dell'agente sulla base della stessa:
 
-	\bigskip
+	\begin[mode = display]{math}
+		S_{t} = f(H_{t})
+	\end{math}
 
 	Essendo i problemi di reinforcement learning intrinsecamente
-	sequenziali (ad ogni passaggio, l'agente subisce l'effetto di
-	un segnale), é in genere preferibile una situazione in cui
-	vale l'assunzione Markoviana.
+	sequenziali, é in genere preferibile una situazione in cui
+	vale per gli stati l'assunzione Markoviana:
+
+	\begin[mode = display]{math}
+		P(S_{t + 1} | S_{t}, S_{t - 1}, \unicodeellipsis, S_{1}) =
+		P(S_{t + 1} | S_{t})
+	\end{math}
+
+	Ovvero, la probabilità che ci si trovi nello stato \math{S_{t + 1}}
+	non dipende da tutti dagli stati a questo precedenti, ma soltanto
+	da quello immediatamente precedente.
+
+	Occorre fare una distinzione fra lo \strong{stato dell'ambiente}
+	e lo \strong{stato dell'agente}. Il primo è la rappresentazione
+	interna dell'ambiente, che usa per fornire all'agente
+	l'osservazione e la ricompensa, e non è necessariamente noto
+	all'agente (anche se lo fosse, potrebbe essere molte più
+	informazioni di quanto l'agente necessiti). Il secondo è la
+	rappresentazione interna dell'agente, che questo usa per 
+	scegliere l'azione da compiere in ciascun istante.
+
+	Nel caso in cui i due stati coincidano, ovvero nel caso in cui
+	l'ambiente è accessibile, il reinforcement learning può essere
+	formulato come un Markov Decision Process. Nel caso in cui
+	l'ambiente non sia accessibile, i due non coincidono, e si
+	parla di \strong{Partially Observable Markov Decision Process}
+	(\strong{POMDP}), dove l'agente necessita di costruire una
+	rappresentazione interna dei propri stati.
 
 \end{sile}
