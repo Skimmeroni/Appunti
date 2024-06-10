@@ -1,42 +1,53 @@
 \begin{sile}
 
-	Un \strong{Knowledge Graph} (\strong{KG}) é un grafo diretto ed
-	etichettato il cui scopo é riportare e trasmettere conoscenze sul
-	mondo reale. I nodi del grafo rappresentano delle \strong{entitá},
-	ovvero degli oggetti che appartengono al mondo di interesse, mentre
-	gli archi del grafo rappresentano delle \strong{relazioni} che
-	intercorrono fra queste entitá.
+	Un \strong{Knowledge Graph} (\strong{KG}) é un grafo
+	diretto ed etichettato il cui scopo é riportare e
+	trasmettere conoscenze sul mondo reale. I nodi del
+	grafo rappresentano delle \strong{entitá}, ovvero
+	degli oggetti che appartengono al mondo di interesse,
+	mentre gli archi del grafo rappresentano delle
+	\strong{relazioni} che intercorrono fra queste entitá.
 
-	Con "conoscenza" si intende genericamente qualsiasi cosa sia
+	"Conoscenza" indica semplicemente qualsiasi cosa sia
 	\em{nota}: tale conoscenza puó essere ricavata da dal mondo
 	che il grafo vuole modellare oppure estratta dal grafo stesso.
 	La conoscenza puó essere composta sia da semplici asserzioni
 	che coinvolgono due entitá ("A possiede/fa uso di/fa parte
-	di/... B") oppure asserzioni che coinvolgono gruppi di entitá
-	("tutti i membri di A possiedono/fanno uso/fanno parte di/...
+	di/\ddd B") oppure asserzioni che coinvolgono gruppi di entitá
+	("tutti i membri di A possiedono/fanno uso/fanno parte di/\ddd
 	B"). Le asserzioni semplici sono riportate come etichette degli
 	archi del grafo: se esiste un arco fra i nodi A e B, significa
 	che A e B sono legati dalla relazione che etichetta l'arco che
 	li unisce.
 
-	Formalmente, un Knowledge Graph é definito a partire dalla quintupla
-	\math{\langle E, L, T, P, A\rangle}:
+	Le informazioni codificate all'interno di un knowledge
+	graph possono essere infatti espresse come formule in
+	una restrizione della logica del primo ordine, mantenendo
+	la maggior parte dei costrutti (quantificatori universali,
+	relazioni binarie, ecc\ddd) ma escludendone alcuni non
+	necessari, come i predicati n-ari ed i simboli di funzione.
+	Tutti i knowledge graph hanno la medesima sintassi, ascrivibile
+	alla quintupla \math{\langle E, L, T, P, A\rangle}:
 
 	\begin{itemize}
 		\begin{item}
-			Un insieme \math{E} di simboli, che rappresentano gli
-			identificativi associati alle entitá;
+			Un insieme \math{E} di simboli, che rappresentano
+			gli identificativi associati alle entitá. Nella 
+			logica predicativa, equivalgono a delle costanti;
 		\end{item}
 		\begin{item}
-			Un insieme \math{L} di \strong{letterali}, che rappresentano
-			tutti i dati "grezzi" che il modello necessita di rappresentare
-			(stringhe, numeri, eccettera);
+			Un insieme \math{L} di \strong{letterali}, che
+			rappresentano tutti i dati "grezzi" che il modello
+			necessita di rappresentare (stringhe, numeri, \ddd).
+			Nella logica predicativa, equivalgono a delle costanti;
 		\end{item}
 		\begin{item}
-			Un insieme \math{T} di tipi;
+			Un insieme \math{T} di tipi. Nella logica predicativa,
+			equivalgono a dei predicati unari;
 		\end{item}
 		\begin{item}
-			Un insieme \math{P} di simboli di relazione;
+			Un insieme \math{P} di simboli di relazione. Nella 
+			logica predicativa, equivalgono a dei predicati binari;
 		\end{item}
 		\begin{item}
 			Un insieme \math{A} di assiomi.
@@ -54,23 +65,26 @@
 
 			\begin{itemize}
 				\begin{item}
-					Se una certa entitá appartiene ad un certo tipo, ovvero
-					\math{t(e) | t(l)} con \math{e \in E} e \math{l \in L};
+					Se una certa entitá appartiene ad un certo tipo,
+					ovvero \math{t(e) | t(l)} con \math{e \in E} e
+					\math{l \in L};
 				\end{item}
 				\begin{item}
-					Se due entitá sono legate da una certa relazione, ovvero
-					\math{r(e_{1}, e_{2}) | r(e, l)} con \math{e_{i} \in E} e
-					\math{l \in L}.
+					Se due entitá sono legate da una certa relazione,
+					ovvero \math{r(e_{1}, e_{2}) | r(e, l)} con
+					\math{e_{i} \in E} e \math{l \in L}.
 				\end{item}
 			\end{itemize}
 		\end{item}
 		\begin{item}
 			Gli assiomi generali, ovvero assiomi che non riguardano
-			singole entitá ma riguardano classi. La loro espressivitá
-			dipende dal linguaggio logico a cui il KG fa riferimento,
-			ma in genere sono nella forma \math{\forall x (t_{1}(x)
-			\rightarrow t_{2}(x))}, ovvero che specificano una relazione
-			di ordine parziale rispetto ai tipi.
+			singole entitá ma riguardano classi. In genere sono nella
+			forma \math{\forall x (t_{1}(x) \rightarrow t_{2}(x))},
+			ovvero che specificano una relazione di ordine parziale
+			rispetto ai tipi. Sebbene la loro sintassi sia la medesima
+			per tutti i knowledge graph, la loro espressivita varia
+			in base a qual'e il linguaggio logico a cui il grafo si
+			appoggia.
 		\end{item}
 	\end{itemize}
 
@@ -93,36 +107,28 @@
 	é comunque una buona pratica, dato che é comunque preferibile
 	definire lo schema prima dei dati.}. Inoltre, lo schema non é
 	prescrittivo, dato che i dati non conformi alla forma attuale
-	dello schema possono venire inseriti comunque (e modificano lo
-	schema).
+	dello schema possono venire inseriti comunque, ed una volta
+	inseriti ristrutturano lo schema.
 
-	Lo schema di un grafo RDF puó essere visto sotto due aspetti.
-	Il primo aspetto é lo schema come "patto sociale", dove i
-	costruttori di grafi si impegnano a seguire degli standard
-	(non obbligatori) per fare in modo che diversi grafi siano
-	fra loro compatibili. Il secondo aspetto é lo schema é uno
-	schema deduttivo, dato che fornisce solamente il significato
-	dei termini e permette di fare inferenze (anche false).
-
-	Un primo approccio al fare in modo che i grafi siano compatibili
-	é quello di costruire dei vocabolari standard che vengono impiegati
-	per modellare domini diversi. Questo approccio funziona se esistono
-	degli enti autorevoli che forniscono tali vocabolari; fra questi 
-	figurano \strong{FOAF} (\strong{friend of a friend}) e \tt{schema.org}.
-
-	Modellare i dati sotto forma di grafo offre maggior flessibilità
-	per integrare nuovi dataset rispetto ai modelli relazionali standard,
-	dove uno schema deve essere definito prima che i dati possano essere
-	inseriti. Nonostante anche modelli di dato ad albero (XML, JSON,
-	ecc\ddd) offrano questa flessibilità, i modelli a grafo non necessitano
-	di dover organizzare i dati in una gerarchia. Inoltre, i modelli a grafo
-	permettono facilmente di rappresentare relazioni cicliche. 
+	Per tutti questi aspetti, i knowledge graph trovano ampia
+	applicazione sia nel web semantico sia nell'intelligenza
+	artificiale, dato che in genere ci si trova a lavorare con
+	grandi moli di dati provenienti da fonti molto eterogenee
+	(in genere dal web). E infatti vantaggioso poter unire tutte
+	queste fonti in maniera agile e dinamicamente, aggiungendo 
+	o ritrattando dati quando necessario.
 
 	Essendo un KG un grafo, é possibile studiarne le proprietá
 	tipiche dei grafi (simmetria, antisimmetria, transitivitá,
-	eccetera) e metterle in relazione con il significato che
-	hanno nel modello che questi rappresentano. É inoltre possibile
-	\em{visitare} il grafo per ricavare informazioni piú elaborate
-	di quelle riportate nei soli archi.
+	\ddd) e metterle in relazione con il significato che
+	hanno nel modello che questi rappresentano. Ad esempio, se
+	il grafo e simmetrico, allora ogni relazione fra A e B vale
+	anche per B ed A. Inoltre, \em{visitare} un KG permette di
+	ricavare informazioni piú elaborate di quelle riportate nei
+	soli archi.
+
+	%%%
+	%%% Perche non c'e un esempio?
+	%%%
 
 \end{sile}
