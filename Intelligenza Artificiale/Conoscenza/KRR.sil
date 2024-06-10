@@ -1,10 +1,11 @@
 \begin{sile}
 
-	Gli esseri umani sono in grado di compiere azioni anche sulla
-	base del fatto che possiedono delle \strong{conoscenze} utilizzate
-	per operare dei \strong{ragionamenti} su una \strong{rappresentazione}
-	interna della conoscenza. Nel campo della AI questo si traduce nella
-	costruzione di \strong{agenti basati sulla conoscenza}.
+	Gli esseri umani sono in grado di compiere azioni anche
+	sulla base del fatto che possiedono delle \strong{conoscenze}
+	utilizzate per operare dei \strong{ragionamenti} su una
+	\strong{rappresentazione} interna della conoscenza. Nel campo
+	dell'intelligenza artificiale questo si traduce nella costruzione
+	di \strong{agenti basati sulla conoscenza}.
 
 	Il componente principale di un agente basato sulla conoscenza
 	é la \strong{base di conoscenza}, o KB. Una KB é composta da
@@ -15,50 +16,51 @@
 	delle \strong{regole}. Affinché questo sia possibile, é necessario
 	che alcuni fatti siano presenti nella KB fin da subito. Questi
 	vengono detti \strong{assiomi}; l'unione di tutti gli assiomi
-	prende il nome di \strong{conoscenza pregressa} (\strong{background
-	knowledge}).
+	prende il nome di \strong{conoscenza pregressa}
+	(\strong{background knowledge}).
 
-	Sia i fatti (le asserzioni sul mondo) che le regole (le trasformazioni
-	che aggiungono nuovi fatti alla KB sulla base di quelli presenti) vengono
-	espressi in genere espressi in linguaggi specifici. Tali linguaggi sono
-	detti \strong{linguaggi di Knowledge Representation and Reasoning}, o
-	\strong{linguaggi KRR} (\strong{linguaggi di rappresentazione della
-	conoscenza}). Un linguaggio KRR deve necessariamente basarsi su una
-	qualche formalizzazione della logica, e ci si chiede allora quale
-	formalizzazione della logica potrebbe ben adattarsi ad essere quella
-	utilizzata dagli agenti basati sulla conoscenza.
+	Sia i fatti (le asserzioni sul mondo) che le regole (le
+	trasformazioni che aggiungono nuovi fatti alla KB sulla base
+	di quelli presenti) vengono espressi in genere espressi in
+	linguaggi specifici. Tali linguaggi sono detti \strong{linguaggi
+	di Knowledge Representation and Reasoning}, o \strong{linguaggi
+	KRR} (\strong{linguaggi di rappresentazione della conoscenza}).
+	Un linguaggio KRR deve necessariamente basarsi su una qualche
+	formalizzazione della logica, di modo da utilizzarne i costrutti
+	per derivare nuova conoscenza a partire da quella nota.
 
-	La logica proposizionale (logica di ordine zero) puó venire scartata
-	subito: nonostante abbia il pregio di essere decidibile, é troppo
-	semplicistica, dato che non supporta i quantificatori universali "per
-	ogni" e "esiste". Un miglior candidato potrebbe allora essere la logica
-	proposizionale (logica del primo ordine), ma anche questa presenta dei
-	problemi:
+	In genere, la logica proposizionale non e adatta a questo scopo:
+	nonostante abbia il pregio di essere decidibile, l'assenza dei
+	quantificatori universali "per ogni" e "esiste" la rende troppo
+	limitata. Una migliore opzione e la logica predicativa (logica
+	del primo ordine), ma anche questa presenta dei problemi:
 
 	\begin{itemize}
 		\begin{item}
-			\em{Decidibilitá}. Come mostrato dai Teoremi di Incompletezza
-			di Godel, la logica proposizionale é \strong{indecidibile},
-			ovvero non tutte le formule possono essere provate vere o false
-			all'interno della logica stessa \footnote{Piú correttamente, si
-			dice che la logica proposizionale é \strong{semidecidibile}, in
-			quanto é sempre possibile dimostrare se una proposizione é vera
-			sulla base delle premesse ma non é sempre possibile dimostrare
-			se sia falsa.}. Questo significa che un sistema di deduzione
-			automatico, essendo limitato dall'Halting Problem, potrebbe
-			rimanere eternamente bloccato nel computare se una data
-			proposizione segua dalle premesse senza essere in grado di
-			fornire una risposta;
+			\em{Decidibilitá}. Come mostrato dai Teoremi di
+			Incompletezza di Godel, la logica predicativa é
+			\strong{indecidibile}, ovvero non tutte le formule
+			possono essere provate vere o false all'interno della
+			logica stessa \footnote{Piú correttamente, si dice che
+			la logica predicativa é \strong{semidecidibile},
+			in quanto é sempre possibile dimostrare se una
+			proposizione é vera sulla base delle premesse ma non
+			e sempre possibile dimostrare se sia falsa.}. Questo
+			significa che un sistema di deduzione automatico,
+			essendo limitato dall'Halting Problem, potrebbe
+			rimanere eternamente bloccato nel computare se una
+			data proposizione segua dalle premesse senza essere
+			in grado di fornire una risposta;
 		\end{item}
 		\begin{item}
-			\em{Complessitá}. La logica proposizionale é estremamente
+			\em{Complessitá}. La logica predicativa é estremamente
 			espressiva, pertanto alcune inferenze possono richiedere
 			molto tempo computazionale (per quanto finito) per essere
 			completate;
 		\end{item}
 		\begin{item}
-			\em{Approssimazione}. Per lo stesso motivo, non tutte le
-			proprietá della logica proposizionale sono strettamente 
+			\em{Approssimazione}. Per lo stesso motivo, non tutte
+			le proprietá della logica predicativa sono strettamente 
 			necessarie nel campo della IA. Cercare di implementarle
 			tutte risulterebbe in uno spreco di risorse e nella
 			costruzione di un sistema di deduzione inefficiente.
@@ -67,8 +69,24 @@
 
 	\bigskip
 
-	La scelta di un formalismo logico adatto al campo delle IA sembrerebbe
-	allora ricadere in una logica che si trovi "nel mezzo" fra la logica
-	proposizionale e la logica predicativa.
+	Per tutti questi motivi, le logiche utilizzate nell'ambito
+	dell'intelligenza artificiale sono delle "restrizioni"
+	della logica del primo ordine, piu espressive della logica
+	proposizionale ma meno esose in termini di computazione delle
+	inferenze (e anche meno espressive) della "pura" logica del
+	primo ordine.
+
+	Esistono due approcci principali all'intelligenza
+	artificiale per quanto riguarda le KRR. Il primo e
+	l'approccio \strong{dichiarativo}, dove il problema
+	e codificato in un linguaggio di KRR e le inferenze
+	sono delegate ad un risolutore del linguaggio, senza
+	la necessita di doverlo implementare. In questo modo,
+	qualsiasi \em{istanza} del problema puo venire risolta
+	allo stesso modo, fintanto che e possibile codificarne
+	il dominio. Il secondo e l'approccio \strong{imperativo},
+	dove la codifica nel linguaggio KRR e specifica per
+	l'istanza in esame, di modo che la soluzione sia dedicata
+	a ciascuna istanza.
 
 \end{sile}

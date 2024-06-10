@@ -71,7 +71,7 @@
 		\include[src = Introduzione/Agente.sil] % da rivedere
 	\chapter{Rappresentazione della conoscenza}
 		\section{Knowledge representation and reasoning}
-		\include[src = Conoscenza/KRR.sil] % da rivedere
+		\include[src = Conoscenza/KRR.sil]
 		\section{Knowledge Graphs}
 		\include[src = Conoscenza/KG.sil] % da rivedere
 		\section{Resource Description Framework}
