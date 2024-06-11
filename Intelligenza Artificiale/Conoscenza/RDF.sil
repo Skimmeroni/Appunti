@@ -309,6 +309,19 @@
 			\end{item}
 		\end{enumerate}
 
+		\bigskip
+
+		Le risorse definite in RDF sono anche utilizzabili per
+		annotare semplici pagine web, non solo basi di conoscenza,
+		come strumento di appoggio al web semantico. L'idea e quella
+		di usare RDF come linguaggio di markup per annotare contenuti
+		sul web, di modo che un agente intelligente possa usare questi
+		dati strutturati per filtrare e/o aggregare tali informazioni
+		\footnote{A dire il vero, RDF non e molto utilizzato per scopi
+		di questo tipo: nella maggior parte dei casi vengono impiegati
+		formati derivati da XML, che sono pero convertibili in maniera
+		piu o meno immediata in RDF.}.
+
 	\subsection{Sintassi: N-triples e Turtle}
 
 		Le uniche forme di sintassi specificate da RDF sono il vincolo
@@ -371,5 +384,11 @@
 				dbr:Nevermind     dbo:artist          dbr:Kurt_Cobain     .
 			\end{verbatim}
 		\end{example}
+
+		La sintassi di RDF e una restrizione di quella di XML, e
+		per questo motivo e possibile riportare delle triple RDF
+		semplicemente in XML. Tuttavia, questa rappresentazione e
+		verbosa e poco leggibile, pertanto viene in genere relegata
+		esclusivamente all'uso di RDF come appoggio al web semantico.
 
 \end{sile}

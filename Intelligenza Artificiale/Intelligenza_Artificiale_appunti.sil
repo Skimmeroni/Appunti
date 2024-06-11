@@ -75,7 +75,7 @@
 		\section{Knowledge Graphs}
 		\include[src = Conoscenza/KG.sil]
 		\section{Resource Description Framework}
-		\include[src = Conoscenza/RDF.sil] % manca la parte sul web semantico
+		\include[src = Conoscenza/RDF.sil]
 		\section{SPARQL Protocol And RDF Query Language}
 		\include[src = Conoscenza/SPARQL.sil] % da rivedere
 		\section{RDFS}
