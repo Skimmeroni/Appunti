@@ -225,6 +225,16 @@
 		partenza dell'arco e l'oggetto é il nodo di arrivo. E facile
 		verificare che questo grafo e un knowledge graph.
 
+		Un \strong{dataset RDF} e un raggruppamento di piu grafi RDF.
+		Un dataset RDF puo contenere zero o piu grafi RDF con associato
+		un nome ed un grafo RDF senza nome, detto \strong{grafo di
+		default}, che abbia dei riferimenti a ciascuno di questi. Il
+		nome del grafo di default deve essere a sua volta un IRI, di
+		modo che sia possibile identificarlo univocamente attraverso
+		il web; i nomi dei grafi a cui questo fa riferimento sono a
+		loro volta IRI, che condividono lo stesso prefisso del grafo
+		di default.
+
 		Il fatto che RDF sia un modello di dati strutturato a grafo
 		lo rende molto flessibile. Infatti, per introdurre nuovi
 		predicati in un grafo RDF é sufficiente aggiungere un arco

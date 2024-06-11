@@ -17,15 +17,18 @@
 	\strong{pattern di tripla RDF}. Questa è di fatto analoga
 	ad una tripla RDF, ma oltre ad ammettere IRI, letterali e
 	nodi blank può contenere anche \strong{variabili di query},
-	che ha il carattere "?" come prefisso. Tale pattern viene
-	riportato nel quarto campo di una query SPARQL dopo la 
-	direttiva \tt{WHERE}.
+	che ha il carattere "?" come prefisso. Questo indica che tale
+	elemento e un placeholder, e deve venire istanziato durante
+	l'interrogazione.
 
 	Un pattern di tripla viene valutato mappando le variabili/costanti 
 	del pattern alle costanti del grafo, di modo che l'immagine del 
 	pattern rispetto alla mappa (dove le variabili del pattern sono 
 	sostituite con le rispettive costanti del grafo) sia un sottografo 
-	del grafo. Nello specifico, gli IRI ed i letterali hanno un match 
+	del grafo. Il risultato dell'interrogazione sono tutti i possibili
+	sottografi costruibili in questo modo.
+
+	Nello specifico, gli IRI ed i letterali hanno un match 
 	solamente con, rispettivamente, un IRI ed un letterale a loro 
 	identico, mentre i blank node e le variabili di query hanno un 
 	match con qualsiasi termine. La differenza fra i due sta nel
@@ -42,61 +45,66 @@
 	Con} é un insieme di etichette e \math{E \subseteq V \times L
 	\times V} é un insieme di archi.
 
-	Un pattern di tripla é formalmente definito come una tupla \math{Q
-	= (V, E, L)}, dove \math{V \subseteq Term} é un insieme di termini 
-	assegnabili ai nodi (IRI e blank nodes), \math{L \subseteq Term}
-	é un insieme di termini assegnabili agli archi (IRI) e e \math{E
-	\subseteq V \times L \times V} é un insieme di archi (triple
-	pattern).
+	Un pattern di tripla é formalmente definito come una tupla
+	\math{Q = (V, E, L)}, dove \math{V \subseteq Term} é un insieme
+	di termini assegnabili ai nodi (IRI e blank nodes), \math{L
+	\subseteq Term} é un insieme di termini assegnabili agli archi
+	(IRI) e e \math{E \subseteq V \times L \times V} é un insieme
+	di archi (triple pattern).
 
 	Sia \math{\mu : Var \mapsto Con} una mappa, il cui dominio é
 	indicato con \math{\mi{Dom}(\mu)}. Dato un pattern di tripla
 	\math{Q}, sia \math{Var(Q)} l'insieme di tutte le variabili
 	che compaiono in \math{Q}. Sia poi \math{\mu(Q)} l'immagine
-	di \math{Q} rispetto ad \math{\mu}, ovvero il sottografo indotto
-	da \math{Q} dove tutte le variabili \math{v \in \mi{Var}(Q) \cap
-	\mi{Dom}(\mu)} vengono sostituite con \math{\mu(v)}.
+	di \math{Q} rispetto ad \math{\mu}, ovvero il sottografo
+	indotto da \math{Q} dove tutte le variabili \math{v \in
+	\mi{Var}(Q) \cap \mi{Dom}(\mu)} vengono sostituite con
+	\math{\mu(v)}.
 
 	Dati due grafi diretti ed etichettati \math{G_{1} = (V_{1},
 	E_{1}, L_{1})} e \math{G_{2} = (V_{2}, E_{2}, L_{2})}, si dice
 	che \math{G_{1}} é sottografo di \math{G_{2}} se \math{V_{1} 
 	\subseteq V_{2}, E_{1} \subseteq E_{2}, L_{1} \subseteq L_{2}}.
 
-	Formalmente, sia \math{Q} un pattern di tripla e sia \math{G} un
-	grafo diretto ed etichettato. La valutazione del pattern \math{Q}
-	sul grafo \math{G}, indicato con \math{Q(G)}, viene definito
-	dall'insieme \math{Q(G) = \{\mu | \mu(Q) \subseteq G \wedge
-	\mi{Dom}(\mu) = \mi{Var}(Q)\}}.
+	Formalmente, sia \math{Q} un pattern di tripla e sia \math{G}
+	un grafo diretto ed etichettato. La valutazione del pattern
+	\math{Q} sul grafo \math{G}, indicato con \math{Q(G)}, viene
+	definito dall'insieme \math{Q(G) = \{\mu | \mu(Q) \subseteq
+	G \wedge \mi{Dom}(\mu) = \mi{Var}(Q)\}}.
 
-	Un pattern di tripla restituisce una tabella. Per questo motivo,
-	un pattern di tripla puó venire poi esteso con gli operatori propri
-	dell'algebra relazionale per creare \strong{pattern complessi}. Gli
-	operatori elementari dell'algebra relazionale sono i seguenti:
+	Il risultato di una query SPARQL non viene, di norma,
+	rappresentato come un grafo propriamente detto, ma come
+	una tabella (informativamente equivalente). Per questo
+	motivo, un pattern di tripla puó venire poi esteso con
+	gli operatori propri dell'algebra relazionale per creare
+	\strong{pattern complessi}. Gli operatori elementari
+	dell'algebra relazionale sono i seguenti:
 
 	\begin{itemize}
 		\begin{item}
-			\math{\pi}, che restituisce la tabella con una o piú colonne
-			rimosse;
+			\math{\pi}, che restituisce la tabella con una
+			o piú colonne rimosse;
 		\end{item}
 		\begin{item}
-			\math{\sigma}, che restituisce solo le righe della tabella
-			che rispettano una determinata condizione;
+			\math{\sigma}, che restituisce solo le righe della
+			tabella che rispettano una determinata condizione;
 		\end{item}
 		\begin{item}
-			\math{\rho}, che restituisce la tabella con una o piú colonne
-			cambiate di nome;
+			\math{\rho}, che restituisce la tabella con una o
+			piú colonne cambiate di nome;
 		\end{item}
 		\begin{item}
-			\math{\cup}, che unisce le righe di due tabelle in un'unica 
-			tabella;
+			\math{\cup}, che unisce le righe di due tabelle in
+			un'unica tabella;
 		\end{item}
 		\begin{item}
-			\math{-}, che rimuove le righe della prima tabella che compaiono
-			nella seconda;
+			\math{-}, che rimuove le righe della prima tabella
+			che compaiono nella seconda;
 		\end{item}
 		\begin{item}
-			\math{\bowtie}, che estendono le righe della prima tabella con le
-			righe della seconda tabella che rispettano una determinata condizione;
+			\math{\bowtie}, che estendono le righe della prima
+			tabella con le righe della seconda tabella che
+			rispettano una determinata condizione;
 		\end{item}
 	\end{itemize}
 
@@ -129,21 +137,23 @@
 
 	\bigskip
 
-	Data una mappa \math{\mu}, per un insieme di variabili \math{V \subseteq
-	\mi{Var}} sia \math{\mu[V]} la proiezione delle variabili \math{V} da 
-	\math{\mu}, ovvero la mappatura \math{\mu'} tale per cui \math{\mi{Dom}
-	(\mu') = \mi{Dom}(\mu) \cap V} e \math{\mu'(v) = \mu(v)} per ogni
-	\math{v \in \mi{Dom}(\mu')}. Data la condizione di selezione \math{R}
-	ed una mappa \math{\mu}, si indica con \math{\mu \vdash R} che la mappa
-	\math{\mu} soddisfa \math{R}. Infine, due mappe \math{\mu_{1}} e
-	\math{\mu_{2}} vengono dette \em{compatibili} se \math{\mu_{1}(v) =
-	\mu_{2}(v) per ogni \math{v} \in \mi{Dom}(\mu_{1}) \cap \mi{Dom}(\mu_{2})},
-	ovvero se mappano le variabili che hanno in comune alle medesime costanti.
-	Due mappe compatibili \math{\mu_{1}} e \math{\mu_{2}} si indicano con 
-	\math{\mu_{1} ~ \mu_{2}}.
+	Data una mappa \math{\mu}, per un insieme di variabili
+	\math{V \subseteq \mi{Var}} sia \math{\mu[V]} la proiezione
+	delle variabili \math{V} da \math{\mu}, ovvero la mappatura
+	\math{\mu'} tale per cui \math{\mi{Dom} (\mu') = \mi{Dom}(\mu)
+	\cap V} e \math{\mu'(v) = \mu(v)} per ogni \math{v \in
+	\mi{Dom}(\mu')}. Data la condizione di selezione \math{R}
+	ed una mappa \math{\mu}, si indica con \math{\mu \vdash R}
+	che la mappa \math{\mu} soddisfa \math{R}. Infine, due mappe
+	\math{\mu_{1}} e \math{\mu_{2}} vengono dette \em{compatibili}
+	se \math{\mu_{1}(v) = \mu_{2}(v) per ogni \math{v} \in
+	\mi{Dom}(\mu_{1}) \cap \mi{Dom}(\mu_{2})}, ovvero se mappano
+	le variabili che hanno in comune alle medesime costanti.
+	Due mappe compatibili \math{\mu_{1}} e \math{\mu_{2}} si
+	indicano con \math{\mu_{1} ~ \mu_{2}}.
 
-	Le operazioni sui pattern semplici, che restituiscono pattern complessi,
-	si indicano allora come segue:
+	Le operazioni sui pattern semplici, che restituiscono pattern
+	complessi, si indicano allora come segue:
 
 	\begin{itemize}
 		\begin{item}
@@ -161,7 +171,8 @@
 		\begin{item}
 			\begin{math}
 				Q_{1} \bowtie Q_{2} (G) = \{\mu_{1} \cup \mu_{2} |
-				\mu_{1} \in Q_{2}(G) \wedge \mu_{2} \in Q_{1}(G) \wedge \mu_{1} ~ \mu_{2}\}
+				\mu_{1} \in Q_{2}(G) \wedge \mu_{2} \in Q_{1}(G)
+				\wedge \mu_{1} ~ \mu_{2}\}
 			\end{math}
 		\end{item}
 		\begin{item}
@@ -243,12 +254,15 @@
 		\end{item}
 		\begin{item}
 			\begin{math}
-				r_{1} \cdot r_{2} [G] = \{(u, v) | \exists w \in V: (u, w) \in r_{1}[G] \wedge (w, v) \in r_{2}[G]\}
+				r_{1} \cdot r_{2} [G] = \{(u, v) |
+				\exists w \in V: (u, w) \in r_{1}[G]
+				\wedge (w, v) \in r_{2}[G]\}
 			\end{math}
 		\end{item}
 		\begin{item}
 			\begin{math}
-				r*[G] = \{(u, u) | u \in V\} \bigcup_{n \in \dsi{N}^{+}} r^{n}[G]
+				r*[G] = \{(u, u) | u \in V\}
+				\bigcup_{n \in \dsi{N}^{+}} r^{n}[G]
 			\end{math}
 		\end{item}
 	\end{itemize}
@@ -258,8 +272,9 @@
 	Dato un grafo diretto ed etichettato \math{G}, delle costanti
 	\math{c_{i} \in Con} e delle variabili \math{z_{i} \in Var},
 	una \strong{path query} semplice é una tripla \math{(x, y, z)}
-	dove \math{x, y \in Con \cup Var} e \math{r} é una path expression.
-	La valutazione di una path query é definita come segue:
+	dove \math{x, y \in Con \cup Var} e \math{r} é una path
+	expression. La valutazione di una path query é definita
+	come segue:
 
 	\begin{itemize}
 		\begin{item}
@@ -283,7 +298,8 @@
 		\begin{item}
 			\begin{math}
 				(z_{1}, r, z_{2}) (G) = \{\mu |
-				\mi{Dom}(\mu) = \{z_{1}, z_{2}\} \wedge (\mu(z_{1}), \mu(z_{2})) \in r[G]\}
+				\mi{Dom}(\mu) = \{z_{1}, z_{2}\} \wedge
+				(\mu(z_{1}), \mu(z_{2})) \in r[G]\}
 			\end{math}
 		\end{item}
 	\end{itemize}
@@ -354,20 +370,20 @@
 			grafi, la query verrà operata sulla loro unione;
 		\end{item}
 		\begin{item}
-			\em{Pattern}. La direttiva \tt{WHERE} specifica il 
-			pattern che discrimina un elemento del grafo che è
-			parte della soluzione da uno che non lo è. Le condizioni
-			sono riportate in un blocco di parentesi graffe seguendo
-			la sintassi Turtle;
+			\em{Pattern}. La direttiva \tt{WHERE} specifica
+			il pattern che discrimina un elemento del grafo
+			che è parte della soluzione da uno che non lo è.
+			Le condizioni sono riportate in un blocco di
+			parentesi graffe seguendo la sintassi Turtle;
 		\end{item}
 		\begin{item}
 			\em{Aggregazione}. Le direttive \tt{GROUP BY} e
 			\tt{HAVING}, analoghe alle direttive omonime di
 			SQL permettono di raggruppare o di filtrare gli
 			elementi della soluzione secondo specifiche regole.
-			I valori possono venire aggregati sulla base di diverse
-			direttive quali \tt{COUNT}, \tt{SUM}, \tt{MIN}, \tt{MAX},
-			\tt{AVG}; 
+			I valori possono venire aggregati sulla base di
+			diverse direttive quali \tt{COUNT}, \tt{SUM},
+			\tt{MIN}, \tt{MAX}, \tt{AVG}; 
 		\end{item}
 		\begin{item}
 			\em{Modificatori della soluzione}. Alcune direttive
