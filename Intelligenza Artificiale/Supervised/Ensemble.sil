@@ -72,19 +72,20 @@
 		i cui elementi hanno associato un peso é detto
 		\strong{dataset pesato}.
 
-		Inizialmente, a tutti gli elementi di \math{D} é
-		associato un peso pari ad 1. Viene costruita una
-		prima ipotesi \math{h_{1}} usando un certo algoritmo
-		di apprendimento; questa inevitabilmente classificherá
-		incorrettamente una parte (idealmente piccola) del
-		dataset. A tali dati viene incrementato il peso e viene
+		Inizialmente, a tutti gli elementi di \math{D} é associato
+		un peso pari a \math{1/\abs{D}}, di modo che la somma dei
+		pesi di tutti gli elementi di \math{D} sia complessivamente
+		1. Viene costruita una prima ipotesi \math{h_{1}} usando un
+		certo algoritmo di apprendimento; questa inevitabilmente
+		classificherá incorrettamente una parte (idealmente piccola)
+		del dataset. A tali dati viene incrementato il peso e viene
 		costruita una nuova ipotesi sul dataset cosí modificato.
 		Il procedimento viene ripetuto per \math{k} volte, con
 		\math{k} fissato, generando \math{k} ipotesi. I valori
 		di \math{D} difficili da classificare aumenteranno
 		costantemente di peso fino a quando l'algoritmo non
 		sará costretto a prendere in considerazione tali valori
-		e generare un'ipotesi che la classifichi correttamente.
+		e generare un'ipotesi che li classifichi correttamente.
 
 		Il modello ensemble cosí costruito classifica i dati
 		sulla base dei voti dei modelli base, come nel bagging,

@@ -108,7 +108,7 @@
 		\section{Apprendimento senza modello: K-nearest neighbour}
 		\include[src = Supervised/Knn.sil]
 		\section{Metodi ensemble}
-		\include[src = Supervised/Ensemble.sil] % da rivedere il boosting
+		\include[src = Supervised/Ensemble.sil]
 	\chapter{Unsupervised Learning}
 		\section{Introduzione all'apprendimento non supervisionato}
 		\include[src = Supervised/Introduzione.sil]
