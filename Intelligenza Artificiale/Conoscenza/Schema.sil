@@ -38,8 +38,14 @@
 	\strong{Resource Description Framework Schema} (\strong{RDFS})
 	é un semplice linguaggio che permette di associare uno schema
 	ad un insieme di dati scritti in formato RDF. Questo permette
-	di descrivere le risorse RDF in termini di classi e di proprietá.
-	Queste hanno \tt{rdfs:} come prefisso.
+	di descrivere le risorse RDF in termini di classi e di proprietá,
+	senza inventare una nuova instassi ma semplicemente estendendo
+	la sintassi di RDF con dei termini speciali. Questi hanno,
+	per convenzione, \tt{rdfs:} come prefisso, che indica l'URI
+	\tt{https://www.w3.org/TR/rdf11-schema/}. L'unica eccezione
+	é \tt{rdf:type}, che era giá presente in RDF "base" ed a cui
+	viene semplicemente data una effettiva semantica (presentata
+	in seguito).
 
 	RDFS si compone di due elementi concettuali ad alto livello: le
 	\strong{proprietá} e le \strong{classi}. Le proprietá sono le 
@@ -60,7 +66,11 @@
 	triple vere (rispetto alla medesima semantica). In questo caso,
 	il secondo grafo non aggiunge alcuna informazione che non sia
 	giá presente, eventualmente implicitamente, nel primo grafo.
-	RDFS mette a disposizione 13 regole di inferenza:
+
+	RDFS é sufficientemente potente per poter modellare le tassonomie,
+	ovvero le gerarchie di classi, le gerarchie di proprietá, i domini
+	di proprietá ed i range di proprietá. Le regole di inferenza che
+	permettono questa modellazione sono le seguenti:
 
 	\begin[cols = 10%fw 55%fw 35%fw]{ptable}
 		\begin{row}

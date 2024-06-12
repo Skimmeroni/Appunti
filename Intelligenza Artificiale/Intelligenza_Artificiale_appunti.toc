@@ -114,9 +114,9 @@ return {
       "Termini",
       id = "stuff"
     },
-    level = 2,
+    level = 3,
     link = "dest12",
-    number = "2.4",
+    number = "2.3.1",
     pageno = "12"
   },
   {
@@ -126,18 +126,28 @@ return {
     },
     level = 3,
     link = "dest13",
-    number = "2.4.1",
+    number = "2.3.2",
     pageno = "13"
+  },
+  {
+    label = {
+      "Vocabolari",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest14",
+    number = "2.3.3",
+    pageno = "14"
   },
   {
     label = {
       "Sintassi: N-triples e Turtle",
       id = "stuff"
     },
-    level = 2,
-    link = "dest14",
-    number = "2.5",
-    pageno = "14"
+    level = 3,
+    link = "dest15",
+    number = "2.3.4",
+    pageno = "15"
   },
   {
     label = {
@@ -145,8 +155,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest15",
-    number = "2.6",
+    link = "dest16",
+    number = "2.4",
     pageno = "15"
   },
   {
@@ -155,9 +165,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest16",
-    number = "2.7",
-    pageno = "17"
+    link = "dest17",
+    number = "2.5",
+    pageno = "18"
   },
   {
     label = {
@@ -165,9 +175,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest17",
-    number = "2.8",
-    pageno = "20"
+    link = "dest18",
+    number = "2.6",
+    pageno = "21"
   },
   {
     label = {
@@ -175,7 +185,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest18",
+    link = "dest19",
     number = "3",
     pageno = "27"
   },
@@ -185,7 +195,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest19",
+    link = "dest20",
     number = "3.1",
     pageno = "27"
   },
@@ -195,7 +205,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest20",
+    link = "dest21",
     number = "3.2",
     pageno = "29"
   },
@@ -205,7 +215,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest21",
+    link = "dest22",
     number = "3.3",
     pageno = "31"
   },
@@ -215,7 +225,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest22",
+    link = "dest23",
     number = "3.3.1",
     pageno = "31"
   },
@@ -225,7 +235,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest23",
+    link = "dest24",
     number = "3.3.2",
     pageno = "32"
   },
@@ -235,7 +245,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest24",
+    link = "dest25",
     number = "3.3.3",
     pageno = "33"
   },
@@ -245,9 +255,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest25",
+    link = "dest26",
     number = "3.3.4",
-    pageno = "33"
+    pageno = "34"
   },
   {
     label = {
@@ -255,9 +265,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest26",
+    link = "dest27",
     number = "3.3.5",
-    pageno = "33"
+    pageno = "34"
   },
   {
     label = {
@@ -265,7 +275,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest27",
+    link = "dest28",
     number = "3.4",
     pageno = "34"
   },
@@ -275,7 +285,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest28",
+    link = "dest29",
     number = "3.4.1",
     pageno = "35"
   },
@@ -285,7 +295,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest29",
+    link = "dest30",
     number = "3.4.2",
     pageno = "35"
   },
@@ -295,7 +305,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest30",
+    link = "dest31",
     number = "4",
     pageno = "37"
   },
@@ -305,7 +315,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest31",
+    link = "dest32",
     number = "4.1",
     pageno = "37"
   },
@@ -315,7 +325,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest32",
+    link = "dest33",
     number = "4.1.1",
     pageno = "38"
   },
@@ -325,7 +335,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest33",
+    link = "dest34",
     number = "4.1.2",
     pageno = "39"
   },
@@ -335,7 +345,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest34",
+    link = "dest35",
     number = "4.2",
     pageno = "40"
   },
@@ -345,7 +355,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest35",
+    link = "dest36",
     number = "4.3",
     pageno = "42"
   },
@@ -355,7 +365,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest36",
+    link = "dest37",
     number = "5",
     pageno = "47"
   },
@@ -365,7 +375,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest37",
+    link = "dest38",
     number = "5.1",
     pageno = "47"
   },
@@ -375,7 +385,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest38",
+    link = "dest39",
     number = "5.2",
     pageno = "48"
   },
@@ -385,7 +395,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest39",
+    link = "dest40",
     number = "5.3",
     pageno = "50"
   },
@@ -395,7 +405,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest40",
+    link = "dest41",
     number = "5.4",
     pageno = "51"
   },
@@ -405,7 +415,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest41",
+    link = "dest42",
     number = "5.5",
     pageno = "51"
   },
@@ -415,7 +425,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest42",
+    link = "dest43",
     number = "5.5.1",
     pageno = "52"
   },
@@ -425,7 +435,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest43",
+    link = "dest44",
     number = "5.5.2",
     pageno = "52"
   },
@@ -435,7 +445,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest44",
+    link = "dest45",
     number = "6",
     pageno = "53"
   },
@@ -445,7 +455,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest45",
+    link = "dest46",
     number = "6.1",
     pageno = "53"
   },
@@ -455,7 +465,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest46",
+    link = "dest47",
     number = "6.2",
     pageno = "54"
   },
@@ -465,7 +475,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest47",
+    link = "dest48",
     number = "6.3",
     pageno = "55"
   },
@@ -475,7 +485,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest48",
+    link = "dest49",
     number = "7",
     pageno = "57"
   },
@@ -485,7 +495,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest49",
+    link = "dest50",
     number = "7.1",
     pageno = "57"
   },
@@ -495,7 +505,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest50",
+    link = "dest51",
     number = "8",
     pageno = "59"
   },
@@ -505,7 +515,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest51",
+    link = "dest52",
     number = "8.1",
     pageno = "59"
   },
@@ -515,7 +525,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest52",
+    link = "dest53",
     pageno = "61"
   },
   {
@@ -524,7 +534,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest53",
+    link = "dest54",
     number = "8.2",
     pageno = "61"
   },
@@ -534,7 +544,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest54",
+    link = "dest55",
     number = "8.3",
     pageno = "62"
   }
