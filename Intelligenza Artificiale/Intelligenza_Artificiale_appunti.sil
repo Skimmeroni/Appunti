@@ -118,7 +118,7 @@
 		\include[src = Unsupervised/DBSCAN.sil]
 	\chapter{Deep Learning}
 		\section{Percettrone}
-		\include[src = Deep/Perceptron.sil] % da rivedere
+		\include[src = Deep/Perceptron.sil] % manca la parte su MIRA
 		%\section{Deep Learning}
 		%\include[src = Deep/Deep.sil] % da rivedere
 	\chapter{Reinforcement Learning}
