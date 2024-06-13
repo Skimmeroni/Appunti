@@ -1,75 +1,11 @@
 \begin{sile}
 
-	Le ontologie che RDFS permette di costruire non sono particolarmente
-	espressive. Ad esempio, RDFS presenta le seguenti limitazioni:
-
-	\begin{itemize}
-		\begin{item}
-			Non é possibile modellare le \strong{classi disgiunte}, ovvero
-			non é possibile definire delle classi a cui sia impedito avere
-			istanze in comune;
-		\end{item}
-		\begin{item}
-			Non é possibile specificare che una proprietá sia transitiva,
-			inversa e/o simmetrica; 
-		\end{item}
-		\begin{item}
-			Non é possibile specificare un vincolo di \strong{cardinalitá},
-			ad esempio che l'istanza di una classe possa essere in relazione
-			con al massimo \math{n} istanze di un'altra classe;
-		\end{item}
-		\begin{item}
-			Non é possibile costruire classi applicando gli operatori 
-			dell'insiemistica (unione, intersezione, complemento) sulle
-			classi esistenti;
-		\end{item}
-		\begin{item}
-			Non é possibile definire un range/dominio che vari in base 
-			a quale entitá si riferisce.
-		\end{item}
-	\end{itemize}
-
-	\begin{example}
-		Si consideri il grafo RDF presentato di seguito, che contiene
-		informazioni relative a cittá, regioni e paesi:
-
-		\begin{verbatim}
-			@prefix rdf:  https://www.w3.org/1999/02/22-rdf-syntax-ns#
-			@prefix rdfs: https://www.w3.org/2000/01/rdfs-schema#
-			@prefix dbr:  https://dbpedia.org/resource/
-			@prefix dbo:  https://dbpedia.org/ontology/
-
-			\bigskip
-			capitalOf      rdfs:domain   dbo:Capital    .
-			capitalOf      rdfs:range    dbo:Country    .
-			cityOf         rdfs:range    dbo:Country    .
-			cityOf         rdfs:range    dbo:Region     .
-
-			\bigskip
-			dbr:Milan      cityOf        dbr:Lombardy   .
-			dbr:Milan      cityOf        dbr:Italy      .
-			dbr:Rome       capitalOf     dbr:Italy      .
-			dbr:Italy      rdf:type      dbo:Country    .
-			dbr:Lombardy   rdf:type      dbo:Region     .
-		\end{verbatim}
-
-		Nonostante le triple siano tutte logicamente valide, é comunque
-		possibile applicare le regole di inferenza di RDFS per derivare
-		delle triple che non lo sono.
-
-		Ad esempio, \tt{dbr:Milan} é legato sia a \tt{dbr:Italy} che a
-		\tt{dbr:Lombardy} per mezzo del predicato \tt{cityOf}. Tuttavia,
-		l'esistenza della tripla \tt{cityOf rdfs:range dbo:Country .}
-		permette di applicare la regola di inferenza 3, a partire dalla
-		quale si deriva che \tt{dbr:Lombardy} é una istanza della classe
-		\tt{dbo:Country}.
-	\end{example}
-
-	Per sopperirvi é necessario utilizzare un linguaggio piú
-	ricco. A tal scopo é stato definito \strong{Ontology Web
-	Language} (\strong{OWL}), che opera come RDFS su triple
-	conformi allo standard RDF ma permettendo una modellazione
-	piú fine.
+	Come giá anticipato, le regole di inferenza messe a disposizione
+	da RDFS sono molto limitate, e per poter modellare ontologie piú
+	elaborate é necessario utilizzare un linguaggio piú ricco. A
+	tal scopo é stato definito \strong{Ontology Web Language}
+	(\strong{OWL}), che opera come RDFS su triple conformi allo
+	standard RDF ma permettendo una modellazione piú fine.
 
 	A differenza di RDFS, che si compone di "sole" 13 regole di
 	inferenza, OWL si prefigge di modellare una ontologia molto

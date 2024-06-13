@@ -79,7 +79,7 @@
 		\section{SPARQL Protocol And RDF Query Language}
 		\include[src = Conoscenza/SPARQL.sil] % É terribile
 		\section{RDFS}
-		\include[src = Conoscenza/Schema.sil] % da rivedere
+		\include[src = Conoscenza/Schema.sil]
 		\section{OWL}
 		\include[src = Conoscenza/OWL.sil] % da rivedere
 	\chapter{Problemi di ricerca}

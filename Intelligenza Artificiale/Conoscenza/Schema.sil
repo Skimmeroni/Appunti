@@ -287,13 +287,14 @@
 		\end{verbatim}
 	\end{example}
 
-	\tt{rdfs:subClassOf} mette due classi nella relazione di sottoclasse.
-	La tripla \tt{C rdfs:subClassOf D} indica che la classe \tt{C} é una
-	sottoclasse della classe \tt{D}, ovvero che tutte le istanze di \tt{C}
-	sono automaticamente anche istanze di \tt{D}. Questa relazione é sia
-	riflessiva (ogni classe é sottoclasse di sé stessa) che transitiva
-	(se \tt{C} é sottoclasse di \tt{D} e \tt{D} é sottoclasse di \tt{E},
-	allora \tt{C} é sottoclasse di \tt{E}).
+	\tt{rdfs:subClassOf} mette due classi nella relazione di
+	sottoclasse. La tripla \tt{C rdfs:subClassOf D} indica che
+	la classe \tt{C} é una sottoclasse della classe \tt{D}, ovvero
+	che tutte le istanze di \tt{C} sono automaticamente anche istanze
+	di \tt{D}. Questa relazione é sia riflessiva (ogni classe é
+	sottoclasse di sé stessa) che transitiva (se \tt{C} é sottoclasse
+	di \tt{D} e \tt{D} é sottoclasse di \tt{E}, allora \tt{C} é
+	sottoclasse di \tt{E}).
 
 	\begin{example}
 		Si consideri il seguente insieme di triple:
@@ -392,18 +393,19 @@
 		\end{verbatim}
 	\end{example}
 
-	Le classi e le proprietá forniscono un \strong{vocabolario}, ovvero
-	un insieme di termini RDF per descrizioni generali. Una singola
-	proprietá o una classe puó essere usata per descrivere un numero
-	arbitrario di istanze. É facile riutilizzare uno stesso vocabolario
-	in diversi grafi RDF.
+	Le classi e le proprietá forniscono un \strong{vocabolario},
+	ovvero un insieme di termini RDF per descrizioni generali.
+	Una singola proprietá o una classe puó essere usata per
+	descrivere un numero arbitrario di istanze. É facile riutilizzare
+	uno stesso vocabolario in diversi grafi RDF.
 
 	RDFS permette di fare query SPARQL su grafi RDF ed ottenere
 	informazioni che non sono esplicitamente contenute nel grafo,
 	applicando le regole di inferenza.
 
 	\begin{example}
-		Si consideri il seguente grafo RDF (espresso in notazione Turtle):
+		Si consideri il seguente grafo RDF (espresso in notazione
+		Turtle):
 
 		\begin{verbatim}
 			@prefix dbr:  https://dbpedia.org/resource/
@@ -417,13 +419,14 @@
 			dbr:Come_As_You_Are_(Nirvana_Song)   dbo:MusicalArtist   dbr:Krist_Novoselic   .
 		\end{verbatim}
 
-		É possibile derivare che le entitá \tt{dbr:Kurt_Cobain} e
-		\tt{dbr:Come_As_You_Are_(Nirvana_Song)} sono legate da
+		É possibile derivare che le entitá \tt{dbr:Kurt_Cobain}
+		e \tt{dbr:Come_As_You_Are_(Nirvana_Song)} sono legate da
 		\tt{dbo:MusicalArtist} applicando le regole di entailment
 		RDFS. Questo perché le due entitá sono legate da \tt{dbo:Singer}
 		e tale classe é una sottoclasse di \tt{dbo:MusicalArtist}.
-		Infatti, tale tripla é presente nel risultato dalla seguente
-		query SPARQL nonostante nel grafo non sia riportata esplicitamente:
+		Infatti, tale tripla é presente nel risultato dalla
+		seguente query SPARQL nonostante nel grafo non sia
+		riportata esplicitamente:
 
 		\begin[width = 65%fw]{parbox}
 			\begin{verbatim}
@@ -466,5 +469,72 @@
 	non é necessario aggiornare il grafo ogni volta che questo viene
 	modificato, ma d'altra parte ogni query sará piú lenta perché é
 	necessario spendere ulteriore tempo per il calcolo delle inferenze.
+
+	Le ontologie che RDFS permette di costruire non sono
+	particolarmente espressive. Ad esempio, RDFS presenta
+	le seguenti limitazioni:
+
+	\begin{itemize}
+		\begin{item}
+			Non é possibile modellare le \strong{classi disgiunte},
+			ovvero non é possibile definire delle classi a cui sia
+			impedito avere istanze in comune;
+		\end{item}
+		\begin{item}
+			Non é possibile specificare che una proprietá sia
+			transitiva, inversa e/o simmetrica; 
+		\end{item}
+		\begin{item}
+			Non é possibile specificare un vincolo di
+			\strong{cardinalitá}, ad esempio che l'istanza di
+			una classe possa essere in relazione con al massimo
+			\math{n} istanze di un'altra classe;
+		\end{item}
+		\begin{item}
+			Non é possibile costruire classi applicando gli
+			operatori dell'insiemistica (unione, intersezione,
+			complemento) sulle classi esistenti;
+		\end{item}
+		\begin{item}
+			Non é possibile definire un range/dominio che vari
+			in base a quale entitá si riferisce.
+		\end{item}
+	\end{itemize}
+
+	\begin{example}
+		Si consideri il grafo RDF presentato di seguito, che contiene
+		informazioni relative a cittá, regioni e paesi:
+
+		\begin{verbatim}
+			@prefix rdf:  https://www.w3.org/1999/02/22-rdf-syntax-ns#
+			@prefix rdfs: https://www.w3.org/2000/01/rdfs-schema#
+			@prefix dbr:  https://dbpedia.org/resource/
+			@prefix dbo:  https://dbpedia.org/ontology/
+
+			\bigskip
+			capitalOf      rdfs:domain   dbo:Capital    .
+			capitalOf      rdfs:range    dbo:Country    .
+			cityOf         rdfs:range    dbo:Country    .
+			cityOf         rdfs:range    dbo:Region     .
+
+			\bigskip
+			dbr:Milan      cityOf        dbr:Lombardy   .
+			dbr:Milan      cityOf        dbr:Italy      .
+			dbr:Rome       capitalOf     dbr:Italy      .
+			dbr:Italy      rdf:type      dbo:Country    .
+			dbr:Lombardy   rdf:type      dbo:Region     .
+		\end{verbatim}
+	
+		Nonostante le triple siano tutte logicamente valide, é
+		comunque possibile applicare le regole di inferenza di
+		RDFS per derivare delle triple che non lo sono.
+
+		Ad esempio, \tt{dbr:Milan} é legato sia a \tt{dbr:Italy}
+		che a \tt{dbr:Lombardy} per mezzo del predicato \tt{cityOf}.
+		Tuttavia, l'esistenza della tripla \tt{cityOf rdfs:range
+		dbo:Country .} permette di applicare la regola di inferenza
+		3, a partire dalla quale si deriva che \tt{dbr:Lombardy} é
+		una istanza della classe \tt{dbo:Country}.
+	\end{example}
 
 \end{sile}
