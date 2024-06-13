@@ -81,7 +81,7 @@
 		\section{RDFS}
 		\include[src = Conoscenza/Schema.sil]
 		\section{OWL}
-		\include[src = Conoscenza/OWL.sil] % da rivedere
+		\include[src = Conoscenza/OWL.sil]
 	\chapter{Problemi di ricerca}
 		\section{Risolvere problemi con la ricerca}
 		\include[src = Ricerca/Introduzione.sil]

@@ -33,47 +33,49 @@
 
 	\begin{itemize}
 		\begin{item}
-			\strong{OWL 2 EL} permette di modellare classificazioni semplici
-			(comunque piú sofisticate di quanto possa fare RDFS), ma viene 
-			garantito il calcolo delle inferenze in tempo polinomiale;
+			\strong{OWL 2 EL} permette di modellare classificazioni
+			semplici (comunque piú sofisticate di quanto possa fare
+			RDFS), ma viene garantito il calcolo delle inferenze in
+			tempo polinomiale;
 		\end{item}
 		\begin{item}
-			\strong{OWL 2 QL} é costruito di modo che le inferenze siano
-			automaticamente traducibili come query su database relazionali;
+			\strong{OWL 2 QL} é costruito di modo che le inferenze
+			siano automaticamente traducibili come query su database
+			relazionali;
 		\end{item}
 		\begin{item}
-			\strong{OWL 2 RL} é pensato per essere implementato in maniera 
-			efficiente in sistemi a regole.
+			\strong{OWL 2 RL} é pensato per essere implementato in
+			maniera efficiente in sistemi a regole.
 		\end{item}
 	\end{itemize}
 
 	\bigskip
 
-	Se RDFS metteva a disposizione la relazione di sottoclasse, OWL fornisce
-	il predicato \tt{owl:equivalentClass}, che indica che le due classi che
-	mette in relazione hanno gli stessi membri. Tale predicato é piú ricco
-	di \tt{rdfs:subClassOf}, perché oltre allo specificare che una classe
-	é sottoclasse di un'altra é anche possibile introdurre dei vincoli
-	aggiuntivi. Inoltre, il predicato \tt{owl:disjointWith} indica che 
-	due classi non possono avere una istanza in comune.
+	Se RDFS metteva a disposizione la relazione di sottoclasse, OWL
+	fornisce il predicato \tt{owl:equivalentClass}, che indica che
+	le due classi che mette in relazione hanno gli stessi membri.
+	Tale predicato é piú ricco di \tt{rdfs:subClassOf}, perché oltre
+	allo specificare che una classe é sottoclasse di un'altra é anche
+	possibile introdurre dei vincoli aggiuntivi. Inoltre, il predicato
+	\tt{owl:disjointWith} indica che due classi non possono avere una
+	istanza in comune.
 
 	\begin{example}
-		L'inconsistenza nell'esempio precedente viene risolta introducendo
-		la tripla \tt{dbo:Region owl:disjointWith dbo:Country .}, perché
-		in questo modo si impedisce che \tt{dbr:Lombardy} possa essere
-		istanza di \tt{dbo:Country}.
+		L'inconsistenza nell'ultimo esempio del capitolo
+		precedente viene risolta introducendo la tripla
+		\tt{dbo:Region owl:disjointWith dbo:Country .},
+		perché in questo modo si impedisce che \tt{dbr:Lombardy}
+		possa essere istanza di \tt{dbo:Country}.
 	\end{example}
 
-	L'istanza di una classe in OWL prende il nome di \strong{individuo}.
-	Un individuo é legato alla propria classe per mezzo di \tt{rdfs:type}.
-	OWL permette di specificare che due individui sono in realtá lo stesso
-	individuo (nonostante abbiano due IRI distinti) per mezzo del predicato
-	\tt{owl:sameAs}. Inoltre, é possibile specificare che due individui sono
-	distinti per mezzo del predicato \tt{owl:differentFrom}. OWL, infatti,
-	non adotta la politica \math{Unique Name Assumption} (\strong{UNA}),
-	ovvero l'idea che due entitá a cui sono stati assegnati due nomi diversi
-	(due URI diversi, in questo caso) siano necessariamente distinte esse
-	stesse.
+	L'istanza di una classe in OWL prende il nome di
+	\strong{individuo}. Un individuo é legato alla propria
+	classe per mezzo di \tt{rdfs:type}. OWL permette di
+	specificare che due individui sono in realtá lo stesso
+	individuo (nonostante abbiano due IRI distinti) per mezzo
+	del predicato \tt{owl:sameAs}. Inoltre, é possibile specificare
+	che due individui sono distinti per mezzo del predicato
+	\tt{owl:differentFrom}.
 
 	\begin{example}
 		\begin{verbatim}
@@ -87,20 +89,22 @@
 		\end{verbatim}
 	\end{example}
 
-	Sebbene le proprietá in RDF(S) siano in genere modellate come
-	attributi di una entitá o come relazione fra due entitá, non
-	esiste un costrutto che permetta di fare esplicitamente questa
-	distinzione. In OWL si distingue invece fra \tt{owl:ObjectProperty},
-	ovvero proprietá i cui valori sono risorse, e \tt{owl:DatatypeProperty},
-	ovvero proprietá i cui valori sono letterali.
+	Sebbene le proprietá in RDF(S) siano in genere modellate
+	come attributi di una entitá o come relazione fra due entitá,
+	non esiste un costrutto che permetta di fare esplicitamente
+	questa distinzione. In OWL si distingue invece fra
+	\tt{owl:ObjectProperty}, ovvero proprietá i cui valori sono
+	risorse, e \tt{owl:DatatypeProperty}, ovvero proprietá i cui
+	valori sono letterali.
 
-	Cosí come per le classi, OWL permette di stabilire che due proprietá
-	(con diverso IRI) si riferiscono alla medesima proprietá per mezzo del
-	predicato \tt{owl:equivalentProperty}, e stabilire che due proprietá
-	sono distinte per mezzo di \tt{owl:propertyDisjointWith}.
+	Cosí come per le classi, OWL permette di stabilire che due
+	proprietá (con diverso IRI) si riferiscono alla medesima
+	proprietá per mezzo del predicato \tt{owl:equivalentProperty},
+	e stabilire che due proprietá sono distinte per mezzo di
+	\tt{owl:propertyDisjointWith}.
 
-	OWL permette di assegnare delle caratteristiche alle proprietá che
-	permettono di inferire nuovi fatti sulla base delle stesse:
+	OWL permette di assegnare delle caratteristiche alle proprietá
+	che permettono di inferire nuovi fatti sulla base delle stesse:
 
 	\begin{itemize}
 		\begin{item}
@@ -260,32 +264,31 @@
 		\end{verbatim}
 	\end{example}
 
-	Per poter costruire classi mediante operatori booleani é necessario
-	che queste siano organizzate in una struttura a \strong{reticolo},
-	con un top ed un bottom. A tal scopo, ogni entitá in OWL (classi,
-	proprietá, letterali, ecc\ddd) é implicitamente istanza della
-	classe \tt{owl:Thing}, mentre la classe \tt{owl:Nothing} é la
-	classe che non ha istanze. Similmente, ogni proprietá é implicitamente
-	istanza della classe \tt{owl:TopObjectProperty}, mentre nessuna 
-	proprietá é istanza della classe \tt{owl:BottomObjectProperty}. Le
-	classi possono avere piú superclassi dirette; le proprietá possono
-	avere piú superproprietá dirette.
+	Per poter costruire classi mediante operatori booleani é
+	necessario che queste siano organizzate in una struttura
+	a \strong{reticolo}, con un top ed un bottom. A tal scopo,
+	ogni entitá in OWL (classi, proprietá, letterali, ecc\ddd)
+	é implicitamente istanza della classe \tt{owl:Thing}, mentre
+	la classe \tt{owl:Nothing} é la classe che non ha istanze.
+	Similmente, ogni proprietá é implicitamente istanza della
+	classe \tt{owl:TopObjectProperty}, mentre nessuna proprietá
+	é istanza della classe \tt{owl:BottomObjectProperty}. Le
+	classi possono avere piú superclassi dirette; le proprietá
+	possono avere piú superproprietá dirette.
 
-	La sintassi di SROIQ é composta da tre elementi: \strong{concetti}, 
-	\strong{ruoli} e \strong{asserzioni}. Un concetto SROIQ corrisponde
-	ad una classe OWL, un ruolo SROIQ ad una proprietá OWL ed una asserzione
-	SROIQ ad un individuo. Si distinguono poi le \strong{definizioni} dagli
-	\strong{assiomi}: le definizioni permettono di fare riferimento ad un
-	concetto/ruolo/asserzione o di definirne di nuovi, mentre gli assiomi
-	specificano una proprietá di un certo concetto/ruolo/asserzione.
+	La sintassi di SROIQ é composta da tre elementi:
+	\strong{concetti}, \strong{ruoli} e \strong{individui}.
+	Un concetto SROIQ corrisponde ad una classe OWL, un ruolo
+	SROIQ ad una proprietá o ad una relazione OWL ed un individuo
+	SROIQ ad una istanza o ad una entitá OWL.
 
-	Le asserzioni che si riferiscono ai concetti e ai ruoli costituiscono
-	la \strong{Terminological Box} (\strong{T-box}), mentre le asserzioni
-	che si riferiscono agli assiomi costituiscono la \strong{Assertional
-	Box} (\strong{A-box}). La A-box riporta le informazioni relative agli
-	individui OWL; a tutti gli individui é necessario associare un nome
-	univoco (non sono ammessi blank node come in RDF(S)). La T-box definisce
-	la semantica relativa alle classi OWL.
+	SROIQ separa lo schema dall'istanziazione: lo schema
+	prende il nome di \strong{Terminological Box} (\strong{T-box}),
+	che riporta le proposizioni relative ai concetti e ai ruoli,
+	mentre l'istanziazione prende il nome di \strong{Assertional
+	Box} (\strong{A-box}), che riporta le proposizioni relative
+	agli individui. Questo significa che, ad esempio, non puó
+	comparire un individuo all'interno della definizione di un ruolo.
 
 	La semantica di una Description Logic, e quindi anche di SROIQ,
 	é definita a partire da una \strong{teoria dei modelli}. Una
@@ -302,7 +305,8 @@
 	semantica di una Description Logic discende una "classica" nozione
 	di entailment, ovvero dove per due ontologie \math{O_{1}} e
 	\math{O_{2}} vale \math{O_{1} \vDash O_{2}} se e solo se ogni
-	interpretazione che soddisfa \math{O_{1}} soddisfa anche \math{O_{2}}.
+	interpretazione che soddisfa \math{O_{1}} soddisfa anche
+	\math{O_{2}}.
 
 	Vi sono diverse possibili tecniche per costruire inferenze sulla
 	base di una DL. Fra queste, figura la \strong{tecnica a tableau},
@@ -565,6 +569,10 @@
 	\strong{Open World Semantic}, ovvero tutto ció che non é
 	esplicitamente contenuto nella Knowledge Base e non é deducibile
 	dagli assiomi (ovvero, tutto ció su cui non si ha informazione)
-	viene assunto come vero. 
+	viene assunto come vero. D'altro canto, le due non adottano la
+	politica \strong{Unique Name Assumption} (\strong{UNA}), ovvero
+	l'idea che due individui/entitá a cui sono stati assegnati due
+	nomi diversi (due URI diversi, nel caso specifico di OWL) siano
+	necessariamente distinte esse stesse.
 
 \end{sile}
