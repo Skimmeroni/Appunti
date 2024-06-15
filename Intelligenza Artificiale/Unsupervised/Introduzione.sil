@@ -45,6 +45,7 @@
 			spazio dimensionale piú ristretto, senza che
 			questo comporti una perdita (troppo) significativa
 			di informazione;
+		\end{item}
 		\begin{item}
 			\strong{anomaly detection}: riuscire ad identificare,
 			dato un insieme di dati, quei (pochi) elementi che
