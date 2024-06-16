@@ -1,6 +1,47 @@
 \begin{sile}
 
-	Una forma di model-free reinforcement learning molto comune
-	é \strong{Q learning}.
+	Una forma di model-free reinforcement learning molto utilizzata
+	é \strong{Q learning}. Questa tecnica, come il nome suggerisce,
+	si basa sulla costruzione di una Q-function. Infatti, é molto
+	naturale il paragone fra un MDP ed un agente che apprende per
+	rinforzo.
+
+	L'idea é quella di far apprendere all'agente la Q-function che
+	modella l'ambiente in cui si trova fino ad ottenerne una stima
+	accettabile. Nello specifico, sia \math{\delta_{t}} lo scarto
+	nell'approssimazione della Q-function all'istante \math{t},
+	indicato come segue:
+
+	\begin[mode = display]{math}
+		\delta_{t} =
+		r_{t} + \gamma \mi{max}_{a'} Q(s_{t + 1}, a') - Q(s_{0}, a_{0})
+	\end{math}
+
+	Dove \math{Q(s_{0}, a_{0})} indica la stima iniziale della Q-function.
+	Ad ogni iterazione dell'algoritmo di Q learning l'agente esegue l'azione
+	che ha calcolato essere la migliore, osserva lo stato che viene raggiunto
+	ed il reward guadagnato e ricalcola lo scarto. Se tale scarto é ancora
+	troppo grande, la Q-function viene ricalcolata come segue:
+
+	\begin[mode = display]{math}
+		Q^{t + 1} (s_{t}, a_{t}) =
+		Q^{t} (s_{t}, a_{t}) + \alpha_{t} \delta_{t}
+	\end{math}
+
+	Dove \math{\alpha_{t}} é un valore strettamente inferiore ad
+	1, che diminuisce ad ogni iterazione, detto \strong{fattore
+	di apprendimento}. La quantitá \math{\alpha_{t}\delta_{t}}
+	decresce quindi ad ogni iterazione, e la stima della Q-function
+	si avvicina sempre piú al valore ottimale.
+
+	Il problema di Q learning é che la convergenza della Q-function
+	é molto lenta, perché ad ogni iterazione viene aggiornata la stima
+	di un solo stato e di una sola azione. Questo richiede di compiere
+	le stesse computazioni molte piú volte del necessario.
+
+	Un approccio alternativo a Q learning che risolve questo problema é
+	\strong{SARSA learning}, dove ad ogni iterazione non viene aggiornata
+	solamente la coppia \math{(s_{t}, a_{t})}, ma anche tutte le coppie
+	stato-azione che hanno portato a tale coppia.
 
 \end{sile}

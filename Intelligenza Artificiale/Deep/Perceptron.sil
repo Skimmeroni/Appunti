@@ -43,9 +43,9 @@
 			ed il vettore \math{f(\bi{x})}:
 
 			\begin[mode = display]{math}
-				\mi{activation}_{\bi{w}} (\bi{x}) =
-				\sum_{i} w_{i} f_{i} (\bi{x}) =
-				\bi{w} \cdot f(\bi{x})
+				\mi{activation}_{\bi{w}} {(\bi{x})} =
+				\sum_{i} w_{i} f_{i} {(\bi{x})} =
+				\bi{w} \cdot f{(\bi{x})}
 			\end{math}
 		\end{item}
 		\begin{item}
@@ -54,10 +54,10 @@
 			attivazione:
 
 			\begin[mode = display]{math}
-				\mi{output}_{\bi{w}} (\bi{x}) =
-				\mi{sgn} (\mi{activation}_{\bi{w}} (\bi{x})) =
-				\frac{\abs{\mi{activation}_{\bi{w}} (\bi{x})}}{
-				\mi{activation}_{\bi{w}} (\bi{x})}
+				\mi{output}_{\bi{w}} {(\bi{x})} =
+				\mi{sgn} {(\mi{activation}_{\bi{w}} {(\bi{x})})} =
+				\frac{\abs{\mi{activation}_{\bi{w}} {(\bi{x})}}}{
+				\mi{activation}_{\bi{w}} {(\bi{x})}}
 			\end{math}
 		\end{item}
 	\end{itemize}
