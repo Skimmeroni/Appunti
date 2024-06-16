@@ -33,11 +33,13 @@
 	essere tradotto in una formula equivalente nella logica
 	proposizionale:
 
+	\bigskip
 	\begin{center}
 		Se attributo1 vale \ddd e attributo2 vale \ddd e \ddd
 		e attributo k vale \ddd allora appartiene / non appartiene
 		alla classe
 	\end{center}
+	\bigskip
 
 	Formalmente, siano \math{A_{1}, A_{2}, \unicodeellipsis, A_{k}}
 	gli attributi che figurano come etichette dei nodi non foglia
@@ -70,8 +72,8 @@
 		1    if (tutti i membri di D appartengono alla stessa classe c\textsubscript{j} in C) then
 		2        crea un nodo foglia T avente c\textsubscript{j} come etichetta
 		3    else if (A = \unichar{U+2205}) then
-		4	    crea un nodo foglia T avente c\textsubscript{j} come etichetta, dove c\textsubscript{j} è la classe avente più membri in D
-		5	 else
+		4        crea un nodo foglia T avente c\textsubscript{j} come etichetta, dove c\textsubscript{j} è la classe avente più membri in D
+		5    else
 		6        p0 = ENTROPY(D)
 		7        foreach Ai in \{A1, A2, \unichar{U+2026}, An\} do
 		8            pi = ENTROPY\textsubscript{Ai}(D)
@@ -80,7 +82,7 @@
 		11       if (p0 - pi) < threshold then
 		12           crea un nodo foglia T avente c\textsubscript{j} come etichetta, dove c\textsubscript{j} è la classe avente più membri in D
 		13       else
-		14           crea un nodo interno T sulla base di A\textsubscript{g}
+		14           crea un nodo interno T avente A\textsubscript{g} come etichetta
 		15           partiziona D in v sotto-dataset disgiunti D\textsubscript{1}, D\textsubscript{2}, \unichar{U+2026}, D\textsubscript{v}, dove v sono i valori assumibili da A\textsubscript{g}
 		16           foreach Dj in \{D1, D2, \unichar{U+2026}, Dv\} do
 		17               if (Dj != \unichar{U+2205}) then
@@ -127,7 +129,7 @@
 
 	La scelta dell'attributo influisce notevolmente sulla qualita
 	dell'albero risultante. L'ideale sarebbe scegliere l'attributo
-	che riduce al minimo l'incertezza nel (sott)dataset. A ciascun
+	che riduce al minimo l'incertezza nel (sotto)dataset. A ciascun
 	\math{D} è infatti possibile associare una misura di "impurità"
 	chiamata \strong{entropia} \footnote{Il termine è associato al
 	concetto analogo in fisica.}, che puo essere utilizzata per
@@ -160,17 +162,17 @@
 
 	\begin[width = 65%fw]{parbox}
 		\begin[mode = display]{math}
-			\mi{lim}_{x \rightarrow 0^{+}} P{(c_{j})} \cdot
-			\mi{log}_{2} {(P{(c_{j})})} = \mi{lim}_{x \rightarrow 0^{+}}
+			\mi{lim}_{P(c_{j}) \rightarrow 0^{+}} P{(c_{j})} \cdot
+			\mi{log}_{2} {(P{(c_{j})})} = \mi{lim}_{P(c_{j}) \rightarrow 0^{+}}
 			\frac{\mi{log}_{2}(P(c_{j}))}{\frac{1}{P(c_{j})}} =
-			\mi{lim}_{x \rightarrow 0^{+}} \frac{\frac{1}{\mi{ln}(2)P(c_{j})}}{-
-			\frac{1}{P(c_{j})^{2}}} = \mi{lim}_{x \rightarrow 0^{+}}
-			\frac{-x}{\mi{ln}(2)} = 0
+			\mi{lim}_{P(c_{j}) \rightarrow 0^{+}} \frac{\frac{1}{\mi{ln}(2)P(c_{j})}}{-
+			\frac{1}{P(c_{j})^{2}}} = \mi{lim}_{P(c_{j}) \rightarrow 0^{+}}
+			\frac{-P(c_{j})}{\mi{ln}(2)} = 0
 		\end{math}
 	\end{parbox}
 	\begin[width = 35%fw]{parbox}
 		\begin[mode = display]{math}
-			\mi{lim}_{x \rightarrow 1^{-}} P(c_{j}) \cdot
+			\mi{lim}_{P(c_{j}) \rightarrow 1^{-}} P(c_{j}) \cdot
 			\mi{log}_{2}(P(c_{j})) = 1 \cdot 0 = 0
 		\end{math}
 	\end{parbox}
@@ -189,7 +191,7 @@
 	un terzo:
 
 	\begin[mode = display]{math}
-		\frac{d}{dx} {(P{(c_{j})} \mi{log}_{2} {(P{(c_{j})})})} = 0
+		\frac{d}{dP(c_{j})} {(P{(c_{j})} \mi{log}_{2} {(P{(c_{j})})})} = 0
 		\thickspace\Rightarrow\thickspace
 		\mi{log}_{2} {(P{(c_{j})})} + \frac{1}{\mi{ln} {(2)}} = 0
 		\thickspace\Rightarrow\thickspace
