@@ -277,69 +277,74 @@
 	\math{t} se ci si trova nello stato \math{s_{t}} avendo compiuto
 	l'azione \math{a_{t}} suggerita da \math{\pi}.
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Una proprietá interessante é che, se si sta considerando la
+	politica ottimale, le equazioni per \math{U(s)} e per \math{Q(s, a)}
+	non dipendono dallo stato iniziale, ma hanno la stessa forma per
+	qualsiasi stato iniziale venga scelto. Diventa allora possibile
+	scrivere le due equazioni in forma ricorsiva, equazioni che prendono
+	il nome di \strong{Equazioni di Bellman}:
 
-	%%
-	%% Altro esempio da prendere dal libro.
-	%%
+	\begin[width = 35%fw]{parbox}
+		\begin[mode = display]{math}
+			U{(s)} = \mi{max}_{a \in A(s)} \sum_{s'} P{(s' | s, a)} {[R{(s, a, s')} + \gamma U{(s')}]}
+		\end{math}
+	\end{parbox}
+	\begin[width = 65%fw]{parbox}
+		\begin[mode = display]{math}
+			Q{(s, a)} = \sum_{s'} P{(s' | s, a)} {[R{(s, a, s')} + \gamma U{(s')}]} =
+			\sum_{s'} P{(s' | s, a)} {[R{(s, a, s')} + \gamma \mi{max}_{a'} Q{(s', a')}]}
+		\end{math}
+	\end{parbox}
+	\par
 
-	Per ciascuno stato \math{s} di un MDP dovrebbe venire calcolato
-	\math{U(s)} attraverso l'equazione di Bellman. Se il numero di
-	stati dell'MDP é \math{n}, questo consiste nel risolvere un
-	sistema di \math{n} equazioni in \math{n} incognite. Se tale 
-	sistema fosse un sistema di equazioni lineari questo sarebbe
-	computazionalmente possibile, ma tale sistema non é lineare,
-	perché nell'equazione di Bellman compare l'operatore max, che
-	non é lineare.
-
-	Value iteration aggira il problema "stimando" il valore di \math{U(s)}
-	per ciascuno stato di iterazione in iterazione fino ad ottenerne una
-	approssimazione accettabile. Sia \math{U_{i}(s)} il valore di utilitá
-	per lo stato \math{s} alla \math{i}-esima iterazione; viene chiamato
-	\strong{aggiornamento di Bellman} l'aggiornamento di tale valore sulla
-	base del precedente:
+	La Q-function ottimale corrisponde alla Q-function calcolata a partire
+	dalla politica che ne massimizza il valore di ricompensa atteso:
 
 	\begin[mode = display]{math}
-		U_{i + 1} {(s)} \leftarrow \mi{max}_{a \in A(s)}
-		\sum_{s'} T{(s, a, s')} [R{(s, a, s')} + \gamma U_{i} {(s')}]
+		Q*(s, a) = \mi{max}_{\pi} Q^{\pi} (s, a)
 	\end{math}
 
-	Inizialmente, i valori di \math{U(s)} vengono impostati ad
-	un valore casuale (in genere a 0), e le iterazioni proseguono
-	fintanto che la differenza fra l'utilitá stimata fra una
-	iterazione e quella successiva non é trascurabile.
+	Questo significa che l'azione suggerita dalla politica ottimale
+	\math{\pi*} nello stato \math{s} é data da:
 
-	\begin{verbatim}
-		S <= a set of states
-		A <= a set of actions A(s)
-		T <= the transition function T(s', a, s)
-		R <= the reward function R(s', a, s)
-		\unichar{U+03B3} <= the discount function
-		\unichar{U+03B5} <= the maximum error allowed in the utility of any state
+	\begin[mode = display]{math}
+		\pi*(s) = \mi{argmax}_{a} Q*(s, a)
+	\end{math}
 
-		\bigskip
-		function VALUE-ITERATION(S, A, T, R, \unichar{U+03B3}, \unichar{U+03B5})
-		    \unichar{U+03B4} <= 0
-		    foreach s in S do
-		        U[s] <= 0
-		        U'[s] <= 0
+	Questo significa che per ricavare la politica ottimale \math{\pi*}
+	di un MDP sarebbe necessario calcolare \math{Q(s, a)} per ciascuno
+	stato \math{s} mediante l'equazione di Bellman. Indicando con \math{n}
+	il numero di stati dell'MDP, ricavare \math{\pi*} significa risolvere
+	un sistema di \math{n} equazioni in \math{n} incognite. Sebbene possibile,
+	la presenza dell'operatore max rende il sistema non lineare, e quindi
+	molto esoso da calcolare. É peró possibile ricavare la politica ottimale
+	in tempo lineare mediante approssimazione.
 
-		    \bigskip
-		    do
-		        foreach s in S do
-		            foreach a in A[s] do
-		                U'[s] <= max(Q-VALUE(S, A, T, R, U, \unichar{U+03B3}))
-		            if (|U'[s] - U[s]| > \unichar{U+03B4}) then
-		                \unichar{U+03B4} <= |U'[s] - U[s]|
-		    while (\unichar{U+03B4} > \unichar{U+03B5} (1 - \unichar{U+03B3}) / \unichar{U+03B3})
+	Uno fra questi approcci prende il nome di \strong{Value Iteration}.
+	Sia \math{U_{i}(s)} il valore di utilitá per lo stato \math{s} alla
+	\math{i}-esima iterazione, e sia \math{\epsilon} un parametro di
+	terminazione. Viene chiamato \strong{aggiornamento di Bellman}
+	l'aggiornamento di \math{U_{i}(s)} sulla base di \math{U_{i - 1}(s)}:
 
-		    \bigskip
-		    return U
-	\end{verbatim}
+	\begin[mode = display]{math}
+		U_{i} {(s)} \leftarrow \mi{max}_{a \in A(s)}
+		\sum_{s'} T{(s, a, s')} [R{(s, a, s')} + \gamma U_{i - 1} {(s')}]
+	\end{math}
 
-	Occorre peró dimostrare che, dopo un numero sufficiente di
-	iterazioni, value iteration restituisce effettivamente una
-	stima corretta dei valori di \math{U(s)}.
+	Ovvero, per tutte le azioni, viene calcolato il guadagno atteso sulla
+	base dell'azione in questione ed ottenendo il risultato atteso.
+
+	L'aggiornamento, ad ogni iterazione, viene compiuto per ciascuno stato.
+	\math{U(s)} viene inizializzato ad un valore casuale (in genere 0) per
+	ciascun \math{s \in S}, e le iterazioni proseguono fintanto che la
+	differenza fra l'utilitá stimata fra una iterazione e quella successiva
+	é superiore a \math{\epsilon} per almeno uno stato.
+
+	L'aggiornamento di Bellman é una operazione approssimativamente
+	lineare, avente tempo di esecuzione \math{O(S^{2}A)}. Naturalmente,
+	occorre dimostrare che un numero sufficiente di iterazioni dell'algoritmo
+	effettivamente restituiscano i valori di \math{U(s)} propri della politica
+	ottimale.
 
 	\begin{theorem}
 		L'aggiornamento di Bellman é una contrazione.
@@ -375,26 +380,49 @@
 		e alla metrica \math{d}.
 	\end{theorem}
 
-	Un approccio alternativo a value iteration é \strong{policy
-	iteration}. Questo si basa sul presupposto che una politica
-	ottimale puó essere ottenuta anche da una funzione di utilitá
-	inaccurata. Policy iteration alterna i seguenti due step in
-	ciascuna iterazione \math{i}:
+	Una volta che \math{U_{i}(s)} é stato calcolato per tutti gli \math{s}
+	con un \math{i} sufficientemente grande, ovvero quando \math{U_{i}(s)
+	\approx U*(s)}, l'ultimo passo da compiere prevede di calcolare la
+	politica \math{\pi*} sulla base di \math{U_{i}(s)}. L'operazione in
+	questione prende il nome di \strong{policy extraction}:
 
-	\begin{itemize}
-		\begin{item}
-			\strong{Policy evaluation}: data una politica \math{\pi_{i}},
-			viene calcolato \math{U_{i} = U^{\pi_{i}}}, la funzione di
-			utilitá in ciascuno stato se venisse applicata \math{\pi_{i}};
-		\end{item}
-		\begin{item}
-			\strong{Policy improvement}: viene calcolata una nuova politica
-			\math{\pi_{i + 1}}, migliore di \math{\pi_{i}}, a partire da
-			\math{U_{i}}.
-		\end{item}
-	\end{itemize}
+	\begin[mode = display]{math}
+		\pi*{(s)} \approx \pi_{U} {(s)} =
+		\mi{argmax}_{a} \sum_{s'} P{(s' | a, s)} {[R{(s, a, s')}, \gamma U{(s')}]}
+	\end{math}
 
-	\bigskip
+	%%
+	%% Altro esempio da prendere dal libro.
+	%%
+
+	Un approccio alternativo a value iteration é \strong{Policy
+	Iteration}. L'approccio si basa sull'osservare che, anziché
+	calcolare \math{U_{i}(s)} e poi dedurre la politica alla fine
+	dell'algoritmo, é possibile calcolare direttamente le politiche
+	approssimate alla fine di ciascuna iterazione.
+
+	L'algoritmo prevede di ripetere in sequenza due step, chiamati
+	\strong{Policy Evaluation} e \strong{Policy Improvement}, fino
+	a quando la politica calcolata in una certa iterazione non é
+	uguale alla politica calcolata all'iterazione precedente.
+
+	Policy evaluation consiste nel calcolare, data una politica
+	\math{\pi_{i}}, la funzione di utilitá in ciascuno stato se
+	venisse applicata tale politica:
+
+	\begin[mode = display]{math}
+		U_{i} {(s)} \leftarrow \sum_{s'} P{(s' | s, \pi_{i - 1} {(s)})}
+		{[R{(s, \pi_{i - 1} {(s)}, s')} + \gamma U_{i - 1} {(s')}]}
+	\end{math}
+
+	Policy improvement consiste nel calcolare una nuova politica
+	\math{\pi_{i + 1}}, migliore di \math{\pi_{i}}, compiendo policy
+	extraction su \math{U_{i}}:
+
+	\begin[mode = display]{math}
+		\pi_{i} {(s)} = \mi{argmax}_{a} \sum_{s'} P{(s' | s, a)}
+		{[R{(s, a, s')} + \gamma U^{\pi_{i - 1}} {(s')}]}
+	\end{math}
 
 	L'algoritmo termina quando la politica \math{\pi_{i}} non é piú
 	in grado di influire sul risultato di \math{U_{i}}. Quando questo
@@ -404,52 +432,5 @@
 	ha generata é una politica ottima. Essendo il numero di politiche
 	finito e venendo le politiche migliorate ad ogni iterazione, é
 	garantito che l'algoritmo termini.
-
-	\begin{verbatim}
-		S <= a set of states
-		A <= a set of actions A(s)
-		T <= the transition function T(s', a, s)
-		R <= the reward function R(s', a, s)
-		\unichar{U+03B3} <= the discount function
-
-		\bigskip
-		function POLICY-ITERATION(S, A, T, R, \unichar{U+03B3})
-		    foreach s in S do
-		        U[s] <= 0
-		    stop <= true
-		    \unichar{U+03C0} <= RANDOM-POLICY()
-
-		    \bigskip
-		    do
-		        U <= POLICY-EVALUATION(S, A, T, R, \unichar{U+03B3})
-		        foreach s in S do
-		            foreach a in A[S] do
-		                a* <= argmax(Q-VALUE(S, A, T, R, \unichar{U+03B3}))
-		            if (Q-VALUE(S, a*, T, R, \unichar{U+03B3}) > Q-VALUE(S, \unichar{U+03B3}[s], T, R, \unichar{U+03B3})) then
-		                \unichar{U+03C0}[s] <= a*
-		                stop <= false
-		    while (stop)
-
-		    \bigskip
-		    return \unichar{U+03C0}
-	\end{verbatim}
-
-	Implementare \tt{POLICY-EVALUATION} é piú semplice che
-	risolvere l'equazione di Bellman "per intero" (come viene
-	fatto da value iteration), perché l'azione che compare
-	nell'equazione non é una incognita. Infatti, questa é la
-	azione che viene raccomandata dalla politica \math{\pi_{i}}
-	nello stato \math{s}, quindi é una informazione nota:
-
-	\begin[mode = display]{math}
-		U_{i} {(s)} = \sum_{s'} T{(s, \pi_{i}(s), s')}
-		[R{(s, \pi_{i}(s), s')} + \gamma U_{i} {(s')}]
-	\end{math}
-
-	Questo semplifica l'equazione eliminando l'operatore max e
-	rendendola una equazione lineare. Se il numero di stati é
-	\math{n} vi saranno \math{n} equazioni lineari in \math{n}
-	incognite, e risolverle con metodi algebrici standard richiede
-	un tempo di esecuzione pari a \math{\mi{O}(n^{3})}.
 
 \end{sile}
