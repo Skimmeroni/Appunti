@@ -41,11 +41,11 @@
 
 	L'idea dell'algoritmo é di stimare \math{P(c | d)}, ovvero
 	la probabilitá che la classificazione corretta sia scegliere
-	la classe \math{c} dato l'individuo \math{d}, con \math{abs{P}/k},
+	la classe \math{c} dato l'individuo \math{d}, con \math{\abs{P}/k},
 	ovvero il rapporto fra il numero di vicini di \math{d} con piú
 	rappresentanti ed il numero totale di vicini di \math{d}. Essendo
 	\math{N} un insieme estratto dai \math{k} vicini di \math{d},
-	il valore \math{abs{N}/k} é certamente compreso fra 0 e 1, ed
+	il valore \math{\abs{N}/k} é certamente compreso fra 0 e 1, ed
 	é quindi un valore di probabilitá.
 
 	Il valore di \math{k} viene in genere scelto in maniera

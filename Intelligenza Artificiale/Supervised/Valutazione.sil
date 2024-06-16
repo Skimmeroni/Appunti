@@ -93,7 +93,7 @@
 
 	\begin[mode = display]{math}
 		A = \frac{TP + TN}{TP + FP + TN + FN} = 
-		frac{\mi{Numero} \thickspace \mi{di} \thickspace
+		\frac{\mi{Numero} \thickspace \mi{di} \thickspace
 		\mi{classificazioni} \thickspace \mi{corrette}}{\mi{Numero}
 		\thickspace \mi{totale} \thickspace \mi{di} \thickspace
 		\mi{elementi} \thickspace \mi{del} \thickspace \mi{test}
