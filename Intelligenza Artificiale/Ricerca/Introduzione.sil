@@ -116,9 +116,9 @@
 			Un problema di ricerca in cui la funzione di costo non é
 			specificata puó essere pensato come avente una funzione di
 			costo che assegna il medesimo costo a tutte le azioni
-			\footnote{Da questo momento in poi, se non riportato
-			esplicitamente, si assume di stare trattando problemi
-			dove la funzione di ricerca non é definita.}.
+			\footnote{Se non riportato esplicitamente, si assume di
+			stare trattando problemi dove la funzione di costo non é
+			definita.}.
 		\end{item}
 	\end{itemize}
 

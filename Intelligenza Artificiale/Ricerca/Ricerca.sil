@@ -206,8 +206,8 @@
 
 	\begin{verbatim}
 		procedure GENERIC-TREE-SEARCH(initialState, strategy)
-		    root.parent \unichar{U+2190} NULL
 		    root.state \unichar{U+2190} initialState
+		    root.parent \unichar{U+2190} NULL
 		    Leaves \unichar{U+2190} [root]
 		    Tree \unichar{U+2190} [root]
 
@@ -219,7 +219,7 @@
 			        Solution = []
 			        do
 			            Solution \unichar{U+2190} Solution + thisNode
-			    	    thisNode \unichar{U+2190} thisNode.parent
+			            thisNode \unichar{U+2190} thisNode.parent
 			        while (thisNode.parent \unichar{U+2260} NULL)
 			        return Solution
 			    else
@@ -254,22 +254,20 @@
 	estrae da questa il risultato, altrimenti il nodo viene espanso
 	normalmente e si salva in \tt{expanded} il risultato.
 
-	Le diverse incarnazioni di \tt{GENERIC-TREE-SEARCH} vengono
-	valutate sulla base di quattro metriche:
+	Le diverse incarnazioni di \tt{GENERIC-SEARCH} e di
+	\tt{GENERIC-TREE-SEARCH} vengono valutate sulla base
+	di quattro metriche:
 
 	\begin{itemize}
 		\begin{item}
 			\strong{Completezza}. Un algoritmo di ricerca si dice
-			\strong{completo} se garantisce, per qualsiasi istanza,
-			di fornire una risposta, a prescindere che questa sia
-			affermativa (soluzione trovata) o negativa (soluzione
-			non trovata). Inoltre, se almeno una soluzione esiste,
-			l'algoritmo deve essere in grado di trovarla;
+			\strong{completo} se garantisce di trovare una soluzione
+			nel caso in cui questa esista;
 		\end{item}
 		\begin{item}
 			\strong{Ottimalitá}. Un algoritmo di ricerca si dice
-			\strong{ottimale} se garantisce di trovare una soluzione
-			ottima;
+			\strong{ottimale} se la soluzione che restituisce é
+			una soluzione ottima;
 		\end{item}
 		\begin{item}
 			\strong{Complessitá in tempo}, nel caso peggiore; 

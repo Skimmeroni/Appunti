@@ -37,8 +37,8 @@
 			\begin{verbatim}
 				// Iterative, based on GENERIC-TREE-SEARCH
 				procedure BACKTRACKING-SEARCH(initialState)
-				    root.parent \unichar{U+2190} NULL
 				    root.state \unichar{U+2190} initialState
+				    root.parent \unichar{U+2190} NULL
 				    Leaves \unichar{U+2190} [root]
 				    Tree \unichar{U+2190} [root]
 				    Solutions \unichar{U+2190} []
@@ -96,7 +96,7 @@
 		esplorare gli stessi stati piú volte negli stessi percorsi,
 		prima o poi tutti gli stati vengono raggiunti. Se sono presenti
 		dei cicli, l'algoritmo potrebbe rimanere bloccato in un loop
-		infiniti. Se lo spazio degli stati é infinito, l'algoritmo
+		infinito. Se lo spazio degli stati é infinito, l'algoritmo
 		potrebbe rimanere bloccato nell'espandere lo stesso percorso
 		indefinitamente, anche se non sono presenti cicli.
 
@@ -156,8 +156,8 @@
 			\begin{verbatim}
 				// Iterative, based on GENERIC-TREE-SEARCH
 				procedure DEPTH-FIRST-SEARCH(initialState)
-				    root.parent \unichar{U+2190} NULL
 				    root.state \unichar{U+2190} initialState
+				    root.parent \unichar{U+2190} NULL
 				    Leaves \unichar{U+2190} [root]
 				    Tree \unichar{U+2190} [root]
 
@@ -251,8 +251,8 @@
 
 		\begin{verbatim}
 			procedure BREADTH-FIRST-SEARCH(initialState)
-			    root.parent \unichar{U+2190} NULL
 			    root.state \unichar{U+2190} initialState
+			    root.parent \unichar{U+2190} NULL
 			    Leaves \unichar{U+2190} [root]
 			    Tree \unichar{U+2190} [root]
 
@@ -359,8 +359,7 @@
 		a grafi senza cicli.}, o \strong{UCS}, é un algoritmo di ricerca
 		pensato per problemi con associata una funzione di costo. Questo
 		consiste essenzialmente nell'espandere sempre il nodo che ha il
-		minimizza il costo complessivo nel percorso dalla radice al nodo
-		stesso.
+		minimo costo complessivo nel percorso dalla radice al nodo stesso.
 
 		Nello specifico, UCS calcola per ogni nodo ad ogni iterazione
 		il valore di \math{g(n)}, ovvero il costo complessivo che si

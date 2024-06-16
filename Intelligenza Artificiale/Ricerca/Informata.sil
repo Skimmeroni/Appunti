@@ -2,18 +2,20 @@
 
 	Un algoritmo di ricerca \strong{informato} possiede informazioni
 	in merito a "quanto vicino" sia uno stato rispetto agli obiettivi.
-	A differenza degli algoritmi di ricerca non informati, che procedono
-	espandensosi in ogni direzione, gli algoritmi di ricerca informati 
-	possono orientare la loro computazione verso una determinata direzione.
+	A differenza degli algoritmi di ricerca non informati, gli algoritmi
+	di ricerca informati possono orientare la loro computazione verso
+	una determinata "direzione".
 
-	Viene detta \strong{funzione di euristica}, o semplicemente \strong{euristica},
-	una funzione che fornisce informazioni piú o meno precise su quanto lo stato
-	generico di un problema sia vicino ad uno stato obiettivo del medesimo problema.
-	Nello specifico: tale funzione, indicata con \math{h(n)}, restituisce una stima
-	numerica del percorso a costo minimo che ha inizio nel nodo \math{n} e ha fine
-	nel nodo con stato obiettivo piú vicino. Si noti come una euristica indichi
-	semplicemente una ipotetica direzione "privilegiata" da seguire, ma non
-	garantisca in alcun modo che seguendo tale direzione si raggiunga la soluzione
+	Viene detta \strong{funzione di euristica}, o semplicemente
+	\strong{euristica}, una funzione che fornisce informazioni
+	piú o meno precise su quanto lo stato generico di un problema
+	sia vicino ad uno stato obiettivo del medesimo problema. Nello
+	specifico: tale funzione, indicata con \math{h(n)}, restituisce
+	una stima numerica del percorso a costo minimo che ha inizio nel
+	nodo \math{n} e ha fine nel nodo con stato obiettivo piú vicino.
+	Si noti come una euristica indichi semplicemente una ipotetica
+	direzione "privilegiata" da seguire, ma non garantisca in alcun
+	modo che seguendo tale direzione si raggiunga la soluzione
 	con il minimo costo.
 
 	\begin{example}

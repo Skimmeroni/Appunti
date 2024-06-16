@@ -7,7 +7,7 @@
 	il procedimento, perché non e necessario alcun preprocessing,
 	ma allo stesso tempo rende i cluster molto suscettibili al
 	rumore del dataset, in particolare, agli \strong{outlier}, i
-	dati isolati molto distanti dal resto;
+	dati isolati molto distanti dal resto.
 
 	\strong{k-means} e un esempio di algoritmo di clustering
 	basato su partizioni, che opera su dati esclusivamente
