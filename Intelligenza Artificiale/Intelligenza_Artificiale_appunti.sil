@@ -134,12 +134,12 @@
 	\chapter{Reinforcement Learning}
 		\section{Introduzione all'apprendimento con rinforzo}
 		\include[src = Reinforcement/Introduzione.sil]
-		%\section{Reinforcement Learning}
-		%\include[src = Reinforcement/RL.sil] % da rivedere
+		\section{Q Learning}
+		\include[src = Reinforcement/Q.sil]
 	\chapter[numbering = false]{Appendice}
-		\section{Teoria della probabilita}
+		\section[numbering = false]{Teoria della probabilita}
 		\include[src = Appendice/Probabilita.sil]
-		\section{Contrazioni}
+		\section[numbering = false]{Contrazioni}
 		\include[src = Appendice/Contrazione.sil]
 
 \end{document}

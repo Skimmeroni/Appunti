@@ -521,11 +521,21 @@ return {
   },
   {
     label = {
+      "Q Learning",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest53",
+    number = "8.2",
+    pageno = "59"
+  },
+  {
+    label = {
       "Appendice",
       id = "stuff"
     },
     level = 1,
-    link = "dest53",
+    link = "dest54",
     pageno = "61"
   },
   {
@@ -534,8 +544,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest54",
-    number = "8.2",
+    link = "dest55",
     pageno = "61"
   },
   {
@@ -544,8 +553,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest55",
-    number = "8.3",
+    link = "dest56",
     pageno = "62"
   }
 }
