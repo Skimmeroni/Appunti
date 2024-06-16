@@ -82,22 +82,18 @@
 	\begin{itemize}
 		\begin{item}
 			\strong{Accessibile} o \strong{inaccessibile}. Un ambiente
-			é tanto accessibile quanto un agente é in grado di ottenere
-			le informazioni sul suo stato di cui necessita con completa
-			accuratezza. Un ambiente puó essere inaccessibile perché i
-			sensori dell'agente non sono precisi oppure perché parte 
-			dell'ambiente é del tutto preclusa ai sensori dell'agente.
-			Gli ambienti nel mondo reale hanno necessariamente un certo
-			grado di inaccessibilitá;
+			é tanto accessibile quanto sono complete le informazioni che
+			un agente é in grado di ricavarvi. Un ambiente puó essere
+			inaccessibile per una qualche mancanza dell'agente oppure
+			esserlo intrinsecamente. Gli ambienti nel mondo reale hanno
+			necessariamente un certo grado di inaccessibilitá;
 		\end{item}
 		\begin{item}
-			\strong{Deterministico} o \strong{non deterministico}.
-			Un ambiente é deterministico (in riferimento alle azioni
-			dell'agente) se la sua evoluzione é completamente determinata
-			dal suo stato attuale e dalle azioni dell'agente. Un ambiente
-			é non deterministico se la sua evoluzione é anche influenzata
-			da forze al di lá dell'agente. Il mondo fisico da modellare ha
-			sempre un certo grado di non determinismo;
+			\strong{Deterministico} o \strong{non deterministico}. Un ambiente
+			é deterministico se le azioni che l'agente compie lo modificano in
+			maniera prevedibile, ovvero se il risultato effettivo delle azioni
+			dell'agente coincide con il risultato atteso. Il mondo fisico da
+			modellare ha sempre un certo grado di non determinismo;
 		\end{item}
 		\begin{item}
 			\strong{Episodico} o \strong{sequenziale}. In un ambiente
@@ -109,8 +105,9 @@
 		\end{item}
 		\begin{item}
 			\strong{Statico} o \strong{dinamico}. Un ambiente é statico
-			se non subisce modifiche mentre l'agente sta deliberando,
-			altrimenti é dinamico;
+			se viene influenzato solo e soltanto dalle azioni dell'agente.
+			Se puó modificarsi anche al di lá delle capacitá di quest'ultimo,
+			allora é dinamico;
 		\end{item}
 		\begin{item}
 			\strong{Discreto} o \strong{continuo}. Un ambiente é
@@ -151,7 +148,8 @@
 					\end{item}
 					\begin{item}
 						Discreto, perché il numero di possibili stati in cui
-						la partita puó trovarsi é finito.
+						la partita puó trovarsi é finito (per quanto molto
+						grande).
 					\end{item}
 				\end{enumerate}
 			\end{item}
@@ -238,17 +236,13 @@
 		sono in grado di determinarli. L'unica contromisura che
 		possono adottare é randomizzare le proprie azioni, dato che
 		in questo modo si riduce la probabilitá che l'agente compia
-		le stesse azioni piú volte di fila. Tuttavia, sebbene questo
-		approccio possa mettere una pezza al problema del loop infinito
-		in maniera semplice, in genere comporta uno spreco di risorse,
-		e pertanto risulta difficilmente in un comportamento razionale
-		da parte dell'agente.
+		le stesse azioni piú volte di fila.
 
 	\subsection{Agenti con riflessi, ma basati su un modello}
 
 		Il modo piú efficiente per risolvere il problema dell'avere a
-		che fare con un agente parzialmente accessibile é tenere traccia
-		della parte di ambiente di cui questo non ha conoscenza. Ovvero,
+		che fare con un ambiente parzialmente accessibile é tenere traccia
+		della parte di ambiente di cui l'agente non ha conoscenza. Ovvero,
 		l'agente dovrebbe avere una qualche sorta di \strong{stato interno}
 		che dipende dalle percezioni che questo ha captato in precedenza,
 		di modo da avere informazioni su alcuni degli stati diversi da
