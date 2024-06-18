@@ -426,8 +426,13 @@
 	\end{theorem}
 
 	\begin{theorem}
-		Un sistema lineare sottodeterminato, se é consistente, ha sempre
-		infinite soluzioni.
+		Un sistema lineare sottodeterminato consistente ha infinite soluzioni.
+	\begin{theorem}
+
+	\end{theorem}
+		Il numero di incognite libere di un sistema lineare sottodeterminato
+		consistente é dato dalla differenza fra il numero di equazioni del
+		sistema e la caratteristica della relativa matrice completa/incompleta.
 	\end{theorem}
 
 	\begin{theorem}

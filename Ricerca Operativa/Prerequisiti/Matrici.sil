@@ -669,10 +669,34 @@
 		Che é la definizione di combinazione lineare.
 	\end{theorem}
 
-	Il massimo numero di righe linearmente indipendenti di una matrice \math{A}
-	é chiamato \strong{rango per righe} di \math{A}. Analogamente, il massimo
-	numero di colonne linearmente indipendenti di una matrice \math{A} é detto
-	\strong{rango per colonne} di \math{A}.
+	Il massimo numero di righe linearmente indipendenti di una matrice
+	\math{A} é chiamato \strong{rango per righe} di \math{A}. Analogamente,
+	il massimo numero di colonne linearmente indipendenti di una matrice
+	\math{A} é detto \strong{rango per colonne} di \math{A}.
+
+	\begin{theorem}
+		Il rango per righe ed il rango per colonne di una qualsiasi
+		matrice sono uguali.
+	\end{theorem}
+
+	In virtú del teorema precedente, si usa indicare con \math{\mi{rank}(A)}
+	indifferentemente il rango per righe o il rango per colonne di \math{A}.
+	É evidente come il rango di una matrice sia necessariamente minore o
+	uguale al suo numero di righe ed al suo numero di colonne: se \math{A}
+	é una matrice \math{m \times n}, allora certamente \math{\mi{rank}(A)
+	\leq \mi{min}(m, n)}. Nel caso in cui \math{\mi{rank}(A) = \mi{min}(m, n)},
+	la matrice é detta \strong{a rango pieno} o \strong{a rango massimo}.
+
+	\begin{theorem}
+		Una matrice (quadrata) non singolare é anche a rango massimo.
+
+		\bigskip
+		\strong{Dimostrazione}. Sia \math{A} una matrice quadrata di
+		ordine \math{n} non singolare. Essendo \math{\mi{det}(A) \ne 0},
+		tutte le sue righe/colonne sono linearmente indipendenti, pertanto
+		\math{\mi{rank}(A) = n}. Essendo poi quadrata, si ha \math{\mi{min}
+		(n, n) = n}, quindi \math{\mi{rank}(A) = \mi{min}(n, n) = n}.
+	\end{theorem}
 
 	Presa una matrice generica \math{A} di ordine \math{m \times n},
 	é detto \strong{minore di ordine r} una qualunque matrice quadrata
@@ -736,8 +760,7 @@
 	\end{theorem}
 
 	\begin{theorem}
-		Il rango per righe/colonne di una matrice é uguale alla sua
-		caratteristica.
+		Il rango di una matrice é uguale alla sua caratteristica.
 	\end{theorem}
 
 	Vengono definite \strong{mosse di Gauss} le tre operazioni riportate di seguito
@@ -951,6 +974,56 @@
 			Altrimenti, si dice che la matrice é \strong{indefinita}.
 		\end{item}
 	\end{itemize}
+
+	\bigskip
+
+	Il calcolo dell'inversa puó essere molto dispendioso; se
+	la matrice é di dimensione contenuta, esistono delle regole
+	pratiche per semplificare il procedimento. Ad esempio, se
+	la matrice (quadrata) é di dimensione 2, la matrice inversa
+	é data da:
+
+	\begin[mode = display]{math}
+		A^{-1} =
+		[\table{
+			a & b \\
+			c & d \\
+		}]^{-1} =
+		\table{
+			\frac{d}{\mi{det}(A)} & \frac{-b}{\mi{det}(A)} \\
+			\frac{-c}{\mi{det}(A)} & \frac{a}{\mi{det}(A)} \\
+		}
+	\end{math}
+
+	Se la matrice é di ordine 3, sia questa \math{A}, é possibile
+	calcolarne l'inversa seguendo questo algoritmo:
+
+	\begin{itemize}
+		\begin{item}
+			Si copiano a lato di \math{A} le prime due colonne,
+			ottenendo cosí una matrice di dimensione \math{3
+			\times 5};
+		\end{item}
+		\begin{item}
+			Si copiano sotto alla matrice cosí costruita le prime
+			due righe, ottenendo cosí una matrice di dimensione
+			\math{5 \times 5};
+		\end{item}
+		\begin{item}
+			Si eliminano la prima riga e la prima colonna della matrice
+			cosí costruita, ricavando una matrice di dimensione \math{4
+			\times 4}, chiamata \math{\mi{Adj}(A)};
+		\end{item}
+		\begin{item}
+			Il valore dell'\math{i, j}-esimo elemento della matrice inversa
+			é dato dal rapporto fra il determinante del minore di ordine 2 di
+			\math{\mi{Adj}(A)} ottenuto intersecando la sua \math{i}-esima e
+			\math{i + 1}-esima colonna con la sua \math{j}-esima e la sua
+			\math{j + 1}-esima riga ed il determinante della matrice originale.
+		\end{item}
+	\end{itemize}
+
+	\bigskip
 
 	Una matrice quadrata a coefficienti interi é detta \strong{unimodulare}
 	se il suo determinante é 1 oppure -1. Una matrice (non necessariamente
