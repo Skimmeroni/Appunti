@@ -1,28 +1,31 @@
 \begin{sile}
 
-	Come giá é stato detto, un percettrone non é in grado di poter
-	classificare un dataset che non é linearmente separabile. Il
-	problema puó essere aggirato introducendo una feature aggiuntiva
-	al dataset, aumentando quindi di una dimensione l'iperpiano che
-	i suoi elementi costituiscono. Se questo viene fatto in maniera
-	oculata, é possibile riottenere un dataset linearmente separabile
-	da poter fornire al percettrone.
+	Come giá detto, un percettrone non é in grado di operare
+	la sua classificazione in presenza di un dataset non
+	linearmente separabile. Diventa quindi fondamentale, se
+	é possibile, trasformare dataset non linearmente separabili
+	in dataset che lo sono. Uno dei possibili approcci prevede
+	di introdurre un attributo aggiuntivo agli elementi del
+	dataset, di modo che la dimensione dell'iperpiano su cui i
+	suoi elementi giacciono aumenti di uno e diventi possibile
+	costruire una iperretta che ne separi linearmente gli elementi.
 
-	Sebbene l'approccio sia corretto, determinare quale sia la
-	feature da introdurre nel dataset e con quali valori non é
-	un problema banale. Inoltre, introdurre una nuova feature
-	introduce rumore, rischiando pertanto di indurre un overfitting.
-	Individuare quali siano le feature che permettono di rendere un
-	dataset linearmente separabile puó essere fatto manualmente, ma
-	anche questo processo puó essere automatizzato.
+	Questo viene in genere fatto a partire da una trasformazione
+	dei valori degli attributi noti. Naturalmente, una trasformazione
+	di questo tipo dovrá essere non lineare, altrimenti non si otterrá
+	mai un dataset linearmente separabile. Determinare quali e quanti
+	attributi sia necessario introdurre nel dataset per compiere questa
+	operazione non é un problema banale; inoltre, introdurre nuovi
+	attributi nel dataset introduce inevitabilmente anche del rumore.
 
-	L'idea é quella di "concatenare" piú percettroni, dove l'output
-	di uno \em{strato} di percettroni diventano le features in input
-	dello strato successivo. I percettroni piú vicini all'input
-	grezzo cercano di determinare quali siano le features rilevanti
-	per operare la classificazione, mentre quelli piú lontani si
-	concentrano sull'operare la classificazione in sé. L'output
-	dell'insieme di percettroni é di fatto l'output dell'ultimo
-	strato.
+	Anziché individuare manualmente gli attributi in questione,
+	é possibile automatizzare il processo. L'idea é quella di
+	"concatenare" piú percettroni, dove l'output di uno \em{strato}
+	di percettroni fanno da attributi in input dello strato successivo.
+	I percettroni piú vicini all'input "grezzo" cercano di determinare
+	quali siano gli attributi rilevanti per operare la classificazione
+	(e rendere il dataset linearmente separabile), mentre quelli piú
+	lontani compiono la classificazione in sé. L'output dell'ultimo
+	strato é l'output finale dell'insieme di percettroni.
 
 \end{sile}

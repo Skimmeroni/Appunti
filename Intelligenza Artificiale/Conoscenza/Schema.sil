@@ -86,64 +86,29 @@
 		\end{row}
 		\begin{row}
 			\begin{cell}
-				Regola 1
+				Riflessivitá
 			\end{cell}
 			\begin{cell}
-				\tt{xxx aaa yyy .}
+				\tt{xxx rdf:type rdf:Property .}
 			\end{cell}
 			\begin{cell}
-				\tt{aaa rdf:type rdfs:Property .}
-			\end{cell}
-		\end{row}
-		\begin{row}
-			\begin{cell}
-				Regola 2
-			\end{cell}
-			\begin{cell}
-				\tt{aaa rdfs:domain xxx .} \par
-				\tt{yyy aaa zzz .}
-			\end{cell}
-			\begin{cell}
-				\tt{yyy rdf:type xxx .}
+				\tt{xxx rdfs:subPropertyOf xxx .}
 			\end{cell}
 		\end{row}
 		\begin{row}
 			\begin{cell}
-				Regola 3
+				Riflessivitá
 			\end{cell}
 			\begin{cell}
-				\tt{aaa rdfs:range xxx .} \par
-				\tt{yyy aaa zzz .}
+				\tt{xxx rdf:type rdfs:Class .}
 			\end{cell}
 			\begin{cell}
-				\tt{zzz rdf:type xxx .}
-			\end{cell}
-		\end{row}
-		\begin{row}
-			\begin{cell}
-				Regola 4a
-			\end{cell}
-			\begin{cell}
-				\tt{xxx aaa yyy .}
-			\end{cell}
-			\begin{cell}
-				\tt{xxx rdf:type rdfs:Resource .}
+				\tt{xxx rdfs:subClassOf xxx .}
 			\end{cell}
 		\end{row}
 		\begin{row}
 			\begin{cell}
-				Regola 4b
-			\end{cell}
-			\begin{cell}
-				\tt{xxx aaa yyy .}
-			\end{cell}
-			\begin{cell}
-				\tt{yyy rdf:type rdfs:Resource .}
-			\end{cell}
-		\end{row}
-		\begin{row}
-			\begin{cell}
-				Regola 5
+				Transitivitá
 			\end{cell}
 			\begin{cell}
 				\tt{xxx rdfs:subPropertyOf yyy .} \par
@@ -155,64 +120,7 @@
 		\end{row}
 		\begin{row}
 			\begin{cell}
-				Regola 6
-			\end{cell}
-			\begin{cell}
-				\tt{xxx rdf:type rdf:Property .}
-			\end{cell}
-			\begin{cell}
-				\tt{xxx rdfs:subPropertyOf xxx .}
-			\end{cell}
-		\end{row}
-		\begin{row}
-			\begin{cell}
-				Regola 7
-			\end{cell}
-			\begin{cell}
-				\tt{aaa rdfs:subPropertyOf bbb .} \par
-				\tt{xxx aaa yyy .}
-			\end{cell}
-			\begin{cell}
-				\tt{xxx bbb yyy .}
-			\end{cell}
-		\end{row}
-		\begin{row}
-			\begin{cell}
-				Regola 8
-			\end{cell}
-			\begin{cell}
-				\tt{xxx rdf:type rdfs:Class .}
-			\end{cell}
-			\begin{cell}
-				\tt{xxx rdfs:subClassOf rdfs:Resource .}
-			\end{cell}
-		\end{row}
-		\begin{row}
-			\begin{cell}
-				Regola 9
-			\end{cell}
-			\begin{cell}
-				\tt{xxx rdfs:subClassOf yyy .} \par
-				\tt{zzz rdf:type xxx .}
-			\end{cell}
-			\begin{cell}
-				\tt{zzz rdf:type yyy .}
-			\end{cell}
-		\end{row}
-		\begin{row}
-			\begin{cell}
-				Regola 10
-			\end{cell}
-			\begin{cell}
-				\tt{xxx rdf:type rdfs:Class .}
-			\end{cell}
-			\begin{cell}
-				\tt{xxx rdfs:subClassOf xxx .}
-			\end{cell}
-		\end{row}
-		\begin{row}
-			\begin{cell}
-				Regola 11
+				Transitivitá
 			\end{cell}
 			\begin{cell}
 				\tt{xxx rdfs:subClassOf yyy .} \par
@@ -224,7 +132,29 @@
 		\end{row}
 		\begin{row}
 			\begin{cell}
-				Regola 12
+				Gerarchia
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdfs:DataType .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf rdfs:Literal .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Gerarchia
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdfs:Class .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf rdfs:Resource .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Gerarchia
 			\end{cell}
 			\begin{cell}
 				\tt{xxx rdf:type rdfs:ContainerMembershipProperty .}
@@ -235,13 +165,83 @@
 		\end{row}
 		\begin{row}
 			\begin{cell}
-				Regola 13
+				Gerarchia
 			\end{cell}
 			\begin{cell}
-				\tt{xxx rdf:type rdfs:DataType .}
+				\tt{aaa rdfs:subPropertyOf bbb .} \par
+				\tt{xxx aaa yyy .}
 			\end{cell}
 			\begin{cell}
-				\tt{xxx rdfs:subClassOf rdfs:Literal .}
+				\tt{xxx bbb yyy .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Tipizzazione
+			\end{cell}
+			\begin{cell}
+				\tt{xxx aaa yyy .}
+			\end{cell}
+			\begin{cell}
+				\tt{aaa rdf:type rdfs:Property .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Tipizzazione
+			\end{cell}
+			\begin{cell}
+				\tt{xxx aaa yyy .}
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdf:type rdfs:Resource .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Tipizzazione
+			\end{cell}
+			\begin{cell}
+				\tt{xxx aaa yyy .}
+			\end{cell}
+			\begin{cell}
+				\tt{yyy rdf:type rdfs:Resource .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Tipizzazione
+			\end{cell}
+			\begin{cell}
+				\tt{aaa rdfs:domain xxx .} \par
+				\tt{yyy aaa zzz .}
+			\end{cell}
+			\begin{cell}
+				\tt{yyy rdf:type xxx .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Tipizzazione
+			\end{cell}
+			\begin{cell}
+				\tt{aaa rdfs:range xxx .} \par
+				\tt{yyy aaa zzz .}
+			\end{cell}
+			\begin{cell}
+				\tt{zzz rdf:type xxx .}
+			\end{cell}
+		\end{row}
+		\begin{row}
+			\begin{cell}
+				Tipizzazione
+			\end{cell}
+			\begin{cell}
+				\tt{xxx rdfs:subClassOf yyy .} \par
+				\tt{zzz rdf:type xxx .}
+			\end{cell}
+			\begin{cell}
+				\tt{zzz rdf:type yyy .}
 			\end{cell}
 		\end{row}
 	\end{ptable}
