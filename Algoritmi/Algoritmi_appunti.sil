@@ -98,7 +98,7 @@
 		\include[src = Dinamica/Sottovettore.sil]
 		\section{Knapsack 0/1} % Da rivedere
 		\include[src = Dinamica/Knapsack.sil]
-		\section{Chiusura palindroma} % Da rivedere
+		\section{Chiusura palindroma} % Da rivedere la giustificazione del passo ricorsivo
 		\include[src = Dinamica/Palindroma.sil]		
 		\section{Distanza di modifica} % Da rivedere
 		\include[src = Dinamica/Distanza.sil]

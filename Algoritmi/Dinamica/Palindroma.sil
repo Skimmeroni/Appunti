@@ -35,18 +35,24 @@
         \end{math}
 
         Per quanto riguarda il passo ricorsivo, si assuma di avere
-		a disposizione tutte le soluzioni nella forma \math{S_{a,
-		b}}, con \math{1 \leq a < i} e \math{1 \leq b < j}, e di
-		voler calcolare \math{S_{i, j}}. Possono verificarsi solamente
-		due situazioni: il primo ed ultimo carattere di \math{X_{i, j}}
+		a disposizione tutte le soluzioni nella forma \math{S_{a, b}},
+		con \math{1 \leq a < i} e \math{1 \leq b < j}, e di voler
+		calcolare \math{S_{i, j}}. Possono verificarsi solamente due
+		situazioni: il primo ed ultimo carattere di \math{X_{i, j}}
 		sono uguali oppure sono diversi.
 
         Se sono uguali, allora tale stringa è palindroma solo se lo è
         anche la sottostringa ottenuta eliminandovi tali caratteri,
-        ovvero se lo è anche \math{X_{i + 1, j - 1}}. Se invece sono
-        distinti, allora tale stringa è palindroma solo se lo è anche
-        la sottostringa ottenuta eliminandovi il primo oppure l'ultimo
-        carattere.        
+        ovvero se lo è anche \math{X_{i + 1, j - 1}}. In altri termini,
+        non é necessario aggiungere alcun carattere a \math{X_{i, j}}
+        per renderla palindroma se lo é giá \math{X_{i + 1, j - 1}} e
+        se \math{x_{i} = x_{j}}. Per questo motivo, in questo caso, il
+        numero minimo di caratteri per rendere palindroma \math{X_{i, j}}
+        é lo stesso di \math{X_{i + 1, j - 1}}.
+
+        Se invece sono distinti, allora tale stringa sará palindroma solo se
+        lo è anche la sottostringa ottenuta eliminandovi il primo oppure
+        l'ultimo carattere.
 
         \begin[mode = display]{math}
             S_{i, j} =
@@ -64,8 +70,7 @@
 		per la \math{i, j}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive.
 		L'algoritmo riceve in input la stringa \math{X} e restituisce
-		in output \math{c[1, |X|]}, la cella che contiene la soluzione del
-		problema.
+		in output \math{c[1, |X|]}, la soluzione del problema.
 
 	\begin{verbatim}
 		procedure PAL-CLOSURE(X)
