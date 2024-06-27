@@ -86,7 +86,7 @@
 	\chapter{Tecnica di programmazione dinamica}
 		\section{Longest Common Subsequence} % Da rivedere la ricostruzione della soluzione
 		\include[src = Dinamica/LCS.sil]
-		\section{Weighted Interval Scheduling} % Da rivedere
+		\section{Weighted Interval Scheduling} % Da rivedere l'algoritmo bottom-up e la ricostruzione della soluzione
 		\include[src = Dinamica/WIS.sil]
 		\section{Hateville} % Da rivedere
 		\include[src = Dinamica/Hateville.sil]

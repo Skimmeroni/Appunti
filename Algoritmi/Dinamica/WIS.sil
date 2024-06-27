@@ -40,7 +40,7 @@
 			\begin[mode = display]{math}
 				V{(A)} = 
 				\{\table[columnalign = left left]{
-					\sum_{i = 1}^{|A|} v_{a_{i}} \in A & \mi{se} \thickspace A \ne \varnothing \\
+					\sum_{i \in A} v_{i} & \mi{se} \thickspace A \ne \varnothing \\
 					0 & \mi{se} \thickspace A = \varnothing \\
 				}
 			\end{math}
@@ -77,37 +77,37 @@
 						\cell{\strong{Peso}}
 					\end{row}
 					\begin{row}
-						\cell{\math{a_{1}}}
+						\cell{1}
 						\cell{1}
 						\cell{3}
 						\cell{10}
 					\end{row}
 					\begin{row}
-						\cell{\math{a_{2}}}
+						\cell{2}
 						\cell{2}
 						\cell{0}
 						\cell{4}
 					\end{row}
 					\begin{row}
-						\cell{\math{a_{3}}}
+						\cell{3}
 						\cell{8}
 						\cell{3}
 						\cell{5}
 					\end{row}
 					\begin{row}
-						\cell{\math{a_{4}}}
+						\cell{4}
 						\cell{1}
 						\cell{4}
 						\cell{8}
 					\end{row}
 					\begin{row}
-						\cell{\math{a_{5}}}
+						\cell{5}
 						\cell{1}
 						\cell{2}
 						\cell{10}
 					\end{row}
 					\begin{row}
-						\cell{\math{a_{6}}}
+						\cell{6}
 						\cell{3}
 						\cell{8}
 						\cell{11}
@@ -119,10 +119,10 @@
 			\end{parbox}
 			\par
 
-			Il sottoinsieme \math{A = \{a_{2}, a_{4}, a_{6}\}} è un insieme
-			compatibile, ma non è il sottoinsieme con peso maggiore. Si osserva
-			infatti che il sottoinsieme con queste caratteristiche è \math{B =
-			\{a_{1}, a_{3}, a_{6}\}}, che ha peso pari a 21.
+			Il sottoinsieme \math{P = \{2, 4, 6\}} è un insieme compatibile, ma
+			non è il sottoinsieme con peso maggiore. Si osserva infatti che il
+			sottoinsieme con queste caratteristiche è \math{Q = \{1, 3, 6\}},
+			che ha peso pari a 21.
 		\end{example}
 
 	\subsection{Programmazione dinamica: sottostruttura ottima}
@@ -130,10 +130,10 @@
 		\begin{theorem}
 			\strong{Proprietà della sottostruttura ottima per il
 			problema Weighted Interval Scheduling}. Sia data una
-			istanza \math{X_{i} = \{x_{1}, x_{2}, \unicodeellipsis,
-			x_{i}\}} del problema Weighted Interval Scheduling, con
-			\math{i \geq 1}. Assunto di avere a disposizione tutte
-			le soluzioni per le istanze precedenti ad \math{X_{i}},
+			istanza \math{X_{i} = \{1, 2, \unicodeellipsis, i\}}
+			del problema Weighted Interval Scheduling, con \math{i
+			\geq 1}. Assunto di avere a disposizione tutte le
+			soluzioni per le istanze precedenti ad \math{X_{i}},
 			ovvero \math{S_{1}, S_{2}, \unicodeellipsis, S_{i - 1}},
 			si ha:
 
@@ -224,7 +224,7 @@
 		\math{X_{i}}. La soluzione per l'intero insieme \math{X} è la
 		soluzione per l'istanza \math{X_{n}}. Il valore totale della
 		soluzione ottimale per la \math{i}-esima istanza del problema
-		viene indicata con \math{\mi{Opt}(i)}.
+		é dato dalla funzione \math{\mi{Opt}(i)}.
 
 		Il caso base è semplice da determinare; l'istanza \math{X_{0}},
 		che corrisponde all'insieme vuoto, ha per soluzione l'insieme
@@ -242,12 +242,13 @@
 		\end{parbox}
 		\par
 
-		Per quanto riguarda il passo ricorsivo, si assuma di
-		avere a disposizione tutte le soluzioni \math{S_{1},
-		S_{2}, \unicodeellipsis, S_{i - 1}} e di voler calcolare
-		\math{S_{i}}. Possono verificarsi solamente due situazioni,
-		mutualmente esclusive: l'\math{i}-esima attività fa parte
-		della soluzione ottimale \math{S_{i}} oppure non ne fa parte.
+		Per quanto riguarda il passo ricorsivo, si assuma di avere a disposizione
+		tutte le soluzioni \math{S_{1}, S_{2}, \unicodeellipsis, S_{i - 1}} ed i
+		relativi valori totali \math{\mi{Opt}(1), \mi{Opt}(2), \unicodeellipsis,
+		\mi{Opt}(i - 1)} e di voler calcolare \math{S_{i}} e \math{\mi{Opt}(i)}.
+		Possono verificarsi solamente due situazioni, mutualmente esclusive:
+		l'\math{i}-esima attività fa parte della soluzione ottimale \math{S_{i}}
+		oppure non ne fa parte.
 
 		Nel primo caso, è evidente come \math{S_{i}} e \math{S_{i - 1}}
 		debbano essere lo stesso insieme. Questo perché, essendo sia
@@ -315,7 +316,7 @@
 					S_{\mi{p}(i)} \cup \{i\} & 
 					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} \geq \mi{Opt}(i - 1) \\
 					S_{i - 1} & 
-					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} < \mi{Opt}(i - 1) \\
+					\mi{se} \thickspace \mi{altrimenti} \\
 				}
 			\end{math}
 		\end{parbox}
