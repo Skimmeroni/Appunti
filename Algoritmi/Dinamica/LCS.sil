@@ -19,6 +19,13 @@
 		lunghezza maggiore, abbreviata con \math{LCS} (\em{longest common
 		subsequence}).
 
+		Anziché affrontare il problema direttamente, si preferisce prima
+		trovare la lunghezza di una possibile LCS di due sequenze (ammesso
+		che esista) e poi, sulla base di questa informazione, ricostruire
+		la LCS "a ritroso". Pertanto, il problema effettivamente in esame
+		sará il problema della lunghezza della sottosequenza comune piú
+		lunga.
+
 	\subsection{Programmazione dinamica: sottostruttura ottima}
 
 		\begin{theorem}
@@ -108,29 +115,19 @@
 		e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i} e
 		\math{j} delle rispettive sequenze. La soluzione \math{S_{i, j}}
 		per l'\math{i, j}-esima istanza del problema corrisponde a trovare
-		la soluzione ottimale per il problema LCS rispetto alle sottosequenze
-		\math{X_{i}} e \math{Y_{j}}. La soluzione per le intere sequenze
-		\math{X} e \math{Y} è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
-		La lunghezza della sottosequenza comune più lunga soluzione per la
-		\math{i, j}-esima istanza del problema viene indicata con
-		\math{\mi{Opt}(i, j)}.
+		la soluzione ottimale per il problema della lunghezza della LCS
+		rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}. La soluzione
+		per le intere sequenze \math{X} e \math{Y} è la soluzione per l'istanza
+		\math{X_{m}, Y_{n}}.
 
 		Il caso base è semplice da determinare; è evidente come due sequenze
-		vuote non abbiano alcun elemento in comune. Inoltre, una qualsiasi
-		sequenza non vuota non ha alcun carattere in comune con la sequenza
-		vuota.
+		vuote non abbiano alcun elemento in comune, pertanto la lunghezza della
+		loro LCS é zero. Piú in generale, una qualsiasi sequenza non vuota non
+		ha alcun carattere in comune con la sequenza vuota.
 
-		\begin[width = 50%fw]{parbox}
-			\begin[mode = display]{math}
-				S_{i, j} = \langle \rangle \thickspace \mi{se} \thickspace i = 0 \vee j = 0 
-			\end{math}
-		\end{parbox}
-		\begin[width = 50%fw]{parbox}
-			\begin[mode = display]{math}
-				\mi{Opt}(i, j) = 0 \thickspace \mi{se} \thickspace i = 0 \vee j = 0 
-			\end{math}
-		\end{parbox}
-		\par
+		\begin[mode = display]{math}
+			S_{i, j} = 0 \thickspace \mi{se} \thickspace i = 0 \vee j = 0
+		\end{math}
 
 		Per quanto riguarda il passo ricorsivo, si assuma di avere
 		a disposizione tutte le soluzioni nella forma \math{S_{a,
@@ -142,10 +139,10 @@
         \math{j}-esimo carattere di \math{Y_{j}}.
 
 		Nel primo caso, per definizione, tale carattere deve essere parte
-		della sottosequenza comune più lunga. Pertanto, in questo caso, la
-		soluzione ottimale per la \math{i, j}-esima istanza si ottiene
-		semplicemente accodando l'ultimo carattere alla soluzione ottimale
-		dell'istanza precedente, ovvero \math{S_{i - 1, j - 1}}.
+		della sottosequenza comune più lunga. Pertanto, la soluzione ottimale
+		per la \math{i, j}-esima istanza si ottiene semplicemente aumentando
+		di uno la soluzione ottimale dell'istanza precedente, ovvero
+		\math{S_{i - 1, j - 1}}.
 
 		Nel secondo caso, la soluzione ottimale per la \math{i, j}-esima
 		istanza deve necessariamente essere di lunghezza maggiore o uguale
@@ -156,33 +153,18 @@
 		per la \math{i, j}-esima istanza sono la \math{i - 1, j}-esima e la
 		\math{i, j - 1}-esima, ovvero \math{S_{i - 1, j}} e \math{S_{i, j -
 		1}}, perché a loro volta comprendono tutte le istanze a loro
-		precedenti. Dato che sono entrambe valide, il criterio di scelta
-		consiste nello scegliere fra le due la soluzione con lunghezza
-		maggiore.
+		precedenti. Essendo egualmente valide, la scelta migliore é quella
+		fra le due avente valore maggiore.
 
-		\begin[width = 50%fw]{parbox}
-			\begin[mode = display]{math}
-				S_{i, j} =
-				\{\table[columnalign = left left]{
-					S_{i - 1, j - 1} \cup \{x_{i}\} & \mi{se} \thickspace X[i] = Y[j] \\
-					S_{i - 1, j} & \mi{se} \thickspace X[i] \ne Y[j] \wedge
-					\mi{Opt}(i - 1, j) > \mi{Opt}(i, j - 1) \\
-					S_{i, j - 1} & \mi{se} \thickspace X[i] \ne Y[j] \wedge
-					\mi{Opt}(i, j - 1) > \mi{Opt}(i - 1, j) \\
-				}
-			\end{math}
-		\end{parbox}
-		\begin[width = 50%fw]{parbox}
-			\begin[mode = display]{math}
-				\mi{Opt} {(i, j)} =
-				\{\table[columnalign = left left]{
-					\mi{Opt}(i - 1, j - 1) + 1 &
-					\mi{se} \thickspace X[i] = Y[j] \\
-					\mi{max}\{\mi{Opt}(i - 1, j), \mi{Opt}(i, j - 1)\} &
-					\mi{se} \thickspace X[i] \ne Y[j] \\
-				}
-			\end{math}
-		\end{parbox}
+		\begin[mode = display]{math}
+			S_{i, j} =
+			\{\table[columnalign = left left]{
+				S_{i - 1, j - 1} + 1 &
+				\mi{se} \thickspace X[i] = Y[j] \\
+				\mi{max}\{S_{i - 1, j}, S_{i, j - 1}\} &
+				\mi{se} \thickspace X[i] \ne Y[j] \\
+			}
+		\end{math}
 
 	\subsection{Programmazione dinamica: implementazione bottom-up}
 
@@ -192,7 +174,7 @@
 		per la \math{i, j}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive. L'algoritmo
 		riceve in input le due sequenze \math{X} e \math{Y} e restituisce in
-		output la tabella \math{c}.
+		output la cella \math{c[\abs{X}, \abs{Y}]}, la soluzione del problema.
 
 		Si noti come le celle che hanno 0 come uno dei due indici possano
 		venire riempite immediatamente con 0, come da caso base dell'equazione
@@ -214,7 +196,7 @@
 			                c[i, j] = max(c[i, j - 1], c[i - 1, j])
 
 			    \bigskip
-			    return c
+			    return c[|X|][|Y|]
 		\end{verbatim}
 
 		È facile notare come il tempo di esecuzione dell'algoritmo

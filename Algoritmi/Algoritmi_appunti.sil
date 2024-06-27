@@ -84,27 +84,27 @@
 	\pagebreak
 
 	\chapter{Tecnica di programmazione dinamica}
-		\section{Longest Common Subsequence}
+		\section{Longest Common Subsequence} % Da rivedere la ricostruzione della soluzione
 		\include[src = Dinamica/LCS.sil]
-		\section{Weighted Interval Scheduling}
+		\section{Weighted Interval Scheduling} % Da rivedere
 		\include[src = Dinamica/WIS.sil]
-		\section{Hateville}
+		\section{Hateville} % Da rivedere
 		\include[src = Dinamica/Hateville.sil]
-		\section{Longest Increasing Subsequence}
+		\section{Longest Increasing Subsequence} % Da rivedere
 		\include[src = Dinamica/LIS.sil]
-		\section{Longest Increasing Common Subsequence}
+		\section{Longest Increasing Common Subsequence} % Da rivedere
 		\include[src = Dinamica/LICS.sil]
-		\section{Sottovettore di peso massimo}
+		\section{Sottovettore di peso massimo} % Da rivedere
 		\include[src = Dinamica/Sottovettore.sil]
-		\section{Knapsack 0/1}
+		\section{Knapsack 0/1} % Da rivedere
 		\include[src = Dinamica/Knapsack.sil]
-		\section{Chiusura palindroma}
+		\section{Chiusura palindroma} % Da rivedere
 		\include[src = Dinamica/Palindroma.sil]		
-		\section{Distanza di modifica}
+		\section{Distanza di modifica} % Da rivedere
 		\include[src = Dinamica/Distanza.sil]
-		\section{Problema Interleaving}
+		\section{Problema Interleaving} % Da rivedere
 		\include[src = Dinamica/Interleaving.sil]
-		\section{Cammino su un grafo}
+		\section{Cammino su un grafo} % Da rivedere
 		\include[src = Dinamica/Grafo.sil]
 	\chapter{Tecnica greedy}
 		\section{Introduzione alla tecnica greedy}
