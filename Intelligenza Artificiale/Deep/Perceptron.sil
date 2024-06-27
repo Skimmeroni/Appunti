@@ -99,10 +99,10 @@
 	disposizione \math{n} input \math{\bi{x}_{1}, \bi{x}_{2},
 	\unicodeellipsis, \bi{x}_{n}} per i quali giá é nota la
 	loro classificazione, sia questa rispettivamente \math{y_{1},
-	y_{2}, \unicodeellipsis, y_{n}}. Questo insieme, che fara da
-	training set per il percettrone, puó essere costruito utilizzando
-	una qualsiasi tecnica di training (holdout set, k-fold cross
-	validation, ecc\ddd).
+	y_{2}, \unicodeellipsis, y_{n}}. Questo insieme, che fara
+	da training set per il percettrone, puó essere costruito
+	utilizzando una qualsiasi tecnica di training (holdout set,
+	k-fold cross validation, ecc\ddd).
 
 	Inizialmente, il vettore \math{\bi{w}} \math{k}-dimensionale
 	viene impostato nullo (tutte le sue componenti hanno valore 0).
@@ -200,21 +200,218 @@
 	\math{w_{i}}, relativo alla classe \math{i} (quella corretta)
 	viene sostituito con \math{\bi{w}_{i} + f(\bi{x})}.
 
-	Si noti come, dato un dataset linearmente separabile, possa
-	esistere piú di una iper-retta in grado di partizionarlo.
-	Fra queste, quella da considerarsi migliore é quella che
-	ha la massima distanza dagli elementi del dataset piú \em{esterni},
-	ovvero quelli che si trovano piú vicino alla partizione opposta.
-	L'algoritmo sopra riportato non garantisce di trovare la 
-	iper-retta migliore, restituendone invece una qualsiasi
-	(per quanto comunque corretta). Inoltre, il percettrone "puro"
-	é prono all'overfitting, perché non é mai ammessa la possibilitá
-	di un margine di errore.
+	Si noti come, dato un dataset linearmente separabile,
+	possa esistere piú di una iper-retta in grado di
+	partizionarlo. Fra queste, quella da considerarsi
+	migliore é quella che ha la massima distanza dagli
+	elementi del dataset piú \em{esterni}, ovvero quelli
+	che si trovano piú vicino alla partizione opposta.
+	L'algoritmo sopra riportato non garantisce di trovare
+	la iper-retta migliore, restituendone invece una qualsiasi
+	(per quanto comunque corretta). Inoltre, il percettrone
+	"puro" é prono all'overfitting, perché non é mai ammessa
+	la possibilitá di un margine di errore.
 
 	Una versione alternativa dell'algoritmo di costruzione del 
 	percettrone prende il nome di \strong{MIRA} (\strong{Margin
 	Infused Relaxed Algorithm}). L'algoritmo é un raffinamento
 	del precedente, dove il passo di aggiornamento viene fatto
 	introducendo un fattore di correzione \math{\tau}.
+
+	Un percettrone con queste caratteristiche separa il dataset
+	che gli viene fornito (ammesso che sia possibile farlo) in
+	maniera netta e completamente disambigua. Tuttavia, in genere
+	un dataset presenta da un lato del rumore e dall'altro lato
+	degli elementi la cui classificazione é incerta. Un modello
+	migliore di percettrone, il \strong{percettrone probabilistico},
+	non solo assegna ciascun elemento del dataset ad una classe
+	(apprendendo da questo), ma restituisce anche una probabilitá
+	che la classificazione in questione sia corretta.
+
+	L'iper-retta costruita da un percettrone probabilistico
+	rappresenta comunque la separazione del dataset in due
+	classi, ma oltre a questo la vicinanza di ciascun elemento
+	all'iper-retta in questione rappresenta il grado di certezza
+	della classificazione dello stesso. In altre parole, piú un
+	elemento si trova vicino alla retta e piú la classificazione
+	che gli é stata data é incerta, mentre piú distante si trova
+	dalla retta e piú la classificazione che gli é stata data é
+	certa; se un elemento si trova precisamente lungo la retta,
+	allora vi é la massima incertezza in merito a quale classe
+	assegnarlo.
+
+	Naturalmente, la distanza di un punto dalla retta é data dal
+	segmento che li congiunge e cade sulla perpendicolare alla
+	retta stessa, ovvero al vettore gradiente. La probabilitá
+	associata alla classificazione di un punto non é altro che
+	una trasformazione non lineare associata a tale distanza, che
+	converte gradienti in probabilitá. Tale trasformazione fará da
+	funzione di attivazione per il percettrone, che peró anziché
+	restituire +1 oppure -1 restituisce una probabilitá, ovvero un
+	numero reale compreso fra 0 e 1.
+
+	Quale debba essere questa funzione é un ambito di ricerca a sé
+	stante. Una delle piú famose é la \strong{funzione sigmoidea},
+	anche detta semplicemente \strong{sigmoide}:
+
+	\begin[mode = display]{math}
+		\mi{sig} {(x)} = \frac{1}{1 + e^{-x}} = \frac{e^{x}}{1 + e^{x}}
+	\end{math}
+
+	Questa funzione ha per codominio \math{[0, 1]}, pertanto é
+	effettivamente una funzione di probabilitá. Inoltre, dal
+	punto di vista strettamente computazionale, ha una proprietá
+	molto interessante: é possibile esprimere la sua derivata in
+	funzione di sé stessa:
+
+	\begin[mode = display]{math}
+		\frac{d}{dx} {(\mi{sig} {(x)})} =
+		\frac{(1 + e^{x})\frac{d}{dx}(e^{x}) -
+		e^{x}\frac{d}{dx}(1 + e^{x})}{(1 + e^{x})^{2}} =
+		\frac{(1 + e^{x}) e^{x} - e^{x} e^{x}}{(1 + e^{x})^{2}} =
+		\frac{e^{x}}{(1 + e^{x})^{2}} =
+		{(\frac{1}{1 + e^{x}})} {(\frac{e^{x}}{1 + e^{x}})} =
+		{(\frac{1 + e^{x} - e^{x}}{1 + e^{x}})} \mi{sig} {(x)} =
+		{(1 - \mi{sig} {(x)})} \mi{sig} {(x)}
+	\end{math}
+
+	Nel contesto del percettrone probabilistico, sia \math{\bi{w}}
+	il vettore dei pesi. Una variante della funzione sigmoidea é la
+	funzione \strong{softmax}:
+
+	\begin[mode = display]{math}
+		\mi{softmax} {(x)} =
+		\frac{e^{\bi{wx}}}{e^{\bi{wx}} + e^{(\bi{1} - \bi{w})\bi{x}}}
+	\end{math}
+
+	Aumentando il valore di \math{\bi{w}} aumenta anche la \em{stifness}
+	della curva. In particolare, con \math{\bi{w}} tendente all'infinito,
+	la funzione diventa indistinguibile dalla funzione max.
+
+	Prende il nome di \strong{likelihood} la probabilitá, dato un modello
+	avente parametri \math{\theta}, di osservare un certo insieme di dati
+	sulla base di una certa assegnazione di \math{\theta}:
+
+	\begin[mode = display]{math}
+		\theta_{ML} = \mi{argmax}_{\theta} P(\bi{X} | \theta)
+	\end{math}
+
+	Una volta stabilito il problema, si assume che i dati di tale
+	problema siano stocasticamente indipendenti fra loro, ovvero
+	che le singole osservazioni non sono influenzate dalle osservazioni
+	precedenti. Diviene allora possibile scrivere:
+
+	\begin[mode = display]{math}
+		\theta_{ML} =
+		\mi{argmax}_{\theta} P(\bi{X} | \theta) =
+		\mi{argmax}_{\theta} \Pi_{i} P_{\theta} (X_{i})
+	\end{math}
+
+	Si noti peró come gli elementi del dataset da fornire al
+	percettrone non abbiano solamente gli attributi \math{\bi{X}}
+	ma anche una classificazione (da apprendere). Per questo motivo,
+	si preferisce esprimere la likelihood in questa forma:
+
+	\begin[mode = display]{math}
+		\theta* =
+		\mi{argmax}_{\theta} P(\bi{Y} | \bi{X}, \theta) =
+		\mi{argmax}_{\theta} \Pi_{i} P_{\theta} (y_{i} | x_{i})
+	\end{math}
+
+	Rispetto al modello di percettrone probabilistico, i parametri
+	\math{\theta} corrispondono ai suoi pesi. Sostituendo poi con,
+	ad esempio, la funzione softmax, si ha:
+
+	\begin[mode = display]{math}
+		l{(w)} = \Pi_{i} \frac{e^{{w_{y}}_{i} \cdot x_{i}}}{\sum_{y} e^{w_{y} \cdot x_{i}}}
+	\end{math}
+
+	Per comoditá si preferisce lavorare non sulla likelihood, ma bensí
+	sulla \strong{log likelihood}, ovvero sul suo logaritmo naturale:
+
+	\begin[mode = display]{math}
+		ll{(w)} = \mi{log} {(l{(w)})} = \sum_{i} \mi{log} P_{w} {(y_{i} | x_{i})} =
+		\sum_{i} {w_{y}}_{i} \cdot x_{i} - \mi{log} \sum_{y} e^{w_{y} \cdot x_{i}}
+	\end{math}
+
+	Massimizzare tale funzione significa, di fatto, selezionare i
+	parametri \math{\bi{w}} che migliorano il trade-off tra le assegnazioni
+	di probabilitá a tutti gli elementi del dataset. Aumentando i pesi, gli
+	elementi classificati erroneamente avranno dei valori di probabilitá
+	bassi, e la (log) likelihood scenderá. Per questo motivo, una maggior
+	presenza di rumore richiede che i pesi siano piccoli, in modo tale da
+	avere una transizione fra le classificazioni che sia sufficientemente
+	uniforme.
+
+	\begin[mode = display]{math}
+		\mi{max}_{w} ll{(w)} =
+		\mi{max}_{w} \sum_{i} \mi{log} P {(y_{i} | x_{i}, w)} =
+		\mi{max}_{w} \sum_{i} \mi{log} \frac{e^{{w_{y}}_{i} \cdot
+		f(x_{i})}}{\sum_{y} e^{w_{y} \cdot f(x_{i})}}
+	\end{math}
+
+	Spesso, anziché massimizzare la log likelihood, si
+	preferisce minimizzare il suo opposto, detto \strong{loss
+	function} (\strong{funzione di loss}).
+
+	\begin[mode = display]{math}
+		\mi{max}_{w} ll{(w)} = \mi{min}_{w} -ll{(w)}
+	\end{math}
+
+	Calcolare questa massimizzazione/minimizzazione significa, di fatto,
+	calcolare i punti della funzione in cui il gradiente si annulla. Se
+	la funzione ha un numero di dimensioni contenuto ed ha un gradiente
+	facilmente calcolabile, come ad esempio nel caso del sigmoide, é
+	possibile farlo analiticamente. Se la funzione é multidimensionale,
+	questo approccio diviene insostenibile, ed é preferibile calcolare
+	i punti di ottimo in maniera approssimata.
+
+	Un algoritmo che permette di farlo prende il nome di \strong{steepest
+	descent}, e si basa sull'osservazione che, per raggiungere un punto
+	di ottimo a partire da un punto qualsiasi, la direzione che permette
+	di raggiungerlo il piú velocemente possibile é quella del gradiente
+	valutato nel punto stesso.
+
+	Si consideri, per comoditá, il caso bidimensionale. Indicando con
+	\math{\Delta} uno spostamento infinitesimo e con \math{\epsilon}
+	una soglia minima, L'intenzione é quella di minimizzare la funzione
+	\math{g}:
+
+	\begin[mode = display]{math}
+		\mi{min}_{\Delta: \Delta_{1} + \Delta_{2} \leq \epsilon} g(w + \Delta)
+	\end{math}
+
+	L'espansione di Taylor al primo ordine di tale funzione é approssimabile a:
+
+	\begin[mode = display]{math}
+		g{(w + \Delta)} \approx
+		\frac{\partial g}{\partial w_{1}} \Delta_{1} +
+		\frac{\partial g}{\partial w_{2}} \Delta_{2}
+	\end{math}
+
+	Questo é, di fatto, un prodotto scalare fra due vettori. Ricordando come
+	il prodotto scalare abbia valore minimo quando i due vettori hanno verso
+	contrario, si ha:
+
+	\begin[mode = display]{math}
+		\mi{min}_{\Delta: \Delta_{1} + \Delta_{2} \leq \epsilon} g{(w + \Delta)} \approx
+		\mi{min}_{\Delta: \Delta_{1} + \Delta_{2} \leq \epsilon}
+		\frac{\partial g}{\partial w_{1}} \Delta_{1} +
+		\frac{\partial g}{\partial w_{2}} \Delta_{2} =
+		- \nabla {(g)} \frac{\epsilon}{\abs{\abs{\nabla (g)}}} =
+		- {[\frac{\partial g}{\partial w_{1}}, \frac{\partial g}{\partial w_{2}}]}^{T}
+		\frac{\epsilon}{\abs{\abs{{[\frac{\partial g}{\partial w_{1}},
+		\frac{\partial g}{\partial w_{2}}]}^{T}}}}
+	\end{math}
+
+	L'idea é quindi quella di partire da un valore qualsiasi per \math{w}
+	(anche il vettore nullo) e poi effettuare ripetutamente degli aggiornamenti:
+
+	\begin[mode = display]{math}
+		w \leftarrow w - \alpha \nabla {(g{(w)})} = w - \alpha \nabla {(ll{(w)})} =
+		w - \alpha \nabla {(\sum_{i = 1}^{m} \mi{log} P{(y_{i} | x_{i}, w)})}
+	\end{math}
+
+	Dove \math{\alpha} é un fattore di correzione chiamato \strong{learning rate}.
 
 \end{sile}

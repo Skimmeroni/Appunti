@@ -20,12 +20,36 @@
 
 	Anziché individuare manualmente gli attributi in questione,
 	é possibile automatizzare il processo. L'idea é quella di
-	"concatenare" piú percettroni, dove l'output di uno \em{strato}
-	di percettroni fanno da attributi in input dello strato successivo.
-	I percettroni piú vicini all'input "grezzo" cercano di determinare
-	quali siano gli attributi rilevanti per operare la classificazione
-	(e rendere il dataset linearmente separabile), mentre quelli piú
-	lontani compiono la classificazione in sé. L'output dell'ultimo
-	strato é l'output finale dell'insieme di percettroni.
+	"concatenare" piú percettroni probabilistici, dove l'output
+	di uno \em{strato} di percettroni fanno da attributi in input
+	dello strato successivo. I percettroni piú vicini all'input
+	"grezzo" cercano di determinare quali siano gli attributi rilevanti
+	per operare la classificazione, mentre quelli piú lontani compiono
+	la classificazione in sé. L'output dell'ultimo strato é l'output
+	finale dell'insieme di percettroni. Si noti come, stando trattando
+	dei percettroni probabilistici, l'output di ciascun percettrone non
+	é \math{\pm 1} ma bensí una probabilitá.
+
+	Ci si chiede peró come possa un insieme di percettroni aggiornare
+	i vettori dei pesi di ciascuno di questi allo stesso modo in cui
+	un singolo percettrone é in grado di farlo. L'approccio piú semplice
+	consisterebbe nell'aggiornare di volta in volta i pesi di ciascun
+	percettrone, e propagare tale aggiornamento agli strati successivi.
+	Un approccio di questo tipo é peró insostenibile, dato che richiederebbe
+	un numero di aggiornamenti esponenziale nel numero dei percettroni della
+	rete ed una vera rete neurale potrebbe contenerne moltissimi.
+
+	Si potrebbe pensare di aggirare il problema una funzione di euristica
+	che permetta di intuire se il cambiamento di un peso davvero influenza
+	il peso dei percettroni successivi, ma anche questo é irrealistico. Si
+	noti come la difficoltá di questa determinazione derivi dal fatto che
+	la funzione di attivazione dei percettroni sia non lineare; se fosse
+	lineare, sarebbe garantito che il riassestamento di un percettrone
+	influenzi la classificazione degli strati successivi. La non linearitá
+	é peró strettamente necessaria, dato che una rete neurale formata da
+	percettroni con funzione di attivazione lineare sarebbe a sua volta un
+	classificatore lineare, e non avrebbe quindi alcun vantaggio rispetto
+	ad un percettrone singolo (sarebbe anzi un inutile spreco di risorse
+	computazionali).
 
 \end{sile}
