@@ -4,7 +4,8 @@
 
         Sia dato un insieme \math{X} costituito da "oggetti". A ciascun
 		oggetto \math{i \in X} è associato un valore \math{v_{i}} ed un
-		ingombro \math{w_{i}}.
+		ingombro \math{w_{i}}. Questi oggetti vanno riposti all'interno
+		di uno zaino avente capacitá massima \math{C}.
 
         La nozioni di valore e di ingombro vengono poi estese dai singoli
 		elementi di \math{X} a sottoinsiemi \math{A} di \math{X}. Il valore
@@ -18,7 +19,7 @@
 			\begin[mode = display]{math}
 				V{(A)} = 
 				\{\table[columnalign = left left]{
-					\sum_{i = 1}^{|A|} v_{a_{i}} \in A & \mi{se} \thickspace A \ne \varnothing \\
+					\sum_{i \in A} v_{i} \in A & \mi{se} \thickspace A \ne \varnothing \\
 					0 & \mi{se} \thickspace A = \varnothing \\
 				}
 			\end{math}
@@ -27,7 +28,7 @@
 			\begin[mode = display]{math}
 				W{(A)} = 
 				\{\table[columnalign = left left]{
-					\sum_{i = 1}^{|A|} w_{a_{i}} \in A & \mi{se} \thickspace A \ne \varnothing \\
+					\sum_{i \in A} w_{i} \in A & \mi{se} \thickspace A \ne \varnothing \\
 					0 & \mi{se} \thickspace A = \varnothing \\
 				}
 			\end{math}
@@ -154,17 +155,17 @@
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
         Dato un insieme di oggetti \math{X} avente cardinalità \math{n},
-        ordinati per peso, sia \math{X_{i}} l'insieme costituito dalle
-        prime \math{i} attività di \math{X}. Sia poi \math{C} un valore
-        intero positivo, che rappresenta la capacità dello zaino. La
-        soluzione \math{S_{i, c}} per la \math{i}-esima istanza del
-        problema corrisponde a trovare la soluzione ottimale per il
-        problema Knapsack 0/1 rispetto al sottoinsieme \math{X_{i}} e
-        alla capacità massima \math{c}. La soluzione per l'intero
-        insieme \math{X} è la soluzione per l'istanza \math{X_{n}}.
-        Il valore totale della soluzione ottimale per la \math{i}-esima
-        istanza del problema con capacità \math{c} viene indicata con
-        \math{\mi{Opt}(i, c)}.
+        ordinati per peso, sia \math{X_{i}} l'insieme costituito dai
+        primi \math{i} oggetti di \math{X} secondo tale ordinamento.
+        Sia poi \math{C} un valore intero positivo, che rappresenta
+        la capacità dello zaino. La soluzione \math{S_{i, c}} per la
+        \math{i}-esima istanza del problema corrisponde a trovare la
+        soluzione ottimale per il problema Knapsack 0/1 rispetto al
+        sottoinsieme \math{X_{i}} e alla capacità massima \math{c}.
+        La soluzione per l'intero insieme \math{X} è la soluzione per
+        l'istanza \math{X_{n}}. Il valore totale della soluzione ottimale
+        per la \math{i}-esima istanza del problema con capacità \math{c}
+        viene indicata con \math{\mi{Opt}(i, c)}.
 
         Il caso base è semplice da determinare; se non vi è alcun oggetto
         da dover mettere nello zaino o se lo zaino non può contenere alcun
@@ -184,19 +185,21 @@
 
         Per quanto riguarda il passo ricorsivo, si assuma di avere a
         disposizione tutte le soluzioni nella forma \math{S_{a, b}}, 
-        con \math{1 \leq a < i} e \math{1 \leq b < j}, e di voler
-        calcolare \math{S_{i, j}}.  Possono verificarsi solamente due
+        con \math{1 \leq a < i} e \math{1 \leq b < c}, e di voler
+        calcolare \math{S_{i, c}}.  Possono verificarsi solamente due
         situazioni, mutualmente esclusive: l'\math{i}-esimo oggetto fa
         parte della soluzione ottimale \math{S_{i, c}} oppure non ne fa
         parte.
 
         Se \math{i} non fa parte di \math{S_{i, c}}, allora la soluzione
-        per la \math{i}-esima istanza è la medesima per l'istanza \math{i
-        - 1}-esima. Se invece \math{i} fa parte di \math{S_{i, c}}, allora
-        tale soluzione è costruita a partire da \math{S_{i - 1, c - 1}} a
-        cui viene aggiunto l'\math{i}-esimo elemento e la cui capacità
-        \math{c} è data dalla capacità della \math{i - 1}-esima soluzione
-        che viene diminuita del peso dell'\math{i}-esimo oggetto.
+        per la \math{i, c}-esima istanza è la medesima per l'istanza \math{i
+        - 1, c}-esima, perché l'oggetto non viene inserito nello zaino. Se
+        invece \math{i} fa parte di \math{S_{i, c}}, ovvero se l'oggetto
+        viene inserito nello zaino, allora occorre cercare la miglior
+        soluzione precedente a \math{S_{i, c}} che sia compatibile con la
+        presenza di \math{i}. Questa non puó che essere \math{S_{i - 1,
+        c  - w_{i}}}, ovvero la soluzione per l'oggetto precedente ma la
+        cui capacitá é diminuita del peso dell'oggetto corrente.
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
@@ -221,14 +224,12 @@
         Naturalmente, non è possibile sapere a priori se l'\math{i}-esimo
         elemento di \math{X} faccia oppure non faccia parte di \math{S_{i,
         c}}, a meno che il peso dell'\math{i}-esimo oggetto sia maggiore
-        della capacità \math{c}. In quel caso, si ha la certezza che
-        \math{i \notin S_{i, c}}, e che di conseguenza la soluzione
-        per la \math{i}-esima istanza del problema è la stessa per la
-        \math{i - 1}-esima. Se invece il peso dell'oggetto è inferiore o
-        uguale a \math{c}, allora \math{i} può fare parte di \math{S_{i, c}};
-        la scelta fra l'includere o l'escludere \math{i} da \math{S_{i, c}}
-        è determinata da quale delle due restituisce un insieme
-        \math{S_{i, c}} avente valore maggiore.
+        della capacità \math{c}. In quel caso, si ha la certezza che \math{i
+        \notin S_{i, c}}. Se invece il peso dell'oggetto è inferiore o uguale
+        a \math{c}, allora \math{i} può fare parte di \math{S_{i, c}}; la
+        scelta fra l'includere e il non includere \math{i} in \math{S_{i,
+        c}} è determinata da quale delle due restituisce una soluzione avente
+        valore maggiore.
 
         \begin[width = 55%fw]{parbox}
             \begin[mode = display]{math}
@@ -236,8 +237,6 @@
                     S_{i - 1, c} & \mi{se} \thickspace w_{i} > c \\
                     S_{i - 1, c - w_{i}} \cup \{i\} & \mi{se} \thickspace w_{i} \leq c \wedge \mi{Opt}(i - 1, c - w_{i}) + v_{i} \geq \mi{Opt}(i - 1, c) \\
                     S_{i - 1, c} & \mi{se} \thickspace w_{i} \leq c \wedge \mi{Opt}(i - 1, c - w_{i}) + v_{i} < \mi{Opt}(i - 1, c) \\
-                    %\mi{max} \{S_{i - 1, c - w_{i}} \cup \{i\},
-                    %S_{i - 1, c}\} & \mi{se} \thickspace w_{i} \leq c \\
                 }
             \end{math}
         \end{parbox}
@@ -253,34 +252,113 @@
 
     \subsection{Programmazione dinamica: implementazione bottom-up}
 
-        L'algoritmo bottom-up viene costruito a partire dall'equazione
-        di ricorrenza sfruttando una tabella \math{d}. In ciascuna cella
-        \math{c[i, j]} viene riportato il valore della soluzione ottimale
-        per la \math{i, j}-esima istanza del problema, che viene utilizzata
-        per calcolare i valori ottimali per le istanze successive. L'algoritmo
-        riceve in input l'insieme \math{V} dei valori degli oggetti, l'insieme
-        \math{W} dei pesi degli oggetti e la capacità totale \math{C} e 
-        restituisce in output la tabella \math{d}. 
+        L'algoritmo bottom-up viene costruito a partire dall'equazione di
+        ricorrenza sfruttando una tabella \math{d} ed una tabella \math{p}.
+        In ciascuna cella \math{p[i, j]} viene riportato il valore della
+        soluzione ottimale per la \math{i, j}-esima istanza del problema,
+        mentre in ciascuna cella \math{d[i, j]} viene riportata la soluzione
+        stessa. I valori di \math{p[i, j]} vengono utilizzati per calcolare
+        i valori ottimali per le istanze successive. L'algoritmo riceve in
+        input l'insieme \math{V} dei valori degli oggetti, l'insieme \math{W}
+        dei pesi degli oggetti e la capacità totale \math{C} e restituisce in
+        output la coppia \math{d[|V|, C], p[|V|, C]}, la soluzione del problema.
 
         \begin{verbatim}
-		procedure KNAPSACK(V, W, C)
-		    for i \unichar{U+2190} 0 to |V| do
-		        for c \unichar{U+2190} 0 to C do
-		            d[i, c] \unichar{U+2190} 0
+            procedure KNAPSACK(V, W, C)
+                for i \unichar{U+2190} 0 to |V| do
+                    d[i, 0] \unichar{U+2190} \unichar{U+2205}
+                    p[i, 0] \unichar{U+2190} 0
+                for c \unichar{U+2190} 0 to C do
+                    d[0, c] \unichar{U+2190} \unichar{U+2205}
+                    p[0, c] \unichar{U+2190} 0
 
-		    \bigskip
-		    for i \unichar{U+2190} 1 to |V| do
-		        for c \unichar{U+2190} 1 to C do
-		            if (c \unichar{U+2265} W[i]) and (d[i - 1, c - W[i]] + V[i] \unichar{U+2264} d[i, c]) then
-		                d[i, c] \unichar{U+2190} d[i - 1, c - W[i]] + V[i]
-		            else
-		                d[i, c] \unichar{U+2190} d[i - 1, c]
+                \bigskip
+                for i \unichar{U+2190} 1 to |V| do
+                    for c \unichar{U+2190} 1 to C do
+                        if (W[i] > c) then
+                            d[i, c] \unichar{U+2190} d[i - 1, c]
+                            p[i, c] \unichar{U+2190} p[i - 1, c]
+                        else
+                            if (p[i - 1, c - W[i]] + V[i] \unichar{U+2265} p[i - 1, c]) then
+                                d[i, c] \unichar{U+2190} d[i - 1, c - W[i]] \unichar{U+222A} \{i\}
+                                p[i, c] \unichar{U+2190} d[i - 1, c - W[i]] + V[i]
+                            else
+                                d[i, c] \unichar{U+2190} d[i - 1, c]
+                                p[i, c] \unichar{U+2190} p[i - 1, c]
 
-		    \bigskip
-		    return d
+                \bigskip
+                return d[|V|, C], p[|V|, C]
         \end{verbatim}
 
-        \begin{example}
+        Il tempo di esecuzione dell'algoritmo è \math{O(nC)}, dove \math{n}
+        è il numero di oggetti nell'insieme \math{X}. Infatti, l'algoritmo
+        è costituito da una coppia di cicli for innestati, dove il ciclo
+        più esterno esegue il ciclo interno esattamente \math{n} volte,
+        mentre il ciclo interno esegue una serie di operazioni aventi tempo
+        di esecuzione unitario.
+
+    \subsection{Programmazione dinamica: ricostruzione di una soluzione}
+
+        É possibile ottimizzare la procedura calcolando prima il valore totale
+        della soluzione ottimale e poi individuarne una ripercorrendo la tabella
+        a ritroso. In particolare, questo viene fatto introducendo una nuova
+        procedura, \tt{PRINT-KNAPSACK}, che ha in input la tabella \math{D},
+        l'insieme dei pesi \math{W}, una capacità \math{c} ed un indice \math{i},
+		mentre in output ha uno dei possibili insiemi di oggetti aventi massimo
+		valore totale. La prima chiamata alla procedura ha \math{\abs{X}} come
+		valore per \math{i} e \math{C} come valore per \math{c} in modo da ottenere
+		la soluzione per l'istanza \math{\abs{X}, c}.
+
+        La procedura ripercorre il vettore \math{c} dalla cella \math{i} verso la
+        cella 0. Ogni volta che la capacità é maggiore del peso dell'\math{i}-esimo
+        oggetto e la \math{i, c}-esima cella di \math{D} non ha lo stesso valore
+        della \math{i - 1, c}-esima, allora l'\math{i}-esimo oggetto è un elemento
+        della soluzione.
+
+        \begin[width = 50%fw]{parbox}
+            \begin{verbatim}
+            procedure KNAPSACK(V, W, C)
+                for i \unichar{U+2190} 0 to |V| do
+                    p[i, 0] \unichar{U+2190} 0
+                for c \unichar{U+2190} 0 to C do
+                    p[0, c] \unichar{U+2190} 0
+
+                \bigskip
+                for i \unichar{U+2190} 1 to |V| do
+                    for c \unichar{U+2190} 1 to C do
+                        if (W[i] > c) then
+                            p[i, c] \unichar{U+2190} p[i - 1, c]
+                        else
+                            if (p[i - 1, c - W[i]] + V[i] \unichar{U+2265} p[i - 1, c]) then
+                                p[i, c] \unichar{U+2190} d[i - 1, c - W[i]] + V[i]
+                            else
+                                p[i, c] \unichar{U+2190} p[i - 1, c]
+
+                \bigskip
+                return p[|V|, C]
+            \end{verbatim}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin{verbatim}
+            procedure PRINT-KNAPSACK(D, W, i, c)
+                if i > 0 and c > 0 then
+                    if c \unichar{U+2265} W[i] then
+                        if D[i, c] = D[i - 1, c] then
+                            PRINT-KNAPSACK(D, W, i - 1, c)
+                        else
+                            PRINT-KNAPSACK(D, W, i - 1, c - W[i])
+                            print i
+                else
+                    PRINT-KNAPSACK(D, W, i - 1, c)
+            \end{verbatim}
+        \end{parbox}
+        \par
+
+        Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione è 
+		comunque proporzionale al numero di oggetti e alla capacità massima,
+		perché la ricorsione è una tail-recursion.
+
+		\begin{example}
             \begin[width = 35%fw]{parbox}
                 \begin[cols = 25%fw 25%fw 25%fw]{ptable}
                     \begin{row}
@@ -344,49 +422,5 @@
                 \end{ptable}
             \end{parbox}
         \end{example}
-
-        Il tempo di esecuzione dell'algoritmo è \math{O(nC)}, dove \math{n}
-        è il numero di oggetti nell'insieme \math{X}. Infatti, l'algoritmo
-        è costituito da una coppia di cicli for innestati, dove il ciclo
-        più esterno esegue il ciclo interno esattamente \math{n} volte,
-        mentre il ciclo interno esegue una serie di operazioni aventi tempo
-        di esecuzione unitario.
-
-    \subsection{Programmazione dinamica: ricostruzione di una soluzione}
-
-        Una volta calcolato il valore dell'insieme ottimale di oggetti, è
-        possibile individuarne uno ripercorrendo la tabella a ritroso. In
-		particolare, questo viene fatto introducendo una nuova procedura,
-		\tt{PRINT-KNAPSACK}, che ha in input la tabella \math{D}, l'insieme
-		dei pesi \math{W}, una capacità \math{c} ed un indice \math{i},
-		mentre in output ha uno dei possibili insiemi di oggetti aventi
-		massimo valore totale. La prima chiamata alla procedura ha
-		\math{\abs{X}} come valore per \math{i} e \math{C} come valore
-		per \math{c} in modo da ottenere la soluzione per l'istanza
-		\math{\abs{X}, c}.
-
-        La procedura ripercorre il vettore \math{c} dalla cella
-        \math{i} verso la cella 0. Ogni volta che la capacità è
-        maggiore del peso dell'\math{i}-esimo oggetto e la
-        \math{i, c}-esima cella di \math{D} non ha lo stesso
-        valore della \math{i - 1, c}-esima, allora l'\math{i}-esimo
-        oggetto è un elemento della soluzione.
-
-        \begin{verbatim}
-		procedure PRINT-KNAPSACK(D, W, i, c)
-		    if i > 0 and c > 0 then
-		        if c \unichar{U+2265} W[i] then
-		            if D[i, c] = D[i - 1, c] then
-		                PRINT-KNAPSACK(D, W, i - 1, c)
-		            else
-		                PRINT-KNAPSACK(D, W, i - 1, c - W[i])
-		                print i
-		    else
-		        PRINT-KNAPSACK(D, W, i - 1, c)
-        \end{verbatim}
-
-        Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione è 
-		comunque proporzionale al numero di oggetti e alla capacità massima,
-		perché la ricorsione è una tail-recursion.
 
 \end{sile}

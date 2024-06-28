@@ -96,7 +96,7 @@
 		\include[src = Dinamica/LICS.sil]
 		\section{Sottovettore di peso massimo} % Da rivedere
 		\include[src = Dinamica/Sottovettore.sil]
-		\section{Knapsack 0/1} % Da rivedere
+		\section{Knapsack 0/1} % Da rivedere la ricostruzione della soluzione
 		\include[src = Dinamica/Knapsack.sil]
 		\section{Chiusura palindroma} % Da rivedere la giustificazione del passo ricorsivo
 		\include[src = Dinamica/Palindroma.sil]		
