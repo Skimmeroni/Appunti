@@ -70,7 +70,7 @@
 		per la \math{i, j}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive.
 		L'algoritmo riceve in input la stringa \math{X} e restituisce
-		in output \math{c[1, |X|]}, la soluzione del problema.
+		in output \math{c[1, \abs{X}]}, la soluzione del problema.
 
 	\begin{verbatim}
 		procedure PAL-CLOSURE(X)

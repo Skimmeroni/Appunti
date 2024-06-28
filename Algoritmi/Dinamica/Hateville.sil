@@ -252,7 +252,7 @@
         stessa. I valori di \math{c[i]} vengono utilizzati per calcolare
         i valori ottimali per le istanze successive. L'algoritmo riceve
         in input l'istanza \math{A} e restituisce in output la coppia
-        \math{c[|A|], d[|A|]}, la soluzione del problema.
+        \math{c[\abs{A}], d[\abs{A}]}, la soluzione del problema.
 
         Si noti come la prima cella del vettore \math{c} possa venire
         riempito immediatamente con 0, mentre la seconda con il valore

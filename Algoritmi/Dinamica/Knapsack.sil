@@ -261,7 +261,8 @@
         i valori ottimali per le istanze successive. L'algoritmo riceve in
         input l'insieme \math{V} dei valori degli oggetti, l'insieme \math{W}
         dei pesi degli oggetti e la capacità totale \math{C} e restituisce in
-        output la coppia \math{d[|V|, C], p[|V|, C]}, la soluzione del problema.
+        output la coppia \math{d[\abs{V}, C], p[\abs{V}, C]}, la soluzione del
+        problema.
 
         \begin{verbatim}
             procedure KNAPSACK(V, W, C)
