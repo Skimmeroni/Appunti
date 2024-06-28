@@ -2,86 +2,67 @@
 
 	\subsection{Definizione del problema}
 
-		Il grado di somiglianza fra due sequenze viene genericamente
-		chiamato \strong{distanza}. Sebbene vi siano diverse formulazioni
-		della distanza fra due sequenze, tutte possiedono le stesse proprietà
-		di base. Matematicamente, la distanza è una metrica definita come la
-		funzione \math{d: S \times S \mapsto R^{+}}, che assegna un valore
-		reale ad ogni coppia di sequenze. La funzione distanza possiede le
-		seguenti tre proprietà:
-
-		\begin{enumerate}
-			\begin{item}
-				\math{d(x, z) \leq d(x, y) + d(y, z)}, la disuguaglianza
-				triangolare;
-			\end{item}
-			\begin{item}
-				\math{d(x, y) = 0} se e soltanto se \math{x = y};
-			\end{item}
-			\begin{item}
-				\math{d(x, y) = d(y, x)}, la simmetricità.
-			\end{item}
-		\end{enumerate}
-
-		\bigskip
-
 		La formulazione della distanza fra due sequenze più semplice
 		e più utilizzata è la cosiddetta \strong{distanza di modifica}
 		(\strong{edit distance}) \footnote{Anche chiamata \strong{distanza
-		di Levenshtein}.}. Date due sequenze \math{S_{1}} e \math{S_{2}},
-		la distanza di modifica fra le due è data dal numero di operazioni
-		atomiche sui singoli caratteri necessario a trasformare \math{S_{1}}
-		in \math{S_{2}}. Le operazioni ammesse sono quattro:
+		di Levenshtein}.}. Date due sequenze \math{X} e \math{Y}, la
+		distanza di modifica fra le due è data dal numero di operazioni
+		atomiche sui singoli caratteri necessario a trasformare \math{X}
+		in \math{Y}, "scansionandola" da sinistra verso destra. Le operazioni
+		ammesse sono tre:
 
 		\begin{enumerate}
 			\begin{item}
-				\em{Inserire} un carattere della seconda sequenza nella prima;  
+				\strong{Insert(a)}, ovvero \em{inserire} il carattere \math{a}
+				nella posizione corrente nella sequenza \math{X};
 			\end{item}
 			\begin{item}
-				\em{Rimuovere} un carattere dalla prima sequenza;
+				\strong{Delete(a)}, ovvero \em{rimuovere} il carattere \math{a}
+				nella posizione corrente nella sequenza \math{X};
 			\end{item}
 			\begin{item}
-				\em{Sostituire} un carattere della prima sequenza con uno della
-				seconda;
-			\end{item}
-			\begin{item}
-				non fare nulla (o equivalentemente, sostituire un carattere
-				della prima sequenza con sé stesso).
+				\strong{Replace(a, b)}, ovvero \em{sostituire} il carattere \math{a}
+				con il carattere \math{b} nella posizione corrente nella sequenza
+				\math{X};
 			\end{item}
 		\end{enumerate}
 
 		\bigskip
 
-		Siano le quattro operazioni sopra citate abbreviate rispettivamente
-		con \math{I}, \math{D} e \math{R} e \math{M}. Una concatenazione di
-		queste operazioni può essere espressa come una sequenza sull'alfabeto
-		\math{\{I, D, M, R\}}. Ovvero, una sequenza del tipo \math{op_{1} op_{2}
-		op_{3} \unicodeellipsis op_{n}}, costruita usando i quattro caratteri
-		dell'alfabeto sopra descritto, è una sequenza dove ciascun carattere
-		\math{op_{i}} indica l'operazione applicata all'\math{i}-esimo
-		carattere di \math{S_{1}} per poterla trasformare in \math{S_{2}}.
-		Una sequenza che esprime la sequenza di operazioni necessarie a
-		trasformare una sequenza in un'altra viene chiamata
-		\strong{trascrizione} delle due sequenze.
+		Siano le tre operazioni sopra citate abbreviate rispettivamente
+		con \math{I}, \math{D} e \math{R}. Una concatenazione di queste
+		operazioni può essere espressa come una sequenza sull'alfabeto
+		\math{\{I, D, R\}}. Ovvero, una sequenza del tipo \math{op_{1}
+		op_{2} op_{3} \unicodeellipsis op_{n}}, costruita usando i tre
+		caratteri dell'alfabeto sopra descritto, è una sequenza dove
+		ciascun carattere \math{op_{i}} indica l'operazione applicata
+		all'\math{i}-esimo carattere della prima stringa per poterla
+		trasformare nella seconda.
 
-		La distanza di modifica fra due sequenze può essere allora
-		vista anche come la lunghezza della trascrizione più corta
-		possibile per tale coppia di sequenze escludendo le operazioni
-		\math{M}, ovvero il minimo numero di operazioni "rilevanti"
-		(tutte tranne quelle nulle) necessarie a trasformare una sequenza
-		in un'altra. La trascrizione (o le trascrizioni) che permette di
-		trasformare una sequenza in un'altra nella maniera più efficiente
-		possibile è quella che contiene il minimo numero di operazioni
-		rilevanti.
+		Una sequenza che esprime la sequenza di operazioni necessarie
+		a trasformare una sequenza in un'altra viene chiamata
+		\strong{trascrizione} delle due sequenze. In particolare, una
+		trascrizione che é costituita dal minimo numero di caratteri
+		possibili é detta trascrizione ottimale. Il \strong{Problema
+		della distanza di modifica} richiede di trovare, prese due
+		sequenze, una qualsiasi trascrizione ottimale che permette
+		di trasformare la prima nella seconda.
+
+		Anziché affrontare il problema direttamente, si preferisce prima
+		trovare la lunghezza di una possibile trascrizione ottimale di
+		due sequenze e poi, sulla base di questa informazione, ricostruire
+		la trascrizione ottimale "a ritroso". Pertanto, il problema
+		effettivamente in esame sará il problema della lunghezza della
+		trascrizione ottimale.
 
 		\begin{example}
 			\begin[width = 35%fw]{parbox}
 				\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw
 							  11%fw 11%fw 11%fw, cellborder = 0]{ptable}
 					\begin{row}
-						\cell{R} \cell{I} \cell{M}
-						\cell{D} \cell{M} \cell{D}
-						\cell{M} \cell{M} \cell{I}
+						\cell{R} \cell{I} \cell{/}
+						\cell{D} \cell{/} \cell{D}
+						\cell{/} \cell{/} \cell{I}
 					\end{row}
 					\begin{row}
 						\cell{v} \cell{} \cell{i}
@@ -96,20 +77,14 @@
 				\end{ptable}
 			\end{parbox}
 			\begin[width = 55%fw, padding = 5%fw]{parbox}
-				La sequenza \math{S_{1} = vintner} può essere trasformata
-				nella sequenza \math{S_{2} = writers} mediante 5 operazioni:
-				sostituire \math{v} con \math{w}, inserire \math{r}, eliminare
-				\math{n}, eliminare \math{n} (di nuovo), inserire \math{s}. Le
-				altre 4 operazioni sono no-op, perché quei caratteri in quelle
-				posizioni sono già corretti. Pertanto, si ha che
-				\math{d(S_{1}, S_{2}) = 5}.
+				La sequenza \math{X = vintner} può essere trasformata nella
+				sequenza \math{Y = writers} mediante 5 operazioni: sostituire
+				\math{v} con \math{w}, inserire \math{r}, eliminare \math{n},
+				eliminare \math{n} (di nuovo), inserire \math{s}. Le altre 4
+				operazioni sono no-op, perché quei caratteri in quelle posizioni
+				sono già corretti. Pertanto, si ha che \math{d(X, Y) = 5}.
 			\end{parbox}
 		\end{example}
-
-		Il \strong{Problema della distanza di modifica} richiede di
-		trovare, prese due sequenze, la lunghezza di una qualsiasi
-		trascrizione ottimale che permette di trasformare la prima
-		nella seconda.
 
 	\subsection{Programmazione dinamica: equazione di ricorrenza}
 
@@ -118,50 +93,31 @@
 		e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i} e
 		\math{j} delle rispettive sequenze. La soluzione \math{S_{i, j}}
 		per l'\math{i, j}-esima istanza del problema corrisponde a
-		trovare la soluzione ottimale per il problema della distanza
-		di modifica rispetto alle sottosequenze \math{X_{i}} e
+		trovare la soluzione ottimale per il problema della lunghezza
+		della trascrizione rispetto alle sottosequenze \math{X_{i}} e
 		\math{Y_{j}}. La soluzione per le intere sequenze \math{X} e
 		\math{Y} è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
-		La lunghezza trascrizione soluzione per la \math{i, j}-esima
-		istanza del problema viene indicata con \math{\mi{Opt}(i, j)}.
 
-		Il caso base della relazione di ricorrenza è immediato. Il numero
-		di operazioni necessarie a trasformare la sequenza vuota in sé
-		stessa è zero, perché non c'è alcuna operazione da compiere, e
-		di conseguenza il relativo trascritto sarà la sequenza vuota.
-		Similmente, per trasformare una sequenza generica di lunghezza
-		\math{i} nella sequenza vuota sono necessarie \math{i} operazioni
-		di tipo \math{D}, pertanto la lunghezza della relativa trascrizione
-		è \math{i}. Infine, per trasformare la sequenza vuota in una sequenza
-		generica di lunghezza \math{j} sono necessarie \math{j} operazioni di
-		tipo \math{I}, pertanto la lunghezza della relativa trascrizione è
+		Il caso base della relazione di ricorrenza è immediato. Il
+		numero di operazioni necessarie a trasformare la sequenza
+		vuota in sé stessa è zero, perché non c'è alcuna operazione
+		da compiere, e di conseguenza il relativo trascritto sarà la
+		sequenza vuota. Similmente, per trasformare una sequenza generica
+		di lunghezza \math{i} nella sequenza vuota sono necessarie \math{i}
+		rimozioni, pertanto la lunghezza della relativa trascrizione è
+		\math{i}. Infine, per trasformare la sequenza vuota in una sequenza
+		generica di lunghezza \math{j} sono necessarie \math{j} operazioni
+		di inserimento, pertanto la lunghezza della relativa trascrizione è
 		\math{j}.
 
-		\begin[width = 33%fw]{parbox}
-			\begin[mode = display]{math}
-				\table[columnalign = left left]{
-					S_{0, 0} = \epsilon \\
-					\mi{Opt}(0, 0) = 0 \\
-				}
-			\end{math}
-		\end{parbox}
-		\begin[width = 33%fw]{parbox}
-			\begin[mode = display]{math}
-				\table[columnalign = left left]{
-					S_{i, 0} = DDDDDD\unicodeellipsis \\
-					\mi{Opt}(i, 0) = i \\
-				}
-			\end{math}
-		\end{parbox}
-		\begin[width = 33%fw]{parbox}
-			\begin[mode = display]{math}
-				\table[columnalign = left left]{
-					S_{0, j} = IIIIII\unicodeellipsis \\
-					\mi{Opt}(0, j) = j \\
-				}
-			\end{math}
-		\end{parbox}
-		\par
+		\begin[mode = display]{math}
+			S_{i, j} =
+			\{\table[columnalign = left left]{
+				0 & \mi{se} \thickspace i = 0 \wedge j = 0 \\
+				i & \mi{se} \thickspace i > 0 \wedge j = 0 \\
+				j & \mi{se} \thickspace i = 0 \wedge j > 0 \\
+			}
+		\end{math}
 
 		Per quanto riguarda il passo ricorsivo, si assuma di avere a
 		disposizione tutte le soluzioni nella forma \math{S_{a, b}},
@@ -172,50 +128,31 @@
         oppure l'\math{i}-esimo carattere di \math{X_{i}} è diverso dal
         \math{j}-esimo carattere di \math{Y_{j}}.
 
-		Nel primo caso, la \math{i, j}-esima soluzione coincide con
-		la \math{i - 1, j - 1}-esima. Questo perché è l'unica situazione
-		in cui è possibile non aggiungere alcun carattere alla trascrizione,
-		e dato che questa può solo crescere di lunghezza o rimanere
-		invariata, non aggiungere alcun carattere è la scelta che per
-		definizione ne minimizza la lunghezza.
+		Nel primo caso, la \math{i, j}-esima soluzione coincide
+		con la \math{i - 1, j - 1}-esima. Questo perché è l'unica
+		situazione in cui è possibile non aggiungere alcun carattere
+		alla trascrizione, e dato che questa può solo crescere di
+		lunghezza o rimanere invariata, non aggiungere alcun carattere
+		è la scelta che per definizione ne minimizza la lunghezza.
 
 		Nel secondo caso, la soluzione ottimale per la \math{i, j}-esima
-		istanza deve necessariamente essere più lunga di tutte le soluzioni
+		istanza deve necessariamente essere maggiore di tutte le soluzioni
 		per istanze precedenti. Le uniche soluzioni candidate per tale
 		istanza sono \math{S_{i - 1, j}}, \math{S_{i - 1, j}} e
 		\math{S_{i - 1, j - 1}}, alle quali viene accodato uno dei
 		caratteri \math{I}, \math{D} o \math{R}. Dato che sono tutte
 		valide, il criterio di scelta consiste nello scegliere la
-		soluzione con lunghezza minore.
+		soluzione minore.
 
-		\begin[width = 50%fw]{parbox}
-			\begin[mode = display]{math}
-				S_{i, j} =
-				\{\table[columnalign = left left]{
-					S_{i - 1, j - 1} & \mi{se} \thickspace X[i] = Y[j] \\
-					\mi{min}
-					\{\table[columnalign = left]{
-						S_{i - 1, j} \cup \{D\} \\
-						S_{i, j - 1} \cup \{I\} \\
-						S_{i - 1, j - 1} \cup \{R\} \\
-					} & \mi{altrimenti}
-				}
-			\end{math}
-		\end{parbox}
-		\begin[width = 50%fw]{parbox}
-			\begin[mode = display]{math}
-				\mi{Opt} {(i, j)} =
-				\{\table[columnalign = left left]{
-					\mi{Opt} (i - 1, j - 1) & \mi{se} \thickspace X[i] = Y[j] \\
-					1 + \mi{min}
-					\{\table[columnalign = left]{
-						\mi{Opt}(i - 1, j) \\
-						\mi{Opt}(i, j - 1) \\
-						\mi{Opt}(i - 1, j - 1) \\
-					} & \mi{altrimenti} \\
-				}
-			\end{math}
-		\end{parbox}
+		\begin[mode = display]{math}
+			S_{i, j} =
+			\{\table[columnalign = left left]{
+				S_{i - 1, j - 1} &
+				\mi{se} \thickspace X[i] = Y[j] \\
+				1 + \mi{min}\{S_{i - 1, j}, S_{i, j - 1}, S_{i - 1, j - 1}\} &
+				\mi{altrimenti} \\
+			}
+		\end{math}
 
 	\subsection{Programmazione dinamica: implementazione bottom-up}
 
@@ -225,7 +162,7 @@
 		per la \math{i, j}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive. L'algoritmo
 		riceve in input le due sequenze \math{X} e \math{Y} e restituisce in
-		output la tabella \math{c}.
+		output \math{c[\abs{X}][\abs{Y}]}, la soluzione del problema.
 
 		Si noti come le celle che hanno 0 come uno dei due indici possano
 		venire riempite immediatamente con il valore dell'altro indice, come
@@ -247,7 +184,7 @@
 			                c[i][j] \unichar{U+2190} 1 + min\{c[i - 1][j], c[i][j - 1], c[i - 1][j - 1]\}
 
 			    \bigskip
-			    return c
+			    return c[|X|][|Y|]
 		\end{verbatim}
 
 		È facile notare come il tempo di esecuzione dell'algoritmo
