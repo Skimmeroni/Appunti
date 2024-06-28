@@ -41,24 +41,31 @@
 		situazioni: il primo ed ultimo carattere di \math{X_{i, j}}
 		sono uguali oppure sono diversi.
 
-        Se sono uguali, allora tale stringa è palindroma solo se lo è
-        anche la sottostringa ottenuta eliminandovi tali caratteri,
+        Se sono uguali, allora tale stringa è palindroma solo se lo
+        è anche la sottostringa ottenuta eliminandovi tali caratteri,
         ovvero se lo è anche \math{X_{i + 1, j - 1}}. In altri termini,
         non é necessario aggiungere alcun carattere a \math{X_{i, j}}
         per renderla palindroma se lo é giá \math{X_{i + 1, j - 1}} e
         se \math{x_{i} = x_{j}}. Per questo motivo, in questo caso, il
-        numero minimo di caratteri per rendere palindroma \math{X_{i, j}}
-        é lo stesso di \math{X_{i + 1, j - 1}}.
+        numero minimo di caratteri per rendere palindroma \math{X_{i,
+        j}} é lo stesso di \math{X_{i + 1, j - 1}}.
 
-        Se invece sono distinti, allora tale stringa sará palindroma solo se
-        lo è anche la sottostringa ottenuta eliminandovi il primo oppure
-        l'ultimo carattere.
+        Se invece sono distinti, allora tale stringa sará palindroma
+        solo se lo è anche la sottostringa ottenuta eliminandovi il
+        primo oppure l'ultimo carattere. In entrambi i casi, la soluzione
+        ottimale non potrá che aumentare di uno, perché se i due caratteri
+        sono distinti allora é necessario aggiungere almeno un carattere
+        per rendere palindroma la stringa. Fra le due sottostringhe in
+        esame, é da scegliersi quella che minimizza il numero di aggiunte
+        necessarie.
 
         \begin[mode = display]{math}
             S_{i, j} =
             \{\table[columnalign = left left]{
-                S_{i + 1, j - 1} & \mi{se} \thickspace x_{i} = x_{j} \\
-                1 + \mi{min}\{S_{i + 1, j}, S_{i, j - 1}\} & \mi{se} \thickspace x_{i} \ne x_{j} \\
+                S_{i + 1, j - 1} &
+                \mi{se} \thickspace x_{i} = x_{j} \\
+                1 + \mi{min}\{S_{i + 1, j}, S_{i, j - 1}\} &
+                \mi{se} \thickspace x_{i} \ne x_{j} \\
             }
         \end{math}
 
@@ -72,23 +79,23 @@
 		L'algoritmo riceve in input la stringa \math{X} e restituisce
 		in output \math{c[1, \abs{X}]}, la soluzione del problema.
 
-	\begin{verbatim}
-		procedure PAL-CLOSURE(X)
-		    for i \unichar{U+2190} 0 to |X| do
-		        for j \unichar{U+2190} 0 to |X| do
-		            c[i, j] \unichar{U+2190} 0
+		\begin{verbatim}
+			procedure PAL-CLOSURE(X)
+			    for i \unichar{U+2190} 0 to |X| do
+			        for j \unichar{U+2190} 0 to |X| do
+			            c[i, j] \unichar{U+2190} 0
 
-		    \bigskip
-		    for i \unichar{U+2190} |X| down to 1 do
-		        for j \unichar{U+2190} 1 to |X| do
-		            if (i < j) then
-		                if (X[i] = X[j]) then
-		                    c[i, j] \unichar{U+2190} c[i + 1, j - 1]
-		                else
-		                    c[i, j] \unichar{U+2190} 1 + min(c[i + 1, j], c[i, j - 1])
+			    \bigskip
+			    for i \unichar{U+2190} |X| down to 1 do
+			        for j \unichar{U+2190} 1 to |X| do
+			            if (i < j) then
+			                if (X[i] = X[j]) then
+			                    c[i, j] \unichar{U+2190} c[i + 1, j - 1]
+			                else
+			                    c[i, j] \unichar{U+2190} 1 + min(c[i + 1, j], c[i, j - 1])
 
-		    \bigskip
-		    return c[1, |X|]
-	\end{verbatim}
+			    \bigskip
+			    return c[1, |X|]
+		\end{verbatim}
 
 \end{sile}
