@@ -38,9 +38,7 @@
         corrisponde a trovare la soluzione ottimale per il problema LIS
         vincolato rispetto alla sottosequenza \math{X_{i}}. La soluzione
         per l'intera sequenza \math{X} è la soluzione per l'istanza
-        \math{X_{n}}. La lunghezza della sottosequenza strettamente
-        crescente più lunga vincolata soluzione per la \math{i}-esima
-        istanza del problema viene indicata con \math{\mi{Opt}(i)}.
+        \math{X_{n}}.
 
         \begin{example}
             Sia data la sequenza \math{X = \langle 14, 1, 4, 6, 13, 15, 0, 13,
@@ -107,70 +105,61 @@
 
         Il caso base dell'equazione di ricorrenza è immediato: se
         la sequenza è la sequenza vuota, allora la sottosequenza
-        comune più lunga vincolata è essa stessa la sequenza vuota.
+        strettamente crescente più lunga vincolata è essa stessa
+        la sequenza vuota, che ha lunghezza 0. Se la sequenza é
+        composta da un solo elemento, allora la sottosequenza
+        strettamente crescente piú lunga vincolata é la stringa
+        stessa, che ha lunghezza 1. Infatti, per definizione é
+        sia strettamente crescente, dato che é composta da un solo
+        elemento, ed é vincolata, dato che di fatto contiene l'ultimo
+        (e unico) carattere della sequenza.
 
         \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                S_{0} = \epsilon
-            \end{math}
+			\begin[mode = display]{math}
+				S_{0} = 0
+			\end{math}
         \end{parbox}
         \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                \mi{Opt}(0) = \abs{S_{0}} = 0
-            \end{math}
+			\begin[mode = display]{math}
+				S_{1} = 1
+			\end{math}
         \end{parbox}
         \par
 
-        Per quanto riguarda il passo ricorsivo, si assuma di avere a
-        disposizione tutte le soluzioni \math{S_{i - 1}, S_{i - 2},
-        \unicodeellipsis} e di voler calcolare \math{S_{i}}. Dato che
-        il problema LIS vincolato richiede di trovare la sottosequenza
-        strettamente crescente più lunga che termini con l'ultimo termine
-        della sequenza, deve per forza aversi \math{x_{i} \in S_{i}}.
-
-        Una generica soluzione per la \math{i}-esima istanza del problema
+        Per quanto riguarda il passo ricorsivo, si assuma di avere
+        a disposizione tutte le soluzioni \math{S_{i - 1}, S_{i - 2},
+        \unicodeellipsis} e di voler calcolare \math{S_{i}}. Una
+        generica soluzione per la \math{i}-esima istanza del problema
         deve essere costruita accodando \math{x_{i}} ad sottosequenza
         strettamente crescente tale che tutti gli elementi di tale
         sottosequenza vengono prima, in ordine lessicografico, di
         \math{x_{i}}. Questo perché l'aggiunta di \math{x_{i}} in coda
         ad una tale sottosequenza restituisce ancora una sottosequenza
         strettamente crescente. La soluzione ottimale \math{S_{i}} è data
-        dalla sottosequenza con queste caratteristiche più lunga possibile
-        a cui viene aggiunto \math{x_{i}} in coda.
+        dalla lunghezza della sottosequenza con queste caratteristiche più
+        lunga possibile aumentata di uno.
 
         La sottosequenza strettamente crescente più lunga possibile con
         tutti gli elementi che vengono prima, in ordine lessicografico,
         di \math{x_{i}} sarà a sua volta soluzione di una certa istanza
         \math{h} del problema, con \math{h < i}. La soluzione \math{S_{i}}
-        è allora il risultato dell'accodare l'elemento \math{x_{i}} alla
-        soluzione \math{S_{h}}. Se \math{x_{i}} viene dopo tutti gli altri
-        elementi di \math{X_{i}} nell'ordine lessicografico, allora l'elemento
-        \math{x_{h}} non esiste. In questo caso, la soluzione per la
-        \math{i}-esima istanza del problema è formata dal solo elemento
+        é allora data dalla soluzione \math{S_{h}} a cui viene sommato 1.
+        Si noti come \math{S_{h}} possa anche non esistere, ed in particolare
+        questo si verifica se \math{x_{i}} viene dopo tutti gli altri elementi
+        di \math{X_{i}} nell'ordine lessicografico. In questo caso, la soluzione
+        per la \math{i}-esima istanza del problema è 1, perché la sottosequenza
+        crescente piú lunga possibile vincolata é costituita dal solo
         \math{x_{i}}.
 
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                S_{i} =
-                \{\table[columnalign = left left]{
-                    \mi{max}\{S_{h} \thickspace t.c. \thickspace 1 \leq h < i \wedge x_{h} < x_{i}\} \cup \{\langle x_{i} \rangle\} &
-                    \mi{se} \thickspace \exists x_{h} \\
-                    \langle x_{i} \rangle &
-                    \mi{se} \thickspace \nexists x_{h} \\
-                }
-            \end{math}
-        \end{parbox}
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                \mi{Opt} {(i)} =
-                \{\table[columnalign = left left]{
-                    \mi{max}\{\mi{Opt}(h) \thickspace t.c. \thickspace 1 \leq h < i \wedge x_{h} < x_{i}\} + 1 &
-                    \mi{se} \thickspace \exists x_{p(i)} \\
-                    1 &
-                    \mi{se} \thickspace \nexists x_{p(i)} \\
-                }
-            \end{math}
-        \end{parbox}
+		\begin[mode = display]{math}
+			S_{i} =
+			\{\table[columnalign = left left]{
+				\mi{max}\{S_{h} \thickspace t.c. \thickspace 1 \leq h < i \wedge x_{h} < x_{i}\} + 1 &
+				\mi{se} \thickspace \exists S_{h} \\
+				1 &
+				\mi{se} \thickspace \nexists S_{h} \\
+			}
+		\end{math}
 
     \subsection{Programmazione dinamica: implementazione bottom-up}
 
@@ -182,23 +171,25 @@
 		L'algoritmo riceve in input la sequenza \math{X} e restituisce
 		in output il vettore \math{c}.
 
-        Si noti come tutte le celle del vettore \math{c} possono essere
-        inizializzate subito ad 1, perché questo è il minimo valore che
-        in una cella può essere presente.
+        Si noti come tutte le celle del vettore \math{c}, ad eccezione
+        della prima, possono essere inizializzate subito ad 1, perché
+        questo è il minimo valore che in una cella può essere presente.
+        La prima cella corrisponde invece al caso base in cui la sequenza
+        in esame é la sequenza vuota.
 
         \begin{verbatim}
 			procedure BOUNDED-LIS(X)
-			    for i \unichar{U+2190} 0 to |X| do
+				c[0] \unichar{U+2190} 0
+			    for i \unichar{U+2190} 1 to |X| do
 			        c[i] \unichar{U+2190} 1
 
 			    \bigskip
-			    for i \unichar{U+2190} 0 to |X| do
-			        p \unichar{U+2190} 0
-			        for j \unichar{U+2190} 0 to i do
-			            if (X[j] < X[i]) and (c[j] \unichar{U+2265} c[p]) then
-			                p \unichar{U+2190} j
-			        if (p \unichar{U+2260} 0) then
-			            c[i] \unichar{U+2190} c[p] + 1
+			    for i \unichar{U+2190} 2 to |X| do
+			        t \unichar{U+2190} 0
+			        for j \unichar{U+2190} 1 to i - 1 do
+			            if (X[j] < X[i]) and (c[j] \unichar{U+2265} t) then
+			                t \unichar{U+2190} c[j]
+			        c[i] \unichar{U+2190} t + 1
 
 			    \bigskip
 			    return c
