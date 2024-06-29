@@ -125,6 +125,18 @@
 			che ha peso pari a 21.
 		\end{example}
 
+		Il problema é risolvibile mediante programmazione dinamica.
+		Dato un insieme di attività \math{X} avente cardinalità
+		\math{n}, ordinate per tempo di fine, sia \math{X_{i}}
+		l'insieme costituito dalle prime \math{i} attività di
+		\math{X}. La soluzione \math{S_{i}} per la \math{i}-esima
+		istanza del problema corrisponde a trovare la soluzione
+		ottimale per il problema WIS rispetto al sottoinsieme
+		\math{X_{i}}. La soluzione per l'intero insieme \math{X}
+		è la soluzione per l'istanza \math{X_{n}}. Il valore totale
+		della soluzione ottimale per la \math{i}-esima istanza del
+		problema é dato dalla funzione \math{\mi{Opt}(i)}.
+
 	\subsection{Programmazione dinamica: sottostruttura ottima}
 
 		\begin{theorem}
@@ -216,19 +228,10 @@
 
 	\subsection{Programmazione dinamica: equazione di ricorrenza}
 
-		Dato un insieme di attività \math{X} avente cardinalità \math{n},
-		ordinate per tempo di fine, sia \math{X_{i}} l'insieme costituito
-		dalle prime \math{i} attività di \math{X}. La soluzione \math{S_{i}}
-		per la \math{i}-esima istanza del problema corrisponde a trovare
-		la soluzione ottimale per il problema WIS rispetto al sottoinsieme
-		\math{X_{i}}. La soluzione per l'intero insieme \math{X} è la
-		soluzione per l'istanza \math{X_{n}}. Il valore totale della
-		soluzione ottimale per la \math{i}-esima istanza del problema
-		é dato dalla funzione \math{\mi{Opt}(i)}.
-
-		Il caso base è semplice da determinare; l'istanza \math{X_{0}},
-		che corrisponde all'insieme vuoto, ha per soluzione l'insieme
-		vuoto stesso, che per definizione ha associato il valore 0.
+		Il caso base dell'equazione di ricorrenza è semplice da
+		determinare; l'istanza \math{X_{0}}, che corrisponde
+		all'insieme vuoto, ha per soluzione l'insieme vuoto
+		stesso, che per definizione ha associato il valore 0.
 
 		\begin[width = 50%fw]{parbox}
 			\begin[mode = display]{math}

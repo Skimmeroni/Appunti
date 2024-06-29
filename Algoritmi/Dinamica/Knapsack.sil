@@ -42,6 +42,20 @@
         (fintanto che questo è inferiore alla capacità dello zaino) non
         sono rilevanti ai fini della soluzione.
 
+        Il problema puó essere risolto mediante programmazione dinamica.
+        Dato un insieme di oggetti \math{X} avente cardinalità \math{n},
+        ordinati per peso, sia \math{X_{i}} l'insieme costituito dai
+        primi \math{i} oggetti di \math{X} secondo tale ordinamento.
+        Sia poi \math{C} un valore intero positivo, che rappresenta
+        la capacità dello zaino. La soluzione \math{S_{i, c}} per la
+        \math{i}-esima istanza del problema corrisponde a trovare la
+        soluzione ottimale per il problema Knapsack 0/1 rispetto al
+        sottoinsieme \math{X_{i}} e alla capacità massima \math{c}.
+        La soluzione per l'intero insieme \math{X} è la soluzione per
+        l'istanza \math{X_{n}}. Il valore totale della soluzione ottimale
+        per la \math{i}-esima istanza del problema con capacità \math{c}
+        viene indicata con \math{\mi{Opt}(i, c)}.
+
         \begin{example}
             \begin[width = 35%fw]{parbox}
                 \begin[cols = 25%fw 25%fw 25%fw]{ptable}
@@ -154,22 +168,9 @@
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
-        Dato un insieme di oggetti \math{X} avente cardinalità \math{n},
-        ordinati per peso, sia \math{X_{i}} l'insieme costituito dai
-        primi \math{i} oggetti di \math{X} secondo tale ordinamento.
-        Sia poi \math{C} un valore intero positivo, che rappresenta
-        la capacità dello zaino. La soluzione \math{S_{i, c}} per la
-        \math{i}-esima istanza del problema corrisponde a trovare la
-        soluzione ottimale per il problema Knapsack 0/1 rispetto al
-        sottoinsieme \math{X_{i}} e alla capacità massima \math{c}.
-        La soluzione per l'intero insieme \math{X} è la soluzione per
-        l'istanza \math{X_{n}}. Il valore totale della soluzione ottimale
-        per la \math{i}-esima istanza del problema con capacità \math{c}
-        viene indicata con \math{\mi{Opt}(i, c)}.
-
-        Il caso base è semplice da determinare; se non vi è alcun oggetto
-        da dover mettere nello zaino o se lo zaino non può contenere alcun
-        oggetto, la soluzione ottimale è l'insieme vuoto. 
+        Il caso base dell'equazione di ricorrenza è semplice da determinare;
+        se non vi è alcun oggetto da dover mettere nello zaino o se lo zaino
+        non può contenere alcun oggetto, la soluzione ottimale è l'insieme vuoto.
 
 		\begin[width = 50%fw]{parbox}
 			\begin[mode = display]{math}

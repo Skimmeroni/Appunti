@@ -55,6 +55,17 @@
 		effettivamente in esame sará il problema della lunghezza della
 		trascrizione ottimale.
 
+		Il problema puó essere risolto mediante programmazione dinamica.
+		Date due sequenze \math{X} e \math{Y} rispettivamente di
+		lunghezza \math{m} e \math{n}, siano \math{X_{i} = X[1 : i]}
+		e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i} e
+		\math{j} delle rispettive sequenze. La soluzione \math{S_{i, j}}
+		per l'\math{i, j}-esima istanza del problema corrisponde a
+		trovare la soluzione ottimale per il problema della lunghezza
+		della trascrizione rispetto alle sottosequenze \math{X_{i}} e
+		\math{Y_{j}}. La soluzione per le intere sequenze \math{X} e
+		\math{Y} è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
+
 		\begin{example}
 			\begin[width = 35%fw]{parbox}
 				\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw
@@ -87,16 +98,6 @@
 		\end{example}
 
 	\subsection{Programmazione dinamica: equazione di ricorrenza}
-
-		Date due sequenze \math{X} e \math{Y} rispettivamente di
-		lunghezza \math{m} e \math{n}, siano \math{X_{i} = X[1 : i]}
-		e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i} e
-		\math{j} delle rispettive sequenze. La soluzione \math{S_{i, j}}
-		per l'\math{i, j}-esima istanza del problema corrisponde a
-		trovare la soluzione ottimale per il problema della lunghezza
-		della trascrizione rispetto alle sottosequenze \math{X_{i}} e
-		\math{Y_{j}}. La soluzione per le intere sequenze \math{X} e
-		\math{Y} è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
 
 		Il caso base della relazione di ricorrenza è immediato. Il
 		numero di operazioni necessarie a trasformare la sequenza

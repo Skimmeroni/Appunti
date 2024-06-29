@@ -58,15 +58,7 @@
         una tripla di sequenze \math{W}, \math{X} e \math{Y}, la sequenza
         \math{W} è interleaving di \math{X} e di \math{Y}.
 
-        \begin{example}
-            Date le sequenze \math{Y = \langle D, E, E, P \rangle} e
-            \math{X = \langle L, O, R, E \rangle}, un interleaving di
-            \math{X} e di \math{Y} è la sequenza \math{W = \langle D,
-            L, O, E, R, E, P, E \rangle}.
-        \end{example}
-
-    \subsection{Programmazione dinamica: equazione di ricorrenza}
-
+        Il problema puó essere risolto mediante programmazione dinamica.
         Date tre sequenze \math{X}, \math{Y} e \math{W}, rispettivamente
         di lunghezza \math{m}, \math{n} e \math{m + n}, siano \math{X_{i} =
         X[1 : i]} e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i}
@@ -82,6 +74,15 @@
             \math{X_{i}} e \math{Y_{j}}, altrimenti \math{S_{i, j} = F}.
         \end{center}
         \bigskip
+
+        \begin{example}
+            Date le sequenze \math{Y = \langle D, E, E, P \rangle} e
+            \math{X = \langle L, O, R, E \rangle}, un interleaving di
+            \math{X} e di \math{Y} è la sequenza \math{W = \langle D,
+            L, O, E, R, E, P, E \rangle}.
+        \end{example}
+
+    \subsection{Programmazione dinamica: equazione di ricorrenza}
 
         Approcciare il problema direttamente a partire dal determinare
         casi base e passi ricorsivi è ostico; è più semplice trattare

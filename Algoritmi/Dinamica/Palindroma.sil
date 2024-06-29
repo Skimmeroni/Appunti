@@ -10,8 +10,7 @@
         \math{X}, il numero minimo di caratteri da inserirvi per renderla
         palindroma.
 
-    \subsection{Programmazione dinamica: equazione di ricorrenza}
-
+        Il problema puó essere risolto mediante programmazione dinamica.
         Data una stringa \math{X} di lunghezza \math{n}, sia \math{X_{i, j}
         = X[i : j]} la sottostringa di \math{X} che ha il primo carattere in
         posizione \math{i} e l'ultimo carattere in posizione \math{j}. La
@@ -20,6 +19,8 @@
         chiusura palindroma rispetto alla sottostringa \math{X_{i, j}}. La
         soluzione per l'intera stringa \math{X} è la soluzione per l'istanza
         \math{X_{1, n}}.
+
+    \subsection{Programmazione dinamica: equazione di ricorrenza}
 
         Il caso base è immediato. Se la sottostringa \math{X_{i, j}} è
         la stringa vuota, ovvero se \math{i > j}, non vi è bisogno di

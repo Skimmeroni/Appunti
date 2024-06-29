@@ -2,14 +2,14 @@
 
 	\subsection{Definizione del problema}
 
-		Data una sequenza \math{S}, si dice \strong{sottosequenza}
-		di \math{S} un qualsiasi sottoinsieme degli elementi di
-		\math{S}, disposti secondo l'ordine in cui appaiono. Più
+		Data una sequenza \math{X}, si dice \strong{sottosequenza}
+		di \math{X} un qualsiasi sottoinsieme degli elementi di
+		\math{X}, disposti secondo l'ordine in cui appaiono. Più
 		formalmente, una sottosequenza di lunghezza \math{n} di
-		una sequenza \math{S} è definita da un insieme di indici
+		una sequenza \math{X} è definita da un insieme di indici
 		\math{i_{1} < i_{2} < \unicodeellipsis < i_{k}}, tale per
 		cui \math{k \leq n}; la sottosequenza che si ricava da questi
-		indici è \math{S[i_{1}] | S[i_{2}] | \unicodeellipsis | S[i_{k}]}.
+		indici è \math{X[i_{1}] | S[i_{2}] | \unicodeellipsis | S[i_{k}]}.
 
 		Date due sequenze \math{X} e \math{Y}, una sottosequenza si
 		dice comune ad entrambe le sequenze se appare sia in \math{X}
@@ -20,11 +20,20 @@
 		subsequence}).
 
 		Anziché affrontare il problema direttamente, si preferisce prima
-		trovare la lunghezza di una possibile LCS di due sequenze (ammesso
-		che esista) e poi, sulla base di questa informazione, ricostruire
-		la LCS "a ritroso". Pertanto, il problema effettivamente in esame
-		sará il problema della lunghezza della sottosequenza comune piú
-		lunga.
+		trovare la lunghezza di una possibile LCS di due sequenze e poi,
+		sulla base di questa informazione, ricostruire la LCS "a ritroso".
+		Pertanto, il problema effettivamente in esame sará il problema
+		della lunghezza della sottosequenza comune piú lunga.
+
+		Il problema puó essere risolto mediante programmazione dinamica.
+		Date due sequenze \math{X} e \math{Y} rispettivamente di lunghezza
+		\math{m} e \math{n}, siano \math{X_{i} = X[1 : i]} e \math{Y_{j} =
+		Y[1 : j]} i prefissi di lunghezza \math{i} e \math{j} delle rispettive
+		sequenze. La soluzione \math{S_{i, j}} per l'\math{i, j}-esima istanza
+		del problema corrisponde a trovare la soluzione ottimale per il problema
+		della lunghezza della LCS rispetto alle sottosequenze \math{X_{i}} e
+		\math{Y_{j}}. La soluzione per le intere sequenze \math{X} e \math{Y}
+		è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
 
 	\subsection{Programmazione dinamica: sottostruttura ottima}
 
@@ -110,20 +119,11 @@
 
 	\subsection{Programmazione dinamica: equazione di ricorrenza}
 
-		Date due sequenze \math{X} e \math{Y} rispettivamente di
-		lunghezza \math{m} e \math{n}, siano \math{X_{i} = X[1 : i]}
-		e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i} e
-		\math{j} delle rispettive sequenze. La soluzione \math{S_{i, j}}
-		per l'\math{i, j}-esima istanza del problema corrisponde a trovare
-		la soluzione ottimale per il problema della lunghezza della LCS
-		rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}. La soluzione
-		per le intere sequenze \math{X} e \math{Y} è la soluzione per l'istanza
-		\math{X_{m}, Y_{n}}.
-
-		Il caso base è semplice da determinare; è evidente come due sequenze
-		vuote non abbiano alcun elemento in comune, pertanto la lunghezza della
-		loro LCS é zero. Piú in generale, una qualsiasi sequenza non vuota non
-		ha alcun carattere in comune con la sequenza vuota.
+		Il caso base dell'equazione di ricorrenza è semplice da determinare;
+		è evidente come due sequenze vuote non abbiano alcun elemento in
+		comune, pertanto la lunghezza della loro LCS é zero. Piú in generale,
+		una qualsiasi sequenza non vuota non ha alcun carattere in comune con
+		la sequenza vuota.
 
 		\begin[mode = display]{math}
 			S_{i, j} = 0 \thickspace \mi{se} \thickspace i = 0 \vee j = 0

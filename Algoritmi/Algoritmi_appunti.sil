@@ -88,7 +88,7 @@
 		\include[src = Dinamica/LCS.sil]
 		\section{Weighted Interval Scheduling} % Da rivedere l'algoritmo bottom-up e la ricostruzione della soluzione
 		\include[src = Dinamica/WIS.sil]
-		\section{Hateville}
+		\section{Hateville} % Da rivedere l'introduzione
 		\include[src = Dinamica/Hateville.sil]
 		\section{Longest Increasing Subsequence} % Da rivedere
 		\include[src = Dinamica/LIS.sil]

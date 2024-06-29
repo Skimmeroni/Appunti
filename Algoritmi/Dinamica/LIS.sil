@@ -14,6 +14,13 @@
             sottosequenza è infatti \math{\langle 2, 4, 7, 13, 21 \rangle}.
         \end{example}
 
+        Anziché affrontare il problema direttamente, si preferisce prima
+		trovare la lunghezza di una possibile LIS della sequenza e poi,
+		sulla base di questa informazione, ricostruire la LIS "a ritroso".
+		Pertanto, il problema effettivamente in esame sará il problema
+		della lunghezza della sottosequenza strettamente crescente piú
+		lunga.
+
         Attaccare il problema LIS direttamente tramite programmazione dinamica
         è complesso. Un miglior approccio consiste nel restringere i requisiti
         del problema per considerarne una versione semplificata.
@@ -24,6 +31,16 @@
         si trovano) hanno valore strettamente crescente e dove l'ultimo
         elemento di tale sottosequenza coincide con l'ultimo elemento
         della sequenza originaria.
+
+        Data una sequenza \math{X} di lunghezza \math{n}, sia \math{X_{i}
+        = X[1 : i]} il prefisso di lunghezza \math{i} di tale sequenza.
+        La soluzione \math{S_{i}} per l'\math{i}-esima istanza del problema
+        corrisponde a trovare la soluzione ottimale per il problema LIS
+        vincolato rispetto alla sottosequenza \math{X_{i}}. La soluzione
+        per l'intera sequenza \math{X} è la soluzione per l'istanza
+        \math{X_{n}}. La lunghezza della sottosequenza strettamente
+        crescente più lunga vincolata soluzione per la \math{i}-esima
+        istanza del problema viene indicata con \math{\mi{Opt}(i)}.
 
         \begin{example}
             Sia data la sequenza \math{X = \langle 14, 1, 4, 6, 13, 15, 0, 13,
@@ -87,16 +104,6 @@
 		\end{theorem}
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
-
-        Data una sequenza \math{X} di lunghezza \math{n}, sia \math{X_{i}
-        = X[1 : i]} il prefisso di lunghezza \math{i} di tale sequenza.
-        La soluzione \math{S_{i}} per l'\math{i}-esima istanza del problema
-        corrisponde a trovare la soluzione ottimale per il problema LIS
-        vincolato rispetto alla sottosequenza \math{X_{i}}. La soluzione
-        per l'intera sequenza \math{X} è la soluzione per l'istanza
-        \math{X_{n}}. La lunghezza della sottosequenza strettamente
-        crescente più lunga vincolata soluzione per la \math{i}-esima
-        istanza del problema viene indicata con \math{\mi{Opt}(i)}.
 
         Il caso base dell'equazione di ricorrenza è immediato: se
         la sequenza è la sequenza vuota, allora la sottosequenza

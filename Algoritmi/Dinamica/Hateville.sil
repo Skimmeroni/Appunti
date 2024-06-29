@@ -51,6 +51,17 @@
             \thickspace \mi{Comp}(A) = T}\{D(A)\}
         \end{math}
 
+        Il problema può essere risolto mediante programmazione dinamica.
+        Si consideri \math{X_{i} = \{1, 2, \unicodeellipsis, i\} \subseteq
+        X}, l'insieme costituito dai primi \math{i} elementi di \math{X},
+        che corrisponde alla \math{i}-esima istanza del problema. A tale
+        insieme è associato l'insieme \math{S_{i} = \{1, 2, \unicodeellipsis,
+        i\} \subseteq X_{i}}, la soluzione ottimale per la \math{i}-esima
+        istanza del problema. Il valore della soluzione \math{S_{i}} viene
+        indicato con \math{\mi{Opt}(i)}. La soluzione finale del problema è
+        \math{S_{n}}, in quanto associata all'istanza \math{X_{n}}, che
+        coincide con l'intero insieme \math{X}.
+
     \subsection{Programmazione dinamica: sottostruttura ottima}
 
         \begin{theorem}
@@ -135,24 +146,11 @@
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
-        Il problema può essere risolto mediante programmazione dinamica.
-        Si consideri \math{X_{i} = \{1, 2, \unicodeellipsis, i\} \subseteq
-        X}, l'insieme costituito dai primi \math{i} elementi di \math{X},
-        che corrisponde alla \math{i}-esima istanza del problema. A tale
-        insieme è associato l'insieme \math{S_{i} = \{1, 2, \unicodeellipsis,
-        i\} \subseteq X_{i}}, la soluzione ottimale per la \math{i}-esima
-        istanza del problema. Il valore della soluzione \math{S_{i}} viene
-        indicato con \math{\mi{Opt}(i)}. La soluzione finale del problema è
-        \math{S_{n}}, in quanto associata all'istanza \math{X_{n}}, che
-        coincide con l'intero insieme \math{X}.
-
-        L'insieme \math{S_{i}} ed il valore \math{\mi{Opt}(i)} vengono
-        calcolati a partire da una equazione di ricorrenza. Il caso base
-        di tale equazione è immediato: si consideri l'istanza \math{X_{0}}
-        del problema, che non contiene alcuna entità. Tale insieme è
-        certamente composto esclusivamente da entità fra loro compatibili,
-        non contenendone alcuno. Inoltre, per lo stesso motivo, il valore
-        di tale insieme è nullo.
+        Il caso base dell'equazione di ricorrenza è immediato: si
+        consideri l'istanza \math{X_{0}} del problema, che non contiene
+        alcuna entità. Tale insieme è certamente composto esclusivamente
+        da entità fra loro compatibili, non contenendone alcuno. Inoltre,
+        per lo stesso motivo, il valore di tale insieme è nullo.
 
 		Similmente, si consideri l'istanza \math{X_{1}}, che contiene solamente
 		il primo elemento: tale insieme é certamente composto esclusivamente da

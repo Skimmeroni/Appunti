@@ -46,8 +46,6 @@
         massimo e avente l'ultimo elemento coincidente con l'ultimo elemento
         del vettore originario.
 
-    \subsection{Programmazione dinamica: equazione di ricorrenza}
-
         Dato un vettore \math{V} avente cardinalità \math{n},
         sia \math{V_{i}} il sottovettore \math{(v_{1}, v_{2},
         \unicodeellipsis, v_{i})}. La soluzione \math{S_{i}}
@@ -58,6 +56,8 @@
         per l'istanza \math{V_{n}}. Il peso del sottovettore di
         peso massimo per la \math{i}-esima istanza del problema
         viene indicato con \math{\mi{Opt}(i)}.
+
+    \subsection{Programmazione dinamica: equazione di ricorrenza}
 
         Il caso base dell'equazione di ricorrenza è immediato: se il
         vettore è il vettore nullo, allora il sottovettore di peso massimo
