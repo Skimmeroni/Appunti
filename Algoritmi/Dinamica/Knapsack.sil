@@ -266,30 +266,30 @@
         problema.
 
         \begin{verbatim}
-            procedure KNAPSACK(V, W, C)
-                for i \unichar{U+2190} 0 to |V| do
-                    d[i, 0] \unichar{U+2190} \unichar{U+2205}
-                    p[i, 0] \unichar{U+2190} 0
-                for c \unichar{U+2190} 0 to C do
-                    d[0, c] \unichar{U+2190} \unichar{U+2205}
-                    p[0, c] \unichar{U+2190} 0
+			procedure KNAPSACK(V, W, C)
+			    for i \unichar{U+2190} 0 to |V| do
+			        d[i, 0] \unichar{U+2190} \unichar{U+2205}
+			        p[i, 0] \unichar{U+2190} 0
+			    for c \unichar{U+2190} 0 to C do
+			        d[0, c] \unichar{U+2190} \unichar{U+2205}
+			        p[0, c] \unichar{U+2190} 0
 
-                \bigskip
-                for i \unichar{U+2190} 1 to |V| do
-                    for c \unichar{U+2190} 1 to C do
-                        if (W[i] > c) then
-                            d[i, c] \unichar{U+2190} d[i - 1, c]
-                            p[i, c] \unichar{U+2190} p[i - 1, c]
-                        else
-                            if (p[i - 1, c - W[i]] + V[i] \unichar{U+2265} p[i - 1, c]) then
-                                d[i, c] \unichar{U+2190} d[i - 1, c - W[i]] \unichar{U+222A} \{i\}
-                                p[i, c] \unichar{U+2190} d[i - 1, c - W[i]] + V[i]
-                            else
-                                d[i, c] \unichar{U+2190} d[i - 1, c]
-                                p[i, c] \unichar{U+2190} p[i - 1, c]
+			    \bigskip
+			    for i \unichar{U+2190} 1 to |V| do
+			        for c \unichar{U+2190} 1 to C do
+			            if (W[i] > c) then
+			                d[i, c] \unichar{U+2190} d[i - 1, c]
+			                p[i, c] \unichar{U+2190} p[i - 1, c]
+			            else
+			                if (p[i - 1, c - W[i]] + V[i] \unichar{U+2265} p[i - 1, c]) then
+			                    d[i, c] \unichar{U+2190} d[i - 1, c - W[i]] \unichar{U+222A} \{i\}
+			                    p[i, c] \unichar{U+2190} p[i - 1, c - W[i]] + V[i]
+			                else
+			                    d[i, c] \unichar{U+2190} d[i - 1, c]
+			                    p[i, c] \unichar{U+2190} p[i - 1, c]
 
-                \bigskip
-                return d[|V|, C], p[|V|, C]
+			    \bigskip
+			    return d[|V|, C], p[|V|, C]
         \end{verbatim}
 
         Il tempo di esecuzione dell'algoritmo è \math{O(nC)}, dove \math{n}
@@ -301,60 +301,73 @@
 
     \subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
-        É possibile ottimizzare la procedura calcolando prima il valore totale
-        della soluzione ottimale e poi individuarne una ripercorrendo la tabella
-        a ritroso. In particolare, questo viene fatto introducendo una nuova
-        procedura, \tt{PRINT-KNAPSACK}, che ha in input la tabella \math{D},
-        l'insieme dei pesi \math{W}, una capacità \math{c} ed un indice \math{i},
+		É possibile ottimizzare l'algoritmo osservando come non sia necessario
+		tenere traccia di tutte le soluzioni parziali, ma é sufficiente calcolare
+		la soluzione ottima a partire dalla tabella dei valori ottimali. Pertanto,
+		La procedura viene modificata eliminando ogni riferimento alla tabella
+		\math{d} e restituendo non la coppia \math{d[\abs{V}, C], p[\abs{V}, C]},
+		ma bensí l'intera tabella \math{p}.
+
+		Alla vecchia procedura opportunamente modificata ne viene aggiunta
+		un'altra, \tt{PRINT-KNAPSACK}. Questa ha in input la tabella \math{p},
+		l'insieme dei pesi \math{W}, una capacità \math{c} ed un indice \math{i},
 		mentre in output ha uno dei possibili insiemi di oggetti aventi massimo
 		valore totale. La prima chiamata alla procedura ha \math{\abs{X}} come
-		valore per \math{i} e \math{C} come valore per \math{c} in modo da ottenere
-		la soluzione per l'istanza \math{\abs{X}, c}.
+		valore per \math{i} e \math{C} come valore per \math{c} in modo da
+		ottenere la soluzione per l'istanza \math{\abs{X}, C}.
 
-        La procedura ripercorre il vettore \math{c} dalla cella \math{i} verso la
-        cella 0. Ogni volta che la capacità é maggiore del peso dell'\math{i}-esimo
-        oggetto e la \math{i, c}-esima cella di \math{D} non ha lo stesso valore
-        della \math{i - 1, c}-esima, allora l'\math{i}-esimo oggetto è un elemento
-        della soluzione.
+		Se il valore di \math{i} o di \math{c} é nullo, allora la procedura
+		termina, perché si é raggiunto il caso base in cui la soluzione é
+		l'insieme vuoto. Se sia \math{i} che \math{c} non sono nulli ma la
+		capacitá \math{c} é inferiore al peso dell'\math{i}-esimo oggetto,
+		allora questo certamente non potrá essere parte della soluzione
+		ottimale. Se sia \math{i} che \math{c} non sono nulli e la capacitá
+		\math{c} é superiore al peso dell'\math{i}-esimo oggetto allora
+		quest'ultimo sará parte della soluzione ottimale solamente se la
+		sua inclusione ha comportato un valore totale maggiore rispetto alla
+		sua esclusione.
 
-        \begin[width = 50%fw]{parbox}
-            \begin{verbatim}
-            procedure KNAPSACK(V, W, C)
-                for i \unichar{U+2190} 0 to |V| do
-                    p[i, 0] \unichar{U+2190} 0
-                for c \unichar{U+2190} 0 to C do
-                    p[0, c] \unichar{U+2190} 0
+        \begin[width = 52.5%fw]{parbox}
+			\begin{verbatim}
+				procedure KNAPSACK(V, W, C)
+				    for i \unichar{U+2190} 0 to |V| do
+				        for c \unichar{U+2190} 0 to C do
+				            p[i, c] \unichar{U+2190} 0
 
-                \bigskip
-                for i \unichar{U+2190} 1 to |V| do
-                    for c \unichar{U+2190} 1 to C do
-                        if (W[i] > c) then
-                            p[i, c] \unichar{U+2190} p[i - 1, c]
-                        else
-                            if (p[i - 1, c - W[i]] + V[i] \unichar{U+2265} p[i - 1, c]) then
-                                p[i, c] \unichar{U+2190} d[i - 1, c - W[i]] + V[i]
-                            else
-                                p[i, c] \unichar{U+2190} p[i - 1, c]
+				    \bigskip
+				    for i \unichar{U+2190} 1 to |V| do
+				        for c \unichar{U+2190} 1 to C do
+				            if (W[i] > c) then
+				                p[i, c] \unichar{U+2190} p[i - 1, c]
+				            else
+				                // per motivi di spazio
+				                temp \unichar{U+2190} p[i - 1, c - W[i]] + V[i]
+				                if (temp \unichar{U+2265} p[i - 1, c]) then
+				                    p[i, c] \unichar{U+2190} temp
+				                else
+				                    p[i, c] \unichar{U+2190} p[i - 1, c]
 
-                \bigskip
-                return p[|V|, C]
-            \end{verbatim}
+				    \bigskip
+				    return p
+			\end{verbatim}
         \end{parbox}
-        \begin[width = 50%fw]{parbox}
-            \begin{verbatim}
-            procedure PRINT-KNAPSACK(D, W, i, c)
-                if i > 0 and c > 0 then
-                    if c \unichar{U+2265} W[i] then
-                        if D[i, c] = D[i - 1, c] then
-                            PRINT-KNAPSACK(D, W, i - 1, c)
-                        else
-                            PRINT-KNAPSACK(D, W, i - 1, c - W[i])
-                            print i
-                else
-                    PRINT-KNAPSACK(D, W, i - 1, c)
-            \end{verbatim}
-        \end{parbox}
-        \par
+		\begin[width = 47.5%fw]{parbox}
+			\begin{verbatim}
+				procedure PRINT-KNAPSACK(p, W, i, c)
+				    if (i = 0 or c = 0) then
+				        return
+				    else
+				        if (c \unichar{U+2265} W[i]) then
+				            if (p[i, c] = p[i - 1, c]) then
+				                PRINT-KNAPSACK(p, W, i - 1, c)
+				            else
+				                PRINT-KNAPSACK(p, W, i - 1, c - W[i])
+				                print i
+				        else
+				            PRINT-KNAPSACK(p, W, i - 1, c)
+			\end{verbatim}
+		\end{parbox}
+		\par
 
         Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione è 
 		comunque proporzionale al numero di oggetti e alla capacità massima,
