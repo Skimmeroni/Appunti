@@ -36,6 +36,13 @@
             avente peso 14.
         \end{example}
 
+        Anziché affrontare il problema direttamente, si preferisce prima
+		trovare il peso complessivo di un possibile sottovettore di peso
+		massimo di un vettore e poi, sulla base di questa informazione,
+		ricostruire il sottovettore "a ritroso". Pertanto, il problema
+		effettivamente in esame sará il problema del peso complessivo del
+		sottovettore di peso massimo.
+
         Attaccare il problema HSV direttamente tramite programmazione
         dinamica è complesso. Un miglior approccio consiste nel restringere
         i requisiti del problema per considerarne una versione semplificata.
@@ -53,33 +60,26 @@
         a trovare la soluzione ottimale per il problema HSV
         vincolato rispetto al sottovettore \math{V_{i}}. La
         soluzione per l'intero vettore \math{V} è la soluzione
-        per l'istanza \math{V_{n}}. Il peso del sottovettore di
-        peso massimo per la \math{i}-esima istanza del problema
-        viene indicato con \math{\mi{Opt}(i)}.
+        per l'istanza \math{V_{n}}.
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
-        Il caso base dell'equazione di ricorrenza è immediato: se il
-        vettore è il vettore nullo, allora il sottovettore di peso massimo
-        più lungo vincolato è esso stesso il vettore nullo. D'altro canto,
-        se il vettore è composto da un solo elemento, tale elemento deve
-        essere parte per definizione della soluzione ottima per tale istanza
-        del problema, ed è inoltre l'unico elemento di tale soluzione.
+        Il caso base dell'equazione di ricorrenza è immediato: se
+        il vettore è il vettore nullo, allora il sottovettore di
+        peso massimo più lungo vincolato è esso stesso il vettore
+        nullo. D'altro canto, se il vettore è composto da un solo
+        elemento, tale elemento deve essere parte per definizione
+        della soluzione ottima per tale istanza del problema, ed è
+        inoltre l'unico elemento di tale soluzione.
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
-                \table[columnalign = left]{
-                    S_{0} = \epsilon \\
-                    S_{1} = (v_{1}) \\
-                }
+				S_{0} = \epsilon
             \end{math}
         \end{parbox}
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
-                \table[columnalign = left]{
-                    \mi{Opt}(0) = \abs{S_{0}} = 0 \\
-                    \mi{Opt}(1) = \abs{S_{1}} = v_{1} \\
-                }
+				S_{1} = v_{1}
             \end{math}
         \end{parbox}
         \par
@@ -87,38 +87,30 @@
         Per quanto riguarda il passo ricorsivo, si assuma di avere a
         disposizione tutte le soluzioni \math{S_{i - 1}, S_{i - 2},
         \unicodeellipsis} e di voler calcolare \math{S_{i}}. Dato che
-        il problema HSV vincolato richiede di trovare il sottovettore
-        di peso massimo che termini con l'ultimo elemento del vettore,
-        deve per forza aversi \math{v_{i} \in S_{i}}.
+        il problema HSV vincolato richiede di trovare il peso complessivo
+        del sottovettore di peso massimo che termini con l'ultimo elemento
+        del vettore, il peso dell'\math{i}-esimo elemento del vettore sará
+        certamente parte della soluzione.
 
-        L'unica scelta da compiere in merito a tale soluzione è se includere
-        o non includere anche la \math{i - 1}-esima soluzione ottimale. Se
-        tale soluzione ha un peso negativo, allora accodando \math{S_{i - 1}}
-        a \math{v_{i}} si otterrebbe un vettore con peso inferiore del solo
-        \math{v_{i}}, e quindi una soluzione peggiore di \math{(v_{i})}.
-        Se tale soluzione ha invece un peso positivo, allora accodando
-        \math{S_{i - 1}} a \math{v_{i}} si otterrebbe un vettore con peso
-        superiore del solo \math{v_{i}}, e quindi una soluzione migliore di
-        \math{(v_{i})}.
+        L'unica scelta da compiere in merito a tale soluzione è se sommarvi
+        o non sommarvi anche la \math{i - 1}-esima soluzione ottimale. Se
+        tale soluzione é un valore negativo, allora sommando \math{S_{i - 1}}
+        a \math{v_{i}} si otterrebbe un valore inferiore al solo \math{v_{i}},
+        e quindi una soluzione peggiore di \math{v_{i}}. Se tale soluzione
+        é invece un valore positivo, allora sommando \math{S_{i - 1}} a
+        \math{v_{i}} si ottiene un valore maggiore del solo \math{v_{i}},
+        e quindi una soluzione migliore di \math{v_{i}}. Se tale soluzione
+        ha valore nullo, allora sommandola o non sommandola a \math{v_{i}}
+        si ottiene lo stesso risultato, pertanto questo caso puó essere
+        accorpato indifferentemente ad uno dei precedenti.
 
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                S_{i} =
-                \{\table[columnalign = left]{
-                    v_{i} & \mi{se} \thickspace \mi{Opt}(i - 1) < 0 \\
-                    S_{i - 1} \cup v_{i} & \mi{se} \thickspace \mi{Opt}(i - 1) > 0 \\
-                }
-            \end{math}
-        \end{parbox}
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                \mi{Opt} {(i)} =
-                \{\table[columnalign = left]{
-                    v_{i} & \mi{se} \thickspace \mi{Opt}(i - 1) < 0 \\
-                    \mi{Opt}(i - 1) + v_{i} & \mi{se} \thickspace \mi{Opt}(i - 1) > 0 \\
-                }
-            \end{math}
-        \end{parbox}
+		\begin[mode = display]{math}
+			S_{i} =
+			\{\table[columnalign = left]{
+				v_{i} & \mi{se} \thickspace S_{i - 1} \leq 0 \\
+				S_{i - 1} + v_{i} & \mi{se} \thickspace S_{i - 1} > 0 \\
+			}
+		\end{math}
 
       \subsection{Programmazione dinamica: implementazione bottom-up}
 
@@ -130,38 +122,6 @@
 		L'algoritmo riceve in input il vettore \math{V} e restituisce
 		in output il vettore \math{c}.
 
-        \begin{verbatim}
-		procedure HSV(V)
-		    c[0] \unichar{U+2190} 0
-		    c[1] \unichar{U+2190} V[1]
-
-		    \bigskip
-		    for i \unichar{U+2190} 2 to |V| do
-		        if (c[i - 1] < 0) then
-		            c[i] \unichar{U+2190} V[i]
-		        else
-		            c[i] \unichar{U+2190} c[i - 1] + V[i]
-
-		   \bigskip
-		    return c
-	\end{verbatim}
-
-        È facile notare come il tempo di esecuzione dell'algoritmo sia
-        \math{O(n)}, dove \math{n} è la lunghezza del vettore \math{V}.
-        Questo perché tale algoritmo è composto da un solo ciclo che
-        esegue per \math{n} volte una istruzione con tempo di esecuzione
-        immediato.
-
-    \subsection{Programmazione dinamica: ricostruzione della soluzione}
-
-        Una volta calcolate le lunghezze degli HSV vincolate, è possibile
-        ricostruire ciascuna di queste a partire il vettore \math{c}. Alla
-        vecchia procedura ne viene aggiunta un'altra, \tt{PRINT-HSV}. Questa
-        ha in input il vettore \math{c}, il vettore \math{V} ed un indice
-        di posizione \math{i}, mentre in output ha il sottovettore di peso
-        massimo per l'\math{i}-esimo prefisso di \math{V}. 
-
-	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
 			procedure HSV(V)
 			    c[0] \unichar{U+2190} 0
@@ -169,7 +129,7 @@
 
 			    \bigskip
 			    for i \unichar{U+2190} 2 to |V| do
-			        if (c[i - 1] < 0) then
+			        if (c[i - 1] \unichar{U+2264} 0) then
 			            c[i] \unichar{U+2190} V[i]
 			        else
 			            c[i] \unichar{U+2190} c[i - 1] + V[i]
@@ -177,20 +137,12 @@
 			    \bigskip
 			    return c
 		\end{verbatim}
-	\end{parbox}
-	\begin[width = 50%fw]{parbox}
-		\begin{verbatim}
-		    procedure PRINT-HSV(V, c, i)
-		        if c[i] \unichar{U+2260} V[i] then
-		            PRINT-HSV(V, c, i - 1)
-		        print V[i]
-		\end{verbatim}
-	\end{parbox}
-	\par
 
-        Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione
-        è comunque proporzionale alle dimensioni del vettore \math{c},
-		perché la ricorsione è una tail-recursion.
+        È facile notare come il tempo di esecuzione dell'algoritmo sia
+        \math{O(n)}, dove \math{n} è la lunghezza del vettore \math{V}.
+        Questo perché tale algoritmo è composto da un solo ciclo che
+        esegue per \math{n} volte una istruzione con tempo di esecuzione
+        immediato.
 
     \subsection{Osservazioni}
 
