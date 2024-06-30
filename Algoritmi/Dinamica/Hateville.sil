@@ -2,26 +2,22 @@
 
     \subsection{Definizione del problema}
 
-        Si consideri una via di una città, composta da \math{n} case. Per
-        la costruzione di un ospedale si richiede agli \math{n} residenti
-        una donazione. Ciascun \math{i}-esimo residente è disposto a donare
-        una certa somma di denaro \math{d_{i}}, ma a condizione che entrambi
-        i suoi vicini, l'\math{i - 1}-esimo e il \math{i + 1}-esimo residente,
-        si rifiutino di partecipare. Il problema \strong{Hateville} richiede
-        di trovare l'insieme di residenti tale per cui nessuno di questi è
-        vicino di un altro ed al contempo permette di ricavare la massima
-        quantità di denaro dalle donazioni.
+        Si consideri una via di una città, composta da un certo numero
+        di case. Per la costruzione di un ospedale si richiede agli
+        abitanti della via una donazione. Ciascun abitante è disposto
+        a donare una certa somma di denaro, ma a condizione che entrambi
+        i suoi vicini (se esistono) si rifiutino di partecipare.
 
-        Sia \math{X = \{1, 2, \unicodeellipsis, n\}} un insieme di
-        \math{n} entità: a ciascuno è associato un valore \math{d_{i}}.
-        Per qualsiasi insieme \math{A \subseteq X} è possibile definire
-        un valore \math{D(A)} come la somma dei valori di tutte le entità
-        costituiscono \math{A}. Due entità \math{i} e \math{j}, con
-        \math{i > j}, si dicono \em{compatibili} se \math{j \ne i - 1} e
-        \math{j \ne i + 1}. La nozione di compatibilità viene estesa ad
-        un qualsiasi insieme \math{A \subseteq X} assegnandovi un valore
-        booleano \math{\mi{Comp}(A)}, che ha valore di verità \math{T} se
-        tutte le entità che compongo \math{A} sono fra loro compatibili,
+        Formalmente, sia \math{X = \{1, 2, \unicodeellipsis, n\}} un insieme
+        di \math{n} abitanti: a ciascuno è associato un valore \math{d_{i}},
+        ovvero la quantitá di denaro che questi é disposto a donare. Per qualsiasi
+        insieme \math{A \subseteq X} è possibile definire un valore \math{D(A)}
+        come la somma dei valori di tutti gli abitanti che costituiscono \math{A}.
+        Due abitanti \math{i} e \math{j}, con \math{i > j}, sono \em{compatibili}
+        se \math{j \ne i - 1} e \math{j \ne i + 1}. La nozione di compatibilità
+        viene estesa ad un qualsiasi insieme \math{A \subseteq X} assegnandovi
+        un valore booleano \math{\mi{Comp}(A)}, che ha valore di verità \math{T}
+        se tutti gli abitanti che compongo \math{A} sono fra loro compatibili,
         e \math{F} altrimenti.
 
         \begin[width = 50%fw]{parbox}
@@ -41,9 +37,13 @@
         \end{parbox}
         \par
 
-        La risoluzione del problema è data dall'insieme \math{A* \subset X}
-        formato esclusivamente da elementi fra loro compatibili che ha il
-        massimo valore fra tutti gli insiemi con questa caratteristica:
+        Il problema \strong{Hateville} richiede di trovare l'insieme di
+        abitanti tale per cui nessuno di questi è vicino di un altro ed
+        al contempo permette di ricavare la massima quantità di denaro
+        dalle donazioni. Formalmente, la soluzione del problema è data
+        dall'insieme \math{A* \subset X} formato esclusivamente da abitanti
+        fra loro compatibili che ha il massimo valore fra tutti gli insiemi
+        con questa caratteristica:
 
         \begin[mode = display]{math}
             \mi{Comp}(A*) = T \wedge
@@ -53,7 +53,7 @@
 
         Il problema può essere risolto mediante programmazione dinamica.
         Si consideri \math{X_{i} = \{1, 2, \unicodeellipsis, i\} \subseteq
-        X}, l'insieme costituito dai primi \math{i} elementi di \math{X},
+        X}, l'insieme costituito dai primi \math{i} abitanti di \math{X},
         che corrisponde alla \math{i}-esima istanza del problema. A tale
         insieme è associato l'insieme \math{S_{i} = \{1, 2, \unicodeellipsis,
         i\} \subseteq X_{i}}, la soluzione ottimale per la \math{i}-esima
