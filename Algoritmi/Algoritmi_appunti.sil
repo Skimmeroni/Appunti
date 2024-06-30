@@ -102,7 +102,7 @@
 		\include[src = Dinamica/Palindroma.sil]
 		\section{Distanza di modifica} % Da rivedere la ricostruzione della soluzione
 		\include[src = Dinamica/Distanza.sil]
-		\section{Problema Interleaving} % Da rivedere
+		\section{Problema Interleaving}
 		\include[src = Dinamica/Interleaving.sil]
 		\section{Cammino su un grafo} % Da rivedere
 		\include[src = Dinamica/Grafo.sil]

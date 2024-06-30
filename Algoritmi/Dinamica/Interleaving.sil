@@ -103,13 +103,13 @@
 
                 \begin{enumerate}
                     \begin{item}
-                        Se \math{W[j] = Y[j]}, allora \math{W_{j}} è
+                        Se \math{w_{j} = y_{j}}, allora \math{W_{j}} è
                         interleaving di \math{X_{i}} e \math{Y_{j}}
                         soltanto se \math{W_{i + j - 1}} era interleaving
                         di \math{X_{i}} e \math{Y_{j} - 1};
                     \end{item}
                     \begin{item}
-                        Se \math{W[j] \ne Y[j]}, allora \math{W_{j}} non può
+                        Se \math{w_{j} \ne y_{j}}, allora \math{W_{j}} non può
                         essere interleaving di \math{X_{i}} e \math{Y_{j}}.
                     \end{item}
                 \end{enumerate}
@@ -120,13 +120,13 @@
 
                 \begin{enumerate}
                     \begin{item}
-                        Se \math{W[i] = X[i]}, allora \math{W_{i}} è
+                        Se \math{w_{i} = x_{i}}, allora \math{W_{i}} è
                         interleaving di \math{X_{i}} e \math{Y_{j}}
                         soltanto se \math{W_{i + j - 1}} era interleaving
                         di \math{X_{i} - 1} e \math{Y_{j}};
                     \end{item}
                     \begin{item}
-                        Se \math{W[i] \ne X[i]}, allora \math{W_{i}} non può
+                        Se \math{w_{i} \ne x_{i}}, allora \math{W_{i}} non può
                         essere interleaving di \math{X_{i}} e \math{Y_{j}}.
                     \end{item}
                 \end{enumerate}
@@ -141,10 +141,10 @@
             S_{i, j} =
             \{\table[columnalign = left left]{
                 T &            \mi{se} \thickspace i = 0 \wedge j = 0 \\
-                S_{i, j - 1} & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge W[j] =   Y[j] \\
-                F &            \mi{se} \thickspace i = 0 \wedge j > 0 \wedge W[j] \ne Y[j] \\
-                S_{i - 1, j} & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge W[i] =   X[i] \\
-                F &            \mi{se} \thickspace i > 0 \wedge j = 0 \wedge W[i] \ne X[i] \\
+                S_{i, j - 1} & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge w_{j} =   y_{j} \\
+                F &            \mi{se} \thickspace i = 0 \wedge j > 0 \wedge w_{j} \ne y_{j} \\
+                S_{i - 1, j} & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge w_{i} =   x_{i} \\
+                F &            \mi{se} \thickspace i > 0 \wedge j = 0 \wedge w_{i} \ne x_{i} \\
             }
         \end{math}
 
@@ -156,32 +156,32 @@
 
         \begin{itemize}
             \begin{item}
-                \math{W[i + j] \ne X[i]} e \math{W[i + j] \ne Y[j]}. Se
-                non è possibile accodare né \math{X[i]} né \math{Y[j]} a
-                \math{W[i + j]} allora \math{W_{i + j}} non può essere
+                \math{w_{i + j} \ne x_{i}} e \math{w_{i + j} \ne y_{j}}. Se
+                non è possibile accodare né \math{x_{i}} né \math{y_{j}} a
+                \math{w_{i + j}} allora \math{W_{i + j}} non può essere
                 interleaving di \math{X_{i}} e di \math{Y_{j}};
             \end{item}
             \begin{item}
-                \math{W[i + j] = X[i]} e \math{W[i + j] \ne Y[j]}. Siccome
-                l'elemento \math{W[i + j]} è uguale all'elemento \math{X[i]}
-                e diverso da \math{Y[j]}, allora l'unico carattere valido per
-                la posizione \math{i + j} in \math{W} è proprio \math{X[i]}.
+                \math{w_{i + j} = x_{i}} e \math{w_{i + j} \ne y_{j}}. Siccome
+                l'elemento \math{w_{i + j}} è uguale all'elemento \math{x_{i}}
+                e diverso da \math{y_{j}}, allora l'unico carattere valido per
+                la posizione \math{i + j} in \math{W} è proprio \math{x_{i}}.
                 Quindi \math{W_{i + j}} è interleaving di \math{X_{i}} e di
                 \math{Y_{j}} solo se \math{W_{i + j - 1}} era interleaving
                 di \math{X_{i - 1}} e \math{Y_{j}};
             \end{item}
             \begin{item}
-                \math{W[i + j] \ne X[i]} e \math{W[i + j] = Y[j]}. Siccome
-                l'elemento \math{W[i + j]} è uguale all'elemento \math{Y[j]}
-                e diverso da \math{X[i]}, allora l'unico carattere valido per
-                la posizione \math{i + j} in \math{W} è proprio \math{Y[j]}.
+                \math{w_{i + j} \ne x_{i}} e \math{w_{i + j} = y_{j}}. Siccome
+                l'elemento \math{w_{i + j}} è uguale all'elemento \math{y_{j}}
+                e diverso da \math{x_{i}}, allora l'unico carattere valido per
+                la posizione \math{i + j} in \math{W} è proprio \math{y_{j}}.
                 Quindi \math{W_{i + j}} è interleaving di \math{X_{i}} e di
                 \math{Y_{j}} solo se \math{W_{i + j - 1}} era interleaving
                 di \math{X_{i}} e \math{Y_{j - 1}};
             \end{item}
             \begin{item}
-                \math{W[i + j] = X[i]} e \math{W[i + j] = Y[j]}. In questo
-                caso, è possibile accodare sia \math{X[i]} che \math{Y[j]}
+                \math{w_{i + j} = x_{i}} e \math{w_{i + j} = y_{j}}. In questo
+                caso, è possibile accodare sia \math{x_{i}} che \math{y_{j}}
                 al simbolo in posizione \math{i + j} in \math{W}. Pertanto,
                 la soluzione all'\math{i, j}-esima istanza è data dall'OR
                 logico fra la \math{i, j - 1}-esima soluzione e la
@@ -196,10 +196,10 @@
         \begin[mode = display]{math}
             S_{i, j} =
             \{\table[columnalign = left left]{
-                F & \mi{se} \thickspace W[i + j] \ne X[i] \wedge W[i + j] \ne Y[j] \\
-                S_{i - 1, j} & \mi{se} \thickspace W[i + j] = X[i] \wedge W[i + j] \ne Y[j] \\
-                S_{i, j - 1} & \mi{se} \thickspace W[i + j] \ne X[i] \wedge W[i + j] = Y[j] \\
-                S_{i - 1, j} \vee S_{i, j - 1} & \mi{se} \thickspace W[i + j] = X[i] \wedge W[i + j] = Y[j] \\
+                F & \mi{se} \thickspace w_{i + j} \ne x_{i} \wedge w_{i + j} \ne y_{j} \\
+                S_{i - 1, j} & \mi{se} \thickspace w_{i + j} = x_{i} \wedge w_{i + j} \ne y_{j} \\
+                S_{i, j - 1} & \mi{se} \thickspace w_{i + j} \ne x_{i} \wedge w_{i + j} = y_{j} \\
+                S_{i - 1, j} \vee S_{i, j - 1} & \mi{se} \thickspace w_{i + j} = x_{i} \wedge w_{i + j} = y_{j} \\
             }
         \end{math}
 
@@ -211,9 +211,9 @@
                 S_{i, j} =
                 \{\table[columnalign = left left]{
                     T & \mi{se} \thickspace i = 0 \wedge j = 0 \\
-                    F & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge W[j] \ne Y[j] \\
-                    F & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge W[i] \ne X[i] \\
-                    F & \mi{se} \thickspace W[i + j] \ne X[i] \wedge W[i + j] \ne Y[j] \\
+                    F & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge w_{j} \ne y_{j} \\
+                    F & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge w_{i} \ne x_{i} \\
+                    F & \mi{se} \thickspace w_{i + j} \ne x_{i} \wedge w_{i + j} \ne y_{j} \\
                 }
             \end{math}
         \end{parbox}
@@ -221,11 +221,11 @@
             \begin[mode = display]{math}
                 S_{i, j} =
                 \{\table[columnalign = left left]{
-                    S_{i, j - 1} & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge W[j] = Y[j] \\
-                    S_{i - 1, j} & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge W[i] = X[i] \\
-                    S_{i - 1, j} & \mi{se} \thickspace W[i + j] = X[i] \wedge W[i + j] \ne Y[j] \\
-                    S_{i, j - 1} & \mi{se} \thickspace W[i + j] \ne X[i] \wedge W[i + j] = Y[j] \\
-                    S_{i - 1, j} \vee S_{i, j - 1} & \mi{se} \thickspace W[i + j] = X[i] \wedge W[i + j] = Y[j] \\
+                    S_{i, j - 1} & \mi{se} \thickspace i = 0 \wedge j > 0 \wedge w_{j} = y_{j} \\
+                    S_{i - 1, j} & \mi{se} \thickspace i > 0 \wedge j = 0 \wedge w_{i} = x_{i} \\
+                    S_{i - 1, j} & \mi{se} \thickspace w_{i + j} = x_{i} \wedge w_{i + j} \ne y_{j} \\
+                    S_{i, j - 1} & \mi{se} \thickspace w_{i + j} \ne x_{i} \wedge w_{i + j} = y_{j} \\
+                    S_{i - 1, j} \vee S_{i, j - 1} & \mi{se} \thickspace w_{i + j} = x_{i} \wedge w_{i + j} = y_{j} \\
                 }
             \end{math}
         \end{parbox}
@@ -238,8 +238,7 @@
 		per la \math{i, j}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive. L'algoritmo
 		riceve in input le due sequenze \math{X} e \math{Y} e restituisce in
-		output il valore \math{c[|X|, |Y|]}, che corrisponde alla soluzione 
-		del problema per l'istanza completa.
+		output il valore \math{c[|X|, |Y|]}, la soluzione del problema.
 
         \begin{verbatim}
 		procedure INTERLEAVING(X, Y, W)
