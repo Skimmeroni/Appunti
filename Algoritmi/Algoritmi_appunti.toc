@@ -527,7 +527,7 @@ return {
     level = 2,
     link = "dest53",
     number = "1.10",
-    pageno = "24"
+    pageno = "23"
   },
   {
     label = {
@@ -537,7 +537,7 @@ return {
     level = 3,
     link = "dest54",
     number = "1.10.1",
-    pageno = "24"
+    pageno = "23"
   },
   {
     label = {
@@ -567,7 +567,7 @@ return {
     level = 2,
     link = "dest57",
     number = "1.11",
-    pageno = "26"
+    pageno = "25"
   },
   {
     label = {
@@ -577,7 +577,7 @@ return {
     level = 3,
     link = "dest58",
     number = "1.11.1",
-    pageno = "26"
+    pageno = "25"
   },
   {
     label = {
@@ -617,7 +617,7 @@ return {
     level = 3,
     link = "dest62",
     number = "1.11.5",
-    pageno = "28"
+    pageno = "27"
   },
   {
     label = {

@@ -182,7 +182,12 @@
 			            if X[i] = Y[j] then
 			                c[i][j] \unichar{U+2190} c[i - 1][j - 1]
 			            else
-			                c[i][j] \unichar{U+2190} 1 + min\{c[i - 1][j], c[i][j - 1], c[i - 1][j - 1]\}
+			                if (c[i - 1][j] \unichar{U+2264} c[i][j - 1] and c[i - 1][j] \unichar{U+2264} c[i - 1][j - 1]) then
+			                    c[i][j] \unichar{U+2190} 1 + c[i - 1][j]
+			                else if (c[i][j - 1] \unichar{U+2264} c[i - 1][j] and c[i][j - 1] \unichar{U+2264} c[i - 1][j - 1]) then
+			                    c[i][j] \unichar{U+2190} 1 + c[i][j - 1]
+			                else
+			                    c[i][j] \unichar{U+2190} 1 + c[i - 1][j - 1]
 
 			    \bigskip
 			    return c[|X|][|Y|]
@@ -246,114 +251,91 @@
 
 	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
-		Una volta calcolata la lunghezza della trascrizione ottima, è
-		possibile individuarne una ripercorrendo la tabella a ritroso.
-		In particolare, questo viene fatto estendendo l'algoritmo per il
-		calcolo della lunghezza introducendo una nuova tabella \math{b}
-		di puntatori. In particolare, nella cella \math{(i, j)} della
-		tabella \math{b} viene inserito:
+		Una volta calcolata la lunghezza della distanza di modifica,
+		è possibile individuare una trascrizione ottimale ripercorrendo
+		la tabella a ritroso. Questo viene fatto modificando la procedura
+		originale affinché restituisca non il valore \math{c[\abs{X},
+		\abs{Y}]}, ma bensí l'intera tabella \math{c}.
+
+		Alla vecchia procedura opportunamente modificata ne viene aggiunta
+		un'altra, \tt{PRINT-ED}. Questa ha in input la tabella \math{c},
+		le stringhe \math{X} e \math{Y} e due indici di posizione \math{i}
+		e \math{j}, mentre in output ha una delle possibili trascrizioni
+		ottimali per le stringhe in input. La prima chiamata alla procedura
+		ha \math{\abs{X}} come valore per \math{i} e \math{\abs{Y}} come
+		valore per \math{j}, in modo da ottenere la soluzione per l'istanza
+		\math{\abs{X}, \abs{Y}}. Si noti come la trascrizione restituita
+		dalla procedura abbia l'ordine dei caratteri invertito, perché
+		questi sono restituiti dall'ultimo al primo.
+
+		La procedura ripercorre la tabella \math{c} dalla cella \math{(i, j)}
+		verso la cella \math{(0, 0)}: quando questa viene raggiunta, la procedura
+		termina. La tabella viene risalita in tre possibili direzioni: in diagonale,
+		a sinistra oppure in alto. La scelta dipende da quale di queste ha associato
+		il valore minore, e ciascuna scelta porta con se una certa informazione:
 
 		\begin{itemize}
 			\begin{item}
-				Un puntatore \math{\nwarrow} se \math{c(i, j) =
-				c(i - 1, j - 1) + 1} o se \math{c(i, j) = c(i - 1, j - 1)}
+				Spostarsi a sinistra significa che, per l'iterazione corrente,
+				l'operazione migliore é un inserimento;
 			\end{item}
 			\begin{item}
-				un puntatore \math{\leftarrow} se \math{c(i, j) =
-				c(i - 1, j) + 1}
+				Spostarsi in alto significa che, per l'iterazione corrente,
+				l'operazione migliore é una rimozione;
 			\end{item}
 			\begin{item}
-				Un puntatore \math{\uparrow} se \math{c(i, j) =
-				c(i, j - 1) + 1},
+				Spostarsi in diagonale significa che, per l'iterazione corrente,
+				l'operazione migliore é una no-op se l'ultimo carattere delle
+				due sottostringhe coincide oppure una sostituzione.
 			\end{item}
 		\end{itemize}
 
-		\bigskip
-
-		Si noti come vi siano celle in cui potrebbero essere
-		inseriti più puntatori, perché più condizioni possono
-		verificarsi contemporaneamente. Per convenzione, è
-		possibile stabilire un ordine di priorità con cui
-		scegliere un puntatore piuttosto che un altro; questo
-		porta a diverse possibili ricostruzioni, ma queste
-		avranno comunque la stessa lunghezza.
-
-		Per ricavare una trascrizione ottimale a partire dalla tabella, è
-		sufficiente seguire un qualsiasi percorso definito dai puntatori
-		dalla cella \math{(n, m)} alla cella \math{(0, 0)}. Se ci si sposta
-		orizzontalmente, ovvero da una cella \math{(i, j)} ad una cella
-		\math{(i, j - 1)}, allora significa che l'operazione più efficiente 
-		per quel passaggio è un inserimento. Se ci si sposta verticalmente,
-		ovvero da una cella \math{(i, j)} ad una cella \math{(i - 1, j)}
-		allora significa che l'operazione più efficiente per quel passaggio
-		è una rimozione. Se ci si sposta diagonalmente, ovvero da una cella
-		\math{(i, j)} ad una cella \math{(i - 1, j - 1)}, allora significa
-		che l'operazione più efficiente per quel passaggio è una
-		sostituzione se \math{X[i] \ne Y[j]} o una no-op altrimenti.
-
-		Alla vecchia procedura opportunamente modificata ne viene
-		aggiunta un'altra, \tt{PRINT-ED}. Questa ha in input la
-		tabella \math{b}, la stringa \math{X}, la stringa \math{Y}
-		e due indici di posizione \math{i} e \math{j}, mentre in
-		output ha una delle possibili trascrizioni ottimali per
-		le stringhe in input. La prima chiamata alla procedura ha
-		\math{\abs{X}} come valore per \math{i} e \math{\abs{Y}}
-		come valore per \math{j}, in modo da ottenere la soluzione
-		per l'istanza \math{\abs{X}, \abs{Y}}. Si noti come la
-		trascrizione restituita dalla procedura abbia l'ordine dei
-		caratteri invertito, perché questi sono restituiti dall'ultimo
-		al primo.
-
-		\begin[width = 62.5%fw]{parbox}
+		\begin[width = 55%fw]{parbox}
 			\begin{verbatim}
 				procedure ED(X, Y)
 				    for i \unichar{U+2190} 0 to |X| do
-				        c[i, 0] \unichar{U+2190} i
-				        b[i, j] \unichar{U+2190} "\unichar{U+2190}"
+				        c[i][0] \unichar{U+2190} i
 				    for j \unichar{U+2190} 0 to |Y| do
-				        c[0, j] \unichar{U+2190} j
-				        b[i, j] \unichar{U+2190} "\unichar{U+2191}"
+				        c[0][j] \unichar{U+2190} j
 
 				    \bigskip
 				    for i \unichar{U+2190} 1 to |X| do
 				        for j \unichar{U+2190} 1 to |Y| do
 				            if X[i] = Y[j] then
-				                c[i, j] \unichar{U+2190} c[i - 1, j - 1]
-				                b[i, j] \unichar{U+2190} "\unichar{U+2196}"
+				                c[i][j] \unichar{U+2190} c[i - 1][j - 1]
 				            else
-				                if (c[i - 1, j - 1] \unichar{U+2264} c[i, j - 1]) and
-				                   (c[i - 1, j - 1] \unichar{U+2264} c[i - 1, j]) then
-				                    c[i, j] \unichar{U+2190} c[i - 1, j - 1] + 1
-				                    b[i, j] \unichar{U+2190} "\unichar{U+2196}"
-				                else if (c[i - 1, j] \unichar{U+2264} c[i, j - 1]) and
-				                        (c[i - 1, j] \unichar{U+2264} c[i - 1, j - 1]) then
-				                    c[i, j] \unichar{U+2190} c[i - 1, j] + 1
-				                    b[i, j] \unichar{U+2190} "\unichar{U+2190}"
+				                if (c[i - 1][j] \unichar{U+2264} c[i][j - 1] and
+				                    c[i - 1][j] \unichar{U+2264} c[i - 1][j - 1]) then
+				                    c[i][j] \unichar{U+2190} 1 + c[i - 1][j]
+				                else if (c[i][j - 1] \unichar{U+2264} c[i - 1][j] and
+				                         c[i][j - 1] \unichar{U+2264} c[i - 1][j - 1]) then
+				                    c[i][j] \unichar{U+2190} 1 + c[i][j - 1]
 				                else
-				                    c[i, j] \unichar{U+2190} c[i, j - 1] + 1
-				                    b[i, j] \unichar{U+2190} "\unichar{U+2191}"
+				                    c[i][j] \unichar{U+2190} 1 + c[i - 1][j - 1]
 
 				    \bigskip
-				    return c, b
+				    return c
 			\end{verbatim}
 		\end{parbox}
-		\begin[width = 37.5%fw]{parbox}
+		\begin[width = 45%fw]{parbox}
 			\begin{verbatim}
-				procedure PRINT-ED(X, Y, i, j, b)
+				procedure PRINT-ED(c, X, Y, i, j)
 				    if i = 0 or j = 0 then
 				        return
 
 				    \bigskip
-				    if b[i, j] = "\unichar{U+2190}" then
+				    if (c[i - 1][j] \unichar{U+2264} c[i][j - 1] and
+				        c[i - 1][j] \unichar{U+2264} c[i - 1][j - 1]) then
 				        print "I"
-				        PRINT-ED(X, Y, i - 1, j, b)
-				    else if b[i, j] = "\unichar{U+2191}" then
+				        PRINT-ED(c, X, Y, i - 1, j)
+				    else if (c[i][j - 1] \unichar{U+2264} c[i - 1][j] and
+				             c[i][j - 1] \unichar{U+2264} c[i - 1][j - 1]) then
 				        print "D"
-				        PRINT-ED(X, Y, i, j - 1, b)
+				        PRINT-ED(c, X, Y, i, j - 1)
 				    else
 				        if X[i] \unichar{U+2260} Y[j] then
 				            print "R"
-				        PRINT-ED(X, Y, i - 1, j - 1, b)
+				        PRINT-ED(c, X, Y, i - 1, j - 1)
 			\end{verbatim}
 		\end{parbox}
 		\par
@@ -362,153 +344,12 @@
 		comunque proporzionale alle dimensioni della tabella \math{b},
 		perché la ricorsione è una tail-recursion.
 
-		\begin{example}
-			\begin[width = 50%fw]{parbox}
-				\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
-					\begin{row}
-						\cell{} \cell{} \cell{\strong{w}} \cell{\strong{r}}
-						\cell{\strong{i}} \cell{\strong{t}} \cell{\strong{e}}
-						\cell{\strong{r}} \cell{\strong{s}}
-					\end{row}
-					\begin{row}
-						\cell{ }
-						\cell{0} \cell{1} \cell{2} \cell{3}
-						\cell{4} \cell{5} \cell{6} \cell{7}
-					\end{row}
-					\begin{row}
-						\cell{\strong{v}}
-						\cell{1} \cell{1} \cell{2} \cell{3}
-						\cell{4} \cell{5} \cell{6} \cell{7}
-					\end{row}
-					\begin{row}
-						\cell{\strong{i}}
-						\cell{2} \cell{2} \cell{2} \cell{2}
-						\cell{3} \cell{4} \cell{5} \cell{6}
-					\end{row}
-					\begin{row}
-						\cell{\strong{n}}
-						\cell{3} \cell{3} \cell{3} \cell{3}
-						\cell{3} \cell{4} \cell{5} \cell{6}
-					\end{row}
-					\begin{row}
-						\cell{\strong{t}}
-						\cell{4} \cell{4} \cell{4} \cell{4}
-						\cell{3} \cell{4} \cell{5} \cell{6}
-					\end{row}
-					\begin{row}
-						\cell{\strong{n}}
-						\cell{5} \cell{5} \cell{5} \cell{5}
-						\cell{4} \cell{4} \cell{5} \cell{6}
-					\end{row}
-					\begin{row}
-						\cell{\strong{e}}
-						\cell{6} \cell{6} \cell{6} \cell{6}
-						\cell{5} \cell{4} \cell{5} \cell{6}
-					\end{row}
-					\begin{row}
-						\cell{\strong{r}}
-						\cell{7} \cell{7} \cell{6} \cell{7}
-						\cell{6} \cell{5} \cell{4} \cell{5}
-					\end{row}
-				\end{ptable}
-			\end{parbox}
-			\begin[width = 50%fw]{parbox}
-				\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
-					\begin{row}
-						\cell{} \cell{} \cell{\strong{w}} \cell{\strong{r}}
-						\cell{\strong{i}} \cell{\strong{t}} \cell{\strong{e}}
-						\cell{\strong{r}} \cell{\strong{s}}
-					\end{row}
-					\begin{row}
-						\cell{}
-						\cell{}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-					\end{row}
-					\begin{row}
-						\cell{\strong{v}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-					\end{row}
-					\begin{row}
-						\cell{\strong{i}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-					\end{row}
-					\begin{row}
-						\cell{\strong{n}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-						\cell{\math{\leftarrow}}
-					\end{row}
-					\begin{row}
-						\cell{\strong{t}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-					\end{row}
-					\begin{row}
-						\cell{\strong{n}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-					\end{row}
-					\begin{row}
-						\cell{\strong{e}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-					\end{row}
-					\begin{row}
-						\cell{\strong{r}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\uparrow}}
-						\cell{\math{\nwarrow}}
-						\cell{\math{\leftarrow}}
-					\end{row}
-				\end{ptable}
-			\end{parbox}
-		\end{example}
+		Si noti come, in genere, possano esistere più percorsi all'interno
+		della tabella. Il numero di percorsi dipende dal numero \math{k} di
+		biforcazioni. Ogni biforcazione indica una possibile soluzione
+		al problema della distanza di modifica, eventualmente ridonanti.
+		Il numero di percorsi non può essere superiore a \math{2^{k}}, ed
+		il numero di possibili soluzioni distinte è non superiore al numero
+		di possibili percorsi.
 
 \end{sile}

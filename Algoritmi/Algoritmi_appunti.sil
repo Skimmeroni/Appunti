@@ -88,7 +88,7 @@
 		\include[src = Dinamica/LCS.sil]
 		\section{Weighted Interval Scheduling} % Da rivedere l'algoritmo bottom-up e la ricostruzione della soluzione
 		\include[src = Dinamica/WIS.sil]
-		\section{Hateville} % Da rivedere l'introduzione
+		\section{Hateville}
 		\include[src = Dinamica/Hateville.sil]
 		\section{Longest Increasing Subsequence} % Da rivedere la ricostruzione della soluzione ed il problema vincolato
 		\include[src = Dinamica/LIS.sil]
@@ -100,7 +100,7 @@
 		\include[src = Dinamica/Knapsack.sil]
 		\section{Chiusura palindroma}
 		\include[src = Dinamica/Palindroma.sil]
-		\section{Distanza di modifica} % Da rivedere la ricostruzione della soluzione
+		\section{Distanza di modifica} % Non é chiaro chi siano i e j nella ricostruzione della soluzione
 		\include[src = Dinamica/Distanza.sil]
 		\section{Problema Interleaving}
 		\include[src = Dinamica/Interleaving.sil]
