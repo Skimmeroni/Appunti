@@ -84,7 +84,7 @@
 	\pagebreak
 
 	\chapter{Tecnica di programmazione dinamica}
-		\section{Longest Common Subsequence} % Da rivedere la ricostruzione della soluzione
+		\section{Longest Common Subsequence} % Non é chiaro chi siano i e j nella ricostruzione della soluzione
 		\include[src = Dinamica/LCS.sil]
 		\section{Weighted Interval Scheduling} % Da rivedere l'algoritmo bottom-up e la ricostruzione della soluzione
 		\include[src = Dinamica/WIS.sil]

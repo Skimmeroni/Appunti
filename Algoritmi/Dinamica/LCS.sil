@@ -19,7 +19,7 @@
 		lunghezza maggiore, abbreviata con \math{LCS} (\em{longest common
 		subsequence}).
 
-		Anziché affrontare il problema direttamente, si preferisce prima
+		Anziché affrontare il problema direttamente, é piú efficiente prima
 		trovare la lunghezza di una possibile LCS di due sequenze e poi,
 		sulla base di questa informazione, ricostruire la LCS "a ritroso".
 		Pertanto, il problema effettivamente in esame sará il problema
@@ -160,9 +160,9 @@
 			S_{i, j} =
 			\{\table[columnalign = left left]{
 				S_{i - 1, j - 1} + 1 &
-				\mi{se} \thickspace X[i] = Y[j] \\
+				\mi{se} \thickspace x_{i} = y_{j} \\
 				\mi{max}\{S_{i - 1, j}, S_{i, j - 1}\} &
-				\mi{se} \thickspace X[i] \ne Y[j] \\
+				\mi{se} \thickspace x_{i} \ne y_{j} \\
 			}
 		\end{math}
 
@@ -249,53 +249,43 @@
 
 	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
-		Una volta calcolata la lunghezza della LCS, è possibile
-		individuarne una ripercorrendo la tabella a ritroso. In
-		particolare, questo viene fatto estendendo l'algoritmo
-		per il calcolo della lunghezza introducendo una nuova
-		tabella \math{b} di puntatori. In particolare, nella
-		cella \math{(i, j)} della tabella \math{b} viene inserito:
+		Una volta calcolata la lunghezza della LCS, è possibile individuarne
+		una ripercorrendo la tabella a ritroso. Questo viene fatto modificando
+		la procedura originale affinché restituisca non il valore
+		\math{c[\abs{X}, \abs{Y}]}, ma bensí l'intera tabella \math{c}.
+
+		Alla vecchia procedura opportunamente modificata ne viene aggiunta
+		un'altra, \tt{PRINT-LCS}. Questa ha in input la tabella \math{c},
+		le stringhe \math{X} e \math{Y} e due indici di posizione \math{i}
+		e \math{j}, mentre in output ha una delle possibili LCS per la
+		stringa in input. La prima chiamata alla procedura ha \math{\abs{X}}
+		come valore per \math{i} e \math{\abs{Y}} come valore per \math{j},
+		in modo da ottenere la soluzione per l'istanza \math{\abs{X}, \abs{Y}}.
+
+		La procedura ripercorre la tabella \math{c} dalla cella \math{(i, j)}
+		verso la cella \math{(0, 0)}: quando questa viene raggiunta, la procedura
+		termina. La tabella viene risalita in tre possibili direzioni:
 
 		\begin{itemize}
 			\begin{item}
-				Un puntatore \math{\nwarrow} quando l'\math{i}-esimo
-				elemento della prima sequenza è uguale al \math{j}-esimo
-				elemento della seconda;
+				In diagonale quando l'\math{i}-esimo elemento di \math{X} coincide
+				con il \math{j}-esimo elemento di \math{Y}. Questo perché se tale
+				condizione si verifica, allora \math{x_{i} = y_{j}} é certamente
+				parte della LCS;
 			\end{item}
 			\begin{item}
-				un puntatore \math{\uparrow} quando l'\math{i}-esimo elemento
-				della prima sequenza è distinto dal \math{j}-esimo elemento
-				della seconda ed il valore nella cella \math{[i - 1, j]} della
-				tabella principale è maggiore di quello nella cella \math{[i,
-				j - 1]};
+				A sinistra quando l'\math{i}-esimo elemento di \math{X} differisce
+				dall'\math{j}-esimo elemento di \math{Y} e la cella \math{c[i, j]}
+				contiene lo stesso valore della cella \math{c[i - 1, j]}. Questo
+				perché se tale condizione si verifica, allora né \math{x_{i}} né
+				\math{y_{j}} possono essere parte della LCS, ma la LCS rispetto
+				ai prefissi \math{X_{i}} e \math{Y_{j}} é la medesima di quella
+				rispetto ai prefissi \math{X_{i - 1}} e \math{Y_{j}};
 			\end{item}
 			\begin{item}
-				Un puntatore \math{\leftarrow} altrimenti.
+				In alto altrimenti.
 			\end{item}
 		\end{itemize}
-
-		\bigskip
-
-		Alla vecchia procedura opportunamente modificata ne viene aggiunta
-		un'altra, \tt{PRINT-LCS}. Questa ha in input la tabella \math{b},
-		la stringa \math{X} (o la stringa \math{Y}, è indifferente) e due
-		indici di posizione \math{i} e \math{j}, mentre in output ha una
-		delle possibili LCS per la stringa in input. La prima chiamata alla
-		procedura ha \math{\abs{X}} come valore per \math{i} e \math{\abs{Y}}
-		come valore per \math{j}, in modo da ottenere la soluzione per
-		l'istanza \math{\abs{X}, \abs{Y}}.
-
-		La procedura ripercorre la tabella \math{b} dalla cella \math{(i, j)}
-		verso la cella \math{(0, 0)}; ogni volta che si incontra il puntatore
-		\math{\nwarrow}, il valore delle due sequenze in corrispondenza della
-		cella di partenza è un elemento della soluzione.
-
-		Si noti come possano esistere più percorsi all'interno della
-		tabella. Il numero di percorsi dipende dal numero \math{k} di
-		biforcazioni. Ogni biforcazione indica una possibile soluzione
-		al problema LCS, eventualmente ridonanti. Il numero di percorsi
-		non può essere superiore a \math{2^{k}}, ed il numero di possibili
-		soluzioni distinte è non superiore al numero di possibili percorsi.
 
 		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
@@ -310,38 +300,77 @@
 				        for j \unichar{U+2190} 1 to |Y| do
 				            if X[i] = Y[j] then
 				                c[i, j] \unichar{U+2190} 1 + c[i - 1, j - 1]
-				                b[i, j] \unichar{U+2190} "\unichar{U+2196}"
 				            else if c[i - 1, j] > c[i, j - 1] then
 				                c[i, j] \unichar{U+2190} c[i - 1, j]
-				                b[i, j] \unichar{U+2190} "\unichar{U+2191}"
 				            else
 				                c[i, j] \unichar{U+2190} c[i, j - 1]
-				                b[i, j] \unichar{U+2190} "\unichar{U+2190}"
 
 				    \bigskip
-				    return c, b
+				    return c
 			\end{verbatim}
 		\end{parbox}
 		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
-				procedure PRINT-LCS(b, X, i, j)
-				    if i = 0 or j = 0 then
+				procedure PRINT-LCS(c, X, Y, i, j)
+				    if (i = 0 or j = 0) then
 				        return
 
 				    \bigskip
-				    if b[i, j] = "\unichar{U+2196}" then
-				        PRINT-LCS(b, X, i - 1, j - 1)
+				    if (X[i] = Y[j]) then
+				        PRINT-LCS(c, X, Y, i - 1, j - 1)
 				        print X[i]
-				    else if b[i, j] = "\unichar{U+2191}" then
-				        PRINT-LCS(b, X, i - 1, j)
 				    else
-				        PRINT-LCS(b, X, i, j - 1)							
+				        if (c[i, j] = c[i - 1, j]) then
+				            PRINT-LCS(c, X, Y, i - 1, j)
+				        else
+				            PRINT-LCS(c, X, Y, i, j - 1)
 			\end{verbatim}
 		\end{parbox}
 		\par
 
-		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione è 
-		comunque proporzionale alle dimensioni della tabella \math{b},
-		perché la ricorsione è una tail-recursion. 
+		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione
+		è comunque proporzionale alle dimensioni della tabella \math{c},
+		perché la ricorsione è una tail-recursion. In particolare:
+
+		\begin{itemize}
+			\begin{item}
+				Quando le due sequenze \math{X} e \math{Y} sono uguali,
+				si avranno \math{\abs{X} = \abs{Y}} iterazioni. Questo
+				perché per definizione si ricade sempre nel primo caso
+				della ricorsione, ed i due indici vengono sempre
+				decrementati di uno ad ogni chiamata;
+			\end{item}stringhe
+			\begin{item}
+				Quando le due sequenze \math{X} e \math{Y} non hanno alcun
+				carattere in comune, si avranno \math{\abs{X}} iterazioni.
+				Questo perché per definizione la tabella \math{c} sará
+				interamente costituita da 0, e si ricadrá quindi sempre nel
+				secondo caso della ricorsione (naturalmente, se i casi due
+				e tre venissero scambiati di posto, si avrebbe tempo di
+				esecuzione \math{\abs{Y}}). Tecnicamente, sarebbe possibile
+				ottimizzare la procedura \tt{PRINT-LIS} per terminare
+				immediatamente restituendo \math{\epsilon} se si ha
+				\math{c[i, j] = 0} con \math{i > 0} e \math{j > 0}, perché
+				in tal caso é garantito che l'LCS delle due sequenze sia la
+				sequenza vuota;
+			\end{item}
+			\begin{item}
+				Quando la sequenza \math{X} é una sottosequenza di \math{Y},
+				e quindi \math{X} é essa stessa la LCS di \math{Y}, si avranno
+				\math{\abs{Y}} iterazioni. Questo perché ad ogni chiamata si
+				ricadrá sempre o nel primo caso oppure nel secondo, ma in
+				entrambi i casi l'effetto é che l'indice \math{i} viene
+				sempre decrementato di uno.
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		Si noti come, in genere, possano esistere più percorsi all'interno
+		della tabella. Il numero di percorsi dipende dal numero \math{k} di
+		biforcazioni. Ogni biforcazione indica una possibile soluzione
+		al problema LCS, eventualmente ridonanti. Il numero di percorsi
+		non può essere superiore a \math{2^{k}}, ed il numero di possibili
+		soluzioni distinte è non superiore al numero di possibili percorsi.
 
 \end{sile}
