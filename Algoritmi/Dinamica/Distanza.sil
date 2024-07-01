@@ -66,6 +66,17 @@
 		\math{Y_{j}}. La soluzione per le intere sequenze \math{X} e
 		\math{Y} è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
 
+		Per calcolare la soluzione ottimale della generica istanza
+		\math{X_{i}, Y_{j}}, ovvero \math{S_{i, j}}, verrá assunto
+		di avere a disposizione tutte le soluzioni parziali nella
+		forma \math{S_{a, b}}, con \math{1 \leq a < i} e \math{1
+		\leq b < j}. Pertanto, per il calcolo della soluzione ottimale
+		dell'\math{i, j}-esima istanza del problema si hanno a disposizione
+		l'\math{i}-esimo carattere della sequenza \math{X}, il \math{j}-esimo
+		carattere della sequenza \math{Y} e le lunghezze delle trascrizioni
+		ottimali delle istanze da \math{i - 1, j - 1} a 0, 0, ma non gli
+		elementi delle due sequenze che comportano tali lunghezze.
+
 		\begin{example}
 			\begin[width = 35%fw]{parbox}
 				\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw
@@ -120,14 +131,11 @@
 			}
 		\end{math}
 
-		Per quanto riguarda il passo ricorsivo, si assuma di avere a
-		disposizione tutte le soluzioni nella forma \math{S_{a, b}},
-		con \math{1 \leq a < i} e \math{1 \leq b < j}, e di voler
-		calcolare \math{S_{i, j}}. Possono verificarsi solamente due
-		situazioni, mutualmente esclusive: l'\math{i}-esimo carattere di
-		\math{X_{i}} e uguale al \math{j}-esimo carattere di \math{Y_{j}}
-        oppure l'\math{i}-esimo carattere di \math{X_{i}} è diverso dal
-        \math{j}-esimo carattere di \math{Y_{j}}.
+		Per quanto riguarda il passo ricorsivo, possono verificarsi
+		solamente due situazioni, mutualmente esclusive: l'\math{i}-esimo
+		carattere di \math{X_{i}} e uguale al \math{j}-esimo carattere di
+		\math{Y_{j}} oppure l'\math{i}-esimo carattere di \math{X_{i}} è
+		diverso dal \math{j}-esimo carattere di \math{Y_{j}}.
 
 		Nel primo caso, la \math{i, j}-esima soluzione coincide
 		con la \math{i - 1, j - 1}-esima. Questo perché è l'unica
