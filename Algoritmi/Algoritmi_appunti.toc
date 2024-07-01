@@ -341,7 +341,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza",
+      "Definizione del problema ausiliario",
       id = "stuff"
     },
     level = 3,
@@ -351,7 +351,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up",
+      "Programmazione dinamica: equazione di ricorrenza",
       id = "stuff"
     },
     level = 3,
@@ -361,13 +361,13 @@ return {
   },
   {
     label = {
-      "Osservazioni",
+      "Programmazione dinamica: implementazione bottom-up",
       id = "stuff"
     },
     level = 3,
     link = "dest37",
     number = "1.6.4",
-    pageno = "16"
+    pageno = "17"
   },
   {
     label = {
@@ -377,7 +377,7 @@ return {
     level = 2,
     link = "dest38",
     number = "1.7",
-    pageno = "16"
+    pageno = "17"
   },
   {
     label = {
@@ -397,7 +397,7 @@ return {
     level = 3,
     link = "dest40",
     number = "1.7.2",
-    pageno = "17"
+    pageno = "18"
   },
   {
     label = {
@@ -417,7 +417,7 @@ return {
     level = 3,
     link = "dest42",
     number = "1.7.4",
-    pageno = "18"
+    pageno = "19"
   },
   {
     label = {
@@ -437,7 +437,7 @@ return {
     level = 2,
     link = "dest44",
     number = "1.8",
-    pageno = "19"
+    pageno = "20"
   },
   {
     label = {
@@ -447,7 +447,7 @@ return {
     level = 3,
     link = "dest45",
     number = "1.8.1",
-    pageno = "19"
+    pageno = "20"
   },
   {
     label = {
@@ -467,7 +467,7 @@ return {
     level = 3,
     link = "dest47",
     number = "1.8.3",
-    pageno = "20"
+    pageno = "21"
   },
   {
     label = {
@@ -477,7 +477,7 @@ return {
     level = 2,
     link = "dest48",
     number = "1.9",
-    pageno = "20"
+    pageno = "21"
   },
   {
     label = {
@@ -487,7 +487,7 @@ return {
     level = 3,
     link = "dest49",
     number = "1.9.1",
-    pageno = "20"
+    pageno = "21"
   },
   {
     label = {
@@ -497,7 +497,7 @@ return {
     level = 3,
     link = "dest50",
     number = "1.9.2",
-    pageno = "21"
+    pageno = "22"
   },
   {
     label = {
@@ -517,7 +517,7 @@ return {
     level = 3,
     link = "dest52",
     number = "1.9.4",
-    pageno = "22"
+    pageno = "23"
   },
   {
     label = {
@@ -527,7 +527,7 @@ return {
     level = 2,
     link = "dest53",
     number = "1.10",
-    pageno = "23"
+    pageno = "24"
   },
   {
     label = {
@@ -537,7 +537,7 @@ return {
     level = 3,
     link = "dest54",
     number = "1.10.1",
-    pageno = "23"
+    pageno = "24"
   },
   {
     label = {
@@ -547,7 +547,7 @@ return {
     level = 3,
     link = "dest55",
     number = "1.10.2",
-    pageno = "24"
+    pageno = "25"
   },
   {
     label = {
@@ -557,7 +557,7 @@ return {
     level = 3,
     link = "dest56",
     number = "1.10.3",
-    pageno = "25"
+    pageno = "26"
   },
   {
     label = {
@@ -567,7 +567,7 @@ return {
     level = 2,
     link = "dest57",
     number = "1.11",
-    pageno = "25"
+    pageno = "26"
   },
   {
     label = {
@@ -577,7 +577,7 @@ return {
     level = 3,
     link = "dest58",
     number = "1.11.1",
-    pageno = "25"
+    pageno = "26"
   },
   {
     label = {
@@ -587,7 +587,7 @@ return {
     level = 3,
     link = "dest59",
     number = "1.11.2",
-    pageno = "26"
+    pageno = "27"
   },
   {
     label = {
@@ -597,7 +597,7 @@ return {
     level = 3,
     link = "dest60",
     number = "1.11.3",
-    pageno = "26"
+    pageno = "27"
   },
   {
     label = {
@@ -607,7 +607,7 @@ return {
     level = 3,
     link = "dest61",
     number = "1.11.4",
-    pageno = "27"
+    pageno = "28"
   },
   {
     label = {
@@ -617,7 +617,7 @@ return {
     level = 3,
     link = "dest62",
     number = "1.11.5",
-    pageno = "27"
+    pageno = "28"
   },
   {
     label = {
@@ -627,7 +627,7 @@ return {
     level = 3,
     link = "dest63",
     number = "1.11.6",
-    pageno = "29"
+    pageno = "30"
   },
   {
     label = {

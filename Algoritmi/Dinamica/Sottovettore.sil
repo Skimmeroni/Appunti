@@ -43,15 +43,51 @@
 		effettivamente in esame sará il problema del peso complessivo del
 		sottovettore di peso massimo.
 
+		Il problema puó essere risolto mediante programmazione dinamica.
+		Dato un vettore \math{V} avente cardinalità \math{n}, sia \math{V_{i}}
+		il sottovettore \math{(v_{1}, v_{2}, \unicodeellipsis, v_{i})}. La
+		soluzione \math{S_{i}} per l'\math{i}-esima istanza del problema
+		corrisponde a trovare la soluzione ottimale per il problema HSV
+        rispetto al sottovettore \math{V_{i}}. La soluzione per l'intero
+        vettore \math{V} è la soluzione per l'istanza \math{V_{n}}.
+
+        Per calcolare la soluzione ottimale della generica istanza \math{V_{i}},
+        ovvero \math{S_{i}}, verrá assunto di avere a disposizione tutte le
+        soluzioni parziali \math{S_{i - 1}, S_{i - 2}, \unicodeellipsis,
+        S_{1}, S_{0}}. Pertanto, per il calcolo della soluzione ottimale
+        dell'\math{i}-esima istanza del problema si hanno a disposizione
+        il peso dell'elemento \math{i}-esimo ed i pesi complessivi dei
+        sottovettori di peso massimo rispetto alle istanze da \math{i - 1}
+        a 0, ma non gli elementi del vettore la cui somma fornisce tali pesi.
+        \math{v_{i}} puó essere come puó non essere uno degli elementi del
+        sottovettore di \math{V_{i}} di peso \math{S_{i}}.
+
+	\subsection{Definizione del problema ausiliario}
+
         Attaccare il problema HSV direttamente tramite programmazione
-        dinamica è complesso. Un miglior approccio consiste nel restringere
-        i requisiti del problema per considerarne una versione semplificata.
+        dinamica non è possibile, perché manca un'informazione. Infatti,
+        se non é noto quali siano gli elementi la cui somma di pesi
+        costituisce le soluzioni ottimali parziali \math{S_{i - 1},
+        \unicodeellipsis, S_{0}} non vi é alcun modo di sapere se
+        l'elemento \math{i}-esimo possa essere accodato ad un sottovettore
+        avente peso \math{S_{j}} con \math{j < i} ottenendo di nuovo un
+        sottovettore di \math{V_{i}}. Questo perché i pesi \math{S_{j}}
+        potrebbero riferirsi a sottovettori che, accodandovi \math{v_{i}},
+        non sarebbero piú contigui in \math{V_{i}}.
+
+        L'unico caso in cui si avrebbe la certezza di ottenere ancora
+        un sottovettore di \math{V_{i}} é si ha quando é garantito che
+        il sottovettore soluzione ottimale per l'\math{i}-esima istanza
+        contiene anche \math{v_{i}}. É pertanto necessario introdurre un
+        problema ausiliario che includa l'informazione mancante.
 
         Una versione più semplice del problema HSV, chiamato \strong{HSV
         vincolato}, richiede di trovare, fra tutti i sottovettori costruibili
         a partire da un vettore \math{V}, quello avente peso complessivo
         massimo e avente l'ultimo elemento coincidente con l'ultimo elemento
-        del vettore originario.
+        del vettore originario. Anche in questo caso, si preferisce considerare
+        non l'effettiva soluzione di ciascuna istanza del problema, bensí il
+        suo peso complessivo, e poi ricostruire "a ritroso" la soluzione.
 
         Dato un vettore \math{V} avente cardinalità \math{n},
         sia \math{V_{i}} il sottovettore \math{(v_{1}, v_{2},
@@ -61,6 +97,18 @@
         vincolato rispetto al sottovettore \math{V_{i}}. La
         soluzione per l'intero vettore \math{V} è la soluzione
         per l'istanza \math{V_{n}}.
+
+        Per calcolare la soluzione ottimale della generica istanza
+        \math{V_{i}}, ovvero \math{S_{i}}, verrá assunto di avere a
+        disposizione tutte le soluzioni parziali \math{S_{i - 1},
+        S_{i - 2}, \unicodeellipsis, S_{1}, S_{0}}. Pertanto, per
+        il calcolo della soluzione ottimale dell'\math{i}-esima
+        istanza del problema si hanno a disposizione il peso dell'elemento
+        \math{i}-esimo ed i pesi complessivi dei sottovettori di peso massimo
+        rispetto alle istanze da \math{i - 1} a 0, ma non gli elementi del
+        vettore la cui somma fornisce tali pesi. A differenza del problema
+        originale, \math{v_{i}} é per forza uno degli elementi (in particolare,
+        l'ultimo) del sottovettore di \math{V_{i}} di peso \math{S_{i}}.
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
@@ -84,13 +132,11 @@
         \end{parbox}
         \par
 
-        Per quanto riguarda il passo ricorsivo, si assuma di avere a
-        disposizione tutte le soluzioni \math{S_{i - 1}, S_{i - 2},
-        \unicodeellipsis} e di voler calcolare \math{S_{i}}. Dato che
-        il problema HSV vincolato richiede di trovare il peso complessivo
-        del sottovettore di peso massimo che termini con l'ultimo elemento
-        del vettore, il peso dell'\math{i}-esimo elemento del vettore sará
-        certamente parte della soluzione.
+        Per quanto riguarda il passo ricorsivo, dato che il problema HSV
+        vincolato richiede di trovare il peso complessivo del sottovettore
+        di peso massimo che termini con l'ultimo elemento del vettore, il
+        peso dell'\math{i}-esimo elemento del vettore sará certamente parte
+        della \math{i}-esima soluzione ottimale.
 
         L'unica scelta da compiere in merito a tale soluzione è se sommarvi
         o non sommarvi anche la \math{i - 1}-esima soluzione ottimale. Se
@@ -120,10 +166,10 @@
 		per la \math{i}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive.
 		L'algoritmo riceve in input il vettore \math{V} e restituisce
-		in output il vettore \math{c}.
+		in output \math{c[\abs{V}]}, la soluzione del problema.
 
 		\begin{verbatim}
-			procedure HSV(V)
+			procedure BOUNDED-HSV(V)
 			    c[0] \unichar{U+2190} 0
 			    c[1] \unichar{U+2190} V[1]
 
@@ -135,7 +181,31 @@
 			            c[i] \unichar{U+2190} c[i - 1] + V[i]
 
 			    \bigskip
-			    return c
+			    return c[|V|]
+		\end{verbatim}
+
+		Il problema HSV non vincolato può essere ridotto al problema
+		HSV vincolato. Infatti, la soluzione del problema HSV non
+		vincolato non è altro che la maggior soluzione parziale del
+		problema HSV vincolato.
+
+		\begin{verbatim}
+			procedure HSV(V)
+			    c[0] \unichar{U+2190} 0
+			    c[1] \unichar{U+2190} V[1]
+			    best \unichar{U+2190} 0
+
+			    \bigskip
+			    for i \unichar{U+2190} 2 to |V| do
+			        if (c[i - 1] \unichar{U+2264} 0) then
+			            c[i] \unichar{U+2190} V[i]
+			        else
+			            c[i] \unichar{U+2190} c[i - 1] + V[i]
+			        if (c[i] > best) then
+			            best \unichar{U+2190} c[i]
+
+			    \bigskip
+			    return best
 		\end{verbatim}
 
         È facile notare come il tempo di esecuzione dell'algoritmo sia
@@ -143,11 +213,5 @@
         Questo perché tale algoritmo è composto da un solo ciclo che
         esegue per \math{n} volte una istruzione con tempo di esecuzione
         immediato.
-
-    \subsection{Osservazioni}
-
-        Il problema HSV non vincolato può essere ridotto al problema HSV
-        vincolato. Infatti, la soluzione del problema HSV non vincolato non
-        è altro che la maggior soluzione parziale del problema HSV vincolato.
 
 \end{sile}

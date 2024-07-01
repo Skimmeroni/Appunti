@@ -94,7 +94,7 @@
 		\include[src = Dinamica/LIS.sil]
 		\section{Longest Increasing Common Subsequence} % Da rivedere
 		\include[src = Dinamica/LICS.sil]
-		\section{Sottovettore di peso massimo} % Da rivedere il problema vincolato
+		\section{Sottovettore di peso massimo}
 		\include[src = Dinamica/Sottovettore.sil]
 		\section{Knapsack 0/1}
 		\include[src = Dinamica/Knapsack.sil]
