@@ -20,6 +20,15 @@
         soluzione per l'intera stringa \math{X} è la soluzione per l'istanza
         \math{X_{1, n}}.
 
+        Per calcolare la soluzione ottimale della generica istanza \math{X_{i,
+        j}}, ovvero \math{S_{i, j}}, verrá assunto di avere a disposizione tutte
+        le soluzioni parziali nella forma \math{S_{a, b}}, con \math{1 \leq a < i}
+        e \math{1 \leq b < j}. Pertanto, per il calcolo della soluzione ottimale
+        dell'\math{i, j}-esima istanza del problema si hanno a disposizione
+        l'\math{i}-esimo carattere della sequenza \math{X}, il \math{j}-esimo
+        carattere della sequenza \math{X} ed il numero di caratteri necessari
+        a rendere palindrome le istanze da \math{i - 1, j - 1} a 0, 0.
+
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
         Il caso base è immediato. Se la sottostringa \math{X_{i, j}} è
@@ -35,12 +44,9 @@
             S_{i, j} = 0 \thickspace \mi{se} \thickspace i \geq j
         \end{math}
 
-        Per quanto riguarda il passo ricorsivo, si assuma di avere
-		a disposizione tutte le soluzioni nella forma \math{S_{a, b}},
-		con \math{1 \leq a < i} e \math{1 \leq b < j}, e di voler
-		calcolare \math{S_{i, j}}. Possono verificarsi solamente due
-		situazioni: il primo ed ultimo carattere di \math{X_{i, j}}
-		sono uguali oppure sono diversi.
+        Per quanto riguarda il passo ricorsivo, possono verificarsi
+        solamente due situazioni: il primo ed ultimo carattere di
+        \math{X_{i, j}} sono uguali oppure sono diversi.
 
         Se sono uguali, allora tale stringa è palindroma solo se lo
         è anche la sottostringa ottenuta eliminandovi tali caratteri,

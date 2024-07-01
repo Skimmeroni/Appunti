@@ -98,7 +98,7 @@
 		\include[src = Dinamica/Sottovettore.sil]
 		\section{Knapsack 0/1}
 		\include[src = Dinamica/Knapsack.sil]
-		\section{Chiusura palindroma} % spostare le soluzioni parziali
+		\section{Chiusura palindroma}
 		\include[src = Dinamica/Palindroma.sil]
 		\section{Distanza di modifica} % Non é chiaro chi siano i e j nella ricostruzione della soluzione, spostare le soluzioni parziali
 		\include[src = Dinamica/Distanza.sil]
