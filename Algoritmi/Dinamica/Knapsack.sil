@@ -362,15 +362,16 @@
 				procedure PRINT-KNAPSACK(p, W, i, c)
 				    if (i = 0 or c = 0) then
 				        return
-				    else
-				        if (c \unichar{U+2265} W[i]) then
-				            if (p[i, c] = p[i - 1, c]) then
-				                PRINT-KNAPSACK(p, W, i - 1, c)
-				            else
-				                PRINT-KNAPSACK(p, W, i - 1, c - W[i])
-				                print i
-				        else
+
+				    \bigskip
+				    if (c \unichar{U+2265} W[i]) then
+				        if (p[i, c] = p[i - 1, c]) then
 				            PRINT-KNAPSACK(p, W, i - 1, c)
+				        else
+				            PRINT-KNAPSACK(p, W, i - 1, c - W[i])
+				            print i
+				    else
+				        PRINT-KNAPSACK(p, W, i - 1, c)
 			\end{verbatim}
 		\end{parbox}
 		\par

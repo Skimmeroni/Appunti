@@ -266,18 +266,18 @@
 		\begin{verbatim}
 			procedure HATEVILLE(A)
 			    c[0] \unichar{U+2190} 0
-			    c[1] \unichar{U+2190} V(A[1])
+			    c[1] \unichar{U+2190} v\textsubscript{1}
 			    d[0] \unichar{U+2190} \unichar{U+2205}
 			    d[1] \unichar{U+2190} A[1]
 
 			    \bigskip
 			    for i \unichar{U+2190} 2 to |A| do
-			        if (c[i - 1] \unichar{U+2265} c[i - 2] + V(A[i])) then
+			        if (c[i - 1] \unichar{U+2265} c[i - 2] + v\textsubscript{i} then
 			            c[i] \unichar{U+2190} c[i - 1]
 			            d[i] \unichar{U+2190} d[i - 1]
 			        else
-			            c[i] \unichar{U+2190} c[i - 2] + V(A[i])
-			            d[i] \unichar{U+2190} d[i - 2] \unichar{U+222A} \{i\}
+			            c[i] \unichar{U+2190} c[i - 2] + v\textsubscript{i}
+			            d[i] \unichar{U+2190} d[i - 2] \unichar{U+222A} \{A[i]\}
 
 			\bigskip
 			return c[|A|], d[|A|]
