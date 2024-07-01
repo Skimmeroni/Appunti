@@ -21,24 +21,76 @@
 		della lunghezza della sottosequenza strettamente crescente piú
 		lunga.
 
-        Attaccare il problema LIS direttamente tramite programmazione dinamica
-        è complesso. Un miglior approccio consiste nel restringere i requisiti
-        del problema per considerarne una versione semplificata.
+		Il problema puó essere risolto mediante programmazione dinamica.
+		Data una sequenza \math{X} avente lunghezza \math{n}, sia \math{X_{i}
+		= [1 : i]} il suo prefisso di lunghezza \math{i}. La soluzione
+		\math{S_{i}} per l'\math{i}-esima istanza del problema corrisponde
+		a trovare la soluzione ottimale per il problema LIS rispetto al
+		prefisso \math{X_{i}}. La soluzione per l'intera sequenza \math{X}
+		è la soluzione per l'istanza \math{X_{n}}.
+
+        Per calcolare la soluzione ottimale della generica istanza \math{X_{i}},
+        ovvero \math{S_{i}}, verrá assunto di avere a disposizione tutte le
+        soluzioni parziali \math{S_{i - 1}, S_{i - 2}, \unicodeellipsis,
+        S_{1}, S_{0}}. Pertanto, per il calcolo della soluzione ottimale
+        dell'\math{i}-esima istanza del problema si hanno a disposizione
+        l'elemento \math{i}-esimo della sequenza, ovvero \math{x_{i}}, e le
+        lunghezze delle sottosequenze strettamente crescenti rispetto alle
+        istanze da \math{i - 1} a 0, ma non gli elementi della sequenza che
+        comportano tale lunghezza. \math{x_{i}} puó essere come puó non essere
+        uno degli elementi della sottosequenza strettamente crescente di
+        \math{X_{i}} di lunghezza \math{S_{i}}.
+
+	\subsection{Definizione del problema ausiliario}
+
+        Attaccare il problema LIS direttamente tramite programmazione
+        dinamica non è possibile, perché manca un'informazione. Infatti,
+        se non é noto quali siano gli elementi che hanno indotto le
+        lunghezze ottimali parziali \math{S_{i - 1}, \unicodeellipsis,
+        S_{0}} non vi é alcun modo di sapere se l'elemento \math{i}-esimo
+        possa essere accodato ad una sottosequenza avente peso \math{S_{j}}
+        con \math{j < i} ottenendo di nuovo una sottosequenza strettamente
+        crescente di \math{X_{i}}. Questo perché le lunghezze \math{S_{j}}
+        potrebbero riferirsi a sottosequenze che contengono elementi che
+        vengono dopo di \math{x_{i}} nell'ordine lessicografico.
+
+        L'unico caso in cui si avrebbe la certezza di ottenere ancora
+        una sottosequenza strettamente crescente di \math{X_{i}} si ha
+        quando é garantito che la sottosequenza soluzione ottimale per
+        l'\math{i}-esima istanza contiene anche \math{x_{i}}. É pertanto
+        necessario introdurre un problema ausiliario che includa
+        l'informazione mancante.
 
         Una versione più semplice del problema LIS, chiamato \strong{LIS
         vincolato} (\strong{LISV}), prevede di trovare la più lunga
         sottosequenza di una sequenza i cui elementi (nell'ordine in cui
         si trovano) hanno valore strettamente crescente e dove l'ultimo
         elemento di tale sottosequenza coincide con l'ultimo elemento
-        della sequenza originaria.
+        della sequenza originaria. Anche in questo caso, si preferisce
+        considerare non l'effettiva soluzione di ciascuna istanza del
+        problema, bensí il suo peso complessivo, e poi ricostruire "a
+        ritroso" la soluzione.
 
-        Data una sequenza \math{X} di lunghezza \math{n}, sia \math{X_{i}
-        = X[1 : i]} il prefisso di lunghezza \math{i} di tale sequenza.
-        La soluzione \math{S_{i}} per l'\math{i}-esima istanza del problema
-        corrisponde a trovare la soluzione ottimale per il problema LIS
-        vincolato rispetto alla sottosequenza \math{X_{i}}. La soluzione
-        per l'intera sequenza \math{X} è la soluzione per l'istanza
-        \math{X_{n}}.
+        Data una sequenza \math{X} avente lunghezza \math{n}, sia
+        \math{X_{i} = [1 : i]} il suo prefisso di lunghezza \math{i}.
+        La soluzione \math{S_{i}} per l'\math{i}-esima istanza del
+        problema corrisponde a trovare la soluzione ottimale per il
+        problema LIS vincolato rispetto al prefisso \math{X_{i}}. La
+        soluzione per l'intera sequenza \math{X} è la soluzione per
+        l'istanza \math{X_{n}}.
+
+        Per calcolare la soluzione ottimale della generica istanza \math{X_{i}},
+        ovvero \math{S_{i}}, verrá assunto di avere a disposizione tutte le
+        soluzioni parziali \math{S_{i - 1}, S_{i - 2}, \unicodeellipsis,
+        S_{1}, S_{0}}. Pertanto, per il calcolo della soluzione ottimale
+        dell'\math{i}-esima istanza del problema si hanno a disposizione
+        l'elemento \math{i}-esimo della sequenza, ovvero \math{x_{i}}, e le
+        lunghezze delle sottosequenze strettamente crescenti rispetto alle
+        istanze da \math{i - 1} a 0, ma non gli elementi della sequenza che
+        comportano tale lunghezza. A differenza del problema originale,
+        \math{x_{i}} é per forza uno degli elementi (in particolare, l'ultimo)
+        della sottosequenza strettamente crescente di \math{X_{i}} di peso
+        \math{S_{i}}.
 
         \begin{example}
             Sia data la sequenza \math{X = \langle 14, 1, 4, 6, 13, 15, 0, 13,
@@ -126,18 +178,16 @@
         \end{parbox}
         \par
 
-        Per quanto riguarda il passo ricorsivo, si assuma di avere
-        a disposizione tutte le soluzioni \math{S_{i - 1}, S_{i - 2},
-        \unicodeellipsis} e di voler calcolare \math{S_{i}}. Una
-        generica soluzione per la \math{i}-esima istanza del problema
-        deve essere costruita accodando \math{x_{i}} ad sottosequenza
-        strettamente crescente tale che tutti gli elementi di tale
-        sottosequenza vengono prima, in ordine lessicografico, di
-        \math{x_{i}}. Questo perché l'aggiunta di \math{x_{i}} in coda
-        ad una tale sottosequenza restituisce ancora una sottosequenza
-        strettamente crescente. La soluzione ottimale \math{S_{i}} è data
-        dalla lunghezza della sottosequenza con queste caratteristiche più
-        lunga possibile aumentata di uno.
+        Per quanto riguarda il passo ricorsivo, si ha che una generica
+        soluzione per la \math{i}-esima istanza del problema deve essere
+        costruita accodando \math{x_{i}} ad sottosequenza strettamente
+        crescente tale che tutti gli elementi di tale sottosequenza
+        vengono prima, in ordine lessicografico, di \math{x_{i}}. Questo
+        perché l'aggiunta di \math{x_{i}} in coda ad una tale sottosequenza
+        restituisce ancora una sottosequenza strettamente crescente. La
+        soluzione ottimale \math{S_{i}} è data dalla lunghezza della
+        sottosequenza con queste caratteristiche più lunga possibile
+        aumentata di uno.
 
         La sottosequenza strettamente crescente più lunga possibile con
         tutti gli elementi che vengono prima, in ordine lessicografico,
@@ -163,8 +213,8 @@
 
     \subsection{Programmazione dinamica: implementazione bottom-up}
 
-        L'algoritmo bottom-up viene costruito a partire dall'equazione
-        di ricorrenza sfruttando un vettore \math{c}. In ciascuna cella
+		L'algoritmo bottom-up viene costruito a partire dall'equazione
+		di ricorrenza sfruttando un vettore \math{c}. In ciascuna cella
 		\math{c[i]} viene riportato il valore della soluzione ottimale
 		per la \math{i}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive.
@@ -179,7 +229,7 @@
 
         \begin{verbatim}
 			procedure BOUNDED-LIS(X)
-				c[0] \unichar{U+2190} 0
+			    c[0] \unichar{U+2190} 0
 			    for i \unichar{U+2190} 1 to |X| do
 			        c[i] \unichar{U+2190} 1
 
@@ -195,6 +245,32 @@
 			    return c
         \end{verbatim}
 
+        Il problema LIS non vincolato può essere ridotto al problema
+		LIS vincolato. Infatti, la soluzione del problema LIS non
+		vincolato non è altro che la maggior soluzione parziale del
+		problema LIS vincolato.
+
+		\begin{verbatim}
+			procedure LIS(X)
+			    c[0] \unichar{U+2190} 0
+			    for i \unichar{U+2190} 1 to |X| do
+			        c[i] \unichar{U+2190} 1
+			    best \unichar{U+2190} 0
+
+			    \bigskip
+			    for i \unichar{U+2190} 2 to |X| do
+			        t \unichar{U+2190} 0
+			        for j \unichar{U+2190} 1 to i - 1 do
+			            if (X[j] < X[i]) and (c[j] \unichar{U+2265} t) then
+			                t \unichar{U+2190} c[j]
+			        c[i] \unichar{U+2190} t + 1
+			        if (c[i] > best) then
+			            best \unichar{U+2190} c[i]
+
+			    \bigskip
+			    return best
+        \end{verbatim}
+
         È facile notare come il tempo di esecuzione dell'algoritmo
 		sia \math{O(n^{2})}, dove \math{n} è la lunghezza della sequenza
 		\math{X}. Il primo ciclo esegue una operazione immediata per
@@ -207,46 +283,47 @@
 
     \subsection{Programmazione dinamica: ricostruzione della soluzione}
 
-        Una volta calcolata la lunghezza della LISV, è possibile
-        individuarne una ripercorrendo il vettore a ritroso. In
-        particolare, questo viene fatto estendendo l'algoritmo per
-        il calcolo della lunghezza introducendo un vettore \math{h}.
-        Nella \math{i}-esima cella di \math{h} viene riportato l'indice
-        della cella di \math{c} in cui si trova l'elemento predecessore
-        dell'elemento nella \math{i}-esima cella di \math{c}. Se l'elemento
-        predecessore non esiste, nella \math{i}-esima cella di \math{h}
-        viene riportato 0.
+        Una volta calcolata la lunghezza di una LISV, è possibile
+        individuarla introducendo un vettore di appoggio \math{h}
+        e ripercorrendolo a ritroso. Nella \math{i}-esima cella di
+        tale vettore viene riportato l'indice della cella di \math{c}
+        in cui si trova l'elemento predecessore dell'elemento nella
+        \math{i}-esima cella di \math{c}. Se l'elemento predecessore
+        non esiste, nella \math{i}-esima cella di \math{h} viene
+        riportato 0. La nuova procedura restituisce non il vettore
+        \math{c}, bensí il vettore \math{h}.
 
         Alla vecchia procedura opportunamente modificata ne viene aggiunta
         un'altra, \tt{PRINT-BOUNDED-LIS}. Questa ha in input il vettore
         \math{h}, la sequenza \math{X} ed un indice di posizione \math{i},
         mentre in output ha una delle possibili LISV per la stringa in input.
 
-        La procedura restituisce la soluzione per la \math{i}-esima istanza
-        del problema ripercorrendo il vettore \math{h} dalla cella \math{i}
+		La procedura restituisce la soluzione per la \math{i}-esima istanza
+		del problema ripercorrendo il vettore \math{h} dalla cella \math{i}
 		verso la cella \math{0}; ogni volta che si incontra un elemento
-		non nullo di \math{h}, l'elemento della sequenza in tale posizione 
+		non nullo di \math{h}, l'elemento della sequenza in tale posizione
 		è un elemento della soluzione.
 
 		\begin[width = 60%fw]{parbox}
 			\begin{verbatim}
-				procedure BOUNDED-LIS(X)
-				    for i \unichar{U+2190} 0 to |X| do
-				        c[i] \unichar{U+2190} 1
-				        h[i] \unichar{U+2190} 0
+			    procedure BOUNDED-LIS(X)
+			        c[0] \unichar{U+2190} 0
+			        h[0] \unichar{U+2190} 0
+			        for i \unichar{U+2190} 1 to |X| do
+			            c[i] \unichar{U+2190} 1
+			            h[i] \unichar{U+2190} 0
 
-				    \bigskip
-				    for i \unichar{U+2190} 0 to |X| do
-				        p \unichar{U+2190} 0
-				        for j \unichar{U+2190} 0 to i do
-				            if (X[j] < X[i]) and (c[j] \unichar{U+2265} c[p]) then
-				                p \unichar{U+2190} j
-				        if (p \unichar{U+2260} 0) then
-				            c[i] \unichar{U+2190} c[p] + 1
-				            h[i] \unichar{U+2190} p
+			        \bigskip
+			        for i \unichar{U+2190} 2 to |X| do
+			            t \unichar{U+2190} 0
+			            for j \unichar{U+2190} 1 to i - 1 do
+			                if (X[j] < X[i]) and (c[j] \unichar{U+2265} t) then
+			                    t \unichar{U+2190} c[j]
+			            c[i] \unichar{U+2190} t + 1
+			            h[i] \unichar{U+2190} ???
 
-				    \bigskip
-				    return c, h
+			        \bigskip
+			        return h
 			\end{verbatim}
 		\end{parbox}
 		\begin[width = 40%fw]{parbox}
@@ -262,6 +339,49 @@
         Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione
         è comunque proporzionale alle dimensioni del vettore \math{h},
 		perché la ricorsione è una tail-recursion. 
+
+		Ricordando come la soluzione del problema originale sia la maggior
+		soluzione parziale del problema vincolato, é possibile modificare
+		la procedura \tt{BOUNDED-LIS} per restituire tale soluzione oltre al
+		vettore \math{h}. Le procedure \tt{PRINT-BOUNDED-LIS} e \tt{PRINT-LIS}
+		sono identiche: l'unica differenza é che la prima chiamata a \tt{PRINT-LIS}
+		deve avere \tt{best} come terzo parametro, di modo da ricavare la soluzione
+		per l'istanza corretta.
+
+		\begin[width = 60%fw]{parbox}
+			\begin{verbatim}
+			    procedure LIS(X)
+			        c[0] \unichar{U+2190} 0
+			        h[0] \unichar{U+2190} 0
+			        for i \unichar{U+2190} 1 to |X| do
+			            c[i] \unichar{U+2190} 1
+			            h[i] \unichar{U+2190} 0
+			        best \unichar{U+2190} 0
+
+			        \bigskip
+			        for i \unichar{U+2190} 2 to |X| do
+			            t \unichar{U+2190} 0
+			            for j \unichar{U+2190} 1 to i - 1 do
+			                if (X[j] < X[i]) and (c[j] \unichar{U+2265} t) then
+			                    t \unichar{U+2190} c[j]
+			            c[i] \unichar{U+2190} t + 1
+			            h[i] \unichar{U+2190} ???
+			            if (c[i] > best) then
+			                best \unichar{U+2190} c[i]
+
+			        \bigskip
+			        return h, best
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 40%fw]{parbox}
+			\begin{verbatim}
+				procedure PRINT-LIS(h, X, i)
+				    if h[i] \unichar{U+2260} 0 then
+				        PRINT-LIS(h, X, h[i])
+				    print X[i]
+			\end{verbatim}
+		\end{parbox}
+		\par
 
         \begin{example}
             \begin[width = 30%fw]{parbox}
@@ -288,27 +408,5 @@
                 \end{ptable}
             \end{parbox}
         \end{example}
-
-    \subsection{Osservazioni}
-
-        Il problema LIS non vincolato può essere ridotto al problema LIS
-        vincolato. Infatti, la soluzione del problema LIS non vincolato non
-        è altro che la maggior soluzione parziale del problema LIS vincolato.
-
-        \begin[width = 50%fw]{parbox}
-			\begin{verbatim}
-				procedure LIS(X)
-				    C, H \unichar{U+2190} BOUNDED-LIS(X)
-				    return max(C)
-			\end{verbatim}
-		\end{parbox}
-		\begin[width = 50%fw]{parbox}
-            \begin{verbatim}
-                procedure PRINT-LIS(h, X, i)
-                    t \unichar{U+2190} LIS(X)
-                    PRINT-BOUNDED-LIS(h, X, t)
-			\end{verbatim}
-		\end{parbox}
-		\par
 
 \end{sile}
