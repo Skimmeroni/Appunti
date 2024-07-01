@@ -96,7 +96,7 @@
 		\include[src = Dinamica/LICS.sil]
 		\section{Sottovettore di peso massimo}
 		\include[src = Dinamica/Sottovettore.sil]
-		\section{Knapsack 0/1} % spostare le soluzioni parziali
+		\section{Knapsack 0/1}
 		\include[src = Dinamica/Knapsack.sil]
 		\section{Chiusura palindroma} % spostare le soluzioni parziali
 		\include[src = Dinamica/Palindroma.sil]

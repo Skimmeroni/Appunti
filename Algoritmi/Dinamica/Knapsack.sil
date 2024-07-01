@@ -56,6 +56,16 @@
         per la \math{i}-esima istanza del problema con capacità \math{c}
         viene indicata con \math{\mi{Opt}(i, c)}.
 
+		Per calcolare la soluzione ottimale della generica istanza \math{X_{i}}
+		con capacitá \math{c}, ovvero \math{S_{i, c}}, verrá assunto di avere a
+		disposizione tutte le soluzioni parziali nella forma \math{S_{a, b}},
+		con \math{1 \leq a < i} e \math{1 \leq b < j}. Pertanto, per il calcolo
+		della soluzione ottimale dell'\math{i, c}-esima istanza del problema si
+		hanno a disposizione l'\math{i}-esimo oggetto dello zaino \math{X}, la
+		capacitá rimanente \math{c} e tutti i sottoinsiemi ottimali di oggetti
+		delle istanze da \math{i - 1, j - 1} a 0, 0. L'oggetto \math{i} puó come
+		non puó fare parte del sottoinsieme ottimale di oggetti \math{S_{i, c}}.
+
         \begin{example}
             \begin[width = 35%fw]{parbox}
                 \begin[cols = 25%fw 25%fw 25%fw]{ptable}
@@ -184,13 +194,9 @@
 		\end{parbox}
 		\par
 
-        Per quanto riguarda il passo ricorsivo, si assuma di avere a
-        disposizione tutte le soluzioni nella forma \math{S_{a, b}}, 
-        con \math{1 \leq a < i} e \math{1 \leq b < c}, e di voler
-        calcolare \math{S_{i, c}}.  Possono verificarsi solamente due
-        situazioni, mutualmente esclusive: l'\math{i}-esimo oggetto fa
-        parte della soluzione ottimale \math{S_{i, c}} oppure non ne fa
-        parte.
+        Per quanto riguarda il passo ricorsivo, possono verificarsi solamente
+        due situazioni, mutualmente esclusive: l'\math{i}-esimo oggetto fa parte
+        della soluzione ottimale \math{S_{i, c}} oppure non ne fa parte.
 
         Se \math{i} non fa parte di \math{S_{i, c}}, allora la soluzione
         per la \math{i, c}-esima istanza è la medesima per l'istanza \math{i
