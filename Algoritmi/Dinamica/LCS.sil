@@ -35,6 +35,18 @@
 		\math{Y_{j}}. La soluzione per le intere sequenze \math{X} e \math{Y}
 		è la soluzione per l'istanza \math{X_{m}, Y_{n}}.
 
+		Per calcolare la soluzione ottimale della generica istanza \math{X_{i},
+		Y_{j}}, ovvero \math{S_{i, j}}, verrá assunto di avere a disposizione
+		tutte le soluzioni parziali nella forma \math{S_{a, b}}, con \math{1 \leq
+		a < i} e \math{1 \leq b < j}. Pertanto, per il calcolo della soluzione
+		ottimale dell'\math{i, j}-esima istanza del problema si hanno a disposizione
+		l'\math{i}-esimo carattere della sequenza \math{X}, il \math{j}-esimo carattere
+		della sequenza \math{Y} e le lunghezze delle LCS delle istanze da \math{i - 1,
+		j - 1} a 0, 0, ma non gli elementi delle due sequenze che comportano tali
+		lunghezze. \math{x_{i}} e \math{y_{j}} possono essere come possono non essere
+		elementi della sottosequenza di \math{X_{i}} e \math{Y_{j}} di lunghezza
+		\math{S_{i, j}}.
+
 	\subsection{Programmazione dinamica: sottostruttura ottima}
 
 		\begin{theorem}
@@ -129,10 +141,7 @@
 			S_{i, j} = 0 \thickspace \mi{se} \thickspace i = 0 \vee j = 0
 		\end{math}
 
-		Per quanto riguarda il passo ricorsivo, si assuma di avere
-		a disposizione tutte le soluzioni nella forma \math{S_{a,
-		b}}, con \math{1 \leq a < i} e \math{1 \leq b < j}, e di
-		voler calcolare \math{S_{i, j}}. Possono verificarsi solamente
+		Per quanto riguarda il passo ricorsivo, possono verificarsi solamente
 		due situazioni, mutualmente esclusive: l'\math{i}-esimo carattere
         di \math{X_{i}} e uguale al \math{j}-esimo carattere di \math{Y_{j}}
         oppure l'\math{i}-esimo carattere di \math{X_{i}} è diverso dal
@@ -183,9 +192,8 @@
 		\begin{verbatim}
 			procedure LCS(X, Y)
 			    for i \unichar{U+2190} 0 to |X| do
-			        c[i, 0] \unichar{U+2190} 0
-			    for j \unichar{U+2190} 0 to |Y| do
-			        c[0, j] \unichar{U+2190} 0
+			        for j \unichar{U+2190} 0 to |Y| do
+			            c[i, j] \unichar{U+2190} 0
 
 			    \bigskip
 			    for i \unichar{U+2190} 1 to |X| do
@@ -291,9 +299,8 @@
 			\begin{verbatim}
 				procedure LCS(X, Y)
 				    for i \unichar{U+2190} 0 to |X| do
-				        c[i, 0] \unichar{U+2190} 0
-				    for j \unichar{U+2190} 0 to |Y| do
-				        c[0, j] \unichar{U+2190} 0
+				        for j \unichar{U+2190} 0 to |Y| do
+				            c[i, j] \unichar{U+2190} 0
 
 				    \bigskip
 				    for i \unichar{U+2190} 1 to |X| do
