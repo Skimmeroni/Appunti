@@ -187,7 +187,7 @@ return {
     level = 2,
     link = "dest19",
     number = "1.4",
-    pageno = "11"
+    pageno = "10"
   },
   {
     label = {
@@ -217,7 +217,7 @@ return {
     level = 3,
     link = "dest22",
     number = "1.4.3",
-    pageno = "12"
+    pageno = "11"
   },
   {
     label = {

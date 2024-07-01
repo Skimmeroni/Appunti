@@ -62,6 +62,15 @@
         \math{S_{n}}, in quanto associata all'istanza \math{X_{n}}, che
         coincide con l'intero insieme \math{X}.
 
+        Per calcolare la soluzione ottimale della generica istanza \math{X_{i}},
+        ovvero \math{S_{i}}, verrá assunto di avere a disposizione tutte le
+        soluzioni parziali \math{S_{i - 1}, S_{i - 2}, \unicodeellipsis,
+        S_{1}, S_{0}}. Pertanto, per il calcolo della soluzione ottimale
+        dell'\math{i}-esima istanza del problema si hanno a disposizione
+        l'abitante \math{i}-esimo ed i sottoinsiemi di valore massimo
+        rispetto alle istanze da \math{i - 1} a 0. \math{i} puó essere come
+        puó non essere uno degli abitanti del sottoinsieme \math{S_{i}}.
+
     \subsection{Programmazione dinamica: sottostruttura ottima}
 
         \begin{theorem}
@@ -169,35 +178,30 @@
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
                 \{\table[columnalign = left left]{
-					D(S_{0}) = \mi{Opt}(0) = 0 \\
-					D(S_{1}) = \mi{Opt}(1) = d_{1} \\
+					\mi{Opt}(0) = D(S_{0}) = 0 \\
+					\mi{Opt}(1) = D(S_{1}) = d_{1} \\
 				}
             \end{math}
         \end{parbox}
         \par
 
-        Per quanto riguarda la relazione di ricorrenza, si consideri
-        una generica istanza \math{X_{i} = \{1, 2, \unicodeellipsis,
-        i\}} del problema, alla quale viene associata la soluzione
-        ottimale \math{S_{i} \subseteq \{1, 2, \unicodeellipsis, i\}}
-        assumendo di avere a disposizione tutte le soluzioni ottimali
-        \math{S_{j} \subseteq \{1, 2, \unicodeellipsis, j\}} tali per
-        cui \math{j < i}. Possono presentarsi due casistiche: \math{i}
-        può oppure non può fare parte di \math{S_{i}}. Se \math{i
-        \notin S_{i}}, allora è possibile assumere che la soluzione
+        Per quanto riguarda la relazione di ricorrenza, possono presentarsi
+        due casistiche: \math{i} fa parte oppure non fa parte di \math{S_{i}}.
+        Se \math{i \notin S_{i}}, allora è possibile assumere che la soluzione
         ottimale per la \math{i}-esima istanza sia la medesima della
         \math{i - 1}-istanza.
 
         Se invece \math{i \in S_{i}}, allora la soluzione ottimale
         \math{S_{i - 1} \subseteq \{1, 2, \unicodeellipsis, i - 1\}}
         potrebbe dover venire esclusa, perché \math{i} e \math{i - 1}
-        sono elementi certamente incompatibili e \math{S_{i - 1}} potrebbe
-        contenere \math{i - 1}. D'altro canto, \math{i} e \math{i - 2} sono
-        certamente compatibili, pertanto \math{S_{i - 2}} è una possibile
-        soluzione per la \math{i}-esima istanza, dato che non può contenere
-        \math{i - 1}. Tuttavia, proprio per il fatto che \math{i} e \math{i
-        - 2} sono compatibili, anche \math{S_{i - 2} \cup \{i\}} è una
-        soluzione, ed è certamente una soluzione migliore di \math{S_{i - 2}}.
+        sono elementi certamente incompatibili e \math{S_{i - 1}}
+        potrebbe contenere \math{i - 1}. D'altro canto, \math{i} e
+        \math{i - 2} sono certamente compatibili, pertanto \math{S_{i - 2}}
+        è una possibile soluzione per la \math{i}-esima istanza, dato che
+        non può contenere \math{i - 1}. Tuttavia, proprio per il fatto che
+        \math{i} e \math{i - 2} sono compatibili, anche \math{S_{i - 2} \cup
+        \{i\}} è una soluzione, ed è certamente una soluzione migliore di
+        \math{S_{i - 2}} e di tutte le precedenti.
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}

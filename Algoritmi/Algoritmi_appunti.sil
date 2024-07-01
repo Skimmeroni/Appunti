@@ -86,24 +86,24 @@
 	\chapter{Tecnica di programmazione dinamica}
 		\section{Longest Common Subsequence} % Non é chiaro chi siano i e j nella ricostruzione della soluzione
 		\include[src = Dinamica/LCS.sil]
-		\section{Weighted Interval Scheduling} % Da rivedere l'algoritmo bottom-up e la ricostruzione della soluzione
-		\include[src = Dinamica/WIS.sil] % da spostare le soluzioni parziali
+		\section{Weighted Interval Scheduling} % algoritmo bottom-up, ricostruzione della soluzione, spostare le soluzioni parziali
+		\include[src = Dinamica/WIS.sil]
 		\section{Hateville}
-		\include[src = Dinamica/Hateville.sil] % da spostare le soluzioni parziali
-		\section{Longest Increasing Subsequence} % Da rivedere la ricostruzione della soluzione ed il problema vincolato
+		\include[src = Dinamica/Hateville.sil]
+		\section{Longest Increasing Subsequence} % ricostruzione della soluzione, problema vincolato, spostare le soluzioni parziali
 		\include[src = Dinamica/LIS.sil]
 		\section{Longest Increasing Common Subsequence} % Da rivedere
 		\include[src = Dinamica/LICS.sil]
 		\section{Sottovettore di peso massimo}
 		\include[src = Dinamica/Sottovettore.sil]
-		\section{Knapsack 0/1}
-		\include[src = Dinamica/Knapsack.sil] % da spostare le soluzioni parziali
-		\section{Chiusura palindroma}
-		\include[src = Dinamica/Palindroma.sil] % da spostare le soluzioni parziali
-		\section{Distanza di modifica} % Non é chiaro chi siano i e j nella ricostruzione della soluzione
-		\include[src = Dinamica/Distanza.sil] % da spostare le soluzioni parziali
-		\section{Problema Interleaving}
-		\include[src = Dinamica/Interleaving.sil] % da spostare le soluzioni parziali
+		\section{Knapsack 0/1} % spostare le soluzioni parziali
+		\include[src = Dinamica/Knapsack.sil]
+		\section{Chiusura palindroma} % spostare le soluzioni parziali
+		\include[src = Dinamica/Palindroma.sil]
+		\section{Distanza di modifica} % Non é chiaro chi siano i e j nella ricostruzione della soluzione, spostare le soluzioni parziali
+		\include[src = Dinamica/Distanza.sil]
+		\section{Problema Interleaving} % spostare le soluzioni parziali
+		\include[src = Dinamica/Interleaving.sil]
 		\section{Cammino su un grafo} % Da rivedere
 		\include[src = Dinamica/Grafo.sil]
 	\chapter{Tecnica greedy}
