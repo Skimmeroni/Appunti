@@ -84,7 +84,7 @@
 	\pagebreak
 
 	\chapter{Tecnica di programmazione dinamica}
-		\section{Longest Common Subsequence} % Non é chiaro chi siano i e j nella ricostruzione della soluzione
+		\section{Longest Common Subsequence}
 		\include[src = Dinamica/LCS.sil]
 		\section{Weighted Interval Scheduling} % algoritmo bottom-up, ricostruzione della soluzione, spostare le soluzioni parziali
 		\include[src = Dinamica/WIS.sil]
@@ -100,7 +100,7 @@
 		\include[src = Dinamica/Knapsack.sil]
 		\section{Chiusura palindroma}
 		\include[src = Dinamica/Palindroma.sil]
-		\section{Distanza di modifica} % Non é chiaro chi siano i e j nella ricostruzione della soluzione
+		\section{Distanza di modifica}
 		\include[src = Dinamica/Distanza.sil]
 		\section{Problema Interleaving} % mancano le soluzioni parziali
 		\include[src = Dinamica/Interleaving.sil]

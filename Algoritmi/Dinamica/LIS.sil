@@ -160,7 +160,7 @@
         strettamente crescente più lunga vincolata è essa stessa
         la sequenza vuota, che ha lunghezza 0. Se la sequenza é
         composta da un solo elemento, allora la sottosequenza
-        strettamente crescente piú lunga vincolata é la stringa
+        strettamente crescente piú lunga vincolata é la sequenza
         stessa, che ha lunghezza 1. Infatti, per definizione é
         sia strettamente crescente, dato che é composta da un solo
         elemento, ed é vincolata, dato che di fatto contiene l'ultimo
@@ -296,7 +296,7 @@
         Alla vecchia procedura opportunamente modificata ne viene aggiunta
         un'altra, \tt{PRINT-BOUNDED-LIS}. Questa ha in input il vettore
         \math{h}, la sequenza \math{X} ed un indice di posizione \math{i},
-        mentre in output ha una delle possibili LISV per la stringa in input.
+        mentre in output ha una delle possibili LISV per la sequenza in input.
 
 		La procedura restituisce la soluzione per la \math{i}-esima istanza
 		del problema ripercorrendo il vettore \math{h} dalla cella \math{i}

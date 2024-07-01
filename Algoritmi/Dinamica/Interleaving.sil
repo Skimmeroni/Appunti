@@ -86,7 +86,7 @@
 
         Approcciare il problema direttamente a partire dal determinare
         casi base e passi ricorsivi è ostico; è più semplice trattare
-        il problema in termini di prefissi delle tre stringhe. Si
+        il problema in termini di prefissi delle tre sequenze. Si
         consideri innanzitutto il caso in cui almeno una delle due
         sequenze è la sequenza vuota:
 
@@ -274,7 +274,7 @@
 
         È facile notare come il tempo di esecuzione dell'algoritmo
 		sia \math{O(nm)}, dove \math{m} e \math{n} sono le lunghezze
-		di rispettivamente la stringa \math{X} e la stringa \math{Y}.
+		di rispettivamente la sequenza \math{X} e la sequenza \math{Y}.
 		I primi due cicli eseguono una operazione immediata rispettivamente
 		per \math{m} e per \math{n} volte, dopodiché si presenta un doppio
 		ciclo innestato: il ciclo esterno esegue il ciclo interno \math{m}

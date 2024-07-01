@@ -119,18 +119,18 @@
 
         Certamente, la soluzione per tutte le coppie di indici \math{i, j}
         con \math{i = 0} oppure \math{j = 0} si rivela immediatamente essere 
-        la stringa vuota, perché questa è l'unica sottosequenza che una
-        sequenza generica può avere in comune con la stringa vuota stessa.
+        la sequenza vuota, perché questa è l'unica sottosequenza che una
+        sequenza generica può avere in comune con la sequenza vuota stessa.
 
         Tuttavia, anche nel caso in cui \math{x_{i} \ne y_{j}}, ovvero
         quando le due sottosequenze \math{X_{i}} e \math{Y_{j}} non terminano
         con lo stesso carattere, la sottosequenza crescente comune più lunga
-        è la stringa vuota. Questo perché il problema chiede di trovare una
-        sottosequenza che termini con il carattere (uguale) delle due stringhe,
+        è la sequenza vuota. Questo perché il problema chiede di trovare una
+        sottosequenza che termini con il carattere (uguale) delle due sequenze,
         e se tale carattere è distinto l'unica soluzione accettabile non può
-        che essere la stringa vuota.
+        che essere la sequenza vuota.
 
-        Dato che, per definizione, l'ultimo elemento della stringa vuota
+        Dato che, per definizione, l'ultimo elemento della sequenza vuota
         (non esistendo) non può coincidere con l'ultimo carattere dell'altra
         sequenza, il caso \math{i = 0 \vee j = 0} rientra di fatto nel caso
         \math{x_{i} \ne y_{j}}, pertanto è sufficiente considerare solamente
@@ -158,7 +158,7 @@
 
         Una generica soluzione per la \math{i, j}-esima istanza del problema
         deve essere costruita accodando \math{x_{i} = y_{j}} ad sottosequenza
-        strettamente crescente comune alle due stringhe tale che tutti gli
+        strettamente crescente comune alle due sequenze tale che tutti gli
         elementi di tale sottosequenza vengono prima, in ordine lessicografico,
         di \math{x_{i} = y_{j}}. Questo perché l'aggiunta di \math{x_{i} =
         y_{j}} in coda ad una tale sottosequenza restituisce ancora una
@@ -232,8 +232,8 @@
 		\end{verbatim}
 
                 Il tempo di esecuzione dell'algoritmo è \math{O(m^{2}n^{2})},
-                dove \math{m} è la lunghezza della stringa \math{X} e \math{n}
-                è la lunghezza della stringa \math{Y}. Si noti infatti come 
+                dove \math{m} è la lunghezza della sequenza \math{X} e \math{n}
+                è la lunghezza della sequenza \math{Y}. Si noti infatti come 
                 l'algoritmo sia costituito da due cicli innestati, dove il 
                 primo esegue il secondo \math{m} volte ed il secondo esegue
                 potenzialmente \math{n} volte a sua volta una coppia di cicli
@@ -258,7 +258,7 @@
         un'altra, \tt{PRINT-BOUNDED-LICS}. Questa ha in input la tabella
         \math{h}, le due sequenze \math{X} e \math{Y} e due indici di
         posizione \math{i} e \math{j}, mentre in output ha una delle
-        possibili LICSV per la stringa in input.
+        possibili LICSV per la sequenza in input.
 
         La procedura restituisce la soluzione per la \math{i, j}-esima
         istanza del problema ripercorrendo la tabella \math{h} dalla

@@ -14,7 +14,7 @@
 		Date due sequenze \math{X} e \math{Y}, una sottosequenza si
 		dice comune ad entrambe le sequenze se appare sia in \math{X}
 		che in \math{Y}. Il problema della sottosequenza comune più
-		lunga consiste nel trovare, in due stringhe \math{X} ed \math{Y},
+		lunga consiste nel trovare, in due sequenze \math{X} ed \math{Y},
 		qual'è (se esiste) la sottosequenza comune ad entrambe che sia di
 		lunghezza maggiore, abbreviata con \math{LCS} (\em{longest common
 		subsequence}).
@@ -84,8 +84,8 @@
 				\begin{item}
 					Si assuma per assurdo che \math{z_{k} \ne x_{m}}.
 					Si accodi allora \math{x_{m} = y_{n}} a \math{Z},
-					ottenendo la stringa \math{Z' = \langle z_{1}, z_{2},
-					\unicodeellipsis, z_{k}, x_{m} \rangle}. Tale stringa
+					ottenendo la sequenza \math{Z' = \langle z_{1}, z_{2},
+					\unicodeellipsis, z_{k}, x_{m} \rangle}. Tale sequenza
 					ha lunghezza \math{k + 1} e, essendo \math{x_{m} =
 					y_{n}}, è una LCS per \math{X} e \math{Y}. Ma allora
 					\math{Z} non può essere una LCS per \math{X} e \math{Y},
@@ -209,7 +209,7 @@
 
 		È facile notare come il tempo di esecuzione dell'algoritmo
 		sia \math{O(nm)}, dove \math{m} e \math{n} sono le lunghezze
-		di rispettivamente la stringa \math{X} e la stringa \math{Y}.
+		di rispettivamente la sequenza \math{X} e la sequenza \math{Y}.
 		I primi due cicli eseguono una operazione immediata rispettivamente
 		per \math{m} e per \math{n} volte, dopodiché si presenta un doppio
 		ciclo innestato: il ciclo esterno esegue il ciclo interno \math{m}
@@ -264,9 +264,9 @@
 
 		Alla vecchia procedura opportunamente modificata ne viene aggiunta
 		un'altra, \tt{PRINT-LCS}. Questa ha in input la tabella \math{c},
-		le stringhe \math{X} e \math{Y} e due indici di posizione \math{i}
+		le sequenze \math{X} e \math{Y} e due indici di posizione \math{i}
 		e \math{j}, mentre in output ha una delle possibili LCS per la
-		stringa in input. La prima chiamata alla procedura ha \math{\abs{X}}
+		sequenza in input. La prima chiamata alla procedura ha \math{\abs{X}}
 		come valore per \math{i} e \math{\abs{Y}} come valore per \math{j},
 		in modo da ottenere la soluzione per l'istanza \math{\abs{X}, \abs{Y}}.
 
@@ -346,7 +346,7 @@
 				perché per definizione si ricade sempre nel primo caso
 				della ricorsione, ed i due indici vengono sempre
 				decrementati di uno ad ogni chiamata;
-			\end{item}stringhe
+			\end{item}sequenze
 			\begin{item}
 				Quando le due sequenze \math{X} e \math{Y} non hanno alcun
 				carattere in comune, si avranno \math{\abs{X}} iterazioni.

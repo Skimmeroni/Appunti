@@ -36,7 +36,7 @@
 		op_{2} op_{3} \unicodeellipsis op_{n}}, costruita usando i tre
 		caratteri dell'alfabeto sopra descritto, è una sequenza dove
 		ciascun carattere \math{op_{i}} indica l'operazione applicata
-		all'\math{i}-esimo carattere della prima stringa per poterla
+		all'\math{i}-esimo carattere della prima sequenza per poterla
 		trasformare nella seconda.
 
 		Una sequenza che esprime la sequenza di operazioni necessarie
@@ -203,7 +203,7 @@
 
 		È facile notare come il tempo di esecuzione dell'algoritmo
 		sia \math{O(nm)}, dove \math{n} e \math{m} sono le lunghezze
-		di rispettivamente la stringa \math{X} e la stringa \math{Y}.
+		di rispettivamente la sequenza \math{X} e la sequenza \math{Y}.
 		I primi due cicli eseguono una operazione immediata rispettivamente
 		per \math{n} e per \math{m} volte, dopodiché si presenta un doppio
 		ciclo innestato: il ciclo esterno esegue il ciclo interno \math{m}
@@ -267,9 +267,9 @@
 
 		Alla vecchia procedura opportunamente modificata ne viene aggiunta
 		un'altra, \tt{PRINT-ED}. Questa ha in input la tabella \math{c},
-		le stringhe \math{X} e \math{Y} e due indici di posizione \math{i}
+		le sequenze \math{X} e \math{Y} e due indici di posizione \math{i}
 		e \math{j}, mentre in output ha una delle possibili trascrizioni
-		ottimali per le stringhe in input. La prima chiamata alla procedura
+		ottimali per le sequenze in input. La prima chiamata alla procedura
 		ha \math{\abs{X}} come valore per \math{i} e \math{\abs{Y}} come
 		valore per \math{j}, in modo da ottenere la soluzione per l'istanza
 		\math{\abs{X}, \abs{Y}}. Si noti come la trascrizione restituita
@@ -294,7 +294,7 @@
 			\begin{item}
 				Spostarsi in diagonale significa che, per l'iterazione corrente,
 				l'operazione migliore é una no-op se l'ultimo carattere delle
-				due sottostringhe coincide oppure una sostituzione.
+				due sottosequenze coincide oppure una sostituzione.
 			\end{item}
 		\end{itemize}
 

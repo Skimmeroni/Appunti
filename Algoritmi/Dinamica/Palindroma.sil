@@ -2,22 +2,22 @@
 
     \subsection{Definizione del problema}
 
-        Una stringa \math{X = \{x_{1}, x_{2}, \unicodeellipsis, x_{n}\}}
-        è detta \strong{palindroma} se è uguale alla stringa \math{X' =
+        Una sequenza \math{X = \{x_{1}, x_{2}, \unicodeellipsis, x_{n}\}}
+        è detta \strong{palindroma} se è uguale alla sequenza \math{X' =
         \{x_{n}, \unicodeellipsis, x_{2}, x_{1}\}}, che è composta dagli
         stessi caratteri di \math{X} ma in ordine inverso. Il \strong{problema
-        della chiusura palindroma} chiede di trovare, per una generica stringa
+        della chiusura palindroma} chiede di trovare, per una generica sequenza
         \math{X}, il numero minimo di caratteri da inserirvi per renderla
         palindroma.
 
         Il problema puó essere risolto mediante programmazione dinamica.
-        Data una stringa \math{X} di lunghezza \math{n}, sia \math{X_{i, j}
-        = X[i : j]} la sottostringa di \math{X} che ha il primo carattere in
+        Data una sequenza \math{X} di lunghezza \math{n}, sia \math{X_{i, j}
+        = X[i : j]} la sottosequenza di \math{X} che ha il primo carattere in
         posizione \math{i} e l'ultimo carattere in posizione \math{j}. La
         soluzione \math{S_{i, j}} per l'\math{i, j}-esima istanza del problema
         corrisponde a trovare la soluzione ottimale per il problema della
-        chiusura palindroma rispetto alla sottostringa \math{X_{i, j}}. La
-        soluzione per l'intera stringa \math{X} è la soluzione per l'istanza
+        chiusura palindroma rispetto alla sottosequenza \math{X_{i, j}}. La
+        soluzione per l'intera sequenza \math{X} è la soluzione per l'istanza
         \math{X_{1, n}}.
 
         Per calcolare la soluzione ottimale della generica istanza \math{X_{i,
@@ -31,14 +31,14 @@
 
     \subsection{Programmazione dinamica: equazione di ricorrenza}
 
-        Il caso base è immediato. Se la sottostringa \math{X_{i, j}} è
-        la stringa vuota, ovvero se \math{i > j}, non vi è bisogno di
+        Il caso base è immediato. Se la sottosequenza \math{X_{i, j}} è
+        la sequenza vuota, ovvero se \math{i > j}, non vi è bisogno di
         aggiungere alcun carattere a \math{X_{i, j}} per renderla
-        palindroma, perché la stringa vuota è per definizione palindroma.
-        Similmente, se la sottostringa è formata da un solo carattere,
+        palindroma, perché la sequenza vuota è per definizione palindroma.
+        Similmente, se la sottosequenza è formata da un solo carattere,
         ovvero se \math{i = j}, non vi è bisogno di aggiungere alcun
         carattere a \math{X_{i, j}} per renderla palindroma, perché una
-        stringa di lunghezza unitaria è per definizione palindroma.
+        sequenza di lunghezza unitaria è per definizione palindroma.
 
         \begin[mode = display]{math}
             S_{i, j} = 0 \thickspace \mi{se} \thickspace i \geq j
@@ -48,8 +48,8 @@
         solamente due situazioni: il primo ed ultimo carattere di
         \math{X_{i, j}} sono uguali oppure sono diversi.
 
-        Se sono uguali, allora tale stringa è palindroma solo se lo
-        è anche la sottostringa ottenuta eliminandovi tali caratteri,
+        Se sono uguali, allora tale sequenza è palindroma solo se lo
+        è anche la sottosequenza ottenuta eliminandovi tali caratteri,
         ovvero se lo è anche \math{X_{i + 1, j - 1}}. In altri termini,
         non é necessario aggiungere alcun carattere a \math{X_{i, j}}
         per renderla palindroma se lo é giá \math{X_{i + 1, j - 1}} e
@@ -57,12 +57,12 @@
         numero minimo di caratteri per rendere palindroma \math{X_{i,
         j}} é lo stesso di \math{X_{i + 1, j - 1}}.
 
-        Se invece sono distinti, allora tale stringa sará palindroma
-        solo se lo è anche la sottostringa ottenuta eliminandovi il
+        Se invece sono distinti, allora tale sequenza sará palindroma
+        solo se lo è anche la sottosequenza ottenuta eliminandovi il
         primo oppure l'ultimo carattere. In entrambi i casi, la soluzione
         ottimale non potrá che aumentare di uno, perché se i due caratteri
         sono distinti allora é necessario aggiungere almeno un carattere
-        per rendere palindroma la stringa. Fra le due sottostringhe in
+        per rendere palindroma la sequenza. Fra le due sottosequenze in
         esame, é da scegliersi quella che minimizza il numero di aggiunte
         necessarie.
 
@@ -83,7 +83,7 @@
 		\math{c[i, j]} viene riportato il valore della soluzione ottimale
 		per la \math{i, j}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive.
-		L'algoritmo riceve in input la stringa \math{X} e restituisce
+		L'algoritmo riceve in input la sequenza \math{X} e restituisce
 		in output \math{c[1, \abs{X}]}, la soluzione del problema.
 
 		\begin{verbatim}
