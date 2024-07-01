@@ -97,7 +97,7 @@ return {
     level = 3,
     link = "dest10",
     number = "1.2.2",
-    pageno = "6"
+    pageno = "7"
   },
   {
     label = {

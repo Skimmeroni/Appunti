@@ -137,6 +137,16 @@
 		della soluzione ottimale per la \math{i}-esima istanza del
 		problema é dato dalla funzione \math{\mi{Opt}(i)}.
 
+		Per calcolare la soluzione ottimale della generica istanza \math{X_{i}},
+        ovvero \math{S_{i}}, verrá assunto di avere a disposizione tutte le
+        soluzioni parziali \math{S_{i - 1}, S_{i - 2}, \unicodeellipsis,
+        S_{1}, S_{0}}. Pertanto, per il calcolo della soluzione ottimale
+        dell'\math{i}-esima istanza del problema si hanno a disposizione
+        le informazioni relative all'\math{i}-esima attivitá (tempo di inizio,
+        tempo di fine, valore) ed il valore totale delle soluzioni \math{i - 1}
+        a 0. \math{i} puó essere come puó non essere uno degli elementi della
+        soluzione ottimale per l'istanza \math{i}-esima.
+
 	\subsection{Programmazione dinamica: sottostruttura ottima}
 
 		\begin{theorem}
@@ -245,13 +255,10 @@
 		\end{parbox}
 		\par
 
-		Per quanto riguarda il passo ricorsivo, si assuma di avere a disposizione
-		tutte le soluzioni \math{S_{1}, S_{2}, \unicodeellipsis, S_{i - 1}} ed i
-		relativi valori totali \math{\mi{Opt}(1), \mi{Opt}(2), \unicodeellipsis,
-		\mi{Opt}(i - 1)} e di voler calcolare \math{S_{i}} e \math{\mi{Opt}(i)}.
-		Possono verificarsi solamente due situazioni, mutualmente esclusive:
-		l'\math{i}-esima attività fa parte della soluzione ottimale \math{S_{i}}
-		oppure non ne fa parte.
+		Per quanto riguarda il passo ricorsivo, possono verificarsi
+		solamente due situazioni, mutualmente esclusive: l'\math{i}-esima
+		attività fa parte della soluzione ottimale \math{S_{i}} oppure non
+		ne fa parte.
 
 		Nel primo caso, è evidente come \math{S_{i}} e \math{S_{i - 1}}
 		debbano essere lo stesso insieme. Questo perché, essendo sia

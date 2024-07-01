@@ -86,7 +86,7 @@
 	\chapter{Tecnica di programmazione dinamica}
 		\section{Longest Common Subsequence}
 		\include[src = Dinamica/LCS.sil]
-		\section{Weighted Interval Scheduling} % algoritmo bottom-up, ricostruzione della soluzione, spostare le soluzioni parziali
+		\section{Weighted Interval Scheduling} % algoritmo bottom-up, ricostruzione della soluzione
 		\include[src = Dinamica/WIS.sil]
 		\section{Hateville}
 		\include[src = Dinamica/Hateville.sil]
