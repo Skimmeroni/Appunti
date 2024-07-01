@@ -319,8 +319,8 @@
 			            for j \unichar{U+2190} 1 to i - 1 do
 			                if (X[j] < X[i]) and (c[j] \unichar{U+2265} t) then
 			                    t \unichar{U+2190} c[j]
+			                    h[i] \unichar{U+2190} j
 			            c[i] \unichar{U+2190} t + 1
-			            h[i] \unichar{U+2190} ???
 
 			        \bigskip
 			        return h
@@ -335,10 +335,6 @@
 			\end{verbatim}
 		\end{parbox}
 		\par
-
-        Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione
-        è comunque proporzionale alle dimensioni del vettore \math{h},
-		perché la ricorsione è una tail-recursion. 
 
 		Ricordando come la soluzione del problema originale sia la maggior
 		soluzione parziale del problema vincolato, é possibile modificare
@@ -364,8 +360,8 @@
 			            for j \unichar{U+2190} 1 to i - 1 do
 			                if (X[j] < X[i]) and (c[j] \unichar{U+2265} t) then
 			                    t \unichar{U+2190} c[j]
+			                    h[i] \unichar{U+2190} j
 			            c[i] \unichar{U+2190} t + 1
-			            h[i] \unichar{U+2190} ???
 			            if (c[i] > best) then
 			                best \unichar{U+2190} c[i]
 
@@ -382,6 +378,27 @@
 			\end{verbatim}
 		\end{parbox}
 		\par
+
+		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione
+		è comunque proporzionale alle dimensioni del vettore \math{h},
+		perché la ricorsione è una tail-recursion. In particolare:
+
+		\begin{itemize}
+			\begin{item}
+				Quando la sequenza \math{X} é giá di per sé
+				strettamente crescente, la procedura viene
+				chiamata esattamente \math{\abs{h}} volte.
+				Questo perché ogni elemento \math{i}-esimo di
+				\math{X} con \math{i > 0} ha per predecessore
+				nel vettore \math{h} l'elemento \math{i - 1}-esimo;
+			\end{item}
+			\begin{item}
+				Quando la sequenza \math{X} é decrescente, la procedura
+				viene chiamata una sola volta. Questo perché ogni elemento
+				di \math{h} é nullo e la procedura entra immediatamente
+				nel caso base.
+			\end{item}
+		\end{itemize}
 
         \begin{example}
             \begin[width = 30%fw]{parbox}

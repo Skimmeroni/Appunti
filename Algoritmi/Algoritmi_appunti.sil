@@ -90,7 +90,7 @@
 		\include[src = Dinamica/WIS.sil]
 		\section{Hateville}
 		\include[src = Dinamica/Hateville.sil]
-		\section{Longest Increasing Subsequence} % ricostruzione della soluzione
+		\section{Longest Increasing Subsequence}
 		\include[src = Dinamica/LIS.sil]
 		\section{Longest Increasing Common Subsequence} % Da rivedere
 		\include[src = Dinamica/LICS.sil]
