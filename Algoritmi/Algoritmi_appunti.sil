@@ -102,7 +102,7 @@
 		\include[src = Dinamica/Palindroma.sil]
 		\section{Distanza di modifica} % Non é chiaro chi siano i e j nella ricostruzione della soluzione, spostare le soluzioni parziali
 		\include[src = Dinamica/Distanza.sil]
-		\section{Problema Interleaving} % spostare le soluzioni parziali
+		\section{Problema Interleaving} % mancano le soluzioni parziali
 		\include[src = Dinamica/Interleaving.sil]
 		\section{Cammino su un grafo} % Da rivedere
 		\include[src = Dinamica/Grafo.sil]

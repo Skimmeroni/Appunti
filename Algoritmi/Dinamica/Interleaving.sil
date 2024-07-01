@@ -148,11 +148,9 @@
             }
         \end{math}
 
-        Si consideri invece il caso in cui entrambe le sequenze non sono la
-        sequenza vuota. In tal senso, si assuma di avere a disposizione tutte
-        le soluzioni nella forma \math{S_{a, b}}, con \math{1 \leq a < i} e
-        \math{1 \leq b < j}, e di voler calcolare \math{S_{i, j}}. Possono
-        presentarsi quattro possibilità mutualmente esclusive:
+        Si consideri invece il caso in cui entrambe le sequenze non
+        sono la sequenza vuota. Possono presentarsi quattro possibilità
+        mutualmente esclusive:
 
         \begin{itemize}
             \begin{item}
