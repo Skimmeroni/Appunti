@@ -15,16 +15,68 @@
             2, 4, 11 \rangle}.
         \end{example}
 
-        Attaccare il problema LICS direttamente tramite programmazione dinamica
-        è complesso. Un miglior approccio consiste nel restringere i requisiti
-        del problema per considerarne una versione semplificata.
+        Anziché affrontare il problema direttamente, si preferisce prima
+		trovare la lunghezza di una possibile LICS delle due sequenze e
+		poi, sulla base di questa informazione, ricostruire la LICS "a
+		ritroso". Pertanto, il problema effettivamente in esame sará il
+		problema della lunghezza della sottosequenza strettamente crescente
+		comune piú lunga.
+
+		Il problema puó essere risolto mediante programmazione dinamica.
+		Date due sequenze \math{X} e \math{Y} di lunghezza rispettivamente
+        \math{n} e \math{m}, siano \math{X_{i} = X[1 : i]} e \math{Y_{j} =
+        Y[1 : j]} i prefissi di lunghezza \math{i} e \math{j} rispettivamente
+        della sequenza \math{X} e della sequenza \math{Y}. La soluzione
+        \math{S_{i, j}} per l'\math{i, j}-esima istanza del problema
+        corrisponde a trovare la soluzione ottimale per il problema LICS
+        rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}. La soluzione
+        per le intere sequenze \math{X} e \math{Y} è la soluzione per le
+        istanze \math{X_{n}} e \math{Y_{m}}.
+
+        Per calcolare la soluzione ottimale della generica istanza \math{X_{i}},
+        \math{Y_{j}} ovvero \math{S_{i, j}}, verrá assunto di avere a disposizione
+		tutte le soluzioni parziali nella forma \math{S_{a, b}}, con \math{1 \leq
+		a < i} e \math{1 \leq b < j}. Pertanto, per il calcolo della soluzione
+		ottimale della \math{i, j}-esima istanza del problema si hanno a disposizione
+		l'elemento \math{i}-esimo della sequenza \math{X}, ovvero \math{x_{i}},
+		l'elemento \math{j}-esimo della sequenza \math{Y}, ovvero \math{y_{j}},
+		e le lunghezze delle sottosequenze strettamente crescenti rispetto alle
+		istanze da \math{i - 1, j - 1} a 0, 0, ma non gli elementi della sequenza
+		che comportano tale lunghezza. \math{x_{i}} e \math{y_{j}} possono essere
+		come possono non essere elementi della sottosequenza di \math{X_{i}} e
+		\math{Y_{j}} strettamente crescente di lunghezza \math{S_{i, j}}.
+
+	\subsection{Definizione del problema ausiliario}
+
+		Attaccare il problema LICS direttamente tramite programmazione
+        dinamica non è possibile, perché manca un'informazione. Infatti,
+        se non é noto quali siano gli elementi che hanno indotto le
+        lunghezze ottimali parziali da \math{S_{i - 1, j - 1}} a
+        \math{S_{0, 0}} non vi é alcun modo di sapere se l'elemento
+
+        %\math{i}-esimo
+        %possa essere accodato ad una sottosequenza avente peso \math{S_{j}}
+        %con \math{j < i} ottenendo di nuovo una sottosequenza strettamente
+        %crescente di \math{X_{i}}. Questo perché le lunghezze \math{S_{j}}
+        %potrebbero riferirsi a sottosequenze che contengono elementi che
+        %vengono dopo di \math{x_{i}} nell'ordine lessicografico.
+
+        L'unico caso in cui si avrebbe la certezza di ottenere ancora
+        una sottosequenza strettamente crescente di \math{X_{i}} e di
+        \math{Y_{j}} si ha quando é garantito che la sottosequenza
+        soluzione ottimale per l'\math{i, j}-esima istanza contiene
+        anche \math{x_{i} = y_{j}}. É pertanto necessario introdurre
+        un problema ausiliario che includa l'informazione mancante.
 
         Una versione più semplice del problema LICS, chiamato \strong{LICS
         vincolato} (\strong{LICSV}), prevede di trovare la più lunga
-        sottosequenza comune a due sequenze i cui elementi (nell'ordine
+        sottosequenza comune di due sequenze i cui elementi (nell'ordine
         in cui si trovano) hanno valore strettamente crescente e dove
         l'ultimo elemento di tale sottosequenza coincide con l'ultimo
-        elemento di entrambe le sequenze originarie.
+        elemento di entrambe le sequenze originarie. Anche in questo
+        caso, si preferisce considerare non l'effettiva soluzione di
+        ciascuna istanza del problema, bensí il suo peso complessivo,
+        e poi ricostruire "a ritroso" la soluzione.
 
         Date due sequenze \math{X} e \math{Y} di lunghezza rispettivamente
         \math{n} e \math{m}, siano \math{X_{i} = X[1 : i]} e \math{Y_{j} =
@@ -33,11 +85,23 @@
         \math{S_{i, j}} per l'\math{i, j}-esima istanza del problema
         corrisponde a trovare la soluzione ottimale per il problema LICS
         vincolato rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}.
-        La soluzione per le intere sequenze \math{X} e \math{Y} è la soluzione
-        per le istanze \math{X_{n}} e \math{Y_{m}}. La lunghezza della
-        sottosequenza strettamente crescente più lunga comune vincolata
-        soluzione per la \math{i, j}-esima istanza del problema viene
-        indicata con \math{\mi{Opt}(i, j)}.
+        La soluzione per le intere sequenze \math{X} e \math{Y} è la
+        soluzione per le istanze \math{X_{n}} e \math{Y_{m}}.
+
+		Per calcolare la soluzione ottimale della generica istanza \math{X_{i}},
+        \math{Y_{j}} ovvero \math{S_{i, j}}, verrá assunto di avere a disposizione
+		tutte le soluzioni parziali nella forma \math{S_{a, b}}, con \math{1 \leq
+		a < i} e \math{1 \leq b < j}. Pertanto, per il calcolo della soluzione
+		ottimale della \math{i, j}-esima istanza del problema si hanno a disposizione
+		l'elemento \math{i}-esimo della sequenza \math{X}, ovvero \math{x_{i}},
+		l'elemento \math{j}-esimo della sequenza \math{Y}, ovvero \math{y_{j}},
+		e le lunghezze delle sottosequenze strettamente crescenti rispetto alle
+		istanze da \math{i - 1, j - 1} a 0, 0, ma non gli elementi della sequenza
+		che comportano tale lunghezza. A differenza del problema originale,
+		\math{x_{i}} e \math{y_{j}} devono non solo essere uguali, ma devono
+		anche essere per forza un elemento (in particolare, l'ultimo) della
+		sottosequenza strettamente crescente comune di \math{X_{i}} e di
+		\math{Y_{j}} di lunghezza \math{S_{i}}.
 
         \begin{example}
             Siano date le sequenze \math{X = \langle 14, 2, 4, 6, 13, 15,
@@ -148,11 +212,8 @@
         \end{parbox}
         \par
 
-        Per quanto riguarda il passo ricorsivo, si assuma di avere a
-        disposizione tutte le soluzioni nella forma \math{S_{a, b}}, 
-        con \math{1 \leq a < i} e \math{1 \leq b < j}, e di voler
-        calcolare \math{S_{i, j}}. Dato che il problema LICS vincolato
-        richiede di trovare la sottosequenza strettamente crescente
+        Per quanto riguarda il passo ricorsivo, dato che il problema LICS
+        vincolato richiede di trovare la sottosequenza strettamente crescente
         comune più lunga che termini con l'ultimo termine di entrambe
         le sequenze, deve per forza aversi \math{x_{i} = y_{j} \in S_{i, j}}.
 
