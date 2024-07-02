@@ -117,24 +117,24 @@
     \subsection{Programmazione dinamica: sottostruttura ottima}
 
         \begin{theorem}
-                \strong{Proprietà della sottostruttura ottima per il
-                problema Longest Increasing Common Subsequence (Vincolato)}.
-                Sia \math{X} una sequenza di \math{m} numeri interi e sia
-                \math{X_{i}} un suo prefisso di lunghezza \math{i}, con
-                \math{1 \leq i \leq m}. Sia \math{Y} una sequenza di
-                \math{n} numeri interi e sia \math{Y_{j}} un suo prefisso
-                di lunghezza \math{j}, con \math{1 \leq j \leq n}.
+			\strong{Proprietà della sottostruttura ottima per il
+			problema Longest Increasing Common Subsequence (Vincolato)}.
+			Sia \math{X} una sequenza di \math{m} numeri interi e sia
+			\math{X_{i}} un suo prefisso di lunghezza \math{i}, con
+			\math{1 \leq i \leq m}. Sia \math{Y} una sequenza di
+			\math{n} numeri interi e sia \math{Y_{j}} un suo prefisso
+			di lunghezza \math{j}, con \math{1 \leq j \leq n}.
 
-		Sia \math{Z^{i,j}} una LICSV di \math{X_{i}} e di
-		\math{Y_{j}} tale che termini con \math{x_{i} = y_{j}}.
-		Sia infine \math{W_{i,j}} l'insieme di tutte le possibili
-		sottosequenze crescenti comuni (non necessariamente le più
-		lunghe) di \math{X_{h}} e di \math{Y_{k}} che finiscono
-		con \math{x_{h} = y_{k}} e a cui è possibile concatenare
-		\math{x_{i}} (o \math{y_{j}}) ottenendo ancora una sequenza
-		crescente comune, ovvero:
+			Sia \math{Z^{i,j}} una LICSV di \math{X_{i}} e di
+			\math{Y_{j}} tale che termini con \math{x_{i} = y_{j}}.
+			Sia infine \math{W_{i,j}} l'insieme di tutte le possibili
+			sottosequenze crescenti comuni (non necessariamente le più
+			lunghe) di \math{X_{h}} e di \math{Y_{k}} che finiscono
+			con \math{x_{h} = y_{k}} e a cui è possibile concatenare
+			\math{x_{i}} (o \math{y_{j}}) ottenendo ancora una sequenza
+			crescente comune, ovvero:
 
-		\smallskip
+			\smallskip
             \begin{center}
                 \begin{math}
                     W_{i, j} = \bigcup_{1 \leq h < i; \thickspace i \leq k < j;
@@ -180,7 +180,7 @@
             istanza del problema.
         \end{theorem}
 
-        \subsection{Programmazione dinamica: equazione di ricorrenza}
+	\subsection{Programmazione dinamica: equazione di ricorrenza}
 
         Certamente, la soluzione per tutte le coppie di indici \math{i, j}
         con \math{i = 0} oppure \math{j = 0} si rivela immediatamente essere 
@@ -201,73 +201,48 @@
         \math{x_{i} \ne y_{j}}, pertanto è sufficiente considerare solamente
         quest'ultimo come caso base.
 
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                S_{i, j} = \epsilon \thickspace \mi{se} \thickspace x_{i} \ne y_{j}
-            \end{math}
-        \end{parbox}
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                \mi{Opt}(i, j) = 0 \thickspace \mi{se} \thickspace x_{i} \ne y_{j}
-            \end{math}
-        \end{parbox}
-        \par
+		\begin[mode = display]{math}
+			S_{i, j} = 0 \thickspace \mi{se} \thickspace x_{i} \ne y_{j}
+		\end{math}
 
-        Per quanto riguarda il passo ricorsivo, dato che il problema LICS
-        vincolato richiede di trovare la sottosequenza strettamente crescente
-        comune più lunga che termini con l'ultimo termine di entrambe
-        le sequenze, deve per forza aversi \math{x_{i} = y_{j} \in S_{i, j}}.
-
-        Una generica soluzione per la \math{i, j}-esima istanza del problema
-        deve essere costruita accodando \math{x_{i} = y_{j}} ad sottosequenza
-        strettamente crescente comune alle due sequenze tale che tutti gli
-        elementi di tale sottosequenza vengono prima, in ordine lessicografico,
-        di \math{x_{i} = y_{j}}. Questo perché l'aggiunta di \math{x_{i} =
-        y_{j}} in coda ad una tale sottosequenza restituisce ancora una
-        sottosequenza strettamente crescente comune alle due. La soluzione
-        ottimale \math{S_{i, j}} è data dalla sottosequenza con queste
-        caratteristiche più lunga possibile a cui viene aggiunto \math{x_{i}
-        = y_{j}} in coda.
+        Per quanto riguarda il passo ricorsivo, si ha che una generica
+        soluzione per la \math{i, j}-esima istanza del problema deve essere
+        costruita accodando \math{x_{i} = y_{j}} ad sottosequenza strettamente
+        crescente comune tale che tutti gli elementi di tale sottosequenza
+        vengono prima, in ordine lessicografico, di \math{x_{i} = y_{j}}.
+        Questo perché l'aggiunta di \math{x_{i} = y_{j}} in coda ad una
+        tale sottosequenza restituisce ancora una sottosequenza strettamente
+        crescente comune. La soluzione ottimale \math{S_{i, j}} è data dalla
+        lunghezza della sottosequenza con queste caratteristiche più lunga
+        possibile aumentata di uno.
 
         La sottosequenza strettamente crescente comune più lunga possibile
         con tutti gli elementi che vengono prima, in ordine lessicografico,
         di \math{x_{i} = y_{j}} sarà a sua volta soluzione di una certa
         istanza \math{h, k} del problema, con \math{h < i} e \math{k < j}.
-        La soluzione \math{S_{i, j}} è allora il risultato dell'accodare
-        l'elemento \math{x_{i} = y_{j}} alla soluzione \math{S_{h, k}}.
-        Se \math{x_{i} = y_{j}} viene dopo tutti gli altri elementi di
-        \math{X_{i}} nell'ordine lessicografico, allora l'elemento
-        \math{x_{h}} non esiste. In questo caso, la soluzione per la
-        \math{i, j}-esima istanza del problema è formata dal solo elemento
+        La soluzione \math{S_{i, j}} é allora data dalla soluzione \math{S_{h,
+        k}} a cui viene sommato 1. Si noti come \math{S_{h, k}} possa anche non
+        esistere, ed in particolare questo si verifica se \math{x_{i} = y_{j}}
+        viene dopo tutti gli altri elementi di \math{X_{i}} e di \math{Y_{j}}
+        nell'ordine lessicografico. In questo caso, la soluzione per la
+        \math{i, j}-esima istanza del problema è 1, perché la sottosequenza
+        crescente piú lunga possibile vincolata é costituita dal solo
         \math{x_{i} = y_{j}}.
 
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                S_{i, j} =
-                \{\table[columnalign = left left]{
-                    \mi{max}\{S_{h, k} | 1 \leq h < i, 1 \leq k < j, x_{h} < x_{i}\} | x_{i} &
-                    \mi{se} \thickspace \exists h, k \\
-                    x_{i} &
-                    \mi{se} \thickspace \nexists h, k \\
-                }
-            \end{math}
-        \end{parbox}
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                \mi{Opt} {(i, j)} = 
-                \{\table[columnalign = left left]{
-                    \mi{max}\{\mi{Opt}(h, k) | 1 \leq h < i, 1 \leq k < j, x_{h} < x_{i}\} + 1 &
-                    \mi{se} \thickspace \exists h, k \\
-                    1 &
-                    \mi{se} \thickspace \nexists h, k \\
-                }
-            \end{math}
-        \end{parbox}
+		\begin[mode = display]{math}
+			S_{i, j} =
+			\{\table[columnalign = left left]{
+				\mi{max}\{S_{h, k} | 1 \leq h < i, 1 \leq k < j, x_{h} < x_{i}\} + 1 &
+				\mi{se} \thickspace \exists S_{h, k} \\
+				0 &
+				\mi{se} \thickspace \nexists S_{h, k} \\
+			}
+		\end{math}
 
-        \subsection{Programmazione dinamica: implementazione bottom-up}
+	\subsection{Programmazione dinamica: implementazione bottom-up}
 
-                L'algoritmo bottom-up viene costruito a partire dall'equazione
-                di ricorrenza sfruttando una tabella \math{c}. In ciascuna cella
+		L'algoritmo bottom-up viene costruito a partire dall'equazione
+		di ricorrenza sfruttando una tabella \math{c}. In ciascuna cella
 		\math{c[i, j]} viene riportato il valore della soluzione ottimale
 		per la \math{i, j}-esima istanza del problema, che viene utilizzata
 		per calcolare i valori ottimali per le istanze successive. L'algoritmo
@@ -293,18 +268,42 @@
 			    return c
 		\end{verbatim}
 
-                Il tempo di esecuzione dell'algoritmo è \math{O(m^{2}n^{2})},
-                dove \math{m} è la lunghezza della sequenza \math{X} e \math{n}
-                è la lunghezza della sequenza \math{Y}. Si noti infatti come 
-                l'algoritmo sia costituito da due cicli innestati, dove il 
-                primo esegue il secondo \math{m} volte ed il secondo esegue
-                potenzialmente \math{n} volte a sua volta una coppia di cicli
-                innestati, dove il primo esegue il secondo al più \math{m}
-                volte ed il secondo esegue al più \math{n} volte un blocco di
-                istruzioni avente tempo di esecuzione immediato. Si ha quindi
-                \math{O(m \cdot n \cdot (m \cdot n)) = O(m^{2}n^{2})}.
+		Il problema LIS non vincolato può essere ridotto al problema
+		LIS vincolato. Infatti, la soluzione del problema LIS non
+		vincolato non è altro che la maggior soluzione parziale del
+		problema LIS vincolato.
 
-        \subsection{Programmazione dinamica: ricostruzione di una soluzione}
+		\begin{verbatim}
+			procedure LICS(X, Y)
+			    best \unichar{U+2190} 0
+			    for i \unichar{U+2190} 1 to m do
+			        for j \unichar{U+2190} 1 to n do
+			            if X[i] \unichar{U+2260} Y[j] then
+			                c[i, j] \unichar{U+2190} 0
+			            else
+			                t \unichar{U+2190} 0
+			                for a \unichar{U+2190} 1 to i - 1 do
+			                    for b \unichar{U+2190} 1 to j - 1 do
+			                        if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
+			                            t \unichar{U+2190} c[a, b]
+			                c[i, j] \unichar{U+2190} t + 1
+			            if (c[i] > best) then
+			                best \unichar{U+2190} c[i]
+			    return best
+		\end{verbatim}
+
+		Il tempo di esecuzione dell'algoritmo è \math{O(m^{2}n^{2})},
+		dove \math{m} è la lunghezza della sequenza \math{X} e \math{n}
+		è la lunghezza della sequenza \math{Y}. Si noti infatti come
+		l'algoritmo sia costituito da due cicli innestati, dove il
+		primo esegue il secondo \math{m} volte ed il secondo esegue
+		potenzialmente \math{n} volte a sua volta una coppia di cicli
+		innestati, dove il primo esegue il secondo al più \math{m}
+		volte ed il secondo esegue al più \math{n} volte un blocco di
+		istruzioni avente tempo di esecuzione immediato. Si ha quindi
+		\math{O(m \cdot n \cdot (m \cdot n)) = O(m^{2}n^{2})}.
+
+	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
         Una volta calcolata la lunghezza della LICSV, è possibile
         individuarne una ripercorrendo la tabella a ritroso. In
@@ -359,28 +358,5 @@
 			        print X[i], Y[j]
 		\end{verbatim}
 	\end{parbox}
-	\par
-
-        \subsection{Osservazioni}
-
-        Il problema LICS non vincolato può essere ridotto al problema LICS
-        vincolato. Infatti, la soluzione del problema LICS vincolato non è
-        altro che la maggior soluzione parziale del problema LICS vincolato.
-
-	\begin[width = 50%fw]{parbox}
-		\begin{verbatim}
-			procedure LICS(X, Y)
-			    C, H \unichar{U+2190} BOUNDED-LICS(X)
-			    return max(C)
-		\end{verbatim}
-	\end{parbox}
-	\begin[width = 50%fw]{parbox}
-		\begin{verbatim}
-			procedure PRINT-LICS(h, X, Y, i, j)
-			    p, q \unichar{U+2190} LICS(X)
-			    PRINT-BOUNDED-LICS(h, X, Y, p, q)
-		\end{verbatim}
-	\end{parbox}
-	\par
 
 \end{sile}

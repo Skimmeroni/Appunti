@@ -271,7 +271,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima",
+      "Definizione del problema ausiliario",
       id = "stuff"
     },
     level = 3,
@@ -281,7 +281,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza",
+      "Programmazione dinamica: sottostruttura ottima",
       id = "stuff"
     },
     level = 3,
@@ -291,7 +291,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up",
+      "Programmazione dinamica: equazione di ricorrenza",
       id = "stuff"
     },
     level = 3,
@@ -301,7 +301,7 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: ricostruzione di una soluzione",
+      "Programmazione dinamica: implementazione bottom-up",
       id = "stuff"
     },
     level = 3,
@@ -311,7 +311,7 @@ return {
   },
   {
     label = {
-      "Osservazioni",
+      "Programmazione dinamica: ricostruzione di una soluzione",
       id = "stuff"
     },
     level = 3,
@@ -347,7 +347,7 @@ return {
     level = 3,
     link = "dest35",
     number = "1.6.2",
-    pageno = "17"
+    pageno = "18"
   },
   {
     label = {
@@ -367,7 +367,7 @@ return {
     level = 3,
     link = "dest37",
     number = "1.6.4",
-    pageno = "18"
+    pageno = "19"
   },
   {
     label = {
@@ -397,7 +397,7 @@ return {
     level = 3,
     link = "dest40",
     number = "1.7.2",
-    pageno = "19"
+    pageno = "20"
   },
   {
     label = {
@@ -417,7 +417,7 @@ return {
     level = 3,
     link = "dest42",
     number = "1.7.4",
-    pageno = "20"
+    pageno = "21"
   },
   {
     label = {
@@ -547,7 +547,7 @@ return {
     level = 3,
     link = "dest55",
     number = "1.10.2",
-    pageno = "26"
+    pageno = "27"
   },
   {
     label = {
@@ -557,7 +557,7 @@ return {
     level = 3,
     link = "dest56",
     number = "1.10.3",
-    pageno = "27"
+    pageno = "28"
   },
   {
     label = {
@@ -587,7 +587,7 @@ return {
     level = 3,
     link = "dest59",
     number = "1.11.2",
-    pageno = "28"
+    pageno = "29"
   },
   {
     label = {
@@ -597,7 +597,7 @@ return {
     level = 3,
     link = "dest60",
     number = "1.11.3",
-    pageno = "28"
+    pageno = "29"
   },
   {
     label = {
@@ -607,7 +607,7 @@ return {
     level = 3,
     link = "dest61",
     number = "1.11.4",
-    pageno = "29"
+    pageno = "30"
   },
   {
     label = {
@@ -627,7 +627,7 @@ return {
     level = 3,
     link = "dest63",
     number = "1.11.6",
-    pageno = "31"
+    pageno = "32"
   },
   {
     label = {
