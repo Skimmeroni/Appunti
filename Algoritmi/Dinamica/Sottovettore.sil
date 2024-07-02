@@ -115,14 +115,15 @@
         Il caso base dell'equazione di ricorrenza è immediato: se
         il vettore è il vettore nullo, allora il sottovettore di
         peso massimo più lungo vincolato è esso stesso il vettore
-        nullo. D'altro canto, se il vettore è composto da un solo
-        elemento, tale elemento deve essere parte per definizione
-        della soluzione ottima per tale istanza del problema, ed è
-        inoltre l'unico elemento di tale soluzione.
+        nullo (di peso nullo). D'altro canto, se il vettore è
+        composto da un solo elemento, tale elemento deve essere
+        parte per definizione della soluzione ottima per tale
+        istanza del problema, ed è inoltre l'unico elemento di
+        tale soluzione, che ha per peso l'elemento stesso.
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
-				S_{0} = \epsilon
+				S_{0} = 0
             \end{math}
         \end{parbox}
         \begin[width = 50%fw]{parbox}

@@ -89,7 +89,7 @@
         istanze da \math{i - 1} a 0, ma non gli elementi della sequenza che
         comportano tale lunghezza. A differenza del problema originale,
         \math{x_{i}} é per forza uno degli elementi (in particolare, l'ultimo)
-        della sottosequenza strettamente crescente di \math{X_{i}} di peso
+        della sottosequenza strettamente crescente di \math{X_{i}} di lunghezza
         \math{S_{i}}.
 
         \begin{example}

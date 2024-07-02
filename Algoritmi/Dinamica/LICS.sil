@@ -53,13 +53,14 @@
         se non é noto quali siano gli elementi che hanno indotto le
         lunghezze ottimali parziali da \math{S_{i - 1, j - 1}} a
         \math{S_{0, 0}} non vi é alcun modo di sapere se l'elemento
-
-        %\math{i}-esimo
-        %possa essere accodato ad una sottosequenza avente peso \math{S_{j}}
-        %con \math{j < i} ottenendo di nuovo una sottosequenza strettamente
-        %crescente di \math{X_{i}}. Questo perché le lunghezze \math{S_{j}}
-        %potrebbero riferirsi a sottosequenze che contengono elementi che
-        %vengono dopo di \math{x_{i}} nell'ordine lessicografico.
+        \math{i}-esimo edi \math{X} o l'elemento \math{j}-esimo di
+        \math{Y} possano essere accodati ad una sottosequenza avente
+        peso \math{S_{a, b}} con \math{1 \leq a < i} e \math{1 \leq
+        b < j} ottenendo di nuovo una sottosequenza strettamente crescente
+        comune di \math{X_{i}} e \math{Y_{j}}. Questo perché le lunghezze
+        \math{S_{i, j}} potrebbero riferirsi a sottosequenze che contengono
+        elementi che vengono dopo di \math{x_{i}} e/o di \math{y_{j}}
+        nell'ordine lessicografico.
 
         L'unico caso in cui si avrebbe la certezza di ottenere ancora
         una sottosequenza strettamente crescente di \math{X_{i}} e di
