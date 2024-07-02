@@ -104,8 +104,6 @@
 		\include[src = Dinamica/Distanza.sil]
 		\section{Problema Interleaving} % mancano le soluzioni parziali
 		\include[src = Dinamica/Interleaving.sil]
-		\section{Cammino su un grafo} % Da rivedere
-		\include[src = Dinamica/Grafo.sil]
 	\chapter{Tecnica greedy}
 		\section{Introduzione alla tecnica greedy}
 		\include[src = Greedy/Introduzione.sil]
@@ -119,16 +117,18 @@
 		\include[src = Greedy/Standard.sil]
 		\section{Strutture dati per insiemi disgiunti}
 		\include[src = Greedy/Union.sil]
-		\section{Minimum Spanning Tree}
-		\include[src = Greedy/MST.sil]
-		\section{Cammini minimi da sorgente unica}
-		\include[src = Greedy/Dijkstra.sil]
-	\chapter{Visite di grafi}
+	\chapter{Algoritmi su grafi}
 		\section{Definizione di grafo}
-		\include[src = Visita/Definizione.sil]
+		\include[src = Grafi/Definizione.sil]
+		\section{Cammini minimi da sorgente unica}
+		\include[src = Grafi/Dijkstra.sil]
+		\section{Cammini minimi da ogni sorgente}
+		\include[src = Grafi/FW.sil]
+		\section{Minimum Spanning Tree}
+		\include[src = Grafi/MST.sil]
 		\section{Visita in ampiezza}
-		\include[src = Visita/Ampiezza.sil]
+		\include[src = Grafi/Ampiezza.sil]
 		\section{Visita in profonditá}
-		\include[src = Visita/Profondita.sil]
+		\include[src = Grafi/Profondita.sil]
 
 \end{document}

@@ -4,10 +4,10 @@
     algoritmi che risolvono problemi di ottimizzazione. La tecnica greedy
     permette di calcolare la soluzione ottima (di una istanza) di un problema
     attraverso una sequenza di scelte localmente ottime, dove ogni scelta 
-    compiuto non dipende da quelle successive. Le differenze con la tecnica
+    compiuta non dipende da quelle successive. Le differenze con la tecnica
     di programmazione dinamica sono riassunte di seguito:
 
-    \begin[cols = 50%fw 50%fw, cellborder = 1pt 1pt 1pt 1pt]{ptable}
+    \begin[cols = 45%fw 55%fw, cellborder = 1pt 1pt 1pt 1pt]{ptable}
         \begin{row}
             \cell{\strong{Tecnica di programmazione dinamica}}
             \cell{\strong{Tecnica greedy}}
@@ -32,9 +32,10 @@
         \end{row}
         \begin{row}
             \cell{Permette di risolvere molti problemi}
-            \cell{Permette di risolvere pochi problemi}
+            \cell{Permette di risolvere (in maniera esatta) pochi problemi}
         \end{row}
     \end{ptable}
+    \bigskip
 
     L'approccio greedy alla risoluzione di un problema è possibile
     solamente se viene dimostrata matematicamente la \strong{proprietà
@@ -43,5 +44,14 @@
     esame. A sua volta, affinché tale proprietà sia vera, è necessario
     dimostrare che il problema possiede la proprietà della sottostruttura
     ottima (come per la programmazione dinamica).
+
+    Gli algoritmi basati sulla tecnica greedy vengono anche spesso
+    utilizzati per dare soluzioni approssimate a problemi per i quali
+    una soluzione esatta sarebbe troppo costosa e/o non necessaria.
+    Esistono peró alcuni problemi, fra cui quelli presentati di seguito,
+    dove algoritmi basati sull'approccio greedy restituiscono soluzioni
+    esatte: se questo si verifica, allora é quasi garantito che l'algoritmo
+    greedy sia quello in grado di risolvere il problema con le migliori
+    prestazioni.
 
 \end{sile}

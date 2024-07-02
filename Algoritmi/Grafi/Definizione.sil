@@ -1,0 +1,201 @@
+\begin{sile}
+
+    Si definisce \strong{grafo} una coppia \math{G = (V, E)}, costituita
+    da un insieme \math{V} di \strong{vertici} \math{\{v_{1}, v_{2},
+    \unicodeellipsis, v_{n}\}} e da un insieme \math{E} di \strong{archi}
+    \math{\{e_{1}, e_{2}, \unicodeellipsis, e_{m}\}}. Il numero di elementi
+    di \math{V} e di \math{E} indicando la \strong{dimensione} del grafo.
+
+    Ogni arco \math{e_{k}} indica l'esistenza di una relazione
+    \math{R} tra i due vertici \math{v_{i}} e \math{v_{j}}. Se
+    la relazione \math{R} è simmetrica, ovvero se per qualsiasi
+    coppia \math{(v_{i}, v_{j})} l'esistenza di \math{v_{i} R v_{j}}
+    implica l'esistenza di \math{v_{j} R v_{i}}, il grafo si dice
+    \strong{non orientato}. Se invece la relazione non è simmetrica,
+    il grafo si dice \strong{orientato}. Un vertice si dice
+    \strong{adiacente} ad un altro vertice se esiste un arco che
+    ha tali vertici come elementi. Ovvero, \math{u} è adiacente a
+    \math{v} in un grafo \math{G = (V, E)} se \math{(u, v) \in E}.
+    Un arco \math{(v_{i}, v_{i})}, ovvero un arco che unisce un
+    vertice con sé stesso, viene chiamato \strong{cappio}.
+
+    Un grafo può venire rappresentato in forma estensionale
+    elencando gli elementi dei due insiemi di cui è costituito.
+    In alternativa, può essere rappresentato graficamente riportando
+    i nodi come cerchi numerati e gli archi come frecce che connettono
+    tali cerchi. Se il grafo è orientato, le frecce hanno una punta,
+    mentre se non è orientato sono piatte.
+
+    \begin{example}
+        \math{V = \{1, 2, 3, 4, 5\}, E = \{(1, 2), (1, 5), (2, 3), (2, 4),
+        (4, 3), (5, 2), (5, 4)\}}.
+
+        \begin[width = 50%fw]{parbox}
+            \center{\img[src = Dinamica/graph1_d.pdf, width = 75%fw]}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \center{\img[src = Dinamica/graph1_nd.pdf, width = 75%fw]}
+        \end{parbox}
+    \end{example}
+
+    Esistono principalmente due strutture dati in grado di contenere
+    le informazioni relative ad un grafo, entrambe con punti di forza
+    e punti deboli:
+
+    \begin{itemize}
+        \begin{item}
+            \strong{Liste di adiacenza}: vettore \math{L_{v}} di
+            dimensione \math{\abs{V}} dove \math{V[i]} è una lista
+            che contiene tutti i vettori rispetto a cui \math{v_{i}}
+            è adiacente. 
+        \end{item}
+        \begin{item}
+            \strong{Matrice di adiacenza}: matrice \math{M_{v}}
+            di dimensione \math{n \times n} dove ciascuna cella
+            \math{(i, j)} ha valore 1 se i vertici \math{v_{i}} e
+            \math{v_{j}} sono adiacenti, e 0 altrimenti.
+        \end{item}
+    \end{itemize}
+
+    \bigskip
+
+    Le liste di adiacenza riportano solamente le informazioni
+    relative a quali nodi e quali archi esistono all'interno
+    del grafo, ed infatti il numero di elementi che contiene è
+    \math{\abs{V} + \abs{E}}. D'altro canto, per sapere se una
+    certa coppia di vertici del grafo che rappresenta sono adiacenti
+    è una operazione eseguibile in tempo lineare, perché occorre
+    "scorrere" le liste relative ai due vertici fino a trovare (se
+    esistono) una corrispondenza. Pertanto, le liste di adiacenza
+    sono una codifica vantaggiosa per i grafi \strong{sparsi}, ovvero
+    i grafi il cui numero di archi è di molto inferiore al numero di
+    vertici.
+
+    La matrice di adiacenza deve riportare esplicitamente informazioni
+    in merito all'esistenza o alla non esistenza di ogni arco, ed infatti
+    il numero di elementi che contiene è \math{\abs{V^{2}}}. D'altro
+    canto, sapere se una certa coppia di vertici del grafo che rappresenta
+    sono adiacenti è una operazione eseguibile in tempo costante, perché
+    è sufficiente leggere il valore della cella che ha tale vertici per
+    indici. Pertanto, le matrici di adiacenza sono una codifica vantaggiosa
+    per i grafi \strong{densi}, ovvero i grafi il cui numero di archi è
+    vicino al numero di vertici.
+
+    \begin{example}
+        \math{V = \{1, 2, 3, 4, 5\}, E = \{(1, 2), (1, 5), (2, 3), (2, 4),
+        (4, 3), (5, 2), (5, 4)\}}
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    A \Rightarrow B \Rightarrow E \\
+                    B \Rightarrow C \Rightarrow D \\
+                    C \\
+                    D \Rightarrow C \\
+                    E \Rightarrow B \Rightarrow D \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table{
+                    & A & B & C & D & E \\
+                    A & 0 & 1 & 0 & 0 & 1 \\
+                    B & 0 & 0 & 1 & 1 & 0 \\
+                    C & 0 & 0 & 0 & 0 & 0 \\
+                    D & 0 & 0 & 1 & 0 & 0 \\
+                    E & 0 & 1 & 0 & 1 & 0 \\
+                }
+            \end{math}
+        \end{parbox}
+        \par
+
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table[columnalign = left]{
+                    A \Rightarrow B \Rightarrow E \\
+                    B \Rightarrow A \Rightarrow C \Rightarrow D \Rightarrow E \\
+                    C \Rightarrow B \Rightarrow D \\
+                    D \Rightarrow B \Rightarrow C \Rightarrow E \\
+                    E \Rightarrow A \Rightarrow B \Rightarrow D \\
+                }
+            \end{math}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \begin[mode = display]{math}
+                \table{
+                    & A & B & C & D & E \\
+                    A & 0 & 1 & 0 & 0 & 1 \\
+                    B & 1 & 0 & 1 & 1 & 1 \\
+                    C & 0 & 1 & 0 & 1 & 0 \\
+                    D & 0 & 1 & 1 & 0 & 1 \\
+                    E & 1 & 1 & 0 & 1 & 0 \\
+                }
+            \end{math}
+        \end{parbox}
+    \end{example}
+
+    Dato un grafo \math{G = (V, E)}, prende il nome di \strong{cammino}
+    una qualsiasi sequenza \math{P = \langle {v_{i}}_{1}, {v_{i}}_{2},
+    \unicodeellipsis, {v_{i}}_{k - 1}, {v_{i}}_{k} \rangle} tale per
+    cui un generico \math{{v_{i}}_{j}} appartiene a \math{V} per ogni
+    \math{1 \leq j \leq k} e \math{({v_{i}}_{j}, {v_{i}}_{j + 1})}
+    appartiene ad \math{E} per \math{1 \leq j < k}. La \strong{lunghezza}
+    del cammino è \math{k - 1}, dove \math{k} è il numero di archi.
+
+    Un cammino \math{P} in cui si ha che \math{{v_{i}}_{1}} coincide
+    con \math{{v_{i}}_{k}} viene detto \strong{ciclo}. Un cammino in
+    cui ogni suo vertice compare una sola volta, ovvero che non
+    contiene alcun ciclo, prende il nome di \strong{cammino semplice}.
+    Preso un qualsiasi vertice \math{{v_{i}}_{k} \in P}, viene
+    detto \strong{predecessore} di \math{{v_{i}}_{k}} il vertice
+    \math{{v_{i}}_{k - 1}}. Tutti i vertici in un cammino \math{P =
+    \langle {v_{i}}_{1}, {v_{i}}_{2}, \unicodeellipsis, {v_{i}}_{k}
+    \rangle} diversi da \math{{v_{i}}_{1}} e da \math{{v_{i}}_{k}}
+    sono detti \strong{vertici intermedi}.
+
+    Un \strong{grafo orientato pesato} è costituito da una tripla
+    \math{G = (V, E, W)} dove, oltre all'insieme \math{V = \{v_{1},
+    \unicodeellipsis, v_{n}\}} di vertici e all'insieme \math{E =
+    \{e_{1}, \unicodeellipsis, e_{m}\}} di archi, figura la funzione
+    \math{W : V \times V \mapsto \dsi{R}^{+}}. Tale funzione restituisce,
+    per ciascuna coppia di vertici in \math{V \times V}, un numero
+    positivo \math{w_{ij}} chiamato \strong{peso} dell'arco \math{(v_{i},
+    v_{j})}. Per convenzione, se l'arco \math{(v_{i}, v_{j})} non è
+    presente nel grafo, si ha \math{W(v_{i}, v_{j}) = \infty}, mentre se
+    \math{v_{i} = v_{j}} si ha \math{W(v_{i}, v_{j}) = 0}. Il peso di un
+    cammino è dato dalla somma dei pesi degli archi che costituiscono il
+    cammino.
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            W{(v_{i}, v_{j})} =
+            \{\table[columnalign = left left]{
+                0 & \mi{se} \thickspace v_{i} = v_{j} \\
+                \infty & \mi{se} \thickspace v_{i} \ne v_{j} \wedge
+                        (v_{i}, v_{j}) \in E \\
+                w_{ij} & \mi{altrimenti} \\
+            }
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            W{(\langle {v_{i}}_{1}, {v_{i}}_{2}, \unicodeellipsis, {v_{i}}_{k} \rangle)} =
+            \sum_{j = 1}^{k - 1} W{({v_{i}}_{j}, {v_{i}}_{j + 1})}
+        \end{math}
+    \end{parbox}
+    \par
+
+    \begin{example}
+        Il cammino blu ha peso 2 + 3 + 1 = 6, mentre il cammino rosa ha peso
+        8 + 9 + 7 = 24. Il primo è un cammino semplice, mentre il secondo no.
+
+        \begin[width = 50%fw]{parbox}
+            \center{\img[src = Dinamica/graph2_path1.pdf, width = 75%fw]}
+        \end{parbox}
+        \begin[width = 50%fw]{parbox}
+            \center{\img[src = Dinamica/graph2_path2.pdf, width = 75%fw]}
+        \end{parbox}
+    \end{example}
+
+\end{sile}

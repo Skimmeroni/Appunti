@@ -39,7 +39,7 @@
 	Il problema \strong{Interval Scheduling} chiede di trovare il
 	sottoinsieme \math{X} di \math{A} di cardinalità massima composto
 	da attività mutualmente compatibili \footnote{Si noti la differenza
-	con il problema Wait Interval Scheduling: tale problema chiede di 
+	con il problema Weighted Interval Scheduling: tale problema chiede di
 	trovare il sottoinsieme di valore totale massimo, mentre il problema
 	Interval Scheduling chiede di trovare quello di cardinalità massima.}.
 

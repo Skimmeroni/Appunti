@@ -328,32 +328,32 @@
         si incontra un elemento non nullo di \math{h}, l'elemento della
         sequenza in tale posizione è un elemento della soluzione.
 
-		\begin[width = 50%fw]{parbox}
+		\begin[width = 60%fw]{parbox}
 			\begin{verbatim}
-			    procedure BOUNDED-LICS(X, Y)
-			        for i \unichar{U+2190} 1 to m do
-			            for j \unichar{U+2190} 1 to n do
-			                if X[i] \unichar{U+2260} Y[j] then
-			                    c[i, j] \unichar{U+2190} 0
-			                    h[i, j] \unichar{U+2190} 0
-			                else
-			                    t \unichar{U+2190} 0
-			                    for a \unichar{U+2190} 1 to i - 1 do
-			                        for b \unichar{U+2190} 1 to j - 1 do
-			                            if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
-			                                t \unichar{U+2190} c[a, b]
-			                                h[i, j] \unichar{U+2190} (a, b)
-			                    c[i, j] \unichar{U+2190} t + 1
+				procedure BOUNDED-LICS(X, Y)
+				    for i \unichar{U+2190} 1 to m do
+				        for j \unichar{U+2190} 1 to n do
+				            if X[i] \unichar{U+2260} Y[j] then
+				                c[i, j] \unichar{U+2190} 0
+				                h[i, j] \unichar{U+2190} 0
+				            else
+				                t \unichar{U+2190} 0
+				                for a \unichar{U+2190} 1 to i - 1 do
+				                    for b \unichar{U+2190} 1 to j - 1 do
+				                        if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
+				                            t \unichar{U+2190} c[a, b]
+				                            h[i, j] \unichar{U+2190} (a, b)
+				                c[i, j] \unichar{U+2190} t + 1
 
-					\bigskip
-			        return h
+				    \bigskip
+				    return h
 			\end{verbatim}
 		\end{parbox}
-		\begin[width = 50%fw]{parbox}
+		\begin[width = 40%fw]{parbox}
 			\begin{verbatim}
-				procedure PRINT-BOUNDED-LICS(h, X, i, j)
+				procedure PRINT-BOUNDED-LICS(h, X, [i, j])
 				    if h[i, j] \unichar{U+2260} (0, 0) then
-				        PRINT-BOUNDED-LICS(h, X, h[i, j][0], h[i, j][1])
+				        PRINT-BOUNDED-LICS(h, X, h[i, j])
 				    print X[i]
 			\end{verbatim}
 		\end{parbox}
@@ -367,35 +367,35 @@
 		deve avere \tt{best} come terzo parametro, di modo da ricavare la soluzione
 		per l'istanza corretta.
 
-		\begin[width = 50%fw]{parbox}
+		\begin[width = 60%fw]{parbox}
 			\begin{verbatim}
-			    procedure LICS(X, Y)
-			        best \unichar{U+2190} 0
-			        for i \unichar{U+2190} 1 to m do
-			            for j \unichar{U+2190} 1 to n do
-			                if X[i] \unichar{U+2260} Y[j] then
-			                    c[i, j] \unichar{U+2190} 0
-			                    h[i, j] \unichar{U+2190} 0
-			                else
-			                    t \unichar{U+2190} 0
-			                    for a \unichar{U+2190} 1 to i - 1 do
-			                        for b \unichar{U+2190} 1 to j - 1 do
-			                            if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
-			                                t \unichar{U+2190} c[a, b]
-			                                h[i, j] \unichar{U+2190} (a, b)
-			                    c[i, j] \unichar{U+2190} t + 1
-			                if (c[i, j] > best) then
-			                    best \unichar{U+2190} c[i, j]
+				procedure LICS(X, Y)
+				    best \unichar{U+2190} 0
+				    for i \unichar{U+2190} 1 to m do
+				        for j \unichar{U+2190} 1 to n do
+				            if X[i] \unichar{U+2260} Y[j] then
+				                c[i, j] \unichar{U+2190} 0
+				                h[i, j] \unichar{U+2190} 0
+				            else
+				                t \unichar{U+2190} 0
+				                for a \unichar{U+2190} 1 to i - 1 do
+				                    for b \unichar{U+2190} 1 to j - 1 do
+				                        if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
+				                            t \unichar{U+2190} c[a, b]
+				                            h[i, j] \unichar{U+2190} (a, b)
+				                c[i, j] \unichar{U+2190} t + 1
+				            if (c[i, j] > best) then
+				                best \unichar{U+2190} c[i, j]
 
-			        \bigskip
-			        return h, best
+				    \bigskip
+				    return h, best
 			\end{verbatim}
 		\end{parbox}
-		\begin[width = 50%fw]{parbox}
+		\begin[width = 40%fw]{parbox}
 			\begin{verbatim}
-				procedure PRINT-LICS(h, X, i, j)
+				procedure PRINT-LICS(h, X, [i, j])
 				    if h[i, j] \unichar{U+2260} (0, 0) then
-				        PRINT-LICS(h, X, h[i, j][0], h[i, j][1])
+				        PRINT-LICS(h, X, h[i, j])
 				    print X[i]
 			\end{verbatim}
 		\end{parbox}

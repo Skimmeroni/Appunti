@@ -327,7 +327,7 @@ return {
     level = 2,
     link = "dest33",
     number = "1.6",
-    pageno = "18"
+    pageno = "17"
   },
   {
     label = {
@@ -561,83 +561,13 @@ return {
   },
   {
     label = {
-      "Cammino su un grafo",
-      id = "stuff"
-    },
-    level = 2,
-    link = "dest57",
-    number = "1.11",
-    pageno = "28"
-  },
-  {
-    label = {
-      "Definizione del problema",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest58",
-    number = "1.11.1",
-    pageno = "28"
-  },
-  {
-    label = {
-      "Programmazione dinamica: sottostruttura ottima",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest59",
-    number = "1.11.2",
-    pageno = "29"
-  },
-  {
-    label = {
-      "Programmazione dinamica: equazione di ricorrenza",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest60",
-    number = "1.11.3",
-    pageno = "29"
-  },
-  {
-    label = {
-      "Programmazione dinamica: implementazione bottom-up",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest61",
-    number = "1.11.4",
-    pageno = "30"
-  },
-  {
-    label = {
-      "Programmazione dinamica: ricostruzione di una soluzione",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest62",
-    number = "1.11.5",
-    pageno = "30"
-  },
-  {
-    label = {
-      "Osservazioni",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest63",
-    number = "1.11.6",
-    pageno = "32"
-  },
-  {
-    label = {
       "Tecnica greedy",
       id = "stuff"
     },
     level = 1,
-    link = "dest64",
+    link = "dest57",
     number = "2",
-    pageno = "33"
+    pageno = "29"
   },
   {
     label = {
@@ -645,9 +575,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest65",
+    link = "dest58",
     number = "2.1",
-    pageno = "33"
+    pageno = "29"
   },
   {
     label = {
@@ -655,9 +585,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest66",
+    link = "dest59",
     number = "2.2",
-    pageno = "33"
+    pageno = "29"
   },
   {
     label = {
@@ -665,9 +595,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest67",
+    link = "dest60",
     number = "2.3",
-    pageno = "34"
+    pageno = "31"
   },
   {
     label = {
@@ -675,9 +605,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest68",
+    link = "dest61",
     number = "2.4",
-    pageno = "36"
+    pageno = "32"
   },
   {
     label = {
@@ -685,9 +615,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest69",
+    link = "dest62",
     number = "2.5",
-    pageno = "38"
+    pageno = "33"
   },
   {
     label = {
@@ -695,9 +625,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest70",
+    link = "dest63",
     number = "2.6",
-    pageno = "40"
+    pageno = "36"
   },
   {
     label = {
@@ -705,9 +635,9 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest71",
+    link = "dest64",
     number = "2.6.1",
-    pageno = "41"
+    pageno = "36"
   },
   {
     label = {
@@ -715,59 +645,19 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest72",
+    link = "dest65",
     number = "2.6.2",
-    pageno = "41"
+    pageno = "37"
   },
   {
     label = {
-      "Minimum Spanning Tree",
-      id = "stuff"
-    },
-    level = 2,
-    link = "dest73",
-    number = "2.7",
-    pageno = "43"
-  },
-  {
-    label = {
-      "Algoritmo di Kruskal",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest74",
-    number = "2.7.1",
-    pageno = "46"
-  },
-  {
-    label = {
-      "Algoritmo di Prim",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest75",
-    number = "2.7.2",
-    pageno = "47"
-  },
-  {
-    label = {
-      "Cammini minimi da sorgente unica",
-      id = "stuff"
-    },
-    level = 2,
-    link = "dest76",
-    number = "2.8",
-    pageno = "48"
-  },
-  {
-    label = {
-      "Visite di grafi",
+      "Algoritmi su grafi",
       id = "stuff"
     },
     level = 1,
-    link = "dest77",
+    link = "dest66",
     number = "3",
-    pageno = "51"
+    pageno = "39"
   },
   {
     label = {
@@ -775,9 +665,119 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest78",
+    link = "dest67",
     number = "3.1",
-    pageno = "51"
+    pageno = "39"
+  },
+  {
+    label = {
+      "Cammini minimi da sorgente unica",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest68",
+    number = "3.2",
+    pageno = "41"
+  },
+  {
+    label = {
+      "Cammini minimi da ogni sorgente",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest69",
+    number = "3.3",
+    pageno = "42"
+  },
+  {
+    label = {
+      "Definizione del problema",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest70",
+    number = "3.3.1",
+    pageno = "43"
+  },
+  {
+    label = {
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest71",
+    number = "3.3.2",
+    pageno = "43"
+  },
+  {
+    label = {
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest72",
+    number = "3.3.3",
+    pageno = "43"
+  },
+  {
+    label = {
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest73",
+    number = "3.3.4",
+    pageno = "44"
+  },
+  {
+    label = {
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest74",
+    number = "3.3.5",
+    pageno = "44"
+  },
+  {
+    label = {
+      "Osservazioni",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest75",
+    number = "3.3.6",
+    pageno = "46"
+  },
+  {
+    label = {
+      "Minimum Spanning Tree",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest76",
+    number = "3.4",
+    pageno = "46"
+  },
+  {
+    label = {
+      "Algoritmo di Kruskal",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest77",
+    number = "3.4.1",
+    pageno = "50"
+  },
+  {
+    label = {
+      "Algoritmo di Prim",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest78",
+    number = "3.4.2",
+    pageno = "52"
   },
   {
     label = {
@@ -786,7 +786,7 @@ return {
     },
     level = 2,
     link = "dest79",
-    number = "3.2",
+    number = "3.5",
     pageno = "53"
   },
   {
@@ -796,7 +796,7 @@ return {
     },
     level = 2,
     link = "dest80",
-    number = "3.3",
+    number = "3.6",
     pageno = "54"
   }
 }

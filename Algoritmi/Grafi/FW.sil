@@ -425,7 +425,7 @@
 
     \begin{example}
         \begin[width = 33%fw, strut = character, valign = middle]{parbox}
-            \center{\img[src = Dinamica/graph2.pdf, width = 87.5%fw]}
+            \center{\img[src = Grafi/graph2.pdf, width = 87.5%fw]}
         \end{parbox}
         \begin[width = 33%fw, valign = middle]{parbox}
             \begin[mode = display]{math}

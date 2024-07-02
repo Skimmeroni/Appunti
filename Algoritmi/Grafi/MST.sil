@@ -1,5 +1,81 @@
 \begin{sile}
 
+	Dato un grafo \math{G = (V, E)} non orientato e connesso, si dice
+    \strong{matroide grafico} la coppia di insiemi \math{M_{G} = (S, F)},
+    dove \math{S} coincide con l'insieme degli archi \math{E} e \math{F}
+    è costituito da tutti i sottoinsiemi di \math{S} che non presentano
+    cicli, ovvero da tutti ed i soli sottoinsiemi di \math{S} che
+    definiscono dei sottografi che formano una \strong{foresta}.
+
+    \begin{theorem}
+        Un matroide grafico è un matroide.
+
+        \bigskip
+        \strong{Dimostrazione}. Dato un grafo non orientato e connesso
+        \math{G = (V, E)}, sia \math{M_{G} = (S, F)} il matroide grafico
+        a questo associato. Si dimostri innanzitutto che \math{M_{G}} è
+        un sistema di indipendenza: preso un qualsiasi \math{A \in F},
+        sia \math{B} un suo sottoinsieme. Tale sottoinsieme viene costruito
+        eliminando da \math{A} uno o più archi; essendo però \math{A} privo
+        di cicli per ipotesi, anche \math{B} dovrà esserlo, e quindi anche
+        \math{B} è un elemento di \math{F}. Questo significa che qualsiasi
+        sottoinsieme di un elemento di \math{F} fa a sua volta parte di
+        \math{F}, pertanto \math{M_{G}} è un sistema di indipendenza.
+
+        Siano poi \math{A, B \in F} due sottoinsiemi tali per cui
+        \math{\abs{B} = \abs{A} + 1}, i quali definiscono rispettivamente
+        i sottografi \math{G_{A} = (V, A)} e \math{G_{B} = (V, B)}. Per
+        definizione tali sottografi sono delle foreste, costituite
+        rispettivamente da \math{\abs{V} - \abs{A}} e da \math{\abs{V}
+        - \abs{B}} alberi. La foresta \math{G_{B}} contiene esattamente
+        un albero in meno della foresta \math{G_{A}}, infatti:
+
+        \begin[mode = display]{math}
+            \abs{V} - \abs{A} - (\abs{V} - \abs{B}) =
+            \abs{V} - \abs{A} - \abs{V} + \abs{B} =
+            - \abs{A} + \abs{A} + 1 = 1
+        \end{math}
+
+        Questo implica che, essendo \math{G_{A}} e \math{G_{B}} costituite
+        dagli stessi vertici, esiste in \math{G_{B}} un arco \math{(u, v)}
+        che connette due vertici \math{u} e \math{v} che in \math{G_{B}} si
+        trovano in un solo albero ma che in \math{G_{A}} si trovano in due
+        alberi diversi. Allora tale arco può essere aggiunto a \math{G_{A}}
+        senza creare un ciclo, ottenendo quindi un nuovo sottografo i cui
+        vertici formano ancora un insieme che appartiene ad \math{F}. Questa
+        è però precisamente la definizione di proprietà di scambio, e quindi
+        è possibile affermare che \math{M_{G}} sia un matroide.
+    \end{theorem}
+
+    \begin{example}
+        \center{\img[src = Grafi/matroid.pdf, width = 87.5%fw]}
+
+        Si consideri il grafo \math{G = (V, E)} sopra presentato. A
+        partire dall'insieme \math{F}, che contiene tutti i sottoinsiemi
+        di \math{E} che non hanno cicli. Da \math{F} è estratto il
+        sottoinsieme di archi \math{A = \{(a, b), (b, c), (c, d), (d, e),
+        (i, g), (f, g), (g, h)\}}. Il sottografo \math{G_{A} = (V, A)}
+        definisce una foresta di \math{\abs{V} - \abs{A} = 2} alberi, il
+        primo formato dagli archi \math{\{(a, b), (b, c), (c, d), (d, e)\}}
+        ed il secondo dagli archi \math{\{(i, g), (f, g), (g, h)\}}
+    \end{example}
+
+    Dato il matroide grafico \math{M_{G} = (S, F)}, l'insieme \math{A \in
+    F} è massimale se non è possibile aggiungere un arco ad \math{A} (che
+    non faccia già parte di \math{A}) senza formare un ciclo. Questo equivale
+    a dire che il sottografo \math{G_{A}} indotto da \math{A} è una foresta
+    formata da un solo albero, avente \math{\abs{V} - 1} archi che connette
+    tutti i vertici del grafo. Un albero con queste caratteristiche viene
+    chiamato \strong{albero di copertura}, o \strong{Spanning Tree}
+    (\strong{ST}).
+
+    \begin{example}
+        \center{\img[src = Grafi/matroid2.pdf, width = 87.5%fw]}
+
+        L'insieme di archi sopra evidenziato è uno spanning tree per il grafo
+        dell'esempio precedente.
+    \end{example}
+
     Sia dato un grafo connesso non orientato pesato \math{G = (V, E)}, 
     con \math{W} funzione che associa un intero positivo a ciascuna
     coppia di archi di \math{G}. Il \strong{problema del minimum 
@@ -22,7 +98,7 @@
     \par
 
     \begin{example}
-        \img[src = Greedy/matroid3.pdf, width = 100%fw]
+        \img[src = Grafi/matroid3.pdf, width = 100%fw]
 
         Rispetto al grafo sopra riportato, quello evidenziato in blu è il MST.
     \end{example}
@@ -107,7 +183,7 @@
     attraversa tale taglio.
 
     \begin{example}
-        \img[src = Greedy/matroid4.pdf, width = 100%fw]
+        \img[src = Grafi/matroid4.pdf, width = 100%fw]
 
         Si consideri il grafo sopra presentato. Il taglio evidenziato
         partiziona i vertici del grafo in due sottoinsiemi, \math{V =
@@ -168,7 +244,7 @@
     \end{theorem}
 
     \begin{example}
-        \img[src = Greedy/matroid5.pdf, width = 100%fw]
+        \img[src = Grafi/matroid5.pdf, width = 100%fw]
 
         Il sottoinsieme di archi \math{A = \{(B, C), (C, D), (D, E),
         (F, G), (G, H)\}} è parte degli archi del MST. Per questo motivo,
