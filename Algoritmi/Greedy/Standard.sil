@@ -194,11 +194,14 @@
         è provato. 
     \end{theorem}
 
-    Il Teorema di Rado implica che se un problema può essere formulato come
-    un matroide pesato allora esiste un algoritmo greedy che lo risolve per
-    qualsiasi funzione peso. Se invece non è possibile, potrebbe comunque 
-    esistere un algoritmo greedy che risolve il problema, ma solo per alcune
-    specifiche funzioni peso, non tutte.
+    Il Teorema di Rado implica che se un problema può essere formulato
+    come un matroide pesato allora esiste un algoritmo greedy, basato
+    sull'algoritmo greedy standard, che lo risolve per qualsiasi funzione
+    peso. Se invece non è possibile, potrebbe comunque esistere un algoritmo
+    greedy basato sull'algoritmo greedy standard in grado di risolvere il
+    problema, ma solo per alcune specifiche funzioni peso, non tutte.
+    Inoltre, il teorema non dice nulla a proposito degli algoritmi greedy
+    che non sono basati sull'algoritmo greedy standard.
 
     \begin{example}
         Sia \math{V = v_{1}, v_{2}, \unicodeellipsis, v_{n}} un insieme

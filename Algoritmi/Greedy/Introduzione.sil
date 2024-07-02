@@ -26,9 +26,8 @@
             \cell{Il problema è scomposto in pochi sottoproblemi}       
         \end{row}
         \begin{row}
-            \cell{L'algoritmo è complesso e, in genere, non troppo
-            efficiente}
-            \cell{L'algoritmo è semplice e, in genere, efficiente}
+            \cell{L'algoritmo è complesso e spesso non efficiente}
+            \cell{L'algoritmo è semplice e efficiente}
         \end{row}
         \begin{row}
             \cell{Permette di risolvere molti problemi}
