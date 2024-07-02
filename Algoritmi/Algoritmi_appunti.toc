@@ -327,7 +327,7 @@ return {
     level = 2,
     link = "dest33",
     number = "1.6",
-    pageno = "17"
+    pageno = "18"
   },
   {
     label = {
@@ -337,7 +337,7 @@ return {
     level = 3,
     link = "dest34",
     number = "1.6.1",
-    pageno = "17"
+    pageno = "18"
   },
   {
     label = {
@@ -357,7 +357,7 @@ return {
     level = 3,
     link = "dest36",
     number = "1.6.3",
-    pageno = "18"
+    pageno = "19"
   },
   {
     label = {
@@ -387,7 +387,7 @@ return {
     level = 3,
     link = "dest39",
     number = "1.7.1",
-    pageno = "19"
+    pageno = "20"
   },
   {
     label = {
@@ -407,7 +407,7 @@ return {
     level = 3,
     link = "dest41",
     number = "1.7.3",
-    pageno = "20"
+    pageno = "21"
   },
   {
     label = {
@@ -427,7 +427,7 @@ return {
     level = 3,
     link = "dest43",
     number = "1.7.5",
-    pageno = "21"
+    pageno = "22"
   },
   {
     label = {
@@ -457,7 +457,7 @@ return {
     level = 3,
     link = "dest46",
     number = "1.8.2",
-    pageno = "22"
+    pageno = "23"
   },
   {
     label = {
@@ -507,7 +507,7 @@ return {
     level = 3,
     link = "dest51",
     number = "1.9.3",
-    pageno = "24"
+    pageno = "25"
   },
   {
     label = {

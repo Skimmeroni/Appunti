@@ -256,15 +256,14 @@
 			            if X[i] \unichar{U+2260} Y[j] then
 			                c[i, j] \unichar{U+2190} 0
 			            else
-			                p \unichar{U+2190} 0
-			                q \unichar{U+2190} 0
+			                t \unichar{U+2190} 0
 			                for a \unichar{U+2190} 1 to i - 1 do
 			                    for b \unichar{U+2190} 1 to j - 1 do
-			                        if (X[a] < X[i]) and (c[a, b] > c[p, q]) then
-			                            p \unichar{U+2190} a
-			                            q \unichar{U+2190} b
-			                if (p \unichar{U+2260} 0) and (q \unichar{U+2260} 0) then
-			                    c[i, j] \unichar{U+2190} c[p, q] + 1
+			                        if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
+			                            t \unichar{U+2190} c[a, b]
+			                c[i, j] \unichar{U+2190} t + 1
+
+				\bigskip
 			    return c
 		\end{verbatim}
 
@@ -287,8 +286,10 @@
 			                        if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
 			                            t \unichar{U+2190} c[a, b]
 			                c[i, j] \unichar{U+2190} t + 1
-			            if (c[i] > best) then
-			                best \unichar{U+2190} c[i]
+			            if (c[i, j] > best) then
+			                best \unichar{U+2190} c[i, j]
+
+			    \bigskip
 			    return best
 		\end{verbatim}
 
@@ -305,21 +306,21 @@
 
 	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
-        Una volta calcolata la lunghezza della LICSV, è possibile
-        individuarne una ripercorrendo la tabella a ritroso. In
-        particolare, questo viene fatto estendendo l'algoritmo per
-        il calcolo della lunghezza introducendo una tabella \math{h}.
-        Nella \math{i, j}-esima cella di \math{h} viene riportato
-        l'indice della cella di \math{c} in cui si trova l'elemento
-        predecessore dell'elemento nella \math{i, j}-esima cella di
-        \math{c}. Se l'elemento predecessore non esiste, nella
-        \math{i, j}-esima cella di \math{h} viene riportato (0, 0).
+		Una volta calcolata la lunghezza di una LICSV, è possibile
+        individuarla introducendo una tabella di appoggio \math{h}
+        e ripercorrendola a ritroso. Nella \math{i, j}-esima cella
+        di tale tabella viene riportato la coppia di indici della
+        cella di \math{c} in cui si trova l'elemento predecessore
+        dell'elemento nella \math{i, j}-esima cella di \math{c}. Se
+        l'elemento predecessore non esiste, nella \math{i, j}-esima
+        cella di \math{h} viene riportato (0, 0). La nuova procedura
+        restituisce non la tabella \math{c}, bensí la tabella \math{h}.
 
         Alla vecchia procedura opportunamente modificata ne viene aggiunta
         un'altra, \tt{PRINT-BOUNDED-LICS}. Questa ha in input la tabella
         \math{h}, le due sequenze \math{X} e \math{Y} e due indici di
         posizione \math{i} e \math{j}, mentre in output ha una delle
-        possibili LICSV per la sequenza in input.
+        possibili LICSV per le sequenze in input.
 
         La procedura restituisce la soluzione per la \math{i, j}-esima
         istanza del problema ripercorrendo la tabella \math{h} dalla
@@ -327,36 +328,81 @@
         si incontra un elemento non nullo di \math{h}, l'elemento della
         sequenza in tale posizione è un elemento della soluzione.
 
-	\begin[width = 60%fw]{parbox}
-		\begin{verbatim}
-			procedure BOUNDED-LICS(X, Y)
-			    for i \unichar{U+2190} 1 to m do
-			        for j \unichar{U+2190} 1 to n do
-			            if X[i] \unichar{U+2260} Y[j] then
-			                c[i, j] \unichar{U+2190} 0
-			                h[i, j] \unichar{U+2190} 0
-			            else
-			                p \unichar{U+2190} 0
-			                q \unichar{U+2190} 0
-			                for a \unichar{U+2190} 1 to i - 1 do
-			                    for b \unichar{U+2190} 1 to j - 1 do
-			                        if (X[a] < X[i]) and (c[a, b] > c[p, q]) then
-			                            p \unichar{U+2190} a
-			                            q \unichar{U+2190} b
-			                if (p \unichar{U+2260} 0) and (q \unichar{U+2260} 0) then
-			                    c[i, j] \unichar{U+2190} c[p, q] + 1
-			                    h[i, j] \unichar{U+2190} (p, q)
-			    return c
-		\end{verbatim}
-	\end{parbox}
-	\begin[width = 40%fw]{parbox}
-		\begin{verbatim}
-			procedure PRINT-BOUNDED-LICS(h, X, Y, i, j)
-			    if h[i, j] \unichar{U+2260} (0, 0) then
-			        a, b \unichar{U+2190} h[i, j]
-			        PRINT-BOUNDED-LICS(h, X, Y, a, b)
-			        print X[i], Y[j]
-		\end{verbatim}
-	\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+			    procedure BOUNDED-LICS(X, Y)
+			        for i \unichar{U+2190} 1 to m do
+			            for j \unichar{U+2190} 1 to n do
+			                if X[i] \unichar{U+2260} Y[j] then
+			                    c[i, j] \unichar{U+2190} 0
+			                    h[i, j] \unichar{U+2190} 0
+			                else
+			                    t \unichar{U+2190} 0
+			                    for a \unichar{U+2190} 1 to i - 1 do
+			                        for b \unichar{U+2190} 1 to j - 1 do
+			                            if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
+			                                t \unichar{U+2190} c[a, b]
+			                                h[i, j] \unichar{U+2190} (a, b)
+			                    c[i, j] \unichar{U+2190} t + 1
+
+					\bigskip
+			        return h
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure PRINT-BOUNDED-LICS(h, X, i, j)
+				    if h[i, j] \unichar{U+2260} (0, 0) then
+				        PRINT-BOUNDED-LICS(h, X, h[i, j][0], h[i, j][1])
+				    print X[i]
+			\end{verbatim}
+		\end{parbox}
+		\par
+
+		Ricordando come la soluzione del problema originale sia la maggior
+		soluzione parziale del problema vincolato, é possibile modificare
+		la procedura \tt{BOUNDED-LICS} per restituire tale soluzione oltre al
+		vettore \math{h}. Le procedure \tt{PRINT-BOUNDED-LICS} e \tt{PRINT-LICS}
+		sono identiche: l'unica differenza é che la prima chiamata a \tt{PRINT-LICS}
+		deve avere \tt{best} come terzo parametro, di modo da ricavare la soluzione
+		per l'istanza corretta.
+
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+			    procedure LICS(X, Y)
+			        best \unichar{U+2190} 0
+			        for i \unichar{U+2190} 1 to m do
+			            for j \unichar{U+2190} 1 to n do
+			                if X[i] \unichar{U+2260} Y[j] then
+			                    c[i, j] \unichar{U+2190} 0
+			                    h[i, j] \unichar{U+2190} 0
+			                else
+			                    t \unichar{U+2190} 0
+			                    for a \unichar{U+2190} 1 to i - 1 do
+			                        for b \unichar{U+2190} 1 to j - 1 do
+			                            if (X[a] < X[i]) and (c[a, b] \unichar{U+2265} t) then
+			                                t \unichar{U+2190} c[a, b]
+			                                h[i, j] \unichar{U+2190} (a, b)
+			                    c[i, j] \unichar{U+2190} t + 1
+			                if (c[i, j] > best) then
+			                    best \unichar{U+2190} c[i, j]
+
+			        \bigskip
+			        return h, best
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure PRINT-LICS(h, X, i, j)
+				    if h[i, j] \unichar{U+2260} (0, 0) then
+				        PRINT-LICS(h, X, h[i, j][0], h[i, j][1])
+				    print X[i]
+			\end{verbatim}
+		\end{parbox}
+		\par
+
+		Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione
+		è comunque proporzionale alle dimensioni del vettore \math{h},
+		perché la ricorsione è una tail-recursion.
 
 \end{sile}
