@@ -27,9 +27,9 @@
 		\begin[mode = display]{math}
 			\mi{Comp} {(X)} = 
 			\{\table{
-				T & \mi{se} \thickspace \nexists i, j \in A \thickspace
+				T & \mi{se} \thickspace \nexists i, j \in X \thickspace
 										\mi{t.c.} \thickspace f_{i} > s_{j} \\
-				F & \mi{se} \thickspace \exists i, j \in A \thickspace
+				F & \mi{se} \thickspace \exists i, j \in X \thickspace
 										\mi{t.c.} \thickspace f_{i} > s_{j} \\
 			}
 		\end{math}
@@ -71,7 +71,7 @@
 	Il caso base si ha per l'insieme \math{X_{i, i + 1}}, ovvero quando
 	\math{i + 1 = j}. Infatti, l'insieme costituito da tutte le attività
 	che vengono dopo \math{a_{i}} e prima di \math{a_{i + 1}} è, per
-	definizione, l'insieme vuoto.
+	definizione, l'insieme vuoto, perché le due attivitá sono contigue.
 
 	\begin[width = 50%fw]{parbox}
 		\begin[mode = display]{math}
@@ -108,7 +108,7 @@
 	su tale equazione avrebbe un tempo di esecuzione (almeno) quadratico.
 	Questo perché per ottenere la soluzione ottimale per una intera istanza
 	è necessario calcolare le soluzioni ottimali per tutte le istanze
-	\math{X_{a, b}} con \math{a, b \in [1, n]}.
+	\math{X_{a, b}} con \math{0 \leq a \leq n} e \math{0 \leq b \leq n}.
 
 	Il problema Interval Scheduling può essere risolto in maniera più
 	semplice e più efficiente applicando la tecnica greedy. Dato un
@@ -142,11 +142,12 @@
 				inizialmente contiene soltanto \math{a_{1}};
 			\end{item}
 			\begin{item}
-				Sia \math{x'} l'ultimo elemento dell'insieme
-				\math{X}. Viene aggiunta ad \math{X} l'attività
-				\math{a_{i} \in A} compatibile con \math{x'} che
-				viene per prima (quella che ha tempo di inizio
-				minore);
+				Sia \math{a_{k}} l'ultimo elemento dell'insieme
+				\math{X}, ovvero l'elemento di \math{X} avente
+				tempo di fine maggiore. Se l'\math{i}-esimo elemento
+				di \math{A} é compatibile con \math{a_{k}}, allora
+				viene aggiunto ad \math{X} diventando il nuovo
+				\math{a_{k}};
 			\end{item}
 			\begin{item}
 				Se tutte le attività di \math{A} sono state
@@ -155,7 +156,7 @@
 			\end{item}
 		\end{enumerate}
 	\end{parbox}
-	\par
+	\par\bigskip
 
 	Tale algoritmo è effettivamente un algoritmo greedy, perché la scelta
 	localmente ottima viene considerata anche globalmente ottima. Tuttavia,
@@ -171,7 +172,7 @@
 
 	\begin{theorem}
 		\strong{Proprietà della scelta greedy per il problema Interval
-		Schedule}. Sia dato un insieme di attività \math{A = \langle
+		Scheduling}. Sia dato un insieme di attività \math{A = \langle
 		a_{1}, a_{2}, \unicodeellipsis, a_{n} \rangle} ordinate per
 		tempo di fine non decrescente. L'attività \math{a_{1}} è
 		sempre parte della soluzione ottima.
