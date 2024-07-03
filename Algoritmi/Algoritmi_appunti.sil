@@ -83,28 +83,29 @@
 
 	\pagebreak
 
-	\chapter{Tecnica di programmazione dinamica}
+	\chapter{Programmazione dinamica su stringhe}
 		\section{Longest Common Subsequence}
-		\include[src = Dinamica/LCS.sil]
-		\section{Weighted Interval Scheduling} % algoritmo bottom-up, ricostruzione della soluzione
-		\include[src = Dinamica/WIS.sil]
-		\section{Hateville}
-		\include[src = Dinamica/Hateville.sil]
+		\include[src = Stringhe/LCS.sil]
 		\section{Longest Increasing Subsequence}
-		\include[src = Dinamica/LIS.sil]
+		\include[src = Stringhe/LIS.sil]
 		\section{Longest Increasing Common Subsequence} % ricostruzione della soluzione
-		\include[src = Dinamica/LICS.sil]
+		\include[src = Stringhe/LICS.sil]
 		\section{Sottovettore di peso massimo}
-		\include[src = Dinamica/Sottovettore.sil]
-		\section{Knapsack 0/1}
-		\include[src = Dinamica/Knapsack.sil]
+		\include[src = Stringhe/Sottovettore.sil]
 		\section{Chiusura palindroma}
-		\include[src = Dinamica/Palindroma.sil]
+		\include[src = Stringhe/Palindroma.sil]
 		\section{Distanza di modifica}
-		\include[src = Dinamica/Distanza.sil]
+		\include[src = Stringhe/Distanza.sil]
 		\section{Problema Interleaving} % mancano le soluzioni parziali
-		\include[src = Dinamica/Interleaving.sil]
-	\chapter{Tecnica greedy}
+		\include[src = Stringhe/Interleaving.sil]
+	\chapter{Programmazione dinamica su insiemi}
+		\section{Weighted Interval Scheduling} % algoritmo bottom-up, ricostruzione della soluzione
+		\include[src = Insiemi/WIS.sil]
+		\section{Hateville}
+		\include[src = Insiemi/Hateville.sil]
+		\section{Knapsack 0/1}
+		\include[src = Insiemi/Knapsack.sil]
+	\chapter{Tecnica di programmazione greedy}
 		\section{Introduzione alla tecnica greedy}
 		\include[src = Greedy/Introduzione.sil]
 		\section{Problema interval scheduling}
@@ -115,20 +116,27 @@
 		\include[src = Greedy/Matroidi.sil]
 		\section{Algoritmo Greedy Standard}
 		\include[src = Greedy/Standard.sil]
+	\chapter{Strutture dati}
+		\section{Strutture dati per grafi}
+		\include[src = Strutture/Grafi.sil]
 		\section{Strutture dati per insiemi disgiunti}
-		\include[src = Greedy/Union.sil]
-	\chapter{Algoritmi su grafi}
-		\section{Definizione di grafo}
-		\include[src = Grafi/Definizione.sil]
-		\section{Cammini minimi da sorgente unica}
-		\include[src = Grafi/Dijkstra.sil]
-		\section{Cammini minimi da ogni sorgente}
-		\include[src = Grafi/FW.sil]
-		\section{Minimum Spanning Tree}
-		\include[src = Grafi/MST.sil]
+		\include[src = Strutture/Disgiunti.sil]
+	\chapter{Cammini minimi su grafi}
+		\section{Cammini minimi da sorgente unica: algoritmo di Dijkstra}
+		\include[src = Cammini/Dijkstra.sil]
+		\section{Cammini minimi da ogni sorgente: algoritmo di Floyd-Warshall}
+		\include[src = Cammini/FW.sil]
+	\chapter{Minimum Spanning Tree}
+		\section{Problema del Minimum Spanning Tree}
+		\include[src = MST/MST.sil]
+		\section{Ricavare il Minimum Spanning Tree: algoritmo di Kruskal}
+		\include[src = MST/Kruskal.sil]
+		\section{Ricavare il Minimum Spanning Tree: algoritmo di Prim}
+		\include[src = MST/Prim.sil]
+	\chapter{Visite di grafi}
 		\section{Visita in ampiezza}
-		\include[src = Grafi/Ampiezza.sil]
+		\include[src = Visite/Ampiezza.sil]
 		\section{Visita in profonditá}
-		\include[src = Grafi/Profondita.sil]
+		\include[src = Visite/Profondita.sil]
 
 \end{document}

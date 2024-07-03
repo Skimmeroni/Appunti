@@ -31,10 +31,10 @@
         (4, 3), (5, 2), (5, 4)\}}.
 
         \begin[width = 50%fw]{parbox}
-            \center{\img[src = Dinamica/graph1_d.pdf, width = 75%fw]}
+            \center{\img[src = Strutture/graph1_d.pdf, width = 75%fw]}
         \end{parbox}
         \begin[width = 50%fw]{parbox}
-            \center{\img[src = Dinamica/graph1_nd.pdf, width = 75%fw]}
+            \center{\img[src = Strutture/graph1_nd.pdf, width = 75%fw]}
         \end{parbox}
     \end{example}
 
@@ -191,10 +191,10 @@
         8 + 9 + 7 = 24. Il primo è un cammino semplice, mentre il secondo no.
 
         \begin[width = 50%fw]{parbox}
-            \center{\img[src = Dinamica/graph2_path1.pdf, width = 75%fw]}
+            \center{\img[src = Strutture/graph2_path1.pdf, width = 75%fw]}
         \end{parbox}
         \begin[width = 50%fw]{parbox}
-            \center{\img[src = Dinamica/graph2_path2.pdf, width = 75%fw]}
+            \center{\img[src = Strutture/graph2_path2.pdf, width = 75%fw]}
         \end{parbox}
     \end{example}
 

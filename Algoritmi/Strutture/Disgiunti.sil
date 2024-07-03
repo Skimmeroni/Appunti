@@ -65,7 +65,7 @@
         all'elemento nell'oggetto cui punta \tt{head}.
 
         \bigskip
-        \center{\img[src = Greedy/union-find.pdf, width = 75%fw]}
+        \center{\img[src = Strutture/union-find.pdf, width = 75%fw]}
         \bigskip
 
         La più semplice implementazione dell'operazione \tt{UNION(x, y)}
@@ -128,7 +128,7 @@
         a sé stesso di uno dei due alberi e collegarlo all'altra radice.
 
         \bigskip
-        \center{\img[src = Greedy/union-find2.pdf, width = 25%fw]}
+        \center{\img[src = Strutture/union-find2.pdf, width = 25%fw]}
         \bigskip
 
         L'operazione di \tt{UNION} così come descritta finora non fornisce

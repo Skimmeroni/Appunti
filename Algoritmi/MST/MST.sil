@@ -1,0 +1,287 @@
+\begin{sile}
+
+	Dato un grafo \math{G = (V, E)} non orientato e connesso, si dice
+    \strong{matroide grafico} la coppia di insiemi \math{M_{G} = (S, F)},
+    dove \math{S} coincide con l'insieme degli archi \math{E} e \math{F}
+    è costituito da tutti i sottoinsiemi di \math{S} che non presentano
+    cicli, ovvero da tutti ed i soli sottoinsiemi di \math{S} che
+    definiscono dei sottografi che formano una \strong{foresta}.
+
+    \begin{theorem}
+        Un matroide grafico è un matroide.
+
+        \bigskip
+        \strong{Dimostrazione}. Dato un grafo non orientato e connesso
+        \math{G = (V, E)}, sia \math{M_{G} = (S, F)} il matroide grafico
+        a questo associato. Si dimostri innanzitutto che \math{M_{G}} è
+        un sistema di indipendenza: preso un qualsiasi \math{A \in F},
+        sia \math{B} un suo sottoinsieme. Tale sottoinsieme viene costruito
+        eliminando da \math{A} uno o più archi; essendo però \math{A} privo
+        di cicli per ipotesi, anche \math{B} dovrà esserlo, e quindi anche
+        \math{B} è un elemento di \math{F}. Questo significa che qualsiasi
+        sottoinsieme di un elemento di \math{F} fa a sua volta parte di
+        \math{F}, pertanto \math{M_{G}} è un sistema di indipendenza.
+
+        Siano poi \math{A, B \in F} due sottoinsiemi tali per cui
+        \math{\abs{B} = \abs{A} + 1}, i quali definiscono rispettivamente
+        i sottografi \math{G_{A} = (V, A)} e \math{G_{B} = (V, B)}. Per
+        definizione tali sottografi sono delle foreste, costituite
+        rispettivamente da \math{\abs{V} - \abs{A}} e da \math{\abs{V}
+        - \abs{B}} alberi. La foresta \math{G_{B}} contiene esattamente
+        un albero in meno della foresta \math{G_{A}}, infatti:
+
+        \begin[mode = display]{math}
+            \abs{V} - \abs{A} - (\abs{V} - \abs{B}) =
+            \abs{V} - \abs{A} - \abs{V} + \abs{B} =
+            - \abs{A} + \abs{A} + 1 = 1
+        \end{math}
+
+        Questo implica che, essendo \math{G_{A}} e \math{G_{B}} costituite
+        dagli stessi vertici, esiste in \math{G_{B}} un arco \math{(u, v)}
+        che connette due vertici \math{u} e \math{v} che in \math{G_{B}} si
+        trovano in un solo albero ma che in \math{G_{A}} si trovano in due
+        alberi diversi. Allora tale arco può essere aggiunto a \math{G_{A}}
+        senza creare un ciclo, ottenendo quindi un nuovo sottografo i cui
+        vertici formano ancora un insieme che appartiene ad \math{F}. Questa
+        è però precisamente la definizione di proprietà di scambio, e quindi
+        è possibile affermare che \math{M_{G}} sia un matroide.
+    \end{theorem}
+
+    \begin{example}
+        \center{\img[src = MST/matroid.pdf, width = 87.5%fw]}
+
+        Si consideri il grafo \math{G = (V, E)} sopra presentato. A
+        partire dall'insieme \math{F}, che contiene tutti i sottoinsiemi
+        di \math{E} che non hanno cicli. Da \math{F} è estratto il
+        sottoinsieme di archi \math{A = \{(a, b), (b, c), (c, d), (d, e),
+        (i, g), (f, g), (g, h)\}}. Il sottografo \math{G_{A} = (V, A)}
+        definisce una foresta di \math{\abs{V} - \abs{A} = 2} alberi, il
+        primo formato dagli archi \math{\{(a, b), (b, c), (c, d), (d, e)\}}
+        ed il secondo dagli archi \math{\{(i, g), (f, g), (g, h)\}}
+    \end{example}
+
+    Dato il matroide grafico \math{M_{G} = (S, F)}, l'insieme \math{A \in
+    F} è massimale se non è possibile aggiungere un arco ad \math{A} (che
+    non faccia già parte di \math{A}) senza formare un ciclo. Questo equivale
+    a dire che il sottografo \math{G_{A}} indotto da \math{A} è una foresta
+    formata da un solo albero, avente \math{\abs{V} - 1} archi che connette
+    tutti i vertici del grafo. Un albero con queste caratteristiche viene
+    chiamato \strong{albero di copertura}, o \strong{Spanning Tree}
+    (\strong{ST}).
+
+    \begin{example}
+        \center{\img[src = MST/matroid2.pdf, width = 87.5%fw]}
+
+        L'insieme di archi sopra evidenziato è uno spanning tree per il grafo
+        dell'esempio precedente.
+    \end{example}
+
+    Sia dato un grafo connesso non orientato pesato \math{G = (V, E)}, 
+    con \math{W} funzione che associa un intero positivo a ciascuna
+    coppia di archi di \math{G}. Il \strong{problema del minimum 
+    spanning tree} (\strong{MST problem}) richiede di trovare l'albero
+    \math{T}, sottoinsieme di \math{E}, tale per cui \math{G_{T} = (V, T)}
+    è lo spanning tree per il grafo \math{G} che ha peso complessivo minimo.
+    Il peso di uno spanning tree è dato dalla somma dei pesi di tutti gli
+    archi di cui è composto.
+
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            \forall v \in V, \thickspace \exists (u, v) \in T
+        \end{math}
+    \end{parbox}
+    \begin[width = 50%fw]{parbox}
+        \begin[mode = display]{math}
+            W{(T)} = \sum_{(u, v) \in T} W{(u, v)} \thickspace \mi{minimo}
+        \end{math}
+    \end{parbox}
+    \par
+
+    \begin{example}
+        \img[src = MST/matroid3.pdf, width = 100%fw]
+
+        Rispetto al grafo sopra riportato, quello evidenziato in blu è il MST.
+    \end{example}
+
+    È evidente come il problema possa essere risolto mediante tecnica
+    greedy, perché un insieme massimale di un matroide grafico è uno
+    spanning tree. Si ha quindi che il minimum spanning tree è dato
+    dall'insieme massimale del matroide grafico con peso minimo. In
+    termini molto generici, l'algoritmo può essere descritto come segue:
+
+    \begin{enumerate}
+        \begin{item}
+            Viene inizializzato un insieme \math{A} vuoto;
+        \end{item}
+        \begin{item}
+            Viene scelto l'arco \math{(u, v)} di modo che \math{A \cup (u, v)}
+            sia un sottoinsieme dell'insieme \math{T} degli archi del MST. Un 
+            arco che aggiunto ad \math{A} restituisce un insieme di archi ancora
+            sottoinsieme dell'MST è detto \strong{arco sicuro} per \math{A};
+        \end{item}
+        \begin{item}
+            Se \math{A = T}, ovvero se \math{G_{A} = (V, T)} è il MST,
+            l'algoritmo termina, altrimenti si torna al punto precedente.
+        \end{item}
+    \end{enumerate}
+
+	\begin{verbatim}
+		procedure GENERIC-MST(G, W)
+		1    A \unichar{U+2190} \unichar{U+2205}
+
+		\bigskip
+		2    while G\textsubscript{A} \unichar{U+2260} MST do
+		3        trova arco (u, v) sicuro per A
+		4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
+
+		\bigskip
+		5    return A
+	\end{verbatim}
+
+    L'algoritmo è effettivamente un algoritmo greedy perché ad ogni
+    iterazione viene operata una scelta localmente ottima assumendo
+    che lo sia anche complessivamente. 
+
+    Si noti come la condizione di terminazione dell'algoritmo, ovvero valutare
+    se il sottografo \math{G_{A} = (V, A)} è il MST, sia piuttosto vaga, dato
+    che non è direttamente computabile. A tal proposito, si presti attenzione
+    all'insieme \math{A}: in una qualsiasi iterazione, tale insieme definisce
+    una foresta \math{G_{A} = (V, A)} per un grafo \math{G = (V, E)} avente
+    \math{\abs{V} - \abs{A}} alberi.
+
+    Dato che per definizione lo Spanning Tree si ha quando la foresta è
+    costituita da un solo albero, la condizione di terminazione dell'algoritmo
+    può essere formulata come un controllo sulla differenza fra il numero di
+    vertici del grafo ed il numero di alberi della foresta. In particolare,
+    tale condizione è verificata quando la differenza fra i due è pari ad 1,
+    perché questo significa che è rimasto un solo albero.
+
+	\begin{verbatim}
+		procedure GENERIC-MST(G, W)
+		1    A \unichar{U+2190} \unichar{U+2205}
+
+		     \bigskip
+		2    while |V| - |A| > 1 do
+		3        trova arco (u, v) sicuro per A
+		4        A \unichar{U+2190} A \unichar{U+222A} \{(u, v)\}
+
+		     \bigskip
+		5    return A
+	\end{verbatim}
+
+    Per rendere l'algoritmo effettivamente utilizzabile è infine necessario
+    capire come compiere la scelta greedy, ovvero definire un metodo che
+    discrimini quando un arco è un arco sicuro.
+
+    Dato un grafo \math{G = (V, E)}, viene detto \strong{taglio} una qualsiasi
+    partizione di \math{V} in due insiemi, \math{V'} e \math{V - V'}. Un arco
+    \math{(u, v) \in E} si dice che \strong{attraversa il taglio} se il vertice
+    \math{u} appartiene a \math{V'} e \math{v} appartiene a \math{V - V'}.
+    L'arco che attraversa il taglio avente peso minimo è detto \strong{arco
+    leggero}. Dato un sottoinsieme \math{A \subseteq E}, si dice che un taglio
+    \strong{rispetta} l'insieme \math{A} se nessun arco di \math{A}
+    attraversa tale taglio.
+
+    \begin{example}
+        \img[src = MST/matroid4.pdf, width = 100%fw]
+
+        Si consideri il grafo sopra presentato. Il taglio evidenziato
+        partiziona i vertici del grafo in due sottoinsiemi, \math{V =
+        \{A, B, C, D, E\}} e \math{V - V' = \{F, G, H, I\}}. Tale taglio
+        rispetta il sottoinsieme di archi \math{A = \{(B, C), (C, D),
+        (D, E), (F, G), (G, H)\}}. Gli archi che attraversano il taglio
+        sono \math{(A, F), (B, F), (C, I), (C, H), (D, H), (E, H)}; fra
+        questi, l'arco \math{(C, I)} è l'arco leggero per il taglio, essendo
+        quello fra questi di peso minimo.
+    \end{example}
+
+    \begin{theorem}
+        \strong{Teorema dell'arco sicuro}. Siano dati un grafo connesso non
+        orientato e pesato \math{G = (V, E, W)}, un sottoinsieme \math{A}
+        dell'insieme \math{T} di archi del MST e un qualsiasi taglio che
+        rispetti \math{A}. L'arco leggero \math{(u, v)} del taglio è
+        certamente un arco sicuro per \math{A}, ovvero \math{A \cup
+        \{(u, v)\} \subseteq T}.
+
+        \bigskip
+        \strong{Dimostrazione}. Se \math{(u, v)} è l'unico arco che
+        attraversa il taglio il teorema è dimostrato, dato che è l'unico
+        arco in grado di connettere le due componenti distinte nel MST.
+
+        Si consideri invece il caso in cui esista almeno un altro arco
+        che attraversa il taglio. Si supponga per assurdo che l'arco
+        leggero \math{(u, v)} del taglio non sia un arco sicuro per
+        \math{A}, ovvero che aggiungendo \math{(u, v)} all'insieme
+        \math{A} non si ottiene un sottoinsieme di \math{T}. Deve
+        allora esistere un altro arco che attraversa il taglio e
+        che appartiene a \math{T}, sia questo \math{(x, y)}.
+
+        L'arco \math{(x, y)} non può appartenere ad \math{A}, perché
+        per definizione il taglio rispetta \math{A}. Se da \math{T}
+        viene rimosso l'arco \math{(x, y)} si ottengono due alberi
+        separate; se viene poi aggiunto \math{(u, v)} i due alberi
+        si ricongiungono per ottenere l'albero di connessione, non
+        necessariamente minimo, \math{T' = T - \{(x, y)\} \cup \{(u,
+        v)\}}. Poiché per ipotesi \math{(u, v)} è l'arco leggero per
+        il taglio, il peso di \math{(u, v)} deve essere inferiore al
+        peso di \math{(x, y)}. Allora:
+
+        \begin[mode = display]{math}
+            W(T') = W(T) - W(x, y) + W(u, v) \leq W(T)
+        \end{math}
+
+        Essendo però \math{T} un albero di connessione minimo, deve
+        aversi \math{W(T) \leq W(T')}; si ha quindi \math{W(T') \leq
+        W(T) \wedge W(T) \leq W(T')}, ma questo significa \math{W(T) 
+        = W(T')}, e quindi anche \math{T'} è un albero di connessione
+        minimo.
+
+        Dato che per ipotesi \math{A \subseteq T} e \math{(x, y) \notin A},
+        allora \math{A \subseteq T'}. Questo significa che \math{A \cup
+        \{(u, v)\} \subseteq T'}. Ma questa è la definizione di arco sicuro,
+        ed avendo appena mostrato che \math{T'} è un MST deve aversi che 
+        \math{(u, v)} è un arco sicuro per \math{A}.
+    \end{theorem}
+
+    \begin{example}
+        \img[src = MST/matroid5.pdf, width = 100%fw]
+
+        Il sottoinsieme di archi \math{A = \{(B, C), (C, D), (D, E),
+        (F, G), (G, H)\}} è parte degli archi del MST. Per questo motivo,
+        il teorema precedente stabilisce che l'arco leggero del taglio che
+        rispetta \math{A} è un arco sicuro per \math{A}, e infatti l'arco
+        \math{(C, I)} è uno degli archi del MST.
+    \end{example}
+
+    \begin{theorem}
+        \strong{Corollario del teorema dell'arco sicuro}. Siano dati un grafo
+        connesso non orientato e pesato \math{G = (V, E)} ed un sottoinsieme
+        \math{A} dell'insieme \math{T} di archi del MST che definisce una
+        foresta \math{G_{A} = (V, A)}. Sia \math{C = (V_{C}, A_{C})}, con 
+        \math{V_{C} \subseteq V} e \math{A_{C} \subseteq A} uno qualsiasi
+        degli alberi di \math{G_{A}}. Il taglio che divide i vertici di
+        \math{G_{A}} nei due sottoinsiemi \math{V_{C}} e \math{V - V_{C}}
+        rispetta l'insieme \math{A}. Inoltre, un arco leggero per tale 
+        taglio è anche arco sicuro per l'insieme \math{A}.
+
+        \bigskip
+        \strong{Dimostrazione}. Il taglio \math{(V_{C}, V - V_{C})} rispetta
+        \math{A} e \math{(u, v)} è un arco leggero per questo taglio, quindi
+        \math{(u, v)} è sicuro per \math{A}.
+    \end{theorem}
+
+    Sia \math{A} il sottoinsieme degli archi del MST di una generica
+    iterazione dell'algoritmo, e sia \math{G_{A}} la foresta indotta
+    dall'insieme \math{A}. Il corollario appena mostrato stabilisce
+    che per trovare un arco sicuro per \math{A}, e che può essere
+    aggiunto a quest'ultimo, è sufficiente scegliere uno qualsiasi
+    degli alberi di \math{G_{A}} e trovare l'arco di peso minimo che
+    collega un vertice che appartiene a tale albero con un vertice
+    che non vi appartiene.
+
+    Ci si chiede allora come determinare in una qualsiasi iterazione (ed
+    in maniera efficiente) quale sia l'arco di peso minimo da aggiungere
+    all'insieme di archi del MST in costruzione. Per farlo vi sono diversi
+    approcci, e ciascuno di questi è associato ad un algoritmo diverso.
+
+\end{sile}

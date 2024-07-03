@@ -1,0 +1,160 @@
+\begin{sile}
+
+        L'\strong{Algoritmo di Prim} è un algoritmo greedy che permette
+        di ricavare il MST di un grafo che non si rifà all'algoritmo
+        greedy standard. In termini molto generali, l'idea dell'algoritmo
+        è la seguente:
+
+        \begin{enumerate}
+            \begin{item}
+                Dato un grafo \math{G = (V, E, W)}, viene scelto
+                arbitrariamente un vertice \math{r}, e si considera
+                l'albero (degenere) \math{C} formato da questo vertice
+                isolato;
+            \end{item}
+            \begin{item}
+                Viene trovato l'arco di peso minimo che connette un vertice in
+                \math{C} con un vertice \math{v} non in \math{C} e si aggiunge
+                \math{v} a \math{C};
+            \end{item}
+            \begin{item}
+                L'algoritmo viene ripetuto fino ad esaurire tutti i vertici.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        L'algoritmo funziona perché ad ogni iterazione i vertici del
+        grafo vengono divisi in due sottoinsiemi: i vertici dell'albero
+        in costruzione (l'insieme \math{V_{C}}) e tutti quelli rimanenti
+        (l'insieme \math{V - V_{C}}). Per definizione, tale taglio rispetta
+        l'insieme degli archi di \math{C}, pertanto l'arco di peso minimo
+        che connette un vertice in \math{V_{C}} con un vertice in \math{V -
+        V_{C}} è certamente un arco sicuro per l'arco in costruzione.
+
+        Per determinare quale sia l'arco corretto da considerare, l'algoritmo
+        associa a ciascun vertice \math{v} del grafo \math{G = (V, E, W)}
+        due campi: un campo chiave (\math{v}.key) ed un campo predecessore
+        (\math{v.\pi}. Il campo chiave contiene il peso dell'arco che,
+        rispetto all'iterazione corrente, è il minimo trovato, mentre il
+        campo predecessore contiene il vertice con il quale il vertice
+        corrente ha l'arco con peso più piccolo. Dato un grafo \math{G =
+        (V, E, W)}, si ha allora:
+
+        \begin{enumerate}
+            \begin{item}
+                I campi chiave di tutti i vertici vengono inizializzati
+                a \math{\infty}, mentre i campi predecessore vengono
+                inizializzati a NULL;
+            \end{item}
+            \begin{item}
+                Viene scelto un vertice arbitrario, al quale viene assegnato
+                come campo chiave il valore 0. Dopodiché, tutti i vertici
+                vengono inseriti in una coda di min-priority, dove il valore
+                della chiave definisce l'ordine (la priorità) con cui i 
+                vertici vengono estratti. In questo modo, il vertice estratto
+                è sempre quello con valore del campo chiave più piccolo;
+            \end{item}
+            \begin{item}
+                Viene operata un'estrazione ed il vertice \math{v} estratto
+                viene confrontato con i vertici a questo adiacenti che ancora
+                si trovano nella coda. Per ciascuno di questi, se il relativo
+                campo chiave contiene un valore maggiore di \math{v}.key
+                allora come campo predecessore viene posto \math{v} e come
+                campo chiave viene posto il peso dell'arco che connette
+                \math{v} a tale vertice;
+            \end{item}
+            \begin{item}
+                Se la coda di priorità non è vuota, l'algoritmo riprende
+                dal punto 2, altrimenti si procede oltre, perché è possibile
+                assumere che a tutti i vertici tranne quello di partenza è
+                stato univocamente assegnato un predecessore;
+            \end{item}
+            \begin{item}
+                L'insieme degli archi del MST viene costruito riportando,
+                per ciascun vertice, l'arco (quale che sia) che ha con il
+                rispettivo predecessore.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+	\begin{verbatim}
+		procedure PRIM-MST(V, E, W, r)
+		 1    foreach v \unichar{U+2208} V do
+		 2        v.key \unichar{U+2190} \unichar{U+221E}
+		 3        v.\unichar{U+03C0} \unichar{U+2190} NULL
+		 4    r.key \unichar{U+2190} 0
+
+		      \bigskip
+		 5    Aggiungi tutti i vertici di V alla coda Q
+
+		      \bigskip
+		 6    while Q \unichar{U+2260} \unichar{U+2205} do
+		 7        u \unichar{U+2190} POP(Q)
+		 8        foreach v \unichar{U+2208} ADJ(u) do
+		 9            if v \unichar{U+2208} Q and W(u, v) < v.key then
+		10                v.key \unichar{U+2190} W(u, v)
+		11                v.\unichar{U+03C0} \unichar{U+2190} u
+
+		      \bigskip
+		12    A \unichar{U+2190} \unichar{U+2205}
+		13    foreach v \unichar{U+2208} V do
+		14        A \unichar{U+2190} A \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
+
+		      \bigskip
+		15    return A
+	\end{verbatim}
+
+        Per quanto riguarda il tempo di esecuzione dell'algoritmo, è
+        possibile distinguere quattro sezioni dello stesso: la costruzione
+        della coda di priorità (righe da 1 a 5), il loop principale (righe
+        da 6 a 11) e la ricostruzione della soluzione (righe da 12 a 14)
+
+        \begin{enumerate}
+            \begin{item}
+                Il campo chiave ed il campo predecessore vengono aggiunti
+                a ciascun vertice in tempo lineare. Allo stesso modo, il
+                tempo di esecuzione dell'aggiunta dei vertici alla coda è
+                proporzionale al numero di vertici, perché tutti i vertici
+                inizialmente hanno la stessa priorità e quindi possono
+                essere aggiunti in ordine casuale. Il tempo di esecuzione
+                della costruzione della coda è allora \math{O(\abs{V})};
+            \end{item}
+            \begin{item}
+                Il loop principale viene eseguito una volta per ciascun
+                vertice del grafo. L'estrazione del vertice in cima alla
+                coda è una operazione che richiede tempo di esecuzione 
+                logaritmico, perché per ricavare il vertice con campo
+                chiave più piccolo occorre effettuare una ricerca binaria.
+                Allo stesso modo, l'analisi di ciascun vertice adiacente
+                al vertice corrente viene compiuta in tempo logaritmico.
+                Il tempo di esecuzione del loop principale è allora
+                \math{O(\abs{V} \mi{log}(\abs{V}))};
+            \end{item}
+            \begin{item}
+                La ricostruzione della soluzione viene eseguita in tempo
+                proporzionale al numero dei vertici, perché l'aggiunta di
+                un singolo vertice avviene in tempo costante e ciascun
+                vertice viene analizzato esattamente una sola volta. Si
+                ha allora che il tempo di esecuzione della ricostruzione
+                della soluzione è \math{O(\abs{V})}.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        Il tempo di esecuzione complessivo è dato dalla somma dei
+        tre tempi di esecuzione parziali, ovvero \math{O(\abs{V}) +
+        O(\abs{V} \mi{log} (\abs{V}) + O(\abs{V})}, che asintoticamente
+        equivale a \math{O(\abs{V}) + O(\abs{V} \mi{log}(\abs{V})}. Essendo
+        il tempo logaritmico più influente sul tempo complessivo rispetto a
+        quello lineare, si ha che l'equazione equivale asintoticamente a
+        \math{O(\abs{V} \mi{log}(\abs{V}))}. Dato che si sta considerando un
+        grafo connesso, il numero di archi è necessariamente superiore al
+        numero di vertici, pertanto è possibile effettuare una maggiorazione
+        e sostituire \math{\abs{V}} con \math{\abs{E}}. Si ha allora che il
+        tempo di esecuzione dell'algoritmo di Prim è \math{O(\abs{E}
+        \mi{log}(\abs{E}))}.
+
+\end{sile}

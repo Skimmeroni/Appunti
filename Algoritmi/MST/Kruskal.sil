@@ -1,0 +1,144 @@
+\begin{sile}
+
+        L'\strong{Algoritmo di Kruskal} è un algoritmo greedy che permette
+        di ricavare il MST di un grafo a partire dall'algoritmo greedy
+        standard.
+
+        Innanzitutto, sia \math{G = (V, E, W)} un grafo connesso, non
+        orientato e pesato; a questo è possibile associare un matroide
+        grafico \math{M_{G} = (S, F)}. Come già detto, un qualsiasi
+        insieme massimale di archi \math{M_{G}} è uno spanning tree,
+        pertanto il MST è quell'insieme massimale avente peso minimo.
+
+        L'algoritmo greedy standard risolve problemi di ottimizzazione
+        di massimo, ma la ricerca di un MST (come dice il nome) è un
+        problema di ottimizzazione di minimo. A tale scopo occorre, come
+        già visto in precedenza, sostituire alla funzione peso \math{W}
+        la funzione peso \math{W'}, dove ciascun valore \math{i}-esimo
+        è dato dalla differenza fra il massimo valore in \math{W} e
+        l'\math{i}-esimo valore di \math{W}.
+
+        Rifacendosi all'algoritmo greedy standard, l'insieme che sarà
+        passato in input all'algoritmo (e che viene poi ordinato) sarà
+        l'insieme degli archi del grafo. Si ricordi che tale insieme va
+        ordinato, secondo ordine decrescente, rispetto a \math{W'}, e non
+        rispetto a \math{W}. In realtà questo equivale ad ordinare gli 
+        elementi rispetto a \math{W} ma in ordine inverso (in ordine
+        crescente), pertanto è possibile applicare tale semplificazione.
+
+	\begin{verbatim}
+		procedure KRUSKAL-MST(E)
+		1    A \unichar{U+2190} \unichar{U+2205}
+		2    E \unichar{U+2190} <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+
+		     \bigskip
+		3    for i \unichar{U+2190} 1 to n do
+		4        if e\textsubscript{i} è arco sicuro then
+		5            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+
+		     \bigskip
+		6    return A
+	\end{verbatim}
+
+        Per sapere se l'\math{i}-esimo arco è un arco sicuro occorre
+        applicare il corollario al teorema dell'arco sicuro: un arco
+        è sicuro se connette due alberi distinti di \math{G_{A}}.
+
+	\begin{verbatim}
+		procedure KRUSKAL-MST(V, E, W)
+		1    A \unichar{U+2190} \unichar{U+2205}
+		2    E \unichar{U+2190} <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+
+		     \bigskip
+		3    for i \unichar{U+2190} 1 to n do
+		4        (u, v) \unichar{U+2190} e\textsubscript{i} 
+		5        if u e v \unichar{U+2209} stesso albero in G\textsubscript{A} then
+		6            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+
+		     \bigskip
+		7    return A
+	\end{verbatim}
+
+        L'algoritmo funziona perché, ordinando gli elementi in ordine
+        crescente, è garantito che fra tutti i possibili archi che
+        connettono due alberi distinti verrà sempre scelto quello di
+        peso minimo.
+
+        L'ultimo passo consiste nel determinare che struttura dati usare
+        per salvare le informazioni relative agli alberi. Questo può essere
+        fatto in maniera efficiente mediante una union-find e le relative
+        primitive: per ogni vertice viene creato un insieme che contiene
+        solo quel vertice, ed i confronti vengono fatti su questi insiemi.
+        In particolare, se vengono trovati due insiemi disgiunti significa
+        che non vi è alcun vertice in comune ai due insiemi, e che quindi è
+        stato trovato un arco che unisce due alberi distinti. A questo punto
+        è sufficiente sostituire i due insiemi con la loro unione.
+
+	\begin{verbatim}
+		procedure KRUSKAL-MST(V, E, W)
+		 1    A \unichar{U+2190} \unichar{U+2205}
+		 2    E \unichar{U+2190} <e\textsubscript{1}, \unichar{U+2026}, e\textsubscript{n}> ordinati per peso crescente
+		 3    foreach v \unichar{U+2208} V do
+		 4        MAKE_SET(v)
+
+		      \bigskip
+		 5    for i \unichar{U+2190} 1 to n do
+		 6        (u, v) \unichar{U+2190} e\textsubscript{i} 
+		 7        if FIND_SET(u) \unichar{U+2260} FIND_SET(v) then
+		 8            A \unichar{U+2190} A \unichar{U+222A} \{e\textsubscript{i}\}
+		 9            UNION(u, v)
+
+		      \bigskip
+		10    return A
+	\end{verbatim}
+
+        Per quanto riguarda il tempo di esecuzione dell'algoritmo, è
+        possibile distinguere tre sezioni dello stesso: l'ordinamento
+        degli archi rispetto al peso (riga 2), la costruzione dei set
+        (righe 3 e 4) ed il loop principale (righe da 5 a 9):
+
+        \begin{enumerate}
+            \begin{item}
+                L'ordinamento avviene con il consueto tempo logaritmico, \math{O(n
+                \mi{log}(n))}. Dato che, nello specifico, l'ordinamento è fatto sugli
+                archi di un grafo \math{G = (V, E, W)}, e che il numero di tali archi
+                è dato dalla cardinalità di \math{E}, si ha che l'ordinamento degli
+                archi ha tempo di esecuzione \math{O(\abs{E} \mi{log}(\abs{E}))}.
+            \end{item}
+            \begin{item}
+                È possibile assumere che la costruzione dei set avvenga in tempo
+                lineare per le proprietà della struttura dati union-find. Dato che
+                viene costruito un set per ogni vertice, il tempo di esecuzione di
+                tale costruzione è \math{O(\abs{V})}.
+            \end{item}
+            \begin{item}
+                Il tempo di esecuzione del loop principale dipende interamente
+                dal tempo di esecuzione delle primitive della union-find. Il
+                confronto fra due set e l'unione di due set avviene in tempo
+                \math{\alpha}, con \math{\alpha} costante fissata. Dato che il
+                confronto avviene tante volte quanti sono gli archi del grafo, 
+                e dato che le unioni avvengono al massimo tante volte quanti 
+                sono i confronti, il tempo di esecuzione del loop principale è
+                \math{O(\abs{E}\alpha)}.
+            \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+        Il tempo di esecuzione complessivo è dato dalla somma dei tre
+        tempi di esecuzione parziali, ovvero \math{O(\abs{E} \mi{log}
+        (\abs{E})) + O(\abs{V}) + O(\abs{E}\alpha)}. Dato che si sta
+        considerando un grafo connesso, il numero di archi è necessariamente
+        superiore al numero di vertici, pertanto è possibile effettuare una
+        maggiorazione e sostituire \math{\abs{V}} con \math{\abs{E}}.
+        Si ha quindi \math{O(\abs{E} \mi{log}(\abs{E})) + O(\abs{E}) +
+        O(\abs{E}\alpha)}, che asintoticamente equivale a \math{O(\abs{E}
+        \mi{log}(\abs{E})) + O(\abs{E}\alpha)}. A sua volta, la costante
+        \math{\alpha} è certamente inferiore a \math{\mi{log}(\abs{V})},
+        che è a sua volta certamente inferiore a \math{\mi{log}(\abs{E})}.
+        È quindi possibile maggiorare il tempo di esecuzione come
+        \math{O(\abs{E} \mi{log}(\abs{E})) + O(\abs{E} \mi{log}(\abs{E}))},
+        ovvero \math{O(2\abs{E} \mi{log}(\abs{E}))}, ma che asintoticamente
+        equivale semplicemente a \math{O(\abs{E} \mi{log}(\abs{E}))}.
+
+\end{sile}

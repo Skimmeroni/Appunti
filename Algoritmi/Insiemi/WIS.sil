@@ -115,7 +115,7 @@
 				\end{ptable}
 			\end{parbox}
 			\begin[width = 60%fw, strut = character, valign = middle]{parbox}
-				\img[src = Dinamica/wis.pdf, width = 87.5%fw]
+				\img[src = Insiemi/wis.pdf, width = 87.5%fw]
 			\end{parbox}
 			\par
 
