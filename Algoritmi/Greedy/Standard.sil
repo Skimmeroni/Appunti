@@ -1,24 +1,19 @@
 \begin{sile}
 
-    Il legame fra matroidi e problemi risolvibili mediante tecnica greedy
-    è molto forte. Infatti, molti problemi per i quali un metodo greedy
-    fornisce soluzioni ottime possono essere riformulati come la ricerca
-    di un sottoinsieme indipendente di peso massimo in un matroide pesato.
-    Tale sottoinsieme, che è indipendente ed ha assegnato il peso più grande
-    possibile, è detto \strong{sottoinsieme ottimo} del matroide. Poiché la
-    funzione peso è stata definita per restituire solo valori strettamente
-    positivi, un sottoinsieme ottimo è sempre un sottoinsieme indipendente
-    massimale.
+    Il legame fra matroidi e problemi risolvibili mediante tecnica
+    greedy è molto forte. Infatti, molti problemi per i quali un
+    metodo greedy fornisce soluzioni ottime possono essere riformulati
+    come la ricerca di uno dei sottoinsiemi ottimi di un matroide pesato.
+    L'algoritmo che, fornitogli in input un matroide pesato, permette di
+    ricavarne un sottoinsieme ottimo prende il nome di \strong{algoritmo
+    greedy standard}.
 
-    L'algoritmo che permette di ricavare il sottoinsieme ottimo di
-    un matroide pesato, presentato di seguito, prende il nome di
-    \strong{algoritmo greedy standard}. Tale algoritmo riceve in
-    input un matroide pesato \math{M = (S, F, W)} e restituisce un
-    sottoinsieme ottimo \math{A}. L'algoritmo è effettivamente un
-    algoritmo greedy perché esamina uno dopo l'altro in ordine di
-    peso ogni elemento \math{x \in S} e lo aggiunge immediatamente
-    all'insieme \math{A} se \math{A \cup \{x\}} è esso stesso
-    indipendente. 
+    Tale algoritmo riceve in input un matroide pesato \math{M = (S, F,
+    W)} e restituisce un sottoinsieme ottimo \math{A}. L'algoritmo è
+    effettivamente un algoritmo greedy perché esamina uno dopo l'altro
+    in ordine di peso ogni elemento \math{x \in S} e lo aggiunge
+    immediatamente all'insieme \math{A} se \math{A \cup \{x\}} è
+    esso stesso un sottoinsieme indipendente.
 
 	\begin{verbatim}
 		procedure STANDARD-GREEDY-ALGORITHM(S, F, W)
@@ -39,16 +34,18 @@
         indipendente.
 
         \bigskip
-        \strong{Dimostrazione}. Si osservi lo pseudocodice dell'algoritmo
-        greedy standard, presentato sopra. La riga 4 controlla se, aggiungendo
-        un elemento \math{s_{i}} ad \math{A}, l'insieme \math{A} resta
-        indipendente. Se \math{A} resta indipendente, la riga 5 aggiunge
-        \math{s_{i}} ad \math{A}, altrimenti viene scartato. Poiché l'insieme
-        vuoto è per definizione un sottoinsieme indipendente e poiché ogni
-        esecuzione del corpo del ciclo for lascia \math{A} indipendente, il
-        sottoinsieme \math{A} è indipendente per induzione. Di conseguenza,
-        l'algoritmo greedy standard restituisce sempre un sottoinsieme
-        indipendente.
+        \strong{Dimostrazione}. Si faccia riferimento allo pseudocodice
+        dell'algoritmo greedy standard, presentato sopra. L'insieme che
+        questo restituisce, \math{A}, é inizialmente l'insieme vuoto,
+        che per definizione é un sottoinsieme indipendente. La riga 4
+        controlla se, aggiungendo un elemento \math{s_{i}} ad \math{A},
+        si ottiene un membro di \math{F}, ovvero se \math{A \cup \{s_{i}\}}
+        é a sua volta un sottoinsieme indipendente: se questo accade, la
+        riga 5 sostituisce \math{A} con \math{A \cup \{s_{i}\}}. Poiché
+        l'insieme \math{A} viene inizializzato come sottoinsieme indipendente
+        e poiché ogni esecuzione del corpo del ciclo principale se modifica
+        \math{A} lo lascia indipendente, per principio di induzione l'insieme
+        restituito dall'algoritmo sará certamente un sottoinsieme indipendente.
     \end{theorem}
 
     Per adattare l'algoritmo greedy standard ad un certo problema occorre
@@ -238,9 +235,9 @@
         appartenenza.
 
         \begin{verbatim}
-            Procedura greedy_ind_vectors(V = \{v\textsubscript{1}, \unichar{U+2026}, v\textsubscript{n}\})
+            procedure greedy_ind_vectors(V)
                 X \unichar{U+2190} \unichar{U+2205}
-                V viene ordinato per peso W decrescente
+                V \unichar{U+2190} V ordinato per peso W decrescente
 
                 \bigskip
                 for i from 1 to n do

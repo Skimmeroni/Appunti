@@ -48,11 +48,11 @@
     \end{example}
 
     Un sistema di indipendenza \math{(S, F)} è detto \strong{matroide} se
-    possiede la \strong{proprietà di scambio}, ovvero per qualsiasi coppia
-    di sottoinsiemi di \math{F}, dove il primo ha un elemento in più del
-    secondo, esiste almeno un elemento del secondo insieme non presente
-    nel primo tale che aggiunto al primo insieme restituisce un insieme
-    che appartiene ancora ad \math{F}.
+    possiede la \strong{proprietà di scambio}, ovvero se per qualsiasi coppia
+    di insiemi in \math{F}, dove il primo ha un elemento in meno del secondo,
+    esiste almeno un elemento del secondo insieme non presente nel primo tale
+    che aggiunto a quest'ultimo restituisce un insieme che appartiene ancora
+    ad \math{F}.
 
     \begin[mode = display]{math}
         (S, F \subseteq \mi{Pow}(S))
@@ -136,7 +136,8 @@
     elemento dell'insieme \math{S} un numero reale strettamente positivo.
     Tale funzione viene estesa ad un generico insieme \math{A} membro di
     \math{F} come la somma dei pesi di tutti gli elementi contenuti in
-    \math{A}.
+    \math{A}. Un qualsiasi sottoinsieme indipendente di un matroide pesato
+    avente peso massimo è detto \strong{sottoinsieme ottimo} del matroide.
 
     \begin[width = 33%fw]{parbox}
         \begin[mode = display]{math}

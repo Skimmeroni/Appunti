@@ -84,17 +84,21 @@
 
 		      \bigskip
 		 3    S \unichar{U+2190} S ordinato per valore specifico non crescente
-		 4    i \unichar{U+2190} 1
-		 5    c \unichar{U+2190} C
+		 4    V \unichar{U+2190} V ordinato secondo S
+		 5    W \unichar{U+2190} W ordinato secondo S
+		 6    i \unichar{U+2190} 1
+		 7    c \unichar{U+2190} C
 
 		      \bigskip
-		 6    while i \unichar{U+2264} n and c > 0 do
-		 7        P[i] \unichar{U+2190} min\{c / W[i], 1\}
-		 8        c \unichar{U+2190} c - P[i] * W[i]
-		 9        i \unichar{U+2190} i + 1
+		 8    while i \unichar{U+2264} n and c > 0 do
+		 9        P[i] \unichar{U+2190} c / W[i]
+		10        if (P[i] > 1) then
+		11            P[i] \unichar{U+2190} 1
+		12        c \unichar{U+2190} c - P[i] * W[i]
+		13        i \unichar{U+2190} i + 1
 
 		      \bigskip
-		10    return P
+		14    return P
 	\end{verbatim}
 
     Tale algoritmo è effettivamente un algoritmo greedy, perché la scelta
