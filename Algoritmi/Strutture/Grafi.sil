@@ -1,23 +1,24 @@
 \begin{sile}
 
     Si definisce \strong{grafo} una coppia \math{G = (V, E)}, costituita
-    da un insieme \math{V} di \strong{vertici} \math{\{v_{1}, v_{2},
-    \unicodeellipsis, v_{n}\}} e da un insieme \math{E} di \strong{archi}
-    \math{\{e_{1}, e_{2}, \unicodeellipsis, e_{m}\}}. Il numero di elementi
-    di \math{V} e di \math{E} indicando la \strong{dimensione} del grafo.
+    da un insieme \math{V = \{v_{1}, v_{2}, \unicodeellipsis, v_{n}\}} di
+    elementi detti \strong{vertici} e da un insieme \math{E = \{e_{1},
+    e_{2}, \unicodeellipsis, e_{m}\}} di \strong{archi}, ovvero di coppie
+    ordinate di elementi di \math{V}. Il numero di elementi di \math{V}
+    e di \math{E} indicano la \strong{dimensione} del grafo.
 
-    Ogni arco \math{e_{k}} indica l'esistenza di una relazione
-    \math{R} tra i due vertici \math{v_{i}} e \math{v_{j}}. Se
-    la relazione \math{R} è simmetrica, ovvero se per qualsiasi
+    Ogni arco \math{e_{k} = (v_{i}, v_{j})} indica l'esistenza di una
+    relazione \math{R} tra i due vertici \math{v_{i}} e \math{v_{j}}.
+    Se la relazione \math{R} è simmetrica, ovvero se per qualsiasi
     coppia \math{(v_{i}, v_{j})} l'esistenza di \math{v_{i} R v_{j}}
     implica l'esistenza di \math{v_{j} R v_{i}}, il grafo si dice
     \strong{non orientato}. Se invece la relazione non è simmetrica,
     il grafo si dice \strong{orientato}. Un vertice si dice
     \strong{adiacente} ad un altro vertice se esiste un arco che
-    ha tali vertici come elementi. Ovvero, \math{u} è adiacente a
-    \math{v} in un grafo \math{G = (V, E)} se \math{(u, v) \in E}.
-    Un arco \math{(v_{i}, v_{i})}, ovvero un arco che unisce un
-    vertice con sé stesso, viene chiamato \strong{cappio}.
+    ha tali vertici come elementi. Ovvero, \math{v_{i}} è adiacente
+    a \math{v_{j}} in un grafo \math{G = (V, E)} se \math{(v_{i},
+    v_{j}) \in E}. Un arco \math{(v_{i}, v_{i})}, ovvero un arco che
+    unisce un vertice con sé stesso, viene chiamato \strong{cappio}.
 
     Un grafo può venire rappresentato in forma estensionale
     elencando gli elementi dei due insiemi di cui è costituito.
@@ -38,48 +39,46 @@
         \end{parbox}
     \end{example}
 
-    Esistono principalmente due strutture dati in grado di contenere
-    le informazioni relative ad un grafo, entrambe con punti di forza
-    e punti deboli:
-
-    \begin{itemize}
-        \begin{item}
-            \strong{Liste di adiacenza}: vettore \math{L_{v}} di
-            dimensione \math{\abs{V}} dove \math{V[i]} è una lista
-            che contiene tutti i vettori rispetto a cui \math{v_{i}}
-            è adiacente. 
-        \end{item}
-        \begin{item}
-            \strong{Matrice di adiacenza}: matrice \math{M_{v}}
-            di dimensione \math{n \times n} dove ciascuna cella
-            \math{(i, j)} ha valore 1 se i vertici \math{v_{i}} e
-            \math{v_{j}} sono adiacenti, e 0 altrimenti.
-        \end{item}
-    \end{itemize}
-
-    \bigskip
+    Una prima struttura dati in grado di contenere le informazioni
+    relative ad un grafo é la cosiddetta \strong{lista di adiacenza}.
+    Questa consiste in un vettore \math{L} di dimensione \math{\abs{V}},
+    dove ciascun elemento \math{L[i]} è una lista che contiene
+	tutti i vertici rispetto a cui l'\math{i}-esimo vertice del
+	grafo è adiacente.
 
     Le liste di adiacenza riportano solamente le informazioni
     relative a quali nodi e quali archi esistono all'interno
-    del grafo, ed infatti il numero di elementi che contiene è
-    \math{\abs{V} + \abs{E}}. D'altro canto, per sapere se una
-    certa coppia di vertici del grafo che rappresenta sono adiacenti
-    è una operazione eseguibile in tempo lineare, perché occorre
-    "scorrere" le liste relative ai due vertici fino a trovare (se
-    esistono) una corrispondenza. Pertanto, le liste di adiacenza
-    sono una codifica vantaggiosa per i grafi \strong{sparsi}, ovvero
-    i grafi il cui numero di archi è di molto inferiore al numero di
-    vertici.
+    del grafo, ed infatti il numero di elementi che contiene
+    è \math{\abs{V} + \abs{E}}. D'altro canto, per sapere se
+    una certa coppia di vertici del grafo che rappresenta sono
+    adiacenti è una operazione eseguibile in tempo lineare,
+    perché occorre "scorrere" le liste relative ai due vertici
+    fino a trovare (se esistono) una corrispondenza. Pertanto,
+    le liste di adiacenza sono una codifica vantaggiosa per i
+    grafi \strong{sparsi}, ovvero i grafi il cui numero di archi
+    è di molto inferiore al numero di vertici.
+
+    Una seconda struttura dati in grado di contenere le informazioni
+    relative ad un grafo é la cosiddetta \strong{matrice di adiacenza}.
+    Questa consiste in una matrice \math{M} di dimensione \math{\abs{V
+    \times V}}, dove ciascuna cella \math{M[i, j]} contiene il valore
+    1 se l'\math{i}-esimo ed il \math{j}-esimo vertice del grafo sono
+    adiacenti, e 0 altrimenti.
 
     La matrice di adiacenza deve riportare esplicitamente informazioni
     in merito all'esistenza o alla non esistenza di ogni arco, ed infatti
-    il numero di elementi che contiene è \math{\abs{V^{2}}}. D'altro
+    il numero di elementi che contiene è \math{{\abs{V}}^{2}}. D'altro
     canto, sapere se una certa coppia di vertici del grafo che rappresenta
     sono adiacenti è una operazione eseguibile in tempo costante, perché
     è sufficiente leggere il valore della cella che ha tale vertici per
     indici. Pertanto, le matrici di adiacenza sono una codifica vantaggiosa
     per i grafi \strong{densi}, ovvero i grafi il cui numero di archi è
     vicino al numero di vertici.
+
+    Si noti come le due strutture dati siano del tutto equivalenti.
+    Ovvero, se é nota la rappresentazione in forma di lista di
+    adiacenza per un grafo, é sempre possibile convertirla in una
+    matrice di adiacenza che rappresenta lo stesso grafo, e viceversa.
 
     \begin{example}
         \math{V = \{1, 2, 3, 4, 5\}, E = \{(1, 2), (1, 5), (2, 3), (2, 4),
@@ -135,24 +134,25 @@
         \end{parbox}
     \end{example}
 
-    Dato un grafo \math{G = (V, E)}, prende il nome di \strong{cammino}
-    una qualsiasi sequenza \math{P = \langle {v_{i}}_{1}, {v_{i}}_{2},
-    \unicodeellipsis, {v_{i}}_{k - 1}, {v_{i}}_{k} \rangle} tale per
-    cui un generico \math{{v_{i}}_{j}} appartiene a \math{V} per ogni
-    \math{1 \leq j \leq k} e \math{({v_{i}}_{j}, {v_{i}}_{j + 1})}
-    appartiene ad \math{E} per \math{1 \leq j < k}. La \strong{lunghezza}
-    del cammino è \math{k - 1}, dove \math{k} è il numero di archi.
+    Dato un grafo \math{G = (V, E)}, prende il nome di
+    \strong{cammino} una qualsiasi sequenza ordinata di
+    vertici tali per cui, ad eccezione dell'ultimo, ciascuno
+    di essi ha un arco con il suo successore. Formalmente, un
+    cammino dal vertice \math{v_{a}} al vertice \math{v_{b}}
+    é dato dalla \math{k}-upla \math{\langle v_{a}, v_{a + 1},
+    \unicodeellipsis, v_{b - 1}, v_{b} \rangle}, dove per
+    ciascuna coppia di vertici \math{v_{i}} e \math{v_{i + 1}}
+    con \math{a \leq i < b} si ha che \math{(v_{i}, v_{i + 1})}
+    é un elemento di \math{E}.
 
-    Un cammino \math{P} in cui si ha che \math{{v_{i}}_{1}} coincide
-    con \math{{v_{i}}_{k}} viene detto \strong{ciclo}. Un cammino in
-    cui ogni suo vertice compare una sola volta, ovvero che non
-    contiene alcun ciclo, prende il nome di \strong{cammino semplice}.
-    Preso un qualsiasi vertice \math{{v_{i}}_{k} \in P}, viene
-    detto \strong{predecessore} di \math{{v_{i}}_{k}} il vertice
-    \math{{v_{i}}_{k - 1}}. Tutti i vertici in un cammino \math{P =
-    \langle {v_{i}}_{1}, {v_{i}}_{2}, \unicodeellipsis, {v_{i}}_{k}
-    \rangle} diversi da \math{{v_{i}}_{1}} e da \math{{v_{i}}_{k}}
-    sono detti \strong{vertici intermedi}.
+    Il numero di archi di un cammino meno uno viene detto
+    \strong{lunghezza} del cammino. Un cammino dove il
+    primo vertice coincide con l'ultimo prende il nome
+    di \strong{ciclo}. Un cammino in cui ogni suo vertice
+    compare una sola volta, ovvero che non contiene alcun
+    ciclo, prende il nome di \strong{cammino semplice}.
+    Tutti i vertici che compongono un cammino ad eccezione
+    del primo e dell'ultimo si dicono \strong{vertici intermedi}.
 
     Un \strong{grafo orientato pesato} è costituito da una tripla
     \math{G = (V, E, W)} dove, oltre all'insieme \math{V = \{v_{1},
@@ -173,15 +173,15 @@
             \{\table[columnalign = left left]{
                 0 & \mi{se} \thickspace v_{i} = v_{j} \\
                 \infty & \mi{se} \thickspace v_{i} \ne v_{j} \wedge
-                        (v_{i}, v_{j}) \in E \\
+                        (v_{i}, v_{j}) \notin E \\
                 w_{ij} & \mi{altrimenti} \\
             }
         \end{math}
     \end{parbox}
     \begin[width = 50%fw]{parbox}
         \begin[mode = display]{math}
-            W{(\langle {v_{i}}_{1}, {v_{i}}_{2}, \unicodeellipsis, {v_{i}}_{k} \rangle)} =
-            \sum_{j = 1}^{k - 1} W{({v_{i}}_{j}, {v_{i}}_{j + 1})}
+            W{(\langle v_{a}, v_{a + 1}, \unicodeellipsis, v_{b - 1}, v_{b} \rangle)} =
+            \sum_{i = a}^{b - 1} W{(v_{i}, v_{i + 1})}
         \end{math}
     \end{parbox}
     \par
