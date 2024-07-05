@@ -123,8 +123,8 @@
 		%\include[src = Deep/Deep.sil]
 		%\section{Percettrone probabilistico}
 		%\include[src = Deep/Probabilistico.sil]
-		%\section{Funzioni di attivazione}
-		%\include[src = Deep/Attivazione.sil]
+		\section{Funzioni di attivazione}
+		\include[src = Deep/Attivazione.sil]
 		%\section{Batch normalization}
 		%\include[src = Deep/Batch.sil]
 		%\section{Tecniche di apprendimento}

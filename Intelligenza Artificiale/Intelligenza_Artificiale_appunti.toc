@@ -501,13 +501,83 @@ return {
   },
   {
     label = {
+      "Funzioni di attivazione",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest51",
+    number = "7.2",
+    pageno = "60"
+  },
+  {
+    label = {
+      "Sigmoide",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest52",
+    number = "7.2.1",
+    pageno = "60"
+  },
+  {
+    label = {
+      "Tangente iperbolica",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest53",
+    number = "7.2.2",
+    pageno = "60"
+  },
+  {
+    label = {
+      "Rectifier Linear Unit (ReLU)",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest54",
+    number = "7.2.3",
+    pageno = "60"
+  },
+  {
+    label = {
+      "Leaky ReLU",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest55",
+    number = "7.2.4",
+    pageno = "61"
+  },
+  {
+    label = {
+      "Parametric ReLU",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest56",
+    number = "7.2.5",
+    pageno = "61"
+  },
+  {
+    label = {
+      "Exponential Linear Unit (ELU)",
+      id = "stuff"
+    },
+    level = 3,
+    link = "dest57",
+    number = "7.2.6",
+    pageno = "61"
+  },
+  {
+    label = {
       "Reinforcement Learning",
       id = "stuff"
     },
     level = 1,
-    link = "dest51",
+    link = "dest58",
     number = "8",
-    pageno = "61"
+    pageno = "63"
   },
   {
     label = {
@@ -515,9 +585,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest52",
+    link = "dest59",
     number = "8.1",
-    pageno = "61"
+    pageno = "63"
   },
   {
     label = {
@@ -525,9 +595,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest53",
+    link = "dest60",
     number = "8.2",
-    pageno = "61"
+    pageno = "63"
   },
   {
     label = {
@@ -535,8 +605,8 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest54",
-    pageno = "63"
+    link = "dest61",
+    pageno = "65"
   },
   {
     label = {
@@ -544,8 +614,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest55",
-    pageno = "63"
+    link = "dest62",
+    pageno = "65"
   },
   {
     label = {
@@ -553,7 +623,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest56",
-    pageno = "64"
+    link = "dest63",
+    pageno = "66"
   }
 }

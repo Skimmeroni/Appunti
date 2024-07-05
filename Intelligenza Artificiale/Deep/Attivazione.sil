@@ -1,0 +1,284 @@
+\begin{sile}
+
+	La funzione di attivazione é un elemento cruciale di una rete
+	neurale, e molte energie sono state impiegate per trovare la
+	funzione di attivazione migliore. Oltre alla funzione sigmoidea
+	(che verrá ripresa e trattata piú nel dettaglio) molte altre
+	funzioni non lineari hanno trovato uso come funzioni di attivazione.
+	Di seguito ne verranno presentate alcune, riportandone pregi e difetti.
+
+	\subsection{Sigmoide}
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{sig} {(x)} = \frac{e^{x}}{1 + e^{x}}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{d}{dx} {(\mi{sig} {(x)})} =
+				\mi{sig} {(x)} {(1 - \mi{sig} {(x)})}
+			\end{math}
+		\end{parbox}
+		\par
+
+		\begin[width = 50%fw]{parbox}
+			\strong{Vantaggi}:
+			\begin{itemize}
+				\begin{item}
+					Ha come codominio l'insieme \math{[0, 1]}, ovvero
+					restituisce delle probabilitá;
+				\end{item}
+				\begin{item}
+					Nonostante sia una funzione non lineare, l'espressione
+					analitica della sua derivata é molto semplice, perché
+					puó essere espressa in termini di sé stessa.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\strong{Svantaggi}:
+			\begin{itemize}
+				\begin{item}
+					Il gradiente della funzione valutato in punti molto vicini
+					agli estremi del suo dominio restituiscono un valore quasi
+					nullo, e questo diventa un problema se si vuole propagare
+					il gradiente all'indietro;
+				\end{item}
+				\begin{item}
+					Il codominio della funzione non é centrato in 0, pertanto i
+					vettori gradienti avranno sempre lo stesso segno. Ne consegue
+					che gli aggiornamenti dei pesi della rete neurale saranno
+					inevitabilmente subottimali;
+				\end{item}
+				\begin{item}
+					La funzione \math{e^{x}} é comunque piuttosto esosa da calcolare.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+		\par\bigskip
+
+		É stata storicamente molto popolare perché modella bene l'emissione di impulsi
+		elettromagnetici di un neurone saturo. Non viene quasi piú utilizzata.
+
+	\subsection{Tangente iperbolica}
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{tanh} {(x)} = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{d}{dx} {(\mi{tanh} {(x)})} = 1 - \mi{tanh}^{2} {(x)}
+			\end{math}
+		\end{parbox}
+		\par
+
+		\begin[width = 50%fw]{parbox}
+			\strong{Vantaggi}:
+			\begin{itemize}
+				\begin{item}
+					Ha come codominio l'insieme \math{[-1, 1]}, che pur
+					non restituendo delle probabilitá é comunque facilmente
+					mappabile su queste;
+				\end{item}
+				\begin{item}
+					Il codominio della funzione é centrato in 0;
+				\end{item}
+				\begin{item}
+					L'espressione analitica della sua derivata
+					puó essere espressa in termini di sé stessa.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\strong{Svantaggi}:
+			\begin{itemize}
+				\begin{item}
+					Il gradiente della funzione é quasi nullo negli estremi
+					del suo dominio;
+				\end{item}
+				\begin{item}
+					La funzione \math{e^{x}} é piuttosto esosa da calcolare.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+		\par\bigskip
+
+		Nonostante presenti dei vantaggi rispetto al sigmoide, in particolar
+		modo il codominio centrato in 0, ha ancora diversi problemi (gradiente
+		quasi nullo sugli estremi, presenza dell'esponenziale). Non viene quasi
+		piú utilizzata.
+
+	\subsection{Rectifier Linear Unit (ReLU)}
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{ReLU} {(x)} =
+				\{\table[columnalign = left left]{
+					0 & \mi{se} \thickspace x \leq 0 \\
+					x & \mi{se} \thickspace x > 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{d}{dx} {(\mi{ReLU} {(x)})} =
+				\{\table[columnalign = left left]{
+					0 & \mi{se} \thickspace x < 0 \\
+					1 & \mi{se} \thickspace x > 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\par
+
+		\begin[width = 50%fw]{parbox}
+			\strong{Vantaggi}:
+			\begin{itemize}
+				\begin{item}
+					Sia la funzione che il suo gradiente hanno espressioni analitiche
+					molto semplici;
+				\end{item}
+				\begin{item}
+					Sia la funzione che il suo gradiente possono essere calcolate in
+					maniera efficiente;
+				\end{item}
+				\begin{item}
+					Il gradiente collassa a 0 solamente per gli input negativi;
+				\end{item}
+				\begin{item}
+					Permette di aggiornare una rete neurale molto piú velocemente delle
+					funzioni precedenti.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\strong{Svantaggi}:
+			\begin{itemize}
+				\begin{item}
+					In \math{x = 0}, presenta un punto di discontinuitá, pertanto la sua
+					derivata in tale punto non é definita (per convenzione, si assume
+					che valga 0);
+				\end{item}
+				\begin{item}
+					Il codominio della funzione non é centrato in 0;
+				\end{item}
+				\begin{item}
+					Problema dei gradienti evanescenti.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+		\par\bigskip
+
+		É attualmente la funzione di attivazione piú utilizzata, sia per tutti i vantaggi
+		sopra presentati sia perché modella l'emissione di impulsi elettromagnetici di un
+		neurone saturo meglio di quanto faccia il sigmoide.
+
+	\subsection{Leaky ReLU}
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{LReLU} {(x)} =
+				\{\table[columnalign = left left]{
+					0.01x & \mi{se} \thickspace x \leq 0 \\
+					x & \mi{se} \thickspace x > 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{d}{dx} {(\mi{LReLU} {(x)})} =
+				\{\table[columnalign = left left]{
+					0.01 & \mi{se} \thickspace x < 0 \\
+					1 & \mi{se} \thickspace x > 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\par\bigskip
+
+		Non é altro che una versione modificata di ReLU in cui viene introdotto un gradiente
+		leggermente positivo per gli input negativi. Questo risolve il problema dei gradienti
+		evanescenti, ma peggiora le performance.
+
+	\subsection{Parametric ReLU}
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{PReLU} {(x)} =
+				\{\table[columnalign = left left]{
+					\alpha x & \mi{se} \thickspace x \leq 0 \\
+					x & \mi{se} \thickspace x > 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{d}{dx} {(\mi{PReLU} {(x)})} =
+				\{\table[columnalign = left left]{
+					\alpha & \mi{se} \thickspace x < 0 \\
+					1 & \mi{se} \thickspace x > 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\par\bigskip
+
+		Simile a Leaky ReLU, ma anziché fissare il gradiente questo viene riportato come
+		iperparametro per aumentare la flessibilitá. Tale parametro puó essere oggetto a
+		sua volta di apprendimento da parte della rete neurale.
+
+	\subsection{Exponential Linear Unit (ELU)}
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\mi{ELU} {(x)} =
+				\{\table[columnalign = left left]{
+					\alpha (e^{x} - 1) & \mi{se} \thickspace x \leq 0 \\
+					x & \mi{se} \thickspace x > 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{d}{dx} {(\mi{ELU} {(x)})} =
+				\{\table[columnalign = left left]{
+					\alpha e^{x} & \mi{se} \thickspace x \leq 0 \\
+					1 & \mi{se} \thickspace x > 0 \\
+				}
+			\end{math}
+		\end{parbox}
+		\par
+
+		\begin[width = 50%fw]{parbox}
+			\strong{Vantaggi}:
+			\begin{itemize}
+				\begin{item}
+					Sia la funzione che il suo gradiente hanno espressioni analitiche
+					molto semplici;
+				\end{item}
+				\begin{item}
+					Permette di aggiornare una rete neurale molto velocemente;
+				\end{item}
+				\begin{item}
+					Il codominio della funzione é quasi centrato in 0;
+				\end{item}
+				\begin{item}
+					Un regime di saturazione negativo permette alla funzione di essere
+					piú resiliente ai dataset rumorosi.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\strong{Svantaggi}:
+			\begin{itemize}
+				\begin{item}
+					La funzione \math{e^{x}} é piuttosto esosa da calcolare.
+				\end{item}
+			\end{itemize}
+		\end{parbox}
+		\par\bigskip
+
+		Viene talvolta utilizzata al posto di ReLU e delle sue varianti in
+		specifiche situazioni.
+
+\end{sile}
