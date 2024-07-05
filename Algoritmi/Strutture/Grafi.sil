@@ -5,7 +5,8 @@
     elementi detti \strong{vertici} e da un insieme \math{E = \{e_{1},
     e_{2}, \unicodeellipsis, e_{m}\}} di \strong{archi}, ovvero di coppie
     ordinate di elementi di \math{V}. Il numero di elementi di \math{V}
-    e di \math{E} indicano la \strong{dimensione} del grafo.
+    e di \math{E} indicano la \strong{dimensione} del grafo. Per convenzione,
+    i vertici del grafo vengono numerati a partire da 1.
 
     Ogni arco \math{e_{k} = (v_{i}, v_{j})} indica l'esistenza di una
     relazione \math{R} tra i due vertici \math{v_{i}} e \math{v_{j}}.
@@ -162,10 +163,10 @@
     per ciascuna coppia di vertici in \math{V \times V}, un numero
     positivo \math{w_{ij}} chiamato \strong{peso} dell'arco \math{(v_{i},
     v_{j})}. Per convenzione, se l'arco \math{(v_{i}, v_{j})} non è
-    presente nel grafo, si ha \math{W(v_{i}, v_{j}) = \infty}, mentre se
-    \math{v_{i} = v_{j}} si ha \math{W(v_{i}, v_{j}) = 0}. Il peso di un
-    cammino è dato dalla somma dei pesi degli archi che costituiscono il
-    cammino.
+    presente nel grafo, si ha \math{W(v_{i}, v_{j}) = \infty}, mentre
+    se \math{v_{i} = v_{j}} si ha \math{W(v_{i}, v_{j}) = 0}. Il peso
+    complessivo di un cammino è dato dalla somma dei pesi degli archi
+    che costituiscono il cammino.
 
     \begin[width = 50%fw]{parbox}
         \begin[mode = display]{math}
@@ -180,8 +181,8 @@
     \end{parbox}
     \begin[width = 50%fw]{parbox}
         \begin[mode = display]{math}
-            W{(\langle v_{a}, v_{a + 1}, \unicodeellipsis, v_{b - 1}, v_{b} \rangle)} =
-            \sum_{i = a}^{b - 1} W{(v_{i}, v_{i + 1})}
+            W{(\langle v_{a}, v_{a + 1}, \unicodeellipsis, v_{b - 1},
+            v_{b} \rangle)} = \sum_{i = a}^{b - 1} W{(v_{i}, v_{i + 1})}
         \end{math}
     \end{parbox}
     \par

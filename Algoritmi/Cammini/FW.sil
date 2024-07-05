@@ -1,7 +1,5 @@
 \begin{sile}
 
-    \subsection{Definizione del problema}
-
         Dato un grafo \math{G = (V, E, W)} senza cappi, orientato e
         pesato, il \strong{problema dei cammini minimi} richiede, per
         ogni coppia di vertici \math{(v_{i}, v_{j}) \in V \times V},
@@ -29,49 +27,6 @@
             \end{item}
         \end{itemize}
 
-    \subsection{Programmazione dinamica: sottostruttura ottima}
-
-        \begin{theorem}
-            \strong{Proprietà della sottostruttura ottima per il problema
-            dei cammini minimi}. Sia dato un grafo orientato e pesato
-            \math{G = (V, E, W)}. Sia \math{P_{0k}} un cammino minimo
-            su \math{G} per i vertici \math{v_{0}} e \math{v_{k}}. Si
-            considerino due indici \math{i, j} qualsiasi tali per cui
-            \math{0 \leq i \leq j \leq k}: il sottocammino \math{P_{ij}}
-            di \math{P_{0k}} è un cammino minimo per i vertici \math{v_{i}}
-            e \math{v_{j}}.
-
-            \bigskip
-            \strong{Dimostrazione}. Il cammino \math{P_{0k}} può essere
-            separato in tre sottocammini: il cammino \math{P_{0i}} da
-            \math{v_{0}} a \math{v_{i}}, il cammino \math{P_{ij}} da 
-            \math{v_{i}} a \math{v_{j}} ed il cammino \math{P_{jk}} da 
-            \math{v_{j}} a \math{v_{k}}.
-
-            \begin[width = 55%fw]{parbox}
-                \begin[mode = display]{math}
-                    P_{0k} = \langle v_{0}, v_{1}, \unicodeellipsis, v_{i},
-                    \unicodeellipsis, v_{j}, \unicodeellipsis, v_{k} \rangle =
-                    P_{0i} \rightsquigarrow P_{ij} \rightsquigarrow P_{jk}
-                \end{math}
-            \end{parbox}
-            \begin[width = 45%fw]{parbox}
-                \begin[mode = display]{math}
-                    W(P_{0k}) = W(P_{0i}) + W(P_{ij}) + W(P_{jk})
-                \end{math}
-            \end{parbox}
-            \par
-
-            Si supponga per assurdo che esista un cammino \math{{P'}_{ij}} tale che
-            \math{W({P'}_{ij}) < W(P_{ij})}. Allora \math{P_{0i} \rightsquigarrow
-            {P'}_{ij} \rightsquigarrow P_{jk}} è un cammino da \math{v_{0}} a
-            \math{v_{k}} il cui peso è inferiore a \math{P_{0k}}, ma questo va
-            contro l'ipotesi secondo la quale \math{P_{0k}} è un cammino minimo
-            da \math{v_{0}} a \math{v_{k}}.
-        \end{theorem}
-
-    \subsection{Programmazione dinamica: equazione di ricorrenza}
-
         Dato un grafo orientato e pesato \math{G = (V, E, W)}, se ne numerino
         i vertici in maniera univoca. Supponendo che i vertici di \math{G}
         siano \math{V = \{v_{1}, v_{2}, \unicodeellipsis, v_{n}\}}, se ne
@@ -82,10 +37,15 @@
         dall'insieme \math{K}. Sia poi \math{\mi{Opt}_{k}(i, j)} la lunghezza
         complessiva di uno di questi cammini minimi.
 
-        Parametrizzando il problema rispetto ai \math{k} vertici
-        intermedi si ottiene un algoritmo di programmazione dinamica
-        chiamato \strong{Algoritmo di Floyd-Warshall}. L'algoritmo può
-        essere descritto in maniera informale come segue:
+        Il problema potrebbe essere risolto applicando al grafo l'algoritmo
+        di Dijkstra tante volte quanti sono i vertici del grafo, cambiando
+        ad ogni iterazione il vertice sorgente. É peró possibile parametrizzare
+        il problema rispetto ai \math{k} vertici intermedi, ottenendo un algoritmo
+        di programmazione dinamica chiamato \strong{Algoritmo di Floyd-Warshall}.
+        Questo non solo risolve il problema dei cammini minimi da ogni sorgente,
+        ma a differenza dell'algoritmo di Dijkstra funziona anche per grafi
+        orientati, grafi non connessi e grafi aventi archi con pesi negativi.
+        L'algoritmo può essere descritto in maniera informale come segue:
 
         \begin{enumerate}
             \begin{item}
@@ -238,8 +198,6 @@
                 \end{math}
         \end{parbox}
 
-    \subsection{Programmazione dinamica: implementazione bottom-up}
-
         L'algoritmo bottom-up viene costruito a partire dall'equazione di
         ricorrenza sfruttando tante matrici \math{D} quanti sono i vertici
         del grafo. All'interno di \math{D^{(k)}[i, j]}, la cella \math{[i, j]}
@@ -280,8 +238,6 @@
 	sia \math{O(\abs{V^{3}})}, perché sono presenti tre cicli
 	dove in quello più interno viene eseguita una operazione
 	con costo unitario.
-
-    \subsection{Programmazione dinamica: ricostruzione di una soluzione}
 
         Per la restituzione di una soluzione ottima al problema dei cammini
         minimi è necessario calcolare, oltre alla matrice \math{D^{(n)}},
@@ -475,8 +431,6 @@
             \end{math}
         \end{parbox}
         \par
-
-        \subsection{Osservazioni}
 
                 L'algoritmo Floyd-Warshall può essere utilizzato
                 anche per calcolare la \strong{chiusura transitiva}

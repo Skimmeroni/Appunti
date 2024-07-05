@@ -1,73 +1,153 @@
 \begin{sile}
 
     Sia dato un grafo \math{G = (V, E, W)} non orientato, pesato e
-    connesso. Si consideri una funzione peso \math{W} che restituisce
-    esclusivamente valori strettamente positivi. Sia poi \math{s \in V}
-    un vertice "privilegiato", chiamato \strong{vertice sorgente}. Il 
-    \strong{problema dei cammini minimi da sorgente unica} richiede di 
-    trovare, rispetto ad un vertice fissato \math{s}, il cammino di
-    minima lunghezza da ciascun vertice del grafo ad \math{s}.
+    connesso. Sia poi \math{v_{s} \in V} un vertice "privilegiato",
+    chiamato \strong{vertice sorgente}. Dato il vertice generico
+    \math{v_{k} \in V}, sia \math{P_{sk}} il cammino su \math{G} che
+    ha inizio in \math{v_{s}} e fine in \math{v_{k}} avente il peso
+    complessivo piú piccolo possibile, detto \strong{cammino minimo}
+    da \math{v_{s}} a \math{v_{k}}.
 
-    Si consideri un cammino minimo \math{P = \langle v_{1}, v_{2},
-    \unicodeellipsis, v_{k - 1}, v_{k} \rangle}. Come già dimostrato
-    per l'algoritmo Floyd-Warshal, sono a loro volta minimi anche
-    tutti i sottocammini \math{P_{ij} = \langle v_{i}, v_{i + 1},
-    \unicodeellipsis, v_{j} \rangle} con \math{1 \leq i < j \leq k}.
-    In particolare, è minimo il sottocammino \math{\langle v_{1},
-    v_{2}, \unicodeellipsis, v_{k - 1} \rangle} dove \math{v_{k - 1}}
-    è il \strong{predecessore} di \math{v_{k}} nel cammino minimo
-    \math{P}.
+    Il \strong{problema dei cammini minimi da sorgente unica} richiede
+    di trovare, rispetto ad un vertice fissato \math{v_{s} \in G}, uno
+    qualsiasi dei cammini minimi che hanno inizio in \math{v_{s}} e fine
+    in ciascun vertice \math{v_{k} \in S - \{v_{s}\}}. Dati due vertici
+    \math{v_{i}} e \math{v_{j}} di un grafo pesato \math{G}, viene indicato
+    con \math{\delta (v_{i}, v_{j})} il peso di uno qualsiasi dei cammini
+    minimi che hanno inizio in \math{v_{i}} e fine in \math{v_{j}}.
 
-    Sia \math{\delta (s, v)} il peso complessivo del cammino minimo dalla
-    sorgente \math{s} ad un qualsiasi vertice \math{v}, ottenuto sommando
-    i pesi di tutti gli archi \math{(i, j)} che compongono tale cammino.
-    Sia \math{u} il predecessore di \math{v} su tale cammino; il peso del
-    cammino può essere scomposto come somma fra il peso del sottocammino
-    minimo da \math{s} a \math{u} ed il peso dell'arco che connette
-    \math{u} a \math{v}. Per indicare che \math{v_{i}} è il predecessore
-    di \math{v_{j}} rispetto ad un certo cammino si una la notazione 
-    \math{v_{i} = \pi(v_{j})}.
+    Un algoritmo che permette di risolvere il problema dei cammini minimi
+    da sorgente unica è l'\strong{Algoritmo di Dijkstra}. Tale algoritmo
+    é applicabile esclusivamente a grafi pesati connessi, non orientati
+    e aventi una funzione peso che restituisce solo valori strettamente
+    positivi. Prima di descrivere l'algoritmo, é necessario compiere
+    alcune osservazioni in merito alla natura dei cammini minimi.
+
+	\begin{theorem}
+		\strong{Proprietà della sottostruttura ottima per il problema
+		dei cammini minimi}. Dato un grafo pesato \math{G = (V, E, W)},
+		siano \math{v_{h}} e \math{v_{k}} due vertici di \math{G}. Sia
+		poi \math{P_{hk}} un cammino minimo su \math{G} che ha inizio
+		nel vertice \math{v_{h}} e fine nel vertice \math{v_{k}}. Si
+		considerino due indici \math{i, j} qualsiasi tali per cui
+		\math{h \leq i \leq j \leq k}: ogni sottocammino \math{P_{ij}}
+		di \math{P_{hk}}, avente inizio in \math{v_{i}} e fine in
+		\math{v_{k}}, è a sua volta un cammino minimo.
+
+		\bigskip
+		\strong{Dimostrazione}. Il cammino \math{P_{hk}} può essere
+		separato in tre sottocammini: il cammino \math{P_{hi}} da
+		\math{v_{h}} a \math{v_{i}}, il cammino \math{P_{ij}} da
+		\math{v_{i}} a \math{v_{j}} ed il cammino \math{P_{jk}} da
+		\math{v_{j}} a \math{v_{k}}.
+
+		\begin[width = 55%fw]{parbox}
+			\begin[mode = display]{math}
+				P_{hk} = \langle v_{h}, v_{h + 1}, \unicodeellipsis, v_{i},
+				\unicodeellipsis, v_{j}, \unicodeellipsis, v_{k - 1}, v_{k}
+				\rangle = P_{hi} \rightsquigarrow P_{ij} \rightsquigarrow P_{jk}
+			\end{math}
+		\end{parbox}
+		\begin[width = 45%fw]{parbox}
+			\begin[mode = display]{math}
+				W(P_{hk}) = W(P_{hi}) + W(P_{ij}) + W(P_{jk})
+			\end{math}
+		\end{parbox}
+		\par
+
+		Si supponga per assurdo che esista un cammino \math{{P'}_{ij}} tale
+		che \math{W({P'}_{ij}) < W(P_{ij})}. Sia \math{{P'}_{hk} = P_{hi}
+		\rightsquigarrow {P'}_{ij} \rightsquigarrow P_{jk}}: questo è un
+		cammino che ha inizio in \math{v_{h}} e fine in \math{v_{k}} il
+		cui peso complessivo è inferiore a quello di \math{P_{hk}}:
+
+		\begin[mode = display]{math}
+			W({P'}_{ij}) < W(P_{ij})
+			\thickspace\Rightarrow\thickspace
+			W({P'}_{ij}) + W(P_{hi}) + W(P_{jk}) < W(P_{ij}) + W(P_{hi}) + W(P_{jk})
+			\thickspace\Rightarrow\thickspace
+			W({P'}_{hk}) < W(P_{hk})
+		\end{math}
+
+		Ma allora \math{P_{hk}} non puó essere il cammino minimo che ha inizio
+		in \math{v_{h}} e fine in \math{v_{k}}, perché esiste almeno un cammino
+		(\math{{P'}_{hk}}) che ha inizio e fine negli stessi vertici ma peso
+		complessimo inferiore. Questo é peró in contrasto all'ipotesi secondo
+		la quale \math{P_{hk}} sia il cammino minimo che ha tali vertici per
+		estremi. Si deduce allora che il cammino \math{{P'}_{ij}} non puó esistere,
+		e che quindi \math{P_{ij}} é effettivamente il cammino minimo che ha inizio
+		in \math{v_{i}} e fine in \math{v_{j}}.
+	\end{theorem}
+
+	Dati due vertici \math{u} e \math{v}, sia \math{w} il predecessore di
+	\math{v} lungo il cammino minimo che ha inizio in \math{u} e fine in
+	\math{v}, ovvero il penultimo vertice che costituisce il cammino. Per
+	indicare che \math{v_{i}} é il predecessore di \math{v_{j}} rispetto
+	ad un determinato cammino viene usata la notazione \math{\pi(v_{j})
+	= v_{i}}.
+
+	É possibile scomporre tale cammino minimo nel sottocammino che ha
+	inizio in \math{u} e fine in \math{w} unito all'arco che unisce
+	\math{w} a \math{v}. Sulla base della proprietá della sottostruttura
+	ottima sopra riportata, deve aversi che il peso di un cammino minimo
+	fra \math{u} e \math{v} é uguale alla somma fra il peso di un cammino
+	minimo fra \math{u} e \math{w} ed il peso dell'arco che unisce \math{w}
+	e \math{v}.
 
     \begin[mode = display]{math}
-        \delta {(s, v)} =
-        \sum_{(i, j) \in P, i = \pi(j)} W{(i, j)} =
-        \delta {(s, u)} + W{(u, v)}
+        \delta {(s, v)} = \delta {(s, u)} + W{(u, v)}
     \end{math}
 
     Nel caso in cui \math{u} non sia il predecessore di \math{v} sul cammino
-    minimo da \math{s} a \math{v}, ma comunque \math{W(u, v)} esiste, si ha
-    \math{\delta (s, v) \leq \delta (s, u) + W(u, v)}. Questo perché se si 
-    mantiene il medesimo \math{\delta (s, u)}, il valore \math{W(u, v)} non
-    può che essere maggiore del peso dell'arco minimo che unisce \math{u} a
-    \math{v}, altrimenti coinciderebbe con tale arco.
+    minimo da \math{s} a \math{v}, ma esiste comunque un arco \math{(u, v)}
+    che li unisce, deve aversi:
 
-    Un algoritmo che permette di risolvere il problema dei cammini minimi da
-    sorgente unica è l'\strong{Algoritmo di Dijkstra}. L'algoritmo associa a
-    ciascun vertice \math{v} del grafo in esame un campo \math{d} ed un campo
-    \math{\pi}: il primo contiene un limite superiore per \math{\delta (s, v)},
-    mentre il secondo riporta uno dei vertici con i quali \math{v} è congiunto
-    da un arco.
+    \begin[mode = display]{math}
+		\delta {(s, v)} \leq \delta {(s, u)} + W{(u, v)}
+    \end{math}
 
-    Prima dell'esecuzione dell'algoritmo, al vertice sorgente viene assegnato
-    0 come campo \math{d}, mentre a tutti gli altri vertici viene assegnato
-    \math{\infty}, mentre il campo \math{\pi} viene inizializzato a NULL per
-    tutti i vertici. Alla fine dell'esecuzione, per ciascun vertice il campo
-    \math{d} contiene precisamente il peso del cammino minimo dalla sorgente
-    al vertice, mentre il campo \math{\pi} riporta il predecessore del vertice
-    nel cammino minimo dalla sorgente al vertice.
+    Questo perché se si mantiene il medesimo \math{\delta (s, u)}, il valore
+    \math{W(u, v)} non può che essere maggiore del peso dell'arco minimo che
+    unisce \math{u} a \math{v}, altrimenti coinciderebbe con tale arco.
 
-    Per un qualsiasi vertice \math{v}, l'algoritmo di Dijkstra permette al 
-    valore di \math{v.d} di passare dal valore iniziale \math{\infty} al
-    valore finale \math{\delta (s, v)} (l'effettivo peso del cammino minimo
-    da \math{v} alla sorgente) applicando una serie di "miglioramenti", detti
-    \strong{rilassamenti}. Presi due vertici \math{u} e \math{v}, se \math{v.d}
-    è maggiore della somma fra \math{u.d} ed il peso dell'arco che unisce
-    \math{u} e \math{d}, allora significa che il cammino che va dalla sorgente
-    a \math{v} passando per \math{u} come predecessore è un cammino con peso
-    inferiore, e quindi migliore, di quello attualmente salvato per \math{v}.
-    Un rilassamento consiste per l'appunto nel valutare se \math{v.d > u.d +
-    W(u, v)} e, in caso affermativo, sostituire \math{v.d} con \math{u.d +
-    W(u, v)} e \math{v.\pi} con \math{u}.
+    Dato un grafo non orientato e pesato \math{G = (V, E, W)} ed una sorgente
+    \math{s \in V}, l'algoritmo di Dijkstra associa a ciascun vertice \math{v}
+    di \math{G} un campo \math{d} ed un campo \math{\pi}: il primo contiene
+    un limite superiore per \math{\delta (s, v)}, mentre il secondo riporta
+    uno dei vertici con i quali \math{v} è congiunto da un arco. L'algoritmo
+    inizializza, per ogni vertice, il campo \math{\pi} a NULL ed il campo
+    \math{d} a \math{\infty}, tranne per \math{s}, a cui viene assegnato 0.
+
+	\begin{verbatim}
+		procedure INITIALIZE-SINGLE-SOURCE(V, s)
+		 1    foreach v \unichar{U+2208} V do
+		 2        v.d \unichar{U+2190} \unichar{U+221E}
+		 3        v.\unichar{U+03C0} \unichar{U+2190} NULL
+		 4    s \unichar{U+2190} 0
+	\end{verbatim}
+
+    Alla fine dell'esecuzione, per ciascun vertice \math{v} il campo
+    \math{d} contiene \math{\delta (s, v)}, ovvero l'effettivo peso
+    di un cammino minimo dalla sorgente a \math{v}, mentre il campo
+    \math{\pi} riporta il predecessore di \math{v} in tale cammino
+    minimo. Questo viene fatto operando una serie di "miglioramenti",
+    detti \strong{rilassamenti}.
+
+    Presi due vertici \math{u} e \math{v}, se \math{v.d} è maggiore della
+    somma fra \math{u.d} ed il peso dell'arco che unisce \math{u} e \math{d},
+    allora significa che il cammino che ha inizio nella sorgente e fine in
+    \math{v} passando per \math{u} come predecessore è un cammino con peso
+    inferiore, e quindi migliore, di quello finora trovato che abbia inizio
+    nella sorgente e fine in \math{v}. Il rilassamento consiste in nient'altro
+    che la sostituzione di \math{v.d} con \math{u.d + W(u, v)} e di \math{v.\pi}
+    con \math{u}.
+
+    \begin{verbatim}
+		procedure RELAX(u, v, W)
+		 1    if (v.d > u.d + W(u, v)) then
+		 2        v.d \unichar{U+2190} u.d + W(u, v)
+		 3        v.\unichar{U+03C0} \unichar{U+2190} u
+    \end{verbatim}
 
     In particolare, l'algoritmo di Dijkstra opera esattamente un solo
     rilassamento per ciascun vertice. Dato un grafo non orientato, pesato e
@@ -104,32 +184,47 @@
 
     \bigskip
 
-	\begin{verbatim}
-		procedure DIJKSTRA(V, E, W, s)
-		 1    foreach v \unichar{U+2208} V do
-		 2        v.d \unichar{U+2190} \unichar{U+221E}
-		 3        v.\unichar{U+03C0} \unichar{U+2190} NULL
-		 4        ENQUEUE(v, Q)
+	Una volta che l'algoritmo é terminato, é possibile costruire
+	a ritroso un cammino minimo per ciascun vertice risalendo di
+	predecessore in predecessore fino alla sorgente, unico vertice
+	che avrá ancora NULL come campo predecessore.
 
-              \bigskip
-         5    s.d \unichar{U+2190} 0
-		 6    S \unichar{U+2190} \unichar{U+2205}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure DIJKSTRA(V, E, W, s)
+			1    INITIALIZE-SINGLE-SOURCE(V, s)
+			2    Q coda di min priority
+			3    foreach v \unichar{U+2208} V do
+			4        ENQUEUE(v, Q)
 
-		      \bigskip
-		 7    while Q \unichar{U+2260} \unichar{U+2205} do
-		 8        u \unichar{U+2190} POP(Q)
-		 9        S \unichar{U+2190} S \unichar{U+222A} \{u\}
-		10        foreach v \unichar{U+2208} ADJ(u) do
-		11            if v.d > u.d + W(u, v) then
-		12                v.d \unichar{U+2190} u.d + W(u, v)
-		13                v.\unichar{U+03C0} \unichar{U+2190} u
-	\end{verbatim}
+				\bigskip
+			5    S \unichar{U+2190} \unichar{U+2205}
+
+				\bigskip
+			6    while Q \unichar{U+2260} \unichar{U+2205} do
+			7        u \unichar{U+2190} POP(Q)
+			8        S \unichar{U+2190} S \unichar{U+222A} \{u\}
+			9        foreach v \unichar{U+2208} ADJ(u) do
+			10            RELAX(u, v, W)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure PRINT-MINPATH(v)
+			 1   do
+			 2       print v
+			 3       v.\unichar{U+03C0} \unichar{U+2190} v
+			 4   while v.\unichar{U+03C0} \unichar{U+2260} NULL
+		\end{verbatim}
+	\end{parbox}
+	\par
 
     \begin{theorem}
-        Dato un grafo connesso, non orientato e pesato \math{G = (V, E,
-        W)}, sia \math{s \in V} un vertice eletto a sorgente. L'algoritmo
-        di Dijkstra restituisce correttamente il cammino minimo dalla
-        sorgente \math{s} a tutti i vertici in \math{V}.
+		\strong{Correttezza dell'algoritmo di Dijkstra}. Dato un grafo
+		connesso, non orientato e pesato \math{G = (V, E, W)}, sia
+		\math{s \in V} un vertice eletto a sorgente. L'algoritmo di
+		Dijkstra restituisce correttamente la lunghezza di un cammino
+		minimo dalla sorgente \math{s} a tutti i vertici in \math{V}.
 
         \bigskip
         \strong{Dimostrazione}. Sia \math{\langle v_{1} = s, v_{2},
@@ -144,22 +239,23 @@
         Il caso base è dimostrato se \math{s.d = \delta (s, s)} quando
         viene estratto \math{s}. Dato che per raggiungere \math{s} da
         \math{s} non occorre percorrere alcun cammino, la distanza da
-        \math{s} a sé stesso è 0. In effetti l'algoritmo inizializza a
-        0 il valore di \math{s.d}, quindi quando \math{s} viene estratto
-        il valore di \math{s.d} è effettivamente 0.
+        \math{s} a sé stesso è 0. L'algoritmo inizializza a 0 il valore
+        di \math{s.d}, quindi quando \math{s} viene estratto il valore
+        di \math{s.d} è effettivamente 0.
 
         Per quanto riguarda il passo ricorsivo, occorre mostrare
         che per il vertice \math{v_{k}}, quando viene estratto,
         vale \math{v_{k}.d = \delta (s, v_{k})} assumendo che
         la relazione valga per \math{v_{k - 1}}. Si supponga
         per assurdo che questo non sia vero, e che quindi
-        \math{v_{k}.d \ne \delta (s, v_{k})}.
+        \math{v_{k}.d \ne \delta (s, v_{k})} quando l'algoritmo
+        estrae \math{v_{k}} dalla coda.
 
         Il vertice \math{v_{k}} non può essere \math{s}, perché è
         stato appena mostrato che il teorema per \math{s} è valido.
-        Deve allora essere un vertice che si trova dopo di \math{s},
-        e deve necessariamente esistere un cammino che va da \math{s}
-        a \math{v_{k}}, dato che altrimenti si avrebbe \math{\delta
+        Deve allora essere un vertice estratto dopo \math{s}, e deve
+        necessariamente esistere un cammino che va da \math{s} a
+        \math{v_{k}}, dato che altrimenti si avrebbe \math{\delta
         (s, v_{k}) = \infty} e questo contraddirebbe l'ipotesi assunta
         per assurdo. Esistendo (almeno) un cammino da \math{s} a
         \math{v_{k}}, esisterà anche (almeno) un cammino minimo da
@@ -167,22 +263,26 @@
 
         Sia \math{v_{y}} il primo vertice lungo il cammino minimo da
         \math{s} a \math{v_{k}} ad essere ancora parte della coda di
-        priorità, e sia \math{v_{x}} il predecessore di \math{v_{y}}.
-        Il cammino da \math{s} a \math{v_{k}} può essere allora
-        scomposto come \math{s \rightsquigarrow v_{x} \rightarrow
-        v_{y} \rightsquigarrow v_{k}}. Si noti come \math{v_{k}}
-        potrebbe coincidere con \math{v_{y}}, così come \math{s}
-        potrebbe coincidere con \math{v_{x}}, pertanto i sottocammini
-        \math{s \rightsquigarrow v_{x}} e \math{v_{y} \rightsquigarrow
-        v_{k}} potrebbero essere vuoti.
+        priorità, e sia \math{v_{x}} il predecessore di \math{v_{y}}:
+        per definizione, questo deve essere giá stato estratto dalla
+        coda di prioritá. Il cammino minimo da \math{s} a \math{v_{k}}
+        può essere allora scomposto come \math{s \rightsquigarrow
+        v_{x} \rightarrow v_{y} \rightsquigarrow v_{k}}. Si noti come
+        \math{v_{k}} potrebbe coincidere con \math{v_{y}}, così come
+        \math{s} potrebbe coincidere con \math{v_{x}}, pertanto i
+        sottocammini \math{s \rightsquigarrow v_{x}} e \math{v_{y}
+        \rightsquigarrow v_{k}} potrebbero essere vuoti.
 
-        Alla fine dell'iterazione per \math{v_{x}}, essendo \math{v_{x}}
-        predecessore di \math{v_{y}} ed essendo per ipotesi \math{v_{x}}
-        un vertice già estratto dalla coda, si avrà \math{v_{y}.d = \delta
-        (s, \math{v_{y}})}. Poiché \math{v_{y}} precede \math{v_{k}} nel
-        cammino minimo da \math{s} a \math{v_{k}} e poiché tutti i pesi
-        degli archi sono non negativi, deve aversi \math{\delta (s, v_{y})
-        \leq \delta (s, v_{k})}. Quindi:
+        Alla fine dell'iterazione in cui viene estratto \math{v_{x}},
+        essendo \math{v_{x}} predecessore di \math{v_{y}} si avrà
+        \math{v_{y}.d = \delta (s, \math{v_{y}})} (lo stesso accadrá
+        per tutti gli altri vertici adiacenti a \math{v_{x}}). Poiché
+        \math{v_{y}} precede \math{v_{k}} nel cammino minimo che ha
+        inizio in \math{s} e fine in \math{v_{k}} e poiché tutti i
+        pesi degli archi sono non negativi, deve aversi \math{\delta
+        (s, v_{y}) \leq \delta (s, v_{k})}. Essendo poi \math{v_{k}}
+        non ancora estratto, si avrá \math{v_{k}.d = \infty}.
+        Riassumendo:
 
         \begin[mode = display]{math}
             v_{y}.d = \delta (s, v_{y}) \leq \delta (s, v_{k}) \leq v_{k}.d
@@ -197,45 +297,50 @@
             v_{y}.d = \delta (s, v_{y}) = \delta (s, v_{k}) = v_{k}.d
         \end{math}
 
-        Si ha però \math{\delta (s, v_{k}) = v_{k}.d}, che è in
+        Da cui si ha \math{\delta (s, v_{k}) = v_{k}.d}, che è in
         contraddizione con l'ipotesi assunta per assurdo. Occorre
         quindi concludere che effettivamente \math{\delta (s, v_{k})
-        = v_{k}.d}, ed il teorema è provato.
+        = v_{k}.d} quando tale vertice viene estratto, e di conseguenza
+        il teorema è provato.
     \end{theorem}
 
-    Il tempo di esecuzione dell'algoritmo di Dijkstra può essere
-    calcolato osservando che questo si compone di tre operazioni
-    principali: l'inizializzazione (righe 2-4), l'estrazione di
-    un vertice dalla coda (riga 8) ed il rilassamento (righe 11-13).
-    Si assuma che la coda di priorità sia implementata utilizzando
-    una struttura dati efficiente (ad esempio un min-heap binario).
+    Per calcolare il tempo di esecuzione dell'algoritmo di Dijkstra,
+    si assuma innanzitutto di stare utilizzando una struttura dati
+    efficiente, ad esempio un min-heap binario, per implementare la
+    coda di prioritá \math{Q}.
 
-    L'inizializzazione richiede un tempo di esecuzione immediato, dato che
-    sia assegnare valori ai campi di un vertice che l'inserirlo nella coda
-    di priorità che inizializzare i suoi campi hanno tempo di esecuzione
-    immediato. Per motivi analoghi, il rilassamento di un vertice ha tempo
-    di esecuzione unitario. D'altro canto, estrarre un vertice da una coda
-    di priorità è una operazione che ha tempo di esecuzione logaritmico
-    nel numero dei vertici.
+    Si osservi come \tt{INITIALIZE-SINGLE-SOURCE} abbia chiaramente
+    tempo di esecuzione lineare nel numero dei vertici, dato che compie
+    una operazione avente tempo costante esattamente una sola volta per
+    ciascuno di essi. Allo stesso modo, l'inserimento di tutti i vertici
+    all'interno della coda di prioritá ha tempo di esecuzione lineare nel
+    numero degli stessi. La riga 5 che inizializza l'insieme \math{S} é
+    una operazione con tempo di esecuzione unitario, e quindi trascurabile.
+    Riassumendo, il tempo di esecuzione complessivo delle righe da 1 a 5 é
+    \math{O(\abs{V})}.
 
-    Dato che l'inizializzazione viene eseguita per ciascun vertice una
-    sola volta, il primo ciclo (1-4) ha tempo di esecuzione complessivo
-    \math{O(\abs{V})}. Il secondo ciclo (riga 7) esegue il suo corpo
-    una sola volta per ciascun vertice, dato che nella coda di priorità
-    vengono inseriti tutti i vertici e ad ogni iterazione uno di questi
-    viene sempre rimosso. Infine, dato ciascun vertice viene inserito in
-    \math{S} esattamente una sola volta e dato che il numero totale di
-    archi del grafo è \math{\abs{E}}, l'algoritmo ispeziona ciascun arco
-    esattamente una sola volta. Pertanto il ciclo più interno (righe
-    10-13) ha tempo di esecuzione lineare nel numero degli archi.
+    Il ciclo \tt{while} alla riga 6 esegue il suo corpo una sola volta per
+	ciascun vertice, dato che nella coda di priorità vengono inseriti tutti
+	i vertici e ad ogni iterazione uno di questi viene sempre estratto.
+	Estrarre un vertice da una coda di priorità (riga 7) è una operazione
+    che ha tempo di esecuzione logaritmico nel numero dei vertici. D'altro
+    canto, inserire il vertice estratto nell'insieme \math{S} (riga 8) é
+    una operazione con tempo di esecuzione unitario.
+
+    Dato che ciascun vertice viene inserito in \math{S} esattamente una sola
+    volta, l'algoritmo ispeziona ciascun arco esattamente una sola volta. La
+    procedura di rilassamento su una coppia di archi ha tempo di esecuzione
+    unitario: dato che questa viene operata esattamente tante volte quanti
+    sono i vertici del grafo, il ciclo \tt{foreach} ha tempo di esecuzione
+    lineare nel numero degli archi.
 
     Il tempo di esecuzione complessivo della seconda parte dell'algoritmo
-    (righe 7-13) viene allora ad essere \math{O(\abs{E} \mi{log}(\abs{V}))},
-    al quale va sommato il tempo di esecuzione dell'inizializzazione per
-    ciascun vertice. Il tempo di esecuzione dell'algoritmo di Dijkstra
-    viene allora ad essere \math{O(\abs{V}) + O(\abs{E} \mi{log}(\abs{V}))
-    = O(\abs{E} \mi{log}(\abs{V})) = O(\abs{E} \mi{log}(\abs{E}))}, dato
-    che si sta considerando un grafo connesso e quindi è possibile
-    maggiorare \math{\abs{V}} con \math{\abs{E}}.
+    (righe da 6 a 10) viene allora ad essere \math{O(\abs{E} \mi{log}(\abs{V}))},
+    al quale va sommato il tempo di esecuzione di \tt{INITIALIZE-SINGLE-SOURCE},
+    che é \math{O(\abs{V})}. Dato che si sta considerando un grafo connesso, é
+    possibile maggiorare \math{\abs{V}} con \math{\abs{E}}. Il tempo di esecuzione
+    complessivo dell'algoritmo di Dijkstra viene allora ad essere \math{O(\abs{V})
+    + O(\abs{E} \mi{log}(\abs{V})) = O(\abs{E} \mi{log}(\abs{V})) = O(\abs{E}
+    \mi{log}(\abs{E}))}.
 
 \end{sile}

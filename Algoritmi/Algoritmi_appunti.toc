@@ -707,67 +707,7 @@ return {
     level = 2,
     link = "dest71",
     number = "5.2",
-    pageno = "45"
-  },
-  {
-    label = {
-      "Definizione del problema",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest72",
-    number = "5.2.1",
-    pageno = "45"
-  },
-  {
-    label = {
-      "Programmazione dinamica: sottostruttura ottima",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest73",
-    number = "5.2.2",
-    pageno = "45"
-  },
-  {
-    label = {
-      "Programmazione dinamica: equazione di ricorrenza",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest74",
-    number = "5.2.3",
-    pageno = "45"
-  },
-  {
-    label = {
-      "Programmazione dinamica: implementazione bottom-up",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest75",
-    number = "5.2.4",
     pageno = "46"
-  },
-  {
-    label = {
-      "Programmazione dinamica: ricostruzione di una soluzione",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest76",
-    number = "5.2.5",
-    pageno = "47"
-  },
-  {
-    label = {
-      "Osservazioni",
-      id = "stuff"
-    },
-    level = 3,
-    link = "dest77",
-    number = "5.2.6",
-    pageno = "48"
   },
   {
     label = {
@@ -775,9 +715,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest78",
+    link = "dest72",
     number = "6",
-    pageno = "49"
+    pageno = "51"
   },
   {
     label = {
@@ -785,9 +725,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest79",
+    link = "dest73",
     number = "6.1",
-    pageno = "49"
+    pageno = "51"
   },
   {
     label = {
@@ -795,9 +735,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest80",
+    link = "dest74",
     number = "6.2",
-    pageno = "53"
+    pageno = "55"
   },
   {
     label = {
@@ -805,9 +745,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest81",
+    link = "dest75",
     number = "6.3",
-    pageno = "54"
+    pageno = "56"
   },
   {
     label = {
@@ -815,9 +755,9 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest82",
+    link = "dest76",
     number = "7",
-    pageno = "57"
+    pageno = "59"
   },
   {
     label = {
@@ -825,9 +765,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest83",
+    link = "dest77",
     number = "7.1",
-    pageno = "57"
+    pageno = "59"
   },
   {
     label = {
@@ -835,8 +775,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest84",
+    link = "dest78",
     number = "7.2",
-    pageno = "58"
+    pageno = "60"
   }
 }
