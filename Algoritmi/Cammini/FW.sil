@@ -1,31 +1,43 @@
 \begin{sile}
 
         Dato un grafo \math{G = (V, E, W)} senza cappi, orientato e
-        pesato, il \strong{problema dei cammini minimi} richiede, per
-        ogni coppia di vertici \math{(v_{i}, v_{j}) \in V \times V},
-        di trovare il cammino che ha inizio in \math{v_{i}} e fine in
-        \math{v_{j}} avente il minimo peso. Il problema può essere
-        formulato come un problema di ottimizzazione di minimo:
+        pesato, il \strong{problema dei cammini minimi da ogni sorgente}
+        richiede, per tutte le possibili coppie di vertici \math{(v_{i},
+        v_{j}) \in V \times V}, di trovare il cammino che ha inizio in
+        \math{v_{i}} e fine in \math{v_{j}} avente il minimo peso.
+
+        Il problema potrebbe essere risolto applicando al grafo l'algoritmo
+        di Dijkstra tante volte quanti sono i vertici del grafo, cambiando
+        ad ogni iterazione il vertice sorgente. Si noti peró come questo
+        sia possibile solamente se la funzione peso del grafo restituisce
+        valori strettamente positivi e se il grafo non é orientato.
+
+        Il problema dei cammini minimi da ogni sorgente può essere formulato
+        come un problema di ottimizzazione di minimo:
 
         \begin{itemize}
             \begin{item}
                 Per ciascuna coppia di vertici \math{(v_{i}, v_{j})},
                 l'insieme delle soluzioni possibili è dato da tutti i
-                possibili cammini che hanno \math{v_{i}} come primo
-                vertice e \math{v_{j}} come ultimo;
+                possibili cammini che hanno inizio in \math{v_{i}} e
+                fine in \math{v_{j}};
             \end{item}
             \begin{item}
                 La funzione obiettivo è il peso del cammino;
             \end{item}
             \begin{item}
                 Il valore ottimo per \math{v_{i}} e \math{v_{j}} è il
-                peso del cammino minimo da \math{v_{i}} a \math{v_{j}};
+                peso del cammino minimo che ha inizio in \math{v_{i}}
+                e fine in \math{v_{j}};
             \end{item}
             \begin{item}
                 La soluzione ottimale è data da uno qualsiasi dei cammini
-                di peso minimo fra i vertici \math{v_{i}} e \math{v_{j}};
+                di peso minimo che hanno inizio in \math{v_{i}} e fine in
+                \math{v_{j}};
             \end{item}
         \end{itemize}
+
+        \bigskip
 
         Dato un grafo orientato e pesato \math{G = (V, E, W)}, se ne numerino
         i vertici in maniera univoca. Supponendo che i vertici di \math{G}
@@ -34,92 +46,69 @@
         v_{k}\}} per un \math{k} generico. Presi due vertici \math{v_{i},
         v_{j} \in V}, si indichi con \math{P^{k}_{ij}} un cammino minimo da
         \math{v_{i}} a \math{v_{j}} i cui vertici intermedi sono stati estratti
-        dall'insieme \math{K}. Sia poi \math{\mi{Opt}_{k}(i, j)} la lunghezza
-        complessiva di uno di questi cammini minimi.
+        dall'insieme \math{K}.
 
-        Il problema potrebbe essere risolto applicando al grafo l'algoritmo
-        di Dijkstra tante volte quanti sono i vertici del grafo, cambiando
-        ad ogni iterazione il vertice sorgente. É peró possibile parametrizzare
-        il problema rispetto ai \math{k} vertici intermedi, ottenendo un algoritmo
-        di programmazione dinamica chiamato \strong{Algoritmo di Floyd-Warshall}.
-        Questo non solo risolve il problema dei cammini minimi da ogni sorgente,
-        ma a differenza dell'algoritmo di Dijkstra funziona anche per grafi
-        orientati, grafi non connessi e grafi aventi archi con pesi negativi.
+        Parametrizzando il problema rispetto ai \math{k} vertici
+        intermedi, si ottiene un algoritmo di programmazione dinamica
+        chiamato \strong{Algoritmo di Floyd-Warshall}. Questo risolve
+        il problema dei cammini minimi da ogni sorgente per grafi
+        orientati la cui funzione peso puó restituire valori negativi
         L'algoritmo può essere descritto in maniera informale come segue:
 
         \begin{enumerate}
             \begin{item}
                 Per tutte le possibili coppie di vertici \math{(v_{i}, v_{j})}
-                si calcoli \math{P^{0}_{ij}}, il cammino minimo da \math{v_{i}}
-                a \math{v_{j}} che non ha alcun vertice intermedio. Tali cammini
-                possono essere costruiti immediatamente a partire dai dati del
+                si calcoli \math{S^{0}_{ij}}, la lunghezza del cammino minimo
+                da \math{v_{i}} a \math{v_{j}} che non ha alcun vertice intermedio.
+                Tali lunghezze possono essere calcolate direttamente dai dati del
                 problema;
             \end{item}
             \begin{item}
-                Si utilizzi tale informazione per calcolare, per tutte
-                le possibili coppie di vertici \math{(v_{i}, v_{j})},
-                \math{P^{k}_{ij}}, il cammino minimo da \math{v_{i}}
-                a \math{v_{j}} i cui vertici intermedi sono estratti
-                dall'insieme \math{\{ v_{1}, v_{2}, \unicodeellipsis,
-                v_{k} \}}. Si noti come l'insieme dei vertici intermedi
-                di tale cammino minimo non deve necessariamente coincidere
-                con l'intero \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}
-                \}}, ma ne è certamente un sottoinsieme;
+                Si utilizzi tale informazione per calcolare, per tutte le
+                possibili coppie di vertici \math{(v_{i}, v_{j})}, \math{S^{k}_{ij}},
+                la lunghezza di un cammino minimo da \math{v_{i}} a \math{v_{j}} i cui
+                vertici intermedi sono estratti dall'insieme \math{\{v_{1}, v_{2},
+                \unicodeellipsis, v_{k} \}} (pur non utilizzando necessariamente
+                ciascuno di tali vertici);
             \end{item}
             \begin{item}
-                L'algoritmo termina quando viene calcolato, per tutte
-                le possibili coppie di vertici \math{(v_{i}, v_{j})},
-                \math{P^{n}_{ij}}, il cammino minimo da \math{v_{i}}
-                a \math{v_{j}} i cui vertici intermedi sono estratti
-                dall'intero insieme \math{V};
+                L'algoritmo termina quando viene calcolata, per tutte le possibili
+                coppie di vertici \math{(v_{i}, v_{j})}, \math{S^{n}_{ij}}, la
+                lunghezza del cammino minimo da \math{v_{i}} a \math{v_{j}} i cui
+                vertici intermedi sono estratti dall'intero insieme \math{V}. É
+                poi possibile, sulla base di questa e di altre informazioni,
+                ricostruire un cammino minimo.
             \end{item}
         \end{enumerate}
 
         \bigskip
 
-        Il caso base dell'equazione di ricorrenza si ha con \math{P^{0}_{ij}}, 
-        il cammino minimo da \math{v_{i}} a \math{v_{j}} che non ha alcun
-        vertice intermedio, l'arco che connette direttamente \math{v_{i}}
-        e \math{v_{j}}. Se i due vertici sono coincidenti, ovvero se
-        \math{v_{i} = v_{j}}, l'unico cammino possibile è il cammino
-        degenere che va da \math{v_{i}} a sé stesso. Tale cammino non
-        solo effettivamente non possiede alcun vertice intermedio,
-        rispettando la definizione, ma essendo l'unico cammino possibile è
-        anche certamente quello di peso minimo. Se i due vertici \math{v_{i}}
-        e \math{v_{j}} sono distinti ma non è presente nel grafo un arco fra
-        i due, si ha per convenzione \math{P^{0}_{ij} =} NULL.
+        Il caso base dell'equazione di ricorrenza si ha rispetto a \math{P^{0}_{ij}},
+        il cammino minimo da \math{v_{i}} a \math{v_{j}} che non ha alcun vertice
+        intermedio, l'arco che connette direttamente \math{v_{i}} e \math{v_{j}}.
+        Se i due vertici sono coincidenti, ovvero se \math{v_{i} = v_{j}}, l'unico
+        cammino possibile è il cammino degenere che va da \math{v_{i}} a sé stesso,
+        di peso nullo. Tale cammino non solo effettivamente non possiede alcun
+        vertice intermedio, rispettando la definizione, ma essendo l'unico cammino
+        possibile è anche certamente quello di peso minimo. Se i due vertici
+        \math{v_{i}} e \math{v_{j}} sono distinti ma non è presente nel grafo
+        un arco fra i due, si ha per convenzione che la loro distanza é infinita.
 
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                P^{0}_{ij} =
-                \{\table[columnalign = left left]{
-                    \mi{NULL} & \mi{se} \thickspace v_{i} \ne v_{j} \wedge
-                                    \langle v_{i}, v_{j} \rangle \notin E \\
-                    \langle v_{i} \rangle & \mi{se} \thickspace v_{i} = v_{j} \\
-                    \langle v_{i}, v_{j} \rangle & \mi{altrimenti} \\
-                }
-            \end{math}
-        \end{parbox}
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                \mi{Opt}_{0} {(i, j)} =
-                \{\table[columnalign = left left]{
-                    \infty & \mi{se} \thickspace v_{i} \ne v_{j} \wedge
-                    \langle v_{i}, v_{j} \rangle \notin E \\
-                    0 & \mi{se} \thickspace v_{i} = v_{j} \\
-                    W{(v_{i}, v_{j})} & \mi{altrimenti} \\
-                }
-            \end{math}
-        \end{parbox}
-        \par
+		\begin[mode = display]{math}
+			S^{0}_{ij} =
+			\{\table[columnalign = left left]{
+				\infty & \mi{se} \thickspace v_{i} \ne v_{j} \wedge
+				\langle v_{i}, v_{j} \rangle \notin E \\
+				0 & \mi{se} \thickspace v_{i} = v_{j} \\
+				W{(v_{i}, v_{j})} & \mi{altrimenti} \\
+			}
+		\end{math}
 
         Per quanto riguarda la relazione di ricorrenza, si consideri
         \math{P^{k}_{ij}}, il cammino minimo da \math{v_{i}} a \math{v_{j}}
         i cui vertici intermedi sono estratti dall'insieme \math{\{v_{1},
-        v_{2}, \unicodeellipsis, v_{k}\}}. Si indichi con \math{\mi{Opt}_{k} 
-        (i, j)} il peso totale del cammino minimo \math{P^{k}_{i, j}}.
-        Possono verificarsi due situazioni: \math{v_{k}} è oppure non è
-        uno dei vertici intermedi del cammino.
+        v_{2}, \unicodeellipsis, v_{k}\}}. Possono verificarsi due situazioni:
+        \math{v_{k}} è oppure non è uno dei vertici intermedi del cammino.
 
         Se \math{v_{k}} non è uno dei vertici del cammino, allora questo
         equivale a dire che i vertici intermedi di \math{P^{k}_{ij}} sono
@@ -150,102 +139,79 @@
         sottocammini sono estratti dall'insieme \math{\{v_{1}, v_{2},
         \unicodeellipsis, v_{k - 1}\}}.
 
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                P^{k}_{ij} =
-                \{\table[columnalign = left left]{
-                    P^{k - 1}_{ij} &
-                    \mi{se} \thickspace v_{k} \notin P^{k}_{ij} \\
-                    P^{k - 1}_{ik} \rightsquigarrow P^{k - 1}_{kj} &
-                    \mi{se} \thickspace v_{k} \in P^{k}_{ij} \\
-                }
-            \end{math}
-        \end{parbox}
-        \begin[width = 50%fw]{parbox}
-            \begin[mode = display]{math}
-                \mi{Opt}_{k} {(i, j)} =
-                \{\table[columnalign = left left]{
-                    \mi{Opt}_{k - 1} {(i, j)} &
-                    \mi{se} \thickspace v_{k} \notin P^{k}_{ij} \\
-                    \mi{Opt}_{k - 1} {(i, k)} + \mi{Opt}_{k - 1} {(k, j)} &
-                    \mi{se} \thickspace v_{k} \in P^{k}_{ij} \\
-                }
-            \end{math}
-        \end{parbox}
-        \par
+		\begin[mode = display]{math}
+			S^{k} {(i, j)} =
+			\{\table[columnalign = left left]{
+				S^{k - 1} {(i, j)} &
+				\mi{se} \thickspace v_{k} \notin P^{k}_{ij} \\
+				S^{k - 1} {(i, k)} + S^{k - 1} {(k, j)} &
+				\mi{se} \thickspace v_{k} \in P^{k}_{ij} \\
+			}
+		\end{math}
 
-        Naturalmente non è possibile sapere, se non a posteriori, se
-        \math{v_{k}} fa o non fa parte della \math{k}-esima soluzione
-        ottimale. La scelta migliore fa l'includere o il non includere
-        \math{v_{k}} nella soluzione dipende da quale rende ottimale,
-        ovvero minimo, il peso del cammino risultante.
+        Naturalmente non è possibile sapere a priori se \math{v_{k}} faccia
+        o non faccia parte della \math{k}-esima soluzione ottimale. La scelta
+        migliore fa l'includere o il non includere \math{v_{k}} nella soluzione
+        dipende da quale rende ottimale, ovvero minimo, il peso del cammino
+        risultante.
 
-        \begin[width = 50%fw]{parbox}
-                \begin[mode = display]{math}
-                        P^{k}_{ij} =
-                        \{\table[columnalign = left left]{P^{k - 1}_{ij} &
-                        \mi{se} \thickspace \mi{Opt}_{k - 1}{(i, j)} \leq
-                        \mi{Opt}_{k - 1}{(i, k)} + \mi{Opt}_{k - 1}{(k, j)} \\
-                        P^{k - 1}_{ik} \rightsquigarrow P^{k - 1}_{kj} &
-                        \mi{altrimenti} \\
-                        }
-                \end{math}
-        \end{parbox}
-        \begin[width = 50%fw]{parbox}
-                \begin[mode = display]{math}
-                        \mi{Opt}_{k} {(i, j)} = \mi{min}\{\mi{Opt}_{k - 1}{(i, j)},
-                        \mi{Opt}_{k - 1}{(i, k)} + \mi{Opt}_{k - 1}{(k, j)}\}
-                \end{math}
-        \end{parbox}
+		\begin[mode = display]{math}
+			S^{k} (i, j) = \mi{min}\{S^{k - 1} (i, j),
+			S^{k - 1} (i, k) + S^{k - 1} (k, j)\}
+		\end{math}
 
         L'algoritmo bottom-up viene costruito a partire dall'equazione di
         ricorrenza sfruttando tante matrici \math{D} quanti sono i vertici
         del grafo. All'interno di \math{D^{(k)}[i, j]}, la cella \math{[i, j]}
-        della \math{k}-esima matrice, viene \math{\mi{opt}_{k}{(i, j)}}, la
-        lunghezza del cammino minimo fra i vertici \math{v_{i}} e \math{v_{j}}
-        i cui vertici intermedi sono stati estratti dall'insieme \math{v_{1},
-        v_{2}, \unicodeellipsis, v_{k}}. L'algoritmo riceve la matrice \math{W}
+        della \math{k}-esima matrice, contiene la lunghezza del cammino minimo
+        che ha inizio in \math{v_{i}} e fine in \math{v_{j}} i cui vertici
+        intermedi sono stati estratti dall'insieme \math{v_{1}, v_{2},
+        \unicodeellipsis, v_{k}}. L'algoritmo riceve la matrice \math{W}
         dei pesi degli archi e restituisce in output la matrice \math{D^{(n)}},
-        quella per la soluzione all'\math{n}-esima istanza.
+        la soluzione del problema.
 
         Si noti come la matrice \math{D^{(0)}} coincida esattamente con
         \math{W}, la matrice passata in input, perché entrambe riportano
-        i cammini (unici, se esistono) costituiti da un solo arco
-        \footnote{Si noti inoltre come i valori della \math{i}-esima matrice
-        dipendano esclusivamente da quelli della \math{i - 1}-esima: questo
-        significa che sarebbe possibile ottimizzare ulteriormente il costo
-        spaziale dell'algoritmo tenendo traccia, in ciascuna \math{i}-esima
+        le lunghezze dei cammini (unici, se esistono) costituiti da un solo
+        arco \footnote{Si noti inoltre come i valori della \math{i}-esima
+        matrice dipendano esclusivamente da quelli della \math{i - 1}-esima:
+        questo significa che sarebbe possibile ottimizzare ulteriormente il
+        costo spaziale dell'algoritmo tenendo traccia, in ciascuna \math{i}-esima
         iterazione, solamente dei valori della \math{i - 1}-esima matrice e
         non di tutte le precedenti.}.
 
-	\begin{verbatim}
-		procedure FW(W)
-		    n \unichar{U+2190} W.rows
-		    D\textsuperscript{(0)} \unichar{U+2190} W
+		\begin{verbatim}
+			procedure FW(W)
+				n \unichar{U+2190} W.rows
+				D\textsuperscript{(0)} \unichar{U+2190} W
 
-		    \bigskip
-		    for k \unichar{U+2190} 1 to n do
-		        D\textsuperscript{(k)} nuova matrice n x n
-		        for i \unichar{U+2190} 1 to n do
-		            for j \unichar{U+2190} 1 to n do
-		                D\textsuperscript{(k)}[i, j] \unichar{U+2190} min(D\textsuperscript{(k - 1)}[i, j], D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j])
+				\bigskip
+				for k \unichar{U+2190} 1 to n do
+				    D\textsuperscript{(k)} nuova matrice n x n
+				        for i \unichar{U+2190} 1 to n do
+				            for j \unichar{U+2190} 1 to n do
+				                if (D\textsuperscript{(k)}[i, j] \unichar{U+2264} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]) then
+				                    D\textsuperscript{(k)}[i, j] \unichar{U+2190} D\textsuperscript{(k - 1)}[i, j]
+				                else
+				                    D\textsuperscript{(k)}[i, j] \unichar{U+2190} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]
 
-		    \bigskip
-		    return D\textsuperscript{(n)}
-	\end{verbatim}
+				\bigskip
+				return D\textsuperscript{(n)}
+		\end{verbatim}
 
-    È facile notare come il tempo di esecuzione dell'algoritmo
-	sia \math{O(\abs{V^{3}})}, perché sono presenti tre cicli
-	dove in quello più interno viene eseguita una operazione
-	con costo unitario.
+		È facile notare come il tempo di esecuzione dell'algoritmo
+		sia \math{O({\abs{V}}^{3})}, perché sono presenti tre cicli
+		dove in quello più interno viene eseguita una operazione
+		con costo unitario.
 
-        Per la restituzione di una soluzione ottima al problema dei cammini
-        minimi è necessario calcolare, oltre alla matrice \math{D^{(n)}},
-        anche la \strong{matrice dei predecessori} \math{\Pi^{(n)}}. In
-        ciascuna cella \math{i, j} è riportato NULL se \math{i} coincide
-        con \math{j} oppure se non esiste un cammino fra \math{v_{i}} e 
-        \math{v_{j}}, altrimenti riporta il predecessore di \math{v_{j}} in
-        qualche cammino minimo che ha inizio in \math{v_{i}}.
+        Per la restituzione di una soluzione ottima al problema è
+        necessario calcolare, oltre alla matrice \math{D^{(n)}},
+        anche la \strong{matrice dei predecessori} \math{\Pi^{(n)}}.
+        In ciascuna cella \math{i, j} è riportato NULL se \math{v_{i}}
+        coincide con \math{v_{j}} oppure se non esiste un cammino fra
+        \math{v_{i}} e \math{v_{j}}, altrimenti riporta il predecessore
+        di \math{v_{j}} in qualche cammino minimo che ha inizio in
+        \math{v_{i}}.
 
         Tale matrice, così come la matrice \math{D^{(n)}}, viene calcolata
         parametrizzando il problema rispetto ai \math{k} vertici intermedi.
@@ -267,8 +233,8 @@
         non ha un predecessore in tale cammino. Se i due vertici
         sono distinti e \math{P^{(0)}_{ij}} esiste, allora deve
         aversi che \math{\Pi^{(0)}[i, j] = v_{i}}, perché
-        \math{P^{(0)}_{ij}} è costituito da un arco che connette
-        i due vertici direttamente.
+        \math{P^{(0)}_{ij}} è costituito da un solo arco
+        che connette i due vertici direttamente.
 
         \begin[mode = display]{math}
             \Pi^{(0)} {[i, j]} =
@@ -280,37 +246,38 @@
             }
         \end{math}
 
-        Per quanto riguarda il passo ricorsivo, si assuma di avere
-        a disposizione tutti i valori \math{\Pi^{(k - 1)}[i, j],
-        \Pi^{(k - 2)}[i, j], \unicodeellipsis} e di voler calcolare
-        \math{\Pi^{(k)}[i, j]}.
-
-        Se \math{\mi{opt}_{k}(i, j) = \mi{opt}_{k - 1}(i, j)}, ovvero
-        se il cammino minimo da \math{v_{i}} a \math{v_{j}} avente i
-        vertici intermedi estratti dall'insieme \math{\{v_{1}, v_{2},
-        \unicodeellipsis, v_{k - 1}\}} ha la stessa lunghezza di quello
-        avente i vertici intermedi estratti dall'insieme \math{\{v_{1},
-        v_{2}, \unicodeellipsis, v_{k}\}}, allora è possibile inferire
-        che il cammino minimo \math{P^{(k)}_{ij}} ed il cammino minimo
-        \math{P^{(k - 1)}_{ij}} abbiano lo stesso penultimo vertice,
+        Per quanto riguarda il passo ricorsivo, se \math{S^{k}(i, j) =
+        S^{k - 1}(i, j)}, ovvero se il cammino minimo da \math{v_{i}} a
+        \math{v_{j}} avente i vertici intermedi estratti dall'insieme
+        \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k - 1}\}} ha la stessa
+        lunghezza di quello avente i vertici intermedi estratti dall'insieme
+        \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}\}}, allora è possibile
+        inferire che il cammino minimo \math{P^{(k)}_{ij}} ed il cammino
+        minimo \math{P^{(k - 1)}_{ij}} abbiano lo stesso penultimo vertice,
         ovvero che \math{\Pi^{(k)}[i, j] = \Pi^{(k - 1)}[i, j]}. Questo
-        perché, se i due cammini hanno la stessa lunghezza, allora
-        significa che esiste una soluzione ottimale (non necessariamente
-        l'unica) comune alla \math{k}-esima e alla \math{k - 1}-esima
-        istanza del problema.
+        perché, se i due cammini hanno la stessa lunghezza, allora significa
+        che esiste una soluzione ottimale (non necessariamente l'unica) comune
+        alla \math{k}-esima e alla \math{k - 1}-esima istanza del problema.
 
-        Altrimenti si ha \math{\Pi^{(k)}[i, j] = \Pi^{(k - 1)}[k, j]}, ovvero
-        il predecessore del vertice \math{v_{j}} nel cammino minimo avente i
-        vertici intermedi estratti dall'insieme \math{\{v_{1}, v_{2},
-        \unicodeellipsis, v_{k - 1}\}} che va da \math{v_{k}} a \math{v_{j}}.
+        Se invece \math{S^{k}(i, j) = S^{k - 1}(i, k) + S^{k - 1}(k, j)},
+        sebbene non sia noto quale sará il predecessore di \math{v_{j}}
+        nel cammino minimo, certamente tale cammino avrá \math{v_{k}} tra
+        i suoi vertici intermedi. Per questo motivo, dovrá valere
+        \math{\Pi^{(k)}[i, j] = \Pi^{(k - 1)}[k, j]}, ovvero il predecessore
+        del vertice \math{v_{j}} nel cammino minimo avente i vertici intermedi
+        estratti dall'insieme \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k - 1}\}}
+        che va da \math{v_{k}} a \math{v_{j}} sará lo stesso (quale che sia) del
+        predecessore del vertice \math{v_{j}} nel cammino minimo avente i vertici
+        intermedi estratti dall'insieme \math{\{v_{1}, v_{2}, \unicodeellipsis,
+        v_{k}\}} che va da \math{v_{i}} a \math{v_{j}}.
 
         \begin[mode = display]{math}
             \Pi^{(k)} {[i, j]} =
                 \{\table[columnalign = left left]{
                         \Pi^{(k - 1)}[i, j] &
-                        \mi{se} \thickspace \mi{opt}_{k}{(i, j)} = \mi{opt}_{k - 1}{(i, j)} \\
+                        \mi{se} \thickspace S^{k} {(i, j)} = S^{k - 1} {(i, j)} \\
                         \Pi^{(k - 1)}[k, j] &
-                        \mi{se} \thickspace \mi{opt}_{k}{(i, j)} \ne \mi{opt}_{k - 1}{(i, j)} \\
+                        \mi{se} \thickspace S^{k} {(i, j)} \ne S^{k - 1} {(i, j)} \\
                 }
         \end{math}
 
@@ -325,89 +292,89 @@
         in input \math{\Pi^{(n)}} ed una coppia di indici \math{i} e \math{j}
         e restituisce il cammino minimo da \math{v_{i}} a \math{v_{j}}.
 
-	\begin[width = 60%fw]{parbox}
-		\begin{verbatim}
-			procedure FW(W)
-			    n \unichar{U+2190} W.rows
-			    D\textsuperscript{(0)} \unichar{U+2190} W
-			    for i \unichar{U+2190} 1 to n do
-			        for j \unichar{U+2190} 1 to n do
-			            if D\textsuperscript{(0)}[i, j] \unichar{U+2260} \unichar{U+221E} and i \unichar{U+2260} j then
-			                \unichar{U+03A0}\textsuperscript{(0)} \unichar{U+2190} i
-			            else
-			                \unichar{U+03A0}\textsuperscript{(0)} \unichar{U+2190} NULL
+		\begin[width = 60%fw]{parbox}
+			\begin{verbatim}
+				procedure FW(W)
+				    n \unichar{U+2190} W.rows
+				    D\textsuperscript{(0)} \unichar{U+2190} W
+				    for i \unichar{U+2190} 1 to n do
+				        for j \unichar{U+2190} 1 to n do
+				            if (D\textsuperscript{(0)}[i, j] \unichar{U+2260} \unichar{U+221E} and i \unichar{U+2260} j) then
+				                \unichar{U+03A0}\textsuperscript{(0)} [i, j] \unichar{U+2190} i
+				            else
+				                \unichar{U+03A0}\textsuperscript{(0)} [i, j] \unichar{U+2190} NULL
 
-			    \bigskip
-			    for k \unichar{U+2190} 1 to n do
-			        D\textsuperscript{(k)} nuova matrice n x n
-			        \unichar{U+03A0}\textsuperscript{(k)} nuova matrice n x n
-			        for i \unichar{U+2190} 1 to n do
-			            for j \unichar{U+2190} 1 to n do
-			                if (D\textsuperscript{(k - 1)}[i, j] \unichar{U+2264} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]) then
-			                    D\textsuperscript{(k)}[i, j] \unichar{U+2190} D\textsuperscript{(k - 1)}[i, j]
-			                    \unichar{U+03A0}\textsuperscript{k}[i, j] \unichar{U+2190} \unichar{U+03A0}\textsuperscript{(k - 1)}[i, j]
-			                else
-			                    D\textsuperscript{(k)}[i, j] \unichar{U+2190} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]
-			                    \unichar{U+03A0}\textsuperscript{(k)}[i, j] \unichar{U+2190} \unichar{U+03A0}\textsuperscript{(k - 1)}[k, j]
+				    \bigskip
+				    for k \unichar{U+2190} 1 to n do
+				        D\textsuperscript{(k)} nuova matrice n x n
+				        \unichar{U+03A0}\textsuperscript{(k)} nuova matrice n x n
+				        for i \unichar{U+2190} 1 to n do
+				            for j \unichar{U+2190} 1 to n do
+				                if (D\textsuperscript{(k - 1)}[i, j] \unichar{U+2264} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]) then
+				                    D\textsuperscript{(k)}[i, j] \unichar{U+2190} D\textsuperscript{(k - 1)}[i, j]
+				                    \unichar{U+03A0}\textsuperscript{k}[i, j] \unichar{U+2190} \unichar{U+03A0}\textsuperscript{(k - 1)}[i, j]
+				                else
+				                    D\textsuperscript{(k)}[i, j] \unichar{U+2190} D\textsuperscript{(k - 1)}[i, k] + D\textsuperscript{(k - 1)}[k, j]
+				                    \unichar{U+03A0}\textsuperscript{(k)}[i, j] \unichar{U+2190} \unichar{U+03A0}\textsuperscript{(k - 1)}[k, j]
 
-			    \bigskip
-			    return D\textsuperscript{(n)}, \unichar{U+03A0}\textsuperscript{(n)}
-		\end{verbatim}
-	\end{parbox}
-	\begin[width = 40%fw]{parbox}
-		\begin{verbatim}
-			procedure PRINT-FW(\unichar{U+03A0})
-			    for i \unichar{U+2190} 1 to \unichar{U+03A0}.rows do
-			        for j \unichar{U+2190} 1 to \unichar{U+03A0}.columns do
-			            PRINT-PATH(\unichar{U+03A0}, i, j)
+				    \bigskip
+				    return D\textsuperscript{(n)}, \unichar{U+03A0}\textsuperscript{(n)}
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 40%fw]{parbox}
+			\begin{verbatim}
+				procedure PRINT-FW(\unichar{U+03A0})
+				    for i \unichar{U+2190} 1 to \unichar{U+03A0}.rows do
+				        for j \unichar{U+2190} 1 to \unichar{U+03A0}.columns do
+				            PRINT-PATH(\unichar{U+03A0}, i, j)
 
-			    \bigskip
-			    procedure PRINT-PATH(\unichar{U+03A0}, i, j)
-			        if i = j then
-			            print i
-			        else if \unichar{U+03A0}[i, j] = NULL then
-			            print NULL
-			        else
-			            PRINT-PATH(\unichar{U+03A0}, i, \unichar{U+03A0}[i, j])
-			            print j
-		\end{verbatim}
-	\end{parbox}
-	\par
+				\bigskip
+				procedure PRINT-PATH(\unichar{U+03A0}, i, j)
+				    if (i = j) then
+				        print i
+				    else (if \unichar{U+03A0}[i, j] = NULL) then
+				        print NULL
+				    else
+				        PRINT-PATH(\unichar{U+03A0}, i, \unichar{U+03A0}[i, j])
+				        print j
+			\end{verbatim}
+		\end{parbox}
+		\par
 
-    Il tempo di esecuzione della procedura di stampa è comunque
-    \math{O(\abs{V^{3}})}, perché i due cicli innestati eseguono
-    una procedura tail-ricorsiva che ha tempo di esecuzione lineare
-    nel numero di vertici del grafo.
+		Il tempo di esecuzione della procedura di stampa è comunque
+		\math{O({\abs{V}}^{3})}, perché i due cicli innestati eseguono
+		una procedura tail-ricorsiva che ha tempo di esecuzione lineare
+		nel numero di vertici del grafo.
 
-    \begin{example}
-        \begin[width = 33%fw, strut = character, valign = middle]{parbox}
-            \center{\img[src = Cammini/graph2.pdf, width = 87.5%fw]}
-        \end{parbox}
-        \begin[width = 33%fw, valign = middle]{parbox}
-            \begin[mode = display]{math}
-                \table{
-                      & A  & B & C & D & E \\
-                    A & 0  & 7 & 6 & 5 & 2 \\
-                    B & 15 & 0 & 8 & 7 & 13 \\
-                    C & 16 & 1 & 0 & 8 & 14 \\
-                    D & 8  & 2 & 1 & 0 & 10 \\
-                    E & 11 & 5 & 4 & 3 & 0 \\
-                }
-            \end{math}
-        \end{parbox}
-        \begin[width = 33%fw, valign = middle]{parbox}
-            \begin[mode = display]{math}
-                \table{
-                      & A         & B         & C         & D         & E \\
-                    A & \mi{NULL} & C         & D         & E         & A \\
-                    B & D         & \mi{NULL} & D         & B         & B \\
-                    C & D         & C         & \mi{NULL} & B         & B \\
-                    D & D         & C         & D         & \mi{NULL} & A \\
-                    E & D         & C         & D         & E         & \mi{NULL} \\
-                }
-            \end{math}
-        \end{parbox}
-    \end{example}
+		\begin{example}
+			\begin[width = 33%fw, strut = character, valign = middle]{parbox}
+				\center{\img[src = Cammini/graph2.pdf, width = 87.5%fw]}
+			\end{parbox}
+			\begin[width = 33%fw, valign = middle]{parbox}
+				\begin[mode = display]{math}
+					\table{
+						& A  & B & C & D & E \\
+						A & 0  & 7 & 6 & 5 & 2 \\
+						B & 15 & 0 & 8 & 7 & 13 \\
+						C & 16 & 1 & 0 & 8 & 14 \\
+						D & 8  & 2 & 1 & 0 & 10 \\
+						E & 11 & 5 & 4 & 3 & 0 \\
+					}
+				\end{math}
+			\end{parbox}
+			\begin[width = 33%fw, valign = middle]{parbox}
+				\begin[mode = display]{math}
+					\table{
+						& A         & B         & C         & D         & E \\
+						A & \mi{NULL} & C         & D         & E         & A \\
+						B & D         & \mi{NULL} & D         & B         & B \\
+						C & D         & C         & \mi{NULL} & B         & B \\
+						D & D         & C         & D         & \mi{NULL} & A \\
+						E & D         & C         & D         & E         & \mi{NULL} \\
+					}
+				\end{math}
+			\end{parbox}
+		\end{example}
 
         La procedura \tt{PRINT-FW} è molto simile alle procedure usate
         per ottenere i cammini minimi negli alberi indotti dalle visite
@@ -432,81 +399,82 @@
         \end{parbox}
         \par
 
-                L'algoritmo Floyd-Warshall può essere utilizzato
-                anche per calcolare la \strong{chiusura transitiva}
-                di un grafo \math{G = (V, E)}, definita come il grafo
-                \math{G* = (V, E*)} dove
+		L'algoritmo Floyd-Warshall può essere utilizzato
+		anche per calcolare la \strong{chiusura transitiva}
+		di un grafo \math{G = (V, E)}, definita come il grafo
+		\math{G* = (V, E*)} dove
 
-                \smallskip
-                \begin{center}
-                        \math{E*} = \{\math{(i, j)}: esiste un cammino dal
-                        vertice \math{i} al vertice \math{j} in \math{G}\}
-                \end{center}
-                \bigskip
+		\smallskip
+		\begin{center}
+				\math{E*} = \{\math{(i, j)}: esiste un cammino dal
+				vertice \math{i} al vertice \math{j} in \math{G}\}
+		\end{center}
+		\bigskip
 
-                Il metodo consiste nell'assegnare un peso 1 ad ogni arco
-                di \math{E} e nell'eseguire normalmente l'algoritmo di
-                Floyd-Warshall. Sia \math{n = \abs{V}}: se esiste un
-                cammino dal vertice \math{i} al vertice \math{j}, si
-                avrà \math{D^{n}[i, j] < n}, altrimenti \math{D^{n}[i, j]
-                = \infty}.
+		Il metodo consiste nell'assegnare un peso 1 ad ogni arco
+		di \math{E} e nell'eseguire normalmente l'algoritmo di
+		Floyd-Warshall. Sia \math{n = \abs{V}}: se esiste un
+		cammino dal vertice \math{i} al vertice \math{j}, si
+		avrà \math{D^{n}[i, j] < n}, altrimenti \math{D^{n}[i, j]
+		= \infty}.
 
-                Un metodo simile che permette di raffinare ulteriormente il
-                costo in termini di tempo e spazio prevede di sostituire le
-                operazioni aritmetiche usate nell'algoritmo di Floyd-Warshall
-                con gli operatori logici AND e OR. Dato un grafo \math{G =
-                (V, E)} con \math{\abs{V} = n}, sia \math{T^{k}} con \math{k
-                \leq n} una matrice la cui cella \math{[i, j]} contiene il
-                valore 1 se esiste un cammino da \math{v_{i}} a \math{v_{j}}
-                in \math{G} i cui vertici intermedi sono tutti estratti dal
-                sottoinsieme \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}\}}
-                di \math{V} e 0 altrimenti. Le celle di \math{T^{k}} sono 
-                definite a partire dalla seguente equazione di ricorrenza:
+		Un metodo simile che permette di raffinare ulteriormente il
+		costo in termini di tempo e spazio prevede di sostituire le
+		operazioni aritmetiche usate nell'algoritmo di Floyd-Warshall
+		con gli operatori logici AND e OR. Dato un grafo \math{G =
+		(V, E)} con \math{\abs{V} = n}, sia \math{T^{k}} con \math{k
+		\leq n} una matrice la cui cella \math{[i, j]} contiene il
+		valore 1 se esiste un cammino da \math{v_{i}} a \math{v_{j}}
+		in \math{G} i cui vertici intermedi sono tutti estratti dal
+		sottoinsieme \math{\{v_{1}, v_{2}, \unicodeellipsis, v_{k}\}}
+		di \math{V} e 0 altrimenti. Le celle di \math{T^{k}} sono
+		definite a partire dalla seguente equazione di ricorrenza:
 
-                \begin[width = 50%fw]{parbox}
-                    \begin[mode = display]{math}
-                        T^{0}[i, j] =
-                        \table[columnalign = left left]{
-                            0 & \mi{se} \thickspace i \ne j \wedge (i, j) \notin E \\
-                            1 & \mi{se} \thickspace i = j \vee (i, j) \in E \\
-                        }
-                    \end{math}
-                \end{parbox}
-                \begin[width = 50%fw]{parbox}
-                    \begin[mode = display]{math}
-                        T^{k}[i, j] = T^{k - 1}[i, j] \vee (T^{k - 1}[i, k] \wedge T^{k - 1}[k, j])
-                    \end{math}
-                \end{parbox}
-                \par
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				T^{0} {[i, j]} =
+				\{\table[columnalign = left left]{
+					0 & \mi{se} \thickspace i \ne j \wedge (i, j) \notin E \\
+					1 & \mi{se} \thickspace i = j \vee (i, j) \in E \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				T^{k}[i, j] = T^{k - 1}[i, j] \vee (T^{k - 1}[i, k] \wedge T^{k - 1}[k, j])
+			\end{math}
+		\end{parbox}
+		\par
 
-                Come nell'algoritmo di Floyd-Warshall, vengono calcolate le
-                matrici \math{T^{k}} per valori crescenti di \math{k}.
+		Come nell'algoritmo di Floyd-Warshall, vengono calcolate le
+		matrici \math{T^{k}} per valori crescenti di \math{k}.
 
-                \begin{verbatim}
-                    procedure FW(G)
-                        n \unichar{U+2190} |G.V|
-                        T\textsuperscript{(0)} nuova matrice n x n
-                        for i \unichar{U+2190} 1 to n do
-                            for j \unichar{U+2190} 1 to n do
-                                if i = j or (i, j) in G.E then
-                                    T\textsuperscript{(0)} \unichar{U+2190} 1
-                                else
-                                    T\textsuperscript{(0)} \unichar{U+2190} 0
+		\begin{verbatim}
+			procedure FW(V, E)
+			    n \unichar{U+2190} |V|
+			    T\textsuperscript{(0)} nuova matrice n x n
+			    for i \unichar{U+2190} 1 to n do
+			        for j \unichar{U+2190} 1 to n do
+			            if (i = j or (i, j) \unichar{U+2208} E) then
+			                T\textsuperscript{(0)} \unichar{U+2190} 1
+			            else
+			                T\textsuperscript{(0)} \unichar{U+2190} 0
 
-                        \bigskip
-                        for k \unichar{U+2190} 1 to n do
-                            T\textsuperscript{(k)} nuova matrice n x n
-                            for i \unichar{U+2190} 1 to n do
-                                for j \unichar{U+2190} 1 to n do
-                                    T\textsuperscript{(k)}[i, j] \unichar{U+2190} T\textsuperscript{(k - 1)}[i, j] or (T\textsuperscript{(k - 1)}[i, k] and T\textsuperscript{(k - 1)}[k, j])
-                        \bigskip
-                        return T\textsuperscript{(n)}
-                \end{verbatim}
+			    \bigskip
+			    for k \unichar{U+2190} 1 to n do
+				    T\textsuperscript{(k)} nuova matrice n x n
+				    for i \unichar{U+2190} 1 to n do
+				        for j \unichar{U+2190} 1 to n do
+				            T\textsuperscript{(k)}[i, j] \unichar{U+2190} T\textsuperscript{(k - 1)}[i, j] or (T\textsuperscript{(k - 1)}[i, k] and T\textsuperscript{(k - 1)}[k, j])
 
-                Sebbene il tempo di esecuzione e lo spazio occupato
-                dall'algoritmo siano teoricamente rimasti invariati,
-                i calcolatori sono comunque in grado di eseguire tale
-                algoritmo più velocemente perché le operazioni logiche
-                vengono tradotte in istruzioni assembly molto efficienti.
+				\bigskip
+				return T\textsuperscript{(n)}
+		\end{verbatim}
+
+		Sebbene il tempo di esecuzione e lo spazio occupato
+		dall'algoritmo siano teoricamente rimasti invariati,
+		i calcolatori sono comunque in grado di eseguire tale
+		algoritmo più velocemente perché le operazioni logiche
+		vengono tradotte in istruzioni assembly molto efficienti.
 
 \end{sile}
