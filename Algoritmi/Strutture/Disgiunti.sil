@@ -12,15 +12,14 @@
     piccolo, l'elemento che ha associato il valore maggiore,
     ecc\math{\unicodeellipsis}).
 
-    Indicando con \math{x} un generico elemento di uno degli insiemi,
-    si vuole costruire una struttura dati che supporti le seguenti
+    Si vuole costruire una struttura dati che supporti le seguenti
     tre operazioni:
 
     \begin{itemize}
         \begin{item}
-            \tt{MAKE-SET(x)} crea un nuovo insieme il cui unico elemento e
-            rappresentante è \math{x}. Poiché gli insiemi sono disgiunti,
-            \math{x} non può trovarsi in un altro insieme.
+            \tt{MAKE-SET(x)} crea un nuovo insieme il cui unico elemento
+            nonché rappresentante è \math{x}. Poiché gli insiemi sono
+            disgiunti, \math{x} non può trovarsi in un altro insieme;
         \end{item}
         \begin{item}
             \tt{UNION(x, y)} unisce gli insiemi (univoci) che contengono
@@ -35,11 +34,11 @@
             del primo insieme o sempre un elemento del secondo insieme.}. Al
             fine di mantenere la proprietà di disgiunzione degli insiemi
             della collezione, occorre eliminare dalla collezione \math{S_{x}}
-            e \math{S_{y}}.
+            e \math{S_{y}};
         \end{item}
         \begin{item}
-            \tt{FIND-SET(x)} restituisce un puntatore al rappresentante 
-            dell'insieme (unico) che contiene \math{x}.
+            \tt{FIND-SET(x)} restituisce il rappresentante dell'insieme
+            (univoco) che contiene \math{x}.
         \end{item}
     \end{itemize}
 
@@ -124,8 +123,8 @@
         che puntatore a sé stesso, che per definizione è la radice
         dell'albero; tale cammino semplice verso la radice prende
         il nome di \strong{cammino di ricerca}. L'operazione \tt{UNION}
-        consiste semplicemente nello sganciare il puntatore dalla radice
-        a sé stesso di uno dei due alberi e collegarlo all'altra radice.
+        consiste semplicemente nello "sganciare" il puntatore dalla radice
+        a sé stessa di uno dei due alberi e collegarlo all'altra radice.
 
         \bigskip
         \center{\img[src = Strutture/union-find2.pdf, width = 25%fw]}
@@ -143,10 +142,11 @@
         viene introdotta l'euristica \strong{unione per rango}. Questa
         prevede di fare in modo che, quando è necessario unire due alberi,
         l'albero da cui viene sganciato il puntatore sia sempre quello con
-        meno nodi. In ciascun nodo, anziché tenere traccia della dimensione
-        del sottoalbero che ha tale nodo per radice, è sufficiente conoscerne
-        il \strong{rango}, ovvero il numero di archi nel cammino semplice
-        più lungo fra \math{x} e una foglia sua discendente. Tale valore
+        meno nodi. Per conoscere questa informazione non é necessario che
+        ogni nodo tenga traccia della dimensione del sottoalbero che ha
+        tale nodo per radice: è infatti sufficiente che memorizzi il proprio
+        \strong{rango}, ovvero il numero di archi nel cammino semplice più
+        lungo fra tale nodo e una foglia sua discendente. Tale valore
         viene sfruttato come limite superiore all'altezza del nodo. Durante
         l'operazione di \tt{UNION} fra due alberi, l'unione per rango prevede
         che la radice con il rango più piccolo venga fatta puntare alla
@@ -173,20 +173,21 @@
 				1    x.p \unichar{U+2190} x
 				2    x.rank \unichar{U+2190} 0
 			\end{verbatim}
-		\end{parbox}
-		\begin[width = 50%fw]{parbox}
 			\begin{verbatim}
 				procedure UNION(x, y)
 				3    LINK(FIND-SET(x), FIND-SET(y))
-
-				\bigskip
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
 				procedure LINK(x, y)
-				4    if x.rank > y.rank then
-				5        y.p \unichar{U+2190} x
-				6    else
-				7        x.p \unichar{U+2190} y
-				8        if x.rank = y.rank then
-				9            y.rank \unichar{U+2190} y.rank + 1
+				 4    if (x.rank > y.rank) then
+				 5        y.p \unichar{U+2190} x
+				 6    else if (x.rank = y.rank) then
+				 7        x.p \unichar{U+2190} y
+				 8        y.rank \unichar{U+2190} y.rank + 1
+				 9    else
+				10        x.p \unichar{U+2190} y
 			\end{verbatim}
 		\end{parbox}
 		\par
@@ -198,7 +199,7 @@
 
         \begin{verbatim}
 			procedure FIND-SET(x)
-			1    if x \unichar{U+2260} x.p then
+			1    if (x \unichar{U+2260} x.p) then
 			2        x.p \unichar{U+2190} FIND-SET(x.p)
 			3    return x.p
 		\end{verbatim}
@@ -236,24 +237,24 @@
         preprocessato il grafo, la procedura \tt{SAME-COMPONENT} è in grado
         di determinare se due vertici sono nella stessa componente connessa.
 
-	\begin[width = 50%fw]{parbox}
-		\begin{verbatim}
-			procedure CONNECTED-COMPONENTS(V, E)
-			1    foreach v \unichar{U+2208} V
-			2        MAKE-SET(v)
-			3    foreach (u, v) \unichar{U+2208} E
-			4        if (FIND-SET(u) \unichar{U+2260} FIND-SET(v)) then
-			5            UNION(u, v)
-		\end{verbatim}
-	\end{parbox}
-	\begin[width = 50%fw]{parbox}
-		\begin{verbatim}
-			procedure SAME-COMPONENT(u, v)
-			6    if (FIND-SET(u) = FIND-SET(v)) then
-			7        return TRUE
-			8    else
-			9        return FALSE
-		\end{verbatim}
-	\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure CONNECTED-COMPONENTS(V, E)
+				1    foreach v \unichar{U+2208} V
+				2        MAKE-SET(v)
+				3    foreach (u, v) \unichar{U+2208} E
+				4        if (FIND-SET(u) \unichar{U+2260} FIND-SET(v)) then
+				5            UNION(u, v)
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin{verbatim}
+				procedure SAME-COMPONENT(u, v)
+				6    if (FIND-SET(u) = FIND-SET(v)) then
+				7        return T
+				8    else
+				9        return F
+			\end{verbatim}
+		\end{parbox}
 
 \end{sile}
