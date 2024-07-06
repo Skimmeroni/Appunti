@@ -60,19 +60,17 @@
 
 			\begin{enumerate}
 				\begin{item}
-					Se \math{x_{m} = y_{n}}, allora \math{z_{k} = x_{m} =
-					y_{n}} e \math{Z_{k - 1}} è una LCS di \math{X_{m - 1}}
+					Se \math{x_{m} = y_{n}}, allora \math{x_{m} = y_{n} =
+					z_{k}} e \math{Z_{k - 1}} è una LCS di \math{X_{m - 1}}
 					e \math{Y_{n - 1}};
 				\end{item}
 				\begin{item}
-					Se \math{x_{m} \ne y_{n}}, allora \math{z_{k} \ne x_{m}}
-					implica che \math{Z} è una LCS di \math{X_{m - 1}} e
-					\math{Y};
+					Se \math{x_{m} \ne y_{n}} e \math{x_{m} \ne z_{k}}, allora
+					\math{Z} è una LCS di \math{X_{m - 1}} e \math{Y};
 				\end{item}
 				\begin{item}
-					Se \math{x_{m} \ne y_{n}}, allora \math{z_{k} \ne y_{n}}
-					implica che \math{Z} è una LCS di \math{X} e
-					\math{Y_{n - 1}};
+					Se \math{x_{m} \ne y_{n}} e \math{y_{n} \ne z_{k}}, allora
+					\math{Z} è una LCS di \math{X} e \math{Y_{n - 1}};
 				\end{item}
 			\end{enumerate}
 
@@ -82,7 +80,7 @@
 
 			\begin{enumerate}
 				\begin{item}
-					Si assuma per assurdo che \math{z_{k} \ne x_{m}}.
+					Si supponga per assurdo che \math{x_{m} = y_{n} \ne z_{k}}.
 					Si accodi allora \math{x_{m} = y_{n}} a \math{Z},
 					ottenendo la sequenza \math{Z' = \langle z_{1}, z_{2},
 					\unicodeellipsis, z_{k}, x_{m} \rangle}. Tale sequenza
@@ -113,13 +111,13 @@
 					una LCS di \math{X_{m - 1}} e \math{Y_{n - 1}}.
 				\end{item}
 				\begin{item}
-					Si supponga per assurdo che, se \math{z_{k} \ne x_{m}},
-					allora \math{Z} non sia una LCS di \math{X_{m - 1}} e
-					\math{Y}. Deve allora esistere una sequenza \math{W}
-					di lunghezza maggiore di \math{k} che è LCS di
-					\math{X_{m - 1}} e \math{Y}. Ma allora \math{W} è anche
-					LCS per \math{X} e \math{Y}, contraddicendo l'ipotesi che
-					lo sia \math{Z}. Occorre allora assumere che \math{Z} sia
+					Si supponga per assurdo che, se \math{x_{m} \ne y_{n}} e
+					\math{x_{m} \ne z_{k}}, allora \math{Z} non sia una LCS
+					di \math{X_{m - 1}} e \math{Y}. Deve allora esistere una
+					sequenza \math{W} di lunghezza maggiore di \math{k} che
+					è LCS di \math{X_{m - 1}} e \math{Y}. Ma allora \math{W}
+					è anche LCS per \math{X} e \math{Y}, contraddicendo l'ipotesi
+					che lo sia \math{Z}. Occorre allora assumere che \math{Z} sia
 					una LCS di \math{X_{m - 1}} e \math{Y}.
 				\end{item}
 				\begin{item}
@@ -201,7 +199,10 @@
 			            if X[i] = Y[j] then
 			                c[i, j] \unichar{U+2190} 1 + c[i - 1, j - 1]
 			            else
-			                c[i, j] = max(c[i, j - 1], c[i - 1, j])
+			                if (c[i - 1, j] > c[i, j - 1]) then
+			                    c[i, j] \unichar{U+2190} c[i - 1, j]
+			                else
+			                    c[i, j] \unichar{U+2190} c[i, j - 1]
 
 			    \bigskip
 			    return c[|X|][|Y|]
@@ -307,10 +308,11 @@
 				        for j \unichar{U+2190} 1 to |Y| do
 				            if X[i] = Y[j] then
 				                c[i, j] \unichar{U+2190} 1 + c[i - 1, j - 1]
-				            else if c[i - 1, j] > c[i, j - 1] then
-				                c[i, j] \unichar{U+2190} c[i - 1, j]
 				            else
-				                c[i, j] \unichar{U+2190} c[i, j - 1]
+				                if c[i - 1, j] > c[i, j - 1] then
+				                    c[i, j] \unichar{U+2190} c[i - 1, j]
+				                else
+				                    c[i, j] \unichar{U+2190} c[i, j - 1]
 
 				    \bigskip
 				    return c
