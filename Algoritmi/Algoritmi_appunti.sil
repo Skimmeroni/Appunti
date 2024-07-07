@@ -99,7 +99,7 @@
 		%\section{Problema Interleaving}           É un approfondimento
 		%\include[src = Stringhe/Interleaving.sil]
 	\chapter{Programmazione dinamica su insiemi}
-		\section{Weighted Interval Scheduling} % algoritmo bottom-up, ricostruzione della soluzione
+		\section{Weighted Interval Scheduling}
 		\include[src = Insiemi/WIS.sil]
 		\section{Hateville}
 		\include[src = Insiemi/Hateville.sil]

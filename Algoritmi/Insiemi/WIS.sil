@@ -60,12 +60,7 @@
 
 		Il problema \strong{Weighted Interval Scheduling} richiede di
 		individuare qual'è, dato un insieme di attività, il sottoinsieme
-		di attività fra loro compatibili che ha peso maggiore. Il problema
-		può essere risolto in maniera banale osservando l'insieme potenza
-		dell'insieme di attività (che ne contiene tutti i possibili
-		sottoinsiemi), scartando tutti gli insiemi di cui è costituito
-		che non sono compatibili, calcolando il peso di tutti gli insiemi
-		compatibili e cercando il peso massimo.
+		di attività fra loro compatibili che ha peso maggiore.
 
 		\begin{example}
 			\begin[width = 40%fw, valign = middle]{parbox}
@@ -133,19 +128,20 @@
 		istanza del problema corrisponde a trovare la soluzione
 		ottimale per il problema WIS rispetto al sottoinsieme
 		\math{X_{i}}. La soluzione per l'intero insieme \math{X}
-		è la soluzione per l'istanza \math{X_{n}}. Il valore totale
+		è la soluzione per l'istanza \math{X_{n}}. Il peso totale
 		della soluzione ottimale per la \math{i}-esima istanza del
 		problema é dato dalla funzione \math{\mi{Opt}(i)}.
 
-		Per calcolare la soluzione ottimale della generica istanza \math{X_{i}},
-        ovvero \math{S_{i}}, verrá assunto di avere a disposizione tutte le
-        soluzioni parziali \math{S_{i - 1}, S_{i - 2}, \unicodeellipsis,
-        S_{1}, S_{0}}. Pertanto, per il calcolo della soluzione ottimale
-        dell'\math{i}-esima istanza del problema si hanno a disposizione
-        le informazioni relative all'\math{i}-esima attivitá (tempo di inizio,
-        tempo di fine, valore) ed il valore totale delle soluzioni \math{i - 1}
-        a 0. \math{i} puó essere come puó non essere uno degli elementi della
-        soluzione ottimale per l'istanza \math{i}-esima.
+		Per calcolare la soluzione ottimale della generica istanza
+		\math{X_{i}}, ovvero \math{S_{i}}, verrá assunto di avere
+		a disposizione tutte le soluzioni parziali \math{S_{i - 1},
+		S_{i - 2}, \unicodeellipsis, S_{1}, S_{0}}. Pertanto, per
+		il calcolo della soluzione ottimale dell'\math{i}-esima
+		istanza del problema si hanno a disposizione le informazioni
+		relative all'\math{i}-esima attivitá (tempo di inizio, tempo
+		di fine, peso) ed il peso totale delle soluzioni \math{i - 1}
+		a 0. \math{i} puó essere come puó non essere uno degli elementi
+		della soluzione ottimale per l'istanza \math{i}-esima.
 
 	\subsection{Programmazione dinamica: sottostruttura ottima}
 
@@ -271,8 +267,8 @@
 
 		Nel secondo caso, la soluzione ottimale dell'istanza \math{X_{i}} 
 		deve essere un insieme che contiene \math{i} e tutte le attività 
-		precedenti ad \math{i} che sono con questa compatibili. Tuttavia, 
-		dato che l'insieme \math{S_{i}} è soprainsieme di tutti gli insiemi
+		precedenti ad \math{i} che sono con questa compatibili. Dato
+		che l'insieme \math{S_{i}} è soprainsieme di tutti gli insiemi
 		\math{S_{j}} con \math{j < i}, per individuare il sottoinsieme
 		di \math{S_{i}} che contiene tutte le attività compatibili con
 		\math{i} è sufficiente cercare quello di indice maggiore, perché
@@ -283,10 +279,6 @@
 		\begin[mode = display]{math}
 			\mi{p}(i) = \mi{max}\{j | j < i \wedge \mi{Comp}(i, j) = T\}
 		\end{math}
-
-		Le equazioni di ricorrenza complete per gli insiemi \math{S_{i}}
-		e per i valori \math{\mi{Opt}(i)} possono allora essere scritte
-		in questa forma:
 
 		\begin[width = 40%fw]{parbox}
 			\begin[mode = display]{math}
@@ -299,7 +291,7 @@
 		\end{parbox}
 		\begin[width = 60%fw]{parbox}
 			\begin[mode = display]{math}
-				V {(S_{i})} = \mi{Opt} {(i)} =
+				\mi{Opt} {(i)} =
 				\{\table[columnalign = left left]{
 					\mi{Opt}(\mi{p}(i)) + v_{i} & \mi{se} \thickspace i \in S_{i} \\
 					\mi{Opt}(i - 1)                & \mi{se} \thickspace i \notin S_{i} \\
@@ -308,16 +300,11 @@
 		\end{parbox}
 		\par
 
-		Naturalmente non è possibile sapere a priori se l'\math{i}-esimo
-		elemento appartiene oppure non appartiene ad \math{S_{i}}; l'unica
-		informazione nota è il peso complessivo degli insiemi \math{S_{j}}
-		con \math{j < i}. Dovendo però ricavare l'insieme avente valore
-		ottimale, è sufficiente scegliere di volta in volta l'insieme
-		\math{S} che permette di avere il valore massimo. Ovvero, se
-		il valore dell'insieme \math{S_{\mi{p}(i)}} a cui viene unito
-		\math{\{i\}} è maggiore del valore dell'insieme \math{S_{i - 1}},
-		allora \math{S_{\mi{p}(i)} \cup \{i\}} è la scelta migliore,
-		altrimenti è l'insieme \math{S_{i - 1}} ad esserlo.
+		Naturalmente non è possibile sapere a priori se \math{i} fa oppure
+		non fa parte di \math{S_{i}}, tuttavia è possibile scegliere se
+		includere oppure non includere \math{i} nella \math{i}-esima soluzione
+		ottimale in base a quale delle due scelte rende maggiore il valore di
+		\math{\mi{Opt}(i)}:
 
 		\begin[width = 50%fw]{parbox}
 			\begin[mode = display]{math}
@@ -326,7 +313,7 @@
 					S_{\mi{p}(i)} \cup \{i\} & 
 					\mi{se} \thickspace \mi{Opt}(\mi{p}(i)) + v_{i} \geq \mi{Opt}(i - 1) \\
 					S_{i - 1} & 
-					\mi{se} \thickspace \mi{altrimenti} \\
+					\mi{altrimenti} \\
 				}
 			\end{math}
 		\end{parbox}
@@ -339,107 +326,43 @@
 
 	\subsection{Programmazione dinamica: implementazione bottom-up}
 
-		L'algoritmo bottom-up viene costruito a partire dall'equazione
-		di ricorrenza sfruttando un vettore monodimensionale \math{c}.
-		In ciascuna cella \math{c[i]} viene riportato il valore della
-		soluzione ottimale per la \math{i}-esima istanza del problema,
-		che viene utilizzata per calcolare i valori ottimali per le
-		istanze successive. Tale procedura ha in input i valori associati
-		alle attività (ordinate per tempo di fine) e restituisce in output
-		il vettore \math{c}.
+        L'algoritmo bottom-up viene costruito a partire dall'equazione
+        di ricorrenza sfruttando due vettori, \math{c} e \math{d}. In
+        ciascuna cella \math{c[i]} viene riportato il valore della
+        soluzione ottimale per la \math{i}-esima istanza del problema,
+        mentre in ciascuna cella \math{d[i]} viene riportata la soluzione
+        stessa. I valori di \math{c[i]} vengono utilizzati per calcolare
+        i valori ottimali per le istanze successive. L'algoritmo riceve
+        in input l'istanza \math{X} e restituisce in output la coppia
+        \math{c[\abs{X}], d[\abs{X}]}, la soluzione del problema.
 
-		Si noti come la prima cella del vettore \math{c} possa venire riempito
-		immediatamente con 0, come da caso base dell'equazione di ricorrenza.
-
-		\begin{verbatim}
-			procedure WIS(X)
-			   c[0] \unichar{U+2190} 0
-
-			   \bigskip
-			   for i \unichar{U+2190} 1 to |X| do
-			       c[i] \unichar{U+2190} max(c[i - 1], c[p[i]] + X[i])
-
-			   \bigskip
-			   return c
-		\end{verbatim}
-
-		È facile notare come il tempo di esecuzione dell'algoritmo sia
-		\math{O(n)}, dove \math{n} è la lunghezza del vettore \math{X}.
-		Questo perché è presente un ciclo che esegue una istruzione 
-		in tempo immediato esattamente \math{\abs{X}} volte. Naturalmente,
-		questo è possibile solamente se il vettore \math{p} è noto,
-		altrimenti il tempo di esecuzione salirebbe a \math{O(n^{2})}.
-
-	\subsection{Programmazione dinamica: ricostruzione di una soluzione}
-
-		Un primo modo per ricavare una soluzione ottimale consiste nel
-		calcolarla direttamente durante il calcolo del valore ottimale,
-		modificando la procedura precedente introducendo l'insieme soluzione
-		\math{S}. Il tempo di esecuzione dell'algoritmo rimane invariato.
+        Si noti come la prima cella del vettore \math{c} possa venire
+        riempita immediatamente con 0, come da caso base dell'equazione
+        di ricorrenza. Per lo stesso motivo, la prima cella del vettore
+        \math{d} puó venire riempita immediatamente con l'insieme vuoto.
 
 		\begin{verbatim}
 			procedure WIS(X)
 			    c[0] \unichar{U+2190} 0
-			    S \unichar{U+2190} \unichar{U+2205}
+			    d[0] \unichar{U+2190} \unichar{U+2205}
 
 			    \bigskip
 			    for i \unichar{U+2190} 1 to |X| do
-			        if (c[i - 1] > c[p[i]] + X[i]) then
+			        if (c[i - 1] \unichar{U+2265} c[p[i]] + v\textsubscript{i} then
 			            c[i] \unichar{U+2190} c[i - 1]
-			            S[i] \unichar{U+2190} S[i - 1]
+			            d[i] \unichar{U+2190} d[i - 1]
 			        else
-			            c[i] \unichar{U+2190} c[p[i]] + X[i]
-			            S[i] \unichar{U+2190} S[p[i]] \unichar{U+222A} \{i\}
+			            c[i] \unichar{U+2190} c[p[i]] + v\textsubscript{i}
+			            d[i] \unichar{U+2190} d[p[i]] \unichar{U+222A} \{X[i]\}
 
-			    \bigskip
-			    return (c[|X|], S[|X|])
+			\bigskip
+			return c[|X|], d[|X|]
 		\end{verbatim}
 
-		%Una volta calcolato il valore dell'insieme ottimale di intervalli,
-		%è possibile individuarne uno ripercorrendo la tabella a ritroso. In
-		%particolare, questo viene fatto introducendo una nuova procedura,
-		%\tt{PRINT-WIS}, che ha in input la tabella \math{c}, il vettore
-		%\math{X} ed un indice \math{i}, mentre in output ha uno dei possibili
-		%insiemi di attività mutualmente compatibili aventi massimo valore
-		%totale. La prima chiamata alla procedura ha \math{\abs{X}} come
-		%valore per \math{i}, in modo da ottenere la soluzione per l'istanza
-		%\math{\abs{X}}.
-
-		%La procedura ripercorre il vettore \math{c} dalla cella \math{i}
-		%verso la cella 0; ogni volta che si ha \math{c[p[i]] + X[i] \geq
-		%c[i - 1]}, si ha che l'\math{i}-esima attività è un elemento della
-		%soluzione.
-
-		%\begin[width = 50%fw]{parbox}
-		%	\begin{verbatim}
-		%		procedure WIS(X)
-		%		   c[0] = 0
-
-		%		   \bigskip
-		%		   for i = 1 to |X| do
-		%		       c[i] = max(c[i - 1], c[p[i]] + X[i])
-
-		%		   \bigskip
-		%		   return c
-		%	\end{verbatim}
-		%\end{parbox}
-		%\begin[width = 50%fw]{parbox}
-		%	\begin{verbatim}
-		%		procedure PRINT-WIS(c, X, i)
-		%		   if i \unichar{U+2260} 0
-		%		       if c[p[i]] + X[i] \unichar{U+2265} c[i - 1]
-		%		           PRINT-WIS(c, X, p[i])
-		%		           print i
-		%		       else
-		%		           PRINT-WIS(c, X, i - 1)
-		%		   else
-		%		       return
-		%	\end{verbatim}
-		%\end{parbox}
-		%\par
-
-		%Sebbene la procedura sia ricorsiva, il suo tempo di esecuzione è 
-		%comunque proporzionale alla lunghezza del vettore \math{c}, perché
-		%la ricorsione è una tail-recursion.
+		È facile notare come il tempo di esecuzione dell'algoritmo sia
+		\math{O(n^{2})}, dove \math{n} è la lunghezza del vettore \math{X}.
+		Questo perché è presente un ciclo che per l'attività in esame deve
+		cercare a ritroso l'attivitá con questa compatibile di peso massimo,
+		e tale ricerca avviene esattamente \math{n} volte.
 
 \end{sile}

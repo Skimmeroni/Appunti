@@ -227,7 +227,7 @@
         non fa parte di \math{S_{i}}, tuttavia è possibile scegliere se
         includere oppure non includere \math{i} nella \math{i}-esima soluzione
         ottimale in base a quale delle due scelte rende maggiore il valore di
-        \math{S_{i}}:
+        \math{\mi{Opt}(i)}:
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
@@ -257,11 +257,11 @@
         \math{c[\abs{A}], d[\abs{A}]}, la soluzione del problema.
 
         Si noti come la prima cella del vettore \math{c} possa venire
-        riempito immediatamente con 0, mentre la seconda con il valore
+        riempita immediatamente con 0, mentre la seconda con il valore
         del primo elemento di \math{A}, come da caso base dell'equazione
         di ricorrenza. Per lo stesso motivo, la prima cella del vettore
-        \math{d} puó venire riempita con l'insieme vuoto, mentre la
-        seconda con il valore del solo primo elemento di \math{A}.
+        \math{d} puó venire riempita immediatamente con l'insieme vuoto,
+        mentre la seconda con il valore del solo primo elemento di \math{A}.
 
 		\begin{verbatim}
 			procedure HATEVILLE(A)
