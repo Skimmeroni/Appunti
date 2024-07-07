@@ -90,14 +90,14 @@
 		\include[src = Stringhe/LIS.sil]
 		\section{Longest Increasing Common Subsequence} % ricostruzione della soluzione
 		\include[src = Stringhe/LICS.sil]
-		\section{Sottovettore di peso massimo}
-		\include[src = Stringhe/Sottovettore.sil]
-		\section{Chiusura palindroma}
-		\include[src = Stringhe/Palindroma.sil]
-		\section{Distanza di modifica}
-		\include[src = Stringhe/Distanza.sil]
-		\section{Problema Interleaving} % mancano le soluzioni parziali
-		\include[src = Stringhe/Interleaving.sil]
+		%\section{Sottovettore di peso massimo}    É un approfondimento
+		%\include[src = Stringhe/Sottovettore.sil]
+		%\section{Chiusura palindroma}             É un approfondimento
+		%\include[src = Stringhe/Palindroma.sil]
+		%\section{Distanza di modifica}            É un approfondimento
+		%\include[src = Stringhe/Distanza.sil]
+		%\section{Problema Interleaving}           É un approfondimento
+		%\include[src = Stringhe/Interleaving.sil]
 	\chapter{Programmazione dinamica su insiemi}
 		\section{Weighted Interval Scheduling} % algoritmo bottom-up, ricostruzione della soluzione
 		\include[src = Insiemi/WIS.sil]
