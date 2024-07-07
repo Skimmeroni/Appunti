@@ -119,10 +119,8 @@
 	\chapter{Deep Learning}
 		\section{Percettrone}
 		\include[src = Deep/Perceptron.sil] % manca la parte su MIRA
-		%\section{Deep Learning}
-		%\include[src = Deep/Deep.sil]
-		%\section{Percettrone probabilistico}
-		%\include[src = Deep/Probabilistico.sil]
+		\section{Deep Learning}
+		\include[src = Deep/Deep.sil]
 		\section{Funzioni di attivazione}
 		\include[src = Deep/Attivazione.sil]
 		%\section{Batch normalization}
