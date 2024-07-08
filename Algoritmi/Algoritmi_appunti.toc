@@ -1,7 +1,8 @@
 return {
   {
     label = {
-      "Programmazione dinamica su stringhe"
+      "Programmazione dinamica su stringhe",
+      id = "stuff"
     },
     level = 1,
     link = "dest1",
@@ -10,7 +11,8 @@ return {
   },
   {
     label = {
-      "Longest Common Subsequence"
+      "Longest Common Subsequence",
+      id = "stuff"
     },
     level = 2,
     link = "dest2",
@@ -19,7 +21,8 @@ return {
   },
   {
     label = {
-      "Definizione del problema"
+      "Definizione del problema",
+      id = "stuff"
     },
     level = 3,
     link = "dest3",
@@ -28,7 +31,8 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima"
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
     },
     level = 3,
     link = "dest4",
@@ -37,7 +41,8 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza"
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
     },
     level = 3,
     link = "dest5",
@@ -46,7 +51,8 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up"
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
     },
     level = 3,
     link = "dest6",
@@ -55,7 +61,8 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: ricostruzione di una soluzione"
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
     },
     level = 3,
     link = "dest7",
@@ -64,7 +71,8 @@ return {
   },
   {
     label = {
-      "Longest Increasing Subsequence"
+      "Longest Increasing Subsequence",
+      id = "stuff"
     },
     level = 2,
     link = "dest8",
@@ -73,7 +81,8 @@ return {
   },
   {
     label = {
-      "Definizione del problema"
+      "Definizione del problema",
+      id = "stuff"
     },
     level = 3,
     link = "dest9",
@@ -82,7 +91,8 @@ return {
   },
   {
     label = {
-      "Definizione del problema ausiliario"
+      "Definizione del problema ausiliario",
+      id = "stuff"
     },
     level = 3,
     link = "dest10",
@@ -91,7 +101,8 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima"
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
     },
     level = 3,
     link = "dest11",
@@ -100,7 +111,8 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza"
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
     },
     level = 3,
     link = "dest12",
@@ -109,16 +121,18 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up"
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
     },
     level = 3,
     link = "dest13",
     number = "1.2.5",
-    pageno = "8"
+    pageno = "7"
   },
   {
     label = {
-      "Programmazione dinamica: ricostruzione della soluzione"
+      "Programmazione dinamica: ricostruzione della soluzione",
+      id = "stuff"
     },
     level = 3,
     link = "dest14",
@@ -127,7 +141,8 @@ return {
   },
   {
     label = {
-      "Longest Increasing Common Subsequence"
+      "Longest Increasing Common Subsequence",
+      id = "stuff"
     },
     level = 2,
     link = "dest15",
@@ -136,16 +151,18 @@ return {
   },
   {
     label = {
-      "Definizione del problema"
+      "Definizione del problema",
+      id = "stuff"
     },
     level = 3,
     link = "dest16",
     number = "1.3.1",
-    pageno = "10"
+    pageno = "9"
   },
   {
     label = {
-      "Definizione del problema ausiliario"
+      "Definizione del problema ausiliario",
+      id = "stuff"
     },
     level = 3,
     link = "dest17",
@@ -154,16 +171,18 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima"
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
     },
     level = 3,
     link = "dest18",
     number = "1.3.3",
-    pageno = "11"
+    pageno = "10"
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza"
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
     },
     level = 3,
     link = "dest19",
@@ -172,16 +191,18 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up"
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
     },
     level = 3,
     link = "dest20",
     number = "1.3.5",
-    pageno = "12"
+    pageno = "11"
   },
   {
     label = {
-      "Programmazione dinamica: ricostruzione di una soluzione"
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
     },
     level = 3,
     link = "dest21",
@@ -190,380 +211,422 @@ return {
   },
   {
     label = {
-      "Programmazione dinamica su insiemi"
+      "Programmazione dinamica su insiemi",
+      id = "stuff"
     },
     level = 1,
     link = "dest22",
     number = "2",
-    pageno = "15"
+    pageno = "13"
   },
   {
     label = {
-      "Weighted Interval Scheduling"
+      "Weighted Interval Scheduling",
+      id = "stuff"
     },
     level = 2,
     link = "dest23",
     number = "2.1",
-    pageno = "15"
+    pageno = "13"
   },
   {
     label = {
-      "Definizione del problema"
+      "Definizione del problema",
+      id = "stuff"
     },
     level = 3,
     link = "dest24",
     number = "2.1.1",
-    pageno = "15"
+    pageno = "13"
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima"
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
     },
     level = 3,
     link = "dest25",
     number = "2.1.2",
-    pageno = "16"
+    pageno = "14"
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza"
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
     },
     level = 3,
     link = "dest26",
     number = "2.1.3",
-    pageno = "16"
+    pageno = "14"
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up"
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
     },
     level = 3,
     link = "dest27",
     number = "2.1.4",
-    pageno = "17"
+    pageno = "15"
   },
   {
     label = {
-      "Hateville"
+      "Hateville",
+      id = "stuff"
     },
     level = 2,
     link = "dest28",
     number = "2.2",
-    pageno = "17"
+    pageno = "15"
   },
   {
     label = {
-      "Definizione del problema"
+      "Definizione del problema",
+      id = "stuff"
     },
     level = 3,
     link = "dest29",
     number = "2.2.1",
-    pageno = "17"
+    pageno = "15"
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima"
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
     },
     level = 3,
     link = "dest30",
     number = "2.2.2",
-    pageno = "18"
+    pageno = "16"
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza"
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
     },
     level = 3,
     link = "dest31",
     number = "2.2.3",
-    pageno = "18"
+    pageno = "16"
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up"
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
     },
     level = 3,
     link = "dest32",
     number = "2.2.4",
-    pageno = "19"
+    pageno = "17"
   },
   {
     label = {
-      "Knapsack 0/1"
+      "Knapsack 0/1",
+      id = "stuff"
     },
     level = 2,
     link = "dest33",
     number = "2.3",
-    pageno = "19"
+    pageno = "17"
   },
   {
     label = {
-      "Definizione del problema"
+      "Definizione del problema",
+      id = "stuff"
     },
     level = 3,
     link = "dest34",
     number = "2.3.1",
-    pageno = "19"
+    pageno = "17"
   },
   {
     label = {
-      "Programmazione dinamica: sottostruttura ottima"
+      "Programmazione dinamica: sottostruttura ottima",
+      id = "stuff"
     },
     level = 3,
     link = "dest35",
     number = "2.3.2",
-    pageno = "20"
+    pageno = "18"
   },
   {
     label = {
-      "Programmazione dinamica: equazione di ricorrenza"
+      "Programmazione dinamica: equazione di ricorrenza",
+      id = "stuff"
     },
     level = 3,
     link = "dest36",
     number = "2.3.3",
-    pageno = "21"
+    pageno = "18"
   },
   {
     label = {
-      "Programmazione dinamica: implementazione bottom-up"
+      "Programmazione dinamica: implementazione bottom-up",
+      id = "stuff"
     },
     level = 3,
     link = "dest37",
     number = "2.3.4",
-    pageno = "21"
+    pageno = "19"
   },
   {
     label = {
-      "Programmazione dinamica: ricostruzione di una soluzione"
+      "Programmazione dinamica: ricostruzione di una soluzione",
+      id = "stuff"
     },
     level = 3,
     link = "dest38",
     number = "2.3.5",
-    pageno = "22"
+    pageno = "19"
   },
   {
     label = {
-      "Tecnica di programmazione greedy"
+      "Tecnica di programmazione greedy",
+      id = "stuff"
     },
     level = 1,
     link = "dest39",
     number = "3",
-    pageno = "23"
+    pageno = "21"
   },
   {
     label = {
-      "Introduzione alla tecnica greedy"
+      "Introduzione alla tecnica greedy",
+      id = "stuff"
     },
     level = 2,
     link = "dest40",
     number = "3.1",
-    pageno = "23"
+    pageno = "21"
   },
   {
     label = {
-      "Problema interval scheduling"
+      "Problema interval scheduling",
+      id = "stuff"
     },
     level = 2,
     link = "dest41",
     number = "3.2",
-    pageno = "23"
+    pageno = "21"
   },
   {
     label = {
-      "Problema dello zaino frazionario"
+      "Problema dello zaino frazionario",
+      id = "stuff"
     },
     level = 2,
     link = "dest42",
     number = "3.3",
-    pageno = "25"
+    pageno = "23"
   },
   {
     label = {
-      "Matroidi e sistemi di indipendenza"
+      "Matroidi e sistemi di indipendenza",
+      id = "stuff"
     },
     level = 2,
     link = "dest43",
     number = "3.4",
-    pageno = "26"
+    pageno = "24"
   },
   {
     label = {
-      "Algoritmo Greedy Standard"
+      "Algoritmo Greedy Standard",
+      id = "stuff"
     },
     level = 2,
     link = "dest44",
     number = "3.5",
-    pageno = "27"
+    pageno = "25"
   },
   {
     label = {
-      "Strutture dati"
+      "Strutture dati",
+      id = "stuff"
     },
     level = 1,
     link = "dest45",
     number = "4",
-    pageno = "31"
+    pageno = "29"
   },
   {
     label = {
-      "Strutture dati per grafi"
+      "Strutture dati per grafi",
+      id = "stuff"
     },
     level = 2,
     link = "dest46",
     number = "4.1",
-    pageno = "31"
+    pageno = "29"
   },
   {
     label = {
-      "Strutture dati per insiemi disgiunti"
+      "Strutture dati per insiemi disgiunti",
+      id = "stuff"
     },
     level = 2,
     link = "dest47",
     number = "4.2",
-    pageno = "33"
+    pageno = "31"
   },
   {
     label = {
-      "Implementazione mediante liste concatenate"
+      "Implementazione mediante liste concatenate",
+      id = "stuff"
     },
     level = 3,
     link = "dest48",
     number = "4.2.1",
-    pageno = "33"
+    pageno = "31"
   },
   {
     label = {
-      "Implementazione mediante foreste"
+      "Implementazione mediante foreste",
+      id = "stuff"
     },
     level = 3,
     link = "dest49",
     number = "4.2.2",
-    pageno = "34"
+    pageno = "32"
   },
   {
     label = {
-      "Cammini minimi su grafi"
+      "Cammini minimi su grafi",
+      id = "stuff"
     },
     level = 1,
     link = "dest50",
     number = "5",
-    pageno = "37"
+    pageno = "35"
   },
   {
     label = {
-      "Cammini minimi da sorgente unica: algoritmo di Dijkstra"
+      "Cammini minimi da sorgente unica: algoritmo di Dijkstra",
+      id = "stuff"
     },
     level = 2,
     link = "dest51",
     number = "5.1",
-    pageno = "37"
+    pageno = "35"
   },
   {
     label = {
-      "Cammini minimi da ogni sorgente: algoritmo di Floyd-Warshall"
+      "Cammini minimi da ogni sorgente: algoritmo di Floyd-Warshall",
+      id = "stuff"
     },
     level = 2,
     link = "dest52",
     number = "5.2",
-    pageno = "40"
+    pageno = "38"
   },
   {
     label = {
-      "Minimum Spanning Tree"
+      "Minimum Spanning Tree",
+      id = "stuff"
     },
     level = 1,
     link = "dest53",
     number = "6",
-    pageno = "45"
+    pageno = "43"
   },
   {
     label = {
-      "Problema del Minimum Spanning Tree"
+      "Problema del Minimum Spanning Tree",
+      id = "stuff"
     },
     level = 2,
     link = "dest54",
     number = "6.1",
-    pageno = "45"
+    pageno = "43"
   },
   {
     label = {
-      "Ricavare il Minimum Spanning Tree: algoritmo di Kruskal"
+      "Ricavare il Minimum Spanning Tree: algoritmo di Kruskal",
+      id = "stuff"
     },
     level = 2,
     link = "dest55",
     number = "6.2",
-    pageno = "49"
+    pageno = "47"
   },
   {
     label = {
-      "Ricavare il Minimum Spanning Tree: algoritmo di Prim"
+      "Ricavare il Minimum Spanning Tree: algoritmo di Prim",
+      id = "stuff"
     },
     level = 2,
     link = "dest56",
     number = "6.3",
-    pageno = "50"
+    pageno = "48"
   },
   {
     label = {
-      "Visite di grafi"
+      "Visite di grafi",
+      id = "stuff"
     },
     level = 1,
     link = "dest57",
     number = "7",
-    pageno = "53"
+    pageno = "51"
   },
   {
     label = {
-      "Visita in ampiezza"
+      "Visita in ampiezza",
+      id = "stuff"
     },
     level = 2,
     link = "dest58",
     number = "7.1",
-    pageno = "53"
+    pageno = "51"
   },
   {
     label = {
-      "Visita in profonditá"
+      "Visita in profonditá",
+      id = "stuff"
     },
     level = 2,
     link = "dest59",
     number = "7.2",
-    pageno = "54"
+    pageno = "52"
   },
   {
     label = {
-      "Applicazioni della visita in profonditá"
+      "Applicazioni della visita in profonditá",
+      id = "stuff"
     },
     level = 2,
     link = "dest60",
     number = "7.3",
-    pageno = "56"
+    pageno = "53"
   },
   {
     label = {
-      "Struttura di parentesi"
+      "Struttura di parentesi",
+      id = "stuff"
     },
     level = 3,
     link = "dest61",
     number = "7.3.1",
-    pageno = "56"
+    pageno = "54"
   },
   {
     label = {
-      "Classificazione degli archi"
+      "Classificazione degli archi",
+      id = "stuff"
     },
     level = 3,
     link = "dest62",
     number = "7.3.2",
-    pageno = "56"
+    pageno = "54"
   },
   {
     label = {
-      "Ordinamento topologico"
+      "Ordinamento topologico",
+      id = "stuff"
     },
     level = 3,
     link = "dest63",
     number = "7.3.3",
-    pageno = "57"
+    pageno = "55"
   }
 }

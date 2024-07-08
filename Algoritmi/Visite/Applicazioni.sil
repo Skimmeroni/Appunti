@@ -2,7 +2,7 @@
 
 	\subsection{Struttura di parentesi}
 
-        	I tempi di scoperta e di completamento dei vertici di una visita in
+		I tempi di scoperta e di completamento dei vertici di una visita in
 		profondità hanno una \strong{struttura di parentesi}. Ovvero, se per
 		ciascun vertice \math{v} si rappresenta il suo tempo di scoperta come
 		una parentesi aperta ed il suo tempo di completamento come una parentesi
@@ -78,10 +78,8 @@
 
 	\subsection{Classificazione degli archi}
 
-        Un'altra proprietà della visita in profondità è che questa può
-        essere utilizzata per classificare gli archi del grafo in input.
-        È possibile definire quattro tipi di archi in base alla foresta
-        DF prodotta da una visita in profondità di un grafo:
+        A partire dalla foresta DF indotta dalla visita in profonditá di
+        un grafo, é possibile classificarne gli archi in quattro categorie:
 
         \begin{itemize}
             \begin{item}
@@ -110,11 +108,10 @@
 
         \bigskip
 
-        L'algoritmo per la visita in profondità contiene abbastanza
-        informazioni per classificare gli archi che incontra. Infatti,
-        ogni arco \math{(u, v)} può essere classificato in base al
-        colore del vertice \math{v} che viene raggiunto quando l'arco
-        viene ispezionato per la prima volta:
+        Ogni arco \math{(u, v)} può essere classificato in una delle quattro
+        categorie in base al colore del vertice \math{v} che viene raggiunto
+        quando l'arco viene ispezionato per la prima volta durante la visita
+        in profonditá:
 
         \begin{enumerate}
                 \begin{item}
@@ -155,7 +152,7 @@
 
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			procedure DFS(G)
+			procedure DFS-AND-MARK(G)
 			 1    foreach v ∈ V do
 			 2        v.color \unichar{U+2190} W
 			 3        v.π \unichar{U+2190} NULL
@@ -163,29 +160,29 @@
 			 5        v.f \unichar{U+2190} 0
 			 6    time \unichar{U+2190} 0
 			 7    foreach v ∈ V do
-			 8        if v.color = W then
-			 9            DFS-VISIT(G, v)
+			 8        if (v.color = W) then
+			 9            DFS-VISIT-AND-MARK(G, v)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			procedure DFS-VISIT(G, u)
+			procedure DFS-VISIT-AND-MARK(G, u)
 			10    time \unichar{U+2190} time + 1
 			11    u.d \unichar{U+2190} time
 			12    u.color \unichar{U+2190} G
-			13    foreach v ∈ adj(u) do
-			14        if v.color = W then
-			15            (u, v) \unichar{U+2190} "T"
-			16            v.π \unichar{U+2190} u
-			17            DFS-VISIT(G, v)
+			13    foreach w ∈ ADJACENT(u) do
+			14        if (w.color) = W then
+			15            (u, w) \unichar{U+2190} "T"
+			16            w.π \unichar{U+2190} u
+			17            DFS-VISIT-AND-MARK(G, w)
 			18        else
-			19            if v.color = G then
-			20                (u, v) \unichar{U+2190} "B"
+			19            if (w.color = G) then
+			20                (u, w) \unichar{U+2190} "B"
 			21            else
-			22                if u.d < v.d then
-			23                    (u, v) \unichar{U+2190} "F"
+			22                if (u.d < w.d) then
+			23                    (u, w) \unichar{U+2190} "F"
 			24                else
-			25                    (u, v) \unichar{U+2190} "C"
+			25                    (u, w) \unichar{U+2190} "C"
 			26    time \unichar{U+2190} time + 1
 			27    u.f \unichar{U+2190} time
 			28    u.color \unichar{U+2190} B
@@ -197,11 +194,18 @@
         classificazione degli archi, perché \math{(u, v)} e \math{(v, u)}
         sono di fatto lo stesso arco. In tal caso, l'arco viene classificato
         come il primo tipo della lista di classificazione che può essere
-        applicato.
+        applicato. Inoltre, non é necessario considerare tutte e quattro
+        le categorie, perché gli archi di un grafo non orientato non
+        possono ricadere in alcune di queste.
+
+        \begin{theorem}
+                Un grafo non orientato, dopo una visita in profondità, ha
+                solo archi d'albero e archi all'indietro.
+        \end{theorem}
 
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			procedure DFS(G)
+			procedure DFS-AND-MARK-U(G)
 			 1    foreach v ∈ V do
 			 2        v.color \unichar{U+2190} W
 			 3        v.π \unichar{U+2190} NULL
@@ -209,37 +213,29 @@
 			 5        v.f \unichar{U+2190} 0
 			 6    time \unichar{U+2190} 0
 			 7    foreach v ∈ V do
-			 8        if v.color = W then
-			 9            DFS-VISIT(G, v)
+			 8        if (v.color = W) then
+			 9            DFS-VISIT-AND-MARK-U(G, v)
 		\end{verbatim}
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
-			procedure DFS-VISIT(G, u)
+			procedure DFS-VISIT-AND-MARK-U(G, u)
 			10    time \unichar{U+2190} time + 1
 			11    u.d \unichar{U+2190} time
 			12    u.color \unichar{U+2190} G
-			13    foreach v ∈ adj(u) - \{u.π\} do
-			14        if v.color = W then
-			15            (u, v) \unichar{U+2190} "T"
-			16            v.π \unichar{U+2190} u
-			17            DFS-VISIT(G, v)
+			13    foreach w ∈ (ADJACENT(u) - \{u.π\}) do
+			14        if (w.color) = W then
+			15            (u, w) \unichar{U+2190} "T"
+			16            w.π \unichar{U+2190} u
+			17            DFS-VISIT-AND-MARK-U(G, w)
 			18        else
-			19            (u, v) \unichar{U+2190} "B"
+			19            (u, w) \unichar{U+2190} "B"
 			20    time \unichar{U+2190} time + 1
 			21    u.f \unichar{U+2190} time
 			22    u.color \unichar{U+2190} B
 		\end{verbatim}
 	\end{parbox}
 	\par
-
-        Il motivo per cui in un grafo non orientato non si presentano tutte e
-        quattro le casistiche è spiegato nel seguente teorema.
-
-        \begin{theorem}
-                Un grafo non orientato, dopo una visita in profondità, ha
-                solo archi d'albero e archi all'indietro. 
-        \end{theorem}
 
 	\subsection{Ordinamento topologico}
 
