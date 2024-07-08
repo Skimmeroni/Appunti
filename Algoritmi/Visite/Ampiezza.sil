@@ -76,13 +76,16 @@
 
         L'algoritmo per la visita in ampiezza di un grafo è presentato di 
         seguito. Questo, dopo aver inizializzato gli attributi di ciascun 
-        vertice (righe 1-6) fa uso di una coda di priorità, nella quale
-        vengono messi i vertici non appena vengono visitati e nella quale
-        rimangono fino a quando estratti per esplorarne gli adiacenti.
+        vertice (righe 1-6) fa uso di una coda di priorità (FIFO queue),
+	nella quale vengono messi i vertici non appena vengono visitati e
+	nella quale rimangono fino a quando estratti per esplorarne gli
+	adiacenti. Si supponga di avere a disposizione una procedura
+	denominata \tt{ADJACENT} che restituisce una lista contenente
+	tutti i vertici adiacenti al vertice passato come argomento.
 
 	\begin{verbatim}
 		procedure BFS(V, E, s)
-		 1    foreach v \unichar{U+2208} (V - \{s\}) do
+		 1    foreach v \unichar{U+2208} V do
 		 2       v.color \unichar{U+2190} W
 		 3       v.d \unichar{U+2190} \unichar{U+221E}
 		 4       v.\unichar{U+03C0} \unichar{U+2190} NULL
@@ -92,14 +95,14 @@
 		 6   s.d \unichar{U+2190} 0
 
 		     \bigskip
-		 7   Q \unichar{U+2190} \unichar{U+2205}
+		 7   Q \unichar{U+2190} coda FIFO (inizialmente vuota)
 		 8   ENQUEUE(Q, s)
 
 		     \bigskip
 		 9   while Q \unichar{U+2260} \unichar{U+2205} do
 		10        v \unichar{U+2190} HEAD(Q)
-		11        foreach v \unichar{U+2208} adj(v) do
-		12            if u.color = W then
+		11        foreach u \unichar{U+2208} ADJACENT(v) do
+		12            if (u.color = W) then
 		13                u.color \unichar{U+2190} G
 		14                ENQUEUE(Q, u)
 		15                u.d \unichar{U+2190} v.d + 1
@@ -127,13 +130,14 @@
         Il costo di inizializzazione dell'algoritmo in termini di tempo di
         esecuzione è \math{O(\abs{V})}, perché viene compiuto un numero
         costante di operazioni per ciascun vertice. Una singola operazione
-        sulla coda può considerarsi eseguita in un tempo costante. Ciascun
-        vertice viene inserito e/o estratto dalla coda non più di una sola
-        volta. Questo significa che il numero massimo di volte che l'algoritmo
-        ispeziona un vertice è \math{2E}, e che quindi il costo del loop
-        principale dell'algoritmo in termini di tempo di esecuzione è
-        \math{O(\abs{E})}. Il tempo di esecuzione complessivo dell'algoritmo
-        viene allora ad essere \math{O(\abs{V} + \abs{E})}.
+        sulla coda può considerarsi eseguita in un tempo costante, perchè
+	questa non necessita di essere riordinata quando un elemento viene
+	aggiunto o rimosso. Ciascun vertice viene inserito e/o estratto dalla
+	coda non più di una sola volta. Questo significa che il numero massimo
+	di volte che l'algoritmo ispeziona un vertice è \math{2E}, e che quindi
+	il costo del loop principale dell'algoritmo in termini di tempo di
+	esecuzione è \math{O(\abs{E})}. Il tempo di esecuzione complessivo
+	dell'algoritmo viene allora ad essere \math{O(\abs{V} + \abs{E})}.
 
         Per un grafo \math{G = (V, E)} con sorgente \math{s \in V}, è
         detto \strong{sottografo dei predecessori} di \math{G} il grafo
@@ -172,25 +176,25 @@
         \math{V} dove ciascuno di questi è stato arricchito con i valori dei
         tre attributi.
 
-        I vertici raggiunti dalla visita in ampiezza sono tutti ed i
-        soli vertici di colore nero, pertanto è sufficiente aggiungere
-        a \math{V_{\pi}} tutti i vertici neri. Per quanto riguarda
-        \math{E_{\pi}}, questo sarà costituito da tutti gli archi che
-        connettono un vertice ad un suo predecessore, perché ripercorrendo
-        a ritroso tutti i predecessori da ciascun vertice alla sorgente
-        si ottengono tutti i cammini che vanno dalla sorgente a tale
-        vertice.
+        I vertici raggiunti dalla visita in ampiezza sono la sorgente e tutti
+	i vertici che hanno un valore diverso da NULL come campo predecessore,
+	pertanto è sufficiente aggiungere a \math{V_{\pi}} tutti i vertici
+	aventi queste caratteristiche. Per quanto riguarda \math{E_{\pi}},
+	questo sarà costituito da tutti gli archi che connettono un vertice
+	ad un suo predecessore, perché ripercorrendo a ritroso tutti i
+	predecessori da ciascun vertice alla sorgente si ottengono tutti
+	i cammini che vanno dalla sorgente a tale vertice.
 
 	\begin{verbatim}
 		procedure BUILD-BF-TREE(V', s)
 		1    E\unichar{U+03C0} \unichar{U+2190} \unichar{U+2205}
-		2    V\unichar{U+03C0} \unichar{U+2190} \unichar{U+2205}
+		2    V\unichar{U+03C0} \unichar{U+2190} \{s\}
 
                      \bigskip
 		3    foreach v \unichar{U+2208} (V' - \{s\}) do
-		4        if v.\unichar{U+03C0} \unichar{U+2260} NULL and v.color = B then
+		4        if (v.\unichar{U+03C0} \unichar{U+2260} NULL) then
 		5            V\unichar{U+03C0} \unichar{U+2190} V\unichar{U+03C0} \unichar{U+222A} \{v\}
-		6            E\unichar{U+03C0} \unichar{U+2190} E\unichar{U+03C0} \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
+		6            E\unichar{U+03C0} \unichar{U+2190} E\unichar{U+03C0} \unichar{U+222A} \{(v.\unichar{U+03C0}, v)\}
 
                      \bigskip
 		7    return E\unichar{U+03C0}, V\unichar{U+03C0}
