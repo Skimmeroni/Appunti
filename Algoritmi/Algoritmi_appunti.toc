@@ -529,5 +529,41 @@ return {
     link = "dest59",
     number = "7.2",
     pageno = "54"
+  },
+  {
+    label = {
+      "Applicazioni della visita in profonditá"
+    },
+    level = 2,
+    link = "dest60",
+    number = "7.3",
+    pageno = "56"
+  },
+  {
+    label = {
+      "Struttura di parentesi"
+    },
+    level = 3,
+    link = "dest61",
+    number = "7.3.1",
+    pageno = "56"
+  },
+  {
+    label = {
+      "Classificazione degli archi"
+    },
+    level = 3,
+    link = "dest62",
+    number = "7.3.2",
+    pageno = "56"
+  },
+  {
+    label = {
+      "Ordinamento topologico"
+    },
+    level = 3,
+    link = "dest63",
+    number = "7.3.3",
+    pageno = "57"
   }
 }

@@ -138,5 +138,7 @@
 		\include[src = Visite/Ampiezza.sil]
 		\section{Visita in profonditá}
 		\include[src = Visite/Profondita.sil]
+		\section{Applicazioni della visita in profonditá}
+		\include[src = Visite/Applicazioni.sil]
 
 \end{document}

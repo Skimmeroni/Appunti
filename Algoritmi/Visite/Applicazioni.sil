@@ -1,0 +1,318 @@
+\begin{sile}
+
+	\subsection{Struttura di parentesi}
+
+        	I tempi di scoperta e di completamento dei vertici di una visita in
+		profondità hanno una \strong{struttura di parentesi}. Ovvero, se per
+		ciascun vertice \math{v} si rappresenta il suo tempo di scoperta come
+		una parentesi aperta ed il suo tempo di completamento come una parentesi
+		chiusa, allora l'insieme di tutti i tempi di tutti i vertici produce
+		una formula ben formata per la grammatica delle parentesi.
+
+        \begin{theorem}
+            \strong{Teorema delle parentesi}. Dato un grafo \math{G = (V, E)}
+            orientato e non pesato, si operi una visita in profondità su tale
+            grafo. Si consideri una coppia di vertici \math{u} e \math{v}
+            ed i relativi intervalli \math{(u.d, u.f)} e \math{(v.d, v.f)}:
+
+            \begin{itemize}
+                \begin{item}
+                    \math{(u.d, u.f)} contiene \math{(v.d, v.f)}. Allora
+                    \math{u} e \math{v} si trovano in uno stesso albero della
+                    foresta DF, ed in particolare \math{u} è un predecessore
+                    di \math{v};
+                \end{item}
+                \begin{item}
+                    \math{(v.d, v.f)} contiene \math{(u.d, u.f)}. Allora
+                    \math{u} e \math{v} si trovano in uno stesso albero della
+                    foresta DF, ed in particolare \math{v} è un predecessore
+                    di \math{u};
+                \end{item}
+                \begin{item}
+                    \math{(v.d, v.f)} e \math{(u.d, u.f)} sono intervalli
+                    disgiunti. Allora \math{u} e \math{v} si trovano in due
+                    alberi distinti della foresta DF.
+                \end{item}
+            \end{itemize}
+
+            \bigskip
+
+            \strong{Dimostrazione}. Si consideri la situazione \math{u.d <
+            v.d} (la situazione opposta è del tutto analoga, basta invertire
+            i vertici). Possono presentarsi due casi:
+
+            \begin{itemize}
+                \begin{item}
+                    \math{v.d < u.f}. Questo significa che \math{v} è
+                    stato scoperto dopo il tempo di scoperta di \math{u}
+                    ma prima del tempo di fine esplorazione di \math{u},
+                    il che significa che \math{v} è un discendente di 
+                    \math{u}. Inoltre, poiché \math{v} è stato scoperto
+                    prima di \math{u}, verrà completamente esplorato prima
+                    della completa esplorazione di \math{u}. Ne segue che i
+                    vari tempi coinvolti sono disposti nell'ordine:
+
+                    \begin[mode = display]{math}
+                        u.d < v.d < v.f < u.f
+                    \end{math}
+
+                    Che equivale a dire che l'intervallo \math{(v.d, v.f)} è 
+                    interamente contenuto nell'intervallo \math{(u.d, u.f)}
+                \end{item}
+                \begin{item}
+                    \math{u.f < v.d}. In questo caso, i due intervalli sono 
+                    completamente disgiunti, in quanto l'ordine ottenuto è il
+                    seguente:
+
+                    \begin[mode = display]{math}
+                        u.d < u.f < v.d < v.f
+                    \end{math}
+
+                    Infatti, questo equivale a dire che nessuno dei due
+                    vertici è stato scoperto mentre l'altro era grigio.
+                    Ne segue che anche \math{u} e \math{v} non sono
+                    discendenti l'uno dell'altro.
+                \end{item}
+            \end{itemize}
+        \end{theorem}
+
+	\subsection{Classificazione degli archi}
+
+        Un'altra proprietà della visita in profondità è che questa può
+        essere utilizzata per classificare gli archi del grafo in input.
+        È possibile definire quattro tipi di archi in base alla foresta
+        DF prodotta da una visita in profondità di un grafo:
+
+        \begin{itemize}
+            \begin{item}
+                \strong{Arco d'albero}, indicato con la lettera \strong{T}.
+                Sono gli archi nella foresta DF. Un arco \math{(u, v)} è un
+                arco d'albero se \math{v} viene scoperto la prima volta
+                durante l'esplorazione di \math{(u, v)}; 
+            \end{item}
+            \begin{item}
+                \strong{Arco all'indietro}, indicato con la lettera \strong{B}.
+                Sono quegli archi \math{(u, v)} che collegano un vertice
+                \math{u} ad un antenato \math{v} in un albero DF;
+            \end{item}
+            \begin{item}
+                \strong{Arco in avanti}, indicato con la lettera \strong{F}.
+                Sono quegli archi \math{(u, v)} che collegano un vertice
+                \math{u} ad un vertice \math{v} in un albero DF;
+            \end{item}
+            \begin{item}
+                \strong{Arco trasversale}, indicato con la lettera \strong{C}.
+                Possono connettere i vertici nello stesso albero DF, purché
+                un vertice non sia antenato dell'altro, oppure possono
+                connettere vertici di alberi DF differenti.
+            \end{item}
+        \end{itemize}
+
+        \bigskip
+
+        L'algoritmo per la visita in profondità contiene abbastanza
+        informazioni per classificare gli archi che incontra. Infatti,
+        ogni arco \math{(u, v)} può essere classificato in base al
+        colore del vertice \math{v} che viene raggiunto quando l'arco
+        viene ispezionato per la prima volta:
+
+        \begin{enumerate}
+                \begin{item}
+                        Se \math{v} è bianco, allora \math{(u, v)} è un
+                        arco d'albero. Questo è vero per definizione: se
+                        gli archi d'albero sono gli archi dove il vertice
+                        di arrivo non è stato ancora scoperto, allora tale
+                        vertice è un vertice bianco;
+                \end{item}
+                \begin{item}
+                        Se \math{v} è grigio, allora \math{(u, v)} è un arco
+                        all'indietro. Si noti infatti come i vertici grigi
+                        formino sempre una catena lineare di discendenti che
+                        corrisponde allo stack delle chiamate attive di
+                        \tt{DFS-VISIT}; il numero di vertici grigi è uno in
+                        più della profondità dell'ultimo vertice scoperto.
+                        L'ispezione procede sempre a partire dal vertice
+                        grigio più profondo, quindi un arco che raggiunge
+                        un altro vertice grigio raggiunge un antenato;
+                \end{item}
+                \begin{item}
+                        Se \math{v} è nero e \math{(u.d < v.d)}, allora
+                        \math{(u, v)} è un arco in avanti. Questo perché
+                        \math{v} è stato completamente esplorato ma \math{u}
+                        è stato scoperto prima di \math{v}, quindi \math{v}
+                        è un discendente di \math{u} in uno stesso albero;
+                \end{item}
+                \begin{item}
+                        Se \math{v} è nero e \math{(u.d > v.d)}, allora
+                        \math{(u, v)} è un arco trasversale. Questo perché
+                        \math{v} è stato completamente esplorato ma \math{u}
+                        è stato scoperto dopo \math{v}, quindi \math{v} e
+                        \math{u} non possono fare parte dello stesso albero.
+                \end{item}
+        \end{enumerate}
+
+        \bigskip
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure DFS(G)
+			 1    foreach v ∈ V do
+			 2        v.color \unichar{U+2190} W
+			 3        v.π \unichar{U+2190} NULL
+			 4        v.d \unichar{U+2190} 0
+			 5        v.f \unichar{U+2190} 0
+			 6    time \unichar{U+2190} 0
+			 7    foreach v ∈ V do
+			 8        if v.color = W then
+			 9            DFS-VISIT(G, v)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure DFS-VISIT(G, u)
+			10    time \unichar{U+2190} time + 1
+			11    u.d \unichar{U+2190} time
+			12    u.color \unichar{U+2190} G
+			13    foreach v ∈ adj(u) do
+			14        if v.color = W then
+			15            (u, v) \unichar{U+2190} "T"
+			16            v.π \unichar{U+2190} u
+			17            DFS-VISIT(G, v)
+			18        else
+			19            if v.color = G then
+			20                (u, v) \unichar{U+2190} "B"
+			21            else
+			22                if u.d < v.d then
+			23                    (u, v) \unichar{U+2190} "F"
+			24                else
+			25                    (u, v) \unichar{U+2190} "C"
+			26    time \unichar{U+2190} time + 1
+			27    u.f \unichar{U+2190} time
+			28    u.color \unichar{U+2190} B
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+        In un grafo non orientato potrebbe presentarsi una ambiguità nella
+        classificazione degli archi, perché \math{(u, v)} e \math{(v, u)}
+        sono di fatto lo stesso arco. In tal caso, l'arco viene classificato
+        come il primo tipo della lista di classificazione che può essere
+        applicato.
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure DFS(G)
+			 1    foreach v ∈ V do
+			 2        v.color \unichar{U+2190} W
+			 3        v.π \unichar{U+2190} NULL
+			 4        v.d \unichar{U+2190} 0
+			 5        v.f \unichar{U+2190} 0
+			 6    time \unichar{U+2190} 0
+			 7    foreach v ∈ V do
+			 8        if v.color = W then
+			 9            DFS-VISIT(G, v)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure DFS-VISIT(G, u)
+			10    time \unichar{U+2190} time + 1
+			11    u.d \unichar{U+2190} time
+			12    u.color \unichar{U+2190} G
+			13    foreach v ∈ adj(u) - \{u.π\} do
+			14        if v.color = W then
+			15            (u, v) \unichar{U+2190} "T"
+			16            v.π \unichar{U+2190} u
+			17            DFS-VISIT(G, v)
+			18        else
+			19            (u, v) \unichar{U+2190} "B"
+			20    time \unichar{U+2190} time + 1
+			21    u.f \unichar{U+2190} time
+			22    u.color \unichar{U+2190} B
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+        Il motivo per cui in un grafo non orientato non si presentano tutte e
+        quattro le casistiche è spiegato nel seguente teorema.
+
+        \begin{theorem}
+                Un grafo non orientato, dopo una visita in profondità, ha
+                solo archi d'albero e archi all'indietro. 
+        \end{theorem}
+
+	\subsection{Ordinamento topologico}
+
+	Dato un grafo orientato, diretto e aciclico (\em{Directed
+	Acyclic Graph}, \em{DAG}), un \strong{ordinamento topologico}
+	del DAG \math{G = (V, E)} è un ordinamento lineare di tutti i
+	suoi vertici tale che, se \math{G} contiene un arco \math{(u,
+	v)}, allora \math{u} compare prima di \math{v}. L'algoritmo
+	per l'ordinamento topologico viene costruito a partire da
+	quello per la visita in profondità, a grandi linee come segue:
+
+    \begin{enumerate}
+        \begin{item}
+            Per ogni vertice viene effettuata una normale ricerca in
+            profondità, in modo da calcolare il tempo di completamento
+            \math{v.f} per ciascun vertice \math{v};
+        \end{item}
+        \begin{item}
+            Una volta completata l'ispezione di un vertice, tale vertice
+            viene inserito in uno stack;
+        \end{item}
+        \begin{item}
+            Vengono stampati i vertici contenuti nello stack, nell'ordine in
+            cui sono stati inseriti.
+        \end{item}
+    \end{enumerate}
+
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure TOPOLOGICAL-ORDERING(G)
+			 1    foreach v ∈ V do
+			 2        v.color \unichar{U+2190} W
+			 3        v.π \unichar{U+2190} NULL
+			 4        v.d \unichar{U+2190} 0
+			 5        v.f \unichar{U+2190} 0
+			 6    time \unichar{U+2190} 0
+			 7    S \unichar{U+2190} []
+			 8    foreach v ∈ V do
+			 9        if (v.color = W) then
+			10            DFS-VISIT(G, v)
+			11    while not IS-EMPTY(S) do
+			12        POP(S)
+		\end{verbatim}
+	\end{parbox}
+	\begin[width = 50%fw]{parbox}
+		\begin{verbatim}
+			procedure DFS-VISIT(G, u)
+			13    time \unichar{U+2190} time + 1
+			14    u.d \unichar{U+2190} time
+			15    u.color \unichar{U+2190} G
+			16    foreach w ∈ ADJACENT(u) do
+			17        if (w.color = W) then
+			18            w.π \unichar{U+2190} u
+			19            DFS-VISIT(G, w)
+			20    time \unichar{U+2190} time + 1
+			21    u.f \unichar{U+2190} time
+			22    u.color \unichar{U+2190} B
+			23    PUSH(S, u)
+		\end{verbatim}
+	\end{parbox}
+	\par
+
+	L'ordinamento topologico e la visita in profondità condividono
+	il medesimo tempo di esecuzione. Infatti, l'algoritmo che risolve
+	i due problemi è sostanzialmente identico, salvo per la presenza
+	delle operazioni che agiscono sulla coda. L'aggiunta di elementi
+	allo stack è una operazione con tempo di esecuzione unitario,
+	perchè non è necessario riordinarla ad ogni aggiunta (essendo di
+	fatto già ordinata), che quindi non influisce sul costo della visita
+	in profondità. La stampa degli elementi dello stack (righe 11 e 12)
+	consiste di una operazione a costo unitario che viene eseguita una
+	volta per ciascun vertice, ma trovandosi dopo il corpo principale
+	della visita in profondità si ha \math{O(\abs{V} + \abs{E}) +
+	O(\abs{V}) = O(\abs{V} + \abs{E})}.
+
+\end{sile}
