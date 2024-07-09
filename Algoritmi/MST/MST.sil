@@ -37,14 +37,14 @@
         \end{math}
 
         Questo implica che, essendo \math{G_{A}} e \math{G_{B}} costituite
-        dagli stessi vertici, esiste in \math{G_{B}} un arco \math{(u, v)}
-        che connette due vertici \math{u} e \math{v} che in \math{G_{B}} si
-        trovano in un solo albero ma che in \math{G_{A}} si trovano in due
-        alberi diversi. Allora tale arco può essere aggiunto a \math{G_{A}}
-        senza creare un ciclo, ottenendo quindi un nuovo sottografo i cui
-        vertici formano ancora un insieme che appartiene ad \math{F}. Questa
-        è però precisamente la definizione di proprietà di scambio, e quindi
-        è possibile affermare che \math{M_{G}} sia un matroide.
+        dagli stessi vertici, esiste un arco \math{(u, v)} che connette due
+        vertici \math{u} e \math{v} che in \math{G_{B}} si trovano in un
+        solo albero ma che in \math{G_{A}} si trovano in due alberi diversi.
+        Allora tale arco può essere aggiunto a \math{G_{A}} senza creare un
+        ciclo, ottenendo quindi un nuovo sottografo i cui vertici formano
+        ancora un insieme che appartiene ad \math{F}. Questa è però precisamente
+        la definizione di proprietà di scambio, e quindi è possibile affermare
+        che \math{M_{G}} sia un matroide.
     \end{theorem}
 
     \begin{example}
@@ -107,23 +107,26 @@
     greedy, perché un insieme massimale di un matroide grafico è uno
     spanning tree. Si ha quindi che il minimum spanning tree è dato
     dall'insieme massimale del matroide grafico con peso minimo. In
-    termini molto generici, l'algoritmo può essere descritto come segue:
+    termini molto generali, l'algoritmo può essere descritto come segue:
 
     \begin{enumerate}
         \begin{item}
             Viene inizializzato un insieme \math{A} vuoto;
         \end{item}
         \begin{item}
-            Viene scelto l'arco \math{(u, v)} di modo che \math{A \cup (u, v)}
-            sia un sottoinsieme dell'insieme \math{T} degli archi del MST. Un 
-            arco che aggiunto ad \math{A} restituisce un insieme di archi ancora
-            sottoinsieme dell'MST è detto \strong{arco sicuro} per \math{A};
+            Viene scelto l'arco \math{(u, v)} non presente in \math{A} di modo
+            che \math{A \cup (u, v)} sia un sottoinsieme dell'insieme \math{T}
+            degli archi del MST. Un arco che aggiunto ad \math{A} restituisce
+            un insieme di archi ancora sottoinsieme dell'MST è detto
+            \strong{arco sicuro} per \math{A};
         \end{item}
         \begin{item}
             Se \math{A = T}, ovvero se \math{G_{A} = (V, T)} è il MST,
             l'algoritmo termina, altrimenti si torna al punto precedente.
         \end{item}
     \end{enumerate}
+
+    \bigskip
 
 	\begin{verbatim}
 		procedure GENERIC-MST(G, W)
@@ -169,18 +172,20 @@
 		5    return A
 	\end{verbatim}
 
-    Per rendere l'algoritmo effettivamente utilizzabile è infine necessario
-    capire come compiere la scelta greedy, ovvero definire un metodo che
-    discrimini quando un arco è un arco sicuro.
+    Per rendere l'algoritmo effettivamente utilizzabile è infine
+    necessario capire come compiere la scelta greedy, ovvero
+    definire un metodo che discrimini gli archi sicuri da quelli
+    che non lo sono.
 
-    Dato un grafo \math{G = (V, E)}, viene detto \strong{taglio} una qualsiasi
-    partizione di \math{V} in due insiemi, \math{V'} e \math{V - V'}. Un arco
-    \math{(u, v) \in E} si dice che \strong{attraversa il taglio} se il vertice
-    \math{u} appartiene a \math{V'} e \math{v} appartiene a \math{V - V'}.
-    L'arco che attraversa il taglio avente peso minimo è detto \strong{arco
-    leggero}. Dato un sottoinsieme \math{A \subseteq E}, si dice che un taglio
-    \strong{rispetta} l'insieme \math{A} se nessun arco di \math{A}
-    attraversa tale taglio.
+    Dato un grafo \math{G = (V, E)}, viene detto \strong{taglio}
+    una qualsiasi partizione di \math{V} in due insiemi, \math{V'}
+    e \math{V - V'}. Un arco \math{(u, v) \in E} si dice che
+    \strong{attraversa il taglio} se il vertice \math{u} appartiene
+    a \math{V'} e \math{v} appartiene a \math{V - V'}. L'arco che
+    attraversa il taglio avente peso minimo è detto \strong{arco
+    leggero}. Dato un sottoinsieme \math{A \subseteq E}, si dice
+    che un taglio \strong{rispetta} l'insieme \math{A} se nessun
+    arco di \math{A} attraversa tale taglio.
 
     \begin{example}
         \img[src = MST/matroid4.pdf, width = 100%fw]
@@ -191,40 +196,42 @@
         rispetta il sottoinsieme di archi \math{A = \{(B, C), (C, D),
         (D, E), (F, G), (G, H)\}}. Gli archi che attraversano il taglio
         sono \math{(A, F), (B, F), (C, I), (C, H), (D, H), (E, H)}; fra
-        questi, l'arco \math{(C, I)} è l'arco leggero per il taglio, essendo
-        quello fra questi di peso minimo.
+        questi, l'arco \math{(C, I)} è l'arco leggero per il taglio,
+        essendo quello fra questi di peso minimo.
     \end{example}
 
     \begin{theorem}
-        \strong{Teorema dell'arco sicuro}. Siano dati un grafo connesso non
-        orientato e pesato \math{G = (V, E, W)}, un sottoinsieme \math{A}
-        dell'insieme \math{T} di archi del MST e un qualsiasi taglio che
-        rispetti \math{A}. L'arco leggero \math{(u, v)} del taglio è
-        certamente un arco sicuro per \math{A}, ovvero \math{A \cup
-        \{(u, v)\} \subseteq T}.
+        \strong{Teorema dell'arco sicuro}. Siano dati un grafo connesso
+        non orientato e pesato \math{G = (V, E, W)}, un sottoinsieme
+        \math{A} dell'insieme \math{T} di archi del MST e un qualsiasi
+        taglio che rispetti \math{A}. L'arco leggero \math{(u, v)} del
+        taglio è certamente un arco sicuro per \math{A}, ovvero \math{A
+        \cup \{(u, v)\} \subseteq T}.
 
         \bigskip
         \strong{Dimostrazione}. Se \math{(u, v)} è l'unico arco che
         attraversa il taglio il teorema è dimostrato, dato che è l'unico
         arco in grado di connettere le due componenti distinte nel MST.
 
-        Si consideri invece il caso in cui esista almeno un altro arco
-        che attraversa il taglio. Si supponga per assurdo che l'arco
-        leggero \math{(u, v)} del taglio non sia un arco sicuro per
-        \math{A}, ovvero che aggiungendo \math{(u, v)} all'insieme
-        \math{A} non si ottiene un sottoinsieme di \math{T}. Deve
-        allora esistere un altro arco che attraversa il taglio e
-        che appartiene a \math{T}, sia questo \math{(x, y)}.
+        Si consideri invece il caso in cui esista almeno un altro
+        arco che attraversa il taglio. Si supponga per assurdo che
+        l'arco leggero \math{(u, v)} del taglio non sia un arco
+        sicuro per \math{A}, ovvero che aggiungendo \math{(u, v)}
+        all'insieme \math{A} non si ottiene un sottoinsieme di
+        \math{T}. Deve allora esistere un altro arco che attraversa
+        il taglio e che appartiene a \math{T}, sia questo \math{(x,
+        y)}.
 
-        L'arco \math{(x, y)} non può appartenere ad \math{A}, perché
-        per definizione il taglio rispetta \math{A}. Se da \math{T}
-        viene rimosso l'arco \math{(x, y)} si ottengono due alberi
-        separate; se viene poi aggiunto \math{(u, v)} i due alberi
-        si ricongiungono per ottenere l'albero di connessione, non
-        necessariamente minimo, \math{T' = T - \{(x, y)\} \cup \{(u,
-        v)\}}. Poiché per ipotesi \math{(u, v)} è l'arco leggero per
-        il taglio, il peso di \math{(u, v)} deve essere inferiore al
-        peso di \math{(x, y)}. Allora:
+        Sia \math{T'} l'albero costruito a partire da \math{T} sostituendo
+        l'arco \math{(u, v)} con l'arco \math{(x, y)}, ovvero \math{T' =
+        T - \{(x, y)\} \cup \{(u, v)\}}. \math{T'} é certamente un albero
+        di connessione (non necessariamente minimo) per \math{G}, perché é
+        stato costruito a partire da un albero di connessione sostituendo
+        un suo arco con un arco che attraversa il medesimo taglio.
+
+        Poiché per ipotesi \math{(u, v)} è l'arco leggero per il taglio,
+        il peso di \math{(u, v)} deve essere inferiore al peso di \math{(x,
+        y)}. Ricordando come \math{(x, y)} appartenga a \math{T}, si ha:
 
         \begin[mode = display]{math}
             W(T') = W(T) - W(x, y) + W(u, v) \leq W(T)
@@ -236,38 +243,41 @@
         = W(T')}, e quindi anche \math{T'} è un albero di connessione
         minimo.
 
-        Dato che per ipotesi \math{A \subseteq T} e \math{(x, y) \notin A},
-        allora \math{A \subseteq T'}. Questo significa che \math{A \cup
-        \{(u, v)\} \subseteq T'}. Ma questa è la definizione di arco sicuro,
-        ed avendo appena mostrato che \math{T'} è un MST deve aversi che 
-        \math{(u, v)} è un arco sicuro per \math{A}.
+        Dato che \math{(x, y)} rispetta il taglio, tale arco non puó
+        appartenere ad \math{A}. Inoltre, per ipotesi, si ha \math{A
+        \subseteq T}. Avendo definito \math{T'} come \math{T - \{(x,
+        y)\} \cup \{(u, v)\}}, si ha \math{A \subseteq T'}, ma anche
+        \math{A \cup \{(u, v)\} \subseteq T'}. Questa è la definizione
+        di arco sicuro, ed avendo appena mostrato che \math{T'} è un
+        MST deve aversi che \math{(u, v)} è un arco sicuro per \math{A}.
     \end{theorem}
 
     \begin{example}
         \img[src = MST/matroid5.pdf, width = 100%fw]
 
         Il sottoinsieme di archi \math{A = \{(B, C), (C, D), (D, E),
-        (F, G), (G, H)\}} è parte degli archi del MST. Per questo motivo,
-        il teorema precedente stabilisce che l'arco leggero del taglio che
-        rispetta \math{A} è un arco sicuro per \math{A}, e infatti l'arco
-        \math{(C, I)} è uno degli archi del MST.
+        (F, G), (G, H)\}} è parte degli archi del MST. Per questo
+        motivo, il teorema precedente stabilisce che l'arco leggero
+        del taglio che rispetta \math{A} è un arco sicuro per \math{A},
+        e infatti l'arco \math{(C, I)} è uno degli archi del MST.
     \end{example}
 
     \begin{theorem}
-        \strong{Corollario del teorema dell'arco sicuro}. Siano dati un grafo
-        connesso non orientato e pesato \math{G = (V, E)} ed un sottoinsieme
-        \math{A} dell'insieme \math{T} di archi del MST che definisce una
-        foresta \math{G_{A} = (V, A)}. Sia \math{C = (V_{C}, A_{C})}, con 
-        \math{V_{C} \subseteq V} e \math{A_{C} \subseteq A} uno qualsiasi
-        degli alberi di \math{G_{A}}. Il taglio che divide i vertici di
-        \math{G_{A}} nei due sottoinsiemi \math{V_{C}} e \math{V - V_{C}}
-        rispetta l'insieme \math{A}. Inoltre, un arco leggero per tale 
-        taglio è anche arco sicuro per l'insieme \math{A}.
+        \strong{Corollario del teorema dell'arco sicuro}. Siano dati
+        un grafo connesso non orientato e pesato \math{G = (V, E)}
+        ed un sottoinsieme \math{A} dell'insieme \math{T} di archi
+        del MST che definisce una foresta \math{G_{A} = (V, A)}.
+        Sia \math{C = (V_{C}, A_{C})}, con \math{V_{C} \subseteq V}
+        e \math{A_{C} \subseteq A} uno qualsiasi degli alberi di
+        \math{G_{A}}. Il taglio che divide i vertici di \math{G_{A}}
+        nei due sottoinsiemi \math{V_{C}} e \math{V - V_{C}} rispetta
+        l'insieme \math{A}. Inoltre, un arco leggero per tale taglio
+        è anche arco sicuro per l'insieme \math{A}.
 
         \bigskip
-        \strong{Dimostrazione}. Il taglio \math{(V_{C}, V - V_{C})} rispetta
-        \math{A} e \math{(u, v)} è un arco leggero per questo taglio, quindi
-        \math{(u, v)} è sicuro per \math{A}.
+        \strong{Dimostrazione}. Il taglio \math{(V_{C}, V - V_{C})}
+        rispetta \math{A} e \math{(u, v)} è un arco leggero per questo
+        taglio, quindi \math{(u, v)} è sicuro per \math{A}.
     \end{theorem}
 
     Sia \math{A} il sottoinsieme degli archi del MST di una generica
@@ -279,9 +289,10 @@
     collega un vertice che appartiene a tale albero con un vertice
     che non vi appartiene.
 
-    Ci si chiede allora come determinare in una qualsiasi iterazione (ed
-    in maniera efficiente) quale sia l'arco di peso minimo da aggiungere
-    all'insieme di archi del MST in costruzione. Per farlo vi sono diversi
-    approcci, e ciascuno di questi è associato ad un algoritmo diverso.
+    Ci si chiede allora come determinare in una qualsiasi iterazione
+    (ed in maniera efficiente) quale sia l'arco di peso minimo da
+    aggiungere all'insieme di archi del MST in costruzione. Per farlo
+    vi sono diversi approcci, e ciascuno di questi è associato ad un
+    algoritmo diverso.
 
 \end{sile}
