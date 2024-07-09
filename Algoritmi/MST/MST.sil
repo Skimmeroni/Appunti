@@ -129,7 +129,7 @@
     \bigskip
 
 	\begin{verbatim}
-		procedure GENERIC-MST(G, W)
+		procedure GENERIC-MST(V, E, W)
 		1    A \unichar{U+2190} \unichar{U+2205}
 
 		\bigskip
@@ -160,7 +160,7 @@
     perché questo significa che è rimasto un solo albero.
 
 	\begin{verbatim}
-		procedure GENERIC-MST(G, W)
+		procedure GENERIC-MST(V, E, W)
 		1    A \unichar{U+2190} \unichar{U+2205}
 
 		     \bigskip

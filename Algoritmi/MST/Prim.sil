@@ -30,16 +30,16 @@
         (l'insieme \math{V - V_{C}}). Per definizione, tale taglio rispetta
         l'insieme degli archi di \math{C}, pertanto l'arco di peso minimo
         che connette un vertice in \math{V_{C}} con un vertice in \math{V -
-        V_{C}} è certamente un arco sicuro per l'arco in costruzione.
+        V_{C}} è certamente un arco sicuro per l'albero in costruzione.
 
         Per determinare quale sia l'arco corretto da considerare, l'algoritmo
         associa a ciascun vertice \math{v} del grafo \math{G = (V, E, W)}
         due campi: un campo chiave (\math{v}.key) ed un campo predecessore
-        (\math{v.\pi}. Il campo chiave contiene il peso dell'arco che,
-        rispetto all'iterazione corrente, è il minimo trovato, mentre il
-        campo predecessore contiene il vertice con il quale il vertice
-        corrente ha l'arco con peso più piccolo. Dato un grafo \math{G =
-        (V, E, W)}, si ha allora:
+        (\math{v.\pi}). Il campo chiave contiene il peso dell'arco che,
+        rispetto all'iterazione corrente, è il piú piccolo trovato, mentre
+        il campo predecessore contiene il vertice con il quale il vertice
+        corrente ha l'arco con tale peso. L'algoritmo di Prim procede come
+        segue:
 
         \begin{enumerate}
             \begin{item}
@@ -71,9 +71,8 @@
                 stato univocamente assegnato un predecessore;
             \end{item}
             \begin{item}
-                L'insieme degli archi del MST viene costruito riportando,
-                per ciascun vertice, l'arco (quale che sia) che ha con il
-                rispettivo predecessore.
+                L'insieme degli archi del MST viene ricostruito a partire
+                dagli archi che ciascun vertice ha con il proprio predecessore.
             \end{item}
         \end{enumerate}
 
@@ -81,35 +80,34 @@
 
 	\begin{verbatim}
 		procedure PRIM-MST(V, E, W, r)
-		 1    foreach v \unichar{U+2208} V do
-		 2        v.key \unichar{U+2190} \unichar{U+221E}
-		 3        v.\unichar{U+03C0} \unichar{U+2190} NULL
-		 4    r.key \unichar{U+2190} 0
+		 1    Q \unichar{U+2190} coda di prioritá (inizialmente vuota)
+		 2    foreach v \unichar{U+2208} V do
+		 3        v.key \unichar{U+2190} \unichar{U+221E}
+		 4        v.\unichar{U+03C0} \unichar{U+2190} NULL
+		 5        ENQUEUE(v, Q)
+		 6    r.key \unichar{U+2190} 0
 
 		      \bigskip
-		 5    Aggiungi tutti i vertici di V alla coda Q
+		 7    while Q \unichar{U+2260} \unichar{U+2205} do
+		 8        u \unichar{U+2190} POP(Q)
+		 9        foreach v \unichar{U+2208} ADJACENT(u) do
+		10        if (v \unichar{U+2208} Q and W(u, v) < v.key) then
+		11                v.key \unichar{U+2190} W(u, v)
+		12                v.\unichar{U+03C0} \unichar{U+2190} u
 
 		      \bigskip
-		 6    while Q \unichar{U+2260} \unichar{U+2205} do
-		 7        u \unichar{U+2190} POP(Q)
-		 8        foreach v \unichar{U+2208} ADJ(u) do
-		 9            if v \unichar{U+2208} Q and W(u, v) < v.key then
-		10                v.key \unichar{U+2190} W(u, v)
-		11                v.\unichar{U+03C0} \unichar{U+2190} u
+		13    A \unichar{U+2190} \unichar{U+2205}
+		14    foreach v \unichar{U+2208} V do
+		15        A \unichar{U+2190} A \unichar{U+222A} \{(v.\unichar{U+03C0}, v)\}
 
 		      \bigskip
-		12    A \unichar{U+2190} \unichar{U+2205}
-		13    foreach v \unichar{U+2208} V do
-		14        A \unichar{U+2190} A \unichar{U+222A} \{(v, v.\unichar{U+03C0})\}
-
-		      \bigskip
-		15    return A
+		16    return A
 	\end{verbatim}
 
         Per quanto riguarda il tempo di esecuzione dell'algoritmo, è
-        possibile distinguere quattro sezioni dello stesso: la costruzione
-        della coda di priorità (righe da 1 a 5), il loop principale (righe
-        da 6 a 11) e la ricostruzione della soluzione (righe da 12 a 14)
+        possibile distinguerne tre sezioni: la costruzione della coda
+        di priorità (righe da 1 a 6), il loop principale (righe da 7 a
+        12) e la ricostruzione della soluzione (righe da 13 a 15).
 
         \begin{enumerate}
             \begin{item}
@@ -127,10 +125,10 @@
                 coda è una operazione che richiede tempo di esecuzione 
                 logaritmico, perché per ricavare il vertice con campo
                 chiave più piccolo occorre effettuare una ricerca binaria.
-                Allo stesso modo, l'analisi di ciascun vertice adiacente
-                al vertice corrente viene compiuta in tempo logaritmico.
-                Il tempo di esecuzione del loop principale è allora
-                \math{O(\abs{V} \mi{log}(\abs{V}))};
+                Dato che il corpo del loop viene eseguito tante volte quanti
+                sono gli elementi della coda, ovvero \math{\abs{V}}, si ha
+                che il tempo di esecuzione del loop principale viene ad
+                essere \math{O(\abs{V} \mi{log}(\abs{V}))};
             \end{item}
             \begin{item}
                 La ricostruzione della soluzione viene eseguita in tempo

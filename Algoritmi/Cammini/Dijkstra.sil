@@ -193,7 +193,7 @@
 		\begin{verbatim}
 			procedure DIJKSTRA(V, E, W, s)
 			1    INITIALIZE-SINGLE-SOURCE(V, s)
-			2    Q coda di min priority
+			2    Q \unichar{U+2190} coda di prioritá (inizialmente vuota)
 			3    foreach v \unichar{U+2208} V do
 			4        ENQUEUE(v, Q)
 
