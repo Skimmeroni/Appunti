@@ -204,7 +204,7 @@
 			6    while Q \unichar{U+2260} \unichar{U+2205} do
 			7        u \unichar{U+2190} POP(Q)
 			8        S \unichar{U+2190} S \unichar{U+222A} \{u\}
-			9        foreach v \unichar{U+2208} ADJ(u) do
+			9        foreach v \unichar{U+2208} ADJACENT(u) do
 			10            RELAX(u, v, W)
 		\end{verbatim}
 	\end{parbox}

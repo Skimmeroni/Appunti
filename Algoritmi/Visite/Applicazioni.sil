@@ -175,17 +175,16 @@
 			15            (u, w) \unichar{U+2190} "T"
 			16            w.π \unichar{U+2190} u
 			17            DFS-VISIT-AND-MARK(G, w)
-			18        else
-			19            if (w.color = G) then
-			20                (u, w) \unichar{U+2190} "B"
-			21            else
-			22                if (u.d < w.d) then
-			23                    (u, w) \unichar{U+2190} "F"
-			24                else
-			25                    (u, w) \unichar{U+2190} "C"
-			26    time \unichar{U+2190} time + 1
-			27    u.f \unichar{U+2190} time
-			28    u.color \unichar{U+2190} B
+			18        else if (w.color = G) then
+			19            (u, w) \unichar{U+2190} "B"
+			20        else
+			21            if (u.d < w.d) then
+			22                (u, w) \unichar{U+2190} "F"
+			23            else
+			24                (u, w) \unichar{U+2190} "C"
+			25    time \unichar{U+2190} time + 1
+			26    u.f \unichar{U+2190} time
+			27    u.color \unichar{U+2190} B
 		\end{verbatim}
 	\end{parbox}
 	\par
@@ -272,7 +271,7 @@
 			 4        v.d \unichar{U+2190} 0
 			 5        v.f \unichar{U+2190} 0
 			 6    time \unichar{U+2190} 0
-			 7    S \unichar{U+2190} []
+			 7    S \unichar{U+2190} stack (inizialmente vuoto)
 			 8    foreach v ∈ V do
 			 9        if (v.color = W) then
 			10            DFS-VISIT(G, v)
