@@ -115,14 +115,14 @@
     di \math{G} un campo \math{d} ed un campo \math{\pi}: il primo contiene
     un limite superiore per \math{\delta (s, v)}, mentre il secondo riporta
     uno dei vertici con i quali \math{v} è congiunto da un arco. L'algoritmo
-    inizializza, per ogni vertice, il campo \math{\pi} a NULL ed il campo
+    inizializza, per ogni vertice, il campo \math{\pi} a NIL ed il campo
     \math{d} a \math{\infty}, tranne per \math{s}, a cui viene assegnato 0.
 
 	\begin{verbatim}
 		procedure INITIALIZE-SINGLE-SOURCE(V, s)
 		 1    foreach v \unichar{U+2208} V do
 		 2        v.d \unichar{U+2190} \unichar{U+221E}
-		 3        v.\unichar{U+03C0} \unichar{U+2190} NULL
+		 3        v.\unichar{U+03C0} \unichar{U+2190} NIL
 		 4    s \unichar{U+2190} 0
 	\end{verbatim}
 
@@ -157,7 +157,7 @@
         \begin{item}
             A ciascun vertice del grafo viene associato un campo
             \math{d}, inizializzato a \math{\infty}, ed un campo
-            \math{\pi}, inizializzato a NULL.
+            \math{\pi}, inizializzato a NIL.
         \end{item}
         \begin{item}
             Viene scelto il noto sorgente, indicato con \math{s},
@@ -187,7 +187,7 @@
 	Una volta che l'algoritmo é terminato, é possibile costruire
 	a ritroso un cammino minimo per ciascun vertice risalendo di
 	predecessore in predecessore fino alla sorgente, unico vertice
-	che avrá ancora NULL come campo predecessore.
+	che avrá ancora NIL come campo predecessore.
 
 	\begin[width = 50%fw]{parbox}
 		\begin{verbatim}
@@ -202,7 +202,7 @@
 
 				\bigskip
 			6    while Q \unichar{U+2260} \unichar{U+2205} do
-			7        u \unichar{U+2190} POP(Q)
+			7        u \unichar{U+2190} EXTRACT-MIN(Q)
 			8        S \unichar{U+2190} S \unichar{U+222A} \{u\}
 			9        foreach v \unichar{U+2208} ADJACENT(u) do
 			10            RELAX(u, v, W)
@@ -214,7 +214,7 @@
 			 1   do
 			 2       print v
 			 3       v.\unichar{U+03C0} \unichar{U+2190} v
-			 4   while v.\unichar{U+03C0} \unichar{U+2260} NULL
+			 4   while v.\unichar{U+03C0} \unichar{U+2260} NIL
 		\end{verbatim}
 	\end{parbox}
 	\par

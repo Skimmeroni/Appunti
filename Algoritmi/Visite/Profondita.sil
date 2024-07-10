@@ -81,11 +81,11 @@
 
         All'inizio della visita, a ciascun vertice viene assegnato il colore
         bianco, un tempo di scoperta pari a 0, un tempo di completamento pari
-        a 0 ed un valore \math{\pi} pari a NULL. Dopo la visita tutti i
+        a 0 ed un valore \math{\pi} pari a NIL. Dopo la visita tutti i
         vertici avranno assegnato il colore nero, perché ogni vertice è
         sempre eleggibile a sorgente (quindi anche un vertice isolato può
         comunque venire raggiunto). Inoltre, dopo la visita, il campo
-        \math{\pi} sarà rimasto NULL solamente per quei vertici che sono
+        \math{\pi} sarà rimasto NIL solamente per quei vertici che sono
         stati scelti come sorgente, perché per definizione le sorgenti non
         hanno un predecessore. Infine, un vertice può avere assegnato il
         colore grigio solamente \em{durante} la visita, mai prima e mai dopo.
@@ -101,7 +101,7 @@
 			procedure DFS(G)
 			 1    foreach v ∈ V do
 			 2        v.color \unichar{U+2190} W
-			 3        v.π \unichar{U+2190} NULL
+			 3        v.π \unichar{U+2190} NIL
 			 4        v.d \unichar{U+2190} 0
 			 5        v.f \unichar{U+2190} 0
 			 6    time \unichar{U+2190} 0
@@ -171,7 +171,7 @@
         dei vertici \math{V} coincide con l'insieme dei vertici del grafo e:
 
         \begin[mode = display]{math}
-                E_{\pi} = \{(v.\pi, v) : v \in V \wedge v.\pi \ne \mi{NULL}\}
+                E_{\pi} = \{(v.\pi, v) : v \in V \wedge v.\pi \ne \mi{NIL}\}
         \end{math}
 
         Il sottografo dei predecessori di una visita in profondità forma una

@@ -66,12 +66,12 @@
         All'inizio della visita, a ciascun vertice viene assegnato
         il colore bianco, un valore \math{d} pari a \math{\infty} (ad
         eccezione della sorgente \math{s}, che ha \math{s.d = 0}) ed
-        un valore \math{\pi} pari a NULL. Alla fine della visita, a
+        un valore \math{\pi} pari a NIL. Alla fine della visita, a
         tutti i vertici raggiungibili dalla sorgente sarà assegnato il
         colore nero ed i relativi valori di \math{d} e di \math{\pi}.
         Se alla fine della visita sono ancora presenti dei vertici di
         colore bianco che hanno \math{\infty} come attributo distanza
-        e NULL come attributo predecessore, allora significa che non vi
+        e NIL come attributo predecessore, allora significa che non vi
         è modo di raggiungerli a partire dalla sorgente.
 
         L'algoritmo per la visita in ampiezza di un grafo è presentato di 
@@ -88,7 +88,7 @@
 		 1    foreach v \unichar{U+2208} V do
 		 2       v.color \unichar{U+2190} W
 		 3       v.d \unichar{U+2190} \unichar{U+221E}
-		 4       v.\unichar{U+03C0} \unichar{U+2190} NULL
+		 4       v.\unichar{U+03C0} \unichar{U+2190} NIL
 
 		     \bigskip
 		 5   s.color \unichar{U+2190} G
@@ -145,7 +145,7 @@
 
         \begin[width = 50%fw]{parbox}
                 \begin[mode = display]{math}
-                        V_{\pi} = \{v \in V: v.\pi \ne \mi{NULL}\} \cup \{s\}
+                        V_{\pi} = \{v \in V: v.\pi \ne \mi{NIL}\} \cup \{s\}
                 \end{math}
         \end{parbox}
         \begin[width = 50%fw]{parbox}
@@ -177,7 +177,7 @@
         tre attributi.
 
         I vertici raggiunti dalla visita in ampiezza sono la sorgente e tutti
-	i vertici che hanno un valore diverso da NULL come campo predecessore,
+	i vertici che hanno un valore diverso da NIL come campo predecessore,
 	pertanto è sufficiente aggiungere a \math{V_{\pi}} tutti i vertici
 	aventi queste caratteristiche. Per quanto riguarda \math{E_{\pi}},
 	questo sarà costituito da tutti gli archi che connettono un vertice
@@ -192,7 +192,7 @@
 
                      \bigskip
 		3    foreach v \unichar{U+2208} (V' - \{s\}) do
-		4        if (v.\unichar{U+03C0} \unichar{U+2260} NULL) then
+		4        if (v.\unichar{U+03C0} \unichar{U+2260} NIL) then
 		5            V\unichar{U+03C0} \unichar{U+2190} V\unichar{U+03C0} \unichar{U+222A} \{v\}
 		6            E\unichar{U+03C0} \unichar{U+2190} E\unichar{U+03C0} \unichar{U+222A} \{(v.\unichar{U+03C0}, v)\}
 

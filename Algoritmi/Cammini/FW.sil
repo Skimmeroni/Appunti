@@ -207,7 +207,7 @@
         Per la restituzione di una soluzione ottima al problema è
         necessario calcolare, oltre alla matrice \math{D^{(n)}},
         anche la \strong{matrice dei predecessori} \math{\Pi^{(n)}}.
-        In ciascuna cella \math{i, j} è riportato NULL se \math{v_{i}}
+        In ciascuna cella \math{i, j} è riportato NIL se \math{v_{i}}
         coincide con \math{v_{j}} oppure se non esiste un cammino fra
         \math{v_{i}} e \math{v_{j}}, altrimenti riporta il predecessore
         di \math{v_{j}} in qualche cammino minimo che ha inizio in
@@ -239,7 +239,7 @@
         \begin[mode = display]{math}
             \Pi^{(0)} {[i, j]} =
             \{\table[columnalign = left left]{
-                \mi{NULL} & \mi{se} \thickspace {(v_{i} \ne v_{j} \wedge
+                \mi{NIL} & \mi{se} \thickspace {(v_{i} \ne v_{j} \wedge
                                         \langle v_{i}, v_{j} \rangle \notin E)}
                                         \vee v_{i} = v_{j} \\
                 v_{i} & \mi{altrimenti} \\
@@ -302,7 +302,7 @@
 				            if (D\textsuperscript{(0)}[i, j] \unichar{U+2260} \unichar{U+221E} and i \unichar{U+2260} j) then
 				                \unichar{U+03A0}\textsuperscript{(0)} [i, j] \unichar{U+2190} i
 				            else
-				                \unichar{U+03A0}\textsuperscript{(0)} [i, j] \unichar{U+2190} NULL
+				                \unichar{U+03A0}\textsuperscript{(0)} [i, j] \unichar{U+2190} NIL
 
 				    \bigskip
 				    for k \unichar{U+2190} 1 to n do
@@ -332,8 +332,8 @@
 				procedure PRINT-PATH(\unichar{U+03A0}, i, j)
 				    if (i = j) then
 				        print i
-				    else (if \unichar{U+03A0}[i, j] = NULL) then
-				        print NULL
+				    else (if \unichar{U+03A0}[i, j] = NIL) then
+				        print NIL
 				    else
 				        PRINT-PATH(\unichar{U+03A0}, i, \unichar{U+03A0}[i, j])
 				        print j
@@ -366,11 +366,11 @@
 				\begin[mode = display]{math}
 					\table{
 						& A         & B         & C         & D         & E \\
-						A & \mi{NULL} & C         & D         & E         & A \\
-						B & D         & \mi{NULL} & D         & B         & B \\
-						C & D         & C         & \mi{NULL} & B         & B \\
-						D & D         & C         & D         & \mi{NULL} & A \\
-						E & D         & C         & D         & E         & \mi{NULL} \\
+						A & \mi{NIL} & C         & D         & E         & A \\
+						B & D         & \mi{NIL} & D         & B         & B \\
+						C & D         & C         & \mi{NIL} & B         & B \\
+						D & D         & C         & D         & \mi{NIL} & A \\
+						E & D         & C         & D         & E         & \mi{NIL} \\
 					}
 				\end{math}
 			\end{parbox}
@@ -383,13 +383,13 @@
         ({V_{i}}_{\pi}, {E_{i}}_{\pi})}, ovvero un albero di cammini
         minimi avente \math{v_{i}} come radice. \math{{V_{i}}_{\pi}} è
         definito come l'insieme dei vertici di \math{G} con predecessori
-        diversi da NULL a cui viene aggiunto \math{i}. L'insieme degli
+        diversi da NIL a cui viene aggiunto \math{i}. L'insieme degli
         archi orientati \math{{E_{i}}_{\pi}} è l'insieme degli archi
         indotto dai valori \math{\pi} per i vertici in \math{{V_{i}}_{\pi}}:
 
         \begin[width = 50%fw]{parbox}
             \begin[mode = display]{math}
-                {V_{i}}_{\pi} = \{j \in V | \pi_{ij} \ne \mi{NULL}\} \cup \{i\}
+                {V_{i}}_{\pi} = \{j \in V | \pi_{ij} \ne \mi{NIL}\} \cup \{i\}
             \end{math}
         \end{parbox}
         \begin[width = 50%fw]{parbox}

@@ -155,7 +155,7 @@
 			procedure DFS-AND-MARK(G)
 			 1    foreach v ∈ V do
 			 2        v.color \unichar{U+2190} W
-			 3        v.π \unichar{U+2190} NULL
+			 3        v.π \unichar{U+2190} NIL
 			 4        v.d \unichar{U+2190} 0
 			 5        v.f \unichar{U+2190} 0
 			 6    time \unichar{U+2190} 0
@@ -207,7 +207,7 @@
 			procedure DFS-AND-MARK-U(G)
 			 1    foreach v ∈ V do
 			 2        v.color \unichar{U+2190} W
-			 3        v.π \unichar{U+2190} NULL
+			 3        v.π \unichar{U+2190} NIL
 			 4        v.d \unichar{U+2190} 0
 			 5        v.f \unichar{U+2190} 0
 			 6    time \unichar{U+2190} 0
@@ -267,7 +267,7 @@
 			procedure TOPOLOGICAL-ORDERING(G)
 			 1    foreach v ∈ V do
 			 2        v.color \unichar{U+2190} W
-			 3        v.π \unichar{U+2190} NULL
+			 3        v.π \unichar{U+2190} NIL
 			 4        v.d \unichar{U+2190} 0
 			 5        v.f \unichar{U+2190} 0
 			 6    time \unichar{U+2190} 0

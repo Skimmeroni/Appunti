@@ -45,7 +45,7 @@
             \begin{item}
                 I campi chiave di tutti i vertici vengono inizializzati
                 a \math{\infty}, mentre i campi predecessore vengono
-                inizializzati a NULL;
+                inizializzati a NIL;
             \end{item}
             \begin{item}
                 Viene scelto un vertice arbitrario, al quale viene assegnato
@@ -83,13 +83,13 @@
 		 1    Q \unichar{U+2190} coda di prioritá (inizialmente vuota)
 		 2    foreach v \unichar{U+2208} V do
 		 3        v.key \unichar{U+2190} \unichar{U+221E}
-		 4        v.\unichar{U+03C0} \unichar{U+2190} NULL
+		 4        v.\unichar{U+03C0} \unichar{U+2190} NIL
 		 5        ENQUEUE(v, Q)
 		 6    r.key \unichar{U+2190} 0
 
 		      \bigskip
 		 7    while Q \unichar{U+2260} \unichar{U+2205} do
-		 8        u \unichar{U+2190} POP(Q)
+		 8        u \unichar{U+2190} EXTRACT-MIN(Q)
 		 9        foreach v \unichar{U+2208} ADJACENT(u) do
 		10        if (v \unichar{U+2208} Q and W(u, v) < v.key) then
 		11                v.key \unichar{U+2190} W(u, v)
