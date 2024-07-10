@@ -118,15 +118,13 @@
 		\include[src = Unsupervised/DBSCAN.sil]
 	\chapter{Deep Learning}
 		\section{Percettrone}
-		\include[src = Deep/Perceptron.sil] % manca la parte su MIRA
+		\include[src = Deep/Perceptron.sil]
 		\section{Deep Learning}
 		\include[src = Deep/Deep.sil]
 		\section{Funzioni di attivazione}
 		\include[src = Deep/Attivazione.sil]
-		%\section{Batch normalization}
-		%\include[src = Deep/Batch.sil]
-		%\section{Tecniche di apprendimento}
-		%\include[src = Deep/Tecniche.sil]
+		\section{Strategie di ottimizzazione dell'apprendimento}
+		\include[src = Deep/Strategie.sil]
 		%\section{Reti neurali convoluzionali}
 		%\include[src = Deep/Convoluzionale.sil]
 	\chapter{Reinforcement Learning}

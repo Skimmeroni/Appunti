@@ -1,0 +1,52 @@
+\begin{sile}
+
+	\subsection{Normalizzazione}
+
+		Si consideri un singolo strato \math{i}-esimo di una rete
+		neurale, ovvero \math{{\bi{A}}^{(i)} = \mi{sig} {(\bi{W}
+		{\bi{A}}^{(i - 1)})}}. é stato mostrato \footnote{Interessante
+		notare come, nonostante l'evidenza empirica, il guadagno
+		ottenuto dalla normalizzazione dei batch non è stato
+		dimostrato formalmente.} che è possibile ottimizzare
+		notevolmente le prestazioni della rete neurale se gli
+		input in \math{\bi{A}^{(i - 1)}} sono centrati in 0 e se
+		ciascuno di questi scala in maniera diversa. Se l'input
+		in questione non si trova in questa forma, è possibile
+		"forzarlo" perchè lo diventi.
+
+		In statistica, si parla di \strong{normalizzazione}
+		quando una distribuzione generica viene trasformata
+		in una distribuzione normale, sottraendo da tale
+		distribuzione il suo valore atteso e dividendo
+		tutto per la deviazione standard. L'idea è quella
+		di correggere l'attivazione di ciascun neurone
+		normalizzandola.
+
+		?????????????
+
+	\subsection{Inizializzazione dei pesi}
+
+		I pesi di una rete neurale vengono corretti mano a mano
+		che la rete apprende. Si ricordi però come la rete non
+		possa partire da zero, perchè il nuovo valore per i pesi
+		dipende dai valori dei pesi precedenti. Ripercorrendo a
+		ritroso, deve aversi che un valore iniziale per i pesi
+		della rete deve essere inserito "manualmente".
+
+		Una scelta piuttosto intuitiva consiste nell'impostare nulli
+		tutti i pesi o, più in generale, impostarli tutti al medesimo
+		valore. Questa si rivela essere una pessima scelta, perchè
+		durante la propagazione all'indietro tutti i pesi si
+		aggiorneranno allo stesso modo, rendendo il modello poco
+		versatile.
+
+		Una scelta semplice ed al contempo migliore prevede di
+		inizializzare i valori dei pesi con valori casuali; in
+		particolare, si preferisce inizializzare tali pesi a partire
+		da una distribuzione gaussiana.
+
+	\subsection{Regolarizzazione}
+
+		%%% Da recuperare sulle slide
+
+\end{sile}

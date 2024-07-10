@@ -43,7 +43,8 @@
 					Il gradiente della funzione valutato in punti molto vicini
 					agli estremi del suo dominio restituiscono un valore quasi
 					nullo, e questo diventa un problema se si vuole propagare
-					il gradiente all'indietro;
+					il gradiente all'indietro, perchè la rete smette di 
+					imparare (si parla di \em{dead neuron});
 				\end{item}
 				\begin{item}
 					Il codominio della funzione non é centrato in 0, pertanto i
@@ -145,7 +146,9 @@
 					maniera efficiente;
 				\end{item}
 				\begin{item}
-					Il gradiente collassa a 0 solamente per gli input negativi;
+					Il gradiente può collassare a 0 solamente per gli input negativi, 
+					anzichè (come le precedenti) sia per gli input positivi che
+					negativi;
 				\end{item}
 				\begin{item}
 					Permette di aggiornare una rete neurale molto piú velocemente delle

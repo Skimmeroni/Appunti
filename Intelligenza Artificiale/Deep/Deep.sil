@@ -30,6 +30,15 @@
 	dei percettroni probabilistici, l'output di ciascun percettrone non
 	é \math{\pm 1} ma bensí una probabilitá.
 
+	\begin{theorem}
+		\strong{Teorema di approssimazione universale}. Una rete
+		neurale a due strati costituita da un numero sufficientemente
+		grande di neuroni è in grado di approssimare qualsiasi
+		funzione continua con accuratezza desiderata (questo non è
+		necessariamente un aspetto positivo, dato che rende le reti
+		neurali prone all'overfitting).
+	\end{theorem}
+
 	Si consideri l'\math{i}-esimo strato della rete neurale. Questa
 	sará composta da un certo numero \math{m} di percettroni. Ciascun
 	\math{j}-esimo percettrone avrá un proprio output, \math{a_{j}^{i}}.
