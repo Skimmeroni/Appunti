@@ -1,7 +1,8 @@
 return {
   {
     label = {
-      "Introduzione"
+      "Introduzione",
+      id = "stuff"
     },
     level = 1,
     link = "dest1",
@@ -10,7 +11,8 @@ return {
   },
   {
     label = {
-      "Agente intelligente"
+      "Agente intelligente",
+      id = "stuff"
     },
     level = 2,
     link = "dest2",
@@ -19,7 +21,8 @@ return {
   },
   {
     label = {
-      "Agenti con riflessi semplici"
+      "Agenti con riflessi semplici",
+      id = "stuff"
     },
     level = 3,
     link = "dest3",
@@ -28,7 +31,8 @@ return {
   },
   {
     label = {
-      "Agenti con riflessi, ma basati su un modello"
+      "Agenti con riflessi, ma basati su un modello",
+      id = "stuff"
     },
     level = 3,
     link = "dest4",
@@ -37,7 +41,8 @@ return {
   },
   {
     label = {
-      "Agenti basati su un modello, ma basati su obiettivi"
+      "Agenti basati su un modello, ma basati su obiettivi",
+      id = "stuff"
     },
     level = 3,
     link = "dest5",
@@ -46,7 +51,8 @@ return {
   },
   {
     label = {
-      "Agenti basati su un modello e guidati da utilitá"
+      "Agenti basati su un modello e guidati da utilitá",
+      id = "stuff"
     },
     level = 3,
     link = "dest6",
@@ -55,7 +61,8 @@ return {
   },
   {
     label = {
-      "Agenti che apprendono"
+      "Agenti che apprendono",
+      id = "stuff"
     },
     level = 3,
     link = "dest7",
@@ -64,7 +71,8 @@ return {
   },
   {
     label = {
-      "Rappresentazione della conoscenza"
+      "Rappresentazione della conoscenza",
+      id = "stuff"
     },
     level = 1,
     link = "dest8",
@@ -73,7 +81,8 @@ return {
   },
   {
     label = {
-      "Knowledge representation and reasoning"
+      "Knowledge representation and reasoning",
+      id = "stuff"
     },
     level = 2,
     link = "dest9",
@@ -82,7 +91,8 @@ return {
   },
   {
     label = {
-      "Knowledge Graphs"
+      "Knowledge Graphs",
+      id = "stuff"
     },
     level = 2,
     link = "dest10",
@@ -91,7 +101,8 @@ return {
   },
   {
     label = {
-      "Resource Description Framework"
+      "Resource Description Framework",
+      id = "stuff"
     },
     level = 2,
     link = "dest11",
@@ -100,7 +111,8 @@ return {
   },
   {
     label = {
-      "Termini"
+      "Termini",
+      id = "stuff"
     },
     level = 3,
     link = "dest12",
@@ -109,7 +121,8 @@ return {
   },
   {
     label = {
-      "Triple"
+      "Triple",
+      id = "stuff"
     },
     level = 3,
     link = "dest13",
@@ -118,7 +131,8 @@ return {
   },
   {
     label = {
-      "Vocabolari"
+      "Vocabolari",
+      id = "stuff"
     },
     level = 3,
     link = "dest14",
@@ -127,7 +141,8 @@ return {
   },
   {
     label = {
-      "Sintassi: N-triples e Turtle"
+      "Sintassi: N-triples e Turtle",
+      id = "stuff"
     },
     level = 3,
     link = "dest15",
@@ -136,7 +151,8 @@ return {
   },
   {
     label = {
-      "SPARQL Protocol And RDF Query Language"
+      "SPARQL Protocol And RDF Query Language",
+      id = "stuff"
     },
     level = 2,
     link = "dest16",
@@ -145,7 +161,8 @@ return {
   },
   {
     label = {
-      "RDFS"
+      "RDFS",
+      id = "stuff"
     },
     level = 2,
     link = "dest17",
@@ -154,7 +171,8 @@ return {
   },
   {
     label = {
-      "OWL"
+      "OWL",
+      id = "stuff"
     },
     level = 2,
     link = "dest18",
@@ -163,7 +181,8 @@ return {
   },
   {
     label = {
-      "Problemi di ricerca"
+      "Problemi di ricerca",
+      id = "stuff"
     },
     level = 1,
     link = "dest19",
@@ -172,7 +191,8 @@ return {
   },
   {
     label = {
-      "Risolvere problemi con la ricerca"
+      "Risolvere problemi con la ricerca",
+      id = "stuff"
     },
     level = 2,
     link = "dest20",
@@ -181,7 +201,8 @@ return {
   },
   {
     label = {
-      "Algoritmi di ricerca"
+      "Algoritmi di ricerca",
+      id = "stuff"
     },
     level = 2,
     link = "dest21",
@@ -190,7 +211,8 @@ return {
   },
   {
     label = {
-      "Ricerca non informata"
+      "Ricerca non informata",
+      id = "stuff"
     },
     level = 2,
     link = "dest22",
@@ -199,7 +221,8 @@ return {
   },
   {
     label = {
-      "Backtracking Search"
+      "Backtracking Search",
+      id = "stuff"
     },
     level = 3,
     link = "dest23",
@@ -208,7 +231,8 @@ return {
   },
   {
     label = {
-      "Depth-First Search"
+      "Depth-First Search",
+      id = "stuff"
     },
     level = 3,
     link = "dest24",
@@ -217,7 +241,8 @@ return {
   },
   {
     label = {
-      "Breadth-First Search"
+      "Breadth-First Search",
+      id = "stuff"
     },
     level = 3,
     link = "dest25",
@@ -226,16 +251,18 @@ return {
   },
   {
     label = {
-      "Iterative-Deepening Search"
+      "Iterative-Deepening Search",
+      id = "stuff"
     },
     level = 3,
     link = "dest26",
     number = "3.3.4",
-    pageno = "33"
+    pageno = "34"
   },
   {
     label = {
-      "Uniform Cost Search"
+      "Uniform Cost Search",
+      id = "stuff"
     },
     level = 3,
     link = "dest27",
@@ -244,7 +271,8 @@ return {
   },
   {
     label = {
-      "Ricerca informata"
+      "Ricerca informata",
+      id = "stuff"
     },
     level = 2,
     link = "dest28",
@@ -253,7 +281,8 @@ return {
   },
   {
     label = {
-      "Greedy Search"
+      "Greedy Search",
+      id = "stuff"
     },
     level = 3,
     link = "dest29",
@@ -262,7 +291,8 @@ return {
   },
   {
     label = {
-      "A* Search"
+      "A* Search",
+      id = "stuff"
     },
     level = 3,
     link = "dest30",
@@ -271,7 +301,8 @@ return {
   },
   {
     label = {
-      "Problemi di planning"
+      "Problemi di planning",
+      id = "stuff"
     },
     level = 1,
     link = "dest31",
@@ -280,7 +311,8 @@ return {
   },
   {
     label = {
-      "Planning classico"
+      "Planning classico",
+      id = "stuff"
     },
     level = 2,
     link = "dest32",
@@ -289,7 +321,8 @@ return {
   },
   {
     label = {
-      "STRIPS"
+      "STRIPS",
+      id = "stuff"
     },
     level = 3,
     link = "dest33",
@@ -298,7 +331,8 @@ return {
   },
   {
     label = {
-      "PDDL"
+      "PDDL",
+      id = "stuff"
     },
     level = 3,
     link = "dest34",
@@ -307,7 +341,8 @@ return {
   },
   {
     label = {
-      "Planning probabilistico: filtri Bayesiani"
+      "Planning probabilistico: filtri Bayesiani",
+      id = "stuff"
     },
     level = 2,
     link = "dest35",
@@ -316,7 +351,8 @@ return {
   },
   {
     label = {
-      "Planning probabilistico: MDP"
+      "Planning probabilistico: MDP",
+      id = "stuff"
     },
     level = 2,
     link = "dest36",
@@ -325,7 +361,8 @@ return {
   },
   {
     label = {
-      "Supervised Learning"
+      "Supervised Learning",
+      id = "stuff"
     },
     level = 1,
     link = "dest37",
@@ -334,7 +371,8 @@ return {
   },
   {
     label = {
-      "Introduzione all'apprendimento supervisionato"
+      "Introduzione all'apprendimento supervisionato",
+      id = "stuff"
     },
     level = 2,
     link = "dest38",
@@ -343,7 +381,8 @@ return {
   },
   {
     label = {
-      "Apprendimento con modello: alberi di decisione"
+      "Apprendimento con modello: alberi di decisione",
+      id = "stuff"
     },
     level = 2,
     link = "dest39",
@@ -352,7 +391,8 @@ return {
   },
   {
     label = {
-      "Valutare modelli di classificazione"
+      "Valutare modelli di classificazione",
+      id = "stuff"
     },
     level = 2,
     link = "dest40",
@@ -361,7 +401,8 @@ return {
   },
   {
     label = {
-      "Apprendimento senza modello: K-nearest neighbour"
+      "Apprendimento senza modello: K-nearest neighbour",
+      id = "stuff"
     },
     level = 2,
     link = "dest41",
@@ -370,7 +411,8 @@ return {
   },
   {
     label = {
-      "Metodi ensemble"
+      "Metodi ensemble",
+      id = "stuff"
     },
     level = 2,
     link = "dest42",
@@ -379,7 +421,8 @@ return {
   },
   {
     label = {
-      "Bagging"
+      "Bagging",
+      id = "stuff"
     },
     level = 3,
     link = "dest43",
@@ -388,7 +431,8 @@ return {
   },
   {
     label = {
-      "Boosting"
+      "Boosting",
+      id = "stuff"
     },
     level = 3,
     link = "dest44",
@@ -397,7 +441,8 @@ return {
   },
   {
     label = {
-      "Unsupervised Learning"
+      "Unsupervised Learning",
+      id = "stuff"
     },
     level = 1,
     link = "dest45",
@@ -406,7 +451,8 @@ return {
   },
   {
     label = {
-      "Introduzione all'apprendimento non supervisionato"
+      "Introduzione all'apprendimento non supervisionato",
+      id = "stuff"
     },
     level = 2,
     link = "dest46",
@@ -415,7 +461,8 @@ return {
   },
   {
     label = {
-      "Clustering basato su partizioni: K-means"
+      "Clustering basato su partizioni: K-means",
+      id = "stuff"
     },
     level = 2,
     link = "dest47",
@@ -424,7 +471,8 @@ return {
   },
   {
     label = {
-      "Clustering basato su densitá: DBSCAN"
+      "Clustering basato su densitá: DBSCAN",
+      id = "stuff"
     },
     level = 2,
     link = "dest48",
@@ -433,7 +481,8 @@ return {
   },
   {
     label = {
-      "Deep Learning"
+      "Deep Learning",
+      id = "stuff"
     },
     level = 1,
     link = "dest49",
@@ -442,7 +491,8 @@ return {
   },
   {
     label = {
-      "Percettrone"
+      "Percettrone",
+      id = "stuff"
     },
     level = 2,
     link = "dest50",
@@ -451,7 +501,8 @@ return {
   },
   {
     label = {
-      "Deep Learning"
+      "Deep Learning",
+      id = "stuff"
     },
     level = 2,
     link = "dest51",
@@ -460,25 +511,28 @@ return {
   },
   {
     label = {
-      "Funzioni di attivazione"
+      "Funzioni di attivazione",
+      id = "stuff"
     },
     level = 2,
     link = "dest52",
     number = "7.3",
-    pageno = "60"
+    pageno = "61"
   },
   {
     label = {
-      "Sigmoide"
+      "Sigmoide",
+      id = "stuff"
     },
     level = 3,
     link = "dest53",
     number = "7.3.1",
-    pageno = "60"
+    pageno = "61"
   },
   {
     label = {
-      "Tangente iperbolica"
+      "Tangente iperbolica",
+      id = "stuff"
     },
     level = 3,
     link = "dest54",
@@ -487,7 +541,8 @@ return {
   },
   {
     label = {
-      "Rectifier Linear Unit (ReLU)"
+      "Rectifier Linear Unit (ReLU)",
+      id = "stuff"
     },
     level = 3,
     link = "dest55",
@@ -496,7 +551,8 @@ return {
   },
   {
     label = {
-      "Leaky ReLU"
+      "Leaky ReLU",
+      id = "stuff"
     },
     level = 3,
     link = "dest56",
@@ -505,25 +561,28 @@ return {
   },
   {
     label = {
-      "Parametric ReLU"
+      "Parametric ReLU",
+      id = "stuff"
     },
     level = 3,
     link = "dest57",
     number = "7.3.5",
-    pageno = "61"
+    pageno = "62"
   },
   {
     label = {
-      "Exponential Linear Unit (ELU)"
+      "Exponential Linear Unit (ELU)",
+      id = "stuff"
     },
     level = 3,
     link = "dest58",
     number = "7.3.6",
-    pageno = "61"
+    pageno = "62"
   },
   {
     label = {
-      "Reinforcement Learning"
+      "Reinforcement Learning",
+      id = "stuff"
     },
     level = 1,
     link = "dest59",
@@ -532,7 +591,8 @@ return {
   },
   {
     label = {
-      "Introduzione all'apprendimento con rinforzo"
+      "Introduzione all'apprendimento con rinforzo",
+      id = "stuff"
     },
     level = 2,
     link = "dest60",
@@ -541,7 +601,8 @@ return {
   },
   {
     label = {
-      "Q Learning"
+      "Q Learning",
+      id = "stuff"
     },
     level = 2,
     link = "dest61",
@@ -550,7 +611,8 @@ return {
   },
   {
     label = {
-      "Appendice"
+      "Appendice",
+      id = "stuff"
     },
     level = 1,
     link = "dest62",
@@ -558,7 +620,8 @@ return {
   },
   {
     label = {
-      "Teoria della probabilita"
+      "Teoria della probabilita",
+      id = "stuff"
     },
     level = 2,
     link = "dest63",
@@ -566,7 +629,8 @@ return {
   },
   {
     label = {
-      "Contrazioni"
+      "Contrazioni",
+      id = "stuff"
     },
     level = 2,
     link = "dest64",

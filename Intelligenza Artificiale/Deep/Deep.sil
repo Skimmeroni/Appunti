@@ -30,6 +30,64 @@
 	dei percettroni probabilistici, l'output di ciascun percettrone non
 	é \math{\pm 1} ma bensí una probabilitá.
 
+	Si consideri l'\math{i}-esimo strato della rete neurale. Questa
+	sará composta da un certo numero \math{m} di percettroni. Ciascun
+	\math{j}-esimo percettrone avrá un proprio output, \math{a_{j}^{i}}.
+	Tale output é interamente determinato dai percettroni dello strato
+	\math{i - 1}-esimo: in particolare, questo sará dato dall'applicare
+	la funzione di attivazione al prodotto scalare fra il vettore dei
+	pesi dei percettroni dello strato \math{i - 1}-esimo ed i loro
+	valori di output. Assumendo, senza perdita di generalitá, di stare
+	usando la funzione sigmoidea come funzione di attivazione, si ha:
+
+	\begin[mode = display]{math}
+		a_{j}^{(i)} = \mi{sig} (w_{j, 0} a_{0}^{(i - 1)} + w_{j, 1} a_{1}^{(i - 1)} + \unicodeellipsis + w_{j, n} a_{n}^{(i - 1)})
+	\end{math}
+
+	Dove \math{n} é il numero di percettroni del \math{i - 1}-esimo strato,
+	che potrebbe essere distinto da \math{m}. Gli output dell'intero strato
+	\math{i}-esimo di percettroni é allora dato da:
+
+	\begin[mode = display]{math}
+		\table{
+			a_{0}^{(i)} = \mi{sig} (w_{0, 0} a_{0}^{(i - 1)} + w_{0, 1} a_{1}^{(i - 1)} + \unicodeellipsis + w_{0, n} a_{n}^{(i - 1)}) \\
+			a_{1}^{(i)} = \mi{sig} (w_{1, 0} a_{0}^{(i - 1)} + w_{1, 1} a_{1}^{(i - 1)} + \unicodeellipsis + w_{1, n} a_{n}^{(i - 1)}) \\
+			\unicodeellipsis \\
+			a_{m}^{(i)} = \mi{sig} (w_{m, 0} a_{0}^{(i - 1)} + w_{m, 1} a_{1}^{(i - 1)} + \unicodeellipsis + w_{m, n} a_{n}^{(i - 1)}) \\
+		}
+	\end{math}
+
+	Questa struttura puó essere facilmente ricondotta ad una matrice:
+
+	\begin[width = 65%fw]{parbox}
+		\begin[mode = display]{math}
+			[\table{
+				a_{0}^{(i)} \\
+				\unicodecdots \\
+				a_{m}^{(i)} \\
+			}]
+			= \mi{sig} {(
+			[\table{
+				w_{0, 0} & w_{0, 1} & \unicodecdots & w_{0, n} \\
+				\vdots   & \ddots   & \vdots        & \vdots   \\
+				w_{m, 0} & w_{m, 1} & \unicodecdots & w_{m, n} \\
+			}]
+			[\table{
+				a_{0}^{(i - 1)} \\
+				a_{1}^{(i - 1)} \\
+				\unicodecdots \\
+				a_{n}^{(i - 1)} \\
+			}]
+			)}
+		\end{math}
+	\end{parbox}
+	\begin[width = 35%fw]{parbox}
+		\begin[mode = display]{math}
+			{\bi{A}}^{(i)} = \mi{sig} {(\bi{W} {\bi{A}}^{(i - 1)})}
+		\end{math}
+	\end{parbox}
+	\par
+
 	Ci si chiede peró come possa un insieme di percettroni aggiornare
 	i vettori dei pesi di ciascuno di questi allo stesso modo in cui
 	un singolo percettrone é in grado di farlo. L'approccio piú semplice
