@@ -14,7 +14,7 @@
 		sottoinsieme \math{0, ..., k} ripetendo il procedimento fino a quando
 		\math{k = n} (ovvero, tutto l'array é ordinato).
 
-		\begin{codeblock}
+		\begin{code}
 			\begin{verbatim}
 				values = [...]
 				\bigskip
@@ -28,11 +28,11 @@
 				\bigskip
 				print(values)
 			\end{verbatim}
-		\end{codeblock}
+		\end{code}
 
 	\subsection{Selection sort}
 
-		\begin{codeblock}
+		\begin{code}
 			\begin{verbatim}
 				values = [...]
 
@@ -49,11 +49,11 @@
 				\bigskip
 				print(values)
 			\end{verbatim}
-		\end{codeblock}
+		\end{code}
 
 	\subsection{Bubble sort}
 
-		\begin{codeblock}
+		\begin{code}
 			\begin{verbatim}
 				values = [...] 
 				isSorted = False 
@@ -71,7 +71,7 @@
 				\bigskip
 				print(values)
 			\end{verbatim}
-		\end{codeblock}
+		\end{code}
 
 	\subsection{Merge sort}
 
@@ -104,7 +104,7 @@
 			\end{row}
 		\end{ptable}
 
-		\begin{codeblock}
+		\begin{code}
 			\begin{verbatim}
 				values = [...]
 
@@ -163,7 +163,7 @@
 				mergesort(values, 0, len(values) - 1)
 				print(values)
 			\end{verbatim}
-		\end{codeblock}
+		\end{code}
 
 	\subsection{Counting sort}
 
@@ -184,7 +184,7 @@
 		da sinistra a destra quante volte compare (anche zero volte) ciascun 
 		\math{i}-esimo valore di \math{A} desumendoli da \math{B}.
 
-		\begin{codeblock}
+		\begin{code}
 			\begin{verbatim}
 				values = [...] 
 
@@ -213,6 +213,6 @@
 				\bigskip
 				print(result)
 			\end{verbatim}
-		\end{codeblock}
+		\end{code}
 
 \end{sile}

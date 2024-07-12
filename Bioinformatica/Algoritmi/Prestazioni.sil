@@ -23,7 +23,7 @@
 	é \math{k \cdot c_{i}}. Il tempo di esecuzione complessivo é dato dalla somma 
 	dei tempi di esecuzione parziali delle singole istruzioni.
 
-	\begin{examplebox}
+	\begin{example}
 		Si consideri l'algoritmo di ordinamento Insertion sort. L'istruzione 1 
 		viene necessariamente eseguita tante volte quanto vale la dimensione 
 		dell'input, ovvero \math{n}, perché per ciascun valore dell'array in 
@@ -124,7 +124,7 @@
 				   c_{6} \cdot \sum_{i = 0}^{n - 1} {(m_{i} - 1)} + 
 				   c_{7} \cdot {(n - 1)}
 		\end{math}
-	\end{examplebox}
+	\end{example}
 
 	Naturalmente, l'input passato ad un algoritmo influisce su quante volte deve 
 	eseguire i suoi passi. Ad esempio, se ad un algoritmo di ordinamento viene
@@ -140,7 +140,7 @@
 	Individuare i due casi non é una operazione scontata, ed algoritmi diversi
 	hanno casi migliori/peggiori diversi.
 
-	\begin{examplebox}
+	\begin{example}
 		Per quanto riguarda Insertion sort, il caso migliore si ha quando i 
 		valori passati in input sono giá di per loro ordinati, perché l'istruzione 
 		4 viene eseguita una volta sola per ciascun ciclo e le istruzioni 5 e 6 
@@ -213,7 +213,7 @@
 		Si noti come le istruzioni 1, 2, 3 e 7 dipendano esclusivamente dalla 
 		dimensione dell'input, pertanto vengono eseguite comunque a prescindere 
 		che si stia trattando il caso migliore o peggiore.
-	\end{examplebox}
+	\end{example}
 
 	Analizzare il tempo di esecuzione di algoritmi ricorsivi é molto piú 
 	complesso. Algoritmi ricorsivi possono essere analizzati mediante una
@@ -228,7 +228,7 @@
 	sempre facile, perché richiede di utilizzare manipolazioni algebriche 
 	non scontate.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 25%fw]{parbox}
 			\begin[mode = display]{math}
 				T(n) = \{\table[columnalign = left right]{
@@ -253,7 +253,7 @@
 		accade quando \math{n/2^{i} = 1}, ovvero quando \math{i = log_{2}(n)}. 
 		Ponendo \math{i = log_{2}(n)} é possibile concludere \math{T(n) = c log(n) 
 		+ T(1) \in O(log(n))}.
-	\end{examplebox}
+	\end{example}
 
 	Se la relazione di ricorrenza é forma presentata di seguito, é possibile 
 	ricavare il tempo di esecuzione mediante un teorema chiamato \strong{teorema 
@@ -325,11 +325,11 @@
 		\end{item}
 	\end{itemize}
 
-	\begin{examplebox}
+	\begin{example}
 		É possibile verificare che, per Insertion Sort, 
 		\math{T_{best} \in O(n)} e \math{T_{worst} \in O(n^{2})}.
 		Ovvero, \math{T_{best}} e \math{T_{worst}} crescono piú
 		rapidamente di, rispettivamente, \math{n} e \math{n^{2}}
-	\end{examplebox}
+	\end{example}
 
 \end{sile}

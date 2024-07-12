@@ -17,7 +17,7 @@
 	secondo l'ordine lessicografico, del suffisso che inizia alla posizione 
 	\math{Pos[i+1]}.
 
-	\begin{examplebox}
+	\begin{example}
 		Data la stringa \em{T = mississippi$}, si ha 
 		\math{Pos = [12, 11, 8, 5, 2, 1, 10, 9, 7, 4, 6, 3]}. Infatti:
 		% \begin[mode = display]{math}
@@ -45,7 +45,7 @@
 				\cell{ssippi$} \cell{ssissippi$}
 			\end{row}
 		\end{ptable}
-	\end{examplebox}
+	\end{example}
 
 	Costruire un array dei suffissi a partire da una stringa é possibile, ma 
 	estremamente complesso. É peró possibile convertire un albero dei suffissi
@@ -74,7 +74,7 @@
 
 	\pagebreak
 
-	\begin{examplebox}
+	\begin{example}
 		\center{\img[src = Suffix/suffix_tree2.pdf, width = 75%fw]}
 
 		\begin{enumerate}
@@ -129,6 +129,6 @@
 				3, 4, 1]}.
 			\end{item}
 		\end{enumerate}
-	\end{examplebox}
+	\end{example}
 
 \end{sile}

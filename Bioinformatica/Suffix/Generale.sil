@@ -17,9 +17,9 @@
 	un nodo foglia venga raggiunto piú volte, alla sua etichetta va aggiunta la
 	\math{i}-esima coppia indice-posizione.
 
-	\begin{examplebox}
+	\begin{example}
 		\center{\img[src = Suffix/suffix_tree3.pdf, width = 75%fw]}
-	\end{examplebox}
+	\end{example}
 
 	Un \strong{array dei suffissi generalizzato} (\strong{generalized suffix array}) 
 	é un array dei suffissi che non contiene i suffissi disposti in ordine 

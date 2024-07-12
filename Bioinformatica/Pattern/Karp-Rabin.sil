@@ -25,14 +25,14 @@
 		\end{math}
 	\end{parbox}
 
-	\begin{examplebox}
+	\begin{example}
 		Se \math{P = 0101}, allora \math{H(P) = 2^{3} \times 0 + 2^{2} \times 1 + 
 		2^{1} \times 0 + 2^{0} \times 1 = 5}.
 
 		Se \math{T = 101101010}, \math{n = 4} e \math{r = 2} allora 
 		\math{H(T_{r}^{n}) = 2^{3} \times 0 + 2^{2} \times 1 +
 		2^{1} \times 1 + 2^{0} \times 0 = 6}.
-	\end{examplebox}
+	\end{example}
 
 	Ogni numero binario ha una ed una sola rappresentazione in forma decimale. 
 	Pertanto, se \math{H(P) = H(T_{r}^{n})}, allora il numero binario/stringa 
@@ -81,7 +81,7 @@
 		X[n]\} \mo[atom = bin]{mod} p
 	\end{math}
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 50%fw]{parbox}
 			Siano \math{P = 101111} e \math{p = 7}. Si ha allora che \math{H_{p}(P) =
 			101111 \mo[atom = bin]{mod} 7 = 47 \mo[atom = bin]{mod} 7 = 5}. Il valore
@@ -100,7 +100,7 @@
 				}
 			\end{math}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Calcolare \math{H_{p}(P)} e \math{H_{p}(T_{r}^{n})} in questo modo permette
 	inoltre di operare con numeri di dimensione contenuta anche durante tutti 
@@ -162,7 +162,7 @@
 
 	\bigskip
 
-	\begin{codeblock}
+	\begin{code}
 		\begin{verbatim}
 			T = "..." 
 			P = "..." 
@@ -193,7 +193,7 @@
 			\bigskip
 			print(occurrences)
 		\end{verbatim}
-	\end{codeblock}
+	\end{code}
 
 	\subsection{Ottimizzazione: ricerca di un \math{p} efficiente}
 
@@ -312,7 +312,7 @@
 		\math{H_{p}(T_{r}^{n})}. Una regola empirica stabilisce che un buon 
 		candidato per il valore di \math{I} é \math{nm^{2}}.
 
-		\begin{examplebox}
+		\begin{example}
 			Siano dati un pattern \math{P} di lunghezza \math{n = 250} ed un tetso 
 			\math{T} di lunghezza \math{m = 4000}. Ponendo \math{I = nm^{2}} si ha,
 			in virtú del Teorema di Hadamard-Poussin:
@@ -327,7 +327,7 @@
 
 			Ovvero, la probabilitá che si verifichi almeno un falso positivo 
 			nella ricerca di \math{P} in \math{T} é circa del 0.04\%.
-		\end{examplebox}
+		\end{example}
 
 	\subsection{Ottimizzazione: utilizzare piú fingerprint}
 

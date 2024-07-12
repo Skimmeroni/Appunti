@@ -29,7 +29,7 @@
 		\unicodeellipsis + {s(S_{1}'[l], S_{2}'[l])}
 	\end{math}
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 40%fw]{parbox}
 			\begin[cols = 15%fw 15%fw 15%fw 15%fw 15%fw 15%fw]{ptable}
 				\begin{row}
@@ -65,7 +65,7 @@
 				0 + 1 + \unicodeellipsis + 3 - 1 = 4
 			\end{math}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Ciascun \math{s(x, y)} é un intero che puó essere positivo, negativo o nullo, 
 	e non esiste una regola univoca per assegnarvi dei valori "giusti". Inoltre, 

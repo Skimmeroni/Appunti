@@ -8,13 +8,13 @@
 	rispettivamente il suffisso di \math{S} che inizia in posizione \math{Pos[i]} 
 	ed il suffisso di \math{S} che inizia in posizione \math{Pos[j]}.
 
-	\begin{examplebox}
+	\begin{example}
 		Si consideri l'array dei suffissi \math{Pos = [12, 11, 8, 5, 2, 1, 10, 9, 
 		7, 4, 6, 3]} associato a \math{S = mississippi$}. Le due posizioni 5 e 3 
 		sull'array dei suffissi corrispondono rispettivamente alle stringhe 
 		\math{ississippi} e \math{ippi}. Dato che il prefisso piú lungo che 
 		queste hanno in comune é \math{i}, si ha \math{Lcp(5, 3) = 1}.
-	\end{examplebox}
+	\end{example}
 
 	Calcolare tutti i possibili valori LCP per una stringa é piuttosto 
 	complesso. Se peró si considerano solamente i valori LCP di posizioni 
@@ -46,7 +46,7 @@
 	nullo il valore LCP, perché significa che il prefisso piú lungo in comune alle
 	due string-depth é la stringa vuota.
 
-	\begin{examplebox}
+	\begin{example}
 		Si consideri l'albero dei suffissi dell'esempio precedente, che ha 
 		associato l'array dei suffissi \math{Pos = [7, 5, 2, 6, 3, 4, 1]}. 
 
@@ -58,7 +58,7 @@
 		Si voglia invece calcolare \math{Lcp(3,4)}: dato che \math{Pos[3] = 2} 
 		e \math{Pos[4] = 6} hanno come \math{lca} la radice, che per definizione 
 		ha string-depth nulla, si ha \math{Lcp(3,4) = 0}.
-	\end{examplebox}
+	\end{example}
 
 	Una volta noto come ricavare i valori LCP di nodi adiacenti ed un array 
 	dei suffissi a partire da un albero dei suffissi, é possibile operare il
@@ -73,7 +73,7 @@
 	dei nodi foglia puó essere dedotta semplicemente percorrendo ordinatamente le 
 	stringhe riportate nell'array dei suffissi.
 
-	\begin{examplebox}
+	\begin{example}
 		Si consideri la stringa \em{rattata$}. Siano dati l'array dei suffissi ed i 
 		valori LCP contigui:
 
@@ -127,6 +127,6 @@
 		\bigskip
 
 		\center{\img[src = Suffix/suffix_tree5.pdf, width = 50%fw]}
-	\end{examplebox}
+	\end{example}
 
 \end{sile}

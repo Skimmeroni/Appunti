@@ -12,7 +12,7 @@
 	i primi \math{i} caratteri di \math{P} coincidono con gli \math{i} caratteri 
 	di \math{T} che terminano al carattere \math{j}, altrimenti é 0. 
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 25%fw]{parbox}
 			\begin[cols = 100%fw, cellborder = 0]{ptable}
 				\row{\cell{T = abracadabra}}
@@ -28,7 +28,7 @@
 				}]
 			\end{math}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Questo significa che se si ha \math{M(n,j) = 1} allora l'intera stringa 
 	\math{P} é contenuta in \math{T} terminando alla posizione \math{j} di 
@@ -44,7 +44,7 @@
 	contiene il valore 1 se \math{x} coincide con l'\math{i}-esimo 
 	carattere di \math{P}, e 0 altrimenti.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 30%fw]{parbox}
 			\math{P} = abx
 		\end{parbox}
@@ -60,7 +60,7 @@
 		\begin[width = 17.5%fw]{parbox}
 			\math{\unicodeellipsis}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Sia \math{\mi{Bit-Shift}(x)} una operazione sui vettori colonna, che 
 	restituisce il vettore \math{x} facendo scalare tutti gli elementi di 
@@ -69,14 +69,14 @@
 	trasposto, \math{\mi{Bit-Shift}(x)} si ottiene eseguendo uno shift a 
 	destra su \math{x} e accodando un 1 a sinistra.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[mode = display]{math}
 			\mi{Bit-Shift} {({[\table{0 \\ 0 \\ 1 \\ 0 \\ 1 \\ }]})} =
 			\mi{Bit-Shift} {({[\table{0 & 0 & 1 & 0 & 1 \\ }]})^{T}} = 
 			{[\table{1 & 0 & 0 & 1 & 0 \\ }]}^{T} =
 			{[\table{1 \\ 0 \\ 0 \\ 1 \\ 0 \\ }]}
 		\end{math}
-	\end{examplebox}
+	\end{example}
 
 	La matrice \math{M} viene costruita colonna per colonna. Il primo passo é 
 	inizializzare i valori della prima colonna di \math{M}: se \math{T[1] \ne 
@@ -103,7 +103,7 @@
 	\end{parbox}
 	\par
 
-	\begin{codeblock}
+	\begin{code}
 		\begin{verbatim}
 			T = "..."
 			P = "..."
@@ -138,7 +138,7 @@
 			\bigskip
 			print(occurrences)
 		\end{verbatim}
-	\end{codeblock}
+	\end{code}
 
 	Per convincersi della correttezza dell'algoritmo é sufficiente osservare che, 
 	per ogni \math{i > 1}, il valore di \math{M[i, j]} é 1 se e soltanto se sono 

@@ -30,7 +30,7 @@
 	stringa genomica della specie (non necessariamente vivente) che etichetta 
 	\math{v_{j}}.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 40%fw, strut = character, valign = middle]{parbox}
 			\begin[cols = 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw]{ptable}
 				\begin{row}
@@ -65,7 +65,7 @@
 		\begin[width = 60%fw, strut = character, valign = middle]{parbox}
 			\center{\img[src = Filogenesi/big1.pdf, width = 50%fw]}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Noto un albero delle distanze, é possibile ricavare la distanza fra una 
 	specie \math{S_{i}} ed una specie \math{S_{j}} sommando le etichette del 
@@ -108,7 +108,7 @@
 		distanza cosí definita é detta \strong{distanza ultrametrica} e la matrice 
 		associata all'albero é detta \strong{matrice ultrametrica}.
 
-		\begin{examplebox}
+		\begin{example}
 			L'albero precedente, e di conseguenza la matrice precedente, non erano 
 			ultrametriche. Lo sono invece, ad esempio, le rispettive versioni 
 			modificate riportate di seguito:
@@ -153,7 +153,7 @@
 			\begin[width = 60%fw, strut = character, valign = middle]{parbox}
 				\center{\img[src = Filogenesi/big2.pdf, width = 50%fw]}
 			\end{parbox}
-		\end{examplebox}
+		\end{example}
 
 		La distanza ultrametrica ha, oltre a tutte le proprietá della distanza, una
 		proprietá aggiuntiva. Presi tre elementi \math{a}, \math{b} e \math{c}, il 

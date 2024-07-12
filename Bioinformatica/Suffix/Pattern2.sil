@@ -7,14 +7,14 @@
 	le altre occorrenze (se ce ne sono) di \math{P} in \math{T} vanno cercate 
 	nelle posizioni contigue a \math{i}. 
 
-	\begin{examplebox}
+	\begin{example}
 		Siano \math{T = tartar$} e \math{P = ta}. L'array dei suffissi 
 		associato a \math{T} é \math{Pos = [7, 5, 2, 6, 3, 4, 1]}. Le 
 		occorrenze di \math{P} in \math{T} sono due, rispettivamente in 
 		posizione 1 e 4. Non a caso, i valori 1 e 4 sono adiacenti in 
 		\math{Pos}, e corrispondono ai suffissi \math{tartar$} e 
 		\math{tar$} di \math{T}.
-	\end{examplebox}
+	\end{example}
 
 	Nello specifico, é possibile trovare le occorrenze di \math{P} in \math{T} 
 	mediante ricerca binaria sull'array dei suffissi. Si considera l'elemento di 
@@ -47,7 +47,7 @@
 		\end{item}
 	\end{itemize}
 
-	\begin{examplebox}
+	\begin{example}
 		Siano \math{T = mississippi$} e \math{P = issi}. Il relativo array dei 
 		suffissi é \math{Pos = [12, 11, 8, 5, 2, 1, 10, 9, 7, 4, 6, 3]}, di 
 		lunghezza \math{m}.
@@ -79,7 +79,7 @@
 				e 5.
 			\end{item}
 		\end{itemize}
-	\end{examplebox}
+	\end{example}
 
 	Un algoritmo di questo tipo, essendo di fatto una ricerca binaria, ha tempo
 	di esecuzione logaritmico. Nello specifico, il tempo di esecuzione per la 

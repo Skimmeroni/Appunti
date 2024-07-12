@@ -67,7 +67,7 @@
 	\em{ottimale}. Si noti come la trascrizione ottimale non sia necessariamente 
 	univoca, ma possano esservene diverse aventi tutte la stessa lunghezza.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 35%fw]{parbox}
 			\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw, cellborder = 0]{ptable}
 				\begin{row}
@@ -95,7 +95,7 @@
 			quei caratteri in quelle posizioni sono giá corretti. Pertanto, si ha
 			che \math{d(S_{1}, S_{2}) = 5}.
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	É possibile descrivere meccanicamente il procedimento di trasformazione di
 	una stringa in un'altra come segue. Siano \math{S_{1}} ed \math{S_{2}} due
@@ -313,7 +313,7 @@
 	la distanza di modifica fra due stringhe ha un tempo di esecuzione di circa 
 	\math{O(mn)}.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 50%fw]{parbox}
 			\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
 				\begin{row}
@@ -402,9 +402,9 @@
 				\end{row}
 			\end{ptable}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
-	\begin{codeblock}
+	\begin{code}
 		\begin{verbatim}
 			S1 = "..."
 			S2 = "..."
@@ -439,7 +439,7 @@
 			\bigskip
 			print(Lev[m - 1][n - 1])            # The solution is the last entry
 		\end{verbatim}
-	\end{codeblock}
+	\end{code}
 
 	Oltre a calcolare la lunghezza delle trascrizioni ottimali, é possibile 
 	estendere l'algoritmo per ricavare tali trascrizioni. Mentre la tabella 
@@ -477,7 +477,7 @@
 	operazioni stanno venendo lette dall'ultima alla prima, la trascrizione 
 	ottimale si ottiene leggendo tale stringa in ordine inverso.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw]{ptable}
 			\begin{row}
 				\cell{} \cell{} \cell{\strong{w}} \cell{\strong{r}} \cell{\strong{i}}
@@ -571,7 +571,7 @@
 		Seguendo tutti i possibili percorsi definiti dai puntatori, si ha che vi sono
 		tre possibili trascrizioni ottimali: \math{RIMDMDMMI}, \math{IRMDMDMMI} e 
 		\math{RRRMDMMI}. Come ci si aspettava, tutte e tre hanno la stessa lunghezza.
-	\end{examplebox}
+	\end{example}
 
 	Una volta che la tabella é stata costruita, ripercorrerla per ricavare le
 	trascrizioni ottimali richiede un tempo di esecuzione \math{O(n + m)}, 

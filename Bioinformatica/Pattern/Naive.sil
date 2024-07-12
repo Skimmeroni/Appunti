@@ -6,12 +6,12 @@
 	trovare, se ne esistono, tutte le occorrenze di \math{P} all'interno di 
 	\math{T}.
 
-	\begin{examplebox}
+	\begin{example}
 		Con \math{P = aba} e \math{T = bbabaxababay}, vi sono tre occorrenze di 
 		P all'interno di T, in particolare alle posizioni 3, 7 e 9 di T. Si noti 
 		che é ammesso che diverse occorrenze si sovrappongano, come accade alle 
 		occorrenze in posizione 7 e 9 di T.
-	\end{examplebox}
+	\end{example}
 
 	Il metodo di risoluzione piú semplice e intuitivo per risolvere il 
 	problema dell'appaiamento esatto é quello che viene chiamato \strong{algoritmo 
@@ -25,7 +25,7 @@
 	destra; l'algoritmo termina quando la posizione dell'estremo destro di 
 	\math{P} supera quella dell'estremo destro di \math{T}.
 
-	\begin{codeblock}
+	\begin{code}
 		\begin{verbatim}
 			occurrences = 0                                   # Number of occurrences
 			P = "..."                                         # Pattern
@@ -44,7 +44,7 @@
 			\bigskip
 			print(occurrences)
 		\end{verbatim}
-	\end{codeblock}
+	\end{code}
 
 	Siano \math{n} la lunghezza della stringa \math{P} e \math{m} la lunghezza
 	della stringa \math{T}. Il caso peggiore si ha quando esattamente ogni 

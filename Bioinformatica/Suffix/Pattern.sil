@@ -41,7 +41,7 @@
 	Questo accade se esiste un percorso che dalla radice dell'albero porta al 
 	(univoco) nodo etichettato \math{i}. 
 
-	\begin{examplebox}
+	\begin{example}
 		\center{\img[src = Suffix/suffix_tree4.pdf, width = 75%fw]}
 
 		\begin{itemize}
@@ -71,7 +71,7 @@
 				compare 0 volte nella parola \em{annalisa}.
 			\end{item}
 		\end{itemize}
-	\end{examplebox}
+	\end{example}
 
 	Per raggiungere il nodo radice del sottoalbero di interesse dove l'algoritmo
 	termina occorre compiere al massimo \math{m} passaggi. A questo punto servono

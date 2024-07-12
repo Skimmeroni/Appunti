@@ -449,11 +449,21 @@ return {
   },
   {
     label = {
+      "Allineamento globale di due sequenze",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest45",
+    number = "4.2",
+    pageno = "36"
+  },
+  {
+    label = {
       "Ricostruzione della filogenesi",
       id = "stuff"
     },
     level = 1,
-    link = "dest45",
+    link = "dest46",
     number = "5",
     pageno = "37"
   },
@@ -463,7 +473,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest46",
+    link = "dest47",
     number = "5.1",
     pageno = "37"
   },
@@ -473,7 +483,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest47",
+    link = "dest48",
     number = "5.2",
     pageno = "37"
   },
@@ -483,7 +493,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest48",
+    link = "dest49",
     number = "5.3",
     pageno = "39"
   },
@@ -493,7 +503,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest49",
+    link = "dest50",
     number = "5.3.1",
     pageno = "40"
   },
@@ -503,7 +513,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest50",
+    link = "dest51",
     number = "5.3.2",
     pageno = "41"
   },
@@ -513,7 +523,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest51",
+    link = "dest52",
     number = "5.4",
     pageno = "43"
   },
@@ -523,7 +533,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest52",
+    link = "dest53",
     number = "5.4.1",
     pageno = "44"
   },
@@ -533,7 +543,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest53",
+    link = "dest54",
     number = "5.4.2",
     pageno = "45"
   },
@@ -543,7 +553,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest54",
+    link = "dest55",
     number = "5.5",
     pageno = "46"
   },
@@ -553,7 +563,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest55",
+    link = "dest56",
     number = "5.5.1",
     pageno = "46"
   },
@@ -563,7 +573,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest56",
+    link = "dest57",
     number = "5.5.2",
     pageno = "47"
   },
@@ -573,7 +583,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest57",
+    link = "dest58",
     number = "5.6",
     pageno = "48"
   },
@@ -583,7 +593,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest58",
+    link = "dest59",
     number = "5.6.1",
     pageno = "48"
   },
@@ -593,7 +603,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest59",
+    link = "dest60",
     number = "5.6.2",
     pageno = "49"
   },
@@ -603,7 +613,7 @@ return {
       id = "stuff"
     },
     level = 3,
-    link = "dest60",
+    link = "dest61",
     number = "5.6.3",
     pageno = "49"
   },
@@ -613,7 +623,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest61",
+    link = "dest62",
     number = "6",
     pageno = "51"
   },
@@ -623,7 +633,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest62",
+    link = "dest63",
     number = "6.1",
     pageno = "51"
   },
@@ -633,7 +643,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest63",
+    link = "dest64",
     number = "6.2",
     pageno = "51"
   },
@@ -643,7 +653,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest64",
+    link = "dest65",
     number = "6.3",
     pageno = "53"
   },
@@ -653,7 +663,7 @@ return {
       id = "stuff"
     },
     level = 1,
-    link = "dest65",
+    link = "dest66",
     number = "7",
     pageno = "57"
   },
@@ -663,7 +673,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest66",
+    link = "dest67",
     number = "7.1",
     pageno = "57"
   },
@@ -673,7 +683,7 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest67",
+    link = "dest68",
     number = "7.2",
     pageno = "59"
   }

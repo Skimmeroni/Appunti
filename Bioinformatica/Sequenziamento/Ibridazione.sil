@@ -42,14 +42,14 @@
 	non essere raggiunti da alcun arco, pertanto possono essere soppressi. Un 
 	grafo cosí costruito viene chiamato \strong{Grafo di de Brujin}.
 
-	\begin{examplebox}
+	\begin{example}
 		Sia data la lista \math{L = \{AAA, AAC, ACA, CAC, CAA, ACG, CGC, GCA, ACT, 
 		CTT, TTA, TAA\}}. Avendosi \math{k = 3}, tutte le stringhe di lunghezza 
 		\math{k - 1 = 2} che possono essere costruite dagli elementi di \math{L},
 		escludendo i duplicati, sono \math{\{AA, AC, CA, CG, GC, CT, TT, TA\}}.
 
 		\center{\img[src = Sequenziamento/euler1.pdf, width = 75%fw]}
-	\end{examplebox}
+	\end{example}
 
 	Similmente al grafo di overlap, é possibile ricavare la stringa del DNA 
 	completo a partire dalle etichette degli archi/nodi del grafo di de 
@@ -194,7 +194,7 @@
 	proprietá che l'insieme delle sue sottostringhe di lunghezza \math{k} é 
 	esattamente l'insieme \math{L} che definisce \math{G(L)}.
 
-	% \begin{examplebox}
+	% \begin{example}
 		% Facendo riferimento alla lista \math{L} e al grafo \math{G(L)} dell'esempio 
 		% precedente, sia dato il percorso euleriano \math{\{AC, CA, AC, CG, GC, CA, 
 		% AA, AC, CT, TT, TA, AA, AA\}}. Le etichette degli archi percorsi lungo 
@@ -202,7 +202,7 @@
 		% Pertanto, la stringa definita dal percorso é \math{ACACGCAACTTAAA}. Si noti 
 		% come questo percorso euleriano non sia un circuito euleriano, perché \math{AC 
 		% \ne AA}.
-	% \end{examplebox}
+	% \end{example}
 
 	Una stringa \math{S} si dice \strong{compatibile} con \math{L} se e soltanto se
 	contiene ogni sottostringa in \math{L} e (assumendo che \math{L} contenga
@@ -246,13 +246,13 @@
 	% ciclica sulla stringa \math{S = \beta \delta} produce la stringa \math{S = 
 	% \delta \beta}.
 
-	% \begin{examplebox}
+	% \begin{example}
 		% Sia \math{S = ACACGCAACTTAAA}. Si supponga di voler suddividere la stringa
 		% nelle cinque sottostringhe \math{\alpha = AC}, \math{\beta = A}, \math{\gamma 
 		% = C}, \math{\delta = GCA} e \math{\epsilon = ACTTAAA}. Si ha allora che la
 		% rotazione applicata ad \math{S} restituisce la stringa \math{S^{'} = 
 		% ACGCACAACTTAAA}.
-	% \end{examplebox}
+	% \end{example}
 
 	% Sia data una lista \math{L} di sottostringhe ed un grafo \math{G} definito 
 	% come in precedenza. Ci si interroghi non sulla stringa specificata dall'unico 

@@ -49,7 +49,7 @@
 	mentre se contiene il valore \math{0} significa che la specie \math{i} non 
 	possiede il carattere \math{j}.
 
-	\begin{examplebox}
+	\begin{example}
 		Si consideri il seguente gruppo di animali: anguilla, leopardo, 
 		salamandra, scorpione, tartaruga, tonno. Si consideri poi il 
 		seguente insieme di caratteri morfologici: sacca amniotica, fauci, 
@@ -107,7 +107,7 @@
 				\end{item}
 			\end{itemize}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	La soluzione del problema della filogenesi perfetta viene allora ad essere un 
 	albero che \strong{spiega} la matrice \math{M}, ovvero che rappresenta le stesse 
@@ -141,7 +141,7 @@
 	lineare, il tempo di esecuzione complessivo dell'algoritmo di Gunsfeld é
 	lineare.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 40%fw, strut = character, valign = middle]{parbox}
 			\begin[cols = 20.5%fw 17.5%fw 16.5%fw 16.5%fw 17.5%fw 16.5%fw]{ptable}
 				\begin{row}
@@ -171,7 +171,7 @@
 		\begin[width = 60%fw, strut = character, valign = middle]{parbox}
 			\center{\img[src = Filogenesi/perfect.pdf, width = 75%fw]}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	I motivi per cui l'algoritmo funziona sono essenzialmente due. Il primo é da 
 	cercarsi in una proprietá della matrice \math{M}: per quanto sia possibile 
@@ -226,7 +226,7 @@
 		disgiunti o l'uno é interamente contenuto nell'altro, il teorema é dimostrato.
 	\end{theorem}
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 40%fw]{parbox}
 			\begin[cols = 16.5%fw 16.5%fw 16.5%fw 16.5%fw 16.5%fw 16.5%fw]{ptable}
 				\begin{row}
@@ -256,7 +256,7 @@
 			(il secondo elemento differisce nei due insiemi). Pertanto, non puó 
 			esistere un albero filogenetico che spieghi questa matrice.
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Il secondo motivo é legato all'algoritmo di ordinamento impiegato. Si osservi
 	infatti come radix sort, a differenza della maggior parte degli algoritmi di 

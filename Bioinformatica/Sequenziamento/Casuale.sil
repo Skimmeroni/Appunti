@@ -41,11 +41,11 @@
 	tutte le stringhe che fanno parte di \math{P}. Pertanto, almeno una 
 	superstringa esiste sempre per qualsiasi \math{P}.
 
-	\begin{examplebox}
+	\begin{example}
 		Sia \math{P = \{abcc, efab, bccla\}}. Una superstringa molto semplice per
 		\math{P} é \math{efababccbccla}. Un'altra superstringa per \math{P}, piú 
 		difficile da individuare, é \math{efabccla}.
-	\end{examplebox}
+	\end{example}
 
 	In relazione al problema del sequenziamento del DNA, la stringa che codifica
 	l'intero DNA é, con molta probabilitá, quella che ha la lunghezza minore 
@@ -66,14 +66,14 @@
 	state estratte da porzioni contigue di DNA. Un grafo di overlap a cui vengono 
 	rimossi gli archi transitivi prende il nome di \strong{grafo di stringhe}.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 50%fw]{parbox}
 			\img[src = Sequenziamento/overlap.pdf, width = 100%fw]
 		\end{parbox}
 		\begin[width = 50%fw]{parbox}
 			\img[src = Sequenziamento/string.pdf,  width = 100%fw]
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Noto il grafo di overlap associato ad un insieme di read, il 
 	sequenziamento del DNA puó essere ricavato percorrendo un cammino 
@@ -169,14 +169,14 @@
 		% \end{item}
 	% \end{enumerate}
 
-	% \begin{examplebox}
+	% \begin{example}
 		% Siano date le stringhe \math{S_{1} = abacd} e \math{S_{2} = acdef}. Il match
 		% piú lungo fra un suffisso di \math{S_{1}} ed un prefisso di \math{S_{2}} si 
 		% ha fra gli ultimi tre caratteri della prima ed i primi tre caratteri della
 		% seconda, pertanto \math{\mi{ov}(S_{1}, S_{2}) = 3}. Essendo \math{|S_{1}| = 
 		% 5}, si ha \math{p(S_{1}, S_{2}) = 5 - 3  = 2}. Infine, si ha \math{\mi{pref}
 		% (S_{1}, S_{2}) = S[1:2] = ab}.
-	% \end{examplebox}
+	% \end{example}
 
 	% Sia \math{L = o_{1}, o_{2}, \unicodeellipsis, o_{t}} un sottoinsieme 
 	% ordinato dei numeri interi che vanno da 1 a \math{t}. \math{L} definisce 
@@ -203,14 +203,14 @@
 		% \end{math}
 	% \end{parbox}
 
-	% \begin{examplebox}
+	% \begin{example}
 		% Siano date le stringhe \math{S_{o_{1}} = azwad}, 
 		% \math{S_{o_{2}} = adcste}, \math{S_{o_{3}} = stee} e 
 		% \math{S_{o_{4}} = eeaz}. Si ha \math{\mi{pref}(S_{o_{1}}, 
 		% S_{o_{2}}) = azw}, \math{\mi{pref}(S_{o_{2}}, S_{o_{3}}) = adc} 
 		% e \math{\mi{pref}(S_{o_{3}}, S_{o_{4}}) = st}. Pertanto, 
 		% \math{S(L) = azwadcsteeaz}.
-	% \end{examplebox}
+	% \end{example}
 
 	% Inoltre, é possibile dimostrare per induzione che \math{S(L)} é 
 	% una superstringa (non necessariamente la piú corta) dell'insieme 
@@ -249,13 +249,13 @@
 	% necessariamente presentare un overlap, altrimenti \math{S^{*}} potrebbe venire
 	% ulteriormente ridotta. Pertanto, \math{S^{*} = S(\Pi)}.
 
-	% \begin{examplebox}
+	% \begin{example}
 		% Sia \math{L = \{eeaz, adcste, azwad, stee\}}. Scambiando la terza stringa di 
 		% \math{P} con la prima e scambiando la (nuova) terza stringa con la quarta, si 
 		% ottiene \math{L^{'} = \{azwad, adcste, stee, eeaz\}}. Si ha allora \math{S(L) 
 		% = S(L^{'}) = azwadcsteeaz}. La permutazione che permette di ottenere 
 		% \math{L^{'}} a partire da \math{L} é \math{\Pi = 3, 2, 4, 1}.
-	% \end{examplebox}
+	% \end{example}
 
 	% Dato che \math{\Pi} definisce un insieme di stringhe ordinate, allo stesso 
 	% modo di \math{L}, Si ha che \math{|S(\Pi)|} si calcola con la stessa formula

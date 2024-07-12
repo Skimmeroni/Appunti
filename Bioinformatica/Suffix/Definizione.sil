@@ -10,9 +10,9 @@
 	stesso carattere. Esiste una corrispondenza biunivoca fra i percorsi che 
 	vanno dalla radice ai nodi foglia del suffix tree e i suffissi della stringa.
 
-	\begin{examplebox}
+	\begin{example}
 		\center{\img[src = Suffix/suffix_tree.pdf, width = 75%fw]}
-	\end{examplebox}
+	\end{example}
 
 	Dato un nodo \math{u} di un albero dei suffissi, Viene chiamata 
 	\strong{path-label} di \math{u} la stringa costruita concatenando 

@@ -119,7 +119,7 @@
 		i quali valori minimi siano contenuti in \math{D}, e calcolare il minimo fra
 		questi due.
 
-		\begin{examplebox}
+		\begin{example}
 			\begin[width = 25%fw]{parbox}
 				\begin[cols = 20%fw 20%fw 20%fw 20%fw 20%fw]{ptable}
 					\begin{row}
@@ -177,6 +177,6 @@
 				Leggendo i valori della tabella, il minimo valore di \math{A[3 : 8]} é 
 				dato da \math{\mi{min} {(D[3, 2], D[5, 2])} = \mi{min} {(2, 1)} = 1}.
 			\end{parbox}
-		\end{examplebox}
+		\end{example}
 
 \end{sile}

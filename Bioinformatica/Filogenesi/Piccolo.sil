@@ -63,7 +63,7 @@
 		etichette per i nodi interni che con uguale probabilitá rappresentano lo stato
 		del carattere per quel nodo.
 
-		\begin{examplebox}
+		\begin{example}
 			Sulla base della matrice a destra, che riporta le informazioni relative 
 			allo stato del carattere \math{c} per ciascuna specie di \math{S}, e sulla
 			base della topologia dell'albero \math{T} fornito, é possibile etichettarne 
@@ -94,7 +94,7 @@
 					\end{row}
 				\end{ptable}
 			\end{parbox}
-		\end{examplebox}
+		\end{example}
 
 		Il carattere é presente in tutte le specie in un certo stato (non 
 		necessariamente distinto), pertanto si presume che questo possa o cambiare 
@@ -166,7 +166,7 @@
 		compaiono con maggiore frequenza (in particolare, nel secondo caso tutti hanno
 		la stessa frequenza).
 
-		\begin{examplebox}
+		\begin{example}
 			\img[src = Filogenesi/tiny2.pdf, width = 100%fw]
 
 			\begin{itemize}
@@ -202,7 +202,7 @@
 			radice nei figli, pertanto se si dovesse scegliere una etichetta per 
 			\math{P3} o per \math{P4}, in entrambi i casi \math{\{G\}} sarebbe la 
 			scelta da preferirsi.
-		\end{examplebox}
+		\end{example}
 
 	\subsection{Peso non uniforme: algoritmo di Sankoff}
 
@@ -239,7 +239,7 @@
 			\mi{min} {(\sum_{(v_{1}, v_{2}) \in T} w {(\lambda {(v_{1})}, \lambda {(v_{2})})})}
 		\end{math}
 
-		\begin{examplebox}
+		\begin{example}
 			Si supponga di avere a disposizione 4 specie ed un carattere X, del quale é
 			nota la matrice di score. Sia poi data la topologia dell'albero filogenetico 
 			per queste:
@@ -307,7 +307,7 @@
 			non significhi né che l'albero a destra sia il migliore possibile e né 
 			tantomeno che sia quello che descriva come la filogenesi sia effettivamente 
 			avvenuta.
-		\end{examplebox}
+		\end{example}
 
 		Il problema puó essere risolto mediante programmazione dinamica. 
 		L'ultima componente della soluzione é determinare quale stato vada 
@@ -365,7 +365,7 @@
 			P{[x, z]} = \sum_{i = 1}^{L} \mi{min}_{s} {(w(z, s) + P[v_{i}, s])}
 		\end{math}
 
-		\begin{examplebox}
+		\begin{example}
 			\begin[width = 30%fw, strut = character, valign = middle]{parbox}
 				\begin[cols = 20%fw 20%fw 20%fw 20%fw 20%fw]{ptable}
 					\begin{row}
@@ -397,7 +397,7 @@
 			\begin[width = 70%fw, strut = character, valign = middle]{parbox}
 				\center{\img[src = Filogenesi/tiny6.pdf, width = 75%fw]}
 			\end{parbox}
-		\end{examplebox}
+		\end{example}
 
 		Indicando con \math{k} il numero di stati del carattere e con \math{n} il 
 		numero di nodi dell'albero, la matrice avrá \math{O(nk)} caselle, per 

@@ -19,7 +19,7 @@
 	1 (la piú comune) riportando esplicitamente soltanto gli 0, sottointendendo 
 	che tutti gli archi non etichettati abbiano peso 1.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 50%fw]{parbox}
 			\begin[cols = 15%fw 15%fw 15%fw 15%fw 15%fw]{ptable}
 				\begin{row}
@@ -42,7 +42,7 @@
 		\begin[width = 50%fw, strut = character, valign = middle]{parbox}
 			\img[src = Allineamento/graph.pdf, width = 75%fw]
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	La proprietá fondamentale di un grafo pesato di modifica é che i percorsi piú
 	corti possibili che vanno da \math{(0, 0)} a \math{(n, m)}, ovvero quelli 

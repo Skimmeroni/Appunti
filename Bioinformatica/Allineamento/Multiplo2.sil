@@ -21,7 +21,7 @@
 		adiacenti potrebbero avere l'allineamento accoppiato indotto diverso dal 
 		loro allineamento ottimale.
 
-		\begin{examplebox}
+		\begin{example}
 			\begin[width = 50%fw, strut = character, valign = middle]{parbox}
 				\img[src = Allineamento/constree.pdf, width = 87.5%fw]
 			\end{parbox}
@@ -44,7 +44,7 @@
 					\end{row}
 				\end{ptable}
 			\end{parbox}
-		\end{examplebox}
+		\end{example}
 
 		A partire da un insieme di stringhe \math{S} e per ogni albero \math{T} i cui 
 		nodi sono etichettati con le stringhe di \math{S}, é possibile trovare un 

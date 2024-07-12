@@ -12,10 +12,10 @@
 	questa é certamente la piú lunga sottostringa in comune fra \math{S_{1}} e 
 	\math{S_{2}}.
 
-	\begin{examplebox}
+	\begin{example}
 		Date \math{S_{1}} = \em{superiorcalifornialives} e \math{S_{2}} = 
 		\em{sealiver}, la sottostringa comune piú lunga é \em{alive}.
-	\end{examplebox}
+	\end{example}
 
 	L'algoritmo banale sopra descritto ha un tempo di esecuzione non 
 	inferiore a \math{O(n^{3})}. Infatti, per individuare tutte le 
@@ -63,13 +63,13 @@
 	\math{S_{1}} e/o con un 2 se esiste almeno un nodo foglia nel sottoalbero 
 	avente per radice tale nodo che é relativo ad un suffisso di \math{S_{2}}.
 
-	\begin{examplebox}
+	\begin{example}
 		Si consideri l'albero dei suffissi generalizzato associato alle stringhe
 		\math{S_{1} = banana$} e \math{S_{2} = panna$}. Le string-depth dei nodi
 		favorevoli sono: \math{\epsilon}, \math{A}, \math{N}, \math{NA}, \math{AN}.
 		Le sottostringhe piú lunghe comuni alle due stringhe sono allora \math{NA} 
 		e \math{AN}, di lunghezza due.
-	\end{examplebox}
+	\end{example}
 
 	Si consideri invece una situazione in cui si ha a disposizione un array dei
 	suffissi generalizzato anziché un albero. Questo contiene tutti i possibili

@@ -1,169 +1,51 @@
 \begin{sile}
 
-	Si definisce \strong{distanza} tra due stringhe \math{S_{1}} e \math{S_{2}} il 
-	numero di operazioni atomiche sui singoli caratteri necessario a trasformare
-	\math{S_{1}} in \math{S_{2}}. Le operazioni ammesse sono quattro:
+	La distanza di modifica si rivela inadatta ad esprimere il
+	grado di somiglianza fra due sequenze. Una misura migliore
+	é fornita dal loro \strong{allineamento globale}, ovvero
+	dall'inserimento all'interno delle stesse di un certo numero
+	di caratteri speciali detti \strong{indel} (\em{Insertion
+	DELetion}) tale da renderle della stessa lunghezza.
 
-	\begin{enumerate}
-		\begin{item}
-			\em{Inserire} un carattere della seconda stringa nella prima;  
-		\end{item}
-		\begin{item}
-			\em{Rimuovere} un carattere dalla prima stringa;
-		\end{item}
-		\begin{item}
-			\em{Sostituire} un carattere della prima stringa con uno della seconda;
-		\end{item}
-		\begin{item}
-			non fare nulla (o equivalentemente, sostituire un carattere della prima 
-			stringa con sé stesso).
-		\end{item}
-	\end{enumerate}
+	Come il nome suggerisce, un indel in una sequenza deve essere
+	interpretato come la rimozione di un carattere in tale sequenza
+	o come l'inserimento di un carattere nell'altra sequenza. Dato
+	che l'inserimento degli indel rende le due sequenze della stessa
+	lunghezza, queste possono poi essere "incolonnate" carattere per
+	caratter per mostrare il grado di somiglianza fra le due. L'unico
+	vincolo al posizionamento degli indel in un allineamento globale
+	é che non puó essere presente un indel nella stessa posizione in
+	entrambe le sequenze: tutti gli allineamenti globali che rispettano
+	tale vincolo sono detti ammissibili.
 
-	\bigskip
+	\begin{example}
+		Si considerino le sequenze \math{ABRACADABRA} e \math{BANANA}.
+		Alcuni allineamenti globali ammissibili sono i seguenti:
 
-	Determinare la distanza tra due stringhe é un problema spesso presente in 
-	biologia computazionale, e viene chiamato \strong{problema della distanza di 
-	modifica}.
-
-	Siano le quattro operazioni sopra citate abbreviate rispettivamente con 
-	\math{I}, \math{D} e \math{R} e \math{M}. Una concatenazione di queste 
-	operazioni puó essere espressa come una stringa sull'alfabeto \math{\{I, 
-	D, M, R\}}. Ovvero, una stringa del tipo \math{op_{1} op_{2} op_{3} 
-	\unicodeellipsis op_{n}}, costruita usando i quattro caratteri dell'alfabeto 
-	sopra descritto, é una stringa dove ciascun carattere \math{op_{i}} indica 
-	l'operazione applicata all'\math{i}-esimo carattere di \math{S_{1}} per 
-	poterla trasformare in \math{S_{2}}. Una stringa che esprime la sequenza di 
-	operazioni necessarie a trasformare una stringa in un'altra viene chiamata 
-	\strong{trascrizione} delle due stringhe.
-
-	\begin{examplebox}
-		\begin[width = 35%fw]{parbox}
-			\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw, cellborder = 0]{ptable}
-				\begin{row}
-					\cell{R} \cell{I} \cell{M}
-					\cell{D} \cell{M} \cell{D}
-					\cell{M} \cell{M} \cell{I}
-				\end{row}
-				\begin{row}
-					\cell{v} \cell{} \cell{i}
-					\cell{n} \cell{t} \cell{n}
-					\cell{e} \cell{r} \cell{}
-				\end{row}
-				\begin{row}
-					\cell{w} \cell{r} \cell{i}
-					\cell{} \cell{t} \cell{}
-					\cell{e} \cell{r} \cell{s}
-				\end{row}
-			\end{ptable}
+		\begin[width = 30%fw]{parbox}
+			\begin[mode = display]{math}
+				\table{
+					A & B & R & A & C & A & D & A & B & R & A \\
+					- & B & - & A & N & A & - & - & - & N & A \\
+				}
+			\end{math}
 		\end{parbox}
-		\begin[width = 55%fw, padding = 5%fw]{parbox}
-			La stringa \math{S_{1} = vintner} puó essere trasformata nella stringa
-			\math{S_{2} = writers} mediante 5 operazioni: sostituire \math{v} con 
-			\math{w}, inserire \math{r}, eliminare \math{n}, eliminare \math{n}
-			(di nuovo), inserire \math{s}. Le altre 4 operazioni sono no-op, perché
-			quei caratteri in quelle posizioni sono giá corretti.
+		\begin[width = 40%fw]{parbox}
+			\begin[mode = display]{math}
+				\table{
+					A & B & R & - & A & C & - & A & D & A & B & R & A \\
+					- & - & - & B & - & A & N & A & - & - & - & N & A \\
+				}
+			\end{math}
 		\end{parbox}
-	\end{examplebox}
-
-	É possibile descrivere meccanicamente il procedimento di trasformazione di 
-	una stringa in un'altra come segue. Siano \math{S_{1}} ed \math{S_{2}} due 
-	stringhe, delle quali é nota la trascrizione. Siano poi \math{next_{1}} un 
-	puntatore a \math{S_{1}} e sia \math{next_{2}} un puntatore a \math{S_{2}}, 
-	entrambi inizializzati ad 1. La trascrizione viene letta ed applicata da 
-	sinistra verso destra:
-
-	\begin{itemize}
-		\begin{item}
-			Se viene letto il simbolo \math{I}, il carattere di \math{S_{2}} in 
-			posizione \math{next_{2}} viene inserito in \math{S_{1}} alla posizione 
-			\math{next_{1} - 1}, e \math{next_{2}} viene incrementato di 1;
-		\end{item}
-		\begin{item}
-			Se viene letto il simbolo \math{D}, il carattere di \math{S_{1}} in 
-			posizione \math{next_{1}} viene eliminato da \math{S_{1}}, e 
-			\math{next_{1}} viene incrementato di 1;
-		\end{item}
-		\begin{item}
-			Se viene letto il simbolo \math{R}, il carattere di \math{S_{1}} in 
-			posizione \math{next_{1}} viene sostituito con il carattere di 
-			\math{S_{2}} alla posizione \math{next_{2}}, ed entrambi i puntatori
-			vengono incrementati di 1;
-		\end{item}
-		\begin{item}
-			Se viene letto il simbolo \math{M}, entrambi i puntatori vengono 
-			incrementati di 1 senza compiere alcuna operazione.
-		\end{item}
-	\end{itemize}
-
-	\bigskip
-
-	Formalmente, si definisce \strong{distanza di modifica} (\strong{edit distance}) di 
-	due stringhe, o \strong{distanza di Levenshtein}, la lunghezza della trascrizione 
-	piú corta possibile per una coppia di stringhe, escludendo le operazioni 
-	\math{M}. In altri termini, la distanza di modifica é il minimo numero di 
-	operazioni "rilevanti" (tutte tranne quelle nulle) necessarie a trasformare 
-	una stringa in un'altra. Si noti come non sempre la trascrizione ottimale sia
-	univoca, talvolta ve ne sono diverse tutte distinte ma aventi la stessa 
-	lunghezza.
-
-	Matematicamente, la distanza di modifica é una funzione definita come 
-	\math{d: S \times S \mapsto R^{+}}, che assegna un valore reale ad ogni 
-	coppia di stringhe. La funzione distanza possiede le seguenti tre proprietá:
-
-	\begin{enumerate}
-		\begin{item}
-			\math{d(x, z) \leq d(x, y) + d(y, z)}, la disuguaglianza triangolare;
-		\end{item}
-		\begin{item}
-			\math{d(x, y) = 0} se e soltanto se \math{x = y};
-		\end{item}
-		\begin{item}
-			\math{d(x, y) = d(y, x)}, la simmetricitá.
-		\end{item}
-	\end{enumerate}
-
-	\bigskip
-
-	Oltre alla trascrizione, un'altro modo per esprimere la trasformazione 
-	di una stringa in un'altra é mostrarne esplicitamente l'allineamento. 
-	L'\strong{allineamento globale} di due stringhe \math{S_{1}} e \math{S_{2}}
-	si ottiene innanzitutto inserendo spazi vuoti in locazioni specifiche 
-	delle stringhe \math{S_{1}} e \math{S_{2}}, e dopodiché disporre le due
-	stringhe cosí ottenute una sopra all'altra, di modo che ciascuno spazio
-	di una delle due stringhe sia associato ad un carattere dell'altra stringa,
-	e viceversa. Analogamente, sono possibili diversi allineamenti globali di
-	due stringhe, tutti leciti; l'allineamento globale da preferire é quello 
-	che restituisce il maggior numero di caratteri incolonnati uguali nelle 
-	due stringhe.
-
-	\begin{examplebox}
-		\begin[width = 35%fw]{parbox}
-			\begin[cols = 13.75%fw 13.75%fw 13.75%fw 13.75%fw 13.75%fw 13.75%fw 13.75%fw, cellborder = 0]{ptable}
-				\begin{row}
-					\cell{q} \cell{a} \cell{c} \cell{-}
-					\cell{d} \cell{b} \cell{d}
-				\end{row}
-				\begin{row}
-					\cell{q} \cell{a} \cell{w} \cell{x}
-					\cell{-} \cell{b} \cell{-}
-				\end{row}
-			\end{ptable}
+		\begin[width = 30%fw]{parbox}
+			\begin[mode = display]{math}
+				\table{
+					A & B & R & A & C & A & D & A & B & R & A \\
+					- & B & A & N & A & - & - & - & - & N & A \\
+				}
+			\end{math}
 		\end{parbox}
-		\begin[width = 65%fw]{parbox}
-			Trasformazione della stringa \math{qacdbd} nella stringa \math{qawxb}.
-			\math{q}, \math{a} e \math{b} combaciano, \math{c} va trasformato in 
-			\math{w}, \math{d} e \math{d} (nuovamente) vanno eliminati dalla prima
-			stringa, \math{x} va eliminato dalla seconda stringa.
-		\end{parbox}
-	\end{examplebox}
-
-	Matematicamente, una trascrizione ed un allineamento globale sono del tutto 
-	equivalenti, ed una stessa trasformazione espressa in forma di trascrizione 
-	puó essere convertita in un allineamento globale e viceversa. L'unica 
-	differenza si ha dal punto di vista della modellazione: la trascrizione 
-	enfatizza il procedimento in sé per la trasformazione della stringa, mentre 
-	l'allineamento globale enfatizza piú il risultato finale che il procedimento.
-	Entrambi i modelli sono utili, ma ciascuno ha un proprio scopo.
+	\end{example}
 
 \end{sile}

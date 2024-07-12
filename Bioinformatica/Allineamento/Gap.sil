@@ -8,7 +8,7 @@
 	alla sua destra, sia a destra della stringa, e quindi avere l'ultimo 
 	carattere della stringa alla sua sinistra, oppure nel mezzo della stringa.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 50%fw]{parbox}
 			L'allineamento presentato a lato ha cinque appaiamenti corretti, 
 			un appaiamento non corretto, sette spazi e quattro gap:
@@ -21,7 +21,7 @@
 				}
 			\end{math}
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Il modo in cui viene assegnato un peso ad un gap influenza notevolmente 
 	il risultato di un allineamento. \footnote{Un possibile esempio di 
@@ -146,13 +146,13 @@
 			\end{item}
 		\end{enumerate}
 
-		\begin{examplebox}
+		\begin{example}
 			\img[src = Allineamento/Gap1.pdf, width = 100%fw]
 			\par\bigskip
 			\img[src = Allineamento/Gap2.pdf, width = 100%fw]
 			\par\bigskip
 			\img[src = Allineamento/Gap3.pdf, width = 100%fw]
-		\end{examplebox}
+		\end{example}
 
 		Siano \math{E(i, j)} il massimo valore di un qualsiasi allineamento 
 		di tipo 1, \math{F(i, j)} il massimo valore di un qualsiasi allineamento 

@@ -35,13 +35,13 @@
 	dedurre quali basi sono presenti su uno stesso locus ma non é possibile 
 	dedurre da quale due cromosomi ciascuna provenga).
 
-	\begin{examplebox}
+	\begin{example}
 		Si consideri uno stesso locus per entrambi i cromosomi di una coppia. Se sul
 		primo é presente la base A e sul secondo la base A, sia il genotipo che 
 		l'aplotipo é AA. Se invece é presente sull'uno C e sull'altro T, il genotipo
 		é sempre lo stesso (indifferentemente CT o TC) mentre l'aplotipo potrebbe
 		essere CT o TC.
-	\end{examplebox}
+	\end{example}
 
 	Un primo metodo per dedurre l'aplotipo di un individuo é studiare il 
 	genotipo dei suoi antentati. Un diagramma utile a questo scopo é il 
@@ -61,7 +61,7 @@
 	certamente alberi, perché l'inbreeding é estremamente raro. La stessa cosa 
 	non si puó dire per gli animali domestici, specialmente quelli di razza.}.
 
-	\begin{examplebox}
+	\begin{example}
 		\begin[width = 50%fw]{parbox}
 			Si consideri il pedigree qui presentato, dove per ogni individuo é riportato
 			il genotipo relativo al suo gruppo sanguigno. L'individuo della terza 
@@ -75,7 +75,7 @@
 		\begin[width = 50%fw, strut = character, valign = middle]{parbox}
 			\img[src = Gen_apl/pedigree2.pdf, width = 100%fw]
 		\end{parbox}
-	\end{examplebox}
+	\end{example}
 
 	Si consideri una situazione semplificata in cui, per ogni individuo di una 
 	popolazione, é noto il suo genotipo per ogni locus, é noto il pedigree della 

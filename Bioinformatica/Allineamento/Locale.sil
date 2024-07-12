@@ -12,7 +12,7 @@
 	\math{S_{1}} e da \math{S_{2}}, tali che siano le sottostringhe delle due 
 	che hanno fra loro la maggiore somiglianza possibile.
 
-	\begin{examplebox}
+	\begin{example}
 		Siano date le stringhe \math{S_{1} = pqraxabcstvq} e \math{S_{2} = 
 		xyaxbacsll}. Sia poi data a ciascuna corrispondenza un valore di 2,
 		ogni mancata corrispondenza un valore di -2 e ad ogni spazio un valore
@@ -26,7 +26,7 @@
 				a & x & - & b & a & c & s \\
 			}
 		\end{math}
-	\end{examplebox}
+	\end{example}
 
 	Siano date due stringhe \math{S_{1}} ed \math{S_{2}} rispettivamente di 
 	lunghezza \math{m} ed \math{n}. Per calcolare l'allineamento locale 
@@ -58,7 +58,7 @@
 	loro allineamento globale é il massimo per qualsiasi coppia di prefissi 
 	occorrerá lo stesso tempo.
 
-	% \begin{examplebox}
+	% \begin{example}
 		% Siano date due stringhe \math{S_{1} = abcxdex} ed \math{S_{2} = xxxcde}, e 
 		% sia data una funzione di appaiamento tale per cui un appaiamento corretto 
 		% da un contributo di +2 ed un appaiamento non corretto o uno spazio da un 
@@ -125,7 +125,7 @@
 		% combaciano), \math{v(4, 5) = 1} (perché le due \math{c} combaciano, ma \math{x} 
 		% e \math{d} no) e \math{v(6, 6) = 5} (perché le due \math{x}, le due \math{d} e 
 		% le due \math{e} combaciano, mentre \math{-} e \math{c} no).
-	% \end{examplebox}
+	% \end{example}
 
 	% É possibile mettere in relazione il problema dell'allineamento locale con il 
 	% problema dell'allineamento locale dei suffissi mostrando che vale il seguente

@@ -102,7 +102,7 @@
 			\end{item}
 		\end{enumerate}
 
-		\begin{examplebox}
+		\begin{example}
 			\begin[width = 30%fw]{parbox}
 				\begin[cols = 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw 17.5%fw]{ptable}
 					\begin{row}
@@ -159,7 +159,7 @@
 					\end{row}
 				\end{ptable}
 			\end{parbox}
-		\end{examplebox}
+		\end{example}
 
 	\subsection{Neighbor Joining}
 
@@ -232,7 +232,7 @@
 			\end{item}
 		\end{enumerate}
 
-		\begin{examplebox}
+		\begin{example}
 			\begin[width = 30%fw]{parbox}
 				\begin[cols = 15%fw 15%fw 15%fw 15%fw 15%fw 15%fw]{ptable}
 					\begin{row}
@@ -339,7 +339,7 @@
 					\end{row}
 				\end{ptable}
 			\end{parbox}
-		\end{examplebox}
+		\end{example}
 
 		Dato un insieme di \math{n} specie, l'algoritmo Neighbor Joining applicato 
 		a tale insieme richiede \math{n - 3} iterazioni. In ciascuna iterazione 

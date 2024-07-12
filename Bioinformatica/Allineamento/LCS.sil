@@ -16,11 +16,11 @@
 	sottostringa é pertanto anche una sottosequenza, ma una sottosequenza non 
 	é sempre anche una sottostringa.
 
-	\begin{examplebox}
+	\begin{example}
 		La stringa \math{wer} é una sottosequenza della stringa \math{winter}, 
 		ma non una sottostringa. La stringa \math{in} é invece sia sottosequenza 
 		sia sottostringa di \math{winter}.
-	\end{examplebox}
+	\end{example}
 
 	Date due stringhe \math{S_{1}} ed \math{S_{2}}, una sottosequenza si 
 	dice comune ad entrambe le stringhe se appare sia in \math{S_{1}} che 

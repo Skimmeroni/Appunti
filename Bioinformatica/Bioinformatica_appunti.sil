@@ -24,7 +24,7 @@
 			style = roman]{\process}
 	}
 
-	\define[command = examplebox]{
+	\define[command = example]{
 		\smallskip
 		\begin[borderwidth = 0.5mm, 
 			 padding = 5mm, 
@@ -54,7 +54,7 @@
 		\bigskip 
 	}
 
-	\define[command = codeblock]{ 
+	\define[command = code]{ 
 		\smallskip 
 		\begin[borderwidth = 0.5mm,  
 			padding = 5mm,  
@@ -121,8 +121,8 @@
 	\chapter{Allineamento di sequenze}
 		\section{Distanza fra due stringhe}
 		\include[src = Allineamento/Distanza.sil]
-		% \section{Allineamento globale}
-		% \include[src = Allineamento/Globale.sil]
+		\section{Allineamento globale di due sequenze}
+		\include[src = Allineamento/Globale.sil]
 		% \section{Allineamento locale}
 		% \include[src = Allineamento/Locale.sil]
 		% \section{Allineamento con Gap}
