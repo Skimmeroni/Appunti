@@ -13,7 +13,7 @@
 		Sia \math{D(S_{i}, S_{j})} la distanza ottimale fra le stringhe \math{S_{i}} 
 		e \math{S_{j}}. Sia poi \math{S} un insieme di stringhe, e sia \math{T} 
 		un albero i cui nodi sono etichettati con una stringa di \math{S}. Un 
-		allineamento multiplo \math{M} dell'insieme \math{S} si dice \bf{consistente} 
+		allineamento multiplo \math{M} dell'insieme \math{S} si dice \strong{consistente} 
 		rispetto a \math{T} se l'allineamento accoppiato indotto delle stringhe 
 		\math{S_{i}} e \math{S_{j}} vale \math{D(S_{i}, S_{j})} per qualsiasi coppia 
 		di stringhe (\math{S_{i}}, \math{S_{j}}) che etichettano nodi adiacenti di 
@@ -102,7 +102,7 @@
 		Dato un allineamento, sia \math{s(x, y)} il contributo dato al valore 
 		dell'allineamento dall'allineare il carattere \math{x} (che puó anche 
 		essere uno spazio) al carattere \math{y} (che puó anche essere uno 
-		spazio). Si dice che uno scoring scheme soddisfa la \bf{disuguaglianza
+		spazio). Si dice che uno scoring scheme soddisfa la \strong{disuguaglianza
 		triangolare} se, per una qualsiasi tripla di caratteri \math{x}, \math{y}
 		e \math{z}, vale la relazione \math{s(x, z) \leq s(x, y) + s(y, z)} 
 		\footnote{Si noti l'analogia con la disuguaglianza triangolare propria
@@ -114,14 +114,14 @@
 		al "costo" per trasformare \math{y} in \math{z}.
 
 		Dato un insieme \math{S} di \math{k} stringhe, viene definita la 
-		\bf{stringa centrale} \math{S_{c} \in S} come la stringa per la quale 
+		\strong{stringa centrale} \math{S_{c} \in S} come la stringa per la quale 
 		la somma delle distanze ottimali fra \math{S_{c}} e ogni altra stringa 
 		di \math{S} é la piú piccola possibile. In altre parole, indicando 
 		questo valore con \math{\lambda}, si ha che \math{S_{c}} é la stringa 
 		in \math{S} tale per cui \math{\lambda = \mi{min} \sum_{S_{i} \in S 
 		D(S_{c}, S_{i})}}.
 
-		Si definisce \bf{stella centrale} come un albero a stella di \math{k} 
+		Si definisce \strong{stella centrale} come un albero a stella di \math{k} 
 		nodi, dove il nodo al centro é etichettato con \math{S_{c}} e gli altri
 		\math{k - 1} nodi sono etichettati con le rimanenti stringhe. Si indichi
 		con \math{M_{c}} l'allineamento multiplo di un insieme di \math{k} stringhe 

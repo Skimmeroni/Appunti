@@ -1,13 +1,13 @@
 \begin{sile}
 
-	Prende il nome di \bf{algoritmo di clustering} un algoritmo che raggruppa 
-	gli elementi di un certo insieme in un certo numero di \bf{clusters}. Un 
+	Prende il nome di \strong{algoritmo di clustering} un algoritmo che raggruppa 
+	gli elementi di un certo insieme in un certo numero di \strong{clusters}. Un 
 	cluster é un sottoinsieme di un insieme piú grande che rispetta due proprietá: 
 	\em{omogeneitá} e \em{separazione}. La prima prevede che gli elementi di un
 	cluster siano fra loro molto simili, mentre la seconda prevede che gli elementi
 	di cluster siano molto diversi dagli elementi di tutti gli altri cluster. 
 
-	Un particolare modo di intendere il clustering é il \bf{clustering gerarchico},
+	Un particolare modo di intendere il clustering é il \strong{clustering gerarchico},
 	che ha una forte connessione con le strutture ad albero. L'idea del clustering
 	gerarchico é quella di, dato un certo insieme di elementi, costruire un certo 
 	insieme di cluster, costruire dei cluster che inglobano questi cluster, e cosí
@@ -36,11 +36,11 @@
 	e le uniche due notevoli differenze si hanno nel metodo utilizzato per 
 	determinare quale sia la coppia di cluster candidata a venire fusa e come 
 	calcolare il "centro di massa" di ciascun cluster. Due algoritmi molto noti
-	sono \bf{UPGMA} e \bf{Neighbor-Joining}.
+	sono \strong{UPGMA} e \strong{Neighbor-Joining}.
 
 	\subsection{UPGMA}
 
-		L'algoritmo \bf{UPGMA} (\bf{unweighted pair group with arithmetic mean}) 
+		L'algoritmo \strong{UPGMA} (\strong{unweighted pair group with arithmetic mean}) 
 		é un algoritmo di clustering molto semplice, che a partire dal clustering 
 		costruisce un albero ultrametrico. L'algoritmo si basa sul definire una 
 		distanza per ciascuna coppia di cluster \math{(C_{1}, C_{2})} mediante la
@@ -163,7 +163,7 @@
 
 	\subsection{Neighbor Joining}
 
-		\bf{Neighbor Joining} é una estensione di UPGMA che produce un albero 
+		\strong{Neighbor Joining} é una estensione di UPGMA che produce un albero 
 		additivo anziché ultrametrico. Neighbor Joining introduce un vincolo 
 		ulteriore sul come scegliere due cluster da fondere: anziché semplicemente
 		fondere due cluster vicini, l'algoritmo fonde due cluster fra loro vicini 

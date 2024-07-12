@@ -2,7 +2,7 @@
 
 	Data una stringa \math{S} di lunghezza \math{m}, sia \math{Pos} l'array 
 	dei suffissi associato a \math{S}, e siano \math{i} e \math{j} due posizioni 
-	su quest'ultimo. Viene chiamata \bf{longest common prefix} di \math{i} e 
+	su quest'ultimo. Viene chiamata \strong{longest common prefix} di \math{i} e 
 	\math{j}, indicata con \math{Lcp(i,j)}, la lunghezza del prefisso piú lungo 
 	che hanno in comune \math{S[Pos[i]:m]} e \math{S[Pos[j]:m]}, ovvero 
 	rispettivamente il suffisso di \math{S} che inizia in posizione \math{Pos[i]} 
@@ -26,7 +26,7 @@
 	e del nodo foglia etichettato \math{Pos[i+1]} (ovvero, fra l'\math{i}-esimo 
 	nodo foglia ed il successivo nodo foglia). Fra questi nodi interni, si 
 	consideri quello piú lontano dalla radice, eventualmente la radice stessa, 
-	chiamato \bf{least common ancestor}, abbreviato come \math{lca}.
+	chiamato \strong{least common ancestor}, abbreviato come \math{lca}.
 
 	Il percorso che va dalla radice a \math{Pos[i]} ed il percorso che va 
 	dalla radice a \math{Pos[i+1]} devono necessariamente passare entrambi 

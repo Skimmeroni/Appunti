@@ -1,6 +1,6 @@
 \begin{sile}
 
-	Viene chiamato \bf{range minimum query} (\bf{RMQ}) la soluzione del problema 
+	Viene chiamato \strong{range minimum query} (\strong{RMQ}) la soluzione del problema 
 	computazionale che, dato un vettore \math{A} di lunghezza \math{n}, richiede 
 	di calcolare il valore minimo di \math{A[i : j]}, il sottovettore di \math{A} 
 	che ha per estremi le posizioni \math{i} e \math{j}, con \math{1 \leq i \leq 

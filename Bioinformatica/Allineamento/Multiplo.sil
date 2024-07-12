@@ -19,13 +19,13 @@
 	multiplo puó quindi rilevarsi utile per tracciare il percorso evolutivo che
 	una proteina ha avuto di specie in specie.}.
 
-	L'\bf{allineamento globale multiplo} di \math{k > 2} stringhe \math{\{S_{1}, 
+	L'\strong{allineamento globale multiplo} di \math{k > 2} stringhe \math{\{S_{1}, 
 	S_{2}, \unicodeellipsis, S_{k}\}} si ottiene inserendo spazi in ciascuna 
 	delle \math{k} stringhe in modo che tutte quante abbiano la stessa lunghezza 
 	\math{l}. Le stringhe sono poi allineate in \math{k} righe di \math{l} colonne 
 	ciascuna, in modo che ciascun carattere/spazio di ciascuna stringa occupi una 
 	sua posizione. Similmente all'allineamento locale fra due stringhe, é possibile
-	definire anche l'\bf{allineamento locale multiplo} di \math{k > 2} stringhe 
+	definire anche l'\strong{allineamento locale multiplo} di \math{k > 2} stringhe 
 	\math{\{S_{1}, S_{2}, \unicodeellipsis, S_{k}\}}, ottenuto selezionando una
 	sottostringa \math{S_{i}^{'}} per ciascuna di queste stringhe e allineando
 	globalmente queste sottostringhe. Sebbene l'allineamento multiplo locale 
@@ -33,7 +33,7 @@
 	é stata ottenuta mediante allineamento globale multiplo, pertanto si preferisce
 	trattare esclusivamente questo.
 
-	A partire da un allineamento multiplo \math{M}, si ottiene l'\bf{allineamento 
+	A partire da un allineamento multiplo \math{M}, si ottiene l'\strong{allineamento 
 	accoppiato indotto} di due stringhe \math{S_{i}} ed \math{S_{j}} rimuovendo 
 	da \math{M} tutte le righe ad eccezione di quelle per \math{S_{i}} ed 
 	\math{S_{j}}. Di fatto, l'allineamento indotto é l'allineamento multiplo 
@@ -49,14 +49,14 @@
 
 	Un esempio di algoritmo che calcola l'allineamento globale multiplo 
 	assegnandovi un valore numerico "oggettivo" é quello che fa uso del 
-	\bf{sum of pairs} (\em{somma delle coppie}), abbreviato in \bf{SP}. 
+	\strong{sum of pairs} (\em{somma delle coppie}), abbreviato in \strong{SP}. 
 	Il valore SP di un allineamento globale multiplo \math{M} é la somma 
 	dei valori assegnati a ciascun allineamento accoppiato che compare in 
 	\math{M} \footnote{Dare una dimostrazione rigorosa del motivo per cui
 	il valore SP é una buona misura dell'allineamento di stringhe é molto
 	difficile. D'altro canto, é un valore utilizzato molto di frequente nella
 	pratica per il computo degli allineamenti globali.}. Si definisce allora
-	il \bf{problema dell'allineamento SP} come il costruire un allineamento
+	il \strong{problema dell'allineamento SP} come il costruire un allineamento
 	globale multiplo \math{M} che abbia il valore SP piú piccolo possibile.
 
 	Il problema dell'allineamento SP, cosí come per l'allineamento di due stringhe, 
@@ -131,7 +131,7 @@
 	\end{math}
 
 	Un primo modo per velocizzare l'algoritmo riducendo il numero di computazioni 
-	necessarie é il cosiddetto \bf{metodo di Carillo-Lipman}. L'algoritmo 
+	necessarie é il cosiddetto \strong{metodo di Carillo-Lipman}. L'algoritmo 
 	modificato prevede, innanzitutto, di computare i valori delle celle della 
 	tabella in \em{avanti}, e non all'\em{indietro}. L'algoritmo qui presentato 
 	prevede di calcolare \math{D(i, j, k)} in funzione delle celle che la 

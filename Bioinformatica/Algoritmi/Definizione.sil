@@ -1,15 +1,15 @@
 \begin{sile}
 
-	Si definisce \bf{algoritmo} una procedura di calcolo ben definita che, 
-	presi uno o piú valori detti \bf{input}, restituisce uno o piú valori 
-	detti \bf{output}. Un algoritmo puó anche essere visto come uno strumento
-	per risolvere un \bf{problema computazionale}; la definizione del problema
+	Si definisce \strong{algoritmo} una procedura di calcolo ben definita che, 
+	presi uno o piú valori detti \strong{input}, restituisce uno o piú valori 
+	detti \strong{output}. Un algoritmo puó anche essere visto come uno strumento
+	per risolvere un \strong{problema computazionale}; la definizione del problema
 	specifica in termini generali la relazione input/output desiderata, e 
 	l'algoritmo descrive una specifica procedura computazionale per ottenere
 	tale relazione input/output.
 
-	Si definisce \bf{stringa} \math{S} una sequenza di caratteri scritti 
-	ordinatamente da sinistra a destra. Si denota con \math{|S|} la \bf{lunghezza} 
+	Si definisce \strong{stringa} \math{S} una sequenza di caratteri scritti 
+	ordinatamente da sinistra a destra. Si denota con \math{|S|} la \strong{lunghezza} 
 	di una stringa \math{S}, ovvero il numero totale di caratteri di cui é 
 	composta. Si denota con \math{S[i]}, o equivalentemente con \math{S(i)}, il 
 	carattere della stringa \math{S} che si trova in posizione \math{i}. Si assume 
@@ -17,23 +17,23 @@
 	\footnote{Questa convenzione é in linea con una notazione piú di tipo 
 	matematico che di tipo informatico.}.
 
-	Per ogni stringa \math{S}, é detta \bf{sottostringa} la stringa \math{S[i : 
+	Per ogni stringa \math{S}, é detta \strong{sottostringa} la stringa \math{S[i : 
 	j]} che inizia alla posizione \math{i} e termina alla posizione \math{j} di 
 	\math{S}. Ogni sottostringa di \math{S} nella forma \math{S[1 : i]} é detta 
-	\bf{prefisso} di \math{S}, e puó venire indicata in forma piú compatta con 
+	\strong{prefisso} di \math{S}, e puó venire indicata in forma piú compatta con 
 	la notazione \math{S[: i]}. Ogni sottostringa di \math{S} nella forma 
-	\math{S[i : |S|]} é detta \bf{suffisso} di \math{S}, e puó venire indicata 
+	\math{S[i : |S|]} é detta \strong{suffisso} di \math{S}, e puó venire indicata 
 	in forma piú compatta con la notazione \math{S[i :]}.
 
-	Date due stringhe \math{S} e \math{T}, si dice \bf{concatenazione} di \math{S}
+	Date due stringhe \math{S} e \math{T}, si dice \strong{concatenazione} di \math{S}
 	e di \math{S} la stringa ottenuta disponendo ordinatamente prima tutti i 
 	caratteri di \math{S} e poi tutti i caratteri di \math{T}. Viene indicata con
 	la notazione \math{S \cdot T}, o semplicemente con \math{ST}.
 
-	Una sottostringa \math{S[i : j]} é la \bf{stringa vuota}, ovvero la stringa 
+	Una sottostringa \math{S[i : j]} é la \strong{stringa vuota}, ovvero la stringa 
 	avente lunghezza zero, se \math{i} é maggiore di \math{j}. Un prefisso, 
 	suffisso o sottostringa di una stringa \math{S} sono detti rispettivamente 
-	\bf{prefisso proprio}, \bf{suffisso proprio} e \bf{sottostringa propria} se 
+	\strong{prefisso proprio}, \strong{suffisso proprio} e \strong{sottostringa propria} se 
 	hanno una lunghezza inferiore a quella di \math{S} e non sono la stringa 
 	vuota.
 

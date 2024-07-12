@@ -2,7 +2,7 @@
 
 	\subsection{Heap}
 
-		Uno \bf{heap} é un albero binario che rispetta le seguenti proprietá: 
+		Uno \strong{heap} é un albero binario che rispetta le seguenti proprietá: 
 		é completo almeno fino al penultimo livello, ad ogni nodo é associato 
 		un valore univoco, che non puó trovarsi in nessun altro nodo, ed il 
 		valore contenuto in un nodo é sempre maggiore o uguale a quello contenuto 
@@ -53,13 +53,13 @@
 
 	\subsection{Tabella hash}
 
-		Una \bf{tabella hash} é una struttura dati che costruisce corrispondenze fra
+		Una \strong{tabella hash} é una struttura dati che costruisce corrispondenze fra
 		delle chiavi e dei valori. Una tabella hash puó essere implementato mediante
 		un array dove ogni indice é associato ad un valore, e a sua volta ogni chiave
 		é associata ad un indice. L'associazione fra indici e chiavi é data da una 
-		\bf{funzione di hashing}, una funzione \math{h : U \rightarrow \{0, ..., n - 
+		\strong{funzione di hashing}, una funzione \math{h : U \rightarrow \{0, ..., n - 
 		1\}} con \math{n} la dimensione dell'array, che manipola una chiave per 
-		ricavarne un indice univoco. Una funzione di hashing si dice \bf{perfetta}
+		ricavarne un indice univoco. Una funzione di hashing si dice \strong{perfetta}
 		se é iniettiva, ovvero se non soltanto ad ogni indice é associata una sola 
 		chiave ma al contempo ad ogni chiave é associato un solo indice. In altri 
 		termini, una funzione di hashing é perfetta se la risultante tabella hash 

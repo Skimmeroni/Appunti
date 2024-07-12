@@ -1,6 +1,6 @@
 \begin{sile}
 
-	Il \bf{sequenziamento} di una biomolecola consiste nel determinare l'ordine 
+	Il \strong{sequenziamento} di una biomolecola consiste nel determinare l'ordine 
 	degli elementi di base di cui é composta. Ad esempio, nel caso delle proteine 
 	questo significa determinare di quali amminoacidi é composta e qual'é la loro 
 	disposizione nello spazio, mentre nel caso del DNA significa ricavare l'ordine 
@@ -19,7 +19,7 @@
 	genoma di una specie in un solo passaggio. Ció che é in grado di fare in 
 	un tempo accettabile e con bassa probabilitá di commettere un errore di 
 	lettura é sequenziare per intero piccoli frammenti di DNA, chiamati 
-	\bf{read}, lunghi dalle 50 alle 10000 coppie di basi (l'intero genoma umano 
+	\strong{read}, lunghi dalle 50 alle 10000 coppie di basi (l'intero genoma umano 
 	é composto da circa \math{3 \times 10^{8}} basi). Non solo queste read sono 
 	molto piú piccole dell'intero DNA, ma non é nemmeno possibile sapere da quale 
 	regione del DNA sono state estratte. Infine, gli organismi diploidi (come 
@@ -29,12 +29,12 @@
 	all'altro.
 
 	Sebbene gli algoritmi per il sequenziamento del DNA siano fra loro molto 
-	variegati, tutti quanti si basano sugli stessi tre passaggi: \bf{overlap}, 
-	\bf{layout}, \bf{consensus}.
+	variegati, tutti quanti si basano sugli stessi tre passaggi: \strong{overlap}, 
+	\strong{layout}, \strong{consensus}.
 
 	\begin{itemize}
 		\begin{item}
-			\bf{Overlap}.
+			\strong{Overlap}.
 
 			Avendo a disposizione un insieme di read, occorre determinare, per 
 			ciascuna coppia ordinata di read, quanto un suffisso della prima 
@@ -45,7 +45,7 @@
 			fatto, ad esempio, mediante programmazione dinamica).
 		\end{item}
 		\begin{item}
-			\bf{Layout}.
+			\strong{Layout}.
 
 			Noto l'ordine in cui le read sono disposte, occorre unirle in un unica 
 			stringa. In questo passaggio é critica la gestione delle stringhe duplicate,
@@ -55,7 +55,7 @@
 			DNA o per una coincidenza.
 		\end{item}
 		\begin{item}
-			\bf{Consensus}.
+			\strong{Consensus}.
 
 			Il layout ha implicitamente assegnato ad ogni posizione del DNA una o piú
 			basi che possono trovarvisi. Se tutte le read hanno lo stesso carattere in

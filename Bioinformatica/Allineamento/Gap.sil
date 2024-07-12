@@ -2,7 +2,7 @@
 
 	Un ulteriore elemento che é possibile usare per determinare il valore di 
 	somiglianza tra due stringhe, oltre agli spazi e agli appaiamenti, sono i
-	\bf{gap}. Un gap é una qualsiasi sequenza ininterrotta di spazi che si 
+	\strong{gap}. Un gap é una qualsiasi sequenza ininterrotta di spazi che si 
 	presenta in una delle stringhe dell'allineamento. Un gap puó sia iniziare
 	a sinistra della stringa, e quindi avere il primo carattere della stringa 
 	alla sua destra, sia a destra della stringa, e quindi avere l'ultimo 
@@ -25,12 +25,12 @@
 
 	Il modo in cui viene assegnato un peso ad un gap influenza notevolmente 
 	il risultato di un allineamento. \footnote{Un possibile esempio di 
-	applicazione dell'allineamento con gap é il confronto fra \bf{DNA} e 
-	\bf{cDNA} (\em{complementary DNA}). Il DNA é composto da piccole sequenze 
-	che codificano per delle proteine, chiamate \bf{introni}, inframezzate da 
-	lunghe sequenze che non codificano nulla, chiamate \bf{esoni}. Quando il 
+	applicazione dell'allineamento con gap é il confronto fra \strong{DNA} e 
+	\strong{cDNA} (\em{complementary DNA}). Il DNA é composto da piccole sequenze 
+	che codificano per delle proteine, chiamate \strong{introni}, inframezzate da 
+	lunghe sequenze che non codificano nulla, chiamate \strong{esoni}. Quando il 
 	DNA deve essere utilizzato per la codifica, viene creata una copia in 
-	\bf{mRNA} (\em{messenger RNA}) delle parti di DNA che codificano per una 
+	\strong{mRNA} (\em{messenger RNA}) delle parti di DNA che codificano per una 
 	certa proteina, che poi esce dal nucleo della cellula. Per capire per quale 
 	proteina quel tipo di mRNA codifica un semplice approccio consiste nel 
 	catturare l'mRNA all'uscita del nucleo, riconvertirlo in DNA e poi compararlo 

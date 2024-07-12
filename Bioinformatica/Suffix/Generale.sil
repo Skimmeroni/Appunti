@@ -1,6 +1,6 @@
 \begin{sile}
  
-	Un \bf{albero dei suffissi generalizzato} (\bf{generalized suffix tree}) é 
+	Un \strong{albero dei suffissi generalizzato} (\strong{generalized suffix tree}) é 
 	un albero dei suffissi che non é relativo ad una singola stringa e ai suoi 
 	suffissi, ma bensí a \math{k} stringhe e ai suffissi di ciascuna. I nodi 
 	foglia di un generalized suffix tree sono etichettati con al piú \math{k} 
@@ -21,7 +21,7 @@
 		\center{\img[src = Suffix/suffix_tree3.pdf, width = 75%fw]}
 	\end{examplebox}
 
-	Un \bf{array dei suffissi generalizzato} (\bf{generalized suffix array}) 
+	Un \strong{array dei suffissi generalizzato} (\strong{generalized suffix array}) 
 	é un array dei suffissi che non contiene i suffissi disposti in ordine 
 	lessicografico di una sola stringa, ma bensí contiene quelli di \math{k} 
 	stringhe. Per evitare che due diverse stringhe abbiano lo stesso suffisso,

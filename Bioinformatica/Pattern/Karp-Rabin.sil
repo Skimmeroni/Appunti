@@ -50,7 +50,7 @@
 	Inoltre, se le stringhe non sono binarie ma \math{n}-arie, il processo diventa 
 	ancora piú oneroso.
 
-	L'\bf{algoritmo Karp-Rabin} é un algoritmo che risolve il problema del 
+	L'\strong{algoritmo Karp-Rabin} é un algoritmo che risolve il problema del 
 	pattern matching utilizzando \math{H(P)} e \math{H(T_{r}^{n})}. Tuttavia, 
 	non sfrutta i due valori per intero, bensí applicandovi l'operazione di 
 	modulo per un intero piccolo \math{p}. In questo modo, i valori sui quali 
@@ -62,7 +62,7 @@
 	divisione intera di \math{H(P)} per \math{p}, ovvero \math{H(P) \mi{mod} p}. 
 	Analogamente, si definisce \math{H_{p}(T_{r}^{n})} come \math{H(T_{r}^{n}) 
 	\mi{mod} p}. I valori \math{H_{p}(P)} e \math{H_{p}(T_{r}^{n})} sono detti
-	\bf{fingerprint} di, rispettivamente, \math{P} e \math{T_{r}^{n}}.
+	\strong{fingerprint} di, rispettivamente, \math{P} e \math{T_{r}^{n}}.
 
 	Avendoli definiti come resto di una divisione, si ha che i valori 
 	\math{H_{p}(P)} e \math{H_{p}(T_{r}^{n})} sono necessariamente 
@@ -132,10 +132,10 @@
 
 	Quando si verifica una situazione in cui \math{H_{p}(P) = H_{p}(T_{r}^{n})} 
 	ma il pattern \math{P} non si trova effettivamente in \math{T} alla posizione 
-	\math{r}, si dice che si ha a che fare con un \bf{falso positivo}. Si noti 
+	\math{r}, si dice che si ha a che fare con un \strong{falso positivo}. Si noti 
 	peró che, siccome se il pattern \math{P} si trova in \math{T} a partire dalla 
 	posizione \math{r} é garantito che valga \math{H_{p}(P) = H_{p}(T_{r}^{n})},
-	non potranno mai verificarsi dei \bf{falsi negativi}, ovvero situazioni in 
+	non potranno mai verificarsi dei \strong{falsi negativi}, ovvero situazioni in 
 	cui \math{P} si trova in \math{T} a partire dalla posizione \math{r} ma 
 	l'algoritmo non lo registra. Questo significa che l'errore, se esiste, 
 	sará sempre in eccesso, mai in difetto.
@@ -206,18 +206,18 @@
 
 		É possibile mostrare che dei buoni valori \math{p} possono essere ottenuti 
 		sfruttando le proprietá aritmetiche dei numeri primi. Dato un numero intero 
-		positivo \math{x}, si indica con \math{\pi {(x)}} la \bf{funzione enumerativa 
+		positivo \math{x}, si indica con \math{\pi {(x)}} la \strong{funzione enumerativa 
 		dei numeri primi}; questa funzione restituisce quanti numeri primi esistono 
 		nell'intervallo che ha per estremi (inclusi) 1 e \math{x}.
 
 		\begin{theorem}
-			\bf{Teorema di Hadamard-Poussin} (anche chiamato semplicemente \bf{Teorema 
+			\strong{Teorema di Hadamard-Poussin} (anche chiamato semplicemente \strong{Teorema 
 			dei numeri primi}). Per \math{x} sufficientemente grandi, si ha \math{\pi 
 			{(x)} \approx \frac{x}{\mi{ln}(x)}}.
 		\end{theorem}
 
 		\begin{theorem}
-			\bf{Disuguaglianza di Rosser-Schoenfeld}. Sia \math{x \geq 29} un numero 
+			\strong{Disuguaglianza di Rosser-Schoenfeld}. Sia \math{x \geq 29} un numero 
 			intero positivo. Il prodotto di tutti i numeri primi minori di \math{x} é 
 			strettamente maggiore di \math{2^{x}}.
 		\end{theorem}
@@ -228,7 +228,7 @@
 			\math{\pi {(u)}} fattori primi distinti.
 
 			\bigskip
-			\bf{Dimostrazione}. Si supponga per assurdo che \math{x} sia scomponibile 
+			\strong{Dimostrazione}. Si supponga per assurdo che \math{x} sia scomponibile 
 			in \math{k > \pi (u)} fattori primi distinti: \math{q_{1}, q_{2}, 
 			\unicodeellipsis, q_{k}}. Essendo questi tutti diversi e tutti contati 
 			con molteplicitá uno, si ha che \math{x \geq q_{1} \cdot q_{2} \cdot 
@@ -259,7 +259,7 @@
 		\pagebreak
 
 		\begin{theorem}
-			\bf{Teorema centrale Karp-Rabin}. Siano dati un pattern \math{P} 
+			\strong{Teorema centrale Karp-Rabin}. Siano dati un pattern \math{P} 
 			ed un testo \math{T}, entrambe stringhe binarie, rispettivamente di 
 			lunghezza \math{n} e \math{m}, tali per cui \math{n \cdot m \geq 29}. 
 			Siano poi dati un numero intero positivo \math{I} ed un numero primo 
@@ -269,7 +269,7 @@
 			\math{\frac{\pi(nm)}{\pi(I)}}.
 
 			\bigskip
-			\bf{Dimostrazione}. Sia \math{R} l'insieme che contiene tutte le posizioni 
+			\strong{Dimostrazione}. Sia \math{R} l'insieme che contiene tutte le posizioni 
 			di \math{T} in cui \math{P} non inizia, ovvero \math{s \in R} se e solo se 
 			non c'é una occorrenza di \math{P} in \math{T} a partire dalla posizione 
 			\math{s}. In altri termini, si ha \math{H(P) \ne H(T_{s}^{n})} per qualsiasi
@@ -355,7 +355,7 @@
 			\math{{[\frac{\pi {(nm)}}{\pi {(I)}}]}^{k}}.
 
 			\bigskip
-			\bf{Dimostrazione}. Il teorema precedente ha mostrato che la probabilitá
+			\strong{Dimostrazione}. Il teorema precedente ha mostrato che la probabilitá
 			che si verifichi un falso positivo é \math{\frac{\pi {(nm)}}{\pi {(I)}}}.
 			Se i numeri primi vengono scelti casualmente ed indipendentemente l'uno
 			dall'altro, ciascuna scelta puó essere vista come un evento indipendente.
@@ -376,9 +376,9 @@
 	\subsection{Ottimizzazione: azzerare gli errori}
 
 		L'algoritmo Karp-Rabin é un algoritmo probabilistico; in particolare, é un 
-		esempio di \bf{algoritmo Monte Carlo}. Algoritmi di questo tipo sono veloci, 
+		esempio di \strong{algoritmo Monte Carlo}. Algoritmi di questo tipo sono veloci, 
 		ma corretti a meno di un certo margine di errore; questi si contraddistinguono 
-		dagli \bf{algoritmi Las Vegas}, che sono non sempre veloci ma sempre corretti. 
+		dagli \strong{algoritmi Las Vegas}, che sono non sempre veloci ma sempre corretti. 
 		In alcuni casi é possibile convertire un algoritmo di tipo Monte Carlo in un
 		algoritmo di tipo Las Vegas equivalente (e viceversa), ovvero perdere in 
 		termini di tempo di esecuzione per guadagnare in termini di correttezza (o

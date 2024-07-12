@@ -2,8 +2,8 @@
 
 	L'algoritmo naive é basato sulla comparazione di caratteri. Esistono approcci 
 	al problema dell'appaiamento esatto basati su operazioni aritmetiche: fra gli
-	algoritmi di questa famiglia figura l'\bf{algoritmo shift-and} \footnote{Anche
-	chiamato \bf{algoritmo di Baeza-Yates} o \bf{algoritmo di Gonnet}}.
+	algoritmi di questa famiglia figura l'\strong{algoritmo shift-and} \footnote{Anche
+	chiamato \strong{algoritmo di Baeza-Yates} o \strong{algoritmo di Gonnet}}.
 
 	Siano \math{P} un pattern di lunghezza \math{n} e \math{T} un testo di 
 	lunghezza \math{m}. Sia \math{M} un array di dimensione \math{n} per 

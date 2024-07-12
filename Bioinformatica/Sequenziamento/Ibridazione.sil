@@ -4,16 +4,16 @@
 	riducendolo ad una variante del problema TSP, che é NP-hard. Pertanto,
 	sebbene risolvibile in pratica per istanze di dimensioni contenute, 
 	non é possibile risolverlo per istanze di dimensioni considerevoli. Un 
-	approccio alternativo é dato dal \bf{sequenziamento mediante ibridazione} 
-	(\bf{sequencing by hybridization}), o \bf{SBH}.
+	approccio alternativo é dato dal \strong{sequenziamento mediante ibridazione} 
+	(\strong{sequencing by hybridization}), o \strong{SBH}.
 
 	SBH comincia con la costruzione di una matrice di \math{4^{k}} celle, 
-	con \math{k} valore fissato, chiamata \bf{chip} \footnote{Il nome 
+	con \math{k} valore fissato, chiamata \strong{chip} \footnote{Il nome 
 	deriva dal fatto che la tecnologia per costruirli é molto simile a 
 	quella usata per costruire i chip in silicio dei calcolatori.}. Ciascuna 
 	cella contiene una copia distinta di tutte le \math{4^{k}} possibili 
 	permutazioni della stessa stringa di DNA di lunghezza \math{k}, ciascuna 
-	chiamata \math{k}-\bf{mero}. Il chip viene messo in contatto con il DNA da 
+	chiamata \math{k}-\strong{mero}. Il chip viene messo in contatto con il DNA da 
 	sequenziare, al quale é stato applicato un marcatore radioattivo. Se il DNA 
 	da sequenziare presenta una sezione complementare ad uno dei \math{k}-meri, 
 	allora fra i due avverrá l'ibridazione, che viene resa evidente dalla presenza 
@@ -40,7 +40,7 @@
 	sinistra di \math{\chi} verso il nodo che ha per etichetta i \math{k - 1} 
 	caratteri piú a destra di \math{\chi}; alcuni nodi in \math{G(L)} potrebbero 
 	non essere raggiunti da alcun arco, pertanto possono essere soppressi. Un 
-	grafo cosí costruito viene chiamato \bf{Grafo di de Brujin}.
+	grafo cosí costruito viene chiamato \strong{Grafo di de Brujin}.
 
 	\begin{examplebox}
 		Sia data la lista \math{L = \{AAA, AAC, ACA, CAC, CAA, ACG, CGC, GCA, ACT, 
@@ -61,17 +61,17 @@
 	grafo esattamente una volta, bensí nell'attraversare ogni arco esattamente
 	una volta.
 
-	Dato un grafo diretto \math{G}, si dice \bf{percorso euleriano} un percorso 
+	Dato un grafo diretto \math{G}, si dice \strong{percorso euleriano} un percorso 
 	diretto che attraversa ciascun arco di \math{G} esattamente una sola volta.
-	Nello specifico, viene chiamato \bf{circuito euleriano} un percorso euleriano
+	Nello specifico, viene chiamato \strong{circuito euleriano} un percorso euleriano
 	dove l'arco iniziale e l'arco finale coincidono.
 
-	Sia \math{G} un grafo orientato. \math{G} é detto \bf{semi-euleriano} se 
+	Sia \math{G} un grafo orientato. \math{G} é detto \strong{semi-euleriano} se 
 	esistono esattamente due vertici \math{s} e \math{t} tali che \math{s} ha un
 	arco uscente in piú di quanti ne ha entranti, \math{t} ha un arco entrante in
 	piú di quanti ne abbia uscenti e tutti i vertici che non sono né \math{s} né
 	\math{t} hanno tanti archi entranti quanti archi uscenti. Viene invece detto
-	\bf{euleriano} se ogni suo vertice ha tanti archi entranti quanti archi 
+	\strong{euleriano} se ogni suo vertice ha tanti archi entranti quanti archi 
 	uscenti.
 
 	\begin{theorem}
@@ -83,7 +83,7 @@
 		\math{G_{1}} é euleriano.
 
 		\bigskip
-		\bf{Dimostrazione}. Sia \math{P} un percorso da \math{s} a \math{t}. Essendo 
+		\strong{Dimostrazione}. Sia \math{P} un percorso da \math{s} a \math{t}. Essendo 
 		\math{G} un grafo semi-euleriano, qualsiasi vertice che non sia \math{s} o 
 		\math{t} ha tanti archi entranti quanti ne ha uscenti. Se viene costruito 
 		\math{G_{1}} rimuovendo \math{P}, questo ha l'effetto collaterale di rimuovere
@@ -99,7 +99,7 @@
 		archi che compongono \math{C}. Allora anche \math{G_{1}} é euleriano.
 
 		\bigskip
-		\bf{Dimostrazione}. Essendo \math{G} un grafo semi-euleriano, qualsiasi 
+		\strong{Dimostrazione}. Essendo \math{G} un grafo semi-euleriano, qualsiasi 
 		vertice ha tanti archi entranti quanti ne ha uscenti. Sia \math{n} il 
 		numero di archi entranti o uscenti di un qualsiasi nodo di \math{G}. Se 
 		viene costruito \math{G_{1}} eliminando un intero ciclo, ciascun vertice 
@@ -114,7 +114,7 @@
 		Un grafo \math{G} é semi-euleriano se e solo se ha un percorso euleriano.
 
 		\bigskip
-		\bf{Dimostrazione}. Sia \math{G} un grafo, e sia \math{P} un percorso 
+		\strong{Dimostrazione}. Sia \math{G} un grafo, e sia \math{P} un percorso 
 		euleriano dal vertice \math{s} al vertice \math{t}, con \math{s \ne t}. 
 		Per definizione, \math{P} percorre tutti gli archi di \math{G} esattamente 
 		una volta.
@@ -204,7 +204,7 @@
 		% \ne AA}.
 	% \end{examplebox}
 
-	Una stringa \math{S} si dice \bf{compatibile} con \math{L} se e soltanto se
+	Una stringa \math{S} si dice \strong{compatibile} con \math{L} se e soltanto se
 	contiene ogni sottostringa in \math{L} e (assumendo che \math{L} contenga
 	sottostringhe di lunghezza \math{k}) non contiene altre sottostringhe di
 	lunghezza \math{k}. É evidente come una stringa \math{S} sia compatibile
@@ -236,11 +236,11 @@
 	% Sia \math{S} la stringa \math{\alpha \beta \gamma \delta \epsilon}, ovvero
 	% una stringa definita come la concatenazione di cinque sottostringhe (non 
 	% necessariamente distinte). Si assuma che \math{\beta} e \math{\delta} non 
-	% siano la stringa vuota. Una \bf{rotazione} sulla stringa \math{S} é una 
+	% siano la stringa vuota. Una \strong{rotazione} sulla stringa \math{S} é una 
 	% operazione che, a partire da \math{S}, restituisce la stringa \math{S^{'} = 
 	% \alpha \delta \gamma \beta \epsilon}, ovvero la stringa \math{S} a cui sono 
 	% state cambiate di posto le sottostringhe \math{\beta} e \math{\gamma}. Un 
-	% caso particolare di rotazione sulle stringhe é la \bf{rotazione ciclica}, 
+	% caso particolare di rotazione sulle stringhe é la \strong{rotazione ciclica}, 
 	% ovvero una rotazione sulle stringhe dove le sottostringhe \math{\alpha}, 
 	% \math{\gamma} e \math{\epsilon} sono stringhe vuote. Pertanto, una rotazione 
 	% ciclica sulla stringa \math{S = \beta \delta} produce la stringa \math{S = 
@@ -333,7 +333,7 @@
 	% sempre piú lunghe.
 
 	% Una trasformazione come quella appena descritta, che da un cammino euleriano 
-	% \math{P} ne produce un'altro \math{P^{''}}, viene chiamata \bf{rotazione di
+	% \math{P} ne produce un'altro \math{P^{''}}, viene chiamata \strong{rotazione di
 	% cammino}. Ne consegue che é sempre possibile trasformare un cammino euleriano
 	% \math{P} per \math{G(L)} in un altro cammino euleriano \math{P^{'}} per 
 	% \math{G(L)} mediante una o piú rotazioni di cammino, e ciascun cammino 

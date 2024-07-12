@@ -1,12 +1,12 @@
 \begin{sile}
 
-	Il \bf{problema dell'ordinamento} é un problema molto ricorrente e molto 
+	Il \strong{problema dell'ordinamento} é un problema molto ricorrente e molto 
 	semplice da esprimere: dato un insieme di numeri (per comoditá, si assume
 	interi), si richiede di disporli in ordine crescente. 
 
 	\subsection{Insertion sort}
 
-		\bf{Insertion sort} é un semplice esempio di algoritmo di ordinamento 
+		\strong{Insertion sort} é un semplice esempio di algoritmo di ordinamento 
 		iterativo. Sia \math{A} un array di numeri di lunghezza \math{n}, e si 
 		supponga che i primi \math{k} elementi di \math{A} siano giá ordinati 
 		(\math{k} puó anche valere 0). Insertion sort prevede di inserire 
@@ -75,8 +75,8 @@
 
 	\subsection{Merge sort}
 
-		\bf{Merge sort} é un algoritmo ricorsivo costruito mediante una tecnica 
-		chiamata \bf{divide et impera}. Questa tecnica prevede, in termini molto 
+		\strong{Merge sort} é un algoritmo ricorsivo costruito mediante una tecnica 
+		chiamata \strong{divide et impera}. Questa tecnica prevede, in termini molto 
 		generali, nel suddividere i dati in ingresso in sottoinsiemi (\em{divide}), 
 		risolvere ricorsivamente il problema su questi sottoinsiemi e poi ricombinare 
 		la soluzione dei sottoinsiemi (\em{impera}) per ottenere la soluzione globale 
@@ -167,7 +167,7 @@
 
 	\subsection{Counting sort}
 
-		\bf{Counting sort} é un altro esempio di algoritmo iterativo: sia \math{A} 
+		\strong{Counting sort} é un altro esempio di algoritmo iterativo: sia \math{A} 
 		un array di numeri di lunghezza \math{n}, e siano \math{min} e \math{max} i 
 		valori rispettivamente piú piccolo e piú grande che compaiono in \math{A}. 
 		Sia poi \math{k} l'ampiezza dell'intervallo dei numeri che compaiono in 

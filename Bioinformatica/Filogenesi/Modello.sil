@@ -4,11 +4,11 @@
 	(deriva genetica, selezione naturale, ecc\math{\unicodeellipsis}), studiare
 	come ed in che ordine queste si verificano é tutt'altro problema. Un modello
 	statistico che descriva il rateo di mutazioni che avvengono nel DNA in 
-	funzione del tempo viene chiamato \bf{modello di mutazione}.
+	funzione del tempo viene chiamato \strong{modello di mutazione}.
 
 	\subsection{Modello di Jukes-Cantor}
 
-		Il modello di mutazione piú semplice possibile, chiamato \bf{modello
+		Il modello di mutazione piú semplice possibile, chiamato \strong{modello
 		di Jukes-Cantor}, assume che una base del DNA possa subire una mutazione 
 		e venire sostituita con un'altra base (diversa da sé stessa) con la stessa
 		probabilitá \math{\mu}. La probabilitá che una base questa venga sostituita 
@@ -43,15 +43,15 @@
 
 		Il modello di Jukes-Cantor é troppo semplicistico per descrivere la relazione
 		fra mutazioni del DNA e tempo trascorso. Ad esempio, al verificarsi di una
-		\bf{transizione} (la sostituzione di una purina con un'altra purina, o di
-		una pirimidina con un'altra pirimidina) o di una \bf{transversione} (la
+		\strong{transizione} (la sostituzione di una purina con un'altra purina, o di
+		una pirimidina con un'altra pirimidina) o di una \strong{transversione} (la
 		sostituzione di una purina con una pirimidina, o di una pirimidina con una
 		purina) viene assegnata la stessa probabilitá, mentre é piú ragionevole
 		assumere che le due siano diverse (a causa della loro conformazione, é molto
 		piú probabile che una purina venga sostituita da un'altra purina piuttosto
 		che da una pirimidina, e viceversa).
 
-		Il \bf{modello K2P} é una estensione del modello di Jukes-Cantor, dove la
+		Il \strong{modello K2P} é una estensione del modello di Jukes-Cantor, dove la
 		probabilitá che una base muti é sempre la stessa, ma vengono assegnate due
 		diverse probabilitá al verificarsi di una transizione o di una transversione.
 		Sia \math{\mu} la probabilitá che si verifichi una mutazione qualsiasi, e sia
@@ -84,7 +84,7 @@
 
 	\subsection{Modello General Time-Reversible}
 
-		Il modello \bf{General Time-Reversible} é ancora piú raffinato dei 
+		Il modello \strong{General Time-Reversible} é ancora piú raffinato dei 
 		precedenti, perché prevede di assegnare una probabilitá univoca a 
 		ciascun tipo di mutazione, mantenendo peró la simmetricitá delle
 		probabilitá (la probabilitá che \math{i} muti in \math{j} é la stessa
@@ -121,7 +121,7 @@
 
 		Una soluzione molto semplice per trovare quale nodo dell'albero é il miglior 
 		candidato per essere la radice consiste nell'introdurre nell'insieme delle 
-		specie da analizzare una specie "spuria", chiamata \bf{outgroup}, che non ha 
+		specie da analizzare una specie "spuria", chiamata \strong{outgroup}, che non ha 
 		alcuna relazione con le altre specie dell'insieme. Dato che questa specie 
 		verrá certamente a trovarsi nell'albero da tutt'altra parte rispetto alle 
 		altre, puó ben fungere da radice. Inoltre, ha anche una funzione di controllo 

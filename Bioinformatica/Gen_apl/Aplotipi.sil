@@ -1,35 +1,35 @@
 \begin{sile}
 
 	Gli esseri viventi piú semplici hanno una sola copia di ciascun loro 
-	cromosoma, e si dicono \bf{aploidi}. Inoltre, si riproducono per 
-	\bf{meiosi}, ovvero un organismo crea una copia identica di sé stessa. 
+	cromosoma, e si dicono \strong{aploidi}. Inoltre, si riproducono per 
+	\strong{meiosi}, ovvero un organismo crea una copia identica di sé stessa. 
 	Per questo motivo, é molto semplice determinare la genealogia di esseri 
 	viventi di questo tipo, perché ogni organismo figlio é una copia identica 
 	del genitore.
 
-	Gli esseri viventi piú complessi sono invece \bf{diploidi}: ogni cromosoma é 
+	Gli esseri viventi piú complessi sono invece \strong{diploidi}: ogni cromosoma é 
 	presente nel DNA in due copie, dove ciascuna copia é ereditata da uno dei due 
-	genitori secondo le \bf{leggi di ereditarietá di Mendel}. La quasi totalitá 
+	genitori secondo le \strong{leggi di ereditarietá di Mendel}. La quasi totalitá 
 	delle due copie é funzionalmente identica, nel senso che entrambe contengono 
 	le informazioni necessarie all'esprimere la stessa cosa, ma non hanno 
 	necessariamente la stessa espressione fenotipica, perché potrebbero presentare 
-	\bf{alleli} distinti. Il caso piú comune di differenza fra i due nucleotidi 
-	prende il nome di \bf{SNP} \footnote{Da leggersi "\em{snip}"} (\bf{single 
+	\strong{alleli} distinti. Il caso piú comune di differenza fra i due nucleotidi 
+	prende il nome di \strong{SNP} \footnote{Da leggersi "\em{snip}"} (\strong{single 
 	nucleotide polymorfism}), dove un singolo nucleotide é differente nei due 
 	cromosomi per lo stesso locus. 
 
 	Idealmente, ci si aspetterebbe che il padre e la madre trasmettano alla prole 
 	uno dei loro due aplotipi (a loro volta ereditati dai rispettivi genitori) 
 	nella loro integritá. In realtá, durante la meiosi avviene un fenomeno chiamato
-	\bf{ricombinazione}, dove l'aplotipo risultante é un ibrido fra i due aplotipi
+	\strong{ricombinazione}, dove l'aplotipo risultante é un ibrido fra i due aplotipi
 	dei genitori. Se in due loci é presente lo stesso nucleotide, si dice che quel
-	locus é \bf{omozigote}; se invece é presente un nucleotide diverso, si dice 
-	che quel locus é \bf{eterozigote}.
+	locus é \strong{omozigote}; se invece é presente un nucleotide diverso, si dice 
+	che quel locus é \strong{eterozigote}.
 
 	L'informazione relativa a quale nucleotide si trovi su ciascun cromosoma 
-	per uno stesso locus viene chiamata \bf{aplotipo}. La coppia di basi per 
+	per uno stesso locus viene chiamata \strong{aplotipo}. La coppia di basi per 
 	uno stesso locus, senza specificare da quale cromosoma ciascuna base 
-	provenga, viene chiamata \bf{genotipo}. La tecnologia attuale non é in 
+	provenga, viene chiamata \strong{genotipo}. La tecnologia attuale non é in 
 	grado di determinare immediatamente gli aplotipi di un cromosoma, ma é 
 	sufficientemente avanzata da determinare i genotipi (ovvero, é possibile 
 	dedurre quali basi sono presenti su uno stesso locus ma non é possibile 
@@ -45,7 +45,7 @@
 
 	Un primo metodo per dedurre l'aplotipo di un individuo é studiare il 
 	genotipo dei suoi antentati. Un diagramma utile a questo scopo é il 
-	\bf{pedigree}, una struttura che riporta, per ciascuno degli antenati 
+	\strong{pedigree}, una struttura che riporta, per ciascuno degli antenati 
 	di un individuo, le loro relazioni (padre, madre, figlio, 
 	ecc\math{\unicodeellipsis}), il loro sesso (indicando con un rettangolo 
 	il sesso maschile e con un cerchio il sesso femminile) ed il genotipo 
@@ -56,7 +56,7 @@
 	\bigskip
 
 	Questa struttura puó essere rassimilata ad un albero quando non sono presenti 
-	cicli, ovvero quando non si é verificato \bf{inbreeding} fra gli antenati 
+	cicli, ovvero quando non si é verificato \strong{inbreeding} fra gli antenati 
 	\footnote{Fintanto che si parla di \em{Homo Sapiens}, i pedigree sono quasi 
 	certamente alberi, perché l'inbreeding é estremamente raro. La stessa cosa 
 	non si puó dire per gli animali domestici, specialmente quelli di razza.}.
@@ -83,8 +83,8 @@
 	viene ereditato dai figli "integralmente". Per comoditá, si considerino 
 	esclusivamente loci binari, ovvero che possono avere soltanto due possibili 
 	alleli, indicati con 0 e 1. Per convenzione si indica con 0 l'allele 
-	\bf{maggiore}, ovvero quello piú presente nella popolazione, e con 1 il 
-	\bf{minore}, il meno presente. Si considerino inoltre esclusivamente pedigree 
+	\strong{maggiore}, ovvero quello piú presente nella popolazione, e con 1 il 
+	\strong{minore}, il meno presente. Si considerino inoltre esclusivamente pedigree 
 	senza cicli.
 
 	Sulla base di queste informazioni, é possibile ricostruire gli aplotipi 

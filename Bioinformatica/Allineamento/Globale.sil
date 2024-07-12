@@ -1,6 +1,6 @@
 \begin{sile}
 
-	Si definisce \bf{distanza} tra due stringhe \math{S_{1}} e \math{S_{2}} il 
+	Si definisce \strong{distanza} tra due stringhe \math{S_{1}} e \math{S_{2}} il 
 	numero di operazioni atomiche sui singoli caratteri necessario a trasformare
 	\math{S_{1}} in \math{S_{2}}. Le operazioni ammesse sono quattro:
 
@@ -23,7 +23,7 @@
 	\bigskip
 
 	Determinare la distanza tra due stringhe é un problema spesso presente in 
-	biologia computazionale, e viene chiamato \bf{problema della distanza di 
+	biologia computazionale, e viene chiamato \strong{problema della distanza di 
 	modifica}.
 
 	Siano le quattro operazioni sopra citate abbreviate rispettivamente con 
@@ -35,7 +35,7 @@
 	l'operazione applicata all'\math{i}-esimo carattere di \math{S_{1}} per 
 	poterla trasformare in \math{S_{2}}. Una stringa che esprime la sequenza di 
 	operazioni necessarie a trasformare una stringa in un'altra viene chiamata 
-	\bf{trascrizione} delle due stringhe.
+	\strong{trascrizione} delle due stringhe.
 
 	\begin{examplebox}
 		\begin[width = 35%fw]{parbox}
@@ -98,8 +98,8 @@
 
 	\bigskip
 
-	Formalmente, si definisce \bf{distanza di modifica} (\bf{edit distance}) di 
-	due stringhe, o \bf{distanza di Levenshtein}, la lunghezza della trascrizione 
+	Formalmente, si definisce \strong{distanza di modifica} (\strong{edit distance}) di 
+	due stringhe, o \strong{distanza di Levenshtein}, la lunghezza della trascrizione 
 	piú corta possibile per una coppia di stringhe, escludendo le operazioni 
 	\math{M}. In altri termini, la distanza di modifica é il minimo numero di 
 	operazioni "rilevanti" (tutte tranne quelle nulle) necessarie a trasformare 
@@ -127,7 +127,7 @@
 
 	Oltre alla trascrizione, un'altro modo per esprimere la trasformazione 
 	di una stringa in un'altra é mostrarne esplicitamente l'allineamento. 
-	L'\bf{allineamento globale} di due stringhe \math{S_{1}} e \math{S_{2}}
+	L'\strong{allineamento globale} di due stringhe \math{S_{1}} e \math{S_{2}}
 	si ottiene innanzitutto inserendo spazi vuoti in locazioni specifiche 
 	delle stringhe \math{S_{1}} e \math{S_{2}}, e dopodiché disporre le due
 	stringhe cosí ottenute una sopra all'altra, di modo che ciascuno spazio

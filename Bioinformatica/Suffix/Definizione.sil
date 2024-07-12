@@ -1,7 +1,7 @@
 \begin{sile}
 
-	Data una stringa \math{S} di lunghezza \math{m}, viene chiamato \bf{suffix 
-	tree} (o \bf{albero dei suffissi}) per \math{S} il compact trie che ha per 
+	Data una stringa \math{S} di lunghezza \math{m}, viene chiamato \strong{suffix 
+	tree} (o \strong{albero dei suffissi}) per \math{S} il compact trie che ha per 
 	dizionario \math{S} e tutti i suoi suffissi. Un suffix tree per \math{S} 
 	ha esattamente \math{m} nodi foglia, numerati da 1 a \math{m}. Ogni nodo 
 	interno che non sia la radice ha almeno due nodi figli, ed ogni arco é 
@@ -15,17 +15,17 @@
 	\end{examplebox}
 
 	Dato un nodo \math{u} di un albero dei suffissi, Viene chiamata 
-	\bf{path-label} di \math{u} la stringa costruita concatenando 
+	\strong{path-label} di \math{u} la stringa costruita concatenando 
 	ordinatamente tutte le etichette degli archi del percorso che va 
 	dalla radice a \math{u}. La lunghezza della path-label di \math{u} 
-	viene chiamata \bf{string-depth} di \math{u}. É possibile aggiungere 
+	viene chiamata \strong{string-depth} di \math{u}. É possibile aggiungere 
 	a ciascun nodo di un albero dei suffissi la sua path-label e la sua 
 	string-depth semplicemente con una visita in profonditá.
 
 	Data una stringa \math{S} di lunghezza \math{m}, é possibile costruire 
 	un albero dei suffissi relativo ad \math{S} mediante un algoritmo banale 
 	\footnote{Esistono algoritmi efficienti che permettono di costruire alberi 
-	dei suffissi in tempo lineare, come \bf{l'algoritmo di Ukkonen}, ma sono 
+	dei suffissi in tempo lineare, come \strong{l'algoritmo di Ukkonen}, ma sono 
 	estremamente complessi.} in tempo \math{O(n^{2})}, basato sul costruire 
 	iterativamente \math{m} alberi intermedi per ciascun suffisso di \math{S}. 
 	Indicando con \math{N_{i}} l'albero intermedio che codifica tutti i suffissi 

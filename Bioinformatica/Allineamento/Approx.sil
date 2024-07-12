@@ -1,7 +1,7 @@
 \begin{sile}
 
 	Una variante molto utilizzata dell'allineamento di due stringhe é 
-	l'allineamento \bf{end-space free}. In questo allineamento, gli spazi
+	l'allineamento \strong{end-space free}. In questo allineamento, gli spazi
 	che si trovano all'estremitá sinistra e destra di una delle due stringhe
 	hanno sempre un peso 0, a prescindere da con quale altro carattere sono 
 	appaiati. Dare un peso nullo agli spazi che si trovano alle estremitá 
@@ -24,7 +24,7 @@
 	celle della \math{m}-esima colonna.
 
 	Dato un parametro \math{\delta}, una sottostringa \math{T^{'}} di un 
-	testo \math{T} viene detta \bf{occorrenza approssimata} del pattern 
+	testo \math{T} viene detta \strong{occorrenza approssimata} del pattern 
 	\math{P} se e soltanto se l'allineamento ottimale di \math{P} per 
 	\math{T^{'}} vale almeno \math{\delta}. Il problema del trovare 
 	l'occorrenza approssimata puó essere risolto mediante la variante 

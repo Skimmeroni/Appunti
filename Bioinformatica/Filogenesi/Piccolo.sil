@@ -20,7 +20,7 @@
 	ultimi.
 
 	Un approccio spesso usato in contesti come questo é il cosiddetto 
-	\bf{principio di massima parsimonia}, ovvero assumere che il processo 
+	\strong{principio di massima parsimonia}, ovvero assumere che il processo 
 	che é avvenuto sia sempre quello che aveva la maggior probabilitá di 
 	avvenire \footnote{Il principio di massima parsimonia adotta lo stesso 
 	principio del Rasoio di Occam: la soluzione piú semplice fra quelle 
@@ -29,7 +29,7 @@
 	in termini evolutivi. Il problema basato su questo principio che richiede 
 	di determinare se e quali caratteri erano posseduti dai progenitori delle 
 	specie, conoscendo se e quali caratteri sono posseduti dalle specie attuali 
-	e conoscendo la loro filogenesi, é chiamato \bf{piccolo problema di 
+	e conoscendo la loro filogenesi, é chiamato \strong{piccolo problema di 
 	parsimonia}.
 
 	\subsection{Peso uniforme: algoritmo di Fitch}
@@ -48,7 +48,7 @@
 		ciascuna delle \math{m} specie di \math{S}.
 
 		Sia poi dato un albero filogenetico \math{T} per \math{S} del quale é nota la 
-		\bf{topologia}, ovvero si conosce quanti nodi l'albero ha, come sono disposti, 
+		\strong{topologia}, ovvero si conosce quanti nodi l'albero ha, come sono disposti, 
 		quanti archi esistono e quali coppie di nodi ciascuno di questi collega. Come 
 		da definizione, le foglie dell'albero rappresentano le specie viventi, mentre 
 		i nodi interni rappresentano gli antenati comuni.
@@ -112,7 +112,7 @@
 		che l'albero filogenetico \math{T} del quale é nota la topologia sia 
 		binario (ovvero che ogni specie abbia esattamente due discendenti), 
 		il problema di piccola parsimonia cosí formulato é risolvibile 
-		dall'\bf{algoritmo di Fitch}.
+		dall'\strong{algoritmo di Fitch}.
 
 		Dato un nodo \math{x \in T}, sia \math{\lambda (x)} l'etichetta che é 
 		stata scelta da assegnare ad \math{x} (o, nel caso dei nodi foglia, 
@@ -222,7 +222,7 @@
 		una transizione di stato, sia zero. Questi valori possono essere riportati 
 		in una matrice di score di dimensione \math{k \times k}, dove ciascuna cella
 		\math{(i, j)} contiene il numero intero associato alla probabilitá che il 
-		carattere \math{c} cambi stato da \math{i} a \math{j}, chiamato \bf{score}; 
+		carattere \math{c} cambi stato da \math{i} a \math{j}, chiamato \strong{score}; 
 		ciascuno di questi valori viene indicato con \math{w(i, j)}.
 
 		Per ogni nodo \math{v \in T}, sia \math{\lambda {(v)}} l'etichetta che é 
@@ -329,7 +329,7 @@
 		v_{2}, \unicodeellipsis, v_{k}}.
 
 		L'algoritmo basato su programmazione dinamica che risolve il problema di
-		piccola parsimonia cosí formulato é l'\bf{algoritmo di Sankoff}. Lo scopo 
+		piccola parsimonia cosí formulato é l'\strong{algoritmo di Sankoff}. Lo scopo 
 		dell'algoritmo é quello di costruire una matrice \math{P}, dove ciascuna 
 		cella \math{P[x, z]} contiene la soluzione ottimale del sottoalbero 
 		\math{T_{x}} se \math{x} viene etichettato con il valore \math{z}.

@@ -1,8 +1,8 @@
 \begin{sile}
 
-	Viene chiamato \bf{modello di filogenesi perfetta} un modello di filogenesi 
+	Viene chiamato \strong{modello di filogenesi perfetta} un modello di filogenesi 
 	che identifica gli eventi di speciazione nella presenza o assenza di 
-	\bf{caratteri} da parte delle specie. Con carattere si puó intendere 
+	\strong{caratteri} da parte delle specie. Con carattere si puó intendere 
 	indifferentemente sia una proprietá fenotipica, quindi una proprietá 
 	osservabile che le specie possiedono o non possiedono (avere/non avere le 
 	branchie, avere quattro/cinque/sei/\math{\unicodeellipsis} dita dei piedi, 
@@ -25,11 +25,11 @@
 			esclusivamente possedere o non possedere;
 		\end{item}
 		\begin{item}
-			Non possono avvenire \bf{backmutations}, ovvero una volta che una 
+			Non possono avvenire \strong{backmutations}, ovvero una volta che una 
 			specie ha ereditato un carattere da un antenato non puó piú perderlo 
 			\footnote{Nonostante sia raro, fenomeni di questo tipo possono 
 			effettivamente accadere. Esistono altri modelli di filogenesi, come ad 
-			esempio il \bf{modello Dollo} o il \bf{modello 012}, che contemplano la 
+			esempio il \strong{modello Dollo} o il \strong{modello 012}, che contemplano la 
 			possibilitá che si verifichino backmutations, ma hanno un potere 
 			predittivo nettamente inferiore al modello di filogenesi perfetta.}.
 		\end{item}
@@ -110,7 +110,7 @@
 	\end{examplebox}
 
 	La soluzione del problema della filogenesi perfetta viene allora ad essere un 
-	albero che \bf{spiega} la matrice \math{M}, ovvero che rappresenta le stesse 
+	albero che \strong{spiega} la matrice \math{M}, ovvero che rappresenta le stesse 
 	informazioni della matrice. Se esiste, questo albero filogenetico avrá le 
 	seguenti caratteristiche:
 
@@ -132,7 +132,7 @@
 
 	Un algoritmo molto semplice che risolve il problema della filogenesi 
 	perfetta, ovvero che permette di costruire un albero filogenetico a 
-	partire da una matrice binaria \math{M}, é l'\bf{algoritmo di Gunsfeld}.
+	partire da una matrice binaria \math{M}, é l'\strong{algoritmo di Gunsfeld}.
 	L'algoritmo si compone di due parti: prima si ordina la matrice \math{M}
 	in tempo lineare mediante radix sort, poi si costruisce l'albero aggiungendo
 	una specie alla volta dalla piú a sinistra alla piú a destra nella matrice.
@@ -188,7 +188,7 @@
 		interamente contenuto nell'altro. 
 
 		\bigskip
-		\bf{Dimostrazione}. Sia \math{T} l'albero filogenetico che spiega la matrice 
+		\strong{Dimostrazione}. Sia \math{T} l'albero filogenetico che spiega la matrice 
 		\math{M}, e si consideri la coppia di caratteri distinti \math{(i, j)} di 
 		\math{T} (o di \math{M}). Siano poi \math{e_{i}} e \math{e_{j}} gli archi di 
 		\math{T} etichettati, rispettivamente, \math{i} e \math{j}, ovvero gli archi 

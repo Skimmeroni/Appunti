@@ -1,6 +1,6 @@
 \begin{sile}
 
-	La struttura ad albero chiamata \bf{trie} é la piú semplice struttura 
+	La struttura ad albero chiamata \strong{trie} é la piú semplice struttura 
 	dati possibile che permette di determinare se una stringa appartiene 
 	o non appartiene ad un determinato insieme chiamato \em{dizionario}. 
 	Un trie é un DAG che ha un singolo carattere riportato sulle etichette 
@@ -54,7 +54,7 @@
 		\end{parbox}
 	\end{examplebox}
 
-	Un \bf{compact trie} é un tipo particolare di trie dove ciascun cammino che 
+	Un \strong{compact trie} é un tipo particolare di trie dove ciascun cammino che 
 	non ha diramazioni viene accorpato in un unico arco fra due nodi, etichettato 
 	con la stringa che si ottiene concatenando ordinatamente tutti i caratteri 
 	sulle etichette che formavano il cammino. É possibile determinare se una 

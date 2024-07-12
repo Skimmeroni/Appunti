@@ -1,8 +1,8 @@
 \begin{sile}
 
 	Data una stringa \math{P}, chiamata \em{pattern}, ed una stringa \math{T} 
-	di lunghezza maggiore di \math{P}, chiamata \em{testo}, il \bf{problema 
-	dell'appaiamento esatto} (\bf{exact matching problem}) consiste nel 
+	di lunghezza maggiore di \math{P}, chiamata \em{testo}, il \strong{problema 
+	dell'appaiamento esatto} (\strong{exact matching problem}) consiste nel 
 	trovare, se ne esistono, tutte le occorrenze di \math{P} all'interno di 
 	\math{T}.
 
@@ -14,8 +14,8 @@
 	\end{examplebox}
 
 	Il metodo di risoluzione piú semplice e intuitivo per risolvere il 
-	problema dell'appaiamento esatto é quello che viene chiamato \bf{algoritmo 
-	naive} (\bf{algoritmo ingenuo}). L'algoritmo naive consiste nell'allineare 
+	problema dell'appaiamento esatto é quello che viene chiamato \strong{algoritmo 
+	naive} (\strong{algoritmo ingenuo}). L'algoritmo naive consiste nell'allineare 
 	l'estremo sinistro di \math{P} con l'estremo sinistro di \math{T}, 
 	dopodiché confrontare ordinatamente da sinistra a destra i caratteri 
 	di \math{P} con quelli di \math{T} finché non viene trovata una coppia 

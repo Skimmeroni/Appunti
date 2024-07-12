@@ -1,7 +1,7 @@
 \begin{sile}
 
 	Un primo approccio al problema del sequenziamento del DNA é offerto dallo 
-	\bf{shotgun sequencing}, o \bf{sequenziamento casuale}. Questo si compone
+	\strong{shotgun sequencing}, o \strong{sequenziamento casuale}. Questo si compone
 	di quattro passaggi:
 
 	\begin{enumerate}
@@ -30,10 +30,10 @@
 	C, G, T}, e l'insieme di tutte le read contiene le informazioni sull'intero
 	DNA, allora questo non é altro che una stringa formata dalla concatenazione
 	di sottostringhe di varia lunghezza di tutte le read. Piú formalmente, si ha
-	che l'intero DNA é una \bf{superstringa} delle relative read.
+	che l'intero DNA é una \strong{superstringa} delle relative read.
 
 	Dato un insieme di \math{k} stringhe \math{P = \{S_{1}, S_{2}, 
-	\unicodeellipsis, S_{k}\}}, una \bf{superstringa} dell'insieme \math{P}
+	\unicodeellipsis, S_{k}\}}, una \strong{superstringa} dell'insieme \math{P}
 	é una stringa che contiene ogni stringa di \math{P} come sua sottostringa.
 	Si noti come la superstringa di un insieme \math{P} non deve necessariamente
 	essere membro di \math{P}. É sempre possibile ottenere una superstringa 
@@ -58,13 +58,13 @@
 
 	É possibile approcciare il problema di determinare la superstringa piú corta 
 	di un insieme di stringhe mediante grafi. Dato un insieme di \math{n} read, 
-	un \bf{grafo di overlap} é un grafo che ha i nodi etichettati con le read e 
+	un \strong{grafo di overlap} é un grafo che ha i nodi etichettati con le read e 
 	ha archi fra tutte le coppie di read che hanno un overlap "sufficientemente 
 	lungo", etichettati con l'overlap stesso. Di norma si impone un valore soglia 
 	per la lunghezza degli overlap al di sopra del quale si assume che l'overlap 
 	non possa essere dovuto ad una coincidenza ma al fatto che le due read sono 
 	state estratte da porzioni contigue di DNA. Un grafo di overlap a cui vengono 
-	rimossi gli archi transitivi prende il nome di \bf{grafo di stringhe}.
+	rimossi gli archi transitivi prende il nome di \strong{grafo di stringhe}.
 
 	\begin{examplebox}
 		\begin[width = 50%fw]{parbox}
@@ -84,10 +84,10 @@
 	suffisso dell'ultima read non presente nell'overlap.
 
 	Il problema del sequenziamento del DNA ha notevoli somiglianze con il 
-	problema del determinare un \bf{cammino hamiltoniano} su un grafo, in 
+	problema del determinare un \strong{cammino hamiltoniano} su un grafo, in 
 	particolare nella sua variante dove le etichette degli archi ne determinano
-	un peso, il \bf{problema del commesso viaggiatore} (\bf{travelling salesman
-	problem}), o \bf{TSP}. Questo problema ha peró una complessitá NP-hard, 
+	un peso, il \strong{problema del commesso viaggiatore} (\strong{travelling salesman
+	problem}), o \strong{TSP}. Questo problema ha peró una complessitá NP-hard, 
 	peranto non puó esistere un algoritmo in grado di risolverlo in tempo 
 	polinomiale. Nonostante questo, é comunque possibile risolvere piccole 
 	istanze di TSP in tempo accettabile.
@@ -154,7 +154,7 @@
 			% \math{||P||} la somma delle lunghezze di tutte le stringhe in \math{P};
 		% \end{item}
 		% \begin{item}
-			% \math{\mi{ov}(S_{i}, S_{j})} l'\bf{overlap} di \math{S_{i}} e \math{S_{j}}, 
+			% \math{\mi{ov}(S_{i}, S_{j})} l'\strong{overlap} di \math{S_{i}} e \math{S_{j}}, 
 			% ovvero la lunghezza del match piú lungo fra un suffisso di \math{S_{i}} ed 
 			% un prefisso di \math{S_{j}};
 		% \end{item}

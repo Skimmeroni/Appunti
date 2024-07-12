@@ -1,7 +1,7 @@
 \begin{sile}
 
 	É spesso utile rappresentare le soluzioni di problemi di programmazione 
-	dinamica sulle stringhe mediante dei \bf{grafi pesati di modifica}. Date 
+	dinamica sulle stringhe mediante dei \strong{grafi pesati di modifica}. Date 
 	due stringhe \math{S_{1}} ed \math{S_{2}}, rispettivamente di lunghezza 
 	\math{n} e \math{m}, un grafo pesato di modifica é un grafo diretto aciclico 
 	avente \math{(n + 1) \times (m + 1)} nodi, ciascuno etichettato con una 
@@ -23,19 +23,19 @@
 		\begin[width = 50%fw]{parbox}
 			\begin[cols = 15%fw 15%fw 15%fw 15%fw 15%fw]{ptable}
 				\begin{row}
-					\cell{} \cell{} \cell{\bf{a}} \cell{\bf{n}} \cell{\bf{n}}
+					\cell{} \cell{} \cell{\strong{a}} \cell{\strong{n}} \cell{\strong{n}}
 				\end{row}
 				\begin{row}
 					\cell{} \cell{0} \cell{1} \cell{2} \cell{3}
 				\end{row}
 				\begin{row}
-					\cell{\bf{c}} \cell{1} \cell{2} \cell{3} \cell{4}
+					\cell{\strong{c}} \cell{1} \cell{2} \cell{3} \cell{4}
 				\end{row}
 				\begin{row}
-					\cell{\bf{a}} \cell{2} \cell{1} \cell{2} \cell{3}
+					\cell{\strong{a}} \cell{2} \cell{1} \cell{2} \cell{3}
 				\end{row}
 				\begin{row}
-					\cell{\bf{n}} \cell{3} \cell{2} \cell{1} \cell{2}
+					\cell{\strong{n}} \cell{3} \cell{2} \cell{1} \cell{2}
 				\end{row}
 			\end{ptable}
 		\end{parbox}

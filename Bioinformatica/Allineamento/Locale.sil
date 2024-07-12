@@ -4,7 +4,7 @@
 	una stringa codificante con l'intero genoma}, si ha a che fare con 
 	coppie di stringhe che non sono, nel complesso, molto simili, ma che 
 	hanno delle regioni al loro interno che lo sono. Si definisce il problema 
-	dell'\bf{allineamento locale} come la ricerca delle due regioni (di 
+	dell'\strong{allineamento locale} come la ricerca delle due regioni (di 
 	lunghezza fissata), una per ciascuna stringa, che presentano fra loro 
 	elevata somiglianza. Piú formalmente, il problema dell'allineamento locale 
 	consiste, date due stringhe \math{S_{1}} ed \math{S_{2}}, nel trovare due 

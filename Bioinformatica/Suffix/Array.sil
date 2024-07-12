@@ -4,7 +4,7 @@
 	pattern matching, ma sono anche molto esosi in termini di spazio. Nel caso 
 	in cui l'occupazione di memoria sia un fattore critico per la risoluzione 
 	di un problema, gli alberi dei suffissi potrebbero non rivelarsi lo strumento 
-	migliore. Esiste peró una struttura dati \bf{array dei suffissi} che é piú 
+	migliore. Esiste peró una struttura dati \strong{array dei suffissi} che é piú 
 	conservativa dell'albero dei suffissi in termini di spazio occupato e permette 
 	di risolvere il problema del pattern matching in un tempo comparabile.
 

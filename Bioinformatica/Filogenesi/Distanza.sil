@@ -1,7 +1,7 @@
 \begin{sile}
 
 	Il grado di somiglianza fra due stringhe viene genericamente chiamato 
-	\bf{distanza}. Sebbene vi siano diverse formulazioni della distanza fra
+	\strong{distanza}. Sebbene vi siano diverse formulazioni della distanza fra
 	due stringhe, tutte possiedono le stesse proprietá di base. Matematicamente, 
 	la distanza é una metrica definita come \math{d: S \times S \mapsto R^{+}}, 
 	che assegna un valore reale ad ogni coppia di stringhe. La funzione distanza 
@@ -22,7 +22,7 @@
 	\bigskip
 
 	La formulazione della distanza fra due stringhe piú semplice e piú utilizzata
-	é la cosiddetta \bf{distanza di modifica} (\bf{edit distance}), o \bf{distanza 
+	é la cosiddetta \strong{distanza di modifica} (\strong{edit distance}), o \strong{distanza 
 	di Levenshtein}. Date due stringhe \math{S_{1}} e \math{S_{2}}, la distanza di 
 	modifica fra le due é data dal numero di operazioni atomiche sui singoli 
 	caratteri necessario a trasformare \math{S_{1}} in \math{S_{2}}. Le operazioni 
@@ -55,7 +55,7 @@
 	l'operazione applicata all'\math{i}-esimo carattere di \math{S_{1}} per 
 	poterla trasformare in \math{S_{2}}. Una stringa che esprime la sequenza di 
 	operazioni necessarie a trasformare una stringa in un'altra viene chiamata 
-	\bf{trascrizione} delle due stringhe.
+	\strong{trascrizione} delle due stringhe.
 
 	La distanza di modifica fra due stringhe puó essere allora vista anche 
 	come la lunghezza della trascrizione piú corta possibile per tale coppia 
@@ -179,7 +179,7 @@
 		\math{D(i - 1, j - 1) + 1} \math{D(i - 1, j - 1)}.
 
 		\bigskip
-		\bf{Dimostrazione}. Si consideri una trascrizione ottimale qualsiasi associata 
+		\strong{Dimostrazione}. Si consideri una trascrizione ottimale qualsiasi associata 
 		alla trasformazione di una stringa \math{S_{1}} in una stringa \math{S_{2}}. 
 		Ci si concentri sull'ultimo carattere della trascrizione, che dovrá 
 		necessariamente essere \math{I}, \math{D}, \math{R} o \math{M}:
@@ -235,7 +235,7 @@
 		\math{D} é il minimo dei quattro possibili.
 
 		\bigskip
-		\bf{Dimostrazione}. Sia \math{S_{1}} una qualsiasi stringa che si vuole 
+		\strong{Dimostrazione}. Sia \math{S_{1}} una qualsiasi stringa che si vuole 
 		trasformare, in maniera ottimale, in una stringa \math{S_{2}}. Si consideri 
 		il passaggio intermedio (obbligato) dove il prefisso \math{S_{1}[1:i]} viene 
 		trasformato nel prefisso \math{S_{2}[1:j]}:
@@ -317,43 +317,43 @@
 		\begin[width = 50%fw]{parbox}
 			\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
 				\begin{row}
-					\cell{} \cell{} \cell{\bf{s}} \cell{\bf{u}}
-					\cell{\bf{n}} \cell{\bf{d}} \cell{\bf{a}} \cell{\bf{y}}
+					\cell{} \cell{} \cell{\strong{s}} \cell{\strong{u}}
+					\cell{\strong{n}} \cell{\strong{d}} \cell{\strong{a}} \cell{\strong{y}}
 				\end{row}
 				\begin{row}
 					\cell{} \cell{0} \cell{1} \cell{2}
 					\cell{3} \cell{4} \cell{5} \cell{6}
 				\end{row}
 				\begin{row}
-					\cell{\bf{s}} \cell{1} \cell{} \cell{}
+					\cell{\strong{s}} \cell{1} \cell{} \cell{}
 					\cell{} \cell{} \cell{} \cell{}
 				\end{row}
 				\begin{row}
-					\cell{\bf{a}} \cell{2} \cell{} \cell{}
+					\cell{\strong{a}} \cell{2} \cell{} \cell{}
 					\cell{} \cell{} \cell{} \cell{}
 				\end{row}
 				\begin{row}
-					\cell{\bf{t}} \cell{3} \cell{} \cell{}
+					\cell{\strong{t}} \cell{3} \cell{} \cell{}
 					\cell{} \cell{} \cell{} \cell{}
 				\end{row}
 				\begin{row}
-					\cell{\bf{u}} \cell{4} \cell{} \cell{}
+					\cell{\strong{u}} \cell{4} \cell{} \cell{}
 					\cell{} \cell{} \cell{} \cell{}
 				\end{row}
 				\begin{row}
-					\cell{\bf{r}} \cell{5} \cell{} \cell{}
+					\cell{\strong{r}} \cell{5} \cell{} \cell{}
 					\cell{} \cell{} \cell{} \cell{}
 				\end{row}
 				\begin{row}
-					\cell{\bf{d}} \cell{6} \cell{} \cell{}
+					\cell{\strong{d}} \cell{6} \cell{} \cell{}
 					\cell{} \cell{} \cell{} \cell{}
 				\end{row}
 				\begin{row}
-					\cell{\bf{a}} \cell{7} \cell{} \cell{}
+					\cell{\strong{a}} \cell{7} \cell{} \cell{}
 					\cell{} \cell{} \cell{} \cell{}
 				\end{row}
 				\begin{row}
-					\cell{\bf{y}} \cell{8} \cell{} \cell{}
+					\cell{\strong{y}} \cell{8} \cell{} \cell{}
 					\cell{} \cell{} \cell{} \cell{}
 				\end{row}
 			\end{ptable}
@@ -361,43 +361,43 @@
 		\begin[width = 50%fw]{parbox}
 			\begin[cols = 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw 10%fw]{ptable}
 				\begin{row}
-					\cell{} \cell{} \cell{\bf{s}} \cell{\bf{u}}
-					\cell{\bf{n}} \cell{\bf{d}} \cell{\bf{a}} \cell{\bf{y}}
+					\cell{} \cell{} \cell{\strong{s}} \cell{\strong{u}}
+					\cell{\strong{n}} \cell{\strong{d}} \cell{\strong{a}} \cell{\strong{y}}
 				\end{row}
 				\begin{row}
 					\cell{} \cell{0} \cell{1} \cell{2}
 					\cell{3} \cell{4} \cell{5} \cell{6}
 				\end{row}
 				\begin{row}
-					\cell{\bf{s}} \cell{1} \cell{0} \cell{1}
+					\cell{\strong{s}} \cell{1} \cell{0} \cell{1}
 					\cell{2} \cell{3} \cell{4} \cell{5}
 				\end{row}
 				\begin{row}
-					\cell{\bf{a}} \cell{2} \cell{1} \cell{1}
+					\cell{\strong{a}} \cell{2} \cell{1} \cell{1}
 					\cell{2} \cell{3} \cell{3} \cell{4}
 				\end{row}
 				\begin{row}
-					\cell{\bf{t}} \cell{3} \cell{2} \cell{2}
+					\cell{\strong{t}} \cell{3} \cell{2} \cell{2}
 					\cell{2} \cell{3} \cell{4} \cell{4}
 				\end{row}
 				\begin{row}
-					\cell{\bf{u}} \cell{4} \cell{3} \cell{2}
+					\cell{\strong{u}} \cell{4} \cell{3} \cell{2}
 					\cell{3} \cell{3} \cell{4} \cell{5}
 				\end{row}
 				\begin{row}
-					\cell{\bf{r}} \cell{5} \cell{4} \cell{3}
+					\cell{\strong{r}} \cell{5} \cell{4} \cell{3}
 					\cell{3} \cell{4} \cell{4} \cell{5}
 				\end{row}
 				\begin{row}
-					\cell{\bf{d}} \cell{6} \cell{5} \cell{4}
+					\cell{\strong{d}} \cell{6} \cell{5} \cell{4}
 					\cell{4} \cell{3} \cell{4} \cell{5}
 				\end{row}
 				\begin{row}
-					\cell{\bf{a}} \cell{7} \cell{6} \cell{5}
+					\cell{\strong{a}} \cell{7} \cell{6} \cell{5}
 					\cell{5} \cell{4} \cell{3} \cell{4}
 				\end{row}
 				\begin{row}
-					\cell{\bf{y}} \cell{8} \cell{7} \cell{6}
+					\cell{\strong{y}} \cell{8} \cell{7} \cell{6}
 					\cell{6} \cell{5} \cell{4} \cell{3}
 				\end{row}
 			\end{ptable}
@@ -480,8 +480,8 @@
 	\begin{examplebox}
 		\begin[cols = 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw 11%fw]{ptable}
 			\begin{row}
-				\cell{} \cell{} \cell{\bf{w}} \cell{\bf{r}} \cell{\bf{i}}
-				\cell{\bf{t}} \cell{\bf{e}} \cell{\bf{r}} \cell{\bf{s}}
+				\cell{} \cell{} \cell{\strong{w}} \cell{\strong{r}} \cell{\strong{i}}
+				\cell{\strong{t}} \cell{\strong{e}} \cell{\strong{r}} \cell{\strong{s}}
 			\end{row}
 			\begin{row}
 				\cell{} \cell{0} \cell{\math{\leftarrow} 1}
@@ -490,7 +490,7 @@
 				\cell{\math{\leftarrow} 6} \cell{\math{\leftarrow} 7}
 			\end{row}
 			\begin{row}
-				\cell{\bf{v}}
+				\cell{\strong{v}}
 				\cell{\math{\uparrow} 1}
 				\cell{\math{\nwarrow} 1}
 				\cell{\math{\nwarrow} \math{\leftarrow} 2}
@@ -501,7 +501,7 @@
 				\cell{\math{\nwarrow} \math{\leftarrow} 7}
 			\end{row}
 			\begin{row}
-				\cell{\bf{i}}
+				\cell{\strong{i}}
 				\cell{\math{\uparrow} 2}
 				\cell{\math{\nwarrow} \math{\uparrow} 2}
 				\cell{\math{\nwarrow} 2}
@@ -512,7 +512,7 @@
 				\cell{\math{\leftarrow} 6}
 			\end{row}
 			\begin{row}
-				\cell{\bf{n}}
+				\cell{\strong{n}}
 				\cell{\math{\uparrow} 3}
 				\cell{\math{\nwarrow} \math{\uparrow} 3}
 				\cell{\math{\nwarrow} \math{\uparrow} 3}
@@ -523,7 +523,7 @@
 				\cell{\math{\uparrow} \math{\leftarrow} 6}
 			\end{row}
 			\begin{row}
-				\cell{\bf{t}}
+				\cell{\strong{t}}
 				\cell{\math{\uparrow} 4}
 				\cell{\math{\nwarrow} \math{\uparrow} 4}
 				\cell{\math{\nwarrow} \math{\uparrow} 4}
@@ -534,7 +534,7 @@
 				\cell{\math{\nwarrow} \math{\leftarrow} 6}
 			\end{row}
 			\begin{row}
-				\cell{\bf{n}}
+				\cell{\strong{n}}
 				\cell{\math{\uparrow} 5}
 				\cell{\math{\nwarrow} \math{\uparrow} 5}
 				\cell{\math{\nwarrow} \math{\uparrow} 5}
@@ -545,7 +545,7 @@
 				\cell{\math{\nwarrow} \math{\leftarrow} 6}
 			\end{row}
 			\begin{row}
-				\cell{\bf{e}}
+				\cell{\strong{e}}
 				\cell{\math{\uparrow} 6}
 				\cell{\math{\nwarrow} \math{\uparrow} 6}
 				\cell{\math{\nwarrow} \math{\uparrow} 6}
@@ -556,7 +556,7 @@
 				\cell{\math{\nwarrow} \math{\leftarrow} 6}
 			\end{row}
 			\begin{row}
-				\cell{\bf{r}}
+				\cell{\strong{r}}
 				\cell{\math{\uparrow} 7}
 				\cell{\math{\nwarrow} \math{\uparrow} 7}
 				\cell{\math{\nwarrow} 6}

@@ -1,6 +1,6 @@
 \begin{sile}
 
-	Viene chiamato \bf{longest common substring} il problema che richiede di 
+	Viene chiamato \strong{longest common substring} il problema che richiede di 
 	trovare la sottostringa piú lunga in comune fra due stringhe \math{S_{1}} e 
 	\math{S_{2}} (per comoditá, si assuma che entrambe siano di lunghezza 
 	\math{n}). Il problema puó essere risolto in maniera banale prendendo tutte 
@@ -31,7 +31,7 @@
 	generalizzati. Si consideri il problema della sottostringa comune piú 
 	lunga limitato a due sole stringhe \math{S_{1}} e \math{S_{2}}, e si 
 	costruisca l'albero dei suffissi generalizzato relativo a queste. Un
-	nodo si dice \bf{favorevole} se il sottoalbero avente tale nodo per 
+	nodo si dice \strong{favorevole} se il sottoalbero avente tale nodo per 
 	radice ha almeno un nodo foglia che corrisponde ad un suffisso di 
 	\math{S_{1}} ed almeno un nodo foglia che corrisponde ad un suffisso 
 	di \math{S_{2}}. Naturalmente, i nodi che hanno per discendenti dei 

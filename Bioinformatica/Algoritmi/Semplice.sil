@@ -1,6 +1,6 @@
 \begin{sile}
 
-	Una \bf{struttura dati} é un modo per organizzare e gestire una collezione 
+	Una \strong{struttura dati} é un modo per organizzare e gestire una collezione 
 	di dati. L'implementazione di una struttura dati richiede in genere di 
 	costruire degli algoritmi che la gestiscono e la manipolano: cercare (se 
 	esiste) uno specifico dato, inserire (se possibile) un dato, eliminare un 
@@ -9,9 +9,9 @@
 
 	\subsection{Array}
 
-		Un \bf{array} é una \bf{struttura indicizzata} costituita da una collezione 
+		Un \strong{array} é una \strong{struttura indicizzata} costituita da una collezione 
 		di celle numerate a partire da 0 che possono contenere elementi di un tipo
-		prestabilito. La \bf{dimensione} di un array, ovvero il numero massimo di 
+		prestabilito. La \strong{dimensione} di un array, ovvero il numero massimo di 
 		elementi che puó contenere, viene fissata quando l'array viene creata,
 		e non é possibile modificarla.
 
@@ -20,21 +20,21 @@
 		certa cella con tempo costante \math{O(1)}. Allo stesso modo, aggiungere
 		o eliminare un elemento da un array é una operazione immediata (in tempo
 		\math{O(1)}). Non potendo peró modificare direttamente la dimensione di
-		un array, l'unico modo per farlo é mediante \bf{riallocazione}, ovvero 
+		un array, l'unico modo per farlo é mediante \strong{riallocazione}, ovvero 
 		creare un secondo array (piú grande o piú piccolo) e copiarvi tutti i 
 		dati del precedente; evidentemente questo procedimento richiede tempo 
 		lineare \math{O(n)}.
 
 	\subsection{Liste concatenate}
 
-		Una \bf{lista concatenata} é costituita da un insieme di \bf{record}, simili
+		Una \strong{lista concatenata} é costituita da un insieme di \strong{record}, simili
 		alle celle degli array ma che, anziché essere ordinate sequenzialmente, sono
 		fra loro collegati da dei puntatori. Se i record di una lista concatenata
 		hanno un puntatore al record successivo ma non al precedente, la lista 
-		concatenata é detta \bf{semplice}, ed é percorribile in una sola direzione;
+		concatenata é detta \strong{semplice}, ed é percorribile in una sola direzione;
 		se invece i record di una lista concatenata hanno un puntatore al record 
 		successivo ed un puntatore al record precedente, la lista concatenata é 
-		detta \bf{doppia}, ed é percorribile in entrambe le direzioni. Le uniche 
+		detta \strong{doppia}, ed é percorribile in entrambe le direzioni. Le uniche 
 		eccezioni sono l'ultimo record, che non punta a nulla e il primo record, a
 		cui nessun record punta.
 
@@ -48,8 +48,8 @@
 
 	\subsection{Pile}
 
-		Una \bf{pila} é una struttura dati basata sulla disciplina di accesso 
-		\bf{LIFO} (\em{Last In First Out}), ovvero dove l'elemento di prima 
+		Una \strong{pila} é una struttura dati basata sulla disciplina di accesso 
+		\strong{LIFO} (\em{Last In First Out}), ovvero dove l'elemento di prima 
 		posizione é l'ultimo elemento che é stato inserito. Gli inserimenti in
 		una pila (\tt{push}) aggiungono elementi alla fine della sequenza, 
 		mentre le cancellazioni (\tt{pop}) ne rimuovono sempre l'ultimo elemento.
@@ -61,8 +61,8 @@
 
 	\subsection{Code}
 
-		Una \bf{coda} é una struttura dati basata sulla disciplina di accesso 
-		\bf{FIFO} (\em{First In First Out}), ovvero dove l'elemento di prima 
+		Una \strong{coda} é una struttura dati basata sulla disciplina di accesso 
+		\strong{FIFO} (\em{First In First Out}), ovvero dove l'elemento di prima 
 		posizione é il primo elemento che é stato inserito. Gli inserimenti in
 		una coda (\tt{enqueue}) aggiungono elementi alla fine della sequenza, 
 		mentre le cancellazioni (\tt{dequeue}) ne rimuovono sempre il primo elemento.
@@ -74,21 +74,21 @@
 
 	\subsection{Alberi}
 
-		Un \bf{albero} é una coppia \math{T = (N, A)} costituita da un insieme 
-		\math{N} di \bf{nodi} e da un insieme \math{A \subseteq N \times N} di 
-		coppie di nodi, detti \bf{archi}. In un albero, ogni nodo \math{v} ha 
+		Un \strong{albero} é una coppia \math{T = (N, A)} costituita da un insieme 
+		\math{N} di \strong{nodi} e da un insieme \math{A \subseteq N \times N} di 
+		coppie di nodi, detti \strong{archi}. In un albero, ogni nodo \math{v} ha 
 		uno ed un solo \em{genitore} \math{u} tale per cui \math{(u, v) \in A};
-		l'unica eccezione é il nodo \bf{radice}, il nodo da cui tutti gli altri
+		l'unica eccezione é il nodo \strong{radice}, il nodo da cui tutti gli altri
 		nodi derivano. Un nodo \math{u} puó avere zero o piú \em{figli} \math{v}
-		tali che \math{(u, v) \in A}, ed il loro numero viene chiamato \bf{grado}
-		del nodo. Un nodo che non ha figli é chiamato \bf{foglia}, mentre un
-		nodo che ha sia dei figli che dei genitori é detto \bf{nodo interno}. La
-		\bf{profonditá} di un nodo é il numero di archi che occorre attraversare,
-		a partire dalla radice, per raggiungerlo; l'\bf{altezza} di un albero é
+		tali che \math{(u, v) \in A}, ed il loro numero viene chiamato \strong{grado}
+		del nodo. Un nodo che non ha figli é chiamato \strong{foglia}, mentre un
+		nodo che ha sia dei figli che dei genitori é detto \strong{nodo interno}. La
+		\strong{profonditá} di un nodo é il numero di archi che occorre attraversare,
+		a partire dalla radice, per raggiungerlo; l'\strong{altezza} di un albero é
 		la massima profonditá a cui é possibile trovare una foglia. Viene detto
-		\bf{albero n-ario} un albero costituito esclusivamente da nodi (interni)
+		\strong{albero n-ario} un albero costituito esclusivamente da nodi (interni)
 		di grado \math{n}; un albero \math{n}-ario in cui tutte le foglie sono
-		sullo stesso livello é detto \bf{completo}.
+		sullo stesso livello é detto \strong{completo}.
 
 		Un albero puó essere implementato sia mediante array, sia mediante liste
 		concatenate, anche se la seconda opzione é preferibile. Questo puó essere
@@ -105,7 +105,7 @@
 		a differenza delle strutture dati precedenti, in un albero ad ogni elemento
 		puó essere associato piú di un elemento ordinatamente successivo, pertanto
 		é possibile che si abbiano delle ramificazioni. L'approccio piú usato viene
-		detto \bf{visita in profonditá}, ed é basato sulla ricorsione: se il nodo non 
+		detto \strong{visita in profonditá}, ed é basato sulla ricorsione: se il nodo non 
 		ha figli, se ne restituisce il contenuto, mentre se ha figli la funzione viene
 		ricorsivamente applicata a questi.
 

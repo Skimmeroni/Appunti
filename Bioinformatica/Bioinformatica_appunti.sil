@@ -1,4 +1,4 @@
-\begin[class = book]{document}
+\begin[class = book, papersize = a3]{document}
 
 	\script[src = packages/pdf]
 	\script[src = packages/framebox]
@@ -11,10 +11,6 @@
 	\script[src = packages/textsubsuper]
 	\script[src = packages/rules]
 	\script[src = packages/unichar]
-
-	\define[command = bf]{
-		\font[weight = 800]{\process}
-	}
 
 	\define[command = emoji]{
 		\font[family = Twitter Color Emoji, 
@@ -81,7 +77,7 @@
 	\pdf:metadata[key = Title, value = Appunti di Bioinformatica]
 	\pdf:metadata[key = Author, value = Shania]
 
-	% \center{\img[src = Bioinformatica_copertina.jpg, width = 75%pw]}
+	\center{\img[src = Bioinformatica_copertina.png, width = 75%pw]}
 
 	\pagebreak
 
@@ -123,14 +119,6 @@
 		\section{Sottostringa comune piú lunga}
 		\include[src = Suffix/Comune.sil]
 	\chapter{Allineamento di sequenze}
-		% \section{Sottosequenza comune piú lunga}
-		% \include[src = Allineamento/LCS.sil]
-		% \section{Grafo pesato di modifica}
-		% \include[src = Allineamento/Grafo.sil]
-		% \section{Somiglianza tra due stringhe}
-		% \include[src = Allineamento/Somiglianza.sil]
-		% \section{Ricerca approssimata di pattern in un testo}
-		% \include[src = Allineamento/Approx.sil]
 		% \section{Allineamento globale}
 		% \include[src = Allineamento/Globale.sil]
 		% \section{Allineamento locale}
@@ -141,8 +129,6 @@
 		% \include[src = Allineamento/Banda.sil]
 		% \section{Allineamento multiplo}
 		% \include[src = Allineamento/Multiplo.sil]
-		% \section{Allineamento multiplo approssimato}
-		% \include[src = Allineamento/Multiplo2.sil]
 	\chapter{Ricostruzione della filogenesi}
 		\section{Filogenesi ed evoluzione delle specie}
 		\include[src = Filogenesi/Filogenesi.sil]

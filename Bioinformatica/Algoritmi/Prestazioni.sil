@@ -10,7 +10,7 @@
 	condizioni lo delimitano.
 
 	Un parametro di valutazione molto importante per l'analisi algoritmica é 
-	il \bf{tempo di esecuzione}, ovvero il numero di operazioni primitive che 
+	il \strong{tempo di esecuzione}, ovvero il numero di operazioni primitive che 
 	l'algoritmo esegue per un input generico. Per semplificarne il calcolo, si 
 	preferisce assumere che l'input di un algoritmo avente dimensione \math{n} 
 	sia sempre proporzionale a \math{ln(n)}; questo non é, in genere, uno 
@@ -131,7 +131,7 @@
 	passato come input un array giá parzialmente ordinato sará necessario eseguire 
 	meno istruzioni rispetto al passarvi un array con i valori disposti in maniera
 	completamente casuale. Per questo motivo si preferisce non valutare il tempo
-	di esecuzione su un input generico, ma piuttosto in due casi: il \bf{caso 
+	di esecuzione su un input generico, ma piuttosto in due casi: il \strong{caso 
 	migliore} (\em{best case}) ed il caso peggiore (\em{worst case}). Il primo é
 	il caso che si verifica quando all'algoritmo viene passato un input per il 
 	quale deve eseguire le sue istruzioni il minimo numero di volte, mentre il 
@@ -217,12 +217,12 @@
 
 	Analizzare il tempo di esecuzione di algoritmi ricorsivi é molto piú 
 	complesso. Algoritmi ricorsivi possono essere analizzati mediante una
-	\bf{relazione di ricorrenza}: il tempo richiesto da una routine é uguale
+	\strong{relazione di ricorrenza}: il tempo richiesto da una routine é uguale
 	al tempo speso all'interno della routine piú il tempo speso per le chiamate
 	ricorsive. Questa relazione di ricorrenza é una equazione dove la variabile
 	tempo compare sia a sinistra che a destra.
 
-	Un possibile approccio é il cosiddetto \bf{metodo dell'iterazione}, che 
+	Un possibile approccio é il cosiddetto \strong{metodo dell'iterazione}, che 
 	prevede di "sciogliere" la ricorsione per esprimerla sotto forma di una 
 	sommatoria dipendente solo da \math{n}. Applicare questo metodo non é 
 	sempre facile, perché richiede di utilizzare manipolazioni algebriche 
@@ -256,7 +256,7 @@
 	\end{examplebox}
 
 	Se la relazione di ricorrenza é forma presentata di seguito, é possibile 
-	ricavare il tempo di esecuzione mediante un teorema chiamato \bf{teorema 
+	ricavare il tempo di esecuzione mediante un teorema chiamato \strong{teorema 
 	fondamentale delle ricorrenze}:
 
 	\par
@@ -294,7 +294,7 @@
 	complicata. Per questo motivo spesso non si é particolarmente interessati 
 	a considerare il tempo di esecuzione di per sé, ma bensí una sua delimitazione
 	che ne dia una stima ragionevole. A questo scopo é possibile introdurre la 
-	\bf{notazione asintotica}, che permette di approssimare tempi di esecuzione 
+	\strong{notazione asintotica}, che permette di approssimare tempi di esecuzione 
 	aventi una espressione complessa mediante espressioni piú semplici. Data una 
 	funzione generica \math{f_{n}}:
 

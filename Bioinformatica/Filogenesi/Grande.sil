@@ -1,6 +1,6 @@
 \begin{sile}
 
-	Il \bf{grande problema di parsimonia} é una generalizzazione del piccolo 
+	Il \strong{grande problema di parsimonia} é una generalizzazione del piccolo 
 	problema di parsimonia; é uguale a quest'ultimo in tutto e per tutto ma
 	introduce l'ulteriore difficoltá di non avere a disposizione la topologia 
 	dell'albero \math{T}. Pertanto, il grande problema di parsimonia richiede
@@ -16,7 +16,7 @@
 	filogenesi: infatti, se si assume che specie simili abbiano genomi simili,
 	allora due specie filogeneticamente lontane avranno le rispettive stringhe
 	genomiche distanti, e viceversa. Questo tipo di approccio al problema della
-	ricostruzione della filogenesi prende il nome di \bf{filogenesi basata su
+	ricostruzione della filogenesi prende il nome di \strong{filogenesi basata su
 	distanze}.
 
 	La distanza fra le specie (ovvero, la distanza fra la stringa di DNA dell'una
@@ -75,9 +75,9 @@
 	esistono infiniti alberi delle distanze, tutti potenzialmente corretti, 
 	equivalenti ad una matrice delle distanze. Non tutte le distanze riportate 
 	su un albero possono considerarsi valide. Verrá studiato un caso particolare 
-	in cui vale un assunto chiamato \bf{teoria dell'orologio molecolare}.
+	in cui vale un assunto chiamato \strong{teoria dell'orologio molecolare}.
 
-	La \bf{teoria dell'orologio molecolare} é una assunzione sulla natura delle 
+	La \strong{teoria dell'orologio molecolare} é una assunzione sulla natura delle 
 	mutazioni delle biomolecole, secondo la quale il numero di mutazioni positive 
 	che avvengono in una biomolecola in un certo intervallo di tempo é (circa) 
 	proporzionale alla durata dell'intervallo stesso. Pertanto, se sono note 
@@ -104,9 +104,9 @@
 		ha una proprietá particolare: preso un qualsiasi nodo interno dell'albero, la 
 		somma dei valori riportati sulle etichette del cammino che inizia in tale nodo 
 		e termina in una qualsiasi foglia sua discendente ha sempre lo stesso valore. 
-		Un albero con questa proprietá prende il nome di \bf{albero ultrametrico}, la 
-		distanza cosí definita é detta \bf{distanza ultrametrica} e la matrice 
-		associata all'albero é detta \bf{matrice ultrametrica}.
+		Un albero con questa proprietá prende il nome di \strong{albero ultrametrico}, la 
+		distanza cosí definita é detta \strong{distanza ultrametrica} e la matrice 
+		associata all'albero é detta \strong{matrice ultrametrica}.
 
 		\begin{examplebox}
 			L'albero precedente, e di conseguenza la matrice precedente, non erano 
@@ -256,10 +256,10 @@
 		sulle mutazioni a cui le specie vanno incontro possano essere disposti 
 		in una matrice perfettamente ultrametrica, perché l'ipotesi di ultrametricitá
 		é estremamente stringente. É possibile rilassare tale ipotesi e rifarsi ad 
-		una sua forma piú debole, l'ipotesi di \bf{additivitá}.
+		una sua forma piú debole, l'ipotesi di \strong{additivitá}.
 
-		Una matrice delle distanze \math{D} si dice \bf{matrice additiva} 
-		se soddisfa la \bf{condizione dei quattro punti}. Presi 4 elementi 
+		Una matrice delle distanze \math{D} si dice \strong{matrice additiva} 
+		se soddisfa la \strong{condizione dei quattro punti}. Presi 4 elementi 
 		qualsiasi \math{x}, \math{y}, \math{v} e \math{w} sulla matrice 
 		\math{D}, si considerino tutte le possibili celle di \math{D} 
 		definibili da tali punti, ovvero \math{D[x, y]}, \math{D[x, v]},
@@ -299,8 +299,8 @@
 		\end{math}
 
 		Se una matrice \math{D} é additiva, allora l'albero delle distanze \math{T} 
-		a questa associato é detto \bf{albero additivo}, e la distanza definita da 
-		\math{D} (e da \math{T}) é detta \bf{distanza additiva}. Essendo l'additivitá
+		a questa associato é detto \strong{albero additivo}, e la distanza definita da 
+		\math{D} (e da \math{T}) é detta \strong{distanza additiva}. Essendo l'additivitá
 		una proprietá piú debole dell'ultrametricitá, si ha che qualsiasi matrice 
 		ultrametrica é anche additiva, qualsiasi distanza ultrametrica é anche 
 		additiva e qualsiasi albero ultrametrico é anche additivo.
@@ -347,11 +347,11 @@
 		forza additivo o ultrametrico). Dato che la disuguaglianza triangolare é 
 		sempre valida, deve aversi che \math{d(x, y) \leq d(y, z) + d(x, z)}, ovvero 
 		che \math{d(y, z) + d(x, z) - d(x, y) \geq 0}. La quantitá \math{d(y, z) + 
-		d(x, z) - d(x, y)} prende il nome di \bf{sbilancio} della tripla 
+		d(x, z) - d(x, y)} prende il nome di \strong{sbilancio} della tripla 
 		\math{(x, y, z)}.
 
 		Una tripla \math{(x, y, z)} di nodi su un albero delle distanze si dice 
-		\bf{degenere} se il loro sbilancio é nullo, ovvero se \math{d(y, z) + 
+		\strong{degenere} se il loro sbilancio é nullo, ovvero se \math{d(y, z) + 
 		d(x, z) = d(x, y)}. É facile verificare come questa situazione possa 
 		presentarsi, ad esempio, nel caso in cui \math{z} é un nodo interno al 
 		cammino che va da \math{x} a \math{y}. Se \math{z'} é un nodo raggiungibile

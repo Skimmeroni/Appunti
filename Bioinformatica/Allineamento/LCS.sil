@@ -1,6 +1,6 @@
 \begin{sile}
 
-	Data una stringa \math{S}, si dice \bf{sottosequenza} di \math{S} 
+	Data una stringa \math{S}, si dice \strong{sottosequenza} di \math{S} 
 	qualsiasi sottoinsieme dei caratteri di \math{S}, disposti secondo 
 	l'ordine in cui appaiono in \math{S}. Piú formalmente, una sottosequenza 
 	di lunghezza \math{n} una stringa \math{S} é definita da un insieme di 

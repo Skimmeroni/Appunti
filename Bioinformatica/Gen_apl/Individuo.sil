@@ -5,14 +5,14 @@
 	dato un insieme di read del DNA di un individuo, nel separare l'insieme in due
 	sottoinsiemi, uno per ciascun aplotipo di provenienza.
 
-	Una possibile formulazione viene data dal \bf{grafo dei conflitti}, un grafo 
+	Una possibile formulazione viene data dal \strong{grafo dei conflitti}, un grafo 
 	i cui vertici sono le read ed ogni arco é una coppia di read non 
 	compatibili, ovvero che si é certi non possano provenire da uno stesso 
 	aplotipo. Il problema puó essere quindi riformulato come il partizionare il 
 	grafo in due sottografi, tali per cui ciascun sottografo contenga solo read 
 	provenienti da uno dei due aplotipi.
 
-	Un grafo di questo tipo viene detto \bf{grafo bipartito}, dove tutti i 
+	Un grafo di questo tipo viene detto \strong{grafo bipartito}, dove tutti i 
 	nodi di una partizione ha archi solo e soltanto con nodi dell'altra 
 	partizione. Sebbene a volte si possa dedurre se un grafo sia o non sia 
 	bipartito semplicemente osservandone la topologia, é possibile dimostrare un 
@@ -41,7 +41,7 @@
 	bipartito, ovvero il minimo numero dgli archi da eliminare tali per cui 
 	un grafo non bipartito diviene bipartito.
 
-	Un approccio alternativo é il \bf{MEC} (\bf{minimal error correction}), 
+	Un approccio alternativo é il \strong{MEC} (\strong{minimal error correction}), 
 	ovvero non eliminare vertici del grafo risultante fino a renderlo bipartito 
 	ma modificando quelli esistenti (che nel contesto della lettura del genoma 
 	significa modificare il minimo numero di caratteri). Questo approccio é 
