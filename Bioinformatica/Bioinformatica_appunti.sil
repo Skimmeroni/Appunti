@@ -119,6 +119,8 @@
 		\section{Sottostringa comune piú lunga}
 		\include[src = Suffix/Comune.sil]
 	\chapter{Allineamento di sequenze}
+		\section{Distanza fra due stringhe}
+		\include[src = Allineamento/Distanza.sil]
 		% \section{Allineamento globale}
 		% \include[src = Allineamento/Globale.sil]
 		% \section{Allineamento locale}
@@ -134,8 +136,6 @@
 		\include[src = Filogenesi/Filogenesi.sil]
 		\section{Problema della filogenesi perfetta}
 		\include[src = Filogenesi/Perfetta.sil]
-		\section{Distanza fra due stringhe}
-		\include[src = Filogenesi/Distanza.sil]
 		\section{Piccolo problema di parsimonia}
 		\include[src = Filogenesi/Piccolo.sil]
 		\section{Grande problema di parsimonia}

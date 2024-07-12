@@ -439,13 +439,23 @@ return {
   },
   {
     label = {
+      "Distanza fra due stringhe",
+      id = "stuff"
+    },
+    level = 2,
+    link = "dest44",
+    number = "4.1",
+    pageno = "33"
+  },
+  {
+    label = {
       "Ricostruzione della filogenesi",
       id = "stuff"
     },
     level = 1,
-    link = "dest44",
+    link = "dest45",
     number = "5",
-    pageno = "35"
+    pageno = "37"
   },
   {
     label = {
@@ -453,9 +463,9 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest45",
+    link = "dest46",
     number = "5.1",
-    pageno = "35"
+    pageno = "37"
   },
   {
     label = {
@@ -463,18 +473,8 @@ return {
       id = "stuff"
     },
     level = 2,
-    link = "dest46",
-    number = "5.2",
-    pageno = "35"
-  },
-  {
-    label = {
-      "Distanza fra due stringhe",
-      id = "stuff"
-    },
-    level = 2,
     link = "dest47",
-    number = "5.3",
+    number = "5.2",
     pageno = "37"
   },
   {
@@ -484,8 +484,8 @@ return {
     },
     level = 2,
     link = "dest48",
-    number = "5.4",
-    pageno = "41"
+    number = "5.3",
+    pageno = "39"
   },
   {
     label = {
@@ -494,8 +494,8 @@ return {
     },
     level = 3,
     link = "dest49",
-    number = "5.4.1",
-    pageno = "41"
+    number = "5.3.1",
+    pageno = "40"
   },
   {
     label = {
@@ -504,8 +504,8 @@ return {
     },
     level = 3,
     link = "dest50",
-    number = "5.4.2",
-    pageno = "43"
+    number = "5.3.2",
+    pageno = "41"
   },
   {
     label = {
@@ -514,8 +514,8 @@ return {
     },
     level = 2,
     link = "dest51",
-    number = "5.5",
-    pageno = "44"
+    number = "5.4",
+    pageno = "43"
   },
   {
     label = {
@@ -524,8 +524,8 @@ return {
     },
     level = 3,
     link = "dest52",
-    number = "5.5.1",
-    pageno = "45"
+    number = "5.4.1",
+    pageno = "44"
   },
   {
     label = {
@@ -534,8 +534,8 @@ return {
     },
     level = 3,
     link = "dest53",
-    number = "5.5.2",
-    pageno = "47"
+    number = "5.4.2",
+    pageno = "45"
   },
   {
     label = {
@@ -544,8 +544,8 @@ return {
     },
     level = 2,
     link = "dest54",
-    number = "5.6",
-    pageno = "47"
+    number = "5.5",
+    pageno = "46"
   },
   {
     label = {
@@ -554,8 +554,8 @@ return {
     },
     level = 3,
     link = "dest55",
-    number = "5.6.1",
-    pageno = "48"
+    number = "5.5.1",
+    pageno = "46"
   },
   {
     label = {
@@ -564,8 +564,8 @@ return {
     },
     level = 3,
     link = "dest56",
-    number = "5.6.2",
-    pageno = "49"
+    number = "5.5.2",
+    pageno = "47"
   },
   {
     label = {
@@ -574,8 +574,8 @@ return {
     },
     level = 2,
     link = "dest57",
-    number = "5.7",
-    pageno = "50"
+    number = "5.6",
+    pageno = "48"
   },
   {
     label = {
@@ -584,8 +584,8 @@ return {
     },
     level = 3,
     link = "dest58",
-    number = "5.7.1",
-    pageno = "50"
+    number = "5.6.1",
+    pageno = "48"
   },
   {
     label = {
@@ -594,8 +594,8 @@ return {
     },
     level = 3,
     link = "dest59",
-    number = "5.7.2",
-    pageno = "50"
+    number = "5.6.2",
+    pageno = "49"
   },
   {
     label = {
@@ -604,8 +604,8 @@ return {
     },
     level = 3,
     link = "dest60",
-    number = "5.7.3",
-    pageno = "50"
+    number = "5.6.3",
+    pageno = "49"
   },
   {
     label = {
@@ -615,7 +615,7 @@ return {
     level = 1,
     link = "dest61",
     number = "6",
-    pageno = "53"
+    pageno = "51"
   },
   {
     label = {
@@ -625,7 +625,7 @@ return {
     level = 2,
     link = "dest62",
     number = "6.1",
-    pageno = "53"
+    pageno = "51"
   },
   {
     label = {
@@ -635,7 +635,7 @@ return {
     level = 2,
     link = "dest63",
     number = "6.2",
-    pageno = "53"
+    pageno = "51"
   },
   {
     label = {
@@ -645,7 +645,7 @@ return {
     level = 2,
     link = "dest64",
     number = "6.3",
-    pageno = "55"
+    pageno = "53"
   },
   {
     label = {
@@ -655,7 +655,7 @@ return {
     level = 1,
     link = "dest65",
     number = "7",
-    pageno = "59"
+    pageno = "57"
   },
   {
     label = {
@@ -665,7 +665,7 @@ return {
     level = 2,
     link = "dest66",
     number = "7.1",
-    pageno = "59"
+    pageno = "57"
   },
   {
     label = {
@@ -675,6 +675,6 @@ return {
     level = 2,
     link = "dest67",
     number = "7.2",
-    pageno = "61"
+    pageno = "59"
   }
 }
