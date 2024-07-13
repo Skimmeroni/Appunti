@@ -48,4 +48,194 @@
 		\end{parbox}
 	\end{example}
 
+	Fra tutti gli allineamenti globali ammissibili che é possibile
+	costruire a partire da due sequenze, si ha interesse a trovare
+	quello che meglio esprime il loro grado di somiglianza, ovvero
+	quello ottimale. Date due sequenze \math{X} e \math{Y}, il
+	\strong{problema dell'allineamento globale di due sequenze}
+	(\strong{global sequence alignment problem}) consiste nel trovare
+	l'allineamento globale (la disposizione di indel) ottimale di
+	\math{X} e \math{Y}.
+
+	Ci si chiede allora come definire una condizione di ottimalitá
+	per un allineamento globale. É possibile pensare al problema
+	dell'allineamento globale di due sequenze come ad un problema di
+	ottimizzazione: dopo aver aggiunto gli indel alle due sequenze e
+	averle incolonnate carattere per carattere, si associa all'allineamento
+	globale un valore dato dal numero di colonne in cui i caratteri delle
+	due sequenze combaciano. L'allineamento globale ottimale é allora quello
+	che possiede il massimo valore, ovvero quello che ha il massimo numero
+	di colonne in cui compaiono caratteri uguali (oppure, ugualmente, quello
+	con il minimo numero di colonne in cui compaiono caratteri diversi).
+
+	Il problema di questo approccio é che qualsiasi coppia di caratteri
+	che non combaciano é trattata allo stesso modo. Questo non é ideale,
+	perché se le due sequenze devono essere intese come due sequenze
+	biologiche e se le differenze fra di esse come delle mutazioni
+	evolutive, si sta di fatto asserendo che tutte le mutazioni siano
+	equiprobabili, che é una eventualitá del tutto irrealistica. Occorre
+	pertanto aggiungere un peso alla presenza di ciascuna mutazione, di
+	modo che un allineamento globale che induce incolonnamenti poco
+	probabili venga sfavorito.
+
+	Questo viene fatto costruendo la cosiddetta \strong{matrice di score}.
+	Questa é una matrice che, date due sequenze \math{X} ed \math{Y}, riporta
+	in ciascuna cella \math{i, j} il valore (in genere intero) che comporta
+	l'allineare il carattere \math{i} della stringa \math{X} con il carattere
+	\math{j} della stringa \math{Y}. In altre parole, il valore nella cella
+	\math{i, j} rappresenta di quanto aumenta o diminuisce il valore totale
+	di un allineamento globale se questo presenta tale appaiamento. La matrice
+	conterrá anche dei valori per coppie in cui uno dei due caratteri é un
+	indel.
+
+	La matrice di score deve essere definita in maniera oculata, di
+	modo da favorire allineamenti in cui é presente il maggior numero
+	di appaiamenti con entrambi i caratteri uguali e sfavorire gli
+	appaiamenti con caratteri diversi. Per questo motivo, la matrice
+	di score presenta valori positivi nelle celle dove i caratteri in
+	questione coincidono, mentre presenta valori negativi nelle celle
+	in cui i due caratteri non coincidono. In particolare, tanto é
+	negativo il valore in una cella della matrice e tanto l'appaiamento
+	dei due caratteri in questione viene sfavorito. In termini biologici,
+	tanto un valore della matrice di score é negativo e tanto improbabile
+	é l'avvenire di una mutazione da un carattere all'altro.
+
+	Il problema dell'allineamento globale puó essere risolto mediante
+	programmazione dinamica: l'algoritmo in questione prende il nome
+	di \strong{Algoritmo di Needleman-Wunsch}. Anziché affrontare il
+	problema direttamente, é piú efficiente prima trovare il valore
+	di un possibile allineamento globale ottimale di due sequenze e
+	poi, sulla base di questa informazione, ricostruire l'allineamento
+	globale "a ritroso". Pertanto, il problema effettivamente in esame
+	sará il problema del valore dell'allineamento globale fra due sequenze.
+
+	Date due sequenze \math{X} e \math{Y} rispettivamente di lunghezza
+	\math{m} e \math{n}, siano \math{X_{i} = X[1 : i]} e \math{Y_{j} =
+	Y[1 : j]} i prefissi di lunghezza \math{i} e \math{j} delle rispettive
+	sequenze. Sia poi \math{d} una matrice di score. La soluzione \math{S_{i,
+	j}} per l'\math{i, j}-esima istanza del problema corrisponde a trovare
+	la soluzione ottimale per il problema della lunghezza dell'allineamento
+	globale ottimale rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}.
+	La soluzione per le intere sequenze \math{X} e \math{Y} è la soluzione
+	per l'istanza \math{X_{m}, Y_{n}}.
+
+	Per calcolare la soluzione ottimale della generica istanza \math{X_{i},
+	Y_{j}}, ovvero \math{S_{i, j}}, verrá assunto di avere a disposizione
+	tutte le soluzioni parziali nella forma \math{S_{a, b}}, con \math{1
+	\leq a < i} e \math{1 \leq b < j}. Pertanto, per il calcolo della
+	soluzione ottimale dell'\math{i, j}-esima istanza del problema si hanno
+	a disposizione l'\math{i}-esimo carattere della sequenza \math{X}, il
+	\math{j}-esimo carattere della sequenza \math{Y}, i valori della matrice
+	di score \math{d} e le lunghezze degli allineamenti globali ottimali delle
+	istanze da \math{i - 1, j - 1} a 0, 0, ma non gli elementi delle due sequenze
+	che comportano tali lunghezze.
+
+	Il caso base dell'equazione di ricorrenza é semplice da determinare: se
+	una delle due sequenze é la sequenza vuota, allora l'allineamento globale
+	ottimale fra le due é costituito da solo indel; in particolare, se entrambe
+	le sequenze sono la sequenza vuota, il valore del loro allineamento globale
+	ottimale é nullo.
+
+	Se é la sequenza \math{Y_{j}} ad essere la sequenza vuota, allora il valore
+	dell'allineamento globale ottimale per \math{X_{i}} e \math{\epsilon}, ovvero
+	\math{S_{i, 0}} é dato dalla somma fra la soluzione ottimale per l'istanza
+	precedente rispetto ad \math{i}, ovvero \math{S_{i - 1, 0}}, ed il valore
+	della matrice di score per la coppia \math{(X[i], -)}. Viceversa, se é
+	\math{X_{i}} ad essere la stringa vuota, allora il valore dell'allineamento
+	globale ottimale per \math{\epsilon} e \math{Y_{j}} é dato dalla somma fra la
+	soluzione ottimale per l'istanza precedente rispetto a \math{j} ed il valore
+	della matrice di score per la coppia \math{(-, Y[j])}.
+
+	\begin[width = 33%fw]{parbox}
+		\begin[mode = display]{math}
+			S_{0, 0} = 0
+		\end{math}
+	\end{parbox}
+	\begin[width = 33%fw]{parbox}
+		\begin[mode = display]{math}
+			S_{i, 0} = S_{i - 1, 0} + d(X[i], -)
+		\end{math}
+	\end{parbox}
+	\begin[width = 33%fw]{parbox}
+		\begin[mode = display]{math}
+			S_{0, j} = S_{0, j - 1} + d(-, Y[j])
+		\end{math}
+	\end{parbox}
+	\par
+
+	Per quanto riguarda il passo ricorsivo, occorre osservare cosa potrebbe
+	figurare come coppia di caratteri \math{i, j} dell'allineamento globale
+	ottimale, ovvero l'\math{i}-esimo carattere di \math{X} a cui sono stati
+	aggiunti gli indel ed al \math{j}-esimo carattere di \math{Y} a cui sono
+	stati aggiunti gli indel. Sono possibili le seguenti tre situazioni:
+
+	\begin{enumerate}
+		\begin{item}
+			L'\math{i}-esimo carattere di \math{X} (dopo l'aggiunta degli indel)
+			ed il \math{j}-esimo carattere di \math{Y} (dopo l'aggiunta degli indel)
+			non sono indel. Allora la soluzione ottimale per la \math{i, j}-esima
+			istanza del problema é data dalla somma fra la soluzione ottimale per
+			la \math{i - 1, j - 1}-esima istanza ed il valore della matrice di score
+			per la coppia \math{X[i], Y[j]};
+		\end{item}
+		\begin{item}
+			Il \math{j}-esimo carattere di \math{Y} (dopo l'aggiunta degli indel) é
+			un indel, mentre l'\math{i}-esimo carattere di \math{X} (dopo l'aggiunta
+			degli indel) non lo é. Allora la soluzione ottimale per la \math{i, j}-esima
+			istanza del problema é data dalla somma fra la soluzione ottimale per
+			la \math{i - 1, j}-esima istanza ed il valore della matrice di score
+			per la coppia \math{X[i], -};
+		\end{item}
+		\begin{item}
+			L'\math{i}-esimo carattere di \math{X} (dopo l'aggiunta degli indel) é
+			un indel, mentre il \math{j}-esimo carattere di \math{Y} (dopo l'aggiunta
+			degli indel) non lo é. Allora la soluzione ottimale per la \math{i, j}-esima
+			istanza del problema é data dalla somma fra la soluzione ottimale per
+			la \math{i, j - 1}-esima istanza ed il valore della matrice di score
+			per la coppia \math{-, Y[j]};
+		\end{item}
+	\end{enumerate}
+
+	\bigskip
+
+	Non essendo noto a priori quali siano i caratteri che compaiono
+	nell'allineamento globale ottimale, é sufficiente limitarsi a
+	scegliere il valore che, fra questi, massimizza la soluzione
+	ottima:
+
+	\begin[mode = display]{math}
+		S_{i, j} = \mi{max}\{S_{i - 1, j - 1} + d(X[i], Y[j]),
+		S_{i - 1, j} + d(X[i], -), S_{i, j - 1} + d(-, Y[j])\}
+	\end{math}
+
+	É evidente come il tempo di esecuzione dell'algoritmo sia lineare nel
+	prodotto delle lunghezze delle due sequenze.
+
+	\begin{code}
+		\begin{verbatim}
+			procedure NEEDLEMAN-WUNSCH(X, Y, D)
+			    c[0, 0] \unichar{U+2190} 0
+			    for i \unichar{U+2190} 1 to |X| do
+			        c[i, 0] \unichar{U+2190} c[i - 1, 0] + D[X[i], -]
+			    for j \unichar{U+2190} 1 to |Y| do
+			        c[0, j] \unichar{U+2190} c[0, j - 1] + D[-, Y[j]]
+
+			    \bigskip
+			    for i \unichar{U+2190} 1 to |X| do
+			        for j \unichar{U+2190} 1 to |Y| do
+			            t\textsubscript{1} \unichar{U+2190} c[i - 1, j] + D[X[i], -]
+			            t\textsubscript{2} \unichar{U+2190} c[i, j - 1] + D[-, Y[j]]
+			            t\textsubscript{3} \unichar{U+2190} c[i - 1, j - 1] + D[X[i], Y[j]]
+			            if (t\textsubscript{1} \unichar{U+2265} t\textsubscript{2} and t\textsubscript{1} \unichar{U+2265} t\textsubscript{3}) then
+			                c[i, j] \unichar{U+2190} t\textsubscript{1}
+			            else if (t\textsubscript{2} \unichar{U+2265} t\textsubscript{1} and t\textsubscript{2} \unichar{U+2265} t\textsubscript{3}) then
+			                c[i, j] \unichar{U+2190} t\textsubscript{2}
+			            else
+			                c[i, j] \unichar{U+2190} t\textsubscript{3}
+
+			    \bigskip
+			    return c[|X|][|Y|]
+		\end{verbatim}
+	\end{code}
+
 \end{sile}
