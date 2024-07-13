@@ -81,17 +81,6 @@
 
 	\pagebreak
 
-	\chapter{Elementi di algoritmica}
-		\section{Definizioni di base}
-		\include[src = Algoritmi/Definizione.sil]
-		\section{Ordinamento}
-		\include[src = Algoritmi/Ordinamento.sil]
-		\section{Prestazioni di algoritmi}
-		\include[src = Algoritmi/Prestazioni.sil]
-		\section{Strutture dati elementari}
-		\include[src = Algoritmi/Semplice.sil]
-		\section{Strutture dati complesse}
-		\include[src = Algoritmi/Complesso.sil]
 	\chapter{Algoritmi di pattern matching}
 		\section{Algoritmo naive}
 		\include[src = Pattern/Naive.sil]
