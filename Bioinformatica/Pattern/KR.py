@@ -1,16 +1,26 @@
 import sys
-from functools import reduce
 
 T = [int(i) for i in sys.argv[1]]
 P = [int(i) for i in sys.argv[2]]
 p = 3
 occurrences = 0
 
+def check(S):
+    b = True
+    for i in range (0, len(S)):
+        if (S[i] != 1 and S[i] != 0):
+            b = False
+    return b
+
 def init(S):
     H = 0
     for i in range (0, len(S)):
         H = (H + (S[i] * 2**(len(S) - i - 1))) % p
     return H
+
+if (check(T) == False or check(P) == False):
+    print("Strings are not binary")
+    sys.exit(1)
 
 Hp = init(P) 
 Ht = init(T)
