@@ -163,36 +163,34 @@
 	\bigskip
 
 	\begin{code}
-		\begin{verbatim}
-			T = "..." 
-			P = "..." 
-			pvalue = ... 
-			occurrences = 0
+		\begin[width = 60%fw]{parbox}
+			\begin{verbatim}
+				procedure KARP-RABIN(T, P, p)
+				    occurrences \unichar{U+2190} 0
+				    Hp \unichar{U+2190} KR-PREPROCESS(P, p)
+				    Ht \unichar{U+2190} KR-PREPROCESS(T, p)
 
-			\bigskip
-			def initiate(S):
-			    H = 0
-			    for i in range (0, len(P)):
-			        H = H + (int(S[i]) * 2**(len(P) - i - 1))
-			    H = H \% pvalue
-			    return H
+				    \bigskip
+				    for i \unichar{U+2190} 1 to (|T| - |P| + 1) do
+				    Ht \unichar{U+2190} (((2 * Ht) \% p) - (2\textsuperscript{|P|} \% p) * T[i - 1] + T[|P| + i - 1]) \% p
+				        if (Ht = Hp) then
+				            occurrences \unichar{U+2190} occurrences + 1
 
-			\bigskip
-			Hp = initiate(P) 
-			Ht = initiate(T)
+				    \bigskip
+				    return occurrences
+			\end{verbatim}
+		\end{parbox}
+		\begin[width = 40%fw]{parbox}
+			\begin{verbatim}
+				procedure KR-PREPROCESS(S, p)
+				    H \unichar{U+2190} 0
+				    for i \unichar{U+2190} 0 to L do
+				        H \unichar{U+2190} (H + (S[i] * 2\textsuperscript{|S| - i - 1})) \% p
 
-			\bigskip
-			for i in range (1, len(T) - len(P) + 1):
-			    Ht = (((2 * Ht) \% pvalue) - 
-			          (2**(len(P)) \% pvalue) * 
-			          int(T[i - 1]) + 
-			          int(T[len(P) + i - 1])) \% pvalue
-			    if (Ht == Hp):
-			        occurrences = occurrences + 1
-
-			\bigskip
-			print(occurrences)
-		\end{verbatim}
+				    \bigskip
+				    return H
+			\end{verbatim}
+		\end{parbox}
 	\end{code}
 
 	\subsection{Ottimizzazione: ricerca di un \math{p} efficiente}
@@ -255,8 +253,6 @@
 
 		I teoremi relativi ai numeri primi appena riportati permettono di definire 
 		delle chiare limitazioni alla probabilitá che avvenga un falso positivo.
-
-		\pagebreak
 
 		\begin{theorem}
 			\strong{Teorema centrale Karp-Rabin}. Siano dati un pattern \math{P} 
