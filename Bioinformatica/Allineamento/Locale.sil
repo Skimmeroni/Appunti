@@ -1,24 +1,36 @@
 \begin{sile}
 
-	In alcune situazioni \footnote{Ad esempio, quando si vuole comparare 
-	una stringa codificante con l'intero genoma}, si ha a che fare con 
-	coppie di stringhe che non sono, nel complesso, molto simili, ma che 
-	hanno delle regioni al loro interno che lo sono. Si definisce il problema 
-	dell'\strong{allineamento locale} come la ricerca delle due regioni (di 
-	lunghezza fissata), una per ciascuna stringa, che presentano fra loro 
-	elevata somiglianza. Piú formalmente, il problema dell'allineamento locale 
-	consiste, date due stringhe \math{S_{1}} ed \math{S_{2}}, nel trovare due 
-	sottostringhe \math{\alpha} e \math{\beta}, estratte rispettivamente da 
-	\math{S_{1}} e da \math{S_{2}}, tali che siano le sottostringhe delle due 
-	che hanno fra loro la maggiore somiglianza possibile.
+	Vi sono situazioni in cui non si ha particolare interesse a trovare un
+	allineamento globale (ottimale) fra due intere sequenze, ma solamente
+	rispetto a delle loro sottosequenze. Si consideri ad esempio il voler
+	allineare una sequenza codificante con un genoma intero per individuare
+	dove questa si posiziona: se si comparassero le due sequenze per intero,
+	sarebbe ovvio che qualsiasi allineamento globale fra le due conterrebbe
+	moltissimi indel e non fornirebbe alcuna informazione rilevante.
+
+	Date due sequenze \math{X} e \math{Y}, il \strong{problema dell'allineamento
+	locale di due sequenze} (\strong{local sequence alignment problem}) consiste
+	nel trovare una sottosequenza \math{\alpha} di \math{X} ed una sottosequenza
+	\math{\beta} di \math{Y} tali per cui il loro allineamento globale ottimale é
+	quello che, fra tutte le possibili combinazioni di sottostringhe di \math{X}
+	e di \math{Y}, restituisce il valore massimo.
+
+	Date due sequenze \math{X} e \math{Y} di lunghezza rispettivamente \math{m}
+	e \math{n}, il problema dell'allineamento locale potrebbe essere risolto in
+	maniera banale semplicemente calcolando ogni possibile sottosequenza di
+	\math{X} ed ogni possibile sottosequenza di \math{Y}, per poi cercare quale
+	sia la coppia di sottosequenze cosí costruite avente l'allineamento globale
+	ottimale di valore massimo (ad esempio operando l'algoritmo di Needleman-Wunsch).
+	Un approccio di questo tipo é peró proibitivo in termini computazionali, perché
+	si avrebbe un tempo di esecuzione pari a \math{O(n^{3}m^{3})}.
 
 	\begin{example}
-		Siano date le stringhe \math{S_{1} = pqraxabcstvq} e \math{S_{2} = 
-		xyaxbacsll}. Sia poi data a ciascuna corrispondenza un valore di 2,
-		ogni mancata corrispondenza un valore di -2 e ad ogni spazio un valore
-		di -1. Le due sottostringhe prese da ciascuna stringa tali che siano le
-		piú simili possibili sono \math{\alpha = axabcs} e \math{\beta = axbacs},
-		che hanno somiglianza pari ad 8:
+		Siano date le stringhe \math{X = pqraxabcstvq} e \math{Y =
+		xyaxbacsll}. Sia poi data a ciascuna corrispondenza un valore
+		di 2, ogni mancata corrispondenza un valore di -2 e ad ogni
+		indel un valore di -1. Le due sottostringhe prese da ciascuna
+		stringa tali che siano le piú simili possibili sono \math{\alpha
+		= axabcs} e \math{\beta = axbacs}, che hanno somiglianza pari ad 8:
 
 		\begin[mode = display]{math}
 			\table{
@@ -28,202 +40,153 @@
 		\end{math}
 	\end{example}
 
-	Siano date due stringhe \math{S_{1}} ed \math{S_{2}} rispettivamente di 
-	lunghezza \math{m} ed \math{n}. Per calcolare l'allineamento locale 
-	\footnote{Sebbene sia possibile cercare regioni di coppie di stringhe che 
-	hanno un alto valore di somiglianza a partire dal loro allineamento globale, 
-	spesso capita che queste regioni si "perdano" all'interno dell'allineamento 
-	globale. Pertanto, cercare allineamenti locali esplicitamente é piú efficiente 
-	che dedurli da un allineamento globale.} in maniera banale occorrerebbe 
-	calcolare tutte le possibile sottostringhe di \math{S_{1}}, tutte le possibili
-	sottostringhe di \math{S_{2}} e calcolare l'allineamento globale di ciascuna 
-	di coppie di sottostringhe cosí ricavare. Il tempo di esecuzione di un 
-	algoritmo di questo tipo verrebbe ad essere \math{O(n^{3}m^{3})}.
+	Anziché attaccare il problema dell'allineamento locale di due sequenze
+	direttamente, se ne consideri il problema ausiliario in cui si osservano
+	solamente i prefissi. Ovvero, anziché trovare le due sottosequenze aventi
+	il valore di allineamento globale ottimo massimo fra tutte le sottosequenze
+	possibili, si richiede di trovare i due prefissi aventi il valore di
+	allineamento globale ottimo massimo fra tutti i prefissi possibili.
 
-	Prima di attaccare il problema dell'allineamento locale nella sua 
-	interezza, si consideri una versione semplificata del problema in cui 
-	si considerano soltanto prefissi delle due stringhe e non sottostringhe 
-	generiche. Ovvero, si chiede di trovare i due prefissi \math{\alpha} e 
-	\math{\beta} rispettivamente di \math{S_{1}} e \math{S_{2}} tali per cui 
-	il loro allineamento globale ottimale ha il valore piú alto dell'allineamento 
-	ottimale fra qualsiasi altra coppia di prefissi delle due stringhe.
+	La soluzione ottimale per il problema ausiliario in questione viene
+	ricavata immediatamente a partire dalla matrice di programmazione
+	dinamica per l'algoritmo di Needleman-Wunsch. Infatti, date due
+	sequenze \math{X} e \math{Y}, ciascuna cella \math{i, j} di tale
+	matrice contiene la soluzione ottimale del problema dell'allineamento
+	globale per i prefissi \math{X_{i} = [1 : i]} e \math{Y_{j} = [1 : j]},
+	che sono precisamente le soluzioni ammissibili per il problema ausiliario
+	in esame. La soluzione ottimale di tale problema non é allora altro che
+	la cella di tale matrice, quale che sia, avente il valore maggiore.
 
-	Questo problema non é altro che una generalizzazione del problema precedente.
-	Infatti, la cella \math{(i, j)} della matrice di programmazione dinamica 
-	costruita per determinare l'allineamento globale di due stringhe \math{S_{1}} 
-	e \math{S_{2}} specifica il valore dell'allineamento globale ottimale per le
-	stringhe \math{S_{1}[1:i]} e \math{S_{2}[1:j]}, che corrisponde alla soluzione
-	del problema appena enunciato. Dato che questa matrice é stata costruita in 
-	tempo \math{O(nm)}, per determinare i prefissi di due stringhe tali per cui il
-	loro allineamento globale é il massimo per qualsiasi coppia di prefissi 
-	occorrerá lo stesso tempo.
+	Ci si chiede allora come passare dal problema ausiliario (prefissi
+	con allineamento globale migliore possibile) al problema principale
+	(sottosequenze con allineamento globale migliore possibile). Siano
+	\math{X_{p}} e \math{Y_{q}} i due prefissi che hanno il massimo valore
+	di allineamento globale fra tutte le coppie di prefissi costruibili a
+	partire da \math{X} e da \math{Y}. Le due sottosequenze \math{\alpha}
+	e \math{\beta} che hanno il massimo valore di allineamento globale fra
+	tutte le sottosequenze costruibili a partire da \math{X} e da \math{Y}
+	saranno necessariamente dei suffissi di, rispettivamente, \math{X_{p}}
+	e \math{Y_{q}}. Ovvero, deve esistere una coppia di indici \math{h, k}
+	con \math{0 < h \leq p} e \math{0 < k \leq q} tali per cui \math{\alpha
+	= X[h : p]} e \math{\beta = [k : q]}.
 
-	% \begin{example}
-		% Siano date due stringhe \math{S_{1} = abcxdex} ed \math{S_{2} = xxxcde}, e 
-		% sia data una funzione di appaiamento tale per cui un appaiamento corretto 
-		% da un contributo di +2 ed un appaiamento non corretto o uno spazio da un 
-		% contributo di -1. Si considerino le coppie di indici \math{(3, 4)}, 
-		% \math{(4, 5)} e \math{(6, 6)}; si ottengono i seguenti allineamenti:
+	É allora possibile vedere ciascuno dei due prefissi \math{X_{p}}
+	e \math{Y_{q}} di, rispettivamente, \math{X} e \math{Y}, come la
+	concatenazione di un altro prefisso della medesima sequenza di cui
+	é prefisso, ma di lunghezza minore, ovvero rispettivamente \math{X_{h}}
+	e \math{Y_{k}}, con una delle due sottosequenze che si ha interesse a
+	ricavare, rispettivamente \math{\alpha} e \math{\beta}. I due prefissi
+	\math{X_{h}} e \math{Y_{k}} non sono casuali: infatti, é garantito che
+	il loro valore di allineamento globale ottimale sia inferiore o uguale
+	a 0. Questo perché, se cosí non fosse, allora potrebbero venire aggiunti
+	in testa rispettivamente ad \math{\alpha} e a \math{\beta} ottenendo
+	due sottosequenze di \math{X} e di \math{Y} che hanno un allineamento
+	globale ottimale di dimensione maggiore rispetto al valore dell'allineamento
+	globale ottimale per \math{\alpha} e \math{\beta}, ma si é assunto per ipotesi
+	che sia tale coppia di sottosequenze ad essere quella con allineamento globale
+	ottimale massimo.
 
-		% \begin[width = 30%fw]{parbox}
-			% \begin[mode = display]{math}
-				% S_{1}[1:3] = abc
-			% \end{math}
-			% \begin[mode = display]{math}
-				% S_{2}[1:4] = xxxc
-			% \end{math}
-			% \begin{center}
-				% \begin[cols = 12.5%fw 12.5%fw 12.5%fw 12.5%fw, cellborder = 0]{ptable}
-					% \begin{row}
-						% \cell{-} \cell{a} \cell{b} \cell{c}
-					% \end{row}
-					% \begin{row}
-						% \cell{x} \cell{x} \cell{x} \cell{c}
-					% \end{row}
-				% \end{ptable}
-			% \end{center}
-		% \end{parbox}
-		% \begin[width = 32.5%fw]{parbox}
-			% \begin[mode = display]{math}
-				% S_{1}[1:4] = abcx
-			% \end{math}
-			% \begin[mode = display]{math}
-				% S_{2}[1:5] = xxxcd
-			% \end{math}
-			% \begin{center}
-				% \begin[cols = 12.5%fw 12.5%fw 12.5%fw 12.5%fw 12.5%fw, cellborder = 0]{ptable}
-					% \begin{row}
-						% \cell{-} \cell{a} \cell{b} \cell{c} \cell{x}
-					% \end{row}
-					% \begin{row}
-						% \cell{x} \cell{x} \cell{x} \cell{c} \cell{d}
-					% \end{row}
-				% \end{ptable}
-			% \end{center}
-		% \end{parbox}
-		% \begin[width = 37.5%fw]{parbox}
-			% \begin[mode = display]{math}
-				% S_{1}[1:6] = abcxde
-			% \end{math}
-			% \begin[mode = display]{math}
-				% S_{2}[1:6] = xxxcde
-			% \end{math}
-			% \begin{center}
-				% \begin[cols = 12.5%fw 12.5%fw 12.5%fw 12.5%fw 12.5%fw 12.5%fw 12.5%fw, cellborder = 0]{ptable}
-					% \begin{row}
-						% \cell{a} \cell{b} \cell{c} \cell{x} \cell{-} \cell{d} \cell{e} 
-					% \end{row}
-					% \begin{row}
-						% \cell{-} \cell{x} \cell{x} \cell{x} \cell{c} \cell{d} \cell{e} 
-					% \end{row}
-				% \end{ptable}
-			% \end{center}
-		% \end{parbox}
-		% \par
+	Siano \math{h'} e \math{k'} due indici tali per cui \math{0 < h' < h} e
+	\math{0 < k' < k}. Se, da come é stato mostrato, l'allineamento globale
+	ottimale per i prefissi \math{X_{h}} e \math{Y_{k}} é negativo, allora
+	il valore dell'allineamento globale ottimale per \math{\alpha} e \math{\beta}
+	deve essere maggiore del valore dell'allineamento globale ottimale per i
+	prefissi \math{X_{h'}} e \math{Y_{k'}}, per qualsiasi coppia di indici
+	\math{h'} e \math{k'}. Questo equivale a dire che, per qualsiasi \math{h'}
+	e \math{k'}, il valore dell'allineamento globale ottimale della coppia di
+	sottosequenze \math{X[h' : h - 1]} e \math{Y[k' : k - 1]} é negativo a sua
+	volta.
 
-		% Da questi, é possibile dedurre che \math{v(3, 4) = 2} (perché le due \math{c} 
-		% combaciano), \math{v(4, 5) = 1} (perché le due \math{c} combaciano, ma \math{x} 
-		% e \math{d} no) e \math{v(6, 6) = 5} (perché le due \math{x}, le due \math{d} e 
-		% le due \math{e} combaciano, mentre \math{-} e \math{c} no).
-	% \end{example}
+	Sono stati introdotti tutti gli elementi per risolvere il problema
+	dell'allineamento locale di due sequenze mediante programmazione
+	dinamica: l'algoritmo in questione prende il nome di \strong{Algoritmo
+	di Smith-Waterman}. Anziché affrontare il problema direttamente, é piú
+	efficiente prima trovare il valore di un possibile allineamento locale
+	ottimale di due sequenze e poi, sulla base di questa informazione,
+	ricostruire l'allineamento locale "a ritroso". Pertanto, il problema
+	effettivamente in esame sará il problema del valore dell'allineamento
+	locale fra due sequenze.
 
-	% É possibile mettere in relazione il problema dell'allineamento locale con il 
-	% problema dell'allineamento locale dei suffissi mostrando che vale il seguente
-	% risultato: 
+	Date due sequenze \math{X} e \math{Y} rispettivamente di
+	lunghezza \math{m} e \math{n}, siano \math{X_{i} = X[1 : i]}
+	e \math{Y_{j} = Y[1 : j]} i prefissi di lunghezza \math{i} e
+	\math{j} delle rispettive sequenze. Sia poi \math{d} una matrice
+	di score. La soluzione \math{S_{i, j}} per l'\math{i, j}-esima
+	istanza del problema corrisponde a trovare la soluzione ottimale
+	per il problema del valore dell'allineamento locale ottimale
+	rispetto alle sottosequenze \math{X[h : i]} e \math{Y[k : j]},
+	per ogni possibile \math{0 < h < i} e \math{0 < k < j}. La
+	soluzione per le intere sequenze \math{X} e \math{Y} è la
+	soluzione parziale, quale che sia, avente valore massimo.
 
-	% \begin[mode = display]{math}
-		% v^{*} = \mo[atom = bin]{max}[v(i, j): i \leq n, j \leq m]
-	% \end{math}
+	Il caso base dell'equazione di ricorrenza é semplice da
+	determinare: se una delle due sequenze é la sequenza vuota,
+	allora non c'é alcun allineamento locale ottimale fra le
+	due. Ovvero, il valore della soluzione ottimale é nullo.
 
-	% É possibile dimostrare questo teorema come segue. Innanziutto, é facile 
-	% intuire che \math{v^{*} \geq \mo[atom = bin]{max}[v(i, j): i \leq n, 
-	% j \leq m]}, perché se \math{v(i, j)} é la soluzione ottimale al problema 
-	% dell'allineamento locale dei suffissi allora é anche soluzione, non 
-	% necessariamente ottimale, anche del problema dell'allineamento locale.
-	% Siano invece \math{\alpha} e \math{\beta} le sottostringhe in una 
-	% soluzione ottimale, e si supponga che terminino rispettivamente in 
-	% posizione \math{i^{*}} e \math{j^{*}}. Si ha allora che \math{\alpha} e
-	% \math{\beta} definiscono un allineamento locale dei suffissi per la 
-	% coppia di indici \math{i^{*}} e \math{j^{*}}, non necessariamente quella
-	% ottimale. Si ha allora \math{v(i^{*}, j^{*}) \geq \mo[atom = bin]{max}[
-	% v(i, j): i \leq n, j \leq m]}. Essendo peró che \math{v^{*} \leq v(i^{*}, 
-	% j^{*})}, per proprietá transitiva \math{v^{*} \geq \mo[atom = bin]{max}[
-	% v(i, j): i \leq n, j \leq m]}. Dato che \math{v^{*}} é contemporaneamente
-	% maggiore o uguale e minore o uguale a \math{\mo[atom = bin]{max}[v(i, j): 
-	% i \leq n, j \leq m]}, allora le due quantitá devono essere uguali.
+	\begin[mode = display]{math}
+		S_{0, 0} = S_{i, 0} = S_{0, j} = 0
+	\end{math}
 
-	% Passare dall'allineamento locale dei suffissi all'allineamento locale é 
-	% immediato: se \math{i^{'}} e \math{j^{'}} formano una coppia di indici che 
-	% massimizzano \math{v(i, j)} per qualsiasi possibile coppia di \math{i} e 
-	% \math{j}, allora una coppia di sottostringhe che risolvono il problema 
-	% dell'allineamento locale dei suffissi per gli indici \math{i^{'}} e 
-	% \math{j^{'}} risolvono anche il problema dell'allineamento locale. Si ha
-	% quindi che risolvendo il problema dell'allineamento locale dei suffissi 
-	% é possibile risolvere anche il (piú generale) problema dell'allineamento 
-	% locale.
+	Per quanto riguarda il passo ricorsivo, si faccia riferimento
+	alle considerazioni fatta in precedenza. Se la soluzione del
+	problema di allineamento globale rispetto ad un determinato
+	prefisso é negativo, allora é garantito che le sottosequenze
+	che lo hanno indotto non possono fare parte dell'allineamento
+	locale. Se questo si verifica, allora il valore dell'allineamento
+	locale di tali prefissi é nullo, se invece non lo é, é sufficiente
+	rifarsi alle possibili soluzioni locali dell'algoritmo di
+	Needleman-Wunsch.
 
-	% Il problema dell'allineamento locale dei suffissi puó essere risolto tramite 
-	% programmazione dinamica. Si ricordi che l'obiettivo consiste nel trovare le
-	% due stringhe \math{\alpha} e \math{\beta}, estratte rispettivamente da 
-	% \math{S_{1}[1:i]} e \math{S_{2}[1:j]}, tali per cui é massima la loro 
-	% somiglianza, e ricavare tale valore. Il caso base é dato da \math{v(i, 0) = 
-	% v(0, j) = 0} per ogni \math{i, j}, perché é evidente come il valore di 
-	% somiglianza fra una stringa generica e la stringa vuota sia sempre 0. La 
-	% relazione di ricorrenza é invece data da:
+	Non essendo noto a priori quali siano i caratteri che compaiono
+	nell'allineamento locale ottimale, é sufficiente limitarsi a
+	scegliere il valore che, fra questi, massimizza la soluzione
+	ottima:
 
-	% \begin[mode = display]{math}
-		% v(i, j) = \mo[atom = bin]{max}[0, v(i - 1, j - 1) + s(S_{1}[i], S_{2}[j]), 
-		% v(i - 1, j) + s(S_{1}[i], -), v(i, j - 1) + s(-, S_{2}[j])]
-	% \end{math}
+	\begin[mode = display]{math}
+		S_{i, j} = \mi{max}\{S_{i - 1, j - 1} + d(X[i], Y[j]),
+		S_{i - 1, j} + d(X[i], -), S_{i, j - 1} + d(-, Y[j]), 0\}
+	\end{math}
 
-	% Dove \math{s(x, y)} é il peso che ha l'accoppiamento del carattere \math{x} 
-	% al carattere \math{y}. É possibile dimostrare la relazione di ricorrenza come 
-	% segue. Innanzitutto, la presenza dello 0 é data dal fatto che \math{\alpha} 
-	% e \math{\beta} possono essere vuote. Tuttavia, se la stringa ottimale 
-	% \math{\alpha} non é vuota, allora il carattere \math{S_{1}[i]} é accoppiato
-	% ad uno spazio o con il carattere \math{S_{2}[j]}. Allo stesso modo, se la 
-	% stringa ottimale \math{\beta} non é vuota, allora il carattere \math{S_{2}[j]} 
-	% é accoppiato ad uno spazio o con il carattere \math{S_{1}[i]}.
+	A differenza dell'algoritmo di Needleman-Wunsch, la ricostruzione
+	della soluzione viene fermata quando viene trovato un valore nullo,
+	non quando si raggiunge la cella (0, 0). Questo perché, per il modo
+	in cui l'equazione di ricorrenza é stata definita, tutti i valori
+	delle celle a questa precedente saranno 0 a sua volta, e quindi
+	irrilevanti.
 
-	% Se le stringhe \math{\alpha} e \math{\beta} non sono vuote, allora il carattere
-	% \math{S_{1}[i]} é allineato con \math{S_{2}[j]} nell'allineamento locale dei 
-	% suffissi per gli indici \math{i} e \math{j}. Vi sono soltanto tre possibilitá:
-	% Sia \math{S_{1}[i]} che \math{S_{2}[j]} sono due caratteri propriamente detti,
-	% \math{S_{1}[i]} é un carattere e \math{S_{2}[j]} é uno spazio oppure 
-	% \math{S_{2}[j]} é un carattere e \math{S_{1}[i]} é uno spazio.
+	\begin{code}
+		\begin{verbatim}
+			procedure SMITH-WATERMAN(X, Y, D)
+			    for i \unichar{U+2190} 0 to |X| do
+			        c[i, 0] \unichar{U+2190} 0
+			    for j \unichar{U+2190} 0 to |Y| do
+			        c[0, j] \unichar{U+2190} 0
 
-	% Nel primo caso, i caratteri \math{S_{1}[i]} e \math{S_{2}[j]} danno 
-	% un contributo a \math{v(i, j)} pari a \math{s(S_{1}[i], S_{2}[j])}, 
-	% ed il contributo rimanente é dato da \math{v(i - 1, j - 1)}, che per 
-	% definizione é esso stesso ottimale. Pertanto, se \math{S_{1}[i]} é 
-	% allineato con \math{S_{2}[j]}, \math{v(i, j)} é dato da \math{v(i - 1, 
-	% j - 1) + s(S_{1}[i], S_{2}[j])}. Nel secondo caso, allora \math{v(i, j)} 
-	% si ricava dalla somma del contributo dato da \math{s(S_{1}[i], -)} e dal 
-	% contributo dato da \math{v(i - 1, j)}, che é esso stesso ottimale; in 
-	% questo caso si ha quindi che \math{v(i, j) = v(i - 1, j) + s(S_{1}[i], -)}. 
-	% In maniera sostanzialmente analoga si dimostra che nel terzo caso si ha 
-	% \math{v(i, j) = v(i, j - 1) + s(-, S_{2}[j])}.
+			    \bigskip
+			    best \unichar{U+2190} 0
+			    for i \unichar{U+2190} 1 to |X| do
+			        for j \unichar{U+2190} 1 to |Y| do
+			            t\textsubscript{1} \unichar{U+2190} c[i - 1, j] + D[X[i], -]
+			            t\textsubscript{2} \unichar{U+2190} c[i, j - 1] + D[-, Y[j]]
+			            t\textsubscript{3} \unichar{U+2190} c[i - 1, j - 1] + D[X[i], Y[j]]
+			            if (t\textsubscript{1} \unichar{U+2265} t\textsubscript{2} and t\textsubscript{1} \unichar{U+2265} t\textsubscript{3} and t\textsubscript{1} > 0) then
+			                c[i, j] \unichar{U+2190} t\textsubscript{1}
+			            else if (t\textsubscript{2} \unichar{U+2265} t\textsubscript{1} and t\textsubscript{2} \unichar{U+2265} t\textsubscript{3} and t\textsubscript{2} > 0) then
+			                c[i, j] \unichar{U+2190} t\textsubscript{2}
+			            else if (t\textsubscript{3} \unichar{U+2265} t\textsubscript{1} and t\textsubscript{3} \unichar{U+2265} t\textsubscript{2} and t\textsubscript{3} > 0) then
+			                c[i, j] \unichar{U+2190} t\textsubscript{3}
+			            else
+			                c[i, j] \unichar{U+2190} 0
+			            if (c[i, j] > best) then
+			                best \unichar{U+2190} c[i, j]
 
-	% Dato che tutti i possibili casi sono stati esplorati, si ha che \math{v(i, j)}
-	% deve valere 0 oppure \math{v(i - 1, j - 1) + s(S_{1}[i], S_{2}[j])} oppure 
-	% \math{v(i - 1, j) + s(S_{1}[i], -)} oppure \math{v(i, j - 1) + s(-, S_{2}[j])}.
-	% D'altro canto, per ciascuno di questi quattro valori, é sempre possibile 
-	% scegliere suffissi di \math{S_{1}[i]} e di \math{S_{2}[j]} tali che il 
-	% loro allineamento abbia quel valore. Pertanto, il valore dell'allineamento 
-	% ottimale dei suffissi é almeno pari al piú grande fra questi quattro valori.
-	% Dato che \math{v(i, j)} é necessariamente uno di questi quattro valori, ed
-	% é almeno pari al piú grande fra questi, la relazione é provata.
+			    \bigskip
+			    return best
+		\end{verbatim}
+	\end{code}
 
-	% Per calcolare \math{v^{*}} occorre calcolare la tabella di programmazione
-	% dinamica per \math{v(i, j)} e dopodiché trovare la cella con il valore piú
-	% alto, sia ad esempio quella denotata dagli indici \math{i^{*}} e \math{j^{*}}.
-	% Come di consueto, i puntatori vengono creati nel riempire le celle della 
-	% tabella. Una volta che la cella \math{(i^{*}, j^{*})} é stata trovata, le
-	% sottostringhe \math{\alpha} e \math{\beta} che danno l'allineamento locale
-	% ottimale di \math{S_{1}} e di \math{S_{2}} vengono ottenute mediante 
-	% backtracking seguendo i puntatori che vanno dalla cella \math{(i^{*}, j^{*})}
-	% alla prima cella che vale zero, ad esempio \math{(i^{'}, j^{'})}. Le due
-	% stringhe sono allora \math{\alpha = S_{1}[i^{'}:i^{*}]} e \math{\beta = 
-	% S_{2}[j^{'}:j^{*}]}.
+	Si noti come il tempo di esecuzione dell'algoritmo rimanga comunque
+	lineare nella lunghezza delle sequenze.
 
 \end{sile}

@@ -4,7 +4,7 @@
 	grado di somiglianza fra due sequenze. Una misura migliore
 	é fornita dal loro \strong{allineamento globale}, ovvero
 	dall'inserimento all'interno delle stesse di un certo numero
-	di caratteri speciali detti \strong{indel} (\em{Insertion
+	di caratteri speciali detti \strong{indel} (\em{INsertion
 	DELetion}) tale da renderle della stessa lunghezza.
 
 	Come il nome suggerisce, un indel in una sequenza deve essere
@@ -114,9 +114,9 @@
 	Y[1 : j]} i prefissi di lunghezza \math{i} e \math{j} delle rispettive
 	sequenze. Sia poi \math{d} una matrice di score. La soluzione \math{S_{i,
 	j}} per l'\math{i, j}-esima istanza del problema corrisponde a trovare
-	la soluzione ottimale per il problema della lunghezza dell'allineamento
-	globale ottimale rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}.
-	La soluzione per le intere sequenze \math{X} e \math{Y} è la soluzione
+	la soluzione ottimale per il problema del valore dell'allineamento globale
+	ottimale rispetto alle sottosequenze \math{X_{i}} e \math{Y_{j}}. La
+	soluzione per le intere sequenze \math{X} e \math{Y} è la soluzione
 	per l'istanza \math{X_{m}, Y_{n}}.
 
 	Per calcolare la soluzione ottimale della generica istanza \math{X_{i},
