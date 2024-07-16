@@ -116,8 +116,8 @@
 		\include[src = Allineamento/Locale.sil]
 		\section{Allineamento con gap}
 		\include[src = Allineamento/Gap.sil]
-		% \section{Allineamento con banda}
-		% \include[src = Allineamento/Banda.sil]
+		\section{Allineamento con banda}
+		\include[src = Allineamento/Banda.sil]
 		% \section{Allineamento multiplo}
 		% \include[src = Allineamento/Multiplo.sil]
 	\chapter{Ricostruzione della filogenesi}

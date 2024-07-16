@@ -1,0 +1,92 @@
+\begin{sile}
+
+	Si consideri il problema della distanza di edit di due sequenze risolto
+	per una istanza \math{X, Y} dove le due sequenze in questione sono fra
+	loro molto simili, ovvero dove il valore della loro distanza é piccolo.
+	Sia questo valore \math{k}: essendo la soluzione del problema, per il
+	modo in cui il problema stesso é definito é certo che tale valore occuperá
+	la cella di coordinate \math{m, n} della tabella di programmazione dinamica.
+
+	Si noti come la differenza fra la lunghezza delle due sequenze non possa
+	essere superiore a \math{k}, perché le uniche operazioni su sequenze che
+	ne modificano la lunghezza sono l'inserimento e la cancellazione: anche
+	ammesso che per trasformare \math{X} in \math{Y} (o \math{Y} in \math{X})
+	siano necessarie o solo inserimenti o solo cancellazioni, il numero di tali
+	operazioni é comunque al massimo \math{k}. Inoltre, dato che la dimensione
+	della matrice di programmazione dinamica per il problema della distanza di
+	edit fra due sequenze é un rettangolo che ha per lati le loro lunghezze, se
+	\math{k} é un valore piccolo, e quindi la differenza fra le loro lunghezze
+	é a sua volta piccola, allora \math{m \approx n}, e la matrice é pertanto
+	quasi quadrata.
+
+	Piú in generale, il percorso ottimale da compiere lungo una matrice di
+	programmazione dinamica quasi quadrata per il problema della distanza
+	di edit fra due sequenze che permette di raggiungere la cella che contiene
+	il valore ottimo \math{(m, n)} a partire dalla cella iniziale \math{(0, 0)}
+	non puó discostarsi piú di \math{k} dalla sua (quasi) diagonale principale.
+	Questo significa che se \math{k} é piccolo, la maggior parte delle celle
+	della matrice, quelle che distano piú di \math{k} dalla sua (quasi) diagonale
+	principale, non saranno mai attraversate da un percorso ottimale, e quindi di
+	fatto calcolare tali soluzioni parziali non serve a nulla.
+
+	É allora possibile ottimizzare l'algoritmo della distanza di edit fra
+	due sequenze escludendo il calcolo di tutte le soluzioni parziali che
+	distano piú di \math{k} dalla (quasi) diagonale principale della matrice
+	della programmazione dinamica, sempre assumendo che \math{k} sia piccolo.
+	Ovvero, anziché calcolare tutte e \math{mn} le celle della tabella, si
+	calcolano solamente le celle che si trovano nel poligono che ha per
+	diagonale la (quasi) diagonale della matrice di programmazione dinamica
+	e che ha \math{2k + 1} come larghezza massima. La larghezza massima di
+	tale poligono prende il nome di \strong{banda}.
+
+	Cosí facendo, sia lo spazio occupato dalla tabella che il tempo di esecuzione
+	dell'algoritmo vengono ad essere \math{O(kn) = O(km)}; se \math{k} é molto piú
+	piccolo di \math{m} (o di \math{n}), il guadagno é effettivamente notevole. Il
+	problema di questa ottimizzazione é che \math{k} é proprio la distanza di edit
+	fra le due sequenze in esame, e quindi di fatto si sta richiedendo di poter
+	sapere in anticipo la soluzione del problema originale per poi poter restituire
+	la medesima soluzione ma piú velocemente.
+
+	Si potrebbe pensare di operare stime ripetute di \math{k} e di operare
+	l'algoritmo opportunamente modificato per il calcolo della distanza di
+	edit per piú volte, fino trovare una stima di \math{k} sufficientemente
+	precisa e, di conseguenza, la soluzione ottima del problema. Sia
+	\math{b_{i}} la \math{i}-esima stima di \math{k}: dato che \math{k}
+	deve essere stimato \math{k} volte, si risolverebbe il problema della
+	distanza di edit in tempo \math{\sum_{b = 1}^{k} O(bm) = O(k^{2}m)},
+	che per valori di \math{k} piccoli é comunque un netto miglioramento
+	rispetto a \math{O(mn)} (anche se, naturalmente, non quanto \math{O(kn)}).
+	Dato che la matrice di programmazione dinamica per ciascuna iterazione non
+	é necessaria per il calcolo della successiva, lo spazio occupato é comunque
+	\math{O(kn) = O(km)}.
+
+	Ci si chiede allora se sia possibile conoscere se la stima attuale
+	\math{b_{i}}. Innanzitutto, si osservi come \math{b_{i}} diventa una
+	stima sufficiente di \math{k} quando la soluzione restituita dall'algoritmo
+	per la distanza di edit opportunamente modificato é uguale a \math{b}. Questo
+	é peró vero solamente nel caso in cui si stia considerando la distanza di
+	modifica \strong{non pesata}, ovvero quella (finora considerata) in cui il
+	peso di ciascuna operazione sulle stringhe ha il medesimo costo. Un miglior
+	test prevede di valutare se il percorso ottimale passa per i confini della
+	banda: se questo accade, allora potrebbe darsi che la larghezza della banda
+	non sia sufficiente. Sebbene questo non sia garantito, é peró garantito il
+	contrario, ovvero se un percorso ottimale rimane all'interno della banda e
+	non passa mai per i suoi confini allora é certo che la soluzione restituita
+	dalla stima \math{b_{i}} sia effettivamente la miglior soluzione possibile.
+
+	Questo, come detto, permette di avere un algoritmo che risolve il problema
+	della distanza di edit in tempo \math{O(k^{2}n)}. É possibile ottimizzare
+	ulteriormente l'algoritmo in questo modo: anziché ripetere l'algoritmo della
+	distanza di edit con \math{b_{i}} incrementato di 1 ad ogni iterazione, lo
+	si raddoppia. In questo modo, si convergerá molto piú rapidamente ad una
+	stima sufficientemente buona di \math{k}, anche eventualmente superandolo,
+	ma non é rilevante. In questo modo, il tempo di esecuzione dell'algoritmo
+	diviene \math{O(kn)}; con \math{b = 2^{c}}, si ha infatti:
+
+	\begin[mode = display]{math}
+		\sum_{c = 0}^{\lceil \mi{log}_{2} (k) \rceil} O{(2^{c} n)} =
+		O{(2^{0} n)} + O{(2^{1} n)} + O{(2^{2} n)} + \unicodeellipsis + O{(2^{\lceil \mi{log}_{2} (k) \rceil} n)} =
+		O{(n)} + O{(2n)} + O{(4n)} + \unicodeellipsis + O{(kn)} = O{(kn)}
+	\end{math}
+
+\end{sile}

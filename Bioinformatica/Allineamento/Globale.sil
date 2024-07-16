@@ -238,4 +238,13 @@
 		\end{verbatim}
 	\end{code}
 
+	É interessante notare come il problema della distanza di edit (fra due sequenze)
+	non sia altro che un caso particolare del problema dell'allineamento globale
+	fra due sequenze. Infatti, risolvere il problema della distanza di edit fra due
+	stringhe equivale a risolvere il problema dell'allineamento globale per tali
+	stringhe dove anziché massimizzare il valore dell'allineamento si minimizza la
+	distanza e dove la matrice di score contiene \math{+0} per qualsiasi match e
+	\math{+1} per qualsiasi mismatch e per qualsiasi coppia carattere-indel o
+	indel-carattere.
+
 \end{sile}
