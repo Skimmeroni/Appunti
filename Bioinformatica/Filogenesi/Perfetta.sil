@@ -47,7 +47,9 @@
 	che una specie puó avere o non avere. Se una cella \math{(i, j)} contiene il 
 	valore 1, significa che la specie \math{i} possiede il carattere \math{j}, 
 	mentre se contiene il valore \math{0} significa che la specie \math{i} non 
-	possiede il carattere \math{j}.
+	possiede il carattere \math{j}. Naturalmente, si assume che tutte le possibili
+	coppie di specie differiscano di almeno un carattere, altrimenti non sarebbero
+	distinguibili.
 
 	\begin{example}
 		Si consideri il seguente gruppo di animali: anguilla, leopardo, 
@@ -188,16 +190,16 @@
 		interamente contenuto nell'altro. 
 
 		\bigskip
-		\strong{Dimostrazione}. Sia \math{T} l'albero filogenetico che spiega la matrice 
-		\math{M}, e si consideri la coppia di caratteri distinti \math{(i, j)} di 
-		\math{T} (o di \math{M}). Siano poi \math{e_{i}} e \math{e_{j}} gli archi di 
-		\math{T} etichettati, rispettivamente, \math{i} e \math{j}, ovvero gli archi 
-		a partire dai quali i due caratteri passano dall'avere valore 0 all'avere 
-		valore 1. Tutte le specie che possiedono il carattere \math{i} devono 
-		necessariamente trovarsi nei nodi foglia dopo \math{e_{i}}, cosí come 
-		tutte le specie che possiedono il carattere \math{j} devono necessariamente 
-		trovarsi nei nodi foglia dopo \math{e_{j}}. Si hanno tre possibilitá, 
-		mutualmente esclusive:
+		\strong{Dimostrazione}. Sia \math{T} l'albero filogenetico che spiega la
+		matrice \math{M}, e si consideri la coppia di caratteri distinti \math{(i,
+		j)} di \math{T} (o di \math{M}). Siano poi \math{e_{i}} e \math{e_{j}} gli
+		archi di \math{T} etichettati, rispettivamente, \math{i} e \math{j}, ovvero
+		gli archi che portano al nodo interno dell'albero che rappresenta la speciazione
+		rispetto alla presenza/assenza di tale carattere. Tutte le specie che possiedono
+		il carattere \math{i} devono necessariamente trovarsi nei nodi foglia dopo
+		\math{e_{i}}, cosí come tutte le specie che possiedono il carattere \math{j}
+		devono necessariamente trovarsi nei nodi foglia dopo \math{e_{j}}. Si hanno
+		tre possibilitá, mutualmente esclusive:
 
 		\begin{enumerate}
 			\begin{item}
@@ -222,7 +224,7 @@
 
 		\bigskip
 
-		Dato che in ciascuna di queste quattro possibilitá i due insiemi sono o
+		Dato che in ciascuna di queste tre possibilitá i due insiemi sono o
 		disgiunti o l'uno é interamente contenuto nell'altro, il teorema é dimostrato.
 	\end{theorem}
 
