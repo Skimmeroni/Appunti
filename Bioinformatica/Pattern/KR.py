@@ -12,18 +12,18 @@ def check(S):
             b = False
     return b
 
-def init(S):
+def init(S, n):
     H = 0
     for i in range (0, len(S)):
-        H = (H + (S[i] * 2**(len(S) - i - 1))) % p
+        H = (H + (S[i] * 2**(n - i - 1))) % p
     return H
 
 if (check(T) == False or check(P) == False):
     print("Strings are not binary")
     sys.exit(1)
 
-Hp = init(P) 
-Ht = init(T)
+Hp = init(P, len(P))
+Ht = init(T, len(P))
 
 for i in range (1, len(T) - len(P) + 1):
     Ht = (((2 * Ht) % p) - (2**(len(P)) % p) * T[i - 1] + T[len(P) + i - 1]) % p

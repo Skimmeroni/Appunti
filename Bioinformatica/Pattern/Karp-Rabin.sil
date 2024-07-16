@@ -5,14 +5,15 @@
 	\math{n} volte per la sua base, é possibile ripensare l'algoritmo Shift-And 
 	in termini di operazioni aritmetiche anziché operazioni logiche.
 
-	Siano dati un pattern \math{P} ed un testo \math{T}. Si assuma per il 
-	momento che \math{P} e \math{T} siano stringhe binarie, ovvero esclusivamente 
-	composte da 0 e 1. Questo permette di considerare le stringhe non come 
-	concatenazioni di caratteri ma come numeri binari. Si indichi con 
-	\math{T_{r}^{n}} la sottostringa di \math{T} che inizia alla posizione 
-	\math{r} ed ha lunghezza \math{n}, ovvero \math{T[r : r + n]}. Siano infine 
-	\math{H(P)} e \math{H(T_{r})} le rappresentazioni in forma decimale dei numeri 
-	binari \math{P} e \math{T_{r}^{n}}, ovvero:
+	Siano dati un pattern \math{P} di lunghezza \math{n} ed un testo \math{T}
+	di lunghezza \math{m}. Si assuma per il momento che \math{P} e \math{T}
+	siano stringhe binarie, ovvero esclusivamente composte da 0 e 1. Questo
+	permette di considerare le stringhe non come concatenazioni di caratteri
+	ma come numeri binari. Si indichi con \math{T_{r}^{n}} la sottostringa
+	di \math{T} che inizia alla posizione \math{r} ed ha lunghezza \math{n},
+	ovvero \math{T[r : r + n]}. Siano infine \math{H(P)} e \math{H(T_{r}^{n})}
+	le rappresentazioni in forma decimale dei numeri binari \math{P} e
+	\math{T_{r}^{n}}, ovvero:
 
 	\begin[width = 50%fw]{parbox}
 		\begin[mode = display]{math}
@@ -21,7 +22,7 @@
 	\end{parbox}
 	\begin[width = 50%fw]{parbox}
 		\begin[mode = display]{math}
-			H{(T_{r})} = \sum_{i = 1}^{n} 2^{n - i} \cdot T{[r + i - 1]}
+			H{(T_{r}^{n})} = \sum_{i = 1}^{n} 2^{n - i} \cdot T{[r - 1 + i]}
 		\end{math}
 	\end{parbox}
 
@@ -109,7 +110,7 @@
 	da \math{H_{p}(T_{r - 1}^{n})} con un numero costante di operazioni. Infatti:
 
 	\begin[mode = display]{math}
-		H(T_{r}^{n}) = 2 \times H(T_{r - 1}^{n}) - 2^{n}T[r - 1] + T[r + n - 1]
+		H(T_{r}^{n}) = 2 \times H(T_{r - 1}^{n}) - 2^{n}T[r - 1] + T[n + r - 1]
 	\end{math}
 
 	E ricordando che \math{H_{p}(T_{r}^{n}) = H(T_{r}^{n}) \mo[atom = bin]{mod} 
@@ -118,7 +119,7 @@
 	\begin[mode = display]{math}
 		H_{p}(T_{r}^{n}) = [(2 \times H(T_{r - 1}^{n}) 
 		\mo[atom = bin]{mod} p) - (2^{n} \mo[atom = bin]{mod} p) 
-		T[r - 1] + T[r + n - 1]] \mo[atom = bin]{mod} p
+		T[r - 1] + T[n + r - 1]] \mo[atom = bin]{mod} p
 	\end{math}
 
 	Se il pattern \math{P} si trova in \math{T} a partire dalla posizione 
@@ -153,26 +154,26 @@
 			il valore iniziale di \math{H_{P}(T_{r}^{n})};
 		\end{item}
 		\begin{item}
-			Per ogni posizione \math{r} di \math{T}, si calcoli \math{H_{P}(T_{r}^{n})}
-			e si valuti se questo é uguale a \math{H_{p}(P)}. Se lo é, significa che é
-			presente una occorrenza, potenzialmente falsa, di \math{P} in \math{T}
-			alla posizione \math{r}.
+			Per ogni posizione \math{r} di \math{T}, con \math{1 \leq r \leq m - n},
+			si calcoli \math{H_{P}(T_{r}^{n})} e si valuti se questo é uguale a
+			\math{H_{p}(P)}. Se lo é, significa che é presente una occorrenza,
+			potenzialmente falsa, di \math{P} in \math{T} alla posizione \math{r}.
 		\end{item}
 	\end{enumerate}
 
 	\bigskip
 
 	\begin{code}
-		\begin[width = 60%fw]{parbox}
+		\begin[width = 62.5%fw]{parbox}
 			\begin{verbatim}
 				procedure KARP-RABIN(T, P, p)
 				    occurrences \unichar{U+2190} 0
-				    Hp \unichar{U+2190} KR-PREPROCESS(P, p)
-				    Ht \unichar{U+2190} KR-PREPROCESS(T, p)
+				    Hp \unichar{U+2190} KR-PREPROCESS(P, p, |P|)
+				    Ht \unichar{U+2190} KR-PREPROCESS(T, p, |P|)
 
 				    \bigskip
 				    for i \unichar{U+2190} 1 to (|T| - |P| + 1) do
-				    Ht \unichar{U+2190} (((2 * Ht) \% p) - (2\textsuperscript{|P|} \% p) * T[i - 1] + T[|P| + i - 1]) \% p
+				        Ht \unichar{U+2190} (((2 * Ht) \% p) - (2\textsuperscript{|P|} \% p) * T[i - 1] + T[|P| + i - 1]) \% p
 				        if (Ht = Hp) then
 				            occurrences \unichar{U+2190} occurrences + 1
 
@@ -180,12 +181,12 @@
 				    return occurrences
 			\end{verbatim}
 		\end{parbox}
-		\begin[width = 40%fw]{parbox}
+		\begin[width = 37.5%fw]{parbox}
 			\begin{verbatim}
-				procedure KR-PREPROCESS(S, p)
+				procedure KR-PREPROCESS(S, p, n)
 				    H \unichar{U+2190} 0
 				    for i \unichar{U+2190} 0 to L do
-				        H \unichar{U+2190} (H + (S[i] * 2\textsuperscript{|S| - i - 1})) \% p
+				        H \unichar{U+2190} (H + (S[i] * 2\textsuperscript{n - i - 1})) \% p
 
 				    \bigskip
 				    return H
