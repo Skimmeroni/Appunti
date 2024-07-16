@@ -114,9 +114,9 @@
 		\include[src = Allineamento/Globale.sil]
 		\section{Allineamento locale di due sequenze} % Non é molto chiara la giustificazione logica dietro l'algoritmo
 		\include[src = Allineamento/Locale.sil]
-		% \section{Allineamento con Gap}
-		% \include[src = Allineamento/Gap.sil]
-		% \section{Allineamento con Banda}
+		\section{Allineamento con gap}
+		\include[src = Allineamento/Gap.sil]
+		% \section{Allineamento con banda}
 		% \include[src = Allineamento/Banda.sil]
 		% \section{Allineamento multiplo}
 		% \include[src = Allineamento/Multiplo.sil]

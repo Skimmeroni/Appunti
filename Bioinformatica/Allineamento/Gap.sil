@@ -1,17 +1,17 @@
 \begin{sile}
 
-	Un ulteriore elemento che é possibile usare per determinare il valore di 
-	somiglianza tra due stringhe, oltre agli spazi e agli appaiamenti, sono i
-	\strong{gap}. Un gap é una qualsiasi sequenza ininterrotta di spazi che si 
-	presenta in una delle stringhe dell'allineamento. Un gap puó sia iniziare
-	a sinistra della stringa, e quindi avere il primo carattere della stringa 
-	alla sua destra, sia a destra della stringa, e quindi avere l'ultimo 
-	carattere della stringa alla sua sinistra, oppure nel mezzo della stringa.
+	Vi sono situazioni in cui si ha interesse a trattare i gap dell'allineamento
+	in maniera privilegiata. Con \strong{gap} si intende un qualsiasi numero
+	contiguo di indel (anche soltanto uno) che viene inserito all'interno di una
+	delle due sequenze una volta allineate: un gap puó sia iniziare a sinistra di
+	una delle due sequenze originali, sia a destra, sia nel mezzo. Allineamenti
+	in cui i gap vengono trattati in maniera privilegiata sono detti
+	\strong{allineamenti con gap}.
 
 	\begin{example}
 		\begin[width = 50%fw]{parbox}
-			L'allineamento presentato a lato ha cinque appaiamenti corretti, 
-			un appaiamento non corretto, sette spazi e quattro gap:
+			L'allineamento presentato a lato ha cinque appaiamenti corretti,
+			un appaiamento non corretto, sette indel e quattro gap:
 		\end{parbox}
 		\begin[width = 50%fw]{parbox}
 			\begin[mode = display]{math}
@@ -23,128 +23,138 @@
 		\end{parbox}
 	\end{example}
 
-	Il modo in cui viene assegnato un peso ad un gap influenza notevolmente 
-	il risultato di un allineamento. \footnote{Un possibile esempio di 
-	applicazione dell'allineamento con gap é il confronto fra \strong{DNA} e 
-	\strong{cDNA} (\em{complementary DNA}). Il DNA é composto da piccole sequenze 
-	che codificano per delle proteine, chiamate \strong{introni}, inframezzate da 
-	lunghe sequenze che non codificano nulla, chiamate \strong{esoni}. Quando il 
-	DNA deve essere utilizzato per la codifica, viene creata una copia in 
-	\strong{mRNA} (\em{messenger RNA}) delle parti di DNA che codificano per una 
-	certa proteina, che poi esce dal nucleo della cellula. Per capire per quale 
-	proteina quel tipo di mRNA codifica un semplice approccio consiste nel 
-	catturare l'mRNA all'uscita del nucleo, riconvertirlo in DNA e poi compararlo 
-	con il DNA contenuto nei cromosomi. Il DNA ottenuto a partire dall'mRNA, é 
-	peró composto esclusivamente da introni, ed é pertanto molto piú piccolo del 
-	DNA "puro". Ci si aspetta quindi che un allineamento fra DNA e cDNA sia 
-	composto da lunghi gap alternati da piccole sequenze di caratteri che 
-	combaciano.}. Esistono fondamentalmente quattro tipi di peso assegnabili ai 
-	gap: \em{costante}, \em{affine}, \em{convesso}, \em{arbitrario}.
+	Una situazione di questo tipo si ha, ad esempio, nell'allineamento fra
+	\strong{DNA} e \strong{cDNA} (\em{complementary DNA}). Il DNA é composto
+	da piccole sequenze che codificano per delle proteine (\strong{esoni}),
+	inframezzate da lunghe sequenze che non codificano nulla (\strong{introni}).
+	Quando il DNA deve essere utilizzato per la codifica di una certa proteina,
+	ne viene creata una copia in \strong{mRNA} (\em{messenger RNA}) da cui sono
+	rimossi, mediante splicing, sia gli introni sia gli esoni che non codificano
+	per la proteina di interesse, che poi esce dal nucleo della cellula. Per capire,
+	dato un certo trascritto in mRNA, per quale proteina codifica, un possibile
+	approccio consiste nel "catturare" l'mRNA all'uscita del nucleo, retrotrascriverlo
+	in DNA e poi allineare la sequenza risultante, chiamato appunto cDNA, con il DNA
+	originale. Tuttavia, il cDNA é composto solamente da una parte degli esoni del DNA
+	originale, e sará quindi infinitamente piú piccolo. É naturale pertanto aspettarsi
+	che un allineamento fra DNA e cDNA presenterá lunghi gap in corrispondenza degli
+	introni e degli esoni scartati alternati da piccole sequenze di interesse in
+	corrispondenza degli esoni codificanti.
 
-	\subsection{Peso costante}
+	Negli allineamenti con gap, la presenza di un solo indel o di piú indel contigui
+	ha sostanzialmente lo stesso impatto. Infatti, la presenza di un solo indel indica
+	che la sequenza deve venire allineata operando uno "shift" rispetto alla sequenza
+	originale, e compierne uno o piú di uno ha di fatto il medesimo significato. Inoltre,
+	appaiare un certo carattere con un indel o appaiare un altro carattere con un indel
+	non fa differenza, perché il focus di allineamenti con gap sono le sequenze dove i
+	caratteri non sono indel.
 
-		L'approccio piú semplice consiste nell'assegnare a ciascuno spazio 
-		singolo un peso nullo, ovvero \math{s(x, -) = s(-, x) = 0} per qualsiasi 
-		carattere \math{x}, mentre ai gap viene assegnato un peso costante 
-		\math{W_{g}} che non dipende dal numero di spazi di cui é composto. 
-		Un valore di \math{W_{g}} grande incoraggia l'allineamento ad avere 
-		pochi gap, e la porzione allineata delle due stringhe consisterá di 
-		poche sottostringhe. Un valore di \math{W_{g}} piccolo incoraggia
-		l'allineamento ad essere piú frammentato. Il valore di un allineamento 
-		contenente \math{k} gap é dato da:
+	La penalitá introdotta dalla presenza di un gap deve dipendere esclusivamente
+	dalla sua lunghezza. L'allineamento con gap di due sequenze é dato dal valore
+	del loro allineamento globale a cui viene sottratto il contributo portato dai
+	gap. É ragionevole fare le seguenti assunzioni sulla natura della funzione di
+	penalitá \math{L}:
 
-		\begin[mode = display]{math}
-			\mi{maximize}(\sum_{i = 1}^{l} s{(S^{'}_{1}{(i)}, S^{'}_{2}{(i)})} - k W_{g})
-		\end{math}
+	\begin{itemize}
+		\begin{item}
+			Deve restituire sempre valori positivi;
+		\end{item}
+		\begin{item}
+			Deve essere una funzione crescente, ovvero avere derivata prima
+			sempre positiva. Questo perché si richiede che piú un gap é lungo
+			e piú é grande la penalitá associata;
+		\end{item}
+		\begin{item}
+			Deve essere una funzione concava, ovvero avere derivata seconda
+			sempre negativa o nulla. Questo perché, seppur vero che piú un
+			gap é lungo e piú é alta la sua penalitá, la crescita di tale
+			penalitá rispetto alla sua lunghezza deve essere sempre meno
+			incisiva \footnote{Una funzione, affinché sia derivabile, deve
+			anche essere continua, e le funzioni del calcolo del gap sono
+			funzioni discrete. Pertanto, la definizione di derivabilitá qui
+			sottointesa non é del tutto corretta.}.
+		\end{item}
+	\end{itemize}
 
-	\subsection{Peso affine}
+	\bigskip
 
-		Una variante del precedente approccio consiste nell'assegnare un peso 
-		fisso ad un gap, indipendentemente dalla sua lunghezza, a cui va sommato 
-		un ulteriore peso che dipende dal numero di spazi di cui é composto, 
-		lasciando comunque nullo il peso degli spazi singoli. Il peso dato da
-		ciascun gap di lunghezza \math{q} é dato dalla funzione lineare \math{W_{g} 
-		+ qW_{s}} (di fatto, un allineamento con peso costante é un allineamento 
-		con peso affine con \math{W_{s} = 0}. Il valore di un allineamento contenente 
-		\math{k} gap e \math{n} spazi é dato da: 
+	\begin{example}
+		Un esempio di funzione con queste caratteristiche é \math{1 +
+		\sqrt x}. Infatti, é una funzione sempre positiva, la sua
+		derivata prima é sempre positiva e la sua derivata seconda
+		é sempre negativa.
 
-		\begin[mode = display]{math}
-			\mi{maximize}(\sum_{i = 1}^{l} s{(S^{'}_{1}{(i)}, S^{'}_{2}{(i)})} - k W_{g} - n W_{s})
-		\end{math}
+		\begin[width = 35%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{d}{dx} {(1 + \sqrt x)} =
+				\frac{d}{dx} {(x^{-1})} = \frac{1}{2 \sqrt x}
+			\end{math}
+		\end{parbox}
+		\begin[width = 65%fw]{parbox}
+			\begin[mode = display]{math}
+				\frac{d}{dx} {(\frac{d}{dx} {(1 + \sqrt x)})} =
+				\frac{d}{dx} {(\frac{1}{2 \sqrt x})} =
+				\frac{1}{2} \frac{d}{dx} {(x^{-1 / 2})} =
+				\frac{1}{2} {(-\frac{1}{2} {(x^{-3 / 2})})} =
+				-\frac{1}{4 \sqrt x^{3}}
+			\end{math}
+		\end{parbox}
+	\end{example}
 
-		L'aumento di efficienza nel caso di peso affine sta nel fatto che l'aumento
-		del peso totale di un gap aggiungendo uno spazio é un valore costante che non 
-		dipende dal peso che ha il gap fino a quel momento. In altri termini, si ha 
-		\math{w(q + 1) - w(q) = W_{s}} per qualsiasi \math{q > 0}, mentre invece nel
-		modello arbitrario non é possibile predire il valore di \math{w(q + 1)} noto
-		\math{w(q)}. Dato che il peso aumenta in maniera costante, una volta noti 
-		\math{E(i, j)} e \math{F(i, j)} non é necessario chiedersi dove il gap inizi,
-		ma soltanto se il gap é o non é ancora iniziato.
+	Date due sequenze \math{X} e \math{Y} ed una funzione peso
+	\math{L}, il \strong{problema dell'allineamento con gap di
+	due sequenze} (\strong{gapped sequence alignment problem})
+	consiste nel trovare l'allineamento globale ottimale di
+	\math{X} e \math{Y} tale da minimizzare l'impatto del
+	contributo portato dai gap.
 
-		Se i gap alla fine ed all'inizio dell'allineamento hanno un peso non nullo, 
-		il caso base puó essere facilmente dedotto come:
+	Il problema dell'allineamento con gap puó essere risolto
+	mediante programmazione dinamica. Date due sequenze \math{X}
+	e \math{Y} rispettivamente di lunghezza \math{m} e \math{n},
+	siano \math{X_{i} = X[1 : i]} e \math{Y_{j} = Y[1 : j]} i
+	prefissi di lunghezza \math{i} e \math{j} delle rispettive
+	sequenze. Sia poi \math{d} una matrice di score. La soluzione
+	\math{S_{i, j}} per l'\math{i, j}-esima istanza del problema
+	corrisponde a trovare la soluzione ottimale per il problema
+	del valore dell'allineamento con gap ottimale rispetto alle
+	sottosequenze \math{X_{i}} e \math{Y_{j}}. La soluzione per
+	le intere sequenze \math{X} e \math{Y} è la soluzione per
+	l'istanza \math{X_{m}, Y_{n}}.
 
-		\begin[mode = display]{math}
-			\table{
-				V(i, 0) = E(i, 0) = -W_{g} - iW_{s} \\
-				V(0, j) = F(0, j) = -W_{g} - jW_{s} \\
-			}
-		\end{math}
+	\subsection{Gap arbitrario}
 
-		Se invece gli spazi che si trovano alle estremitá hanno peso nullo, si ha 
-		banalmente \math{V(i,0) = V(0,j) = 0}. Per quanto riguarda la relazione di
-		ricorrenza, si ha:
-
-		\begin[mode = display]{math}
-			\table{
-				V(i, j) = \mi{max}[E(i, j), F(i, j), G(i, j)] \\
-				G(i, j) = \table{
-					V(i - 1, j - 1) + W_{m} & S_{1}[i] = S_{2}[j] \\
-					V(i - 1, j - 1) + W_{ms} & S_{1}[i] \ne S_{2}[j] \\
-				} \\
-				E(i, j) = \mi{max}[E(i, j - 1), V(i, j - 1) - W_{g}] - W_{s} \\
-				F(i, j) = \mi{max}[F(i - 1, j), V(i - 1, j) - W_{g}] - W_{s} \\
-			}
-		\end{math}
-
-	\subsection{Peso convesso}
-
-		Un approccio simile al precedente consiste nell'avere una funzione che lega
-		\math{W_{g}} e \math{W_{s}} che non sia lineare, ma che sia una funzione dove
-		il peso di ciascuno spazio decresce con l'aumentare della lunghezza stringa,
-		anziché rimanere costante. Un esempio di funzione di questo tipo potrebbe 
-		essere \math{W_{g} \mi{ln}(q)}.
-
-	\subsection{Peso arbitrario}
-
-		Il caso piú generale possibile si ha quando il peso di un gap é una funzione
-		arbitraria \math{w(q)} della sua lunghezza \math{q}. Tutti i precedenti 
-		approcci possono essere visti come un caso particolare di questo, pertanto é
-		sufficiente trovare una soluzione a questo approccio per risolverli tutti.
-		Siano \math{S_{1}} ed \math{S_{2}} due stringhe da volersi allineare. Si 
-		considerino, come é stato fatto in precedenza, i prefissi \math{S_{1}[1:i]}
-		di \math{S_{1}} e \math{S_{2}[1:j]} di \math{S_{2}}. Ogni possibile 
-		allineamento di questi due prefissi deve necessariamente rientrare in una di
-		queste tre categorie:
+		Si consideri il caso in cui la funzione di calcolo della penalitá
+		del gap sia una funzione generica. Essendo l'allineamento con gap
+		di fatto una variante dell'allineamento globale, ci si chiede se
+		sia possibile risolverlo semplicemente applicando l'algoritmo di
+		Needleman-Wunsch. Si consideri, a tal proposito, l'allineamento
+		con gap ottimale di due prefissi generici \math{X_{i}} e
+		\math{Y_{j}}. L'ultima coppia di caratteri, \math{x_{i}} e
+		\math{y_{j}}, deve necessariamente rientrare in una di queste
+		tre categorie:
 
 		\begin{enumerate}
 			\begin{item}
-				L'ultimo carattere di \math{S_{1}[1:i]} si trova in corrispondenza di un
-				carattere di \math{S_{2}[1:j]} che non é l'ultimo. Pertanto, l'allineamento
-				si chiude con un gap su \math{S_{1}};
+				Il carattere \math{x_{i}}, che non é un indel, si trova in corrispondenza
+				di un indel, e \math{x_{i}} si trova piú a destra dell'ultimo carattere
+				non indel di \math{Y_{j}}. Questo equivale a dire che l'allineamento con
+				gap ottimale di \math{X_{i}} e \math{Y_{j}} termina con un gap su
+				\math{Y_{j}};
 			\end{item}
 			\begin{item}
-				L'ultimo carattere di \math{S_{1}[1:i]} si trova in corrispondenza di uno
-				spazio vuoto piú a destra dell'ultimo carattere di \math{S_{2}[1:j]}. 
-				Pertanto, l'allineamento si chiude con un gap su \math{S_{2}};
+				Il carattere \math{y_{j}}, che non é un indel, si trova in corrispondenza
+				di un indel, e \math{y_{j}} si trova piú a destra dell'ultimo carattere
+				non indel di \math{X_{i}}. Questo equivale a dire che l'allineamento con
+				gap ottimale di \math{X_{i}} e \math{Y_{j}} termina con un gap su
+				\math{X_{i}};
 			\end{item}
 			\begin{item}
-				L'ultimo carattere di \math{S_{1}[1:i]} si trova in corrispondenza 
-				con l'ultimo carattere di \math{S_{2}[1:j]}. Pertanto, deve essere 
-				\math{S_{1}[i] = S_{2}[j]} oppure \math{S_{1}[i] \ne S_{2}[j]}, ma
-				in entrambi i casi \math{S_{1}[i] \ne -} e \math{S_{2}[j] \ne -}.
+				Il carattere \math{x_{i}}, che non é un indel, si trova in
+				corrispondenza con il carattere \math{y_{j}}, ed anch'esso
+				non é un indel.
 			\end{item}
 		\end{enumerate}
+
+		\bigskip
 
 		\begin{example}
 			\img[src = Allineamento/Gap1.pdf, width = 100%fw]
@@ -154,53 +164,260 @@
 			\img[src = Allineamento/Gap3.pdf, width = 100%fw]
 		\end{example}
 
-		Siano \math{E(i, j)} il massimo valore di un qualsiasi allineamento 
-		di tipo 1, \math{F(i, j)} il massimo valore di un qualsiasi allineamento 
-		di tipo 2 e \math{G(i, j)} il massimo valore di un qualsiasi allineamento 
-		di tipo 3. Sia infine \math{V(i, j)} il massimo fra i tre valori 
-		\math{E(i, j)}, \math{F(i, j)} e \math{G(i, j)}. I quattro valori possono
-		essere ottenuti a partire dalla seguente relazione di ricorrenza:
+		Il terzo caso puó essere fatto rientrare all'interno di uno dei casi
+		dell'algoritmo di Needleman-Wunsch, ma il primo ed il secondo non lo
+		sono. Si consideri infatti la prima situazione sopra presentata (per
+		la seconda il ragionamento é sostanzialmente analogo): se \math{x_{i}}
+		é un carattere ed é allineato con un indel, allora dovrá esistere un
+		\math{x_{h}} con \math{0 < h < i} che é allineato con l'ultimo carattere
+		di \math{Y} diverso da un indel, sia questo \math{y_{k}}. É allora
+		possibile pensare di separare l'allineamento di \math{X_{i}} e
+		\math{Y_{j}} in due parti: l'allineamento dei prefissi \math{X_{h}}
+		e \math{Y_{k}} unito all'allineamento del suffisso \math{X[h + 1 : i]}
+		con un gap di lunghezza \math{h + 1 - i}.
+
+		La soluzione del problema per l'istanza \math{S_{i, j}} é data dalla
+		differenza fra la soluzione per l'istanza \math{S_{h, k}} e \math{L(h
+		+ 1 - i)}, con \math{L} funzione del calcolo del costo del gap. Se si
+		applicasse l'algoritmo di Needleman-Wunsch, si otterrebbe come soluzione
+		\math{S_{h, k} - (L(h - i) + L(1))}: anche se \math{L(h - i)} non é un
+		valore noto (cosí come non é noto \math{L(h + 1 - i)}), \math{L(1)} é
+		certamente noto, e sarebbe possibile ricondurre \math{L(h - i)} ad una
+		somma di casi base (noti). Il problema é che, dovendo la soluzione teorica
+		del problema e la soluzione fornita dall'algoritmo di Needleman-Wunsch
+		coincidere, deve valere \math{S_{h, k} - L(h + 1 - i) = S_{h, k} -
+		(L(h - i) + L(1))}, ovvero che \math{L(h + 1 - i) = L(h - i) + L(1)}.
+		Tuttavia, questo é vero solamente se la funzione \math{L} é una funzione
+		additiva, e non é noto se la funzione del problema effettivamente lo sia.
+
+		Si supponga peró di conoscere giá l'allineamento ottimale con gap di
+		\math{X_{i}} e di \math{Y_{j}}, e di essere pertanto a conoscenza del
+		valore di \math{h + 1 - i}, sia questo \math{g}. Sarebbe allora possibile
+		modificare l'algoritmo di Needleman-Wunsch per risolvere il problema
+		dell'allineamento con gap. In particolare, una soluzione in cui non
+		figurano indel avrá la medesima soluzione offerta dall'algoritmo di
+		Needleman-Wunsch per il problema dell'allineamento globale, mentre una
+		soluzione per una coppia di sequenze dove una delle due contiene un gap
+		viene ricavata a partire dalla prima soluzione a questa precedente dove
+		i gap sono assenti, decrementata del peso del gap. Indicando con
+		\math{x_{i}*} e \math{y_{j}*} i caratteri delle sequenze di rispettivamente
+		\math{X} e \math{Y} dopo che gli indel sono stati introdotti per ricavare
+		l'allineamento con gap ottimale, si ottiene la seguente equazione di ricorrenza:
 
 		\begin[mode = display]{math}
-			\{\table{
-				V(i, j) = \mi{max}[E(i, j), F(i, j), G(i, j)] \\
-				G(i, j) = V(i-1, j-1) + s(S_{1}[i], S_{2}[j]) \\
-				E(i, j) = \mi{max}_{0 \leq k \leq j-1}[V(i, k) - w(j - k)] \\
-				F(i. j) = \mi{max}_{0 \leq l \leq i-1}[V(l, j) - w(i - l)] \\
+			S_{i, j} =
+			\{\table[columnalign = left left]{
+				S_{i - 1, j - 1} + d(x_{i}*, y_{j}*) &
+				\mi{se} \thickspace x_{i}* \ne - \wedge y_{j}* \ne - \\
+				S_{i - g, j} - L(g) &
+				\mi{se} \thickspace x_{i}* \ne - \wedge y_{j}* = - \\
+				S_{i, j - g} - L(g) &
+				\mi{se} \thickspace x_{i}* = - \wedge y_{j}* \ne - \\
 			}
 		\end{math}
 
-		Per completare la ricorrenza, occorre specificare i casi base e dove i 
-		valori ottimali di allineamento si trovano. Se tutti gli spazi hanno un 
-		peso non nullo, anche quelli che si trovano all'inizio o alla fine 
-		dell'allineamento, allora il valore ottimale dell'allineamento si trova 
-		nella cella \math{(n, m)} ed i casi base sono dati da:
+		É possibile comunque individuare la soluzione che restituisce il valore
+		migliore in presenza di gap anche se la lunghezza di quest'ultimo non é
+		nota semplicemente cercando quale, fra tutte le soluzioni precedenti,
+		massimizza la differenza fra il proprio valore ed il peso di un gap di
+		lunghezza \math{g}. L'equazione di ricorrenza é allora:
 
 		\begin[mode = display]{math}
-			\table{
-				V(i, 0) = -w(i) &
-				V(0, j) = -w(j) &
-				E(i, 0) = -w(i) &
-				F(0, j) = -w(j) \\
+			S_{i, j} =
+			\mi{max}\{\table[columnalign = left left]{
+				S_{i - 1, j - 1} + d(X[i], Y[j]) \\
+				\mi{max} \{S_{i - g, j} - L(g) \thickspace t.c. \thickspace 0 \leq g \leq i\} \\
+				\mi{max} \{S_{i, j - g} - L(g) \thickspace t.c. \thickspace 0 \leq g \leq j\} \\
 			}
 		\end{math}
 
-		Dove \math{G(0, 0) = 0}, ma \math{G(i, j)} é indefinito quando esattamente un
-		solo valore fra \math{i} e \math{j} é 0. Si noti inoltre che \math{V(0, 0) = 
-		w(0)}. Quando invece gli spazi che si trovano alle estremitá hanno peso nullo,
-		allora il valore dell'allineamento ottimale é il massimo valore che si trova
-		in una qualsiasi delle celle della tabella, ed i casi base sono, banalmente:
+		Per quanto riguarda i casi base, questi si verificano quando una
+		delle due sequenze é la sequenza vuota, ed il loro allineamento
+		comporterá l'aggiunta di tanti indel contigui alla sequenza vuota
+		quanto la lunghezza della sequenza non vuota. Essendo peró una
+		sequenza di soli indel contigui un unico gap, ed essendo la lunghezza
+		di tale gap nota, é sufficiente valutare la funzione \math{L} nella
+		lunghezza della sequenza non vuota per ottenere il valore di tale
+		allineamento. Naturalmente, l'allineamento di due sequenze vuote é
+		comunque di valore nullo.
 
-		\begin[width = 50%fw]{parbox}
+		\begin[width = 33%fw]{parbox}
 			\begin[mode = display]{math}
-				V(i, 0) = 0
+				S_{0, 0} = 0
 			\end{math}
 		\end{parbox}
-		\begin[width = 50%fw]{parbox}
+		\begin[width = 33%fw]{parbox}
 			\begin[mode = display]{math}
-				V(0, j) = 0
+				S_{i, 0} = L(i)
+			\end{math}
+		\end{parbox}
+		\begin[width = 33%fw]{parbox}
+			\begin[mode = display]{math}
+				S_{0, j} = L(j)
 			\end{math}
 		\end{parbox}
 		\par
+
+		Il tempo di esecuzione di tale algoritmo é sensibilmente maggiore
+		di quello dell'algoritmo di Needleman-Wunsch. Infatti, il tempo di
+		esecuzione é \math{O(n^{2}m + nm^{2})}.
+
+	\subsection{Gap affine}
+
+		Il tempo di esecuzione dell'algoritmo per la risoluzione del problema
+		dell'allineamento con gap fra due sequenze puó venire notevolmente
+		semplificato se come funzione per il calcolo del peso dei gap viene
+		utilizzata una funzione lineare. Si parla in questo caso di \strong{gap
+		affine}.
+
+		Sia \math{L = mx + q}, con \math{m} e \math{q} noti. Affinché tale
+		funzione abbia le caratteristiche della funzione di gap riportate
+		in precedenza, \math{q} deve essere strettamente positivo: in questo
+		modo, la retta \math{mx + q} non passerá per l'origine, e di conseguenza
+		non si puó avere \math{L = 0}. Inoltre, \math{m} deve essere positivo
+		o, eventualmente, nullo: in questo modo, la derivata di \math{mx + q},
+		ovvero lo stesso \math{m}, é positiva, e la funzione sia quindi crescente.
+		Infine, la derivata seconda di qualsiasi funzione lineare é sempre nulla,
+		rispettando anche il terzo requisito.
+
+		Per convenzione, la funzione di penalitá per gap affini non viene espressa
+		in termini di \math{m} e di \math{q}, bensí in termini di \math{P_{e}}
+		(\em{extension gap penalty}) e di \math{P_{0}} (\em{open gap penalty}).
+		\math{P_{0}} é la penalitá associata all'\em{aprire} un gap, ovvero ad
+		inserirne il primo indel, mentre \math{P_{e}} é la penalitá associata
+		all'\em{espandere} un gap, ovvero ad aggiungere un indel ad un gap giá
+		\em{aperto}. La penalitá associata ad un gap di lunghezza \math{g} viene
+		allora espressa come \math{L(g) = P_{e} g + P_{0}}.
+
+		Si faccia riferimento all'equazione di ricorrenza per il problema
+		di allineamento con gap con funzione di penalitá arbitraria. Il
+		motivo per cui non era stato possibile esprimere ciascuna soluzione
+		\math{S_{i, j}} in funzione di una specifica istanza precedente (o
+		quantomeno, non sempre) era il fatto che non fosse noto se la funzione
+		\math{L} fosse additiva. In particolare, non era possibile sapere se
+		\math{L(h + 1 - i)} fosse uguale a \math{L(h - i) + L(1)} per qualsiasi
+		\math{L}. Se la funzione \math{L} é una funzione lineare, questo diventa
+		possibile.
+
+		Sia infatti \math{g} la lunghezza di un gap generico e sia \math{L}
+		una funzione lineare di penalitá. La penalitá associata ad un gap di
+		lunghezza nulla é il solo \math{P_{0}}: \math{L(0) = P_{e} \cdot 0 +
+		P_{0} = P_{0}}. D'altro canto, la penalitá associata ad un gap di
+		lunghezza unitaria é data da \math{L(1) = P_{e} \cdot 1 + P_{0} =
+		P_{e} + P_{0}}, ovvero la somma fra il costo di \em{apertura} del
+		gap ed il costo di una \em{espansione}.
+
+		Per quanto riguarda un gap di lunghezza generica \math{g}, strettamente
+		positiva, questo sará dato da \math{L(g) = P_{e} \cdot g + P_{0} = P_{e}g
+		+ P_{0}}, ovvero la somma fra il costo di \em{apertura} del gap ed il
+		costo di tante \em{espansioni} quanti sono gli indel che costituiscono
+		il gap. É facile verificare come sia possibile ricondurre il valore di
+		\math{L(g + 1)} al valore di \math{L(g)}:
+
+		\begin[mode = display]{math}
+			L(g + 1) = P_{e} \cdot (g + 1) + P_{0} = P_{e}g + P_{e} + P_{0} = L(g) + P_{e}
+		\end{math}
+
+		Assumendo di conoscere giá la soluzione ottimale dell'allineamento con gap
+		dei prefissi \math{X_{i}} e \math{Y_{j}}, ed assumendo inoltre di sapere in
+		ogni iterazione se il carattere in esame sia il primo indel di un gap o abbia
+		altri indel nelle posizioni precedenti, si ottiene la seguente equazione di
+		ricorrenza:
+
+		\begin[mode = display]{math}
+			S_{i, j} =
+			\table[columnalign = left left]{
+				S_{i - 1, j - 1} + d(x_{i}*, y_{j}*) & \mi{se} \thickspace x_{i}* \ne - \wedge y_{j}* \ne - \\
+				S_{i - 1, j} + P_{e} & \mi{se} \thickspace x_{i}* \ne - \wedge
+				y_{j}* \thickspace \mi{non} \thickspace \mi{é} \thickspace \mi{un} \thickspace \mi{primo} \thickspace \mi{indel} \\
+				S_{i, j - 1} + P_{e} & \mi{se} \thickspace y_{j}* \ne - \wedge
+				x_{i}* \thickspace \mi{non} \thickspace \mi{é} \thickspace \mi{un} \thickspace \mi{primo} \thickspace \mi{indel} \\
+				S_{i - 1, j} + P_{0} + P_{e} & \mi{se} \thickspace x_{i}* \ne - \wedge
+				y_{j}* \thickspace \mi{é} \thickspace \mi{un} \thickspace \mi{primo} \thickspace \mi{indel} \\
+				S_{i, j - 1} + P_{0} + P_{e} & \mi{se} \thickspace y_{j}* \ne - \wedge
+				x_{i}* \thickspace \mi{é} \thickspace \mi{un} \thickspace \mi{primo} \thickspace \mi{indel} \\
+			}
+		\end{math}
+
+		Se la presenza di \math{x_{i}*} e \math{y_{j}*} puó essere risolta scegliendo
+		di volta in volta la soluzione di valore massimo, non vi é modo di sapere, in
+		ciascuna iterazione, se un indel é o non é il primo indel di un gap, perché il
+		valore ottimo \math{S_{i, j}} non é noto a quale coppia di sottosequenze si
+		riferisca. É peró possibile aggirare la difficoltá introducento quattro problemi
+		ausiliari, da risolvere in parallelo insieme al problema principale:
+
+		\begin{itemize}
+			\begin{item}
+				Il valore dell'allineamento con gap ottimale sui prefissi \math{X_{i}} e
+				\math{Y_{j}}, vincolato dal riferirsi ad un allineamento con gap dove la
+				stringa \math{X} (dopo l'aggiunta degli indel) ha come ultimo elemento un
+				indel, il quale termina un gap giá \em{aperto}. Tale valore viene indicato
+				con \math{E1_{i, j}};
+			\end{item}
+			\begin{item}
+				Il valore dell'allineamento con gap ottimale sui prefissi \math{X_{i}} e
+				\math{Y_{j}}, vincolato dal riferirsi ad un allineamento con gap dove la
+				stringa \math{Y} (dopo l'aggiunta degli indel) ha come ultimo elemento un
+				indel, il quale termina un gap giá \em{aperto}. Tale valore viene indicato
+				con \math{E2_{i, j}};
+			\end{item}
+			\begin{item}
+				Il valore dell'allineamento con gap ottimale sui prefissi \math{X_{i}} e
+				\math{Y_{j}}, vincolato dal riferirsi ad un allineamento con gap dove la
+				stringa \math{X} (dopo l'aggiunta degli indel) ha come ultimo elemento un
+				indel, il quale é il primo elemento di un gap. Tale valore viene indicato
+				con \math{N1_{i, j}};
+			\end{item}
+			\begin{item}
+				Il valore dell'allineamento con gap ottimale sui prefissi \math{X_{i}} e
+				\math{Y_{j}}, vincolato dal riferirsi ad un allineamento con gap dove la
+				stringa \math{Y} (dopo l'aggiunta degli indel) ha come ultimo elemento un
+				indel, il quale é il primo elemento di un gap. Tale valore viene indicato
+				con \math{N2_{i, j}};
+			\end{item}
+		\end{itemize}
+
+		\bigskip
+
+		Risolvere i quattro sottoproblemi puó essere fatto in maniera immediata:
+
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\{\table{
+					E1_{i, j} = \mi{max} \{E1_{i, j - 1} + P_{e},
+					N1_{i, j - 1} + P_{e}\} \\
+					E2_{i, j} = \mi{max} \{E2_{i - 1, j} + P_{e},
+					N2_{i - 1, j} + P_{e}\} \\
+				}
+			\end{math}
+		\end{parbox}
+		\begin[width = 50%fw]{parbox}
+			\begin[mode = display]{math}
+				\{\table{
+					N1_{i, j} = S_{i, j - 1} + P_{0} + P_{e} \\
+					N2_{i, j} = S_{i - 1, j} + P_{0} + P_{e} \\
+				}
+			\end{math}
+		\end{parbox}
+		\par
+
+		Le quattro soluzioni in questione corrispondono alle quattro soluzioni
+		dell'equazione di ricorrenza precedente per le quali non si avevano
+		sufficienti informazioni a disposizione. Ora che tali informazioni sono
+		state integrate per mezzo dei problemi ausiliari, é possibile riscrivere
+		tale equazione come:
+
+		\begin[mode = display]{math}
+			S_{i, j} = \mi{max} \{S_{i - 1, j - 1} + d(X[i], Y[j]),
+			E1_{i, j}, E2_{i, j}, N1_{i, j}, N2_{i, j}\}
+		\end{math}
+
+		Il caso base dell'equazione di ricorrenza é analogo a quello per la
+		funzione di gap generica.
+
+		Il tempo di esecuzione dell'algoritmo é \math{O(mn)}, il medesimo tempo
+		di esecuzione dell'algoritmo di Needleman-Wunsch, dato che tutte e cinque
+		le possibili soluzioni per \math{S_{i, j}} sono a volta calcolabili in
+		tempo \math{O(mn)}.
 
 \end{sile}
