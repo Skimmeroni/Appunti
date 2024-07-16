@@ -105,38 +105,36 @@
 
 	\begin{code}
 		\begin{verbatim}
-			T = "..."
-			P = "..."
-			occurrences = 0
+			procedure SHIFT-AND(P, T, \unichar{U+03A3})
+			    occurrences \unichar{U+2190} 0
 
-			\bigskip
-			U = [[0] * (len(P)) for _ in range(26)] 
-			M = [[0] * (len(P)) for _ in range(len(T))]
+			    \bigskip
+			    foreach i in \unichar{U+03A3} do
+			        for j \unichar{U+2190} 0 to |P| do
+			            if (P[j] = i) then
+			                U\textsubscript{i}[j] \unichar{U+2190} 1
+			            else
+			                U\textsubscript{i}[j] \unichar{U+2190} 0
+			        U\textsubscript{i} \unichar{U+2190} TRANSPOSE(U\textsubscript{i})
 
-			\bigskip
-			for i in range (0, len(P)):
-			    Temp = ord(P[i]) - 97
-			    U[Temp][i] = 1
+			    \bigskip
+			    for i \unichar{U+2190} 0 to |P| do
+			        for j \unichar{U+2190} 0 to |T| do
+			            M[i, j] \unichar{U+2190} 0
+			    if (T[0] = P[0]) then
+			        M[0, 0] \unichar{U+2190} 1
 
-			\bigskip
-			if (T[0] == P[0]):
-			    M[0][0] = 1
+			    \bigskip
+			    for i \unichar{U+2190} 0 to |T| do
+			        for j \unichar{U+2190} 0 to |P| do
+			            M[i, j] \unichar{U+2190} (BIT-SHIFT(j - 1)[i]) AND U\textsubscript{T[j]}[i]
 
-			\bigskip
-			for i in range (1, len(T)):
-			    for j in range (1, len(P)):
-			        M[i][j] = M[i - 1][j - 1]
-			    M[i][0] = 1
-			    Temp = ord(T[i]) - 97
-			    for j in range (0, len(P)):
-			        M[i][j] = U[Temp][j] & M[i][j]
+			    \bigskip
+			    for i \unichar{U+2190} 0 to |T| do
+			        occurrences \unichar{U+2190} occurrences + M[i, |T|]
 
-			\bigskip
-			for i in range (len(T)):
-			    occurrences = occurrences + M[i][len(P) - 1]
-
-			\bigskip
-			print(occurrences)
+			    \bigskip
+			    return occurrences
 		\end{verbatim}
 	\end{code}
 
