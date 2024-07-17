@@ -118,8 +118,8 @@
 		\include[src = Allineamento/Gap.sil]
 		\section{Allineamento con banda}
 		\include[src = Allineamento/Banda.sil]
-		% \section{Allineamento multiplo}
-		% \include[src = Allineamento/Multiplo.sil]
+		\section{Allineamento multiplo}
+		\include[src = Allineamento/Multiplo.sil]
 	\chapter{Ricostruzione della filogenesi}
 		\section{Filogenesi ed evoluzione delle specie}
 		\include[src = Filogenesi/Filogenesi.sil]

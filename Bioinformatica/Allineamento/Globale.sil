@@ -84,9 +84,10 @@
 	l'allineare il carattere \math{i} della stringa \math{X} con il carattere
 	\math{j} della stringa \math{Y}. In altre parole, il valore nella cella
 	\math{i, j} rappresenta di quanto aumenta o diminuisce il valore totale
-	di un allineamento globale se questo presenta tale appaiamento. La matrice
-	conterrá anche dei valori per coppie in cui uno dei due caratteri é un
-	indel.
+	di un allineamento globale se questo presenta tale appaiamento \footnote{
+	Valori per matrici di questo tipo sono state standardizzate: un esempio é
+	la famiglia di matrici \strong{BLOSUM}}. La matrice conterrá anche dei
+	valori per coppie in cui uno dei due caratteri é un indel.
 
 	La matrice di score deve essere definita in maniera oculata, di
 	modo da favorire allineamenti in cui é presente il maggior numero

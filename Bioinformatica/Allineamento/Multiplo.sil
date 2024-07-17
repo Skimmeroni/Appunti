@@ -1,196 +1,79 @@
 \begin{sile}
 
-	Il problema dell'allineamento fra due stringhe puó essere esteso in maniera
-	molto naturale all'allineamento di un numero \math{n} di stringhe. Sebbene
-	questa possa sembrare una semplice generalizzazione del problema precedente,
-	e nulla di piú, in realtá allineare piú stringhe in una sola volta puó 
-	permettere di ottenere informazioni che comparando soltanto coppie di stringhe
-	non sarebbe possibile ricavare \footnote{Sebbene sia vero che due biomolecole 
-	che hanno un alto valore di allineamento hanno anche una funzionalitá ed una 
-	struttura simile, non é necessariamente detto il contrario. Si dimostra infatti
-	empiricamente che due biomolecole che hanno struttura e funzionalitá molto 
-	simile possono avere un basso valore di allineamento. Questo si verifica 
-	soprattutto nelle proteine, dove la maggior parte degli amminoacidi di cui é
-	costituita non si trovano in posizioni "critiche", e possono pertanto subire
-	mutazioni senza che la struttura complessiva cambi. Un esempio é l'emoglobina,
-	la proteina che permetta il trasporto dell'ossigeno nel flusso sanguigno, che
-	nonostante si trovi in quasi tutti gli animali e svolga sempre la stessa 
-	funzione é spesso completamente diversa in specie diverse. Un allineamento
-	multiplo puó quindi rilevarsi utile per tracciare il percorso evolutivo che
-	una proteina ha avuto di specie in specie.}.
+	Allineare piú sequenze contemporaneamente permette di ottenere informazioni
+	che allineamenti fra coppie non possono dare. Ad esempio, sebbene sia vero
+	che due biomolecole con alto valore di allineamento hanno anche una funzionalitá
+	ed una struttura simile, non é necessariamente detto il contrario. Si dimostra
+	infatti empiricamente che due biomolecole che hanno struttura e funzionalitá
+	molto simile possono avere un basso valore di allineamento. Questo si verifica
+	soprattutto nelle proteine, dove la maggior parte degli amminoacidi di cui sono
+	costituite non si trovano in posizioni che comportano modifiche strutturali, e
+	possono pertanto subire mutazioni senza che la struttura complessiva cambi (fra
+	le proteine di questo tipo figura l'emoglobina, la proteina che permette il
+	trasporto dell'ossigeno nel flusso sanguigno, che nonostante si trovi in quasi
+	tutti gli animali e svolga sempre la stessa funzione é spesso completamente
+	diversa in specie diverse). Allineare piú proteine sequenziate puó quindi
+	rilevarsi utile per tracciare il percorso evolutivo che queste hanno avuto
+	di specie in specie.
 
-	L'\strong{allineamento globale multiplo} di \math{k > 2} stringhe \math{\{S_{1}, 
-	S_{2}, \unicodeellipsis, S_{k}\}} si ottiene inserendo spazi in ciascuna 
-	delle \math{k} stringhe in modo che tutte quante abbiano la stessa lunghezza 
-	\math{l}. Le stringhe sono poi allineate in \math{k} righe di \math{l} colonne 
-	ciascuna, in modo che ciascun carattere/spazio di ciascuna stringa occupi una 
-	sua posizione. Similmente all'allineamento locale fra due stringhe, é possibile
-	definire anche l'\strong{allineamento locale multiplo} di \math{k > 2} stringhe 
-	\math{\{S_{1}, S_{2}, \unicodeellipsis, S_{k}\}}, ottenuto selezionando una
-	sottostringa \math{S_{i}^{'}} per ciascuna di queste stringhe e allineando
-	globalmente queste sottostringhe. Sebbene l'allineamento multiplo locale 
-	rivesta una sua indubbia importanza, la maggior parte dei risultati teoretici
-	é stata ottenuta mediante allineamento globale multiplo, pertanto si preferisce
-	trattare esclusivamente questo.
+	Il problema dell'allineamento globale fra due sequenze puó essere
+	esteso in maniera molto naturale all'allineamento di un numero
+	\math{k} arbitrario di sequenze. L'\strong{allineamento globale
+	multiplo} di \math{k} sequenze si ottiene inserendo indel in ciascuna
+	sequenza in modo che tutte quante abbiano la stessa lunghezza \math{l}.
+	Le sequenze sono poi allineate in \math{k} righe di \math{l} colonne
+	ciascuna, in modo che ciascun carattere/indel di ciascuna sequenza
+	occupi una sua posizione, fintanto che non ci sia una colonna interamente
+	composta da indel. Naturalmente, ci si aspetta che quando \math{k = 2}
+	si ricada nuovamente nel caso dell'allineamento globale fra due sequenze
+	(giá trattato) \footnote{É possibile definire anche l'\strong{allineamento
+	locale multiplo} di \math{k} sequenze generalizzando l'allineamento locale
+	fra due sequenze. Tuttavia, sebbene l'allineamento multiplo locale abbia
+	una indubbia importanza, la maggior parte dei risultati teoretici é stata
+	ottenuta mediante allineamento globale multiplo, pertanto si preferisce
+	trattare esclusivamente questo.}.
 
-	A partire da un allineamento multiplo \math{M}, si ottiene l'\strong{allineamento 
-	accoppiato indotto} di due stringhe \math{S_{i}} ed \math{S_{j}} rimuovendo 
-	da \math{M} tutte le righe ad eccezione di quelle per \math{S_{i}} ed 
-	\math{S_{j}}. Di fatto, l'allineamento indotto é l'allineamento multiplo 
-	\math{M} ma ristretto alle sole stringhe \math{S_{i}} e \math{S_{j}}; se 
-	l'allineamento cosí costruito presenta coppie di spazi, queste possono essere 
-	eliminate. All'allineamento accoppiato indotto é possibile assegnare un valore,
-	cosí come é stato fatto per l'allineamento locale/globale di due stringhe. Il
-	modo in cui questo valore viene assegnato, se per distanza o per somiglianza,
-	dipende dall'algoritmo utilizzato per effettuare l'allineamento. Dato che la
-	distanza fra stringhe é da prediligersi se si sta effettuando un allineamento
-	globale, e dato che si sta cercando di definire un algoritmo per l'allineamento 
-	globale multiplo, il valore di un allineamento sará funzione della distanza.
+	Fra tutti gli allineamenti globali multipli ammissibili che é possibile
+	costruire a partire da \math{k} sequenze, si ha interesse a trovare quello
+	che meglio esprime il loro grado di somiglianza, ovvero quello ottimale.
+	Date \math{k} sequenze \math{\{S_{1}, S_{2}, \unicodeellipsis, S_{k}\}} ed
+	una matrice di score \math{d}, il \strong{problema dell'allineamento globale
+	multiplo di due sequenze} (\strong{global multiple sequence alignment problem})
+	consiste nel trovare l'allineamento globale multiplo (la disposizione di indel)
+	ottimale di \math{\{S_{1}, S_{2}, \unicodeellipsis, S_{k}\}}.
 
-	Un esempio di algoritmo che calcola l'allineamento globale multiplo 
-	assegnandovi un valore numerico "oggettivo" é quello che fa uso del 
-	\strong{sum of pairs} (\em{somma delle coppie}), abbreviato in \strong{SP}. 
-	Il valore SP di un allineamento globale multiplo \math{M} é la somma 
-	dei valori assegnati a ciascun allineamento accoppiato che compare in 
-	\math{M} \footnote{Dare una dimostrazione rigorosa del motivo per cui
-	il valore SP é una buona misura dell'allineamento di stringhe é molto
-	difficile. D'altro canto, é un valore utilizzato molto di frequente nella
-	pratica per il computo degli allineamenti globali.}. Si definisce allora
-	il \strong{problema dell'allineamento SP} come il costruire un allineamento
-	globale multiplo \math{M} che abbia il valore SP piú piccolo possibile.
+	Si noti come la nozione di valore di una colonna dell'allineamento
+	globale fra due sequenze non sia applicabile al caso in cui le
+	sequenze siano \math{k}. Infatti, nel caso \math{k = 2} il valore
+	associato ai due caratteri incolonnati, siano questi \math{S_{1}[i]}
+	e \math{S_{2}[j]}, era semplicemente dato da \math{d(S_{1}[i], S_{2}[j])},
+	ma nel caso \math{k > 2} questo non é sufficiente.
 
-	Il problema dell'allineamento SP, cosí come per l'allineamento di due stringhe, 
-	puó essere risolto facendo uso della programmazione dinamica. Sfortunatamente,
-	il tempo di esecuzione dell'algoritmo cresce esponenzialmente in funzione del
-	numero di stringhe dell'allineamento: con \math{k} stringhe di lunghezza 
-	\math{n}, il tempo di esecuzione é \math{\theta {(n^{k})}}. Per questo motivo,
-	verrá trattato il caso piú semplice possibile, ovvero dove l'allineamento é
-	operato su tre stringhe; l'estensione a \math{k} stringhe é immediata, ma 
-	irrealistico nella pratica.
-
-	Siano \math{S_{1}}, \math{S_{2}} ed \math{S_{3}} tre stringhe di lunghezza 
-	rispettivamente \math{n_{1}}, \math{n_{2}} ed \math{n_{3}}. Siano poi 
-	\math{D(i, j, k)} il valore SP ottimale relativo all'allineamento (parziale)
-	dei prefissi \math{S_{1}[1:i]}, \math{S_{2}[1:j]} e \math{S_{3}[1:k]}. Ci 
-	si riferisca ai valori per un match, per un mismatch e per uno spazio 
-	rispettivamente con \em{smatch}, \em{smis} e \em{sspace}. La tabella di 
-	programmazione dinamica \math{D} relativa all'allineamento delle tre stringhe 
-	forma un cubo tridimensionale. Ciascuna cella \math{(i, j, k)} che non si 
-	trovi su uno dei "bordi" del cubo, ovvero ciascunca cella che non abbia alcuno 
-	0 tra i suoi tre valori, ha sette celle vicine, ed é necessario passarle tutte 
-	in esame per determinare il valore di \math{D(i, j, k)}. La relazione di 
-	ricorrenza per calcolare il valore contenuto in una cella é simile a quella 
-	utilizzata nell'allineamento globale di due stringhe, ma piú convoluta.
-
-	\begin{verbatim}
-		for i := 1 to n1 do
-		    for j := 1 to n2 do
-		        for k := 1 to n3 do
-		            \bigskip
-		            if (S1[i] == S2[j]) then
-		                cij := smatch
-		            else 
-		                cij := smiss
-		            if (S1[i] == S3[k]) then
-		                cik := smatch
-		            else 
-		                cik := smiss
-		            if (S2[j] == S3[k]) then
-		                cjk := smatch
-		            else 
-		                cjk := smiss
-		            \bigskip
-		            d1 = D(i - 1, j - 1, k - 1) + cij + cik + cjk
-		            d2 = D(i - 1, j - 1, k) + cji + 2 * sspace
-		            d3 = D(i - 1, j, k - 1) + cik + 2 * sspace
-		            d4 = D(i, j - 1, k - 1) + cjk + 2 * sspace
-		            d5 = D(i - 1, j, k) + 2 * sspace
-		            d6 = D(i, j - 1, k) + 2 * sspace
-		            d7 = D(i, j, k - 1) + 2 * sspace
-		            \bigskip
-		            D(i, j, k) = min(d1, d2, d3, d4, d5, d6, d7)
-	\end{verbatim}
-
-	Per completare l'algoritmo occorre definire i casi base, ovvero la situazione
-	in cui si sta calcolando il valore contenuto in una cella che si trova sul
-	"bordo" del cubo (ovvero, dove almeno uno dei tre indici \math{i}, \math{j} o
-	\math{k} vale 0). Innanzitutto, é evidente come si abbia \math{D(0, 0, 0) = 0},
-	perché la cella \math{(0, 0, 0)} corrisponde al primo elemento del cubo. Siano 
-	\math{D_{1,2}(i, j)} la distanza fra \math{S_{1}[1:i]} e \math{S_{2}[1:j]},
-	\math{D_{2,3}(j, k)} la distanza fra \math{S_{2}[1:j]} e \math{S_{3}[1:k]},
-	\math{D_{1,3}(i, k)} la distanza fra \math{S_{1}[1:i]} e \math{S_{3}[1:k]}.
-	Le tre distanze sono calcolate come normali distanze fra due stringhe. Da
-	queste si ottiene:
+	Un modo molto semplice per estendere la nozione di valore di una colonna
+	dell'allineamento globale al caso di \math{k} sequenze consiste nel sommare
+	il valore della matrice di score per ciascuna coppia di caratteri che
+	costituisce la colonna. Questa formulazione prende il nome di \strong{Sum
+	of Pairs} (\em{somma delle coppie}), in genere abbreviato come \strong{SP}.
+	Date \math{k} sequenze \math{\{S_{1}, S_{2}, \unicodeellipsis, S_{k}\}},
+	siano \math{\{S_{1}*, S_{2}*, \unicodeellipsis, S_{k}*\}} le sequenze dopo
+	l'inserimento degli indel. Il valore di una colonna \math{h} dell'allineamento
+	é dato da:
 
 	\begin[mode = display]{math}
-		\table{
-			D(i, j, 0) = D_{1,2}(i, j) + (i + j) * sspace &
-			D(0, j, k) = D_{2,3}(j, k) + (j + k) * sspace &
-			D(i, 0, k) = D_{1,3}(i, k) + (i + k) * sspace \\
-		}
+		\sum_{i = 1}^{k - 1} \sum_{j = i + 1}^{k} d{(S_{i}* {[h]}, S_{j}* {[h]})}
 	\end{math}
 
-	Un primo modo per velocizzare l'algoritmo riducendo il numero di computazioni 
-	necessarie é il cosiddetto \strong{metodo di Carillo-Lipman}. L'algoritmo 
-	modificato prevede, innanzitutto, di computare i valori delle celle della 
-	tabella in \em{avanti}, e non all'\em{indietro}. L'algoritmo qui presentato 
-	prevede di calcolare \math{D(i, j, k)} in funzione delle celle che la 
-	precedono (\math{D(i - 1, j, k)}, \math{D(i, j - 1, k)}, 
-	ecc\math{\unicodeellipsis}). Un approccio alternativo consiste nel calcolare 
-	\math{D(i, j, k)} e "inviare" il valore cosí trovato alle celle successive 
-	(\math{D(i + 1, j, k)}, \math{D(i, j + 1, k)}, ecc\math{\unicodeellipsis}). 
+	Il numero di elementi di una sommatoria di questo tipo cresce molto
+	rapidamente con il crescere del numero di sequenze: é infatti facile
+	verificare che se il numero di stringhe é \math{k}, il numero di
+	termini della sommatoria é \math{k!}.
 
-	Il problema dell'allineamento multiplo puó quindi essere visto come un problema 
-	del percorso piú breve nel grafo pesato di modifica. Quando il percorso piú 
-	breve possibile che va dalla sorgente \math{s} \math{(0, 0, 0)} ad un nodo 
-	generico \math{v} \math{(i, j, k)} é stato calcolato, viene aggiornata la 
-	distanza dei nodi adiacenti a \math{v}. Nello specifico: sia \math{D(v)} la 
-	"vera" distanza piú corta fra \math{s} e \math{v}, sia \math{(v, w)} un 
-	arco diretto da \math{v} a \math{w} di peso \math{p(v, w)} e sia 
-	\math{p(w)} la distanza piú corta finora calcolata tra \math{s} e \math{w}. 
-	Una volta che \math{D(v)} é stato calcolato, \math{p(w)} viene immediatamente 
-	aggiornato con il valore \math{\mi{min}(p(w), D(v) + p(v, w))}. Inoltre, alla
-	"vera" minima distanza fra \math{s} e \math{w}, \math{D(w)}, viene assegnato
-	il valore \math{p(w)} dopo che \math{p(w)} é stato aggiornato da ciascun nodo
-	\math{v} che ha un arco che punta a \math{w}.
-
-	In questa implementazione é necessario mantenere una \em{coda} di nodi per i
-	quali non é stato ancora calcolato il valore \math{D}. L'algoritmo calcola il
-	valore di \math{D} relativo al nodo \math{v} che si trova in cima alla coda, 
-	per poi rimuovere il nodo dalla coda. Quando questo viene fatto, \math{p(w)} 
-	viene aggiornato per ciascun nodo che si trova vicino a \math{v}, e se \math{w}
-	non si trova attualmente nella coda, viene aggiunto sul fondo della coda. É 
-	facile verificare che quando un nodo si trova in cima alla coda, tutti i nodi 
-	che nel grafo vi puntano sono giá stati eliminati dalla coda. L'idea alla base
-	del metodo di Carillo-Lipman é quella di individuare, mentre la computazione 
-	procede, quanti piú nodi possibili dei quali si ha assoluta certezza che non 
-	possono trovarsi sul percorso piú corto da \math{(0, 0, 0)} a \math{(n, n, n)}, 
-	ed eliminarli subito dalla coda senza fare calcoli. 
-
-	Sia \math{d_{1,2}(i, j)} la distanza di modifica fra i suffissi 
-	\math{S_{1}[i:n]} e \math{S_{2}[j:n]} delle stringhe \math{S_{1}} e 
-	\math{S_{2}}, e siano \math{d_{2,3}(j, k)} e \math{d_{1,3}(i, k)} le 
-	distanze definite in maniera analoga. Queste distanze possono essere
-	calcolate in tempo accettabile con i metodi descritti in precedenza. 
-	Inoltre, il percorso piú breve che va da \math{(i, j, k)} a 
-	\math{(n, n, n)} deve necessariamente essere non inferiore a 
-	\math{d_{1,2}(i, j) + d_{2,3}(j, k) + d_{1,3}(i, k)}.
-
-	Si supponga che sia noto un allineamento globale multiplo delle tre stringhe 
-	\math{S_{1}}, \math{S_{2}} ed \math{S_{3}}, e che questo allineamento abbia
-	valore SP pari a \math{z}. Dato che \math{D(i, j, k)} é il valore SP ottimale
-	per l'allineamento di \math{S_{1}[1:i]}, \math{S_{2}[1:j]} e \math{S_{3}[1:k]},
-	se \math{D(i, j, k) + d_{1,2}(i, j) + d_{2,3}(j, k) + d_{1,3}(i, k)} é maggiore
-	di \math{z}, allora vi é la certezza che il nodo \math{(i, j, k)} non possa
-	trovarsi sul percorso piú breve possibile che va da \math{(0, 0, 0)} a 
-	\math{(i, j, k)}. Pertanto, il valore \math{(i, j, k)} puó venire rimosso 
-	dalla coda immediatamente senza propagarne il valore ai nodi limitrofi. Non 
-	solo questo permette di risparmiare i calcoli relativi ad un nodo, ma anche a
-	diversi nodi da cui il valore di quel nodo dipende, perché anche questi a loro
-	volta non possono trovarsi sul percorso piú breve e non verranno mai inseriti 
-	nella coda.
-
-	Il valore \math{z} puó essere il valore calcolato di volta in volta, ma puó 
-	anche essere ottenuto mediante approssimazione.
+	A differenza dell'allineamento globale fra due sequenze, nell'allineamento
+	globale multiplo é ammesso che sia presente piú di un indel in una stessa
+	colonna (fintanto che almeno un carattere della colonna non é un indel),
+	pertanto occorre estendere le matrici di score perché includano anche
+	il caso \math{d(-, -)}. Un approccio molto semplice prevede di porre
+	\math{d(-, -) = 0}, stando a significare che la presenza di una coppia
+	di indel in un allineamento globale multiplo non riveste alcuna importanza.
 
 \end{sile}
