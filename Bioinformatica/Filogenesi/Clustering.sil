@@ -76,10 +76,6 @@
 				\math{|C_{1}| + |C_{2}|} elementi;
 			\end{item}
 			\begin{item}
-				Si calcoli la distanza fra ciascun cluster ed il nuovo cluster \math{C}
-				cosí costruito;
-			\end{item}
-			\begin{item}
 				Si aggiunga \math{C} ai nodi dell'albero, e lo si colleghi a \math{C_{1}} 
 				e a \math{C_{2}} mediante degli archi. \math{C} rappresenta l'antenato 
 				comune da cui le specie \math{C_{1}} e \math{C_{2}} si sono separate;
@@ -91,6 +87,10 @@
 				Si etichetti l'arco che unisce il nodo \math{C_{1}} al nodo \math{C} con
 				\math{h(C) - h(C_{1})}. Allo stesso modo, si etichetti l'arco che unisce 
 				il nodo \math{C_{2}} al nodo \math{C} con \math{h(C) - h(C_{2})};
+			\end{item}
+			\begin{item}
+				Si calcoli la distanza fra ciascun cluster ed il nuovo cluster \math{C}
+				cosí costruito;
 			\end{item}
 			\begin{item}
 				Si scartino le righe e le colonne di \math{D} relative a \math{C_{1}} e a 
@@ -172,7 +172,7 @@
 		altri é indicato con \math{u(C)}:
 
 		\begin[mode = display]{math}
-			u{(C)} = \frac{1}{k - 2} \sum_{C_{i}} D{(C, C_{i})}
+			u{(C)} = \frac{1}{k - 2} \sum_{C_{i} \ne C} D{(C, C_{i})}
 		\end{math}
 
 		Nella scelta di quale cluster fondere, Una prima ipotesi sarebbe 
@@ -208,19 +208,20 @@
 				un unico cluster \math{C} avente \math{|C_{1}| + |C_{2}|} elementi;
 			\end{item}
 			\begin{item}
-				Per qualsiasi cluster \math{C* \ne C}, si ha \math{D(C, C*) = 
-				(D(C_{1}, C*) + D(C_{2}, C*) - D(C_{1}, C_{2})) / 2};
-			\end{item}
-			\begin{item}
 				Si aggiunga \math{C} ai nodi dell'albero, e lo si colleghi a \math{C_{1}} 
 				e a \math{C_{2}} mediante degli archi. \math{C} rappresenta l'antenato 
 				comune da cui le specie \math{C_{1}} e \math{C_{2}} si sono separate;
 			\end{item}
 			\begin{item}
 				Si etichetti l'arco che unisce il nodo \math{C_{1}} al nodo \math{C} con
-				\math{(D(C_{1}, D_{2}) + u(C_{1}) - u(C_{2}))/2}. Allo stesso modo, si 
+				\math{(D(C_{1}, C_{2}) + u(C_{1}) - u(C_{2}))/2}. Allo stesso modo, si
 				etichetti l'arco che unisce il nodo \math{C_{2}} al nodo \math{C} con 
-				\math{(D(C_{1}, D_{2}) - u(C_{1}) + u(C_{2}))/2};
+				\math{(D(C_{1}, C_{2}) - u(C_{1}) + u(C_{2}))/2};
+			\end{item}
+			\begin{item}
+				Si aggiorni la distanza di ogni cluster: per qualsiasi cluster
+				\math{C* \ne C}, si ha \math{D(C, C*) = (D(C_{1}, C*) + D(C_{2}, C*)
+				- D(C_{1}, C_{2})) / 2};
 			\end{item}
 			\begin{item}
 				Si scartino le righe e le colonne di \math{D} relative a \math{C_{1}} e a 

@@ -199,20 +199,21 @@
 						due foglie la distanza é equamente divisa fra le due;
 					\end{item}
 					\begin{item}
-						La specie \math{i} é giá presente nell'albero, ma non \math{j}. Allora
-						occorre aggiungere un nodo foglia etichettato \math{j} ed un nodo interno 
-						\math{v} che ha un arco con \math{j} etichettato con \math{D[i, j]}. 
-						Deve inoltre esistere, avendo \math{i} e \math{j} un antenato comune, un 
-						cammino composto da almeno due archi che va da \math{v} a \math{i}, che 
-						passerá per un certo numero di antenati di \math{i}. Affinché l'albero 
-						sia ultrametrico, la somma delle etichette degli archi di tale cammino 
-						deve essere \math{D[i, j]}. Sia \math{u} l'antenato di \math{i} piú 
-						lontano: il cammino che va da \math{v} a \math{i} sará allora composto
-						da un arco che va da \math{v} ad \math{u} e dal cammino che va da \math{u}
-						a \math{i}. Affinché l'albero sia ultrametrico, l'etichetta dell'arco 
-						che va da \math{v} ad \math{u} deve essere data dalla differenza fra
-						\math{D[i, j]} e la somma di tutte le etichette degli archi del cammino
-						da \math{u} a \math{i};
+						La specie \math{i} é giá presente nell'albero, ma non \math{j}.
+						Allora occorre aggiungere un nodo foglia etichettato \math{j} ed
+						un nodo interno \math{v} che ha un arco con \math{j} etichettato
+						con \math{D[i, j]}. Deve inoltre esistere, avendo \math{i} e \math{j}
+						un antenato comune, un cammino composto da almeno due archi che va da
+						\math{v} a \math{i}, che passerá per un certo numero di antenati di
+						\math{i}. Sia \math{u} l'antenato di \math{i} piú vicino a \math{v}:
+						il cammino che va da \math{v} a \math{i} puó allora essere spezzato
+						nell'arco che va da \math{v} ad \math{u} e nel cammino che va da
+						\math{u} a \math{i}. Affinché l'albero sia ultrametrico, la somma di
+						tutte le etichette del cammino che va da \math{v} ad \math{i} deve
+						essere \math{D[i, j]}. Essendo le etichette del cammino che va da
+						\math{u} a \math{i} giá note, l'etichetta dell'arco che va da \math{v}
+						ad \math{u} sará data dalla differenza fra \math{D[i, j]} e la somma di
+						tutte le etichette degli archi del cammino da \math{u} a \math{i};
 					\end{item}
 					\begin{item}
 						La specie \math{j} é giá presente nell'albero, ma non \math{i}. La 
@@ -227,8 +228,8 @@
 						piú lontani. Il cammino che va da \math{v} a \math{i} sará composto
 						da un arco che va da \math{v} ad \math{u} e dal cammino che va da 
 						\math{u} a \math{i}; allo stesso modo, il cammino che va da \math{v} 
-						a \math{j} sará composto da un arco che va da \math{v} ad \math{w} e 
-						dal cammino che va da \math{w} a \math{j}. Affinché l'albero sia 
+						a \math{j} sará composto da un arco che va da \math{v} ad \math{w}
+						e dal cammino che va da \math{w} a \math{j}. Affinché l'albero sia
 						ultrametrico, l'etichetta dell'arco che va da \math{v} ad \math{u} 
 						deve essere data dalla differenza fra \math{D[i, j]} e la somma di 
 						tutte le etichette degli archi del cammino da \math{u} a \math{i}; 
