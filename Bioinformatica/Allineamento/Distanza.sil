@@ -406,38 +406,32 @@
 
 	\begin{code}
 		\begin{verbatim}
-			S1 = "..."
-			S2 = "..."
+			procedure EDIT-DISTANCE(X, Y)
+			    for i \unichar{U+2190} 0 to |X| do
+			        D[i, 0] \unichar{U+2190} i
+			    for j \unichar{U+2190} 0 to |Y| do
+			        D[0, j] \unichar{U+2190} j
 
-			\bigskip
-			m = len(S1) + 1
-			n = len(S2) + 1
+			    \bigskip
+			    for i \unichar{U+2190} 1 to |X| do
+			        for j \unichar{U+2190} 1 to |Y| do
+			            a \unichar{U+2190} D[i - 1, j] + 1
+			            b \unichar{U+2190} D[i, j - 1] + 1
+			            if (X[i] = Y[j]) then
+			                c \unichar{U+2190} D[i - 1, j - 1]
+			            else
+			                c \unichar{U+2190} D[i - 1, j - 1] + 1
 
-			\bigskip
-			Lev = [[0] * (n) for _ in range(m)]
+			            \bigskip
+			            if (a \unichar{U+2264} b and a \unichar{U+2264} c) then
+			                D[i, j] \unichar{U+2190} a
+			            else if (b \unichar{U+2264} a and b \unichar{U+2264} c) then
+			                D[i, j] \unichar{U+2190} b
+			            else
+			                D[i, j] \unichar{U+2190} c
 
-			\bigskip
-			for i in range(1, m):               # The first row and first
-			    Lev[i][0] = i                   # column are computed from
-			for j in range(1, n):               # the base case of the
-			    Lev[0][j] = j                   # recurrence relation
-
-			\bigskip
-			for i in range(1, m):
-			    for j in range(1, n):
-			        A = Lev[i - 1][j] + 1       # A generic entry is given by
-			        B = Lev[i][j - 1] + 1       # computing its 3 companion values
-			        C = Lev[i - 1][j - 1]       # and finding the minimum
-
-			\bigskip
-			        if (S1[i - 1] != S2[j - 1]):
-			            C = C + 1
-
-			\bigskip
-			        Lev[i][j] = min(A, B, C)
-
-			\bigskip
-			print(Lev[m - 1][n - 1])            # The solution is the last entry
+			    \bigskip
+			    return D[|X|, |Y|]
 		\end{verbatim}
 	\end{code}
 
