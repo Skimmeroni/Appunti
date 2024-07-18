@@ -11,25 +11,23 @@
 
 	\begin{itemize}
 		\begin{item}
-			Esiste un arco interamente etichettato da un prefisso \math{P[0:i]} di 
-			\math{P}, con \math{P[0:i] \ne P}. In questo caso, ci si sposta lungo 
-			questo arco e si ripete l'algoritmo sul suffisso \math{P[i:m]} sul 
-			sottoalbero dei suffissi che ha per radice il nodo corrente;
+			Esiste un arco interamente etichettato da un prefisso \math{P[0:i]}
+			di \math{P}, con \math{P[0:i] \ne P}. In questo caso, ci si sposta
+			lungo questo arco e si ripete l'algoritmo sul suffisso \math{P[i:n]}
+			sul sottoalbero dei suffissi che ha per radice il nodo corrente;
 		\end{item}
 		\begin{item}
-			Esiste un arco etichettato con l'intero \math{P}, oppure esiste un arco che 
-			ha l'intero \math{P} come prefisso della sua etichetta. In questo caso, ci 
-			si sposta lungo quest'arco e l'algoritmo termina segnalando che il numero di 
-			occorrenze di \math{P} in \math{T} é dato dal numero di nodi foglia che ha 
-			il sottoalbero dei suffissi che ha per radice il nodo corrente. Inoltre, il 
-			numero che etichetta questi nodi foglia corrisponde alle posizioni di 
-			\math{T} in cui si trova \math{P};
+			Esiste un arco etichettato con l'intero \math{P}, oppure esiste un arco
+			che ha l'intero \math{P} come prefisso della sua etichetta. In questo
+			caso, ci si sposta lungo quest'arco e l'algoritmo termina segnalando
+			che il numero di occorrenze di \math{P} in \math{T} é dato dal numero di
+			nodi foglia che ha il sottoalbero dei suffissi che ha per radice il nodo
+			corrente. Inoltre, il numero che etichetta questi nodi foglia corrisponde
+			alle posizioni delle occorrenze di \math{P} in \math{T};
 		\end{item}
 		\begin{item}
-			Non esiste alcun arco etichettato con un prefisso di \math{P}, oppure 
-			non esiste alcun arco che abbia l'intero \math{P} come prefisso della 
-			sua etichetta. In questo caso, l'algoritmo termina segnalando che non 
-			esiste alcuna occorrenza di \math{P} in \math{T}.
+			Nessuna delle precedenti. In questo caso, l'algoritmo termina segnalando
+			che non esiste alcuna occorrenza di \math{P} in \math{T}.
 		\end{item}
 	\end{itemize}
 

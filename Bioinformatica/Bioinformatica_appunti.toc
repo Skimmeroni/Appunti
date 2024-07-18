@@ -195,7 +195,7 @@ return {
     level = 2,
     link = "dest19",
     number = "2.8",
-    pageno = "19"
+    pageno = "18"
   },
   {
     label = {

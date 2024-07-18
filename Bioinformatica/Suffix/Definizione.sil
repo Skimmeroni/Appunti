@@ -24,12 +24,12 @@
 
 	Data una stringa \math{S} di lunghezza \math{m}, é possibile costruire 
 	un albero dei suffissi relativo ad \math{S} mediante un algoritmo banale 
-	\footnote{Esistono algoritmi efficienti che permettono di costruire alberi 
-	dei suffissi in tempo lineare, come \strong{l'algoritmo di Ukkonen}, ma sono 
-	estremamente complessi.} in tempo \math{O(n^{2})}, basato sul costruire 
-	iterativamente \math{m} alberi intermedi per ciascun suffisso di \math{S}. 
-	Indicando con \math{N_{i}} l'albero intermedio che codifica tutti i suffissi 
-	di \math{S} da 1 a \math{i}, l'algoritmo puó essere descritto come segue:
+	\footnote{Esistono algoritmi che permettono di costruire alberi dei suffissi
+	in tempo lineare, come \strong{l'algoritmo di Ukkonen}, ma sono estremamente
+	complessi.} in tempo \math{O(n^{2})}, basato sul costruire iterativamente
+	\math{m} alberi intermedi per ciascun suffisso di \math{S}. Indicando con
+	\math{N_{i}} l'albero intermedio che codifica tutti i suffissi di \math{S}
+	da 1 a \math{i}, l'algoritmo puó essere descritto come segue:
 
 	\begin{enumerate}
 		\begin{item}
@@ -38,12 +38,10 @@
 			per intero, che unisce la radice dell'albero con una foglia etichettata 1;
 		\end{item}
 		\begin{item}
-			Il generico albero intermedio \math{N_{i+1}} é costruito a partire da 
-			\math{N_{i}}. Partendo dalla radice di \math{N_{i}}, si individui, se 
-			esiste, il percorso piú lungo esistente a partire dalla radice la cui 
-			etichetta contiene un prefisso di \math{S[i + 1:m]$};
-		\end{item}
-		\begin{item}
+			Il generico albero intermedio \math{N_{i+1}} é costruito a partire
+			da \math{N_{i}}. Si individui, se esiste, il percorso piú lungo che
+			ha inizio nella radice di \math{N_{i}} e la cui etichetta contiene
+			un prefisso di \math{S[i + 1:m]$}:
 			\begin{itemize}
 				\begin{item}
 					Se un percorso di questo tipo non esiste, viene aggiunto un nodo 
@@ -51,8 +49,8 @@
 					etichetta;
 				\end{item}
 				\begin{item}
-					Se invece questo percorso esiste, ci si aspetta che l'algoritmo si 
-					trovi nel mezzo di un arco \math{(u, v)} che va da un nodo \math{u} 
+					Se un percorso di questo tipo esiste, ci si aspetta che l'algoritmo
+					si trovi nel mezzo di un arco \math{(u, v)} che va da un nodo \math{u} 
 					ad un nodo \math{v}, etichettato da una certa stringa \math{c}. Viene 
 					inserito nell'albero un nuovo nodo \math{w}, e l'arco \math{(u, v)}
 					viene sostituito con due archi distinti, \math{(u, w)} e \math{(w, v)}. 
@@ -67,8 +65,8 @@
 		\end{item}
 		\begin{item}
 			Se il numero di nodi foglia dell'albero finora costruito é inferiore 
-			ad \math{m}, si ripete l'algoritmo a partire dal punto 2. Altrimenti, 
-			l'algoritmo termina.
+			ad \math{m}, si ripete il punto precedente. Altrimenti, l'algoritmo
+			termina.
 		\end{item}
 	\end{enumerate} 
 
