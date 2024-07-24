@@ -14,6 +14,12 @@ sile filename.sil
 
 Oltre ai pacchetti inclusi di default in SILE, servono `ptable` per tabelle e box di testo e `textsubsuper` per il testo in apice/pedice.
 
+Ora sto sperimentando con [Typst](https://typst.app), probabilmente riscriveró gli appunti in questo linguaggio. Per compilare:
+
+```
+typst compile filename.typ
+```
+
 I diagrammi sono scritti con [Pikchr](https://pikchr.org). I file SVG che questo restituisce possono poi essere convertiti in PDF con, ad esempio, [CairoSVG](https://cairosvg.org) o [Inkscape](https://inkscape.org):
 
 ```
