@@ -1,7 +1,19 @@
-#set text(font: "Gentium Plus", size: 10pt, lang: "it")
-#set page(paper: "a4")
-#set par(justify: true)
-#set heading(numbering: "1.")
+#set text(
+	font: "Gentium Plus",
+	size: 10pt,
+	lang: "it"
+)
+#set page(
+	paper: "a4",
+	header: align(right)[_Metodi Algebrici per l'Informatica_],
+	numbering: "1"
+)
+#set par(
+	justify: true
+)
+#set heading(
+	numbering: "1."
+)
 
 #import "Metodi_defs.typ": *
 
