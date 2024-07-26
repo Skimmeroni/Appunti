@@ -132,7 +132,11 @@ convertita in una dimostrazione analoga compiuta nell'altra forma.
 	  principio del buon ordinamento non sia valido, ovvero che $S$ non
 	  ammetta minimo. Si consideri la proposizione $P(n)$ dipendente da $n$:
 
-	  #align(center)[_Non esiste alcun numero intero minore o uguale ad_ $n$ _che appartenga ad_ $S$]
+	  #v(1em)
+	  #align(center)[
+		$P(n) =$ _Non esiste alcun numero intero minore o uguale ad_ $n$ _che appartenga ad_ $S$
+	  ]
+	  #v(1em)
 
 	  É possibile applicare a $P(n)$ il principio di induzione forte. La
 	  prima ipotesi é verificata, perché se $n_(0)$ appartenesse ad $S$,

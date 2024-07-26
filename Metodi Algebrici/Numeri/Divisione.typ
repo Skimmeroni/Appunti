@@ -79,12 +79,13 @@ viene indicato con $"MCD"(a, b)$.
 #theorem[
 	Per una qualsiasi coppia di numeri interi $a$ e $b$ non entrambi nulli
 	esiste sempre ed é univoco $d = "MCD"(a, b)$
-]
+] <MCD-exists-and-unique>
 #proof[
-	É immediato riconoscere che se $d = "MCD"(a, b)$, allora é vero anche
-	$d = "MCD"(-a, -b)$. É altrettanto immediato riconoscere che che $"MCD"(a, b)
-	= "MCD"(b, a)$ per qualsiasi $a, b$. Pertanto, senza perdita di generalitá, é
-	possibile assumere che $a$ e $b$ siano numeri naturali con $a gt.eq b$.
+	Innanzitutto, é immediato riconoscere che se $d = "MCD"(a, b)$, allora é
+	vero anche $d = "MCD"(-a, -b)$. É altrettanto immediato riconoscere che
+	$"MCD"(a, b) = "MCD"(b, a)$ per qualsiasi $a, b$. Pertanto, senza perdita
+	di generalitá, é possibile assumere che $a$ e $b$ siano numeri naturali
+	con $a gt.eq b$.
 
 	Se $a = 0$ e $b != 0$ si verifica facilmente che $"MCD"(a, b) = a$; allo
 	stesso modo, se $b = 0$ e $a != 0$ si ha $"MCD"(a, b) = b$. Si consideri
@@ -99,8 +100,7 @@ viene indicato con $"MCD"(a, b)$.
 	é possibile ripetere l'operazione e risvolgere i calcoli con un nuovo
 	resto ed un nuovo quoziente. Piú in generale:
 
-	#set math.mat(column-gap: 2.5em)
-	#set math.mat(delim: none)
+	#set math.mat(column-gap: 2.5em, delim: none)
 	$ mat(
 	  & (1), & a = b q_(1) + r_(1), & r_(1) != 0;
 	  & (2), & b = r_(1) q_(2) + r_(2), & r_(2) != 0;
@@ -115,11 +115,63 @@ viene indicato con $"MCD"(a, b)$.
 	di numeri non negativi.
 
 	L'ultimo resto non nullo, ovvero $r_(k - 1)$, é precisamente $"MCD"(a, b)$. Per
-	convincersene, é sufficiente osservare che tale resto possiede entrambe le proprietá
+	verificarlo, é sufficiente osservare come questo possegga entrambe le proprietá
 	enunciate nella definizione di Massimo Comun Divisore:
 
-	-
-	-
+	- Alla riga $(k)$ si ha $r_(k - 2) = r_(k - 1) q_(k)$, ovvero $r_(k - 1) | r_(k - 2)$.
+	  Sostituendo la riga $(k)$ nella riga $(k - 1)$ si ha:
+
+	  $ r_(k - 3) = r_(k - 2) q_(k - 1) + r_(k - 1) =
+	                r_(k - 1) q_(k) q_(k - 1) + r_(k - 1) =
+	                r_(k - 1) (q_(k) q_(k - 1) + 1) $
+
+	  Ovvero, $r_(k - 1) | r_(k - 3)$ (Si noti come il raccoglimento é ammesso dato che
+	  $r_(k - 1)$ é definito come non nullo). Risalendo di riga in riga, é facile convincersi
+	  che dalla riga $(2)$ si ottiene $r_(k - 1) | r_(1)$ e $r_(k - 1) | b$. Dalla riga
+	  $(1)$ segue $r_(k - 1) | a$. Avendo dimostrato che $r_(k - 1) | a$ e $r_(k - 1) | b$,
+	  si ha che $r_(k - 1)$ possiede la prima proprietá dell'MCD.
+	- Sia $c in bb(Z) - {0}$. Siano poi $a = c overline(a)$ e $b = c overline(b)$. Sostituendo nella
+	  riga $(1)$ si ottiene:
+
+	  $ a = b q_(1) + r_(1) => c overline(a) = c overline(b) q_(1) + r_(1) =>
+	    r_(1) = c overline(a) - c overline(b) q_(1) => r_(1) = c (overline(a) - overline(b) q_(1)) $
+
+	  Da cui si ha $c | r_(1)$. Ponendo $r_(1) = c overline(r_(1))$ e sostituendo nella riga
+	  $(2)$, si ha:
+
+	  $ b = r_(1) q_(2) + r_(2) => c overline(b) = c overline(r_(1)) q_(2) + r_(2) =>
+	    r_(2) = c overline(b) - c overline(r_(1)) q_(2) => r_(2) = c (overline(b) - overline(r_(1)) q_(2)) $
+
+	  Da cui si ha $c | r_(2)$. Discendendo di riga in riga ed applicando lo stesso procedimento,
+	  si arriva fino a $c | r_(k - 1)$. Ma questo equivale a dire che, per un $c$ numero intero
+	  generico, se $c | a$ e $c | b$, allora $c | r_(k - 1)$, e quindi $r_(k - 1)$ possiede anche
+	  la seconda proprietá dell'MCD.
+]
+
+La dimostrazione del @MCD-exists-and-unique fornisce implicitamente anche un
+algoritmo per calcolare, a partire da due numeri interi $a$ e $b$ non entrambi
+nulli, il loro MCD. Tale algoritmo prende il nome di *Algoritmo di Euclide*,
+ed é strutturato come segue:
+
+	+ Si calcola qual'é il piú grande intero $q$ tale per cui é possibile
+	  moltiplicarlo per $b$ ottenendo un valore inferiore ad $a$;
+	+ Si calcola $r$ come differenza fra $q b$ ed $a$. Se tale valore é
+	  nullo, allora $q$ é MCD per $a$ e $b$, e l'algoritmo termina;
+	+ $q$ diventa il nuovo $a$, mentre $r$ diventa il nuovo $b$. Dopodiché,
+	  si torna al punto 1.
+
+#example("Calcolo dell'MCD")[
+	L'MCD dei numeri $a = 110143$ e $b = 665$ é 19. Infatti:
+
+	#set math.mat(delim: none)
+	$ mat(
+		110143 & = 665 dot.op 165 + 418 &;
+		665 & = 418 dot.op 1 + 247 &;
+		418 & = 247 dot.op 1 + 171 &;
+		247 & = 171 dot.op 1 + 76 &;
+		171 & = 76 dot.op 2 + 19 &;
+		76 & = 19 dot.op 4 &;
+	) $
 ]
 
 Se due numeri interi hanno 1 come Massimo Comun Divisore, allora si dice che
@@ -132,5 +184,36 @@ tali numeri sono *coprimi* o *primi fra di loro*.
 	$ a x + b y = "MCD"(a, b) $
 ]
 #proof[
+	Facendo riferimento al @MCD-exists-and-unique, si consideri la successione di operazioni.
+	In particolare, la riga $(1)$, ovvero $a = b q_(1) + r_(1)$, puó anche essere riscritta
+	come $r_(1) = a (1) + b (-q_(1))$. Sostituendo nella riga $(2)$, si ha:
 
+	$ b = r_(1) q_(2) + r_(2) => b = (a - b q_(1)) q_(2) + r_(2) =>
+	  r_(2) = b - a q_(2) + b q_(1) q_(2) => r_(2) = a (-q_(2)) + b (q_(1) q_(2) + 1) $
+
+	In questo modo, é possibile ciascun resto come combinazione lineare di $a$ e di $b$.
+	In particolare per il resto $r_(k - 1)$, che é anche l'MCD di $a$ e di $b$, esisteranno
+	due valori $x$ e $y$ tali per cui é possibile esprimerlo come combinazione lineare di
+	$a$ e $b$, e quindi $r_(k - 1) = "MCD"(a, b) = a x + b y$.
+]
+
+La definizione di numeri primi fra di loro puó essere riformulata anche rispetto
+a tale identitá.
+
+#theorem[
+	Due numeri interi $a$ e $b$ sono coprimi fra di loro se e soltanto se esistono
+	due numeri interi $x$ e $y$ tali per cui vale $a x + b y = 1$.
+]
+#proof[
+	Il primo verso dell'implicazione deriva direttamente dalla definizione di
+	numeri coprimi. Infatti, due numeri interi $a$, e $b$ si dicono coprimi se
+	il loro MCD é 1; sostituendolo nell'identitá di Bézout, si ha precisamente
+	$a x + b y = 1$.
+
+	Ció che manca da dimostrare é il secondo verso, ovvero che se per due numeri
+	interi $a$ e $b$ esistono due numeri interi $x$ e $y$ tali per cui $a x + b y = 1$,
+	allora $a$ e $b$ sono coprimi. Si supponga per assurdo che, se esistono $x$ e $y$,
+	tali per cui $a x + b y = 1$, allora $a$ e $b$ non siano coprimi. Questo significa
+	che il loro MCD non é 1, ovvero che $a x + b y != 1$, ma questo é in contraddizione
+	con l'ipotesi assunta per assurdo.
 ]
