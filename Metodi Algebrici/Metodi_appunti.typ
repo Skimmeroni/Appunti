@@ -25,3 +25,5 @@
 #include "Numeri/Insiemi.typ"
 == Divisione
 #include "Numeri/Divisione.typ"
+== Basi
+#include "Numeri/Basi.typ"

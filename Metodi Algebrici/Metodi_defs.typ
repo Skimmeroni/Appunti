@@ -10,6 +10,6 @@
 	)[#content]
 }
 
-#let theorem = thmbox("theorem", "Teorema", fill: rgb("#e6eef5"))
-#let principle = thmbox("principle", "Principio", fill: rgb("#e6eef5"))
+#let theorem = thmbox("theorem", "Teorema", fill: rgb("#e6f7ea"))
+#let principle = thmbox("principle", "Principio", fill: rgb("#e6f7ea"))
 #let proof = thmproof("proof", "Dimostrazione")

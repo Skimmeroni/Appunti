@@ -157,7 +157,7 @@ ed é strutturato come segue:
 	  moltiplicarlo per $b$ ottenendo un valore inferiore ad $a$;
 	+ Si calcola $r$ come differenza fra $q b$ ed $a$. Se tale valore é
 	  nullo, allora $q$ é MCD per $a$ e $b$, e l'algoritmo termina;
-	+ $q$ diventa il nuovo $a$, mentre $r$ diventa il nuovo $b$. Dopodiché,
+	+ $b$ diventa il nuovo $a$, mentre $r$ diventa il nuovo $b$. Dopodiché,
 	  si torna al punto 1.
 
 #example("Calcolo dell'MCD")[
@@ -174,15 +174,12 @@ ed é strutturato come segue:
 	) $
 ]
 
-Se due numeri interi hanno 1 come Massimo Comun Divisore, allora si dice che
-tali numeri sono *coprimi* o *primi fra di loro*.
-
 #theorem("Identitá di Bézout")[
 	Se $a$ e $b$ sono due numeri interi non entrambi nulli, allora esistono
 	due numeri interi $x$ e $y$ tali per cui vale:
 
 	$ a x + b y = "MCD"(a, b) $
-]
+] <Bezout>
 #proof[
 	Facendo riferimento al @MCD-exists-and-unique, si consideri la successione di operazioni.
 	In particolare, la riga $(1)$, ovvero $a = b q_(1) + r_(1)$, puó anche essere riscritta
@@ -197,8 +194,36 @@ tali numeri sono *coprimi* o *primi fra di loro*.
 	$a$ e $b$, e quindi $r_(k - 1) = "MCD"(a, b) = a x + b y$.
 ]
 
-La definizione di numeri primi fra di loro puó essere riformulata anche rispetto
-a tale identitá.
+La dimostrazione del @Bezout fornisce implicitamente anche un algoritmo per calcolare,
+a partire da due numeri interi $a$ e $b$ non entrambi nulli, una possibile coppia $x,
+y$ di interi tali da soddisfare l'identitá per $a$ e $b$, fintanto che il loro MCD é
+noto. Tale algoritmo é strutturato come segue:
+
++ Si esprime $r$ in funzione di $a$ e di $b$, spostando ques'ultimo a primo membro
+  ed isolando $r$ a secondo membro;
++ Se $r$ é l'MCD di $a$ e di $b$, l'algoritmo termina, perché le soluzioni particolari
+  cercate sono i coefficienti di $a$ e di $b$;
++ Si passa alla riga successiva e si ripete il procedimento, esprimendo i due nuovi $a$
+  e $b$ in funzione dei precedenti. Si noti come questi, ad ogni iterazione, cambiano
+  di segno.
+
+#example("Identitá di Bézout")[
+	L'MCD dei numeri $a = 110143$ e $b = 665$ é 19. Una soluzione particolare che
+	soddisfa l'identitá di Bézout per questa coppia é ricavata di seguito:
+
+	#set math.mat(delim: none)
+	$ mat(
+		110143 & = 665 dot.op 165 + 418 & => & a & = & 165 b + 418 & => & a - 165 b & = & 418 &;
+		665 & = 418 dot.op 1 + 247 & => & b & = & a - 165 b + 247 & => & 166 b - a & = & 247;
+		418 & = 247 dot.op 1 + 171 & => & a - 165 b & = & 166 b - a + 171 & => & 2 a - 331 b & = & 171;
+		247 & = 171 dot.op 1 + 76 & => & 166 b - a & = & 2 a - 331 b + 76 & => & 497 b - 3 a & = & 76;
+		171 & = 76 dot.op 2 + 19 & => & 2 a - 331 b & = & 2(497 b - 3 a) + 19 & => & 8 a - 1325 b & = & 19;
+	) $
+]
+
+Se due numeri interi hanno 1 come Massimo Comun Divisore, allora si dice che
+tali numeri sono *coprimi* o *primi fra di loro*. Tale definizione puó essere
+riformulata anche rispetto al @Bezout.
 
 #theorem[
 	Due numeri interi $a$ e $b$ sono coprimi fra di loro se e soltanto se esistono
