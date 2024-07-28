@@ -76,7 +76,7 @@ Dal teorema si evince immediatamente che se $d$ é un Massimo Comun Divisore
 positivo di due numeri interi $a$ e $b$, allora $d$ é univoco. Tale valore
 viene indicato con $"MCD"(a, b)$.
 
-#theorem[
+#theorem("Esistenza ed unicitá del Massimo Comun Divisore")[
 	Per una qualsiasi coppia di numeri interi $a$ e $b$ non entrambi nulli
 	esiste sempre ed é univoco $d = "MCD"(a, b)$
 ] <MCD-exists-and-unique>
@@ -150,8 +150,7 @@ viene indicato con $"MCD"(a, b)$.
 
 La dimostrazione del @MCD-exists-and-unique fornisce implicitamente anche un
 algoritmo per calcolare, a partire da due numeri interi $a$ e $b$ non entrambi
-nulli, il loro MCD. Tale algoritmo prende il nome di *Algoritmo di Euclide*,
-ed é strutturato come segue:
+nulli, il loro MCD. Tale algoritmo é strutturato come segue:
 
 	+ Si calcola qual'é il piú grande intero $q$ tale per cui é possibile
 	  moltiplicarlo per $b$ ottenendo un valore inferiore ad $a$;
@@ -225,8 +224,8 @@ Se due numeri interi hanno 1 come Massimo Comun Divisore, allora si dice che
 tali numeri sono *coprimi* o *primi fra di loro*. Tale definizione puó essere
 riformulata anche rispetto al @Bezout.
 
-#theorem[
-	Due numeri interi $a$ e $b$ sono coprimi fra di loro se e soltanto se esistono
+#lemma[
+	Due numeri interi $a$ e $b$ sono primi fra di loro se e soltanto se esistono
 	due numeri interi $x$ e $y$ tali per cui vale $a x + b y = 1$.
 ]
 #proof[

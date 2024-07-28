@@ -27,3 +27,7 @@
 #include "Numeri/Divisione.typ"
 == Basi
 #include "Numeri/Basi.typ"
+== Teorema Fondamentale dell'Aritmetica
+#include "Numeri/Primi.typ"
+// == Stime temporali
+// #include "Numeri/Tempo.typ"
