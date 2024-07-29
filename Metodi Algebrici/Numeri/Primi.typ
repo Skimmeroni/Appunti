@@ -172,7 +172,7 @@ procedere, ovvero fintanto che tale risultato sia diverso da 1.
 	fattorizzazione deve esserne anche un divisore. Questo peró non é possibile,
 	perché se si avesse $p_(i) | M$ per un qualsiasi $1 lt.eq i lt.eq k$ allora
 	si avrebbe anche $p_(i) | 1 = M - (p_(1) dot.op p_(2) dot.op ... dot.op p_(k))$,
-	e non esiste alcun numero primo che sia divisore di 1. Occorre pertanto assumere
+	e non esiste alcun numero che sia divisore di 1. Occorre pertanto assumere
 	che i numeri primi siano infiniti.
 ]
 
