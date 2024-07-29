@@ -78,7 +78,7 @@ Questa forma é nettamente piú convoluta, ma piú semplice da utilizzare per
 effettuare la conversione. Infatti, sono necessarie solo $k$ moltiplicazioni
 per $b$ e $k$ addizioni.
 
-#example("Conversione da base qualsiasi a base 10")[
+#example[
 	$ 61405_(7) = (((6 dot.op 7 + 1)7 + 4)7 + 0)7 + 5 =
 	((42 + 1)7 + 4)49 + 5 = (301 + 4)49 + 5 = 14950 $
 ]
@@ -97,7 +97,7 @@ $ mat(
 
 E cosı̀ via, finchè non si ottiene quoziente nullo.
 
-#example("Conversione da base 10 a base qualsiasi")[
+#example[
 $ mat(
 	14950 & = 7 dot.op 2135 + 5;
 	2135 & = 7 dot.op 305 + 0;

@@ -159,7 +159,7 @@ nulli, il loro MCD. Tale algoritmo é strutturato come segue:
 	+ $b$ diventa il nuovo $a$, mentre $r$ diventa il nuovo $b$. Dopodiché,
 	  si torna al punto 1.
 
-#example("Calcolo dell'MCD")[
+#example[
 	L'MCD dei numeri $a = 110143$ e $b = 665$ é 19. Infatti:
 
 	#set math.mat(delim: none)
@@ -206,7 +206,7 @@ noto. Tale algoritmo é strutturato come segue:
   e $b$ in funzione dei precedenti. Si noti come questi, ad ogni iterazione, cambiano
   di segno.
 
-#example("Identitá di Bézout")[
+#example[
 	L'MCD dei numeri $a = 110143$ e $b = 665$ é 19. Una soluzione particolare che
 	soddisfa l'identitá di Bézout per questa coppia é ricavata di seguito:
 

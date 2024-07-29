@@ -59,7 +59,7 @@ sull'insieme $bb(N)$ sono la *somma* ed il *prodotto*.
 	Allora $P(n)$ é vera $forall n in bb(Z)$
 ]
 
-#example[Principio di induzione][
+#example[
 	Si consideri la seguente proposizione, dipendente da $n$:
 
 	$ sum_(i = 1)^(n) (2i - 1) = n^(2), forall n gt.eq 1 $

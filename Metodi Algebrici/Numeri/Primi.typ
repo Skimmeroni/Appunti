@@ -77,7 +77,7 @@ espressa raccogliendo a fattor comune i numeri primi per mettere in
 evidenza la loro molteplicitá. Naturalmente, la fattorizzazione in
 numeri primi di un numero primo é sé stesso.
 
-#example("Fattorizzazione in numeri primi")[
+#example[
 	Il numero $386672$ puó venire riscritto come $11 dot.op 13 dot.op
 	13 dot.op 13 dot.op 2 dot.op 2 dot.op 2 dot.op 2$. Questa é una
 	fattorizzazione in numeri primi, perché 11, 13 e 2 sono numeri primi.
@@ -136,6 +136,25 @@ numeri primi di un numero primo é sé stesso.
 	p_(2) ... p_(s) = q_(2) ... q_(t) $
 
 	Che essendo necessariamente entrambe minori di $n$, vale per queste l'ipotesi induttiva.
+]
+
+Per calcolare la (univoca) fattorizzazione di un numero primo occorre
+trovare un numero primo qualsiasi che ne sia un divisore e ripetere
+il procedimento sul risultato di tale divisione fintanto che é possibile
+procedere, ovvero fintanto che tale risultato sia diverso da 1.
+
+#example[
+	#set math.mat(delim: none)
+	$ mat(
+	  13796146 div 13 &= 1061242;
+	  1061242 div 13 &= 81634;
+	  81634 div 17 &= 4802;
+	  4802 div 7 &= 686;
+	  686 div 7 &= 98;
+	  98 div 7 &= 14;
+	  14 div 7 &= 2;
+	  2 div 2 &= 1;
+	) $
 ]
 
 #theorem("Teorema di Euclide sui numeri primi")[
