@@ -20,7 +20,10 @@
 #show: thmrules.with(qed-symbol: $square$)
 #show par: set block(spacing: 0.55em)
 
-= I numeri
+= Insiemi
+== Definizione di insieme
+#include "Insiemi/Definizione.typ"
+= Numeri interi
 == Sistemi numerici
 #include "Numeri/Insiemi.typ"
 == Divisione

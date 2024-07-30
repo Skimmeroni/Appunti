@@ -162,8 +162,8 @@ procedere, ovvero fintanto che tale risultato sia diverso da 1.
 ]
 #proof[
 	Si supponga per assurdo che questo non sia vero, e che i numeri primi
-	siano quindi un insieme finito: sia tale insieme $\{p_(1), p_(2), ...,
-	p_(k)\}$. Sia $M = 1 + (p_(1) dot.op p_(2) dot.op ... dot.op p_(k))$:
+	siano quindi un insieme finito: sia tale insieme ${p_(1), p_(2), ...,
+	p_(k)}$. Sia $M = 1 + (p_(1) dot.op p_(2) dot.op ... dot.op p_(k))$:
 	essendo 2 il numero primo piú piccolo, si avrá certamente $M gt.eq 2$.
 	Essendo poi l'insieme $bb(Z)$ chiuso rispetto al prodotto e alla somma,
 	si ha $M in bb(Z)$. Sono allora valide le ipotesi del @Fundamental-Arithmetic,
