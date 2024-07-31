@@ -139,6 +139,10 @@ Si noti come "$and$" vada inteso in senso disgiuntivo. Ovvero, un certo elemento
 $x$ appartiene ad $A sect B$ se e soltanto se appartiene contemporaneamente sia
 ad $A$ che a $B$.
 
+Se l'intersezione di due insiemi é l'insieme vuoto, ovvero se non esiste alcun
+elemento che sia presente contemporaneamente in entrambi gli insiemi, si dice
+che tali insiemi sono *disgiunti*.
+
 #example[
 	Siano $A = {"rosso", "verde", "blu"}$ e $B = {"verde", "giallo", "rosa", "nero"}$.
 	Si ha:

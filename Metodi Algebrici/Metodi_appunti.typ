@@ -23,6 +23,8 @@
 = Insiemi
 == Definizione di insieme
 #include "Insiemi/Definizione.typ"
+== Corrispondenze e relazioni
+#include "Insiemi/Relazioni.typ"
 = Numeri interi
 == Sistemi numerici
 #include "Numeri/Insiemi.typ"
