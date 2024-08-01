@@ -38,3 +38,5 @@
 #include "Numeri/Primi.typ"
 == Equazioni Diofantee
 #include "Numeri/Diofantee.typ"
+== Congruenza Modulo $n$ // Da rivedere
+#include "Numeri/Congruenza.typ"
