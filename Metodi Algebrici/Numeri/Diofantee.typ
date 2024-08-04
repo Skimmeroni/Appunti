@@ -19,7 +19,7 @@ per cui $a x_(0) + b y_(0) = c$.
 	Si consideri l'equazione diofantea $a x + b y = c$, con termini noti non nulli $a, b, c
 	in bb(Z)$ e incognite $x, y in bb(Z)$. Tale equazione ammette soluzione se e soltanto se
 	$"MCD"(a, b) | c$.
-]
+] <Diophantine-solutions-exist>
 #proof[
 	Si supponga che $a x + b y = c$ ammetta una certa soluzione $(x_(0), y_(0)) in bb(Z)
 	times bb(Z)$. Deve allora valere $a x_(0) + b y_(0) = c$. Valendo $"MCD"(a, b) | a
@@ -70,10 +70,10 @@ per cui $a x_(0) + b y_(0) = c$.
 	si ha $c | "MCD"(a, b)$.
 ]
 
-Questo significa che per ricavare una soluzione particolare di una equazione
-diofantea risolubile $a x + b y = c$ é sufficiente trovare una soluzione particolare
-dell'identitá di Bézout che ha $a $ e $b$ per termini noti e moltiplicare il risultato
-per $frac(c, "MCD"(a, b))$.
+Il @Diophantine-one-solution suggerisce che per ricavare una soluzione particolare
+di una equazione diofantea risolubile $a x + b y = c$ sia sufficiente trovare una
+soluzione particolare dell'identitá di Bézout che ha $a $ e $b$ per termini noti
+e moltiplicare il risultato per $frac(c, "MCD"(a, b))$.
 
 #example[
 	Si consideri l'equazione diofantea risolubile $74 x + 22 y = 10$. É giá stato
@@ -99,16 +99,16 @@ per $frac(c, "MCD"(a, b))$.
 	in bb(Z) times bb(Z)$ é soluzione per tale equazione, allora lo sono tutte e sole le
 	coppie $(x_(h), y_(h)) in bb(Z) times bb(Z)$ cosí costruite:
 
-	$ x_(h) = x_(0) + h frac(b, "MCD"(a, b)) space.fig space.fig space.fig
-	  y_(h) = y_(0) - h frac(a, "MCD"(a, b))
+	$ x_(h) = x_(0) + h (frac(b, "MCD"(a, b))) space.fig space.fig space.fig
+	  y_(h) = y_(0) - h (frac(a, "MCD"(a, b)))
 	  "   con" h in bb(Z) $
-]
+] <Diophantine-all-solutions>
 #proof[
 	Le coppie $(x_(h), y_(h))$ cosí costruite sono certamente soluzioni di $a x + b y = c$,
 	dato che sostituendo si ha:
 
-	$ a x_(h) + b y_(h) = c & => a(x_(0) + h frac(b, "MCD"(a, b))) +
-	b(y_(0) - h frac(a, "MCD"(a, b))) = c \ & => a x_(0) + cancel(frac(a h b, "MCD"(a, b))) +
+	$ a x_(h) + b y_(h) = c & => a(x_(0) + h (frac(b, "MCD"(a, b)))) +
+	b(y_(0) - h (frac(a, "MCD"(a, b)))) = c \ & => a x_(0) + cancel(frac(a h b, "MCD"(a, b))) +
 	b y_(0) - cancel(frac(a h b, "MCD"(a, b))) = c => a x_(0) + b y_(0) = c $
 
 	Viceversa, sia $(overline(x), overline(y))$ una generica soluzione di $a x + b y = c$.
@@ -137,8 +137,8 @@ per $frac(c, "MCD"(a, b))$.
 	Risostituendo il valore di $overline(a)$ e $overline(b)$ nelle rispettive formule,
 	si ottiene la forma presente nell'enunciato del teorema:
 
-	$ overline(x) = x_(0) + h frac(b, "MCD"(a, b)) space.fig space.fig space.fig
-	  overline(y) = y_(0) - h frac(a, "MCD"(a, b))
+	$ overline(x) = x_(0) + h (frac(b, "MCD"(a, b))) space.fig space.fig space.fig
+	  overline(y) = y_(0) - h (frac(a, "MCD"(a, b)))
 	  "   con" h in bb(Z) $
 
 	Essendo $(overline(x), overline(y)) in bb(Z) times bb(Z)$ una soluzione generica,

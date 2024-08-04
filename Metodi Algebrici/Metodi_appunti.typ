@@ -40,3 +40,5 @@
 #include "Numeri/Diofantee.typ"
 == Congruenza Modulo $n$ // Da rivedere
 #include "Numeri/Congruenza.typ"
+== Congruenze lineari
+#include "Numeri/Lineare.typ"
