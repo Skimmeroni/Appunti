@@ -118,39 +118,139 @@ della soluzione particolare di tale equazione.
 	$c = 6$, $c = 16$ e $c = 26$.
 ]
 
-/*
-Nel caso in cui i termini noti di una congruenza lineare abbiano dei
-fattori comuni, é possibile semplificarla per rendere piú semplice la
-determinazione della soluzione.
+Viene detto *sistema di congruenze lineari* qualunque espressione nella forma:
 
-#lemma[
-	Siano $a$, $b$, $c$, $d in bb(Z)$ con $c != 0$, e si
-	supponga che valga $a c equiv b c mod d$. Allora $a
-	equiv b mod frac(d, "MCD"(c, d))$.
-] <Cancel>
+$
+	A_(i) x equiv B_(i) mod N_(i) =
+	cases(
+		a_(1) x equiv b_(1) & mod n_(1),
+		a_(2) x equiv b_(2) & mod n_(2),
+		dots.v,
+		a_(m) x equiv b_(m) & mod n_(m)
+	) " con " a_(1), ..., a_(m), b_(1), ..., b_(m), n_(1), ..., n_(m) in bb(Z)
+$
+
+Dove $a_(1), ..., a_(m)$, $b_(1), ..., b_(m)$ e $n_(1), ..., n_(m)$
+sono termini noti ed $x$ é una incognita. Le _soluzioni_ di un sistema
+di congruenze lineari sono tutti e soli quei $c in bb(Z)$ tali che,
+sostituiti ad $x$, verificano contemporaneamente tutte le $m$ congruenze
+lineari modulo $n_(i)$ che lo compongono. Se esiste almeno un $c$ con
+queste caratteristiche, si dice che il sistema di congruenze lineari
+_ammette_ soluzione.
+
+#lemma("Condizione necessaria per la solubilitá di un sistema di congruenze lineari")[
+	Un sistema di congruenze lineari $A_(i) x equiv B_(i) mod N_(i)$ ha soluzione
+	soltanto se, per ogni $i = 1, ..., m$, si ha $"MCD"(a_(i), n_(i)) | b_(i)$.
+] <System-sufficient-condition>
 #proof[
-	Siano $c = overline(c) "MCD"(c, d)$ e $d = overline(d)
-	"MCD"(c, d)$. Per definizione, $a c equiv b c mod d$
-	equivale a dire $d | a c - b c$, ovvero esiste un certo
-	$k$ tale per cui $a c - b c = d k$. Sostituendo le espressioni
-	per $c$ e $d$, si ha:
-
-	$ a c - b c = d k => c (a - b) = d k => cancel("MCD"(c, d)) (a - b)
-	overline(c) = cancel("MCD"(c, d)) overline(d) k => (a - b) overline(c)
-	= overline(d) k $
+	Per il @Congruence-solutions-exist, si ha che $a x equiv b mod n$ ha soluzione
+	se e soltanto se $"MCD"(a, n) | b$. Dato che un sistema di congruenze lineari
+	ha soluzione soltanto se tutte le congruenze che lo compongono hanno soluzione,
+	tale sistema avrá soluzione soltanto se $"MCD"(a_(i), n_(i)) | b_(i)$ é valido
+	per ogni $i = 1, ..., m$.
 ]
 
-Nel caso in cui i termini noti siano coprimi, questo é ancora piú semplice.
+Si noti come il @System-sufficient-condition sia una implicazione a senso unico,
+ovvero potrebbero esistere dei sistemi di congruenze lineari che lo verificano
+ma che comunque non hanno soluzione. Infatti, le congruenze lineari che costituiscono
+un sistema potrebbero essere solubili individualmente, ma nessuna di queste avere una
+soluzione che sia comune a tutte.
 
-#corollary[
-	Siano $a$, $b$, $c$, $d in bb(Z)$, con $c != 0$ e $c$
-	e $d$ primi fra di loro, e si supponga che valga
-	$a c equiv b c mod d$. Allora $a equiv b mod d$.
-]
+#theorem("Teorema Cinese del Resto")[
+	Si consideri un sistema di congruenze lineari come quello presentato di seguito:
+
+	$
+		cases(
+			x equiv b_(1) & mod n_(1),
+			dots.v,
+			x equiv b_(2) & mod n_(2),
+			x equiv b_(m) & mod n_(m)
+		) " con " b_(1), ..., b_(m), n_(1), ..., n_(m) in bb(Z)
+	$
+
+	Ovvero, dove i termini $a_(1), ..., a_(m)$ sono tutti pari ad 1. Si assuma
+	inoltre che i termini $n_(1), ..., n_(m)$ siano tutti positivi e che siano
+	a due a due coprimi, ovvero $"MCD"(n_(i), n_(j)) = 1$ per ogni $1 lt.eq i
+	lt.eq m$ e $1 lt.eq j lt.eq m$ tali per cui $i != j$.
+
+	Allora il sistema é risolubile. In particolare, se $c$ e $c'$ sono due
+	soluzioni, allora vale:
+
+	$ c equiv c' mod N " dove " N = n_(1) dot.op n_(2) dot.op ... dot.op n_(m) =
+	  product_(i = 1)^(m) n_(i) $
+] <Chinese-remainder-theorem>
 #proof[
-	Per il @Cancel si ha che, se vale $a c equiv b c mod d$, allora $a equiv
-	b mod frac(d, "MCD"(c, d))$. Essendo $c$ ed $d$ primi fra di loro, si ha
-	$"MCD"(c, d) = 1$. Allora $a equiv b mod frac(n, "MCD"(c, d))$ si riduce
-	a $a equiv b mod frac(d, 1)$, ovvero $a equiv b mod d$.
+	Per ogni $i = 1, ..., m$, sia $N_(i) = frac(N, n_(i))$ (essendo $N =
+	product_(i = 1)^(m) n_(i)$ é garantito che $N_(i)$ sia un numero intero,
+	perché $n_(i)$ é uno dei fattori di $N$). Per ipotesi, si ha $"MCD"(n_(i),
+	n_(j)) = 1$ per $i != j$. Tuttavia, é facile verificare che anche $"MCD"(N_(i),
+	n_(i)) = 1$.
+
+	Infatti, si supponga per assurdo che $"MCD"(N_(i), n_(i)) != 1$. Deve allora
+	esistere un numero primo $p$ tale per cui $p | n_(i)$ e $p | N_(i)$, ovvero
+	che é divisore sia di $n_(i)$ che di $N_(i)$. Essendo $N_(i) = n_(1) dot.op
+	... dot.op n_(i - 1) dot.op n_(i + 1) dot.op ... dot.op n_(m)$, per il
+	@Euclid-lemma deve esistere un $n_(j)$ con $j != i$ tale per cui $p | n_(j)$.
+	Ma allora, valendo sia $p | n_(i)$ sia $p | n_(j)$, si ha che $n_(i)$ ed $n_(j)$
+	hanno un divisore in comune, e quindi non sono primi, contro l'ipotesi che invece
+	lo siano. Occorre allora assumere che $"MCD"(N_(i), n_(i)) = 1$.
+
+	Si consideri la congruenza lineare $N_(i) y equiv 1 mod n_(i)$ nell'incognita
+	$y$, che ha $y_(i)$ per soluzione. Per il @Congruence-solutions-exist, tale
+	congruenza lineare ha soluzione se vale $"MCD"(N_(i), n_(i)) | 1$, ed é stato
+	appena mostrato che $"MCD"(N_(i), n_(i)) = 1$, pertanto é garantito che $y_(i)$
+	esista. Sia $c$ definito come:
+
+	$ c = sum_(i = 1)^(m) N_(i) y_(i) b_(i) =
+	  N_(1) y_(1) b_(1) + ... + N_(m) y_(m) b_(m) $
+
+	// Da rivedere gli ultimi due paragrafi, mi sembrano un po' a caso.
+
+	É possibile verificare che $c$ é una soluzione del sistema, ovvero che $c equiv
+	b_(j) mod n_(j)$ per $j != i$. Valendo $n_(j) | N_(i)$ per qualsiasi $j != i$, é
+	possibile scrivere $N_(i) equiv 0 mod n_(j)$, e quindi $c equiv N_(j) y_(j) b_(j)
+	mod n_(j)$. Avendo trovato che vale $N_(j) n_(j) equiv 1 mod n_(j)$, moltiplicando
+	ambo i membri per $b_(j)$ si ha $N_(j) n_(j) b_(j) equiv b_(j) mod n_(j)$ (questo
+	é legittimo perché $N_(j) n_(j)$ e $1$ sono primi fra di loro, esiste un lemma
+	che lo prova).
+
+	Avendosi la soluzione $c$, sia $c'$ un'altra soluzione del sistema. Allora deve
+	valere $c equiv c' mod n_(i)$, ovvero $n_(i) | c − c'$ per ogni i = $1, ..., m$.
+	Poichè gli $n_(i)$ sono a due a due coprimi, segue che anche $N$ é divisore di
+	$c − c'$, ovvero $c equiv c' mod N$. Questo dimostra che $c$ è l'unica soluzione
+	del sistema modulo $N$, a meno di multipli di $N$.
 ]
-*/
+
+#example[
+	Si consideri il seguente sistema di congruenze lineari, e lo si risolva:
+
+	$ cases(x equiv 2 mod 3, x equiv 3 mod 5, x equiv 2 mod 7) $
+
+	Tale sistema rispetta le ipotesi del @Chinese-remainder-theorem, dato che
+	tutti i termini noti a sinistra dell'equivalenza sono pari ad $1$, i termini
+	noti a destra sono tutti positivi e sono tutti coprimi fra di loro a due a
+	due.
+
+	Si ha allora $N = 3 dot.op 5 dot.op 7 = 105$. Per ciascuna congruenza lineare
+	del sistema si calcoli $N_(i) = frac(N, n_(i))$:
+
+	$ N_(1) = frac(N, n_(1)) = frac(105, 3) = 35 space.fig space.fig space.fig
+	  N_(2) = frac(N, n_(2)) = frac(105, 5) = 21 space.fig space.fig space.fig
+	  N_(3) = frac(N, n_(3)) = frac(105, 7) = 15 $
+
+	Da cui si ottengono le congruenze lineari:
+
+	#set math.mat(delim: none)
+	$ mat(
+		N_(1) y equiv 1 mod n_(1) & => 35 y equiv 1 mod 3 & => 2 y equiv 1 mod 3 & => y_(1) = 2;
+		N_(2) y equiv 1 mod n_(2) & => 21 y equiv 1 mod 5 & =>   y equiv 1 mod 5 & => y_(2) = 1;
+		N_(3) y equiv 1 mod n_(3) & => 15 y equiv 1 mod 7 & =>   y equiv 1 mod 7 & => y_(3) = 1
+	) $
+
+	La soluzione del sistema é allora data da:
+
+	$ c = sum_(i = 1)^(3) N_(i) y_(i) b_(i) =
+	  35 dot.op 2 dot.op 2 + 21 dot.op 1 dot.op 3 + 15 dot.op 1 dot.op 2 = 233 $
+
+	E da tutti gli interi a questo congruenti modulo $N$.
+]

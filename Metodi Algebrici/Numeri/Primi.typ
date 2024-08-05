@@ -47,11 +47,11 @@ plus.minus p$ oppure $a = plus.minus 1$.
 Un numero non primo (o, equivalentemente, un numero non irriducibile) viene
 detto *numero composto*.
 
-#lemma[
+#lemma("Lemma di Euclide")[
 	Sia $p$ un numero primo. Se $p$ é il divisore del prodotto di
 	$n gt.eq 2$ numeri interi, allora $p$ é divisore di almeno uno
 	dei fattori.
-]
+] <Euclid-lemma>
 #proof[
 	Si applichi il principio di induzione su $n$. Se $n = 2$, si ha $p | a b$
 	con $a, b in bb(Z)$, e per definizione $p | a$ oppure $p | b$.
