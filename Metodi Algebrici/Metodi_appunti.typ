@@ -20,11 +20,18 @@
 #show: thmrules.with(qed-symbol: $square$)
 #show par: set block(spacing: 0.55em)
 
+#outline(indent: auto)
+#pagebreak()
+
 = Insiemi
 == Definizione di insieme
 #include "Insiemi/Definizione.typ"
 == Corrispondenze e relazioni
 #include "Insiemi/Relazioni.typ"
+== Funzioni
+#include "Insiemi/Funzioni.typ"
+#pagebreak()
+
 = Numeri interi
 == Sistemi numerici
 #include "Numeri/Insiemi.typ"
