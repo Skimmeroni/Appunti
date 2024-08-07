@@ -129,3 +129,104 @@ $bb(Z)_(n)$.
 	il numero $2308$ $(329 times 7 + 5)$, il numero $-2$ $(-1 times 7 + 5)$
 	il numero $-9$ $(-2 times 7 + 5)$, ecc...
 ]
+
+Sull'insieme delle classi di resto modulo $n$ é possibile definire le operazioni
+di somma e di prodotto. Siano $[a]_(n)$ e $[b]_(n)$ due classi di resto modulo
+$n$. La somma ed il prodotto sono definiti come:
+
+$ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
+  [a]_(n) dot.op [b]_(n) = [a b]_(n) $
+
+#example[
+	in $bb(Z)_(5)$, si ha $[1]_(5) + [3]_(5) = [3 + 1]_(5) = [4]_(5)$ e
+	$[2]_(5) dot.op [3]_(5) = [2 dot.op 3]_(5) = [6]_(5)$
+]
+
+#lemma[
+	Sia $n in bb(Z)$ con $n gt.eq 1$. Siano poi $a, b, c, d in bb(Z)$,
+	tali per cui $[a]_(n) = [b]_(n)$ e $[c]_(n) = [d]_(n)$. Allora vale:
+
+	$ [a]_(n) + [c]_(n) = [b]_(n) + [d]_(n) space.fig space.fig space.fig
+	  [a]_(n) dot.op [c]_(n) = [b]_(n) dot.op [d]_(n) $
+]
+#proof[
+	Poichè $[a]_(n) = [b]_(n)$ e $[c]_(n) = [d]_(n)$ si ha, per definizione
+	di classe di equivalenza, $a = b + n k$ e $c = d + n h$ per $k, h in
+	bb(Z)$. Sommando e moltiplicando l'una all'altra, si ha:
+
+	#set math.mat(delim: none)
+	$ mat(
+	  a + c = b + n k + d + n h =>
+	  a + c = (b + d) + n(h + k);
+	  a dot.op c = (b + n k) dot.op (d + n h) =>
+	  a c = b d + b n h + n k d + n^(2) k h =>
+	  a c = b d + n(b h + d k + n k h)
+	) $
+
+	Essendo $bb(Z)$ chiuso rispetto alla somma e al prodotto, si ha
+	$k + h in bb(Z)$ e $b h + d k + k h n in bb(Z)$, siano questi
+	rispettivamente $alpha$ e $beta$. Si ha:
+
+	$ a + c = b + d + n alpha space.fig space.fig space.fig a c = b d + n beta $
+
+	Applicando nuovamente la definizione di classe di equivalenza, si ha che
+	$[a + c]_(n) = [b + d]_(n)$ e $[a c]_(n) = [b d]_(n)$. Per come sono state
+	definite la somma ed il prodotto rispetto alle classi di equivalenza, si ha
+	infine $[a]_(n) + [c]_(n) = [b]_(n) + [d]_(n)$ e $[a]_(n) [c]_(n) = [b]_(n)
+	[d]_(n)$.
+]
+
+#theorem[
+	La struttura algebrica $(bb(Z)_(n), +)$, formata dalla classe di resti
+	modulo $n$ e dalla somma su questi definita, é un gruppo abeliano.
+]
+#proof[
+	La struttura algebrica $(bb(Z)_(n), +)$ é:
+
+	- un semigruppo, perché l'operazione $+$ cosí definita gode della proprietá
+	  associativa. Questo é determinato dal fatto che l'usuale somma in $bb(Z)$
+	  gode di tale proprietá:
+
+	  $ ([a]_(n) + [b]_(n)) + [c]_(n) = & [a + b]_(n) + [c]_(n) =
+	    [(a + b) + c]_(n) = [a + (b + c)]_(n) \ = & [a]_(n) + [b + c]_(n) =
+	    [a]_(n) + ([b]_(n) + [c]_(n)) $
+
+	- un monoide, perché per l'operazione $+$ cosí definita esiste l'elemento
+	  neutro. Tale elemento é $[0]_(n)$, infatti preso un qualsiasi $[a]_(n)
+	  in bb(Z)_(n)$:
+
+	  $ [0]_(n) + [a]_(n) = [a]_(n) + [0]_(n) = [a + 0]_(n) = [0 + a]_(n) = [a]_(n) $
+
+	- un gruppo, perché per l'operazione $+$ cosí definita esiste un elemento
+	  opposto per qualsiasi elemento di $bb(Z)_(n)$. Preso un qualsiasi $[a]_(n)
+	  in bb(Z)_(n)$, tale elemento opposto é $[n - a]_(n)$, in quanto:
+
+	  $ [a]_(n) + [n - a]_(n) = [n - a]_(n) + [a]_(n) = [(n - a) + a]_(n) =
+	    [a + (n - a)]_(n) = [n]_(n) = 0 $
+
+	Inoltre, valendo per $+$ la proprietá commutativa, é un gruppo abeliano.
+]
+
+#theorem[
+	La struttura algebrica $(bb(Z)_(n), dot.op)$, formata dalla classe di resti
+	modulo $n$ e dal prodotto su questi definito, é un monoide abeliano.
+]
+#proof[
+	La struttura algebrica $(bb(Z)_(n), dot.op)$ é:
+
+	- un semigruppo, perché l'operazione $dot.op$ cosí definita gode della
+	  proprietá associativa. Questo é determinato dal fatto che l'usuale
+	  prodotto in $bb(Z)$ gode di tale proprietá:
+
+	  $ ([a]_(n) dot.op [b]_(n)) dot.op [c]_(n) = & [a dot.op b]_(n) dot.op [c]_(n) =
+	    [(a dot.op b) dot.op c]_(n) = [a dot.op (b dot.op c)]_(n) \ = & [a]_(n) dot.op
+	    [b dot.op c]_(n) = [a]_(n) dot.op ([b]_(n) dot.op [c]_(n)) $
+
+	- un monoide, perché per l'operazione $dot.op$ cosí definita esiste l'elemento
+	  neutro. Tale elemento é $[1]_(n)$, infatti preso un qualsiasi $[a]_(n)
+	  in bb(Z)_(n)$:
+
+	  $ [1]_(n) dot.op [a]_(n) = [a]_(n) dot.op [1]_(n) = [a dot.op 1]_(n) = [1 dot.op a]_(n) = [a]_(n) $
+
+	Inoltre, valendo per $dot.op$ la proprietá commutativa, é un monoide abeliano.
+]

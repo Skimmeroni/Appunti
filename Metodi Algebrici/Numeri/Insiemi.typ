@@ -25,12 +25,13 @@ L'insieme $bb(N)$ cosí definito prende il nome di *insieme dei numeri naturali*
 	$forall s in S$.
 ]
 
+/*
 #theorem("Teorema di Ricorrenza")[
 	Dati un insieme $S$, un elemento $a$ di $S$ ed una funzione $phi.alt$ da $S$ in
 	sé stesso, esiste una ed una sola funzione $f: bb(N) -> S$ tale che
 
 	$ f(0) = a, f(n^(+)) = phi.alt(f(n)) $
-] /*
+]
 #proof[
 		Sia $X$ il prodotto cartesiano di $bb(N)$ e $S$. Si consideri l'insieme
 		$Gamma subset.eq cal(P) (X)$, costituito dai sottoinsiemi $U$ di $X$ che
@@ -45,7 +46,7 @@ In particolare, le due operazioni principali che é possibile definire per ricor
 sull'insieme $bb(N)$ sono la *somma* ed il *prodotto*.
 */
 
-// Definizione dell'insieme $bb(Z)$
+// Manca la definizione dell'insieme $bb(Z)$
 
 #principle("Principio di induzione")[
 	Dato un numero fissato $n_(0) in bb(Z)$, sia $P(n)$ una proposizione

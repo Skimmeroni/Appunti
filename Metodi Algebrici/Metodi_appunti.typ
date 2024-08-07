@@ -30,6 +30,8 @@
 #include "Insiemi/Relazioni.typ"
 == Funzioni
 #include "Insiemi/Funzioni.typ"
+== Strutture algebriche
+#include "Insiemi/Strutture.typ"
 #pagebreak()
 
 = Numeri interi

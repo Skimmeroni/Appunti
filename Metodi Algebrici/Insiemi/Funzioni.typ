@@ -89,18 +89,11 @@ con $A$:
 
 $ * : A times A |-> A $
 
-Piú in generale, la funzione $*$ viene detta *operazione n-aria* su $A$ se
-ha come dominio $A^(n)$ e sé stesso come codominio:
-
-$ * : A^(n) |-> A $
-
 #example[
 	- La funzione $f: bb(Z) times bb(N) |-> bb(Z),
-	  f(a, b) = a^(b)$ non é un'operazione;
+	  f(a, b) = a^(b)$ non é un'operazione binaria;
 	- La funzione $f: bb(Z) times bb(Z) |-> bb(Z),
-	  f(a, b) = root(b, a)$ é un'operazione binaria;
-	- La funzione $f: bb(Z) times bb(Z) times bb(Z) |-> bb(Z),
-	  f(a, b, c) = frac(a + b, c)$ é un'operazione ternaria.
+	  f(a, b) = root(b, a)$ é un'operazione binaria.
 ]
 
 Sia $*$ una operazione su un insieme $a$, e siano $a, b, c in A$ tre suoi elementi.
@@ -133,3 +126,22 @@ $ a * b = b * a $
 	  valga $f(a, f(b, c)) = f(f(a, b), c) = c$, si ha $f(a, b) = b$ e
 	  $f(b, a) = a$, pertanto $f(a, b) != f(b, a)$.
 ]
+
+Se $*$ é una operazione sull'insieme $A$, un elemento $e in A$ viene detto *elemento
+neutro* per $*$ se, per qualsiasi $a in A$, vale $e * a = a * e = a$. Se $*$ é una
+operazione sull'insieme $A$ che ammette elemento neutro $e$, per ciascun $a in A$
+esiste un $tilde(a) in A$ chiamato *opposto* di $A$ tale per cui $a * tilde(a) =
+tilde(a) * a = e$.
+
+#example[
+	L'operazione $f: bb(Z) times bb(Z) |-> bb(Z), f(a, b) = a + b$ ha come elemento
+	neutro $e = 0$. Infatti, preso un $a in Z$ qualsiasi, si ha $a + 0 = 0 + a = a$.
+	L'elemento opposto di $a$ rispetto a tale operazione é $-a$, in quanto $a + (-a)
+	= (-a) + a = 0$.
+]
+
+Le operazioni binarie possono venire generalizzate con prodotti cartesiani
+$n$-dimensionali. La funzione $*$ viene detta *operazione n-aria* su $A$ se
+ha come dominio $A^(n)$ e sé stesso come codominio:
+
+$ * : A^(n) |-> A $
