@@ -118,6 +118,20 @@ della soluzione particolare di tale equazione.
 	$c = 6$, $c = 16$ e $c = 26$.
 ]
 
+Sia $[a]_(n)$ una classe di resto invertibile, e si supponga di volerne
+trovarne l'inverso $[a]^(-1)_(n)$. É sufficiente osservare come l'espressione
+$[a]_(n) [a]^(-1)_(n) = [1]_(n)$ equivalga a $a dot.op a^(-1) equiv 1 mod n$.
+Pertanto, occorre risolvere tale congruenza lineare con $a^(-1)$ come incognita
+e sceglierne una soluzione qualsiasi, essendo tutte equivalenti. Per convenzione,
+si preferisce scegliere la soluzione piú piccola.
+
+#example[
+	In $bb(Z)_(9)$, la classe di resto $[7]_(9)$ é invertibile, in quanto
+	$"MCD"(7, 9) = 1$. L'inverso é ricavato dal risolvere la congruenza
+	lineare $7 x equiv 1 mod 9$, che ha come soluzione $4 + 9 k$ con $k in
+	bb(Z)$. Pertanto, l'inverso di $[7]_(9)$ é $[4]_(9)$.
+]
+
 Viene detto *sistema di congruenze lineari* qualunque espressione nella forma:
 
 $

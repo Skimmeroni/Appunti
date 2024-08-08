@@ -130,6 +130,18 @@ $bb(Z)_(n)$.
 	il numero $-9$ $(-2 times 7 + 5)$, ecc...
 ]
 
+#lemma[
+	Sia $[a]_(n)$ con $n in bb(N)$ una classe di resto. Se vale $[a]_(n) =
+	[0]_(n)$, allora $n | a$.
+] <Class-as-divisibility>
+#proof[
+	Per la definizione di classe di resto, l'espressione $[a]_(n) = [0]_(n)$ equivale
+	a dire che la divisione fra $a$ e $n$ ha lo stesso resto della divisione fra $0$
+	ed $n$. Dato che la divisione fra $0$ ed un qualsiasi numero (intero) ha quoziente
+	$0$ e resto $0$, si ha che la divisione fra $a$ e $n$ ha resto $0$, ovvero che
+	$n | a$.
+]
+
 Sull'insieme delle classi di resto modulo $n$ é possibile definire le operazioni
 di somma e di prodotto. Siano $[a]_(n)$ e $[b]_(n)$ due classi di resto modulo
 $n$. La somma ed il prodotto sono definiti come:
@@ -167,7 +179,7 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
 	$k + h in bb(Z)$ e $b h + d k + k h n in bb(Z)$, siano questi
 	rispettivamente $alpha$ e $beta$. Si ha:
 
-	$ a + c = b + d + n alpha space.fig space.fig space.fig a c = b d + n beta $
+	$ (a + c) = (b + d) + n alpha space.fig space.fig space.fig a c = b d + n beta $
 
 	Applicando nuovamente la definizione di classe di equivalenza, si ha che
 	$[a + c]_(n) = [b + d]_(n)$ e $[a c]_(n) = [b d]_(n)$. Per come sono state
@@ -204,7 +216,11 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
 	  $ [a]_(n) + [n - a]_(n) = [n - a]_(n) + [a]_(n) = [(n - a) + a]_(n) =
 	    [a + (n - a)]_(n) = [n]_(n) = 0 $
 
-	Inoltre, valendo per $+$ la proprietá commutativa, é un gruppo abeliano.
+	Inoltre, $+$ gode della proprietá commutativa. Infatti:
+
+	$ [a]_(n) + [b]_(n) = [a + b]_(n) = [b + a]_(n) = [b]_(n) + [a]_(n) $
+
+	Pertanto, $(bb(Z)_(n), +)$ é un gruppo abeliano.
 ]
 
 #theorem[
@@ -228,5 +244,67 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
 
 	  $ [1]_(n) dot.op [a]_(n) = [a]_(n) dot.op [1]_(n) = [a dot.op 1]_(n) = [1 dot.op a]_(n) = [a]_(n) $
 
-	Inoltre, valendo per $dot.op$ la proprietá commutativa, é un monoide abeliano.
+	Inoltre, $dot.op$ gode della proprietá commutativa. Infatti:
+
+	$ [a]_(n) dot.op [b]_(n) = [a dot.op b]_(n) = [b dot.op a]_(n) = [b]_(n) dot.op [a]_(n) $
+
+	Pertanto, $(bb(Z)_(n), dot.op)$ é un monoide abeliano.
+]
+
+Un elemento $[a]_(n)$ in $bb(Z)_(n)$ si dice *invertibile* in $bb(Z)_(n)$
+(rispetto al prodotto) se esiste $[b]_(n) in bb(Z)_(n)$ tale per cui
+$[a]_(n) dot.op [b]_(n) = [1]_(n)$; $[b]_(n)$ viene detto _inverso_
+di $[a]_(n)$.
+
+#example[
+	- Se vale $[a]_(7) = [3]_(7)$, allora esiste $[b]_(7) in bb(Z)_(7)$ tale per cui
+	  $[3]_(7) dot.op [b]_(7) = [1]_(7)$. Tale $[b]_(7)$ é $[5]_(7)$, in quanto
+	  $[3]_(7) [5]_(7) = [15]_(7) = [1]_(7)$;
+	- Se vale $[a]_(6) = [3]_(6)$, allora non esiste alcun $[b]_(6) in bb(Z)_(6)$ tale
+	  per cui $[3]_(6) [b]_(6) = [1]_(6)$;
+	- Se vale $[a]_(n) = [0]_(n)$ per un qualsiasi $n in bb(N)$, per ogni $[b]_(n) in
+	  bb(Z)_(n)$, risulta $[0]_(n) [b]_(n) = [0 dot.op b]_(n) = [0]_(n)$. Pertanto,
+	  affinché esista un $[b]_(n) in bb(Z)_(n)$ tale per cui valga $[0]_(n) [b]_(n) =
+	  [1]_(n)$, deve valere $[0]_(n) = [1]_(n)$, ovvero $0 equiv 1 mod n$. Questo si
+	  verifica soltanto se $n = 1$, pertanto un invertibile per $[a]_(n) = [0]_(n)$
+	  esiste solamente in questo caso.
+]
+
+#lemma[
+	Siano $a, n$ due numeri interi, dove $n gt.eq 2$. La classe di resto $[a]_(n)$ è
+	invertibile in $bb(Z)_(n)$ se e soltanto se $a$ ed $n$ sono coprimi, ovvero se
+	$"MCD"(a, n) = 1$.
+]
+#proof[
+	Se la classe di resto $[a]_(n)$ è invertibile, allora esiste $[b]_(n) in bb(Z)_(n)$
+	tale per cui $[a]_(n) [b]_(n) = [1]_(n)$, ovvero $[a b]_(n) = [1]_(n)$. Per come la
+	somma sulle classi di resto é stata definita, é possibile sommare $[-1]_(n)$ ad
+	entrambi i membri, ottenendo $[a b]_(n) + [-1]_(n) = [1]_(n) + [-1]_(n)$, da cui
+	si ricava $[a b - 1]_(n) = [0]_(n)$. Per il @Class-as-divisibility, si ha $n | a b
+	- 1$. Deve allora esistere un $k in bb(Z)$ tale per cui $a b - 1 = n k$, ovvero
+	$a b - n k = 1$. Dato che sia $b$ sia $k$ sono certamente esistenti, é possibile
+	applicare il @Coprime-as-Bézout per provare che $a$ ed $n$ sono coprimi.
+
+	Viceversa, si assuma che $a$ ed $n$ siano coprimi. Per l'identitá di Bézout esistono
+	$s, t in bb(Z)$ tali per cui $a s + n t = 1$, ovvero $a s = 1 - n t$. Questo equivale
+	a dire che $a s equiv 1 mod n$, ovvero che $[a s]_(n) = [a]_(n) [s]_(n) = [1]_(n)$. Si
+	ha quindi che per $[a]_(n)$ esiste l'invertibile.
+]
+
+#example[
+	In $bb(Z)_(51)$ l'elemento $[13]_(51)$ è invertibile perchè
+	$"MCD"(13, 51) = 1$. D'altro canto, $[15]_(51)$ non lo é,
+	perché $"MCD"(15, 51) = 3$.
+]
+
+#lemma[
+	Se la classe di resto $[a]_(n)$ é invertibile, il suo inverso é unico.
+]
+
+L'inverso di una classe di resto $[a]_(n)$, essendo unico, viene anche indicato
+semplicemente con $[a]^(-1)_(n)$.
+
+#lemma[
+	Sia $bb(Z)_(n)$ un insieme di classi di resto modulo $n$, con $n$ numero primo.
+	Tutte le classi di resto di $bb(Z)_(n)$, tranne $[0]_(n)$, sono invertibili.
 ]

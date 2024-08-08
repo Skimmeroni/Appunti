@@ -227,7 +227,7 @@ riformulata anche rispetto al @Bezout.
 #lemma[
 	Due numeri interi $a$ e $b$ sono primi fra di loro se e soltanto se esistono
 	due numeri interi $x$ e $y$ tali per cui vale $a x + b y = 1$.
-]
+] <Coprime-as-Bézout>
 #proof[
 	Il primo verso dell'implicazione deriva direttamente dalla definizione di
 	numeri coprimi. Infatti, due numeri interi $a$, e $b$ si dicono coprimi se
