@@ -51,3 +51,8 @@
 #include "Numeri/Congruenza.typ"
 == Congruenze lineari
 #include "Numeri/Lineare.typ"
+== Funzione di Eulero
+#include "Numeri/Eulero.typ"
+== Teorema di Fermat-Eulero
+#include "Numeri/Fermat.typ"
+#pagebreak()

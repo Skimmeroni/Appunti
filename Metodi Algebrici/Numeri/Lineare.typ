@@ -109,15 +109,6 @@ della soluzione particolare di tale equazione.
 	("MCD"(a, n) - 1)$.
 ]
 
-#example[
-	La congruenza lineare dell'@Example-congruence-solution, che aveva
-	per soluzione particolare $c = 5$. Avendosi $"MCD"(21, 30) = 3$, si
-	ha $frac(30, 3) = 10$. Pertanto, tale congruenza lineare ha per
-	soluzioni ogni intero nella forma $6 + 10 h$ con $h in bb(Z)$. In
-	particolare, le soluzioni non congruenti modulo $n$ fra di loro sono
-	$c = 6$, $c = 16$ e $c = 26$.
-]
-
 Sia $[a]_(n)$ una classe di resto invertibile, e si supponga di volerne
 trovarne l'inverso $[a]^(-1)_(n)$. É sufficiente osservare come l'espressione
 $[a]_(n) [a]^(-1)_(n) = [1]_(n)$ equivalga a $a dot.op a^(-1) equiv 1 mod n$.
@@ -266,5 +257,5 @@ soluzione che sia comune a tutte.
 	$ c = sum_(i = 1)^(3) N_(i) y_(i) b_(i) =
 	  35 dot.op 2 dot.op 2 + 21 dot.op 1 dot.op 3 + 15 dot.op 1 dot.op 2 = 233 $
 
-	E da tutti gli interi a questo congruenti modulo $N$.
+	E da tutti gli interi a questo congruenti modulo $105$.
 ]

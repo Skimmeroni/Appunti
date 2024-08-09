@@ -35,6 +35,45 @@ questo motivo, non é limitativo considerare $n > 0$.
 	c d mod n$.
 ]
 
+#example[
+	La congruenza lineare dell'@Example-congruence-solution, che aveva
+	per soluzione particolare $c = 5$. Avendosi $"MCD"(21, 30) = 3$, si
+	ha $frac(30, 3) = 10$. Pertanto, tale congruenza lineare ha per
+	soluzioni ogni intero nella forma $6 + 10 h$ con $h in bb(Z)$. In
+	particolare, le soluzioni non congruenti modulo $n$ fra di loro sono
+	$c = 6$, $c = 16$ e $c = 26$.
+]
+
+#lemma[
+	Siano $a, b, c, n in bb(Z)$, con $c != 0$. Allora $a c equiv b c mod n$
+	equivale a $a equiv b mod frac(n, "MCD"(c, n))$.
+] <Simplification-law-congruences>
+#proof[
+	Per definizione di congruenza modulo $n$, l'espressione $a c equiv b c
+	mod n$ equivale a $n | a c - b c$. Deve allora esistere un certo $q in
+	bb(Z)$ tale per cui $a c - b c = n q$, ovvero $(a - b) c = n q$. Siano
+	$c = tilde(c) "MCD"(c, n)$ e $n = tilde(n) "MCD"(c, n)$. Si ha:
+
+	$ (a - b) c = n q => (a - b) tilde(c) cancel("MCD"(c, n)) =
+	  tilde(n) cancel("MCD"(c, n)) q => (a - b) tilde(c) = tilde(n) q =>
+	  tilde(n) | (a - b) tilde(c) $
+
+	Per il @Euclid-lemma, almeno una delle due proposizioni fra $tilde(n) |
+	a - b$ e $tilde(n) | tilde(c)$ deve essere vera. La prima proposizione
+	equivale a $a equiv b mod tilde(n)$; ricordando la definizione di $tilde(n)$,
+	si ha $a equiv b mod frac(n, "MCD"(c, n))$.
+]
+
+#corollary("Legge di cancellazione per le congruenze lineari")[
+	Siano $a, b, c, n in bb(Z)$, con $c$ non nullo e con $c$ ed $n$ coprimi.
+	Allora $a c equiv b c mod n$ equivale a $a equiv b mod n$.
+] <Cancellation-law-congruences>
+#proof[
+	Se $c$ ed $n$ sono coprimi, allora $"MCD"(c, n) = 1$. Applicando il
+	@Simplification-law-congruences, si ha che $a c equiv b c mod n$
+	equivale a $a equiv b mod frac(n, 1)$, ovvero $a equiv b mod n$.
+]
+
 #theorem[
 	Per ogni numero intero $n > 0$, la congruenza modulo $n$ é una
 	relazione di equivalenza su $bb(Z)$.
