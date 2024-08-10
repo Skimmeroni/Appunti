@@ -53,6 +53,30 @@
 #include "Numeri/Lineare.typ"
 == Funzione di Eulero
 #include "Numeri/Eulero.typ"
+// == Binomio di Newton
+// #include "Numeri/Newton.typ"
 == Teorema di Fermat-Eulero
 #include "Numeri/Fermat.typ"
+== Test di primalitá
+#include "Numeri/Primalita.typ"
+// == Numeri di Carmichael
+// #include "Numeri/Carmichael.typ"
 #pagebreak()
+
+/*
+Permutazioni
+Potenze modulo m
+Anelli e campi
+Polinomi su un campo
+Sottogruppi. Ideali. Morfismi
+Costruzione di campi
+Radici di un polinomio
+*/
+
+/*
+Crittografia
+Firma digitale tramite RSA
+Teoria dei Codici: introduzione
+Codici Lineari
+Codici Ciclici
+*/
