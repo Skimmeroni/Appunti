@@ -65,7 +65,6 @@
 
 /*
 Permutazioni
-Potenze modulo m
 Polinomi su un campo
 Sottogruppi. Ideali. Morfismi
 Costruzione di campi
