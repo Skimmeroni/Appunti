@@ -43,10 +43,10 @@ per cui $a x_(0) + b y_(0) = c$.
 
 	#set math.mat(delim: none)
 	$ mat(
-		74 & = 22 dot.op 3 + 8;
-		22 & = 8 dot.op 2 + 6;
-		8  & = 6 dot.op 1 + 2;
-		6  & = 2 dot.op 3;
+		74 & = 22 dot 3 + 8;
+		22 & = 8 dot 2 + 6;
+		8  & = 6 dot 1 + 2;
+		6  & = 2 dot 3;
 	) $
 
 	Da cui si ricava $"MCD"(74, 22) = 2$. Essendo $2 | 10$, si ha che l'equazione ammette
@@ -83,9 +83,9 @@ e moltiplicare il risultato per $frac(c, "MCD"(a, b))$.
 
 	#set math.mat(delim: none)
 	$ mat(
-		74 & = 22 dot.op 3 + 8 => a = 3 b + 8 => a - 3 b = 8;
-		22 & = 8 dot.op 2 + 6 => b = 2(a - 3 b) + 6 => 7 b - 2a = 6;
-		8  & = 6 dot.op 1 + 2 => (a - 3 b) = (7 b - 2 a) + 2 => 3 a - 10 b = 2;
+		74 & = 22 dot 3 + 8 => a = 3 b + 8 => a - 3 b = 8;
+		22 & = 8 dot 2 + 6 => b = 2(a - 3 b) + 6 => 7 b - 2a = 6;
+		8  & = 6 dot 1 + 2 => (a - 3 b) = (7 b - 2 a) + 2 => 3 a - 10 b = 2;
 	) $
 
 	Si ha quindi $(x_(0) ', y_(0) ') = (3, -10)$. Essendo $frac(10, "MCD"(74, 22)) = 5$,

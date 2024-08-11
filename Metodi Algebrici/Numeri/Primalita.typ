@@ -40,7 +40,7 @@ primi.
 	Se $q$ fosse maggiore di $p$, allora non sarebbe rilevante ai
 	fini del test, perché $p$ verrebbe scoperto prima di $q$ ed
 	il test terminerebbe comunque. L'unico caso rilevante si ha
-	con $p = q$, ovvero $n = p dot.op p = p^(2)$, da cui si ha
+	con $p = q$, ovvero $n = p dot p = p^(2)$, da cui si ha
 	$sqrt(n) = p$. Dato che $p$ é stato scelto casualmente, si ha
 	che deve esistere almeno un $p$ con queste caratteristiche
 	nell'intervallo $(1, n)$.
@@ -83,6 +83,7 @@ semplicemente come pseudoprimi.
 	alla base $b$.
 ]
 // #proof[
+// Dimostrabile, da aggiungere
 // ]
 
 Alla luce dei risultati trovati, é possibile enunciare un semplice algoritmo,
@@ -123,6 +124,7 @@ primo.
 	$0 < b < n$ e $"MCD"(b, n) = 1$.
 ] <Fermat-pseudoprime-estimate>
 // #proof[
+// Dimostrabile, da aggiungere
 // ]
 
 Il @Fermat-pseudoprime-estimate permette di dare una stima della probabilitá che

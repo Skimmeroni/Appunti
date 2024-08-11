@@ -57,13 +57,13 @@ detto *numero composto*.
 	con $a, b in bb(Z)$, e per definizione $p | a$ oppure $p | b$.
 
 	Si supponga che la proposizione sia vera per $n$, ovvero che $p$ sia
-	il divisore di almeno uno dei fattori del prodotto $a_(1) dot.op a_(2)
-	dot.op ... dot.op a_(n)$, con $a_(1), ..., a_(n) in bb(Z)$ sapendo che
+	il divisore di almeno uno dei fattori del prodotto $a_(1) dot a_(2)
+	dot ... dot a_(n)$, con $a_(1), ..., a_(n) in bb(Z)$ sapendo che
 	é divisore del prodotto stesso. Si dimostri pertanto che $p$ sia il
-	divisore di almeno uno dei fattori del prodotto $a_(1) dot.op a_(2)
-	dot.op ... dot.op a_(n + 1)$ sapendo che vale $p | (a_(1) dot.op ...
-	dot.op a_(n + 1))$. Sia $b = a_(1) dot.op a_(2) dot.op ... dot.op a_(n)$:
-	é possibile allora scrivere $p | b dot.op a_(n + 1)$. Si ha quindi $p |
+	divisore di almeno uno dei fattori del prodotto $a_(1) dot a_(2)
+	dot ... dot a_(n + 1)$ sapendo che vale $p | (a_(1) dot ...
+	dot a_(n + 1))$. Sia $b = a_(1) dot a_(2) dot ... dot a_(n)$:
+	é possibile allora scrivere $p | b dot a_(n + 1)$. Si ha quindi $p |
 	a_(n + 1)$ oppure $p | b$: se vale $p | a_(n + 1)$ il lemma é provato
 	immediatamente, mentre se vale $p | b$ allora $p$ divide almeno uno
 	dei fattori di $b$ per l'ipotesi induttiva, ed il lemma é provato
@@ -78,11 +78,11 @@ evidenza la loro molteplicitá. Naturalmente, la fattorizzazione in
 numeri primi di un numero primo é sé stesso.
 
 #example[
-	Il numero $386672$ puó venire riscritto come $11 dot.op 13 dot.op
-	13 dot.op 13 dot.op 2 dot.op 2 dot.op 2 dot.op 2$. Questa é una
+	Il numero $386672$ puó venire riscritto come $11 dot 13 dot
+	13 dot 13 dot 2 dot 2 dot 2 dot 2$. Questa é una
 	fattorizzazione in numeri primi, perché 11, 13 e 2 sono numeri primi.
-	Tale fattorizzazione viene in genere scritta come $11 dot.op 13^(3)
-	dot.op 2^(4)$.
+	Tale fattorizzazione viene in genere scritta come $11 dot 13^(3)
+	dot 2^(4)$.
 ]
 
 #theorem("Teorema fondamentale dell'aritmetica")[
@@ -105,9 +105,9 @@ numeri primi di un numero primo é sé stesso.
 	$b$. Si ha allora $n = a b$, con $2 lt.eq a$ e $b < n$. Essendo sia $a$
 	che $b$ minori di $n$, vale per questi l'ipotesi induttiva, ed esiste quindi
 	una fattorizzazione in numeri primi sia per $a$ che per $b$, siano queste
-	rispettivamente $a_(1) dot.op ... dot.op a_(h)$ e $b_(1) dot.op ... dot.op
+	rispettivamente $a_(1) dot ... dot a_(h)$ e $b_(1) dot ... dot
 	b_(k)$. É allora possibile fattorizzare $n$ in numeri primi come $(a_(1)
-	dot.op ... dot.op a_(h)) dot.op (b_(1) dot.op ... dot.op b_(k))$, pertanto
+	dot ... dot a_(h)) dot (b_(1) dot ... dot b_(k))$, pertanto
 	(almeno) una fattorizzazione in numeri primi per $n$ esiste.
 
 	Per provare l'unicitá della fattorizzazione in numeri primi di $n$, si proceda
@@ -163,7 +163,7 @@ procedere, ovvero fintanto che tale risultato sia diverso da 1.
 #proof[
 	Si supponga per assurdo che questo non sia vero, e che i numeri primi
 	siano quindi un insieme finito: sia tale insieme ${p_(1), p_(2), ...,
-	p_(k)}$. Sia $M = 1 + (p_(1) dot.op p_(2) dot.op ... dot.op p_(k))$:
+	p_(k)}$. Sia $M = 1 + (p_(1) dot p_(2) dot ... dot p_(k))$:
 	essendo 2 il numero primo piú piccolo, si avrá certamente $M gt.eq 2$.
 	Essendo poi l'insieme $bb(Z)$ chiuso rispetto al prodotto e alla somma,
 	si ha $M in bb(Z)$. Sono allora valide le ipotesi del @Fundamental-Arithmetic,
@@ -171,7 +171,7 @@ procedere, ovvero fintanto che tale risultato sia diverso da 1.
 	tale fattorizzazione esiste, allora ciascun elemento $p_(i)$ di tale
 	fattorizzazione deve esserne anche un divisore. Questo peró non é possibile,
 	perché se si avesse $p_(i) | M$ per un qualsiasi $1 lt.eq i lt.eq k$ allora
-	si avrebbe anche $p_(i) | 1 = M - (p_(1) dot.op p_(2) dot.op ... dot.op p_(k))$,
+	si avrebbe anche $p_(i) | 1 = M - (p_(1) dot p_(2) dot ... dot p_(k))$,
 	e non esiste alcun numero che sia divisore di 1. Occorre pertanto assumere
 	che i numeri primi siano infiniti.
 ]

@@ -14,7 +14,7 @@ divisione per $n$ restituisce il medesimo resto.
 ]
 
 La definizione puó essere estesa anche al caso in cui $n = 0$. Si noti
-infatti come, se vale $n = 0$, si ha $a - b = 0 dot.op k$, ovvero $a = b$.
+infatti come, se vale $n = 0$, si ha $a - b = 0 dot k$, ovvero $a = b$.
 Pertanto, la congruenza modulo 0 coincide semplicemente con la relazione
 di uguaglianza in $bb(Z)$.
 
@@ -186,11 +186,11 @@ di somma e di prodotto. Siano $[a]_(n)$ e $[b]_(n)$ due classi di resto modulo
 $n$. La somma ed il prodotto sono definiti come:
 
 $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
-  [a]_(n) dot.op [b]_(n) = [a b]_(n) $
+  [a]_(n) dot [b]_(n) = [a b]_(n) $
 
 #example[
 	in $bb(Z)_(5)$, si ha $[1]_(5) + [3]_(5) = [3 + 1]_(5) = [4]_(5)$ e
-	$[2]_(5) dot.op [3]_(5) = [2 dot.op 3]_(5) = [6]_(5)$
+	$[2]_(5) dot [3]_(5) = [2 dot 3]_(5) = [6]_(5)$
 ]
 
 #lemma[
@@ -198,7 +198,7 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
 	tali per cui $[a]_(n) = [b]_(n)$ e $[c]_(n) = [d]_(n)$. Allora vale:
 
 	$ [a]_(n) + [c]_(n) = [b]_(n) + [d]_(n) space.fig space.fig space.fig
-	  [a]_(n) dot.op [c]_(n) = [b]_(n) dot.op [d]_(n) $
+	  [a]_(n) dot [c]_(n) = [b]_(n) dot [d]_(n) $
 ]
 #proof[
 	Poichè $[a]_(n) = [b]_(n)$ e $[c]_(n) = [d]_(n)$ si ha, per definizione
@@ -209,7 +209,7 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
 	$ mat(
 	  a + c = b + n k + d + n h =>
 	  a + c = (b + d) + n(h + k);
-	  a dot.op c = (b + n k) dot.op (d + n h) =>
+	  a dot c = (b + n k) dot (d + n h) =>
 	  a c = b d + b n h + n k d + n^(2) k h =>
 	  a c = b d + n(b h + d k + n k h)
 	) $
@@ -263,46 +263,46 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
 ]
 
 #theorem[
-	La struttura algebrica $(bb(Z)_(n), dot.op)$, formata dalla classe di resti
+	La struttura algebrica $(bb(Z)_(n), dot)$, formata dalla classe di resti
 	modulo $n$ e dal prodotto su questi definito, é un monoide abeliano.
 ]
 #proof[
-	La struttura algebrica $(bb(Z)_(n), dot.op)$ é:
+	La struttura algebrica $(bb(Z)_(n), dot)$ é:
 
-	- un semigruppo, perché l'operazione $dot.op$ cosí definita gode della
+	- un semigruppo, perché l'operazione $dot$ cosí definita gode della
 	  proprietá associativa. Questo é determinato dal fatto che l'usuale
 	  prodotto in $bb(Z)$ gode di tale proprietá:
 
-	  $ ([a]_(n) dot.op [b]_(n)) dot.op [c]_(n) = & [a dot.op b]_(n) dot.op [c]_(n) =
-	    [(a dot.op b) dot.op c]_(n) = [a dot.op (b dot.op c)]_(n) \ = & [a]_(n) dot.op
-	    [b dot.op c]_(n) = [a]_(n) dot.op ([b]_(n) dot.op [c]_(n)) $
+	  $ ([a]_(n) dot [b]_(n)) dot [c]_(n) = & [a dot b]_(n) dot [c]_(n) =
+	    [(a dot b) dot c]_(n) = [a dot (b dot c)]_(n) \ = & [a]_(n) dot
+	    [b dot c]_(n) = [a]_(n) dot ([b]_(n) dot [c]_(n)) $
 
-	- un monoide, perché per l'operazione $dot.op$ cosí definita esiste l'elemento
+	- un monoide, perché per l'operazione $dot$ cosí definita esiste l'elemento
 	  neutro. Tale elemento é $[1]_(n)$, infatti preso un qualsiasi $[a]_(n)
 	  in bb(Z)_(n)$:
 
-	  $ [1]_(n) dot.op [a]_(n) = [a]_(n) dot.op [1]_(n) = [a dot.op 1]_(n) = [1 dot.op a]_(n) = [a]_(n) $
+	  $ [1]_(n) dot [a]_(n) = [a]_(n) dot [1]_(n) = [a dot 1]_(n) = [1 dot a]_(n) = [a]_(n) $
 
-	Inoltre, $dot.op$ gode della proprietá commutativa. Infatti:
+	Inoltre, $dot$ gode della proprietá commutativa. Infatti:
 
-	$ [a]_(n) dot.op [b]_(n) = [a dot.op b]_(n) = [b dot.op a]_(n) = [b]_(n) dot.op [a]_(n) $
+	$ [a]_(n) dot [b]_(n) = [a dot b]_(n) = [b dot a]_(n) = [b]_(n) dot [a]_(n) $
 
-	Pertanto, $(bb(Z)_(n), dot.op)$ é un monoide abeliano.
+	Pertanto, $(bb(Z)_(n), dot)$ é un monoide abeliano.
 ]
 
 Un elemento $[a]_(n)$ in $bb(Z)_(n)$ si dice *invertibile* in $bb(Z)_(n)$
 (rispetto al prodotto) se esiste $[b]_(n) in bb(Z)_(n)$ tale per cui
-$[a]_(n) dot.op [b]_(n) = [1]_(n)$; $[b]_(n)$ viene detto _inverso_
+$[a]_(n) dot [b]_(n) = [1]_(n)$; $[b]_(n)$ viene detto _inverso_
 di $[a]_(n)$.
 
 #example[
 	- Se vale $[a]_(7) = [3]_(7)$, allora esiste $[b]_(7) in bb(Z)_(7)$ tale per cui
-	  $[3]_(7) dot.op [b]_(7) = [1]_(7)$. Tale $[b]_(7)$ é $[5]_(7)$, in quanto
+	  $[3]_(7) dot [b]_(7) = [1]_(7)$. Tale $[b]_(7)$ é $[5]_(7)$, in quanto
 	  $[3]_(7) [5]_(7) = [15]_(7) = [1]_(7)$;
 	- Se vale $[a]_(6) = [3]_(6)$, allora non esiste alcun $[b]_(6) in bb(Z)_(6)$ tale
 	  per cui $[3]_(6) [b]_(6) = [1]_(6)$;
 	- Se vale $[a]_(n) = [0]_(n)$ per un qualsiasi $n in bb(N)$, per ogni $[b]_(n) in
-	  bb(Z)_(n)$, risulta $[0]_(n) [b]_(n) = [0 dot.op b]_(n) = [0]_(n)$. Pertanto,
+	  bb(Z)_(n)$, risulta $[0]_(n) [b]_(n) = [0 dot b]_(n) = [0]_(n)$. Pertanto,
 	  affinché esista un $[b]_(n) in bb(Z)_(n)$ tale per cui valga $[0]_(n) [b]_(n) =
 	  [1]_(n)$, deve valere $[0]_(n) = [1]_(n)$, ovvero $0 equiv 1 mod n$. Questo si
 	  verifica soltanto se $n = 1$, pertanto un invertibile per $[a]_(n) = [0]_(n)$

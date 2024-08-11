@@ -68,7 +68,7 @@ sull'insieme $bb(N)$ sono la *somma* ed il *prodotto*.
 	É possibile applicarvi il principio di induzione ponendo
 	$n_(0) = 1$. Nello specifico:
 
-	- $P(1)$ é vera. Infatti, $sum_(i = 1)^(1) (2i - 1) = (2 dot.op 1)
+	- $P(1)$ é vera. Infatti, $sum_(i = 1)^(1) (2i - 1) = (2 dot 1)
 	  - 1 = 2 - 1 = 1$ e $1^(2) = 1$;
 	- Supponendo che sia vera $P(n)$, si dimostri che é vera $P(n + 1)$,
 	  ovvero che sia vera $sum_(i = 1)^(n + 1) (2i - 1) = (n + 1)^(2)$.

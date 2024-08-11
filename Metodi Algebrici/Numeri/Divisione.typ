@@ -15,7 +15,7 @@ difetto ed il resto $r = n - m q$ misura lo scarto.
 
 	- Se $n = 0$, si ha $0 = m q + r$, ovvero $m q = -r$. In effetti, esiste una
 	  ed una sola coppia di numeri interi $q$ ed $r$ per i quali tale uguaglianza é
-	  verificata, ovvero $0, 0$. Infatti, $m dot.op 0 = -0 = 0$ e $0 lt.eq 0 < |m|$;
+	  verificata, ovvero $0, 0$. Infatti, $m dot 0 = -0 = 0$ e $0 lt.eq 0 < |m|$;
 	- Assumendo che esista una ed una sola coppia di numeri interi $q$ ed $r$ tali
 	  per cui $n = m q + r$ e $0 lt.eq r < |m|$, si dimostri che esista una ed una
 	  sola coppia di numeri interi $q'$ ed $r'$ tali per cui $(n + 1) = m q' + r'$
@@ -164,12 +164,12 @@ nulli, il loro MCD. Tale algoritmo é strutturato come segue:
 
 	#set math.mat(delim: none)
 	$ mat(
-		110143 & = 665 dot.op 165 + 418 &;
-		665 & = 418 dot.op 1 + 247 &;
-		418 & = 247 dot.op 1 + 171 &;
-		247 & = 171 dot.op 1 + 76 &;
-		171 & = 76 dot.op 2 + 19 &;
-		76 & = 19 dot.op 4 &;
+		110143 & = 665 dot 165 + 418 &;
+		665 & = 418 dot 1 + 247 &;
+		418 & = 247 dot 1 + 171 &;
+		247 & = 171 dot 1 + 76 &;
+		171 & = 76 dot 2 + 19 &;
+		76 & = 19 dot 4 &;
 	) $
 ]
 
@@ -212,11 +212,11 @@ noto. Tale algoritmo é strutturato come segue:
 
 	#set math.mat(delim: none)
 	$ mat(
-		110143 & = 665 dot.op 165 + 418 & => & a & = & 165 b + 418 & => & a - 165 b & = & 418 &;
-		665 & = 418 dot.op 1 + 247 & => & b & = & a - 165 b + 247 & => & 166 b - a & = & 247;
-		418 & = 247 dot.op 1 + 171 & => & a - 165 b & = & 166 b - a + 171 & => & 2 a - 331 b & = & 171;
-		247 & = 171 dot.op 1 + 76 & => & 166 b - a & = & 2 a - 331 b + 76 & => & 497 b - 3 a & = & 76;
-		171 & = 76 dot.op 2 + 19 & => & 2 a - 331 b & = & 2(497 b - 3 a) + 19 & => & 8 a - 1325 b & = & 19;
+		110143 & = 665 dot 165 + 418 & => & a & = & 165 b + 418 & => & a - 165 b & = & 418 &;
+		665 & = 418 dot 1 + 247 & => & b & = & a - 165 b + 247 & => & 166 b - a & = & 247;
+		418 & = 247 dot 1 + 171 & => & a - 165 b & = & 166 b - a + 171 & => & 2 a - 331 b & = & 171;
+		247 & = 171 dot 1 + 76 & => & 166 b - a & = & 2 a - 331 b + 76 & => & 497 b - 3 a & = & 76;
+		171 & = 76 dot 2 + 19 & => & 2 a - 331 b & = & 2(497 b - 3 a) + 19 & => & 8 a - 1325 b & = & 19;
 	) $
 ]
 

@@ -66,6 +66,8 @@
 = Gruppi
 == Proprietá dei gruppi
 #include "Gruppi/Proprieta.typ"
+== Polinomi
+#include "Gruppi/Polinomi.typ"
 
 /*
 Permutazioni

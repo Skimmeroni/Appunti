@@ -12,8 +12,8 @@ soluzione.
 
 #example[
 	Si consideri la congruenza lineare $2 x equiv 3 mod 7$. Una possibile soluzione
-	per tale congruenza é $c = 5$, dato che $2 dot.op 5 = 10$ ed effettivamente
-	$10 equiv 3 mod 7$. Anche $c = 26$ é una possibile soluzione, dato che $2 dot.op
+	per tale congruenza é $c = 5$, dato che $2 dot 5 = 10$ ed effettivamente
+	$10 equiv 3 mod 7$. Anche $c = 26$ é una possibile soluzione, dato che $2 dot
 	26 = 52 equiv 3 mod 7$.
 ] <Congruence>
 
@@ -53,13 +53,13 @@ della soluzione particolare di tale equazione.
 	#set math.mat(delim: none)
 	$
 		mat(
-			30 & = 21 dot.op 1 + 9;
-			21 & = 9 dot.op 2 + 3;
-			9 & = 3 dot.op 3 + 0;
+			30 & = 21 dot 1 + 9;
+			21 & = 9 dot 2 + 3;
+			9 & = 3 dot 3 + 0;
 		)
 		space.fig space.fig space.fig
 		mat(
-			b & = a dot.op 1 + 9 => 9 = b - a;
+			b & = a dot 1 + 9 => 9 = b - a;
 			a & = 2 (b - a) + 3 => 3 = 3 a - 2 b;
 		)
 		space.fig space.fig space.fig
@@ -111,7 +111,7 @@ della soluzione particolare di tale equazione.
 
 Sia $[a]_(n)$ una classe di resto invertibile, e si supponga di volerne
 trovarne l'inverso $[a]^(-1)_(n)$. É sufficiente osservare come l'espressione
-$[a]_(n) [a]^(-1)_(n) = [1]_(n)$ equivalga a $a dot.op a^(-1) equiv 1 mod n$.
+$[a]_(n) [a]^(-1)_(n) = [1]_(n)$ equivalga a $a dot a^(-1) equiv 1 mod n$.
 Pertanto, occorre risolvere tale congruenza lineare con $a^(-1)$ come incognita
 e sceglierne una soluzione qualsiasi, essendo tutte equivalenti. Per convenzione,
 si preferisce scegliere la soluzione piú piccola.
@@ -181,7 +181,7 @@ soluzione che sia comune a tutte.
 	Allora il sistema é risolubile. In particolare, se $c$ e $c'$ sono due
 	soluzioni, allora vale:
 
-	$ c equiv c' mod N " dove " N = n_(1) dot.op n_(2) dot.op ... dot.op n_(m) =
+	$ c equiv c' mod N " dove " N = n_(1) dot n_(2) dot ... dot n_(m) =
 	  product_(i = 1)^(m) n_(i) $
 ] <Chinese-remainder-theorem>
 #proof[
@@ -193,8 +193,8 @@ soluzione che sia comune a tutte.
 
 	Infatti, si supponga per assurdo che $"MCD"(N_(i), n_(i)) != 1$. Deve allora
 	esistere un numero primo $p$ tale per cui $p | n_(i)$ e $p | N_(i)$, ovvero
-	che é divisore sia di $n_(i)$ che di $N_(i)$. Essendo $N_(i) = n_(1) dot.op
-	... dot.op n_(i - 1) dot.op n_(i + 1) dot.op ... dot.op n_(m)$, per il
+	che é divisore sia di $n_(i)$ che di $N_(i)$. Essendo $N_(i) = n_(1) dot
+	... dot n_(i - 1) dot n_(i + 1) dot ... dot n_(m)$, per il
 	@Euclid-lemma deve esistere un $n_(j)$ con $j != i$ tale per cui $p | n_(j)$.
 	Ma allora, valendo sia $p | n_(i)$ sia $p | n_(j)$, si ha che $n_(i)$ ed $n_(j)$
 	hanno un divisore in comune, e quindi non sono primi, contro l'ipotesi che invece
@@ -236,7 +236,7 @@ soluzione che sia comune a tutte.
 	noti a destra sono tutti positivi e sono tutti coprimi fra di loro a due a
 	due.
 
-	Si ha allora $N = 3 dot.op 5 dot.op 7 = 105$. Per ciascuna congruenza lineare
+	Si ha allora $N = 3 dot 5 dot 7 = 105$. Per ciascuna congruenza lineare
 	del sistema si calcoli $N_(i) = frac(N, n_(i))$:
 
 	$ N_(1) = frac(N, n_(1)) = frac(105, 3) = 35 space.fig space.fig space.fig
@@ -255,7 +255,7 @@ soluzione che sia comune a tutte.
 	La soluzione del sistema é allora data da:
 
 	$ c = sum_(i = 1)^(3) N_(i) y_(i) b_(i) =
-	  35 dot.op 2 dot.op 2 + 21 dot.op 1 dot.op 3 + 15 dot.op 1 dot.op 2 = 233 $
+	  35 dot 2 dot 2 + 21 dot 1 dot 3 + 15 dot 1 dot 2 = 233 $
 
 	E da tutti gli interi a questo congruenti modulo $105$.
 ]

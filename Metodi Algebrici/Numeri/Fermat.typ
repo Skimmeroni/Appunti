@@ -49,10 +49,10 @@
 	elementi del primo insieme deve essere uguale al prodotto degli elementi
 	del secondo insieme:
 
-	$ [a]_(p) dot.op [2 a]_(p) dot.op ... dot.op [(p - 1)a]_(p) & =
-	  [1]_(p) dot.op [2]_(p) dot.op ... dot.op [(p - 1)]_(p) => \
-	  [a dot.op 2 a dot.op ... dot.op (p - 1)a]_(p) & =
-	  [1 dot.op 2 dot.op ... dot.op (p - 1)]_(p) => \
+	$ [a]_(p) dot [2 a]_(p) dot ... dot [(p - 1)a]_(p) & =
+	  [1]_(p) dot [2]_(p) dot ... dot [(p - 1)]_(p) => \
+	  [a dot 2 a dot ... dot (p - 1)a]_(p) & =
+	  [1 dot 2 dot ... dot (p - 1)]_(p) => \
 	  [a^(p - 1) (p - 1)!]_(p) & =
 	  [(p - 1)!]_(p) $
 
@@ -170,11 +170,11 @@ Si costruisca poi una tabella come quella seguente:
 
 $ mat(
 	space,   c_(0) & = 1;
-	d_(k - 1), c_(1) & equiv c_(0)^(2) dot.op a^(d_(k - 1)) mod n;
-	d_(k - 2), c_(2) & equiv c_(1)^(2) dot.op a^(d_(k - 2)) mod n;
+	d_(k - 1), c_(1) & equiv c_(0)^(2) dot a^(d_(k - 1)) mod n;
+	d_(k - 2), c_(2) & equiv c_(1)^(2) dot a^(d_(k - 2)) mod n;
 	dots.v, & dots.v ;
-	d_(1),     c_(k - 1) & equiv c_(k - 2)^(2) dot.op a^(d_(1)) mod n;
-	d_(0),     c_(k) & equiv c_(k - 1)^(2) dot.op a^(d_(0)) mod n;
+	d_(1),     c_(k - 1) & equiv c_(k - 2)^(2) dot a^(d_(1)) mod n;
+	d_(0),     c_(k) & equiv c_(k - 1)^(2) dot a^(d_(0)) mod n;
 	delim: "[",
 	augment: #1
 ) $
@@ -186,13 +186,13 @@ Risulta $a^(m) equiv c_(k) mod n$.
 
 	$ mat(
 		space, c_(0) & = 1;
-		1, c_(1) & equiv 1^(2) dot.op 3^(1) = 3 mod 91;
-		0, c_(2) & equiv 3^(2) dot.op 3^(0) = 9 mod 91;
-		1, c_(3) & equiv 9^(2) dot.op 3^(1) = 273 equiv -30 mod 91;
-		1, c_(4) & equiv (-30)^(2) dot.op 3^(1) = 2700 equiv -30 mod 91;
-		0, c_(5) & equiv (-30)^(2) dot.op 3^(0) = 900 equiv -10 mod 91;
-		1, c_(6) & equiv (-10)^(2) dot.op 3^(1) = 300 equiv 27 mod 91;
-		0, c_(7) & equiv (27)^(2) dot.op 3^(0) = 729 equiv 1 mod 91;
+		1, c_(1) & equiv 1^(2) dot 3^(1) = 3 mod 91;
+		0, c_(2) & equiv 3^(2) dot 3^(0) = 9 mod 91;
+		1, c_(3) & equiv 9^(2) dot 3^(1) = 273 equiv -30 mod 91;
+		1, c_(4) & equiv (-30)^(2) dot 3^(1) = 2700 equiv -30 mod 91;
+		0, c_(5) & equiv (-30)^(2) dot 3^(0) = 900 equiv -10 mod 91;
+		1, c_(6) & equiv (-10)^(2) dot 3^(1) = 300 equiv 27 mod 91;
+		0, c_(7) & equiv (27)^(2) dot 3^(0) = 729 equiv 1 mod 91;
 		delim: "[",
 		augment: #1
 	) $

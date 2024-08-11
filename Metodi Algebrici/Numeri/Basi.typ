@@ -79,7 +79,7 @@ effettuare la conversione. Infatti, sono necessarie solo $k$ moltiplicazioni
 per $b$ e $k$ addizioni.
 
 #example[
-	$ 61405_(7) = (((6 dot.op 7 + 1)7 + 4)7 + 0)7 + 5 =
+	$ 61405_(7) = (((6 dot 7 + 1)7 + 4)7 + 0)7 + 5 =
 	((42 + 1)7 + 4)49 + 5 = (301 + 4)49 + 5 = 14950 $
 ]
 
@@ -99,11 +99,11 @@ E cosı̀ via, finchè non si ottiene quoziente nullo.
 
 #example[
 $ mat(
-	14950 & = 7 dot.op 2135 + 5;
-	2135 & = 7 dot.op 305 + 0;
-	305 & = 7 dot.op 43 + 4;
-	43 & = 7 dot.op 6 + 1;
-	6 & = 7 dot.op 0 + 6;
+	14950 & = 7 dot 2135 + 5;
+	2135 & = 7 dot 305 + 0;
+	305 & = 7 dot 43 + 4;
+	43 & = 7 dot 6 + 1;
+	6 & = 7 dot 0 + 6;
 ) $
 
 Leggendo dal basso verso l'alto, si ha $14950 = 61405_(7)$

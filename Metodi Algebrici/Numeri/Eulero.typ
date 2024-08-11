@@ -140,11 +140,11 @@ soprattutto per numeri molto grandi, perché richiede solamente la fattorizzazio
 in numeri primi e semplici moltiplicazioni.
 
 #example[
-	Sia $n = 246064$. La sua fattorizzazione in numeri primi é $2^(4) dot.op 7
-	dot.op 13^(3)$. Si ha:
+	Sia $n = 246064$. La sua fattorizzazione in numeri primi é $2^(4) dot 7
+	dot 13^(3)$. Si ha:
 
 	$ phi(246064) = product_(i = 1)^(3) p_(i)^(alpha_(i) − 1) (p_(i) − 1) =
-	  2^(4 − 1) (2 − 1) dot.op 7^(1 − 1) (7 − 1) dot.op 13^(3 − 1) (13 − 1) = 97344 $
+	  2^(4 − 1) (2 − 1) dot 7^(1 − 1) (7 − 1) dot 13^(3 − 1) (13 − 1) = 97344 $
 ]
 
 #theorem[

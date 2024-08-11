@@ -2,10 +2,12 @@
 
 Un insieme $A$ su cui sono definite $n$ operazioni $f_(1), ..., f_(n)$
 prende il nome di *struttura algebrica* e si indica con $(A, f_(1), ...,
-f_(n))$. Dato che, nella maggior parte dei casi, le operazioni $f_(1),
-..., f_(n)$ delle strutture algebriche sono operazioni binarie, se non
-viene diversamente specificato con "operazione" si intende implicitamente
-"operazione binaria".
+f_(n))$. L'insieme $A$ viene detto *insieme sostegno*, o semplicemente
+*sostegno*, della struttura algebrica.
+
+Dato che, nella maggior parte dei casi, le operazioni $f_(1), ..., f_(n)$
+delle strutture algebriche sono operazioni binarie, se non viene diversamente
+specificato con "operazione" si intende implicitamente "operazione binaria".
 
 La coppia ordinata $(S, *)$, formata dall'insieme $S$ e da una operazione
 $*$ definita su $S$, prende il nome di *semigruppo* se $*$ gode della
@@ -26,16 +28,16 @@ sull'insieme $G$ ammette opposto per ogni elemento di $G$.
 	  +)$, sia un semigruppo che un monoide. É peró anche un gruppo: per
 	  ogni $a in bb(Z)$ esiste sempre un $-a in bb(Z)$ tale per cui $a +
 	  (-a) = (-a) + a = 0$;
-	- La coppia $(bb(Q), dot.op)$, dove $dot.op$ indica il prodotto sui
-	  numeri razionali comunemente inteso, é un semigruppo, perché $dot.op$
-	  gode della proprietá associativa. É anche un monoide, perché $dot.op$
+	- La coppia $(bb(Q), dot)$, dove $dot$ indica il prodotto sui
+	  numeri razionali comunemente inteso, é un semigruppo, perché $dot$
+	  gode della proprietá associativa. É anche un monoide, perché $dot$
 	  ammette elemento neutro (il numero $1$). Non é peró un gruppo, perché
-	  non esiste l'inverso di $0$ rispetto a $dot.op$ (richiederebbe di dividere
+	  non esiste l'inverso di $0$ rispetto a $dot$ (richiederebbe di dividere
 	  per $0$, che non é possibile);
-	- La coppia $(bb(Q) - {0}, dot.op)$ é, per gli stessi motivi per cui lo
-	  é $(bb(Q), dot.op)$, sia un semigruppo che un monoide. É peró anche un
+	- La coppia $(bb(Q) - {0}, dot)$ é, per gli stessi motivi per cui lo
+	  é $(bb(Q), dot)$, sia un semigruppo che un monoide. É peró anche un
 	  gruppo, perché per ogni $a in bb(Q)$ esiste sempre un $frac(1, a) in
-	  bb(Q)$ tale per cui $a dot.op frac(1, a) = frac(1, a) dot.op a = 1$.
+	  bb(Q)$ tale per cui $a dot frac(1, a) = frac(1, a) dot a = 1$.
 ]
 
 Un semigruppo, un monoide ed un gruppo si dicono, rispettivamente, *semigruppo
@@ -62,37 +64,17 @@ diversamente specificato, nel parlare di "anelli" in generale si stará sottoint
 di stare considerando anelli unitari.
 
 #example[
-	- $(bb(Z), +. dot.op)$, $(bb(Q), +, dot.op)$ e $(bb(Z)_(n) , +, dot.op)$
+	- $(bb(Z), +. dot)$, $(bb(Q), +, dot)$ e $(bb(Z)_(n) , +, dot)$
 	  sono anelli commutativi;
 	- $("Mat"(2 times 2, bb(Q)), +, ·)$ é un anello,
 	  ma non é commutativo.
-]
-
-Per comoditá, verranno fatte delle semplificazioni di notazione. Se non
-riportato diversamente:
-
-- L'operazione $*$ verrá intesa come una somma,
-  ed indicata con $+$;
-- L'operazione $compose$ verrá intesa come un prodotto,
-  ed indicato con $dot$;
-- Per indicare $a dot.op b$, il prodotto fra due elementi
-  $a$ e $b$ di $A$, verrá usata la notazione abbreviata $a b$;
-- L'elemento neutro per l'operazione $*$ (la somma)
-  verrá indicato con $0$;
-- Se esiste, l'elemento neutro per l'operazione $compose$ (il prodotto)
-  verrá indicato con $1$.
-
-#lemma[
-	Sia $(A, +, dot.op)$ un gruppo. Per qualsiasi $a, b in A$, vale:
-
-	$ a dot.op 0 = 0 dot.op a = 0 space.fig space.fig space.fig a (−b) − a b = (−a) b $
 ]
 
 L'anello $(A, *, compose)$ prende il nome di *campo* se é commutativo,
 unitario e se $(A - {0}, compose)$ é un gruppo.
 
 #example[
-	- $(bb(Q), +, dot.op)$ é un campo;
-	- $(bb(Z)_(n) , +, dot.op)$ é un campo solamente se $n$ é un numero primo;
-	- $(bb(Z), +, dot.op)$ non é un campo.
+	- $(bb(Q), +, dot)$ é un campo;
+	- $(bb(Z)_(n) , +, dot)$ é un campo solamente se $n$ é un numero primo;
+	- $(bb(Z), +, dot)$ non é un campo.
 ]
