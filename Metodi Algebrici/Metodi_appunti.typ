@@ -63,6 +63,10 @@
 // #include "Numeri/Carmichael.typ"
 #pagebreak()
 
+= Gruppi
+== Proprietá dei gruppi
+#include "Gruppi/Proprieta.typ"
+
 /*
 Permutazioni
 Polinomi su un campo
