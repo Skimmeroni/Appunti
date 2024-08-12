@@ -219,3 +219,57 @@ In questo caso, i polinomi $a(x)$ e $b(x)$ si dicono *coprimi* o
 
 	$ a(x)[4]_(5) + b(x)([2]_(5)x + [4]_(5)) = [1]_(5)x + [2]_(5) $
 ]
+
+Sia $p(x)$ un polinomio in $K[x]$, con $diff p(x) > 0$. Il polinomio
+$p(x)$ si dice *primo* se, per qualsiasi $a(x), b(x) in K[x]$, $p(x)
+| a(x) b(x)$ implica $p(x) | a(x)$ oppure $p(x) | b(x)$.
+
+Il polinomio $p(x) in K[x]$ con $diff p(x) > 0$ viene detto *irriducibile*
+se i suoi divisori sono solo e soltanto i polinomi di grado $0$ ed i
+polinomi nella forma $h p(x)$, con $h in (K - {0})$.
+
+#theorem[
+	Il polinomio $p(x) in K[x]$, con $diff p(x) > 0$ é primo se e
+	solo se é irriducibile (ovvero, le due definizioni sono equivalenti).
+]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
+
+Si dice che un polinomio $p(x) in K[x]$ viene *fattorizzato in polinomi
+primi* quando tale polinomio viene scritto come prodotto di soli polinomi
+primi (non necessariamente distinti) appartenenti a $K[x]$. In genere, una
+fattorizzazione viene espressa raccogliendo a fattor comune i polinomi primi
+per mettere in evidenza la loro molteplicitá. Naturalmente, la fattorizzazione
+in polinomi primi di un polinomio primo é sé stesso, a meno di una costante
+moltiplicativa non nulla.
+
+#example[
+	- Il polinomio $a(x) = x^(2) − 2$ è irriducibile in $bb(Q)[x]$. Non lo
+	  é peró in $bb(R)[x]$, perché ha $b(x) = x + sqrt(2)$ come divisore,
+	  e puó essere infatti fattorizzato come $x^(2) − 2 = (x − sqrt(2))
+	  (x + sqrt(2))$;
+	- Il polinomio $a(x) = x^(2) + 1$ è irriducibile in $bb(R)[x]$. Non lo
+	  è peró in $bb(C)[x]$, perché ha $b(x) = x + i$ come divisore, e puó
+	  essere infatti fattorizzato come $x^(2) + 1 = (x − i)(x + i)$.
+]
+
+#theorem("Teorema fondamentale dell'aritmetica per i polinomi")[
+	Per ogni polinomio $p(x) in K[x]$ tale che $diff p(x) > 0$ esiste
+	uno ed un solo modo per fattorizzarlo in polinomi primi in $K[x]$
+	(a meno dell’ordine in cui si dispongono i fattori).
+]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
+
+#corollary[
+	Ogni polinomio $a(x) in K[x]$ di grado $diff p(x) > 0$ puó essere
+	fattorizzato come $a(x) = k a_(1) (x) ... a_(m) (x)$, dove $k in
+	(K - {0})$ è il coefficiente direttore di $a(x)$ ed i polinomi
+	$a_(1) (x), ..., a_(m) (x)$ sono monici e irriducibili. Tale
+	scrittura è unica, a meno dell'ordine dei fattori.
+]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]

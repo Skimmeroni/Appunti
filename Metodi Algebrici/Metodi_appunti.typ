@@ -66,12 +66,11 @@
 = Gruppi
 == Proprietá dei gruppi
 #include "Gruppi/Proprieta.typ"
-== Polinomi
+== Polinomi su un campo
 #include "Gruppi/Polinomi.typ"
 
 /*
 Permutazioni
-Polinomi su un campo
 Sottogruppi. Ideali. Morfismi
 Costruzione di campi
 Radici di un polinomio
