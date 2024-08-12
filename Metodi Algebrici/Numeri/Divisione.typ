@@ -33,7 +33,8 @@ difetto ed il resto $r = n - m q$ misura lo scarto.
 
 Siano $a$ e $b$ due numeri interi. Se esiste $c in bb(Z)$ tale che $a = b c$,
 si dice che $b$ _divide_ $a$, oppure analogamente che $a$ é _divisibile_ per
-$b$. Per indicare che $b$ divide $a$ viene usata la notazione $b | a$. Se $b$
+$b$. Per indicare che $b$ divide $a$ viene usata la notazione $b | a$; se
+invece $b$ non divide $a$, si usa la notazione $b divides.not a$. Se $b$
 divide $a$, si dice anche che $b$ é _multiplo_ di $a$. É immediato verificare
 che, dato $a in bb(Z)$, sia $plus.minus 1$ che $plus.minus a$ sono certamente
 divisori di $a$.

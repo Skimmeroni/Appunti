@@ -47,7 +47,8 @@ dell'anello $bb(Z)$
 Dati $a(x), b(x) in K[x]$, i due polinomi $q(x), r(x) in K[x]$ che figurano
 nel @Division-of-polynomials sono chiamati rispettivamente *quoziente* e
 *resto* della divisione fra $a(x)$ e $b(x)$. Se $r(x) = 0$, si dice che
-$b(x)$ _divide_ $a(x)$, e si indica con $b(x) | a(x)$.
+$b(x)$ _divide_ $a(x)$, e si indica con $b(x) | a(x)$; se invece $b(x)$
+non divide $a(x)$, si indica con $b(x) divides.not a(x)$.
 
 Il @Division-of-polynomials fornisce implicitamente un algoritmo che permette
 di calcolare la divisione fra due polinomi.

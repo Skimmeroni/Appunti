@@ -47,7 +47,7 @@
 #include "Numeri/Primi.typ"
 == Equazioni Diofantee
 #include "Numeri/Diofantee.typ"
-== Congruenza Modulo $n$ // Da rivedere
+== Congruenza Modulo $n$
 #include "Numeri/Congruenza.typ"
 == Congruenze lineari
 #include "Numeri/Lineare.typ"
@@ -68,12 +68,16 @@
 #include "Gruppi/Proprieta.typ"
 == Polinomi su un campo
 #include "Gruppi/Polinomi.typ"
+== Radici di un polinomio
+#include "Gruppi/Radici.typ"
+#pagebreak()
+
+// = Crittografia
 
 /*
 Permutazioni
 Sottogruppi. Ideali. Morfismi
 Costruzione di campi
-Radici di un polinomio
 */
 
 /*
