@@ -72,7 +72,9 @@
 #include "Gruppi/Radici.typ"
 #pagebreak()
 
-// = Crittografia
+= Crittografia
+== Introduzione alla crittografia
+#include "Crittografia/Introduzione.typ"
 
 /*
 Permutazioni
@@ -81,7 +83,7 @@ Costruzione di campi
 */
 
 /*
-Crittografia
+Algoritmo RSA
 Firma digitale tramite RSA
 Teoria dei Codici: introduzione
 Codici Lineari
