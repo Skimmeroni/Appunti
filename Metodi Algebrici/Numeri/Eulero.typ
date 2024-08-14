@@ -22,7 +22,7 @@ n)$, estremi esclusi.
 
 #lemma[
 	Se $p in bb(N)$ é un numero primo maggiore di $1$, allora $phi(p) = p - 1$.
-]
+] <Euler-function-single-prime>
 #proof[
 	Per un generico $p$ numero naturale con $p > 1$, $phi(p)$ é il numero
 	di numeri naturali maggiori di 0 e minori di $p$ con cui $p$ é coprimo.

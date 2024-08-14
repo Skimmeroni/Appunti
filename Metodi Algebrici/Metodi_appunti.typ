@@ -75,6 +75,8 @@
 = Crittografia
 == Introduzione alla crittografia
 #include "Crittografia/Introduzione.typ"
+== Algoritmo RSA
+#include "Crittografia/RSA.typ"
 
 /*
 Permutazioni
