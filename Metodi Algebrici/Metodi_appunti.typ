@@ -72,20 +72,21 @@
 #include "Gruppi/Radici.typ"
 #pagebreak()
 
-= Crittografia
-== Introduzione alla crittografia
-#include "Crittografia/Introduzione.typ"
-== Algoritmo RSA
-#include "Crittografia/RSA.typ"
-
 /*
 Permutazioni
 Sottogruppi. Ideali. Morfismi
 Costruzione di campi
 */
 
+= Crittografia
+== Introduzione alla crittografia
+#include "Crittografia/Introduzione.typ"
+== Algoritmo RSA
+#include "Crittografia/RSA.typ"
+== Firma digitale tramite RSA
+#include "Crittografia/Firma.typ"
+
 /*
-Firma digitale tramite RSA
 Teoria dei Codici: introduzione
 Codici Lineari
 Codici Ciclici
