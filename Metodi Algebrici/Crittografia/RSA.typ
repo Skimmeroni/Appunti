@@ -66,6 +66,104 @@ messaggi mediante RSA puó essere descritta sotto forma di algoritmo:
 	$ a^(s) mod N = (b^(r))^(s) mod N = b^(r s) mod N = b $
 ]
 
+#example[
+	Si supponga che Bob voglia inviare ad Alice un messaggio, occultandolo
+	usando il sistema crittografico RSA. Si assuma innanzitutto che entrambi
+	sappiano che la conversione carattere/numero venga fatta con unitá di
+	grandezza $1$ mediante questo schema:
+
+	#align(
+		center,
+		table(
+			columns: 22,
+			[A],  [B],  [C],  [D],  [E],  [F],  [G],  [H],  [I],  [L],  [M],
+			[N],  [O],  [P],  [Q],  [R],  [S],  [T],  [U],  [V],  [Z],  [#math.qed],
+			[2],  [3],  [4],  [5],  [6],  [7],  [8],  [9],  [29], [31], [12],
+			[13], [14], [37], [16], [17], [18], [19], [43], [21], [22], [23]
+		)
+	)
+
+	Alice sceglie i numeri primi $p = 5$ e $q = 11$. A partire da questi,
+	Alice calcola:
+
+	$ N = p q = 55 space space space phi(N) = phi(55) = phi(5) dot phi(11) =
+	  (5 - 1) dot (11 - 1) = 40 $
+
+	Alice sceglie poi il numero $r = 37$ tale che $r < phi(N)$ e
+	$"MCD"(r, phi(N)) = "MCD"(37, 40) = 1$. A partire da questi,
+	Alice calcola due interi $s$ e $t$ per i quali $37 s + 40 t = 1$,
+	mediante l'algoritmo di Euclide:
+
+	#set math.mat(delim: none)
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[
+			$ mat(
+				40 &= 37 dot 1 + 3;
+				37 &= 3 dot 12 + 1;
+				3 &= 3 dot 1 + 0;
+			) $
+		],
+		[
+			$ mat(
+				3 &= 40 − 37;
+				1 &= 37 − 12 dot 3 = 37 − 12(40 − 37) ;
+				  &= −12 dot 40 + 13 dot 37;
+			) $
+		]
+	)
+
+	Ottenendo $t = −12$ e $s = 13$. A questo punto, Alice ha ricavato la
+	chiave di cifratura $(N, r) = (55, 37)$, e la rende pubblica.
+
+	Bob legge le informazioni rese pubbliche da Alice e le spedisce il
+	messaggio seguente:
+
+	#align(
+		center,
+		table(
+			columns: 15,
+			[26], [7], [21], [9], [52], [7], [52], [41],
+			[23], [28], [24], [7], [18], [49], [7]
+		)
+	)
+
+	Alice decodifica ciascuna unitá del messaggio a parire dall'equivalenza
+	$b = a^(s) mod N$:
+
+	$ mat(
+		26^(13) mod 55 &= 31, 7^(13)  mod 55 &= 2,  21^(13) mod 55 &= 21,
+		9^(13)  mod 55 &= 14, 52^(13) mod 55 &= 17;
+		7^(13)  mod 55 &= 2,  52^(13) mod 55 &= 17, 41^(13) mod 55 &= 6,
+		23^(13) mod 55 &= 23, 28^(13) mod 55 &= 18;
+		24^(13) mod 55 &= 19, 7^(13)  mod 55 &= 2,  18^(13) mod 55 &= 13,
+		49^(13) mod 55 &= 4,  7^(13)  mod 55 &= 2;
+	) $
+
+	Il messaggio decodificato é quindi:
+
+	#align(
+		center,
+		table(
+			columns: 15,
+			[31], [2], [21], [14], [17], [2], [17], [6],
+			[23], [18], [19], [2], [13], [4], [2]
+		)
+	)
+
+	Convertendo ordinatamente ciascuna unitá da numero a carattere, si
+	ottiene:
+
+	#align(
+		center,
+		table(
+			columns: 15,
+			[L], [A], [V], [O], [R], [A], [R], [E],
+			[#math.qed], [S], [T], [A], [N], [C], [A]
+		)
+	)
+]
+
 La funzione di cifratura dell'algoritmo RSA é effettivamente una one-way
 function perché per conoscere il termine $s$ della chiave di decifratura
 é necessario risolvere $r s + phi(N) t = 1$, che a sua volta richiede di

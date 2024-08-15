@@ -167,18 +167,19 @@ $ sect.big_(i = 1)^(k) A_(i) = (... (A_(1) sect (A_(2) sect (A_(3) sect ...)))) 
 	Siano $A$, $B$ e $C$ tre insiemi. Per la loro unione e la loro intersezione
 	valgono le proprietá:
 
-	#grid(columns: (0.625fr, 0.875fr, 1fr),
-		block[
+	#grid(
+		columns: (0.625fr, 0.875fr, 1fr),
+		[
 			*Commutativa*:
 			- $A sect B = B sect A$;
 			- $A union B = B union A$.
 		],
-		block[
+		[
 			*Associativa*:
 			- $(A sect B) sect C = A sect (B sect C)$;
 			- $(A union B) union C = A union (B union C)$.
 		],
-		block[
+		[
 			*Distributiva*:
 			- $A sect (B union C) = (A sect B) union (A sect C)$;
 			- $A union (B sect C) = (A union B) sect (A union C)$.

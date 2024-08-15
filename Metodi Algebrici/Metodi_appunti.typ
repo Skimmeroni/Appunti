@@ -85,7 +85,6 @@ Costruzione di campi
 */
 
 /*
-Algoritmo RSA
 Firma digitale tramite RSA
 Teoria dei Codici: introduzione
 Codici Lineari
