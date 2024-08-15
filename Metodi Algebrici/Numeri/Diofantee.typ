@@ -99,7 +99,7 @@ e moltiplicare il risultato per $frac(c, "MCD"(a, b))$.
 	in bb(Z) times bb(Z)$ é soluzione per tale equazione, allora lo sono tutte e sole le
 	coppie $(x_(h), y_(h)) in bb(Z) times bb(Z)$ cosí costruite:
 
-	$ x_(h) = x_(0) + h (frac(b, "MCD"(a, b))) space.fig space.fig space.fig
+	$ x_(h) = x_(0) + h (frac(b, "MCD"(a, b))) space space space
 	  y_(h) = y_(0) - h (frac(a, "MCD"(a, b)))
 	  "   con" h in bb(Z) $
 ] <Diophantine-all-solutions>
@@ -118,7 +118,7 @@ e moltiplicare il risultato per $frac(c, "MCD"(a, b))$.
 	$ a overline(x) + b overline(y) = c = a x_(0) + b y_(0) =>
 	a(overline(x) - x_(0)) = -b(overline(y) - y_(0)) =>
 	overline(a) (overline(x) - x_(0)) = overline(b) (y_(0) - overline(y))
-	space.fig space.fig "con" space.fig space.fig
+	space space "con" space space
 	mat(
 		overline(a) = frac(a, "MCD"(a, b));
 		overline(b) = frac(b, "MCD"(a, b))
@@ -137,7 +137,7 @@ e moltiplicare il risultato per $frac(c, "MCD"(a, b))$.
 	Risostituendo il valore di $overline(a)$ e $overline(b)$ nelle rispettive formule,
 	si ottiene la forma presente nell'enunciato del teorema:
 
-	$ overline(x) = x_(0) + h (frac(b, "MCD"(a, b))) space.fig space.fig space.fig
+	$ overline(x) = x_(0) + h (frac(b, "MCD"(a, b))) space space space
 	  overline(y) = y_(0) - h (frac(a, "MCD"(a, b)))
 	  "   con" h in bb(Z) $
 
@@ -151,7 +151,7 @@ e moltiplicare il risultato per $frac(c, "MCD"(a, b))$.
 	Avendosi $frac(74, 2) = 37$ e $frac(22, 2) = 11$, é possibile ricavare la
 	famiglia di soluzioni $(x_(h), y_(h)) in bb(Z) times bb(Z)$:
 
-	$ x_(h) = 15 + 11 h space.fig space.fig space.fig
+	$ x_(h) = 15 + 11 h space space space
 	  y_(h) = -50 - 37 h
 	  "   con" h in bb(Z) $
 ]

@@ -61,31 +61,34 @@ elemento di $B$ ha sempre una controimmagine:
 $ forall b in B, exists ! a in A : f(a) = b $
 
 #example[
-	- La funzione $f: bb(Z) -> bb(Z), f(z) = 0$ non é iniettiva, perché ogni elemento
-	  di $bb(Z)$ viene sempre associato allo stesso elemento di $bb(Z)$ (lo $0$, in
-	  questo caso). Inoltre, non é suriettiva, perché tutti gli elementi del codominio
-	  al di fuori di $0$ non hanno una controimmagine;
-	- La funzione $f: bb(Z) |-> bb(Z), f(z) = z^(2)$ non é iniettiva, perché se per un
-	  certo $a in bb(Z)$ vale $b = f(a)$, anche per $-a in bb(Z)$ vale $b = f(-a)$. Ad
-	  esempio, $f(4) = f(-4) = 16$). Inoltre, non é suriettiva, perché tutti gli elementi
-	  di $bb(Z)$ che non sono quadrati perfetti non hanno una controimmagine. Ad esempio,
-	  non esiste un $a in bb(Z)$ tale per cui $f(a) = 13$. Infatti, sebbene esistano due
-	  $a$ tali per cui $f(a) = 13$, ovvero $plus.minus sqrt(13)$, questi non sono numeri
-	  interi, pertanto non appartengono al dominio;
-	- La funzione $f: bb(N) |-> bb(Z), f(z) = z^(2)$ é iniettiva, perché ad ogni elemento
-	  di $bb(N)$ viene associato un elemento distinto di $bb(Z)$. Non é peró suriettiva,
-	  perché tutti gli elementi di $bb(Z)$ che non sono quadrati perfetti non hanno una
+	- La funzione $f: bb(Z) -> bb(Z), f(z) = 0$ non é iniettiva, perché ogni
+	  elemento di $bb(Z)$ viene sempre associato allo stesso elemento di
+	  $bb(Z)$ (lo $0$, in questo caso). Inoltre, non é suriettiva, perché
+	  tutti gli elementi del codominio al di fuori di $0$ non hanno una
 	  controimmagine;
-	- La funzione $f: bb(Z) |-> bb(Z), f(z) = z + 1$ é iniettiva, perché per ogni numero
-	  intero esiste uno ed un solo numero intero ottenuto sommandovi uno. É inoltre anche
-	  suriettiva, perché per ogni numero intero é sempre possibile trovare un'altro numero
-	  intero ottenuto a partire dal precedente avendovi sommato uno. Pertanto, é una
+	- La funzione $f: bb(Z) |-> bb(Z), f(z) = z^(2)$ non é iniettiva, perché
+	  se per un certo $a in bb(Z)$ vale $b = f(a)$, anche per $-a in bb(Z)$
+	  vale $b = f(-a)$. Ad esempio, $f(4) = f(-4) = 16$). Inoltre, non é
+	  suriettiva, perché tutti gli elementi di $bb(Z)$ che non sono quadrati
+	  perfetti non hanno una controimmagine. Ad esempio, non esiste un $a in
+	  bb(Z)$ tale per cui $f(a) = 13$. Infatti, sebbene esistano due $a$ tali
+	  per cui $f(a) = 13$, ovvero $plus.minus sqrt(13)$, questi non sono
+	  numeri interi, pertanto non appartengono al dominio;
+	- La funzione $f: bb(N) |-> bb(Z), f(z) = z^(2)$ é iniettiva, perché
+	  ad ogni elemento di $bb(N)$ viene associato un elemento distinto di
+	  $bb(Z)$. Non é peró suriettiva, perché tutti gli elementi di $bb(Z)$
+	  che non sono quadrati perfetti non hanno una controimmagine;
+	- La funzione $f: bb(Z) |-> bb(Z), f(z) = z + 1$ é iniettiva, perché
+	  per ogni numero intero esiste uno ed un solo numero intero ottenuto
+	  sommandovi uno. É inoltre anche suriettiva, perché per ogni numero
+	  intero é sempre possibile trovare un'altro numero intero ottenuto
+	  a partire dal precedente avendovi sommato uno. Pertanto, é una
 	  funzione biettiva.
 ]
 
-Sia $A$ un insieme non vuoto. La funzione $*$ viene detta *operazione binaria* su $A$ se
-ha come dominio il prodotto cartesiano di $A$ con sé stesso ed il codominio coincidente
-con $A$:
+Sia $A$ un insieme non vuoto. La funzione $*$ viene detta *operazione
+binaria* su $A$ se ha come dominio il prodotto cartesiano di $A$ con
+sé stesso ed il codominio coincidente con $A$:
 
 $ * : A times A |-> A $
 
@@ -96,18 +99,20 @@ $ * : A times A |-> A $
 	  f(a, b) = root(b, a)$ é un'operazione binaria.
 ]
 
-Sia $*$ una operazione su un insieme $a$, e siano $a, b, c in A$ tre suoi elementi.
-Si dice che $*$ gode della *proprietá associativa* se applicare a $c$ il risultato
-dell'applicazione di $*$ ad $a$ e a $b$ equivale all'applicare ad $a$ il risultato
-dell'applicazione di $*$ a $b$ e a $c$. In altri termini:
+Sia $*$ una operazione su un insieme $a$, e siano $a, b, c in A$ tre suoi
+elementi. Si dice che $*$ gode della *proprietá associativa* se applicare
+a $c$ il risultato dell'applicazione di $*$ ad $a$ e a $b$ equivale
+all'applicare ad $a$ il risultato dell'applicazione di $*$ a $b$ e a
+$c$. In altri termini:
 
 $ (a * b) * c = a * (b * c) $
 
-Dove le parentesi tonde determinano l'_ordine di precedenza_ dell'applicazione di $*$.
+Dove le parentesi tonde determinano l'_ordine di precedenza_
+dell'applicazione di $*$.
 
-Sia $*$ una operazione su un insieme $a$, e siano $a, b in A$ due suoi elementi.
-Si dice che $*$ gode della *proprietá commutativa* se applicare $a$ a $b$ equivale
-ad applicare $b$ ad $a$. In altri termini:
+Sia $*$ una operazione su un insieme $a$, e siano $a, b in A$ due suoi
+elementi. Si dice che $*$ gode della *proprietá commutativa* se applicare
+$a$ a $b$ equivale ad applicare $b$ ad $a$. In altri termini:
 
 $ a * b = b * a $
 
@@ -127,17 +132,17 @@ $ a * b = b * a $
 	  $f(b, a) = a$, pertanto $f(a, b) != f(b, a)$.
 ]
 
-Se $*$ é una operazione sull'insieme $A$, un elemento $e in A$ viene detto *elemento
-neutro* per $*$ se, per qualsiasi $a in A$, vale $e * a = a * e = a$. Se $*$ é una
-operazione sull'insieme $A$ che ammette elemento neutro $e$, per ciascun $a in A$
-esiste un $tilde(a) in A$ chiamato *opposto* di $A$ tale per cui $a * tilde(a) =
-tilde(a) * a = e$.
+Se $*$ é una operazione sull'insieme $A$, un elemento $e in A$ viene detto
+*elemento neutro* per $*$ se, per qualsiasi $a in A$, vale $e * a = a * e
+= a$. Se $*$ é una operazione sull'insieme $A$ che ammette elemento neutro
+$e$, per ciascun $a in A$ esiste un $tilde(a) in A$ chiamato *opposto* di
+$A$ tale per cui $a * tilde(a) = tilde(a) * a = e$.
 
 #example[
-	L'operazione $f: bb(Z) times bb(Z) |-> bb(Z), f(a, b) = a + b$ ha come elemento
-	neutro $e = 0$. Infatti, preso un $a in Z$ qualsiasi, si ha $a + 0 = 0 + a = a$.
-	L'elemento opposto di $a$ rispetto a tale operazione é $-a$, in quanto $a + (-a)
-	= (-a) + a = 0$.
+	L'operazione $f: bb(Z) times bb(Z) |-> bb(Z), f(a, b) = a + b$ ha come
+	elemento neutro $e = 0$. Infatti, preso un $a in Z$ qualsiasi, si ha
+	$a + 0 = 0 + a = a$. L'elemento opposto di $a$ rispetto a tale operazione
+	é $-a$, in quanto $a + (-a) = (-a) + a = 0$.
 ]
 
 Le operazioni binarie possono venire generalizzate con prodotti cartesiani
@@ -145,3 +150,43 @@ $n$-dimensionali. La funzione $*$ viene detta *operazione n-aria* su $A$ se
 ha come dominio $A^(n)$ e sé stesso come codominio:
 
 $ * : A^(n) |-> A $
+
+Siano $A$, $B$, $C$ e $D$ quattro insiemi. Siano poi $f: A |-> B$ e
+$g: C |-> D$ due funzioni, dove $Im(f) subset.eq C$. Viene detta *funzione
+composta* di $f$ e di $g$ la funzione che si ottiene applicando la funzione
+$g$ al risultato della funzione $f$, ovvero:
+
+$ g compose f : A |-> D, space g(f(a)) space forall a in A $
+
+#theorem[
+	La composizione di funzioni gode della proprietá associativa. Ovvero,
+	Siano $A$, $B$, $C$, $D$, $E$ e $F$ sei insiemi. Siano poi $f: A |-> B$,
+	$g: C |-> D$ e $h: E |-> F$ tre funzioni, dove $Im(f) subset.eq C$ e
+	$Im(g) subset.eq E$. Allora $h compose (g compose f) = (h compose g)
+	compose f$.
+]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
+
+#theorem[
+	Siano $f: A |-> B$ e $g: B |-> C$ due funzioni, e sia $g compose f$ la
+	funzione composta di tali funzioni. Si ha allora:
+
+	+ Se $f$ e $g$ sono iniettive, allora $g compose f$ é iniettiva;
+	+ Se $f$ e $g$ sono suriettive, allora $g compose f$ é suriettiva;
+	+ Se $f$ e $g$ sono biettive, allora $g compose f$ é biettiva;
+]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
+
+Dati due insiemi $A$ e $B$ ed una funzione $f: A |-> B$, si dice *funzione
+inversa* di $f$ la funzione $f^(-1)$ tale che, per ogni elemento $b in B$,
+$f^(-1)(b)$ é quell'unico $a in A$ tale per cui $f(a) = b$. Se per una
+funzione $f$ é possibile costruire la funzione inversa $f^(-1)$, si dice
+che $f$ é *invertibile*.
+
+#theorem[
+	Una funzione $f: A |-> B$ é invertibile se e solo se é biettiva.
+]

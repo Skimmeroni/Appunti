@@ -186,7 +186,7 @@ Sull'insieme delle classi di resto modulo $n$ é possibile definire le operazion
 di somma e di prodotto. Siano $[a]_(n)$ e $[b]_(n)$ due classi di resto modulo
 $n$. La somma ed il prodotto sono definiti come:
 
-$ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
+$ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
   [a]_(n) dot [b]_(n) = [a b]_(n) $
 
 #example[
@@ -198,7 +198,7 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
 	Sia $n in bb(Z)$ con $n gt.eq 1$. Siano poi $a, b, c, d in bb(Z)$,
 	tali per cui $[a]_(n) = [b]_(n)$ e $[c]_(n) = [d]_(n)$. Allora vale:
 
-	$ [a]_(n) + [c]_(n) = [b]_(n) + [d]_(n) space.fig space.fig space.fig
+	$ [a]_(n) + [c]_(n) = [b]_(n) + [d]_(n) space space space
 	  [a]_(n) dot [c]_(n) = [b]_(n) dot [d]_(n) $
 ]
 #proof[
@@ -219,7 +219,7 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space.fig space.fig space.fig
 	$k + h in bb(Z)$ e $b h + d k + k h n in bb(Z)$, siano questi
 	rispettivamente $alpha$ e $beta$. Si ha:
 
-	$ (a + c) = (b + d) + n alpha space.fig space.fig space.fig a c = b d + n beta $
+	$ (a + c) = (b + d) + n alpha space space space a c = b d + n beta $
 
 	Applicando nuovamente la definizione di classe di equivalenza, si ha che
 	$[a + c]_(n) = [b + d]_(n)$ e $[a c]_(n) = [b d]_(n)$. Per come sono state

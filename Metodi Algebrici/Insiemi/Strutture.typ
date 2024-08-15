@@ -44,34 +44,37 @@ Un semigruppo, un monoide ed un gruppo si dicono, rispettivamente, *semigruppo
 abeliano*, *monoide abeliano* e *gruppo abeliano* se l'operazione su questi
 definita gode della proprietá commutativa.
 
-La struttura algebrica $(A, *, compose)$ prende il nome di *anello* se sono
-rispettate le seguenti proprietá:
+La struttura algebrica $(A, *, diamond.small)$ prende il nome di *anello*
+se sono rispettate le seguenti proprietá:
 
 - $(A, *)$ é un gruppo abeliano;
-- $(A, compose)$ é un semigruppo;
-- L'operazione $compose$ gode della *proprietá distributiva* rispetto a $*$, ovvero:
+- $(A, diamond.small)$ é un semigruppo;
+- L'operazione $diamond.small$ gode della *proprietá distributiva* rispetto
+  a $*$, ovvero:
 
-  $ a compose (b * c) = (a compose b) * (a compose c) space.fig " e " space.fig
-    (a * b) compose c = (a compose c) * (b compose c) space.fig space.fig space.fig
-    forall a, b in A $
+  $ a diamond.small (b * c) = (a diamond.small b) * (a diamond.small c)
+    space " e " space
+    (a * b) diamond.small c = (a diamond.small c) * (b diamond.small c)
+    space space space forall a, b in A $
 
-Se $compose$ gode inoltre della proprietá commutativa, ovvero se $(A, compose)$
-é abeliano, allora si dice che $(A, *, compose)$ é un *anello commutativo*.
+Se $diamond.small$ gode inoltre della proprietá commutativa, ovvero se
+$(A, diamond.small)$ é abeliano, allora si dice che $(A, *, diamond.small)$
+é un *anello commutativo*.
 
-Se $(A, compose)$ é un monoide (oltre che un semigruppo), ovvero se esiste per
-$compose$ un elemento neutro, $(A, *, compose)$ é un *anello unitario*. Se non
-diversamente specificato, nel parlare di "anelli" in generale si stará sottointendendo
-di stare considerando anelli unitari.
+Se $(A, diamond.small)$ é un monoide (oltre che un semigruppo), ovvero se
+esiste per $diamond.small$ un elemento neutro, $(A, *, diamond.small)$ é un
+*anello unitario*. Se non diversamente specificato, nel parlare di "anelli"
+in generale si stará sottointendendo di stare considerando anelli unitari.
 
 #example[
-	- $(bb(Z), +. dot)$, $(bb(Q), +, dot)$ e $(bb(Z)_(n) , +, dot)$
+	- $(bb(Z), +, dot)$, $(bb(Q), +, dot)$ e $(bb(Z)_(n) , +, dot)$
 	  sono anelli commutativi;
 	- $("Mat"(2 times 2, bb(Q)), +, ·)$ é un anello,
 	  ma non é commutativo.
 ]
 
-L'anello $(A, *, compose)$ prende il nome di *campo* se é commutativo,
-unitario e se $(A - {0}, compose)$ é un gruppo.
+L'anello $(A, *, diamond.small)$ prende il nome di *campo* se é commutativo,
+unitario e se $(A - {0}, diamond.small)$ é un gruppo.
 
 #example[
 	- $(bb(Q), +, dot)$ é un campo;

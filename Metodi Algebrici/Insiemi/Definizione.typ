@@ -12,14 +12,14 @@ in maniera *intensionale*, ovvero specificando una certa proprietá che é
 posseduta da tutti ed i soli elementi di quell'insieme. Formalmente, viene
 usata questa notazione:
 
-$ underbracket(A = {a_(1)\, a_(2)\, a_(3)\, ...}, "forma estensionale") space.fig space.fig space.fig
+$ underbracket(A = {a_(1)\, a_(2)\, a_(3)\, ...}, "forma estensionale") space space space
   underbracket(A = {a : a "possiede la proprietá caratteristica di" A}, "forma intensionale") $
 
 #example[
 	Sia $A$ l'insieme che contiene i colori che possono comparire in un pixel.
 	$A$ puó venire descritto equivalentemente nei due modi:
 
-	$ A = {"rosso", "verde", "blu"} space.fig space.fig space.fig
+	$ A = {"rosso", "verde", "blu"} space space space
 	  A = {a : a "é uno dei colori presenti in un pixel"} $
 ]
 
@@ -39,7 +39,7 @@ Equivalentemente, si dice che $A$ é un *soprainsieme* di $B$ se ogni membro
 di $B$ é anche membro di $A$, e si indica con $A supset.eq B$. Formalmente:
 
 $ B subset.eq A "se e solo se" forall x in B, x in A
-  space.fig space.fig space.fig
+  space space space
   A supset.eq B "se e solo se" forall x in B, x in A $
 
 Due insiemi $A$ e $B$ sono *uguali* se contengono gli stessi elementi, ovvero se
@@ -56,7 +56,7 @@ $B subset A$. Equivalentemente, se $A$ é un soprainsieme di $B$ ed al contempo 
 $A supset B$. Formalmente:
 
 $ B subset A "se e solo se" forall x in B, x in A " e " B != A
-  space.fig space.fig space.fig
+  space space space
   A supset B "se e solo se" forall x in B, x in A " e " B != A $
 
 Per indicare che l'insieme $B$ _non_ é un sottoinsieme di $A$ viene usata la notazione
@@ -204,7 +204,7 @@ questo viene omesso.
 	Siano $A$ e $B$ due sottoinsiemi di un certo insieme $U$. Si ha:
 
 	$ overline(A sect B) = overline(A) union overline(B)
-	  space.fig space.fig space.fig
+	  space space space
 	  overline(A union B) = overline(A) sect overline(B) $
 
 	Il risultato viene generalizzato a $k$ insiemi.

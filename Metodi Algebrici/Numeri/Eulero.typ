@@ -53,9 +53,9 @@ n)$, estremi esclusi.
 #proof[
 	Siano $r$ e $s$ due numeri interi, scelti con queste caratteristiche:
 
-	$ 0 < r < a space.fig space.fig space.fig
-	  "MCD"(r, a) = 1 space.fig space.fig space.fig
-	  0 < s < b space.fig space.fig space.fig
+	$ 0 < r < a space space space
+	  "MCD"(r, a) = 1 space space space
+	  0 < s < b space space space
 	  "MCD"(s, b) = 1 $
 
 	Per il @Chinese-remainder-theorem, il sistema di congruenze

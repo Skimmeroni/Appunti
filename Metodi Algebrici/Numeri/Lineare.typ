@@ -57,12 +57,12 @@ della soluzione particolare di tale equazione.
 			21 & = 9 dot 2 + 3;
 			9 & = 3 dot 3 + 0;
 		)
-		space.fig space.fig space.fig
+		space space space
 		mat(
 			b & = a dot 1 + 9 => 9 = b - a;
 			a & = 2 (b - a) + 3 => 3 = 3 a - 2 b;
 		)
-		space.fig space.fig space.fig
+		space space space
 		(6) 21 - (4) 30 = 6
 	$
 
@@ -87,7 +87,7 @@ della soluzione particolare di tale equazione.
 	tale equazione, allora lo sono tutte e sole le coppie $(x_(h), k_(h))
 	in bb(Z) times bb(Z)$ nella forma:
 
-	$ x_(h) = x_(0) + h (frac(n, "MCD"(a, n))) space.fig space.fig space.fig
+	$ x_(h) = x_(0) + h (frac(n, "MCD"(a, n))) space space space
 	  k_(h) = k_(0) - h (frac(n, "MCD"(a, n)))
 	  "   con" h in bb(Z) $
 
@@ -239,8 +239,8 @@ soluzione che sia comune a tutte.
 	Si ha allora $N = 3 dot 5 dot 7 = 105$. Per ciascuna congruenza lineare
 	del sistema si calcoli $N_(i) = frac(N, n_(i))$:
 
-	$ N_(1) = frac(N, n_(1)) = frac(105, 3) = 35 space.fig space.fig space.fig
-	  N_(2) = frac(N, n_(2)) = frac(105, 5) = 21 space.fig space.fig space.fig
+	$ N_(1) = frac(N, n_(1)) = frac(105, 3) = 35 space space space
+	  N_(2) = frac(N, n_(2)) = frac(105, 5) = 21 space space space
 	  N_(3) = frac(N, n_(3)) = frac(105, 7) = 15 $
 
 	Da cui si ottengono le congruenze lineari:
