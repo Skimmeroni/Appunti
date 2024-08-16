@@ -45,7 +45,7 @@ messaggi mediante RSA puó essere descritta sotto forma di algoritmo:
 	Essendo $N$ il prodotto di due numeri primi distinti $p$ e $q$
 	ed avendo scelto come inferiore ad $N$, $b$ deve essere multiplo
 	o di $p$ o di $q$. Si assuma, senza perdita di generalitá, che
-	$b$ sia multiplo di $p$, ovvero che esista un $q in bb(Z)$ maggiore
+	$b$ sia multiplo di $p$, ovvero che esista un $q in ZZ$ maggiore
 	di $k$ tale per cui $b = k p$. Essendo $p$ e $q$ primi ed avendo
 	assunto che $b$ sia multiplo di $q$, deve aversi che $q$ e $b$
 	siano coprimi. Per il @Euler-theorem, deve valere $b^(phi(q)) equiv
@@ -56,7 +56,7 @@ messaggi mediante RSA puó essere descritta sotto forma di algoritmo:
 	  (b^(q − 1))^(p − 1) equiv b^(−t phi(N)) equiv 1 mod q $
 
 	La congruenza $b^(-t phi(N)) equiv 1 mod q$ equivale a $b^(-t phi(N)) =
-	1 + w q$ per un certo $w in bb(Z)$. Si ha:
+	1 + w q$ per un certo $w in ZZ$. Si ha:
 
 	$ b^(-t phi(N)) = 1 + w q => b^(1 -t phi(N)) = b + b w q =>
 	  b^(1 -t phi(N)) = b + w k N => b^(r s) = b + w k N equiv b mod N $

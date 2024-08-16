@@ -62,9 +62,9 @@ Possono infatti esistere dei polinomi $f(x) in K[x]$ che sono riducibili
 in $K[x]$ ma che non ammettono radici in $K$.
 
 #example[
-	Il polinomio $x^(4) + 3x^(2) + 2 in bb(R)[x]$ si fattorizza come
-	$(x^(2) + 1)(x^(2) + 2)$ e quindi è riducibile in $bb(R)[x]$, ma
-	non ha radici in $bb(R)$.
+	Il polinomio $x^(4) + 3x^(2) + 2 in RR[x]$ si fattorizza come
+	$(x^(2) + 1)(x^(2) + 2)$ e quindi è riducibile in $RR[x]$, ma
+	non ha radici in $RR$.
 ]
 
 #corollary[
@@ -73,7 +73,7 @@ in $K[x]$ ma che non ammettono radici in $K$.
 ]
 
 Siano $f(x) in K[x]$ e $alpha in K$. Si dice che $alpha$ é una radice
-di $f(x)$ di *molteplicitá algebrica* $r$, con $r in bb(N)$ e $r gt.eq
+di $f(x)$ di *molteplicitá algebrica* $r$, con $r in NN$ e $r gt.eq
 1$, se $(x − alpha)^(r) | f(x)$ ma $(x − alpha)^(r + 1) divides.not f(x)$.
 In particolare, una radice di molteplicità algebrica $1$ si dice *radice
 semplice*.
@@ -84,10 +84,10 @@ figura come fattore nella fattorizzazione di $p(x)$.
 
 #example[
 	- Il polinomio $f(x) = x^(4) − 2x^(2) + 1 = (x − 1)^(2)(x + 1)^(2)
-	  in bb(Q)[x]$ ha in $bb(Q)$ le radici $alpha_(1) = −1$ e $alpha_(2) = 1$
+	  in QQ[x]$ ha in $QQ$ le radici $alpha_(1) = −1$ e $alpha_(2) = 1$
 	  entrambe di molteplicità $2$;
 	- Il polinomio $f(x) = [1]_(2)x^(4) + [1]_(2) = ([1]_(2)x + [1]_(2))^(4)
-	  in bb(Z)_(2)[x]$ ha in $bb(Z)_(2)$ la radice $alpha = [1]_(2)$
+	  in ZZ_(2)[x]$ ha in $ZZ_(2)$ la radice $alpha = [1]_(2)$
 	  con molteplicità $4$.
 ]
 

@@ -4,7 +4,7 @@ Sia dato un certo campo $K$. Prende il nome di *polinomio* a coefficienti
 in $K$ e incognita in $x$ qualunque espressione nella forma:
 
 $ p(x) = sum_(i = 0)^(n) a_(i) x^(i) = a_(n) x^(n) + a_(n − 1) x^(n − 1) + ... + a_(1) x + a_(0)
-  space "con" space n in bb(N), a_(i) in K space forall i in {0, ..., n} $
+  space "con" space n in NN, a_(i) in K space forall i in {0, ..., n} $
 
 Dove l'intero non negativo $n$ si dice *grado* di $p(x)$ e lo si indica
 con $diff p(x)$. Al polinomio nullo $p(x) = 0$ si attribusce, per convenzione,
@@ -31,7 +31,7 @@ $ p(x) q(x) = sum_(0)^(n + m) (sum_(i + j = k) a_(i) b_(i)) x^(i) $
 ]
 
 Per l'anello $K[x]$ é possibile sviluppare una teoria parallela a quella
-dell'anello $bb(Z)$
+dell'anello $ZZ$
 
 #theorem("Algoritmo della divisione per polinomi")[
 	Siano $a(x), b(x) in K[x]$, con $b(x)$ non nullo. Esiste una ed
@@ -55,7 +55,7 @@ di calcolare la divisione fra due polinomi.
 
 #example[
 	Siano $a(x) = x^(3) −2x^(2) +x −1$ e $b(x) = 2x^(2) -5$ polinomi sull'anello
-	$bb(Q)[x]$. Si ha:
+	$QQ[x]$. Si ha:
 
 	#set math.mat(delim: none)
 	$
@@ -75,7 +75,7 @@ di calcolare la divisione fra due polinomi.
 
 	Siano $a(x) = [2]_(7)x^(4) + [-1]_(7)x^(2) +[1]_(7)$ e
 	$b(x) = [3]_(7)x^(3) + [-2]_(7)$ polinomi sull'anello
-	$bb(Z)_(7)[x]$. Si ha:
+	$ZZ_(7)[x]$. Si ha:
 
 	#set math.mat(delim: none)
 	$
@@ -148,7 +148,7 @@ In questo caso, i polinomi $a(x)$ e $b(x)$ si dicono *coprimi* o
 	#set math.mat(delim: none)
 
 	Siano $a(x) = x^(3) + 1$ e $b(x) = x^(2) + 1$
-	polinomi sull'anello $bb(Q)[x]$. Si ha:
+	polinomi sull'anello $QQ[x]$. Si ha:
 
 	$
 		mat(
@@ -187,7 +187,7 @@ In questo caso, i polinomi $a(x)$ e $b(x)$ si dicono *coprimi* o
 
 	Siano $a(x) = [1]_(5)x^(3) + [1]_(5)x^(2) + [1]_(5)x + [1]_(5)$ e
 	$b(x) = [3]_(5)x^(2) + [2]_(5)x + [2]_(5)$ polinomi sull'anello
-	$bb(Z)_(5)[x]$. Si ha:
+	$ZZ_(5)[x]$. Si ha:
 
 	$
 		mat(
@@ -246,12 +246,12 @@ in polinomi primi di un polinomio primo é sé stesso, a meno di una costante
 moltiplicativa non nulla.
 
 #example[
-	- Il polinomio $a(x) = x^(2) − 2$ è irriducibile in $bb(Q)[x]$. Non lo
-	  é peró in $bb(R)[x]$, perché ha $b(x) = x + sqrt(2)$ come divisore,
+	- Il polinomio $a(x) = x^(2) − 2$ è irriducibile in $QQ[x]$. Non lo
+	  é peró in $RR[x]$, perché ha $b(x) = x + sqrt(2)$ come divisore,
 	  e puó essere infatti fattorizzato come $x^(2) − 2 = (x − sqrt(2))
 	  (x + sqrt(2))$;
-	- Il polinomio $a(x) = x^(2) + 1$ è irriducibile in $bb(R)[x]$. Non lo
-	  è peró in $bb(C)[x]$, perché ha $b(x) = x + i$ come divisore, e puó
+	- Il polinomio $a(x) = x^(2) + 1$ è irriducibile in $RR[x]$. Non lo
+	  è peró in $CC[x]$, perché ha $b(x) = x + i$ come divisore, e puó
 	  essere infatti fattorizzato come $x^(2) + 1 = (x − i)(x + i)$.
 ]
 

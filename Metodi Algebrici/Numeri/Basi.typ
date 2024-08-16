@@ -42,7 +42,7 @@
 	e di $r$.
 ]
 
-Dati $b in bb(Z)$ con $b gt.eq 2$ e un numero naturale $n$ tale che:
+Dati $b in ZZ$ con $b gt.eq 2$ e un numero naturale $n$ tale che:
 
 $ n = d_(k) b^(k) + d_(k − 1) b^(k − 1) + ... + d_(1) b + d_(0)
 "   con" 0 lt.eq d_(i) < b " " forall i = 0, ..., k " " d_(k) != 0 "per" k > 0 $

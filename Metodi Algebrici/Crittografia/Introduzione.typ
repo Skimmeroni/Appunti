@@ -76,8 +76,8 @@ $ cal(P) attach(-->, t: f) cal(C) attach(-->, t: f^(-1)) cal(P) $
 	effettivamente l'una l'inversa dell'altra):
 
 	$ mat(
-		cal(P) = bb(Z)_(N),
-		cal(C) = bb(Z)_(N),
+		cal(P) = ZZ_(N),
+		cal(C) = ZZ_(N),
 		f(p) = [5]_(26) p + [3]_(26),
 		f^(-1) (c) = [21]_(26) c - [11]_(26);
 	) $
@@ -122,11 +122,11 @@ della funzione $f^(-1)$ prendono il nome di *chiave di decifratura*.
 
 	#set math.mat(column-gap: 1.5em, delim: none)
 	$ mat(
-		cal(P) = bb(Z)_(N),
-		cal(C) = bb(Z)_(N),
+		cal(P) = ZZ_(N),
+		cal(C) = ZZ_(N),
 		f(p) = a p + b,
 		f^(-1) (c) = a^(-1) c - a^(-1) b,
-		"con" a\, b in bb(Z)_(n) " e " a "invertibile";
+		"con" a\, b in ZZ_(n) " e " a "invertibile";
 	) $
 
 	Dove tutti i sistemi crittografici di tale famiglia hanno gli

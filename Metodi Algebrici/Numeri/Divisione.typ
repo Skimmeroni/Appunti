@@ -22,7 +22,7 @@ difetto ed il resto $r = n - m q$ misura lo scarto.
 	  e $0 lt.eq r' < |m|$
 
 	  Se $n gt.eq |m|$, ovvero se $n > n − |m| gt.eq 0$, per l’ipotesi di induzione
-	  esistono $q'$ e $r'$ in $bb(Z)$ tali che $n − |m| = m q' + r'$ con $0 lt.eq r'
+	  esistono $q'$ e $r'$ in $ZZ$ tali che $n − |m| = m q' + r'$ con $0 lt.eq r'
 	  < |m|$.
 
 	  Allora $n = m q' + |m| + r'$ e, essendo $|m| = plus.minus m$, si ha $n = m(q'
@@ -31,30 +31,30 @@ difetto ed il resto $r = n - m q$ misura lo scarto.
 	Per quanto riguarda l'unicitá
 ] */
 
-Siano $a$ e $b$ due numeri interi. Se esiste $c in bb(Z)$ tale che $a = b c$,
+Siano $a$ e $b$ due numeri interi. Se esiste $c in ZZ$ tale che $a = b c$,
 si dice che $b$ _divide_ $a$, oppure analogamente che $a$ é _divisibile_ per
 $b$. Per indicare che $b$ divide $a$ viene usata la notazione $b | a$; se
 invece $b$ non divide $a$, si usa la notazione $b divides.not a$. Se $b$
 divide $a$, si dice anche che $b$ é _multiplo_ di $a$. É immediato verificare
-che, dato $a in bb(Z)$, sia $plus.minus 1$ che $plus.minus a$ sono certamente
+che, dato $a in ZZ$, sia $plus.minus 1$ che $plus.minus a$ sono certamente
 divisori di $a$.
 
-Siano $a, b in bb(Z)$ non entrambi nulli; si dice che $d in bb(Z)$ é un *Massimo
+Siano $a, b in ZZ$ non entrambi nulli; si dice che $d in ZZ$ é un *Massimo
 Comun Divisore* tra $a$ e $b$ se sono verificate entrambe le seguenti due condizioni:
 
 + $d | a$ e $d | b$. Ovvero, $d$ é divisore sia di $a$ che di $b$;
-+ Se $c in bb(Z)$ é tale che $c | a$ e $c | b$, allora $c | d$. Ovvero,
++ Se $c in ZZ$ é tale che $c | a$ e $c | b$, allora $c | d$. Ovvero,
   tutti i divisori di $a$ che sono anche divisori di $b$ sono anche
   divisori di $d$.
 
 #theorem[
-	Dati due numeri $a, b in bb(Z)$ non entrambi nulli, se $d$ e $tilde(d)$
+	Dati due numeri $a, b in ZZ$ non entrambi nulli, se $d$ e $tilde(d)$
 	sono due Massimi Comun Divisori fra $a$ e $b$ allora devono essere uguali
 	in modulo, ovvero deve aversi $d = plus.minus tilde(d)$.
 ]
 #proof[
 	Essendo $d$ un Massimo Comun Divisore per $a$ e $b$, deve valere
-	$d | a$ e $d | b$. Inoltre, deve valere anche che se $c in bb(Z)$
+	$d | a$ e $d | b$. Inoltre, deve valere anche che se $c in ZZ$
 	é tale che $c | a$ e $c | b$, allora $c | d$.
 
 	Essendo peró anche $tilde(d)$ un Massimo Comun Divisore per $a$ e
@@ -64,10 +64,10 @@ Comun Divisore* tra $a$ e $b$ se sono verificate entrambe le seguenti due condiz
 
 	É peró possibile operare anche in senso contrario: essendo $tilde(d)$
 	un Massimo Comun Divisore per $a$ e $b$, deve valere anche che se $c
-	in bb(Z)$ é tale che $c | a$ e $c | b$, allora $c | tilde(d)$, e valendo
+	in ZZ$ é tale che $c | a$ e $c | b$, allora $c | tilde(d)$, e valendo
 	$d | a$ e $d | b$ deve aversi che $d | tilde(d)$.
 
-	Esistono allora due numeri $h, k in bb(Z)$ tali per cui $tilde(d) = h d$
+	Esistono allora due numeri $h, k in ZZ$ tali per cui $tilde(d) = h d$
 	e $d = tilde(d)$. Ne segue $tilde(d) = (h k) tilde(d)$, e quindi $h k = 1$.
 	Deve allora aversi $h = k = 1$ e quindi $d = tilde(d)$ oppure $h = k = -1$
 	e quindi $d = -tilde(d)$.
@@ -131,7 +131,7 @@ viene indicato con $"MCD"(a, b)$.
 	  che dalla riga $(2)$ si ottiene $r_(k - 1) | r_(1)$ e $r_(k - 1) | b$. Dalla riga
 	  $(1)$ segue $r_(k - 1) | a$. Avendo dimostrato che $r_(k - 1) | a$ e $r_(k - 1) | b$,
 	  si ha che $r_(k - 1)$ possiede la prima proprietá dell'MCD.
-	- Sia $c in bb(Z) - {0}$. Siano poi $a = c overline(a)$ e $b = c overline(b)$. Sostituendo nella
+	- Sia $c in ZZ - {0}$. Siano poi $a = c overline(a)$ e $b = c overline(b)$. Sostituendo nella
 	  riga $(1)$ si ottiene:
 
 	  $ a = b q_(1) + r_(1) => c overline(a) = c overline(b) q_(1) + r_(1) =>

@@ -1,11 +1,11 @@
 #import "../Metodi_defs.typ": *
 
-Viene detta *funzione di Eulero* la funzione $phi : (bb(N) - {0}) |->
-(bb(N) - {0})$ cosí definita:
+Viene detta *funzione di Eulero* la funzione $phi : (NN - {0}) |->
+(NN - {0})$ cosí definita:
 
 $ phi(n) = cases(
 	1 & "se" n = 1,
-	|{k in bb(N) : 0 < k < n, "MCD"(k, n) = 1}| & "se" n > 1
+	|{k in NN : 0 < k < n, "MCD"(k, n) = 1}| & "se" n > 1
 ) $
 
 Ovvero, che per l'argomento $1$ restituisce $1$ mentre per un generico
@@ -16,12 +16,12 @@ n)$, estremi esclusi.
 #example[
 	Per $n = 26$, si ha:
 
-	$ phi(26) = |{k in bb(Z) : 0 < k < 26, (k, 26) = 1}| =
+	$ phi(26) = |{k in ZZ : 0 < k < 26, (k, 26) = 1}| =
 	|{1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25}| = 12 $
 ]
 
 #lemma[
-	Se $p in bb(N)$ é un numero primo maggiore di $1$, allora $phi(p) = p - 1$.
+	Se $p in NN$ é un numero primo maggiore di $1$, allora $phi(p) = p - 1$.
 ] <Euler-function-single-prime>
 #proof[
 	Per un generico $p$ numero naturale con $p > 1$, $phi(p)$ é il numero
@@ -47,7 +47,7 @@ n)$, estremi esclusi.
 ]
 
 #theorem("Moltiplicativitá della funzione di Eulero")[
-	La funzione di Eulero é moltiplicativa. Ovvero, presi $a, b in bb(N) - {0}$
+	La funzione di Eulero é moltiplicativa. Ovvero, presi $a, b in NN - {0}$
 	primi fra di loro, si ha $phi(a b) = phi(a) phi(b)$.
 ] <Euler-function-multiplicative>
 #proof[
@@ -74,7 +74,7 @@ n)$, estremi esclusi.
 	applicare il @Euclid-lemma, pertanto deve valere almeno un assunto fra
 	$p | a$ e $p | b$. Si supponga che sia vera $p | a$. Essendo $c$ soluzione
 	del sistema di congruenze, deve valere $c equiv r mod a$, ovvero che esiste
-	un $k in bb(Z)$ tale per cui $c - r = a k$. Riscrivendo l'espressione
+	un $k in ZZ$ tale per cui $c - r = a k$. Riscrivendo l'espressione
 	come $r = c - a h$, si evince che $p | r$, ma si ha assunto che valesse
 	$p | a$ e che $"MCD"(r, a) = 1$, e le due assunzioni sono incompatibili.
 	É facile verificare che assumendo invece che sia vera $p | b$, si ricade
@@ -87,7 +87,7 @@ n)$, estremi esclusi.
 
 	Viceversa, sia $t$ un numero intero scelto di modo che valga $0 < t < a b$
 	e $"MCD"(t, a b) = 1$. Dividendo $t$ per $a$, si ha $t = a q + r$ con $0
-	lt.eq r < a$ e $q in bb(Z)$.
+	lt.eq r < a$ e $q in ZZ$.
 
 	É possibile verificare che $"MCD"(a, r) = 1$. Innanzitutto, si osservi come
 	debba per forza aversi $r != 0$; se cosí fosse, si avrebbe $a | t$, ma questo
@@ -148,6 +148,6 @@ in numeri primi e semplici moltiplicazioni.
 ]
 
 #theorem[
-	Sia $n in bb(N)$ con $n > 0$. Il valore di $phi(n)$ equivale al numero di
-	elementi invertibili di $bb(Z)_(n)$.
+	Sia $n in NN$ con $n > 0$. Il valore di $phi(n)$ equivale al numero di
+	elementi invertibili di $ZZ_(n)$.
 ]

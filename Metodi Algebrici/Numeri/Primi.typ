@@ -1,37 +1,37 @@
 #import "../Metodi_defs.typ": *
 
-Sia $p in bb(Z)$, con $p gt.eq 2$. Il numero intero $p$ si dice
-*primo* se, per qualsiasi $a, b in bb(Z)$, $p | a b$ implica $p
+Sia $p in ZZ$, con $p gt.eq 2$. Il numero intero $p$ si dice
+*primo* se, per qualsiasi $a, b in ZZ$, $p | a b$ implica $p
 | a$ oppure $p | b$.
 
 Il numero intero $p$ con $p gt.eq 2$ viene detto *irriducibile* se
 i suoi divisori sono solo e soltanto $plus.minus p$ e $plus.minus
-1$. In altre parole, se vale $a | p$ con $a in bb(Z)$, allora $a =
+1$. In altre parole, se vale $a | p$ con $a in ZZ$, allora $a =
 plus.minus p$ oppure $a = plus.minus 1$.
 
 #theorem[
-	Il numero $p in bb(Z)$, con $p gt.eq 2$ é primo se e solo se é
+	Il numero $p in ZZ$, con $p gt.eq 2$ é primo se e solo se é
 	irriducibile (ovvero, le due definizioni sono equivalenti).
 ]
 #proof[
-	- Si supponga che $p$ sia un numero primo. Sia $a in bb(Z)$ un
+	- Si supponga che $p$ sia un numero primo. Sia $a in ZZ$ un
 	  divisore di $p$, la cui esistenza é garantita per definizione.
-	  Deve allora esistere un certo $b in bb(Z)$ tale per cui $p =
+	  Deve allora esistere un certo $b in ZZ$ tale per cui $p =
 	  a b$; avendosi $p | p$ per qualsiasi numero intero, si ha $p
 	  | a b$. Essendo $p$ un numero primo, per definizione deve aversi
 	  $p | a$ oppure $p | b$:
 
 	  - Se $p | a$, allora $p = plus.minus a$, perché avendo scelto $a$
 	    come divisore di $p$ si ha sia $a | p$ che $p | a$;
-	  - Se $p | b$, allora deve esistere un certo $c in bb(Z)$ tale per
+	  - Se $p | b$, allora deve esistere un certo $c in ZZ$ tale per
 	    cui $b = p c$. Ma per ipotesi $p = a b$, pertanto $p = a (p c)$,
 	    ovvero $plus.minus 1 = a c$, da cui si ha $a = plus.minus 1$.
 
 	  In entrambi i casi, $p$ risponde alla definizione di numero
 	  irriducibile.
 	- Si supponga che $p$ sia un numero irriducibile. Siano allora $a, b
-	  in bb(Z)$ tali per cui $p | a b$; deve allora esistere un certo
-	  $q in bb(Z)$ tale per cui $a b = p q$. Sia $d = "MCD"(a, b)$: per
+	  in ZZ$ tali per cui $p | a b$; deve allora esistere un certo
+	  $q in ZZ$ tale per cui $a b = p q$. Sia $d = "MCD"(a, b)$: per
 	  definizione, $d | p$. Essendo $p$ un numero irriducibile, deve
 	  aversi o $d = p$ oppure $d = 1$:
 
@@ -54,11 +54,11 @@ detto *numero composto*.
 ] <Euclid-lemma>
 #proof[
 	Si applichi il principio di induzione su $n$. Se $n = 2$, si ha $p | a b$
-	con $a, b in bb(Z)$, e per definizione $p | a$ oppure $p | b$.
+	con $a, b in ZZ$, e per definizione $p | a$ oppure $p | b$.
 
 	Si supponga che la proposizione sia vera per $n$, ovvero che $p$ sia
 	il divisore di almeno uno dei fattori del prodotto $a_(1) dot a_(2)
-	dot ... dot a_(n)$, con $a_(1), ..., a_(n) in bb(Z)$ sapendo che
+	dot ... dot a_(n)$, con $a_(1), ..., a_(n) in ZZ$ sapendo che
 	é divisore del prodotto stesso. Si dimostri pertanto che $p$ sia il
 	divisore di almeno uno dei fattori del prodotto $a_(1) dot a_(2)
 	dot ... dot a_(n + 1)$ sapendo che vale $p | (a_(1) dot ...
@@ -86,7 +86,7 @@ numeri primi di un numero primo é sé stesso.
 ]
 
 #theorem("Teorema fondamentale dell'aritmetica")[
-	Per ogni numero $n in bb(N)$ tale che $n gt.eq 2$ esiste uno ed
+	Per ogni numero $n in NN$ tale che $n gt.eq 2$ esiste uno ed
 	un solo modo per fattorizzarlo in numeri primi (a meno dell'ordine
 	in cui si dispongono i fattori).
 ] <Fundamental-Arithmetic>
@@ -165,8 +165,8 @@ procedere, ovvero fintanto che tale risultato sia diverso da 1.
 	siano quindi un insieme finito: sia tale insieme ${p_(1), p_(2), ...,
 	p_(k)}$. Sia $M = 1 + (p_(1) dot p_(2) dot ... dot p_(k))$:
 	essendo 2 il numero primo piú piccolo, si avrá certamente $M gt.eq 2$.
-	Essendo poi l'insieme $bb(Z)$ chiuso rispetto al prodotto e alla somma,
-	si ha $M in bb(Z)$. Sono allora valide le ipotesi del @Fundamental-Arithmetic,
+	Essendo poi l'insieme $ZZ$ chiuso rispetto al prodotto e alla somma,
+	si ha $M in ZZ$. Sono allora valide le ipotesi del @Fundamental-Arithmetic,
 	ed esiste quindi una ed una sola fattorizzazione in numeri primi per $M$. Se
 	tale fattorizzazione esiste, allora ciascun elemento $p_(i)$ di tale
 	fattorizzazione deve esserne anche un divisore. Questo peró non é possibile,
@@ -176,16 +176,16 @@ procedere, ovvero fintanto che tale risultato sia diverso da 1.
 	che i numeri primi siano infiniti.
 ]
 
-Siano $a, b in bb(Z)$ non entrambi nulli; si dice che $m in bb(Z)$ é un *Minimo
+Siano $a, b in ZZ$ non entrambi nulli; si dice che $m in ZZ$ é un *Minimo
 Comune Multiplo* tra $a$ e $b$ se sono verificate entrambe le seguenti due condizioni:
 
 + $a | m$ e $b | m$. Ovvero, sia $a$ che $b$ sono divisori di $m$;
-+ Se $c in bb(Z)$ é tale che $a | c$ e $b | c$, allora $m | c$. Ovvero,
++ Se $c in ZZ$ é tale che $a | c$ e $b | c$, allora $m | c$. Ovvero,
   se sia $a$ che $b$ sono divisori di un generico $c$, allora anche $m$
   é divisore di $c$.
 
 #theorem[
-	Dati due numeri $a, b in bb(Z)$ non entrambi nulli, se $m$ e $tilde(m)$
+	Dati due numeri $a, b in ZZ$ non entrambi nulli, se $m$ e $tilde(m)$
 	sono due Minimi Comuni Multipli fra $a$ e $b$ allora devono essere uguali
 	in modulo, ovvero deve aversi $m = plus.minus tilde(m)$.
 ]
@@ -207,12 +207,12 @@ viene indicato con $"mcm"(a, b)$.
 	$b | m$, provando il primo requisito della definizione di Minimo
 	Comune Multiplo.
 
-	Preso un $c in bb(Z)$ tale per cui $a | c$ e $b | c$, ossia tale
-	per cui $c = a s = b t$ per certi $s, t in bb(Z)$, si ha $c =
+	Preso un $c in ZZ$ tale per cui $a | c$ e $b | c$, ossia tale
+	per cui $c = a s = b t$ per certi $s, t in ZZ$, si ha $c =
 	tilde(a) s d = tilde(b) t d$, ovvero $tilde(a) s = tilde(b) t$.
 	Poiché $"MCD"(tilde(a), tilde(b)) = 1$, deve aversi $tilde(a) |
 	t$ e $tilde(b) | s$, ovvero deve valere $t = h tilde(a)$ e $s =
-	k tilde(b)$ per certi $h, k in bb(Z)$. Sostituendo $t = h tilde(a)$
+	k tilde(b)$ per certi $h, k in ZZ$. Sostituendo $t = h tilde(a)$
 	nell'espressione per $c$, si ha $c = b tilde(a) h = m h$, da cui si
 	deduce $m | c$, provando il secondo requisito della definizione di
 	Minimo Comune Multiplo.

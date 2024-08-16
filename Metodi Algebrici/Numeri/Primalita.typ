@@ -26,14 +26,14 @@ tutti i numeri nell'intervallo $1 < k < n$, ma soltanto quelli
 primi.
 
 #lemma[
-	Sia $n in bb(N)$ con $n gt.eq 1$. Se $n$ é un numero composto,
+	Sia $n in NN$ con $n gt.eq 1$. Se $n$ é un numero composto,
 	allora almeno uno dei numeri primi che costituiscono la sua
 	fattorizzazione é minore di $floor(sqrt(n))$.
 ]
 #proof[
 	Si supponga che, in una certa iterazione del test naive, venga
 	trovato un numero $p$ che é divisore di $n$. Allora é possibile
-	scrivere $n = p q$ per un certo $q in bb(Z)$. Per come il test
+	scrivere $n = p q$ per un certo $q in ZZ$. Per come il test
 	é strutturato, $q$ deve necessariamente essere maggiore o uguale
 	a $p$, perché altrimenti il test lo avrebbe giá individuato (o
 	avrebbe individuato un numero primo della sua fattorizzazione).

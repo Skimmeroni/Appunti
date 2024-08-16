@@ -2,10 +2,10 @@
 
 Viene detta *congruenza lineare modulo* $n$ qualunque espressione nella forma:
 
-$ a x equiv b mod n "   con " a, b, n in bb(Z) $
+$ a x equiv b mod n "   con " a, b, n in ZZ $
 
 Dove $a$, $b$ ed $n$ sono termini noti ed $x$ é una incognita. Naturalmente,
-le _soluzioni_ di una congruenza lineare sono tutti e soli quei $c in bb(Z)$
+le _soluzioni_ di una congruenza lineare sono tutti e soli quei $c in ZZ$
 tali che, sostituiti ad $x$, rendono valida l'espressione. Se esiste almeno
 un $c$ con queste caratteristiche, si dice che la congruenza lineare _ammette_
 soluzione.
@@ -18,13 +18,13 @@ soluzione.
 ] <Congruence>
 
 #theorem[
-	Siano $a$, $b$, $n in bb(Z)$, con $a != 0$. La congruenza lineare $a x equiv b
+	Siano $a$, $b$, $n in ZZ$, con $a != 0$. La congruenza lineare $a x equiv b
 	mod n$ ammette soluzione se e soltanto se $"MCD"(a, n) | b$.
 ] <Congruence-solutions-exist>
 #proof[
 	Da definizione di congruenza modulo $n$, si ha che $a x equiv b mod n$ equivale
 	a $n | a x - b$, che a sua volta equivale a $a x - b = n k$ per un certo $k in
-	bb(Z)$. Spostando $b$ al secondo membro, si ha $a x - n k = b$; dato che tutti
+	ZZ$. Spostando $b$ al secondo membro, si ha $a x - n k = b$; dato che tutti
 	i numeri che figurano in questa equazione sono numeri interi, si sta avendo a
 	che fare con una equazione diofantea, nello specifico nelle variabili $x$ e $k$.
 	Per il @Diophantine-solutions-exist, l'equazione ha soluzione se e soltanto se
@@ -70,11 +70,11 @@ della soluzione particolare di tale equazione.
 ] <Example-congruence-solution>
 
 #theorem[
-	Siano $a$, $b$, $n in bb(Z)$, con $a != 0$. Si consideri la congruenza
-	lineare $a x equiv b mod n$: se $x_(0) in bb(Z)$ ne é una soluzione,
+	Siano $a$, $b$, $n in ZZ$, con $a != 0$. Si consideri la congruenza
+	lineare $a x equiv b mod n$: se $x_(0) in ZZ$ ne é una soluzione,
 	allora lo sono anche tutti ed i soli numeri interi $x_(h)$ nella forma:
 
-	$ x_(h) = x_(0) + h (frac(n, "MCD"(a, n))) "   con" h in bb(Z) $
+	$ x_(h) = x_(0) + h (frac(n, "MCD"(a, n))) "   con" h in ZZ $
 
 	In particolare, fra queste ne esistono esattamente $"MCD"(a, n)$
 	non congruenti modulo $n$ fra di loro.
@@ -82,23 +82,23 @@ della soluzione particolare di tale equazione.
 #proof[
 	Per il @Congruence-solutions-exist, $a x equiv b mod n$ ha soluzione se
 	e soltanto se ha soluzione l'equazione diofantea equivalente $a x - n k
-	= b$ con $k in bb(Z)$. Per il @Diophantine-all-solutions si ha che se
-	$(x_(0), k_(0)) in bb(Z) times bb(Z)$ é una soluzione particolare di
+	= b$ con $k in ZZ$. Per il @Diophantine-all-solutions si ha che se
+	$(x_(0), k_(0)) in ZZ times ZZ$ é una soluzione particolare di
 	tale equazione, allora lo sono tutte e sole le coppie $(x_(h), k_(h))
-	in bb(Z) times bb(Z)$ nella forma:
+	in ZZ times ZZ$ nella forma:
 
 	$ x_(h) = x_(0) + h (frac(n, "MCD"(a, n))) space space space
 	  k_(h) = k_(0) - h (frac(n, "MCD"(a, n)))
-	  "   con" h in bb(Z) $
+	  "   con" h in ZZ $
 
 	L'espressione per $x_(h)$ é quella cercata. Per provare che la congruenza
 	lineare ha esattamente $"MCD"(a, n)$ soluzioni non congruenti modulo $n$
-	fra di loro, si consideri $h_(1), h_(2) in bb(Z)$. Si ha:
+	fra di loro, si consideri $h_(1), h_(2) in ZZ$. Si ha:
 
 	$ x_(0) + h_(1) (frac(n, "MCD"(a, n))) equiv x_(0) + h_(2) (frac(n, "MCD"(a, n))) mod n <==>
 	  (frac(n, "MCD"(a, n))) (h_(1) - h_(2)) equiv 0 mod n $
 
-	Deve allora esistere un certo $q in bb(Z)$ tale per cui:
+	Deve allora esistere un certo $q in ZZ$ tale per cui:
 
 	$ (frac(n, "MCD"(a, n))) (h_(1) - h_(2)) equiv 0 mod n =>
 	  (frac(cancel(n), "MCD"(a, n))) (h_(1) - h_(2)) = q cancel(n) =>
@@ -117,10 +117,10 @@ e sceglierne una soluzione qualsiasi, essendo tutte equivalenti. Per convenzione
 si preferisce scegliere la soluzione piú piccola.
 
 #example[
-	In $bb(Z)_(9)$, la classe di resto $[7]_(9)$ é invertibile, in quanto
+	In $ZZ_(9)$, la classe di resto $[7]_(9)$ é invertibile, in quanto
 	$"MCD"(7, 9) = 1$. L'inverso é ricavato dal risolvere la congruenza
 	lineare $7 x equiv 1 mod 9$, che ha come soluzione $4 + 9 k$ con $k in
-	bb(Z)$. Pertanto, l'inverso di $[7]_(9)$ é $[4]_(9)$.
+	ZZ$. Pertanto, l'inverso di $[7]_(9)$ é $[4]_(9)$.
 ]
 
 Viene detto *sistema di congruenze lineari* qualunque espressione nella forma:
@@ -132,12 +132,12 @@ $
 		a_(2) x equiv b_(2) & mod n_(2),
 		dots.v,
 		a_(m) x equiv b_(m) & mod n_(m)
-	) " con " a_(1), ..., a_(m), b_(1), ..., b_(m), n_(1), ..., n_(m) in bb(Z)
+	) " con " a_(1), ..., a_(m), b_(1), ..., b_(m), n_(1), ..., n_(m) in ZZ
 $
 
 Dove $a_(1), ..., a_(m)$, $b_(1), ..., b_(m)$ e $n_(1), ..., n_(m)$
 sono termini noti ed $x$ é una incognita. Le _soluzioni_ di un sistema
-di congruenze lineari sono tutti e soli quei $c in bb(Z)$ tali che,
+di congruenze lineari sono tutti e soli quei $c in ZZ$ tali che,
 sostituiti ad $x$, verificano contemporaneamente tutte le $m$ congruenze
 lineari modulo $n_(i)$ che lo compongono. Se esiste almeno un $c$ con
 queste caratteristiche, si dice che il sistema di congruenze lineari
@@ -170,7 +170,7 @@ soluzione che sia comune a tutte.
 			dots.v,
 			x equiv b_(2) & mod n_(2),
 			x equiv b_(m) & mod n_(m)
-		) " con " b_(1), ..., b_(m), n_(1), ..., n_(m) in bb(Z)
+		) " con " b_(1), ..., b_(m), n_(1), ..., n_(m) in ZZ
 	$
 
 	Ovvero, dove i termini $a_(1), ..., a_(m)$ sono tutti pari ad 1. Si assuma

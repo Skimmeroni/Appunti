@@ -66,6 +66,8 @@
 = Gruppi
 == Proprietá dei gruppi
 #include "Gruppi/Proprieta.typ"
+== Permutazioni
+#include "Gruppi/Permutazioni.typ"
 == Polinomi su un campo
 #include "Gruppi/Polinomi.typ"
 == Radici di un polinomio
@@ -73,7 +75,6 @@
 #pagebreak()
 
 /*
-Permutazioni
 Sottogruppi. Ideali. Morfismi
 Costruzione di campi
 */

@@ -1,7 +1,7 @@
 #import "../Metodi_defs.typ": *
 
 #theorem("Piccolo Teorema di Fermat")[
-	Sia $p in bb(N)$ numero primo. Per qualsiasi $a in bb(N)$ vale:
+	Sia $p in NN$ numero primo. Per qualsiasi $a in NN$ vale:
 
 	$ a^(p) equiv a mod p $
 
@@ -18,7 +18,7 @@
 	É possibile provare che tali classi sono tutte distinte fra loro. Si
 	supponga infatti per assurdo che questo non sia vero, e che quindi
 	esistano (almeno) due classi di resto dell'insieme sopra definito che
-	coincidono. Siano queste $[r a]_(p) = [s a]_(p)$, con $r, s in bb(Z)$
+	coincidono. Siano queste $[r a]_(p) = [s a]_(p)$, con $r, s in ZZ$
 	tali per cui $0 lt.eq r < p$ e $0 lt.eq s < p$. Supponendo, senza
 	perdita di generalitá, $r gt.eq s$, si ha allora:
 
@@ -73,7 +73,7 @@
 ]
 
 #theorem("Teorema di Fermat-Eulero")[
-	Sia $n in bb(N) - {0}$ e sia $a$ un qualsiasi intero tale che $a$ ed $n$ siano
+	Sia $n in NN - {0}$ e sia $a$ un qualsiasi intero tale che $a$ ed $n$ siano
 	primi fra di loro. Allora vale:
 
 	$ a^(phi(n)) equiv 1 mod n $
@@ -100,7 +100,7 @@
 	  p^(m - 1) | a^(phi(p^(m - 1))) - 1 =>
 	  a^(phi(p^(m - 1))) - 1 = p^(m - 1) b $
 
-	Per un certo $b in bb(Z)$. Per il @Euler-function-primes, é
+	Per un certo $b in ZZ$. Per il @Euler-function-primes, é
 	possibile esplicitare l'esponente di $a$:
 
 	$ a^(phi(p^(m - 1))) - 1 = p^(m - 1) b =>
@@ -141,7 +141,7 @@
 	$ a^(phi(p_(i)^(m_(i)))) equiv 1 mod p_(i)^(m_(i)) $
 
 	Per il @Euler-function-multiplicative, si ha che ciascun $phi(p_(i)^(m_(i)))$
-	é divisore di $phi(n)$, ovvero che per un certo $t in bb(Z)$ vale $phi(n) =
+	é divisore di $phi(n)$, ovvero che per un certo $t in ZZ$ vale $phi(n) =
 	phi(p_(i)^(m_(i))) t$. Allora:
 
 	$ a^(phi(n)) = a^(phi(p_(i)^(m_(i))) t) = (a^(phi(p_(i)^(m_(i)))))^(t)
