@@ -40,6 +40,12 @@ possibile costruire per $X$ viene indicato con $S_(X)$.
 Per un insieme $X$, il gruppo $(S_(X), compose)$ viene chiamato
 *gruppo simmetrico* o *gruppo delle permutazioni*.
 
+Essendo $compose$ l'operazione piú "interessante" da applicare
+alle permutazioni, si usa chiamare _prodotto_ di due permutazioni
+la loro composizione. Pertanto, se $sigma$ e $tau$ sono due permutazioni
+in $S_(X)$, la scrittura $sigma compose tau$ puó anche venire riportata
+come $sigma tau$.
+
 In genere, quando si parla di permutazioni su un insieme $X$, si ha
 interesse a considerare $X$ come i primi $n$ numeri interi, ovvero
 come  $X = {1, 2, ..., n}$. Per tal motivo, viene usata la notazione
@@ -78,43 +84,43 @@ posizione diversa da quella in cui si trova. In caso contrario,
 ovvero se $sigma(a) = a$, si dice che $sigma$ _fissa_ $a$.
 
 L'insieme costituito dagli elementi mossi da $sigma$ prende il nome
-di *supporto* di $sigma$. Due permutazioni $sigma_(1), sigma_(2) in
+di *supporto* di $sigma$. Due permutazioni $sigma, tau in
 S_(n)$ si dicono *disgiunte* se i loro supporti sono insiemi disgiunti.
 
 #example[
-	Si considerino le tre permutazioni $sigma_(1), sigma_(2), sigma_(3)
+	Si considerino le tre permutazioni $sigma, tau, upsilon
 	in S_(6)$:
 
 	#grid(
 		columns: (0.33fr, 0.33fr, 0.33fr),
 		[
-			$ sigma_(1) = mat(
+			$ sigma = mat(
 				1, 2, 3, 4, 5, 6;
 				1, 6, 2, 3, 5, 4;
 			) $
 		],
 		[
-			$ sigma_(2) = mat(
+			$ tau = mat(
 				1, 2, 3, 4, 5, 6;
 				5, 2, 3, 4, 1, 6;
 			) $
 		],
 		[
-			$ sigma_(3) = mat(
+			$ upsilon = mat(
 				1, 2, 3, 4, 5, 6;
 				1, 2, 3, 5, 6, 4;
 			) $
 		]
 	)
 
-	Il supporto di $sigma_(1)$ é ${2, 3, 4, 6}$, quello di $sigma_(2)$
-	é ${1, 5}$ mentre quello di $sigma_(3)$ é ${4, 5, 6}$. Si ha quindi
-	che $sigma_(1)$ e $sigma_(2)$ sono disgiunte.
+	Il supporto di $sigma$ é ${2, 3, 4, 6}$, quello di $tau$
+	é ${1, 5}$ mentre quello di $upsilon$ é ${4, 5, 6}$. Si ha quindi
+	che $sigma$ e $tau$ sono disgiunte.
 ]
 
 #theorem[
-	Se $sigma_(1)$ e $sigma_(2)$ sono due permutazioni disgiunte,
-	si ha $sigma_(1) compose sigma_(2) = sigma_(2) compose sigma_(1)$.
+	Se $sigma$ e $tau$ sono due permutazioni disgiunte,
+	si ha $sigma tau = tau sigma$.
 ]
 // #proof[
 // Dimostrabile, da aggiungere
@@ -129,18 +135,17 @@ $ mat(
 
 Viene detta *permutazione ciclica* di lunghezza $r$, o semplicemente
 *ciclo* di lunghezza $r$, con $r gt.eq 2$. Intuitivamente, un ciclo
-"sposta" un elemento $x_(a)$ nella posizione in cui si trovava $x_(b)$,
-l'elemento $x_(b)$ nella posizione in cui si trovava $x_(c)$, ..., e
-l'elemento $x_(r)$ nella posizione in cui si trovava $x_(a)$.
+"sposta" l'elemento $x_(b)$ "sotto" a $x_(a)$, l'elemento $x_(b)$
+"sotto" a $x_(c)$, ..., e $x_(r)$ "sotto" a $x_(a)$.
 
 Dato che un ciclo o fissa o muove ciascun suo elemento, per denotare
 un ciclo é sufficiente denotare quali elementi vengono mossi ed in
 quale posizione, perché tutti gli elementi non menzionati sono
 implicitamente fissati. Un ciclo $sigma$ di lunghezza $r$ viene
 denotato con $sigma = (x_(1), x_(2), ..., x_(r))$; tale scrittura
-sta ad indicare che ciascun elemento $x_(i)$ viene mosso nella
-posizione in cui si trovava $x_(i + 1)$, ad eccezione dell'$r$-esimo
-elemento che viene portato nella posizione in cui si trovava $x_(1)$.
+sta ad indicare che in corrispondenza di ciascun elemento $x_(i)$
+viene messo l'elemento $x_(i + 1)$, ad eccezione dell'$r$-esimo
+elemento che viene messo in corrispondenza con $x_(1)$.
 
 Si noti come la scrittura $(x_(1), x_(2), x_(3), ..., x_(r))$ sia
 equivalente alla scrittura $(x_(r), x_(1), x_(2), ..., x_(r - 1))$
@@ -155,15 +160,15 @@ diversi quant'é la sua lunghezza.
 	all'insieme delle permutazioni $S_(12)$:
 
 	$ sigma = mat(
-		1,  2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
-		11, 2, 3, 9, 5, 4, 7, 8, 1, 10,  6, 12;
-
+		1, 2, 3, 4, 5,  6, 7, 8, 9, 10, 11, 12;
+		9, 2, 3, 6, 5, 11, 7, 8, 4, 10,  1, 12;
 	) $
 
-	Tale ciclo muove $1$ in posizione $9$, $9$ in posizione $4$, $4$
-	in posizione $6$, $6$ in posizione $11$ e $11$ in posizione $1$.
-	Pertanto, viene denotato come $(1, 9, 4, 6, 11)$. Si noti come
-	tale scrittura possa essere formulata in $5$ modi, tutti equivalenti:
+	Tale ciclo mette $1$ in corrispondenza con $9$, $9$ corrispondenza
+	con $4$, $4$ in corrispondenza con $6$, $6$ in corrispondenza con
+	$11$ e $11$ in corrispondenza con $1$. Pertanto, viene denotato come
+	$(1, 9, 4, 6, 11)$. Si noti come tale scrittura possa essere formulata
+	in $5$ modi, tutti equivalenti:
 
 	#grid(
 		columns: (0.2fr, 0.2fr, 0.2fr, 0.2fr, 0.2fr),
@@ -185,14 +190,44 @@ diversi quant'é la sua lunghezza.
 // ]
 
 #example[
-	Si consideri la permutazione $sigma in S_(13)$ cosí definita:
+	La permutazione $sigma in S_(13)$ a sinistra puó essere scomposta
+	nel prodotto dei tre cicli $upsilon_(1), upsilon_(2), upsilon_(3)$
+	a destra:
 
-	$ sigma = mat(
-		1, 2,  3,  4, 5, 6,  7, 8, 9, 10, 11, 12, 13;
-		9, 12, 13, 6, 7, 11, 2, 3, 4, 10, 1,  5,  8;
-	) $
+	#grid(
+		columns: (0.7fr, 0.3fr),
+		[
+			$ sigma = mat(
+				1,  2,  3, 4, 5,  6, 7, 8, 9, 10, 11, 12, 13;
+				9, 12, 13, 6, 7, 11, 2, 3, 4, 10,  1,  5,  8;
+			) $
+		],
+		[
+			$upsilon_(1) = (1, 9, 4, 6, 11)$,
+			$upsilon_(2) = (2, 12, 5, 7)$,
+			$upsilon_(3) = (3, 13, 8)$
+		]
+	)
 
-	La permutazione in questione puó essere decomposta nel prodotto
-	di tre cicli. Nello specifico: $(1, 9, 4, 6, 11)(2, 12, 5, 7)
-	(3, 13, 8)$.
+	Per convincersene, é sufficiente comporre (in ordine arbitrario) i
+	tre cicli. Si consideri, per esempio, $upsilon_(1) compose upsilon_(2)
+	compose upsilon_(3)$:
+
+	$
+		upsilon_(1) compose upsilon_(2) compose upsilon_(3) =
+		upsilon_(1) upsilon_(2) upsilon_(3) =
+		upsilon_(1)(upsilon_(2)(upsilon_(3)))&=
+		upsilon_(1)(upsilon_(2)(mat(
+			1, 2,  3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13;
+			1, 2, 13, 4, 5, 6, 7, 3, 9, 10, 11, 12,  8;
+		))) \ =
+		upsilon_(1)(mat(
+			1,  2,  3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13;
+			1, 12, 13, 4, 7, 6, 2, 3, 9, 10, 11,  5,  8;
+		))&=
+		mat(
+			1,  2,  3, 4, 5,  6, 7, 8, 9, 10, 11, 12, 13;
+			9, 12, 13, 6, 7, 11, 2, 3, 4, 10,  1,  5,  8;
+		)
+	$
 ]

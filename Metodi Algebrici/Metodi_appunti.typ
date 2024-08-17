@@ -76,6 +76,7 @@
 
 /*
 Sottogruppi. Ideali. Morfismi
+Ordini (permutazioni e cicli)
 Costruzione di campi
 */
 
