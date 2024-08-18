@@ -160,9 +160,10 @@
 	$ a^(phi(n)) equiv 1 mod n $
 ]
 
-Calcolare $a^(m) mod n$ puó essere molto difficile, specialmente se
-i numeri in questione sono molto grandi. É peró possibile rendere il
-procedimento piú semplice utilizzando le proprietá della base due.
+Calcolare $a^(m) mod n$ "a mano" puó richiedere molto tempo, specialmente
+se i numeri in questione sono molto grandi. É peró possibile velocizzare
+il procedimento impiegando il *metodo dei quadrati ripetuti*, di seguito
+discusso.
 
 Si scriva l'esponente $m$ in base due, ottenendo $m = sum_(i = 0)^(k - 1)
 d_(i) 2^(i)$, dove ciascun $d_(i)$ é la $i$-esima cifra della rappresentazione.

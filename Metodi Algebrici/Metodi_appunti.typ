@@ -87,9 +87,15 @@ Costruzione di campi
 #include "Crittografia/RSA.typ"
 == Firma digitale tramite RSA
 #include "Crittografia/Firma.typ"
+#pagebreak()
+
+= Teoria dei codici
+== Introduzione alla teoria dei codici
+#include "Codici/Introduzione.typ"
+== Codici a blocchi
+#include "Codici/Blocchi.typ"
 
 /*
-Teoria dei Codici: introduzione
 Codici Lineari
 Codici Ciclici
 */
