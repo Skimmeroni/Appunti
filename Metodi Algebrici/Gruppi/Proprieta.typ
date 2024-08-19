@@ -110,33 +110,96 @@ se, dati due gruppi $G$ ed $H$, $H$ sia un sottogruppo di $G$.
 
 #lemma[
 	Per un qualsiasi gruppo $G = (G, diamond.small)$, le strutture algebriche
-	$(G, diamond.small)$ e $({1}, diamond.small)$ sono sottogruppi di $G$.
+	$(G, diamond.small)$ e $({1_(G)}, diamond.small)$ sono sottogruppi di $G$.
 ]
 #proof[
-	- L'insieme $G$ della struttura algebrica $(G, diamond.small)$ é lo stesso
-	  insieme che figura nell'insieme $G$ del gruppo $G = (G, diamond.small)$.
-	  Pertanto, il @Is-a-subgroup é certamente verificato;
-	- L'unico elemento che figura nell'insieme ${1}$ della struttura
-	  algebrica $({1}, diamond.small)$ é precisamente $1$. A prescindere
-	  di come $diamond.small$ sia definita, si ha $overline(1) = 1$,
-	  pertanto $1 diamond.small overline(1) = 1 diamond.small 1 = 1$.
-	  Dato che $1 in {1}$, il @Is-a-subgroup é verificato.
+	- L'insieme $G$ della struttura algebrica $(G, diamond.small)$ é
+	  lo stesso insieme che figura nell'insieme $G$ del gruppo $G =
+	  (G, diamond.small)$. Pertanto, il @Is-a-subgroup é certamente
+	  verificato;
+	- L'unico elemento che figura nell'insieme ${1_(G)}$ della
+	  struttura algebrica $({1_(G)}, diamond.small)$ é precisamente
+	  $1_(G)$. A prescindere di come $diamond.small$ sia definita,
+	  si ha $overline(1)_(G) = 1_(G)$, pertanto $1_(G) diamond.small
+	  overline(1)_(G) = 1_(G) diamond.small 1_(G) = 1_(G)$. Dato che
+	  $1_(G) in {1_(G)}$, il @Is-a-subgroup é verificato.
 ]
 
 Per un qualsiasi gruppo $G$, il sottogruppo $G$ viene detto
-*sottogruppo improprio*, mentre il sottogruppo ${1}$ viene
-detto *sottogruppo banale*.
+*sottogruppo improprio*, mentre il sottogruppo ${1_(G)}$
+viene detto *sottogruppo banale*.
 
-/*
+Siano $(G, *)$ e $(K, diamond.small)$ due gruppi. Una funzione
+$phi.alt: G |-> K$ si dice *omomorfismo* (tra $G$ e $K$) se vale:
+
+$ forall g_(1), g_(2) in G, space phi.alt(g_(1) * g_(2)) =
+  phi.alt(g_(1)) diamond.small phi.alt(g_(2)) $
+
+Un omomorfismo iniettivo si dice *monomorfismo*, un omomorfismo suriettivo
+si dice *epimorfismo*, un omomorfismo biettivo si dice *isomorfismo* ed un
+isomorfismo che mappa due insiemi uguali si dice *automorfismo*.
+
+#example[
+	- Si considerino i gruppi $(RR^(+), dot)$ e $(RR, +)$. La funzione
+	  $f: RR^(+) |-> RR, ln(x)$ é un omomorfismo, in quanto:
+
+	  $ ln(x_(1) dot x_(2)) = ln(x_(1)) + ln(x_(2)) $
+	- Si considerino i gruppi $(RR, dot)$ e $(RR, +)$. La funzione
+	  $f: RR |-> RR, sin(x)$ non é un omomorfismo, in quanto:
+
+	  $ sin(x_(1) dot x_(2)) != sin(x_(1)) + sin(x_(2)) $
+	- Si considerino i gruppi $(RR^(+), +)$ e $(RR, dot)$. La funzione
+	  $f: RR^(+) |-> RR, ln(x)$ non é un omomorfismo, in quanto:
+
+	  $ ln(x_(1) + x_(2)) != ln(x_(1)) dot ln(x_(2)) $
+] <ln-is-homomorphism>
+
+Se esiste un isomorfismo fra due gruppi $G$ e $K$, si dice che tali
+gruppi sono _isomorfi_, e si indica con $G tilde.eq K$.
+
+Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
+$(K, diamond.small)$. Prende il nome di *nucleo* di $phi.alt$,
+denotato con $ker(phi.alt)$, il sottoinsieme di $G$ cosí definito:
+
+$ ker(phi.alt) = {g in G: phi.alt(g) = 1_(K)} $
+
+Dove $1_(K)$ é l'elemento neutro dell'operazione $diamond.small$.
+
+Prende invece il nome di *immagine* di $phi.alt$, denotata con
+$im(phi.alt)$, il sottoinsieme di $K$ cosí definito:
+
+$ im(phi.alt) = {k in K: exists g in G, phi.alt(g) = k} $
+
+#example[
+	Come mostrato nell'@ln-is-homomorphism, la funzione $f: RR^(+)
+	|-> RR, ln(x)$ é un omomorfismo per i gruppi $(RR^(+), dot)$ e
+	$(RR, +)$.
+
+	Essendo $0$ l'elemento neutro rispetto alla somma in $RR$, il
+	nucleo di $phi.alt$ é l'insieme che contiene tutti gli elementi
+	$x in RR^(+)$ tali per cui $ln(x) = 0$. L'unico valore che soddisfa
+	tale espressione é $1$, pertanto $ker(phi.alt) = {1}$.
+
+	L'immagine di $phi.alt$ é l'insieme che contiene tutti gli elementi
+	di $y in RR$ tali per cui $y = ln(x)$. Dato che qualsiasi numero reale
+	puó essere il risultato dell'applicazione del logaritmo naturale,
+	si ha $im(phi.alt) = RR$.
+]
+
 #lemma[
-	Sia $G$ un gruppo $H$ un suo sottogruppo. L'elemento neutro per $G$,
-	oltre ad appartenere ad $H$, é anche l'elemento neutro per $H$.
+	Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
+	$(K, diamond.small)$. Il nucleo di $phi.alt$ é un sottogruppo
+	di $(G, *)$
 ]
-#proof[
-	L'elemento neutro di un gruppo $G$ é definito rispetto alla sua operazione.
-	Pertanto, un sottogruppo $H$ di $G$, dovendo venire definito rispetto alla
-	medesima operazione, deve avere lo stesso elemento neutro. Inoltre, per
-	definizione di gruppo, tale elemento é unico, pertanto l'unico elemento
-	elemento neutro di $H$ é il medesimo (ed unico) elemento neutro per $G$.
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
+
+#lemma[
+	$phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
+	$(K, diamond.small)$. L'immagine di $phi.alt$ é un sottogruppo
+	di $(K, diamond.small)$
 ]
-*/
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
