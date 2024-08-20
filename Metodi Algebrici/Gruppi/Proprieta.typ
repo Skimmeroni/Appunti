@@ -130,7 +130,7 @@ Per un qualsiasi gruppo $G$, il sottogruppo $G$ viene detto
 viene detto *sottogruppo banale*.
 
 Siano $(G, *)$ e $(K, diamond.small)$ due gruppi. Una funzione
-$phi.alt: G |-> K$ si dice *omomorfismo* (tra $G$ e $K$) se vale:
+$phi.alt: G |-> K$ si dice *omomorfismo* (da $G$ a $K$) se vale:
 
 $ forall g_(1), g_(2) in G, space phi.alt(g_(1) * g_(2)) =
   phi.alt(g_(1)) diamond.small phi.alt(g_(2)) $
@@ -139,23 +139,96 @@ Un omomorfismo iniettivo si dice *monomorfismo*, un omomorfismo suriettivo
 si dice *epimorfismo*, un omomorfismo biettivo si dice *isomorfismo* ed un
 isomorfismo che mappa due insiemi uguali si dice *automorfismo*.
 
+Se esiste (almeno) un isomorfismo fra due gruppi $G$ e $K$, si dice che tali
+gruppi sono _isomorfi_, e si indica con $G tilde.eq K$.
+
 #example[
-	- Si considerino i gruppi $(RR^(+), dot)$ e $(RR, +)$. La funzione
-	  $f: RR^(+) |-> RR, ln(x)$ é un omomorfismo, in quanto:
+	- Rispetto ai gruppi $(RR^(+), dot)$ e $(RR, +)$, la funzione
+	  $f: RR^(+) |-> RR, f(x) = ln(x)$ é un omomorfismo. Infatti:
 
 	  $ ln(x_(1) dot x_(2)) = ln(x_(1)) + ln(x_(2)) $
-	- Si considerino i gruppi $(RR, dot)$ e $(RR, +)$. La funzione
-	  $f: RR |-> RR, sin(x)$ non é un omomorfismo, in quanto:
+
+	  Inoltre, essendo $f$ biettiva, si ha $(RR^(+), dot) tilde.eq (RR, +)$.
+	- Rispetto ai gruppi $(RR, dot)$ e $(RR, +)$, la funzione
+	  $f: RR |-> RR, f(x) = sin(x)$ non é un omomorfismo. Infatti:
 
 	  $ sin(x_(1) dot x_(2)) != sin(x_(1)) + sin(x_(2)) $
-	- Si considerino i gruppi $(RR^(+), +)$ e $(RR, dot)$. La funzione
-	  $f: RR^(+) |-> RR, ln(x)$ non é un omomorfismo, in quanto:
+	- Rispetto ai gruppi $(RR^(+), +)$ e $(RR, dot)$, la funzione
+	  $f: RR^(+) |-> RR, f(x) = ln(x)$ non é un omomorfismo. Infatti:
 
 	  $ ln(x_(1) + x_(2)) != ln(x_(1)) dot ln(x_(2)) $
 ] <ln-is-homomorphism>
 
-Se esiste un isomorfismo fra due gruppi $G$ e $K$, si dice che tali
-gruppi sono _isomorfi_, e si indica con $G tilde.eq K$.
+#theorem[
+	L'isomorfismo fra gruppi é una relazione di equivalenza.
+]
+#proof[
+	Per provare che l'isomorfismo fra gruppi é una relazione di
+	equivalenza, occorre provare che tale relazione é riflessiva,
+	simmetrica e transitiva.
+
+	- L'isomorfismo fra gruppi é riflessivo se, per un qualsiasi
+	  gruppo $(G, *)$, si ha $(G, *) tilde.eq (G, *)$.
+
+	  Si consideri, a tal proposito, la funzione identitá $id_(g)
+	  (x)$, definita come $f: G |-> G, f(x) = x$. Tale funzione,
+	  oltre che biettiva, é chiaramente un omomorfismo da $(G, *)$
+	  a $(G, *)$, in quanto:
+
+	  $ f(g_(1) * g_(2)) = f(g_(1)) * f(g_(2)) =>
+	    g_(1) * g_(2) = g_(1) * g_(2) space forall g_(1), g_(2) in G $
+
+	  Pertanto, $id_(G)$ é un isomorfismo da $(G, *)$ a $(G, *)$, e
+	  quindi $(G, *) tilde.eq (G, *)$;
+	- L'isomorfismo fra gruppi é riflessivo se, per una qualsiasi
+	  coppia di gruppi $(G, *)$ e $(K, diamond.small)$, si ha che
+	  $(G, *) tilde.eq (K, diamond.small)$ implica $(K, diamond.small)
+	  tilde.eq (G, *)$.
+
+	  Se $(G, *)$ e $(K, diamond.small)$ sono isomorfi, allora per
+	  definizione esiste (almeno) un isomorfismo da $(G, *)$ a $(K,
+	  diamond.small)$, sia questo $phi.alt: G |-> K$. Essendo $phi.alt$
+	  un isomorfismo, ed essendo quindi una funzione biettiva, esiste
+	  certamente la funzione inversa di $phi.alt$, ovvero $phi.alt^(-1):
+	  K |-> G$. Tale funzione, oltre che biettiva a sua volta, é anche
+	  un omomorfismo da $(K, diamond.small)$ a $(G, *)$, in quanto:
+
+	  $ phi.alt^(-1)(k_(1) diamond.small k_(2)) =
+	    phi.alt^(-1)(phi.alt(g_(1)) diamond.small phi.alt(g_(2))) =
+	    phi.alt^(-1)(phi.alt(g_(1) * g_(2))) = g_(1) * g_(2) =
+	    phi.alt^(-1)(k_(1)) * phi.alt^(-1)(k_(2))
+	    space forall k_(1), k_(2) in K $
+
+	  Pertanto, $phi.alt^(-1)$ é un isomorfismo da $(K, diamond.small)$
+	  a $(G, *)$, e quindi se vale $(G, *) tilde.eq (K, diamond.small)$
+	  allora vale anche $(K, diamond.small) tilde.eq (G, *)$;
+	- L'isomorfismo fra gruppi é transitivo se, per una qualsiasi
+	  tripla di gruppi $(G, *)$, $(K, diamond.small)$ e $(H, dot.circle)$,
+	  si ha che $(G, *) tilde.eq (K, diamond.small)$ e $(K, diamond.small)
+	  tilde.eq (H, dot.circle)$ implicano $(G, *) tilde.eq (H, dot.circle)$.
+
+	  Se $(G, *)$ e $(K, diamond.small)$ sono isomorfi, allora per
+	  definizione esiste (almeno) un isomorfismo da $(G, *)$ a $(K,
+	  diamond.small)$, sia questo $f: G |-> K$. Allo stesso modo,
+	  se $(K, diamond.small)$ e $(H, dot.circle)$ sono isomorfi,
+	  allora per definizione esiste (almeno) un isomorfismo da
+	  $(K, diamond.small)$ a $(H, dot.circle)$, sia questo $g: K
+	  |-> H$. Si consideri a tal proposito la composizione di $f$
+	  e di $g$, ovvero $f compose g: G |-> H$. Tale funzione esiste
+	  certamente, essendo $f$ e $g$ biettive in quanto isomorfismi,
+	  ed é biettiva a sua volta per il @Composition-preserves-jection.
+	  Inoltre, é un omomorfismo da $(G, *)$ a $(H, dot.circle)$, in
+	  quanto:
+
+	  $ (f compose g)(h_(1) * h_(2)) = f(g(h_(1)) diamond.small g(h_(2))) =
+	    f(g(h_(1))) dot.circle f(g(h_(2))) = (f compose g)(h_(1))
+	    dot.circle (f compose g)(h_(2)) space forall h_(1), h_(2) in H $
+
+	  Pertanto, $f compose g$ é un isomorfismo da $(G, *)$ a
+	  $(H, dot.circle)$, e quindi se valgono $(G, *) tilde.eq
+	  (K, diamond.small)$ e $(K, diamond.small) tilde.eq (H,
+	  dot.circle)$ allora vale anche $(G, *) tilde.eq (H, dot.circle)$.
+]
 
 Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
 $(K, diamond.small)$. Prende il nome di *nucleo* di $phi.alt$,
@@ -166,14 +239,14 @@ $ ker(phi.alt) = {g in G: phi.alt(g) = 1_(K)} $
 Dove $1_(K)$ é l'elemento neutro dell'operazione $diamond.small$.
 
 Prende invece il nome di *immagine* di $phi.alt$, denotata con
-$im(phi.alt)$, il sottoinsieme di $K$ cosí definito:
+$Im(phi.alt)$, il sottoinsieme di $K$ cosí definito:
 
-$ im(phi.alt) = {k in K: exists g in G, phi.alt(g) = k} $
+$ Im(phi.alt) = {k in K: exists g in G, phi.alt(g) = k} $
 
 #example[
 	Come mostrato nell'@ln-is-homomorphism, la funzione $f: RR^(+)
-	|-> RR, ln(x)$ é un omomorfismo per i gruppi $(RR^(+), dot)$ e
-	$(RR, +)$.
+	|-> RR, f(x) = ln(x)$ é un omomorfismo per i gruppi $(RR^(+),
+	dot)$ e $(RR, +)$.
 
 	Essendo $0$ l'elemento neutro rispetto alla somma in $RR$, il
 	nucleo di $phi.alt$ é l'insieme che contiene tutti gli elementi
@@ -181,9 +254,8 @@ $ im(phi.alt) = {k in K: exists g in G, phi.alt(g) = k} $
 	tale espressione é $1$, pertanto $ker(phi.alt) = {1}$.
 
 	L'immagine di $phi.alt$ é l'insieme che contiene tutti gli elementi
-	di $y in RR$ tali per cui $y = ln(x)$. Dato che qualsiasi numero reale
-	puó essere il risultato dell'applicazione del logaritmo naturale,
-	si ha $im(phi.alt) = RR$.
+	di $y in RR$ tali per cui $y = ln(x)$. Essendo il logaritmo naturale
+	una funzione suriettiva, si ha $Im(phi.alt) = RR$.
 ]
 
 #lemma[

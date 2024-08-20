@@ -203,7 +203,7 @@ $ g compose f : A |-> D, space g(f(a)) space forall a in A $
 	+ Se $f$ e $g$ sono iniettive, allora $g compose f$ é iniettiva;
 	+ Se $f$ e $g$ sono suriettive, allora $g compose f$ é suriettiva;
 	+ Se $f$ e $g$ sono biettive, allora $g compose f$ é biettiva;
-]
+] <Composition-preserves-jection>
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
