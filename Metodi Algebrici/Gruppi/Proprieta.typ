@@ -8,9 +8,6 @@ riportato diversamente:
 - Per indicare $x diamond.small y$ (con $x, y in G$) verrá usata la notazione
   abbreviata $x y$;
 - L'elemento neutro per l'operazione $diamond.small$ verrá indicato con $1$;
-- L'applicazione reiterata $k$ volte dell'operazione $diamond.small$ su un $x
-  in G$, ovvero $underbrace(x diamond.small x diamond.small ... diamond.small
-  x, k)$, verrá indicata con $x^(k)$;
 - Il reciproco di un $x in G$ rispetto a $diamond.small$ viene indicato con
   $overline(x)$;
 - Se ci si sta riferendo ad un gruppo ed é noto dal contesto quale sia

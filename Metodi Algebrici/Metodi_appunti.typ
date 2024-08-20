@@ -68,6 +68,8 @@
 #include "Gruppi/Proprieta.typ"
 == Permutazioni
 #include "Gruppi/Permutazioni.typ"
+== Insiemi di generatori
+#include "Gruppi/Generatori.typ"
 == Polinomi su un campo
 #include "Gruppi/Polinomi.typ"
 == Radici di un polinomio
@@ -75,8 +77,7 @@
 #pagebreak()
 
 /*
-Sottogruppi. Ideali. Morfismi
-Ordini (permutazioni e cicli)
+Ideali. Morfismi
 Costruzione di campi
 */
 
