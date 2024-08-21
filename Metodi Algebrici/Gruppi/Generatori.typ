@@ -71,6 +71,21 @@ $ (angle.l g angle.r, *) space "dove" space angle.l g angle.r =
 	$angle.l g angle.r$ di $(G, *)$ é abeliano.
 ]
 
+#lemma[
+	Sia $(G, *)$ un gruppo e sia $(H, *)$ un suo sottogruppo.
+	Se $H$ contiene $g in G$, allora contiene anche $angle.l
+	g angle.r$.
+]
+#proof[
+	Innanzitutto, si noti come $g^(0) = 1_(G)$ sia certamente membro
+	di $H$ per per definizione di sottogruppo. Sempre per definizione
+	di sottogruppo, per qualsiasi $h, k in H$ vale $h * k in H$.
+	Essendo $g in H$ per ipotesi, certamente vale $g * g in H$, ma
+	$g * g = g^(2)$. Allo stesso modo, se $g^(2) in H$, allora $g^(2)
+	* g in H$, ma $g^(2) * g = g^(3)$, e via dicendo. Si ha quindi per
+	induzione che $H$ contiene $angle.l g angle.r = {g^(n): n in ZZ}$.
+]
+
 Un gruppo $(G, *)$ si dice *ciclico* se esiste $g in G$ tale per cui
 $angle.l g angle.r = G$, ovvero se esiste (almeno) un suo elemento
 il cui sottogruppo generato coincide con l'intero $G$.
@@ -89,9 +104,6 @@ con $o(g)$. Se $o(g)$ é infinito, si dice che $g$ é _di ordine_ (_di periodo_)
 infinito, altrimenti si dice che é _di ordine_ (_di periodo_) finito.
 
 #theorem[
-	//Sia $(G, *)$ un gruppo e sia $g$ un suo elemento. Se $angle.l g angle.r$
-	//é un insieme finito, allora $o(g)$ coincide con il minimo intero positivo
-	//$m$ tale per cui $g^(m) = 1_(G)$.
 	Sia $(G, *)$ un gruppo e sia $g$ un suo elemento. Se esiste un numero
 	intero positivo $m$ tale per cui $g^(m) = 1_(G)$, allora $angle.l g
 	angle.r$ é un insieme finito, e l'ordine di $g$ coincide con il piú
@@ -145,13 +157,32 @@ infinito, altrimenti si dice che é _di ordine_ (_di periodo_) finito.
 	l'elemento neutro rispetto a $*$.
 ]
 
-#lemma[
+#theorem[
 	Nel gruppo simmetrico $S_(n)$, un ciclo di lunghezza r$$
-	ha ordine $r$
-]
-
-#lemma[
-	Una permutazione $f$ del gruppo simmetrico $S_(n)$ che sia prodotto
-	di $t$ cicli disgiunti di lunghezza $r_(1), r_(2), dots, r_(t)$ ha per
+	ha ordine $r$. Piú in generale, una permutazione $f$ del
+	gruppo simmetrico $S_(n)$ che sia prodotto di $t$ cicli
+	disgiunti di lunghezza $r_(1), r_(2), dots, r_(t)$ ha per
 	ordine il minimo comune multiplo di $r_(1), r_(2), dots, r_(t)$.
 ]
+
+Sia $(G, *)$ un gruppo e sia $S subset.eq G$. Il sottogruppo di
+$G$ che contiene $S$ e che sia contenuto in ogni sottogruppo di
+$G$ contenente $S$ prende il nome di *sottogruppo generato da*
+$S$ e si indica con $angle.l S angle.r$:
+
+$ angle.l S angle.r = sect.big_(H lt.eq G, S subset.eq H) H $
+
+Nel caso particolare in cui $S$ sia costituito da un solo elemento,
+il sottogruppo generato da $S$ coincide con il sottogruppo _ciclico_
+generato da $S$.
+
+#theorem[
+	Sia $(G, *)$ un gruppo e sia $S subset.eq G$. Il sottogruppo
+	generato da $S$ puó essere scritto come:
+
+	$ angle.l S angle.r = {product_(i = 1)^(n) s_(i)^(epsilon_(i)):
+	  s_(i) in S, epsilon_(i) = plus.minus 1, n in NN} $
+]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]

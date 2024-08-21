@@ -126,6 +126,11 @@ Per un qualsiasi gruppo $G$, il sottogruppo $G$ viene detto
 *sottogruppo improprio*, mentre il sottogruppo ${1_(G)}$
 viene detto *sottogruppo banale*.
 
+#lemma[
+	Per qualsiasi gruppo $G$, l'intersezione di piú sottogruppi di $G$
+	é a sua volta un sottogruppo di $G$.
+]
+
 Siano $(G, *)$ e $(K, diamond.small)$ due gruppi. Una funzione
 $phi.alt: G |-> K$ si dice *omomorfismo* (da $G$ a $K$) se vale:
 
