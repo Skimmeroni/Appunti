@@ -177,7 +177,7 @@ X_(k)}$ un insieme che contiene $k$ sottoinsiemi di $A$. $cal(F)$ viene detto
 	Allo stesso modo, sia $cal(F) = {X_(1), X_(2), ..., X_(k)}$ una partizione
 	di $A$; la relazione $cal(R)$ definita come $a cal(R) b <==> {exists i in
 	{1, ..., k} "t.c." a, b in X_(i)}$ é una relazione di equivalenza su $A$.
-]
+] <Equivalence-relation-is-partition>
 #proof[
 	Si osservi come:
 

@@ -28,11 +28,6 @@ e quindi essere membro di un'altro insieme. Inoltre, non é ammesso che un
 insieme contenga piú "copie" dello stesso oggetto. Infine, l'ordine in cui
 gli elementi di un insieme sono disposti non é rilevante.
 
-Dato un insieme $A$, il numero di elementi che questo contiene é detto
-*cardinalitá* e si indica con $|A|$. La cardinalitá di un insieme puó
-essere sia _finita_ che _infinita_, pertanto é ammesso che un insieme
-possa contenere infiniti elementi.
-
 Siano $A$ e $B$ due insiemi. Si dice che $B$ é un *sottoinsieme* di $A$ se
 ogni membro di $B$ é anche membro di $A$, e si indica con $B subset.eq A$.
 Equivalentemente, si dice che $A$ é un *soprainsieme* di $B$ se ogni membro
@@ -236,3 +231,9 @@ $ product_(i = 1)^(k) A_(i) = A_(1) times A_(2) times ... times A_(k) =
 Nel caso particolare in cui tutti e $k$ gli insiemi $A_(1), A_(2), ..., A_(k)$ siano
 tutti uguali ad un certo insieme $A$, per indicare il loro prodotto cartesiano si scrive
 semplicemente $A^(k)$.
+
+Dato un insieme $A$, il numero di elementi che questo contiene é detto
+*cardinalitá* e si indica con $|A|$. La cardinalitá di un insieme puó
+essere sia _finita_ che _infinita_, pertanto é ammesso che un insieme
+possa contenere infiniti elementi. Due insiemi (anche distinti) con la
+stessa cardinalitá si dicono *equipotenti*.

@@ -242,3 +242,24 @@ che $f$ é *invertibile*.
 	= i_(B)$. Nel caso particolare in cui $A = B$, si ha $f compose g = g
 	compose f = i_(A)$.
 ]
+
+Le funzioni biettive permettono di estendere la nozione di equipotenza anche
+agli insiemi a cardinalitá infinita. Infatti, se per confrontare la cardinalitá
+di insiemi a cardinalitá finita é sufficiente "contare" quanti elementi ha
+ciascun insieme e comparare i due numeri (naturali) cosí ottenuti, per gli
+insiemi a cardinalitá infinita questo non é possibile.
+
+In particolare, siano $A$ e $B$ due insiemi. Tali insiemi sono equipotenti
+se e soltanto se esiste (almeno) una funzione biettiva che ha $A$ per dominio
+e $B$ per codominio.
+
+#example[
+	Sia $f: NN |-> ZZ$ la funzione cosí definita:
+
+	$ f(n) = cases(
+		frac(n, 2) & "se" 2 | n,
+		frac(-n -1, 2) & "se" 2 divides.not n
+	) $
+
+	Tale funzione é biettiva, pertanto $NN$ e $ZZ$ sono equipotenti.
+]

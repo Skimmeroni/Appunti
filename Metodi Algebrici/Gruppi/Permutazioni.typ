@@ -134,14 +134,11 @@ $ mat(
 ) $
 
 Viene detta *permutazione ciclica* di lunghezza $r$, o semplicemente
-*ciclo* di lunghezza $r$, con $r gt.eq 2$. Intuitivamente, un ciclo
-"sposta" l'elemento $x_(b)$ "sotto" a $x_(a)$, l'elemento $x_(b)$
-"sotto" a $x_(c)$, ..., e $x_(r)$ "sotto" a $x_(a)$.
+*ciclo* di lunghezza $r$, con $r gt.eq 2$.
 
-Dato che un ciclo o fissa o muove ciascun suo elemento, per denotare
-un ciclo é sufficiente denotare quali elementi vengono mossi ed in
-quale posizione, perché tutti gli elementi non menzionati sono
-implicitamente fissati. Un ciclo $sigma$ di lunghezza $r$ viene
+Per denotare un ciclo é sufficiente denotare quali elementi vengono
+mossi ed in quale posizione, perché tutti gli elementi non menzionati
+sono implicitamente fissati. Un ciclo $sigma$ di lunghezza $r$ viene
 denotato con $sigma = (x_(1), x_(2), ..., x_(r))$; tale scrittura
 sta ad indicare che in corrispondenza di ciascun elemento $x_(i)$
 viene messo l'elemento $x_(i + 1)$, ad eccezione dell'$r$-esimo

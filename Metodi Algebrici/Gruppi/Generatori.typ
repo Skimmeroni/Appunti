@@ -186,3 +186,135 @@ generato da $S$.
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
+
+Siano $G$ un gruppo e $H$ un suo sottogruppo. Siano
+poi $g_(1)$ e $g_(2)$ due elementi di $G$. Le relazioni
+$cal(R)_(H)$ e $cal(L)_(H)$ vengono definite come:
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ g_(1) cal(R)_(H) g_(2)
+	   space "se e soltanto se" space
+	   g_(1) g_(2)^(-1) in H $],
+	[$ g_(1) cal(L)_(H) g_(2)
+	   space "se e soltanto se" space
+	   g_(1)^(-1) g_(2) in H $]
+)
+
+#theorem[
+	Siano $G$ un gruppo e $H$ un suo sottogruppo. Le relazioni
+	$cal(R)_(H)$ e $cal(L)_(H)$ sono relazioni di equivalenza.
+] <Left-right-is-equivalence>
+#proof[
+	Per provare che $cal(R)_(H)$ sia una relazione di equivalenza, é
+	necessario provare che sia riflessiva, simmetrica e transitiva:
+
+	- $cal(R)_(H)$ é riflessiva se, preso un qualsiasi $g in G$, $g g^(-1)
+	  in H$.
+
+	  Questo é vero per definizione, perchè $g g^(-1) = 1_(G)$ e
+	  l'elemento neutro é sempre membro di qualsiasi sottogruppo;
+	- $cal(R)_(H)$ é simmetrica se, presi due $g_(1), g_(2) in G$
+	  qualsiasi, $g_(1) cal(R)_(H) g_(2)$ implica $g_(2) cal(R)_(H)
+	  g_(1)$.
+
+	  Se $g_(1) cal(R)_(H) g_(2)$ allora $g_(1) g_(2)^(-1) in H$, ma
+	  allora anche $(g_(1) g_(2)^(-1))^(-1) in H$. Si noti peró come
+	  $(g_(1) g_(2)^(-1))^(-1) = g_(2) g_(1)^(-1)$, pertanto anche
+	  $g_(2) g_(1)^(-1) in H$, ovvero $g_(2) cal(R)_(H) g_(1)$;
+	- $cal(R)_(H)$ é transitiva se, presi tre $g_(1), g_(2), g_(3) in G$
+	  qualsiasi, $g_(1) cal(R)_(H) g_(2)$ e $g_(2) cal(R)_(H) g_(3)$
+	  implicano $g_(1) cal(R)_(H) g_(3)$.
+
+	  Se $g_(1) cal(R)_(H) g_(2)$, allora $g_(1) g_(2)^(-1) in H$. Allo
+	  stesso modo, se $g_(2) cal(R)_(H) g_(3)$, allora $g_(2) g_(3)^(-1)
+	  in H$. Ricordando che, per qualsiasi $g in G$, vale $g g^(-1) =
+	  g^(-1) g = 1_(G)$ Si ha:
+
+	  $ g_(1) g_(3)^(-1) = g_(1) (g_(2)^(-1) g_(2)) g_(3)^(-1) =
+	    g_(1) g_(2)^(-1) g_(2) g_(3)^(-1) = (g_(1) g_(2)^(-1))
+	    (g_(2) g_(3)^(-1)) $
+
+	  Per definizione di sottogruppo, il risultato dell'applicazione
+	  dell'operazione a due membri del sottogruppo é a sua volta
+	  membro del sottogruppo. Essendo $g_(1) g_(2)^(-1) in H$ e
+	  $g_(2) g_(3)^(-1) in H$, il risultato dell'operazione su
+	  questi, ovvero $g_(1) g_(3)^(-1)$, appartiene ad $H$. Avendosi
+	  peró che $g_(1) g_(3)^(-1)$ corrisponde a $g_(1) cal(R)_(H)
+	  g_(3)$, é provato che $cal(R)_(H)$ sia transitiva.
+
+	La prova rispetto a $cal(L)_(H)$ é sostanzialmente analoga.
+]
+
+Dato un gruppo $G$ ed un suo sottogruppo $H$, la classe di equivalenza
+$[g]_(cal(R)_(H))$ prende il nome di *laterale destro* di $H$ in $G$ di
+rappresentante $g$. Similmente, la classe di equivalenza $[g]_(cal(L)_(H))$
+prende il nome di *laterale sinistro* di $H$ in $G$ di rappresentante $g$.
+
+#theorem[
+	Dato un gruppo $G$ ed un suo sottogruppo $H$, le classi di equivalenza
+	$[g]_(cal(R)_(H))$ e $[g]_(cal(L)_(H))$ possono essere scritte come:
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ [g]_(cal(R)_(H)) = H g = {h g: g in H} $],
+		[$ [g]_(cal(L)_(H)) = g H = {g h: g in H} $]
+	)
+]
+#proof[
+	Sia $g in G$. Si consideri la classe di equivalenza $[g]_(cal(R)_(H))$:
+
+	$ [g]_(cal(R)_(H)) &= {j in G : j cal(R)_(H) g} = {j in G : j g^(−1) in H} =
+	  {h in G : exists h in H "tale che" j g^(-1) = h} = \ &= {j in G : exists h
+	  in H "tale che" j = h g} = {h g : h in H} = H g $
+
+	La dimostrazione rispetto a $[g]_(cal(L)_(H))$ é sostanzialmente analoga.
+]
+
+#lemma[
+	Siano $G$ un gruppo e $H$ un suo sottogruppo. L'insieme dei laterali
+	destri/sinistri di $H$ costituisce una partizione di $G$.
+] <Right-left-is-partition>
+#proof[
+	Per il @Left-right-is-equivalence, $cal(R)_(H)$ e $cal(L)_(H)$ sono
+	delle relazioni di equivalenza. Pertanto, l'insieme dei laterali
+	destri/sinistri di $H$ é un insieme quoziente. Il teorema é provato
+	perché il @Equivalence-relation-is-partition stabilisce che gli
+	insiemi quoziente siano partizioni.
+]
+
+#lemma[
+	Siano $G$ un gruppo e $H$ un suo sottogruppo. Per un qualsiasi $g in G$,
+	gli insiemi $H$ e $H g$ sono equipotenti.
+] <Right-lateral-same-cardinality>
+#proof[
+	Per definizione di equipotenza, $H$ e $H g$ sono equipotenti se esiste
+	(almeno) una funzione biettiva con $H$ come dominio e $H g$ come codominio.
+
+	Si consideri a tal proposito la funzione $f: H |-> H g, f(h) = h g$. Tale
+	funzione é iniettiva perché se vale $h_(1) g = h_(2) g$ per certi $h_(1),
+	h_(2) in H$, la legge di cancellazione permette di scrivere $h_(1) = h_(2)$.
+	In altre parole, $h_(1) g = h_(2) g$ nel solo caso in cui $h_(1) = h_(2)$,
+	e quindi ogni coppia distinta $h_(1), h_(2)$ ha una distinta immagine per
+	$f$. É peró anche suriettiva, perché per ciascun $h g$ é sempre possibile
+	trovare un $h in H$ tale per cui $f(h) = h g$. Essendo $f$ sia iniettiva che
+	suriettiva, é biettiva, e quindi $H$ e $H g$ sono equipotenti.
+]
+
+#theorem("Teorema di Lagrange")[
+	Sia $G$ un gruppo finito e sia $H$ un suo sottogruppo. Allora $abs(H)$
+	é divisore di $abs(G)$.
+]
+#proof[
+	Per la definizione di divisore, $abs(H)$ é divisore di $abs(G)$ se esiste
+	un $k in ZZ$ tale per cui $abs(G) = k abs(H)$.
+
+	Siano $H g_(1), H g_(2), ..., H g_(r)$ i laterali destri distinti di $H$
+	in $G$ (essendo $G$ un insieme finito, é possibile enumerarli). Per il
+	@Right-lateral-same-cardinality, tutti gli $H g_(i)$ con $i in {1, ..., n}$
+	sono equipotenti ad $H$. Inoltre, per il @Right-left-is-partition, tali
+	insiemi formano una partizione, e quindi a due a due disgiunti. Si ha allora:
+
+	$ abs(G) = abs(union.big_(i = 1)^(r) H g_(i)) = sum_(i = 1)^(r) abs(H g_(i))
+	  = sum_(i = 1)^(r) abs(H) = r abs(H) $
+]
