@@ -81,3 +81,20 @@ unitario e se $(A - {0}, diamond.small)$ é un gruppo.
 	- $(ZZ_(n) , +, dot)$ é un campo solamente se $n$ é un numero primo;
 	- $(ZZ, +, dot)$ non é un campo.
 ]
+
+Sia $X$ un insieme e siano $*$ e $tilde.op$ rispettivamente una operazione
+ed una relazione di equivalenza definite su $X$. Si dice che $tilde.op$ é
+*compatibile* con $*$ se vale:
+
+$ a tilde.op b and c tilde.op d => (a * c) tilde.op (b * d)
+  space forall a, b, c, d in X $
+
+#lemma[
+	Sia $X$ un insieme e siano $*$ e $tilde.op$ rispettivamente una
+	operazione ed una relazione di equivalenza definite su $X$. Se
+	$tilde.op$ é compatibile con $*$, é possibile costruire l'operazione
+	$*_(tilde.op)$ sull'insieme quoziente $X_(tilde.op)$ in questo modo:
+
+	$ [x]_(tilde.op) *_(tilde.op) [y]_(tilde.op) = [x * y]_(tilde.op)
+	  space forall x, y in X $
+]

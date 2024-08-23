@@ -304,17 +304,94 @@ prende il nome di *laterale sinistro* di $H$ in $G$ di rappresentante $g$.
 #theorem("Teorema di Lagrange")[
 	Sia $G$ un gruppo finito e sia $H$ un suo sottogruppo. Allora $abs(H)$
 	é divisore di $abs(G)$.
-]
+] <Lagrange-theorem>
 #proof[
-	Per la definizione di divisore, $abs(H)$ é divisore di $abs(G)$ se esiste
-	un $k in ZZ$ tale per cui $abs(G) = k abs(H)$.
+	Per la definizione di divisore, $abs(H)$ é divisore di $abs(G)$ se
+	esiste un $k in ZZ$ tale per cui $abs(G) = k abs(H)$.
 
-	Siano $H g_(1), H g_(2), ..., H g_(r)$ i laterali destri distinti di $H$
-	in $G$ (essendo $G$ un insieme finito, é possibile enumerarli). Per il
-	@Right-lateral-same-cardinality, tutti gli $H g_(i)$ con $i in {1, ..., n}$
-	sono equipotenti ad $H$. Inoltre, per il @Right-left-is-partition, tali
-	insiemi formano una partizione, e quindi a due a due disgiunti. Si ha allora:
+	Siano $H g_(1), H g_(2), ..., H g_(r)$ i laterali destri distinti
+	di $H$ in $G$ (essendo $G$ un insieme finito, é possibile enumerarli).
+	Per il @Right-lateral-same-cardinality, tutti gli $H g_(i)$ con
+	$i in {1, ..., n}$ sono equipotenti ad $H$. Inoltre, per il
+	@Right-left-is-partition, tali insiemi formano una partizione,
+	e quindi a due a due disgiunti. Si ha allora:
 
 	$ abs(G) = abs(union.big_(i = 1)^(r) H g_(i)) = sum_(i = 1)^(r) abs(H g_(i))
 	  = sum_(i = 1)^(r) abs(H) = r abs(H) $
+
+	Essendo $r$ chiaramente un numero intero, si ha che $abs(H)$ é divisore
+	di $abs(G)$.
 ]
+
+Si noti come il @Lagrange-theorem indichi che, dato un gruppo, la
+cardinalitá di qualsiasi suo sottogruppo é divisore della cardinalitá
+del gruppo, ma non indica che tali sottogruppi necessariamente esistano.
+
+#example[
+	Sia $(G, *)$ un gruppo di cardinalitá $6$. Il @Lagrange-theorem implica
+	che un qualsiasi sottogruppo di $(G, *)$ debba avere cardinalitá pari ad
+	un divisore di $6$, ovvero $1$, $2$, $3$ oppure $6$, ma non implica che
+	effettivamente esistano dei sottogruppi di $(G, *)$ aventi cardinalitá
+	$1$, $2$, $3$ oppure $6$. Sia peró, ad esempio, $H$ un sottoinsieme di
+	$G$ avente cardinaliá $4$: il @Lagrange-theorem implica che $(H, *)$
+	non possa essere un sottogruppo di $(G, *)$, perché $4 divides.not 6$.
+]
+
+Siano $G$ un gruppo ed $N$ un suo sottogruppo. $N$ si dice *sottogruppo
+normale* (di $G$) se, per qualsiasi $g in G$, i laterali destri e sinistri
+di $g$ coincidono, ovvero $g N = N g$. Per indicare che $N$ é un sottogruppo
+normale di $G$ si usa la notazione $N triangle.l G$.
+
+Siano $G$ un gruppo ed $N$ un suo sottogruppo normale. Essendo $cal(R)_(N)$
+e $cal(L)_(N)$ delle relazioni di equivalenza, per tali relazioni esiste
+un insieme quoziente. Inoltre, essendo $N$ normale, tali relazioni coincidono.
+Sia pertanto $G slash N = {N x : x in G}$ l'insieme quoziente dei laterali
+destri (sinistri) di $G$. É possibile definire una legge $dot$ su $N slash G$
+in questo modo:
+
+$ N g_(1) dot N g_(2) = N g_(1) g_(2) space forall g_(1), g_(2) in G $
+
+#lemma[
+	Siano $G$ un gruppo ed $N$ un suo sottogruppo normale. La legge
+	$dot$ definita come $N g_(1) dot N g_(2) = N g_(1) g_(2) space
+	forall g_(1), g_(2) in G$ é una funzione.
+]
+// #proof[
+//	Dimostrabile, da aggiungere
+// ]
+
+#theorem[
+	Siano $G$ un gruppo ed $N$ un suo sottogruppo normale. La struttura
+	algebrica $(G slash N, dot)$, dove $G slash N$ é l'insieme quoziente
+	dei laterali destri (sinistri) di $G$ e $dot$ é l'operazione definita
+	come $N g_(1) dot N g_(2) = N g_(1) g_(2) space forall g_(1), g_(2)
+	in G$, é un gruppo.
+]
+#proof[
+	Si consideri l'operazione $dot$ della struttura algebrica $(G slash N,
+	dot)$:
+
+	- Per ogni $N g_(1), N g_(2), N g_(3) in G slash N$, si ha:
+
+	  $ (N g_(1) dot N g_(2)) dot N g_(3) = N (g_(1) g_(2)) z =
+	    N g_(1) (g_(2) g_(3)) = N g_(1) dot (N g_(2) dot N g_(3)) $
+
+	  Pertanto, $dot$ gode della proprietá associativa, e quindi $(G slash N,
+	  dot)$ é un semigruppo;
+	- $N = N 1_(G)$ é l'elemento neutro per $dot$. Infatti, per ogni $N g in
+	  N slash G$, vale:
+
+	  $ N dot N g = N 1 dot N g = N 1 dot g = N g = N g dot 1 = N g dot N 1 =
+	    N g dot N $
+
+	  Esistendo l'elemento neutro per $(G slash N, dot)$, questo é un monoide;
+	- Per ogni elemento $N g in G slash N$, esiste il suo opposto $n g^(-1) in
+	  G slash N$. Inoltre:
+
+	  $ N g dot N g^(−1) = N = N g^(−1) dot N g $
+
+	  Pertanto, $(G slash N, dot)$ é un gruppo.
+]
+
+Siano $G$ un gruppo ed $N$ un suo sottogruppo normale. Il gruppo $(G slash N,
+dot)$ prende il nome di *gruppo quoziente* di $G$ rispetto a $N$.
