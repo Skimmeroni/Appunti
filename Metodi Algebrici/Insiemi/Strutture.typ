@@ -9,7 +9,7 @@ Dato che, nella maggior parte dei casi, le operazioni $f_(1), ..., f_(n)$
 delle strutture algebriche sono operazioni binarie, se non viene diversamente
 specificato con "operazione" si intende implicitamente "operazione binaria".
 
-La coppia ordinata $(S, *)$, formata dall'insieme $S$ e da una operazione
+La struttura algebrica $(S, *)$, formata dall'insieme $S$ e da una operazione
 $*$ definita su $S$, prende il nome di *semigruppo* se $*$ gode della
 proprietá associativa.
 
@@ -17,7 +17,7 @@ Un semigruppo $(M, *)$ viene detto *monoide* se l'operazione $*$ definita
 sull'insieme $M$ ammette elemento neutro.
 
 Un monoide $(G, *)$ viene detto *gruppo* se l'operazione $*$ definita
-sull'insieme $G$ ammette opposto per ogni elemento di $G$.
+sull'insieme $G$ ammette inverso per ogni elemento di $G$.
 
 #example[
 	- La coppia $(NN, +)$, dove $+$ indica la somma sui numeri interi
@@ -38,7 +38,19 @@ sull'insieme $G$ ammette opposto per ogni elemento di $G$.
 	  é $(QQ, dot)$, sia un semigruppo che un monoide. É peró anche un
 	  gruppo, perché per ogni $a in QQ$ esiste sempre un $frac(1, a) in
 	  QQ$ tale per cui $a dot frac(1, a) = frac(1, a) dot a = 1$.
-]
+	- Sia $"GL"(n, RR) = {A in "Mat"(n, RR): det(A) != 0}$ l'insieme che
+	  contiene tutte le matrici quadrate di dimensione $n$ che hanno il
+	  determinante non nullo. La struttura algebrica $("GL"(n, RR), dot)$,
+	  dove $dot$ indica l'operazione di prodotto fra matrici, forma un
+	  semigruppo, in quanto il prodotto fra matrici gode della proprietá
+	  associativa. É inoltre un monoide, in quanto il prodotto fra matrici
+	  ammette elemento neutro nella forma della matrice identitá. É infine
+	  anche un gruppo, in quanto il prodotto fra matrici ammette inverso
+	  nella forma della matrice inversa (che esiste per tutte le matrici
+	  che hanno il determinante non nullo, pertanto ogni matrice in
+	  $"GL"(n, RR)$ ha per definizione una inversa). Il gruppo $("GL"(n, RR),
+	  dot)$ prende il nome di *gruppo lineare generale*.
+] <Some-groups>
 
 Un semigruppo, un monoide ed un gruppo si dicono, rispettivamente, *semigruppo
 abeliano*, *monoide abeliano* e *gruppo abeliano* se l'operazione su questi

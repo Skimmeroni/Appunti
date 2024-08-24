@@ -250,8 +250,8 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 	  $ [0]_(n) + [a]_(n) = [a]_(n) + [0]_(n) = [a + 0]_(n) = [0 + a]_(n) = [a]_(n) $
 
 	- un gruppo, perché per l'operazione $+$ cosí definita esiste un elemento
-	  opposto per qualsiasi elemento di $ZZ_(n)$. Preso un qualsiasi $[a]_(n)
-	  in ZZ_(n)$, tale elemento opposto é $[n - a]_(n)$, in quanto:
+	  inverso per qualsiasi elemento di $ZZ_(n)$. Preso un qualsiasi $[a]_(n)
+	  in ZZ_(n)$, tale elemento inverso é $[n - a]_(n)$, in quanto:
 
 	  $ [a]_(n) + [n - a]_(n) = [n - a]_(n) + [a]_(n) = [(n - a) + a]_(n) =
 	    [a + (n - a)]_(n) = [n]_(n) = 0 $

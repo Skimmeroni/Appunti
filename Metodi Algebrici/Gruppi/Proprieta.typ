@@ -3,23 +3,22 @@
 Per comoditá, verranno fatte delle semplificazioni di notazione. Se non
 riportato diversamente:
 
-- L'operazione che figura nei gruppi, a prescindere da quale sia,
-  verrá denotata con $diamond.small$;
-- Per indicare $x diamond.small y$ (con $x, y in G$) verrá usata la notazione
-  abbreviata $x y$;
-- L'elemento neutro per l'operazione $diamond.small$ verrá indicato con $1$;
-- Il reciproco di un $x in G$ rispetto a $diamond.small$ viene indicato con
-  $overline(x)$;
 - Se ci si sta riferendo ad un gruppo ed é noto dal contesto quale sia
   l'operazione che figura nel gruppo, ci si riferirá al gruppo solo con
-  il suo insieme sostegno. In altre parole, se $(G, diamond.small)$ é un
-  gruppo ed é noto dal contesto che l'operazione a cui ci si riferisce é
-  $diamond.small$, si indicherá con il solo $G$ la coppia $(G, diamond.small)$.
+  il suo insieme sostegno. In altre parole, se $(G, *)$ é un gruppo ed
+  é noto dal contesto che l'operazione a cui ci si riferisce é $*$, si
+  indicherá con il solo $G$ la coppia $(G, *)$;
+- Quando l'operazione $*$ é nota dal contesto, per indicare $x * y$
+  (con $x$ e $y$ membri dell'insieme su cui $*$ é definita) verrá usata
+  la notazione abbreviata $x y$;
+- Se é noto dal contesto a quale gruppo e a quale operazione ci si sta
+  riferendo, l'elemento neutro di tale gruppo per tale operazione viene
+  indicato con $1$.
 
 #lemma[
-	Sia $G$ un gruppo. Per qualsiasi $x, y, z in G$, vale:
+	Sia $(G, diamond.small)$ un gruppo. Per qualsiasi $x, y, z in G$, vale:
 
-	- Unicitá del reciproco:
+	- Unicitá dell'inverso:
 	  $exists! x^(-1) : x diamond.small x^(-1) = 1$;
 	- Unicitá dell'elemento neutro:
 	  $exists! 1 : x diamond.small 1 = x$;
@@ -38,7 +37,7 @@ In altre parole, $H = (H, diamond.small)$ é un sottogruppo di $G =
 - L'elemento neutro di $G$ appartiene ad $H$;
 - L'insieme $H$ é _chiuso_ rispetto all'operazione $diamond.small$,
   ovvero $forall h, k in H$ si ha $h diamond.small k in H$;
-- $forall h in H$, il reciproco $overline(h)$ di $h$ é a sua volta
+- $forall h in H$, l'inverso $overline(h)$ di $h$ é a sua volta
   membro di $H$.
 
 Per indicare che $H$ é un sottogruppo di $G$ si usa la notazione
@@ -51,6 +50,27 @@ con le relazioni d'ordine "minore" e "minore o uguale" rispetto ai
 numeri, cosí come non si riferiscono alla cardinalitá dei sostegni
 dei gruppi. Infatti, é accettato che due gruppi possano essere l'uno
 il sottogruppo dell'altro pur avendo la stessa cardinalitá.
+
+#example[
+	É stato provato nell'@Some-groups che la struttura algebrica
+	$("GL"(n, RR), dot)$ sia un gruppo. Sia $"SL"(n, RR) = {A in
+	"Mat"(n, RR): det(A) != 1}$ l'insieme che contiene tutte le
+	matrici quadrate di dimensione $n$ che hanno il determinante
+	pari ad $1$. Naturalmente, $"SL"(n, RR)$ é un sottoinsieme di
+	$"GL"(n, RR)$, perché se una matrice ha il determinate pari
+	ad $1$ allora tale determinante é evidentemente diverso da $0$.
+	Inoltre, l'elemento neutro di $("GL"(n, RR), dot)$ é la matrice
+	identitá di dimensione $n$, che avendo determinante pari ad $1$
+	é membro di $"SL"(n, RR)$. Inoltre, dato che per qualsiasi $A, B
+	in "SL"(n, RR)$ vale $det(A) = det(B) = 1$, anche la matrice
+	ottenuta dal loro prodotto ha determinante $1$, perché il
+	determinante é una funzione moltiplicativa e quindi $det(A B) =
+	det(A) det(B) = 1 dot 1 = 1$. Infine, se $A$ é una matrice con
+	determinante pari ad $1$, anche la sua inversa ha determinante
+	pari ad $1$. É possibile allora concludere che $"SL"(n, RR)$ sia
+	un sottogruppo di $"GL"(n, RR)$. Il (sotto)gruppo $("SL"(n, RR), dot)$
+	prende il nome di *gruppo lineare speciale*.
+]
 
 #lemma[
 	Sia $G = (G, diamond.small)$ un gruppo. Un sottoinsieme $H$ di $G$
@@ -69,7 +89,7 @@ il sottogruppo dell'altro pur avendo la stessa cardinalitá.
 	Viceversa, si supponga che $H$ sia un sottoinsieme di $G$ tale per
 	cui $forall h, k in H$ vale $h diamond.small overline(k) in H$:
 
-	- Se $h = k$, allora, per l'unicitá del reciproco, $overline(h) =
+	- Se $h = k$, allora, per l'unicitá dell'inverso, $overline(h) =
 	  overline(k)$, e quindi $h diamond.small overline(h) = h diamond.small
 	  overline(k) = 1$, quindi l'elemento neutro di $(G, diamond.small)$
 	  appartiene ad $H$;
@@ -91,10 +111,11 @@ Il @Is-a-subgroup é un possibile criterio che permette di determinare
 se, dati due gruppi $G$ ed $H$, $H$ sia un sottogruppo di $G$.
 
 #example[
-	La struttura algebrica $(ZZ, +)$ é un gruppo. La struttura algebrica
-	$(n ZZ, +)$, dove $n ZZ = {n k : k in ZZ}$ é l'insieme che
-	contiene tutti i multipli (interi) di $n$, é un sottogruppo di $(ZZ,
-	+)$. Siano infatti $a$ e $b$ due elementi di $(n ZZ)$. Si ha:
+	É stato provato nell'@Some-groups che la struttura algebrica $(ZZ, +)$
+	sia un gruppo. La struttura algebrica $(n ZZ, +)$, dove $n ZZ = {n k
+	: k in ZZ}$ é l'insieme che contiene tutti i multipli (interi) di $n$,
+	é un sottogruppo di $(ZZ, +)$. Siano infatti $a$ e $b$ due elementi di
+	$(n ZZ)$. Si ha:
 
 	$ a + overline(b) = n k_(1) + overline(n k_(2)) = n k_(1) - n k_(2) =
 	n (k_(1) - k_(2)) $
@@ -264,7 +285,7 @@ $ Im(phi.alt) = {k in K: exists g in G, phi.alt(g) = k} $
 	Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
 	$(K, diamond.small)$. Il nucleo di $phi.alt$ é un sottogruppo
 	di $(G, *)$
-]
+] <Kernel-is-subgroup>
 // #proof[
 // Dimostrabile, da aggiungere
 // ]

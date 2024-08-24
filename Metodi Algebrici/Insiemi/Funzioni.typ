@@ -135,13 +135,13 @@ $ a * b = b * a $
 Se $*$ é una operazione sull'insieme $A$, un elemento $e in A$ viene detto
 *elemento neutro* per $*$ se, per qualsiasi $a in A$, vale $e * a = a * e
 = a$. Se $*$ é una operazione sull'insieme $A$ che ammette elemento neutro
-$e$, per ciascun $a in A$ esiste un $tilde(a) in A$ chiamato *opposto* di
-$A$ tale per cui $a * tilde(a) = tilde(a) * a = e$.
+$e$, per ciascun $a in A$ esiste un $overline(a) in A$ chiamato *inverso* di
+$a$ tale per cui $a * overline(a) = overline(a) * a = e$.
 
 #example[
 	L'operazione $f: ZZ times ZZ |-> ZZ, f(a, b) = a + b$ ha come
 	elemento neutro $e = 0$. Infatti, preso un $a in Z$ qualsiasi, si ha
-	$a + 0 = 0 + a = a$. L'elemento opposto di $a$ rispetto a tale operazione
+	$a + 0 = 0 + a = a$. L'elemento inverso di $a$ rispetto a tale operazione
 	é $-a$, in quanto $a + (-a) = (-a) + a = 0$.
 ]
 

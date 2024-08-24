@@ -342,6 +342,34 @@ normale* (di $G$) se, per qualsiasi $g in G$, i laterali destri e sinistri
 di $g$ coincidono, ovvero $g N = N g$. Per indicare che $N$ é un sottogruppo
 normale di $G$ si usa la notazione $N triangle.l G$.
 
+#theorem[
+	Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
+	$(K, diamond.small)$. Il nucleo di $phi.alt$ é un sottogruppo
+	normale di $(G, *)$.
+] <Kernel-is-normal-subgroup>
+#proof[
+	Si osservi innanzitutto come per il @Kernel-is-subgroup, si ha
+	$ker(phi.alt) lt.eq (G, *)$.
+
+	Sia $g ker(phi.alt)$ il laterale destro di $ker(phi.alt)$. Per ogni
+	$g * k in g ker(phi.alt)$, risulta:
+
+	$ phi.alt((g * k) * g^(-1)) = (phi.alt(g) * phi.alt(k))
+	  diamond.small phi.alt(g^(-1)) = (phi.alt(g) * 1_(G))
+	  diamond.small phi.alt(g^(-1)) = phi.alt(g) diamond.small
+	  phi.alt(g^(-1)) = 1_(H) $
+
+	Ovvero, $g * k * g^(-1) in ker(phi.alt)$. Questo significa che esiste
+	$overline(k) in ker(phi.alt)$ per il quale $g k g^(-1) = overline(k)$,
+	e pertanto $g k = overline(k) g in ker(phi.alt)$.
+
+	Questo implica $g ker(phi.alt) subset.eq ker(phi.alt) g$. In
+	maniera analoga, é possibile provare che $ker(phi.alt) g subset.eq
+	g ker(phi.alt)$. Questo significa che, per qualsiasi $g in G$,
+	$g ker(phi.alt) = ker(phi.alt) g$, e quindi che $ker(phi.alt)$ é
+	un sottogruppo normale di $(G, *)$.
+]
+
 Siano $G$ un gruppo ed $N$ un suo sottogruppo normale. Essendo $cal(R)_(N)$
 e $cal(L)_(N)$ delle relazioni di equivalenza, per tali relazioni esiste
 un insieme quoziente. Inoltre, essendo $N$ normale, tali relazioni coincidono.
@@ -385,7 +413,7 @@ $ N g_(1) dot N g_(2) = N g_(1) g_(2) space forall g_(1), g_(2) in G $
 	    N g dot N $
 
 	  Esistendo l'elemento neutro per $(G slash N, dot)$, questo é un monoide;
-	- Per ogni elemento $N g in G slash N$, esiste il suo opposto $n g^(-1) in
+	- Per ogni elemento $N g in G slash N$, esiste il suo inverso $n g^(-1) in
 	  G slash N$. Inoltre:
 
 	  $ N g dot N g^(−1) = N = N g^(−1) dot N g $
@@ -395,3 +423,12 @@ $ N g_(1) dot N g_(2) = N g_(1) g_(2) space forall g_(1), g_(2) in G $
 
 Siano $G$ un gruppo ed $N$ un suo sottogruppo normale. Il gruppo $(G slash N,
 dot)$ prende il nome di *gruppo quoziente* di $G$ rispetto a $N$.
+
+#theorem("Teorema fondamentale degli omomorfismi")[
+	Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
+	$(K, diamond.small)$. Il gruppo quoziente $(G slash ker(phi.alt),
+	dot)$ é isomorfo a $(Im(phi.alt), dot)$.
+]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
