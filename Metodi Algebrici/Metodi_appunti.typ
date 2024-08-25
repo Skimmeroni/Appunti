@@ -30,8 +30,6 @@
 #include "Insiemi/Relazioni.typ"
 == Funzioni
 #include "Insiemi/Funzioni.typ"
-== Strutture algebriche
-#include "Insiemi/Strutture.typ"
 #pagebreak()
 
 = Numeri interi
@@ -63,23 +61,27 @@
 // #include "Numeri/Carmichael.typ"
 #pagebreak()
 
-= Gruppi
+= Strutture algebriche
+== Strutture algebriche di base
+#include "Strutture/Strutture.typ"
 == Proprietá dei gruppi
-#include "Gruppi/Proprieta.typ"
+#include "Strutture/Gruppi.typ"
 == Permutazioni
-#include "Gruppi/Permutazioni.typ"
+#include "Strutture/Permutazioni.typ"
 == Insiemi di generatori
-#include "Gruppi/Generatori.typ"
-== Polinomi su un campo
-#include "Gruppi/Polinomi.typ"
-== Radici di un polinomio
-#include "Gruppi/Radici.typ"
+#include "Strutture/Generatori.typ"
+// == Anelli
+// #include "Strutture/Anelli.typ"
 #pagebreak()
 
-/*
-Ideali. Morfismi
-Costruzione di campi
-*/
+= Polinomi
+== Polinomi su un campo
+#include "Polinomi/Polinomi.typ"
+== Radici di un polinomio
+#include "Polinomi/Radici.typ"
+// Costruzione di campi
+// #include "Polinomi/Costruzione.typ"
+#pagebreak()
 
 = Crittografia
 == Introduzione alla crittografia
@@ -88,6 +90,8 @@ Costruzione di campi
 #include "Crittografia/RSA.typ"
 == Firma digitale tramite RSA
 #include "Crittografia/Firma.typ"
+// == Logaritmo discreto
+// #include "Crittografia/Logaritmo.typ"
 #pagebreak()
 
 = Teoria dei codici
@@ -95,10 +99,7 @@ Costruzione di campi
 #include "Codici/Introduzione.typ"
 == Codici a blocchi
 #include "Codici/Blocchi.typ"
-== Codici lineari
-#include "Codici/Lineari.typ"
-
-/*
-Codici Lineari
-Codici Ciclici
-*/
+// == Codici lineari
+// #include "Codici/Lineari.typ"
+// == Codici ciclici
+// #include "Codici/Ciclici.typ"
