@@ -70,8 +70,8 @@
 #include "Strutture/Permutazioni.typ"
 == Insiemi di generatori
 #include "Strutture/Generatori.typ"
-// == Anelli
-// #include "Strutture/Anelli.typ"
+== Anelli
+#include "Strutture/Anelli.typ"
 #pagebreak()
 
 = Polinomi

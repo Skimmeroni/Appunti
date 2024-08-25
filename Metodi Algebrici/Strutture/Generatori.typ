@@ -342,6 +342,14 @@ normale* (di $G$) se, per qualsiasi $g in G$, i laterali destri e sinistri
 di $g$ coincidono, ovvero $g N = N g$. Per indicare che $N$ é un sottogruppo
 normale di $G$ si usa la notazione $N triangle.l G$.
 
+#lemma[
+	Se $(G, *)$ é un gruppo abeliano, allora qualsiasi suo sottogruppo
+	é un sottogruppo normale.
+] <Abelian-normal-subgroups>
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
+
 #theorem[
 	Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
 	$(K, diamond.small)$. Il nucleo di $phi.alt$ é un sottogruppo

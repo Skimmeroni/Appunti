@@ -124,7 +124,7 @@ se, dati due gruppi $G$ ed $H$, $H$ sia un sottogruppo di $G$.
 	Pertanto, per il @Is-a-subgroup si ha che $(n ZZ, +)$ é sottogruppo di
 	$(ZZ, +)$. Si noti inoltre come i due insiemi sostegno, $ZZ$ e
 	$n ZZ$, abbiano la stessa cardinalitá.
-]
+] <nZ-is-subgroup-Z>
 
 #lemma[
 	Per un qualsiasi gruppo $G = (G, diamond.small)$, le strutture algebriche
