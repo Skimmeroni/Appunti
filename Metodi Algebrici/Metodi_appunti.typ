@@ -79,8 +79,8 @@
 #include "Polinomi/Polinomi.typ"
 == Radici di un polinomio
 #include "Polinomi/Radici.typ"
-// Costruzione di campi
-// #include "Polinomi/Costruzione.typ"
+== Costruzione di campi
+#include "Polinomi/Costruzione.typ"
 #pagebreak()
 
 = Crittografia

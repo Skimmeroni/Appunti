@@ -136,7 +136,7 @@ $ZZ_(n)$.
 	  {1 + n k : k in ZZ},
 	  ...,
 	  {n - 1 + n k : k in ZZ}} $
-]
+] <Distinct-residue-classes>
 #proof[
 	Sia $a in ZZ$. La divisione con resto fornisce $a = n q + r$ con $0 lt.eq r < n$.
 	Poichè $a − r = q n$ si ha che $a equiv r mod n$. Ciò mostra che ogni intero $a$ è

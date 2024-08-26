@@ -26,9 +26,9 @@ dice *radice* del polinomio $f(x)$.
 	$f(x)$ e $(x - alpha)$, esistono due polinomi $p(x)$ e $q(x)$
 	tali per cui
 
-	$ f(x) = (x − alpha)q(x) + r(x) "con" diff r(x) < 1 $
+	$ f(x) = (x − alpha)q(x) + r(x) "con" diff(r(x)) < 1 $
 
-	Poiché $diff r(x) < 1$, il polinomio $r(x)$ puó avere
+	Poiché $diff(r(x)) < 1$, il polinomio $r(x)$ puó avere
 	esclusivamente grado $0$ oppure $-1$. Nel primo caso,
 	il polinomio é nella forma $r(x) = k$ con $k in (K - {0})$,
 	nel secondo caso il polinomio é il polinomio nullo.
@@ -49,11 +49,11 @@ dice *radice* del polinomio $f(x)$.
 #corollary[
 	Un polinomio $f(x) = a x + b in K[x]$ di grado $1$ (quindi con
 	$a != 0$) è irriducibile in $K[x]$ ed ha una ed una sola radice
-	$alpha in K$. Tale radice é pari a $-b dot a^(-1)$.
+	$alpha in K$. In particolare, $alpha = -b dot a^(-1)$.
 ]
 
 #corollary[
-	Sia $f(x)$ un polinomio in $K[x]$ con $diff f(x) > 1$. Se $f(x)$ ammette
+	Sia $f(x)$ un polinomio in $K[x]$ con $diff(f(x)) > 1$. Se $f(x)$ ammette
 	radice $alpha in K$ allora è riducibile in $K[x]$.
 ] <Poly-radix-is-reduceable>
 
