@@ -111,6 +111,9 @@ di somma e di prodotto come segue:
 	per $g(x)$.
 ]
 
+La forma presentata in @Polynomial-class-is-unique per le classi di
+equivalenza puó essere considerata la "forma standard" per rappresentarle.
+
 #example[
 	Si considerino i polinomi
 
@@ -121,7 +124,8 @@ di somma e di prodotto come segue:
 	)
 
 	Per entrambi la divisione per $g(x) = x^(2) - 2x + 1$ da resto
-	$r(x) = 22x - 12$. É allora possibile scrivere:
+	$r(x) = 22x - 12$. Per il @Polynomial-class-is-unique, é allora
+	possibile scrivere:
 
 	$ [3x^(5) + 2x^(4) - x^(3) + 3x^(2) - 4x + 7]_(x^(2) - 2x + 1) =
 	  [7x^(3) + 9x^(2) - 17x + 11]_(x^(2) - 2x + 1) =
@@ -163,7 +167,7 @@ di somma e di prodotto come segue:
 	Siano $K$ un campo e $g(x) in K[x]$ un polinomio, tale che
 	$diff(g(x)) > 0$. L'anello $(K[x] slash g(x), +, dot)$ è un
 	campo se e soltanto se $g(x)$ è irriducibile in $K[x]$
-]
+] <Polynomial-ring-if-prime>
 #proof[
 	+ Sia $g(x)$ un polinomio irriducibile in $K[x]$. Per definizione
 	  di campo, L'anello $(K[x] slash g(x), +, dot)$ é un campo se é
@@ -227,4 +231,10 @@ di somma e di prodotto come segue:
 	  Questo non é peró possibile, perché in un campo non possono esistere
 	  due elementi non nulli il cui prodotto restituisca l'elemento nullo.
 	  Occorre quindi convenire che $g(x)$ sia un polinomio irriducibile.
+]
+
+#example[
+	Sia $g(x) = x^(2) + 1$ un polinomio a coefficienti in $RR[x]$. Essendo
+	$g(x)$ irriducibile in $RR[x]$, per il @Polynomial-ring-if-prime l'anello
+	$RR[x] slash x^(2) + 1$ è un campo.
 ]

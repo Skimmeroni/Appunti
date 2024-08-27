@@ -60,8 +60,8 @@ questo motivo, non é limitativo considerare $n > 0$.
 
 	Per il @Euclid-lemma, almeno una delle due proposizioni fra $tilde(n) |
 	a - b$ e $tilde(n) | tilde(c)$ deve essere vera. La prima proposizione
-	equivale a $a equiv b mod tilde(n)$; ricordando la definizione di $tilde(n)$,
-	si ha $a equiv b mod frac(n, "MCD"(c, n))$.
+	equivale a $a equiv b mod tilde(n)$; ricordando la definizione di
+	$tilde(n)$, si ha $a equiv b mod frac(n, "MCD"(c, n))$.
 ]
 
 #corollary("Legge di cancellazione per le congruenze lineari")[
@@ -94,12 +94,12 @@ questo motivo, non é limitativo considerare $n > 0$.
 	  un certo $k in ZZ$. Moltiplicando per $-1$ ambo i membri si ha $-(a − b)
 	  = -(k n)$, ovvero $b − a = (−k) n$, cioé $b equiv a mod n$;
 	+ Transitiva: $forall a, b, c in ZZ$, $a equiv b mod n$ e $b equiv c mod n$
-	  implicano $a equiv c mod n$. Infatti, $a equiv b mod n$ e $b equiv c mod n$
-	  equivalgono a dire, rispettivamente, $a − b = k n$ e $b − c = h n$ per certi
-	  $h, k in ZZ$. Sommando la seconda alla prima:
+	  implicano $a equiv c mod n$. Infatti, $a equiv b mod n$ e $b equiv c mod
+	  n$ equivalgono a dire, rispettivamente, $a − b = k n$ e $b − c = h n$ per
+	  certi $h, k in ZZ$. Sommando la seconda alla prima:
 
-	  $ a − b + (b - c) = k n + (b − c) => a - cancel(b) + cancel(b) - c = k n + h n
-	    => a - c = (k + h) n => a equiv c mod n $
+	  $ a − b + (b - c) = k n + (b − c) => a - cancel(b) + cancel(b) - c =
+	    k n + h n => a - c = (k + h) n => a equiv c mod n $
 
 	Pertanto, é una relazione di equivalenza.
 ]
@@ -110,26 +110,27 @@ un certo $a in ZZ$, la classe di equivalenza di $a$ rispetto alla congruenza
 modulo $n$ viene indicata con $[a]_(n)$.
 
 Tale classe di equivalenza corrisponde all'insieme ${b : b in ZZ and a equiv
-b mod n}$, ovvero all'insieme che contiene tutti i numeri interi che, divisi per
-$n$, restituiscono lo stesso resto della divisione fra $n$ e $a$.
+b mod n}$, ovvero all'insieme che contiene tutti i numeri interi che, divisi
+per $n$, restituiscono lo stesso resto della divisione fra $n$ e $a$.
 
 #lemma[
-	Sia $n$ un numero intero maggiore di $0$. Sia $a$ un numero intero qualsiasi
-	e sia $b$ il resto della divisione di $a$ per $n$. Vale $[a]_(n) = [b]_(n)$.
+	Sia $n$ un numero intero maggiore di $0$. Sia $a$ un numero intero
+	qualsiasi e sia $b$ il resto della divisione di $a$ per $n$. Vale
+	$[a]_(n) = [b]_(n)$.
 ]
 #proof[
-	Se $b$ é il resto della divisione di $a$ per $n$, allora vale $a = n k + b$
-	per un certo $k in ZZ$, da cui si ha $a - b = n k$, che é la definizione
-	di congruenza modulo $n$.
+	Se $b$ é il resto della divisione di $a$ per $n$, allora vale
+	$a = n k + b$ per un certo $k in ZZ$, da cui si ha $a - b = n k$,
+	che é la definizione di congruenza modulo $n$.
 ]
 
-L'insieme quoziente di $ZZ$ rispetto alla relazione di congruenza modulo $n$
-con $n > 0$ si dice *insieme delle classi di resti modulo* $n$ e si denota con
-$ZZ_(n)$.
+L'insieme quoziente di $ZZ$ rispetto alla relazione di congruenza modulo
+$n$ con $n > 0$ si dice *insieme delle classi di resti modulo* $n$ e si
+denota con $ZZ_(n)$.
 
 #theorem[
-	Per ogni numero intero $n > 0$, l'insieme delle classi di resti modulo $n$ ha
-	cardinalitá $n$. In particolare, tale insieme é:
+	Per ogni numero intero $n > 0$, l'insieme delle classi di resti modulo
+	$n$ distinte ha cardinalitá $n$. In particolare, tale insieme é:
 
 	$ ZZ_(n) = {[0]_(n), [1]_(n), ..., [n − 1]_(n)} =
 	  {{n k : k in ZZ},
@@ -138,13 +139,17 @@ $ZZ_(n)$.
 	  {n - 1 + n k : k in ZZ}} $
 ] <Distinct-residue-classes>
 #proof[
-	Sia $a in ZZ$. La divisione con resto fornisce $a = n q + r$ con $0 lt.eq r < n$.
-	Poichè $a − r = q n$ si ha che $a equiv r mod n$. Ciò mostra che ogni intero $a$ è
-	congruo, modulo $n$, a uno degli interi $0, 1, ..., n − 1$. D'altra parte se $i$ e
-	$j$ sono interi, con $0 lt.eq i < n$ e $0 lt.eq j < n$ si ha, assumendo $i gt.eq j$,
-	che $0 lt.eq i − j lt.eq n − 1$ e quindi $i − j = k n$ se e solo se $k = 0$, cioè
-	$i = j$.
+	Sia $a in ZZ$. La divisione con resto fornisce $a = n q + r$ con
+	$0 lt.eq r < n$. Poichè $a − r = q n$ si ha che $a equiv r mod n$.
+	Ciò mostra che ogni intero $a$ è congruo, modulo $n$, a uno degli
+	interi $0, 1, ..., n − 1$. D'altra parte se $i$ e $j$ sono interi,
+	con $0 lt.eq i < n$ e $0 lt.eq j < n$ si ha, assumendo $i gt.eq j$,
+	che $0 lt.eq i − j lt.eq n − 1$ e quindi $i − j = k n$ se e solo
+	se $k = 0$, cioè $i = j$.
 ]
+
+La forma presentata in @Distinct-residue-classes per le classi di
+equivalenza puó essere considerata la "forma standard" per rappresentarle.
 
 #example[
 	#grid(
@@ -175,16 +180,16 @@ $ZZ_(n)$.
 	[0]_(n)$, allora $n | a$.
 ] <Class-as-divisibility>
 #proof[
-	Per la definizione di classe di resto, l'espressione $[a]_(n) = [0]_(n)$ equivale
-	a dire che la divisione fra $a$ e $n$ ha lo stesso resto della divisione fra $0$
-	ed $n$. Dato che la divisione fra $0$ ed un qualsiasi numero (intero) ha quoziente
-	$0$ e resto $0$, si ha che la divisione fra $a$ e $n$ ha resto $0$, ovvero che
-	$n | a$.
+	Per la definizione di classe di resto, l'espressione $[a]_(n) = [0]_(n)$
+	equivale a dire che la divisione fra $a$ e $n$ ha lo stesso resto della
+	divisione fra $0$ ed $n$. Dato che la divisione fra $0$ ed un qualsiasi
+	numero (intero) ha quoziente $0$ e resto $0$, si ha che la divisione fra
+	$a$ e $n$ ha resto $0$, ovvero che $n | a$.
 ]
 
-Sull'insieme delle classi di resto modulo $n$ é possibile definire le operazioni
-di somma e di prodotto. Siano $[a]_(n)$ e $[b]_(n)$ due classi di resto modulo
-$n$. La somma ed il prodotto sono definiti come:
+Sull'insieme delle classi di resto modulo $n$ é possibile definire le
+operazioni di somma e di prodotto. Siano $[a]_(n)$ e $[b]_(n)$ due classi
+di resto modulo $n$. La somma ed il prodotto sono definiti come:
 
 $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
   [a]_(n) dot [b]_(n) = [a b]_(n) $
@@ -221,11 +226,11 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 
 	$ (a + c) = (b + d) + n alpha space space space a c = b d + n beta $
 
-	Applicando nuovamente la definizione di classe di equivalenza, si ha che
-	$[a + c]_(n) = [b + d]_(n)$ e $[a c]_(n) = [b d]_(n)$. Per come sono state
-	definite la somma ed il prodotto rispetto alle classi di equivalenza, si ha
-	infine $[a]_(n) + [c]_(n) = [b]_(n) + [d]_(n)$ e $[a]_(n) [c]_(n) = [b]_(n)
-	[d]_(n)$.
+	Applicando nuovamente la definizione di classe di equivalenza, si ha
+	che $[a + c]_(n) = [b + d]_(n)$ e $[a c]_(n) = [b d]_(n)$. Per come
+	sono state definite la somma ed il prodotto rispetto alle classi di
+	equivalenza, si ha infine $[a]_(n) + [c]_(n) = [b]_(n) + [d]_(n)$ e
+	$[a]_(n) [c]_(n) = [b]_(n) [d]_(n)$.
 ]
 
 #theorem[
@@ -235,9 +240,9 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 #proof[
 	La struttura algebrica $(ZZ_(n), +)$ é:
 
-	- un semigruppo, perché l'operazione $+$ cosí definita gode della proprietá
-	  associativa. Questo é determinato dal fatto che l'usuale somma in $ZZ$
-	  gode di tale proprietá:
+	- un semigruppo, perché l'operazione $+$ cosí definita gode della
+	  proprietá associativa. Questo é determinato dal fatto che l'usuale
+	  somma in $ZZ$ gode di tale proprietá:
 
 	  $ ([a]_(n) + [b]_(n)) + [c]_(n) = & [a + b]_(n) + [c]_(n) =
 	    [(a + b) + c]_(n) = [a + (b + c)]_(n) \ = & [a]_(n) + [b + c]_(n) =
@@ -247,7 +252,8 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 	  neutro. Tale elemento é $[0]_(n)$, infatti preso un qualsiasi $[a]_(n)
 	  in ZZ_(n)$:
 
-	  $ [0]_(n) + [a]_(n) = [a]_(n) + [0]_(n) = [a + 0]_(n) = [0 + a]_(n) = [a]_(n) $
+	  $ [0]_(n) + [a]_(n) = [a]_(n) + [0]_(n) = [a + 0]_(n) = [0 + a]_(n) =
+	    [a]_(n) $
 
 	- un gruppo, perché per l'operazione $+$ cosí definita esiste un elemento
 	  inverso per qualsiasi elemento di $ZZ_(n)$. Preso un qualsiasi $[a]_(n)
@@ -278,15 +284,17 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 	    [(a dot b) dot c]_(n) = [a dot (b dot c)]_(n) \ = & [a]_(n) dot
 	    [b dot c]_(n) = [a]_(n) dot ([b]_(n) dot [c]_(n)) $
 
-	- un monoide, perché per l'operazione $dot$ cosí definita esiste l'elemento
-	  neutro. Tale elemento é $[1]_(n)$, infatti preso un qualsiasi $[a]_(n)
-	  in ZZ_(n)$:
+	- un monoide, perché per l'operazione $dot$ cosí definita esiste
+	  l'elemento neutro. Tale elemento é $[1]_(n)$, infatti preso un
+	  qualsiasi $[a]_(n) in ZZ_(n)$:
 
-	  $ [1]_(n) dot [a]_(n) = [a]_(n) dot [1]_(n) = [a dot 1]_(n) = [1 dot a]_(n) = [a]_(n) $
+	  $ [1]_(n) dot [a]_(n) = [a]_(n) dot [1]_(n) = [a dot 1]_(n) =
+	    [1 dot a]_(n) = [a]_(n) $
 
 	Inoltre, $dot$ gode della proprietá commutativa. Infatti:
 
-	$ [a]_(n) dot [b]_(n) = [a dot b]_(n) = [b dot a]_(n) = [b]_(n) dot [a]_(n) $
+	$ [a]_(n) dot [b]_(n) = [a dot b]_(n) = [b dot a]_(n) =
+	  [b]_(n) dot [a]_(n) $
 
 	Pertanto, $(ZZ_(n), dot)$ é un monoide abeliano.
 ]
@@ -297,38 +305,41 @@ $[a]_(n) dot [b]_(n) = [1]_(n)$; $[b]_(n)$ viene detto _inverso_
 di $[a]_(n)$.
 
 #example[
-	- Se vale $[a]_(7) = [3]_(7)$, allora esiste $[b]_(7) in ZZ_(7)$ tale per cui
-	  $[3]_(7) dot [b]_(7) = [1]_(7)$. Tale $[b]_(7)$ é $[5]_(7)$, in quanto
-	  $[3]_(7) [5]_(7) = [15]_(7) = [1]_(7)$;
-	- Se vale $[a]_(6) = [3]_(6)$, allora non esiste alcun $[b]_(6) in ZZ_(6)$ tale
-	  per cui $[3]_(6) [b]_(6) = [1]_(6)$;
-	- Se vale $[a]_(n) = [0]_(n)$ per un qualsiasi $n in NN$, per ogni $[b]_(n) in
-	  ZZ_(n)$, risulta $[0]_(n) [b]_(n) = [0 dot b]_(n) = [0]_(n)$. Pertanto,
-	  affinché esista un $[b]_(n) in ZZ_(n)$ tale per cui valga $[0]_(n) [b]_(n) =
-	  [1]_(n)$, deve valere $[0]_(n) = [1]_(n)$, ovvero $0 equiv 1 mod n$. Questo si
-	  verifica soltanto se $n = 1$, pertanto un invertibile per $[a]_(n) = [0]_(n)$
+	- Se vale $[a]_(7) = [3]_(7)$, allora esiste $[b]_(7) in ZZ_(7)$
+	  tale per cui $[3]_(7) dot [b]_(7) = [1]_(7)$. Tale $[b]_(7)$ é
+	  $[5]_(7)$, in quanto $[3]_(7) [5]_(7) = [15]_(7) = [1]_(7)$;
+	- Se vale $[a]_(6) = [3]_(6)$, allora non esiste alcun $[b]_(6)
+	  in ZZ_(6)$ tale per cui $[3]_(6) [b]_(6) = [1]_(6)$;
+	- Se vale $[a]_(n) = [0]_(n)$ per un qualsiasi $n in NN$, per ogni
+	  $[b]_(n) in ZZ_(n)$, risulta $[0]_(n) [b]_(n) = [0 dot b]_(n) =
+	  [0]_(n)$. Pertanto, affinché esista un $[b]_(n) in ZZ_(n)$ tale
+	  per cui valga $[0]_(n) [b]_(n) = [1]_(n)$, deve valere $[0]_(n)
+	  = [1]_(n)$, ovvero $0 equiv 1 mod n$. Questo si verifica soltanto
+	  se $n = 1$, pertanto un invertibile per $[a]_(n) = [0]_(n)$
 	  esiste solamente in questo caso.
 ]
 
 #lemma[
-	Siano $a, n$ due numeri interi, dove $n gt.eq 2$. La classe di resto $[a]_(n)$ è
-	invertibile in $ZZ_(n)$ se e soltanto se $a$ ed $n$ sono coprimi, ovvero se
-	$"MCD"(a, n) = 1$.
+	Siano $a, n$ due numeri interi, dove $n gt.eq 2$. La classe di resto
+	$[a]_(n)$ è invertibile in $ZZ_(n)$ se e soltanto se $a$ ed $n$ sono
+	coprimi, ovvero se $"MCD"(a, n) = 1$.
 ]
 #proof[
-	Se la classe di resto $[a]_(n)$ è invertibile, allora esiste $[b]_(n) in ZZ_(n)$
-	tale per cui $[a]_(n) [b]_(n) = [1]_(n)$, ovvero $[a b]_(n) = [1]_(n)$. Per come la
-	somma sulle classi di resto é stata definita, é possibile sommare $[-1]_(n)$ ad
-	entrambi i membri, ottenendo $[a b]_(n) + [-1]_(n) = [1]_(n) + [-1]_(n)$, da cui
-	si ricava $[a b - 1]_(n) = [0]_(n)$. Per il @Class-as-divisibility, si ha $n | a b
-	- 1$. Deve allora esistere un $k in ZZ$ tale per cui $a b - 1 = n k$, ovvero
-	$a b - n k = 1$. Dato che sia $b$ sia $k$ sono certamente esistenti, é possibile
+	Se la classe di resto $[a]_(n)$ è invertibile, allora esiste $[b]_(n)
+	in ZZ_(n)$ tale per cui $[a]_(n) [b]_(n) = [1]_(n)$, ovvero $[a b]_(n)
+	= [1]_(n)$. Per come la somma sulle classi di resto é stata definita,
+	é possibile sommare $[-1]_(n)$ ad entrambi i membri, ottenendo $[a b]_(n)
+	+ [-1]_(n) = [1]_(n) + [-1]_(n)$, da cui si ricava $[a b - 1]_(n) =
+	[0]_(n)$. Per il @Class-as-divisibility, si ha $n | a b - 1$. Deve allora
+	esistere un $k in ZZ$ tale per cui $a b - 1 = n k$, ovvero $a b - n k =
+	1$. Dato che sia $b$ sia $k$ sono certamente esistenti, é possibile
 	applicare il @Coprime-as-Bézout per provare che $a$ ed $n$ sono coprimi.
 
-	Viceversa, si assuma che $a$ ed $n$ siano coprimi. Per l'identitá di Bézout esistono
-	$s, t in ZZ$ tali per cui $a s + n t = 1$, ovvero $a s = 1 - n t$. Questo equivale
-	a dire che $a s equiv 1 mod n$, ovvero che $[a s]_(n) = [a]_(n) [s]_(n) = [1]_(n)$. Si
-	ha quindi che per $[a]_(n)$ esiste l'invertibile.
+	Viceversa, si assuma che $a$ ed $n$ siano coprimi. Per l'identitá di
+	Bézout esistono $s, t in ZZ$ tali per cui $a s + n t = 1$, ovvero
+	$a s = 1 - n t$. Questo equivale a dire che $a s equiv 1 mod n$,
+	ovvero che $[a s]_(n) = [a]_(n) [s]_(n) = [1]_(n)$. Si ha quindi
+	che per $[a]_(n)$ esiste l'invertibile.
 ]
 
 #example[
@@ -341,10 +352,11 @@ di $[a]_(n)$.
 	Se la classe di resto $[a]_(n)$ é invertibile, il suo inverso é unico.
 ]
 
-L'inverso di una classe di resto $[a]_(n)$, essendo unico, viene anche indicato
-semplicemente con $[a]^(-1)_(n)$.
+L'inverso di una classe di resto $[a]_(n)$, essendo unico, viene anche
+indicato semplicemente con $[a]^(-1)_(n)$.
 
 #lemma[
-	Sia $ZZ_(n)$ un insieme di classi di resto modulo $n$, con $n$ numero primo.
-	Tutte le classi di resto di $ZZ_(n)$, tranne $[0]_(n)$, sono invertibili.
+	Sia $ZZ_(n)$ un insieme di classi di resto modulo $n$, con $n$ numero
+	primo. Tutte le classi di resto di $ZZ_(n)$, tranne $[0]_(n)$, sono
+	invertibili.
 ]
