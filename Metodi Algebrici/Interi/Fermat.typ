@@ -10,6 +10,7 @@
 	$ a^(p − 1) equiv 1 mod p $
 ] <Fermat-little-theorem>
 #proof[
+	/*
 	Si consideri innanzitutto il caso in cui $p$ non sia divisore di $a$.
 	Si studino allora le classi di resto cosí definite:
 
@@ -70,11 +71,12 @@
 	Se invece $p$ é un divisore di $a$, questo equivale a dire $a equiv 0 mod p$.
 	Tuttavia, deve valere anche $a^(p) equiv 0 mod p$; per proprietá transitiva,
 	$a^(p) equiv a mod p$.
+	*/
 ]
 
 #theorem("Teorema di Fermat-Eulero")[
-	Sia $n in NN - {0}$ e sia $a$ un qualsiasi intero tale che $a$ ed $n$ siano
-	primi fra di loro. Allora vale:
+	Sia $n in NN - {0}$ e sia $a$ un qualsiasi intero tale che $a$ ed $n$
+	siano primi fra di loro. Allora vale:
 
 	$ a^(phi(n)) equiv 1 mod n $
 ] <Euler-theorem>
@@ -117,7 +119,8 @@
 	formula del binomio di Newton:
 
 	$ (1 + p^(m - 1) b)^(p) =>
-	  1 + (p^(m - 1) b)^(p) + sum_(k = 1)^(p - 1) mat(p; k) (p^(m - 1) b)^(p - k) $
+	  1 + (p^(m - 1) b)^(p) +
+	  sum_(k = 1)^(p - 1) mat(p; k) (p^(m - 1) b)^(p - k) $
 
 	Ogni addendo della sommatoria, cioè ogni termine $mat(p; k)
 	(p^(m - 1) b)^(p - k)$, é un multiplo di $p^(m)$ perché
@@ -132,17 +135,19 @@
 
 	$ a^(phi(p^(m))) equiv 1 mod p^(m) $
 
-	Nel caso in cui $n$ sia un numero qualsiasi, questo puó essere certamente
-	fattorizzato come $n = p_(1)^(m_(1)) p_(2)^(m_(2)) ... p_(r)^(m_(r))$, dove
-	ciascun $p_(i)$ con $1 lt.eq i lt.eq r$ é un numero primo distinto e ciascun
-	$m_(i)$ é un numero naturale. Per ciascuno di questi fattori elevati al
-	rispettivo esponente, dovrá valere:
+	Nel caso in cui $n$ sia un numero qualsiasi, questo puó essere
+	certamente fattorizzato come $n = p_(1)^(m_(1)) p_(2)^(m_(2)) ...
+	p_(r)^(m_(r))$, dove ciascun $p_(i)$ con $1 lt.eq i lt.eq r$ é un
+	numero primo distinto e ciascun $m_(i)$ é un numero naturale. Per
+	ciascuno di questi fattori elevati al rispettivo esponente, dovrá
+	valere:
 
 	$ a^(phi(p_(i)^(m_(i)))) equiv 1 mod p_(i)^(m_(i)) $
 
-	Per il @Euler-function-multiplicative, si ha che ciascun $phi(p_(i)^(m_(i)))$
-	é divisore di $phi(n)$, ovvero che per un certo $t in ZZ$ vale $phi(n) =
-	phi(p_(i)^(m_(i))) t$. Allora:
+	Per il @Euler-function-multiplicative, si ha che ciascun
+	$phi(p_(i)^(m_(i)))$ é divisore di $phi(n)$, ovvero che
+	per un certo $t in ZZ$ vale $phi(n) = phi(p_(i)^(m_(i))) t$.
+	Allora:
 
 	$ a^(phi(n)) = a^(phi(p_(i)^(m_(i))) t) = (a^(phi(p_(i)^(m_(i)))))^(t)
 	  equiv 1^(t) = 1 mod p_(i)^(m_(i)) $
@@ -155,48 +160,8 @@
 	$ p_(1)^(m_(1)) p_(2)^(m_(2)) ... p_(r)^(m_(r)) | a^(phi(n)) - 1 =>
 	  a^(phi(n)) equiv 1 mod p_(1)^(m_(1)) p_(2)^(m_(2)) ... p_(r)^(m_(r)) $
 
-	Avendo peró definito $n$ come $n = p_(1)^(m_(1)) p_(2)^(m_(2)) ... p_(r)^(m_(r))$:
+	Avendo peró definito $n$ come $n = p_(1)^(m_(1)) p_(2)^(m_(2)) ...
+	p_(r)^(m_(r))$:
 
 	$ a^(phi(n)) equiv 1 mod n $
-]
-
-Calcolare $a^(m) mod n$ "a mano" puó richiedere molto tempo, specialmente
-se i numeri in questione sono molto grandi. É peró possibile velocizzare
-il procedimento impiegando il *metodo dei quadrati ripetuti*, di seguito
-discusso.
-
-Si scriva l'esponente $m$ in base due, ottenendo $m = sum_(i = 0)^(k - 1)
-d_(i) 2^(i)$, dove ciascun $d_(i)$ é la $i$-esima cifra della rappresentazione.
-Si costruisca poi una tabella come quella seguente:
-
-$ mat(
-	space,   c_(0) & = 1;
-	d_(k - 1), c_(1) & equiv c_(0)^(2) dot a^(d_(k - 1)) mod n;
-	d_(k - 2), c_(2) & equiv c_(1)^(2) dot a^(d_(k - 2)) mod n;
-	dots.v, & dots.v ;
-	d_(1),     c_(k - 1) & equiv c_(k - 2)^(2) dot a^(d_(1)) mod n;
-	d_(0),     c_(k) & equiv c_(k - 1)^(2) dot a^(d_(0)) mod n;
-	delim: "[",
-	augment: #1
-) $
-
-Risulta $a^(m) equiv c_(k) mod n$.
-
-#example[
-	Si voglia calcolare $3^(90) mod 91$. Si ha $90_(10) = 1011010_(2)$. Si ha:
-
-	$ mat(
-		space, c_(0) & = 1;
-		1, c_(1) & equiv 1^(2) dot 3^(1) = 3 mod 91;
-		0, c_(2) & equiv 3^(2) dot 3^(0) = 9 mod 91;
-		1, c_(3) & equiv 9^(2) dot 3^(1) = 273 equiv -30 mod 91;
-		1, c_(4) & equiv (-30)^(2) dot 3^(1) = 2700 equiv -30 mod 91;
-		0, c_(5) & equiv (-30)^(2) dot 3^(0) = 900 equiv -10 mod 91;
-		1, c_(6) & equiv (-10)^(2) dot 3^(1) = 300 equiv 27 mod 91;
-		0, c_(7) & equiv (27)^(2) dot 3^(0) = 729 equiv 1 mod 91;
-		delim: "[",
-		augment: #1
-	) $
-
-	Risulta $3^(90) equiv 1 mod 91$
 ]

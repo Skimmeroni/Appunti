@@ -1,52 +1,11 @@
 #import "../Metodi_defs.typ": *
 
-Sia $NN$ un insieme non vuoto, in cui si fissa un elemento detto _zero_,
-indicato con 0, ed una funzione $+$ da $NN$ in $NN$. Indicata con $a^(+)$
-l'immagine di $a$ tramite $+$ al variare di $a in NN$, si dice che $a^(+)$
-é _elemento successivo_, o _successore_, di $a$. Si assuma che per l'insieme
-$NN$ valgano i seguenti assiomi, detti *Assiomi di Peano*:
-
-+ $0 != a^(+)$ $forall a in NN$. Ovvero, non esiste alcun elemento di
-  $NN$ avente 0 come successore;
-+ La funzione $+$ é iniettiva. Ovvero, non esistono due $a_(1), a_(2) in S$
-  distinti che abbiano uno stesso $a^(+)$ come successore;
-+ Se $S subset.eq NN, 0 in S$ e $s^(+) in S$ $forall s in S$,
-  allora $S = NN$. Ovvero, se $S$ é un sottoinsieme anche
-  improprio di $NN$ che contiene (almeno) 0 e che, per ciascun
-  elemento di $S$, ne contiene anche l'immagine tramite $+$, allora
-  $S$ e $NN$ sono lo stesso insieme.
-
-L'insieme $NN$ cosí definito prende il nome di *insieme dei numeri naturali*.
-
 #principle("Principio del buon ordinamento")[
 	Sia $S$ un sottoinsieme non vuoto di $ZZ$ limitato inferiormente
 	(esiste un $n_(0) in ZZ$ tale che $s gt.eq n_(0)$, $forall s in S$).
 	Allora $S$ ha minimo, ovvero esiste un $m in S$ tale che $s gt.eq m$,
 	$forall s in S$.
 ]
-
-/*
-#theorem("Teorema di Ricorrenza")[
-	Dati un insieme $S$, un elemento $a$ di $S$ ed una funzione $phi.alt$ da $S$ in
-	sé stesso, esiste una ed una sola funzione $f: NN -> S$ tale che
-
-	$ f(0) = a, f(n^(+)) = phi.alt(f(n)) $
-]
-#proof[
-		Sia $X$ il prodotto cartesiano di $NN$ e $S$. Si consideri l'insieme
-		$Gamma subset.eq cal(P) (X)$, costituito dai sottoinsiemi $U$ di $X$ che
-		godono delle seguenti proprietá:
-
-		+ $(0, a) in U$;
-		+ Se $(n, b) in U$ allora anche $(n^(+), phi.alt(b)) in U$.
-]
-
-Ogni funzione definita a partire da tale teorema viene detta _definita per ricorrenza_.
-In particolare, le due operazioni principali che é possibile definire per ricorrenza
-sull'insieme $NN$ sono la *somma* ed il *prodotto*.
-*/
-
-// Manca la definizione dell'insieme $ZZ$
 
 #principle("Principio di induzione")[
 	Dato un numero fissato $n_(0) in ZZ$, sia $P(n)$ una proposizione

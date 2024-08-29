@@ -30,35 +30,33 @@
 #include "Insiemi/Relazioni.typ"
 == Funzioni
 #include "Insiemi/Funzioni.typ"
+// == Insiemi numerici noti
+// #include "Insiemi/Insiemi.typ"
 #pagebreak()
 
 = Numeri interi
-== Sistemi numerici
-#include "Numeri/Insiemi.typ"
-== Divisione
-#include "Numeri/Divisione.typ"
-== Basi
-#include "Numeri/Basi.typ"
+== Principio di induzione
+#include "Interi/Induzione.typ"
+== Divisione euclidea
+#include "Interi/Divisione.typ"
+== Numeri in base $n$
+#include "Interi/Basi.typ"
 // == Stime temporali
-// #include "Numeri/Tempo.typ"
-== Teorema Fondamentale dell'Aritmetica
-#include "Numeri/Primi.typ"
-== Equazioni Diofantee
-#include "Numeri/Diofantee.typ"
-== Congruenza Modulo $n$
-#include "Numeri/Congruenza.typ"
-== Congruenze lineari
-#include "Numeri/Lineare.typ"
-== Funzione di Eulero
-#include "Numeri/Eulero.typ"
+// #include "Interi/Tempo.typ"
 // == Binomio di Newton
-// #include "Numeri/Newton.typ"
+// #include "Interi/Newton.typ"
+== Numeri primi
+#include "Interi/Primi.typ"
+== Equazioni Diofantee
+#include "Interi/Diofantee.typ"
+== Congruenza Modulo $n$
+#include "Interi/Congruenza.typ"
+== Funzione di Eulero
+#include "Interi/Eulero.typ"
 == Teorema di Fermat-Eulero
-#include "Numeri/Fermat.typ"
-== Test di primalitá
-#include "Numeri/Primalita.typ"
-// == Numeri di Carmichael
-// #include "Numeri/Carmichael.typ"
+#include "Interi/Fermat.typ"
+== Metodo dei quadrati ripetuti
+#include "Interi/Quadrati.typ"
 #pagebreak()
 
 = Strutture algebriche
@@ -68,6 +66,8 @@
 #include "Strutture/Gruppi.typ"
 == Permutazioni
 #include "Strutture/Permutazioni.typ"
+== Classi di resto
+#include "Strutture/Resto.typ"
 == Insiemi di generatori
 #include "Strutture/Generatori.typ"
 == Anelli
@@ -92,6 +92,10 @@
 #include "Crittografia/Firma.typ"
 // == Logaritmo discreto
 // #include "Crittografia/Logaritmo.typ"
+== Test di primalitá
+#include "Crittografia/Primalita.typ"
+// == Numeri di Carmichael
+// #include "Crittografia/Carmichael.typ"
 #pagebreak()
 
 = Teoria dei codici

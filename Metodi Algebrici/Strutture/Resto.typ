@@ -1,132 +1,35 @@
 #import "../Metodi_defs.typ": *
 
-Sia $n in ZZ$ con $n > 0$. Dati due interi $a$ e $b$ sono *congrui
-modulo* $n$ se $n | a - b$, e si scrive $a equiv b mod n$. In altre
-parole, $a equiv b mod n$ vale se e solo se esiste un certo $k in
-ZZ$ tale per cui $a - b = n k$. In maniera equivalente, é possibile
-dire che due numeri $a$ e $b$ sono congruenti modulo $n$ se la loro
-divisione per $n$ restituisce il medesimo resto.
+Il @Congruence-mod-is-equivalence stabilisce che la congruenza modulo
+$n$ una relazione di equivalenza su $ZZ$. Pertanto, deve essere possibile
+identificare delle classi di equivalenza per la congruenza modulo $n$.
 
-#example[
-	Avendosi $12 | 38 - 14$, é possibile scrivere $38 equiv 14 mod
-	12$. Si noti inoltre come sia $38$ sia $14$, divisi per $12$,
-	diano resto $2$.
-]
-
-La definizione puó essere estesa anche al caso in cui $n = 0$. Si noti
-infatti come, se vale $n = 0$, si ha $a - b = 0 dot k$, ovvero $a = b$.
-Pertanto, la congruenza modulo 0 coincide semplicemente con la relazione
-di uguaglianza in $ZZ$.
-
-La definizione puó essere inoltre estesa anche al caso in cui $n < 0$.
-Infatti, basta osservare che $n | a − b$ se e solo se $−n | a − b$ per
-concludere che $a equiv b mod n$ se e solo se $a equiv b mod − n$. Per
-questo motivo, non é limitativo considerare $n > 0$.
-
-#lemma[
-	Sia $n in ZZ$ con $n > 0$. Dati quattro interi $a$, $b$, $c$ e $d$,
-	se vale $a equiv b mod n$ e $c equiv d mod n$ allora vale $a + b equiv
-	c + d mod n$.
-]
-
-#lemma[
-	Sia $n in ZZ$ con $n > 0$. Dati quattro interi $a$, $b$, $c$ e $d$,
-	se vale $a equiv b mod n$ e $c equiv d mod n$ allora vale $a b equiv
-	c d mod n$.
-]
-
-#example[
-	La congruenza lineare dell'@Example-congruence-solution, che aveva
-	per soluzione particolare $c = 5$. Avendosi $"MCD"(21, 30) = 3$, si
-	ha $frac(30, 3) = 10$. Pertanto, tale congruenza lineare ha per
-	soluzioni ogni intero nella forma $6 + 10 h$ con $h in ZZ$. In
-	particolare, le soluzioni non congruenti modulo $n$ fra di loro sono
-	$c = 6$, $c = 16$ e $c = 26$.
-]
-
-#lemma[
-	Siano $a, b, c, n in ZZ$, con $c != 0$. Allora $a c equiv b c mod n$
-	equivale a $a equiv b mod frac(n, "MCD"(c, n))$.
-] <Simplification-law-congruences>
-#proof[
-	Per definizione di congruenza modulo $n$, l'espressione $a c equiv b c
-	mod n$ equivale a $n | a c - b c$. Deve allora esistere un certo $q in
-	ZZ$ tale per cui $a c - b c = n q$, ovvero $(a - b) c = n q$. Siano
-	$c = tilde(c) "MCD"(c, n)$ e $n = tilde(n) "MCD"(c, n)$. Si ha:
-
-	$ (a - b) c = n q => (a - b) tilde(c) cancel("MCD"(c, n)) =
-	  tilde(n) cancel("MCD"(c, n)) q => (a - b) tilde(c) = tilde(n) q =>
-	  tilde(n) | (a - b) tilde(c) $
-
-	Per il @Euclid-lemma, almeno una delle due proposizioni fra $tilde(n) |
-	a - b$ e $tilde(n) | tilde(c)$ deve essere vera. La prima proposizione
-	equivale a $a equiv b mod tilde(n)$; ricordando la definizione di
-	$tilde(n)$, si ha $a equiv b mod frac(n, "MCD"(c, n))$.
-]
-
-#corollary("Legge di cancellazione per le congruenze lineari")[
-	Siano $a, b, c, n in ZZ$, con $c$ non nullo e con $c$ ed $n$ coprimi.
-	Allora $a c equiv b c mod n$ equivale a $a equiv b mod n$.
-] <Cancellation-law-congruences>
-#proof[
-	Se $c$ ed $n$ sono coprimi, allora $"MCD"(c, n) = 1$. Applicando il
-	@Simplification-law-congruences, si ha che $a c equiv b c mod n$
-	equivale a $a equiv b mod frac(n, 1)$, ovvero $a equiv b mod n$.
-]
-
-#theorem[
-	Per ogni numero intero $n > 0$, la congruenza modulo $n$ é una
-	relazione di equivalenza su $ZZ$.
-]
-#proof[
-	La congruenza modulo $n$ definisce su $ZZ$ la relazione $cal(R)$
-	data da:
-
-	$ forall a, b in ZZ, (a, b) in cal(R) "se e solo se" a equiv b mod n $
-
-	La relazione in questione é:
-
-	+ Riflessiva: $forall a in ZZ$ vale $a equiv a mod n$. Infatti,
-	  $a equiv a mod n$ equivale a dire $a - a = 0 = k n$, che é valido
-	  per $k = 0$ e per qualsiasi $a in ZZ$;
-	+ Simmetrica: $forall a, b in ZZ$, $a equiv b mod n$ implica $b equiv
-	  a mod n$. Infatti, $a equiv b mod n$ equivale a dire $a − b = k n$ per
-	  un certo $k in ZZ$. Moltiplicando per $-1$ ambo i membri si ha $-(a − b)
-	  = -(k n)$, ovvero $b − a = (−k) n$, cioé $b equiv a mod n$;
-	+ Transitiva: $forall a, b, c in ZZ$, $a equiv b mod n$ e $b equiv c mod n$
-	  implicano $a equiv c mod n$. Infatti, $a equiv b mod n$ e $b equiv c mod
-	  n$ equivalgono a dire, rispettivamente, $a − b = k n$ e $b − c = h n$ per
-	  certi $h, k in ZZ$. Sommando la seconda alla prima:
-
-	  $ a − b + (b - c) = k n + (b − c) => a - cancel(b) + cancel(b) - c =
-	    k n + h n => a - c = (k + h) n => a equiv c mod n $
-
-	Pertanto, é una relazione di equivalenza.
-]
-
-Essendo la congruenza modulo $n$ una relazione di equivalenza, é possibile
-identificare delle classi di equivalenza. Preso $n$ intero con $n > 0$ ed
-un certo $a in ZZ$, la classe di equivalenza di $a$ rispetto alla congruenza
-modulo $n$ viene indicata con $[a]_(n)$.
-
-Tale classe di equivalenza corrisponde all'insieme ${b : b in ZZ and a equiv
-b mod n}$, ovvero all'insieme che contiene tutti i numeri interi che, divisi
-per $n$, restituiscono lo stesso resto della divisione fra $n$ e $a$.
+Preso $n$ intero con $n > 0$ ed un certo $a in ZZ$, la classe di
+equivalenza di $a$ rispetto alla congruenza modulo $n$ viene indicata
+con $[a]_(n)$. Tale classe di equivalenza corrisponde all'insieme ${b:
+b in ZZ and a equiv b mod n}$, ovvero all'insieme che contiene tutti i
+numeri interi che, divisi per $n$, restituiscono lo stesso resto della
+divisione fra $n$ e $a$.
 
 #lemma[
 	Sia $n$ un numero intero maggiore di $0$. Sia $a$ un numero intero
 	qualsiasi e sia $b$ il resto della divisione di $a$ per $n$. Vale
 	$[a]_(n) = [b]_(n)$.
-]
+] <Residue-class-and-itself>
 #proof[
 	Se $b$ é il resto della divisione di $a$ per $n$, allora vale
 	$a = n k + b$ per un certo $k in ZZ$, da cui si ha $a - b = n k$,
 	che é la definizione di congruenza modulo $n$.
 ]
 
-L'insieme quoziente di $ZZ$ rispetto alla relazione di congruenza modulo
-$n$ con $n > 0$ si dice *insieme delle classi di resti modulo* $n$ e si
-denota con $ZZ_(n)$.
+Il @Residue-class-and-itself definisce una "forma standard" per
+rappresentare le classi di equivalenza per la congruenza modulo
+$n$.
+
+Le classi di equivalenza indotte dalla congruenza modulo $n$ vengono
+anche chiamate *classi di resto*. L'insieme quoziente di $ZZ$ rispetto
+alla relazione di congruenza modulo $n$ con $n > 0$ si dice *insieme
+delle classi di resti modulo* $n$ e si denota con $ZZ_(n)$.
 
 #theorem[
 	Per ogni numero intero $n > 0$, l'insieme delle classi di resti modulo
@@ -147,9 +50,6 @@ denota con $ZZ_(n)$.
 	che $0 lt.eq i − j lt.eq n − 1$ e quindi $i − j = k n$ se e solo
 	se $k = 0$, cioè $i = j$.
 ]
-
-La forma presentata in @Distinct-residue-classes per le classi di
-equivalenza puó essere considerata la "forma standard" per rappresentarle.
 
 #example[
 	#grid(
@@ -200,7 +100,7 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 ]
 
 #lemma[
-	Sia $n in ZZ$ con $n gt.eq 1$. Siano poi $a, b, c, d in ZZ$,
+	Sia $n in ZZ$ con $n > 0$. Siano poi $a, b, c, d in ZZ$,
 	tali per cui $[a]_(n) = [b]_(n)$ e $[c]_(n) = [d]_(n)$. Allora vale:
 
 	$ [a]_(n) + [c]_(n) = [b]_(n) + [d]_(n) space space space
@@ -234,9 +134,9 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 ]
 
 #theorem[
-	La struttura algebrica $(ZZ_(n), +)$, formata dalla classe di resti
-	modulo $n$ e dalla somma su questi definita, é un gruppo abeliano.
-]
+	La struttura algebrica $(ZZ_(n), +)$, formata dalle classi di resto
+	modulo $n$ e dalla somma su queste definita, é un gruppo abeliano.
+] <Residue-classes-sum-group>
 #proof[
 	La struttura algebrica $(ZZ_(n), +)$ é:
 
@@ -270,9 +170,9 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 ]
 
 #theorem[
-	La struttura algebrica $(ZZ_(n), dot)$, formata dalla classe di resti
-	modulo $n$ e dal prodotto su questi definito, é un monoide abeliano.
-]
+	La struttura algebrica $(ZZ_(n), dot)$, formata dalle classi di resto
+	modulo $n$ e dal prodotto su queste definito, é un monoide abeliano.
+] <Residue-classes-product-monoid>
 #proof[
 	La struttura algebrica $(ZZ_(n), dot)$ é:
 
@@ -299,30 +199,15 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 	Pertanto, $(ZZ_(n), dot)$ é un monoide abeliano.
 ]
 
-Un elemento $[a]_(n)$ in $ZZ_(n)$ si dice *invertibile* in $ZZ_(n)$
-(rispetto al prodotto) se esiste $[b]_(n) in ZZ_(n)$ tale per cui
-$[a]_(n) dot [b]_(n) = [1]_(n)$; $[b]_(n)$ viene detto _inverso_
-di $[a]_(n)$.
-
-#example[
-	- Se vale $[a]_(7) = [3]_(7)$, allora esiste $[b]_(7) in ZZ_(7)$
-	  tale per cui $[3]_(7) dot [b]_(7) = [1]_(7)$. Tale $[b]_(7)$ é
-	  $[5]_(7)$, in quanto $[3]_(7) [5]_(7) = [15]_(7) = [1]_(7)$;
-	- Se vale $[a]_(6) = [3]_(6)$, allora non esiste alcun $[b]_(6)
-	  in ZZ_(6)$ tale per cui $[3]_(6) [b]_(6) = [1]_(6)$;
-	- Se vale $[a]_(n) = [0]_(n)$ per un qualsiasi $n in NN$, per ogni
-	  $[b]_(n) in ZZ_(n)$, risulta $[0]_(n) [b]_(n) = [0 dot b]_(n) =
-	  [0]_(n)$. Pertanto, affinché esista un $[b]_(n) in ZZ_(n)$ tale
-	  per cui valga $[0]_(n) [b]_(n) = [1]_(n)$, deve valere $[0]_(n)
-	  = [1]_(n)$, ovvero $0 equiv 1 mod n$. Questo si verifica soltanto
-	  se $n = 1$, pertanto un invertibile per $[a]_(n) = [0]_(n)$
-	  esiste solamente in questo caso.
-]
+Il @Residue-classes-sum-group ed il @Residue-classes-product-monoid
+suggeriscono che per qualsiasi classe di resto in $ZZ_(n)$ esista
+un inverso per la somma, ma non per tutte esiste un inverso per
+il prodotto.
 
 #lemma[
-	Siano $a, n$ due numeri interi, dove $n gt.eq 2$. La classe di resto
-	$[a]_(n)$ è invertibile in $ZZ_(n)$ se e soltanto se $a$ ed $n$ sono
-	coprimi, ovvero se $"MCD"(a, n) = 1$.
+	Siano $a, n$ due numeri interi, dove $n > 1$. La classe di resto
+	$[a]_(n)$ ammette inverso in $ZZ_(n)$ rispetto al prodotto se e
+	soltanto se $a$ ed $n$ sono coprimi, ovvero se $"MCD"(a, n) = 1$.
 ]
 #proof[
 	Se la classe di resto $[a]_(n)$ è invertibile, allora esiste $[b]_(n)
@@ -349,14 +234,31 @@ di $[a]_(n)$.
 ]
 
 #lemma[
-	Se la classe di resto $[a]_(n)$ é invertibile, il suo inverso é unico.
+	Il numero di classi di resto in $ZZ_(n)$ (con $n > 0$ numero intero)
+	che ammettono inverso rispetto al prodotto é pari a $phi(n)$.
 ]
 
-L'inverso di una classe di resto $[a]_(n)$, essendo unico, viene anche
-indicato semplicemente con $[a]^(-1)_(n)$.
+#theorem[
+	La struttura algebrica $(ZZ_(n) - {[0]_(n)}, dot)$, formata dalle
+	classi di resto modulo $n$ esclusa $[0]_(n)$ e dal prodotto su queste
+	definito, é un gruppo abeliano se e soltanto se $n$ é un numero primo.
+	In altre parole, le classi di resto modulo $n$ (tranne $[0]_(n)$)
+	ammettono sempre inversa solamente se $n$ é un numero primo.
+]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
 
-#lemma[
-	Sia $ZZ_(n)$ un insieme di classi di resto modulo $n$, con $n$ numero
-	primo. Tutte le classi di resto di $ZZ_(n)$, tranne $[0]_(n)$, sono
-	invertibili.
+Sia $[a]_(n)$ una classe di resto invertibile, e si supponga di
+volerne trovarne l'inverso $[a]^(-1)_(n)$. É sufficiente osservare
+come l'espressione $[a]_(n) [a]^(-1)_(n) = [1]_(n)$ equivalga a $a
+dot a^(-1) equiv 1 mod n$. Pertanto, occorre risolvere tale congruenza
+lineare con $a^(-1)$ come incognita e sceglierne una soluzione qualsiasi,
+essendo tutte equivalenti.
+
+#example[
+	In $ZZ_(9)$, la classe di resto $[7]_(9)$ é invertibile, in quanto
+	$"MCD"(7, 9) = 1$. L'inverso é ricavato dal risolvere la congruenza
+	lineare $7 x equiv 1 mod 9$, che ha come soluzione $4 + 9 k$ con $k in
+	ZZ$. Pertanto, l'inverso di $[7]_(9)$ é $[4]_(9)$.
 ]
