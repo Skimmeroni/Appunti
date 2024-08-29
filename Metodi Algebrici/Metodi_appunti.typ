@@ -103,7 +103,7 @@
 #include "Codici/Introduzione.typ"
 == Codici a blocchi
 #include "Codici/Blocchi.typ"
-// == Codici lineari
-// #include "Codici/Lineari.typ"
+== Codici lineari
+#include "Codici/Lineari.typ"
 // == Codici ciclici
 // #include "Codici/Ciclici.typ"

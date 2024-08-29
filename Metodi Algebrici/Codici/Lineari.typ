@@ -12,6 +12,21 @@ Mentre il prodotto fra un vettore ed uno scalare come:
 $ [lambda]_(p) ([x_(1)]_(p), ..., [x_(n)]_(p)) =
   ([lambda x_(1)]_(p), ..., [lambda x_(n)]_(p)) $
 
+É infine possibile definire un prodotto scalare come:
+
+$ ([x_(1)]_(p), ..., [x_(n)]_(p)) dot ([y_(1)]_(p), ..., [y_(n)]_(p)) =
+  sum_(i = 1)^(n) x_(i) y_(i) $
+
+Se due vettori hanno nullo il loro prodotto scalare, si dicono *ortogonali*.
+
+#lemma[
+	Siano $x, y, z in ZZ_(p)^(n)$ e $lambda in ZZ_(p)$. Si ha:
+
+	- $x dot y = y dot x$;
+	- $x dot (y + z) = x dot y + x dot z$;
+	- $(lambda x) dot y = lambda (x dot y)$.
+]
+
 La base canonica di tale spazio vettoriale viene definita come:
 
 $ ([1]_(p), [0]_(p), dots, [0]_(p), [0]_(p)),
@@ -30,28 +45,35 @@ $[x]_(p)$ verrá semplicemente denotata con $x$.
 	$[1]_(2)$).
 ]
 
-#theorem[
-	Lo spazio vettoriale $ZZ_(p)^(n)$ ha dimensione $n$.
-]
+// #theorem[
+//	Lo spazio vettoriale $ZZ_(p)^(n)$ ha dimensione $n$.
+// ]
 
 Un qualsiasi sottospazio vettoriale di $ZZ_(p)^(n)$ viene detto
 *codice lineare*.
 
 #example[
-	A partire dallo spazio vettoriale $ZZ_(2)^(5)$ é possibile definire
-	il codice $C$ come il suo sottospazio avente base $B = {b_(1) = 10111,
-	b_(2) = 11110}$. I vettori che costituiscono $C$ sono tutti e i soli
-	vettori generati dalla combinazione lineare $lambda_(1) b_(1) + lambda_(2)
-	b_(2)$, con $lambda_(1), lambda_(2) in ZZ_(2)$. Essendo $ZZ_(2)$ e $B$
-	due insiemi finiti, é possibile enumerare $C$ esplicitamente:
+	A partire dallo spazio vettoriale $ZZ_(2)^(5)$ é possibile
+	definire il codice $C$ come il suo sottospazio avente base
+	$B = {b_(1) = 10111, b_(2) = 11110}$. I vettori che costituiscono
+	$C$ sono tutti e i soli vettori generati dalla combinazione lineare
+	$lambda_(1) b_(1) + lambda_(2) b_(2)$, con $lambda_(1), lambda_(2)
+	in ZZ_(2)$. Essendo $ZZ_(2)$ e $B$ due insiemi finiti, é possibile
+	enumerare $C$ esplicitamente:
 
-	#set math.mat(delim:none, column-gap: 2.5em)
-	$ mat(
-		0(10111) + 0(11110) = (00000),
-		1(10111) + 0(11110) = (10111);
-		0(10111) + 1(11110) = (11110),
-		1(10111) + 1(11110) = (01001),
-	) $
+	#set math.mat(delim:none)
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ mat(
+			0(10111) + 0(11110) = (00000);
+			1(10111) + 0(11110) = (10111)
+		) $],
+		[$ mat(
+			0(10111) + 1(11110) = (11110);
+			1(10111) + 1(11110) = (01001)
+		) $]
+	)
 ]
 
 #lemma[
@@ -59,9 +81,9 @@ Un qualsiasi sottospazio vettoriale di $ZZ_(p)^(n)$ viene detto
 	Si ha $|C| = p^(k)$.
 ]
 #proof[
-	Sia $B = {b_(1), b_(2), ..., b_(k)}$ una base di $C$. Ogni elemento di
-	$C$ puó essere generato a partire da una ed una sola combinazione lineare
-	dei vettori di $B$, ovvero
+	Sia $B = {b_(1), b_(2), ..., b_(k)}$ una base di $C$. Ogni elemento
+	di $C$ puó essere generato a partire da una ed una sola combinazione
+	lineare dei vettori di $B$, ovvero
 
 	$ lambda_(1) b_(1) + lambda_(2) b_(2) + ··· + lambda_(k) b_(k)
 	  space "con" space lambda_(i) in ZZ_(p), space i = {1, ..., k} $
@@ -82,7 +104,8 @@ Un qualsiasi sottospazio vettoriale di $ZZ_(p)^(n)$ viene detto
 	dimensione. Per generare $00...0$ occorre costruire una combinazione
 	lineare dove tutti gli elementi sono nulli. Questo é sempre possibile
 	perché, per qualsiasi $p$, l'elemento $[0]_(p)$ appartiene a $ZZ_(p)$,
-	ed quindi é sempre possibile costruire una combinazione lineare del tipo:
+	ed quindi é sempre possibile costruire una combinazione lineare del
+	tipo:
 
 	$ 0 b_(1) + 0 b_(2) + ··· + 0 b_(k) space "ovvero" space
 	  lambda_(1) = lambda_(2) = ... = lambda_(k) = 0 $
@@ -105,9 +128,9 @@ di Hamming.
 #proof[
 	Per il @Null-word-always-in, la parola $underline(0)$ appartiene
 	sempre a $C$. Pertanto, per qualsiasi $y in C$, vale $d(underline(0),
-	y) = w(y)$, perché di fatto le due definizioni coincidono. Poichè $d(C)$
-	è la distanza minima di $C$ esistono certamente $x, y in C$ con $d(C) =
-	d(x, y) = w(x − y)$.
+	y) = w(y)$, perché di fatto le due definizioni coincidono. Poichè
+	$d(C)$ è la distanza minima di $C$ esistono certamente $x, y in C$
+	con $d(C) = d(x, y) = w(x − y)$.
 ]
 
 #lemma[
@@ -125,11 +148,13 @@ di Hamming.
 	fra tutte le parole di $C$.
 ]
 
-Sia $C in ZZ_(p)^(n)$ un codice lineare di dimensione $k$. Siano poi
-$cal(B)_(C) = {b_(1), b_(2), ..., b_(k)}$ una base di $C$ e $cal(B)
-= {e_(1), e_(2), ..., e_(k)}$ una base di $ZZ_(p)^(n)$. Ciascun vettore
-$b_(i) in cal(B)_(C)$ puó essere scritto come combinazione lineare a
-coefficienti $ZZ_(p)$ dei vettori di $cal(B)$:
+Sia $C in ZZ_(p)^(n)$ un codice lineare di dimensione $k$. Siano
+poi $cal(B)_(C) = {b_(1), b_(2), ..., b_(k)}$ una base di $C$ e
+$cal(B) = {e_(1), e_(2), ..., e_(k)}$ una base di $ZZ_(p)^(n)$.
+Dato che ogni parola in $cal(B)_(C)$ (e quindi in $C$) appartiene
+a $ZZ_(p)$, ogni $b_(i) in cal(B)_(C)$ puó essere scritto come
+combinazione lineare a coefficienti in $ZZ_(p)$ dei vettori di
+$cal(B)$:
 
 $ cases(
 	b_(1) = lambda_(1, 1) e_(1) + lambda_(1, 2) e_(2) + dots +
@@ -153,11 +178,9 @@ $ G = mat(
 
 Viene detta *matrice generatrice* di $G$.
 
-La matrice $G$ puó essere usata per la codifica dei messaggi, ovvero
-per associare ad un vettore $m in Z_(p)^(k)$ una parola in $C subset.eq
-Z_(p)^(k)$. Dato un vettore $m = (m_(1), m_(2), dots, m_(k)) in Z_(p)^(k)$,
-la codifica di $m$ è rispetto a $G$ é data dal prodotto matriciale fra
-$m$ e $G$, ovvero:
+Naturalmente, preso un qualsiasi $m = (m_(1), m_(2), dots, m_(k))
+in ZZ_(p)^(k)$, si avrá che il prodotto matriciale fra $m$ e $G$
+appartiene a $C$:
 
 $ m G = mat(m_(1), m_(2), dots, m_(k))
 	   mat(
@@ -220,3 +243,67 @@ $
 	  = mat(0; 1; 1; 0; 0) in C
 	$
 ]
+
+Siano $C_(1)$ e $C_(2)$ due codici lineari in $ZZ_(p)^(n)$ di stessa
+dimensione. Si dice che $C_(1)$ e $C_(2)$ sono equivalenti se è possibile
+ottenere tutte le parole di uno a partire da quelle dell'altro applicando:
+
++ Una permutazione delle posizioni $1, 2, ..., n$ a tutte le parole;
++ La moltiplicazione dei simboli che compaiono in una data posizione
+  per un elemento non nullo $lambda in ZZ_(p)$ a tutte le parole;
+
+Di conseguenza, due matrici generatrici $G_(1)$ e $G_(2)$ in $"Mat"(k
+times n, ZZ_(p))$ danno luogo a due codici lineari equivalenti se una
+delle due può essere ottenuta dall'altra tramite un numero finito delle
+seguenti operazioni:
+
++ Scambiare due righe;
++ Moltiplicare gli elementi di una riga per un elemento non nullo di
+  $ZZ_(p)$;
++ Sommare a una riga un'altra riga moltiplicata per un elemento non
+  nullo di $ZZ_(p)$;
++ Permutare le colonne;
++ Moltiplicare gli elementi di una colonna per un elemento non nullo
+  di $ZZ_(p)$.
+
+Dove le prime tre operazioni corrispondono a cambiare la base del codice
+mentre le ultime due corrispondono alle operazioni nella definizione di
+codici equivalenti.
+
+Sia $C subset.eq ZZ_(p)^(n)$ un codice lineare di dimensione $k$. Dato
+che esistono diverse matrici che generano $C$, é ragionevole sceglierne
+una che renda i calcoli piú agevoli possibili. In particolare, si
+consideri la matrice del tipo:
+
+$ S = mat(
+	1, 0, dots, 0, Lambda_(1, k + 1), Lambda_(1, k + 2), dots, Lambda_(1, k + n);
+	0, 1, dots, 0, Lambda_(2, k + 1), Lambda_(2, k + 2), dots, Lambda_(2, k + n);
+	dots.v, dots, dots.down, dots.v, dots.v, dots, dots.down, dots.v;
+	0, 0, dots, 1, Lambda_(k, k + 1), Lambda_(k, k + 2), dots, Lambda_(k, k + n);
+  ) $
+
+Per indicare una matrice in questa forma, detta *forma standard*,
+si usa la notazione $S = (I_(k) | A)$.
+
+// Per convincersi che le matrici in forma standard sono effettivamente
+// vantaggiose, si osservi come:
+
+// $ m S &= mat(m_(1), m_(2), dots, m_(k)) mat(
+//	1, 0, dots, 0, Lambda_(1, k + 1), Lambda_(1, k + 2), dots, Lambda_(1, k + n);
+//	0, 1, dots, 0, Lambda_(2, k + 1), Lambda_(2, k + 2), dots, Lambda_(2, k + n);
+//	dots.v, dots, dots.down, dots.v, dots.v, dots, dots.down, dots.v;
+//	0, 0, dots, 1, Lambda_(k, k + 1), Lambda_(k, k + 2), dots, Lambda_(k, k + n);
+//  ) = \ &= mat(m_(1), m_(2), dots, m_(k), sum_(i = 1)^(k) m_(i) Lambda_(i, k + 1),
+//  dots, sum_(i = 1)^(k) m_(i) Lambda_(i, k + n)) $
+
+// Ovvero, dove le prime $k$ componenti della codifica coincidono con i primi
+// $k$ elementi del messaggio originale e la ridondanza è tutta nelle ultime
+// componenti. Dunque se nella trasmissione non occorrono errori la parola
+// ricevuta viene facilmente decodificata: basta considerare le prime $k$
+// componenti per ottenere $m$.
+
+// La matrice $G$ puó essere usata per la codifica dei messaggi,
+// ovvero per associare ad un vettore $m in Z_(p)^(k)$ una parola
+// in $C subset.eq ZZ_(p)^(k)$. Dato un vettore $m = (m_(1), m_(2),
+// dots, m_(k)) in ZZ_(p)^(k)$, la codifica di $m$ è rispetto a $G$
+// é data da $m G$, che come giá visto appartiene a $C$.
