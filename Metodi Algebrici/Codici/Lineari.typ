@@ -481,7 +481,7 @@ $C$ si dice *autoduale*.
 
 #lemma[
 	Sia $C$ un codice in $ZZ_(p)^(n)$. Vale $(C^(perp))^(perp) = C$.
-]
+] <Double-perp-is-none>
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
@@ -547,9 +547,9 @@ $C$ si dice *autoduale*.
 	Se $C$ è un codice lineare in $ZZ_(p)^(n)$ di dimensione
 	$k$, allora $C^(perp)$ è un codice lineare in $ZZ_(p)^(n)$
 	di dimensione $n − k$.
-]
+] <Perp-dimension>
 #proof[
-	Per il <Perp-matrix-product-null> si ha che $x = (x_(1), dots,
+	Per il @Perp-matrix-product-null si ha che $x = (x_(1), dots,
 	x_(n)) in ZZ_(p)^(n)$ appartiene a $C^(perp)$ se e soltanto
 	se $x(G^(t)) = 0$. Allora i vettori di $C^(perp)$ sono tutte
 	e sole le soluzioni del sistema lineare omogeneo $x(G^(t)) =
@@ -558,4 +558,67 @@ $C$ si dice *autoduale*.
 	Pertanto, entrambe devono essere a rango pieno, che in questo
 	caso equivale ad avere rango $k$, e lo spazio delle soluzioni
 	ha pertanto dimensione $n − k$.
+]
+
+Sia $C$ un codice lineare in $ZZ_(p)^(n)$ di dimensione $k$. Si dice
+*matrice di controllo* per $C$ una qualsiasi matrice $H$ che genera
+$C^(perp)$.
+
+#theorem[
+	Sia $C$ un codice e $H$ una sua matrice di controllo. Un vettore
+	$x = (x_(1), dots, x_(n)) in ZZ_(p)^(n)$ appartiene a $C$ se e
+	soltanto se il prodotto matriciale $x(H^(t))$ é il vettore nullo.
+] <Control-matrix-product-null>
+#proof[
+	Se $H$ é matrice di controllo per $C$, allora é matrice generatrice
+	per $C^(perp)$. Per il @Perp-matrix-product-null, $x$ appartiene a
+	$(C^(perp))^(perp)$ se e soltanto se il prodotto matriciale $x (H^(t))$
+	é il vettore nullo. Tuttavia, per il @Double-perp-is-none, $C =
+	(C^(perp))^(perp)$, pertanto $x$ appartiene a $C$ se e soltanto se
+	il prodotto matriciale $x (H^(t))$ é il vettore nullo.
+]
+
+Sia $C$ un codice e $H$ una sua matrice di controllo.
+Il @Control-matrix-product-null fornisce un metodo per
+determinare se un elemento $x in ZZ_(p)^(n)$ appartenga
+a $C$.
+
+#lemma[
+	Sia $C$ un codice di dimensione $k$, e sia $S = (I_(k) | A)$ una sua
+	matrice in forma standard. Allora la matrice $H = (−A^(t) | I_(n − k))$
+	è una matrice di controllo per $C$.
+]
+//#proof[
+//	$ H S^(t) = (−A^(t) | I_(n − k)) (I_(k) | A)^(t) =
+//	  (−A^(t) | I_(n − k)) (frac(I_(k), (A^(t))^(-1))) =
+//	  -A^(t) + A^(t) = underline(0) $
+//]
+
+#theorem[
+	Sia $C in ZZ_(p)^(n)$ un codice di dimensione $k$ e sia $H$ una sua
+	matrice di controllo. La distanza minima di $C$ è uguale al minimo
+	ordine di un insieme linearmente dipendente di colonne della matrice
+	$H$. In particolare, se $d(C)$ è la distanza minima di $C$, si ha
+	che $H$ ha almeno $d(C) - 1$ colonne linearmente indipendenti.
+]
+//#proof[
+// Dimostrabile, da aggiungere
+//]
+
+#example[
+	Sia $C in ZZ_(3)^(5)$ un codice lineare di dimensione $k$, e sia $H$
+	la matrice di controllo per $C$ cosí definita:
+
+	$ H = mat(
+	  2, 0, 0, 1, 1;
+	  0, 2, 0, 0, 2;
+	  0, 0, 1, 2, 0) $
+
+	Si voglia determinare $k = dim(C)$. Per il @Perp-dimension, si ha
+	$dim(H) = n - dim(C)$. Essendo $H$ di dimensione $3 times 5$, si
+	ha $dim(C) = n - dim(H) = 5 - 3 = 2$.
+
+	Si voglia determinare $d(C)$. Le colonne di $H$ sono a $2$ a $2$
+	linearmente indipendenti. Invece, le colonne $1$, $2$ e $5$ sono
+	linearmente dipendenti. Pertanto, $d(C) = 3$.
 ]
