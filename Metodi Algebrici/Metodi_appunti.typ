@@ -105,5 +105,11 @@
 #include "Codici/Blocchi.typ"
 == Codici lineari
 #include "Codici/Lineari.typ"
+== Codifica e decodifica
+#include "Codici/Codifica.typ"
+== Codice duale
+#include "Codici/Duale.typ"
+== Sindrome
+#include "Codici/Sindrome.typ"
 // == Codici ciclici
 // #include "Codici/Ciclici.typ"
