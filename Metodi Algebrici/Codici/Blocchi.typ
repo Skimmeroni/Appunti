@@ -185,7 +185,7 @@ massimo di errori che è in grado di correggere.
 #theorem[
 	Ogni codice $C subset.eq A_(q)^(n)$ é
 	$floor(frac(d(C) - 1, 2))$-correttore.
-]
+] <Min-distance-is-correcting>
 #proof[
 	Siano $p, p' in C$ rispettivamente la parola trasmessa e la
 	parola ricevuta, con $t$ numero di errori subiti da $p$ durante
