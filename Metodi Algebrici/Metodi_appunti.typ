@@ -111,5 +111,5 @@
 #include "Codici/Duale.typ"
 == Sindrome
 #include "Codici/Sindrome.typ"
-// == Codici ciclici
-// #include "Codici/Ciclici.typ"
+== Codici ciclici
+#include "Codici/Ciclici.typ"
