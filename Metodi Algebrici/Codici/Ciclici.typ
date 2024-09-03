@@ -125,10 +125,117 @@ Per $f(t) in R_(n)$ é possibile definire $angle.l f(t) angle.r =
 	  r_(2)(t) in angle.l f(t) angle.r$.
 ]
 
+#theorem[
+	Sia $C != {underline(0)}$ un codice ciclico in $R_(n)$. Allora:
+
+	- Esiste un unico polinomio monico $p(t)$ di grado minimo in $C$;
+	- $C = angle.l p(t) angle.r$;
+	- Il polinomio $p(t)$ divide $t^(n) − 1$.
+] <Cyclic-codes-properties>
+#proof[
+	- Essendo $C != {underline(0)}$, in $C$ non esistono polinomi
+	  nulli. Sia $h(t) = h_(0) + h_(1) t + dots + h_(k) t^(k)$, con
+	  $k < n$, un generico polinomio non nullo in $C$ di grado $k$.
+	  Essendo $C$ un codice lineare, il polinomio monico $h^(-1)_(k)
+	  h(t)$ appartiene a $C$. Si ha quindi che $C$ contiene almeno un
+	  polinomio monico. Sia $p(t)$ uno dei polinomi monici che, fra
+	  questi, ha grado minimo. Si supponga che esista almeno un altro
+	  polinomio monico $q(t)$ di grado minimo; naturalmente, $diff(p(t))
+	  = diff(q(t))$. Essendo $C$ un sottospazio di $R_(n)$, anche $p(t)
+	  - q(t)$ deve appartenere a $C$, e $diff(p(t) - q(t)) < diff(p(t))$.
+	  Essendo $p(t)$ polinomio di grado minimo ed essendo $diff(p(t)) =
+	  diff(q(t))$, tale disuguaglianza é vera solamente nel caso in cui
+	  $p(t) = q(t)$, ovvero se non esistono due polinomi monici distinti
+	  di grado minimo.
+	- Sia $p(t) in C$ e $s(t) in R_(n)$ un generico polinomio. Se
+	  $p(t) s(t) in angle.l p(t) angle.r$, allora per definizione
+	  di codice ciclico $p(t) s(t) in C$. Pertanto, $angle.l p(t)
+	  angle.r subset.eq C$. D'altro canto, dato un generico polinomio
+	  $f(t) in C$, dividendolo per $p(t)$ si ha $f(t) = p(t) q(t) +
+	  r(t)$, con $diff(r(t)) < diff(p(t))$. Per quanto appena detto,
+	  $p(t) q(t) in C$, pertanto $r(t) = f(t) - p(t) q(t) in C$.
+	  Essendo peró $p(t)$ un polinomio di grado minimo, l'unica
+	  situazione in cui si verifica $diff(r(t)) < diff(p(t))$ é
+	  quando $r(t)$ é il polinomio nullo, ovvero quando la divisione
+	  non ha resto. Pertanto, $C subset.eq angle.l p(t) angle.r$.
+	  Valendo sia $angle.l p(t) angle.r subset.eq C$ sia $C subset.eq
+	  angle.l p(t) angle.r$, si ha $C = angle.l p(t) angle.r$.
+	- La divisione fra polinomi tra $t^(n) - 1$ e $p(t)$ restituisce
+	  $t^(n) − 1 = p(t)q(t) + r(t)$, con $diff(r(t)) < diff(p(t))$.
+	  É allora possibile scrivere $r(t) equiv −p(t) q(t) mod t^(n) − 1$.
+	  Questo significa che $r(t) in angle.l p(t) angle.r = C$. Essendo
+	  $p(t)$ un polinomio di grado minimo, la disuguaglianza $diff(r(t))
+	  < diff(p(t))$ é valida solo se $r(t) = 0$, ovvero se $p(t)$ divide
+	  $t^(n) - 1$.
+]
+
+Il solo ed unico polinomio del @Cyclic-codes-properties prende il nome di
+*polinomio generatore*.
+
 #example[
 	Sia $R_(3) = Z_(2)[t] slash t^(3) − 1$, e sia $C = 1 + t^(2)$ un codice
-	ciclico.
-// Le parole di C sono
-// 0, 1 + t2, (1 + t2 )t = t + t3 = t + 1, (1 + t2)t2 = (1 + t)t = t + t2 .
-// Nella notazione usuale con le n-ple le parole di C sono 000, 101, 110 e 011.
+	ciclico. Le parole di $C$ sono:
+
+	$ mat(
+		a(t) &= 0 => 000;
+		a(t) &= 1 + t^(2) => 101;
+		a(t) &= (1 + t^(2))t = t + t^(3) = t + 1 => 110;
+		a(t) &= (1 + t^(2))t^(2) = (1 + t)t = t + t^(2) => 011) $
+
+	Risulta $C = angle.l 1 + t angle.r = angle.l 1 + t^(2) angle.r
+	= angle.l t + t^(2) angle.r$. Il polinomio generatore di $C$ è
+	$p(t) = 1 + t$, che è anche l'unico che divide $t^(3) − 1 =
+	(t − 1)(t^(2) + t + 1) = (t + 1)(t^(2) + t + 1)$ in $ZZ_(2)[t]$.
+]
+
+Il @Cyclic-codes-properties stabilisce che i codici ciclici in $R_(n)$
+sono in corrispondenza biunivoca con i divisori monici del polinomio
+$t^(n) − 1$. Pertanto, trovare i codici ciclici di $R_(n)$ consiste
+nel trovare i divisori monici di $t^(n) − 1$ in $ZZ_(p) [t]$, che
+corrisponde al trovare la fattorizzazione in polinomi primi di $t^(n) − 1$
+in $ZZ_(p) [t]$.
+
+#example[
+	La fattorizzazione in primi di $t^(3) − 1$ in $ZZ_(2) [t]$ è $t^(3) − 1
+	= (t + 1)(t^(2) + t + 1)$. I codici ciclici di $R_(3)$ sono allora:
+
+	#align(
+		center,
+		table(
+			columns: (auto, auto, auto),
+			align: center,
+			[polinomio generatore $p(t)$],
+			[codice in $R_(3) = ZZ_(2) [t] slash t^(3) − 1$],
+			[codice corrispondente in $ZZ_(2)^(3)$],
+			$1$, $R_(n)$, $ZZ_(2)^(3)$,
+			$t + 1$, ${0, 1 + t, t + t^(2), 1 + t^(2)}$, ${000, 110, 011, 101}$,
+			$t^(2) + t + 1$, ${0, 1 + t + t^(2)}$, ${000, 111}$
+		)
+	)
+]
+
+#theorem[
+	Sia $C$ un codice ciclico con polinomio generatore $p(t) = p_(0) +
+	p_(1) t + dots + p_(r − 1) t^(r − 1) + t^(r)$ di grado $r$. Allora
+	$C$ ha dimensione $k = n − r$. Inoltre, una matrice generatrice per
+	$C$ è la matrice:
+
+	$ G = mat(p_(0), p_(1), p_(2), dots, p_(r − 1), 1, 0, 0, dots, dots, 0;
+			  0, p_(0), p_(1), p_(2), dots, p_(r − 1), 1, 0, dots, dots, 0;
+			  0, 0, p_(0), p_(1), p_(2), dots, p_(r − 1), 1, 0, dots, 0;
+			  dots.v, dots.down, dots.down, dots.down, dots.down, dots.down,
+			  dots, dots.down, dots.down, dots, dots.v;
+			  0, dots, dots, 0, p_(0), p_(1), p_(2), dots, p_(r − 1), 1, 0;
+			  0, 0, dots, dots, 0, p_(0), p_(1), p_(2), dots, p_(r − 1), 1) $
+]
+
+#example[
+	Il codice ciclico $C$ in $R_(8) = ZZ_(3) [t] slash t^(8) −1$ con
+	polinomio generatore $p(t) = t^(3) + t − 1$ ha per matrice generatrice:
+
+	$ G = mat(−1, 1, 0, 1, 0, 0, 0, 0;
+			  0, −1, 1, 0, 1, 0, 0, 0;
+			  0, 0, −1, 1, 0, 1, 0, 0;
+			  0, 0, 0, −1, 1, 0, 1, 0;
+			  0, 0, 0, 0, −1, 1, 0, 1) $
 ]
