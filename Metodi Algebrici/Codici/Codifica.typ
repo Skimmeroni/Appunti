@@ -12,10 +12,7 @@ ZZ_(p)^(k)$ associata. Si noti come debba venire anche messa in
 conto la possibilitá che si siano verificati degli errori durante
 la trasmissione, pertanto per determinare quale sia la parola in
 $C$ associata ad $m$ non basta svolgere il prodotto matriciale
-all'inverso.
-
-Si costruisca pertanto una matrice di conversione operando il
-seguente algoritmo:
+all'inverso. Si costruisca pertanto una matrice come segue:
 
 #line(length: 100%)
 + Si inizializzi una matrice (vuota) $Sigma = (sigma_(i,j))$;
@@ -34,10 +31,8 @@ seguente algoritmo:
   e l'algoritmo riprende dal punto 5, altrimenti termina.
 #line(length: 100%)
 
-La matrice $Sigma$ è costruita in modo tale che ogni parola di $ZZ_(p)^(n)$
-compaia una e una sola volta in una riga di $Sigma$. Quando viene ricevuta
-la parola $y in ZZ_(p)^(n)$, tale parola viene corretta con la parola di $C$
-che in $Sigma$ appartiene alla stessa colonna di $y$.
+Quando viene ricevuta la parola $y in ZZ_(p)^(n)$, tale parola viene corretta
+con la parola di $C$ che in $Sigma$ appartiene alla stessa colonna di $y$.
 
 #example[
 	Sia $C in ZZ_(2)^(4) = {0000, 1110, 1011, 0101}$ un codice, e sia
@@ -78,8 +73,8 @@ che in $Sigma$ appartiene alla stessa colonna di $y$.
 	  0100 + 1110 = 1010
 	) $
 
-	Si ha poi $Delta := Delta - {1000, 0011, 1101, 0110} =
-	{0010, 1001, 1100, 0111}$
+	Si ha poi $Delta := Delta - {0100, 1111, 0001, 1010} =
+	{0010, 1001, 0111, 1100}$
 
 	Per quanto riguarda la quarta riga, si osservi come la parola in
 	$Delta$ con distanza minima é $0010$. Si ha quindi che le parole
@@ -92,10 +87,8 @@ che in $Sigma$ appartiene alla stessa colonna di $y$.
 	  0010 + 1110 = 1100
 	) $
 
-	Si ha poi $Delta := Delta - {0010, 1001, 1100, 0111} = {}$.
-
-	Essendo $Delta$ l'insieme vuoto, l'algoritmo termina. La matrice
-	risultante é:
+	Si ha poi $Delta := Delta - {0010, 1001, 1100, 0111} = {}$, e
+	l'algoritmo termina. La matrice risultante é:
 
 	#set math.mat(column-gap: 1em)
 	$ mat(

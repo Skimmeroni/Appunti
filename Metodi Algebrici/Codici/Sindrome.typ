@@ -155,7 +155,6 @@ Riassumendo, la decodifica mediante codici $1$-correttori avviene come segue:
 		  1 dot 0 + 0 dot 0 + 0 dot 1 + 1 dot 2 + 0 dot 0)^(t) =
 	  mat(0, 0, 2) = 2 mat(0, 0, 1) $
 
-	L'errore é quindi nella terza componente. $y$ viene quindi corretto come:
-
-	$ y − e = mat(1, 0, 0, 1, 0) − mat(0, 0, 2, 0, 0) = mat(1, 0, 1, 1, 0) $
+	L'errore é quindi nella terza componente. $y$ viene quindi corretto come
+	$y − e = 10010 − 00200 = 10110$.
 ]

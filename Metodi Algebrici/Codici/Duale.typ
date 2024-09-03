@@ -1,16 +1,15 @@
 #import "../Metodi_defs.typ": *
 
-Sia $C$ un codice in $ZZ_(p)^(n)$ di dimensione $k$. L'insieme di tutti i
-vettori in $ZZ_(p)^(n)$ che sono ortogonali ad ogni vettore di $C$, ovvero:
+Sia $C$ un codice in $ZZ_(p)^(n)$ di dimensione $k$. L'insieme $C^(perp)
+subset.eq ZZ_(p)^(n)$ che contiene tutti i vettori ortogonali ad ogni
+vettore di $C$ si dice *codice duale* di $C$. In particolare, se $C =
+C^(perp)$, il codice$C$ si dice *autoduale*.
 
 $ C^(perp) = {x in ZZ_(p)^(n) : x dot c = 0, space forall c in C} $
 
-Si dice *codice duale* di $C$. In particolare, se $C = C^(perp)$, il codice
-$C$ si dice *autoduale*.
-
 #example[
 	Sia $C in ZZ_(2)^(4) = {0000, 1110, 1011, 0101}$ un codice. Si voglia
-	costruire il codice autoduale:
+	costruire il codice duale:
 
 	$ C^(perp) =
 	  cases(

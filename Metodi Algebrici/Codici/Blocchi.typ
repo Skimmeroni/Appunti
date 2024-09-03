@@ -14,8 +14,7 @@ sottoinsieme non vuoto $C$ di $A_(q)^(n)$. In particolare:
 
 La notazione matematica per le $n$-uple ordinate sarebbe $(x_(1), x_(2),
 ..., x_(n))$, ma per semplicitá verranno omesse sia le parentesi, sia le
-virgole. Inoltre, spesso si ha $A_(q) = {0, 1}$, perché l'interesse
-della trasmissione dei segnali é prettamente informatico.
+virgole.
 
 #example[
 	Si consideri l'alfabeto $A_(q) = {0, 1}$. Il codice $C$ sull'alfabeto
@@ -53,14 +52,14 @@ questo contesto é la *distanza di Hamming*:
 $ d: A_(q)^(n) times A_(q)^(n) |-> RR, space
   d(p, p') = |{i: x_(i) != y_(i)}| $
 
-Ovvero, la distanza di Hamming é pari al numero di simboli delle due
-parole nella stessa posizione che differiscono (a prescindere da quali
-siano i simboli in questione). Dato che in questo contesto verrá sempre
-usata la distanza di Hamming come forma di distanza, si sottointenderá
-con il solo termine "distanza" la distanza di Hamming.
+Ovvero, la distanza di Hamming é pari al numero di simboli (quali che
+siano) delle due parole nella stessa posizione che differiscono. Dato
+che in questo contesto verrá sempre usata la distanza di Hamming come
+forma di distanza, si sottointenderá con il solo termine "distanza"
+la distanza di Hamming.
 
-Essendo una distanza, la distanza di Hamming gode, per qualsiasi parola
-sull'alfabeto $A_(q)$, delle seguenti quattro proprietá:
+La distanza (di Hamming) gode, per qualsiasi parola sull'alfabeto
+$A_(q)$, delle seguenti proprietá:
 
 + $d(p, p') = d(p', p)$;
 + $d(p, p') = 0$ se e soltanto se $p = p'$;
@@ -104,15 +103,6 @@ da $w$, cioè se e soltanto se esiste una ed una sola $x in C$ tale per
 cui $d(x, w) = min{d(y, w) : y in C}$. In tal caso, $w$ viene corretta
 con $x$.
 
-Si noti come non sia garantito che la correzione del codice restituisca
-la parola che é stata effettivamente inviata. Infatti, la parola ricevuta
-viene corretta (se necessario) con la parola che meno dista da questa, ma
-se il canale di comunicazione é particolarmente rumoroso la parola ricevuta
-potrebbe differire profondamente da quella originale, e molto piú simile
-ad una parola diversa. Inoltre, non é nemmeno garantito che la parola del
-codice con minima distanza da quella ricevuta sia sempre una sola, perché
-potrebbero esistere piú parole con la medesima distanza minima.
-
 #example[
 	Sia $C = {000000, 111111, 222222}$ un codice di lunghezza $6$
 	sull'alfabeto $A_(3) = {0, 1, 2}$. Si supponga che Alice invii
@@ -136,20 +126,20 @@ potrebbero esistere piú parole con la medesima distanza minima.
 	  $ d(000000, 000111) = 3, d(111111, 000111) = 3, d(222222, 000111) = 6 $
 
 	  Bob non é in grado di correggere la parola ricevuta, perché esistono
-	  piú parole con la stessa distanza da questa.
+	  piú parole con la stessa distanza.
 ]
 
-Un codice $C subset.eq A_(q)^(n)$ si dice $k$-*rivelatore* se $k$ è il numero
+Un codice $C subset.eq A_(q)^(n)$ si dice $h$-*rivelatore* se $h$ è il numero
 massimo di errori che è in grado di rivelare.
 
 #theorem[
-	Un codice $C subset.eq A_(q)^(n)$ è $k$-rivelatore se e soltanto se
-	$d(C) = k + 1$.
+	Sia $k = d(C) - 1$. Ogni codice $C subset.eq A_(q)^(n)$ è $k$-rivelatore.
 ]
 #proof[
-	Si supponga che $d(C) = k + 1$. Sia $p$ la parola inviata, e sia $p'$
-	la parola ricevuta. Sia poi $t$ il numero di errori subiti da $p$ durante
-	la trasmissione, ovvero $d(p, p') = t$. Si distinguono due casi:
+	Sia $p$ la parola inviata, e sia $p'$ la parola ricevuta. Sia poi $t$ il
+	numero di errori subiti da $p$ durante la trasmissione, ovvero $d(p, p')
+	= t$. Si distinguono due casi:
+
 	- $t < k$. Allora $d(p, p') = t < k < k + 1 = d(C) = min{d(w, w') : w,
 	  w' in C, w != w'}$. Questo significa che $p' in.not C$, e che quindi
 	  i $t$ errori vengono rivelati. Essendo $t < k$, a maggior ragione i
@@ -165,11 +155,11 @@ massimo di errori che è in grado di rivelare.
 	C$ distinta da $p$ deve differire da questa in almeno $k + 1$ componenti,
 	pertanto si ha $d(C) gt.eq k + 1$. Inoltre, poichè $C$ rivela $k$ errori
 	ma non $k + 1$, devono esistere due parole $w, w' in C$ tali per cui
-	$d(w, w') = k + 1$. Ne consegue che $d(C) = k + 1$.
+	$d(w, w') = k + 1$. Ne consegue che $d(C) - 1 = k$.
 ]
 
 #corollary[
-	Un codice $C subset.eq A_(q)^(n)$ rivela $t$ errori se e solo se
+	Un codice $C subset.eq A_(q)^(n)$ rivela $t$ errori se e soltanto se
 	$d(C) gt.eq t + 1$.
 ]
 #proof[
@@ -183,35 +173,32 @@ Un codice $C subset.eq A_(q)^(n)$ si dice $h$-*correttore* se $h$ è il numero
 massimo di errori che è in grado di correggere.
 
 #theorem[
-	Ogni codice $C subset.eq A_(q)^(n)$ é
-	$floor(frac(d(C) - 1, 2))$-correttore.
+	Sia $k = floor(frac(d(C) - 1, 2))$. Ogni codice $C subset.eq A_(q)^(n)$ é
+	$k$-correttore.
 ] <Min-distance-is-correcting>
 #proof[
 	Siano $p, p' in C$ rispettivamente la parola trasmessa e la
 	parola ricevuta, con $t$ numero di errori subiti da $p$ durante
-	la trasmissione. Si supponga poi $t lt.eq floor(frac(d(C) - 1, 2))$.
-	Affinché $C$ sia $floor(frac(d(C) - 1, 2))$-correttore, la parola
-	$p$ che viene scelta come correzione per $p'$ deve essere l'unica
-	e sola parola in $C$ che dista da $p'$ meno di tutte. In altre
-	parole, qualsiasi parola $p''$ distinta da $p$ dev'essere piú
-	distante da $p'$ di quanto $p'$ disti da $p$. Formalmente:
+	la trasmissione. Si supponga poi $t lt.eq k$. Affinché $C$ sia
+	$k$-correttore, la parola $p$ che viene scelta come correzione
+	per $p'$ deve essere l'unica e sola parola in $C$ che dista da
+	$p'$ meno di tutte. In altre parole, qualsiasi parola $p''$
+	distinta da $p$ dev'essere piú distante da $p'$ di quanto $p'$
+	disti da $p$. Formalmente:
 
-	$ forall p'' in C, p'' != p space "si ha" space
-	  d(p'', p') > d(p, p') = t $
+	$ forall p'' in C, p'' != p space "si ha" space d(p'', p') >
+	  d(p, p') = t $
 
-	Avendo supposto $t lt.eq floor(frac(d(C) - 1, 2))$, questo equivale
-	a dimostrare che:
+	Avendo supposto $t lt.eq k$, questo equivale a dimostrare che:
 
-	$ forall p'' in C, p'' != p space "si ha" space
-	  d(p'', p') > floor(frac(d(C) - 1, 2)) $
+	$ forall p'' in C, p'' != p space "si ha" space d(p'', p') > k $
 
-	Si supponga per assurdo che questo non sia vero, e che esista quindi
-	una parola $p''' in C$ distinta da $p$ tale per cui $d(p''', p') lt.eq
-	floor(frac(d(C) - 1, 2))$. Applicando la disuguaglianza triangolare,
+	Si supponga per assurdo che questo non sia vero, e che esista
+	quindi una parola $p''' in C$ distinta da $p$ tale per cui
+	$d(p''', p') lt.eq k$. Applicando la disuguaglianza triangolare,
 	si ha:
 
-	$ d(p''', p) lt.eq d(p''', p') + d(p', p) lt.eq
-	  floor(frac(d(C) - 1, 2)) + floor(frac(d(C) - 1, 2)) =
+	$ d(p''', p) lt.eq d(p''', p') + d(p', p) lt.eq k + k = 2k =
 	  2floor(frac(d(C) - 1, 2)) $
 
 	Per definizione di arrotondamento per difetto, $floor(a) =
@@ -228,7 +215,7 @@ massimo di errori che è in grado di correggere.
 ]
 
 #corollary[
-	Un codice $C subset.eq A_(q)^(n)$ corregge $t$ errori se e solo se
+	Un codice $C subset.eq A_(q)^(n)$ corregge $t$ errori se e soltanto se
 	$d(C) gt.eq 2 t + 1$.
 ]
 // #proof[

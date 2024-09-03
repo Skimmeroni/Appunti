@@ -1,7 +1,7 @@
 #import "../Metodi_defs.typ": *
 
-Un codice lineare $C in ZZ_(p)^(n)$ si dice ciclico se per ogni parola
-di $C$ esiste in $C$ ogni sua possibile permutazione ciclica.
+Un codice lineare $C in ZZ_(p)^(n)$ si dice *codice ciclico* se per ogni
+parola di $C$ esiste in $C$ ogni sua possibile permutazione ciclica.
 
 #example[
 	- Si consideri il codice lineare $C = {000, 011, 101, 110} subset.eq
@@ -15,21 +15,29 @@ di $C$ esiste in $C$ ogni sua possibile permutazione ciclica.
 		  [$ angle.l 101 angle.r = {101, 110, 011} $],
 		  [$ angle.l 110 angle.r = {110, 011, 101} $])
 
-	  Dato che ogni permutazione ciclica di ogni parola di $C$ é a sua volta
-	  membro di $C$, si ha che $C$ è un codice ciclico.
+	  Dato che ogni permutazione ciclica di ogni parola di $C$ é membro di $C$
+	  a sua volta, $C$ è un codice ciclico.
 	- Si consideri il codice lineare $C = {0000, 0110, 1001, 1111} subset.eq
 	  ZZ_(2)^(4)$. Si osservi come, ad esempio, $angle.l 0110 angle.r = {0110,
 	  0011, 1001, 1100}$, ma $1100 in.not C$. Pertanto, $C$ non è un codice
 	  ciclico.
 ]
 
-É possibile vedere le componenti di ciascun elemento di $ZZ_(p)^(n)$ come i
-coefficienti di un polinomio. Ovvero, all'elemento $(a_(0), dots, a_(n − 1))
-in ZZ_(p)^(n)$ é associabile il polinomio:
+É possibile manipolare i codici ciclici in maniera piú semplice sfruttando
+le proprietá dei polinomi. Si noti infatti come ad ogni parola in $ZZ_(p)^(n)$
+sia associabile un polinomio a coefficienti in $ZZ_(p)$ nell'incognita $t$, e
+viceversa. In particolare:
 
-$ a(t) = a_(0) + a_(1) t + dots + a_(n − 1) t^(n − 1) in ZZ_(p) [t] $
+$ (a_(0), dots, a_(n − 1)) in ZZ_(p)^(n) <==>
+  a_(0) + a_(1) t + dots + a_(n − 1) t^(n − 1) in ZZ_(p) [t] $
 
-Nell'anello dei polinomi a coefficienti in $ZZ_(p)$ nell'incognita $t$.
+#example[
+	- Alla parola $10022 in ZZ_(3)^(5)$ é associabile il polinomio
+	  $1 + 2t^(3) + 2t^(4)$ a coefficienti in $ZZ_(3)$;
+	- Al polinomio $t + t^(2) + t^(4)$ a coefficienti in $ZZ_(2)$
+	  é associabile la parola $01101 in ZZ_(2)^(5)$.
+]
+
 É poi possibile definire un insieme quoziente come $R_(n) = ZZ_(p) [t]
 slash t^(n − 1)$. La struttura algebrica $(R_(n), +, dot)$ forma un
 anello, ma non un campo, perché $t^(n - 1)$ é un polinomio riducibile.
@@ -60,7 +68,7 @@ $ a_(0) a_(1) dots a_(n − 1) |-> a_(0) + a_(1) t + dots + a_(n − 1) t^(n −
 
 	+ Per ogni $a(t), b(t) in C$, vale $a(t) + b(t) in C$;
 	+ Per ogni $a(t) in C$ e per ogni $r(t) in R_(n)$, vale $a(t) r(t) in C$.
-]
+] <Is-a-cyclic-code>
 #proof[
 	Si assuma che $C$ sia un codice ciclico. Essendo $C$ un codice lineare,
 	è un sottospazio di $R_(n)$. Segue quindi dalla definizione di spazio
@@ -93,4 +101,34 @@ $ a_(0) a_(1) dots a_(n − 1) |-> a_(0) + a_(1) t + dots + a_(n − 1) t^(n −
 	condizione scegliendo $r(t) = t$, si ha $a(t)t = a_(n − 1) + a_(0) t +
 	a_(1) t^(2) + dots + a_(n − 2) t^(n − 1) in C$. Segue che $C$ è un codice
 	ciclico.
+]
+
+Per $f(t) in R_(n)$ é possibile definire $angle.l f(t) angle.r =
+{f(t) r(t) : r(t) in R_(n)}$.
+
+#lemma[
+	Sia $f(t) in R_(n)$. L'insieme $angle.l f(t) angle.r$ è un codice ciclico.
+]
+#proof[
+	Affinché $angle.l f(t) angle.r$ sia un codice ciclico, é necessario che
+	rispetti le due condizioni presentate nel @Is-a-cyclic-code:
+
+	- Per ogni $f(t) r_(1)(t)$ e $f(t) r_(2)(t)$ in $angle.l f(t)
+	  angle.r$ si ha $f(t) r_(1)(t) + f(t) r_(2)(t) = f(t)(r_(1)(t) +
+	  r_(2)(t))$. Essendo $(R_(n), +, dot)$ un anello, é chiuso rispetto
+	  alla somma, pertanto $r_(1)(t) + r_(2)(t) in R_(n)$. Di conseguenza,
+	  $f(t) (r_(1)(t) + r_(2)(t)) in angle.l f(t) angle.r$;
+	- Per ogni $f(t) r_(1)(t) in angle.l f(t) angle.r$ e per ogni $r_(2)(t)
+	  in R_(n)$ si ha $(f(t) r_(1)(t)) dot r_(2)(t) = f(t) r_(1)(t) r_(2)(t)$.
+	  Essendo $(R_(n), +, dot)$ un anello, é chiuso rispetto al prodotto,
+	  pertanto $r_(1)(t) r_(2)(t) in R_(n)$. Di conseguenza, $f(t) r_(1)(t)
+	  r_(2)(t) in angle.l f(t) angle.r$.
+]
+
+#example[
+	Sia $R_(3) = Z_(2)[t] slash t^(3) − 1$, e sia $C = 1 + t^(2)$ un codice
+	ciclico.
+// Le parole di C sono
+// 0, 1 + t2, (1 + t2 )t = t + t3 = t + 1, (1 + t2)t2 = (1 + t)t = t + t2 .
+// Nella notazione usuale con le n-ple le parole di C sono 000, 101, 110 e 011.
 ]

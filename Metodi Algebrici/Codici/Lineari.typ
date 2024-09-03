@@ -74,7 +74,7 @@ Un qualsiasi sottospazio vettoriale di $ZZ_(p)^(n)$ viene detto
 			1(10111) + 1(11110) = (01001)
 		) $]
 	)
-]
+] <Subspace>
 
 #lemma[
 	Sia $C subset.eq ZZ_(p)^(n)$ un codice lineare di dimensione $k$.
@@ -91,6 +91,11 @@ Un qualsiasi sottospazio vettoriale di $ZZ_(p)^(n)$ viene detto
 	Essendo i $lambda_(i)$ esattamente $p$ e dovendone scegliere $k$ per
 	generare ciascun vettore, anche ripetuti, il numero totale di vettori
 	di $C$ é $p^(k)$.
+]
+
+#example[
+	Il codice $C$ dell'@Subspace ha dimensione $abs(B) = 2$, ed é un
+	sottoinsieme di $ZZ_(2)^(5)$. Correttamente, $abs(C) = 2^(2) = 4$.
 ]
 
 #lemma[
@@ -229,16 +234,25 @@ $
 		1 dot 0 + 0 dot 0 + 1 dot 1;
 		1 dot 0 + 0 dot 1 + 1 dot 0;
 		1 dot 1 + 0 dot 0 + 1 dot 1;
-	  )
-	  =
-	  mat(
-		1 + 0 + 1;
-		0 + 0 + 1;
-		0 + 0 + 1;
-		0 + 0 + 0;
-		1 + 0 + 1;
-	  )
-	  = mat(2; 1; 1; 0; 2)
-	  = mat(0; 1; 1; 0; 0) in C
+	  )^(t)
+	  = mat(0, 1, 1, 0, 0) in C
 	$
+
+	É poi possibile ricavare il codice $C$ associato osservando come:
+
+	$ mat(x, y, z)
+	  mat(1, 0, 0, 0, 1;
+		  1, 1, 0, 1, 0;
+		  1, 1, 1, 0, 1) =
+	  mat(x dot 1 + y dot 1 + z dot 1;
+		  x dot 0 + y dot 1 + z dot 1;
+		  x dot 0 + y dot 0 + z dot 1;
+		  x dot 0 + y dot 1 + z dot 0;
+		  x dot 1 + y dot 0 + z dot 1)^(t) =
+	  mat(x + y + z, y + z, z, y, x + z) $
+
+	Essendo $x, y, z in ZZ_(2)$, é possibile elencare gli elementi
+	di $C$ esplicitamente:
+
+	$ C = {00000, 10001, 11010, 11101, 01011, 01100, 00111, 10110} $
 ]
