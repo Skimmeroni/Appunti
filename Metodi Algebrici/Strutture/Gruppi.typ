@@ -23,54 +23,43 @@ abeliano*.
 	  anche un gruppo, in quanto il prodotto fra matrici ammette inverso
 	  nella forma della matrice inversa (che esiste per tutte le matrici
 	  che hanno il determinante non nullo, pertanto ogni matrice in
-	  $"GL"(n, RR)$ ha per definizione una inversa). Il gruppo $("GL"(n,
-	  RR), dot)$ prende il nome di *gruppo lineare generale*.
+	  $"GL"(n, RR)$ ha per definizione una inversa). In particolare,
+	  il gruppo $("GL"(n, RR), dot)$ prende il nome di *gruppo lineare
+	  generale*.
 ]
 
-Per comoditá, verranno fatte delle semplificazioni di notazione. Se non
-riportato diversamente:
-
-- Se ci si sta riferendo ad un gruppo ed é noto dal contesto quale sia
-  l'operazione che figura nel gruppo, ci si riferirá al gruppo solo con
-  il suo insieme sostegno. In altre parole, se $(G, *)$ é un gruppo ed
-  é noto dal contesto che l'operazione a cui ci si riferisce é $*$, si
-  indicherá con il solo $G$ la coppia $(G, *)$;
-- Quando l'operazione $*$ é nota dal contesto, per indicare $x * y$
-  (con $x$ e $y$ membri dell'insieme su cui $*$ é definita) verrá usata
-  la notazione abbreviata $x y$;
-- Se é noto dal contesto a quale gruppo e a quale operazione ci si sta
-  riferendo, l'elemento neutro di tale gruppo per tale operazione viene
-  indicato con $1$.
+Quando l'operazione $*$ é nota dal contesto, per indicare $x * y$
+(con $x$ e $y$ membri dell'insieme su cui $*$ é definita) verrá usata
+la notazione abbreviata $x y$;
 
 #lemma[
-	Sia $(G, diamond.small)$ un gruppo. Per qualsiasi $x, y, z in G$, vale:
+	Sia $(G, *)$ un gruppo. Per qualsiasi $x, y, z in G$, vale:
 
 	- Unicitá dell'inverso:
-	  $exists! x^(-1) : x diamond.small x^(-1) = 1$;
+	  $exists! x^(-1) : x * x^(-1) = 1$;
 	- Unicitá dell'elemento neutro:
-	  $exists! 1 : x diamond.small 1 = x$;
+	  $exists! 1_(G) : x * 1_(G) = x$;
 	- Legge di cancellazione (a destra):
-	  $x diamond.small y = x diamond.small z => y = z$;
+	  $x * y = x * z => y = z$;
 	- Legge di cancellazione (a sinistra):
-	  $y diamond.small x = z diamond.small x => y = z$.
+	  $y * x = z * x => y = z$.
 ]
 
-Dato un gruppo $G$, la struttura algebrica $(H, diamond.small)$ si
-dice *sottogruppo* di $G$ se $H$ é un sottoinsieme (anche improprio)
-di $G$ e se la coppia $(H, diamond.small)$ forma a sua volta un gruppo.
-In altre parole, $H = (H, diamond.small)$ é un sottogruppo di $G =
-(G, diamond.small)$ se:
+Dato un gruppo $(G, *)$, la struttura algebrica $(H, *)$ si dice
+*sottogruppo* di $(G, *)$ se $H$ é un sottoinsieme (anche improprio)
+di $G$ e se $(H, *)$ é a sua volta un gruppo. In altre parole, $(H, *)$
+é un sottogruppo di $(G, *)$ se:
 
-- L'elemento neutro di $G$ appartiene ad $H$;
-- L'insieme $H$ é _chiuso_ rispetto all'operazione $diamond.small$,
-  ovvero $forall h, k in H$ si ha $h diamond.small k in H$;
-- $forall h in H$, l'inverso $overline(h)$ di $h$ é a sua volta
+- L'elemento neutro di $(G, *)$ appartiene ad $H$;
+- L'insieme $H$ é _chiuso_ rispetto all'operazione $*$,
+  ovvero $forall h, k in H$ si ha $h * k in H$;
+- $forall h in H$, l'inverso $h^(-1)$ di $h$ é a sua volta
   membro di $H$.
 
-Per indicare che $H$ é un sottogruppo di $G$ si usa la notazione
-$H lt.eq G$. Se $H$ é un sottogruppo di $G$ ed é distinto da $G$
-si dice che $H$ é un *sottogruppo proprio* di $G$, e si indica
-con $H < G$.
+Per indicare che $(H, *)$ é un sottogruppo di $(G, *)$ si usa la notazione
+$(H, *) lt.eq (G, *)$. Se $(H, *)$ é un sottogruppo di $(G, *)$ e $H != G$,
+si dice che $(H, *)$ é un *sottogruppo proprio* di $(G, *)$, e si indica
+con $(H, *) < (G, *)$.
 
 Si noti come le notazioni $<$ e $lt.eq$ non hanno nulla a che vedere
 con le relazioni d'ordine "minore" e "minore o uguale" rispetto ai
@@ -94,48 +83,45 @@ il sottogruppo dell'altro pur avendo la stessa cardinalitá.
 	determinante é una funzione moltiplicativa e quindi $det(A B) =
 	det(A) det(B) = 1 dot 1 = 1$. Infine, se $A$ é una matrice con
 	determinante pari ad $1$, anche la sua inversa ha determinante
-	pari ad $1$. É possibile allora concludere che $"SL"(n, RR)$ sia
-	un sottogruppo di $"GL"(n, RR)$. Il (sotto)gruppo $("SL"(n, RR), dot)$
-	prende il nome di *gruppo lineare speciale*.
+	pari ad $1$. É possibile allora concludere che $("SL"(n, RR),
+	dot)$ sia un sottogruppo di $("GL"(n, RR), dot)$. Il (sotto)gruppo
+	$("SL"(n, RR), dot)$ prende il nome di *gruppo lineare speciale*.
 ]
 
 #lemma[
-	Sia $G = (G, diamond.small)$ un gruppo. Un sottoinsieme $H$ di $G$
-	é un sottogruppo di $G$ se e soltanto se, per ogni coppia di elementi
-	(non necessariamente distinti) $h, k in H$, vale $h diamond.small
-	overline(k) in H$.
+	Sia $(G, *)$ un gruppo. La struttura algebrica $(H, *)$ con
+	$H subset.eq G$ é un sottogruppo di $(G, *)$ se e soltanto se,
+	per ogni coppia di elementi (non necessariamente distinti) $h,
+	k in H$, vale $h * k^(-1) in H$.
 ] <Is-a-subgroup>
 #proof[
-	Se é noto che $H$ sia un sottogruppo di $G$, allora $H$ rispetta
-	certamente la proprietá richiesta. Infatti, se $(H, diamond.small)$
-	é un gruppo, allora é chiuso rispetto a $diamond.small$, e quindi
-	$forall h, k in H$ vale $h diamond.small k in H$. Inoltre, $forall
-	h in H, overline(h) in H$, pertanto $overline(k) in H$, e si ha quindi
-	$h diamond.small overline(k) in H$ per ogni $h, k in H$.
+	Se é noto che $(H, *)$ sia un sottogruppo di $(G, *)$, allora $(H, *)$
+	rispetta certamente la proprietá richiesta. Infatti, se $(H, *)$ é un
+	gruppo, allora é chiuso rispetto a $*$, e quindi $forall h, k in H$ vale
+	$h * k in H$. Inoltre, $forall h in H, h^(-1) in H$, pertanto $k^(-1) in
+	H$, e si ha quindi $h * k^(-1) in H$ per ogni $h, k in H$.
 
 	Viceversa, si supponga che $H$ sia un sottoinsieme di $G$ tale per
-	cui $forall h, k in H$ vale $h diamond.small overline(k) in H$:
+	cui $forall h, k in H$ vale $h * k^(-1) in H$:
 
-	- Se $h = k$, allora, per l'unicitá dell'inverso, $overline(h) =
-	  overline(k)$, e quindi $h diamond.small overline(h) = h diamond.small
-	  overline(k) = 1$, quindi l'elemento neutro di $(G, diamond.small)$
-	  appartiene ad $H$;
-	- Se $h = 1$ (ed é lecito, avendo appena mostrato che appartiene ad
-	  $H$), allora per un qualsiasi $k$ vale $1 diamond.small overline(k)
-	  in H$, ma $1 diamond.small overline(k) = overline(k)$ per definizione
-	  di elemento neutro. Si ha quindi che $forall h in H$, vale $overline(h)
-	  in H$;
-	- Siano $h, k in H$. Avendo appena provato che $overline(k)$
-	  appartiene ad $H$ per un qualsiasi $k in H$, vale $h diamond.small
-	  overline(overline(k)) in H$, ma $overline(overline(k)) = k$, pertanto
-	  $h diamond.small k in H$.
+	- Se $h = k$, allora, per l'unicitá dell'inverso, $h^(-1) = k^(-1)$,
+	  e quindi $h * h^(-1) = h * k^(-1) = 1_(G)$, quindi l'elemento neutro
+	  di $(G, *)$ appartiene ad $H$;
+	- Se $h = 1_(G)$ (ed é lecito, avendo appena mostrato che appartiene ad
+	  $H$), allora per un qualsiasi $k$ vale $1_(G) * k^(-1) in H$, ma $1_(G)
+	  * k^(-1) = k^(-1)$ per definizione di elemento neutro. Si ha quindi che
+	  $forall h in H$, vale $h^(-1) in H$;
+	- Siano $h, k in H$. Avendo appena provato che $k^(-1)$ appartiene
+	  ad $H$ per un qualsiasi $k in H$, vale $h * (k^(-1))^(-1) in H$,
+	  ma $(k^(-1))^(-1) = k$, pertanto $h * k in H$.
 
-	Si ha quindi che $H$ rispetta la definizione di sottogruppo,
-	pertanto $H lt.eq G$.
+	Si ha quindi che $(H, *)$ rispetta la definizione di sottogruppo,
+	pertanto $(H, *) lt.eq (G, *)$.
 ]
 
 Il @Is-a-subgroup é un possibile criterio che permette di determinare
-se, dati due gruppi $G$ ed $H$, $H$ sia un sottogruppo di $G$.
+se, dati due gruppi $(G, *)$ ed $(H, *)$, $(H, *)$ sia un sottogruppo
+di $(G, *)$.
 
 #example[
 	É stato provato nell'@Some-groups che la struttura algebrica $(ZZ, +)$
@@ -144,7 +130,7 @@ se, dati due gruppi $G$ ed $H$, $H$ sia un sottogruppo di $G$.
 	é un sottogruppo di $(ZZ, +)$. Siano infatti $a$ e $b$ due elementi di
 	$(n ZZ)$. Si ha:
 
-	$ a + overline(b) = n k_(1) + overline(n k_(2)) = n k_(1) - n k_(2) =
+	$ a + (-b) = n k_(1) + (-n k_(2)) = n k_(1) - n k_(2) =
 	n (k_(1) - k_(2)) $
 
 	Dato che $(k_(1) - k_(2)) in ZZ$, si ha $n (k_(1) - k_(2)) in n ZZ$.
@@ -154,30 +140,31 @@ se, dati due gruppi $G$ ed $H$, $H$ sia un sottogruppo di $G$.
 ] <nZ-is-subgroup-Z>
 
 #lemma[
-	Per un qualsiasi gruppo $G = (G, diamond.small)$, le strutture algebriche
-	$(G, diamond.small)$ e $({1_(G)}, diamond.small)$ sono sottogruppi di $G$.
+	Per un qualsiasi gruppo $(G, *)$, le strutture algebriche $(G, *)$ e
+	$({1_(G)}, *)$ sono sottogruppi di $(G, *)$.
 ]
 #proof[
-	- L'insieme $G$ della struttura algebrica $(G, diamond.small)$ é
-	  lo stesso insieme che figura nell'insieme $G$ del gruppo $G =
-	  (G, diamond.small)$. Pertanto, il @Is-a-subgroup é certamente
-	  verificato;
-	- L'unico elemento che figura nell'insieme ${1_(G)}$ della
-	  struttura algebrica $({1_(G)}, diamond.small)$ é precisamente
-	  $1_(G)$. A prescindere di come $diamond.small$ sia definita,
-	  si ha $overline(1)_(G) = 1_(G)$, pertanto $1_(G) diamond.small
-	  overline(1)_(G) = 1_(G) diamond.small 1_(G) = 1_(G)$. Dato che
-	  $1_(G) in {1_(G)}$, il @Is-a-subgroup é verificato.
+	- L'insieme sostegno di $(G, *)$ é lo stesso insieme che figura
+	  nell'insieme $G$ del gruppo $(G, *)$. Pertanto, il @Is-a-subgroup
+	  é certamente verificato;
+	- L'unico elemento che figura nell'insieme ${1_(G)}$ della struttura
+	  algebrica $({1_(G)}, *)$ é precisamente $1_(G)$. A prescindere di
+	  come $*$ sia definita, si ha $1_(G)^(-1) = 1_(G)$, pertanto $1_(G)
+	  * 1_(G)^(-1) = 1_(G)^(-1) * 1_(G) = 1_(G)$. Dato che $1_(G) in
+	  {1_(G)}$, il @Is-a-subgroup é verificato.
 ]
 
-Per un qualsiasi gruppo $G$, il sottogruppo $G$ viene detto
-*sottogruppo improprio*, mentre il sottogruppo ${1_(G)}$
-viene detto *sottogruppo banale*.
+Per un qualsiasi gruppo $(G, *)$, il sottogruppo $(G, *)$ viene detto
+*sottogruppo improprio*, mentre il sottogruppo $({1_(G)}, *)$ viene
+detto *sottogruppo banale*.
 
 #lemma[
-	Per qualsiasi gruppo $G$, l'intersezione di piú sottogruppi di $G$
-	é a sua volta un sottogruppo di $G$.
+	Per qualsiasi gruppo $(G, *)$, l'intersezione di piú sottogruppi di
+	$(G, *)$ é a sua volta un sottogruppo di $(G, *)$.
 ]
+// #proof[
+// Dimostrabile, da aggiungere
+// ]
 
 Siano $(G, *)$ e $(K, diamond.small)$ due gruppi. Una funzione
 $phi.alt: G |-> K$ si dice *omomorfismo* (da $G$ a $K$) se vale:
@@ -189,8 +176,9 @@ Un omomorfismo iniettivo si dice *monomorfismo*, un omomorfismo suriettivo
 si dice *epimorfismo*, un omomorfismo biettivo si dice *isomorfismo* ed un
 isomorfismo che mappa due insiemi uguali si dice *automorfismo*.
 
-Se esiste (almeno) un isomorfismo fra due gruppi $G$ e $K$, si dice che tali
-gruppi sono _isomorfi_, e si indica con $G tilde.eq K$.
+Se esiste (almeno) un isomorfismo fra due gruppi $(G, *)$ e
+$(K, diamond.small)$, si dice che tali gruppi sono _isomorfi_,
+e si indica con $(G, *) tilde.eq (K, diamond.small)$.
 
 #example[
 	- Rispetto ai gruppi $(RR^(+), dot)$ e $(RR, +)$, la funzione

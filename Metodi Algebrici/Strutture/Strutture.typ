@@ -13,6 +13,12 @@ $ * : A times A |-> A $
 	  f(a, b) = root(b, a)$ é un'operazione binaria.
 ]
 
+Le operazioni binarie possono venire generalizzate con prodotti cartesiani
+$n$-dimensionali. La funzione $*$ viene detta *operazione n-aria* su $A$ se
+ha come dominio $A^(n)$ e sé stesso come codominio:
+
+$ * : A^(n) |-> A $
+
 Sia $*$ una operazione su un insieme $a$, e siano $a, b, c in A$ tre suoi
 elementi. Si dice che $*$ gode della *proprietá associativa* se applicare
 a $c$ il risultato dell'applicazione di $*$ ad $a$ e a $b$ equivale
@@ -46,16 +52,16 @@ $ a * b = b * a $
 	  $f(b, a) = a$, pertanto $f(a, b) != f(b, a)$.
 ]
 
-Se $*$ é una operazione sull'insieme $A$, un elemento $e in A$ viene detto
-*elemento neutro* per $*$ se, per qualsiasi $a in A$, vale $e * a = a * e
-= a$. Se $*$ é una operazione sull'insieme $A$ che ammette elemento neutro
-$e$, per ciascun $a in A$ esiste un $overline(a) in A$ chiamato *inverso* di
-$a$ tale per cui $a * overline(a) = overline(a) * a = e$.
+Se $*$ é una operazione sull'insieme $A$, un elemento $1_(A) in A$ viene
+detto *elemento neutro* per $*$ se, per qualsiasi $a in A$, vale $1_(A)
+* a = a * 1_(A) = a$. Se $*$ é una operazione sull'insieme $A$ che ammette
+elemento neutro $1_(A)$, per ciascun $a in A$ esiste un $a^(-1) in A$
+chiamato *inverso* di $a$ tale per cui $a * a^(-1) = a^(-1) * a = 1_(A)$.
 
 #example[
 	L'operazione $f: ZZ times ZZ |-> ZZ, f(a, b) = a + b$ ha come
-	elemento neutro $e = 0$. Infatti, preso un $a in Z$ qualsiasi, si ha
-	$a + 0 = 0 + a = a$. L'elemento inverso di $a$ rispetto a tale operazione
+	elemento neutro $0$. Infatti, preso un $a in Z$ qualsiasi, si ha
+	$a + 0 = 0 + a = a$. L'inverso di $a$ rispetto a tale operazione
 	é $-a$, in quanto $a + (-a) = (-a) + a = 0$.
 ]
 
@@ -82,9 +88,9 @@ sull'insieme $M$ ammette elemento neutro.
 	  comunemente intesa, é un semigruppo, perché $+$ gode della proprietá
 	  associativa. É anche un monoide, perché $+$ ammette elemento neutro
 	  (il numero $0$);
-	- La coppia $(QQ, dot)$, dove $dot$ indica il prodotto sui
-	  numeri razionali comunemente inteso, é un semigruppo, perché $dot$
-	  gode della proprietá associativa. É anche un monoide, perché $dot$
+	- La coppia $(QQ, dot)$, dove $dot$ indica il prodotto sui numeri
+	  razionali comunemente inteso, é un semigruppo, perché $dot$ gode
+	  della proprietá associativa. É anche un monoide, perché $dot$
 	  ammette elemento neutro (il numero $1$).
 ] <Some-groups>
 

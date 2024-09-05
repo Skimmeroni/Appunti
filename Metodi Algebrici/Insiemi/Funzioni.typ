@@ -86,12 +86,6 @@ $ forall b in B, exists ! a in A : f(a) = b $
 	  funzione biettiva.
 ]
 
-Le operazioni binarie possono venire generalizzate con prodotti cartesiani
-$n$-dimensionali. La funzione $*$ viene detta *operazione n-aria* su $A$ se
-ha come dominio $A^(n)$ e sé stesso come codominio:
-
-$ * : A^(n) |-> A $
-
 Per un qualsiasi insieme non vuoto $A$ é possibile costruire la *funzione
 identitá* $i_(A)$ come la funzione che ad ogni elemento di $A$ associa sé
 stesso. Formalmente:
