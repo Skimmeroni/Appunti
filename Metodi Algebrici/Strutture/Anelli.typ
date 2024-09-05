@@ -1,5 +1,43 @@
 #import "../Metodi_defs.typ": *
 
+La struttura algebrica $(A, *, diamond.small)$ prende il nome di *anello*
+se sono rispettate le seguenti proprietá:
+
+- $(A, *)$ é un gruppo abeliano;
+- $(A, diamond.small)$ é un semigruppo;
+- L'operazione $diamond.small$ gode della *proprietá distributiva* rispetto
+  a $*$, ovvero:
+
+  $ a diamond.small (b * c) = (a diamond.small b) * (a diamond.small c)
+    space " e " space
+    (a * b) diamond.small c = (a diamond.small c) * (b diamond.small c)
+    space space space forall a, b in A $
+
+Se $diamond.small$ gode inoltre della proprietá commutativa, ovvero se
+$(A, diamond.small)$ é abeliano, allora si dice che $(A, *, diamond.small)$
+é un *anello commutativo*.
+
+Se $(A, diamond.small)$ é un monoide (oltre che un semigruppo), ovvero se
+esiste per $diamond.small$ un elemento neutro, $(A, *, diamond.small)$ é un
+*anello unitario*. Se non diversamente specificato, nel parlare di "anelli"
+in generale si stará sottointendendo di stare considerando anelli unitari.
+
+#example[
+	- $(ZZ, +, dot)$, $(QQ, +, dot)$ e $(ZZ_(n) , +, dot)$
+	  sono anelli commutativi;
+	- $("Mat"(2 times 2, QQ), +, ·)$ é un anello,
+	  ma non é commutativo.
+]
+
+L'anello $(A, *, diamond.small)$ prende il nome di *campo* se é commutativo,
+unitario e se $(A - {0}, diamond.small)$ é un gruppo.
+
+#example[
+	- $(QQ, +, dot)$ é un campo;
+	- $(ZZ_(n) , +, dot)$ é un campo solamente se $n$ é un numero primo;
+	- $(ZZ, +, dot)$ non é un campo.
+]
+
 #lemma[
 	Sia $(A, +, dot)$ un anello. Per ogni $a, b in A$ e per ogni $n in ZZ$,
 	si ha:

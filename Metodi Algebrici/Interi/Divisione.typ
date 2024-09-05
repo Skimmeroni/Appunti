@@ -116,7 +116,7 @@ viene indicato con $"MCD"(a, b)$.
 	  & (1), & a = b q_(1) + r_(1), & r_(1) != 0;
 	  & (2), & b = r_(1) q_(2) + r_(2), & r_(2) != 0;
 	  & (3), & r_(1) = r_(2) q_(3) + r_(3), & r_(3) != 0;
-	  & , & ..., &;
+	  & dots.v, &, &;
 	  & (k - 1), & r_(k - 3) = r_(k - 2) q_(k - 1) + r_(k - 1),
 	  & r_(k - 1) != 0;
 	  & (k), & r_(k - 2) = r_(k - 1) q_(k), &;
@@ -212,11 +212,22 @@ entrambi nulli, il loro MCD. Tale algoritmo é strutturato come segue:
 	  r_(2) = a (-q_(2)) + b (q_(1) q_(2) + 1) $
 
 	In questo modo, é possibile ciascun resto come combinazione
-	lineare intera di $a$ e di $b$. In particolare per il resto
-	$r_(k - 1)$, che é anche il massimo comun divisore di $a$ e
-	di $b$, esisteranno due valori $x$ e $y$ tali per cui é possibile
-	esprimerlo come combinazione lineare intera di $a$ e $b$, e quindi
-	$r_(k - 1) = "MCD"(a, b) = a x + b y$.
+	lineare intera di $a$ e di $b$:
+
+	#set math.mat(column-gap: 1.5em, delim: none)
+	$ mat(
+	  & (1), & a = b q_(1) + r_(1), r_(1) &= a - b q_(1);
+	  & (2), & b = r_(1) q_(2) + r_(2), r_(2) &= b - r_(1) q_(2) =
+	    a (-q_(2)) + b (q_(1) q_(2) + 1);
+	  & (3), & r_(1) = r_(2) q_(3) + r_(3), r_(3) &= r_(1) - r_(2) q_(3) =
+	    a(q_(2) q_(3) + 1) + b(-q_(1) - q_(3) - q_(1) q_(2) q_(3));
+	  & dots.v, & ;
+	) $
+
+	In particolare per il resto $r_(k - 1)$, che é anche il massimo comun
+	divisore di $a$ e di $b$, esisteranno due valori $x$ e $y$ tali per
+	cui é possibile esprimerlo come combinazione lineare intera di $a$ e
+	$b$, e quindi $r_(k - 1) = "MCD"(a, b) = a x + b y$.
 ]
 
 La dimostrazione del @Bezout fornisce implicitamente anche un algoritmo

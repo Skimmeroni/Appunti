@@ -60,9 +60,9 @@
 #pagebreak()
 
 = Strutture algebriche
-== Strutture algebriche di base
+== Semigruppi e monoidi
 #include "Strutture/Strutture.typ"
-== Proprietá dei gruppi
+== Gruppi
 #include "Strutture/Gruppi.typ"
 == Permutazioni
 #include "Strutture/Permutazioni.typ"
@@ -70,7 +70,7 @@
 #include "Strutture/Resto.typ"
 == Insiemi di generatori
 #include "Strutture/Generatori.typ"
-== Anelli
+== Anelli e campi
 #include "Strutture/Anelli.typ"
 #pagebreak()
 

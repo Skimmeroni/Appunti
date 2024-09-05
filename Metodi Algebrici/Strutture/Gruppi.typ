@@ -1,5 +1,32 @@
 #import "../Metodi_defs.typ": *
 
+Un monoide $(G, *)$ viene detto *gruppo* se l'operazione $*$ definita
+sull'insieme $G$ ammette inverso per ogni elemento di $G$. Un gruppo
+$(G, *)$ dove $*$ gode della proprietá commutativa viene detto *gruppo
+abeliano*.
+
+#example[
+	- La coppia $(QQ, dot)$ é un semigruppo ed un monoide, ma non un
+	  gruppo. Questo perché non esiste l'inverso di $0$ rispetto a
+	  $dot$ (richiederebbe di dividere per $0$, che non é possibile);
+	- La coppia $(QQ - {0}, dot)$ é, per gli stessi motivi per cui lo
+	  é $(QQ, dot)$, sia un semigruppo che un monoide. É peró anche un
+	  gruppo, perché per ogni $a in QQ$ esiste sempre un $frac(1, a) in
+	  QQ$ tale per cui $a dot frac(1, a) = frac(1, a) dot a = 1$;
+	- Sia $"GL"(n, RR) = {A in "Mat"(n, RR): det(A) != 0}$ l'insieme che
+	  contiene tutte le matrici quadrate di dimensione $n$ che hanno il
+	  determinante non nullo. La struttura algebrica $("GL"(n, RR), dot)$,
+	  dove $dot$ indica l'operazione di prodotto fra matrici, forma un
+	  semigruppo, in quanto il prodotto fra matrici gode della proprietá
+	  associativa. É inoltre un monoide, in quanto il prodotto fra matrici
+	  ammette elemento neutro nella forma della matrice identitá. É infine
+	  anche un gruppo, in quanto il prodotto fra matrici ammette inverso
+	  nella forma della matrice inversa (che esiste per tutte le matrici
+	  che hanno il determinante non nullo, pertanto ogni matrice in
+	  $"GL"(n, RR)$ ha per definizione una inversa). Il gruppo $("GL"(n,
+	  RR), dot)$ prende il nome di *gruppo lineare generale*.
+]
+
 Per comoditá, verranno fatte delle semplificazioni di notazione. Se non
 riportato diversamente:
 

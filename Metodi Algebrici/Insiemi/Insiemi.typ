@@ -1,18 +1,16 @@
-Sia $NN$ un insieme non vuoto, in cui si fissa un elemento detto _zero_,
-indicato con 0, ed una funzione $+$ da $NN$ in $NN$. Indicata con $a^(+)$
-l'immagine di $a$ tramite $+$ al variare di $a in NN$, si dice che $a^(+)$
-é _elemento successivo_, o _successore_, di $a$. Si assuma che per l'insieme
-$NN$ valgano i seguenti assiomi, detti *Assiomi di Peano*:
+Sia $NN$ un insieme e sia $S$ una funzione. Si supponga che per $NN$ ed $S$
+siano rispettati i seguenti cinque assiomi, detti *Assiomi di Peano*:
 
-+ $0 != a^(+)$ $forall a in NN$. Ovvero, non esiste alcun elemento di
-  $NN$ avente 0 come successore;
-+ La funzione $+$ é iniettiva. Ovvero, non esistono due $a_(1), a_(2) in S$
-  distinti che abbiano uno stesso $a^(+)$ come successore;
-+ Se $S subset.eq NN, 0 in S$ e $s^(+) in S$ $forall s in S$,
-  allora $S = NN$. Ovvero, se $S$ é un sottoinsieme anche
-  improprio di $NN$ che contiene (almeno) 0 e che, per ciascun
-  elemento di $S$, ne contiene anche l'immagine tramite $+$, allora
-  $S$ e $NN$ sono lo stesso insieme.
++ Esiste un elemento, chiamato $0$, che appartiene ad $NN$;
++ Per ogni elemento $n in NN$, esiste un $S(n)$ a sua volta membro di $NN$.
+  Ovvero, $NN$ é un insieme chiuso rispetto ad $S$;
++ Per ogni coppia di elementi $m, n in NN$, se vale $S(m) = S(n)$ allora
+  $m = n$. Ovvero, $S$ é una funzione iniettiva;
++ Per qualsiasi elemento $n in NN$, la proposizione $S(n) = 0$ é sempre falsa.
++ Se $T$ é un insieme che possiede le seguenti proprietá:
+  + $0$ appartiene a $T$;
+  + Per ogni elemento $t in T$, esiste un $S(t)$ a sua volta membro di $T$;
+  Allora $T$ e $NN$ sono lo stesso insieme.
 
 L'insieme $NN$ cosí definito prende il nome di *insieme dei numeri naturali*.
 

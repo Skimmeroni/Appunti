@@ -120,8 +120,24 @@ Leggendo dal basso verso l'alto, si ha $14950 = 61405_(7)$
 ]
 
 #lemma[
-	Sia $n$ un numero intero non negativo e sia $b$ una base. Il numero di
-	cifre in base $b$ necessarie a rappresentare $n$ è dato da:
+	Sia $n$ un numero intero non negativo e sia $b$ una base. Il
+	numero di cifre in base $b$ necessarie a rappresentare $n$ è
+	dato da $floor(ln(n)/ln(b)) + 1$
+]
 
-$ k + 1 = floor(log_(b) (n)) + 1 = floor(ln(n)/ln(b)) + 1 $
+Le somme e le sottrazioni fra numeri in base $n$ operano allo stesso modo
+di quelle in base $10$, l'unica accortezza sta nel fatto che il _riporto_
+massimo é $n - 1$.
+
+#example[
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ mat(space, 3, 1, 4, 2, + ;
+			   space, 3, 2, 4, 4, = ;
+			   1, 1, 4, 1, 1) $],
+		[$ mat(&4 + 2 = 1,     "con" "riporto di", 1;
+			   &4 + 4 + 1 = 4, "con" "riporto di", 1;
+			   &2 + 1 + 1 = 4, "senza riporto", ;
+			   &3 + 3 = 1,     "con" "riporto di", 1) $]
+	)
 ]
