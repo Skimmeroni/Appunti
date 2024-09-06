@@ -51,7 +51,7 @@ $ g^(n) = cases(
 // ]
 
 Dato un gruppo $(G, *)$ e scelto $g in G$ si definisce *sottogruppo
-ciclico generato da* g il sottogruppo di $G$ cosí definito:
+ciclico generato da* g il sottogruppo di $(G, *)$ cosí definito:
 
 $ (angle.l g angle.r, *) space "dove" space angle.l g angle.r =
   {g^(n): n in ZZ} $
@@ -68,7 +68,7 @@ $ (angle.l g angle.r, *) space "dove" space angle.l g angle.r =
 
 #lemma[
 	Dato un gruppo $(G, *)$ e scelto $g in G$, il sottogruppo
-	$angle.l g angle.r$ di $(G, *)$ é abeliano.
+	$(angle.l g angle.r, *)$ di $(G, *)$ é abeliano.
 ]
 
 #lemma[
@@ -87,8 +87,7 @@ $ (angle.l g angle.r, *) space "dove" space angle.l g angle.r =
 ]
 
 Un gruppo $(G, *)$ si dice *ciclico* se esiste $g in G$ tale per cui
-$angle.l g angle.r = G$, ovvero se esiste (almeno) un suo elemento
-il cui sottogruppo generato coincide con l'intero $G$.
+$angle.l g angle.r = G$.
 
 #example[
 	- Il gruppo $(ZZ, +)$ é ciclico. Infatti, $angle.l 1 angle.r
@@ -158,17 +157,17 @@ infinito, altrimenti si dice che é _di ordine_ (_di periodo_) finito.
 ]
 
 #theorem[
-	Nel gruppo simmetrico $S_(n)$, un ciclo di lunghezza r$$
-	ha ordine $r$. Piú in generale, una permutazione $f$ del
-	gruppo simmetrico $S_(n)$ che sia prodotto di $t$ cicli
-	disgiunti di lunghezza $r_(1), r_(2), dots, r_(t)$ ha per
-	ordine il minimo comune multiplo di $r_(1), r_(2), dots, r_(t)$.
+	Nel gruppo simmetrico $(S_(n), compose)$, un ciclo di lunghezza $r$
+	ha ordine $r$. Piú in generale, una permutazione $f$ del gruppo
+	simmetrico $(S_(n), compose)$ che sia prodotto di $t$ cicli disgiunti
+	di lunghezza $r_(1), r_(2), dots, r_(t)$ ha per ordine il minimo comune
+	multiplo di $r_(1), r_(2), dots, r_(t)$.
 ]
 
-Sia $(G, *)$ un gruppo e sia $S subset.eq G$. Il sottogruppo di
-$G$ che contiene $S$ e che sia contenuto in ogni sottogruppo di
-$G$ contenente $S$ prende il nome di *sottogruppo generato da*
-$S$ e si indica con $angle.l S angle.r$:
+Sia $(G, *)$ un gruppo e sia $S subset.eq G$. Il sottogruppo di $(G, *)$
+che contiene $(S, *)$ e che sia contenuto in ogni sottogruppo di $(G, *)$
+contenente $(S, *)$ prende il nome di *sottogruppo generato da* $S$ e si
+indica con $angle.l S angle.r$:
 
 $ angle.l S angle.r = sect.big_(H lt.eq G, S subset.eq H) H $
 

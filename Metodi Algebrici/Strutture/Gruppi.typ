@@ -28,10 +28,6 @@ abeliano*.
 	  generale*.
 ]
 
-Quando l'operazione $*$ é nota dal contesto, per indicare $x * y$
-(con $x$ e $y$ membri dell'insieme su cui $*$ é definita) verrá usata
-la notazione abbreviata $x y$;
-
 #lemma[
 	Sia $(G, *)$ un gruppo. Per qualsiasi $x, y, z in G$, vale:
 
@@ -298,17 +294,17 @@ $ Im(phi.alt) = {k in K: exists g in G, phi.alt(g) = k} $
 
 #lemma[
 	Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
-	$(K, diamond.small)$. Il nucleo di $phi.alt$ é un sottogruppo
-	di $(G, *)$
+	$(K, diamond.small)$. La struttura algebrica $(ker(phi.alt), *)$
+	é un sottogruppo di $(G, *)$.
 ] <Kernel-is-subgroup>
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
 
 #lemma[
-	$phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
-	$(K, diamond.small)$. L'immagine di $phi.alt$ é un sottogruppo
-	di $(K, diamond.small)$
+	Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
+	$(K, diamond.small)$. La struttura algebrica $(Im(phi.alt),
+	diamond.small)$ é un sottogruppo di $(K, diamond.small)$.
 ]
 // #proof[
 // Dimostrabile, da aggiungere
