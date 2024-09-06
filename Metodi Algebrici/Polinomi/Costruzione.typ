@@ -94,8 +94,8 @@ di somma e di prodotto come segue:
 
 #theorem[
 	Siano $K$ un campo e $g(x) in K[x]$ un polinomio fissato. Se
-	vale $diff(g(x)) > 0$, ogni elemento di $K[x] slash g(x)$ puó
-	essere scritto in maniera univoca nella forma $[r(x)]_(g(x))$,
+	vale $diff(g(x)) > 0$, ogni elemento $f(x) in K[x] slash g(x)$
+	puó essere scritto in maniera univoca nella forma $[r(x)]_(g(x))$,
 	dove $r(x)$ é il resto della divisione fra $f(x)$ e $g(x)$.
 ] <Polynomial-class-is-unique>
 #proof[

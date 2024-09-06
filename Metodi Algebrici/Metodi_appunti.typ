@@ -70,6 +70,8 @@
 #include "Strutture/Resto.typ"
 == Insiemi di generatori
 #include "Strutture/Generatori.typ"
+== Sottogruppi normali
+#include "Strutture/Normale.typ"
 == Anelli e campi
 #include "Strutture/Anelli.typ"
 #pagebreak()

@@ -1,8 +1,9 @@
 #import "../Metodi_defs.typ": *
 
-Il @Congruence-mod-is-equivalence stabilisce che la congruenza modulo
-$n$ una relazione di equivalenza su $ZZ$. Pertanto, deve essere possibile
-identificare delle classi di equivalenza per la congruenza modulo $n$.
+Il @Congruence-mod-is-equivalence stabilisce che la congruenza
+modulo $n$ é una relazione di equivalenza su $ZZ$. Pertanto,
+deve essere possibile identificare delle classi di equivalenza
+per la congruenza modulo $n$.
 
 Preso $n$ intero con $n > 0$ ed un certo $a in ZZ$, la classe di
 equivalenza di $a$ rispetto alla congruenza modulo $n$ viene indicata
@@ -11,29 +12,40 @@ b in ZZ and a equiv b mod n}$, ovvero all'insieme che contiene tutti i
 numeri interi che, divisi per $n$, restituiscono lo stesso resto della
 divisione fra $n$ e $a$.
 
-#lemma[
-	Sia $n$ un numero intero maggiore di $0$. Sia $a$ un numero intero
-	qualsiasi e sia $b$ il resto della divisione di $a$ per $n$. Vale
-	$[a]_(n) = [b]_(n)$.
-] <Residue-class-and-itself>
-#proof[
-	Se $b$ é il resto della divisione di $a$ per $n$, allora vale
-	$a = n k + b$ per un certo $k in ZZ$, da cui si ha $a - b = n k$,
-	che é la definizione di congruenza modulo $n$.
+#example[
+	$[19]_(7)$ é la classe di equivalenza per la congruenza modulo
+	$7$ che contiene tutti e soli i numeri interi che, divisi per
+	$7$, restituiscono il medesimo resto della divisione fra $19$
+	e $7$. Come da definizione di classe di equivalenza, qualsiasi
+	numero che rispetti tale caratteristica puó essere scelto come
+	rappresentante. Pertanto, $[19]_(7)$ é equivalente, ad esempio,
+	a $[-2]_(7)$, perché $19 equiv -2 mod 7$.
 ]
-
-Il @Residue-class-and-itself definisce una "forma standard" per
-rappresentare le classi di equivalenza per la congruenza modulo
-$n$.
 
 Le classi di equivalenza indotte dalla congruenza modulo $n$ vengono
 anche chiamate *classi di resto*. L'insieme quoziente di $ZZ$ rispetto
 alla relazione di congruenza modulo $n$ con $n > 0$ si dice *insieme
-delle classi di resti modulo* $n$ e si denota con $ZZ_(n)$.
+delle classi di resto modulo* $n$ e si denota con $ZZ_(n)$.
+
+#lemma[
+	Sia $n$ un numero intero. Ogni elemento $a$ della classe di resto
+	$[a]_(n)$ puó essere scritto in maniera univoca nella forma $[r]_(n)$,
+	dove $r$ é il resto della divisione fra $a$ ed $n$.
+] <Residue-class-is-unique>
+#proof[
+	Se $r$ é il resto della divisione di $a$ per $n$, allora vale
+	$a = n k + r$ per un certo $k in ZZ$, da cui si ha $a - r = n k$,
+	che é la definizione di congruenza modulo $n$.
+]
+
+Il @Residue-class-is-unique definisce una "forma standard" per
+rappresentare le classi di equivalenza per la congruenza modulo
+$n$.
 
 #theorem[
-	Per ogni numero intero $n > 0$, l'insieme delle classi di resti modulo
-	$n$ distinte ha cardinalitá $n$. In particolare, tale insieme é:
+	Per ogni numero intero $n > 0$, l'insieme quoziente $ZZ_(n)$ contiene
+	$n$ classi di resto distinte. Tali classi di resto, scritte in forma
+	standard, sono
 
 	$ ZZ_(n) = {[0]_(n), [1]_(n), ..., [n − 1]_(n)} =
 	  {{n k : k in ZZ},
@@ -91,8 +103,11 @@ Sull'insieme delle classi di resto modulo $n$ é possibile definire le
 operazioni di somma e di prodotto. Siano $[a]_(n)$ e $[b]_(n)$ due classi
 di resto modulo $n$. La somma ed il prodotto sono definiti come:
 
-$ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
-  [a]_(n) dot [b]_(n) = [a b]_(n) $
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ [a]_(n) + [b]_(n) = [a + b]_(n) $],
+	[$ [a]_(n) dot [b]_(n) = [a b]_(n) $]
+)
 
 #example[
 	in $ZZ_(5)$, si ha $[1]_(5) + [3]_(5) = [3 + 1]_(5) = [4]_(5)$ e
@@ -103,8 +118,11 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 	Sia $n in ZZ$ con $n > 0$. Siano poi $a, b, c, d in ZZ$,
 	tali per cui $[a]_(n) = [b]_(n)$ e $[c]_(n) = [d]_(n)$. Allora vale:
 
-	$ [a]_(n) + [c]_(n) = [b]_(n) + [d]_(n) space space space
-	  [a]_(n) dot [c]_(n) = [b]_(n) dot [d]_(n) $
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ [a]_(n) + [c]_(n) = [b]_(n) + [d]_(n) $],
+		[$ [a]_(n) dot [c]_(n) = [b]_(n) dot [d]_(n) $]
+	)
 ]
 #proof[
 	Poichè $[a]_(n) = [b]_(n)$ e $[c]_(n) = [d]_(n)$ si ha, per definizione
@@ -124,7 +142,11 @@ $ [a]_(n) + [b]_(n) = [a + b]_(n) space space space
 	$k + h in ZZ$ e $b h + d k + k h n in ZZ$, siano questi
 	rispettivamente $alpha$ e $beta$. Si ha:
 
-	$ (a + c) = (b + d) + n alpha space space space a c = b d + n beta $
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ (a + c) = (b + d) + n alpha $],
+		[$ a c = b d + n beta $]
+	)
 
 	Applicando nuovamente la definizione di classe di equivalenza, si ha
 	che $[a + c]_(n) = [b + d]_(n)$ e $[a c]_(n) = [b d]_(n)$. Per come
