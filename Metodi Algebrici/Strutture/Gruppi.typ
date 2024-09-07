@@ -34,7 +34,7 @@ abeliano*.
 	- Unicitá dell'inverso:
 	  $exists! x^(-1) : x * x^(-1) = 1$;
 	- Unicitá dell'elemento neutro:
-	  $exists! 1_(G) : x * 1_(G) = x$;
+	  $exists! 1_(*) : x * 1_(*) = x$;
 	- Legge di cancellazione (a destra):
 	  $x * y = x * z => y = z$;
 	- Legge di cancellazione (a sinistra):
@@ -101,10 +101,10 @@ il sottogruppo dell'altro pur avendo la stessa cardinalitá.
 	cui $forall h, k in H$ vale $h * k^(-1) in H$:
 
 	- Se $h = k$, allora, per l'unicitá dell'inverso, $h^(-1) = k^(-1)$,
-	  e quindi $h * h^(-1) = h * k^(-1) = 1_(G)$, quindi l'elemento neutro
+	  e quindi $h * h^(-1) = h * k^(-1) = 1_(*)$, quindi l'elemento neutro
 	  di $(G, *)$ appartiene ad $H$;
-	- Se $h = 1_(G)$ (ed é lecito, avendo appena mostrato che appartiene ad
-	  $H$), allora per un qualsiasi $k$ vale $1_(G) * k^(-1) in H$, ma $1_(G)
+	- Se $h = 1_(*)$ (ed é lecito, avendo appena mostrato che appartiene ad
+	  $H$), allora per un qualsiasi $k$ vale $1_(*) * k^(-1) in H$, ma $1_(*)
 	  * k^(-1) = k^(-1)$ per definizione di elemento neutro. Si ha quindi che
 	  $forall h in H$, vale $h^(-1) in H$;
 	- Siano $h, k in H$. Avendo appena provato che $k^(-1)$ appartiene
@@ -137,21 +137,21 @@ di $(G, *)$.
 
 #lemma[
 	Per un qualsiasi gruppo $(G, *)$, le strutture algebriche $(G, *)$ e
-	$({1_(G)}, *)$ sono sottogruppi di $(G, *)$.
+	$({1_(*)}, *)$ sono sottogruppi di $(G, *)$.
 ]
 #proof[
 	- L'insieme sostegno di $(G, *)$ é lo stesso insieme che figura
 	  nell'insieme $G$ del gruppo $(G, *)$. Pertanto, il @Is-a-subgroup
 	  é certamente verificato;
-	- L'unico elemento che figura nell'insieme ${1_(G)}$ della struttura
-	  algebrica $({1_(G)}, *)$ é precisamente $1_(G)$. A prescindere di
-	  come $*$ sia definita, si ha $1_(G)^(-1) = 1_(G)$, pertanto $1_(G)
-	  * 1_(G)^(-1) = 1_(G)^(-1) * 1_(G) = 1_(G)$. Dato che $1_(G) in
-	  {1_(G)}$, il @Is-a-subgroup é verificato.
+	- L'unico elemento che figura nell'insieme ${1_(*)}$ della struttura
+	  algebrica $({1_(*)}, *)$ é precisamente $1_(*)$. A prescindere di
+	  come $*$ sia definita, si ha $1_(*)^(-1) = 1_(*)$, pertanto $1_(*)
+	  * 1_(*)^(-1) = 1_(*)^(-1) * 1_(*) = 1_(*)$. Dato che $1_(*) in
+	  {1_(*)}$, il @Is-a-subgroup é verificato.
 ]
 
 Per un qualsiasi gruppo $(G, *)$, il sottogruppo $(G, *)$ viene detto
-*sottogruppo improprio*, mentre il sottogruppo $({1_(G)}, *)$ viene
+*sottogruppo improprio*, mentre il sottogruppo $({1_(*)}, *)$ viene
 detto *sottogruppo banale*.
 
 #lemma[
@@ -268,9 +268,7 @@ Sia $phi.alt: G |-> K$ un omomorfismo tra i gruppi $(G, *)$ e
 $(K, diamond.small)$. Prende il nome di *nucleo* di $phi.alt$,
 denotato con $ker(phi.alt)$, il sottoinsieme di $G$ cosí definito:
 
-$ ker(phi.alt) = {g in G: phi.alt(g) = 1_(K)} $
-
-Dove $1_(K)$ é l'elemento neutro dell'operazione $diamond.small$.
+$ ker(phi.alt) = {g in G: phi.alt(g) = 1_(diamond.small)} $
 
 Prende invece il nome di *immagine* di $phi.alt$, denotata con
 $Im(phi.alt)$, il sottoinsieme di $K$ cosí definito:

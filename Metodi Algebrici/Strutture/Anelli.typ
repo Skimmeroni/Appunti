@@ -30,7 +30,7 @@ in generale si stará sottointendendo di stare considerando anelli unitari.
 ]
 
 L'anello $(A, *, diamond.small)$ prende il nome di *campo* se é commutativo,
-unitario e se $(A - {0}, diamond.small)$ é un gruppo.
+unitario e se $(A - {1_(diamond.small)}, diamond.small)$ é un gruppo.
 
 #example[
 	- $(QQ, +, dot)$ é un campo;

@@ -52,17 +52,30 @@ $ a * b = b * a $
 	  $f(b, a) = a$, pertanto $f(a, b) != f(b, a)$.
 ]
 
-Se $*$ é una operazione sull'insieme $A$, un elemento $1_(A) in A$ viene
-detto *elemento neutro* per $*$ se, per qualsiasi $a in A$, vale $1_(A)
-* a = a * 1_(A) = a$. Se $*$ é una operazione sull'insieme $A$ che ammette
-elemento neutro $1_(A)$, per ciascun $a in A$ esiste un $a^(-1) in A$
-chiamato *inverso* di $a$ tale per cui $a * a^(-1) = a^(-1) * a = 1_(A)$.
+Se $*$ é una operazione sull'insieme $A$, un elemento $1_(*) in A$ viene
+detto *elemento neutro* per $*$ se, per qualsiasi $a in A$, vale $1_(*)
+* a = a * 1_(*) = a$.
+
+Se $*$ é una operazione sull'insieme $A$ che ammette elemento neutro $1_(*)$,
+per ciascun $a in A$ esiste un $a^(-1)_(*) in A$ chiamato *inverso* di $a$
+tale per cui $a * a^(-1)_(*) = a^(-1)_(*) * a = 1_(*)$. Quando l'operazione
+é nota dal contesto, il pedice $*$ viene omesso.
 
 #example[
 	L'operazione $f: ZZ times ZZ |-> ZZ, f(a, b) = a + b$ ha come
 	elemento neutro $0$. Infatti, preso un $a in Z$ qualsiasi, si ha
 	$a + 0 = 0 + a = a$. L'inverso di $a$ rispetto a tale operazione
 	é $-a$, in quanto $a + (-a) = (-a) + a = 0$.
+]
+
+Se $*$ é una operazione sull'insieme $A$, un elemento $0_(*) in A$ viene
+detto *elemento assorbente* per $*$ se, per qualsiasi $a in A$, vale $0_(*)
+* a = a * 0_(*) = 0_(*)$.
+
+#example[
+	L'operazione $f: QQ times QQ |-> QQ, f(a, b) = a dot b$ ha come
+	elemento assorbente $0$. Infatti, preso un $a in Z$ qualsiasi,
+	si ha $a dot 0 = 0 dot a = 0$.
 ]
 
 Sia $A$ un insieme e siano $f_(1), ..., f_(n)$ una collezione di $n$

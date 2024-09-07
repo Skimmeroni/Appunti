@@ -196,7 +196,7 @@ equivalenza puó essere considerata la "forma standard" per rappresentarle.
 	  che ogni elemento non nullo di $K[x] slash g(x)$ ammette inverso.
 
 	  Si supponga che valga $"MCD"(f(x), g(x)) = k g(x)$ con $k in
-	  K - {0_(K)}$. Se cosí fosse, si avrebbe $g(x) | f(x)$; infatti,
+	  K - {0_(dot)}$. Se cosí fosse, si avrebbe $g(x) | f(x)$; infatti,
 	  per definizione $"MCD"(f(x), g(x)) | f(x)$ ma se fosse vero che
 	  $"MCD"(f(x), g(x)) = k g(x)$ allora si avrebbe $k g(x) | f(x)$,
 	  ovvero $g(x) | f(x)$. Questo non é peró possibile, perché é

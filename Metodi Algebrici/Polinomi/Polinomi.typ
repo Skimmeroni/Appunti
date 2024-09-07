@@ -140,7 +140,7 @@ divisore* tra $a(x)$ e $b(x)$ ogni polinomio $d(x)$ in $K[x]$ tale che:
 	Siano $a(x)$ e $b(x)$ due polinomi su $K[x]$, e sia $d(x)$ un massimo
 	comun divisore fra $a(x)$ e $b(x)$. Allora $tilde(d)(x)$ è un massimo
 	comun divisore tra $a(x)$ e $b(x)$ se e soltanto se $tilde(d)(x) = k
-	d(x)$ con $k in K - {0_(K)}$. In altre parole, il massimo comun divisore
+	d(x)$ con $k in K - {0_(dot)}$. In altre parole, il massimo comun divisore
 	tra due polinomi è univocame determinato a meno di una costante
 	moltiplicativa non nulla.
 ] <MCD-polynomials>
@@ -253,7 +253,7 @@ $p(x)$ si dice *primo* se, per qualsiasi $a(x), b(x) in K[x]$, $p(x)
 
 Il polinomio $p(x) in K[x]$ con $diff (p(x)) > 0$ viene detto *irriducibile*
 se i suoi divisori sono solo e soltanto i polinomi di grado $0$ ed i
-polinomi nella forma $h p(x)$, con $h in (K - {0_(K)})$.
+polinomi nella forma $h p(x)$, con $h in (K - {0_(dot)})$.
 
 #theorem[
 	Il polinomio $p(x) in K[x]$, con $diff (p(x)) > 0$ é primo se e

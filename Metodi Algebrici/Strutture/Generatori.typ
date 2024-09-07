@@ -5,19 +5,19 @@ n-esima* di $g$ l'elemento $g^(n) in G$ ottenuto ricorsivamente nel seguente
 modo:
 
 $ g^(n) = cases(
-	1_(G) & "se" n = 0,
+	1_(*) & "se" n = 0,
 	g^(n - 1) * g & "se" n > 0,
 	(g^(-1))^(-n) & "se" n < 0
 ) $
 
 #example[
 	- Si consideri il gruppo $(ZZ, +)$. Ricordando che, in questo caso,
-	  $1_(ZZ) = 0$, l'elemento $3^(4)$ di $ZZ$ viene calcolato come:
+	  $1_(+) = 0$, l'elemento $3^(4)$ di $ZZ$ viene calcolato come:
 
 	  $ 3^(4) = 3^(3) + 3 = 3^(2) + 3 + 3 =
 	    3^(1) + 3 + 3 + 3 = 3^(0) + 3 + 3 + 3 + 3 = 0 + 3 + 3 + 3 + 3 = 12 $
 	- Si consideri il gruppo $(ZZ_(7), +)$. Ricordando che, in questo
-	  caso, $1_(ZZ_(7)) = [0]_(7)$, l'elemento $([4]_(7))^(4)$ di $ZZ_(7)$
+	  caso, $1_(+) = [0]_(7)$, l'elemento $([4]_(7))^(4)$ di $ZZ_(7)$
 	  viene calcolato come:
 
 	  $ ([4]_(7))^(4) = ([4]_(7))^(3) + [4]_(7) = ([4]_(7))^(2) + [4]_(7) +
@@ -26,7 +26,7 @@ $ g^(n) = cases(
 	    [0]_(7) + [4]_(7) + [4]_(7) + [4]_(7) + [4]_(7) = [16]_(7) =
 	    [2]_(7) $
 	- Si consideri il gruppo $(QQ - {0}, dot)$. Ricordando che, in questo
-	  caso, $1_(QQ - {0}) = 1$, l'elemento $(frac(3, 2))^4$ di $QQ - {0}$
+	  caso, $1_(dot) = 1$, l'elemento $(frac(3, 2))^4$ di $QQ - {0}$
 	  viene calcolato come:
 
 	  $ (frac(3, 2))^(4) = (frac(3, 2))^(3) dot frac(3, 2) = (frac(3, 2))^(2)
@@ -77,7 +77,7 @@ $ (angle.l g angle.r, *) space "dove" space angle.l g angle.r =
 	g angle.r$.
 ]
 #proof[
-	Innanzitutto, si noti come $g^(0) = 1_(G)$ sia certamente membro
+	Innanzitutto, si noti come $g^(0) = 1_(*)$ sia certamente membro
 	di $H$ per per definizione di sottogruppo. Sempre per definizione
 	di sottogruppo, per qualsiasi $h, k in H$ vale $h * k in H$.
 	Essendo $g in H$ per ipotesi, certamente vale $g * g in H$, ma
@@ -104,7 +104,7 @@ infinito, altrimenti si dice che é _di ordine_ (_di periodo_) finito.
 
 #theorem[
 	Sia $(G, *)$ un gruppo e sia $g$ un suo elemento. Se esiste un numero
-	intero positivo $m$ tale per cui $g^(m) = 1_(G)$, allora $angle.l g
+	intero positivo $m$ tale per cui $g^(m) = 1_(*)$, allora $angle.l g
 	angle.r$ é un insieme finito, e l'ordine di $g$ coincide con il piú
 	piccolo di questi $m$. Se non esiste alcun $m$ con queste caratteristiche,
 	allora $angle.l g angle.r$ é un insieme infinito.
@@ -152,8 +152,7 @@ infinito, altrimenti si dice che é _di ordine_ (_di periodo_) finito.
 ]
 
 #lemma[
-	Per ogni gruppo $(G, *)$, l'unico elemento che ha ordine $1$ é
-	l'elemento neutro rispetto a $*$.
+	Per ogni gruppo $(G, *)$, l'unico elemento che ha ordine $1$ é $1_(*)$.
 ]
 
 #theorem[

@@ -25,7 +25,7 @@ $cal(R)_(H)$ e $cal(L)_(H)$, come segue:
 	- $cal(R)_(H)$ é riflessiva se, preso un qualsiasi $g in G$, $g * g^(-1)
 	  in H$.
 
-	  Questo é vero per definizione, perchè $g * g^(-1) = 1_(G)$ e
+	  Questo é vero per definizione, perchè $g * g^(-1) = 1_(*)$ e
 	  l'elemento neutro é sempre membro di qualsiasi sottogruppo;
 	- $cal(R)_(H)$ é simmetrica se, presi due $g_(1), g_(2) in G$
 	  qualsiasi, $g_(1) cal(R)_(H) g_(2)$ implica $g_(2) cal(R)_(H)
@@ -42,7 +42,7 @@ $cal(R)_(H)$ e $cal(L)_(H)$, come segue:
 	  Se $g_(1) cal(R)_(H) g_(2)$, allora $g_(1) * g_(2)^(-1) in H$. Allo
 	  stesso modo, se $g_(2) cal(R)_(H) g_(3)$, allora $g_(2) * g_(3)^(-1)
 	  in H$. Ricordando che, per qualsiasi $g in G$, vale $g * g^(-1) =
-	  g^(-1) * g = 1_(G)$ Si ha:
+	  g^(-1) * g = 1_(*)$ Si ha:
 
 	  $ g_(1) * g_(3)^(-1) = g_(1) * (g_(2)^(-1) * g_(2)) * g_(3)^(-1) =
 	    g_(1) * g_(2)^(-1) * g_(2) * g_(3)^(-1) = (g_(1) * g_(2)^(-1)) *
@@ -198,9 +198,9 @@ $ (N, *) triangle.l (G, *) space "se" space g N = N g space forall g in G $
 	ker(phi.alt)}$.
 
 	$ phi.alt((g * k) * g^(-1)) = (phi.alt(g) * phi.alt(k))
-	  diamond.small phi.alt(g^(-1)) = (phi.alt(g) * 1_(G))
+	  diamond.small phi.alt(g^(-1)) = (phi.alt(g) * 1_(*))
 	  diamond.small phi.alt(g^(-1)) = phi.alt(g) diamond.small
-	  phi.alt(g^(-1)) = 1_(H) $
+	  phi.alt(g^(-1)) = 1_(diamond.small) $
 
 	Ovvero, $g * k * g^(-1) in ker(phi.alt)$. Questo significa che esiste
 	$overline(k) in ker(phi.alt)$ per il quale $g k g^(-1) = overline(k)$,
@@ -238,18 +238,18 @@ $ N g_(1) dot N g_(2) = N (g_(1) * g_(2)) space forall g_(1), g_(2) in G $
 
 	  Pertanto, $dot$ gode della proprietá associativa, e quindi $(G slash N,
 	  dot)$ é un semigruppo;
-	- $N = N 1_(G)$ é l'elemento neutro per $dot$. Infatti, per ogni $N g =
+	- $N = N 1_(*)$ é l'elemento neutro per $dot$. Infatti, per ogni $N g =
 	  g N in N slash G$, vale:
 
-	  $ N dot N g = N 1_(G) dot N g = N (1_(G) * g) = N g = N (g * 1_(G)) =
-	    N g dot N 1_(G) = N g dot N $
+	  $ N dot N g = N 1_(*) dot N g = N (1_(*) * g) = N g = N (g * 1_(*)) =
+	    N g dot N 1_(*) = N g dot N $
 
 	  Esistendo l'elemento neutro per $(G slash N, dot)$, questo é un monoide;
 	- Per ogni elemento $N g in G slash N$, esiste il suo inverso $N g^(-1) in
 	  G slash N$, infatti:
 
 	  $ N g dot N g^(−1) = N (g * g^(-1)) = N (g^(-1) * g) =
-	    N g^(−1) dot N g = N 1_(G) = N $
+	    N g^(−1) dot N g = N 1_(*) = N $
 
 	  Pertanto, $(G slash N, dot)$ é un gruppo.
 ]
