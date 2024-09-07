@@ -217,7 +217,7 @@ Siano $(G, *)$ un gruppo ed $(N, *)$ un suo sottogruppo normale. Essendo
 $cal(R)_(N) = cal(L)_(N)$, i due insiemi quoziente $G slash cal(R)_(H)$ e
 $G slash cal(L)_(H)$ sono a loro volta coincidenti. L'insieme quoziente
 dei laterali destri/sinistri di $N$ in $G$ con rappresentante $g$ viene
-indicato semplicemente con $G slash N$. É possibile definire una funzione
+indicato semplicemente con $G slash N$. É possibile definire una operazione
 prodotto (ben definita) su $G slash N$ in questo modo:
 
 $ N g_(1) dot N g_(2) = N (g_(1) * g_(2)) space forall g_(1), g_(2) in G $

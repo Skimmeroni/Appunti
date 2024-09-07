@@ -38,37 +38,50 @@ unitario e se $(A - {1_(diamond.small)}, diamond.small)$ é un gruppo.
 	- $(ZZ, +, dot)$ non é un campo.
 ]
 
-#lemma[
-	Sia $(A, +, dot)$ un anello. Per ogni $a, b in A$ e per ogni $n in ZZ$,
-	si ha:
+Le proprietá che le operazioni di un anello devono rispettare sono analoghe
+alle proprietá che possiedono rispettivamente la somma ed il prodotto fra
+interi. Per tal motivo, gli anelli vengono spesso scritti semplicemente come
+$(A, +, dot)$, dove le due operazioni sono chiamate "somma" e "prodotto",
+anche se queste non sono necessariamente la somma ed il prodotto comunemente
+intesi.
 
-	- $0_(A) dot a = a dot 0_(A) = 0_(A)$;
-	- $a dot overline(b) = overline(a) dot b = overline(a dot b)$;
-	- $(n dot a) dot b = a dot (n dot b) = n dot (a dot b)$.
+#lemma[
+	Sia $(A, *, diamond.small)$ un anello. Per ogni $a, b in A$ e per ogni
+	$n in ZZ$, si ha:
+
+	- $1_(*) diamond.small a = a diamond.small 1_(*) = 1_(*)$;
+	- $a diamond.small b^(-1)_(*) =
+	   a^(-1)_(*) diamond.small b =
+	   (a diamond.small b)^(-1)_(*)$;
+	- $(n diamond.small a) diamond.small b =
+	   a diamond.small (n diamond.small b) =
+	   n diamond.small (a diamond.small b)$.
 ]
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
 
-Sia $(A, +, dot)$ un anello. L'anello $(B, +, dot)$ si dice *sottoanello*
-di $A$ se:
+Sia $(A, *, diamond.small)$ un anello. L'anello $(B, *, diamond.small)$
+si dice *sottoanello* di $A$ se:
 
 - $B$ é un sottoinsieme di $A$;
-- $(B, +)$ é un sottogruppo di $(A +)$;
-- $B$ é un insieme chiuso rispetto a $dot$;
-- $B$ contiene $1_(A)$.
+- $(B, *)$ é un sottogruppo di $(A, *)$;
+- $B$ é un insieme chiuso rispetto a $diamond.small$;
+- $B$ contiene $1_(diamond.small)$.
 
-Per indicare che l'anello $(B, +, dot)$ é un sottoanello dell'anello
-$(A, +, dot)$ si usa la notazione $(B, +, dot) lt.eq (A, +, dot)$.
+Per indicare che l'anello $(B, *, diamond.small)$ é un sottoanello
+dell'anello $(A, *, diamond.small)$ si usa la notazione $(B, *,
+diamond.small) lt.eq (A, *, diamond.small)$.
 
 #lemma[
-	Sia $(A, +, dot)$ un anello. La struttura algebrica $(B, +, dot)$ é un
-	sottoanello di $(A, +, dot)$ se e soltanto se:
+	Sia $(A, *, diamond.small)$ un anello. La struttura algebrica
+	$(B, *, diamond.small)$ é un sottoanello di $(A, *, diamond.small)$
+	se e soltanto se:
 
 	- $B subset.eq A$;
-	- Per qualsiasi $b_(1), b_(2) in B$, si ha $b_(1) + overline(b_(2)) in B$.
-	- Per qualsiasi $b_(1), b_(2) in B$, si ha $b_(1) dot b_(2) in B$.
-	- $1_(A) in B$.
+	- Per qualsiasi $h, k in B$, si ha $h * k^(-1)_(*) in B$.
+	- Per qualsiasi $h, k in B$, si ha $h diamond.small k in B$.
+	- $1_(diamond.small) in B$.
 ] <Is-a-subring>
 
 Il @Is-a-subring fornisce un metodo alternativo e piú semplice per
@@ -77,132 +90,130 @@ determinare se due anelli siano l'uno un sottoanello dell'altro.
 #example[
 	+ L'anello $(ZZ, +, dot)$ é un sottoanello di $(QQ, +, dot)$. Infatti:
 	  - $ZZ$ é un sottoinsieme di $QQ$;
-	  - Presi due interi $a$ e $b$, si ha $a + overline(b) = a + (-b) =
-	    a - b in ZZ$;
+	  - Presi due interi $a$ e $b$, si ha $a + (-b) = a - b in ZZ$;
 	  - Presi due interi $a$ e $b$, si ha $a dot b = a b in ZZ$;
-	  - L'elemento neutro di $1_(QQ)$ é $1$, che appartiene a $ZZ$;
+	  - L'elemento neutro di $1_(dot)$ é $1$, che appartiene a $ZZ$;
 	+ L'anello $(QQ, +, dot)$ é un sottoanello di $(RR, +, dot)$. Infatti:
 	  - $QQ$ é un sottoinsieme di $RR$;
-	  - Presi due razionali $a$ e $b$, si ha $a + overline(b) = a + (-b) =
-	    a - b in QQ$;
+	  - Presi due razionali $a$ e $b$, si ha $a + (-b) = a - b in QQ$;
 	  - Presi due razionali $a$ e $b$, si ha $a dot b = a b in QQ$;
-	  - L'elemento neutro di $1_(RR)$ é $1$, che appartiene a $QQ$;
+	  - L'elemento neutro di $1_(dot)$ é $1$, che appartiene a $QQ$;
 ]
 
-Sia $(A, +, dot)$ un anello. Un sottoinsieme $I$ di $A$ si dice un
-*ideale* di $(A, +, dot)$ se:
+Sia $(A, *, diamond.small)$ un anello. Un sottoinsieme $I$ di $A$ si dice un
+*ideale* di $(A, *, diamond.small)$ se:
 
-- $I$ non é l'insieme vuoto;
-- Per ogni $i_(1), i_(2) in I$, si ha $i_(1) + overline(i_(2)) in I$;
-- Per ogni $a in A$ e $i in I$, si ha $a dot i in I$ e $i dot a in I$.
+- $I != emptyset$;
+- $(I, *)$ é un sottogruppo di $(A, *)$;
+- Per ogni $a in A$ e $i in I$, si ha $a diamond.small i in I$ e
+  $i diamond.small a in I$.
 
 Per indicare che un sottoinsieme $I$ di $A$ é un ideale dell'anello
-$(A, +, dot)$ si usa la notazione $I triangle.l (A, +, dot)$.
+$(A, *, diamond.small)$ si usa la notazione $I triangle.l (A, *,
+diamond.small)$.
 
 #lemma[
-	Per un qualsiasi anello $(A, +, dot)$, gli insiemi $A$ e ${0_(A)}$
-	sono ideali di $(A, +, dot)$.
+	Per un qualsiasi anello $(A, *, diamond.small)$, gli insiemi $A$ e
+	${1_(*)}$ sono ideali di $(A, *, diamond.small)$.
 ]
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
 
-#example[
-	+ Sia $(A, +, dot)$ un anello commutativo e sia $x$ un elemento di
-	  $A$. L'insieme $I = {a x : a in A}$ é un ideale di $(A, +, dot)$,
-	  chiamato *ideale principale generato da* $A$.
-
-	  Si noti innanzitutto infatti che $I$ non puó essere l'insieme
-	  vuoto, perché $1_(A) x = x$, e $1_(A) x in I$ perché rispetta
-	  la definizione. Inoltre, per ogni $a_(1) x, a_(2) x in I$, si
-	  ha $a_(1) x - a_(2) x = (a_(1) - a_(2)) x in I$. Infine, per
-	  ogni $b in A$ e per ogni $a x in I$, si ha $b(a x) = (b a)x
-	  in I$ e $(a x)b = (a b)x in I$;
-	+ Sia $K[x]$ l'anello dei polinomi nell'incognita $x$ a coefficienti
-	  in un campo $K$. Per un certo $g(x) in K[x]$ fissato, l'insieme
-	  $I = {a(x) g(x) : a(x) in K[x]}$ é un ideale di $K[x]$.
+#lemma[
+	Sia $(A, *, diamond.small)$ un anello commutativo e sia $x$ un
+	elemento di $A$. L'insieme $I = {a diamond.small x : a in A}$ é
+	un ideale di $(A, *, diamond.small)$.
+] <Principal-ideal-generated>
+#proof[
+	L'insieme $I$ é un ideale in quanto:
+	- $1_(diamond.small) diamond.small x = x$, e $1_(diamond.small)
+	  diamond.small x in I$ perché rispetta la definizione. Pertanto,
+	  $I$ non puó essere vuoto;
+	- Per ogni $a diamond.small x, b diamond.small x in I$,
+	  si ha $a diamond.small x * (b diamond.small x)^(-1)_(*)
+	  = (a * b^(-1)_(*)) diamond.small x in I$;
+	- Per ogni $b in A$ e per ogni $a diamond.small x in I$, si ha
+	  $b diamond.small (a diamond.small x) = (b diamond.small a)
+	  diamond.small x in I$ e $(a diamond.small x) diamond.small b
+	  = (a diamond.small b) diamond.small x in I$;
 ]
 
+In particolare, per un anello commutativo $(A, *, diamond.small)$ l'insieme
+$I$ dell'@Principal-ideal-generated viene chiamato *ideale principale generato
+da* $A$.
+
 #lemma[
-	Sia $(A, +, dot)$ un anello e sia $I$ un suo ideale. $(I, +)$ é un
-	sottogruppo normale di $(A, +)$;
+	Sia $(A, *, diamond.small)$ un anello e sia $I$ un suo ideale.
+	$(I, *)$ é un sottogruppo normale di $(A, *)$;
 ] <Ideal-is-normal>
 #proof[
-	Affinché $I$ sia un ideale di $(A, +, dot)$ é (anche) necessario
-	che, per ogni $i_(1), i_(2) in I$, si ha $i_(1) + overline(i_(2))
-	in I$. Questo é peró precisamente il criterio espresso nel
-	@Is-a-subgroup rispetto all'operazione $+$, pertanto $(I, +)$ é
-	un sottogruppo di $(A, +)$. Inoltre, affinché $(A, +, dot)$ possa
-	essere un anello si richiede che $(A, +)$ sia un gruppo abeliano;
-	per il @Abelian-normal-subgroups si ha che $(I, +)$ é un sottogruppo
-	normale di $(A, +)$.
+	Affinché $I$ sia un ideale di $(A, *, diamond.small)$ é (anche)
+	necessario che, per ogni $i, j in I$, si ha $i * j^(-1)_(*) in I$.
+	Questo é peró precisamente il criterio espresso nel @Is-a-subgroup
+	rispetto all'operazione $*$, pertanto $(I, *)$ é un sottogruppo di
+	$(A, *)$. Inoltre, affinché $(A, *, diamond.small)$ possa essere un
+	anello si richiede che $(A, *)$ sia un gruppo abeliano; per il
+	@Abelian-normal-subgroups si ha che $(I, *)$ é un sottogruppo
+	normale di $(A, *)$.
 ]
 
-Sia $(A, +, dot)$ un anello e sia $I$ un suo ideale. Per il @Ideal-is-normal,
-é possibile definire l'insieme quoziente $A slash I = {a + I: a in A}$. A
-partire da questo, é possibile costruire un gruppo quoziente $(A slash I, +)$
-similmente a come é stato fatto per i gruppi, con la differenza che
-l'operazione $+$ é definita come:
+Sia $(A, *, diamond.small)$ un anello e sia $I$ un suo ideale. Per il
+@Ideal-is-normal, $(I, *)$ é un sottogruppo normale di $(A, *)$, ed é
+quindi possibile definire, come é stato fatto per i gruppi, un insieme
+quoziente $A slash I = {a * I: a in A}$. É possibile definire delle
+operazioni di somma e di prodotto (entrambe ben definite) su $A slash I$
+in questo modo:
 
-$ (a + I) + (b + I) = (a + b) + I space forall a, b in A $
-
-É possibile definire una legge $dot$ su $A slash I$ in questo modo:
-
-$ (a + I) dot (b + I) = a dot b + I space
-  forall (a + I), (b + I) in A slash I $
-
-#lemma[
-	Siano $(A, +, dot)$ un anello ed $I$ un suo ideale. La legge $dot$
-	definita come $(a + I) dot (b + I) = a dot b + I space forall (a + I),
-	(b + I) in A slash I$ é una funzione.
-]
-// #proof[
-//	Dimostrabile, da aggiungere
-// ]
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ (a * I) + (b * I) = (a * b) * I $],
+	[$ (a * I) dot (b * I) = (a diamond.small b) * I $]
+)
 
 #theorem[
-	Siano $(A, +, dot)$ un anello ed $I$ un suo ideale. La struttura
-	algebrica $(A slash I, +, dot)$, dove $+$ e $dot$ sono le due
-	operazioni sull'insieme quoziente $A slash I$ come sopra definite,
-	é un anello.
+	Siano $(A, *, diamond.small)$ un anello ed $I$ un suo ideale.
+	La struttura algebrica $(A slash I, +, dot)$ é un anello.
 ]
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
 
-Siano $(A, +, dot)$ un anello ed $I$ un suo ideale. L'anello $(A slash I,
-+, dot)$ prende il nome di *anello quoziente* di $(A, +, dot)$ rispetto a
-$I$.
+Siano $(A, *, diamond.small)$ un anello ed $I$ un suo ideale. L'anello
+$(A slash I, +, dot)$ prende il nome di *anello quoziente* di $(A, *,
+diamond.small)$ rispetto a $I$.
 
-Siano $(A, +, dot)$ e $(B, +, dot)$ due anelli con unitá. Un'applicazione
-$phi.alt : A |-> B$ si dice *omomorfismo di anelli* (con unitá) se preserva
-le due operazioni e l'unitá, ovvero se:
+Siano $(A, *, diamond.small)$ e $(B, star.op, dot.circle)$ due anelli con
+unitá. Un'applicazione $phi.alt : A |-> B$ si dice *omomorfismo di anelli*
+(con unitá) se preserva le due operazioni e l'unitá rispetto alla seconda
+operazione, ovvero se:
 
 + Per ogni $a_(1), a_(2) in A$, si ha
-  $phi.alt(a_(1) + a_(2)) = phi.alt(a_(1)) + phi.alt(a_(2))$;
+  $phi.alt(a_(1) * a_(2)) = phi.alt(a_(1)) star.op phi.alt(a_(2))$;
 + Per ogni $a_(1), a_(2) in A$, si ha
-  $phi.alt(a_(1) dot a_(2)) = phi.alt(a_(1)) dot phi.alt(a_(2))$;
-+ $phi.alt(1_(A)) = 1_(B)$.
+  $phi.alt(a_(1) diamond.small a_(2)) =
+  phi.alt(a_(1)) dot.circle phi.alt(a_(2))$;
++ $phi.alt(1_(diamond.small)) = 1_(dot.circle)$.
 
 Un omomorfismo di anelli iniettivo si dice monomorfismo, un
 omomorfismo di anelli suriettivo si dice epimorfismo, ed un
 omomorfismo di anelli biettivo si dice isomorfismo.
 
 #lemma[
-	Siano $(A, +, dot)$ e $(B, +, dot)$ due anelli con unitá,
-	per i quali esiste un omomorfismo $phi.alt : A |-> B$. Si
-	ha $phi.alt(0_(A)) = 0_(B)$ e $phi.alt(overline(a)) =
-	overline(phi.alt(a))$ per qualsiasi $a in A$.
+	Siano $(A, *, diamond.small)$ e $(B, star.op, dot.circle)$ due anelli
+	con unitá, per i quali esiste un omomorfismo $phi.alt : A |-> B$. Si
+	ha $phi.alt(1_(*)) = 1_(star.op)$ e $phi.alt(a^(-1)_(*)) =
+	(phi.alt(a))^(-1)_(*)$ per qualsiasi $a in A$.
 ]
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
 
-Sia $phi.alt: A |-> B$ un omomorfismo tra gli anelli $(A, +, dot)$
-e $(B, +, dot)$. Prende il nome di *nucleo* di $phi.alt$, denotato
-con $ker(phi.alt)$, il sottoinsieme di $A$ cosí definito:
+Sia $phi.alt: A |-> B$ un omomorfismo tra gli anelli $(A, *, diamond.small)$
+e $(B, star.op, dot.circle)$. Prende il nome di *nucleo* di $phi.alt$,
+denotato con $ker(phi.alt)$, il sottoinsieme di $A$ cosí definito:
 
-$ ker(phi.alt) = {a in A: phi.alt(a) = 0_(B)} $
+$ ker(phi.alt) = {a in A: phi.alt(a) = 1_(star.op)} $
 
 Prende invece il nome di *immagine* di $phi.alt$, denotata con
 $Im(phi.alt)$, il sottoinsieme di $B$ cosí definito:
@@ -211,8 +222,8 @@ $ Im(phi.alt) = {b in B: exists a in A, phi.alt(a) = b} $
 
 #lemma[
 	Sia $phi.alt: A |-> B$ un omomorfismo tra gli anelli
-	$(A, +, dot)$ e $(B, +, dot)$. Il nucleo di $phi.alt$
-	é un ideale di $(A, +, dot)$.
+	$(A, *, diamond.small)$ e $(B, star.op, dot.circle)$.
+	Il nucleo di $phi.alt$ é un ideale di $(A, *, diamond.small)$.
 ]
 // #proof[
 // Dimostrabile, da aggiungere
@@ -220,17 +231,19 @@ $ Im(phi.alt) = {b in B: exists a in A, phi.alt(a) = b} $
 
 #lemma[
 	Sia $phi.alt: A |-> B$ un omomorfismo tra gli anelli
-	$(A, +, dot)$ e $(B, +, dot)$. L'immagine di $phi.alt$
-	é un sottoanello di $(B, +, dot)$.
+	$(A, *, diamond.small)$ e $(B, star.op, dot.circle)$.
+	L'immagine di $phi.alt$ é un sottoanello di $(B, star.op,
+	dot.circle)$.
 ]
 // #proof[
 // Dimostrabile, da aggiungere
 // ]
 
 #theorem[
-	Sia $phi.alt: A |-> B$ un omomorfismo tra gli anelli $(A, +, dot)$
-	e $(B, +, dot)$. Il gruppo quoziente $(A slash ker(phi.alt), dot)$
-	é isomorfo a $(Im(phi.alt), dot)$.
+	Sia $phi.alt: A |-> B$ un omomorfismo tra gli anelli
+	$(A, *, diamond.small)$ e $(B, star.op, dot.circle)$.
+	Il gruppo quoziente $(A slash ker(phi.alt), dot)$ é
+	isomorfo a $(Im(phi.alt), dot.circle)$.
 ]
 // #proof[
 // Dimostrabile, da aggiungere

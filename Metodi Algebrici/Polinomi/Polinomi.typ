@@ -54,6 +54,12 @@ fra polinomi ed il prodotto fra polinomi cosí definite si indica con $K[x]$.
 	neutro per il prodotto fra polinomi é $p(x) = 1$.
 ]
 
+#lemma[
+	Sia $K[x]$ l'anello dei polinomi nell'incognita $x$ a coefficienti
+	in un campo $K$. Per un certo $g(x) in K[x]$ fissato, l'insieme
+	$I = {a(x) g(x) : a(x) in K[x]}$ é un ideale di $K[x]$.
+]
+
 Per l'anello $K[x]$ é possibile sviluppare una teoria parallela a quella
 dell'anello $ZZ$.
 
