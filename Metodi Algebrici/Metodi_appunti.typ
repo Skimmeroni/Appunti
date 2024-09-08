@@ -96,8 +96,6 @@
 // #include "Crittografia/Logaritmo.typ"
 == Test di primalitá
 #include "Crittografia/Primalita.typ"
-// == Numeri di Carmichael
-// #include "Crittografia/Carmichael.typ"
 #pagebreak()
 
 = Teoria dei codici
