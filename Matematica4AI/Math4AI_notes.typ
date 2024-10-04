@@ -26,3 +26,7 @@
 = Linear Algebra
 == Vector Spaces
 #include "LinAlg/Spaces.typ"
+== Bases and Dimension
+#include "LinAlg/Bases.typ"
+== Linear Transformations
+#include "LinAlg/Transformations.typ"
