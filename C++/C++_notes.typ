@@ -38,3 +38,5 @@
 #include "Introduzione/Compilazione.typ"
 == Tipi di dato
 #include "Introduzione/Tipi.typ"
+== Array
+#include "Introduzione/Array.typ"
