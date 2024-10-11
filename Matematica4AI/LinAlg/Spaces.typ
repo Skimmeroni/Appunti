@@ -149,8 +149,17 @@ the same meaning.
 ]
 
 Given a vector space $V$, a set $W$ is said to be a *subspace* of $V$ if
-it's a subset of $V$ and it's itself a vector space (with respect to the
-same operations defined for $V$).
+it's a subset of $V$ and it's itself a vector space with respect to the
+same operations defined for $V$.
+
+#theorem[
+	Let $V$ be a vector space. To prove that a set $W$ is a subspace of $V$
+	it suffices to prove that it is a subset of $V$ and is algebraically
+	closed with respect to the same operations defined for $V$.
+] <Subspace-proven-by-being-algebraically-closed>
+// #proof[
+// To be added
+// ]
 
 #exercise[
 	Consider the vector space $RR^(3)$. Prove that the set $W_(1)$ is
@@ -187,3 +196,11 @@ same operations defined for $V$).
 	  mat(x_(1) + y_(1); 2x_(3) + 2y_(3) + 2; x_(3) + y_(3)) =>
 	  2x_(3) + 2y_(3) + 2 eq.not 2(x_(3) + y_(3)) + 1 $
 ]
+
+#theorem[
+	Let $V$ be a vector space. The sets ${underline(0)}$ and $V$ are always
+	subspaces of $V$.
+]
+// #proof[
+// To be added (it's easy)
+// ]
