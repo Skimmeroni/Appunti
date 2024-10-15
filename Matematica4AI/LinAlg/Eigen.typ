@@ -118,22 +118,186 @@ to compute the eigenvalues of a linear transformation it suffices to compute
 the characteristic polynomial of the associated matrix of the linear
 transformation.
 
-Recall that to construct the associated matrix two bases ought to be
-fixed, and changing the bases results in a different matrix. But since
-the determinant is invariant with respect to different bases for the
-associated matrix, it does not matter which bases were chosen. Therefore,
-the characteristic polynomial can be said to refer to the linear
-transformation itself, and not to a certain associated matrix.
+#theorem[
+	Let $T: V |-> V$ be an endomorphism, and let $A$ and $A'$ be two
+	matrices associated to $T$ with respect to the bases $cal(B)$ and
+	$cal(B')$ respectively. The characteristic polynomials of $A$ and
+	$A'$ are equivalent.
+] <Characteristic-polynomial-is-of-transformation>
+#proof[
+	The result follows from applying
+	@Matrix-basis-change-is-matrix-multiplication
+	to the characteristic polynomial of one of the matrices:
 
-Suppose that to a certain linear transformation $T: V |-> V$ it is possible
-to associate a certain matrix $A$ with respect to a basis $cal(B)$ and a
-different matrix $A'$ with respect to a different basis $cal(B')$. Recall
-that the formula to pass from a matrix to the other is $A = P A' P^(-1)$.
-Then:
+	$ p_(A)(lambda) = det(A - lambda I) = det(P A' P^(-1) - lambda I) =
+	det(P A' P^(-1) - lambda P I P^(-1)) = \
+	det(P (A' P^(-1) - lambda I P^(-1))) =
+	det(P (A' - lambda I) P^(-1)) =
+	cancel(det(P)) det(A' - lambda I) cancel(det(P^(-1))) = \
+	det(A' - lambda I) = p_(A')(lambda) $
+]
 
-$ p_(A)(lambda) = det(A - lambda I) = det(P A' P^(-1) - lambda I) =
-  det(P A' P^(-1) - lambda P I P^(-1)) =
-  det(P (A' P^(-1) - lambda I P^(-1))) = \
-  det(P (A' - lambda I) P^(-1)) =
-  cancel(det(P)) det(A' - lambda I) cancel(det(P^(-1))) =
-  det(A' - lambda I) = p_(A')(lambda) $
+@Characteristic-polynomial-is-of-transformation justifies referring
+to such polynomial as the characteristic polynomial of the linear
+transformation itself, and not to one of the possible associated
+matrices to such transformation, since the choice of the matrix is
+irrelevant. Of course, the best choice for the associated matrix is
+the one constructed with respect to the canonical basis, because in
+general it requires the least amount of effort.
+
+#theorem("Diagonalization theorem")[
+	- *With respect to endomorphisms*. Let $T: V |-> V$ be an endomorphism
+	  of dimension $n$ that has $n$ linearly independent eigenvectors
+	  $underline(e_(1)), dots, underline(e_(n))$. Let $E$ be the set that
+	  contains such vectors, forming a basis for $V$. Let $P$ be the matrix
+	  associated to $T$ with respect to the vectors in $E$. The matrix $P$
+	  is a diagonal matrix whose non-zero element are the eigenvalues of $T$.
+	- *With respect to matrices*. Let $A$ be a $n times n$ matrix that has
+	  $n$ linearly independent eigenvectors $underline(e_(1)), dots,
+	  underline(e_(n))$. Then there exist two matrices $P$ and $D$ such
+	  that $A = P D P^(-1)$, where $P$ is an invertible matrix whose columns
+	  are the eigenvectors of $A$ and $D$ is a diagonal matrix whose non-zero
+	  elements are the eigenvalues of $A$.
+] <Diagonalization-theorem>
+#proof[
+	// To be revisited with respect to both points
+
+	The first point is trivial
+
+	For the second point, consider the two matrices $P$ and $D$:
+
+	#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ P = mat(underline(e_(1)), underline(e_(2)), dots, underline(e_(n))) =
+	  mat(e_(1, 1), e_(2, 1), dots, e_(n, 1);
+	  e_(1, 2), e_(2, 2), dots, e_(n, 2);
+	  dots.v, dots.v, dots.down, dots.v;
+	  e_(1, n), e_(2, n), dots, e_(n, n);) $],
+	[$ D = mat(lambda_(1), 0, dots, 0;
+	  0, lambda_(2), dots, 0;
+	  dots.v, dots.v, dots.down, dots.v;
+	  0, 0, dots, lambda_(n);) $])
+
+	The matrix multiplication $A P$ is by definition equivalent to
+	multiplying $A$ with each column vector of $P$. That is, the $i$-th
+	column of $A P$ is given by multiplying the matrix $A$ with the $i$-th
+	column vector of $P$, giving $A underline(e_(i))$. But by definition
+	multiplying the matrix representation of an endomorphism with one of
+	his eigenvectors is equivalent to multiplying said eigenvector by its
+	corresponding eigenvalue. Therefore:
+
+	$ A P = mat(A underline(e_(1)), A underline(e_(2)), dots,
+	  A underline(e_(n))) = mat(lambda_(1) underline(e_(1)),
+	  lambda_(2) underline(e_(2)), dots, lambda_(n) underline(e_(n))) $
+
+	Consider the matrix multiplication $P D$. By definition, the $i$-th
+	element of such matrix is given by the sum of the products of the
+	corresponding elements of the $i$-th row of $P$ and the $i$-th column
+	of $D$. By construction, the elements in $D$ are zero except for the
+	ones on its diagonal, therefore the $i$-th column of $P D$ is just
+	the $i$-th column vector of $P$ multiplied by the $i, i$-th element
+	of $D$, which is $lambda_(i)$. Therefore:
+
+	$ P D = mat(lambda_(1) underline(e_(1)), lambda_(2) underline(e_(2)),
+	  dots, lambda_(n) underline(e_(n))) $
+
+	This shows that the two matrix products $A P$ and $P D$ are equivalent.
+	Since by assumption the set of the eigenvectors of $A$ form a basis, by
+	@Full-rank-matrices-are-invertible $P$ has to be invertible. But then:
+
+	$ A P = P D => A cancel(P) cancel(P^(-1)) = P D P^(-1) => A = P D P^(-1) $
+]
+
+If for a given square matrix $A$ there exist an invertible matrix $P$
+and a diagonal matrix $D$ such that $A = P D P^(-1)$, matrix $A$ is
+said to be *diagonalizable*. As stated in @Diagonalization-theorem,
+the matrix $P$ is an invertible matrix whose columns are the eigenvectors
+of $A$ while $D$ is a diagonal matrix whose non-zero elements are the
+eigenvalues of $A$.
+
+By the Fundamental Theorem of Algebra, the characteristic polynomial
+of any matrix will always have at least $n$ roots, albeit they might
+be complex numbers. Therefore, any square matrix will always have $n$
+(not necessarely distinct) eigenvalues. Despite this, the fact that the
+set of its eigenvectors forms a basis for the vector space associated to
+$A$ isn't always true, therefore not all matrices are diagonalizable. A
+matrix whose set of eigenvectors does not form a basis is said to be
+*defective*.
+
+// Add an example of a diagonalizable matrix
+
+#exercise[
+	Prove that the matrix $A = mat(0, 1; 0, 0)$ is defective.
+]
+#solution[
+	Computing the characteristic polynomial of $A$ gives:
+
+	$ p_(A)(lambda) =
+	  det(A - lambda I) =
+	  mat(delim: "|", 0 - lambda, 1 - 0; 0 - 0, 0 - lambda) =
+	  mat(delim: "|", -lambda, 1; 0, -lambda) =
+	  (-lambda) dot (-lambda) - (0 dot 1) =
+	  lambda^(2) $
+
+	Such polynomial has only two roots, both being $0$. Therefore, the
+	eigenvalues of $A$ are $lambda_(1) = lambda_(2) = 0$. By applying the
+	definition:
+
+	$ A underline(x) = lambda underline(x) =>
+	mat(0, 1; 0, 0)
+	mat(x; y) =
+	0 mat(x; y) =>
+	mat(0 dot x + 1 dot y; 0 dot x + 0 dot y)
+	= mat(0 dot x; 0 dot y) =>
+	mat(y; 0) = mat(0; 0) =>
+	cases(y = 0, 0 = 0) $
+
+	This means that the eigenvectors of $A$ are all the vectors in the
+	form $mat(0; k)$ with $k in RR$. Of course, the set $E = {mat(0; k)}
+	subset RR^(2)$ is not linearly independent (at least two vectors are
+	needed) and therefore $A$ is defective.
+]
+
+Determining whether a matrix is diagonalizable through such definition can
+quickly become cumbersome, but there are necessary and sufficient conditions
+that are equivalent and that can ease the process.
+
+Let $A$ be a matrix and $lambda$ one of its eigenvalues. The number of
+times $lambda$ appears as a root of the characteristic polynomial of $A$
+is the *algebraic multiplicity* of $lambda$, and is denoted as $m_(a)(lambda)$.
+The dimension of the vector space generated by the set of eigenvectors that
+have $lambda$ as their eigenvalue is the *geometric multiplicity* of $lambda$,
+and is denoted as $m_(g)(lambda)$.
+
+#theorem[
+	For any eigenvalue $lambda$, the following inequality holds:
+
+	$ 1 lt.eq m_(g)(lambda) lt.eq m_(a)(lambda) $
+] <Eigenvalues-inequality>
+// #proof[
+// To be added
+// ]
+
+#theorem[
+	A matrix is diagonalizable if and only if, for each of its eigenvalues
+	$lambda_(i)$, $m_(g)(lambda_(i)) = m_(a)(lambda_(i))$.
+] <Same-multiplicity-is-diagonalizable>
+// #proof[
+// To be added
+//]
+
+#corollary[
+	Any $n times n$ matrix that has $n$ distinct eigenvalues is diagonalizable.
+] <Single-multiplicity-is-diagonalizable>
+#proof[
+	If a matrix has as many distinct eigenvalues as its dimension it means
+	that the algebraic multiplicity of any of its eigenvalues is $1$. By
+	@Eigenvalues-inequality, for any eigenvalue $lambda_(i)$ its geometric
+	multiplicity must also be $1$, because $1 lt.eq m_(g)(lambda_(i)) lt.eq
+	1$. The fact that such matrix is diagonalizable follows from applying
+	@Same-multiplicity-is-diagonalizable.
+]
+
+#theorem[
+	A symmetric matrix is always diagonalizable.
+]

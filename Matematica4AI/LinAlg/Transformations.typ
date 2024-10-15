@@ -334,3 +334,71 @@ If this happens, such a matrix is said to have *full rank*.
 #theorem[
 	A matrix is invertible if and only if it has full rank.
 ] <Full-rank-matrices-are-invertible>
+
+@Basis-change-is-matrix-multiplication proves that it is possible to
+convert the representation of a vector with respect to a given basis
+in the representation of the same vector to a different basis by multiplying
+the known representation with respect to a "conversion" matrix $P$. The same
+can be achieved with respect to matrices associated to endomorphisms.
+
+#theorem[
+	Let $T: V |-> V$ be an endomorphism of dimension $n$. Let $A$ be the
+	matrix associated to $T$ with respect to the basis $cal(B)$ (for both
+	domain and codomain), and let $A'$ be the matrix associated to $T$ with
+	respect to a different basis $cal(B')$. There exists an invertible matrix
+	$P$ such that:
+
+	$ A = P A' P^(-1) $
+] <Matrix-basis-change-is-matrix-multiplication>
+#proof[
+	Let $underline(x)$ be a vector of $V$, and let $underline(y)$ be the
+	result of applying $T$ to $underline(x)$. Being $T$ an endomorphism,
+	both $underline(x)$ and $underline(y)$ belong to the same vector space,
+	and can therefore be represented by the bases $cal(B)$ and $cal(B')$:
+
+	#grid(
+		columns: (0.25fr, 0.25fr, 0.25fr, 0.25fr),
+		[$ underline(x) <=> mat(x_(1); dots.v; x_(n))_(cal(B)) $],
+		[$ underline(x) <=> mat(x'_(1); dots.v; x'_(n))_(cal(B')) $],
+		[$ underline(y) = T(underline(x)) <=> mat(y_(1); dots.v; y_(n))_(cal(B)) $],
+		[$ underline(y) = T(underline(x)) <=> mat(y'_(1); dots.v; y'_(n))_(cal(B')) $],
+	)
+
+	By definition of associated matrix, applying $T$ to $underline(x)$ is
+	equivalent to multiplying $A$ with the representation of $underline(x)$
+	with respect to $cal(B)$, or multiplying $A'$ with the representation
+	of $underline(x)$ with respect to $cal(B')$:
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ mat(y_(1); dots.v; y_(n))_(cal(B)) =
+		A mat(x_(1); dots.v; x_(n))_(cal(B)) $],
+		[$ mat(y'_(1); dots.v; y'_(n))_(cal(B')) =
+		A' mat(x'_(1); dots.v; x'_(n))_(cal(B')) $]
+	)
+
+	As stated in @Basis-change-is-matrix-multiplication, there exist a matrix
+	$P$ that permits to convert the representation of a vector with respect to
+	a given basis in the representation to a different basis, while the inverse
+	matrix $P^(-1)$ does the opposite conversion. Such conversion, since they
+	belong to the same vector space $V$, can be done for both $underline(x)$
+	and $underline(y)$:
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ mat(y'_(1); y'_(2); dots.v; y'_(n)) =
+		P^(-1) mat(y_(1); y_(2); dots.v; y_(n)) $],
+		[$ mat(x'_(1); x'_(2); dots.v; x'_(n)) =
+		P^(-1) mat(x_(1); x_(2); dots.v; x_(n)) $])
+
+	Substituting in the previous expression gives:
+
+	$ mat(y'_(1); dots.v; y'_(n))_(cal(B')) =
+	A' mat(x'_(1); dots.v; x'_(n))_(cal(B')) =>
+	P^(-1) mat(y_(1); dots.v; y_(n))_(cal(B)) =
+	A' P^(-1) mat(x_(1); dots.v; x_(n))_(cal(B)) =>
+	P^(-1) A cancel(mat(x_(1); dots.v; x_(n))_(cal(B))) =
+	A' P^(-1) cancel(mat(x_(1); dots.v; x_(n))_(cal(B))) => \
+	P^(-1) A = A' P^(-1) => cancel(P) cancel(P^(-1)) A = P A' P^(-1) =>
+	A = P A' P^(-1) $
+]

@@ -34,3 +34,5 @@
 #include "LinAlg/Transformations.typ"
 == Eigenvalues and eigenvectors
 #include "LinAlg/Eigen.typ"
+== Spectral Theorem
+#include "LinAlg/Spectral.typ"

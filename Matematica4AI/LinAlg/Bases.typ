@@ -273,104 +273,129 @@ from vector space to vector space.
 	specific basis is the canonical basis for $PP_(n)$.
 ]
 
-Consider a vector space $V$ and two bases $cal(B) = {underline(b_(1)),
-underline(b_(2)), dots, underline(b_(n))}$ and $cal(B') = {underline(b'_(1)),
-underline(b'_(2)), dots, underline(b'_(n))}$. A vector $underline(x) in V$ can
-be represented with respect to both bases, non necessarely equivalent composant
-by composant:
+As stated, any vector can be expressed as a matrix composed by
+the coefficients of the linear combination of a basis. In general,
+a vector space has more than one basis, and for each basis the
+representation is most likely different. Nevertheless, each
+representation is connected with the others through a simple
+matrix multiplication.
 
-#grid(
-	columns: (0.5fr, 0.5fr),
-	[$ underline(x) <=> mat(x_(1); x_(2); dots.v; x_(n))_(cal(B)) $],
-	[$ underline(x) <=> mat(x'_(1); x'_(2); dots.v; x'_(n))_(cal(B')) $]
-)
+#theorem[
+	Let $V$ be a vector space, and let $cal(B) = {underline(b_(1)),
+	underline(b_(2)), dots, underline(b_(n))}$ and $cal(B') =
+	{underline(b'_(1)), underline(b'_(2)), dots, underline(b'_(n))}$
+	be two bases of $V$. Any generic vector $underline(x) in V$, can
+	be represented with respect to both bases:
 
-Being both bases constituted by vectors of the same vector space, it is
-possible to express the elements of $cal(B')$ as linear combinations of
-the elements of $cal(B)$:
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ underline(x) <=> mat(x_(1); x_(2); dots.v; x_(n))_(cal(B)) $],
+		[$ underline(x) <=> mat(x'_(1); x'_(2); dots.v; x'_(n))_(cal(B')) $]
+	)
 
-$ cases(
-	underline(b'_(1)) = p_(1, 1) underline(b_(1)) +
-	p_(1, 2) underline(b_(2)) + dots + p_(1, n) underline(b_(n)) =
-	sum_(j = 1)^(n) p_(1, j) underline(b_(j)),
-	underline(b'_(2)) = p_(2, 1) underline(b_(1)) +
-	p_(2, 2) underline(b_(2)) + dots + p_(2, n) underline(b_(n)) =
-	sum_(j = 1)^(n) p_(2, j) underline(b_(j)),
-	dots.v,
-	underline(b'_(n)) = p_(n, 1) underline(b_(1)) +
-	p_(n, 2) underline(b_(2)) + dots + p_(n, n) underline(b_(n)) =
-	sum_(j = 1)^(n) p_(n, j) underline(b_(j))) $
+	There exists an invertible matrix $P$, independent of $underline(x)$,
+	such that:
 
-Therefore:
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ mat(x_(1); x_(2); dots.v; x_(n)) =
+		P mat(x'_(1); x'_(2); dots.v; x'_(n)) $],
+		[$ mat(x'_(1); x'_(2); dots.v; x'_(n)) =
+		P^(-1) mat(x_(1); x_(2); dots.v; x_(n)) $])
+] <Basis-change-is-matrix-multiplication>
+#proof[
+	Being both bases constituted by vectors of the same vector space, it is
+	possible to express the elements of $cal(B')$ as linear combinations of
+	the elements of $cal(B)$:
 
-$ underline(x) =
-  sum_(j = 1)^(n) x'_(j) underline(b'_(j)) =
-  sum_(j = 1)^(n) x'_(j) sum_(i = 1)^(n) p_(j, i) underline(b_(i)) =
-  sum_(i = 1)^(n) x_(i) underline(b_(i)) $
+	$ cases(
+		underline(b'_(1)) = p_(1, 1) underline(b_(1)) +
+		p_(1, 2) underline(b_(2)) + dots + p_(1, n) underline(b_(n)) =
+		sum_(j = 1)^(n) p_(1, j) underline(b_(j)),
+		underline(b'_(2)) = p_(2, 1) underline(b_(1)) +
+		p_(2, 2) underline(b_(2)) + dots + p_(2, n) underline(b_(n)) =
+		sum_(j = 1)^(n) p_(2, j) underline(b_(j)),
+		dots.v,
+		underline(b'_(n)) = p_(n, 1) underline(b_(1)) +
+		p_(n, 2) underline(b_(2)) + dots + p_(n, n) underline(b_(n)) =
+		sum_(j = 1)^(n) p_(n, j) underline(b_(j))) $
 
-By comparing the third and fourth members of the equality term by term:
+	Therefore:
 
-$ x_(i) = sum_(j = 1)^(n) p_(i, j) x'_(j) =>
-  mat(x_(1); x_(2); dots.v; x_(n)) =
-  mat(
-  p_(1, 1), p_(1, 2), dots, p_(1, n);
-  p_(2, 1), p_(2, 2), dots, p_(2, n);
-  dots.v, dots.v, dots.down, dots.v;
-  p_(n, 1), p_(n, 2), dots, p_(n, n))
-  mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-  P mat(x'_(1); x'_(2); dots.v; x'_(n)) $
+	$ underline(x) =
+	sum_(j = 1)^(n) x'_(j) underline(b'_(j)) =
+	sum_(j = 1)^(n) x'_(j) sum_(i = 1)^(n) p_(j, i) underline(b_(i)) =
+	sum_(i = 1)^(n) x_(i) underline(b_(i)) $
 
-Of course, it is also possible to go the other way around, expressing the
-elements of $cal(B)$ as linear combinations of the elements of $cal(B')$:
+	By comparing the third and fourth members of the equality term by term:
 
-$ cases(
-	underline(b_(1)) = q_(1, 1) underline(b'_(1)) +
-	q_(1, 2) underline(b'_(2)) + dots + q_(1, n) underline(b'_(n)) =
-	sum_(j = 1)^(n) q_(1, j) underline(b'_(j)),
-	underline(b_(2)) = q_(2, 1) underline(b'_(1)) +
-	q_(2, 2) underline(b'_(2)) + dots + q_(2, n) underline(b'_(n)) =
-	sum_(j = 1)^(n) q_(2, j) underline(b'_(j)),
-	dots.v,
-	underline(b_(n)) = q_(n, 1) underline(b'_(1)) +
-	q_(n, 2) underline(b'_(2)) + dots + q_(n, n) underline(b'_(n)) =
-	sum_(j = 1)^(n) q_(n, j) underline(b'_(j))) $
+	$ x_(i) = sum_(j = 1)^(n) p_(i, j) x'_(j) =>
+	mat(x_(1); x_(2); dots.v; x_(n)) =
+	mat(
+	p_(1, 1), p_(1, 2), dots, p_(1, n);
+	p_(2, 1), p_(2, 2), dots, p_(2, n);
+	dots.v, dots.v, dots.down, dots.v;
+	p_(n, 1), p_(n, 2), dots, p_(n, n))
+	mat(x'_(1); x'_(2); dots.v; x'_(n)) =
+	P mat(x'_(1); x'_(2); dots.v; x'_(n)) $
+
+	Of course, it is also possible to go the other way around, expressing the
+	elements of $cal(B)$ as linear combinations of the elements of $cal(B')$:
+
+	$ cases(
+		underline(b_(1)) = q_(1, 1) underline(b'_(1)) +
+		q_(1, 2) underline(b'_(2)) + dots + q_(1, n) underline(b'_(n)) =
+		sum_(j = 1)^(n) q_(1, j) underline(b'_(j)),
+		underline(b_(2)) = q_(2, 1) underline(b'_(1)) +
+		q_(2, 2) underline(b'_(2)) + dots + q_(2, n) underline(b'_(n)) =
+		sum_(j = 1)^(n) q_(2, j) underline(b'_(j)),
+		dots.v,
+		underline(b_(n)) = q_(n, 1) underline(b'_(1)) +
+		q_(n, 2) underline(b'_(2)) + dots + q_(n, n) underline(b'_(n)) =
+		sum_(j = 1)^(n) q_(n, j) underline(b'_(j))) $
 
 
-Therefore:
+	Therefore:
 
-$ underline(x) =
-  sum_(j = 1)^(n) x_(j) underline(b_(j)) =
-  sum_(j = 1)^(n) x_(j) sum_(i = 1)^(n) q_(j, i) underline(b'_(i)) =
-  sum_(i = 1)^(n) x'_(i) underline(b'_(i)) $
+	$ underline(x) =
+	sum_(j = 1)^(n) x_(j) underline(b_(j)) =
+	sum_(j = 1)^(n) x_(j) sum_(i = 1)^(n) q_(j, i) underline(b'_(i)) =
+	sum_(i = 1)^(n) x'_(i) underline(b'_(i)) $
 
-By comparing the third and fourth members of the equality term by term:
+	By comparing the third and fourth members of the equality term by term:
 
-$ x'_(i) = sum_(j = 1)^(n) q_(i, j) x_(j) =>
-  mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-  mat(
-  q_(1, 1), q_(1, 2), dots, q_(1, n);
-  q_(2, 1), q_(2, 2), dots, q_(2, n);
-  dots.v, dots.v, dots.down, dots.v;
-  q_(n, 1), q_(n, 2), dots, q_(n, n))
-  mat(x_(1); x_(2); dots.v; x_(n)) =
-  Q mat(x_(1); x_(2); dots.v; x_(n)) $
+	$ x'_(i) = sum_(j = 1)^(n) q_(i, j) x_(j) =>
+	mat(x'_(1); x'_(2); dots.v; x'_(n)) =
+	mat(
+	q_(1, 1), q_(1, 2), dots, q_(1, n);
+	q_(2, 1), q_(2, 2), dots, q_(2, n);
+	dots.v, dots.v, dots.down, dots.v;
+	q_(n, 1), q_(n, 2), dots, q_(n, n))
+	mat(x_(1); x_(2); dots.v; x_(n)) =
+	Q mat(x_(1); x_(2); dots.v; x_(n)) $
 
-This means that to change the representation of a vector with respect to a
-given basis to the representation with respect to a different basis it suffices
-to perform a matrix multiplication. But an even more interesting result can
-be obtained by substituting the one in the expression for the other:
+	Substituting the one in the expression of the other gives:
 
-#grid(
-	columns: (0.5fr, 0.5fr),
-	[$ mat(x_(1); x_(2); dots.v; x_(n)) =
-	   P mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-	   P Q mat(x_(1); x_(2); dots.v; x_(n)) $],
-	[$ mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-	   Q mat(x_(1); x_(2); dots.v; x_(n)) =
-	   Q P mat(x'_(1); x'_(2); dots.v; x'_(n)) $])
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ mat(x_(1); x_(2); dots.v; x_(n)) =
+		P mat(x'_(1); x'_(2); dots.v; x'_(n)) =
+		P Q mat(x_(1); x_(2); dots.v; x_(n)) $],
+		[$ mat(x'_(1); x'_(2); dots.v; x'_(n)) =
+		Q mat(x_(1); x_(2); dots.v; x_(n)) =
+		Q P mat(x'_(1); x'_(2); dots.v; x'_(n)) $])
 
-Since the two matrices on the side of the equalities are the same, for these
-equalities to hold both matrix products $P Q$ and $Q P$ must be equal to the
-identity matrix. In other words, $P$ and $Q$ are the inverse of the other.
+	Since the two matrices on the edges of the equalities are the same,
+	for these equalities to hold both matrix products $P Q$ and $Q P$
+	must be equal to the identity matrix. In other words, $P$ and $Q$
+	are the inverse of each other, therefore:
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ mat(x_(1); x_(2); dots.v; x_(n)) =
+		P mat(x'_(1); x'_(2); dots.v; x'_(n)) $],
+		[$ mat(x'_(1); x'_(2); dots.v; x'_(n)) =
+		P^(-1) mat(x_(1); x_(2); dots.v; x_(n)) $])
+]
 
 // ADD AN EXAMPLE
