@@ -98,8 +98,3 @@ applies in a very specific way.
 
 	// To be retrieved from lectures (messed up)
 ]
-
-A matrix $A$ is said to be *definite positive* if, for any vector
-$underline(x)$, $angle.l underline(x), A underline(x) angle.r > 0$.
-It is instead said to be *semidefinite positive* if, for any vector
-$underline(x)$, $angle.l underline(x), A underline(x) angle.r gt.eq 0$.

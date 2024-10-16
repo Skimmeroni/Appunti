@@ -36,3 +36,5 @@
 #include "LinAlg/Eigen.typ"
 == Spectral Theorem
 #include "LinAlg/Spectral.typ"
+== Cholesky decomposition
+#include "LinAlg/Decomposition.typ"

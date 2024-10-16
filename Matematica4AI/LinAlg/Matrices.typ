@@ -117,3 +117,8 @@ If a matrix is equal to his transposition, said matrix is called *symmetric*.
 
 If the inverse of a matrix is equal to his transposition, said matrix is
 called *orthogonal*.
+
+#theorem[
+	Let $A$ and $B$ be two product-conformant matrices. Then $(A B)^(T) =
+	B^(T) A^(T)$.
+]
