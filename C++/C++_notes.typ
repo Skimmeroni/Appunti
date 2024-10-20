@@ -40,3 +40,9 @@
 #include "Introduzione/Tipi.typ"
 == Array
 #include "Introduzione/Array.typ"
+== Struct, enum, typedef
+#include "Introduzione/Struct.typ"
+== Stringhe
+#include "Introduzione/Stringhe.typ"
+== Casting
+#include "Introduzione/Casting.typ"
