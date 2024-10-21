@@ -46,3 +46,7 @@
 #include "Introduzione/Stringhe.typ"
 == Casting
 #include "Introduzione/Casting.typ"
+== Ciclo di vita delle variabili
+#include "Introduzione/Ciclo.typ"
+== Funzioni
+#include "Introduzione/Funzioni.typ"
