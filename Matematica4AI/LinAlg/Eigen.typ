@@ -300,4 +300,4 @@ and is denoted as $m_(g)(lambda)$.
 
 #theorem[
 	A symmetric matrix is always diagonalizable.
-]
+] <Symmetric-is-diagonalizable>
