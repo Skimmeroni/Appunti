@@ -329,11 +329,117 @@ linear transformation), its rank has to be equal to the number of its
 columns or, equivalently, if its columns form a linearly independent set.
 If this happens, such a matrix is said to have *full rank*.
 
-// To move this around
+#lemma[
+	The rank of a matrix is invariant with respect to transposition. In other
+	words, $"rank(A)" = "rank"(A^(T))$.
+] <Rank-invariant-with-transposition>
+// #proof[
+// To be added
+// ]
 
-#theorem[
+#lemma[
 	A matrix is invertible if and only if it has full rank.
 ] <Full-rank-matrices-are-invertible>
+
+#theorem[
+	Let $A$ be a square matrix. The following results are equivalent, meaning
+	if one of these is true also the others are true:
+
+	- $A$ is non singular;
+	- There exists an inverse of $A$;
+	- $A$ is full rank;
+	- The rows/columns of $A$ form a linearly independent set.
+]
+// #proof[
+// Just combine the results found elsewhere
+// ]
+
+*Gaussian moves* are special operations that can be performed on matrices. Said
+operations are as follows:
+
+- Swapping two rows/columns;
+- Multiplying a row/column by a scalar;
+- Summing a row/column to another row/column multiplied by a scalar.
+
+#theorem[
+	The application of Gaussian moves to a matrix does not change its rank.
+] <Gauss-moves-rank>
+// #proof[
+// To be added
+// ]
+
+#lemma[
+	Let $A$ be a square matrix, and let $A'$ be the matrix resulting from
+	applying the first Gaussian move to $A$. Then $det(A) = -det(A')$.
+]
+// #proof[
+// To be added
+// ]
+
+#theorem[
+	The application of the third Gaussian move to a matrix does not change its
+	determinant.
+]
+// #proof[
+// To be added
+// ]
+
+A matrix is in *row echelon form* if all rows having only zero entries
+are at the bottom and the left-most nonzero entry of every nonzero row,
+called the *pivot*, is on the right of the leading entry of every row above.
+
+#exercise[
+	Provide some examples of matrices in row echelon form.
+]
+#solution[
+	#grid(
+		columns: (0.33fr, 0.33fr, 0.33fr),
+		[$ mat(0, 4, 1, 5, 2;
+		   0, 0, 6, 1, 9;
+		   0, 0, 0, 4, 1;
+		   0, 0, 0, 0, 3) $],
+		[$ mat(2, 1, 3;
+		   0, 4, 2;
+		   0, 0, 0) $],
+		[$ mat(1, 3, 5, 0;
+		   0, 9, 0, 1;
+		   0, 0, -4, 2) $]
+	)
+]
+
+#theorem[
+	The rank of a matrix in row echelon form is equal to the number of its
+	pivots.
+] <Rank-echelon-pivots>
+// #proof[
+// To be added
+// ]
+
+@Rank-echelon-pivots suggests another way to compute the rank of a matrix.
+
+#exercise[
+	Compute the rank of the matrix $A = mat(1, -1, 3, 2; 3, 2, 7, 6;
+	1, 4, 1, 2)$.
+]
+#solution[
+	@Gauss-moves-rank guarantees that applying the third Gaussian move to $A$
+	renders a matrix with the same rank. $A$ can therefore be converted into a
+	matrix in row echelon form as follows:
+
+	+ Substituting the third row with itself summed to the first multiplied by
+	  $-1$;
+	+ Substituting the second row with itself summed to the first multiplied by
+	  $-3$;
+	+ Substituting the second row with itself summed to the third multiplied by
+	  $-1$.
+
+	$ mat(1, -1, 3, 2; 3, 2, 7, 6; 1, 4, 1, 2) =>
+	  mat(1, -1, 3, 2; 3, 2, 7, 6; 0, 5, -2, 0) =>
+	  mat(1, -1, 3, 2; 0, 5, -2, 0; 0, 5, -2, 0) =>
+	  mat(1, -1, 3, 2; 0, 5, -2, 0; 0, 0, 0, 0) $
+
+	As stated in @Rank-echelon-pivots, the rank of $A$ is $2$.
+]
 
 @Basis-change-is-matrix-multiplication proves that it is possible to
 convert the representation of a vector with respect to a given basis
