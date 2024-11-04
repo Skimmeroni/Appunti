@@ -21,6 +21,9 @@
 #show par: set block(spacing: 0.55em)
 
 #outline(indent: auto)
+#figure(
+	image("Stats4AI_cover.jpg")
+)
 #pagebreak()
 
 = Introduction
@@ -28,5 +31,7 @@
 #include "Introduction/Statistics.typ"
 == Probability
 #include "Introduction/Probability.typ"
-== Discrete Random Variables
+== Discrete random variables
 #include "Introduction/DiscreteRV.typ"
+== Known discrete random variables
+#include "Introduction/KnownDRV.typ"
