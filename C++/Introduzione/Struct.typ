@@ -82,37 +82,6 @@ motivo, per ottenere la massima efficienza in termini di spazio occupato
 é preferibile disporre i dati all'interno in ordine decrescente di grandezza,
 di modo che piú dati possano venire "accorpati" in un'unica `word`.
 
-Un `enum` é un tipo di dato che consente di associare in maniera automatica
-dei valori interi costanti a dei nomi di stringhe. Permette di usare delle
-stringhe come dei "segnaposto" per dei valori che dovrebbero essere legati da
-una qualche semantica.
-
-```
-enum name {name_1 = value_1, name_2 = value_2, ..., name_n = value_n};
-```
-
-Il valore a cui ciascun campo di un `enum` viene assegnato puó venire
-specificato oppure lasciato dedurre al compilatore. Nel secondo caso,
-a tutti i campi dell'`enum` che vengono dopo l'ultimo campo con un valore
-specificato viene assegnato il valore a quest'ultimo successivo. Se nessun
-valore viene specificato, ai campi di `enum` vengono ordinatamente assegnati
-i numeri $1, 2, 3, dots, $
-
-#showybox[
-	```
-	enum day {Mon = 10, Tue = 20, Wed = 30, Thu = 40,
-              Fri = 50, Sat = 60, Sun = 70};
-
-	day d;
-	d = Wed;          // Allowed
-	d = 10;           // NOT Allowed
-	int f = Fri;      // Allowed
-
-	enum days {Mon, Tue, Wed, Thu, Fri, Sat, Sun};              // 1, 2, 3, 4, 5, 6, 7
-	enum days {Mon = 1, Tue, Wed = 5, Thu, Fri = 2, Sat, Sun};  // 1, 2, 5, 6, 2, 3, 4
-	```
-]
-
 `typedef` permette di associare un alias ad un tipo di dato giá esistente.
 É utile per riferirsi ad un tipo avente un nome molto lungo con un alias
 piú corto. Puó essere utile anche per "mascherare" valori veri con nomi di

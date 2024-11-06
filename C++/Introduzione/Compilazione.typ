@@ -183,66 +183,6 @@ La suddivisione del codice in piú file oggetto permette la *compilazione
 separata*: un file sorgente deve venire ricompilato solamente se viene
 modificato direttamente.
 
-Nel C++ si distingue tra *dichiarazione* e *definizione* di una funzione
-o di una variabile. Dichiarare una funzione significa riportare il tipo
-del valore di ritorno di tale funzione, il suo nome ed il numero e tipo
-dei suoi argomenti. Definire una funzione significa, oltre a dichiararla,
-anche riportarne il corpo.
-
-```
-	// definition
-	return_value_type function_name(type_arg1 name_arg1, ..., type_argN name_argN)
-
-	// declaration
-	return_value_type function_name(type_arg1 name_arg1, ..., type_argN name_argN)
-	{
-	// body goes here...
-	}
-```
-
-Definire una variabile significa notificare al compilatore che tale variabile
-esiste ed ha un certo nome, ma quale sia il suo valore non é da cercarsi nel
-file attuale (in genere questo viene fatto per la definizione di costanti
-globali in sostituzione a `#define`). Dichiarare una variabile significa
-sia esplicitarne il suo tipo, sia *inizializzarla*, ovvero assegnarle un
-valore iniziale; le due operazioni possono essere compiute separatamente
-o contemporaneamente. Una variabile non inizializzata assume in genere un
-valore casuale, che dipende dal contenuto della memoria che prima occupava
-tale variabile.
-
-```
-	extern variable_type variable_name            // define a variable, without declaring
-
-	variable_type variable_name = initial_value   // declare a variable and initialise
-
-	variable_type variable_name                   // first declare a variable...
-	variable_name = initial_value                 // then initialise it
-```
-
-Come giá detto, il compilatore non dá errori fintanto che esiste una firma
-di una funzione o il nome e tipo di una variabile. In altre parole, non dá
-errori fintanto che una variabile/funzione é _dichiarata_. É il linker a
-dare un errore nel caso in cui una variabile/funzione non é stata _definita_.
-
-Si noti come una dichiarazione implichi anche una definizione, mentre
-non é necessariamente vero il contrario. Inoltre, dichiarare piú volte
-una stessa variable/funzione non dá errore, perché si sta semplicemente
-ripetendo piú volte la stessa operazione, mentre definire piú volte una
-stessa variabile/funzione da spesso errore perché il linker non é in
-grado di distinguere quale "versione" della variabile/funzione debba
-venire utilizzata.
-
-#showybox[
-```
-	float euclidean_distance(int x1, int y1, int x2, int y2)
-
-	double temperature;
-	temperature = 4.2;
-
-	extern float gamma_constant;
-```
-]
-
 L'entry point di un programma C++ é una funzione avente nome `main`. Tale
 funzione deve essere globale e ne deve esistere una ed una sola copia. Il
 suo tipo di ritorno deve essere `int`, perché ció che viene restituito é

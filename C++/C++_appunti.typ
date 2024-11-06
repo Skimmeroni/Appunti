@@ -34,9 +34,11 @@
 = Introduzione
 // == Filosofia del C++
 // #include "Introduzione/Filosofia.typ"
-== Processo di compilazione
-#include "Introduzione/Compilazione.typ"
-== Tipi di dato
+// == Processo di compilazione
+// #include "Introduzione/Compilazione.typ"
+== Dichiarazione e definizione
+#include "Introduzione/Dichiarazione.typ"
+== Tipi di dato elementari
 #include "Introduzione/Tipi.typ"
 == Array
 #include "Introduzione/Array.typ"
@@ -50,5 +52,10 @@
 #include "Introduzione/Ciclo.typ"
 == Funzioni
 #include "Introduzione/Funzioni.typ"
+= Appendice
 == Doxygen
 #include "Introduzione/Doxygen.typ"
+// == Makefile
+// #include "Introduzione/Makefile.typ"
+// == Valgrind
+// #include "Introduzione/Valgrind.typ"
