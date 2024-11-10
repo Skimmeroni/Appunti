@@ -1,9 +1,13 @@
 #import "@preview/showybox:2.0.1": showybox
 
-// Aggiungere disegno preso dalle slide, da fare con Graphviz
+Raramente un programma scritto nel linguaggio C++ é costituito da un solo
+file sorgente che contiene l'intero codice. In genere, questo é costituito
+da uno o piú *file sorgente*, ciascuno contenente una parte del codice.
+Questo permette sia di suddividere logicamente il codice in piú componenti,
+enfatizzando quindi la sua struttura logica, sia di sfruttare la *compilazione
+separata*: quando una parte di codice viene modificata, é necessario
+ricompilare solamente il file che la contiene, non l'intero codice.
 
-Un programma scritto nel linguaggio C++ é in genere costituito da uno o piú
-*file sorgente*, dei file di testo ciascuno contiene una parte del codice.
 Quando la compilazione viene invocata, prima che avvenga la compilazione
 vera e propria ciascun file viene modificato da una componente specifica
 del compilatore chiamata *preprocessore*. Questo converte il file di testo
@@ -11,20 +15,12 @@ originale in un altro file di testo, nel quale sono state peró fatte delle
 specifiche sostituzioni sulla base di *direttive*, contenute nel file stesso.
 Il risultato dell'operato del preprocessore é un file testuale di codice
 "puro", dove le direttive sono sostituite dalle rispettive valutazioni.
-Ciascuno di questi file viene detto *unitá di compilazione*. Tale file esiste
-solo in memoria e viene passato al compilatore. Per ciascuno di questi il
-compilatore lo converte in un *file oggetto*, file che contiene la
-rappresentazione in codice binario dell'unitá di compilazione in input.
-Tali file non sono portabili, perché il loro contenuto dipende sia
-dall'architettura su cui il compilatore é stato eseguito, sia dal sistema
-operativo su cui il compilatore é stato eseguito sia dal compilatore stesso.
-Tali file di per loro non sono eseguibili; un'ultima componente del
-compilatore é il linker, che unisce tutti i file oggetto in un solo
-eseguibile.
+Ciascuno di questi file viene detto *unitá di compilazione*. Tale file
+esiste solo in memoria e viene passato al compilatore, a meno di richiederlo
+direttamente.
 
-Il preprocessore interpreta delle istruzioni speciali (direttive),
-riconoscibili perché vi viene anteposto il simbolo `#`. Le direttive
-piú importanti e piú utilizzate sono:
+Le direttive sono riconoscibili perché sono precedute dal simbolo `#`. Le
+direttive piú importanti e piú utilizzate sono:
 
 - `#define` e `#undef`. Permettono la definizione di *macro* o di *tag*.
   Una macro é una stringa che, in ogni posizione del codice in cui viene
@@ -100,34 +96,82 @@ piú importanti e piú utilizzate sono:
 	)
 ]
 
-Il compilatore analizza sintatticamente il codice sorgente per verificare che
-non siano presenti typo. Effettua inoltre una parziale analisi semantica, in
-particolare il *type checking* (ad esempio, valutare che un valore passato ad
-una funzione sia del tipo specificato nella firma della funzione, oppure che
-una variabile venga inizializzata con un dato coerente col suo tipo) e
-l'identificazione di variabili e funzioni esterne, che non possono essere
-incluse immediatamente ma che devono attendere la fase di linking, ed é quindi
-necessario riportare dei "placeholder". Il compilatore, oltre a convertire le
-istruzioni dal formato testuale a quello binario, aggiunge (se necessario)
-delle informazioni di debug aggiuntive utili per la fase di testing.
+Il compilatore analizza sintatticamente ciascuna unitá di compilazione
+per verificare che non siano presenti errori di sintassi. Effettua inoltre
+una parziale analisi semantica, in particolare il *type checking* (ad
+esempio, valutare che un valore passato ad una funzione sia del tipo
+specificato nella firma della funzione, oppure che una variabile venga
+inizializzata con un dato coerente col suo tipo) e l'identificazione di
+variabili e funzioni esterne, che non possono essere incluse immediatamente
+ma che devono attendere le fasi successive e devono pertanto venire
+contrassegnate da dei "placeholder". Il compilatore, aggiunge poi, se
+necessario delle informazioni di debug aggiuntive utili per la fase di
+testing.
 
-I riferimenti a componenti esterne al file oggetto vengono risolti dal
-linker, che cerca negli altri file oggetto le variabili e le funzioni
-che nel file in esame hanno un nome ma non una implementazione, sostituendo
-il "placeholder" con l'indirizzo di memoria della variabile/funzione presa
-dal file oggetto dove é contenuta. Un errore tipico che il linker puó emettere
-é `Unresolved External Symbol`, che avviene quando in un file oggetto é
-riportato il nome di una funzione/variabile che non é presente in nessun file
-oggetto che il linker ha esaminato. Il linker unifica i vari file oggetto in
-un solo eseguibile, ed introduce del codice di *startup* per renderlo
-riconoscibile dal sistema operativo come tale. Oltre ai file oggetto del
-codice in esame, il linker si occupa anche di aggiungere (se necessario)
+Il compilatore converte ciascuna unitá di compilazione in un *file
+oggetto*. Tali file non sono portabili, perché il loro contenuto
+dipende sia dall'architettura su cui il compilatore é stato eseguito,
+sia dal sistema operativo su cui il compilatore é stato eseguito sia
+dal compilatore stesso. Tali file di per loro non sono eseguibili,
+perché potrebbero avere dei riferimenti a variabili o funzioni che
+sono state dichiarate ma non definite nell'unitá di compilazione stessa.
+
+I file oggetto vengono unificati in un solo eseguibile dal *linker*.
+Questo cerca negli altri file oggetto le variabili e le funzioni che
+nel file in esame sono state dichiarate ma non definite, sostituendo
+il "placeholder" con l'indirizzo di memoria della variabile/funzione
+presa dal file oggetto dove é contenuta. Se in un file oggetto riportato
+il nome di una funzione/variabile che non ha peró una definizione in
+nessun altro file oggetto, viene restituito il messaggio di errore
+`Unresolved External Symbol`.
+
+#showybox[
+	```
+	// file2.c
+	extern int x;
+	int f();
+	void g() { x = f(); }
+
+	// file1.c
+	int x = 1;
+	int f() { return 9; }
+	int main() { return 0; }
+	```
+]
+
+Il linker, oltre ad unificare i vari file oggetto in un solo eseguibile,
+introduce del codice di *startup* per renderlo riconoscibile dal sistema
+operativo come tale. Il linker si occupa inoltre di aggiungere (se necessario)
 le librerie esterne. Queste, tranne la libreria standard (che viene inclusa
 sempre in automatica) devono essere specificate manualmente.
 
-Sebbene, come giá detto, i file sorgente possono avere estensioni a piacere
-(fintanto che sono file di testo), per convenzione i file sorgente si
-dividono in due categorie:
+La fase di linking termina con successo se ogni variabile/funzione é stata
+dichiarata in ogni file oggetto in cui compare, se (eventuali) dichiarazioni
+multiple sono fra loro consistenti, se ogni variabile/funzione usata é stata
+definita in uno dei file file oggetto che la utilizza e se tale definizione
+viene fatta esattamente una sola volta.
+
+#showybox[
+	```
+	// file2.c
+	int x = 0;
+	extern double b;
+	extern int c;
+
+	// file1.c
+	int x = 1;       // NOT allowed, x is already defined
+	int b = 1;       // NOT allowed, b was defined double
+	extern int c;    // Allowed, but pointless
+
+	int main()
+	{
+		return 0;
+	}
+	```
+]
+
+Sebbene i file sorgente possono avere estensioni a piacere (fintanto che sono
+file di testo), per convenzione i file sorgente si dividono in due categorie:
 
 - I file con estensione `.cxx`: contengono la definizione vera e propria di
   funzioni (il loro corpo) e variabili (il loro effettivo valore). Possono
@@ -178,131 +222,3 @@ In questo modo, il preprocessore include `something.h` solamente se non é
 mai stato finora incluso.
 
 // Aggiungere un esempio?
-
-La suddivisione del codice in piú file oggetto permette la *compilazione
-separata*: un file sorgente deve venire ricompilato solamente se viene
-modificato direttamente.
-
-L'entry point di un programma C++ é una funzione avente nome `main`. Tale
-funzione deve essere globale e ne deve esistere una ed una sola copia. Il
-suo tipo di ritorno deve essere `int`, perché ció che viene restituito é
-il valore di successo o di errore dell'esecuzione del programma. Il suo
-numero di argomenti é variabile (anche zero), e tali argomenti vengono
-forniti al programma direttamente dall'utente quando il programma viene
-avviato.
-
-```
-int main()
-{
-    ...
-    return 0;
-}
-```
-
-Il programma `Hello, World!` per il linguaggio C++, che stampa sullo standard
-output tale stringa, é il seguente:
-
-```
-#include <iostream>
-
-int main()
-{
-    std::cout << "Hello, World!" << std::endl;
-
-    return 0;
-}
-```
-
-`std::cout` é un oggetto definito nella libreria standard del C++ (nello
-specifico, definito nell'header `iostream`, che viene importato) preposto
-alla stampa sullo standard output. A prescindere di quale sia il tipo di
-dato che `std::cout` debba stampare, questo lo restituisce come carattere.
-
-La dicitura `std` rappresenta il *namespace*, ovvero uno spazio logico dentro
-al quale sono definite delle funzionalitá. I namespace vengono in genere
-utilizzati per suddividere le entitá di una libreria da tutte le altre, e
-specificare che tali entitá appartengono allo stesso gruppo. Nello specifico,
-`std` indica che l'entitá di cui `std` é prefisso proviene dalla libreria
-standard. In questo modo, é anche possibile avere funzioni/variabili che
-hanno lo stesso nome ma che hanno un significato diverso a seconda del
-namespace a cui appartengono.
-
-In maniera molto simile, per leggere input da tastiera é possibile sfruttare
-`std::cin`
-
-#showybox[
-	```
-	#include <iostream>
-
-	int main()
-	{
-	    int something;
-	    std::cin >> something;
-	    std::cout << "I got " << something << std::endl;
-
-	    return 0;
-	}
-	```
-]
-
-Nel caso in cui si voglia mostrare un messaggio di errore, é possibile
-scrivere sullo standard error mediante `std::cerr`. Questo é in genere
-piú rapido che scrivere sullo standard output perché lo standard error
-non fa buffering, e quindi l'overhead é minore. Aiuta inoltre a separare
-i messaggi di errore dal normale flusso di esecuzione del programma.
-
-Gli operatori `<<` e `>>` sono operatori che rispettivamente inseriscono dati
-in uno stream ed estraggono dati da uno stream. C++ supporta la *ridefinizione*
-degli operatori, pertanto é possibile assegnare ad un operatore una funzione
-diversa a seconda del tipo di dato che si richiede che questo manipoli. In
-effetti, tali operatori sono essi stessi una ridefinizione, dato che il loro
-uso di "default" é lo shift logico (a sinistra e a destra rispettivamente).
-
-Sebbene i namespace abbiano il pregio di separare in maniera elegante
-diversi package, riportarne il nome ogni volta che viene riportato un
-suo oggetto o funzione puó diventare tedioso. Per questo motivo é possibile
-includere l'istruzione `using namespace` per specificare al compilatore che,
-all'interno del file corrente, tutte le funzioni e gli oggetti potrebbero
-provenire da tale namespace. Dato che l'effetto di questa istruzione viene
-propagato, é preferibile evitare di riportarla nei file header.
-
-Il C++ é retrocompatibile con C, pertanto é possibile importare normalmente
-librerie C; tali funzionalitá non sono legate ad un namespace vero e proprio,
-ma si trovano nel namespace globale. Spesso le librerie pensate per il
-linguaggio C possono venire utilizzate nel C++ in maniera nativa incapsulando
-tali funzionalitá in un namespace. La differenza fra le due, ovvero fra le
-librerie per C importate in C++ e librerie in C++ propriamente dette, sta
-nel nome dell'header importato: le seconde sono importate specificando il
-file per intero, estensione inclusa, mentre le seconde vengono importante
-troncando l'estensione. Nel caso specifico della libreria standard del C,
-molte delle funzionalitá di tale libreria sono incapsulate dalla libreria
-standard del C++ in header che hanno il medesimo nome ed una 'c' come prefisso.
-
-#showybox[
-	La libreria standard del C `math.h` contiene alcune funzioni matematiche
-	piú elaborate delle operazioni standard, come ad esempio il calcolo della
-	radice quadrata (`sqrt`) o l'arrotondamento per eccesso o per difetto
-	(`floor` e `ceiling`). Per importarla in un codice C++ é sufficiente
-	specificare la direttiva `#include <math.h>` e le funzioni da questa
-	fornite sono disponibili senza dover specificare un namespace (non
-	avendolo). In alternativa, la libreria standard del C++ incapsula
-	`math.h` nel namespace `std` (senza modificarne le funzionalitá) pertanto
-	é anche possibile accedere alle funzioni di `math.h` mediante la direttiva
-	`#include <cmath>`, e tali funzioni avranno `std` come namespace.
-
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[
-			```
-			#include <math.h>
-			sqrt(16);
-			```
-		],
-		[
-			```
-			#include <cmath>
-			std::sqrt(16);
-			```
-		]
-	)
-]

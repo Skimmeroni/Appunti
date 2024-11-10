@@ -1,9 +1,22 @@
 #import "@preview/showybox:2.0.1": showybox
 
+Inizializzare una variabile significa assegnarle un valore per la prima volta.
+Se una variabile non viene inizializzata, potrebbe o potrebbe non venirle
+essere assegnato un valore di default. Le variabili globali, le variabili
+membro di un certo namespace oppure le variabili locali dichiarate `static`
+vengono implicitamente inizializzate con un valore "neutro" che dipende dal
+tipo di variabile ($0$ per `int`, $0.0$ per `double`, ecc...). Le variabili
+locali non dichiarate `static` e le variabili allocate dinamicamente non
+vengono inizializzate di default, ed occorre farlo esplicitamente. I membri
+degli array e delle strutture possono venire inizializzati oppure no a seconda
+che l'array o la struttura a cui appartengono é o non é `static`. Una
+istanziazione di una classe potrebbe (ed é bene che ce l'abbia) avere un
+costruttore che assegna valori di default agli attributi della classe.
+
 In C++ esistono diversi modi per allocare le variabili. Diversi
 modi implicano diversa visibilitá, ovvero sono accessibili in
 un qualche modo in un punto piuttosto che un altro del programma.
-I modi sono tre:
+I modi sono quattro:
 
 - Allocazione *globale*;
 - Allocazione *automatica*;
@@ -17,7 +30,38 @@ di compilazione corrente, e se dichiarata con il modificatore
 compilazione che la importa. Esistono all'interno della memoria
 fintanto che il programma é in esecuzione.
 
-// Esempio
+Le variabili dichiarate globalmente appartengono ad un proprio namespace,
+detto *namespace globale*. É possibile specificare che ci si sta riferendo
+a delle entitá che appartengono al namespace globale mediante `::` senza
+riportare alcun nome. In genere, questo non é necessario, perché tutto ció
+che non ha un namespace associato (se esiste) viene cercato o nel namespace
+globale o nello scope in cui ci si trova. L'unica situazione in cui `::`
+permette effetivamente di disambiguare si ha quando ci si vuole riferire
+ad una entitá del namespace globale che una un conflitto di nomi con una
+entitá del namespace o dello scope in uso. É comunque considerata bad
+practice riusare gli stessi nomi e tipi per variabili globali e locali,
+a meno di avere un motivo ragionevole per farlo.
+
+#showybox[
+	```
+	int x;
+
+	namespace XXX
+	{
+		int x;
+	}
+
+	int main()
+	{
+		int x = 1;       // Allowed
+		::x = 5;         // Global x, not local x
+		XXX::x = 10;     // x from XXX, not local x
+
+		std::cout << x << ::x << XXX::x << std::endl;    // Prints 1510
+		return 0;
+	}
+	```
+]
 
 Definire una variabile globale che deve essere accessibile
 da ogni singola unitá di compilazione del codice é una delle
@@ -167,69 +211,3 @@ piú ragionevole utilizzare una classe.
 	```
 ]
 
-Un modo alternativo per raggruppare semanticamente funzioni, variabili,
-dichiarazioni e tipi é quello del namespace, che assegna una etichetta univoca
-a ciascuna di queste entitá. Tale etichetta diviene parte del nome dell'entitá
-stessa, e due entitá che hanno lo stesso nome ma diverso namespace saranno
-comunque trattati come distinti (naturalmente, all'interno di uno stesso
-namespace non possono esistere due entitá con lo stesso nome).
-
-#grid(
-	columns: (0.5fr, 0.5fr),
-	[
-	```
-	namespace name_s
-	{
-	...
-	}
-	```
-	],
-	[
-	```
-	name_s::entity
-	```
-	]
-)
-
-#showybox[
-	```
-	namespace First
-	{
-		int smth;
-		int g() {...}
-	}
-
-	namespace Second
-	{
-		int smth;        // Allowed, namespace is not the same
-	}
-
-	First::smth = 10;
-	Second::smth = 5;
-	int smth = 2;        // Allowed, signature is still different
-
-	int x = First::g();
-	```
-]
-
-La keyword `using` permette di specificare che, da quel momento in poi,
-tutte le entitá che vengono nominate, se non hanno un namespace associato,
-_potrebbero_ avere sottinteso il namespace passato come argomento. Puó anche
-essere usato per specificare una singola entitá che deve essere "estratta" dal
-namespace, senza riferirvisi con il nome del namespace.
-
-#showybox[
-	```
-	namespace First
-	{
-		int s;
-	}
-
-	int main()
-	{
-		using First::s;      // Now First::s is just s
-		int s = 10;          // NOT allowed
-		s = 10;              // Allowed
-	}
-	```
-]

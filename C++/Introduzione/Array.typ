@@ -1,161 +1,23 @@
 #import "@preview/showybox:2.0.1": showybox
 
-Un puntatore é un tipo di dato che contiene un riferimento ad un indirizzo
-di memoria. Esistono tanti tipi di puntatori quanti sono i tipi primitivi;
-per quanto contengano un indirizzo di memoria (che é un numero), il loro
-tipo non é un intero, bensí é specificatamente di tipo "puntatore a...".
-Puntatori a tipi diversi sono incompatibili. Nonostante questo, la dimensione
-di un puntatore non dipende dal tipo di dato dato che gli indirizzi di memoria
-hanno tutti la stessa dimensione. Il valore di default per un puntatore é
-`NULL` oppure (standard C++11) `nullptr`.
+Combinando fra loro tipi primiti, é possibile costruire tipi di dato
+composti. Nel C++, i principali dati composti sono tre: *array*,
+*stringhe* e *strutture*.
 
-Un puntatore viene dichiarato come una normale variabile di tale tipo,
-ma postponendo `*` al tipo #footnote[Tecnicamente, la scrittura `type* v`
-é equivalente a `type * v` e a `type *v`. Questo perché il token `*` viene
-riconosciuto dal parser singolarmente, quindi non c'é differenza nella sua
-posizione. Scegliere uno stile piuttosto che un'altro dipende da preferenze
-personali.]. Anteponendo `&` al nome di una variabile se ne ottiene l'indirizzo
-di memoria. Per ricavare il valore della cella di memoria a cui un puntatore é
-associato si antepone `*` al nome della variabile. L'atto di "risalire" al
-valore a cui un puntatore é legato é una operazione che prende il nome di
-*dereferenziazione*.
+=== Array
 
-```
-variable_type* pointer_name                      // declares a pointer
-variable_type* pointer_name = &variable_to_point // declares and initialises a
-pointer
-variable_type variable_name = *pointer_name      // dereferences a pointer
-```
+Un *array* é una sequenza di dati dello stesso tipo, memorizzati in aree
+di memoria contigue chiamate *celle*. Gli array sono utili per memorizzare
+dati che fra loro hanno un qualche legame logico.
 
-#showybox[
-	```
-	int* p = nullptr;                 // initialises a pointer p
-
-	int s = 10;                       // initialises an integer s
-
-	p = &s;                           // p points to the memory address of s
-
-	std::cout << *p << std::endl;     // retrieves the value to which p is
-	                                  // pointing, and prints it
-
-	(*p)++;                           // retrieves the value to which p is
-	                                  // pointing, and increments it by one
-	```
-]
-
-Un puntatore, pur non venendo considerato un intero, puó essere manipolato
-come tale. In particolare, é possibile sommare un intero ad un puntatore,
-e l'operando `+` viene reinterpretato non come una somma nel senso stretto
-del termine ma come lo spostamento di un offset di tante posizioni quante
-ne viene specificato. Il numero di posizioni dipende dal tipo di puntatore:
-sommare N ad un puntatore equivale a spostare la cella di memoria a cui si
-riferisce di N volte la dimensione del tipo di dato a cui il puntatore si
-riferisce. La scrittura `p[n]` permette di risalire al valore che si trova
-`n` posizioni in avanti rispetto al puntatore `p` (é uno spostamento unito
-ad una dereferenziazione). La differenza fra due puntatori restituisce il
-numero di elementi che si trovano nell'intervallo fra le posizioni in memoria
-a cui i due si riferiscono. Il confronto (`=`) fra due puntatori viene fatto
-rispetto ai rispettivi valori, e non a ció a cui puntano.
-
-Il fatto che sui puntatori sia possibile fare aritmetica puó presentare un
-problema, perché significa che é tecnicamente possibile, dall'interno di un
-programma C++, raggiungere aree di memoria che non sono di competenza del
-programma stesso, semplicemente incrementando o decrementando il valore di
-un puntatore. Fortunatamente questo non puó accadere, perché il sistema
-operativo lo previene emettendo un messaggio di errore `Segmentation Fault`
-e fermando il programma prima che avvenga l'accesso. Per questo motivo non
-é consigliabile (a meno di casi eccezionali) inizializzare un puntatore
-fornendogli direttamente un indirizzo di memoria, perché questo comporta
-che si chieda al programma di accedere ad una area di memoria specifica
-senza poter sapere se il programma possa accedervi, dato che gli indirizzi
-in RAM vengono assegnati in maniera sostanzialmente arbitraria.
-
-Cercando di stampare il valore di un puntatore mediante `std::cout` si ottiene
-effettivamente l'indirizzo di memoria a cui il puntatore é associato (espressa
-in esadecimale).
-
-#showybox[
-	```
-	int d = 1;
-	int* p = &d;
-
-	int c = p[2];                  // A shortand for *(p + 2)
-
-	p = p + 3;                     // pointer's location is shifted by one.
-	                               // A shortand for p = p + 3 * sizeof(int)
-	std::cout << p << std::endl    // prints, say, 0xfffff7d7761c
-	```
-]
-
-Essendo un puntatore comunque una variabile, anch'esso si trova in una certa
-area di memoria, ed é pertanto possibile risalire all'area di memoria di un
-puntatore. Questo significa che é anche possibile avere dei puntatori a dei
-puntatori. Inoltre, nulla vieta di avere piú di un puntatore legato alla
-stessa area di memoria.
-
-#showybox[
-	```
-	char s = 's';       // A char
-	char* ss = &s;      // A pointer to a char
-	char* sss = &ss;    // A pointer to a pointer to a char
-	char** f = &s;      // A pointer to a pointer to a char (in one go)
-	```
-]
-
-É possibile sfruttare dei puntatori di tipo `void` per aggirare le
-limitazioni imposte dal compilatore sui puntatori, in particolare i
-vincoli di tipo. Infatti, un puntatore di tipo `void` puó riferirsi
-a qualsiasi tipo di dato, ed é possibile riassegnare un puntatore di
-tipo `void` a dati diversi. Per operare la dereferenziazione é peró
-necessario compiere un casting esplicito al tipo di dato a cui il
-puntatore si riferisce in questo momento. Sebbene nel C vi fosse una
-certa utilitá nei puntatori `void`, nel C++ é da considerarsi una
-funzionalitá deprecata.
-
-#showybox[
-	```
-	int i;
-	double d;
-
-	void* pi = &i;
-	void* pd = &d;
-	int* ppd = pd;             // NOT Allowed
-
-	int x = *((int*) (pi));    // Ok
-	int y = *((int*) (pd));    // Allowed, but VERY dangerous
-	```
-]
-
-Le utilitá dei puntatori sono riassunte di seguito:
-
-- Permettono di riferirsi a piú dati dello stesso tipo;
-- Permettono di condividere uno stesso dato in piú parti di codice senza
-  doverlo ricopiare piú volte;
-- Permettono di accedere ai dati indirettamente, non manipolando il valore
-  della variabile in sé ma bensí accedendo alla memoria su cui tale dato si
-  trova;
-- Permettono il passaggio per parametri alle funzioni, non passando
-  direttamente il valore ma il puntatore, risparmiando memoria;
-- Permettono di costruire strutture dati dinamiche, come liste e alberi;
-
-Un *array* é una sequenza di dati dello stesso tipo, memorizzati in aree di
-memoria contigue chiamate *celle*, utile per memorizzare dati che fra loro
-hanno un qualche legame logico. Un array viene dichiarato come una normale
-variabile di un certo tipo, ma accodando `[]` al nome. La dimensione di un
-array é fissata, direttamente nel codice riportandola fra le parentesi
-quadre oppure venendo "dedotta" dal compilatore in base a come l'array
-viene inizializzato.
-
-Un array viene inizializzato riportando fra parentesi graffe i valori,
-separati da virgole, che verranno assegnati ordinatamente a ciascuna
-posizione dell'array. Se vi sono piú valori che posizioni nell'array,
-il compilatore restituisce un errore. Non é possibile cambiare i valori
-assegnati alle celle di un array usando la medesima sintassi
-dell'inizializzazione, ma occorre farlo cella per cella. Riportando
-il nome dell'array con N fra le parentesi graffe si ottiene il valore
-nella (N - 1)-esima cella dell'array; gli array partono da 0. Il compilatore
-non restituisce un messaggio di errore se si cerca di accedere ad una cella
-di memoria che supera le dimensioni dell'array.
+Un array viene dichiarato come una normale variabile di un certo tipo, ma
+accodando `[]` al nome. Dentro alle parentesi quadre é opzionalmente riportata
+la sua *dimensione*, ovvero il numero di celle di cui é costituito. Un array
+viene inizializzato riportando fra parentesi graffe i valori, separati da
+virgole, che verranno assegnati ordinatamente a ciascuna posizione dell'array.
+Se vi sono piú valori che posizioni nell'array, il compilatore restituisce un
+errore, mentre l'opposto é ammissibile (le celle rimaste vuote vengono
+automaticamente riempite con $0$).
 
 ```
 	array_type array_name[n]                    // Size set to n
@@ -163,6 +25,30 @@ di memoria che supera le dimensioni dell'array.
 	array_type array_name[]                     // Size to be determined
 	array_type array_name[] = {v1, ..., vn}     // Size is set to n by the compiler
 ```
+
+Se la dimensione di un array non viene riportata, il compilatore la "deduce"
+sulla base del numero di elementi con il quale é stato inizializzato (se é
+stato inizializzato con $n$ elementi, allora gli viene assegnata in automatico
+la dimensione $n$). La dimensione di un array, se riportata esplicitamente,
+deve essere un valore costante, non il contenuto di una variabile, anche se il
+valore di tale variabile é noto, e non é ammesso che questa venga determinata
+a runtime #footnote[Molti compilatori hanno introdotto una estesione che
+permette di avere array la cui dimensione viene calcolata a runtime
+(*variable-length arrays* o *VLA*). Per forzare il compilatore a non
+usare questa estesione, molti mettono a disposizione il flag `-pedantic` che
+garantisce aderenza totale allo standard ISO C++.]. Una volta fissata la
+dimensione di un array, non é piú possibile cambiarla (estenderla o
+restringerla).
+
+Non é possibile cambiare i valori assegnati alle celle di un array usando la
+medesima sintassi dell'inizializzazione, ma occorre farlo cella per cella.
+Riportando il nome dell'array con N fra le parentesi graffe si ottiene il
+valore nella (N - 1)-esima cella dell'array; gli array partono da 0.
+Il compilatore non restituisce un messaggio di errore se si cerca di accedere
+ad una cella di memoria che supera le dimensioni dell'array. Nonostante questo,
+é comunque considerato un comportamento semanticamente scorretto, perché (come
+nel caso dei puntatori) si sta cercando di accedere ad un'area di memoria non
+assegnata al programma, e gli effetti sono imprevedibili.
 
 #showybox[
 	```
@@ -177,7 +63,7 @@ di memoria che supera le dimensioni dell'array.
 	array4[10] = 10;                  // NOT allowed
 
 	char x = array3[0]                // Allowed
-	char x = array2[5]                // Allowed, but dangerous
+	char x = array2[5]                // Allowed, but...
 	```
 ]
 
@@ -256,29 +142,300 @@ corrisponde a scorrere di sottoarray in sottoarray.
 // Esiste un modo per decifrare i tipi di dato cursati,
 // ha probabilmente senso prenderla dal libro
 
-Una *reference* é un tipo di dato simile al puntatore. Una reference
-é di fatto un _alias_ per un'altra variabile; ogni volta che viene
-fatta una manipolazione sulla reference, tale manipolazione viene
-propagata sulla variabile originale. Una reference deve necessariamente
-essere inizializzata quando viene dichiarata, pena messaggio di errore
-da parte del compilatore, perché una reference non inizializzata non ha
-alcun significato. L'inizializzazione deve essere rispetto ad una variabile,
-non rispetto ad un valore. Una volta dichiarato ed inizializzato, un reference
-non puó venire "sganciato" e riassegnato ad una variabile diversa, nemmeno se
-ha lo stesso tipo della precedente. Cosí come i puntatori, le reference sono
-di tipo "reference a...".
+=== Stringhe
 
-```
-	reference_type& reference_name = variable_to_be_referenced
-```
+Una *stringa* é un tipo di dato che permette di memorizzare informazioni
+alfanumeriche. In C, le stringhe sono degli array di `char` il cui ultimo
+carattere é il carattere speciale `\0`. Quando a `cout` viene fornito un
+array di `char` con queste caratteristiche, vengono ordinatamente stampati
+tutti i caratteri dell'array ad eccezione di `\0`. Un puntatore a `char`
+viene interpretato come una stringa, pertanto non é possibile, a meno di
+usare una sintassi particolarmente convoluta, riferirsi ad una stringa
+tramite un puntatore. Le stringhe del C hanno dei metodi che si trovano
+nell'header file `string.h` (o `cstring`).
+
+Una stringa puó essere inizializzata in due modi. Il primo é quello di
+usare la sintassi tipica degli array, e quindi riportare ordinatamente
+ogni carattere fra parentesi graffe; in questo caso, occorre che l'ultimo
+sia `\0`. Il secondo é quello di riportare semplicemente i caratteri fra
+doppi apici; il compilatore converte implicitamente tale rappresentazione
+in lista di caratteri e aggiunge `\0` alla fine. Una stringa particolarmente
+lunga puó essere inizializzata "spezzandola" in piú sequenze racchiuse fra
+doppi apici: il compilatore si incarica di concatenarle automaticamente.
 
 #showybox[
 	```
-	int x = 10;
-	int& y = x;        // y references x
-	y++;               // de facto x++
+	char strc[10] = "Hello";
+	char strm[] = "Up" "Down" "Left" "Right" "Forward" "Backward";
+	char strl[] = {'W', 'o', 'r', 'l', 'd', '!', '\0'};
+	char* strp = "Hello, World!";   // should be const char* strp
+	```
+]
 
-	int& z;            // NOT allowed
-	int& w = 10;       // NOT allowed
+// Se una stringa viene dichiarata con `char*`, é...
+// Se viene dichiarata con `char[]`, é...
+
+La sintassi del tipo `char* str = "..."` é ammessa perché é un residuo del
+modo in cui C gestisce le stringhe, ma non é tecnicamente corretta. Infatti,
+una stringa scritta in questo modo ha implicitamente un `const` davanti,
+perché indica una stringa costante che viene raggiunta attraverso un puntatore
+non costante. Infatti, se si cerca di manipolare tale stringa tramite tale
+puntatore si ottiene un errore a runtime. Se si dichiara invece una stringa
+come array di caratteri, é possibile modificarla come fosse un normale array
+senza effetti collaterali.
+
+#showybox[
+	```
+	char* m = "More";
+	m[2] = 'l';            // Allowed, but...
+
+	char d[] = "Down";
+	d[1] = 'a';            // Allowed
+	```
+]
+
+Essendo degli array di caratteri (per quanto gestiti in maniera speciale), una
+stringa si comporta come tale. Ovvero, se la sua dimensione viene fissata ma
+viene inizializzata con una stringa con meno caratteri di tale dimensione, i
+caratteri restanti vengono riempiti con il carattere nullo. Se la dimensione
+non viene specificata, viene dedotta dal compilatore sulla base di come viene
+inizializzata. Non é possibile inizializzare una stringa se non mentre la si
+dichiara.
+
+Per inserire caratteri speciali all'interno di una stringa, é possibile usare
+l'escape character '\'. In particolare, alcuni caratteri speciali, come quello
+di tabulazione o di a capo, hanno delle escape sequence dedicate (`\t` e `\n`
+rispettivamente, in questo caso). É possibile inserire volutamente il carattere
+nullo all'interno di una stringa, ma la maggior parte delle funzioni che
+manipolano stringhe non saranno in grado di notarlo.
+
+Una stringa con prefisso `L` é una stringa di wide chars. Di conseguenza, il
+suo tipo é `const wchar_t`.
+
+In C++, questa é la forma piú "basica" di stringa, e pertanto andrebbe evitata
+a meno di circostanze particolari. Le stringhe C++ sono degli oggetti veri e
+propri, definiti come `std::string`. L'header file `string` contiene diversi
+metodi per manipolarle.
+
+#showybox[
+	```
+	#include <string>
+
+	std::string s1;
+	s1 = "Hello";
+	std::string s2 = "World!";
+	```
+]
+
+Le stringhe C sono ancora utilizzate come argomenti dalla riga di comando.
+Infatti, la sintassi standard #footnote[Alcuni compilatori accettano anche
+versioni non strettamente conformi a tale standard, ma é comunque best
+practise aderirvi.] della funzione `main` completa é la seguente:
+
+```
+int main(int argc, char* argv[])
+{
+	...
+	return 0;
+}
+```
+
+`argc` (_argument count_) é una variabile intera e cattura il numero di
+argomenti passati al programma quando é stato invocato. `argv` (_argument
+value_) é un array di puntatori, ciascuno facente riferimento ad una stringa,
+ed a sua volta ciascuna stringa é l'$i$-esimo argomento passato al programma.
+L'unica eccezione é `argv[0]`, che é invece il nome dell'eseguibile stesso
+(pertanto, gli argomenti vanno contati a partire da $1$).
+
+Gli argomenti in `argv` sono sempre e comunque stringhe. Per interpretarne
+il contenuto come tipi di dato primitivi diversi (come `int` o `float`) sono
+possibili due strade:
+
+- Usare le funzioni di basso livello del C, come `atoi` o `atof`;
+- Usare gli oggetti `stringstream` dell'header C++ `sstream`.
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[
+	```
+	var_type = std::atoX(argv[i]);
+	```
+	],
+	[
+	```
+	#import <sstream>
+	std::stringstream s_name(argv[i]);
+	type name;
+	s_name >> name;
+	```
+	]
+)
+
+=== Struct
+
+Similmente agli array, che sono tipi primitivi, le *struct* sono considerate
+tipi compositi. Di fatto, una struct é un "raggruppamento" di dati anche di
+tipo diverso, chiamati *campi*. Sono di fatto una forma piú "rudimentale"
+del concetto di classe. Tutti i dati di una struct sono di default pubblici,
+quindi liberamente modificabili.
+
+Una struct puó essere inizializzata allo stesso modo di come viene
+inizializzato un array, dove ogni elemento $i$-esimo all'interno
+delle parentesi graffe viene assegnato alla $i$-esima variabile
+contenuta nella `struct`. Una `struct` puó anche essere inizializzata
+parzialmente, ovvero assegnando un valore solamente ai primi $n$
+campi.
+
+#grid(
+	columns: (0.3fr, 0.7fr),
+	[
+	```
+	struct name_type {
+		type_1 name_1;
+		type_2 name_2;
+		...
+		type_n name_n;
+	};
+	```
+	],
+	[
+	```
+	struct_type struct_name = {field_1, field_2, ..., field_n};
+	```
+	]
+)
+
+#showybox[
+	```
+	struct Point {
+		int x;
+		int y;
+	};
+
+	Point A = {5, 2};
+	```
+]
+
+L'operatore `.` permette di accedere ai dati di una `struct`, specificando
+il nome del campo a cui ci si riferisce. L'operatore `->` permette di accedere
+ad un campo di una struct quando ci riferisce ad essa tramite un puntatore e
+non direttamente (é una abbreviazione di una deferenziazione seguita da un
+accesso).
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[
+	```
+	struct_name.field
+	```
+	],
+	[
+	```
+	pointer_to_a_struct->field
+	```
+	]
+)
+
+#showybox[
+	```
+	Point P = {5, 2};
+	Point* Q = &P;
+
+	P.x = 10;
+	Q->y = 8;       // same as (*Q).p = 8
+
+	std::cout << Q->x << " " << P.y << std::endl;    // prints 10 8
+	```
+]
+
+La memoria occupata da una `struct` dipende dalla politica di allocazione
+della memoria del compilatore. In genere, viene prediletta una allocazione
+di memoria che ottimizza l'accesso piuttosto che la dimensione. Per tale
+motivo, per ottenere la massima efficienza in termini di spazio occupato
+é preferibile disporre i dati all'interno in ordine decrescente di grandezza,
+di modo che piú dati possano venire "accorpati" in un'unica `word`.
+
+Due `struct` diverse, anche se hanno gli stessi tipi e sono inizializzate
+allo stesso modo, sono comunque considerati due tipi distinti. Questo perché
+una variabile dichiarata come una certa `struct` ha per tipo tale `struct`.
+Inoltre, anche una `struct` formata da un solo campo, anche se tale campo é
+un tipo di dato primitivo, é comunque considerata un tipo distinto da
+quest'ultimo.
+
+#showybox[
+	```
+	struct S1 {int a;};
+	struct S2 {int a;};
+
+	S1 x;
+	S2 y = x;    // NOT Allowed, different types
+
+	int z = x;   // NOT Allowed, even if x is just a int
+	```
+]
+
+Una `struct` non puó essere definita ricorsivamente, ovvero non puó contenere
+a sua volta una `struct` dello stesso tipo come campo. Questo perché il nome di
+un tipo diventa disponibile non solamente dopo essere stato dichiarato, ma dopo
+che lo si definisce per la prima volta, perché il compilatore non puó sapere
+quanta memoria allocare. É peró possibile avere una `struct` che contiene un
+puntatore ad una `struct` dello stesso tipo, perché la memoria allocata per un
+puntatore é sempre la stessa, ed il problema non si pone.
+
+#showybox[
+	```
+	// NOT allowed, incomplete type
+	struct Node {
+		int value;
+		Node Left;
+		Node Right;
+	};
+
+	// Allowed
+	struct Node {
+		int value;
+		Node* Left;
+		Node* Right;
+	};
+	```
+]
+
+In generale, il nome di una `struct` che é stata dichiarata ma non definita
+puó essere usato solamente nei casi in cui non é necessario conoscerne la
+dimensione o uno dei suoi campi.
+
+#showybox[
+	```
+	struct List;
+
+	// NOT allowed, incomplete type
+	struct Table {
+			int hash;
+			List L;
+	};
+
+	// Allowed, but unusable until List is defined
+	struct Table {
+			int hash;
+			List* L;
+	};
+
+	void  f(List L);         // Allowed
+	List  g(int x, char* S); // Allowed
+	List  h(double y);       // Allowed
+	List  q(List L);         // Allowed
+	List* p(List* L);        // Allowed
+
+	int main(int argc, char* argv[])
+	{
+			List* L;         // Allowed, only pointers involved
+			List LL;         // NOT allowed, incomplete type
+			f(*L);           // NOT allowed, size is needed to be returned
+			g(5, "Hello");   // NOT allowed, size is needed to be passed
+			h(3.14).n = 0;   // NOT allowed, fields are unknown
+			List* P = p(L);  // Allowed, only pointers involved
+
+			return 0;
+	}
 	```
 ]

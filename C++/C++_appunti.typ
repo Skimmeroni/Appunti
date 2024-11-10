@@ -32,29 +32,27 @@
 #pagebreak()
 
 = Introduzione
-// == Filosofia del C++
-// #include "Introduzione/Filosofia.typ"
-// == Processo di compilazione
-// #include "Introduzione/Compilazione.typ"
-== Dichiarazione e definizione
-#include "Introduzione/Dichiarazione.typ"
+== Hello, World!
+#include "Introduzione/HelloWorld.typ"
 == Tipi di dato elementari
 #include "Introduzione/Tipi.typ"
-== Array
+== Dichiarazione e definizione
+#include "Introduzione/Dichiarazione.typ"
+== Tipi di dato composti
 #include "Introduzione/Array.typ"
-== Struct, enum, typedef
-#include "Introduzione/Struct.typ"
-== Stringhe
-#include "Introduzione/Stringhe.typ"
-== Casting
+== Scope e namespace
+#include "Introduzione/Scope.typ"
+== Typedef, const, Casting
 #include "Introduzione/Casting.typ"
 == Ciclo di vita delle variabili
 #include "Introduzione/Ciclo.typ"
 == Funzioni
 #include "Introduzione/Funzioni.typ"
+== Processo di compilazione
+#include "Introduzione/Compilazione.typ"
 = Appendice
 == Doxygen
-#include "Introduzione/Doxygen.typ"
+#include "Appendice/Doxygen.typ"
 // == Makefile
 // #include "Introduzione/Makefile.typ"
 // == Valgrind

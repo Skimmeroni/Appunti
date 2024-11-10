@@ -17,8 +17,7 @@ globali in sostituzione a `#define`).
 La definizione é distinta dall'*inizializzazione*, ovvero assegnare un valore
 iniziale. Una variabile puó essere sia inizializzata mentre la si definisce,
 oppure puó essere fatto separatamente. Se una variabile non viene inizializzata,
-il suo valore é indeterminato, perché dipende dal contenuto della memoria che
-prima occupava tale variabile.
+il suo valore potrebbe essere indeterminato.
 
 #showybox[
 	```
