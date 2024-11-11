@@ -50,6 +50,9 @@
 #include "Introduzione/Funzioni.typ"
 == Processo di compilazione
 #include "Introduzione/Compilazione.typ"
+= Programmazione ad oggetti
+== Classi
+#include "Oggetti/Classi.typ"
 = Appendice
 == Doxygen
 #include "Appendice/Doxygen.typ"
