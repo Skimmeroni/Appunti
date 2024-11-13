@@ -33,10 +33,6 @@ un messaggio di errore.
 const var_type var_name = value;
 ```
 
-Il valore di una reference a cui viene aggiunto il modificatore `const` puó
-cambiare se il valore originale viene cambiato, ma non puó comunque venire
-modificato direttamente.
-
 #showybox[
 	```
 	const float pi;              // NOT Allowed
@@ -46,11 +42,24 @@ modificato direttamente.
 
 	g = 1;
 	const int gamma = g;         // Allowed
+	```
+]
 
+Il valore di una reference a cui viene aggiunto il modificatore `const` puó
+cambiare se il valore originale viene cambiato, ma non puó comunque venire
+modificato direttamente. Non é peró vero il contrario: se una variabile viene
+dichiarata `const` non puó essere referenziata, perché questo violerebbe il
+senso stesso di averla dichiarata in quel modo.
+
+#showybox[
+	```
 	int f = 2;
 	const int& e = f;
 	f++;                         // Allowed, now e = 3 even if constant
 	e++;                         // NOT Allowed
+
+	const char x = 'x';
+	char& y = x;                 // NOT Allowed
 	```
 ]
 

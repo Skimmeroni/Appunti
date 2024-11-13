@@ -139,8 +139,27 @@ corrisponde a scorrere di sottoarray in sottoarray.
 	```
 ]
 
-// Esiste un modo per decifrare i tipi di dato cursati,
-// ha probabilmente senso prenderla dal libro
+Usare i puntatori e gli array puó portare a scritture molto convolute. É
+possibile usare la seguente regola pratica per interpretare una scrittura
+di difficile comprensione:
+
+- Si inizia dal nome della variabile;
+- Ci si sposta a destra se possibile: se esiste qualcosa a destra della
+  variabile (come `[]` o `()`), lo si processa;
+- Ci si sposta a sinistra se necessario: se non c'é nulla a destra, ci si
+  sposta a sinistra. In genere questo accade se c'é da processare `*`, che
+  indica un puntatore;
+- Si ripete finché la dichiarazione é terminata.
+
+#showybox[
+	```
+	int i;                  // i as an int
+	int *i;                 // i as a pointer to an int
+	int **i;                // i is a pointer to a pointer to an int
+	int *i[5];              // i is an array of 5 pointers to int
+	int (*i)[5];            // i is a pointer to an array of 5 ints
+	```
+]
 
 === Stringhe
 

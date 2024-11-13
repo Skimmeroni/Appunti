@@ -8,9 +8,9 @@ devono venire interpretate.
 Nel C++ si distinguono i seguenti tipi di dato primitivi:
 
 - *numeri interi*;
+- *numeri decimali*;
 - *booleani*;
 - *caratteri*;
-- *numeri decimali*;
 - *enumerativi*;
 - `void`;
 - *puntatori*;

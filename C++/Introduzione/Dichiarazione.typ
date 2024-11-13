@@ -7,17 +7,15 @@ compilatore deve sapere si riferisce a tale identificatore. Una *definizione*
 é l'istanziazione/implementazione di tale identificatore. Una definizione é
 ció che il linker deve sapere si riferisce a tale identificatore.
 
-Dichiarare una variabile significa notificare al compilatore che tale variabile
-esiste ed ha un certo nome, ma quale sia il suo valore non é da cercarsi nel
-file attuale (in genere questo viene fatto per la definizione di costanti
-globali in sostituzione a `#define`).
+Dichiarare una variabile significa notificare al compilatore che tale
+variabile esiste ed ha un certo nome. Definire una variabile significa
+richiedere esplicitamente di allocare la memoria necessaria a contenerne
+il valore.
 
-// Definire una variabile significa...
-
-La definizione é distinta dall'*inizializzazione*, ovvero assegnare un valore
-iniziale. Una variabile puó essere sia inizializzata mentre la si definisce,
-oppure puó essere fatto separatamente. Se una variabile non viene inizializzata,
-il suo valore potrebbe essere indeterminato.
+La definizione é distinta dall'*inizializzazione*, ovvero assegnare un
+valore iniziale. Una variabile puó essere sia inizializzata mentre la si
+definisce, oppure puó essere fatto separatamente. Se una variabile non
+viene inizializzata, il suo valore potrebbe essere indeterminato.
 
 #showybox[
 	```
@@ -72,8 +70,8 @@ che quella entitá "esiste". Viene restituito un messaggio di errore durante
 la compilazione nel caso in cui che vi siano piú dichiarazioni di una stessa
 variabile/funzione se queste sono discordanti fra loro. Definire piú volte
 una stessa variable/funzione restituisce sempre un messaggio di errore durante
-la compilazione. Due dichiarazioni che differiscono per il tipo ma hanno lo
-stesso nome sono ammesse.
+la compilazione. Due dichiarazioni/definizioni per variabili con lo stesso nome,
+anche se di tipo diverso, non sono ammesse.
 
 #showybox[
 	```
@@ -81,7 +79,7 @@ stesso nome sono ammesse.
 	int x;                   // NOT allowed
 
 	float y;
-	char y;                  // Allowed
+	char y;                  // NOT allowed
 
 	extern double pi;
 	extern double pi;        // Allowed

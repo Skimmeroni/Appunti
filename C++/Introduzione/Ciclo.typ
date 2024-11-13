@@ -23,12 +23,11 @@ I modi sono quattro:
 - Allocazione *statica*;
 - Allocazione *dinamica*;
 
-Una variabile é globale se non appartiene a nessuna funzione o
-classe. Tale variabile é accessibile da qualsiasi punto dell'unitá
-di compilazione corrente, e se dichiarata con il modificatore
-`extern` é accessibile anche da qualsiasi altra unitá di
-compilazione che la importa. Esistono all'interno della memoria
-fintanto che il programma é in esecuzione.
+Una variabile é globale se non appartiene a nessuna funzione o classe.
+Tale variabile é accessibile da qualsiasi punto dell'unitá di compilazione
+corrente, e da qualsiasi altra unitá di compilazione che importa il (un)
+file in cui é dichiarata. Le variabili globali esistono all'interno della
+memoria fintanto che il programma é in esecuzione.
 
 Le variabili dichiarate globalmente appartengono ad un proprio namespace,
 detto *namespace globale*. É possibile specificare che ci si sta riferendo
@@ -67,14 +66,12 @@ Definire una variabile globale che deve essere accessibile
 da ogni singola unitá di compilazione del codice é una delle
 poche situazioni in cui puó avere senso avere un file `main.h`.
 
-Una variabile é automatica se viene allocata e deallocata
-automaticamente nello/dallo stack. Sono le variabili comunemente
-intese, che si trovano all'interno di una funzione e che esistono
-solamente fintanto che tale funzione é in esecuzione. Sono
-(potenzialmente) accessibili solamente dal blocco in cui
-sono state definite. Naturalmente, le variabili automatiche
-dichiarate all'interno di `main()` esistono fino alla fine
-dell'esecuzione del programma.
+Una variabile é automatica se viene allocata e deallocata automaticamente
+nello/dallo stack. Sono le variabili comunemente intese, che si trovano
+all'interno di una funzione e che esistono solamente fintanto che tale
+funzione é in esecuzione. Sono accessibili solamente dal blocco in cui
+sono state definite. Naturalmente, le variabili automatiche dichiarate
+all'interno di `main()` esistono fino alla fine dell'esecuzione del programma.
 
 #showybox[
 	```

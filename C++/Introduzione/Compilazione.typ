@@ -96,6 +96,20 @@ direttive piú importanti e piú utilizzate sono:
 	)
 ]
 
+#showybox[
+	```
+	#include <iostream>
+
+	#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+	int main()
+	{
+		std::cout << MAX(5, -2) << std::endl;
+		return 0;
+	}
+	```
+]
+
 Il compilatore analizza sintatticamente ciascuna unitá di compilazione
 per verificare che non siano presenti errori di sintassi. Effettua inoltre
 una parziale analisi semantica, in particolare il *type checking* (ad
@@ -173,52 +187,73 @@ viene fatta esattamente una sola volta.
 Sebbene i file sorgente possono avere estensioni a piacere (fintanto che sono
 file di testo), per convenzione i file sorgente si dividono in due categorie:
 
-- I file con estensione `.cxx`: contengono la definizione vera e propria di
-  funzioni (il loro corpo) e variabili (il loro effettivo valore). Possono
-  essere visti come l'implementazione di una libreria della quale é nota
-  l'interfaccia. Tali file sono quelli che vengono effettivamente compilati.
-- I file con estensione `.h`, anche chiamati *file header*: contengono la
-  dichiarazione di funzioni (la loro firma), variabili (il loro tipo) e tipi
-  di dato definiti dall'utente (classi e simili). Possono essere visti come
-  l'interfaccia di una libreria, ovvero riportano solamente _cosa_ é necessario
-  implementare ma non l'implementazione in sé e per sé. Tali file non vengono
-  in genere compilati, ma vengono inclusi nei file `.cxx` per rendere loro
-  disponibili le interfacce da implementare.
+- I file con estensione `.cxx`: contengono la definizione di funzioni (il
+  loro corpo) e variabili. Possono essere visti come l'implementazione di
+  una libreria della quale é nota l'interfaccia. Tali file sono quelli che
+  vengono effettivamente compilati.
+- I file con estensione `.h`, anche chiamati *file header*: contengono
+  la dichiarazione di funzioni (la loro firma), variabili (mediante la
+  keyword `extern`) e tipi di dato definiti dall'utente (classi e simili),
+  namespace e costanti globali. Possono  essere visti come l'interfaccia
+  di una libreria, ovvero riportano solamente _cosa_ é necessario implementare
+  ma non l'implementazione in sé e per sé. Tali file non vengono in genere
+  compilati, ma vengono inclusi nei file `.cxx` per rendere loro disponibili
+  le interfacce da implementare.
 
 Per tale motivo, i file sorgente dei codici C++ sono in genere a coppie: un
 file `.h` che contiene l'interfaccia ed il corrispettivo file `.cpp` che ne
-implementa le funzionalitá. C++ non supporta le *forward declarations*: se
-nel codice é presente una funzione che non ha una firma (anche se non é nota
-l'implementazione), viene restituito un errore. Riportare le firme delle
-funzioni in file header permette di rendere nota al compilatore la firma
-di una funzione prima che questa venga implementata, di modo che non sia
-necessario rivedere l'ordine della dichiarazione delle funzioni ad ogni
-cambiamento.
+implementa le funzionalitá. C++ non supporta le *forward declarations*:
+se nel codice é presente una funzione che non é stata dichiarata, viene
+restituito un errore. Riportare le firme delle funzioni in file header
+permette di rendere nota al compilatore la firma di una funzione prima che
+questa venga implementata, di modo che non sia necessario rivedere l'ordine
+della dichiarazione delle funzioni ad ogni cambiamento.
 
 // Aggiungere un esempio?
 
-Sebbene non sia impedito l'usare `#include` per includere un file `.cpp` in
-un file `.cpp`, questo comportamento viene in genere scoraggiato perché rende
+Sebbene non sia impedito l'usare `#include` per includere un file `.cxx` in
+un file `.cxx`, questo comportamento viene in genere scoraggiato perché rende
 i due file non piú indipendenti. Se si vuole avere del codice condiviso fra
 piú file, é preferibile che si trovi in un header file.
 
-Puó capitare che un header file venga incluso piú volte nello stesso file
-`.cpp`, specialmente quando il progetto é molto grande. Di base questo non
-é un problema, dato che ció che accade é che il preprocessore deve eseguire
-piú volte "a vuoto" una stessa sostituzione della direttiva `#include`;
-sebbene non sia un comportamento problematico, potrebbe comunque far
-sprecare tempo al preprocessore e rallentare il processo di compilazione.
-Per prevenirlo é possibile introdurre la cosiddetta *guardia*, che non é
-altro che una struttura del tipo:
+Puó capitare che uno stesso header file venga incluso in piú file `.cxx`
+facenti parte dello stesso programma, specialmente quando questo é molto
+grande. Nella maggior parte dei casi, questo comporta solamente che il
+preprocessore debba eseguire piú volte una stessa sostituzione della
+direttiva `#include`, che sebbene sia uno spreco di risorse non é di base
+un comportamento problematico. Esistono peró situazioni in cui includere
+piú volte un header puó effettivamente portare ad errori, ad esempio se
+un header contiene la definizione di una classe e viene incluso in piú
+file `.cxx` da linkare insieme, per il compilatore si sta cercando di
+definire la classe tante volte quanti file `.cxx` importano l'header.
+
+Per prevenire situazioni di questo tipo si potrebbe organizzare il codice in
+modo da garantire che ogni inclusione dell'header file in ogni singolo file
+`.cxx` non comporti un conflitto. Non solo questo diventa molto difficile al
+crescere della dimensione del programma, ma in certi casi non é proprio
+possibile. Un metodo piú semplice prevede di dotare ogni header file di una
+*guardia*, che non é altro che una struttura del tipo:
 
 ```
-#ifndef something_H
-#define something_H
-...
+#ifndef SOMETHING_H
+#define SOMETHING_H
+
+// Content of the header goes here...
+
 #endif
 ```
 
-In questo modo, il preprocessore include `something.h` solamente se non é
-mai stato finora incluso.
+In questo modo, la prima volta che l'header file viene incluso in uno dei
+file `.cxx`, tale tag viene definito, mentre dalla seconda volta in poi
+tale tag giá esiste ed il contenuto dell'header file viene ignorato (perché
+é giá incluso).
 
 // Aggiungere un esempio?
+
+In principio, ogni variabile globale viene inizializzata prima che venga
+chiamata la funzione `main()`. In una singola unitá di compilazione, queste
+vengono inizializzate nell'ordine in cui sono state dichiarate. Tuttavia,
+non c'é alcuna garanzia su quale sia l'ordine con cui le unitá di compilazione
+vengono scelte per inizializzarne le variabili globali. Per questo motivo, é
+preferibile evitare che i valori delle variabili globali di unitá di
+compilazione diverse dipendano fra loro.

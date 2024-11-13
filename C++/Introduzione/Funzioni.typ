@@ -1,5 +1,28 @@
 #import "@preview/showybox:2.0.1": showybox
 
+Definire una *funzione* significa specificare quali operazioni tale funzione
+deve compiere. Una funzione non puó essere chiamata fintanto che non é stata
+dichiarata. Una dichiarazione di funzione le fornisce un nome, un tipo di
+valore di ritorno ed un numero di argomenti ciascuno con il loro tipo. Una
+funzione che non ritorna nulla ha come tipo di ritorno `void`. Una definizione
+di una funzione le fornisce il corpo.
+
+La definizione di una funzione deve essere coerente con le precedenti (se
+esistono) dichiarazioni. Inoltre, le dichiarazioni devono essere fra loro
+concordi. Tutte le dichiarazioni e definizioni della stessa funzione devono
+avere lo stesso tipo di valore di ritorno e lo stesso tipo degli argomenti;
+i nomi degli argomenti possono anche essere diversi, ma per rendere il codice
+piú chiaro é preferibile che siano uguali.
+
+#showybox[
+	```
+	void f(int a, double b);
+	void f(int p, double q);     // Allowed, but weird
+	void f(int x, double y) {}   // Allowed, but weird
+	void f(int a, char b) {}     // NOT allowed, type mismatch
+	```
+]
+
 In C++, esistono tre modi per passare un parametro ad una funzione. Di base,
 quando un valore viene passato ad una funzione, il parametro di tale funzione
 viene inizializzato con il valore passato. Al di lá di questo, che é comune a
@@ -18,13 +41,31 @@ tutti i modi, i modi sono i seguenti:
   noto alla funzione chiamante; se la funzione chiamata lo modifica, tale
   modifica si ripercuote anche sul dato originale.
 
-Ad eccezione degli array statici, che possono essere passati solo e
-soltanto tramite puntatore, qualsiasi dato può essere passato in tutti
-e tre i modi, pertanto scegliere una modalità piuttosto che l'altra
-dipende (quasi) soltanto da cosa si vuole ottenere. Il passaggio per
-valore è da preferirsi per quando si ha interesse a non modificare il
-dato di origine o quando si richiede esplicitamente di ricreare una
-copia del dato originale, e tale dato è ragionevolmente piccolo.
+Qualsiasi dato può essere passato ad una funzione in tutti e tre i modi,
+pertanto scegliere una modalità piuttosto che l'altra dipende sostanzialmente
+da cosa si vuole ottenere. L'unica eccezione sono gli array statici che, per
+mantenere C++ retrocompatibile con C, devono per forza venire passati tramite
+puntatore. Se un array viene passato come argomento di una funzione, viene in
+automatico passato un puntatore a tale array come effettivo argomento. In
+altre parole, viene fatta una conversione da `T[]` a `T*`.
+
+#showybox[
+	```
+	int strlen(const char*);
+
+	void f()
+	{
+		char v[] = "Hello, World!";
+		int i = strlen(v);
+	}
+	```
+]
+
+Il passaggio per valore è da preferirsi quando si ha interesse a non
+modificare il dato di origine o quando si richiede esplicitamente di
+ricreare una copia del dato originale, e tale dato è ragionevolmente
+piccolo. In genere, il passaggio per valore viene effettuato per i
+tipi primitivi.
 
 Il passaggio per puntatore e per referenza sono da preferirsi quando si
 ha interesse a modificare il dato originale oppure quando non si vuole
@@ -79,25 +120,51 @@ sempre controllare che il puntatore passato ad una funzione non sia
 	```
 ]
 
-Una funzione può ritornare dati di qualsiasi tipo, ad eccezione
-degli array, dei quali è possibile ritornare esclusivamente un
-puntatore che vi si riferisce.
+Una funzione non dichiarata `void` deve per forza ritornare un valore del
+tipo corrispondente a quello riportato nella sua dichiarazione. Una funzione
+`void` non puó ritornare alcun valore, ad eccezione di una chiamata ad
+un'altra funzione `void`. L'unica funzione che non necessita di un `return`
+esplicito é `main`, che se non lo possiede il compilatore vi aggiunge
+implicitamente `return 0`. Una funzione può ritornare dati di qualsiasi
+tipo, ad eccezione degli array, dei quali è possibile ritornare esclusivamente
+un puntatore che vi si riferisce, mai l'array in se.
 
-è considerata bad practise ritornare da una funzione puntatori o
+É considerata bad practise ritornare da una funzione puntatori o
 reference a dati locali alla funzione stessa. Questo perchè i dati
 locali ad una funzione vengono rimossi dallo stack una volta che la
 funzione è stata eseguita, quindi tali puntatori/reference si riferiscono
-a dati non validi.
+a dati non validi. In genere il compilatore é in grado
 
 Due funzioni che si trovano nello stesso namespace ma che hanno dei
 parametri diversi (come numero e/o come tipo) sono comunque considerate
 funzioni diverse. In altre parole, C++ supporta l'*overloading*. Se viene
 chiamata una funzione che condivide il nome con un'altra funzione, il
 compilatore è in grado di dedurre (più o meno correttamente) quale sia
-la "versione" corretta della funzione da chiamare. Naturalmente, due
-funzioni con la stessa identica signature (stesso namespace, stesso nome,
-stesso nome, tipo e ordine dei parametri) non sono ammesse, ed il compilatore
-restituisce un messaggio d'errore.
+la "versione" corretta della funzione da chiamare. Se esiste piú di un
+candidato per una chiamata di funzione ed il compilatore non é in grado
+di stabilire quale sia quella intesa, viene restituito un messaggio di
+errore. Naturalmente, due funzioni con la stessa identica firma non sono
+ammesse a prescindere.
+
+#showybox[
+	```
+	#include <iostream>
+
+	void f(int x, double y, char z) {}
+	void f(char x, int y, char z) {}
+	void f(float x, double y, int z) {}
+
+	int main()
+	{
+		f(1, 0.0, 'a');       // First is called
+		f('a', 0, 'b');       // Second is called
+		f(1, 0, 'a');         // Ambiguous: all three valid
+		f(1.0f, 0.0, 'a');    // Ambiguous: all three valid
+
+		return 0;
+	}
+	```
+]
 
 Una funzione può anche avere dei valori di default opzionali assegnati
 ai parametri. Se una funzione con dei default sui parametri viene
@@ -115,20 +182,9 @@ ret_type func_name(type_1 par_1, ..., type_i par_i = def_i, ..., type_n par_n = 
 	```
 	#include <iostream>
 
-	void h(char c, int v = 20)         // Allowed
-	{
-		...
-	}
-
-	void f(char c = 10, int v = 90)    // Allowed
-	{
-		...
-	}
-
-	void g(char c = 10, int v)          // NOT allowed
-	{
-		...
-	}
+	void h(char c, int v = 20) {}        // Allowed
+	void f(char c = 10, int v = 90) {}   // Allowed
+	void g(char c = 10, int v) {}        // NOT allowed
 
 	int main()
 	{

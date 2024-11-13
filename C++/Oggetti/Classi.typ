@@ -170,7 +170,7 @@ oggetti #footnote[Questo non é piú vero negli standard piú recenti.].
 ]
 
 Il distruttore ha la stessa sintassi del costruttore, ma é preceduto dal
-carattere '~' ed ha `void` come argomento. Nel suo corpo, sono riportate
+carattere `~` ed ha `void` come argomento. Nel suo corpo, sono riportate
 le istruzioni per azzerare o eliminare dalla memoria tutti gli attributi
 dell'istanza della classe:
 
@@ -209,11 +209,16 @@ senza doverlo fare manualmente.
 	```
 ]
 
-L'idea che debba esistere un costruttore che costruisce e alloca ed un
-distruttore che distrugge e disalloca é un noto pattern di programmazione
-ad oggetti chiamato *RAII* (*Resource Acquisition Is Initialization*):
-quando si vuole acquisire una risorsa, occorre inizializzarle nei
-costruttori, e nei distruttori vanno rimosse le risorse acquisite.
+L'operato del costruttore e del distruttore cosí definiti sono parte di un
+pattern di programmazione ad oggetti chiamato *RAII* (*Resource Acquisition
+Is Initialization*). Questo pattern specifica che l'allocazione (acquisizione)
+delle risorse deve avvenire durante la creazione dell'oggetto (nello specifico,
+durante l'inizializzazione) da parte del costruttore, mentre la deallocazione
+delle risorse deve avvenire durante la distruzione dell'oggetto da parte del
+distruttore. In altre parole, affinché l'inizializzazione possa avere successo,
+l'acquisizione delle risorse deve avere successo. In questo modo, la risorsa
+é garantito che sia in possesso dell'oggetto solamente fintanto che l'oggetto
+esiste: se l'oggetto non ha dei leak, allora nemmeno la risorsa puó averne.
 
 Il copy constructor permette di istanziare una classe "clonando" una istanza
 giá esistente della stessa classe. Il copy constructor funziona anche se i
