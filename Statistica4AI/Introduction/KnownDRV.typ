@@ -16,10 +16,15 @@ $p$ are therefore as follows:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
-	[$ p(x) = P(X = x) =
-	   cases(p & "if" x = 1, 1 - p & "if" x = 0, 0 & "otherwise") $],
-	[$ F(x) = P(X lt.eq x) =
-	   cases(0 & "if" x < 0, 1 - p & "if" 0 lt.eq x < 1, 1 & "if" x gt.eq 1) $]
+	[#figure(image("Bernoulli_PMF.svg"))
+	 $ p(x) = P(X = x) =
+	   cases(p & "if" x = 1, 1 - p & "if" x = 0,
+	         0 & "otherwise") $],
+	[#figure(image("Bernoulli_CDF.svg"))
+	 $ F(x) = P(X lt.eq x) =
+	   cases(0 & "if" x < 0,
+	         1 - p & "if" 0 lt.eq x < 1,
+	         1 & "if" x gt.eq 1) $]
 )
 
 Bernoulli random variables model experiments that have two mutually exclusive
@@ -63,11 +68,13 @@ parameters $n$ and $p$ are therefore as follows:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
-	[$ p(x) = P(X = x) =
+	[#figure(image("Binomial_PMF.svg"))
+	 $ p(x) = P(X = x) =
 	   cases(display(binom(n, x) p^(x)(1 - p)^(n - x)) & "if"
 	   cases(display(x in NN), display(x lt.eq n)),
 	   0 & "otherwise") $],
-	[$ F(x) = P(X lt.eq x) =
+	[#figure(image("Binomial_CDF.svg"))
+	 $ F(x) = P(X lt.eq x) =
 	   sum_(k = 0)^(\u{230a} x \u{230b}) binom(n, k) p^(k) (1 - p)^(n - k) $]
 )
 
@@ -110,10 +117,12 @@ random variable $X$ of parameter $lambda$ are therefore as follows:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
-	[$ p(x) = P(X = x) =
+	[#figure(image("Poisson_PMF.svg"))
+	 $ p(x) = P(X = x) =
 	   cases(display(frac(lambda^(x), x!) e^(-lambda)) & "if" x in NN,
 	   0 & "otherwise") $],
-	[$ F(x) = P(X lt.eq x) = sum_(k in NN, k lt.eq x)
+	[#figure(image("Poisson_CDF.svg"))
+	 $ F(x) = P(X lt.eq x) = sum_(k in NN, k lt.eq x)
 	   frac(lambda^(k), k!) e^(-lambda) $]
 )
 
@@ -199,6 +208,8 @@ whose values are the number of successes (of $1$s) found in a sample of
 size $n$ is said to distributed as an *hypergeometric random variable*
 (denoted $X tilde H(n, N, M)$). The pdf of an hypergeometric random
 variable $X$ of parameters $M$, $N$ and $n$ is therefore as follows:
+
+#figure(image("Hyper_PMF.svg", width: 75%))
 
 $ p(x) = P(X = x) =
   cases(frac(display(binom(M, x) binom(N - M, n - x)), display(binom(N, n)))
@@ -301,10 +312,12 @@ random variable $X$ of parameter $p$ are therefore as follows:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
-	[$ p(x) = P(X = x) =
+	[#figure(image("Geometric_PMF.svg"))
+	 $ p(x) = P(X = x) =
 	   cases(p(1 - p)^(x) & "if" x in NN,
 	   0 & "otherwise") $],
-	[$ F(x) = P(X lt.eq x) = sum_(k in NN, k lt.eq x)
+	[#figure(image("Geometric_CDF.svg"))
+	 $ F(x) = P(X lt.eq x) = sum_(k in NN, k lt.eq x)
 	   p(1 - p)^(k) $]
 )
 
@@ -355,6 +368,8 @@ value $1$ for $r$ times. The random variable $X$ is said to distributed as a
 *negative binomial random variable* (denoted $X tilde N B(r, p)$). The pdf
 of a negative binomial random variable $X$ of parameters $r$ and $p$ is
 therefore as follows:
+
+#figure(image("NegBinom_PMF.svg", width: 75%))
 
 $ p(x) = P(X = x) = cases(display(binom(x + r - 1, r - 1)) p^(r)(1 - p)^(x) &
   "if" x in NN, 0 & "otherwise") $
