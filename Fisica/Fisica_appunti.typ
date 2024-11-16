@@ -28,3 +28,7 @@
 #include "Cinematica/Punto.typ"
 == Punto materiale bidimensionale
 #include "Cinematica/Proiettile.typ"
+== Moto circolare
+#include "Cinematica/Circolare.typ"
+== Principio di relativitá
+#include "Cinematica/Relativita.typ"
