@@ -360,7 +360,7 @@ experiment to have a specific result does not depend on the previous ones.
 	  - 1 - cancel(p^(2)) + 2p, p^(2)) = frac(1 - p, p^(2)) $
 ]
 
-=== Negative binomial distribution
+=== Negative binomial random variable
 
 Let $X$ be a random variable that represents the number of (failed) attempts
 necessary to have a Bernoulli random variable with parameter $p$ to assume

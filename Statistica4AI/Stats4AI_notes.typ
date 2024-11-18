@@ -37,3 +37,6 @@
 #include "Introduction/KnownDRV.typ"
 == Continuous random variables
 #include "Introduction/ContinuousRV.typ"
+== Known continuous random variables
+#include "Introduction/KnownCRV.typ"
+
