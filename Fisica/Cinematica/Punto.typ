@@ -103,6 +103,42 @@ la funzione posizione-tempo su un piano cartesiano, é evidente come la
 velocitá istantanea non sia altro che un vettore lungo la tangente in quel
 punto.
 
+#exercise[
+	Un punto materiale si sta muovendo; la sua posizione é nota in ogni
+	istante a partire dall'equazione $x(t) = -4t + 2t^(2)$. Si vuole
+	calcolare:
+
+	- Il suo spostamento tra gli istanti $t = 0 unit(second)$ e
+	  $t = 1 unit(second)$;
+	- Il suo spostamento tra gli istanti $t = 1 unit(second)$ e
+	  $t = 3 unit(second)$;
+	- La sua velocitá media tra gli istanti $t = 0 unit(second)$ e
+	  $t = 1 unit(second)$;
+	- La sua velocitá media tra gli istanti $t = 1 unit(second)$ e
+	  $t = 3 unit(second)$;
+	- La sua velocitá istantanea in $t = 2.5 unit(second)$.
+]
+#solution[
+	$ Delta x = x(1) - x(0) = (-4 dot 1 + 2 dot 1^(2)) unit(metre) -
+	  (-4 dot 0 + 2 dot 0^(2)) unit(metre) = (-4 + 2) unit(metre) - (0 + 0)
+	  unit(metre) = -2 unit(metre) $
+
+	$ Delta x = x(3) - x(1) = (-4 dot 3 + 2 dot 3^(2)) unit(metre) -
+	  (-4 dot 1 + 2 dot 1^(2)) unit(metre) = (-12 + 18) unit(metre) - (-4 + 2)
+	  unit(metre) = 8 unit(metre) $
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ v_("media") = frac(x(1) - x(0), 1 unit(second) - 0 unit(second)) =
+		   frac(-2 unit(metre), 1 unit(second)) = -2 unit(metre/second) $],
+		[$ v_("media") = frac(x(3) - x(1), 3 unit(second) - 1 unit(second)) =
+		   frac(8 unit(metre), 2 unit(second)) = 4 unit(metre/second) $]
+	)
+
+	$ v(2.5) = frac(d, d t) x(2.5) = frac(d, d t)_(t = 2.5) -4t + 2t^(2) =
+	  -4 + 4 dot 2.5 = 6 unit(metre/second) $
+]
+
 Oltre alla variazione della posizione in funzione del tempo, potrebbe
 essere d'interesse a conoscere la variazione della velocitá in funzione
 del tempo. Tale variazione é descritta dall'*accelerazione media*:
@@ -145,6 +181,24 @@ invertire una derivata, ovvero calcolare un integrale:
 Una espressione di questo tipo necessita peró di descrivere interamente la
 funzione con cui varia l'accelerazione. Questo puó essere fatto solamente
 se la funzione accelerazione é una funzione nota.
+
+#exercise[
+	Un punto materiale si sta muovendo; la sua posizione é nota in
+	ogni istante a partire dall'equazione $v(t) = 40t - 5t^(2)$.
+	Qual'é l'accelerazione media tra gli istanti $t = 0 unit(second)$
+	e $t = 2 unit(second)$? Qual'é l'accelerazione istantanea al tempo
+	$t = 2 unit(second)$?
+]
+#solution[
+	$ a_("media") = frac(v(2) - v(0), (2 - 0) unit(second)) =
+	  frac((40 - 5 dot 2^(2)) unit(metre/second) - (40 - 5 dot 0^(2))
+	  unit(metre/second), 2 unit(second)) = frac(20 unit(metre/second) -
+	  40 unit(metre/second), 2 unit(second)) = -10 unit(metre/second^(2)) $
+
+	$ a(2) = frac(d, d t) v(2) = frac(d, d t)_(t = 2) 40t - 5t^(2) =
+	  40 - 5 dot 2 (2) = 20 unit(metre/second^(2)) $
+
+]
 
 Il caso piú semplice da esaminare si ha quando l'accelerazione non cambia
 mai, ovvero quando la funzione accelerazione é una funzione costante. In
@@ -189,14 +243,82 @@ moto viene anche detto *moto uniformemente accelerato*:
 	   frac(1, 2) arrow(a) (t - t_(0))^(2) $]
 )
 
-Un esempio di moto uniformemente accelerato é il *moto in caduta libera*.
-Questo é tipo di moto che descrive i corpi lasciati liberi di subire l'effetto
-della forza di gravitá del pianeta Terra. Tale accelerazione é indipendente da
-qualsiasi caratteristica del corpo che compie il moto, come la sua massa o la
-sua forma (Il motivo per cui questo non sempre avviene é perché la forma di
-un corpo subisce l'attrito dell'aria).
+#exercise[
+	Un aereo sta effettuando un atterraggio: tocca terra con una velocitá di
+	$64 unit(metre/second^(2))$ per poi rallentare con decelerazione costante
+	fino a fermarsi. Quanto vale questa decelerazione se per fermarsi l'aereo
+	impiega $2 unit(second)$? Qual'é la sua posizione dopo essersi fermato?
+	Si assuma $t_(0) = 0 unit(second)$ e $x(t_(0)) = 0 unit(metre)$.
+]
+#solution[
+	Se l'aereo sta rallentando con accelerazione (negativa) costante, sono
+	valide le leggi del moto uniformemente accelerato. Il fatto che si sia
+	fermato indica che la sua velocitá dopo $2 unit(second)$ é nulla. La
+	velocitá con cui l'aereo tocca terra é la velocitá con cui inizia il
+	suo moto a decelerazione costante. Tale decelerazione é quindi:
+
+	$ v(t) = v(t_(0)) + a dot (t - t_(0)) =>
+	  a = frac(v(t) - v(t_(0)), t - t_(0)) =
+	  frac(v(2) - v(0), 2 unit(second) - 0 unit(second)) =
+	  frac((0 - 64) unit(metre/second), 2 unit(second)) =
+	  -32 unit(metre/second^(2)) $
+
+	La sua posizione dopo essersi fermato é data da:
+
+	$ x(t) &= x(t_(0)) + v(t_(0)) t + frac(1, 2) a t^(2) =>
+	  x(2) = x(0) + v(0) dot 2 unit(second) +
+	  frac(1, 2) dot a dot 2^(2) unit(second) = \
+	  &= 0 unit(metre) + 64 unit(metre/second) dot 2 unit(second) +
+	  frac(1, 2) dot (-32) unit(metre/second^(2)) dot 4 second^(2) =
+	  64 unit(metre) $
+]
+
+Un esempio specifico di moto uniformemente accelerato é il *moto in caduta
+libera*. Questo é tipo di moto che descrive i corpi lasciati liberi di subire
+l'effetto della forza di gravitá del pianeta Terra. Tale accelerazione é
+indipendente da qualsiasi caratteristica del corpo che compie il moto, come
+la sua massa o la sua forma (Il motivo per cui questo non sempre avviene é
+perché la forma di un corpo subisce l'attrito dell'aria).
 
 Tale accelerazione varia a seconda dell'altitudine: piú ci si trova vicino al
 livello del mare e piú é intensa. Tuttavia, per le applicazioni pratiche il
 suo valore é approssimativamente costante, ed é pari a $plus.minus 9.8
 unit(metre / second^2)$.
+
+#exercise[
+	Una palla viene lanciata verso l'alto con velocitá $20 unit(metre/second)$,
+	che ricade poi verso il basso toccando il suolo. Si assuma $t_(0) = 0
+	unit(second)$ e $x(t_(0)) = 0 unit(metre)$.
+
+	- Quanto tempo impiega la palla a raggiungere il punto di massima altezza?
+	- Qual'é la massima altezza che la palla riesce a raggiungere?
+	- Qual'é la posizione della palla al tempo $t = 5 unit(second)$?
+	- Qual'é la velocitá della palla al tempo $t = 5 unit(second)$?
+]
+#solution[
+	Il punto di massima altezza é quello dove la palla é ferma a mezz'aria. Si
+	noti come l'accelerazione del corpo in caduta libera sia negativa.
+
+	$ v(t) = v(t_(0)) + a dot (t - t_(0)) =>
+	  0 = v(0) - g dot (t - 0) =>
+	  t = frac(v(0), g) =
+	  frac(20 unit(metre/second), 9.8 unit(metre/second^(2))) =
+	  2.04 unit(second) $
+
+	$ x(t) = x(t_(0)) + v(t_(0)) t + frac(1, 2) a t^(2) =
+	  x(0) + v(0) t - frac(1, 2) g t^(2) =
+	  0 unit(metre) + 20 unit(metre/second) dot 2.04 unit(second) -
+	  frac(1, 2) 9.8 unit(metre/second^(2)) (2.04)^(2) unit(second^(2)) =
+	  20.4 unit(metre) $
+
+	$ v(t) = v(t_(0)) + a dot (t - t_(0)) =>
+	  v(5) = v(0) - g dot (5 - 0) =
+	  20 unit(metre/second) - 9.8 unit(metre/second^(2)) dot
+	  (5 unit(second) - 0 unit(second)) = -29 unit(metre/second) $
+
+	$ x(t) = x(t_(0)) + v(t_(0)) t + frac(1, 2) a t^(2) =>
+	  x(5) = x(0) + v(0) dot 5 - frac(1, 2) g dot 5^(2) =
+	  0 unit(metre) + 20 unit(metre/second) dot 5 unit(second) -
+	  frac(1, 2) 9.8 unit(metre/second^(2)) 5^(2) unit(second^(2)) =
+	  -22.5 unit(metre) $
+]
