@@ -31,13 +31,13 @@
 == Errore di misurazione
 #include "Introduzione/Errore.typ"
 = Cinematica
-== Punto materiale unidimensionale
+== Moto unidimensionale
 #include "Cinematica/Punto.typ"
-== Punto materiale bidimensionale
+== Moto bidimensionale
 #include "Cinematica/Proiettile.typ"
 == Moto circolare
 #include "Cinematica/Circolare.typ"
-== Principio di relativitá
+== Moti relativi e sistemi inerziali
 #include "Cinematica/Relativita.typ"
 = Meccanica
 == Leggi di Newton

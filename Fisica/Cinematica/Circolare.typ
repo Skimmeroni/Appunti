@@ -92,10 +92,12 @@ calcolando un integrale:
 	   theta(t) - theta(t_(0)) $]
 )
 
-Un caso di studio di moto circolare é il *moto circolare uniforme*, ovvero
-un moto circolare dove oltre al modulo del vettore posizione anche la velocitá
-angolare é costante nel tempo. Naturalmente, essendo la velocitá proporzionale
-alla velocitá angolare, anche la velocitá sará costante in modulo nel tempo.
+=== Caso di studio: moto circolare uniforme
+
+Il *moto circolare uniforme* é un moto circolare dove oltre al modulo
+del vettore posizione anche la velocitá angolare é costante nel tempo.
+Naturalmente, essendo la velocitá proporzionale alla velocitá angolare,
+anche la velocitá sará costante in modulo nel tempo.
 
 In questa particolare situazione, il numero di rivoluzioni che il punto
 compie é necessariamente costante, pertanto per descrivere il suo moto é
@@ -226,6 +228,8 @@ $ cases(-|r| (cos(theta(t)) omega^(2)(t) + sin(theta(t)) dot 0),
   sqrt((|r|^(2) omega^(4))(cos^(2)(theta(t)) + sin^(2)(theta(t)))) =
   sqrt((|r|^(2) omega^(4)) dot 1) = |r| omega^(2) $
 
+=== Caso di studio: moto armonico
+
 La proiezione di un moto circolare uniforme lungo un asse viene detta *moto
 armonico*. Di fatto, ciascuna delle due componenti dimensionali di un moto
 circolare uniforme, se presa singolarmente, descrive un moto armonico.
@@ -257,9 +261,11 @@ calcolo della velocitá angolare di un moto circolare uniforme é $omega =
 2 pi slash T$, il periodo $T = 2 pi slash omega$ viene detto *periodo di
 oscillazione* per il moto armonico.
 
-Un altro caso di studio di moto circolare é il *moto circolare uniformemente
-accelerato*, in cui l'accelerazione angolare é costante. In questo caso, é
-effettivamente possibile risolvere l'integrale in maniera semplice:
+=== Caso di studio: moto circolare uniformemente accelerato
+
+Il *moto circolare uniformemente accelerato* é un moto circolare in cui
+l'accelerazione angolare é costante. In questo caso, é effettivamente
+possibile risolvere l'integrale in maniera semplice:
 
 $ omega(t) - omega(t_(0)) =
   integral_(t_(0))^(t) alpha(t') d t' =

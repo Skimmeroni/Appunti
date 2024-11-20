@@ -47,9 +47,10 @@ le componenti:
 	   frac(1, 2) a_(y) (t - t_(0))^(2) $],
 )
 
-Un caso di studio particolarmente interessante é quello del *moto parabolico*,
-ovvero di un oggetto che si muove nello spazio unicamente sottoposto
-all'attrazione gravitazionale.
+=== Caso di studio: moto parabolico
+
+Il *moto parabolico* é il moto bidimensionale a cui obbedisce un oggetto
+che si muove nello spazio unicamente sottoposto all'attrazione gravitazionale.
 
 Un corpo di questo tipo si muove lungo la direzione orizzontale con
 accelerazione costante pari a $0$, mentre si muove lungo la direzione
@@ -100,3 +101,46 @@ $ (frac(-g, 2cos^(2)(theta) v^(2)(t_(0)))) x^(2)(t) +
   (tan(theta) + frac(g x(t_(0)), cos^(2)(theta) v^(2)(t_(0)))) x(t) -
   (tan(theta) x(t_(0)) + frac(g x^(2)(t_(0)), 2cos^(2)(theta)
   v^(2)(t_(0)))) = 0 $
+
+#exercise[
+	Un saltatore in lungo spicca un balzo in avanti con un angolo
+	$theta = frac(pi, 9) unit(rad)$ rispetto al terreno ed una velocitá
+	di $11 unit(metre/second)$. Quale sará la lunghezza del salto? Quale
+	sará l'altezza massima? Si assuma $t_(0) = 0 unit(second)$, $x(0) = 0
+	unit(metre)$ e $y(0) = 0 unit(metre)$.
+]
+#solution[
+	Imponendo come asse $x$ il terreno, la distanza da terra é nulla nell'istante 
+	iniziale e nell'istante in cui viene percorsa la massima distanza.
+
+	$ y(t) = y(t_(0)) + v_(y)(t_(0)) (t - t_(0)) - frac(1, 2) g (t - t_(0))^(2) =>
+	  y(t) = y(0) + v_(y)(0) (t - 0) - frac(1, 2) g (t - 0)^(2) => \
+	  0 = 0 + v(0) sin(theta) dot t - frac(1, 2) g t^(2) =>
+	  0 = t(v(0) sin(theta) - frac(1, 2) g t) =>
+	  t = frac(2v(0) sin(theta), g) $
+
+	$ x(t) = x(t_(0)) + v_(x)(t_(0)) (t - t_(0)) =>
+	  x(frac(2v(0) sin(theta), g)) =
+	  x(0) + v(0) cos(theta) (frac(2v(0) sin(theta), g) - 0) = \
+	  0 + frac(2v^(2)(0) sin(theta) cos(theta), g) =
+	  frac(v^(2)(0) sin(2 theta), g) =
+	  frac((11 unit(metre/second))^(2) sin(2 dot frac(pi, 9) unit(rad)),
+	  9.8 unit(metre/second^(2))) approx 7.94 unit(metre) $
+
+	Il punto di massima altezza é quello in cui la velocitá lungo $y$ é nulla:
+
+	$ v_(y)(t) = v_(y)(t_(0)) - g dot (t - t_(0)) =>
+	  0 = v(0) sin(theta) - g dot (t - 0) =>
+	  t = frac(v(0) sin(theta), g) $
+
+	$ y(t) = y(t_(0)) + v_(y)(t_(0)) (t - t_(0)) -
+	  frac(1, 2) g (t - t_(0))^(2) => \
+	  y(frac(v(0) sin(theta), g)) = y(0) + sin(theta) v(0)
+	  (frac(v(0) sin(theta), g) - 0) - frac(1, 2) g dot
+	  (frac(v(0) sin(theta), g) - 0)^(2) = \
+	  frac(v^(2)(0) sin^(2)(theta), g) -
+	  frac(1, 2) (frac(v^(2)(0) sin^(2)(theta), g)) =
+	  frac(v^(2)(0) sin^(2)(theta), 2g) =
+	  frac((11 unit(metre/second))^(2) sin^(2)(frac(pi, 9) unit(rad)),
+	  2 dot 9.8 unit(metre/second^(2))) approx 0.722 unit(metre) $
+]

@@ -200,8 +200,10 @@ se la funzione accelerazione é una funzione nota.
 
 ]
 
-Il caso piú semplice da esaminare si ha quando l'accelerazione non cambia
-mai, ovvero quando la funzione accelerazione é una funzione costante. In
+=== Caso di studio: moto uniformemente accelerato
+
+Il moto unidimensionale piú semplice da esaminare é il *moto uniformemente
+accelerato*, in cui la funzione accelerazione é una funzione costante. In
 altri termini, $arrow(a)(t) = arrow(a)$ per qualsiasi istante di tempo $t$.
 Recuperando la formula, si ha:
 
@@ -232,9 +234,7 @@ $ arrow(x)(t) - arrow(x)(t_(0)) = integral_(t_(0))^(t) v(t') d t' =
 // C'é qualcosa di strano in questo integrale...
 
 Riassumendo le due formule trovate ed esplicitando rispetto a
-$arrow(x)(t)$ e $arrow(v)(t)$ si ottiene la legge oraria per
-un punto materiale con accelerazione costante. Tale tipo di
-moto viene anche detto *moto uniformemente accelerato*:
+$arrow(x)(t)$ e $arrow(v)(t)$ si ottiene:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
@@ -272,6 +272,8 @@ moto viene anche detto *moto uniformemente accelerato*:
 	  frac(1, 2) dot (-32) unit(metre/second^(2)) dot 4 second^(2) =
 	  64 unit(metre) $
 ]
+
+=== Caso di studio: moto in caduta libera
 
 Un esempio specifico di moto uniformemente accelerato é il *moto in caduta
 libera*. Questo é tipo di moto che descrive i corpi lasciati liberi di subire
