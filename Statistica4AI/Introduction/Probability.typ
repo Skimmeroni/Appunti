@@ -1,10 +1,13 @@
 #import "../Stats4AI_definitions.typ": *
 
-Probability provides methods to quantify chance and randomness related to a
-certain event. Any activity or process having at least one outcome, all being
-random (not knowable in advance) is called an *experiment*. The set containing
-all possible outcomes of an experiment, denoted as $cal(S)$, is called *sample
-space*.
+*Probability theory* is a mathematical framework providing methods
+that describe situations and events having an unforseeable outcome,
+quantifying chance and randomness related to said results.
+
+Any activity or process having at least one (unnkowable in advance)
+outcome is called an *experiment*. The set containing all possible
+outcomes of an experiment, denoted as $cal(S)$, is called *sample
+space*. The sample space can be either discrete or continuous.
 
 #exercise[
 	Provide some examples of experiments.
@@ -280,6 +283,16 @@ The appropriate or correct assignment depends on how one _interprets_
 probability, that is to say how one intends the link between the mathematical
 treatment of probability and the physical world. This quest is just as
 philosophical as mathematical.
+
+The oldest definition of probability, also called *classical probability*,
+states that the probability of an event $A$ is the ratio of the number of
+favorable events and the entire number of outcomes, assuming all outcomes
+are equally likely.
+
+Said definition is considered outdated mainly for two reasons. On the one
+hand, the definition lies on a circular argument, since it presupposes the
+notion of "equally likely outcomes". On the other hand, an event does not
+necessarely have many outcomes all of them equally likely.
 
 One possible and often invoked interpretation of probability is the
 *objective* interpretation, also called *frequentist* interpretation.

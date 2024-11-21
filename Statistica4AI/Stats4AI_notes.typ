@@ -31,6 +31,8 @@
 #include "Introduction/Statistics.typ"
 == Probability
 #include "Introduction/Probability.typ"
+== Combinatorics
+#include "Introduction/Combinatorics.typ"
 == Discrete random variables
 #include "Introduction/DiscreteRV.typ"
 == Known discrete random variables
