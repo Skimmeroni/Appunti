@@ -65,9 +65,46 @@ events are the complement of each other:
 
 $ P(X > a) = 1 - P(X lt.eq a) = 1 - F(a) $
 
-Suppose $a lt.eq b$. The pdf and cdf are strongly related:
+#lemma[
+	Let $X$ be a random variabile, and let $a$ and $b$ be two real
+	numbers (suppose $a < b$). The following holds:
 
-$ P(a lt.eq X lt.eq b) = P(X lt.eq b) - P(X lt.eq a) = F(b) - F(a) $
+	$ P(a < X lt.eq b) = F(b) - F(a) $
+] <Relation-between-F-and-P>
+#proof[
+	By definition, the events $A$ = "the realization of $X$ lies
+	in $(-infinity, a]$" and $B$ = "the realization of $X$ lies
+	in $(a, b]$" are incompatible. Therefore:
+
+	$ P(-infinity < X lt.eq a) + P(a < X lt.eq b) -
+	  P({-infinity < X lt.eq a} sect {a < X lt.eq b}) = \
+	  P(-infinity < X lt.eq a) + P(a < X lt.eq b) - 0 =
+	  P({-infinity < X lt.eq a} union {a < X lt.eq b}) $
+
+	From which stems:
+
+	$ F(b) = P(-infinity < X lt.eq b) = P({-infinity < X lt.eq a}
+	  union {a < X lt.eq b}) = \ P(-infinity < X lt.eq a) +
+	  P(a < X lt.eq b) = F(a) + P(a < X lt.eq b) =>
+	  F(b) - F(a) = P(a < X lt.eq b) $
+]
+
+#corollary[
+	The probability of a continuous random variable $X$ to assume a
+	specific value $c$ is always $0$.
+] <Continuous-variables-no-single-value>
+#proof[
+	$P(X = c)$ is equivalent to $P(c < X lt.eq c)$. Therefore
+	@Relation-between-F-and-P applies:
+
+	$ P(c < X lt.eq c) = F(c) - F(c) = 0 $
+]
+
+@Continuous-variables-no-single-value is sound even from a logical
+perspective: the probability of choosing a specific value in (a subset
+of) $RR$ is necessarely infinitesimal, since $RR$ is not a countable
+set. Therefore, when dealing with the realization of a continuous random
+variables, it only makes sense to think in terms of intervals.
 
 Let $X$ be a continuous random variable probability distribution
 function $f(x)$. The *expected value* (or *mean value*) of $X$,

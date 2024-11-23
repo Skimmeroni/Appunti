@@ -128,8 +128,8 @@ Since the values of the cdf of $Z$ are known, it is the possible to compute
 the values for the cdf (and pdf) of $X$ by computing the ones for $(X - mu)
 slash sigma$:
 
-$ P(a lt.eq X lt.eq b) = P(frac(a - mu, sigma) lt.eq frac(X - mu, sigma)
-  lt.eq frac(b - mu, sigma)) = P(frac(a - mu, sigma) lt.eq Z
+$ P(a < X lt.eq b) = P(frac(a - mu, sigma) < frac(X - mu, sigma)
+  lt.eq frac(b - mu, sigma)) = P(frac(a - mu, sigma) < Z
   lt.eq frac(b - mu, sigma)) = Phi(frac(b - mu, sigma)) -
   Phi(frac(a - mu, sigma)) $
 
@@ -144,8 +144,8 @@ $ F(a) = P(X lt.eq a) = P(frac(X - mu, sigma) lt.eq frac(a - mu, sigma)) =
 	the probability of it being greater than $2$ seconds?
 ]
 #solution[
-	$ P(1 lt.eq X lt.eq 1.75) = P(frac(1 - 1.25, 0.46) lt.eq frac(X - 1.25,
-	  0.46) lt.eq frac(1.75 - 1.25, 0.46)) = P(frac(-0.25, 0.46) lt.eq Z
+	$ P(1 < X lt.eq 1.75) = P(frac(1 - 1.25, 0.46) < frac(X - 1.25,
+	  0.46) lt.eq frac(1.75 - 1.25, 0.46)) = P(frac(-0.25, 0.46) < Z
 	  lt.eq frac(0.5, 0.46)) approx \
 	  Phi(1.09) - Phi(-0.54) = Phi(1.09) - (1 - Phi(0.54)) =
 	  0.8621 - 0.2946 = 0.5675 $
