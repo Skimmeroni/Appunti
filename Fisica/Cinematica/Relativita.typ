@@ -14,7 +14,10 @@ Questo sta a significare che non esiste alcun modo di determinare in senso
 uniforme, ma é possibile farlo solamente rispetto ad un secondo sistema di
 riferimento. Questa osservazione prende il nome di *principio di relativitá*.
 Sistemi di riferimento che sono fermi l'uno rispetto all'altro o in moto
-rettilineo uniforme l'uno rispetto all'altro si dicono *inerziali*.
+rettilineo uniforme l'uno rispetto all'altro si dicono *inerziali*. In
+altre parole, il principio di relatività sancisce che non esistono sistemi 
+di riferimento "universalmente" inerziali: si è sempre inerziali rispetto 
+ad un altro sistema.
 
 Le descrizioni compiute da piú sistemi di riferimento inerziali del moto di
 uno stesso punto materiale possono essere messe in relazione fra di loro.
