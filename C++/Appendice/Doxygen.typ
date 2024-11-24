@@ -63,3 +63,27 @@ direttiva `@param` va riportata per ogni parametro della funzione. La direttiva
 	float euclidean_distance(float x1, float x2, float y1, float y2);
 	```
 ]
+
+La direttiva `@pre` permette di descrivere una _precondizione_ necessaria
+affinchè un metodo o una classe funzioni correttamente. Ha particolare
+valore per documentare il senso degli `assert`. La direttiva `@post` 
+permette di descrivere una _postcondizione_.
+
+#showybox[
+	```
+	/**
+		@brief Computes the Pearson correlation coefficient 
+
+		@pre sigmaX != 0
+		@pre sigmaY != 0
+	*/
+
+		float pearson_coefficient(float covariance, float sigmaX, float sigmaY)
+		{
+			assert(sigmaX != 0);
+			assert(sigmaY != 0);
+
+			...
+		}
+	```
+]
