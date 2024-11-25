@@ -6,6 +6,8 @@ funzionale. Gli unici operatori che non possono essere ridefiniti
 sono `.` e `::`. La ridefinizione degli operatori è tecnicamente 
 equivalente al definire un metodo speciale per una certa classe, 
 ma la ridefinizione è in genere più comodo e più intellegibile.
+Non è però possibile "inventare" operatori da zero: solo
+ridefinire operatori che già esistono.
 
 #showybox[
 	```
@@ -94,3 +96,53 @@ operatori ridefiniti come membri di classe. Invece, se si necessita
 di ridefinire un operatore di un'altra classe rispetto alla classe in
 esame, è strettamente necessario ridefinirlo globalmente, dato che 
 l'alternativa sarebbe modificare la classe originale.
+
+Possono essere ridefiniti sia operatori binari che operatori unari. Nel caso
+particolare degli operatori unari `++` e `--`, diventa necessario distinguere
+se si sta intendendo la versione prefissa o postfissa, dato che la signature
+dei due operatori è la stessa (`operator++` e `operator--`, rispettivamente).
+Per poterlo fare, è possibile modificare la firma della ridefinizione di una
+delle due versioni introducendo un argomento extra, anche se inutilizzato.
+
+#showybox[
+	```
+	// ++i
+	dbuffer& operator++(dbuffer& rhs)
+	{
+		for (dbuffer::size_type i = 0; i < rhs.size(); i++)
+			rhs[i] = rhs[i] + 1;
+
+		return rhs;
+	}
+
+	// i++
+	dbuffer operator++(dbuffer& lhs, int)   // to distinguish between the two
+	{
+		dbuffer tmp(lhs)
+
+		for (dbuffer::size_type i = 0; i < lhs.size(); i++)
+			lhs[i] = lhs[i] + 1;
+
+		return tmp;
+	}
+	```
+]
+
+Un operatore speciale che è possibile ridefinire è l'operatore di cast,
+che permette di convertire un oggetto di una classe in un oggetto di
+un'altra classe o in un tipo primitivo, e/o viceversa. Nonostante non
+abbiano un valore di ritorno nella firma, tali ridefinizioni devono
+restituire comunque un valore. A prescindere da quale semantica venga
+fornita alla nuova versione dell'operatore, la sua precedenza rimane
+quella originale.
+
+#showybox[
+	```
+	dbuffer::operator int() const {
+		return this->size;
+	}
+
+	dbuffer x(19);
+	int i = static_cast<int>(x);   // Allowed, i = 19
+	```
+]
