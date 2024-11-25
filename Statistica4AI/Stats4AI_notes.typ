@@ -41,4 +41,5 @@
 #include "Introduction/ContinuousRV.typ"
 == Known continuous random variables
 #include "Introduction/KnownCRV.typ"
-
+== Joint probability distributions
+#include "Introduction/Joint.typ"
