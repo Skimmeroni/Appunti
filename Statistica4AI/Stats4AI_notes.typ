@@ -18,7 +18,7 @@
 #import "Stats4AI_definitions.typ": *
 
 #show: thmrules.with(qed-symbol: $square$)
-#show par: set block(spacing: 0.55em)
+#set par(spacing: 0.55em)
 
 #outline(indent: auto)
 #figure(
@@ -43,3 +43,5 @@
 #include "Introduction/KnownCRV.typ"
 == Joint probability distributions
 #include "Introduction/Joint.typ"
+== Random sampling
+#include "Introduction/Sampling.typ"

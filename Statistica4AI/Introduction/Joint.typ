@@ -335,3 +335,12 @@ are poorly linearly correlated, or not correlated at all.
 // #proof[
 // To be added
 // ]
+
+An example of a bivariate distribution is the *bivariate normal distribution*,
+an extension of the normal distribution in two dimensions:
+
+$ f(x, y) = frac(1, pi sigma_(x) sigma_(y) sqrt(1 - rho^(2)))
+  exp(-frac(1, 2(1 - rho^(2))) [(frac(x - mu_(x), sigma_(x)))^(2) +
+  (frac(y - mu_(y), sigma_(y)))^(2) -2 rho(frac(x - mu_(x), sigma_(x)))
+  (frac(y - mu_(y), sigma_(y)))]) $
+
