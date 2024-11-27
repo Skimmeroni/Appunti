@@ -340,3 +340,12 @@ variable* with $n$ degrees of freedom (denoted as $X tilde T(n)$).
 // #proof[
 // Feasible?
 // ]
+
+As for the (standard) normal distribution, the values of its quantiles
+have been tabulated, since their calculations is generally unfeasible
+to be performed by hand.
+
+The degrees of freedom of a Student t random variable are related 
+to how "heavy" the tails of its pdf are. In particular, with $n$ 
+approaching $infinity$, the Student t distribution effectively 
+becomes a normal distribution. 

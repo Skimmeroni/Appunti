@@ -45,3 +45,5 @@
 #include "Introduction/Joint.typ"
 == Random sampling
 #include "Introduction/Sampling.typ"
+== Confidence intervals
+#include "Introduction/Intervals.typ"
