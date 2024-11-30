@@ -57,6 +57,12 @@
 #include "Oggetti/Classi.typ"
 == Ridefinizione degli operatori
 #include "Oggetti/Operatori.typ"
+// == Eccezioni
+// #include "Oggetti/Eccezioni.typ"
+== Template e funtori
+#include "Oggetti/Template.typ"
+== Iteratori
+#include "Oggetti/Iteratori.typ"
 #pagebreak()
 
 = Appendice
