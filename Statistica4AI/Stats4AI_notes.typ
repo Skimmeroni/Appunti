@@ -9,16 +9,21 @@
 	numbering: "1"
 )
 #set par(
-	justify: true
+	justify: true,
 )
 #set heading(
 	numbering: "1."
+)
+#set document(
+        title: "Notes on Advanced Foundations of Statistics for AI",
+        author: "Shania",
+        date: auto
 )
 
 #import "Stats4AI_definitions.typ": *
 
 #show: thmrules.with(qed-symbol: $square$)
-#set par(spacing: 0.55em)
+#show heading: set block(above: 1.4em, below: 1em)
 
 #outline(indent: auto)
 #figure(
@@ -47,3 +52,5 @@
 #include "Introduction/Sampling.typ"
 == Confidence intervals
 #include "Introduction/Intervals.typ"
+== Hypothesis testing
+#include "Introduction/Hypothesis.typ"
