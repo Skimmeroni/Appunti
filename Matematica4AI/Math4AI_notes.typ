@@ -23,6 +23,13 @@
 #outline(indent: auto)
 #pagebreak()
 
+= Sequences and series
+== Sequences
+#include "Series/Sequences.typ"
+== Series
+#include "Series/Series.typ"
+#pagebreak()
+
 = Linear Algebra
 == Matrices
 #include "LinAlg/Matrices.typ"
@@ -38,3 +45,4 @@
 #include "LinAlg/Spectral.typ"
 == Decompositions
 #include "LinAlg/Decomposition.typ"
+#pagebreak()
