@@ -1,4 +1,4 @@
-#import "@preview/ctheorems:1.1.3": *
+#import "@preview/ctheorems:1.1.2": *
 
 #let theorem = thmbox("theorem", "Theorem", fill: rgb("#e7f7e6"))
 #let lemma = thmbox("lemma", "Lemma", fill: rgb("#f7ebf4"))

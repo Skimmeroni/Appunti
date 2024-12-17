@@ -54,3 +54,5 @@
 #include "Introduction/Intervals.typ"
 == Hypothesis testing
 #include "Introduction/Hypothesis.typ"
+== Simple linear regression
+#include "Introduction/Regression.typ"
