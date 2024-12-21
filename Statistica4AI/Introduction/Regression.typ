@@ -140,16 +140,6 @@ $hat(beta)_(1)$:
 	   overline(y) - hat(beta)_(1) overline(x) $]
 )
 
-#theorem[
-	The estimators $hat(beta)_(0)$ and $hat(beta)_(1)$ are correct estimators
-	for $beta_(0)$ and $beta_(1)$.
-]
-
-#theorem("Gauss-Markov Theorem")[
-	The estimators $hat(beta)_(0)$ and $hat(beta)_(1)$ are the estimators
-	for $beta_(0)$ and $beta_(1)$ having the smallest sample variance.
-]
-
 #exercise[
 	Consider @Regression-example-1. Compute the estimates of $hat(beta)_(0)$
 	and $hat(beta)_(1)$ and draw the corresponding estimated regression line.
@@ -327,3 +317,74 @@ The higher the value of $r^(2)$, the better the linear regression
 model is. If the value of $r^(2)$ is particularly low, one should
 investigate whether another regression model is more appropriate
 for the data at hand.
+
+$beta_(0)$ and $beta_(1)$ are estimators, therefore their value is subject
+to some degree of variability depending on the values retrieved from the
+sample. Even if the values of $x$ are fixed, the random variables $epsilon$
+introduce some inevitable uncertainty in the fitted value for $y$. It is
+therefore useful to consider $y$ as a random variable $Y_(i) = beta_(0) +
+beta_(1) x + epsilon_(i)$ to make considerations on the nature of the
+estimators $hat(beta)_(0)$, $hat(beta)_(1)$ and $hat(sigma)^(2)$:
+
+#grid(
+	columns: (0.33fr, 0.33fr, 0.33fr),
+	[$ hat(beta)_(1) =
+	   frac(sum_(i = 1)^(n) (x_(i) - overline(x))(Y_(i) - overline(Y)),
+	        sum_(i = 1)^(n) (x_(i) - overline(x))^(2)) $],
+	[$ hat(beta)_(0) = frac(sum_(i = 1)^(n) Y_(i) -
+	   hat(beta)_(1) sum_(i = 1)^(n) x_(i), n) $],
+	[$ hat(sigma)^(2) = frac(sum_(i = 1)^(n) Y^(2)_(i) -
+	   hat(beta)_(0) Y_(i) - hat(beta)_(1)
+	   x_(i) Y_(i), n - 2) $]
+)
+
+// Missing exercise here
+
+#theorem[
+	- $hat(beta)_(1)$ is an unbiased estimator for $beta_(1)$. In
+	  other words, $E(hat(beta)_(1)) = beta_(1)$;
+	- The variance and standard deviation of $hat(beta)_(1)$ are given by:
+
+	  #grid(
+		columns: (0.5fr, 0.5fr),
+		[$ V(hat(beta)_(1)) = frac(sigma^(2), S_(x x)) $],
+		[$ "SD"(hat(beta)_(1)) = frac(sigma, sqrt(S_(x x))) $]
+	  )
+
+	  Where $sigma^(2)$ and $sigma$ are the variance and standard
+	  deviation of the random error(s), respectively. Replacing
+	  $sigma$ with $hat(sigma)$ (its estimator) in the second equation
+	  gives the expression to compute the estimated standard deviation
+	  of $"SD"(hat(beta)_(1))$:
+
+	  $ s(hat(beta)_(1)) = frac(hat(sigma), sqrt(S_(x x))) $
+	- $hat(beta)_(1)$ is normally distributed.
+] <Results-about-beta-1>
+// #proof[
+//
+// ]
+
+Note how in @Results-about-beta-1 the variance of $hat(beta)_(1)$ is obtained
+by dividing the variance of $epsilon$ by $S_(x x)$, which is a measure of how
+the values of $x$ are spread out with respect to their mean. Being $S_(x x)$
+the denominator means that an higher value of $S_(x x)$, (that is a greater
+variability in $x$), results in a smaller variance of $hat(beta)_(1)$, and
+therefore in a more precise estimation. Of course, if the values of $x$ are
+way too far away from the mean, it most likely mean that the linear model is
+inappropriate.
+
+#lemma[
+	The following holds:
+
+	$ T = frac(hat(beta)_(1) - beta_(1), S slash sqrt(S_(x x))) tilde t(n - 2) $
+]
+
+#theorem[
+	The estimators $hat(beta)_(0)$ and $hat(beta)_(1)$ are correct estimators
+	for $beta_(0)$ and $beta_(1)$.
+]
+
+#theorem("Gauss-Markov Theorem")[
+	The estimators $hat(beta)_(0)$ and $hat(beta)_(1)$ are the estimators
+	for $beta_(0)$ and $beta_(1)$ having the smallest sample variance.
+]
