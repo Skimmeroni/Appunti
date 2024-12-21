@@ -30,6 +30,8 @@
 #include "Introduzione/Grandezze.typ"
 == Errore di misurazione
 #include "Introduzione/Errore.typ"
+#pagebreak()
+
 = Cinematica
 == Moto unidimensionale
 #include "Cinematica/Punto.typ"
@@ -39,6 +41,8 @@
 #include "Cinematica/Circolare.typ"
 == Moti relativi e sistemi inerziali
 #include "Cinematica/Relativita.typ"
+#pagebreak()
+
 = Meccanica
 == Leggi di Newton
 #include "Meccanica/Newton.typ"
