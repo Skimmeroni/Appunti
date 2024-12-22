@@ -31,28 +31,41 @@
 )
 #pagebreak()
 
-= Introduction
+= Descriptive statistics
 == Statistics
-#include "Introduction/Statistics.typ"
+#include "Descriptive/Statistics.typ"
+#pagebreak()
+
+= Probability theory
 == Probability
-#include "Introduction/Probability.typ"
+#include "Probability/Probability.typ"
 == Combinatorics
-#include "Introduction/Combinatorics.typ"
+#include "Probability/Combinatorics.typ"
+#pagebreak()
+
+= Random variables
 == Discrete random variables
-#include "Introduction/DiscreteRV.typ"
+#include "Variables/DiscreteRV.typ"
 == Known discrete random variables
-#include "Introduction/KnownDRV.typ"
+#include "Variables/KnownDRV.typ"
 == Continuous random variables
-#include "Introduction/ContinuousRV.typ"
+#include "Variables/ContinuousRV.typ"
 == Known continuous random variables
-#include "Introduction/KnownCRV.typ"
+#include "Variables/KnownCRV.typ"
 == Joint probability distributions
-#include "Introduction/Joint.typ"
+#include "Variables/Joint.typ"
+#pagebreak()
+
+= Inferential statistics
 == Random sampling
-#include "Introduction/Sampling.typ"
+#include "Inferential/Sampling.typ"
 == Confidence intervals
-#include "Introduction/Intervals.typ"
+#include "Inferential/Intervals.typ"
 == Hypothesis testing
-#include "Introduction/Hypothesis.typ"
+#include "Inferential/Hypothesis.typ"
+#pagebreak()
+
+= Regression model
 == Simple linear regression
-#include "Introduction/Regression.typ"
+#include "Regression/Simple_linear.typ"
+#pagebreak()
