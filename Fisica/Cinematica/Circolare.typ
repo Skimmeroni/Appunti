@@ -32,7 +32,7 @@ dell'angolo $theta$ formato dal vettore posizione con l'asse orizzontale. Tale
 velocitá prende il nome di *velocitá angolare*.
 
 $ omega(t) = lim_(Delta t -> 0) frac(theta(t + Delta t) - theta(t),
-  Delta t) = frac(d, d t) theta(t) [unit(rad/second)] $
+  Delta t) = frac(d, d t) theta(t) [radian/second] $
 
 La velocitá in senso stretto (la velocitá istantanea) rimane comunque
 definita come la variazione istantanea della posizione del punto materiale.
@@ -108,8 +108,8 @@ per compiere un giro completo prende il nome di *periodo*:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
-	[$ nu = frac("numero di giri", 1 unit(second)) [unit(hertz)] $],
-	[$ T = frac(1, nu) [unit(second)] $]
+	[$ nu = frac("numero di giri", 1 second) [hertz] $],
+	[$ T = frac(1, nu) [second] $]
 )
 
 Diventa pertanto possibile esprimere la velocitá e la velocitá angolare in
@@ -187,7 +187,7 @@ dipendenza dal tempo.
 	é vero solamente se il pianeta in questione si trova sufficientemente
 	vicino alla stella. Piú é lontano, piú l'orbita che descrive si fa
 	ellittica.]. Sapendo che la Terra dista circa $1.496 times 10^(11)
-	unit(metre)$ dal Sole, qual'é il valore della velocitá angolare che
+	metre$ dal Sole, qual'é il valore della velocitá angolare che
 	ha la Terra nel suo moto di rivoluzione attorno al Sole? E quello
 	dell'accelerazione centripeta?
 ]
@@ -197,19 +197,19 @@ dipendenza dal tempo.
 	moto in esame:
 
 	$ 1 "anno" = 365 "giorni" = 8760 "ore" = 525600 "minuti" =
-	  31536000 unit(second) $
+	  31536000 second $
 
 	Noto il periodo, é possibile calcolare la velocitá angolare:
 
-	$ omega = frac(2 pi, T) = frac(2 pi, 3.15 times 10^(7) unit(second)) =
-	  2.00 times 10^(-7) unit(rad/second) $
+	$ omega = frac(2 pi, T) = frac(2 pi, 3.15 times 10^(7) second) =
+	  2.00 times 10^(-7) radian/second $
 
 	Nota la velocitá angolare, é possibile calcolare l'accelerazione
 	centripeta:
 
-	$ a = omega^(2) r = (2.00 times 10^(-7) unit(rad/second))^(2) dot
-	  1.496 times 10^(11) unit(metre) =
-	  5.93 times 10^(-3) unit(rad/second^(2)) $
+	$ a = omega^(2) r = (2.00 times 10^(-7) radian/second)^(2) dot
+	  1.496 times 10^(11) metre =
+	  5.93 times 10^(-3) radian/second^(2) $
 ]
 
 Un modo alternativo per derivare l'accelerazione centripeta é quello di

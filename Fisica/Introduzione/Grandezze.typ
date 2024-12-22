@@ -27,13 +27,13 @@ Le unitá fondamentali del SI sono le seguenti:
 	[#table(
 		columns: 3,
 		[*Grandezza*], [*Unitá di misura*], [*Simbolo*],
-		[Lunghezza], [Metro], [$unit(metre)$],
-		[Massa], [Chilogrammo], [$unit(kilogram)$],
-		[Tempo], [Secondo], [$unit(second)$],
-		[Temperatura], [Kelvin], [$unit(kelvin)$],
-		[Corrente elettrica], [Ampere], [$unit(ampere)$],
-		[Quantitá di materia], [Mole], [$unit(mole)$],
-		[Intensitá luminosa], [Candela], [$unit(candela)$]
+		[Lunghezza], [Metro], [$metre$],
+		[Massa], [Chilogrammo], [$kilogram$],
+		[Tempo], [Secondo], [$second$],
+		[Temperatura], [Kelvin], [$kelvin$],
+		[Corrente elettrica], [Ampere], [$ampere$],
+		[Quantitá di materia], [Mole], [$mole$],
+		[Intensitá luminosa], [Candela], [$candela$]
 	)]
 )
 
@@ -41,7 +41,7 @@ Il modo in cui il campionamento delle unitá di misura viene effettuato é
 variegato. Ad esempio:
 
 - Il metro é fissato alla distanza percorsa dalla luce nel vuoto in un tempo
-  di $1299792458 unit(second)$. Questo sia perché la luce ha sempre la stessa
+  di $1299792458 second$. Questo sia perché la luce ha sempre la stessa
   velocitá, sia perché la luce é uguale a sé stessa dovunque nell'Universo;
 - Il chilogrammo é fissato come la massa di un lega metallica tenuta sotto
   strettissime condizioni di sicurezza;
@@ -108,13 +108,13 @@ accuratezza.
 
 #exercise[
 	Convertire le seguenti grandezze in notazione scientifica: $0.0086
-	unit(metre)$, $725555 unit(second)$, $0.00000000069 unit(kilogram)$.
+	metre$, $725555 second$, $0.00000000069 kilogram$.
 ]
 #solution[
 	#grid(
 		columns: (0.3fr, 0.3fr, 0.4fr),
-		[$ 0.0086 unit(metre) = 8.6 times 10^(-3) unit(metre) $],
-		[$ 725555 unit(second) = 7.255555 times 10^(6) unit(second) $],
-		[$ 0.00000000069 unit(kilogram) = 6.9 times 10^(-10) unit(kilogram) $]
+		[$ 0.0086 metre = 8.6 times 10^(-3) metre $],
+		[$ 725555 second = 7.255555 times 10^(6) second $],
+		[$ 0.00000000069 kilogram = 6.9 times 10^(-10) kilogram $]
 	)
 ]

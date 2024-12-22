@@ -63,7 +63,7 @@ di un corpo, da una situazione di partenza ad una di arrivo:
 
 $ arrow(v)_("media") = frac(Delta arrow(x), Delta t) =
   frac(arrow(x)(t + Delta t) - arrow(x)(t), Delta t)
-  [unit(metre/second)] $
+  [metre/second] $
 
 Essendo la velocitá media un rapporto tra un vettore ed uno scalare, é
 anch'essa un vettore. Inoltre, essendo il tempo una quantitá non negativa,
@@ -73,7 +73,7 @@ il segno della velocitá media é necessariamente lo stesso dello spostamento.
 scalare media*. Tale grandezza é data dal rapporto fra la distanza percorsa
 in un intervallo di tempo $Delta t$ e l'intervallo di tempo stesso.
 
-$ arrow(s)_("media") = frac(d(x), Delta t) = [unit(metre/second)] $
+$ arrow(s)_("media") = frac(d(x), Delta t) = [metre/second] $
 
 Cosí come la distanza, anche la velocitá scalare media é (come da nome) uno
 scalare, ed é sempre positiva.
@@ -95,7 +95,7 @@ di tempo arbitrariamente piccolo" piú che infinitesimo.]:
 
 $ arrow(v)_("istantanea") = lim_(Delta t -> 0) arrow(v)_("media") =
   lim_(Delta t -> 0) frac(arrow(x)(t + Delta t) - arrow(x)(t), Delta t) =
-  frac(d, d t) arrow(x)(t) [unit(metre/second)] $
+  frac(d, d t) arrow(x)(t) [metre/second] $
 
 Si noti infatti come l'espressione nel penultimo termine dell'uguaglianza
 corrisponda perfettamente alla definizione di derivata. Inoltre, riportando
@@ -108,35 +108,35 @@ punto.
 	istante a partire dall'equazione $x(t) = -4t + 2t^(2)$. Si vuole
 	calcolare:
 
-	- Il suo spostamento tra gli istanti $t = 0 unit(second)$ e
-	  $t = 1 unit(second)$;
-	- Il suo spostamento tra gli istanti $t = 1 unit(second)$ e
-	  $t = 3 unit(second)$;
-	- La sua velocitá media tra gli istanti $t = 0 unit(second)$ e
-	  $t = 1 unit(second)$;
-	- La sua velocitá media tra gli istanti $t = 1 unit(second)$ e
-	  $t = 3 unit(second)$;
-	- La sua velocitá istantanea in $t = 2.5 unit(second)$.
+	- Il suo spostamento tra gli istanti $t = 0 second$ e
+	  $t = 1 second$;
+	- Il suo spostamento tra gli istanti $t = 1 second$ e
+	  $t = 3 second$;
+	- La sua velocitá media tra gli istanti $t = 0 second$ e
+	  $t = 1 second$;
+	- La sua velocitá media tra gli istanti $t = 1 second$ e
+	  $t = 3 second$;
+	- La sua velocitá istantanea in $t = 2.5 second$.
 ]
 #solution[
-	$ Delta x = x(1) - x(0) = (-4 dot 1 + 2 dot 1^(2)) unit(metre) -
-	  (-4 dot 0 + 2 dot 0^(2)) unit(metre) = (-4 + 2) unit(metre) - (0 + 0)
-	  unit(metre) = -2 unit(metre) $
+	$ Delta x = x(1) - x(0) = (-4 dot 1 + 2 dot 1^(2)) metre -
+	  (-4 dot 0 + 2 dot 0^(2)) metre = (-4 + 2) metre - (0 + 0)
+	  metre = -2 metre $
 
-	$ Delta x = x(3) - x(1) = (-4 dot 3 + 2 dot 3^(2)) unit(metre) -
-	  (-4 dot 1 + 2 dot 1^(2)) unit(metre) = (-12 + 18) unit(metre) - (-4 + 2)
-	  unit(metre) = 8 unit(metre) $
+	$ Delta x = x(3) - x(1) = (-4 dot 3 + 2 dot 3^(2)) metre -
+	  (-4 dot 1 + 2 dot 1^(2)) metre = (-12 + 18) metre - (-4 + 2)
+	  metre = 8 metre $
 
 	#grid(
 		columns: (0.5fr, 0.5fr),
-		[$ v_("media") = frac(x(1) - x(0), 1 unit(second) - 0 unit(second)) =
-		   frac(-2 unit(metre), 1 unit(second)) = -2 unit(metre/second) $],
-		[$ v_("media") = frac(x(3) - x(1), 3 unit(second) - 1 unit(second)) =
-		   frac(8 unit(metre), 2 unit(second)) = 4 unit(metre/second) $]
+		[$ v_("media") = frac(x(1) - x(0), 1 second - 0 second) =
+		   frac(-2 metre, 1 second) = -2 metre/second $],
+		[$ v_("media") = frac(x(3) - x(1), 3 second - 1 second) =
+		   frac(8 metre, 2 second) = 4 metre/second $]
 	)
 
 	$ v(2.5) = frac(d, d t) x(2.5) = frac(d, d t)_(t = 2.5) -4t + 2t^(2) =
-	  -4 + 4 dot 2.5 = 6 unit(metre/second) $
+	  -4 + 4 dot 2.5 = 6 metre/second $
 ]
 
 Oltre alla variazione della posizione in funzione del tempo, potrebbe
@@ -145,7 +145,7 @@ del tempo. Tale variazione é descritta dall'*accelerazione media*:
 
 $ arrow(a)_("media") = frac(Delta arrow(v), Delta t) =
   frac(arrow(v)(t + Delta t) - arrow(v)(t), Delta t)
-  [unit(metre / second^2)] $
+  [metre/second^(2)] $
 
 Cosí come per la velocitá, é possibile definire una *accelerazione istantanea*:
 
@@ -153,7 +153,7 @@ $ arrow(a)_("istantanea") = lim_(Delta t -> 0)
   frac(Delta arrow(v), Delta t) = lim_(Delta t -> 0)
   frac(arrow(v)(t + Delta t) - arrow(v)(t), Delta t) =
   frac(d, d t) arrow(v)(t) = frac(d^(2), d t) arrow(x)(t)
-  [unit(metre / second^2)] $
+  [metre/second^(2)] $
 
 La velocitá istantanea e l'accelerazione istantanea sono le quantitá
 che vengono indicate come "velocitá" e "accelerazione" in senso stretto.
@@ -185,18 +185,18 @@ se la funzione accelerazione é una funzione nota.
 #exercise[
 	Un punto materiale si sta muovendo; la sua posizione é nota in
 	ogni istante a partire dall'equazione $v(t) = 40t - 5t^(2)$.
-	Qual'é l'accelerazione media tra gli istanti $t = 0 unit(second)$
-	e $t = 2 unit(second)$? Qual'é l'accelerazione istantanea al tempo
-	$t = 2 unit(second)$?
+	Qual'é l'accelerazione media tra gli istanti $t = 0 second$
+	e $t = 2 second$? Qual'é l'accelerazione istantanea al tempo
+	$t = 2 second$?
 ]
 #solution[
-	$ a_("media") = frac(v(2) - v(0), (2 - 0) unit(second)) =
-	  frac((40 - 5 dot 2^(2)) unit(metre/second) - (40 - 5 dot 0^(2))
-	  unit(metre/second), 2 unit(second)) = frac(20 unit(metre/second) -
-	  40 unit(metre/second), 2 unit(second)) = -10 unit(metre/second^(2)) $
+	$ a_("media") = frac(v(2) - v(0), (2 - 0) second) =
+	  frac((40 - 5 dot 2^(2)) metre/second - (40 - 5 dot 0^(2))
+	  metre/second, 2 second) = frac(20 metre/second -
+	  40 metre/second, 2 second) = -10 metre/second^(2) $
 
 	$ a(2) = frac(d, d t) v(2) = frac(d, d t)_(t = 2) 40t - 5t^(2) =
-	  40 - 5 dot 2 (2) = 20 unit(metre/second^(2)) $
+	  40 - 5 dot 2 (2) = 20 metre/second^(2) $
 
 ]
 
@@ -245,32 +245,32 @@ $arrow(x)(t)$ e $arrow(v)(t)$ si ottiene:
 
 #exercise[
 	Un aereo sta effettuando un atterraggio: tocca terra con una velocitá di
-	$64 unit(metre/second^(2))$ per poi rallentare con decelerazione costante
+	$64 metre/second^(2)$ per poi rallentare con decelerazione costante
 	fino a fermarsi. Quanto vale questa decelerazione se per fermarsi l'aereo
-	impiega $2 unit(second)$? Qual'é la sua posizione dopo essersi fermato?
-	Si assuma $t_(0) = 0 unit(second)$ e $x(t_(0)) = 0 unit(metre)$.
+	impiega $2 second$? Qual'é la sua posizione dopo essersi fermato?
+	Si assuma $t_(0) = 0 second$ e $x(t_(0)) = 0 metre$.
 ]
 #solution[
 	Se l'aereo sta rallentando con accelerazione (negativa) costante, sono
 	valide le leggi del moto uniformemente accelerato. Il fatto che si sia
-	fermato indica che la sua velocitá dopo $2 unit(second)$ é nulla. La
+	fermato indica che la sua velocitá dopo $2 second$ é nulla. La
 	velocitá con cui l'aereo tocca terra é la velocitá con cui inizia il
 	suo moto a decelerazione costante. Tale decelerazione é quindi:
 
 	$ v(t) = v(t_(0)) + a dot (t - t_(0)) =>
 	  a = frac(v(t) - v(t_(0)), t - t_(0)) =
-	  frac(v(2) - v(0), 2 unit(second) - 0 unit(second)) =
-	  frac((0 - 64) unit(metre/second), 2 unit(second)) =
-	  -32 unit(metre/second^(2)) $
+	  frac(v(2) - v(0), 2 second - 0 second) =
+	  frac((0 - 64) metre/second, 2 second) =
+	  -32 metre/second^(2) $
 
 	La sua posizione dopo essersi fermato é data da:
 
 	$ x(t) &= x(t_(0)) + v(t_(0)) t + frac(1, 2) a t^(2) =>
-	  x(2) = x(0) + v(0) dot 2 unit(second) +
-	  frac(1, 2) dot a dot 2^(2) unit(second) = \
-	  &= 0 unit(metre) + 64 unit(metre/second) dot 2 unit(second) +
-	  frac(1, 2) dot (-32) unit(metre/second^(2)) dot 4 second^(2) =
-	  64 unit(metre) $
+	  x(2) = x(0) + v(0) dot 2 second +
+	  frac(1, 2) dot a dot 2^(2) second = \
+	  &= 0 metre + 64 metre/second dot 2 second +
+	  frac(1, 2) dot (-32) metre/second^(2) dot 4 second^(2) =
+	  64 metre $
 ]
 
 === Caso di studio: moto in caduta libera
@@ -285,17 +285,17 @@ perché la forma di un corpo subisce l'attrito dell'aria).
 Tale accelerazione varia a seconda dell'altitudine: piú ci si trova vicino al
 livello del mare e piú é intensa. Tuttavia, per le applicazioni pratiche il
 suo valore é approssimativamente costante, ed é pari a $plus.minus 9.8
-unit(metre / second^2)$.
+metre/second^(2)$.
 
 #exercise[
-	Una palla viene lanciata verso l'alto con velocitá $20 unit(metre/second)$,
+	Una palla viene lanciata verso l'alto con velocitá $20 metre/second$,
 	che ricade poi verso il basso toccando il suolo. Si assuma $t_(0) = 0
-	unit(second)$ e $x(t_(0)) = 0 unit(metre)$.
+	second$ e $x(t_(0)) = 0 metre$.
 
 	- Quanto tempo impiega la palla a raggiungere il punto di massima altezza?
 	- Qual'é la massima altezza che la palla riesce a raggiungere?
-	- Qual'é la posizione della palla al tempo $t = 5 unit(second)$?
-	- Qual'é la velocitá della palla al tempo $t = 5 unit(second)$?
+	- Qual'é la posizione della palla al tempo $t = 5 second$?
+	- Qual'é la velocitá della palla al tempo $t = 5 second$?
 ]
 #solution[
 	Il punto di massima altezza é quello dove la palla é ferma a mezz'aria. Si
@@ -304,23 +304,23 @@ unit(metre / second^2)$.
 	$ v(t) = v(t_(0)) + a dot (t - t_(0)) =>
 	  0 = v(0) - g dot (t - 0) =>
 	  t = frac(v(0), g) =
-	  frac(20 unit(metre/second), 9.8 unit(metre/second^(2))) =
-	  2.04 unit(second) $
+	  frac(20 metre/second, 9.8 metre/second^(2)) =
+	  2.04 second $
 
 	$ x(t) = x(t_(0)) + v(t_(0)) t + frac(1, 2) a t^(2) =
 	  x(0) + v(0) t - frac(1, 2) g t^(2) =
-	  0 unit(metre) + 20 unit(metre/second) dot 2.04 unit(second) -
-	  frac(1, 2) 9.8 unit(metre/second^(2)) (2.04)^(2) unit(second^(2)) =
-	  20.4 unit(metre) $
+	  0 metre + 20 metre/second dot 2.04 second -
+	  frac(1, 2) 9.8 metre/second^(2) (2.04)^(2) second^(2) =
+	  20.4 metre $
 
 	$ v(t) = v(t_(0)) + a dot (t - t_(0)) =>
 	  v(5) = v(0) - g dot (5 - 0) =
-	  20 unit(metre/second) - 9.8 unit(metre/second^(2)) dot
-	  (5 unit(second) - 0 unit(second)) = -29 unit(metre/second) $
+	  20 metre/second - 9.8 metre/second^(2) dot
+	  (5 second - 0 second) = -29 metre/second $
 
 	$ x(t) = x(t_(0)) + v(t_(0)) t + frac(1, 2) a t^(2) =>
 	  x(5) = x(0) + v(0) dot 5 - frac(1, 2) g dot 5^(2) =
-	  0 unit(metre) + 20 unit(metre/second) dot 5 unit(second) -
-	  frac(1, 2) 9.8 unit(metre/second^(2)) 5^(2) unit(second^(2)) =
-	  -22.5 unit(metre) $
+	  0 metre + 20 metre/second dot 5 second -
+	  frac(1, 2) 9.8 metre/second^(2) 5^(2) second^(2) =
+	  -22.5 metre $
 ]

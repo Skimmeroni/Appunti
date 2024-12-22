@@ -62,9 +62,9 @@ percentuale, quanto la misurazione si avvicina al valore _reale_.
 	#align(center,
 		table(
 			columns: 5,
-			[$2.5561 unit(metre)$], [$2.5505 unit(metre)$],
-			[$2.5597 unit(metre)$], [$2.5523 unit(metre)$],
-			[$2.5549 unit(metre)$]
+			[$2.5561 metre$], [$2.5505 metre$],
+			[$2.5597 metre$], [$2.5523 metre$],
+			[$2.5549 metre$]
 		)
 	)
 
@@ -75,19 +75,19 @@ percentuale, quanto la misurazione si avvicina al valore _reale_.
 	Le cifre significative sono le prime tre, perché compaiono in tutte e
 	cinque le misurazioni. La misurazione media é data da:
 
-	$ frac(2.5561 unit(metre) + 2.5505 unit(metre) + 2.5597 unit(metre)
-	  2.5523 unit(metre) + 2.5549 unit(metre), 5) = 2.5547 unit(metre) $
+	$ frac(2.5561 metre + 2.5505 metre + 2.5597 metre
+	  2.5523 metre + 2.5549 metre, 5) = 2.5547 metre $
 
 	Errore assoluto, relativo e relativo percentuale sono dati da:
 
 	#grid(
 		columns: (0.4fr, 0.3fr, 0.3fr),
-		[$ e_(A) = frac((2.5597 - 2.5505) unit(metre), 2) =
-		   0.0046 unit(metre) $],
-		[$ e_(R) = frac(0.0046 unit(metre), 2.5547 unit(metre)) = 0.0018 $],
+		[$ e_(A) = frac((2.5597 - 2.5505) metre, 2) =
+		   0.0046 metre $],
+		[$ e_(R) = frac(0.0046 metre, 2.5547 metre) = 0.0018 $],
 		[$ e_(R p) = 0.0018 * 100 percent = 0.18 percent $]
 	)
 
 	La misurazione media puó quindi essere scritta piú accuratamente come
-	$2.5547 unit(metre) plus.minus 0.0046 unit(metre)$.
+	$2.5547 metre plus.minus 0.0046 metre$.
 ]

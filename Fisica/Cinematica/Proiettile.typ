@@ -104,10 +104,10 @@ $ (frac(-g, 2cos^(2)(theta) v^(2)(t_(0)))) x^(2)(t) +
 
 #exercise[
 	Un saltatore in lungo spicca un balzo in avanti con un angolo
-	$theta = frac(pi, 9) unit(rad)$ rispetto al terreno ed una velocitá
-	di $11 unit(metre/second)$. Quale sará la lunghezza del salto? Quale
-	sará l'altezza massima? Si assuma $t_(0) = 0 unit(second)$, $x(0) = 0
-	unit(metre)$ e $y(0) = 0 unit(metre)$.
+	$theta = frac(pi, 9) radian$ rispetto al terreno ed una velocitá
+	di $11 metre/second$. Quale sará la lunghezza del salto? Quale
+	sará l'altezza massima? Si assuma $t_(0) = 0 second$, $x(0) = 0
+	metre$ e $y(0) = 0 metre$.
 ]
 #solution[
 	Imponendo come asse $x$ il terreno, la distanza da terra é nulla nell'istante 
@@ -124,8 +124,8 @@ $ (frac(-g, 2cos^(2)(theta) v^(2)(t_(0)))) x^(2)(t) +
 	  x(0) + v(0) cos(theta) (frac(2v(0) sin(theta), g) - 0) = \
 	  0 + frac(2v^(2)(0) sin(theta) cos(theta), g) =
 	  frac(v^(2)(0) sin(2 theta), g) =
-	  frac((11 unit(metre/second))^(2) sin(2 dot frac(pi, 9) unit(rad)),
-	  9.8 unit(metre/second^(2))) approx 7.94 unit(metre) $
+	  frac((11 metre/second)^(2) sin(2 dot frac(pi, 9) radian),
+	  9.8 metre/second^(2)) approx 7.94 metre $
 
 	Il punto di massima altezza é quello in cui la velocitá lungo $y$ é nulla:
 
@@ -141,6 +141,6 @@ $ (frac(-g, 2cos^(2)(theta) v^(2)(t_(0)))) x^(2)(t) +
 	  frac(v^(2)(0) sin^(2)(theta), g) -
 	  frac(1, 2) (frac(v^(2)(0) sin^(2)(theta), g)) =
 	  frac(v^(2)(0) sin^(2)(theta), 2g) =
-	  frac((11 unit(metre/second))^(2) sin^(2)(frac(pi, 9) unit(rad)),
-	  2 dot 9.8 unit(metre/second^(2))) approx 0.722 unit(metre) $
+	  frac((11 metre/second)^(2) sin^(2)(frac(pi, 9) radian),
+	  2 dot 9.8 metre/second^(2)) approx 0.722 metre $
 ]
