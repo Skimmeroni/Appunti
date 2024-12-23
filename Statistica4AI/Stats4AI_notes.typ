@@ -32,8 +32,16 @@
 #pagebreak()
 
 = Descriptive statistics
-== Statistics
-#include "Descriptive/Statistics.typ"
+== Introduction
+#include "Descriptive/Introduction.typ"
+== Frequencies for a single variable
+#include "Descriptive/Frequency.typ"
+== Frequencies for two variables
+#include "Descriptive/Correlation.typ"
+== Central tendency indices
+#include "Descriptive/Central.typ"
+== Variability indices
+#include "Descriptive/Variability.typ"
 #pagebreak()
 
 = Probability theory
