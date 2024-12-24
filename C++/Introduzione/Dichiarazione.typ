@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Nel C++ si fa distinzione fra *dichiarazione* e definizione di una entitá
 (che sia un tipo, un oggetto o una funzione). Una dichiarazione introduce un
@@ -17,7 +17,7 @@ valore iniziale. Una variabile puó essere sia inizializzata mentre la si
 definisce, oppure puó essere fatto separatamente. Se una variabile non
 viene inizializzata, il suo valore potrebbe essere indeterminato.
 
-#showybox[
+#exercise[
 	```
 	// Declaration without definition
 
@@ -39,7 +39,7 @@ del valore di ritorno, il suo nome ed il numero e tipo dei suoi argomenti.
 Definire una funzione significa, oltre a dichiararla, anche specificarne il
 corpo.
 
-#showybox[
+#exercise[
 	```
 	// Declaration without definition
 
@@ -73,7 +73,7 @@ una stessa variable/funzione restituisce sempre un messaggio di errore durante
 la compilazione. Due dichiarazioni/definizioni per variabili con lo stesso nome,
 anche se di tipo diverso, non sono ammesse.
 
-#showybox[
+#exercise[
 	```
 	int x;
 	int x;                   // NOT allowed
@@ -114,7 +114,7 @@ operatori piú comuni sono:
 Gli operatori non vengono estesi a tutti i dichiaratori in una dichiarazione
 multipla, sono legati esclusivamente al dichiaratore in cui figurano.
 
-#showybox[
+#exercise[
 	```
 	int x, y, z;      // int x; int y; int z;
 	int *x, y, z;     // int *x; int y; int z;
@@ -131,7 +131,7 @@ Alcune implementazioni del C++ permettono di utilizzare caratteri speciali
 compatibilitá. I nomi delle parole chiave della grammatica del C++ (`int`,
 `if`, `throw`, ecc...) non possono essere usati come nomi.
 
-#showybox[
+#exercise[
 	```
 	// Valid identifiers
 	hello    ___    a123    INT    Hello_World    _x_y_z_    tHiSnAmE    __0__

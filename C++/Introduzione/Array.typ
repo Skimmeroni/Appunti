@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Combinando fra loro tipi primiti, é possibile costruire tipi di dato
 composti. Nel C++, i principali dati composti sono tre: *array*,
@@ -50,7 +50,7 @@ ad una cella di memoria che supera le dimensioni dell'array. Nonostante questo,
 nel caso dei puntatori) si sta cercando di accedere ad un'area di memoria non
 assegnata al programma, e gli effetti sono imprevedibili.
 
-#showybox[
+#exercise[
 	```
 	char array1[3]                    // Not initialised
 	char array2[3] = {'a', 'b', 'c'}  // Fully initialised (sizes match)
@@ -83,7 +83,7 @@ stesso tipo.
 	array_type array_name[a][b]...[n]
 ```
 
-#showybox[
+#exercise[
 	```
 	int array0[5][3];
 	int array1[2][3] = {{1, 2, 3}, {4, 5, 6}};
@@ -106,7 +106,7 @@ per scorrere lungo l'array in maniera naturale. Un puntatore puó anche essere
 inizializzato con un elemento dell'array specifico, e diventa un puntatore
 a tale cella di memoria.
 
-#showybox[
+#exercise[
 	```
 	int array[3] = {-1, -2, -3};
 
@@ -127,7 +127,7 @@ Assegnare un puntatore ad un array multidimensionale corrisponde ad
 assegnarlo ad uno dei suoi sottoarray; scorrere con tale puntatore
 corrisponde a scorrere di sottoarray in sottoarray.
 
-#showybox[
+#exercise[
 	```
 	int array[2][3] = {{1, 2, 3}, {4, 5, 6}};
 
@@ -151,7 +151,7 @@ di difficile comprensione:
   indica un puntatore;
 - Si ripete finché la dichiarazione é terminata.
 
-#showybox[
+#exercise[
 	```
 	int i;                  // i as an int
 	int *i;                 // i as a pointer to an int
@@ -182,7 +182,7 @@ in lista di caratteri e aggiunge `\0` alla fine. Una stringa particolarmente
 lunga puó essere inizializzata "spezzandola" in piú sequenze racchiuse fra
 doppi apici: il compilatore si incarica di concatenarle automaticamente.
 
-#showybox[
+#exercise[
 	```
 	char strc[10] = "Hello";
 	char strm[] = "Up" "Down" "Left" "Right" "Forward" "Backward";
@@ -203,7 +203,7 @@ puntatore si ottiene un errore a runtime. Se si dichiara invece una stringa
 come array di caratteri, é possibile modificarla come fosse un normale array
 senza effetti collaterali.
 
-#showybox[
+#exercise[
 	```
 	char* m = "More";
 	m[2] = 'l';            // Allowed, but...
@@ -236,7 +236,7 @@ a meno di circostanze particolari. Le stringhe C++ sono degli oggetti veri e
 propri, definiti come `std::string`. L'header file `string` contiene diversi
 metodi per manipolarle.
 
-#showybox[
+#exercise[
 	```
 	#include <string>
 
@@ -324,7 +324,7 @@ campi.
 	]
 )
 
-#showybox[
+#exercise[
 	```
 	struct Point {
 		int x;
@@ -355,7 +355,7 @@ accesso).
 	]
 )
 
-#showybox[
+#exercise[
 	```
 	Point P = {5, 2};
 	Point* Q = &P;
@@ -381,7 +381,7 @@ Inoltre, anche una `struct` formata da un solo campo, anche se tale campo é
 un tipo di dato primitivo, é comunque considerata un tipo distinto da
 quest'ultimo.
 
-#showybox[
+#exercise[
 	```
 	struct S1 {int a;};
 	struct S2 {int a;};
@@ -401,7 +401,7 @@ quanta memoria allocare. É peró possibile avere una `struct` che contiene un
 puntatore ad una `struct` dello stesso tipo, perché la memoria allocata per un
 puntatore é sempre la stessa, ed il problema non si pone.
 
-#showybox[
+#exercise[
 	```
 	// NOT allowed, incomplete type
 	struct Node {
@@ -423,7 +423,7 @@ In generale, il nome di una `struct` che é stata dichiarata ma non definita
 puó essere usato solamente nei casi in cui non é necessario conoscerne la
 dimensione o uno dei suoi campi.
 
-#showybox[
+#exercise[
 	```
 	struct List;
 

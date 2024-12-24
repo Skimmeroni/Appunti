@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Prende il nome di *blocco* qualsiasi sezione di codice racchiusa all'interno
 di due parentesi graffe. Ogni blocco induce uno *scope*, ovvero uno "spazio"
@@ -14,7 +14,7 @@ se si trovano in due scope diversi (che siano disgiunti o l'uno contenuto
 nell'altro) sono considerate due entitá diverse. Gli argomenti di una funzione
 sono considerati facenti parte del blocco indotto dalla funzione.
 
-#showybox[
+#exercise[
 	```
 	{
 		int x = 10;
@@ -70,7 +70,7 @@ Un namespace particolarmente importante é `std`, quello della libreria
 standard del C++. Non a caso, diverse funzioni molto usate come `cin`
 e `cout` appartengono a tale namespace.
 
-#showybox[
+#exercise[
 	```
 	namespace First
 	{
@@ -105,7 +105,7 @@ al di fuori del blocco da questi indotto. Le regole degli scope sono valide
 anche per i namespace, pertanto in uno stesso namespace non possono esserci
 due definizioni uguali.
 
-#showybox[
+#exercise[
 	```
 	namespace AAA
 	{
@@ -160,7 +160,7 @@ importare con piú facilitá entitá da altri namespace.
 	]
 )
 
-#showybox[
+#exercise[
 	```
 	namespace First
 	{
@@ -182,7 +182,7 @@ Inoltre, i namespace possono essere dichiarati piú volte, anche in file
 diversi; quando il codice viene compilato, le diverse occorrenze di uno
 stesso namespace e le loro componenti vengono unite in una sola.
 
-#showybox[
+#exercise[
 	```
 	namespace Ex
 	{
@@ -212,7 +212,7 @@ vengono introdotti dichiarando normalmente un namespace ma omettendone il nome.
 Tali namespace sono inaccessibili agli altri file, nemmeno se importano il
 file con tale definizione.
 
-#showybox[
+#exercise[
 	```
 	namespace
 	{
@@ -247,7 +247,7 @@ troncando l'estensione. Nel caso specifico della libreria standard del C,
 molte delle funzionalitá di tale libreria sono incapsulate dalla libreria
 standard del C++ in header che hanno il medesimo nome ed una 'c' come prefisso.
 
-#showybox[
+#exercise[
 	La libreria standard del C `math.h` contiene alcune funzioni matematiche
 	piú elaborate delle operazioni standard, come ad esempio il calcolo della
 	radice quadrata (`sqrt`) o l'arrotondamento per eccesso o per difetto

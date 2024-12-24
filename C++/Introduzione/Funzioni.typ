@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Definire una *funzione* significa specificare quali operazioni tale funzione
 deve compiere. Una funzione non puó essere chiamata fintanto che non é stata
@@ -14,7 +14,7 @@ avere lo stesso tipo di valore di ritorno e lo stesso tipo degli argomenti;
 i nomi degli argomenti possono anche essere diversi, ma per rendere il codice
 piú chiaro é preferibile che siano uguali.
 
-#showybox[
+#exercise[
 	```
 	void f(int a, double b);
 	void f(int p, double q);     // Allowed, but weird
@@ -49,7 +49,7 @@ puntatore. Se un array viene passato come argomento di una funzione, viene in
 automatico passato un puntatore a tale array come effettivo argomento. In
 altre parole, viene fatta una conversione da `T[]` a `T*`.
 
-#showybox[
+#exercise[
 	```
 	int strlen(const char*);
 
@@ -81,7 +81,7 @@ dato che non esiste e creare inconsistenze. Pertanto, è preferibile
 sempre controllare che il puntatore passato ad una funzione non sia
 `nullptr`.
 
-#showybox[
+#exercise[
 	```
 	#include <iostream>
 
@@ -146,7 +146,7 @@ di stabilire quale sia quella intesa, viene restituito un messaggio di
 errore. Naturalmente, due funzioni con la stessa identica firma non sono
 ammesse a prescindere.
 
-#showybox[
+#exercise[
 	```
 	#include <iostream>
 
@@ -178,7 +178,7 @@ ed essere tutti sulla parte destra.
 ret_type func_name(type_1 par_1, ..., type_i par_i = def_i, ..., type_n par_n = def_n)
 ```
 
-#showybox[
+#exercise[
 	```
 	#include <iostream>
 

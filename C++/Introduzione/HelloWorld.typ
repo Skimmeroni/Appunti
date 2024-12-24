@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 L'entry point di un programma C++ é una funzione avente nome `main`. Tale
 funzione deve essere globale e ne deve esistere una ed una sola copia. Il
@@ -38,7 +38,7 @@ dato che `std::cout` debba stampare, questo lo restituisce come carattere.
 In maniera molto simile, per leggere input da tastiera é possibile sfruttare
 `std::cin`
 
-#showybox[
+#exercise[
 	```
 	#include <iostream>
 

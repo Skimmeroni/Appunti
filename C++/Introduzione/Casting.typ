@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 `typedef` permette di associare un alias ad un tipo di dato giá esistente.
 É utile per riferirsi ad un tipo avente un nome molto lungo con un alias
@@ -10,7 +10,7 @@ semplici da comprendere.
 typedef old_name new_name;
 ```
 
-#showybox[
+#exercise[
 	```
 	typedef unsigned long int uli;
 
@@ -33,7 +33,7 @@ un messaggio di errore.
 const var_type var_name = value;
 ```
 
-#showybox[
+#exercise[
 	```
 	const float pi;              // NOT Allowed
 	const float pi = 3.14;       // Allowed
@@ -51,7 +51,7 @@ modificato direttamente. Non é peró vero il contrario: se una variabile viene
 dichiarata `const` non puó essere referenziata, perché questo violerebbe il
 senso stesso di averla dichiarata in quel modo.
 
-#showybox[
+#exercise[
 	```
 	int f = 2;
 	const int& e = f;
@@ -87,7 +87,7 @@ che ha il modificatore `const` restituisce un errore in fase di compilazione,
 perché si sta di fatto negando il "senso" dell'aver dichiarato tale variabile
 come constante in principio.
 
-#showybox[
+#exercise[
 	```
 	int i = 200;
 
@@ -143,7 +143,7 @@ var_type1 = dynamic_cast<Type1>(var_type2)
 - `dynamic_cast` é un cast speciale che permette di fare downcasting in una
   gerarchia di classi.
 
-#showybox[
+#exercise[
 	```
 	int i;
 	double d;

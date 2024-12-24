@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 *Doxygen* é uno strumento che permette di generare documentazione del codice
 C++ in maniera automatica a partire da dei commenti propriamente formattati.
@@ -45,7 +45,7 @@ direttiva `@param` va riportata per ogni parametro della funzione. La direttiva
 */
 ```
 
-#showybox[
+#exercise[
 	```
 	/**
 		@brief Computes the Euclidean distance
@@ -69,7 +69,7 @@ affinchè un metodo o una classe funzioni correttamente. Ha particolare
 valore per documentare il senso degli `assert`. La direttiva `@post` 
 permette di descrivere una _postcondizione_.
 
-#showybox[
+#exercise[
 	```
 	/**
 		@brief Computes the Pearson correlation coefficient 

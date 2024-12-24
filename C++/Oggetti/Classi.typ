@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Una *classe* viene dichiarata con la seguente sintassi:
 
@@ -29,7 +29,7 @@ possono essere ripetute anche più di una volta all'interno della stessa
 classe, ma per leggibilità è preferibile avere soltanto una parte 
 pubblica ed una privata.
 
-#showybox[
+#exercise[
 	```
 	class dbuffer {
 		unsigned int size;
@@ -52,7 +52,7 @@ class_name::class_name(a1_type a1_value ..., aN_type aN_value) {
 }
 ```
 
-#showybox[
+#exercise[
 	```
 	dbuffer::dbuffer(unsigned int size, int value) {
 		mBuffer = new int[size];
@@ -77,7 +77,7 @@ class_name class_instance(a1_value, ..., aN_value);
 Naturalmente, come ogni tipo di dato, anche una istanza di una classe 
 puó essere creata usando la memoria dinamica.
 
-#showybox[
+#exercise[
 	```
 	dbuffer* d = new dbuffer();
 	...
@@ -122,7 +122,7 @@ permette di specificare che ci si sta riferendo ad un attributo o ad
 una funzione che appartiene alla classe, disambiguando da eventuali 
 omonimi.
 
-#showybox[
+#exercise[
 	```
 	dbuffer::dbuffer(unsigned int size) {
 		...
@@ -160,7 +160,7 @@ per ciascun oggetto, e tale costruttore é l'unico che é possibile
 chiamare per un array di oggetti #footnote[Questo non é piú vero 
 negli standard piú recenti.].
 
-#showybox[
+#exercise[
 	```
 	#include <iostream>
 
@@ -198,7 +198,7 @@ Quando termina lo scope in cui un oggetto esiste, il distruttore
 viene richiamato automaticamente, liberando tutta la memoria a 
 questo associata senza doverlo fare manualmente.
 
-#showybox[
+#exercise[
 	```
 	dbuffer::~dbuffer(void) {
 		if (mBuffer != nullptr) {
@@ -241,7 +241,7 @@ class_name::class_name(const class_name &other) {
 }
 ```
 
-#showybox[
+#exercise[
 	```
 	dbuffer::dbuffer(const dbuffer &other) {
 		mSize = 0;
@@ -270,7 +270,7 @@ effettuare tale copia. Inoltre, se una classe viene istanziata come
 si inizializza una variabile, viene invocato in automatico il copy 
 constructor (non puó pertanto considerare una inizializzazione).
 
-#showybox[
+#exercise[
 	```
 	void f(dbuffer dbx) { ... };
 
@@ -329,7 +329,7 @@ rimane nello stato precedente alla tentata copia. É infatti (quasi)
 garantito che una sostituzione non possa fallire, mentre non vi é 
 garanzia sull'allocazione di memoria.
 
-#showybox[
+#exercise[
 	```
 	dbuffer& dbuffer::operator=(const dbuffer &other) {
 		if (this != &other) {
@@ -378,7 +378,7 @@ class_name& class_name::operator=(const class_name &other) {
 }
 ```
 
-#showybox[
+#exercise[
 	```
 	#include <algorithm>
 
@@ -402,7 +402,7 @@ avere un getter e setter in una sola funzione. Infatti, dato che si
 sta passando il dato per reference, se lo si modifica si sta 
 effettivamente modificando il dato originale.
 
-#showybox[
+#exercise[
 ```
 #include <cassert>
 
@@ -427,7 +427,7 @@ possono anche avere lo stesso nome, è il compilatore a determinare
 in automatico quale delle due versioni usare sulla base della presenza 
 del `const` nel dato passato.
 
-#showybox[
+#exercise[
 ```
 #include <cassert>
 
@@ -451,7 +451,7 @@ rappresentare un oggetto composito), per accedere ai suoi dati
 in maniera ancora migliore è possibile ridefinire l'operatore 
 `[]`, di modo che l'accesso ricordi quello di un array.
 
-#showybox[
+#exercise[
 ```
 // Even better
 int& dbuffer::operator[](unsigned int index) {
@@ -474,7 +474,7 @@ a[i] = b[j];   // a.setValue(i, b.getValue(j))
 Utile puó anche essere un metodo di serializzazione, che semplicemente 
 stampi il valore dei campi della classe.
 
-#showybox[
+#exercise[
 	```
 	void dbuffer::print() {
 		std::cout << mSize << std::endl;
@@ -507,7 +507,7 @@ Dato che tale operatore ha un significato globale, sia la
 definizione che la dichiarazione di tale ridefinizione deve 
 venire fatta globalmente.
 
-#showybox[
+#exercise[
 	```
 	// Even better
 	std::ostream &operator<<(std::ostream &os, const dbuffer &db)
@@ -536,7 +536,7 @@ funzione all'interno della classe (anche se tale funzione non
 appartiene alla classe) specifica che tale funzione può accedere 
 ai suoi attributi anche se dichiarati privati.
 
-#showybox[
+#exercise[
 	```
 	friend std::ostream &operator<<(std::ostream &os, const dbuffer &db)
 	```
@@ -565,7 +565,7 @@ una classe un attributo dichiarato `const`, dato che per definizione
 se lo si tentasse di fare in un costruttore si avrebbe un errore in
 compilazione.
 
-#showybox[
+#exercise[
 	```
 	#include <iostream>
 
@@ -584,7 +584,7 @@ situazione è possibile dichiarare il costruttore con la keyword
 `explicit`. Si noti come `explicit` non faccia parte della signature 
 del metodo.
 
-#showybox[
+#exercise[
 	```
 	dbuffer::dbuffer(unsigned int size) {
 		...
@@ -611,7 +611,7 @@ una classe utilizza (se esiste) il metodo `swap` interno alla
 classe. Può essere quindi utile, soprattutto se la classe è una
 classe container, aggiungervi un metodo `swap`.
 
-#showybox[
+#exercise[
 	```
 	#include <algorithm>
 
@@ -625,7 +625,7 @@ classe container, aggiungervi un metodo `swap`.
 Ridefinire il metodo `swap` può essere utile anche per semplificare la 
 ridefinizione dell'operatore di assegnamento.
 
-#showybox[
+#exercise[
 	```
 	#include <algorithm>
 
@@ -649,7 +649,7 @@ utile per chi usa la classe). Naturalmente, dato che questo `typedef`
 è dentro alla classe, per accedere a quel tipo è necessario specificare
 il nome della classe mediante l'operatore `::`.
 
-#showybox[
+#exercise[
 	```
 	class dbuffer {
 		public:

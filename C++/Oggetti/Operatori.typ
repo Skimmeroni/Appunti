@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 C++ supporta la ridefinizione di quasi tutti gli operatori, di modo 
 che, rispetto ad una classe, abbiano un significato diverso e più 
@@ -9,7 +9,7 @@ ma la ridefinizione è in genere più comodo e più intellegibile.
 Non è però possibile "inventare" operatori da zero: solo
 ridefinire operatori che già esistono.
 
-#showybox[
+#exercise[
 	```
 	// Redefine + so that it sums two objects value-by-value
 
@@ -36,7 +36,7 @@ Un operatore può essere ridefinito sia globalmente che come membro di
 una classe. Nel secondo caso, come primo membro viene automaticamente 
 considerato `this`. 
 
-#showybox[
+#exercise[
 	```
 	// Redefine + so that it sums two objects value-by-value
 	// 'lhs' is just 'this' 
@@ -61,7 +61,7 @@ la signature sia diversa). Il compilatore sceglierà in automatico di
 volta in volta quale "versione" dell'operatore usare in base al 
 contesto.
 
-#showybox[
+#exercise[
 	```
 	// First version: two objects
 	dbuffer operator+(const dbuffer& lhs, const dbuffer& rhs)
@@ -104,7 +104,7 @@ dei due operatori è la stessa (`operator++` e `operator--`, rispettivamente).
 Per poterlo fare, è possibile modificare la firma della ridefinizione di una
 delle due versioni introducendo un argomento extra, anche se inutilizzato.
 
-#showybox[
+#exercise[
 	```
 	// ++i
 	dbuffer& operator++(dbuffer& rhs)
@@ -136,7 +136,7 @@ restituire comunque un valore. A prescindere da quale semantica venga
 fornita alla nuova versione dell'operatore, la sua precedenza rimane
 quella originale.
 
-#showybox[
+#exercise[
 	```
 	dbuffer::operator int() const {
 		return this->size;

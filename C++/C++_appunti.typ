@@ -24,10 +24,12 @@
   outset: (y: 3pt),
   radius: 2pt,
 )
-#show raw.where(block: true): box.with(
-  inset: 20pt
-)
-
+//#show raw.where(block: false): box.with(
+//  fill: luma(240),
+//  inset: (x: 3pt, y: 0pt),
+//  outset: (y: 3pt),
+// radius: 2pt,
+//)
 #outline(indent: auto)
 #pagebreak()
 

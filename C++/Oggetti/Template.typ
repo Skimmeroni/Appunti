@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Una *funzione templata* é una funzione costruita in maniera speciale di modo
 che possa avere uno o piú argomenti aventi qualsiasi tipo. Sono funzioni che
@@ -30,7 +30,7 @@ Naturalmente, se piú argomenti di una funzione templata sono stati dichiarati
 dello stesso tipo generico, una chiamata a tale funzione deve rispettare lo
 stesso tale vincolo di tipo.
 
-#showybox[
+#exercise[
 	```
 	template <typename T> void swap(T& a, T& b) {
 		T temporary = a;
@@ -63,7 +63,7 @@ ambiguitá. Situazioni ambigue si verificano quando la funzione templata
 ritorna un parametro di uno dei tipi generici oppure quando una variabile
 di tipo generico non viene immediatamente inizializzata.
 
-#showybox[
+#exercise[
 	```
 	template <typename T> T example1(T a) {
 		T b = a;
@@ -90,7 +90,7 @@ di dato specifici. In questo caso, é particolarmente sensato definire comunque
 una funzione templata specifica, anche se non definisce alcun tipo generico,
 perché tale funzione viene effettivamente compilata solamente se necessario.
 
-#showybox[
+#exercise[
 	```
 	template <typename T> void test(const T& parameter) {}   // For any type
 	template <> void test(const double& parameter) {}        // For doubles
@@ -112,7 +112,7 @@ come per le funzioni, una classe templata deve venire subito sia dichiarata
 e definita. L'unica differenza con le funzioni é che non é possibile omettere
 le parentesi angolate nella chiamata di una classe templata.
 
-#showybox[
+#exercise[
 	```
 	template <typename T>
 	std::ostream &operator<<(std::ostream &os, const dbuffer<T> &db)
@@ -133,7 +133,7 @@ bit-a-bit (come per i tipi primitivi) oppure richiedere memoria dinamica, e
 non é noto esplicitamente quale delle due situazioni si verifica. É bene
 pertanto gestire questa situazione con un blocco `try catch`.
 
-#showybox[
+#exercise[
 	```
 	dbuffer(size_type size, const value_type& value) : size(0), buffer(nullptr)
 	{
@@ -157,7 +157,7 @@ Un *funtore* é un oggetto che viene dichiarato ed utilizzato come fosse una
 funzione. Permettono di poter simulare il passaggio di una funzione come
 argomento di una funzione.
 
-#showybox[
+#exercise[
 	```
 	struct compare_int_cresc {
 		bool operator()(int a, int b) const {

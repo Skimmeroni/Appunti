@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Inizializzare una variabile significa assegnarle un valore per la prima volta.
 Se una variabile non viene inizializzata, potrebbe o potrebbe non venirle
@@ -41,7 +41,7 @@ entitá del namespace o dello scope in uso. É comunque considerata bad
 practice riusare gli stessi nomi e tipi per variabili globali e locali,
 a meno di avere un motivo ragionevole per farlo.
 
-#showybox[
+#exercise[
 	```
 	int x;
 
@@ -73,7 +73,7 @@ funzione é in esecuzione. Sono accessibili solamente dal blocco in cui
 sono state definite. Naturalmente, le variabili automatiche dichiarate
 all'interno di `main()` esistono fino alla fine dell'esecuzione del programma.
 
-#showybox[
+#exercise[
 	```
 	void f(int param)      // Will exist as long as f exists
 	{
@@ -139,7 +139,7 @@ di programmazione, in C++ non esiste un *garbage collector* #footnote[É peró
 possibile estendere C++ aggiungendo un garbage collector esterno, come Boehm
 GC.].
 
-#showybox[
+#exercise[
 	```
 	struct Obj {
 		double d;
@@ -166,7 +166,7 @@ chiamato `delete` riassegnare il puntatore a `nullptr`, perché chiamando
 `delete` su un puntatore che non si riferisce a dei dati dinamici viene
 restituito un errore a runtime.
 
-#showybox[
+#exercise[
 	```
 	struct Obj {
 		double d;
@@ -190,7 +190,7 @@ solamente il contenuto che si trova in prima posizione viene liberato.
 puntatori a puntatori, anche se a tale livello di complessitá diventa molto
 piú ragionevole utilizzare una classe.
 
-#showybox[
+#exercise[
 	```
 	int size1 = 5, size2 = 3;
 

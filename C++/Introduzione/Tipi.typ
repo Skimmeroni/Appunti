@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Ogni nome (identificatore) in un programma C++ deve aver associato un *tipo*.
 Il tipo di un dato determina sia la quantitá di memoria assegnata al dato,
@@ -71,7 +71,7 @@ ha un qualsiasi valore che non sia $0$ e `false` altrimenti. Anche un
 puntatore puó essere convertito in un booleano. Un puntatore a `nullptr`
 viene convertito come `false` e come `true` altrimenti.
 
-#showybox[
+#exercise[
 	```
 	int x = 10;
 	int y = 5;
@@ -111,7 +111,7 @@ per rifarsi alla prima rappresentazione e `unsigned` per la seconda.
 Fortunatamente, la maggior parte dei caratteri di uso comune si trovano
 fra $0$ e $127$, pertanto la differenza é spesso irrilevante.
 
-#showybox[
+#exercise[
 	```
 	char a = 'b';    // a is 'b', which is 98
 	a /= 2;          // a is '1', which is 49
@@ -134,7 +134,7 @@ dimensione in multipli di `char` del tipo di dato passato come argomento
 (in alternativa, é possibile recuperare queste informazioni dal file della
 libreria standard `#limits.h`).
 
-#showybox[
+#exercise[
 	```
 	std::cout << sizeof(char) << std::endl;     // prints, say, 1
 	std::cout << sizeof(int) << std::endl;      // prints, say, 4
@@ -200,7 +200,7 @@ grande da contenerne il range e non maggiore di `sizeof(int)`, a meno che uno
 o piú dei suoi enumeratori ha assegnato un valore troppo grande per essere
 rappresentato in un `int` o `unsigned int`.
 
-#showybox[
+#exercise[
 	```
 	enum day {Mon = 10, Tue = 20, Wed = 30, Thu = 40,
               Fri = 50, Sat = 60, Sun = 70};
@@ -228,7 +228,7 @@ ritorna alcun valore non é possibile semplicemente non riportare il tipo della
 funzione. Questo sia per mantenere la retrocompatibilitá con il linguaggio C,
 sia perché altrimenti la grammatica del C++ diverrebbe piú complessa.].
 
-#showybox[
+#exercise[
 	```
 	void x;       // NOT allowed
 	void f();     // f() is a function that does not return anything
@@ -268,7 +268,7 @@ Il valore di default per un puntatore é `NULL` oppure (standard C++11)
 istruzione di quel tipo viene interpretata dal compilatore in maniera
 speciale (non venendo mai allocato nulla all'indirizzo $0$).
 
-#showybox[
+#exercise[
 	```
 	int* p = nullptr;                 // initialises a pointer p
 
@@ -300,7 +300,7 @@ rispetto ai rispettivi valori, e non a ció a cui puntano. Cercando di stampare
 il valore di un puntatore mediante `std::cout` si ottiene effettivamente
 l'indirizzo di memoria a cui il puntatore é associato (espressa in esadecimale).
 
-#showybox[
+#exercise[
 	```
 	int d = 1;
 	int* p = &d;
@@ -332,7 +332,7 @@ puntatore. Questo significa che é possibile avere dei puntatori a dei
 puntatori. Inoltre, nulla vieta di avere piú di un puntatore legato alla
 stessa area di memoria.
 
-#showybox[
+#exercise[
 	```
 	char s = 's';       // A char
 	char* ss = &s;      // A pointer to a char
@@ -351,7 +351,7 @@ puntatore si riferisce in questo momento. Sebbene nel C vi fosse una
 certa utilitá nei puntatori `void`, nel C++ é da considerarsi una
 funzionalitá deprecata.
 
-#showybox[
+#exercise[
 	```
 	int i;
 	double d;
@@ -395,7 +395,7 @@ di tipo "reference a...".
 	reference_type& reference_name = variable_to_be_referenced
 ```
 
-#showybox[
+#exercise[
 	```
 	int x = 10;
 	int& y = x;        // y references x

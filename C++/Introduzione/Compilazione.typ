@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Raramente un programma scritto nel linguaggio C++ é costituito da un solo
 file sorgente che contiene l'intero codice. In genere, questo é costituito
@@ -54,7 +54,7 @@ direttive piú importanti e piú utilizzate sono:
   si trovano (questo dipende da sistema operativo a sistema operativo, su
   Linux `/usr/include`).
 
-#showybox[
+#exercise[
 	#grid(
 		columns: (0.4fr, 0.25fr, 0.35fr),
 		[
@@ -96,7 +96,7 @@ direttive piú importanti e piú utilizzate sono:
 	)
 ]
 
-#showybox[
+#exercise[
 	```
 	#include <iostream>
 
@@ -139,7 +139,7 @@ il nome di una funzione/variabile che non ha peró una definizione in
 nessun altro file oggetto, viene restituito il messaggio di errore
 `Unresolved External Symbol`.
 
-#showybox[
+#exercise[
 	```
 	// file2.c
 	extern int x;
@@ -165,7 +165,7 @@ multiple sono fra loro consistenti, se ogni variabile/funzione usata é stata
 definita in uno dei file file oggetto che la utilizza e se tale definizione
 viene fatta esattamente una sola volta.
 
-#showybox[
+#exercise[
 	```
 	// file2.c
 	int x = 0;

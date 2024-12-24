@@ -1,4 +1,4 @@
-#import "@preview/showybox:2.0.1": showybox
+#import "../C++_definizioni.typ": *
 
 Un *iteratore* é un oggetto che generalizza il concetto di puntatore. 
 Un iteratore permette di "scorrere" lungo gli elementi di una classe 
