@@ -105,12 +105,6 @@ come constante in principio.
 	```
 ]
 
-Porre `const` alla fine di un metodo di classe segnala al compilatore 
-che tale metodo non modifica lo stato dell'oggetto su cui agisce. Porre
-`const` all'inizio di una funzione (di classe o non) indica semplicemente
-che il tipo di dato ritornato dalla funzione ha il modificatore `const`.
-Una funzione generica non può terminare con `const`.
-
 Cosí come in (quasi) tutti i linguaggi di programmazione tipizzati, in C++ é
 possibile fare *casting*, ovvero trasformare il tipo di dato di una variabile
 in un tipo di dato diverso, purché compatibile. Alcuni cast sono *impliciti*,

@@ -24,12 +24,6 @@
   outset: (y: 3pt),
   radius: 2pt,
 )
-//#show raw.where(block: false): box.with(
-//  fill: luma(240),
-//  inset: (x: 3pt, y: 0pt),
-//  outset: (y: 3pt),
-// radius: 2pt,
-//)
 #outline(indent: auto)
 #pagebreak()
 
@@ -57,6 +51,8 @@
 = Programmazione ad oggetti
 == Classi
 #include "Oggetti/Classi.typ"
+== Best practice per la creazione di classi
+#include "Oggetti/Practices.typ"
 == Ridefinizione degli operatori
 #include "Oggetti/Operatori.typ"
 // == Eccezioni
