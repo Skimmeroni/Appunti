@@ -36,6 +36,10 @@ volta, ma per leggibilità è preferibile avere soltanto una ciascuna. Una
 sezione che non é esplicitamente dichiarata come `private` o `public` é
 assunta essere `private`.
 
+Una sezione di una classe può anche essere dichiarata `protected`: tutto
+ciò che si trova in tale sezione è privato dal punto di vista dell'uso,
+ma può essere usato da una classe derivata da quella corrente.
+
 #exercise[
 	```
 	class dbuffer {
@@ -197,26 +201,6 @@ const int& dbuffer::value(unsigned int index) const {
 
 ```
 ]
-
-Una funzione globale potrebbe necessitare di accedere ai dati di una 
-funzione, anche se questi sono privati. Ad esempio, l'operatore `<<` 
-potrebbe necessitare di accedere ai dati privati di una classe per 
-poter scrivere su file attributi che questa non espone, di modo da
-poterla poi ricostruire in lettura. Una soluzione è l'uso del 
-modificatore `friend`, che se posto davanti alla firma di una 
-funzione all'interno della classe (anche se tale funzione non 
-appartiene alla classe) specifica che tale funzione può accedere 
-ai suoi attributi anche se dichiarati privati.
-
-#exercise[
-	```
-	friend std::ostream &operator<<(std::ostream &os, const dbuffer &db)
-	```
-]
-
-Una sezione di una classe può essere dichiarata `protected`: tutto ciò
-che si trova in tale sezione è privato dal punto di vista dell'uso, ma
-può essere usato da una classe derivata da quella corrente.
 
 Per inizializzare i valori di una classe in un costruttore è 
 possibile, in alternativa al semplice assegnamento, usare una 
