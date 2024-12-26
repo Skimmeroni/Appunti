@@ -277,31 +277,6 @@ class_name& class_name::operator=(const class_name &other) {
 	```
 ]
 
-Nel caso in cui la classe sia una _classe container_ (se deve
-rappresentare un oggetto composito), per accedere ai suoi dati
-in maniera ancora migliore è possibile ridefinire l'operatore
-`[]`, di modo che l'accesso ricordi quello di un array.
-
-#exercise[
-```
-// Even better
-int& dbuffer::operator[](unsigned int index) {
-	assert(index < mSize);
-
-	return mBuffer[index];
-}
-
-const int& dbuffer::operator[](unsigned int index) const {
-	assert(index < mSize);
-
-	return mBuffer[index];
-}
-
-dbuffer a, b;
-a[i] = b[j];   // a.setValue(i, b.getValue(j))
-```
-]
-
 Utile puó anche essere un metodo di serializzazione, che semplicemente
 stampi il valore dei campi della classe.
 
@@ -389,6 +364,34 @@ ridefinizione dell'operatore di assegnamento.
 		}
 
 		return *this;
+	}
+	```
+]
+
+I tipi di dato esposti dalla classe che non è certo se resteranno
+uguali nel tempo è bene che vengano mascherati da un `typedef`.
+Questo ha sia il vantaggio di nascondere i dettagli implementativi
+all'esterno, sia di poter mantenere uguale l'utilizzo della classe
+anche se il tipo del dato esposto dovesse cambiare (particolarmente
+utile per chi usa la classe). Naturalmente, dato che questo `typedef`
+è dentro alla classe, per accedere a quel tipo è necessario specificare
+il nome della classe mediante l'operatore `::`.
+
+#exercise[
+	```
+	class dbuffer {
+		public:
+		typedef unsigned int size_type;
+
+		private:
+		size_type size;
+		int* buffer;
+	}
+
+	const int& dbuffer::operator[](dbuffer::size_type index) const {
+	assert(index < mSize);
+
+	return mBuffer[index];
 	}
 	```
 ]

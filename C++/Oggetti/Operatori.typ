@@ -90,9 +90,14 @@ Per un qualsiasi operatore unario prefisso `@`, la scrittura `@aa` puó
 essere interpretata nel primo senso come `aa.operator(@)` oppure nel secondo
 senso come `operator@(aa)`. Nel primo caso, l'assenza di argomenti solo é
 dovuta al fatto che `operator@` viene chiamato come metodo dell'oggetto `aa`,
-ed infatti `aa` é sottinteso con `this`. Per un qualsiasi operatore unario
-postfisso `@`, la scrittura `aa@` puó essere interpretata nel primo senso
-come `aa.operator(@)(int)` oppure nel secondo senso come `operator@(aa, int)`.
+ed infatti `aa` é sottinteso con `this`.
+
+Per un qualsiasi operatore unario postfisso `@`, la scrittura `aa@` puó
+essere interpretata nel primo senso come `aa.operator(@)(int)` oppure nel
+secondo senso come `operator@(aa, int)`. Tale variabile `int` non ha nessun
+significato e non verrá mai effettivamente usata, ma é necessaria perché
+altrimenti la firma di un operatore unario prefisso e postfisso sarebbe
+identica ed il compilatore non avrebbe modo di distinguere fra le due.
 
 #exercise[
 	```
@@ -295,3 +300,90 @@ ma introduce anche un accoppiamento forte tra due classi. In casi in cui
 l'accoppiamento fra due classi esiste comunque, un metodo `friend` é una
 buona scelta, ma spesso é possibile ottenere quello che fa un metodo
 `friend` usando dei metodi e delle conversioni di tipo.
+
+Essendo un operatore una funzione, gli argomenti su cui agisce vengono
+passati come verrebbero passati ad una funzione. Per questo motivo,
+specialmente se l'operatore ridefinito agisce su oggetti di classe,
+é buona pratica passargli gli argomenti per reference, perché é
+sostanzialmente garantito che un operatore modifichi una variabile
+piuttosto che ritornare un valore.
+
+Di default, un costruttore avente un solo parametro viene inteso dal
+compilatore come una conversione di tipo implicita. A volte questo é
+effettivamente il comportamento desiderato, ma non sempre é cosí.
+
+#exercise[
+	```
+	complex(z) = 2   // Initialize with complex(2)
+	string s = 'a'   // Make a string of length int('a')
+	```
+]
+
+Questa conversione puó venire impedita dichiarando un costruttore come
+`explicit`, di modo che tale costruttore venga chiamato solamente se
+effettivamente lo si desidera. Nello specifico, quando il copy constructor
+viene invocato, un costruttore `explicit` non verrá mai implicitamente
+invocato, anche a costo di generare un errore.
+
+#exercise[
+	```
+	class String {
+		...
+		explicit String(int n);   // Preallocate n bytes
+	}
+
+	String S1 = 10;               // NOT allowed
+	String S2(10);                // Allowed
+	String S2 = String(10);       // Allowed
+	```
+]
+
+Nel caso in cui la classe sia una _classe container_ (se deve
+rappresentare un oggetto composito), per accedere ai suoi dati
+in maniera ancora migliore è possibile ridefinire l'operatore
+`[]`, di modo che l'accesso ricordi quello di un array.
+
+#exercise[
+```
+// Even better
+int& dbuffer::operator[](unsigned int index) {
+	assert(index < mSize);
+
+	return mBuffer[index];
+}
+
+const int& dbuffer::operator[](unsigned int index) const {
+	assert(index < mSize);
+
+	return mBuffer[index];
+}
+
+dbuffer a, b;
+a[i] = b[j];   // a.setValue(i, b.getValue(j))
+```
+]
+
+Una chiamata di funzione, ovvero una espressione del tipo
+`function(parameter-list)`, puó essere vista come l'applicazione
+di un operatore binario avente `function` come operando di sinistra
+e `parameter-list` come operando di destra. Per tale motivo, anche
+l'operatore `()` puó essere ridefinito.
+
+L'applicazione piú interessante della ridefinizione di `()` é il poter
+fornire la usuale sintassi di chiamata di funzione ad oggetti che, in
+un certo senso, agiscono come una funzione. Oggetti con queste proprietá
+sono detti *oggetti funzione*, o semplicemente *funtori*. I funtori sono
+molto importanti perché permettono di passare una funzione come argomento
+di un'altra funzione.
+
+#exercise[
+	```
+	void negate(complex& c) {
+		c = -c;
+	}
+
+	void f(list<complex>& ll) {
+		for_each(aa.begin(), aa.end(), negate)  // Apply negate to all elements
+	}
+	```
+]

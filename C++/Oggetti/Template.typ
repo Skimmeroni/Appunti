@@ -152,17 +152,3 @@ pertanto gestire questa situazione con un blocco `try catch`.
 	}
 	```
 ]
-
-Un *funtore* é un oggetto che viene dichiarato ed utilizzato come fosse una
-funzione. Permettono di poter simulare il passaggio di una funzione come
-argomento di una funzione.
-
-#exercise[
-	```
-	struct compare_int_cresc {
-		bool operator()(int a, int b) const {
-			return a < b;
-		}
-	};
-	```
-]
