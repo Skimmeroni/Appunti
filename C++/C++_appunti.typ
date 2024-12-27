@@ -55,8 +55,8 @@
 #include "Oggetti/Practices.typ"
 == Ridefinizione degli operatori
 #include "Oggetti/Operatori.typ"
-// == Eccezioni
-// #include "Oggetti/Eccezioni.typ"
+== Eccezioni
+#include "Oggetti/Eccezioni.typ"
 == Template e funtori
 #include "Oggetti/Template.typ"
 == Iteratori
