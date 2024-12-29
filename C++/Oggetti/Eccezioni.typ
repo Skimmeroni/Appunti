@@ -42,7 +42,8 @@ non avviene, o se avviene una eccezione diversa da quella riportata fra
 parentesi, il blocco `catch` viene ignorato. Se una funzione puó generare
 piú eccezioni e le si vuole gestire, é possibile concatenare piú blocchi
 `catch` ad uno stesso blocco `try`, ciascuno preposto a gestire una eccezione
-fra queste.
+fra queste. Blocchi `catch` possono a loro volta contenere blocchi `try`,
+ma nella maggioranza dei casi questa é una scelta implementativa da evitare.
 
 Una eccezione viene effettivamente generata mediante `throw`:
 
@@ -89,3 +90,44 @@ in genere sotto forma di struct o di classe.
 	}
 	```
 ]
+
+Definire le eccezioni sotto forma di classi é particolarmente vantaggioso
+perché permette di costruire una gerarchia di eccezioni, alcune piú generiche
+ed altre piú specifiche. Ad esempio, le eccezioni della libreria standard sono
+definite come classi derivate della classe generica `std::exception`.
+
+In una sequenza di `catch`, l'eccezione che viene catturata non é quella
+che prima si avvicina alla classe dell'eccezione lanciata, ma la prima
+compatibile. La dicitura `...` indica una qualsiasi eccezione, di qualsiasi
+tipo o semantica.
+
+#exercise[
+	```
+	void g() {
+		try {
+			//
+		}
+		catch (std::bad_alloc) {
+			// Handle only memory allocation errors
+		}
+		catch (std::exception& e) {
+			// Handle any stdlib exception
+		}
+		catch (...) {
+			// Handle anything
+		}
+	}
+	```
+]
+
+Nel caso in cui una funzione sia in grado di gestire solo parzialmente
+l'eccezione catturata, é possibile "rilanciare" (_rethrow_) l'eccezione
+e delegare ulteriormente la gestione dell'eccezione. Una eccezione viene
+rilanciata chiamando `throw` senza alcun operando.
+
+Se si tenta di rilanciare una eccezione con `throw` ma non vi é alcuna
+eccezione da rilanciare, viene invocato il metodo `terminate()`. Allo
+stesso modo, se viene generata una eccezione e questa non viene catturata,
+viene invocato `terminate()`. Il metodo `terminate()` chiama a sua volta
+`abort`(), che segnala al sistema che il programma é terminato in maniera
+anomala.
