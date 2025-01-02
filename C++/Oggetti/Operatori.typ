@@ -378,12 +378,21 @@ di un'altra funzione.
 
 #exercise[
 	```
-	void negate(complex& c) {
-		c = -c;
-	}
+	#include <iostream>
 
-	void f(list<complex>& ll) {
-		for_each(aa.begin(), aa.end(), negate)  // Apply negate to all elements
+	struct Comparison {
+		bool operator()(int a, int b) const {
+			return a != b;
+		}
+	};
+
+	int main()
+	{
+		Comparison P;
+		bool c = P(5, 5);
+		std::cout << c << std::endl;
+		bool d = P(15, 5);
+		std::cout << d << std::endl;
 	}
 	```
 ]
