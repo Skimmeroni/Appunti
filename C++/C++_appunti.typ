@@ -66,7 +66,7 @@
 = Appendice
 == Doxygen
 #include "Appendice/Doxygen.typ"
-// == Makefile
-// #include "Introduzione/Makefile.typ"
+== Make e Makefile
+#include "Appendice/Make.typ"
 // == Valgrind
-// #include "Introduzione/Valgrind.typ"
+// #include "Appendice/Valgrind.typ"

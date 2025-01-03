@@ -209,8 +209,6 @@ permette di rendere nota al compilatore la firma di una funzione prima che
 questa venga implementata, di modo che non sia necessario rivedere l'ordine
 della dichiarazione delle funzioni ad ogni cambiamento.
 
-// Aggiungere un esempio?
-
 Sebbene non sia impedito l'usare `#include` per includere un file `.cxx` in
 un file `.cxx`, questo comportamento viene in genere scoraggiato perché rende
 i due file non piú indipendenti. Se si vuole avere del codice condiviso fra
