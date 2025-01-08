@@ -61,6 +61,10 @@
 #include "Oggetti/Template.typ"
 == Iteratori
 #include "Oggetti/Iteratori.typ"
+== Ereditarietá
+#include "Oggetti/Ereditarieta.typ"
+== Polimorfismo
+#include "Oggetti/Polimorfismo.typ"
 #pagebreak()
 
 = Appendice
