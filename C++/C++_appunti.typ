@@ -72,5 +72,7 @@
 #include "Appendice/Doxygen.typ"
 == Make e Makefile
 #include "Appendice/Make.typ"
+== Standard C++11 e C++14
+#include "Appendice/Estensione.typ"
 // == Valgrind
 // #include "Appendice/Valgrind.typ"
