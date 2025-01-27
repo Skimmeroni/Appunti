@@ -62,6 +62,8 @@
 #include "Variables/KnownCRV.typ"
 == Joint probability distributions
 #include "Variables/Joint.typ"
+== Central Limit Theorem
+#include "Variables/Central.typ"
 #pagebreak()
 
 = Inferential statistics
