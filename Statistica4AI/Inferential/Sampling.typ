@@ -1,46 +1,96 @@
 #import "../Stats4AI_definitions.typ": *
 
-Consider a certain population, assuming to be distributed as a 
-certain random variable, and a sample drawn from said population 
-of size $n$. Let $x_(1), x_(2), dots, x_(n)$ be the values obtained 
-from said sample; since it's not possible to know said values before 
-the sampling, they can be conceived as $n$ random variables.
+Statistics is a science concerned with deducing conclusions from 
+experimental data. In most scenarios, it is either impossible or
+impractical to take into account every single member of the population.
+In situations like these, the best approach is to consider a subset
+of the population, called a *sample*, and analyze it hoping to draw
+conclusions that can be applied to the population as a whole.
 
-If $X_(1), X_(2), dots, X_(n)$ are said random variables and a 
-sample is drawn $k$ times, the realizations of each $i$-th sample 
-are $x_(1, i), x_(2, i), dots, x_(n, i)$. If for any of these samples 
-a point estimate (mean, median, ecc...) is computed, unless the exact 
-same values are drawn in more than one sample, each computation of 
-said point estimate will yield a different result. Point estimates 
-can therefore be conceived as random variables as well, since their 
-value is unknown until a sample is drawn and the probability of 
-retrieving a certain values for the estimate depends on how likely 
-a sample with those traits is drawn.
+To be able to extend the conclusions drawn from a sample to the
+entire population it is necessary to make some prior assumptions
+regarding the relationship between the two. A crucial (and often
+reasonale) hypothesis is to assume that the population has a
+probability distribution. Under this assumption, when a sample is
+drawn from the population, each element of the sample can be conceived
+as a random variable whose probability distribution is the sample
+distribution as the population one.
 
-Any value that can be calculated from a sample is called a *statistic*. 
-Prior to the act of sampling the value of a statistic is unknown, and 
-therefore conceivable as a random variable. For this reason, a statistic
-is often denoted with an uppercase letter while its specific realization
-(dependent on the sample drawn) with a lowercase letter. Being a random
-variable, it can be endowed with a probability distribution; the probability
-distribution of a statistic (interpreter as a random variable) is often
-referred to as a *statistic distribution*. The name emphasizes the fact
-that the value of the realization of the statistic depends on which sample
-is drawn from the distribution it's computed on.
+Suppose that the population has a probability distribution $F$. A set
+of random variables $X_(1), X_(2), dots, X_(n)$, each of them having 
+a probability distribution $F$, constitutes a sample of $F$. The nature
+of $F$ is known only to some extent: in some cases, the distribution of
+$F$ is known while its parameters are not, in other cases the parameters
+of $F$ are known but the distribution itself is unknown. There are even
+situations where almost everything regarding $F$ is unknown.
 
-The probability distribution of a statistic depends both on the 
-probability distribution of the population from which the sample 
-is drawn (normal, exponential, binomial, ecc...) and on the size 
-$n$ of the sample, but it also depends on _how_ the sample is 
-performed. The sampling procedure that allows the statistics to 
-be computed with the least effort is what is called a *random 
-sample*: the $n$ random variables $X_(1), X_(2), dots, X_(n)$ are
-said to form a random sample if they are *independent and identically 
-distributed* (*i.i.d* for short), that is, if they are all independent 
-and they have the same probability distribution.
+Together with the hypothesis of each $X_(i)$ having the same distribution,
+a second (much stronger) hypothesis is to assume that all of these random
+variables are independent of one another. A set of variables all having
+the same probability distribution and independent of one another are
+said to be *independent and identically distributed*, or *i.i.d.* for
+short. In turn, a sample constituted of i.i.d. variables is called a
+*random sample*.
 
-One way to obtain information about a statistic's sampling distribution
-involves performing calculations based on probability rules.
+Any value that can be calculated from a sample (that is, any function
+of the sample) is called a *statistic*. Prior to the act of sampling
+the value of any statistic is unknown, and can therefore be conceived
+as a random variable. For this reason, a statistic is often denoted
+with an uppercase letter while its specific realization (dependent on
+the sample drawn) with a lowercase letter. Being a random variable,
+it can be endowed with a probability distribution; the probability
+distribution of a statistic (interpreter as a random variable) is
+often referred to as a *statistic distribution*. The probability
+distribution of a statistic depends both on the probability
+distribution of the population from which the sample is drawn (normal,
+exponential, binomial, ecc...) and on the size $n$ of the sample, but
+it also depends on _how_ the sample is performed.
+
+Let $X_(1), X_(2), dots, X_(n)$ be a random sample drawn from a
+certain population. Each of those variables, being distributed as
+the population itself, will all have the same mean and variance.
+Let $mu$ and $sigma^(2)$ be their respective values. It is possible
+to define the *sample mean* of said sample as:
+
+$ overline(X) = frac(1, n) sum_(i = 1)^(n) X_(i) =
+  frac(X_(1) + X_(2) + dots + X_(n), n) $
+
+#theorem[
+	Let $X_(1), X_(2), dots, X_(n)$ be a random sample from a (known)
+	distribution with mean value $mu$ and standard deviation $sigma$.
+	Then:
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ E(overline(X)) = mu $],
+		[$ V(overline(X)) = frac(sigma^(2), n) $]
+	)
+] <Expected-value-and-variance-of-sample-mean>
+#proof[
+	Applying @Expected-value-linear-transformations and
+	@Expected-value-linear-function gives:
+
+	$ E(overline(X)) =
+	  E(frac(1, n) sum_(i = 1)^(n) X_(i)) =
+	  frac(E(sum_(i = 1)^(n) X_(i)), n) =
+	  frac(sum_(i = 1)^(n) E(X_(i)), n) =
+	  frac(sum_(i = 1)^(n) mu, n) =
+	  frac(cancel(n) mu, cancel(n)) = mu $
+
+	Applying @Variance-linear-transformations and
+	@Variance-linear-function gives:
+
+	$ V(overline(X)) = 
+	  V(frac(1, n) sum_(i = 1)^(n) X_(i)) =
+	  frac(V(sum_(i = 1)^(n) X_(i)), n^(2)) =
+	  frac(sum_(i = 1)^(n) V(X_(i)), n^(2)) =
+	  frac(sum_(i = 1)^(n) sigma^(2), n^(2)) =
+	  frac(cancel(n) sigma^(2), n^(cancel(2))) =
+	  frac(sigma^(2), n) $
+]
+
+Notice how @Expected-value-and-variance-of-sample-mean is completely
+independent of the nature of the population distribution.
 
 #exercise[
 	A certain brand of MP3 player comes in three sizes: the revenue 
@@ -126,42 +176,22 @@ involves performing calculations based on probability rules.
 		  {X_(1) = 80} and {X_(2) = 120}) = 0.1 + 0.1 = 0.2 $
 ]
 
-When the computation is too difficult, another approach is to try 
-(often with the aid of a software) to approximate the distribution
-of the statistic by performing a *simulation experiment*, that 
-consists in sampling the population many times and analyzing the 
-values obtained for said statistic across all samples. The bigger
-the sample size (the number of samples), the greater the precision 
-of the estimation: for any practical application, a sample size of 
-$500$ or $1000$ is generally enough.
+Let $X_(1), X_(2), dots, X_(n)$ be a random sample drawn from a
+certain population, all having expected value $mu$ and variance
+$sigma^(2)$ It is possible to define the *sample variance* of
+said sample as:
 
-Let $X_(1), X_(2), dots, X_(n)$ be a random sample. The *sample mean*
-of said sample is given by:
+$ S^(2) = frac(1, n - 1) sum_(i = 1)^(n) (X_(i) - overline(X))^(2) $
 
-$ overline(X) = frac(1, n) sum_(i = 1)^(n) X_(i) $
-
-Interestingly, the sample mean does not depend on the distribution of
-$X_(1), X_(2), dots, X_(n)$.
+The square root of $S^(2)$, denoted as $S$, is called the *sample
+standard deviation*.
 
 #theorem[
 	Let $X_(1), X_(2), dots, X_(n)$ be a random sample from a (known)
-	distribution with mean value $mu$ and standard deviation $sigma$.
-	Then:
+	distribution with mean value $mu$ and variance $sigma^(2)$. Then:
 
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[$ E(overline(X)) = mu $],
-		[$ V(overline(X)) = frac(sigma^(2), n) $]
-	)
-
-	Also, let $T_(0) = X_(1) + X_(2) + dots + X_(n)$. Then:
-
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[$ E(T_(0)) = n mu $],
-		[$ V(T_(0)) = n sigma^(2) $]
-	)
-]
+	$ E(S^(2)) = sigma^(2) $
+] <Expected-value-of-sample-variance>
 // #proof[
 // To be added
 // ]

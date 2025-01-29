@@ -62,13 +62,13 @@
 #include "Variables/KnownCRV.typ"
 == Joint probability distributions
 #include "Variables/Joint.typ"
-== Central Limit Theorem
-#include "Variables/Central.typ"
 #pagebreak()
 
 = Inferential statistics
 == Random sampling
 #include "Inferential/Sampling.typ"
+== Central Limit Theorem
+#include "Inferential/Central.typ"
 == Confidence intervals
 #include "Inferential/Intervals.typ"
 == Hypothesis testing

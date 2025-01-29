@@ -287,8 +287,8 @@ is always positive.
 )
 
 #theorem[
-	The expected value and variance of a random variable $X tilde chi(n)$
-	are as follows:
+	The expected value and variance of a random variable $X tilde
+	chi^(2)(n)$ are as follows:
 
 	#grid(
 		columns: (0.5fr, 0.5fr),

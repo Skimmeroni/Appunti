@@ -68,29 +68,19 @@ probability the probability of an "unusual" outcome becomes smaller and
 smaller as the sequence progresses.
 
 #theorem("Weak Law of Large Numbers")[
-	Let $angle.l X_(n) angle.r = {X_(1), X_(2), dots, X_(n)}$ be a sequence
-	of identically distributed random variables. Let $overline(X)_(n)$ be
-	the arithmetic mean of $angle.l X_(n) angle.r$, computed as the ratio of
-	the sum of the random variables in $angle.l X_(n) angle.r$ and the
-	number of variables $n$:
+	Let $angle.l X_(n) angle.r = {X_(1), X_(2), dots, X_(n)}$ be a
+	sequence of identically distributed random variables, each having
+	finite expected value $mu$ and finite variance $sigma^(2)$. Then:
 
-	$ overline(X)_(n) = frac(X_(1) + X_(2) + dots + X_(n), n) $
-
-	Since the value of $overline(X)_(n)$ depends on the values of
-	$X_(1), dots, X_(n)$, it is itself a random variable.
-
-	Suppose that each $X_(i)$ has a known and finite expected value $mu$.
-	and a finite variance $sigma^(2)$. Then:
-
-	$ overline(X)_(n) ->^(p) mu $
+	$ overline(X) ->^(p) mu $
 ] <Weak-Law-of-Large-Numbers>
 // #proof[
 // Definitely not
 // ]
 
-In simpler terms, @Weak-Law-of-Large-Numbers states that the arithmetic mean
-of a sequence of i.i.d. random variables gets closer and closer to their "true"
-expected value the longer of a sequence is considered. 
+In simpler terms, @Weak-Law-of-Large-Numbers states that the sample
+mean of a sequence of i.i.d. random variables gets closer and closer
+to their "true" expected value the longer of a sequence is considered. 
 
 #exercise[
 	Consider the random variabile $X$, whose values are the possible outcomes
@@ -118,23 +108,24 @@ expected value the longer of a sequence is considered.
 ]
 
 Note that, with respect to @Weak-Law-of-Large-Numbers, the distribution of
-$overline(X)_(n)$ is irrelevant. Also notice how the theorem does not give
-any indication on how "fast" the convergence of $overline(X)_(n)$ to $mu$
+$overline(X)$ is irrelevant. Also notice how the theorem does not give
+any indication on how "fast" the convergence of $overline(X)$ to $mu$
 is. Intuitively, it is possible to relate the speed of convergence to the
 standard deviation of the $X_(i)$ variables, since a smaller standard
-deviation entails that the values of $overline(X)_(n)$ will be closer
+deviation entails that the values of $overline(X)$ will be closer
 to their expected value, and therefore closer to $mu$.
 
 #theorem("Central Limit Theorem")[
-	Let $angle.l X_(n) angle.r = {X_(1), X_(2), dots, X_(n)}$ be a
-	sequence of independent and identically distributed random variables,
-	and let $overline(X)_(n)$ be the arithmetic mean of $angle.l X_(n)
-	angle.r$. Suppose that each $X_(i)$ has a known and finite expected
-	value $mu$. and a known and finite variance $sigma^(2)$. Then, the
-	normalized arithmetic mean converges in distribution to a standard
-	normal variable:
+	Let $angle.l X_(n) angle.r = {X_(1), X_(2), dots, X_(n)}$ be
+	a sequence of i.i.d. random variables drawn from a population
+	having finite mean $mu$ and finite variance $sigma^(2)$. Then:
 
-	$ frac(n(overline(X)_(n) - mu), sigma sqrt(n)) ->^(d) Z ~ N(0, 1) $
+	$ X_(1) + X_(2) + dots + X_(n) ->^(d) A ~ N(n mu, n sigma^(2)) $
+
+	Or equivalently, by normalizing:
+
+	$ frac(X_(1) + X_(2) + dots + X_(n) - n mu, sigma sqrt(n))
+	  ->^(d) Z ~ N(0, 1) $
 
 ] <Central-Limit-Theorem>
 // #proof[
@@ -151,18 +142,78 @@ random variables, said sequence can always be treated as a standard
 normal random variable, even if the single variables have an unknown
 (yet equal among all of them) distribution.
 
+In particular, @Central-Limit-Theorem can be phrased with respect to
+the sample mean:
+
+$ frac(X_(1) + X_(2) + dots + X_(n) - n mu, sigma sqrt(n)) ->^(d)
+  Z ~ N(0, 1) => frac((X_(1) + X_(2) + dots + X_(n) - n mu) slash n,
+  (sigma sqrt(n)) slash n) ->^(d) Z ~ N(0, 1) => \
+  frac(overline(X) - mu, sigma sqrt(n) slash n)
+  ->^(d) Z ~ N(0, 1) => frac(n(overline(X) - mu), sigma sqrt(n))
+  ->^(d) Z ~ N(0, 1) $
+
 #exercise[
 	Suppose that $angle.l X_(n) angle.r$ is a sequence of $40$ independent
 	and randomly distributed random variables, each having $mu = 14$ and
-	$sigma = 4.8$. What is the probability of $overline(X_(n))$ being less
+	$sigma = 4.8$. What is the probability of $overline(X)$ being less
 	than or equal to $13$?
 ]
 #solution[
-	Even though the distribution of $X$ is unknown, it is still possible to
-	apply @Central-Limit-Theorem:
+	Even though the distribution of $X$ is unknown, it is still
+	possible to apply @Central-Limit-Theorem:
 
-	$ P(overline(X_(n)) lt.eq 13) = P(frac(n(overline(X_(n)) - mu),
+	$ P(overline(X) lt.eq 13) = P(frac(n(overline(X) - mu),
 	  sigma sqrt(n)) lt.eq frac(n(13 - mu), sigma sqrt(n))) = 
 	  P(Z lt.eq frac(40 (13 - 14), 4.8 dot sqrt(40))) =
 	  Phi(frac(-40, 30.33)) approx 0.09 $
 ]
+
+On the other hand, it is not possible to apply @Central-Limit-Theorem
+to the sample variance to retrieve its distribution. Also, if the
+sample size is too small, @Central-Limit-Theorem does not apply, and
+therefore the distribution of the sample mean is unknown as well.
+Despite this, as long as the population is normally distributed, it
+is possible to infer something about the distribution of both.
+
+#theorem[
+	Let $X_(1), X_(2), dots, X_(n)$ be a random sample drawn from
+	a population having mean $mu$ and variance $sigma^(2)$. If the
+	population is normally distributed, the following holds:
+
+	$ frac(n(overline(X) - mu), sigma sqrt(n)) ->^(d) Z ~ N(0, 1) $
+]
+// #proof[
+// To be added
+// ]
+
+#theorem[
+	Let $X_(1), X_(2), dots, X_(n)$ be a random sample drawn from
+	a population having mean $mu$ and variance $sigma^(2)$. If the
+	population is normally distributed, the following holds:
+
+	$ (n - 1) frac(S^(2), sigma^(2)) ~ chi^(2)_(n - 1) $
+]
+// #proof[
+// To be added
+// ]
+
+#theorem[
+	Let $X_(1), X_(2), dots, X_(n)$ be a random sample drawn from
+	a population having mean $mu$ and variance $sigma^(2)$. If the
+	population is normally distributed, $overline(X)$ and $S^(2)$
+	are independent.
+]
+// #proof[
+// To be added
+// ]
+
+#corollary[
+	Let $X_(1), X_(2), dots, X_(n)$ be a random sample drawn from
+	a population having mean $mu$ and variance $sigma^(2)$. If the
+	population is normally distributed, the following holds:
+
+	$ frac(n (overline(X) - mu), S sqrt(n)) ~ t_(n - 1) $
+]
+// #proof[
+// To be added
+// ]
