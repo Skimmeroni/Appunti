@@ -18,7 +18,6 @@
 #import "Fisica_defs.typ": *
 
 #show: thmrules.with(qed-symbol: $square$)
-#show par: set block(spacing: 0.55em)
 
 #outline(indent: auto)
 #pagebreak()
@@ -46,3 +45,5 @@
 = Meccanica
 == Leggi di Newton
 #include "Meccanica/Newton.typ"
+== Energia cinetica
+#include "Meccanica/Cinetica.typ"
