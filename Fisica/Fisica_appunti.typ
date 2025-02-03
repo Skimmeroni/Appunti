@@ -47,3 +47,5 @@
 #include "Dinamica/Newton.typ"
 == Energia cinetica
 #include "Dinamica/Cinetica.typ"
+== Energia potenziale
+#include "Dinamica/Potenziale.typ"
