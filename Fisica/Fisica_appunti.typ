@@ -42,8 +42,8 @@
 #include "Cinematica/Relativita.typ"
 #pagebreak()
 
-= Meccanica
+= Dinamica
 == Leggi di Newton
-#include "Meccanica/Newton.typ"
+#include "Dinamica/Newton.typ"
 == Energia cinetica
-#include "Meccanica/Cinetica.typ"
+#include "Dinamica/Cinetica.typ"

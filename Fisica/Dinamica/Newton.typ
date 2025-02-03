@@ -445,7 +445,7 @@ Applicando la seconda legge di Newton:
 	   N = m g cos(theta) $]
 )
 
-=== Caso di studio: moto circolare
+=== Caso di studio: forza centripeta
 
 É giá stato introdotto il moto circolare come il moto di un corpo che
 percorre una traiettoria circolare, ed é anche stato puntualizzato come
@@ -463,3 +463,40 @@ Si noti come la forza centripeta non sia un nuovo tipo di forza, ma sia
 semplicemente una qualsiasi forza (una tensione, una forza di attrito,
 la forza di gravitá, ecc...) che modifica la direzione di un corpo
 inducendo una accelerazione centripeta senza modificarne la velocitá.
+
+=== Caso di studio: forza elastica di una molla
+
+Un esempio di forza variabile é quello della *forza elastica* esercitata
+da una molla su un punto materiale #footnote[Molte interazioni in natura
+possono essere assimilate a quelle di una molla, pertanto questo caso di
+studio é molto piú ampio.].
+
+Una situazione tipica é quella di una molla attaccata ad una parete sul
+lato sinistro e con il punto materiale attaccato al suo "lato libero"
+(quello destro), centrando il sistema di riferimento nel lato sinistro
+della molla. Inizialmente, si assume che la molla sia _a riposo_, ovvero
+né tirata né contratta.
+
+Se il punto materiale subisce una forza esterna che lo fa allontanare
+dalla molla, questa verrá tirata a sua volta verso destra, ed imprimerá
+sul punto materiale una forza diretta in senso opposto atta a farla
+ritornare nella posizione di riposo. Allo stesso modo, se il punto
+materiale subisce una forza esterna che lo fa avvicinare alla molla,
+questa verrá contratta ed imprimerá sul punto materiale una forza
+diretta in senso opposto atta a ritornare nella posizione di riposo.
+
+Fintanto che la forza che tira o contrae la molla é relativamente piccola,
+la forza elastica che la molla esercita sul punto materiale puó essere
+approssimata dalla seguente equazione, chiamata *Legge di Hooke*:
+
+$ arrow(F)_(s) = -k arrow(d) $
+
+Dove $arrow(d)$ é lo spostamento che la molla subisce, calcolato come
+la differenza fra la sua estensione a riposo e la sua estensione ora
+che é tesa o contratta, e $k$ é una costante di proporzionalitá (inversa)
+univoca per ciascuna molla. La costante $k$, avente come unitá di misura
+$newton dot metre$, rappresenta la "rigiditá" della molla; piú $k$ é
+grande, piú é grande la forza necessaria a far compiere alla molla il
+medesimo spostamento. Il segno meno a secondo membro sta ad indicare che
+la forza della molla agisce sempre in senso opposto a quello della forza
+che ne "disturba" l'equilibrio.

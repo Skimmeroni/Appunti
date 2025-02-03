@@ -86,6 +86,74 @@ positivo, che quindi fornisce energia all'oggetto, mentre una forza
 con componente orizzontale discorde con lo spostamento dell'oggetto
 induce un lavoro con segno negativo, che quindi sottrae energia all'oggetto.
 
+L'espressione per $W$ assume che la forza sia costante, ovvero che non
+dipenda né dal tempo passato né dallo spazio percorso dal corpo per il
+suo effetto. Il calcolo del lavoro puó peró essere generalizzato anche
+al caso in cui la forza di cui é causa sia dipendente dallo spazio.
+
+Si supponga di suddividere lo spazio in incrementi infinitesimi, dove in
+ciascun incremento $j$-esimo la forza é approssimativamente costante per
+tutta la durata dell'incremento. Sia $F_(j)$ la forza costante associata
+al $j$-esimo incremento e sia $Delta x$ la porzione di spazio percorso
+dal corpo per effetto di tale forza in un qualsiasi incremento. Il lavoro
+totale viene pertanto ad essere la somma di tanti lavori infinitesimi
+$W_(j)$:
+
+$ W = sum_(j) W_(j) = sum_(j) F_(j) Delta x $
+
+Imponendo che $Delta x$ approcci zero, si ottiene il seguente integrale:
+
+$ W = lim_(Delta x -> 0) sum_(j) F_(j) Delta x =
+  integral^(x_(f))_(x_(i)) F(x) d x $
+
+Dove $x_(i)$ e $x_(f)$ indicano, rispettivamente, la posizione iniziale
+e finale del punto materiale sottoposto alla forza.
+
+Applicando la seconda legge di Newton, si ha:
+
+$ W = integral^(x_(f))_(x_(i)) F(x) d x = integral^(x_(f))_(x_(i)) m a d x $
+
+L'accelerazione é data dalla derivata della velocitá rispetto al tempo.
+Applicando la regola della catena:
+
+$ W = integral^(x_(f))_(x_(i)) m a d x =
+  integral^(x_(f))_(x_(i)) m frac(d v, d t) d x =
+  integral^(x_(f))_(x_(i)) m frac(d x, d t) d v =
+  integral^(v_(f))_(v_(i)) m v d v $
+
+Risolvendo:
+
+$ W = m integral^(v_(f))_(v_(i)) v d v =
+  m (frac(v^(2)_(f), 2) - frac(v^(2)_(i), 2)) =
+  frac(1, 2) m v^(2)_(f) - frac(1, 2) m v^(2)_(i) =
+  K_(f) - K_(i) $
+
+Riottenendo l'espressione per il lavoro come differenza dell'energia cinetica.
+
+Sotto alcune ipotesi, é possibile estendere il concetto anche a forze
+che agiscono con piú componenti:
+
+$ arrow(F) = F(x) bold(arrow(i)) + F(y) bold(arrow(j)) + F(z) bold(arrow(k)) $
+
+Si consideri uno spostamento infinitesimo in piú dimensioni:
+
+$ d arrow(r) = d x bold(arrow(i)) + d y bold(arrow(j)) + d z bold(arrow(k)) $
+
+Fintanto che le componenti della forza dipendono solamente dalle relative
+componenti spaziali ($F(x)$ dipende solo da $x$, $F(y)$ dipende solo da
+$y$, $F(z)$ dipende solo da $z$), é possibile esprimere la variazione
+infinitesima di lavoro come:
+
+$ d W = arrow(F) d arrow(r) = F(x) d x + F(y) d y + F(z) d z $
+
+Integrando, si ottiene l'espressione per il lavoro compiuto da una
+forza esterna su un punto materiale, che si muove in tre direzioni
+da una posizione iniziale $r_(i) = (x_(i), y_(i), z_(i))$ ad una
+finale $r_(f) = (x_(f), y_(f), z_(f))$:
+
+$ W = integral^(r_(f))_(r_(i)) d W = integral^(x_(f))_(x_(i)) F(x) d x +
+  integral^(y_(f))_(y_(i)) F(y) d y + integral^(z_(f))_(z_(i)) F(z) d z $
+
 === Caso di studio: lavoro compiuto dalla forza di gravità
 
 Si consideri un punto materiale di massa $m$ che viene lanciato in
@@ -119,4 +187,36 @@ $ W_(g) = m g d cos(0) = m g d (1) = m g d $
 Infatti, la forza di gravità sta facendo accelerare il punto materiale,
 e quindi sta compiendo su di esso un lavoro positivo, fornendovi energia.
 
-=== Caso di studio: lavoro compiuto dalla forza elastica
+=== Caso di studio: lavoro compiuto dalla forza elastica di una molla
+
+Considerando uno scenario in cui una molla avente costante $k$ é attaccata
+ad una parete dal lato sinistro ed ha un punto materiale attaccato a quello
+destro, é possibile scrivere:
+
+$ F_(s)(x) = -k x $
+
+Dove $x$ indica lo spostamento della molla dalla sua posizione originale.
+
+Si supponga di imprimere una forza al punto materiale che lo faccia muovere
+verso destra, lasciandolo poi libero; la forza elastica della molla lo fará
+rallentare, compiendo lavoro negativo e sottraendo energia dal punto materiale.
+
+Essendo la forza elastica una forza variabile (dipendente da $x$), non
+é possibile applicare direttamente l'equazione per il calcolo del lavoro.
+É peró possibile applicare quanto detto sulle forze variabili dipendenti
+dallo spazio per ottenere il seguente integrale:
+
+$ W_(s) = integral^(x_(f))_(x_(i)) -F_(s)(x) d x $
+
+Dove $x_(i)$ e $x_(f)$ indicano, rispettivamente, la posizione iniziale
+e finale dell'estremo destro della molla. Sostituendo l'espressione per
+$F_(s)$ nell'equazione, si ha:
+
+// Perché il segno non viene cambiato?
+
+$ W_(s) = integral^(x_(f))_(x_(i)) -k x d x =
+  -k integral^(x_(f))_(x_(i)) x d x =
+  -k [frac(x^(2), 2)]^(x_(f))_(x_(i)) =
+  -k (frac(x^(2)_(f), 2) - frac(x^(2)_(i), 2)) =
+  -frac(1, 2) k (x^(2)_(f) - x^(2)_(i)) =
+  frac(1, 2)k (x^(2)_(i) - x^(2)_(f)) $
