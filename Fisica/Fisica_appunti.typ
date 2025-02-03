@@ -49,3 +49,5 @@
 #include "Dinamica/Cinetica.typ"
 == Energia potenziale
 #include "Dinamica/Potenziale.typ"
+== Energia meccanica
+#include "Dinamica/Meccanica.typ"
