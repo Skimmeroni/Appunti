@@ -59,3 +59,5 @@
 #include "Termodinamica/Espansione.typ"
 == Capacitá termica e calore specifico
 #include "Termodinamica/Calore.typ"
+== Calore latente
+#include "Termodinamica/Latente.typ"

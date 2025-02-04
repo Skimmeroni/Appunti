@@ -113,7 +113,8 @@ $ -c_(A) m_(A) T_(f) + c_(A) m_(A) T_(i, A) =
 	inizialmente alla temperatura di $20.0 degreeCelsius$. Quando
 	il sistema lingotto-vasca (assunto come sistema isolato) raggiunge
 	l'equilibrio termico, la temperatura del sistema é $22.4 degreeCelsius$.
-	Qual'é il calore specifico del metallo?
+	Sapendo che il calore specifico dell'acqua é $4187 joule /kilogram dot
+	kelvin$, qual'é il calore specifico del metallo?
 ]
 #solution[
 	L'acqua ha una temperatura iniziale inferiore a quella del metallo,
