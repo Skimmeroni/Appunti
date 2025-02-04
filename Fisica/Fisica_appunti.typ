@@ -55,3 +55,5 @@
 = Termodinamica
 == Temperatura e principio zero
 #include "Termodinamica/Zero.typ"
+== Espansione lineare e volumetrica
+#include "Termodinamica/Espansione.typ"
