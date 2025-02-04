@@ -1,14 +1,15 @@
 #import "../Fisica_defs.typ": *
 
-Informalmente, la *temperatura* é una quantitá fisica legata alle
-proprietá dei corpi di essere _caldi_ o _freddi_. Piú correttamente,
-la temperatura di un corpo é legata all'energia cinetica media degli
-atomi che lo costituiscono #footnote[Spesso si tende ad associare la
-temperatura di un corpo alla sensazione che suscita quando questo
-viene toccato. Questo peró non é corretto, perché il corpo umano
-percepisce la _differenza_ fra la propria temperatura e quella
-dell'oggetto toccato.]. L'unitá di misura del SI per la temperatura
-é il *Kelvin* (simbolo $kelvin$).
+Informalmente, la *temperatura* é una quantitá fisica legata
+alle proprietá dei corpi di essere _caldi_ o _freddi_. Piú
+correttamente, la temperatura di un corpo é una quantitá legata
+ad una forma di energia chiamata *energia termica*, costituita
+dall'energia cinetica e potenziale media degli atomi che costituiscono
+il corpo #footnote[Spesso si tende ad associare la temperatura di un
+corpo alla sensazione che suscita quando questo viene toccato. Questo
+peró non é corretto, perché il corpo umano percepisce la _differenza_
+fra la propria temperatura e quella dell'oggetto toccato.]. L'unitá
+di misura del SI per la temperatura é il *Kelvin* (simbolo $kelvin$).
 
 Siano $A$ e $B$ due corpi che si trovano in un sistema isolato.
 É possibile verificare empiricamente che, dopo un certo intervallo

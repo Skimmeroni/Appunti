@@ -57,3 +57,5 @@
 #include "Termodinamica/Zero.typ"
 == Espansione lineare e volumetrica
 #include "Termodinamica/Espansione.typ"
+== Capacitá termica e calore specifico
+#include "Termodinamica/Calore.typ"
