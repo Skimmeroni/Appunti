@@ -51,3 +51,7 @@
 #include "Dinamica/Potenziale.typ"
 == Energia meccanica
 #include "Dinamica/Meccanica.typ"
+
+= Termodinamica
+== Temperatura e principio zero
+#include "Termodinamica/Zero.typ"
