@@ -61,3 +61,7 @@
 #include "Termodinamica/Calore.typ"
 == Calore latente
 #include "Termodinamica/Latente.typ"
+
+= Teoria cinetica dei gas
+== Equazione di stato dei gas ideali
+#include "Gas/Ideale.typ"
