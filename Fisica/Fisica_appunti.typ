@@ -53,7 +53,7 @@
 #include "Dinamica/Meccanica.typ"
 
 = Termodinamica
-== Temperatura e principio zero
+== Temperatura e principio zero della termodinamica
 #include "Termodinamica/Zero.typ"
 == Espansione lineare e volumetrica
 #include "Termodinamica/Espansione.typ"
@@ -65,3 +65,5 @@
 = Teoria cinetica dei gas
 == Equazione di stato dei gas ideali
 #include "Gas/Ideale.typ"
+== Primo principio della termodinamica
+#include "Gas/Uno.typ"
