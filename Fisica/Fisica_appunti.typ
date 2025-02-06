@@ -67,3 +67,7 @@
 #include "Gas/Ideale.typ"
 == Primo principio della termodinamica
 #include "Gas/Uno.typ"
+== Trasformazioni termodinamiche particolari
+#include "Gas/Trasformazione.typ"
+//== Descrizione microscopica dei gas
+//#include "Gas/Cinetica.typ"

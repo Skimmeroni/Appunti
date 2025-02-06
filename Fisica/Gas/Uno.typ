@@ -31,11 +31,11 @@ forza é uguale al prodotto fra la pressione del gas e l'area su cui
 questo preme, pertanto il lavoro compiuto dal gas in un istante
 infinitesimo é dato da:
 
-$ d W = arrow(F) dot d arrow(s) = p A d s = p A d s = p d V $
+$ d W = arrow(F) dot d arrow(s) = P A d s = P A d s = P d V $
 
 Integrando, si ha il lavoro compiuto dal gas lungo tutto il processo:
 
-$ W = integral d W = integral^(V_(f))_(V_(i)) p d V $
+$ W = integral d W = integral^(V_(f))_(V_(i)) P d V $
 
 Si noti come tale espressione, per quanto corretta, é difficilmente
 calcolabile cosí com'é, perché il modo in cui la pressione di un gas
