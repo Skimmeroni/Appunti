@@ -51,6 +51,7 @@
 #include "Dinamica/Potenziale.typ"
 == Energia meccanica
 #include "Dinamica/Meccanica.typ"
+#pagebreak()
 
 = Termodinamica
 == Temperatura e principio zero della termodinamica
@@ -61,6 +62,7 @@
 #include "Termodinamica/Calore.typ"
 == Calore latente
 #include "Termodinamica/Latente.typ"
+#pagebreak()
 
 = Teoria cinetica dei gas
 == Equazione di stato dei gas ideali
@@ -71,3 +73,6 @@
 #include "Gas/Trasformazione.typ"
 //== Descrizione microscopica dei gas
 //#include "Gas/Cinetica.typ"
+== Entropia e secondo principio della termodinamica
+#include "Gas/Entropia.typ"
+#pagebreak()
