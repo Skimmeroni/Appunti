@@ -86,6 +86,24 @@ positivo, che quindi fornisce energia all'oggetto, mentre una forza
 con componente orizzontale discorde con lo spostamento dell'oggetto
 induce un lavoro con segno negativo, che quindi sottrae energia all'oggetto.
 
+#exercise[
+	Un uomo delle pulizie spinge il suo aspirapolvere in avanti (verso
+	destra) con una forza costante pari a $50.0 newton$. La direzione
+	della forza forma un angolo di $30 degree$ con il terreno. Calcolare
+	il lavoro compiuto per avere uno spostamento dell'aspirapolvere di
+	$3.00 metre$
+]
+#solution[
+	L'unica forza che sta contribuendo allo spostamento é quella esercitata
+	dall'uomo; la forza di gravitá non sta compiendo alcun lavoro. Il verso
+	dello spostamento é concorde con il piano orizzontale: pertanto l'angolo
+	tra il terreno e la forza é anche l'angolo tra la forza e lo spostamento.
+	Applicando la legge:
+
+	$ W = arrow(F) dot arrow(d) = 50.0 newton dot 3.00 metre
+	  dot cos(30 degree) = 130 joule $
+]
+
 L'espressione per $W$ assume che la forza sia costante, ovvero che non
 dipenda né dal tempo passato né dallo spazio percorso dal corpo per il
 suo effetto. Il calcolo del lavoro puó peró essere generalizzato anche
@@ -220,3 +238,29 @@ $ W_(s) = integral^(x_(f))_(x_(i)) -k x d x =
   -k (frac(x^(2)_(f), 2) - frac(x^(2)_(i), 2)) =
   -frac(1, 2) k (x^(2)_(f) - x^(2)_(i)) =
   frac(1, 2)k (x^(2)_(i) - x^(2)_(f)) $
+
+#exercise[
+	Ad una molla appesa al soffitto viene attaccata una sfera di massa
+	$0.55 kilogram$, il cui peso fa allungare la molla di $0.02 metre$.
+	Quanto vale la costante elastica della molla? Quanto vale il lavoro
+	compiuto dalla molla?
+]
+#solution[
+	Essendo il sistema in equilibrio, non vi é accelerazione. Pertanto, la
+	forza di gravitá che spinge in basso la sfera é uguale e contraria alla
+	forza elastica della molla che cerca di riportarla al suo stato naturale.
+
+	$ sum arrow(F)_("est") = m arrow(a) = arrow(F)_(s) + arrow(F)_(g) = 0 $
+
+	Isolando la costante elastica:
+
+	$ arrow(F)_(s) = -arrow(F)_(g) => k x = -(-m g) => k = frac(m g, x) =
+	  frac(0.55 kilogram dot 9.8 metre / second^(2), 0.02 metre) =
+	  270 newton / metre $
+
+	Il lavoro compiuto dalla molla é dato da:
+
+	$ W_(s) = frac(1, 2) k (x^(2)_(i) - x^(2)_(f)) =
+	  frac(1, 2) 270 newton / metre ((0.00 metre)^(2) - (0.02 metre)^(2)) =
+	  -0.054 joule $
+]
