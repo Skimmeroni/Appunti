@@ -38,6 +38,8 @@
 #include "LinAlg/Bases.typ"
 == Linear Transformations
 #include "LinAlg/Transformations.typ"
+== Systems of Linear Equations
+#include "LinAlg/Systems.typ"
 == Eigenvalues and eigenvectors
 #include "LinAlg/Eigen.typ"
 == Spectral Theorem
