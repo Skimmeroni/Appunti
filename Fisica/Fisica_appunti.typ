@@ -76,3 +76,7 @@
 == Entropia e secondo principio della termodinamica
 #include "Gas/Entropia.typ"
 #pagebreak()
+
+= Elettricitá
+== Elettrostatica e Legge di Coulomb
+#include "Elettricita/Coulomb.typ"
