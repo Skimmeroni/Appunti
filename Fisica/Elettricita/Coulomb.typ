@@ -20,6 +20,10 @@ poggia sulla stessa retta di $arrow(r)$ e $k$ é una costante, detta
 
 $ k = 8.99 times 10^(9) newton dot metre^(2) / coulomb^(2) $
 
+La forza elettrostatica in modulo é data da:
+
+$ F = k frac(abs(q_(1)) abs(q_(2)), r^(2)) $
+
 É naturalmente possibile calcolare la forza elettrostatica che il primo
 corpo esercita sul secondo semplicemente centrando $arrow(r)$ nel primo
 corpo ed invertendo il verso.
@@ -64,6 +68,27 @@ corpo che contiene $n$ elettroni in eccesso/difetto é semplicemente:
 
 $ q = n e, n in ZZ $
 
+#exercise[
+	Il corpo umano possiede un totale di circa $10^(29)$ elettroni. Si
+	immagini che l'$1 percent$ di tutti gli elettroni del corpo di una
+	persona vengano trasferiti nel corpo di un'altra persona, che dista
+	$1 metre$ da questa. Qual'é la forza elettrostatica che la prima
+	persona esercita sulla seconda?
+]
+#solution[
+	L'uno percento di $10^(29)$ é $10^(27)$. La prima persona diventa
+	carica negativamente, la seconda positivamente.
+
+	$ F = k frac(abs(q_(1)) abs(q_(2)), r^(2)) =
+	  8.99 times 10^(9) newton dot metre^(2) / coulomb^(2)
+	  frac(abs(1.602 times 10^(-19) coulomb) 10^(27)
+	  abs(1.602 times 10^(-19) coulomb) 10^(27), (1 metre)^(2)) =
+	  2.3 times 10^(26) newton $
+
+	Si noti come tale forza sia magnitudinalmente piú grande della
+	forza-peso del pianeta Terra.
+]
+
 La forza elettrostatica é quindi una quantitá *quantizzata*, ovvero
 multiplo intero di una unitá finita (detta *quanto*).
 
@@ -73,3 +98,17 @@ quella acquisita dall'altro. Informalmente, la carica elettrica non puó
 "svanire" nel nulla. Questa osservazione viene chiamata *principio di
 conservazione della carica elettrica*, in analogia con il principio di
 conservazione dell'energia.
+
+In base al comportamento che i materiali hanno rispetto alla
+forza elettrostatica, se ne distinguono due tipi: gli *isolanti*
+e i *conduttori*. I primi, quando vengono caricati elettricamente,
+mantengono in quella regione della loro superficie la carica ottenuta
+(positiva o negativa), mentre i secondi, quando vengono caricati,
+"disperdono" la carica ottenuta lungo tutta la loro superficie.
+
+La differenza fra i due tipi di materiali é dovuta alla struttura degli
+atomi che li compongono. Gli isolanti tendono ad essere costituiti da
+atomi con elettroni fortemente attratti dal loro nucleo, avendo quindi
+difficoltá a permettere loro di spostarsi. D'altro canto, i conduttori
+hanno elettroni poco attratti dal loro nucleo, e che quindi sono piú
+propensi a muoversi da un nucleo all'altro.
