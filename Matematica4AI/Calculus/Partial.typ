@@ -124,43 +124,6 @@ satisfies certain conditions.
     9y z sin(3x + y z) -9 cos(3x + y z) $
 ]
 
-Let $f(x_(1), dots, x_(n)): A subset RR^(n) -> RR$ be a function and let
-$bold(p)$ be a point in $A$. The *gradient* of $f$ in $bold(p)$, denoted
-as $nabla_(f) (bold(p))$, is a column vector whose components are the first
-partial derivatives of $f$, arranged from the first to the $n$-th:
-
-$ nabla_(f) (bold(p)) = mat(delim: "[",
-  display(frac(partial f, partial x_(1)));
-  display(frac(partial f, partial x_(2)));
-  dots.v;
-  display(frac(partial f, partial x_(n)))) =
-  mat(delim: "[",
-  display(frac(partial f, partial x_(1))),
-  display(frac(partial f, partial x_(2))),
-  dots,
-  display(frac(partial f, partial x_(n))))^(T) $
-
-If one or more partial derivatives in $bold(p)$ are undefined,
-$nabla_(f) (bold(p))$ is also undefined.
-
-In a similar fashion, the second partial derivatives of $f$ can be arranged
-in a matrix, called *Hessian matrix* and denoted as $H_(f)$:
-
-$ H_(f) = mat(delim: "[",
-  display(frac(partial^(2) f, partial^(2) x_(1))),
-  display(frac(partial^(2) f, partial x_(2) partial x_(1))),
-  dots,
-  display(frac(partial^(2) f, partial x_(n) partial x_(1)));
-  display(frac(partial^(2) f, partial x_(1) partial x_(2))),
-  display(frac(partial^(2) f, partial^(2) x_(2))),
-  dots,
-  display(frac(partial^(2) f, partial x_(n) partial x_(2)));
-  dots.v, dots.v, dots.down, dots.v;
-  display(frac(partial^(2) f, partial x_(1) partial x_(n))),
-  display(frac(partial^(2) f, partial x_(2) partial x_(n))),
-  dots,
-  display(frac(partial^(2) f, partial^(2) x_(n)))) $
-
 As stated, a partial derivative describes the rate of change of the
 function along the $i$-th axis in the $n$-dimensional plane. Since
 each axis is described by a unit vector, a derivative along the $i$-th
@@ -183,18 +146,89 @@ $ D_(bold(v)) f(bold(c)) =
 If $bold(v)$ is the $i$-th unit vector, the directional derivative is just
 a partial derivative with respect to the $i$-th variable.
 
-// #theorem[
-//  If a function has a maximum or a minimum in a point of its domain and a
-//  directional derivative in said point exists, it is zero.
-// ]
+Let $f(x_(1), dots, x_(n)): A subset RR^(n) -> RR$ be a function and let
+$bold(p)$ be a point in $A$. The *gradient* of $f$ in $bold(p)$, denoted
+as $nabla_(f) (bold(p))$, is a column vector whose components are the first
+partial derivatives of $f$, arranged from the first to the $n$-th:
+
+$ nabla_(f) (bold(p)) = mat(delim: "[",
+  display(frac(partial f, partial x_(1)));
+  display(frac(partial f, partial x_(2)));
+  dots.v;
+  display(frac(partial f, partial x_(n)))) =
+  mat(delim: "[",
+  display(frac(partial f, partial x_(1))),
+  display(frac(partial f, partial x_(2))),
+  dots,
+  display(frac(partial f, partial x_(n))))^(T) =
+  frac(partial f, partial x_(1)) hat(i)_(1) +
+  frac(partial f, partial x_(2)) hat(i)_(n) +
+  dots +
+  frac(partial f, partial x_(n)) hat(i)_(n) $
+
+The gradient of a ($n$-valued) scalar function is actually a special case of
+a more generic matrix of a ($n$-valued) vectorial function, called *Jacobian
+matrix*:
+
+$ bold(J)_(f) (bold(p)) = mat(delim: "[",
+  display(frac(partial bold(f), partial x_(1))),
+  dots,
+  display(frac(partial bold(f), partial x_(n)))) =
+  mat(delim: "[",
+  nabla_(f_(1))^(T) (bold(p));
+  dots.v;
+  nabla_(f_(n))^(T) (bold(p))) $
+
+// Relationship between the gradient vector and the directional derivative
+
+The gradient vector is strongly related to maxima and minima of a function.
+
+#theorem[
+  If a function has a local maximum or minimum in a point and all partial
+  derivatives in said point exist, the gradient in said point is zero.
+] <Gradient-maxima-minima>
 // #proof[
 // Could be added?
 // ]
 
-// #corollary[
-//  If the directional derivative of a function in a point of its domain is
-//  zero, the gradient in said point is also zero.
-// ]
+Any point whose gradient is zero is called a *critical point* or
+*stationary point*. Note that, while @Gradient-maxima-minima guarantees
+that maxima and minima are also critical points, the converse is not
+necessarely true. In particular, a critical point that is neither a
+maximum or a minimum is called a *saddle point*.
+
+Similarly to the gradient, the second partial derivatives of $f$ can be
+arranged in a matrix, called *Hessian matrix* and denoted as $H_(f)$:
+
+$ H_(f) = mat(delim: "[",
+  display(frac(partial^(2) f, partial^(2) x_(1))),
+  display(frac(partial^(2) f, partial x_(2) partial x_(1))),
+  dots,
+  display(frac(partial^(2) f, partial x_(n) partial x_(1)));
+  display(frac(partial^(2) f, partial x_(1) partial x_(2))),
+  display(frac(partial^(2) f, partial^(2) x_(2))),
+  dots,
+  display(frac(partial^(2) f, partial x_(n) partial x_(2)));
+  dots.v, dots.v, dots.down, dots.v;
+  display(frac(partial^(2) f, partial x_(1) partial x_(n))),
+  display(frac(partial^(2) f, partial x_(2) partial x_(n))),
+  dots,
+  display(frac(partial^(2) f, partial^(2) x_(n)))) $
+
+The Hessian matrix is strongly related the natures of a critical point of a
+function.
+
+#theorem("Second derivative test for functions having more than one variable")[
+  Consider the function $f : A subset.eq RR^(n) -> RR$, twice (or more)
+  differentiable. Let $bold(p)$ be a critical point of $f$, and let
+  $H_(f) (bold(p))$ be the Hessian matrix of $f$ at $bold(p)$. Then:
+
+  - If $H_(f) (bold(p))$ is positive definite, $bold(p)$ is a local minimum;
+  - If $H_(f) (bold(p))$ is negative definite, $bold(p)$ is a local maximum;
+  - If $H_(f) (bold(p))$ has at least a positive eigenvalue, a negative
+    eigenvalue and no eigenvalue is zero, $bold(p)$ is a saddle point;
+  - If none of the above is true, the test is inconclusive.
+] <Hessian-critical-points>
 // #proof[
-// To be added
+// Could be added?
 // ]
