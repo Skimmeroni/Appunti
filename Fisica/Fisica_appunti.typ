@@ -82,3 +82,5 @@
 #include "Elettricita/Coulomb.typ"
 == Campo elettrico
 #include "Elettricita/Campo.typ"
+== Teorema di Gauss
+#include "Elettricita/Flusso.typ"
