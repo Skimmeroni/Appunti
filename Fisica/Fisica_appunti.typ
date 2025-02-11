@@ -84,3 +84,5 @@
 #include "Elettricita/Campo.typ"
 == Teorema di Gauss
 #include "Elettricita/Flusso.typ"
+== Potenziale elettrico
+#include "Elettricita/Potenziale.typ"
