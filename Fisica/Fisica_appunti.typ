@@ -86,3 +86,5 @@
 #include "Elettricita/Flusso.typ"
 == Potenziale elettrico
 #include "Elettricita/Potenziale.typ"
+== Corrente elettrica
+#include "Elettricita/Corrente.typ"
