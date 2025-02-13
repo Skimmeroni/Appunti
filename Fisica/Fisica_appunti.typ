@@ -88,3 +88,8 @@
 #include "Elettricita/Potenziale.typ"
 == Corrente elettrica
 #include "Elettricita/Corrente.typ"
+#pagebreak()
+
+= Magnetismo
+== Campo magnetico e Forza di Lorentz
+#include "Magnetismo/Lorentz.typ"
