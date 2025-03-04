@@ -25,4 +25,3 @@
 = Graph neural networks
 == Graph definition
 #include "Graphs/Definition.typ"
-#pagebreak()
