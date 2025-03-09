@@ -93,3 +93,5 @@
 = Magnetismo
 == Campo magnetico e Forza di Lorentz
 #include "Magnetismo/Lorentz.typ"
+//== Legge di Biot-Savart
+//#include "Magnetismo/Biot-Savart.typ"
