@@ -42,3 +42,9 @@
 #include "Data/Sets.typ"
 == Data quality
 #include "Data/Quality.typ"
+== Proximity measures
+#include "Data/Proximity.typ"
+
+// = Cluster analysis
+// == Introduction
+// #include "Cluster/Introduction.typ"
