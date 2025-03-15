@@ -25,3 +25,5 @@
 = Graph neural networks
 == Graph definition
 #include "Graphs/Definition.typ"
+== Graph embedding
+#include "Graphs/Embedding.typ"

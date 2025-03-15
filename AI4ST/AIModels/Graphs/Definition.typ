@@ -262,7 +262,7 @@ the union of $n$ sets $V_(i)$, with $i in {1, dots, n}$, such that:
 #grid(
 	columns: (0.5fr, 0.5fr),
 	[$ V = union.big_(i) V_(i) $],
-	[$ V_(i) sect V_(j) = emptyset, forall i, j "when" i != j $]
+	[$ V_(i) inter V_(j) = emptyset, forall i, j "when" i != j $]
 )
 
 An eterogeneous graph whose edges can only connect nodes of different types
