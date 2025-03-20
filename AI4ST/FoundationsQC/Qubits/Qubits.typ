@@ -89,7 +89,7 @@ symbols is completely arbitrary.].
   The set $\{ket(0), ket(1)\}$ forms an orthonormal basis for any
   two-dimensional Hilbert space.
 ]
-#solution[
+#proof[
   The null vector of any two-dimensional Hilbert space is $mat(0; 0)$.
   Constructing the null combination gives:
 
@@ -103,11 +103,9 @@ symbols is completely arbitrary.].
   orthonormal:
 
   #grid(
-    columns: (0.25fr, 0.25fr, 0.25fr, 0.25fr),
-    [$ braket(0, 0) = 1 dot 1 + 0 dot 0 = 1 $],
-    [$ braket(0, 1) = 1 dot 0 + 0 dot 1 = 0 $],
-    [$ braket(1, 0) = 0 dot 1 + 1 dot 0 = 0 $],
-    [$ braket(1, 1) = 0 dot 0 + 1 dot 1 = 1 $]
+    columns: (0.5fr, 0.5fr),
+    [$ braket(0, 0) = braket(1, 1) = 1 dot 1 + 0 dot 0 = 1 $],
+    [$ braket(0, 1) = braket(1, 0) = 1 dot 0 + 0 dot 1 = 0 $]
   )
 ]
 
@@ -118,6 +116,116 @@ necessary condition for being a physically meaningful basis, when talking
 about a basis it will be implicitly assumed (unless stated otherwise) that
 the basis is orthonormal.
 
+Another useful basis is the one denoted as $\{ket(+), ket(-)\}$:
+
+#grid(
+  columns: (0.5fr, 0.5fr),
+  [$ ket(+) = frac(sqrt(2), 2) (ket(0) + ket(1)) = mat(frac(sqrt(2), 2); frac(sqrt(2), 2)) $],
+  [$ ket(-) = frac(sqrt(2), 2) (ket(0) - ket(1)) = mat(frac(sqrt(2), 2); -frac(sqrt(2), 2)) $]
+)
+
+#theorem[
+  The set $\{ket(+), ket(-)\}$ forms an orthonormal basis for any
+  two-dimensional Hilbert space.
+]
+#proof[
+  The basis $\{ket(0), ket(1)\}$ can be written as a linear combination of
+  $\{ket(+), ket(-)\}$:
+
+  #grid(
+    columns: (0.5fr, 0.5fr),
+    [$ ket(0) = frac(sqrt(2), 2) (ket(+) + ket(-)) $],
+    [$ ket(1) = frac(sqrt(2), 2) (ket(+) - ket(-)) $]
+  )
+
+  Therefore, $\{ket(+), ket(-)\}$ is a basis as well. It's also orthonormal:
+
+  #grid(
+    columns: (0.5fr, 0.5fr),
+    [$ braket(+, +) = braket(-, -) =
+       frac(sqrt(2), 2) dot frac(sqrt(2), 2) + frac(sqrt(2), 2) dot frac(sqrt(2), 2) = 1 $],
+    [$ braket(+, -) = braket(-, +) =
+       frac(sqrt(2), 2) dot frac(sqrt(2), 2) - frac(sqrt(2), 2) dot frac(sqrt(2), 2) = 0 $]
+  )
+]
+
+Another relevant basis is $\{ket(arrow.ccw), ket(arrow.cw)\}$, defined as:
+
+#grid(
+  columns: (0.5fr, 0.5fr),
+  [$ ket(arrow.ccw) = frac(sqrt(2), 2) (ket(0) + i ket(1)) = mat(frac(sqrt(2), 2); i frac(sqrt(2), 2)) $],
+  [$ ket(arrow.cw) = frac(sqrt(2), 2) (ket(0) - i ket(1)) = mat(frac(sqrt(2), 2); -i frac(sqrt(2), 2)) $]
+)
+
+#theorem[
+  The set $\{ket(arrow.ccw), ket(arrow.cw)\}$ forms an orthonormal basis for any
+  two-dimensional Hilbert space.
+]
+#proof[
+  This set is indeed a basis since the basis $\{ket(0), ket(1)\}$ can be
+  written as a linear combination of $\{ket(arrow.ccw), ket(arrow.cw)\}$:
+
+  #grid(
+    columns: (0.5fr, 0.5fr),
+    [$ ket(0) = frac(sqrt(2), 2) (ket(arrow.ccw) + i ket(arrow.cw)) $],
+    [$ ket(1) = frac(sqrt(2), 2) (ket(arrow.ccw) - i ket(arrow.cw)) $]
+  )
+
+  Therefore, $\{ket(arrow.ccw), ket(arrow.cw)\}$ is a basis as well. It's also orthonormal:
+
+  #grid(
+    columns: (0.5fr, 0.5fr),
+    [$ braket(arrow.ccw, arrow.ccw) = braket(arrow.cw, arrow.cw) =
+       frac(sqrt(2), 2) dot frac(sqrt(2), 2) - i frac(sqrt(2), 2) dot i frac(sqrt(2), 2) = 1 $],
+    [$ braket(arrow.ccw, arrow.cw) = braket(arrow.cw, arrow.ccw) =
+       frac(sqrt(2), 2) dot frac(sqrt(2), 2) + i frac(sqrt(2), 2) dot i frac(sqrt(2), 2) = 0 $]
+  )
+]
+
+#exercise[
+  Write the state $ket(Psi) = frac(sqrt(2), 2) (ket(0) - ket(1))$ as a
+  linear combination of the basis $\{ket(arrow.ccw), ket(arrow.cw)\}$.
+  What are the probabilities of obtaining the respective measurements?
+]
+#solution[
+  There must exist two coefficents, $alpha$ and $beta$, such that:
+
+  $ alpha ket(arrow.ccw) + beta ket(arrow.cw) =
+    ket(Psi) =
+    frac(sqrt(2), 2) (ket(0) - ket(1)) =
+    frac(sqrt(2), 2) (mat(1; 0) - mat(0; 1)) =
+    frac(sqrt(2), 2) mat(1; -1) =
+    mat(frac(sqrt(2), 2); -frac(sqrt(2), 2)) $
+
+  That is:
+
+  $ mat(frac(sqrt(2), 2); -frac(sqrt(2), 2)) = alpha 
+    mat(frac(sqrt(2), 2); i frac(sqrt(2), 2)) + beta
+    mat(frac(sqrt(2), 2); -i frac(sqrt(2), 2)) =>
+    cases(frac(sqrt(2), 2) = alpha frac(sqrt(2), 2) + beta frac(sqrt(2), 2),
+          -frac(sqrt(2), 2) = alpha i frac(sqrt(2), 2) - beta i frac(sqrt(2), 2)) =>
+    cases(1 = alpha + beta, i = alpha - beta) =>
+    cases(alpha = frac(1 + i, 2), beta = frac(1 - i, 2)) $
+
+  Which gives:
+
+  $ ket(Psi) = frac(1 + i, 2) ket(arrow.ccw) + frac(1 - i, 2) ket(arrow.cw) $
+
+  The probabilities of getting each result when measured is given by:
+
+  #grid(
+    columns: (0.5fr, 0.5fr),
+    [$ P_(ket(arrow.ccw)) =
+       abs(frac(1 + i, 2))^(2) =
+       (frac(1, 2))^(2) + (frac(1, 2))^(2) =
+       frac(1, 2) $],
+    [$ P_(ket(arrow.cw)) =
+       abs(frac(1 - i, 2))^(2) =
+       (frac(1, 2))^(2) + (-frac(1, 2))^(2) =
+       frac(1, 2) $]
+  )
+]
+
 Any vector that results from a non-trivial linear combination of a basis,
 that is, when both coefficients of the linear combination are not zero,
 is said to be in a *superposition* of the states that comprise the basis.
@@ -125,49 +233,51 @@ A basis is always necessary to be specified when talking about superposition:
 a state can be the result of a superposition with respect to a certain basis
 but not with respect to another basis.
 
+#exercise[
+  Consider the states $ket(Psi_(1))$ and $ket(Psi_(2))$. Are they
+  in a superposition with respect to the basis $\{ket(0), ket(1)\}$?
+
+  #grid(
+    columns: (0.5fr, 0.5fr),
+    [$ ket(Psi_(1)) = frac(sqrt(2), 2) (ket(+) + ket(-)) $],
+    [$ ket(Psi_(2)) = frac(sqrt(3), 2) ket(+) - frac(1, 2) ket(-) $]
+  )
+]
+#solution[
+  Note how:
+
+  $ ket(Psi_(1)) = frac(sqrt(2), 2) (ket(+) + ket(-)) =
+    frac(sqrt(2), 2) (mat(frac(sqrt(2), 2); frac(sqrt(2), 2)) +
+                      mat(frac(sqrt(2), 2); -frac(sqrt(2), 2))) =
+    frac(sqrt(2), 2) mat(sqrt(2); 0) = mat(1; 0) = ket(0) $
+
+  This means that the state is one of the base states that consitutes
+  the bases, and therefore there is no superposition. Indeed, trying
+  to write it as a linear combination of the vectors that constitute
+  the basis would give:
+
+  $ ket(Psi_(1)) = 1 ket(0) + 0 ket(1) $
+
+  Which is trivial. On the other hand:
+
+  $ ket(Psi_(2)) = 
+    frac(sqrt(3), 2) ket(+) - frac(1, 2) ket(-) =
+    frac(sqrt(3), 2) mat(frac(sqrt(2), 2); frac(sqrt(2), 2)) -
+    frac(1, 2) mat(frac(sqrt(2), 2); -frac(sqrt(2), 2)) =
+    mat(frac(sqrt(6), 4); frac(sqrt(6), 4)) - mat(frac(sqrt(2), 4); -frac(sqrt(2), 4)) =
+    mat(frac(sqrt(6) - sqrt(2), 4); frac(sqrt(6) + sqrt(2), 4)) =
+    mat(frac(sqrt(3) - 1, 2 sqrt(2)); frac(sqrt(3) + 1, 2 sqrt(2))) $
+
+  Which gives a non-trivial combination:
+
+  $ ket(Psi_(2)) = frac(sqrt(3) - 1, 2 sqrt(2)) ket(0) + frac(sqrt(3) + 1, 2 sqrt(2)) ket(1) $
+]
+
 When a measurement is not performed, the system is in a superposition of 
 base states, and the state in which the system is found when measured can
 be predicted only within a certain probability. When the system _is_
 measured, there is no ambiguity, because any repeated measurement will
 always give the same result.
-
-Another useful basis is $\{ket(+), ket(-)\}$:
-
-#grid(
-  columns: (0.5fr, 0.5fr),
-  [$ ket(+) = frac(sqrt(2), 2) (ket(0) + ket(1)) $],
-  [$ ket(-) = frac(sqrt(2), 2) (ket(0) - ket(1)) $]
-)
-
-This set is indeed a basis since the basis $\{ket(0), ket(1)\}$ can be
-written as a linear combination of $\{ket(+), ket(-)\}$:
-
-#grid(
-  columns: (0.5fr, 0.5fr),
-  [$ ket(0) = frac(sqrt(2), 2) (ket(+) + ket(-)) $],
-  [$ ket(1) = frac(sqrt(2), 2) (ket(+) - ket(-)) $]
-)
-
-This basis is also orthonormal since $braket(+, -) = 0$
-
-Another relevant basis is $\{ket(arrow.ccw), ket(arrow.cw)\}$, defined as:
-
-#grid(
-  columns: (0.5fr, 0.5fr),
-  [$ ket(arrow.ccw) = frac(sqrt(2), 2) (ket(0) + i ket(1)) $],
-  [$ ket(arrow.cw) = frac(sqrt(2), 2) (ket(0) - i ket(1)) $]
-)
-
-This set is indeed a basis since the basis $\{ket(0), ket(1)\}$ can be
-written as a linear combination of $\{ket(+), ket(-)\}$:
-
-#grid(
-  columns: (0.5fr, 0.5fr),
-  [$ ket(0) = frac(sqrt(2), 2) (ket(arrow.ccw) + i ket(arrow.cw)) $],
-  [$ ket(1) = frac(sqrt(2), 2) (ket(arrow.ccw) - i ket(arrow.cw)) $]
-)
-
-This basis is also orthonormal since $braket(arrow.ccw, arrow.cw) = 0$
 
 These bases can be represented graphically as coordinates on a sphere,
 called *Bloch sphere*:
