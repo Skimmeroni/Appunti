@@ -30,8 +30,10 @@
 #pagebreak()
 
 = Principles of Quantum Mechanics
-== Maths
-#include "Principles/Maths.typ"
+== Bra-ket notation
+#include "Principles/Braket.typ"
+== Complex numbers
+#include "Principles/Complex.typ"
 == Basics
 #include "Principles/Basics.typ"
 == Complexity

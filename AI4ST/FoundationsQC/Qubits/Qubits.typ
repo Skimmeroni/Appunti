@@ -10,7 +10,7 @@ these are called *two-state quantum systems*, or just two-state systems.
 
 #figure(
 	cetz.canvas({
-		import cetz.draw: *
+		import cetz.draw: set-style, line, circle, content, bezier-through
 
 		set-style(stroke: (thickness: 1.5pt),
 		          circle: (fill: gradient.radial(white, blue, focal-center: (15%, 30%), focal-radius: 5%)),
@@ -51,8 +51,8 @@ rule. In this respect, the term "two-state" refers to the number of
 dimensions of the Hilbert space
 
 Let $ket(phi_(1))$ and $ket(phi_(2))$ be two base states. Any linear
-combination of the two is also a legitimate state, as long as the
-normalization condition is respected:
+combination of the two is also a legitimate state $ket(Psi)$, as long
+as the normalization condition is respected:
 
 $ ket(Psi) = alpha ket(phi_(1)) + beta ket(phi_(2)),
   "with" alpha, beta in CC
@@ -279,13 +279,61 @@ be predicted only within a certain probability. When the system _is_
 measured, there is no ambiguity, because any repeated measurement will
 always give the same result.
 
+It should also be noted that, despite the existence of superpositions,
+a qubit still holds a single bit of information. Indeed, the state in
+which the qubit is prior to measurement is unknown and unknowable, and
+when measurement happens the value of the qubit is always one out of
+two allowed values. It would therefore be incorrect to state that a
+qubit holds an infinite amount of information.
+
+That the same quantum state is represented by more than one vector means
+that there is a critical distinction between the complex vector space in
+which qubit values are written and the quantum state space itself. In
+particular, any unit vector multiplied by a phase factor is equivalent
+to the original vector, and therefore represents the same state.
+
+The multiple by which two vectors representing the same quantum state
+differ is called the *global phase* and has no physical meaning. The
+notation $ket(v) tilde ket(v')$ denotes the fact that the two vectors
+are equivalent up to a global phase $e^(i phi)$, that is $ket(v) =
+e^(i phi) ket(v')$. The space in which two two-dimensional complex
+vectors are considered equivalent if they are multiples of each other
+is called *complex projective space* of dimension one.
+
+Two complex vectors that differ from a phase factor belong to the same
+equivalence class with respect to the aforementioned relation. Each of
+these equivalence classes are the members of a quotient space, denoted
+as $bold(C P)^(1)$:
+
+$ bold(C P)^(1) = \{alpha ket(phi_(1)) + beta ket(phi_(2))\} slash tilde $
+
+Therefore, the quantum state space for a single-qubit system is in
+one-to-one correspondence with the points of the complex projective
+space $bold(C P)^(1)$.
+
+A physical quantity that, unlike the global phase, is _not_ irrelevant,
+is the *relative phase* of a single-qubit state. The relative phase of
+a superposition $alpha ket(v_(1)) + beta ket(v_(2))$ is a measure of the
+angle in the complex plane between the two complex numbers $alpha$ and
+$beta$. More precisely, the relative phase is the complex number $e^(i phi)$
+(that is, having modulus equal to one) such that:
+
+$ frac(alpha, beta) = e^(i phi) frac(abs(alpha), abs(beta)) =>
+  e^(i phi) = frac(alpha abs(beta), abs(alpha) beta) $
+
+Two superpositions $alpha ket(v_(1)) + beta ket(v_(2))$ and $alpha'
+ket(v_(1)) + beta' ket(v_(2))$ whose amplitudes have the same magnitudes
+but that differ in a relative phase represent different states. On the
+other hand, if two superpositions (with respect to the same basis) have
+the same relative phase, they represent the same state.
+
 These bases can be represented graphically as coordinates on a sphere,
 called *Bloch sphere*:
 
 #align( 
 	center,
 	[#cetz.canvas({
-		import cetz.draw: *
+		import cetz.draw: set-style, circle, line, content
 
 		set-style(stroke: (thickness: 1.5pt),
                           mark: (end: "triangle", fill: black))
