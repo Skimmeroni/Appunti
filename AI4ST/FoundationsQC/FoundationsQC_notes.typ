@@ -40,6 +40,10 @@
 #include "Principles/Complexity.typ"
 #pagebreak()
 
-= Single Qubits
+= Qubits
 == Definition of a qubit
 #include "Qubits/Qubits.typ"
+== Multiple qubits
+#include "Qubits/Multiple.typ"
+== Qubit manipulations
+#include "Qubits/Manipulations.typ"
