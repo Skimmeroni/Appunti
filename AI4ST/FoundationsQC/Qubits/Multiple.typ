@@ -62,6 +62,7 @@ $ lambda_(1, 1, dots, n) ket(phi_(1) phi_(1) dots phi_(n)) +
   lambda_(n, 2, dots, n) ket(phi_(n) phi_(2) dots phi_(n)) $
 
 Is not trivial, meaning that at least two coefficients are not zero.
+As expected, superposition is basis-dependent.
 
 When the basis under consideration is the standard basis, it is possible
 to write the basis of an $n$-qubit state space even more compactly. Recall
@@ -83,7 +84,6 @@ where each ket contains the integer representation of the binary number
 constructed by justapposing the binary digits of the state of each qubit:
 
 #grid(
-  //columns: (0.2fr, 0.2fr, 0.05fr, 0.275fr, 0.275fr),
   columns: (0.21fr, 0.21fr, 0.06fr, 0.26fr, 0.26fr),
   [$ ket(00 dots 0) = ket(0) = mat(1; 0; 0; dots.v; 0; 0; 0) $],
   [$ ket(00 dots 1) = ket(1) = mat(0; 1; 0; dots.v; 0; 0; 0) $],
@@ -146,9 +146,68 @@ states of an $n$-qubit system is a complex projective space of dimension
 $2^(n) − 1$, but in general it is easier to consider the Hilbert space
 directly but taking into account possible duplicate vectors.
 
-Most states in $H_(1) times.circle H_(2)$ cannot be written simply
-as a tensor product of a vector in $H_(1)$ and a vector in $H_(2)$.
-This means that there are combined states that cannot be analysed
-simply by looking at the state of the single qubits that make them
-up: these combined states are effectively entities with their own
-meaning, and are referred to as *entangled states*. 
+Even though the tensor product of $n$ single qubit states represents a
+state of a $n$-qubit system, a state of a $n$-qubit system might not be
+decomposable into a tensot product of $n$ single qubit states. This means
+that there are states of $n$-qubit systems that cannot be conceived as
+simply the result of the combined contribution of each qubit, but are
+instead entities on their own. States like these are called *entangled
+states*, and indeed the majority of states of a $n$-qubit system are
+entangled states. For example, Bell states are entangled states.
+
+#exercise[
+  Consider this two $2$-qubit states. Are they entangled states?
+
+  #grid(
+    columns: (0.66fr, 0.33fr),
+    [$ ket(phi_(1)) = frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01) +
+                      frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11) $],
+    [$ ket(phi_(2)) = frac(1, sqrt(2)) (ket(00) + ket(11)) $]
+  )
+]
+#solution[
+  $ket(phi_(1))$ is not an entangled state, because it can be decomposed
+  into two single (identical) qubit states as follows:
+
+  $ ket(phi_(1)) = frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01) +
+    frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11) =
+    (frac(1, sqrt(8)) ket(0) + sqrt(frac(7, 8)) ket(1)) times.circle
+    (frac(1, sqrt(8)) ket(0) + sqrt(frac(7, 8)) ket(1)) $
+
+  On the other hand, the state $ket(phi_(2))$ is entangled. Attempting a
+  decomposition gives:
+
+  $ (a ket(0) + b ket(1)) times.circle (c ket(0) + d ket(1)) =
+    frac(1, sqrt(2)) (ket(00) + ket(11)) => \
+    a c ket(00) + a d ket(01) + b c ket(10) + b d ket(11) =
+    frac(1, sqrt(2)) (ket(00) + ket(11)) => \
+    a c mat(1; 0; 0; 0) + a d mat(0; 1; 0; 0) + b c mat(0; 0; 1; 0) + b d mat(0; 0; 0; 1) =
+    frac(1, sqrt(2)) (mat(1; 0; 0; 0) + mat(0; 0; 0; 1)) => \
+    mat(a c; a d; b c; b d) = mat(frac(1, sqrt(2)); 0; 0; frac(1, sqrt(2))) =>
+    cases(a c = frac(1, sqrt(2)), a d = 0, b c = 0, b d = frac(1, sqrt(2))) $
+
+  Which is an impossible system of equations to solve.
+]
+
+In the case of a two-qubit system, there is one and only decomposition
+(two one-qubit systems), therefore there is no ambiguity. In general,
+a state can be said to be entangled only with respect to a specific
+decomposition. More formally, a state $ket(Psi)$ member of a state space
+$H$ decomposed as $H_(1) times.circle H_(2) times.circle dots times.circle
+H_(n)$ is said to be _separable_ or _unentangled_ if:
+
+$ ket(Psi) = (ket(v_(1)) in H_(1)) times.circle (ket(v_(2)) in H_(2))
+  times.circle dots times.circle (ket(v_(n)) times.circle H_(n)) $
+
+Otherwise, it is said to be entangled. When non specified, saying that
+a $n$-qubit state is entangled means "entangled with respect to the
+decomposition into $n$ individual qubit states".
+
+// #exercise[
+// An example of the different meanings of entanglement
+// ]
+
+Despite being decomposition-dependent, entanglement is basis-independent,
+since the chosen basis plays no role in the definition of entanglement
+(even though some bases might be more comfortable than others when working
+with entangled states).
