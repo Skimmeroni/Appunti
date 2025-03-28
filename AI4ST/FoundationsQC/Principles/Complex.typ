@@ -66,3 +66,39 @@ $ z = r e^(i phi) $
 
 Where the complex exponential $e^(i phi)$ is also referred to as the *phase
 factor*.
+
+The *conjugate transpose* of a matrix $A$, denoted as $A^(dagger)$, is the
+matrix obtained from transposing $A$ and then applying complex conjugation
+to each element of the resulting matrix:
+
+$ A^(dagger) = A^(T^(*)) =
+  mat(a_(1, 1), a_(1, 2), dots, a_(1, n);
+      a_(2, 1), a_(2, 2), dots, a_(2, n);
+      dots.v, dots.v, dots.down, dots.v;
+      a_(m, 1), a_(m, 2), dots, a_(m, n))^(T^(*)) =
+  mat(a_(1, 1)^(*), a_(2, 1)^(*), dots, a_(m, 1)^(*);
+      a_(1, 2)^(*), a_(2, 2)^(*), dots, a_(m, 2)^(*);
+      dots.v, dots.v, dots.down, dots.v;
+      a_(1, n)^(*), a_(2, n)^(*), dots, a_(m, n)^(*)) $
+
+#exercise[
+  What is the conjugate transpose of the following matrix?
+
+  $ A = mat(1, -2 - i, 5;
+            1 + i, i, 4 - 2i) $
+]
+#solution[
+
+  $ A^(dagger) =
+    mat(1, -2 - i, 5;
+        1 + i, i, 4 - 2i)^(dagger) =
+    mat(1, 1 + i;
+        -2 - i, i;
+        5, 4 - 2i)^(*) =
+    mat(1, 1 - i;
+        -2 + i, -i;
+        5, 4 + 2i) $
+]
+
+A square matrix $A$ is said to be *Hermitian* if $A^(dagger) = A$. It is
+said to be *unitary* if $A^(dagger) = A^(-1)$.

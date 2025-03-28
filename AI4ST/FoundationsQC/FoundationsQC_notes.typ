@@ -30,14 +30,12 @@
 #pagebreak()
 
 = Principles of Quantum Mechanics
-== Bra-ket notation
-#include "Principles/Braket.typ"
 == Complex numbers
 #include "Principles/Complex.typ"
-== Basics
-#include "Principles/Basics.typ"
-== Complexity
-#include "Principles/Complexity.typ"
+== Hilbert spaces
+#include "Principles/Hilbert.typ"
+== Bra-ket notation
+#include "Principles/Braket.typ"
 #pagebreak()
 
 = Qubits
@@ -47,3 +45,10 @@
 #include "Qubits/Multiple.typ"
 == Qubit manipulations
 #include "Qubits/Manipulations.typ"
+#pagebreak()
+
+= Quantum Theory
+== Basics
+#include "Quantum/Basics.typ"
+== Complexity
+#include "Quantum/Kolmogorov.typ"
