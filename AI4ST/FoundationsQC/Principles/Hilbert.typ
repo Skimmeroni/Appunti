@@ -10,7 +10,8 @@ $ angle.l bold(x), bold(y) angle.r = bold(x)^(dagger) bold(y) =
 In the context of quantum mechanics, vector spaces are assumed to be on
 the field $CC$. In this context, the inner product is also referred to 
 as the *scalar product* (because the value returned is a single number)
-or *dot product* (because it is sometimes denoted with a dot).
+or *dot product* (because it is sometimes denoted with a dot), even though
+in general the scalar/dot product is a special case of inner product.
 
 The inner product is a mathematical operation that satisfies (at least)
 this three properties:
@@ -32,9 +33,21 @@ is called the *norm* of the vector:
 $ abs(bold(x)) = sqrt(angle.l bold(x)\, bold(x) angle.r) =
   sqrt(mat(x_(1)^(*), dots, x_(n)^(*)) mat(x_(1); dots.v; x_(n))) $
 
-Any vector space on a field  that possesses an inner product is called
-an *Hilbert space*. Hilbert spaces are so obiquitous that, when not
-specified, any vector space is assumed to be an Hilbert space.
+#lemma[
+  Given two vector spaces $V$ and $W$, let $O$ be an operator
+  $O: V -> W$. For any two vectors $bold(v) in V$ and $bold(w)
+  in W$, the following holds:
+
+  $ angle.l bold(v), O bold(w) angle.r =
+    angle.l O^(dagger) bold(v), bold(w) angle.r $
+]
+// #proof[
+//
+// ]
+
+Any vector space that possesses an inner product is called an *Hilbert
+space*. Hilbert spaces are so obiquitous that, when not specified, any
+vector space is assumed to be an Hilbert space.
 
 The *direct sum* of two vectors spaces $V$ and $W$ having bases $A =
 \{bold(alpha_(1)), dots, bold(alpha_(n))\}$ and $B = \{bold(beta_(1)),

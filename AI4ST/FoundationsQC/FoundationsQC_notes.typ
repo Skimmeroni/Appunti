@@ -29,7 +29,7 @@
 #outline(indent: auto)
 #pagebreak()
 
-= Principles of Quantum Mechanics
+= Mathematical Background
 == Complex numbers
 #include "Principles/Complex.typ"
 == Hilbert spaces
@@ -39,10 +39,12 @@
 #pagebreak()
 
 = Qubits
-== Definition of a qubit
-#include "Qubits/Qubits.typ"
-== Multiple qubits
+== Single qubit systems
+#include "Qubits/Single.typ"
+== Multiple qubits systems
 #include "Qubits/Multiple.typ"
+== Qubit measurement
+#include "Qubits/Measurement.typ"
 == Qubit manipulations
 #include "Qubits/Manipulations.typ"
 #pagebreak()

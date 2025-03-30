@@ -61,7 +61,8 @@ $ ket(Psi) = alpha ket(phi_(1)) + beta ket(phi_(2)),
 According to Born's rule, the probability of finding $ket(Psi)$ in the
 state $ket(phi_(1))$ when measured is given by $abs(alpha)^(2)$, wherease
 the probability of finding it in the state $ket(phi_(2))$ when measured
-is given by $abs(beta)^(2)$.
+is given by $abs(beta)^(2)$. Later chapters will expand on this formalism,
+but the statement just given is, for the moment, sufficient.
 
 A two-state quantum system is also referred to as *qubit*. The name
 "qubit" comes from its classical counterpart, the "bit", but while a

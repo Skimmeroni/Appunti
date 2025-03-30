@@ -53,10 +53,10 @@ Note that any rotation of $2 k pi$ with $k in ZZ$ is equivalent to
 performing no rotation at all, therefore the argument is often required
 to be specified in the interval $(-pi, pi]$.
 
-A complex number $z = a + i b$ is said to be written in *rectangular form*.
-Another way to express a complex number is the *polar form*; given a complex
-number $z$ with modulus $r = abs(z)$ and argument $phi = arg(z)$, the polar
-form of $z$ is:
+A complex number $z = a + i b$ is said to be written in *rectangular form*, 
+or *algebraic form*. Another way to express a complex number is the *polar
+form*; given a complex number $z$ with modulus $r = abs(z)$ and argument
+$phi = arg(z)$, the polar form of $z$ is:
 
 $ z = r(cos(phi) + i sin(phi)) $
 
@@ -100,5 +100,59 @@ $ A^(dagger) = A^(T^(*)) =
         5, 4 + 2i) $
 ]
 
-A square matrix $A$ is said to be *Hermitian* if $A^(dagger) = A$. It is
-said to be *unitary* if $A^(dagger) = A^(-1)$.
+A square matrix $A$ is said to be *Hermitian* if $A^(dagger) = A$. It
+is said to be *unitary* if $A^(dagger) = A^(-1)$.
+
+Any matrix is equivalent to an operator given a fixed basis and vice
+versa, therefore it is also possible to define the conjugate transpose
+of an operator. Since trasposing an operator in matrix form exchanges
+domain and codomain, the conjugate transpose of an operator $O: V -> W$
+is the operator $O^(dagger): W -> V$. The matrix representation of
+$O^(dagger)$ is, as expected, the conjugate transpose of the matrix
+representation of $O$.
+
+The conjugate transpose of an operator is also called its *adjoint operator*.
+If an operator is equal to its adjoint (or equivalently, if its matrix
+representation is Hermitian), it is said to be *self-adjoint*. 
+
+The fourth way to express a complex number is the *matrix form*. Given a 
+complex number $z = a + i b$, it can be written as a $2 times 2$ matrix
+as follows:
+
+$ a + i b = mat(a, -b; b, a) $
+
+The complex conjugate of a complex number in matrix form is simply its
+matrix transpose.
+
+It is also possible to transition immediately from the exponential form to
+the matrix form:
+
+$ r e^(i phi) = r mat(cos(theta), -sin(theta); sin(theta), cos(theta)) =
+  r cos(theta) mat(1, 0; 0, 1) + r sin(theta) mat(0, -1; 1, 0) $
+
+Which also means that the real unit and the imaginary unit are simply:
+
+#grid(
+  columns: (0.5fr, 0.5fr),
+  [$ 1 = mat(1, 0; 0, 1) $],
+  [$ i = mat(0, -1; 1, 0) $]
+)
+
+This representation is consistent with respect to standard complex number
+operations. For example, to show that $z z^(*) = a^(2) + b^(2)$:
+
+$ z z^(*) &=
+  mat(a, -b; b, a) mat(a, -b; b, a)^(T) =
+  mat(a, -b; b, a) mat(a, b; -b, a) =
+  mat(a a + (-b)(-b), a b + (-b)a; b a + a (-b), b b + a a) =
+  mat(a^(2) + b^(2), cancel(a b) - cancel(a b);
+      cancel(a b) - cancel(a b), a^(2) + b^(2)) = \
+  &= mat(a^(2) + b^(2), 0; 0, a^(2) + b^(2))
+  = (a^(2) + b^(2)) mat(1, 0; 0, 1)
+  = a^(2) + b^(2) $
+
+The inverse of a matrix representing a complex number is the reciprocal of
+the number itself. Given a complex number $z = mat(a, -b; b, a)$:
+
+$ mat(a, -b; b, a)^(-1) = frac(1, a^(2) + b^(2)) mat(a, b; -b, a) = 
+  frac(cancel(z^(*)), z cancel(z^(*))) = frac(1, z) $
