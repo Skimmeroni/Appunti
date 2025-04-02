@@ -34,6 +34,8 @@
 #include "Principles/Complex.typ"
 == Hilbert spaces
 #include "Principles/Hilbert.typ"
+== Operators
+#include "Principles/Operators.typ"
 == Bra-ket notation
 #include "Principles/Braket.typ"
 #pagebreak()

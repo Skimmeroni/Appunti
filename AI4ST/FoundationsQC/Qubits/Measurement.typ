@@ -242,3 +242,64 @@ projector to a state might not return a normalized vector.
     frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01) =
     P_(S) ket(Psi) $
 ]
+
+Any projector is not only a projector in the mathematical sense, but is also
+self-ajoint. It is therefore easy to compute $abs(P_(S) ket(Psi))^(2)$:
+
+$ abs(P_(S) ket(Psi))^(2) =
+  (P_(S) ket(Psi))^(dagger) P_(S) ket(Psi) =
+  braket(Psi|P_(S), Psi) $
+
+#exercise[
+  Consider the state $ket(Psi) = a_(00) ket(00) + a_(01) ket(01) +
+  a_(10) ket(10) + a_(11) ket(11)$ and a decomposition $S_(00) plus.circle
+  S_(01) plus.circle S_(10) plus.circle S_(11)$. Consider the projector
+  $P_(01)$ and describe the assigned measurement.
+]
+#solution[
+  Applying the projection $P_(01)$ to $ket(Psi)$ gives:
+
+  $ P_(01) ket(Psi) &=
+    ketbra(01, 01) (a_(00) ket(00) + a_(01) ket(01) + a_(10) ket(10) +
+    a_(11) ket(11)) = \
+    &= a_(00) ket(01) braket(01, 00) + a_(01) ket(01) braket(01, 01) +
+    a_(10) ket(01) braket(01, 10) + a_(11) ket(01) braket(01, 11) =
+    a_(01) ket(01) $
+
+  The state $frac(P_(01) ket(Psi), abs(P_(01) ket(Psi)))$ is measured with
+  probability:
+
+  $ abs(P_(01) ket(Psi))^(2) =
+    braket(Psi|P_(01), Psi) =
+    bra(Psi) (ketbra(01, 01)) ket(Psi) =
+    braket(Psi, 01) braket(01, Psi) =
+    a_(01)^(dagger) a_(01) =
+    abs(a_(01))^(2) $
+]
+
+Recall that, for any Hermitian operator, @Eigenspace-decomposition
+describes a unique decomposition into its eigenspaces. Given this
+correspondence, Hermitian operators can be used to describe measurements.
+
+Let $P_(i)$ be the projectors onto the subspaces $S_(i)$, and let
+$\{lambda_(1), dots, lambda_(k)\}$ be a set of distinct real values.
+Then, the Hermitian operator $O = sum_(i = 1)^(k) lambda_(i) P_(i)$
+has $S_(1) plus.circle dots plus.circle S_(k)$ as its direct sum
+decomposition. Thus, when describing a measurement, instead of
+directly specifying the associated subspace decomposition, it is
+sufficient to specify a Hermitian operator whose eigenspace decomposition
+is that decomposition.
+
+Any Hermitian operator with the appropriate direct sum decomposition can
+be used to specify a given measurement; in particular, the values of the
+$lambda_(i)$ are irrelevant as long as they are distinct. The $lambda_(i)$
+should be thought of simply as labels for the corresponding subspaces, or
+equivalently as labels for the measurement outcomes #footnote[In quantum
+physics, these labels are often chosen to represent a shared property,
+such as the energy, of the eigenstates in the corresponding eigenspace.].
+
+It is important to stress that it is not an Hermitian operator that acts
+on a state when measured, but instead the projectors associated to said
+operator. The Hermitian operator is just a way (frequently used in quantum
+mechanics) to write in compact form the projectors associated to a measuring
+apparatus.

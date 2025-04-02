@@ -33,18 +33,6 @@ is called the *norm* of the vector:
 $ abs(bold(x)) = sqrt(angle.l bold(x)\, bold(x) angle.r) =
   sqrt(mat(x_(1)^(*), dots, x_(n)^(*)) mat(x_(1); dots.v; x_(n))) $
 
-#lemma[
-  Given two vector spaces $V$ and $W$, let $O$ be an operator
-  $O: V -> W$. For any two vectors $bold(v) in V$ and $bold(w)
-  in W$, the following holds:
-
-  $ angle.l bold(v), O bold(w) angle.r =
-    angle.l O^(dagger) bold(v), bold(w) angle.r $
-]
-// #proof[
-//
-// ]
-
 Any vector space that possesses an inner product is called an *Hilbert
 space*. Hilbert spaces are so obiquitous that, when not specified, any
 vector space is assumed to be an Hilbert space.

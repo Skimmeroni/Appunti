@@ -67,54 +67,6 @@ $ z = r e^(i phi) $
 Where the complex exponential $e^(i phi)$ is also referred to as the *phase
 factor*.
 
-The *conjugate transpose* of a matrix $A$, denoted as $A^(dagger)$, is the
-matrix obtained from transposing $A$ and then applying complex conjugation
-to each element of the resulting matrix:
-
-$ A^(dagger) = A^(T^(*)) =
-  mat(a_(1, 1), a_(1, 2), dots, a_(1, n);
-      a_(2, 1), a_(2, 2), dots, a_(2, n);
-      dots.v, dots.v, dots.down, dots.v;
-      a_(m, 1), a_(m, 2), dots, a_(m, n))^(T^(*)) =
-  mat(a_(1, 1)^(*), a_(2, 1)^(*), dots, a_(m, 1)^(*);
-      a_(1, 2)^(*), a_(2, 2)^(*), dots, a_(m, 2)^(*);
-      dots.v, dots.v, dots.down, dots.v;
-      a_(1, n)^(*), a_(2, n)^(*), dots, a_(m, n)^(*)) $
-
-#exercise[
-  What is the conjugate transpose of the following matrix?
-
-  $ A = mat(1, -2 - i, 5;
-            1 + i, i, 4 - 2i) $
-]
-#solution[
-
-  $ A^(dagger) =
-    mat(1, -2 - i, 5;
-        1 + i, i, 4 - 2i)^(dagger) =
-    mat(1, 1 + i;
-        -2 - i, i;
-        5, 4 - 2i)^(*) =
-    mat(1, 1 - i;
-        -2 + i, -i;
-        5, 4 + 2i) $
-]
-
-A square matrix $A$ is said to be *Hermitian* if $A^(dagger) = A$. It
-is said to be *unitary* if $A^(dagger) = A^(-1)$.
-
-Any matrix is equivalent to an operator given a fixed basis and vice
-versa, therefore it is also possible to define the conjugate transpose
-of an operator. Since trasposing an operator in matrix form exchanges
-domain and codomain, the conjugate transpose of an operator $O: V -> W$
-is the operator $O^(dagger): W -> V$. The matrix representation of
-$O^(dagger)$ is, as expected, the conjugate transpose of the matrix
-representation of $O$.
-
-The conjugate transpose of an operator is also called its *adjoint operator*.
-If an operator is equal to its adjoint (or equivalently, if its matrix
-representation is Hermitian), it is said to be *self-adjoint*. 
-
 The fourth way to express a complex number is the *matrix form*. Given a 
 complex number $z = a + i b$, it can be written as a $2 times 2$ matrix
 as follows:
