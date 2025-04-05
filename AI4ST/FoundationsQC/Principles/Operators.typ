@@ -86,6 +86,29 @@ representation of $O$.
   complex conjugate.
 ]
 
+#lemma[
+  If $A$ and $B$ are two unitary matrices, then $(A B)^(dagger) A B = I$.
+  In other words, the product of two unitary matrices is a unitary matrix.
+] <Product-of-unitary-matrices-is-unitary>
+#proof[
+  By definition, $A^(dagger) A = I$ and $B^(dagger) B = I$. Then:
+
+  $ (A B)^(dagger) A B =
+    B^(dagger) A^(dagger) A B = 
+    B^(dagger) (A^(dagger) A) B =
+    B^(dagger) I B =
+    B^(dagger) B =
+    I $
+]
+
+#lemma[
+  The columns/rows of a unitary matrix form an orthonormal basis of
+  $CC^(n)$ with respect to the inner product.
+]
+// #proof[
+//
+// ]
+
 The conjugate transpose of an operator is also called its *adjoint operator*.
 If an operator is equal to its adjoint (or equivalently, if its matrix
 representation is Hermitian), it is said to be *self-adjoint*. 

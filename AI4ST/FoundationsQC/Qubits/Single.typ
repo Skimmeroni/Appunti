@@ -327,3 +327,31 @@ ket(v_(1)) + beta' ket(v_(2))$ whose amplitudes have the same magnitudes
 but that differ in a relative phase represent different states. On the
 other hand, if two superpositions (with respect to the same basis) have
 the same relative phase, they represent the same state.
+
+Bases can be represented graphically as coordinates on a sphere,
+called *Bloch sphere*:
+
+#align( 
+	center,
+	[#cetz.canvas({
+		import cetz.draw: set-style, circle, line, content
+
+		set-style(stroke: (thickness: 1.5pt),
+                          mark: (end: "triangle", fill: black))
+
+		circle((0, 0), radius: 2.5)
+		circle((0, 0), radius: (2.5, 0.75), stroke: (dash: "loosely-dashed"))
+
+		line((-2.5, 0), (2.5, 0), name: "lr")
+		content("lr.end", anchor: "west", padding: 0.25, text(font: "JetBrains Mono", [| i ⟩]))
+		content("lr.start", anchor: "east", padding: 0.25, text(font: "JetBrains Mono", [| -i ⟩]))
+
+		line((0, -2.5), (0, 2.5), name: "01")
+		content("01.end", anchor: "south", padding: 0.25, text(font: "JetBrains Mono", [| 1 ⟩]))
+		content("01.start", anchor: "north", padding: 0.25, text(font: "JetBrains Mono", [| 0 ⟩]))
+
+		line((0.75, 0.75), (-0.75, -0.75), name: "pm")
+		content("pm.end", anchor: "north", padding: 0.25, text(font: "JetBrains Mono", [| + ⟩]))
+		content("pm.start", anchor: "south", padding: 0.25, text(font: "JetBrains Mono", [| - ⟩]))
+	})]
+)
