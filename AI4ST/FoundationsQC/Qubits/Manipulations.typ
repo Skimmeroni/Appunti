@@ -91,6 +91,12 @@ a line that represents the state of the qubit "flowing" through the circuit.
   matrix products.]
 )
 
+When a new state is reached, there's most likely interest in sampling
+its value. Which is why the $ket(Psi')$ symbol is often replaced by
+#quantum-circuit(scale: 66%, baseline: 2.5pt, meter()). Also, to denote
+a line that represents $n$ states at once the shorthand notation
+#quantum-circuit(scale: 66%, baseline: 2.5pt, nwire($n$)) is used.
+
 The simplest operator is the *identity operator*, denoted as $I$, leaves
 the state unchanged. With respect to the standard basis, the operator has
 this following form:
@@ -299,63 +305,28 @@ therefore is physically meaningless, whereas when applied as part of
 a conditional transformation it changes the relative phase between
 elements of a superposition, which is physically meaningful.
 
-/////////////////////////////////////////////////////////////////////////
-
-Applying a transformation by means of any physical process can be modelled
-as a rotation along the Bloch sphere. In particular, any rotation can be
-broken down in two components: one zenithal and one azimuthal.
-
-A zenithal rotation of a state $ket(Psi)$ changes its longitude by an angle
-$theta slash 2$ without changing its latitute. Applied to the standard basis
-gives:
+As a matter of fact, all single-qubit transformations can be reduced to
+a combination of three types of transformation: a _phase shift_ $K(delta)$,
+a _rotation_ $R(beta)$ and a _phase rotation_ $T(alpha)$:
 
 #grid(
-  columns: (0.5fr, 0.5fr),
-  [$ hat(R)_(theta) ket(0) = display(cos(frac(theta, 2))) ket(0) +
-                             display(sin(frac(theta, 2))) ket(1) $],
-  [$ hat(R)_(theta) ket(1) = display(cos(frac(theta, 2))) ket(0) -
-                             display(sin(frac(theta, 2))) ket(1) $]
+  columns: (0.33fr, 0.33fr, 0.33fr),
+  [$ K(delta) = mat(e^(i delta), 0; 0, e^(i delta)) $],
+  [$ R(beta) = mat(cos(beta), sin(beta); -sin(beta), cos(beta)) $],
+  [$ T(alpha) = mat(e^(i alpha), 0; 0, -e^(i alpha)) $]
 )
 
-Which is equivalent to the following matrix multiplication:
-
-$ hat(R)_(theta) =
-  mat(braket(0|hat(R)_(theta), 0), braket(0|hat(R)_(theta), 1);
-      braket(1|hat(R)_(theta), 0), braket(1|hat(R)_(theta), 1)) =
-  mat(display(cos(frac(theta, 2))), -display(sin(frac(theta, 2)));
-      display(sin(frac(theta, 2))), display(cos(frac(theta, 2)))) $
-
-An azimuthal rotation of a state $ket(Psi)$, also called *phase rotation*,
-changes its latitute by an angle $theta$ without changing its longitude.
-Applied to the basis $\{ket(+), ket(-)\}$ gives #footnote[Applying an
-azimuthal rotation on the basis $\{ket(0), ket(1)\}$ would make no sense,
-since it would be left unchanged.]:
-
-#grid(
-  columns: (0.5fr, 0.5fr),
-  [$ hat(P)_(theta) ket(+) =
-     display(frac(sqrt(2), 2)) (ket(0) + e^(i theta) ket(1)) $],
-  [$ hat(P)_(theta) ket(-) =
-     display(frac(sqrt(2), 2)) (ket(0) + e^(i (theta + pi)) ket(1)) $]
-)
-
-Which is equivalent to the following matrix multiplication:
-
-$ hat(R)_(theta) =
-  mat(braket(0|hat(P)_(theta), 0), braket(0|hat(P)_(theta), 1);
-      braket(1|hat(P)_(theta), 0), braket(1|hat(P)_(theta), 1)) =
-  mat(1, 0; 0, e^(i theta)) $
+The transformation $R(alpha)$ and $T(alpha)$ corresponds to rotations
+by an angle of $2 alpha$ along the $y$ and $z$ axis of the Bloch sphere
+respectively. For this reason, they are also referred to as _zenithal
+rotation_ and _azimuthal rotation_.
 
 Phase rotations of $pi slash 2$ radiants and $pi slash 4$ radiants are
-quite obiquitous, therefore they have been given proper names: $hat(S)$
-and $hat(T)$ respectively:
+quite obiquitous, therefore they have been given proper names: $S$
+and $T$ respectively:
 
 #grid(
   columns: (0.5fr, 0.5fr),
-  [$ hat(P)_(frac(pi, 2)) = hat(S) = mat(1, 0; 0, i) $],
-  [$ hat(P)_(frac(pi, 4)) = hat(T) = mat(1, 0; 0, e^(i frac(pi, 4))) $]
+  [$ P_(frac(pi, 2)) = S = mat(1, 0; 0, i) $],
+  [$ P_(frac(pi, 4)) = T = mat(1, 0; 0, e^(i frac(pi, 4))) $]
 )
-
-When a new state is reached, there's most likely interest in sampling
-its value. Which is why the $ket(Psi')$ symbol is often replaced by
-#quantum-circuit(scale: 66%, baseline: 2.5pt, meter()).

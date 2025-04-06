@@ -49,6 +49,8 @@
 #include "Qubits/Measurement.typ"
 == Qubit manipulations
 #include "Qubits/Manipulations.typ"
+== Quantum algorithms
+#include "Qubits/Algorithms.typ"
 #pagebreak()
 
 = Quantum Theory
