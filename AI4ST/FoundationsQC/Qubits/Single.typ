@@ -52,20 +52,14 @@ dimensions of the Hilbert space
 
 Let $ket(phi_(1))$ and $ket(phi_(2))$ be two base states. Any linear
 combination of the two is also a legitimate state $ket(Psi)$, as long
-as the normalization condition is respected:
+as a normalization condition is respected:
 
 $ ket(Psi) = alpha ket(phi_(1)) + beta ket(phi_(2)),
   "with" alpha, beta in CC
   space "such that" abs(alpha)^(2) + abs(beta)^(2) = 1 $
 
-According to Born's rule, the probability of finding $ket(Psi)$ in the
-state $ket(phi_(1))$ when measured is given by $abs(alpha)^(2)$, wherease
-the probability of finding it in the state $ket(phi_(2))$ when measured
-is given by $abs(beta)^(2)$. Later chapters will expand on this formalism,
-but the statement just given is, for the moment, sufficient.
-
 A two-state quantum system is also referred to as *qubit*. The name
-"qubit" comes from its classical counterpart, the "bit", but while a
+"qubit" comes from its classical counterpart, the bit, but while a
 bit is either $0$ or $1$, a qubit is in an indeterminate state until
 the measurement is performed #footnote[A $n$-state quantum system is
 called a *qudit*, and it has the same computational power of a qubit.].
@@ -112,17 +106,20 @@ symbols is completely arbitrary.].
 
 This basis is used obiquitously, and is therefore reffered to as the
 *standard basis*. When the basis at play is not specified, it is assumed
-that the basis is the standard basis. Also, since orthonormality is a
-necessary condition for being a physically meaningful basis, when talking
-about a basis it will be implicitly assumed (unless stated otherwise) that
-the basis is orthonormal.
+that the basis is the standard basis. Denoting these two vectors as
+$ket(0)$ and $ket(1)$ is helpful because it allows one to intuitively
+associate these vectors to the classical bits $0$ and $1$.
+
+Since orthonormality is a necessary condition for being a physically
+meaningful basis, when talking about a basis it will be implicitly
+assumed (unless stated otherwise) that the basis is orthonormal.
 
 Another useful basis is the one denoted as $\{ket(+), ket(-)\}$:
 
 #grid(
   columns: (0.5fr, 0.5fr),
-  [$ ket(+) = frac(sqrt(2), 2) (ket(0) + ket(1)) = mat(frac(sqrt(2), 2); frac(sqrt(2), 2)) $],
-  [$ ket(-) = frac(sqrt(2), 2) (ket(0) - ket(1)) = mat(frac(sqrt(2), 2); -frac(sqrt(2), 2)) $]
+  [$ ket(+) = frac(sqrt(2), 2) (ket(0) + ket(1)) $],
+  [$ ket(-) = frac(sqrt(2), 2) (ket(0) - ket(1)) $]
 )
 
 #theorem[
@@ -154,8 +151,8 @@ Another relevant basis is $\{ket(arrow.ccw), ket(arrow.cw)\}$, defined as:
 
 #grid(
   columns: (0.5fr, 0.5fr),
-  [$ ket(arrow.ccw) = frac(sqrt(2), 2) (ket(0) + i ket(1)) = mat(frac(sqrt(2), 2); i frac(sqrt(2), 2)) $],
-  [$ ket(arrow.cw) = frac(sqrt(2), 2) (ket(0) - i ket(1)) = mat(frac(sqrt(2), 2); -i frac(sqrt(2), 2)) $]
+  [$ ket(arrow.ccw) = frac(sqrt(2), 2) (ket(0) + i ket(1)) $],
+  [$ ket(arrow.cw) = frac(sqrt(2), 2) (ket(0) - i ket(1)) $]
 )
 
 #theorem[
@@ -183,48 +180,52 @@ Another relevant basis is $\{ket(arrow.ccw), ket(arrow.cw)\}$, defined as:
   )
 ]
 
+According to Born's rule, the probability of finding $ket(Psi)$ in the
+state $ket(phi_(1))$ when measured is given by $abs(alpha)^(2)$, wherease
+the probability of finding it in the state $ket(phi_(2))$ when measured
+is given by $abs(beta)^(2)$.
+
+As stated, this is an axiom of quantum mechanics, derived from experimental
+data and assumed to be true. Also, a measurement induces a wave function
+collapse, and the state of the qubit becomes one of the possible basis
+states. This means that the measurement process does not exist "in a vacuum",
+but is dependent on a chosen basis. This also means that any measurement
+performed afterwards will always give the same result with absolute certainty.
+
+Note how:
+
+#grid(
+  columns: (0.5fr, 0.5fr),
+  [$ abs(braket(phi_(1), Psi))^(2) =
+     abs(alpha braket(phi_(1), phi_(1)) + beta braket(phi_(1), phi_(2)))^(2) =
+     abs(alpha)^(2) $],
+  [$ abs(braket(phi_(2), Psi))^(2) =
+     abs(alpha braket(phi_(2), phi_(1)) + beta braket(phi_(2), phi_(2)))^(2) =
+     abs(beta)^(2) $]
+)
+
+Later chapters will expand on this formalism, but the statement just given
+is, for the moment, sufficient.
+
 #exercise[
   Write the state $ket(Psi) = frac(sqrt(2), 2) (ket(0) - ket(1))$ as a
   linear combination of the basis $\{ket(arrow.ccw), ket(arrow.cw)\}$.
   What are the probabilities of obtaining the respective measurements?
 ]
 #solution[
-  There must exist two coefficents, $alpha$ and $beta$, such that:
-
-  $ alpha ket(arrow.ccw) + beta ket(arrow.cw) =
-    ket(Psi) =
+  $ ket(Psi) &=
     frac(sqrt(2), 2) (ket(0) - ket(1)) =
-    frac(sqrt(2), 2) (mat(1; 0) - mat(0; 1)) =
-    frac(sqrt(2), 2) mat(1; -1) =
-    mat(frac(sqrt(2), 2); -frac(sqrt(2), 2)) $
+    frac(sqrt(2), 2) (frac(sqrt(2), 2) (ket(arrow.ccw) + i ket(arrow.cw)) -
+                     frac(sqrt(2), 2) (ket(arrow.ccw) - i ket(arrow.cw))) = \
+    &= frac(1, 2) (ket(arrow.ccw) + i ket(arrow.cw)) -
+    frac(1, 2) (ket(arrow.ccw) - i ket(arrow.cw)) =
+    cancel(frac(1, 2) ket(arrow.ccw)) + frac(i, 2) ket(arrow.cw) -
+    cancel(frac(1, 2) ket(arrow.ccw)) + frac(i, 2) ket(arrow.cw) = \
+    &= i ket(arrow.cw) $
 
-  That is:
-
-  $ mat(frac(sqrt(2), 2); -frac(sqrt(2), 2)) = alpha 
-    mat(frac(sqrt(2), 2); i frac(sqrt(2), 2)) + beta
-    mat(frac(sqrt(2), 2); -i frac(sqrt(2), 2)) =>
-    cases(frac(sqrt(2), 2) = alpha frac(sqrt(2), 2) + beta frac(sqrt(2), 2),
-          -frac(sqrt(2), 2) = alpha i frac(sqrt(2), 2) - beta i frac(sqrt(2), 2)) =>
-    cases(1 = alpha + beta, i = alpha - beta) =>
-    cases(alpha = frac(1 + i, 2), beta = frac(1 - i, 2)) $
-
-  Which gives:
-
-  $ ket(Psi) = frac(1 + i, 2) ket(arrow.ccw) + frac(1 - i, 2) ket(arrow.cw) $
-
-  The probabilities of getting each result when measured is given by:
-
-  #grid(
-    columns: (0.5fr, 0.5fr),
-    [$ P_(ket(arrow.ccw)) =
-       abs(frac(1 + i, 2))^(2) =
-       (frac(1, 2))^(2) + (frac(1, 2))^(2) =
-       frac(1, 2) $],
-    [$ P_(ket(arrow.cw)) =
-       abs(frac(1 - i, 2))^(2) =
-       (frac(1, 2))^(2) + (-frac(1, 2))^(2) =
-       frac(1, 2) $]
-  )
+  Which means that the probability of getting $ket(arrow.cw)$ is
+  $abs(0 + 1i)^(2) = 1$ and the probability of getting $ket(arrow.ccw)$
+  is $0$.
 ]
 
 Any vector that results from a non-trivial linear combination of a basis,
@@ -247,45 +248,36 @@ but not with respect to another basis.
 #solution[
   Note how:
 
-  $ ket(Psi_(1)) = frac(sqrt(2), 2) (ket(+) + ket(-)) =
-    frac(sqrt(2), 2) (mat(frac(sqrt(2), 2); frac(sqrt(2), 2)) +
-                      mat(frac(sqrt(2), 2); -frac(sqrt(2), 2))) =
-    frac(sqrt(2), 2) mat(sqrt(2); 0) = mat(1; 0) = ket(0) $
+  $ ket(Psi_(1)) &= frac(sqrt(2), 2) (ket(+) + ket(-)) =
+    frac(sqrt(2), 2) (frac(sqrt(2), 2)(ket(0) + ket(1)) + frac(sqrt(2), 2)(ket(0) - ket(1))) =
+    frac(1, 2)(ket(0) + ket(1)) + frac(1, 2)(ket(0) - ket(1)) = \
+    &= frac(1, 2) ket(0) + cancel(frac(1, 2) ket(1)) + frac(1, 2) ket(0) - cancel(frac(1, 2) ket(1)) =
+    ket(0) $
 
-  This means that the state is one of the base states that consitutes
-  the bases, and therefore there is no superposition. Indeed, trying
-  to write it as a linear combination of the vectors that constitute
-  the basis would give:
+  This means that $ket(Psi_(1))$ is just one of the two elements of
+  the standard basis, and therefore there is no superposition. Indeed,
+  $ket(Psi_(1))$ written as a linear combination of the standard basis
+  would be $ket(Psi_(1)) = 1 ket(0) + 0 ket(1)$, which is a trivial
+  combination. On the other hand:
 
-  $ ket(Psi_(1)) = 1 ket(0) + 0 ket(1) $
-
-  Which is trivial. On the other hand:
-
-  $ ket(Psi_(2)) = 
+  $ ket(Psi_(2)) &= 
     frac(sqrt(3), 2) ket(+) - frac(1, 2) ket(-) =
-    frac(sqrt(3), 2) mat(frac(sqrt(2), 2); frac(sqrt(2), 2)) -
-    frac(1, 2) mat(frac(sqrt(2), 2); -frac(sqrt(2), 2)) =
-    mat(frac(sqrt(6), 4); frac(sqrt(6), 4)) - mat(frac(sqrt(2), 4); -frac(sqrt(2), 4)) =
-    mat(frac(sqrt(6) - sqrt(2), 4); frac(sqrt(6) + sqrt(2), 4)) =
-    mat(frac(sqrt(3) - 1, 2 sqrt(2)); frac(sqrt(3) + 1, 2 sqrt(2))) $
+    frac(sqrt(3), 2) (frac(sqrt(2), 2)(ket(0) + ket(1))) - frac(1, 2) (frac(sqrt(2), 2)(ket(0) - ket(1))) = \
+    &= frac(sqrt(6), 4) (ket(0) + ket(1)) - frac(sqrt(2), 4)(ket(0) - ket(1)) =
+    frac(sqrt(6), 4) ket(0) + frac(sqrt(6), 4) ket(1) - frac(sqrt(2), 4) ket(0) + frac(sqrt(2), 4) ket(1) = \
+    &= frac(sqrt(6) - sqrt(2), 4) ket(0) + frac(sqrt(6) + sqrt(2), 4) ket(1) $
 
-  Which gives a non-trivial combination:
-
-  $ ket(Psi_(2)) = frac(sqrt(3) - 1, 2 sqrt(2)) ket(0) + frac(sqrt(3) + 1, 2 sqrt(2)) ket(1) $
+  Which is a non-trivial combination.
 ]
 
-When a measurement is not performed, the system is in a superposition of 
-base states, and the state in which the system is found when measured can
-be predicted only within a certain probability. When the system _is_
-measured, there is no ambiguity, because any repeated measurement will
-always give the same result.
-
-It should also be noted that, despite the existence of superpositions,
-a qubit still holds a single bit of information. Indeed, the state in
-which the qubit is prior to measurement is unknown and unknowable, and
-when measurement happens the value of the qubit is always one out of
-two allowed values. It would therefore be incorrect to state that a
-qubit holds an infinite amount of information.
+When a measurement is not performed, the system is in a superposition
+of base states, and the state in which the system is found when measured
+can be predicted only within a certain probability. Nevertheless, it is
+possible to extract at most a single bit of information from a qubit.
+Indeed, the state in which the qubit is prior to measurement is unknown
+and unknowable, and when measurement happens the value of the qubit is
+always one out of two allowed values. It would therefore be incorrect
+to state that a qubit holds an infinite amount of information.
 
 That the same quantum state is represented by more than one vector means
 that there is a critical distinction between the complex vector space in

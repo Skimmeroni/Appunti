@@ -37,8 +37,10 @@ as $ketbra(Psi_(1), Psi_(2))$, and is called *ketbra*:
 	   ketbra(Psi_(1), Psi_(2)) $]
 )
 
-The bra-ket notation is particularly comfortable to work with, because it
-represents the conjugate transpose of a vector as "flipping" its symbol
-left-to-right. In particular, the inner product "flips" the ket on the
-left side of the operation, whereas the outer product "flips" the ket
-on the right side of the operation.
+Even though matrix representation of vectors is useful from time to
+time, the bra-ket notation is much comfortable to work with in quantum
+mechanics. Not only because it is more compact but also because it
+represents the conjugate transpose of a vector, which is an operation
+performed very often, as "flipping" its symbol left-to-right. In particular,
+the inner product "flips" the ket on the left side of the operation, whereas
+the outer product "flips" the ket on the right side of the operation.
