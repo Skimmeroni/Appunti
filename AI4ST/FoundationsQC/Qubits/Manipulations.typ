@@ -1,77 +1,76 @@
 #import "../FoundationsQC_definitions.typ": *
 
 Manipulating the state of a qubit is performed through a *quantum
-transformation*. A quantum transformation is simply an operator that,
-when applied to a quantum state, results in a new state that is still
-valid. In particular, the operator must be an _endomorphism_, mapping
-elements from an Hilbert space to elements to the same Hilbert space.
-Note that, for these reason, a measurement cannot be considered a
-quantum transformation.
+transformation*. A quantum transformation is simply an operator
+that, when applied to a valid quantum state, results in a new
+quantum state that is still valid.
 
-A quantum state is a linear combination of base states, therefore a
-quantum transformation, in order to return a quantum state, must be
-linear. In other words, given a state $a_(1) ket(phi_(1)) + dots +
-a_(n) ket(phi_(n))$ and a quantum transformation $U$, the following
-must hold:
+In order for this requirement to be respected, before introducing
+some examples of quantm transformations, it is necessary to clearly
+state what constraint a quantum transformation must abide to:
 
-$ U(a_(1) ket(phi_(1) + dots + a_(n) ket(phi_(n))) =
-  U(a_(1) ket(phi_(1)) + dots + U(a_(n) ket(phi_(n))) =
-  a_(1) U(ket(phi_(1)) + dots + a_(n) U(ket(phi_(n))) $
++ The Hilbert space of the possible qubit states should be the same
+  before and after applying a transformation. A quantum transformation
+  must then be an _endomorphism_, mapping elements from an Hilbert
+  space to elements to the same space.
++ A quantum state is a linear combination (of base states), therefore
+  a quantum transformation must be linear. In other words, given a
+  state $a_(1) ket(phi_(1)) + dots + a_(n) ket(phi_(n))$ and a quantum
+  transformation $U$, the following must hold:
 
-This way, applying a quantum transformation to a superposition of
-states is the same as applying the transformation to each component
-of the superposition.
+  $ U(a_(1) ket(phi_(1) + dots + a_(n) ket(phi_(n))) =
+    U(a_(1) ket(phi_(1))) + dots + U(a_(n) ket(phi_(n))) =
+    a_(1) U(ket(phi_(1))) + dots + a_(n) U(ket(phi_(n))) $
 
-A quantum state is a unit vector, therefore a quantum transformation
-must return a state that is also a unit vector. Also, the subspaces
-associated to the basis in which the vector is a linear combination
-of must be orthogonal, therefore the resulting state must also be a
-linear combination of orthogonal vectors.
+  This way, applying a quantum transformation to a superposition of
+  states is the same as applying the transformation to each component
+  of the superposition.
++ A quantum state is a unit vector, therefore a quantum transformation
+  must return a state that is also a unit vector.
++ A quantum state is a linear combination of vectors from an orthonormal
+  basis, therefore quantum transformations must map orthonormal bases to
+  orthonormal bases.
 
-These requirements ensure that measuring a state in the original basis
-and then applying a transformation to the outcome gives the same result
-as applying the transformation first and then measuring the resulting
-state in the transformed basis. For these properties to be true, a quantum
-transformation must preserve the inner product. That is, the inner product
-of two quantum states $ket(Psi_(1))$ and $ket(Psi_(2))$ and the inner
-product of $U ket(Psi_(1))$ and $U ket(Psi_(2))$, the result of applying
-the transformation to said states, must be the same:
+Clearly, measurements cannot be considered quantum transformations.
 
-$ angle.l ket(Psi_(1)), ket(Psi_(2)) angle.r =
-  angle.l U ket(Psi_(1)), U ket(Psi_(2)) angle.r => 
-  braket(Psi_(1), Psi_(2)) = braket(Psi_(1) | U^(dagger), U | Psi_(2)) =
-  bra(Psi_(1)) U^(dagger) U ket(Psi_(2)) $
+Constraint number $2$ imposes that the operator has a matrix representation
+with respect to a given basis. As stated in @Equivalent-definitions-of-unitary-matrix, 
+the one and only kind of matrices that abide to constraint number $3$ and $4$
+are the unitary matrices. This means that the set of unitary matrices and the
+set of valid quantum transformations are exactly the same set.
 
-For this condition to be true, the operator in matrix form $U$ and
-its adjoint $U^(dagger)$ must be one the inverse of the other, that
-is $U^(dagger) U = I$. In other words, the matrix $U$ must be unitary.
+The fact that quantum transformations are unitary has important consequences.
+First, recall from @Unitary-matrices-are-inner-product-invariant that unitary
+matrices are inner product-invariant. This means that measuring a state in
+the original basis and then applying a transformation to the outcome should
+give the same result as applying the transformation first and then measuring
+the resulting state in the transformed basis.
 
-It can be proven that this condition is not only necessary, but also
-sufficient. Therefore, the set of unitary matrices that map an element
-of the Hilbert space to other elements of the same space and the set
-of valid quantum transformations are the same set. Since unitary operators
-preserve the inner product, they map orthonormal bases to orthonormal bases.
-In fact, the converse is true: any linear transformation that maps an
-orthonormal basis to an orthonormal basis is unitary.
+Second, recall from @Product-of-unitary-matrices-is-unitary that the
+product of two unitary matrices is also a unitary matrix. Therefore,
+applying more than one quantum transformation to a quantum state, which
+is equivalent to applying their function composition, will still result
+in a valid quantum state.
 
-Recall that, from @Product-of-unitary-matrices-is-unitary, the product
-of two unitary matrices is also a unitary matrix. Therefore, applying
-more than one quantum transformation to a quantum state will still result
-in a valid quantum state. The tensor product $U_(1) times.circle U_(2)$ is
-a unitary transformation of the space $X_(1) times.circle X_(2)$ if $U_(1)$
-and $U_(2)$ are unitary transformations of $X_(1)$ and $X_(2)$ respectively.
+The tensor product $U_(1) times.circle U_(2)$ is a unitary transformation
+of the space $X_(1) times.circle X_(2)$ if $U_(1)$ and $U_(2)$ are unitary
+transformations of $X_(1)$ and $X_(2)$ respectively.
 
-Any quantum state transformation that acts on only a small number of
-qubits a *quantum gate*. Sequences of quantum gates are called *quantum
-gate arrays* or *quantum circuits*. Given a basic set of quantum gates,
-it is possible to combine them to construct elaborate transformations of
-varying complexity.
+Any quantum state transformation that acts on only a small number of qubits
+is also referred to a *quantum gate*. Sequences of quantum gates are called
+*quantum gate arrays* or *quantum circuits*. Given a basic set of quantum
+gates, it is possible to combine them to construct elaborate transformations
+of varying complexity.
 
 The term "gate" is used to suggest a similarity with the classical logical
 gates, but does not necessarely entail that the physical implementation of
 a quantum transformation has to be a gate in the literal sense. Conceiving
 a quantum transformation as gates has the added advantage of abstracting the
-need to specify a basis when talking about operators.
+need to specify a basis when talking about operators. 
+
+It should also be noted that, whereas classical logical circuits can have
+loops (outputs that are fed back in the circuit as inputs), quantum circuits
+are said to be _acyclic_, meaning that they can't have loops.
 
 Drawing quantum transformations as gates is obiquitous. Transformations
 are represented graphically by boxes, labeled by the transformation
@@ -82,7 +81,8 @@ a line that represents the state of the qubit "flowing" through the circuit.
   [#grid(
     columns: (0.5fr, 0.5fr),
     [#quantum-circuit(
-      lstick($ket(Psi)$), gate($U_(1)$), gate($U_(2)$), midstick($dots$), gate($U_(n)$), rstick($ket(Psi')$)
+      lstick($ket(Psi)$), gate($U_(1)$), gate($U_(2)$), midstick($dots$),
+      gate($U_(n)$), rstick($ket(Psi')$)
     )],
     [$ ket(Psi') = U_(n) dots U_(2) U_(1) ket(Psi) $]
   )],
@@ -168,12 +168,12 @@ to the entire system, that is applying $U$ to the $i$-th qubit
 and applying the identity operator to each of the other qubits
 of the system.
 
-In general, the simplest quantum transformations that acts on more than
-a single qubit at a time are those that can be reduced to the application
-of a transformation to each qubit separately. For example, given the
-transformation $U times.circle V$ that acts on two qubits at the same
-time can be broken down into first applying $U times.circle I$ and then
-applying $I times.circle V$.
+In general, the simplest quantum transformations that acts on more
+than a single qubit at a time are those that can be reduced to the
+application of a transformation to each qubit separately. For example,
+given the transformation $U times.circle V$ that acts on two qubits at
+the same time can be broken down into first applying $U times.circle I$
+and then applying $I times.circle V$.
 
 Since it's not possible to conceive an entangled state simply as the sum
 of its parts, trasformations that act on single qubits cannot influence
@@ -216,12 +216,13 @@ otherwise.
   The starting state is not entangled; the final state is.
 ]
 
-For its analogy with classical control gates, the state of the first qubit
-(the first bit) is also referred to as the *control bit*, whereas the state
-of the second qubit (the second bit) is also referred to as the *target bit*.
-However, this terminology might be misleading, since states expressed in
-different bases than the standard basis might result in the control bit
-becoming the target bit and viceversa, or having both bits changed.
+For its analogy with classical control gates, the state of the first
+qubit (the first bit) is also referred to as the *control bit*, whereas
+the state of the second qubit (the second bit) is also referred to as
+the *target bit*. However, this terminology might be misleading, since
+states expressed in different bases than the standard basis might result
+in the control bit becoming the target bit and viceversa, or having both
+bits changed.
 
 #exercise[
   What happens when a $C_("not")$ gate is applied to the state $ket(+-)$?

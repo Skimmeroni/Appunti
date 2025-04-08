@@ -2,10 +2,22 @@
 
 *Quantum algorithms* are the counterpart to classical algorithms, a set
 of well-defined procedures that use quantum operators instead of classical
-operators. In particular, it is useful to consider Boolean functions and
-to map the state $ket(0)$ of a qubit to the Boolean value $0$ and to map
-the state $ket(1)$ to the Boolean value $1$. Since all functions can be
-expressed as boolean functions, this is not restrictive.
+operators.
+
+Quantum algorithms, as expected, must operate on quantum information
+(elements of an Hilbert space), but real world information is generally
+classical information. Therefore, the first step in constructing a quantum
+algorithm is to device a method of representing classical information as
+quantum information. That is, defining a *quantum embedding*.
+
+The simplest form of quantum embedding is *base embedding*, where classical
+bits are mapped to base states. This means that a binary string $b_(1) b_(2)
+dots b_(n)$ is mapped to the state $ket(b_(1) b_(2) dots b_(n))$. Of course,
+this embedding is only possible if the input is binary, but since all strings
+can be encoded into a binary alphabet in a unique way, theoretically speaking
+this is not restrictive. It should be noted, however, that this embedding
+might be wasteful and/or cumbersome, since to represent $n$ classical bits,
+just as many qubits are needed.
 
 Quantum transformations are carried out by unitary matrices, all having
 a defined inverse. This means that, when presented with an output, it is

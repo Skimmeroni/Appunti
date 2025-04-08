@@ -1,17 +1,5 @@
 #import "../FoundationsQC_definitions.typ": *
 
-#lemma[
-  Given two vector spaces $V$ and $W$, let $O$ be an operator
-  $O: V -> W$. For any two vectors $bold(v) in V$ and $bold(w)
-  in W$, the following holds:
-
-  $ angle.l bold(v), O bold(w) angle.r =
-    (angle.l bold(w), bold(v) angle.r)^(dagger) $
-]
-// #proof[
-//
-// ]
-
 The *conjugate transpose* of a matrix $A$, denoted as $A^(dagger)$, is the
 matrix obtained from transposing $A$ and then applying complex conjugation
 to each element of the resulting matrix:
@@ -48,14 +36,6 @@ $ A^(dagger) = A^(T^(*)) =
 A square matrix $A$ is said to be *Hermitian* if $A^(dagger) = A$. It
 is said to be *unitary* if $A^(dagger) = A^(-1)$.
 
-Any matrix is equivalent to an operator given a fixed basis and vice
-versa, therefore it is also possible to define the conjugate transpose
-of an operator. Since trasposing an operator in matrix form exchanges
-domain and codomain, the conjugate transpose of an operator $O: V -> W$
-is the operator $O^(dagger): W -> V$. The matrix representation of
-$O^(dagger)$ is, as expected, the conjugate transpose of the matrix
-representation of $O$.
-
 #theorem[
   An Hermitian matrix has all real eigenvalues.
 ]
@@ -86,9 +66,11 @@ representation of $O$.
   complex conjugate.
 ]
 
-#lemma[
+#theorem[
   If $A$ and $B$ are two unitary matrices, then $(A B)^(dagger) A B = I$.
-  In other words, the product of two unitary matrices is a unitary matrix.
+  In other words, the product of two (product-conforming) unitary matrices
+  is a unitary matrix or, equivalently, the set of unitary matrices of a
+  certain dimension is closed under multiplication.
 ] <Product-of-unitary-matrices-is-unitary>
 #proof[
   By definition, $A^(dagger) A = I$ and $B^(dagger) B = I$. Then:
@@ -101,17 +83,56 @@ representation of $O$.
     I $
 ]
 
-#lemma[
-  The columns/rows of a unitary matrix form an orthonormal basis of
-  $CC^(n)$ with respect to the inner product.
-]
+#theorem[
+  Let $U$ be a matrix. The following definitions are equivalent (if one
+  is true, the others are as well):
+
+  - $U$ is a unitary matrix;
+  - The columns of $U$ form an orthonormal basis of $CC^(n)$ with
+    respect to the inner product;
+  - The rows of $U$ form an orthonormal basis of $CC^(n)$ with
+    respect to the inner product;
+  - $U$ is $L^(2)$-norm invariant: given any vector $bold(v) in CC^(n)$,
+    $abs(abs(U bold(v))) = abs(abs(bold(v)))$.
+] <Equivalent-definitions-of-unitary-matrix>
 // #proof[
 //
 // ]
 
-The conjugate transpose of an operator is also called its *adjoint operator*.
-If an operator is equal to its adjoint (or equivalently, if its matrix
-representation is Hermitian), it is said to be *self-adjoint*. 
+#lemma[
+  Unitary matrices are inner product-invariant. In other words, given
+  a unitary matrix $U$ and two vectors $bold(u), bold(v) in CC^(n)$,
+  $angle.l U bold(u), U bold(v) angle.r = angle.l bold(u), bold(v) angle.r$.
+] <Unitary-matrices-are-inner-product-invariant>
+// #proof[
+//
+// ]
+
+Recall that, for a fixed basis, each operator can be associated to a
+matrix that, when multiplied to a vector, performs the same action.
+By extension, an operator in matrix form is simply referred to as an
+"operator" as well. 
+
+Since trasposing an operator in matrix form exchanges domain and
+codomain, the conjugate transpose of an operator $O: V -> W$ is
+the operator $O^(dagger): W -> V$. The matrix representation of
+$O^(dagger)$ is, as expected, the conjugate transpose of the
+matrix representation of $O$. The conjugate transpose of an
+operator is also called its *adjoint operator*. If an operator
+is equal to its adjoint (if its matrix representation is Hermitian),
+it is said to be *self-adjoint*. 
+
+//#lemma[
+//  Given two vector spaces $V$ and $W$, let $O$ be an operator
+//  $O: V -> W$. For any two vectors $bold(v) in V$ and $bold(w)
+//  in W$, the following holds:
+//
+//  $ angle.l bold(v), O bold(w) angle.r =
+//    (angle.l O bold(w), bold(v) angle.r)^(dagger) $
+//]
+// #proof[
+//
+// ]
 
 Hermitian operators define a unique orthogonal subspace decomposition
 called *eigenspace decomposition*. Moreover, for every such decomposition,

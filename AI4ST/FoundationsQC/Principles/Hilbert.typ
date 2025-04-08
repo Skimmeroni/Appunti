@@ -76,7 +76,8 @@ vector $bold(v) times.circle bold(w)$ constructed as:
 
 $ bold(v) times.circle bold(w) =
   mat(v_(1); dots.v; v_(n)) times.circle mat(w_(1); dots.v; w_(m)) =
-  mat(v_(1)w_(1), dots, v_(1)w_(m), dots, v_(n)w_(1), dots, v_(n)w_(m))^(T) $
+  mat(v_(1) mat(w_(1); dots.v; w_(m)); dots.v; v_(n) mat(w_(1); dots.v; w_(m))) =
+  mat(v_(1)w_(1); dots.v; v_(1)w_(m); dots.v; v_(n)w_(1); dots.v; v_(n)w_(m)) $
 
 The tensor product between vectors satisfies the following relations:
 
@@ -87,31 +88,41 @@ The tensor product between vectors satisfies the following relations:
    bold(v_(1)) times.circle (a bold(v_(2))) =
    a (bold(v_(1)) times.circle bold(v_(2)))$
 
-When there is no ambiguity, the tensor product of two vectors $bold(v)$ and
-$bold(w)$ is simply denoted as $bold(v) bold(w)$.
-
 #exercise[
   What is the tensor product of the two following vectors?
 
   #grid(
     columns: (0.5fr, 0.5fr),
-    [$ bold(v) = mat(frac(1, sqrt(5)); -frac(2, sqrt(5))) $],
-    [$ bold(w) = mat(-frac(1, sqrt(10)); frac(3, sqrt(10))) $]
+    [$ bold(v) = mat(1; 7) $],
+    [$ bold(w) = mat(3; 10) $]
   )
 ]
 #solution[
   $ bold(v) times.circle bold(w) =
-    mat(frac(1, sqrt(5))  (-frac(1, sqrt(10))),
-        frac(1, sqrt(5))  frac(3, sqrt(10)),
-        -frac(2, sqrt(5)) (-frac(1, sqrt(10))),
-        -frac(2, sqrt(5)) frac(3, sqrt(10)))^(T) =
-    mat(-frac(1, 5 sqrt(2)),
-        frac(3, 5 sqrt(2)),
-        -frac(2, 5 sqrt(2)),
-        -frac(6, 5 sqrt(2)))^(T) $
+    mat(1 dot 3; 1 dot 10; 7 dot 3; 7 dot 10) =
+    mat(3; 10; 21; 70) $
 ]
 
-The *tensor product* of two vector spaces $V$ and $W$, having bases
+The tensor product can be extended to matrices, generating a block matrix:
+
+$ bold(A) times.circle bold(B) =
+  mat(a_(1, 1), a_(1, 2), dots, a_(1, n);
+      a_(2, 1), a_(2, 2), dots, a_(2, n);
+      dots.v, dots.v, dots.down, dots.v;
+      a_(m, 1), a_(m, 2), dots, a_(m, n))
+  times.circle bold(B) =
+  mat(a_(1, 1) bold(B), a_(1, 2) bold(B), dots, a_(1, n) bold(B);
+      a_(2, 1) bold(B), a_(2, 2) bold(B), dots, a_(2, n) bold(B);
+      dots.v, dots.v, dots.down, dots.v;
+      a_(m, 1) bold(B), a_(m, 2) bold(B), dots, a_(m, n) bold(B)) $
+
+By definition, $dim(bold(A) times.circle bold(B)) = dim(A) dim(B)$.
+It should be noted that the tensor product between matrices, like
+the row-column product, is not commutative, but unlike the row-column
+product it requires no assumption on the dimension of the matrices to
+be defined.
+
+The tensor product of two vector spaces $V$ and $W$, having bases
 $A = {bold(v_(1)), bold(v_(2)), dots, bold(v_(n))}$ and $B = {bold(w_(1)),
 bold(w_(2)), dots, bold(w_(m))}$ respectively, is a $n m$-dimensional
 vector space denoted as $V times.circle W$.
