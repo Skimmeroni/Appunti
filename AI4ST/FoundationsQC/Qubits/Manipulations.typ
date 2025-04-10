@@ -1,13 +1,13 @@
 #import "../FoundationsQC_definitions.typ": *
 
-Manipulating the state of a qubit is performed through a *quantum
-transformation*. A quantum transformation is simply an operator
-that, when applied to a valid quantum state, results in a new
+The manipulation of the state of an arbitrary-sized qubit system is done
+through *quantum transformations*. A quantum transformation is simply an
+operator that, when applied to a valid quantum state, results in a new
 quantum state that is still valid.
 
-In order for this requirement to be respected, before introducing
-some examples of quantm transformations, it is necessary to clearly
-state what constraint a quantum transformation must abide to:
+In order for this requirement to be followed, before introducing some
+examples of quantum transformations, it is necessary to clearly state
+what constraint a quantum transformation must abide to:
 
 + The Hilbert space of the possible qubit states should be the same
   before and after applying a transformation. A quantum transformation
@@ -52,15 +52,12 @@ applying more than one quantum transformation to a quantum state, which
 is equivalent to applying their function composition, will still result
 in a valid quantum state.
 
-The tensor product $U_(1) times.circle U_(2)$ is a unitary transformation
-of the space $X_(1) times.circle X_(2)$ if $U_(1)$ and $U_(2)$ are unitary
-transformations of $X_(1)$ and $X_(2)$ respectively.
-
 Any quantum state transformation that acts on only a small number of qubits
 is also referred to a *quantum gate*. Sequences of quantum gates are called
 *quantum gate arrays* or *quantum circuits*. Given a basic set of quantum
 gates, it is possible to combine them to construct elaborate transformations
-of varying complexity.
+of varying complexity. For these reasons, the term "gate" and "transformation"
+tend to be used interchangeably.
 
 The term "gate" is used to suggest a similarity with the classical logical
 gates, but does not necessarely entail that the physical implementation of
@@ -143,37 +140,79 @@ Another useful operator is the *Hadamard operator*, denoted as $H$:
 
 #grid(
   columns: (0.75fr, 0.25fr),
-  [$ H = frac(sqrt(2), 2) (ketbra(0, 0) + ketbra(1, 0) + ketbra(0, 1) + ketbra(1, 1)) =
+  [$ H = frac(sqrt(2), 2) (ketbra(0, 0) + ketbra(1, 0) + ketbra(0, 1) - ketbra(1, 1)) =
   frac(sqrt(2), 2) mat(1, 1; 1, -1) $],
   [#quantum-circuit(lstick(""), gate($H$), rstick(""))]
 )
 
-Which produces an even superposition of $ket(0)$ and $ket(1)$ from either
-of the standard basis elements:
+#exercise[
+  What happens when the Hadamard operator is applied to the states
+  $ket(0), ket(1), ket(+), ket(-)$?
+]
+#solution[
+  $ H ket(0) &=
+    frac(sqrt(2), 2) (ketbra(0, 0) + ketbra(1, 0) + ketbra(0, 1) - ketbra(1, 1)) ket(0) =
+    frac(sqrt(2), 2) (ket(0) + ket(1)) =
+    ket(+) \
+    H ket(1) &=
+    frac(sqrt(2), 2) (ketbra(0, 0) + ketbra(1, 0) + ketbra(0, 1) - ketbra(1, 1)) ket(1) =
+    frac(sqrt(2), 2) (ket(0) - ket(1)) =
+    ket(-) \
+    H ket(+) &=
+    frac(sqrt(2), 2) (ketbra(0, 0) + ketbra(1, 0) + ketbra(0, 1) - ketbra(1, 1)) frac(sqrt(2), 2) (ket(0) + ket(1)) =
+    frac(1, 2) (2 ket(0)) = ket(0) \
+    H ket(-) &=
+    frac(sqrt(2), 2) (ketbra(0, 0) + ketbra(1, 0) + ketbra(0, 1) - ketbra(1, 1)) frac(sqrt(2), 2) (ket(0) - ket(1)) =
+    frac(1, 2) (2 ket(1)) = ket(1) $
+]
 
-#grid(
-  columns: (0.25fr, 0.25fr, 0.25fr, 0.25fr),
-  [$ H ket(0) = ket(+) $],
-  [$ H ket(0) = ket(-) $],
-  [$ H ket(+) = ket(0) $],
-  [$ H ket(-) = ket(1) $]
-)
+//Which produces an even superposition of $ket(0)$ and $ket(1)$ from either
+//of the standard basis elements:
+//
+//#grid(
+//  columns: (0.25fr, 0.25fr, 0.25fr, 0.25fr),
+//  [$ H ket(0) = ket(+) $],
+//  [$ H ket(1) = ket(-) $],
+//  [$ H ket(+) = ket(0) $],
+//  [$ H ket(-) = ket(1) $]
+//)
 
-Extending quantum transformations that act on single qubits from
-an $n$ qubit system is trivial. As a matter of fact, applying a
-transformation $U$ to the $i$-th qubit from an $n$ qubit system
-is equivalent to applying $I times.circle dots times.circle I
-times.circle U times.circle I times.circle dots times.circle I$
-to the entire system, that is applying $U$ to the $i$-th qubit
-and applying the identity operator to each of the other qubits
-of the system.
+The previous quantum transformations acted on single qubits, but
+extending the application of quantum transformations to more than
+one qubit at once is trivial. Suppose $U$ is a unitary transformation
+that acts on a qubit: the unitary transformation $U^(times.circle n) =
+U times.circle U times.circle dots times.circle U$ acts on $n$ qubits
+at the same.
 
-In general, the simplest quantum transformations that acts on more
-than a single qubit at a time are those that can be reduced to the
-application of a transformation to each qubit separately. For example,
-given the transformation $U times.circle V$ that acts on two qubits at
-the same time can be broken down into first applying $U times.circle I$
-and then applying $I times.circle V$.
+In general, given $n$ single-qubit transformations $U_(1), U_(2), dots,
+U_(n)$, not necessarely identical, the unitary transformation $U_(1)
+times.circle U_(2) times.circle dots times.circle U_(n)$ applies $U_(1)$
+to the first qubit state, $U_(2)$ to the second qubit state, and so on,
+all at the same time. This also allows to have composite transformations
+that act on certain qubit states and ignore others, since applying the
+identity operator to a qubit state is equivalent to doing nothing.
+
+#exercise[
+  Consider a $3$-qubit state. Apply a Hadamard transformation to the first
+  qubit state and a $Y$ transformation on the third qubit state. How would
+  the resulting matrix look like?
+]
+#solution[
+  $ frac(sqrt(2), 2) mat(1, 1; 1, -1) times.circle
+    mat(1, 0; 0, 1) times.circle mat(0, -i; i, 0) =
+    frac(sqrt(2), 2) mat(1, 0, 1, 0; 0, 1, 0, 1; 1, 0, -1, 0; 0, 1, 0, -1)
+    times.circle mat(0, -i; i, 0) =
+    mat(0, -i, 0, 0, 0, -i, 0, 0;
+        i, 0, 0, 0, i, 0, 0, 0;
+        0, 0, 0, -i, 0, 0, 0, -i;
+        0, 0, i, 0, 0, 0, i, 0;
+        0, -i, 0, 0, 0, i, 0, 0;
+        i, 0, 0, 0, -i, 0, 0, 0;
+        0, 0, 0, -i, 0, 0, 0, i;
+        0, 0, i, 0, 0, 0, -i, 0
+        )
+    $
+]
 
 Since it's not possible to conceive an entangled state simply as the sum
 of its parts, trasformations that act on single qubits cannot influence
