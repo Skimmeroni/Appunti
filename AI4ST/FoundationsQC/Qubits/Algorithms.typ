@@ -145,40 +145,37 @@ is depicted as a quantum circuit as follows:
 #align(
 	center,
 	[#quantum-circuit(scale: 150%,
-	                  lstick($ket(0)$), nwire($n$), gate($H$),
-	                  mqgate($U_(f)$, n: 2), gate($H$), meter(),
-	                  [\ ],
-	                  lstick($ket(1)$), gate($H$))
+	                  lstick($ket(0)^(times.circle n)$, n: 4), 1, gate($H$), mqgate($U_(f)$, n: 5), gate($H$), meter(), [\ ],
+	                  1, 1, gate($H$), 1, gate($H$), meter(), [\ ],
+	                  setwire(0), 1, 1, midstick($dots.v$), 1, midstick($dots.v$), midstick($dots.v$), [\ ],
+	                  1, 1, gate($H$), 1, gate($H$), meter(), [\ ], 
+	                  lstick($ket(0)$), gate($X$), gate($H$), 1)
 	]
 )
 
-The circuit starts with $n$ qubits initialized in the state $ket(0)$
-and a single auxiliary qubit, called *ancillary qubit*, in state $ket(1)$.
-As for the classical gates case, the ancillary qubit is necessary for the
-quantum computation to be reversible. The starting state of the entire
-system can be then written as $ket(000 dots 01)$.
+The circuit starts with $n + 1$ qubits initialized in the state $ket(0)$.
+The last extra qubit, called *ancillary qubit*, is necessary for the quantum
+computation to be reversible. The starting state of the entire system can be
+then written as $ket(000 dots 0)$.
 
-The first operation encountered is an Hadamard gate applied on the ancillary
-qubit, while leaving the other $n$ qubits unchanged:
+The last qubit is changed from $ket(0)$ to $ket(1)$ applying an $X$ gate,
+leaving the other qubits unchanged:
 
 $ ket(Psi_(0)) =
-  (I times.circle I times.circle dots times.circle I times.circle H) ket(000 dots 01) =
-  (I ket(0)) times.circle (I ket(0)) times.circle dots times.circle (H ket(1)) =
-  ket(000 dots 0-) $
+  (I times.circle I times.circle dots times.circle I times.circle X) ket(000 dots 0) =
+  (I ket(0)) times.circle (I ket(0)) times.circle dots times.circle (X ket(0)) =
+  ket(000 dots 01) $
 
-Then, an Hadamard gate is applied to the $n$ qubits, leaving the
-ancillary bit unchanged:
+Then, an Hadamard gate is applied to all the qubits:
 
 $ ket(Psi_(1)) &=
-  (H times.circle H times.circle dots times.circle H times.circle I) ket(Psi_(0)) =
-  (H ket(0)) times.circle (H ket(0)) times.circle dots times.circle (I ket(-)) = \
+  (H times.circle H times.circle dots times.circle H) ket(Psi_(0)) =
+  (H ket(0)) times.circle (H ket(0)) times.circle dots times.circle (H ket(1)) = \
   &= (frac(1, sqrt(2)) (ket(0) + ket(1))) times.circle 
      (frac(1, sqrt(2)) (ket(0) + ket(1))) times.circle 
      dots times.circle
-     (frac(1, sqrt(2)) (ket(0) + ket(1))) times.circle ket(-) = \
-  &= frac(1, sqrt(2^(n))) sum_(x in \{0, 1\}^(n)) ket(x) ket(-) =
-  frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) ket(x) (ket(0) - ket(1))
-  $
+     (frac(1, sqrt(2)) (ket(0) - ket(1))) = \
+  &= frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) ket(x) (ket(0) - ket(1)) $
 
 It is now possible to apply $U_(f): ket(x\, y) -> ket(x\, y or.dot f(x))$
 to the state:
@@ -238,18 +235,18 @@ $ H ket(x_(1) x_(2) dots x_(n)) &=
   frac(1, sqrt(2)) (ket(0) + (-1)^(x_(2)) ket(1)) times.circle
   dots times.circle
   frac(1, sqrt(2)) (ket(0) + (-1)^(x_(n)) ket(1)) = \
-  &= frac(1, sqrt(2^(n))) sum_(j in \{0, 1\}^(n)) (-1)^(x dot.circle j) ket(j) $
+  &= frac(1, sqrt(2^(n))) sum_(j in \{0, 1\}^(n)) (-1)^(angle.l x\, j angle.r) ket(j) $
 
-Where $dot.circle$ denotes the inner product. Substituting it back:
+Where $angle.l angle.r$ denotes the inner product. Substituting it back:
 
 $ ket(Psi_(3)) &=
-  frac(1, sqrt(2^(n))) sum_(x in \{0, 1\}^(n)) (-1)^(f(x)) frac(1, sqrt(2^(n))) sum_(j in \{0, 1\}^(n)) (-1)^(x dot.circle j) ket(j) =
-  frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(f(x)) sum_(j in \{0, 1\}^(n)) (-1)^(x dot.circle j) ket(j) = \
-  &= frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) sum_(j in \{0, 1\}^(n)) (-1)^(f(x) + x dot.circle j) ket(j) $
+  frac(1, sqrt(2^(n))) sum_(x in \{0, 1\}^(n)) (-1)^(f(x)) frac(1, sqrt(2^(n))) sum_(j in \{0, 1\}^(n)) (-1)^(angle.l x\, j angle.r) ket(j) =
+  frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(f(x)) sum_(j in \{0, 1\}^(n)) (-1)^(angle.l x\, j angle.r) ket(j) = \
+  &= frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) sum_(j in \{0, 1\}^(n)) (-1)^(f(x) + angle.l x\, j angle.r) ket(j) $
 
 Applying a measurement process with respect to the state $ket(000 dots 0)$:
 
-$ frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) sum_(j in \{0\}^(n)) (-1)^(f(x) + x dot.circle 0) ket(0) =
+$ frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) sum_(j in \{0\}^(n)) (-1)^(f(x) + angle.l x\, 0 angle.r) ket(0) =
   frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(f(x) + x dot 0) ket(0) =
   frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(f(x)) ket(0) $
 
@@ -328,22 +325,25 @@ This means that the computational complexity of a classical algorithm for
 this problem is $O(n)$.
 
 A quantum algorithm known as *Bernstein-Vazirani algorithm*, whose quantum
-circuit is presented below, can solve the problem faster:
+circuit is presented below, can solve the problem faster. Notice how the
+circuit is identical to the one presented for the Deutsch-Josza Algorithm,
+except for the function encoded in the $U_(f)$ gate:
 
 #align(
 	center,
 	[#quantum-circuit(scale: 150%,
-	                  lstick($ket(0)$), 1, gate($H$), mqgate($U_(f)$, n: 5), gate($H$), meter(), [\ ],
-	                  lstick($ket(0)$), 1, gate($H$), 1, gate($H$), meter(), [\ ],
-	                  setwire(0), lstick($dots.v$), 1, 1, 1, 1, 1, [\ ],
-	                  lstick($ket(0)$), 1, gate($H$), 1, gate($H$), meter(), [\ ], 
+	                  lstick($ket(0)^(times.circle n)$, n: 4), 1, gate($H$), mqgate($U_(f)$, n: 5), gate($H$), meter(), [\ ],
+	                  1, 1, gate($H$), 1, gate($H$), meter(), [\ ],
+	                  setwire(0), 1, 1, midstick($dots.v$), 1, midstick($dots.v$), midstick($dots.v$), [\ ],
+	                  1, 1, gate($H$), 1, gate($H$), meter(), [\ ], 
 	                  lstick($ket(0)$), gate($X$), gate($H$), 1)
 	]
 )
 
-The algorithm starts with $n$ qubits (each representing one of the bits of
-the string) prepared in the $ket(0)$ state. Then, the last qubit is changed
-from $ket(0)$ to $ket(1)$, leaving the other qubits unchanged:
+The algorithm starts with $n + 1$ qubits in state $ket(0)$, where each of
+the first $n$ qubits represents one of the bits of the string and the last
+qubit is an ancillary qubit. The last qubit is changed from $ket(0)$ to
+$ket(1)$, leaving the other qubits unchanged:
 
 $ ket(Psi_(0)) =
   (I times.circle I times.circle dots times.circle I times.circle X) ket(000 dots 0) =
@@ -358,9 +358,8 @@ $ ket(Psi_(1)) &=
   &= (frac(1, sqrt(2)) (ket(0) + ket(1))) times.circle 
      (frac(1, sqrt(2)) (ket(0) + ket(1))) times.circle 
      dots times.circle
-     (frac(1, sqrt(2)) (ket(0) + ket(1))) times.circle ket(-) = \
-  &= frac(1, sqrt(2^(n))) sum_(x in \{0, 1\}^(n)) ket(x) ket(-) =
-  frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) ket(x) (ket(0) - ket(1)) $
+     (frac(1, sqrt(2)) (ket(0) - ket(1))) = \
+  &= frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) ket(x) (ket(0) - ket(1)) $
 
 It is now possible to apply $U_(f): ket(x\, y) -> ket(x\, y or.dot f(x))$
 to the state:
@@ -372,20 +371,20 @@ $ ket(Psi_(2)) &=
   &= frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) U_(f) ket(x) ket(0) - U_(f) ket(x) ket(1) =
   frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) ket(x) ket(0 or.dot f(x)) - ket(x) ket(1 or.dot f(x)) = \
   &= frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) (-1)^(f(x)) ket(x) (ket(0) - ket(1)) =
-  frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) (-1)^(x dot.circle s) ket(x) (ket(0) - ket(1)) $
+  frac(1, sqrt(2^(n + 1))) sum_(x in \{0, 1\}^(n)) (-1)^(angle.l x\, s angle.r) ket(x) (ket(0) - ket(1)) $
 
 Discarding the last qubit and applying Hadamard again:
 
 $ ket(Psi_(3)) &=
   H ket(Psi_(2)) =
-  H frac(1, sqrt(2^(n))) sum_(x in \{0, 1\}^(n)) (-1)^(x dot.circle s) ket(x) =
-  frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) sum_(j in \{0, 1\}^(n)) (-1)^(x dot.circle s or.dot x dot.circle j) ket(j) = \
-  &= frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) sum_(j in \{0, 1\}^(n)) (-1)^(x dot.circle (s or.dot j)) ket(j) $
+  H frac(1, sqrt(2^(n))) sum_(x in \{0, 1\}^(n)) (-1)^(angle.l x\, s angle.r) ket(x) =
+  frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) sum_(j in \{0, 1\}^(n)) (-1)^(angle.l x\, s angle.r or.dot angle.l x\, j angle.r) ket(j) = \
+  &= frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) sum_(j in \{0, 1\}^(n)) (-1)^(angle.l x\, (s or.dot j) angle.r) ket(j) $
 
 The amplitude of the state $ket(s)$ is:
 
-$ frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(x dot.circle (s or.dot s)) =
-  frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(x dot.circle 000 dots 0) =
+$ frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(angle.l x\, (s or.dot s) angle.r) =
+  frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(angle.l x\, 000 dots 0 angle.r) =
   frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) (-1)^(0) =
   frac(1, 2^(n)) sum_(x in \{0, 1\}^(n)) 1 =
   frac(1, cancel(2^(n))) cancel(2^(n)) =
@@ -421,24 +420,14 @@ is presented below, can solve the problem faster:
 #align(
 	center,
 	[#quantum-circuit(scale: 150%,
-	                  lstick($ket(0)$), gate($H$),
+	                  lstick($ket(0)^(times.circle n)$, n: 4), gate($H$),
 	                  mqgate($U_(f)$, n: 4), mqgate($D$, n: 4),
 	                  midstick($dots$),
 	                  mqgate($U_(f)$, n: 4), mqgate($D$, n: 4),
-	                  meter(),
-	                  [\ ],
-	                  lstick($ket(0)$), gate($H$),
-	                  1, 1,
-	                  midstick($dots$),
-	                  1, 1,
-	                  meter(),
-	                  [\ ],
-	                  setwire(0), lstick($dots.v$), 1, 1, 1, 1, 1, 1, 1, [\ ],
-	                  lstick($ket(0)$), gate($H$),
-	                  1, 1,
-	                  midstick($dots$),
-	                  1, 1, 
-	                  meter())
+	                  meter(), [\ ],
+	                  1, gate($H$), 1, 1, midstick($dots$), 1, 1, meter(), [\ ],
+	                  setwire(0), 1, midstick($dots.v$), 1, 1, 1, 1, 1, midstick($dots.v$), [\ ],
+	                  1, gate($H$), 1, 1, midstick($dots$), 1, 1, meter())
 	]
 )
 
