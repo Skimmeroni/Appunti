@@ -72,7 +72,13 @@ $ket(v)$ to $s_(1)$. To construct a projector, it is sufficient to take the
 outer product of a vector with itself. As a matter of fact, a projector
 simply "extracts" the "contribution" given by a basis to the state: the
 product between said basis and the component of the state with respect to
-the basis.
+the basis. Given one of the subspaces $S$ and a basis $\{ket(alpha_(1)),
+dots, ket(alpha_(s))\}$ for this subspace, the projector $P_(S)$ that
+returns the contribution given by $\{ket(alpha_(1)), dots, ket(alpha_(s))\}$
+to $ket(Psi)$ is simply given by:
+
+$ P_(S) = sum_(i = 1)^(s) ketbra(alpha_(i), alpha_(i)) =
+  ketbra(alpha_(1), alpha_(1)) + dots + ketbra(alpha_(s), alpha_(s)) $
 
 In general, given a state space $V$, for any direct sum decomposition
 $V = S_(1) plus.circle dots plus.circle S_(k)$ into orthogonal subspaces,
@@ -82,83 +88,147 @@ $S_(i)$. Framed this way, a measuring device with direct sum decomposition
 $V = S_(1) plus.circle dots plus.circle S_(k)$ acting on a state $ket(Psi)$
 results in the state
 
-$ ket(phi.alt_(i)) = frac(P_(i) ket(Psi), abs(P_(i) ket(Psi))) $
+$ ket(phi.alt) = frac(P_(i) ket(Psi), abs(abs(P_(i) ket(Psi)))) $
 
-With probability $abs(P_(i) ket(Psi))^(2)$. Given one of the subspaces
-$S$ and a basis $\{ket(alpha_(1)), dots, ket(alpha_(s))\}$ for this
-subspace, the projector $P_(S)$ that returns the contribution given
-by $\{ket(alpha_(1)), dots, ket(alpha_(s))\}$ to $ket(Psi)$ is simply
-given by:
+With probability $abs(abs(P_(i) ket(Psi)))^(2)$. The ratio is necessary
+to (re)normalize the resulting vector in response to the measurement. A
+projector is well-defined, since applying a projector two times results
+in no difference.
 
-$ P_(S) = sum_(i = 1)^(s) ketbra(alpha_(i), alpha_(i)) =
-  ketbra(alpha_(1), alpha_(1)) + dots + ketbra(alpha_(s), alpha_(s)) $
-
-Indeed, since the base vectors are all orthogonal, applying $P_(S)$ to
-a generic state $ket(Psi)$ nulls all contributions given by basis absent
-in $S$. This also means that a projector is well-defined, since applying
-a projector two times results in no difference. Note that applying a
-projector to a state might not return a normalized vector.
-
-#exercise[
-  Consider the two-qubit state $ket(Psi) = frac(1, 8) ket(00) +
-  frac(sqrt(7), 8) ket(01) + frac(sqrt(7), 8) ket(10) + frac(7, 8)
-  ket(11)$ and the subspace spanned by $\{ket(00), ket(01)\}$. What
-  is the projector with respect to the basis? What is its effect on
-  $ket(Psi)$?
-]
-#solution[
-  The projector with respect to $S$ is given by $P_(S) = ketbra(00, 00)
-  + ketbra(01, 01)$. Applying to $ket(Psi)$ gives:
-
-  $ P_(S) ket(Psi) = (ketbra(00, 00) + ketbra(01, 01)) (frac(1, 8) ket(00) +
-    frac(sqrt(7), 8) ket(01) + frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11)) =
-    frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01) $
-
-  Note how this state is not normalized. Note also how applying $P_(S)$ to
-  the result does not change the state:
-
-  $ P_(S) (P_(S) ket(Psi)) =
-    (ketbra(00, 00) + ketbra(01, 01)) (frac(1, 8) ket(00) +
-    frac(sqrt(7), 8) ket(01)) = frac(1, 8) ket(00) braket(00, 00) +
-    frac(sqrt(7), 8) ket(00) cancel(braket(00, 01)) + \
-    frac(1, 8) ket(01) cancel(braket(01, 00)) +
-    frac(sqrt(7), 8) ket(01) braket(01, 01) =
-    frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01) =
-    P_(S) ket(Psi) $
-]
+When a measuring device with associated direct sum decomposition V =
+$S_(1) plus.circle dots plus.circle S_(k)$ interacts with an $n$-qubit
+system in state $ket(Psi)$, the interaction changes the state to one
+entirely contained within one of the subspaces, and chooses the subspace
+with probability equal to the square of the absolute value of the amplitude
+of the component of $ket(Psi)$ in that subspace.
 
 Any projector is not only a projector in the mathematical sense, but is also
-self-ajoint. It is therefore easy to compute $abs(P_(S) ket(Psi))^(2)$:
+self-ajoint. It is therefore easy to compute $abs(abs(P_(S) ket(Psi)))^(2)$:
 
-$ abs(P_(S) ket(Psi))^(2) =
+$ abs(abs(P_(S) ket(Psi)))^(2) =
   (P_(S) ket(Psi))^(dagger) P_(S) ket(Psi) =
   braket(Psi|P_(S), Psi) $
 
 #exercise[
-  Consider the state $ket(Psi) = a_(00) ket(00) + a_(01) ket(01) +
-  a_(10) ket(10) + a_(11) ket(11)$ and a decomposition $S_(00) plus.circle
-  S_(01) plus.circle S_(10) plus.circle S_(11)$. Consider the projector
-  $P_(01)$ and describe the assigned measurement.
+  Consider the two-qubit state $ket(Psi) = frac(1, 4) ket(00) +
+  frac(1, 2) ket(01) + frac(1, 2) ket(10) + frac(sqrt(7), 4) ket(11)$
+  and the subspace decomposition $S plus.circle S^(perp)$, where
+  $S = "span"\{ket(00), ket(01), ket(10)\}$. What is the projector
+  with respect to this subspace? Which is the state reached after
+  measurement? With which probability?
 ]
 #solution[
-  Applying the projection $P_(01)$ to $ket(Psi)$ gives:
+  The projector associated to $S$ is $P_(S) = ketbra(00, 00) +
+  ketbra(01, 01) + ketbra(10, 10)$. Applying the projector to
+  $ket(Psi)$ gives:
+  
+  $ P_(S) ket(Psi) &=
+    (ketbra(00, 00) + ketbra(01, 01) + ketbra(10, 10))
+    (frac(1, 4) ket(00) + frac(1, 2) ket(01) + frac(1, 2) ket(10) + frac(sqrt(7), 4) ket(11)) = \
+    &= frac(1, 4) ket(00) braket(00, 00) + frac(1, 2) ket(00) braket(00, 01) +
+    frac(1, 2) ket(00) braket(00, 10) + frac(sqrt(7), 4) ket(00) braket(00, 11) +
+    frac(1, 4) ket(01) braket(01, 00) + \
+    &= frac(1, 2) ket(01) braket(01, 01) + frac(1, 2) ket(01) braket(01, 10) +
+    frac(sqrt(7), 4) ket(01) braket(01, 11) + frac(1, 4) ket(10) braket(10, 00) +
+    frac(1, 2) ket(10) braket(10, 01) + \
+    &= frac(1, 2) ket(10) braket(10, 10) + frac(sqrt(7), 4) ket(10) braket(10, 11) =
+    frac(1, 4) ket(00) + frac(1, 2) ket(01) + frac(1, 2) ket(10) $
 
-  $ P_(01) ket(Psi) &=
-    ketbra(01, 01) (a_(00) ket(00) + a_(01) ket(01) + a_(10) ket(10) +
-    a_(11) ket(11)) = \
-    &= a_(00) ket(01) braket(01, 00) + a_(01) ket(01) braket(01, 01) +
-    a_(10) ket(01) braket(01, 10) + a_(11) ket(01) braket(01, 11) =
-    a_(01) ket(01) $
+  Computing its Euclidean norm:
 
-  The state $frac(P_(01) ket(Psi), abs(P_(01) ket(Psi)))$ is measured with
-  probability:
+  $ abs(abs(P_(S) ket(Psi))) =
+    abs(abs(frac(1, 4) ket(00) + frac(1, 2) ket(01) + frac(1, 2) ket(10))) =
+    sqrt((frac(1, 4))^(2) + (frac(1, 2))^(2) + (frac(1, 2))^(2)) =
+    sqrt(frac(9, 16)) =
+    frac(3, 4) $
 
-  $ abs(P_(01) ket(Psi))^(2) =
-    braket(Psi|P_(01), Psi) =
-    bra(Psi) (ketbra(01, 01)) ket(Psi) =
-    braket(Psi, 01) braket(01, Psi) =
-    a_(01)^(dagger) a_(01) =
-    abs(a_(01))^(2) $
+  The new state reached with respect to this measurement process is:
+
+  $ ket(phi.alt) =
+    frac(P_(S) ket(Psi), abs(abs(P_(S) ket(Psi)))) = 
+    frac(display(frac(1, 4)) ket(00) + display(frac(1, 2)) ket(01) + display(frac(1, 2)) ket(10),
+         display(frac(3, 4))) =
+    frac(1, 3) ket(00) + frac(2, 3) ket(01) + frac(2, 3) ket(10) $
+
+  With probability:
+
+  $ abs(abs(P_(S) ket(Psi))) =
+    braket(Psi|P_(S), Psi) = 
+    (frac(3, 4))^(2) =
+    frac(9, 16) $
+]
+
+As a matter of fact, the observation that any device has an associated
+direct sum decomposition is just a generalization of the single-qubit
+case. Every device measuring a single-qubit system has an associated
+orthonormal basis ${ket(v_(1)), ket(v_(2))}$ for the state space $V$
+of the system, having dimension $2$. Each of these vectors generate a
+one-dimensional subspace, $S_(1)$ and $S_(2)$, consisting of all $alpha
+ket(v_(1))$ and $beta ket(v_(2))$ respectively, with $alpha, beta in CC$,
+and $V = S_(1) plus.circle S_(2)$. Furthermore, the only nontrivial (with
+no subspaces of dimension $0$) possible decompositions of $V$ are the ones
+into two subspaces of dimension $1$, and any choice of unit length vectors,
+one from each of the subspaces, yields an orthonormal basis.
+
+#exercise[
+  Rephrase the measurement of the single-qubit state $ket(Psi) =
+  frac(sqrt(2), 2) ket(0) + frac(sqrt(2), 2) ket(1)$ under this
+  formalism.
+]
+#solution[
+  Let $V$ be the vector space associated with said single-qubit system.
+  A device that measures a qubit in the standard basis has associated the
+  direct sum decomposition:
+
+  $ V = S_(1) plus.circle S_(2) =
+    "span"\{ket(0)\} plus.circle "span"\{ket(1)\} =
+    "span"\{ket(0), ket(1)\} $
+
+  The state $ket(Psi)$ measured by such a device will be $ket(0)$ with
+  probability $abs(frac(sqrt(2), 2))^(2) = frac(1, 2)$, the amplitude
+  of $ket(Psi)$ in the subspace $S_(1)$, and $ket(1)$ with probability
+  $abs(frac(sqrt(2), 2))^(2) = frac(1, 2)$, the amplitude of $ket(Psi)$
+  in the subspace $S_(2)$.
+]
+
+This formalism allows one to construct measurements that don't simply
+refer to one or more base states.
+
+#exercise[
+  Consider the $2$-qubit state $ket(Psi) = frac(1, 8) ket(00) +
+  frac(sqrt(7), 8) ket(01) + frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11)$.
+  What is the probability of observing the first qubit in state $ket(0)$?
+]
+#solution[
+  Measuring the first qubit in the state $ket(0)$ is equivalent to measuring
+  the overall system in a state that is either $ket(00)$ or $ket(01)$. Let
+  $V$ be the vector space associated with said $2$-qubit system. A device
+  that measures the first qubit in the standard basis has associated the
+  direct sum decomposition:
+
+  $ V &= S plus.circle S^(perp) =
+    (ket(0) times.circle "span"\{ket(0), ket(1)\}) plus.circle
+    (ket(1) times.circle "span"\{ket(0), ket(1)\}) =
+    "span"\{ket(00), ket(01)\} plus.circle "span"\{ket(10), ket(11)\} = \
+    &= "span"\{ket(00), ket(01), ket(10), ket(11)\} $
+
+  The projector associated to $S$ is then $P_(S) = ketbra(00, 00) +
+  ketbra(01, 01)$. Applying the projector to $ket(Psi)$ gives:
+
+  $ P_(S) ket(Psi) =
+    (ketbra(00, 00) + ketbra(01, 01))(frac(1, 8) ket(00) +
+     frac(sqrt(7), 8) ket(01) + frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11)) =
+    frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01) $
+
+  Which means that the probability of measuring the first qubit in the state
+  $ket(0)$ is:
+
+  $ abs(abs(P_(S) ket(Psi))) =
+    braket(Psi|P_(S), Psi) =
+    abs(abs(frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01)))^(2) =
+    (frac(1, 8))^(2) + (frac(sqrt(7), 8))^(2) =
+    frac(1, 64) + frac(7, 64) = 
+    frac(1, 8) $
 ]
 
 Recall that, for any Hermitian operator, @Eigenspace-decomposition

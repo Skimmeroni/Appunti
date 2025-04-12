@@ -280,119 +280,18 @@ since the chosen basis plays no role in the definition of entanglement
 (even though some bases might be more comfortable than others when working
 with entangled states).
 
-In the first section, the issue of measuring the state of a single-qubit
-system was introduced. Measuring the state of a $n$-qubit system follows
-the same idea, but the set of possible measurements and measurement outcomes
-is significantly larger. It also serves the purpose of describing in greater
-detail the formal process of measuring in general.
-
-First, recall from @Direct-sum-decomposition that any vector space can be
-decomposed into a direct sum of one or more of its orthogonal subspaces.
-This means that the state space of an $n$-qubit system, having dimension
-$2^(n)$, can be decomposed into $k lt.eq 2^(n)$ of its orthogonal subspaces.
-The number $k$ corresponds to the maximum number of possible measurement
-outcomes for a state measured with that particular device. This number
-varies from device to device, even between devices measuring the same
-system.
-
-As a matter of fact, the observation that any device has an associated
-direct sum decomposition is just a generalization of the single-qubit
-case. Every device measuring a single-qubit system has an associated
-orthonormal basis ${ket(v_(1)), ket(v_(2))}$ for the state space $V$
-of the system, having dimension $2$. Each of these vectors generate a
-one-dimensional subspace, $S_(1)$ and $S_(2)$, consisting of all $alpha
-ket(v_(1))$ and $beta ket(v_(2))$ respectively, with $alpha, beta in CC$,
-and $V = S_(1) plus.circle S_(2)$. Furthermore, the only nontrivial (with
-no subspaces of dimension $0$) possible decompositions of $V$ are the ones
-into two subspaces of dimension $1$, and any choice of unit length vectors,
-one from each of the subspaces, yields an orthonormal basis.
-
-#exercise[
-  Rephrase the measurement of the single-qubit state $ket(Psi) =
-  frac(sqrt(2), 2) ket(0) + frac(sqrt(2), 2) ket(1)$ under this
-  formalism.
-]
-#solution[
-  Let $V$ be the vector space associated with said single-qubit system.
-  A device that measures a qubit in the standard basis has associated the
-  direct sum decomposition:
-
-  $ V = S_(1) plus.circle S_(2) =
-    "span"\{ket(0)\} plus.circle "span"\{ket(1)\} =
-    "span"\{ket(0), ket(1)\} $
-
-  The state $ket(Psi)$ measured by such a device will be $ket(0)$ with
-  probability $abs(frac(sqrt(2), 2))^(2) = frac(1, 2)$, the amplitude
-  of $ket(Psi)$ in the subspace $S_(1)$, and $ket(1)$ with probability
-  $abs(frac(sqrt(2), 2))^(2) = frac(1, 2)$, the amplitude of $ket(Psi)$
-  in the subspace $S_(2)$.
-]
-
-When a measuring device with associated direct sum decomposition V =
-$S_(1) plus.circle dots plus.circle S_(k)$ interacts with an $n$-qubit
-system in state $ket(Psi)$, the interaction changes the state to one
-entirely contained within one of the subspaces, and chooses the subspace
-with probability equal to the square of the absolute value of the amplitude
-of the component of $ket(Psi)$ in that subspace.
-
-More formally, any state $ket(Psi)$ in $V$ has a unique direct
-sum decomposition $ket(Psi) = a_(1) ket(phi_(1)) plus.circle dots
-plus.circle a_(k) ket(phi_(k))$, where each $ket(phi_(i))$ is a
-unit vector in $S_(i)$ and $a_(i)$ is a real and non-negative number.
-When $ket(Psi)$ is measured, the state $ket(phi_(i))$ is obtained
-with probability equal to $abs(a_(i))^(2)$. This is not a fact that
-can be deduced from theory, but is instead an axiom of quantum mechanics.
+Measuring a $n$-qubit state with respect to its base states is no different
+than in the single qubit case. What could be more interesting is measuring
+only a part of the system; for example, in a $2$-qubit system, measuring
+only the first qubit while leaving the second unmeasured, or vice versa.
+This is elaborated in the next chapter.
 
 #exercise[
   Consider the $2$-qubit state $ket(Psi) = frac(1, 8) ket(00) +
   frac(sqrt(7), 8) ket(01) + frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11)$.
-  What is the probability of measuring either $ket(00)$ or $ket(01)$ and the
-  probability of measuring either $ket(10)$ or $ket(11)$?
+  What is the probability of measuring each base state?
 ]
 #solution[
-  Let $V$ be the vector space associated with said $2$-qubit system.
-  A device that measures the first qubit in the standard basis has
-  associated the direct sum decomposition:
-
-  $ V &= S_(1) plus.circle S_(2) =
-    (ket(0) times.circle "span"\{ket(0), ket(1)\}) plus.circle
-    (ket(1) times.circle "span"\{ket(0), ket(1)\}) =
-    "span"\{ket(00), ket(01)\} plus.circle "span"\{ket(10), ket(11)\} = \
-    &= "span"\{ket(00), ket(01), ket(10), ket(11)\} $
-
-  To denote more explicitly what happens when a measurement is performed
-  on the first qubit, the state can be rewritten as $ket(Psi) = c_(1)
-  ket(Psi_(1)) + c_(2) ket(Psi_(2))$, or more explicitly:
-
-  $ ket(Psi) &=
-    sqrt(abs(frac(1, 8))^(2) + abs(frac(sqrt(7), 8))^(2))
-    (frac(frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01),
-     sqrt(abs(frac(1, 8))^(2) + abs(frac(sqrt(7), 8))^(2)))) +
-    sqrt(abs(frac(sqrt(7), 8))^(2) + abs(frac(7, 8))^(2))
-    (frac(frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11),
-     sqrt(abs(frac(sqrt(7), 8))^(2) + abs(frac(7, 8))^(2)))) = \
-    &= sqrt(frac(1, 64) + frac(7, 64))
-       (frac(frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01),
-        sqrt(frac(1, 64) + frac(7, 64)))) +
-       sqrt(frac(7, 64) + frac(49, 64))
-       (frac(frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11),
-        sqrt(frac(7, 64) + frac(49, 64)))) = \
-    &= sqrt(frac(1, 8))
-       (frac(frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01),
-        sqrt(frac(1, 8)))) +
-       sqrt(frac(7, 8))
-       (frac(frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11),
-        sqrt(frac(7, 8)))) = \
-    &= sqrt(frac(1, 8))
-       (sqrt(8) (frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01))) +
-       sqrt(frac(7, 8))
-       (sqrt(frac(8, 7)) (frac(sqrt(7), 8) ket(10) + frac(7, 8) ket(11))) = \
-    &= sqrt(frac(1, 8))
-       (frac(sqrt(8), 8) ket(00) + frac(sqrt(56), 8) ket(01)) +
-       sqrt(frac(7, 8))
-       (frac(sqrt(8), 8) ket(10) + frac(sqrt(56), 8) ket(11)) $
-
-  Which means that the probability of measuring either $ket(00)$ or
-  $ket(01)$ is $frac(1, 8)$ and the probability of measuring either
-  $ket(10)$ or $ket(11)$ is $frac(7, 8)$.
+  The probability of measuring $ket(00), ket(01), ket(10), ket(11)$ are,
+  respectively: $frac(1, 64), frac(7, 64), frac(7, 64), frac(49, 64)$.
 ]
