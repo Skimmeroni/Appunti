@@ -79,14 +79,17 @@ $ bold(v) times.circle bold(w) =
   mat(v_(1) mat(w_(1); dots.v; w_(m)); dots.v; v_(n) mat(w_(1); dots.v; w_(m))) =
   mat(v_(1)w_(1); dots.v; v_(1)w_(m); dots.v; v_(n)w_(1); dots.v; v_(n)w_(m)) $
 
-The tensor product between vectors satisfies the following relations:
+The tensor product has the following properties:
 
-- $(bold(v_(1)) + bold(v_(2))) times.circle bold(v_(3)) =
+- Is bilinear: $(bold(v_(1)) + bold(v_(2))) times.circle bold(v_(3)) =
    bold(v_(1)) times.circle (bold(v_(2)) + bold(v_(3))) =
    bold(v_(1)) times.circle bold(v_(2)) + bold(v_(1)) times.circle bold(v_(3))$
-- $(a bold(v_(1))) times.circle bold(v_(2)) =
+- Is associative: $(a bold(v_(1))) times.circle bold(v_(2)) =
    bold(v_(1)) times.circle (a bold(v_(2))) =
    a (bold(v_(1)) times.circle bold(v_(2)))$
+- Is multiplicative: $(bold(v_(1)) times.circle dots times.circle bold(v_(n)))
+   (bold(w_(1)) times.circle dots times.circle bold(w_(n))) =
+   bold(v_(1)) bold(w_(1)) times.circle dots times.circle bold(v_(n)) bold(w_(n)) $
 
 #exercise[
   What is the tensor product of the two following vectors?
@@ -102,6 +105,18 @@ The tensor product between vectors satisfies the following relations:
     mat(1 dot 3; 1 dot 10; 7 dot 3; 7 dot 10) =
     mat(3; 10; 21; 70) $
 ]
+
+Given two vectors $bold(v)$ and $bold(w)$, the tensor product $bold(v)
+times.circle bold(w)^(dagger)$ is also referred to as the *outer product*
+between $bold(v)$ and $bold(w)$. The result of the outer product between
+two vectors is a matrix:
+
+$ bold(v) times.circle bold(w)^(dagger) =
+  mat(v_(1); dots.v; v_(n)) times.circle mat(w_(1)^(*), dots, w_(m)^(*)) =
+  mat(v_(1) mat(w_(1)^(*), dots, w_(m)^(*)); dots.v; v_(n) mat(w_(1)^(*), dots, w_(m)^(*))) =
+  mat(v_(1) w_(1)^(*), dots, v_(1) w_(m)^(*);
+  dots.v, dots.down, dots.v;
+  v_(n) w_(1)^(*), dots, v_(n) w_(m)^(*)) $
 
 The tensor product can be extended to matrices, generating a block matrix:
 
@@ -179,16 +194,3 @@ state analysis.
 // #proof[
 //
 // ]
-
-The *outer product* of two vectors $bold(v)$ and $bold(w)$, denoted as
-$angle.r v, w angle.l$, is given by:
-
-$ angle.r v, w angle.l = bold(v) bold(w)^(dagger) =
-  mat(v_(1); v_(2); dots.v; v_(n))
-  mat(w_(1); w_(2); dots.v; w_(n))^(dagger) =
-  mat(v_(1) w_(1)^(*), v_(1) w_(2)^(*), dots, v_(1) w_(n)^(*);
-      v_(2) w_(1)^(*), v_(2) w_(2)^(*), dots, v_(2) w_(n)^(*);
-      dots.v, dots.v, dots.down, dots.v;
-      v_(m) w_(1)^(*), v_(m) w_(2)^(*), dots, v_(m) w_(n)^(*)) $
-
-Where $m$ is the dimension of $bold(v)$ and $n$ is the dimension of $bold(w)$.

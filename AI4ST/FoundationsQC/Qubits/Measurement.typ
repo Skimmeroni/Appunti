@@ -1,78 +1,64 @@
 #import "../FoundationsQC_definitions.typ": *
 
-The outer product of two kets results in a matrix. Since any matrix is a
-representation of a linear operator, this must mean that the outer product
-of two kets results in an operator. More operators can be constructed by
-summing outer products. An operator is also represented by denoting how
-each vector of the basis is mapped to its result.
+The kind of measurements presented until now consisted of measuring the
+state with respect to its basis. There is, however, a much richer way
+to measure quantum states, that goes beyond measuring bases.
+
+First, recall that the outer product between two kets is a matrix (an
+operator). Since they are vectors like any other, this is valid for
+basis vectors as well: the outer product between two basis states is
+a matrix (an operator). However, basis vectors are orthonormal, making
+the representation of matrices in bra-ket notation particularly enticing.
+
+Consider an $n$-qubit system spanned by the basis $\{phi_(1), dots,
+phi_(n)\}$. An operator $O$ defined in bra-ket notation with respect
+to this basis is written as:
+
+$ sum_(i = 1)^(n) sum_(j = 1)^(n) p_(i j) ketbra(phi_(i), phi_(j)) $
+
+Any ket $ket(Psi) in V$ can be written as a linear combination
+$sum_(k = 1)^(N) p_(k) ket(phi_(k))$. Applying $O$ to this ket
+gives:
+
+$ O ket(Psi) = (sum_(i = 1)^(n) sum_(j = 1)^(n) p_(i j)
+  ketbra(phi_(i), phi_(j))) (sum_(k = 1)^(n) p_(k) ket(phi_(k))) =
+  sum_(i = 1)^(n) sum_(j = 1)^(n) sum_(k = 1)^(n) p_(i j) p_(k)
+  ket(phi_(i)) braket(phi_(j), phi_(k)) = sum_(i = 1)^(n)
+  sum_(j = 1)^(n) p_(i j) p_(k) ket(phi_(i)) $
+
+This is because, being all orthonormal, all bra-kets $braket(phi_(j),
+phi_(k))$ with $j != k$ are $0$ and those with $j = k$ are $1$.
 
 #exercise[
   Consider the operator $X = ketbra(10, 00) + ketbra(00, 10) +
-  ketbra(11, 11) + ketbra(01, 01)$. What's the corresponding matrix?
-] <Operators>
-#solution[
-  $X$ exchanges the ket $ket(10)$ with the ket $ket(00)$ and vice versa,
-  while leaving $ket(11)$ and $ket(01)$ unchanged. Keep in mind that the
-  operator is constructed with respect to the standard basis.
-
-  $ X &= ketbra(10, 00) + ketbra(00, 10) + ketbra(11, 11) + ketbra(01, 01) =
-    mat(0; 0; 1; 0) mat(1; 0; 0; 0)^(dagger) + mat(1; 0; 0; 0)
-    mat(0; 0; 1; 0)^(dagger) + mat(0; 0; 0; 1) mat(0; 0; 0; 1)^(dagger) + 
-    mat(0; 1; 0; 0) mat(0; 1; 0; 0)^(dagger) = \
-    &= mat(0; 0; 1; 0) mat(1, 0, 0, 0) + mat(1; 0; 0; 0)
-    mat(0, 0, 1, 0) + mat(0; 0; 0; 1) mat(0, 0, 0, 1) + 
-    mat(0; 1; 0; 0) mat(0, 1, 0, 0) = \
-    &= mat(0, 0, 0, 0;
-           0, 0, 0, 0;
-           1, 0, 0, 0;
-           0, 0, 0, 0) +
-       mat(0, 0, 1, 0;
-           0, 0, 0, 0;
-           0, 0, 0, 0;
-           0, 0, 0, 0) +
-       mat(0, 0, 0, 0;
-           0, 0, 0, 0;
-           0, 0, 0, 0;
-           0, 0, 0, 1) +
-       mat(0, 0, 0, 0;
-           0, 1, 0, 0;
-           0, 0, 0, 0;
-           0, 0, 0, 0) =
-       mat(0, 0, 1, 0;
-           0, 1, 0, 0;
-           1, 0, 0, 0;
-           0, 0, 0, 1) $
-
-  This can also be represented as:
-
-  #grid(
-    columns: (0.25fr, 0.25fr, 0.25fr, 0.25fr),
-    [$ ket(10) -> ket(00) $],
-    [$ ket(00) -> ket(10) $],
-    [$ ket(11) -> ket(11) $],
-    [$ ket(01) -> ket(01) $]
-  )
+  ketbra(11, 11) + ketbra(01, 01)$. What happens when applied
+  to the state $ket(Phi^(+)) = frac(sqrt(2), 2) ket(00) +
+  frac(sqrt(2), 2) ket(11)$?
 ]
-
-Results in @Operators can be generalized as follows. In an $n$-qubit
-system, an operator $O: V -> V$ for the basis $\{ket(phi_(i))\}$ on
-the state space $V$ can be written as:
-
-$ O = sum_(i = 1)^(N) sum_(j = 1)^(N) p_(i j) ketbra(phi_(i), phi_(j)) $
-
-Where $N$ is the dimension of $V$. The matrix for $O$ with respect to
-the basis $\{ket(phi_(i))\}$ has the value $p_(i j)$ in the $(i, j)$-th
-cell.
-
-Any ket $ket(Psi) in V$ can be written as a linear combination
-$sum_(k = 1)^(N) p_(k) ket(phi_(k))$. Applying $O$ to this vector
-is equal to:
-
-$ O ket(Psi) = (sum_(i = 1)^(N) sum_(j = 1)^(N) p_(i j)
-  ketbra(phi_(i), phi_(j))) (sum_(k = 1)^(N) p_(k) ket(phi_(k))) =
-  sum_(i = 1)^(N) sum_(j = 1)^(N) sum_(k = 1)^(N) p_(i j) p_(k)
-  ket(phi_(i)) bra(phi_(j)) ket(phi_(k)) = sum_(i = 1)^(N)
-  sum_(j = 1)^(N) p_(i j) p_(j) ket(phi_(i)) $
+#solution[
+  $ X ket(Phi^(+)) &=
+    sum_(i = 1)^(4) sum_(j = 1)^(4) sum_(k = 1)^(2) p_(i j) p_(k)
+    ket(phi_(i)) braket(phi_(j), phi_(k)) = \
+    &= sum_(i = 1)^(4) sum_(j = 1)^(4)
+    p_(i j) frac(sqrt(2), 2) ket(phi_(i)) braket(phi_(j), 00) +
+    p_(i j) frac(sqrt(2), 2) ket(phi_(i)) braket(phi_(j), 11) = \
+    &= sum_(i = 1)^(4)
+       p_(i 1) frac(sqrt(2), 2) ket(phi_(i)) braket(00, 00) +
+       p_(i 1) frac(sqrt(2), 2) ket(phi_(i)) braket(00, 11) +
+       p_(i 2) frac(sqrt(2), 2) ket(phi_(i)) braket(01, 00) +
+       p_(i 2) frac(sqrt(2), 2) ket(phi_(i)) braket(01, 11) + \
+     & p_(i 3) frac(sqrt(2), 2) ket(phi_(i)) braket(10, 00) +
+       p_(i 3) frac(sqrt(2), 2) ket(phi_(i)) braket(10, 11) +
+       p_(i 4) frac(sqrt(2), 2) ket(phi_(i)) braket(11, 00) +
+       p_(i 4) frac(sqrt(2), 2) ket(phi_(i)) braket(11, 11) = \
+    &= sum_(i = 1)^(4) p_(i 1) frac(sqrt(2), 2) ket(phi_(i)) +
+       p_(i 4) frac(sqrt(2), 2) ket(phi_(i)) =
+       0 dot frac(sqrt(2), 2) ket(00) + 0 dot frac(sqrt(2), 2) ket(00) +
+       0 dot frac(sqrt(2), 2) ket(01) + 0 dot frac(sqrt(2), 2) ket(01) + \
+     & 1 dot frac(sqrt(2), 2) ket(10) + 0 dot frac(sqrt(2), 2) ket(10) +
+       0 dot frac(sqrt(2), 2) ket(11) + 1 dot frac(sqrt(2), 2) ket(11) =
+       frac(sqrt(2), 2) ket(10) + frac(sqrt(2), 2) ket(11) $
+]
 
 Again from @Direct-sum-decomposition, for any vector space $V$ there exist
 a subspace $S$ of $V$ such that $V = S plus.circle S^(perp)$, where $S^(perp)$
