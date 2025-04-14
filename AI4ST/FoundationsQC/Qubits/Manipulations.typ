@@ -182,7 +182,7 @@ extending the application of quantum transformations to more than
 one qubit at once is trivial. Suppose $U$ is a unitary transformation
 that acts on a qubit: the unitary transformation $U^(times.circle n) =
 U times.circle U times.circle dots times.circle U$ acts on $n$ qubits
-at the same.
+at the same time.
 
 In general, given $n$ single-qubit transformations $U_(1), U_(2), dots,
 U_(n)$, not necessarely identical, the unitary transformation $U_(1)

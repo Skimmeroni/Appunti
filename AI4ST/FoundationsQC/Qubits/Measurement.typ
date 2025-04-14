@@ -152,7 +152,7 @@ $ abs(abs(P_(S) ket(Psi)))^(2) =
 
   With probability:
 
-  $ abs(abs(P_(S) ket(Psi))) =
+  $ abs(abs(P_(S) ket(Psi)))^(2) =
     braket(Psi|P_(S), Psi) = 
     (frac(3, 4))^(2) =
     frac(9, 16) $
@@ -223,7 +223,7 @@ refer to one or more base states.
   Which means that the probability of measuring the first qubit in the state
   $ket(0)$ is:
 
-  $ abs(abs(P_(S) ket(Psi))) =
+  $ abs(abs(P_(S) ket(Psi)))^(2) =
     braket(Psi|P_(S), Psi) =
     abs(abs(frac(1, 8) ket(00) + frac(sqrt(7), 8) ket(01)))^(2) =
     (frac(1, 8))^(2) + (frac(sqrt(7), 8))^(2) =
@@ -231,29 +231,130 @@ refer to one or more base states.
     frac(1, 8) $
 ]
 
-Recall that, for any Hermitian operator, @Eigenspace-decomposition
-describes a unique decomposition into its eigenspaces. Given this
-correspondence, Hermitian operators can be used to describe measurements.
+Explicitly writing out the direct sum decomposition associated
+to a measurement process can be tedious. A simpler way to specify
+the decomposition involves using Hermitian matrices. Recall how
+@Spectral-decomposition-of-Hermitian-matrix states that the spectral
+decomposition of an Hermitian matrix is constituted by orthogonal
+subspaces, and for any decomposition it is possible to find an
+Hermitian matrix whose spectral decomposition is this decomposition.
 
-Let $P_(i)$ be the projectors onto the subspaces $S_(i)$, and let
-$\{lambda_(1), dots, lambda_(k)\}$ be a set of distinct real values.
-Then, the Hermitian operator $O = sum_(i = 1)^(k) lambda_(i) P_(i)$
-has $S_(1) plus.circle dots plus.circle S_(k)$ as its direct sum
-decomposition. Thus, when describing a measurement, instead of
-directly specifying the associated subspace decomposition, it is
-sufficient to specify a Hermitian operator whose eigenspace decomposition
-is that decomposition.
+Given a state space $V$, consider a subspace decomposition $V = S_(1)
+plus.circle dots plus.circle S_(k)$. Let $P_(i)$ be the projector
+associated to the subspace $S_(i)$ and let $\{lambda_(1), dots,
+lambda_(k)\}$ be a set of distinct real values. Then, the matrix:
 
-Any Hermitian operator with the appropriate direct sum decomposition can
-be used to specify a given measurement; in particular, the values of the
-$lambda_(i)$ are irrelevant as long as they are distinct. The $lambda_(i)$
-should be thought of simply as labels for the corresponding subspaces, or
-equivalently as labels for the measurement outcomes #footnote[In quantum
-physics, these labels are often chosen to represent a shared property,
-such as the energy, of the eigenstates in the corresponding eigenspace.].
+$ O =
+  sum_(i = 1)^(k) lambda_(i) P_(i) =
+  mat(lambda_(1), 0, dots, 0;
+      0, lambda_(2), dots, 0;
+      dots.v, dots.v, dots.down, dots.v;
+      0, 0, dots, lambda_(k);) $
+
+Is an Hermitian operator (in matrix form) whose subspace decomposition
+is exactly $S_(1) plus.circle dots plus.circle S_(k)$. Thus, when
+describing a measurement, instead of directly specifying the associated
+subspace decomposition, it is sufficient to specify a Hermitian matrix
+whose spectral decomposition is that decomposition.
+
+An Hermitian operator used for this purpose is also called *observable*.
+Any observable with the appropriate direct sum decomposition can be used
+to specify a given measurement; in particular, the values of the $lambda_(i)$
+are irrelevant as long as they are distinct. The $lambda_(i)$ should be
+thought of simply as labels for the corresponding subspaces, or equivalently
+as labels for the measurement outcomes. In quantum mechanics, these labels
+are often chosen to represent a property, such as the energy, of the
+eigenstates in the corresponding eigenspace.
 
 It is important to stress that it is not an Hermitian operator that acts
 on a state when measured, but instead the projectors associated to said
-operator. The Hermitian operator is just a way (frequently used in quantum
-mechanics) to write in compact form the projectors associated to a measuring
-apparatus.
+operator. Indeed, applying a Hermitian operator to a quantum state might
+not even return a valid quantum state. The Hermitian operator is just a
+way, frequently used in quantum mechanics, to "pack" the projectors
+associated to a measuring apparatus in compact form, not to specify the
+result of the measurement itself.
+
+#exercise[
+  Write a measurement for a single-qubit system in the Hermitian
+  operator form.
+]
+#solution[
+  Let $V$ be the vector space associated with a single-qubit system.
+  A device that measures a qubit in the standard basis has associated
+  the direct sum decomposition:
+
+  $ V = S_(1) plus.circle S_(2) =
+    "span"\{ket(0)\} plus.circle "span"\{ket(1)\} =
+    "span"\{ket(0), ket(1)\} $
+
+  The projectors associated to the subspaces are $P_(1) = ketbra(0, 0)$
+  and $P_(2) = ketbra(1, 1)$ respectively. Picking two eigenvalues at
+  random, say $1$ and $-1$, the Hermitian operator associated to this
+  measurement process is:
+
+  $ O =
+    1 dot P_(1) + (-1) dot P_(2) =
+    mat(1, 0; 0, -1) $
+]
+
+#exercise[
+  Write the measurement for the first qubit in a two-qubit system in the
+  Hermitian operator form.
+]
+#solution[
+  Measuring the first qubit in the state $ket(0)$ is equivalent to measuring
+  the overall system in a state that is either $ket(00)$ or $ket(01)$. Let
+  $V$ be the vector space associated with a $2$-qubit system. A device that
+  measures the first qubit in the standard basis has associated the direct
+  sum decomposition:
+
+  $ V &= S_(1) plus.circle S_(2) =
+    (ket(0) times.circle "span"\{ket(0), ket(1)\}) plus.circle
+    (ket(1) times.circle "span"\{ket(0), ket(1)\}) =
+    "span"\{ket(00), ket(01)\} plus.circle "span"\{ket(10), ket(11)\} = \
+    &= "span"\{ket(00), ket(01), ket(10), ket(11)\} $
+
+  The projectors associated to the subspaces are $P_(1) = ketbra(00, 00) +
+  ketbra(01, 01)$ and $P_(2) = ketbra(10, 10) + ketbra(11, 11)$ respectively.
+  Picking two eigenvalues at random, say $1$ and $0$, the Hermitian operator
+  associated to this measurement process is:
+
+  $ O =
+    1 dot P_(1) + 0 dot P_(2) =
+    mat(1, 0, 0, 0;
+        0, 1, 0, 0;
+        0, 0, 0, 0;
+        0, 0, 0, 0;) $
+]
+
+Hermitian operators on higher dimensional vectors spaces can be merged with
+the tensor product. That is, if $O_(1)$ and $O_(2)$ are Hermitian operators
+defined for state spaces $V_(1)$ and $V_(2)$ respectively, then $O_(1)
+times.circle O_(2)$ is an Hermitian operator defined for $V_(1) times.circle
+V_(2)$. Furthermore, the eigenvalues of $O_(1) times.circle O_(2)$ are the
+product of the eigenvalues of $O_(1)$ and $O_(2)$.
+
+Not all Hermitian operators on the state space $V_(1) times.circle V_(2)$
+can be factored as tensor product of two Hermitian operators $O_(1)$ and
+$O_(2)$ acting on $V_(0)$ and $V_(1)$ respectively. Such factoring is
+possible only if each subspace in the subspace decomposition described
+by $O$ can be written as $S_(0) times.circle S_(1)$ for $S_(0)$ and $S_(1)$
+in the subspace decompositions associated to $O_(1)$ and $O_(2)$ respectively.
+
+A non-factorable Hermitian operator denotes a measurement on the state that
+cannot be conceived as measuring separately its smaller components.
+
+#exercise[
+  Can the following Hermitian operator be factored into smaller matrices?
+
+  $ O = mat(2, 0, 0, 0;
+            0, 2, 0, 0;
+            0, 0, 2, 0;
+            0, 0, 0, 1) $
+]
+#solution[
+  No. This is because the subspace decomposition described by the operator
+  is $S_(1) plus.circle S_(2)$, where $S_(1) = "span"\{ket(00), ket(01),
+  ket(10)\}$ and $S_(2) = "span"\{ket(11)\}$, and this decomposition is
+  not factorable.
+]
