@@ -188,6 +188,16 @@ $2$ qubit system is the following:
 These states are called *Bell states*, and the basis that they form
 is called *Bell basis*.
 
+The following $3$-qubit states often appear in quantum experiments,
+respectively referred to as *Greenberger–Horne–Zeilinger state* and
+*W state*:
+
+#grid(
+  columns: (0.5fr, 0.5fr),
+  [$ ket(G H Z) = frac(sqrt(2), 2) (ket(000) + ket(111)) $],
+  [$ ket(W) = frac(sqrt(3), 3) (ket(100) + ket(010) + ket(001)) $]
+)
+
 Any unit vector of the $2^(n)$-dimensional state space represents a
 possible state of an $n$-qubit system, but just as in the single-qubit
 case there is redundancy. In the multiple-qubit case, not only do vectors

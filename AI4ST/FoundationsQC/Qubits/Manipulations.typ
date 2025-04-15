@@ -370,3 +370,12 @@ and $T$ respectively:
   [$ P_(frac(pi, 2)) = S = mat(1, 0; 0, i) $],
   [$ P_(frac(pi, 4)) = T = mat(1, 0; 0, e^(i frac(pi, 4))) $]
 )
+
+// CZ gate, Toffoli gate
+
+It would be useful to have a small set of elementary gates that could
+be used to construct an arbitrary complicated function. Sadly, this
+is not possible, because as stated some gates are not decomposable in
+smaller gates and must be implemented as-is. However, it is possible
+to employ a subset of gates that can approximate with sufficient accuracy
+any kind of gate, even those that cannot be decomposed.

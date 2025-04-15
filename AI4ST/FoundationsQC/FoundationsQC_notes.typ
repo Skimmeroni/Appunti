@@ -49,6 +49,8 @@
 #include "Qubits/Measurement.typ"
 == Qubit manipulations
 #include "Qubits/Manipulations.typ"
+== Quantum circuits for known states
+#include "Qubits/Circuits.typ"
 == Quantum algorithms
 #include "Qubits/Algorithms.typ"
 #pagebreak()
