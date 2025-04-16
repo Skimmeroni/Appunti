@@ -379,3 +379,89 @@ is not possible, because as stated some gates are not decomposable in
 smaller gates and must be implemented as-is. However, it is possible
 to employ a subset of gates that can approximate with sufficient accuracy
 any kind of gate, even those that cannot be decomposed.
+
+Another difference with classical computing is the concept of *cloning*,
+creating exact copies of states. A classical state (i.e. a Boolean variable)
+can be cloned effortlessly, both logically and physically (by splitting and,
+if needed, increasing the amplitude the electric current).
+
+At first glance it might seem that quantum states would present no
+difference. Indeed, if a quantum state is in an eigenstate (that is,
+if it has been measured) there is no issue with cloning it. It is
+easy to notice how, for example, CNOT gates can be used to duplicate
+the state of the control qubit if its state is an eigenstate of the
+standard basis, since $"CNOT"_(1, 2) ket(00) = ket(00)$ and $"CNOT"_(1, 2)
+ket(10) = ket(11)$. However, when states are superpositions of base states,
+this doesn't hold anymore.
+
+#theorem("No-cloning theorem")[
+  Unknown (i.e. not measured) quantum states cannot be cloned.
+] <No-Cloning-Theorem>
+#proof[
+  The theorem can be proven by contradiction, considering for simplicity
+  the case of a single qubit (the generalization to the $n$ qubit case
+  is trivial).
+
+  First, suppose that there exists a quantum transformation $Omega$
+  that is capable of duplicating an unknown quantum state $ket(Psi)$.
+  This transformation must be a unitary transformation with two inputs,
+  $ket(Psi)$ and an ancillary qubit $ket(0)$, and two outputs $ket(Psi)$
+  and $ket(Psi)$:
+
+  #align(
+    center,
+    [#quantum-circuit(scale: 150%,
+                      lstick([$ket(Psi)$]), mqgate([$Omega$], n: 2), rstick($ket(Psi)$), [\ ],
+                      lstick([$ket(0)$]), 1, rstick([$ket(Psi)$]))
+                      ]
+  )
+
+  Since $ket(Psi)$ is not known, it can be expressed as a superposition
+  $alpha ket(phi_(1)) + beta ket(phi_(2))$ of two basis states $ket(phi_(1))$
+  and $ket(phi_(2))$, where $alpha$ and $beta$ are both not null. As in the
+  case of the CNOT gate for the $\{ket(0), ket(1)\}$ basis, it can be assumed
+  that $Omega$ is capable of duplicating both basis states.
+
+  Since $Omega$ is has two states as input and two states and output,
+  its two single bit states for input and output must be merged using
+  the tensor product. The input to omega is therefore $ket(Psi) times.circle
+  ket(0)$ and its output is $ket(Psi) times.circle ket(Psi)$.
+
+  If $Omega$ were to exist, then applying it to $ket(Psi) times.circle
+  ket(0)$ would return $ket(Psi) times.circle ket(Psi)$. However:
+
+  $ & Omega(ket(Psi) times.circle ket(0)) = ket(Psi) times.circle ket(Psi) => \
+    & Omega((alpha ket(phi_(1)) + beta ket(phi_(2))) times.circle ket(0)) =
+    (alpha ket(phi_(1)) + beta ket(phi_(2))) times.circle (alpha ket(phi_(1)) + beta ket(phi_(2))) => \
+    & Omega(alpha ket(phi_(1)) times.circle ket(0) + beta ket(phi_(2)) times.circle ket(0)) =
+    (alpha ket(phi_(1)) + beta ket(phi_(2))) times.circle (alpha ket(phi_(1)) + beta ket(phi_(2))) => \
+    & Omega(alpha ket(phi_(1) 0) + beta ket(phi_(2) 0)) =
+    alpha^(2) ket(phi_(1) phi_(1)) + alpha beta ket(phi_(1) phi_(2)) + alpha beta ket(phi_(2) phi_(1)) +
+    beta^(2) ket(phi_(2) phi_(2)) => \
+    & alpha Omega ket(phi_(1) 0) + beta Omega ket(phi_(2) 0) =
+    alpha^(2) ket(phi_(1) phi_(1)) + alpha beta (ket(phi_(1) phi_(2)) + ket(phi_(2) phi_(1))) +
+    beta^(2) ket(phi_(2) phi_(2)) => \
+    & alpha ket(phi_(1) phi_(1)) + beta ket(phi_(2) phi_(2)) =
+    alpha^(2) ket(phi_(1) phi_(1)) + alpha beta (ket(phi_(1) phi_(2)) + ket(phi_(2) phi_(1))) +
+    beta^(2) ket(phi_(2) phi_(2)) => \
+    & (alpha^(2) - alpha) ket(phi_(1) phi_(1)) + alpha beta (ket(phi_(1) phi_(2)) +
+      ket(phi_(2) phi_(1))) + (beta^(2) - beta) ket(phi_(2) phi_(2)) = 0 $
+
+  Since both $ket(phi_(1))$ and $ket(phi_(2))$ are not null by definition,
+  the only way for the left hand side to be null is to have the three
+  coefficients $(alpha^(2) - alpha)$, $alpha beta$, and $(beta^(2) - beta)$
+  all equal to $0$ at the same time. However, having $alpha beta$ equal to
+  $0$ means having either $alpha = 0$ or $beta = 0$, and both possibilities
+  are not admissible by hypothesis.
+
+  Therefore, it must mean that there is no such thing as a unitary
+  transformation with the properties of $Omega$ and the theorem is
+  proven.
+]
+
+Note that, even though @No-Cloning-Theorem forbids cloning unknown quantum
+states, it doesn't prevent an unknown quantum state to be _transferred_
+from one qubit to another, losing the information regarding the original
+state in the process (this aspect is explored further in the next chapter).
+Also, even though perfect clones cannot be created, there are techniques
+to create "imperfect" clones, even with an high degree of approximation.
