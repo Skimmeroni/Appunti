@@ -81,10 +81,23 @@ matrix*.
 
 Given a matrix $A$, the matrix $A^(T)$ that has the rows of $A$ as its
 columns and the columns of $A$ as its rows is called the *transposed*
-of $A$.
+of $A$. If a matrix is equal to its transposed, it is said to be *symmetric*.
 
-A matrix that is invariant with respect to transposition is said to be a
-*symmetric matrix*.
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ A = mat(
+	   a_(1, 1), a_(1, 2), dots, a_(1, n);
+	   a_(2, 1), a_(2, 2), dots, a_(2, n);
+	   dots.v, dots.v, dots.down, dots.v;
+	   a_(n, 1), a_(n, 2), dots, a_(n, n)
+	) $],
+	[$ A^(T) = mat(
+		a_(1, 1), a_(2, 1), dots, a_(n, 1);
+		a_(1, 2), a_(2, 2), dots, a_(n, 2);
+		dots.v, dots.v, dots.down, dots.v;
+		a_(1, n), a_(2, n), dots, a_(n, n)
+	) $]
+)
 
 The *sum* between two matrices $A$ and $B$ having the same dimension $m times
 n$ is defined as the sum, entry by entry, of $A$ and $B$. Two matrices that
@@ -217,6 +230,8 @@ as follows:
 
 $ det(A) = (a_(1, 1) dot a_(2, 2)) - (a_(2, 1) dot a_(1, 2)) $
 
+A matrix whose determinant is equal to $0$ is called a *singular matrix*.
+
 #exercise[
 	Given the matrix $A = mat(1, 2, 3; 0, 1, 2; 1, 1, 0)$, compute
 	its determinant.
@@ -239,23 +254,6 @@ $ det(A) = (a_(1, 1) dot a_(2, 2)) - (a_(2, 1) dot a_(1, 2)) $
 	  (1 dot 0 - 1 dot 2) + (2 dot 2 - 3 dot 1) =
 	  0 - 2 + 4 - 3 = -1 $
 ]
-
-A matrix whose determinant is equal to $0$ is called a *singular matrix*.
-
-#theorem[
-	A matrix is invertible if and only if it's not singular.
-] <Invertible-matrices-not-null-determinant>
-// #proof[
-// To be added
-// ]
-
-#theorem[
-	A matrix is invertible if and only if the set of its rows/columns forms a
-	linearly independent set.
-] <Linearly-independent-set-not-null-determinant>
-// #proof[
-// To be added
-// ]
 
 #theorem[
 	The determinant of a triangular matrix is equal to the product of the
@@ -319,20 +317,19 @@ $ (a^(-1)_(i, j)) = frac((-1)^(i + j) det(M_(j, i)), det(A)) $
 Where $M_(j, i)$ is the matrix $A$ with the $j$-th row and the $i$-th column
 removed.
 
-#lemma[
-	A singular matrix has no inverse.
-]
+#theorem[
+	A matrix is invertible if and only if it's not singular.
+] <Invertible-matrices-not-null-determinant>
 #proof[
 	If $A$ is a singular matrix, its determinant is $0$. Therefore, the
 	expression for $(a^(-1)_(i, j))$ would involve a division by $0$,
 	which is not admissible.
+	
+	// The other way around is missing
 ]
 
 #lemma[
-	Given an invertible matrix $A$, the determinant of its inverse is the
-	reciprocal of the determinant of $A$:
-
-	$ det(A^(-1)) = frac(1, det(A)) $
+	Given an invertible matrix $A$, $det(A^(-1)) = (det(A))^(-1)$.
 ]
 #proof[
 	Applying @Binet-theorem gives:
@@ -375,5 +372,3 @@ $ tr(A) = sum_(i = 1)^(n) a_(i, i) $
 
 If the inverse of a matrix is equal to his transposition, said matrix is
 called *orthogonal*.
-
-

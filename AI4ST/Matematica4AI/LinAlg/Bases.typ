@@ -273,6 +273,14 @@ from vector space to vector space.
 	specific basis is the canonical basis for $PP_(n)$.
 ]
 
+#theorem[
+	A matrix is invertible if and only if the set of its rows/columns forms a
+	linearly independent set.
+] <Linearly-independent-set-not-null-determinant>
+// #proof[
+// To be added
+// ]
+
 As stated, any vector can be expressed as a matrix composed by
 the coefficients of the linear combination of a basis. In general,
 a vector space has more than one basis, and for each basis the
