@@ -1,5 +1,7 @@
 #import "../Math4AI_definitions.typ": *
 
+=== Definition and operations
+
 A *matrix* is a bidimensional mathematical object, represented as follows:
 
 #grid(
@@ -203,13 +205,15 @@ The product between matrices possesses the following properties:
 - The identity matrix is the identity element for matrix multiplication, since
   $A I = I A = A$ for any matrix $A$.
 
-#lemma[
+#proposition[
 	Let $A$ and $B$ be two product-conformant matrices. Then $(A B)^(T) =
 	B^(T) A^(T)$.
 ]
 // #proof[
 // To be added
 // ]
+
+=== Determinant and trace of a matrix
 
 The *determinant* is a function that associates a number to a square
 matrix. Given a $n times n$ matrix $A$, its determinant, denoted as
@@ -255,7 +259,7 @@ A matrix whose determinant is equal to $0$ is called a *singular matrix*.
 	  0 - 2 + 4 - 3 = -1 $
 ]
 
-#theorem[
+#lemma[
 	The determinant of a triangular matrix is equal to the product of the
 	elements on its diagonal.
 ]
@@ -293,7 +297,7 @@ A matrix whose determinant is equal to $0$ is called a *singular matrix*.
 // Hard to prove
 // ]
 
-#lemma[
+#proposition[
 	The determinant is invariant with respect to transposition.
 ]
 // #proof[
@@ -301,12 +305,22 @@ A matrix whose determinant is equal to $0$ is called a *singular matrix*.
 // ]
 
 #lemma[
-	The determinant is an homogeneous function. In other words, given a matrix
-	$A$ and a scalar $k$, $det(k A) = k det(A)$.
+	Given a $n times n$ matrix $A$ and a scalar $k$,
+	$det(k A) = k^(n) det(A)$.
 ]
 // #proof[
 // To be added
 // ]
+
+The *trace* of a square matrix is defined as the sum of the elements on its
+diagonal:
+
+$ tr(A) = sum_(i = 1)^(n) a_(i, i) $
+
+If the inverse of a matrix is equal to his transposition, said matrix is
+called *orthogonal*.
+
+=== Inverse matrix
 
 Given a square matrix $A$, the matrix $A^(-1)$ (if it exists) such that $A
 A^(-1) = A^(-1) A = I$ is called the *inverse matrix* of $A$. Such matrix is
@@ -317,7 +331,7 @@ $ (a^(-1)_(i, j)) = frac((-1)^(i + j) det(M_(j, i)), det(A)) $
 Where $M_(j, i)$ is the matrix $A$ with the $j$-th row and the $i$-th column
 removed.
 
-#theorem[
+#proposition[
 	A matrix is invertible if and only if it's not singular.
 ] <Invertible-matrices-not-null-determinant>
 #proof[
@@ -328,7 +342,7 @@ removed.
 	// The other way around is missing
 ]
 
-#lemma[
+#proposition[
 	Given an invertible matrix $A$, $det(A^(-1)) = (det(A))^(-1)$.
 ]
 #proof[
@@ -364,11 +378,3 @@ removed.
 		   frac(2, -2) = -1 $]
 	)
 ]
-
-The *trace* of a square matrix is defined as the sum of the elements on its
-diagonal:
-
-$ tr(A) = sum_(i = 1)^(n) a_(i, i) $
-
-If the inverse of a matrix is equal to his transposition, said matrix is
-called *orthogonal*.
