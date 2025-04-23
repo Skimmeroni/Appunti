@@ -1,9 +1,11 @@
-#import "@preview/ctheorems:1.1.3": *
 #import "@preview/cetz:0.3.2"
+#import "@preview/thmbox:0.2.0": *
 
-#let theorem = thmbox("theorem", "Theorem", fill: rgb("#e7f7e6"))
-#let lemma = thmbox("lemma", "Lemma", fill: rgb("#f7ebf4"))
-#let corollary = thmbox("corollary", "Corollary", fill: rgb("#f7ebf4"))
-#let proof = thmproof("proof", "Proof")
-#let exercise = thmbox("exercise", "Exercise", fill: rgb("#e9eef7"))
-#let solution = thmproof("solution", "Solution")
+#let algorithm = algorithm.with(title-fonts: "Noto Sans")
+#let theorem = theorem.with(title-fonts: "Noto Sans")
+#let lemma = lemma.with(title-fonts: "Noto Sans")
+#let corollary = corollary.with(title-fonts: "Noto Sans")
+#let exercise = exercise.with(title-fonts: "Noto Sans")
+#let proposition = proposition.with(title-fonts: "Noto Sans")
+#let proof = proof.with(title-fonts: "Noto Sans")
+#let solution = proof.with(title-fonts: "Noto Sans", variant: "Solution")

@@ -17,7 +17,10 @@
 
 #import "AIModels_definitions.typ": *
 
-#show: thmrules.with(qed-symbol: $square$)
+#show: thmbox-init()
+#show heading: set text(
+  font: "Noto Sans"
+)
 
 #outline(indent: auto)
 #pagebreak()
@@ -27,3 +30,8 @@
 #include "Graphs/Definition.typ"
 == Graph embedding
 #include "Graphs/Embedding.typ"
+#pagebreak()
+
+= Reinforcement learning
+== Agents and environments
+#include "Reinforcement/Agent.typ"
