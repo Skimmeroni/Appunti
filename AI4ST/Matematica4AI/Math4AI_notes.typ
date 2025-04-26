@@ -20,8 +20,6 @@
   font: "Noto Sans"
 )
 
-#let amogus = [Amogus]
-
 #outline(indent: auto)
 #pagebreak()
 
