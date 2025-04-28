@@ -141,9 +141,9 @@ transformation.
 to such polynomial as the characteristic polynomial of the linear
 transformation itself, and not to one of the possible associated
 matrices to such transformation, since the choice of the matrix is
-irrelevant. Of course, the best choice for the associated matrix is
-the one constructed with respect to the canonical basis, because in
-general it requires the least amount of effort.
+irrelevant. Of course, the most convenient choice for the associated
+matrix is the one constructed with respect to the canonical basis,
+which in general requires the least amount of effort.
 
 #theorem("Diagonalization theorem")[
 	- *With respect to endomorphisms*. Let $T: V |-> V$ be an endomorphism
@@ -154,10 +154,11 @@ general it requires the least amount of effort.
 	  is a diagonal matrix whose non-zero element are the eigenvalues of $T$.
 	- *With respect to matrices*. Let $A$ be a $n times n$ matrix that has
 	  $n$ linearly independent eigenvectors $underline(e_(1)), dots,
-	  underline(e_(n))$. Then there exist two matrices $P$ and $D$ such
-	  that $A = P D P^(-1)$, where $P$ is an invertible matrix whose columns
-	  are the eigenvectors of $A$ and $D$ is a diagonal matrix whose non-zero
-	  elements are the eigenvalues of $A$.
+	  underline(e_(n))$. Then there exist a diagonal matrix $D$ that is
+	  similar to $A$, meaning that there exist a matrix $P$ such that $A =
+	  P D P^(-1)$. In particular, the matrix $D$ has the eigenvalues of $A$
+	  as non-zero elements (counted with multiplicity) and $P$ has the
+	  eigenvectors of $A$ as columns.
 ] <Diagonalization-theorem>
 #proof[
 	// To be revisited with respect to both points
