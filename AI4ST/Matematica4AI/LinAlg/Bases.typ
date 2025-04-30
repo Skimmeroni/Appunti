@@ -152,7 +152,8 @@ independent is called a *basis* for such vector space.
 
 The cardinality of a basis is called the *dimension* of the corresponding
 vector space. If a vector space contains just the null vector, such vector
-space is said to have dimension $0$.
+space is said to have dimension $0$. The dimension of a vector space $V$
+is denoted as $dim(V)$.
 
 A vector space whose dimension is a finite number is said to be a
 *finite-dimensional* vector space. Otherwise, it is said to be an
@@ -310,15 +311,16 @@ representations with respect to $cal(B)$:
 	[$ vec(lambda_(1), lambda_(2), dots.v, lambda_(n))_(cal(B)) $]
 )
 
-In particular, the right representation is also referred to as its *column
-vector representation*, or just *vector representation*, with respect to
-$cal(B)$. Technically, the suffix $cal(B)$ is necessary, otherwise it would
-be impossible to tell apart representations with respect to different bases.
-However, in general, the basis employed is either deducible from context or
-is not relevant, therefore in practice the suffix is often omitted.
+In particular, the representation on the right is also referred to as its
+*coordinate vector representation*, or just *coordinate representation*,
+with respect to $cal(B)$. Technically, the suffix $cal(B)$ is necessary,
+otherwise it would be impossible to tell apart representations with
+respect to different bases. However, in general, the basis employed
+is either known from context or is not relevant, therefore the suffix
+is often omitted.
 
 Clearly, employing different bases to represent the same vector will give
-different vector representations. Different representations of the same
+different coordinate representations. Different representations of the same
 vector can be converted into another through a simple matrix multiplication.
 
 #theorem("Existence of the basis change matrix")[
@@ -326,8 +328,8 @@ vector can be converted into another through a simple matrix multiplication.
 	underline(b_(2)), dots, underline(b_(n))}$ and $cal(B') =
 	{underline(b'_(1)), underline(b'_(2)), dots, underline(b'_(n))}$
 	be two bases of $V$. Consider a generic vector $underline(x) in V$,
-	and suppose that its vector representations with respect to $cal(B)$
-	and $cal(B')$ are, respectively:
+	and suppose that its coordinate representations with respect to
+	$cal(B)$ and $cal(B')$ are, respectively:
 
 	#grid(
 		columns: (0.5fr, 0.5fr),
@@ -386,9 +388,10 @@ vector can be converted into another through a simple matrix multiplication.
 	  vec(x'_(1), x'_(2), dots.v, x'_(n))_(cal(B')) =
 	  P vec(x'_(1), x'_(2), dots.v, x'_(n))_(cal(B')) $
 
-	The matrix $P$, that has the vector representation of one basis with
-	respect to the other as its columns, is the desired matrix. Multiplying
-	both sides of the equation with $P^(-1)$ gives the second equality.
+	The matrix $P$, that has the coordinate representation of one basis
+	with respect to the other as its columns, is the desired matrix.
+	Multiplying both sides of the equation with $P^(-1)$ gives the second
+	equality.
 ]
 
 #exercise[
@@ -396,8 +399,9 @@ vector can be converted into another through a simple matrix multiplication.
 	bases representations?
 ]
 #solution[
-	Each member of the first basis, in vector representation with respect to
-	the second basis, constitutes one of the columns of the matrix:
+	Each member of the first basis, in coordinate representation with
+	respect to the second basis, constitutes one of the columns of the
+	matrix:
 
 	$ cases(1 = lambda_(1, 1) 5 + lambda_(1, 2) (x + 1) + lambda_(1, 3) 2x^(2),
 	        x = lambda_(2, 1) 5 + lambda_(2, 2) (x + 1) + lambda_(2, 3) 2x^(2),

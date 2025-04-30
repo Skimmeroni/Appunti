@@ -35,15 +35,17 @@
 #include "LinAlg/Matrices.typ"
 == Vector Spaces
 #include "LinAlg/Spaces.typ"
-== Linear dependence and independence
+== Linear Dependence and Independence
 #include "LinAlg/Bases.typ"
-== Determinant and rank
+== Determinant and Rank
 #include "LinAlg/Determinant.typ"
 == Systems of Linear Equations
 #include "LinAlg/Systems.typ"
 == Linear Transformations
 #include "LinAlg/Transformations.typ"
-== Eigenvalues and eigenvectors
+== Kernel and Image
+#include "LinAlg/KerIm.typ"
+== Eigenvalues and Eigenvectors
 #include "LinAlg/Eigen.typ"
 == Spectral Theorem
 #include "LinAlg/Spectral.typ"

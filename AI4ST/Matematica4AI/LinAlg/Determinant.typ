@@ -291,10 +291,19 @@ removed. If $A^(-1)$ exists, $A$ is said to be *invertible*.
 	)
 ]
 
-=== Similar matrices
+=== Equivalent and similar matrices
 
-Two matrices $A$ and $B$ are said to be *similar* if there exist an
-invertible matrix $P$ such that $A = P B P^(-1)$.
+Two matrices $A$ and $B$ are said to be *equivalent* if there exist
+two invertible matrices $S$ and $T$ such that $B = T^(-1) A S$. If
+$T = S$, the two matrices are said to be *similar*. Matrix similarity
+is a special case of matrix equivalence.
+
+#proposition[
+	Matrix equivalence (and similarity) is an equivalence relation.
+]
+// #proof[
+// 
+// ]
 
 #proposition[
 	If two matrices are similar, they have the same determinant and
