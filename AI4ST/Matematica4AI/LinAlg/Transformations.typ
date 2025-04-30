@@ -45,7 +45,7 @@ that, when multiplied, have the same effect as applying $T$.
 	respectively, a vector of $V$ and the result of applying $phi.alt$ to said
 	vector. There exist a matrix $M_(phi.alt)$, dependent both on $cal(B)$ and
 	on $cal(B')$, such that $M_(phi.alt) C = C'$.
-]
+] <Linear-transformations-as-matrices>
 #proof[
 	Consider a generic vector $underline(x) in V$. This vector can be
 	written as a linear combination of the vectors of $cal(B)$:
@@ -102,6 +102,10 @@ that, when multiplied, have the same effect as applying $T$.
 	is composed by the vector representation of the result of applying
 	$phi.alt$ to the $i$-th vector of the basis $cal(B)$.
 ]
+
+Note how @Basis-change-is-matrix-multiplication is just a special case of
+@Linear-transformations-as-matrices when both vector spaces are the same
+and the linear transformation is the identity.
 
 #exercise[
 	Consider the linear transformation $T: RR^(3) |-> RR^(2)$ defined
@@ -182,9 +186,6 @@ that, when multiplied, have the same effect as applying $T$.
 	      -frac(1, 3) + 2 + 0) =
 	  mat(-frac(1, 3); frac(5, 3)) $
 ]
-
-// There's a VERY nice exercise using polynomials and derivatives in the
-// October 1st lecture. Should be stolen ASAP
 
 Let $T: V |-> W$ a linear transformation between vector spaces $V$ and $W$.
 The set of all vectors of $W$ that have a correspondant in $V$ through $T$

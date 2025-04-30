@@ -195,39 +195,32 @@ A vector space whose dimension is a finite number is said to be a
 
 #exercise[
 	Consider the vector space $PP_(2)$. Knowing that the sets $cal(B)_(1)
-	= {1, x, x^(2)}$ and $cal(B)_(2) = {(x + 1), (x - 1), x^(2)}$ are both
+	= {1, x, x^(2)}$ and $cal(B)_(2) = {5, x + 1, 2x^(2)}$ are both
 	bases for $PP_(2)$, write the polynomial $p(x) = 3x^(2) + 2x - 5$ as a
 	linear combination of each.
-]
+] <Multiple-representations>
 #solution[
 	It's trivial to see that, for the first basis, such linear combination
 	is $p(x)$ itself:
 
-	$ lambda_(0) 1 + lambda_(1) x + lambda_(2) x^(2) = -5 + 2x + 3x^(2) =>
+	$ lambda_(0) 1 + lambda_(1) x + lambda_(2) x^(2) =
+	  -5 + 2x + 3x^(2) =>
 	  cases(lambda_(0) = -5, lambda_(1) = 2, lambda_(2) = 3) $
 
 	Regarding the second basis, it can be rewritten as:
 
-	$ lambda_(0) (x + 1) + lambda_(1) (x - 1) +
-	  lambda_(2) x^(2) => lambda_(0) x + lambda_(0) +
-	  lambda_(1) x - lambda_(1) + lambda_(2) x^(2) =>
-	  (lambda_(0) - lambda_(1)) + (lambda_(0) + lambda_(1))x +
-	  lambda_(2) x^(2) $
-
-	Equating it term by term:
-
-	$ (lambda_(0) - lambda_(1)) + (lambda_(0) + lambda_(1))x +
-	  lambda_(2) x^(2) = -5 + 2x + 3x^(2) =>
-	  cases(lambda_(0) - lambda_(1) = -5,
-			lambda_(0) + lambda_(1) = 2,
-			lambda_(2) = 3) =>
-	  cases(lambda_(0) = -frac(3, 2),
-			lambda_(1) = frac(7, 2),
-			lambda_(2) = 3) $
-
-	Therefore:
-
-	$ 3x^(2) + 2x - 5 = -frac(3, 2) (x + 1) + frac(7, 2) (x - 1) + 3x^(2) $
+	$ lambda_(0) 5 + lambda_(1) (x + 1) + lambda_(2) 2x^(2) &=
+	  -5 + 2x + 3x^(2) =>
+	  lambda_(0) 5 + lambda_(1) x + lambda_(1) + lambda_(2) 2x^(2) =
+	  -5 + 2x + 3x^(2) => \
+	  (5 lambda_(0) + lambda_(1)) + (lambda_(1)) x + (2 lambda_(2)) x^(2) &=
+	  -5 + 2x + 3x^(2) =>
+	  cases(5 lambda_(0) + lambda_(1) = -5,
+	        lambda_(1) = 2,
+	        2 lambda_(2) = 3) =>
+	  cases(lambda_(0) = -frac(7, 5),
+	        lambda_(1) = 2,
+	        lambda_(2) = frac(3, 2)) $
 ]
 
 The basis of a vector space that renders calculations the most "comfortable"
@@ -328,17 +321,18 @@ Clearly, employing different bases to represent the same vector will give
 different vector representations. Different representations of the same
 vector can be converted into another through a simple matrix multiplication.
 
-#proposition[
+#theorem("Existence of the basis change matrix")[
 	Let $V$ be a vector space, and let $cal(B) = {underline(b_(1)),
 	underline(b_(2)), dots, underline(b_(n))}$ and $cal(B') =
 	{underline(b'_(1)), underline(b'_(2)), dots, underline(b'_(n))}$
-	be two bases of $V$. Any generic vector $underline(x) in V$, can
-	be represented with respect to both bases:
+	be two bases of $V$. Consider a generic vector $underline(x) in V$,
+	and suppose that its vector representations with respect to $cal(B)$
+	and $cal(B')$ are, respectively:
 
 	#grid(
 		columns: (0.5fr, 0.5fr),
-		[$ underline(x) <=> mat(x_(1); x_(2); dots.v; x_(n))_(cal(B)) $],
-		[$ underline(x) <=> mat(x'_(1); x'_(2); dots.v; x'_(n))_(cal(B')) $]
+		[$ underline(x) <==> mat(x_(1); x_(2); dots.v; x_(n))_(cal(B)) $],
+		[$ underline(x) <==> mat(x'_(1); x'_(2); dots.v; x'_(n))_(cal(B')) $]
 	)
 
 	There exists an invertible matrix $P$, independent of $underline(x)$,
@@ -352,9 +346,9 @@ vector can be converted into another through a simple matrix multiplication.
 		P^(-1) mat(x_(1); x_(2); dots.v; x_(n)) $])
 ] <Basis-change-is-matrix-multiplication>
 #proof[
-	Being both bases constituted by vectors of the same vector space, it is
-	possible to express the elements of $cal(B')$ as linear combinations of
-	the elements of $cal(B)$:
+	Both $cal(B)$ and $cal(B')$ are bases of the same vector space.
+	This means that it's possible to write the vectors of one as linear
+	combinations of the vectors of the other:
 
 	$ cases(
 		underline(b'_(1)) = p_(1, 1) underline(b_(1)) +
@@ -368,82 +362,82 @@ vector can be converted into another through a simple matrix multiplication.
 		p_(n, 2) underline(b_(2)) + dots + p_(n, n) underline(b_(n)) =
 		sum_(j = 1)^(n) p_(n, j) underline(b_(j))) $
 
-	Therefore:
+	Consider a generic vector $overline(x) in V$. It can be written as a
+	linear combination of vectors of $cal(B')$, which gives:
 
 	$ underline(x) =
-	sum_(j = 1)^(n) x'_(j) underline(b'_(j)) =
-	sum_(j = 1)^(n) x'_(j) sum_(i = 1)^(n) p_(j, i) underline(b_(i)) =
-	sum_(i = 1)^(n) x_(i) underline(b_(i)) $
+	  sum_(i = 1)^(n) x'_(i) underline(b'_(i)) =
+	  sum_(i = 1)^(n) x'_(i) (sum_(j = 1)^(n) p_(i, j) underline(b_(j))) =
+	  sum_(i = 1)^(n) (sum_(j = 1)^(n) p_(i, j) x'_(i)) underline(b_(j)) $
 
-	By comparing the third and fourth members of the equality term by term:
+	This means that $underline(x)$ can be represented with respect to
+	$cal(B)$ as:
 
-	$ x_(i) = sum_(j = 1)^(n) p_(i, j) x'_(j) =>
-	mat(x_(1); x_(2); dots.v; x_(n)) =
-	mat(
-	p_(1, 1), p_(1, 2), dots, p_(1, n);
-	p_(2, 1), p_(2, 2), dots, p_(2, n);
-	dots.v, dots.v, dots.down, dots.v;
-	p_(n, 1), p_(n, 2), dots, p_(n, n))
-	mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-	P mat(x'_(1); x'_(2); dots.v; x'_(n)) $
+	$ underline(x)
+	  <==> vec(x_(1), x_(2), dots.v, x_(n))_(cal(B)) =
+	  vec(sum_(j = 1)^(n) p_(1, j) x'_(1),
+	      sum_(j = 1)^(n) p_(2, j) x'_(2),
+	      dots.v,
+	      sum_(j = 1)^(n) p_(n, j) x'_(n)) =
+	  mat(p_(1, 1), p_(1, 2), dots, p_(1, n);
+	      p_(2, 1), p_(2, 2), dots, p_(2, n);
+	      dots.v, dots.v, dots.down, dots.v;
+	      p_(n, 1), p_(n, 2), dots, p_(n, n))
+	  vec(x'_(1), x'_(2), dots.v, x'_(n))_(cal(B')) =
+	  P vec(x'_(1), x'_(2), dots.v, x'_(n))_(cal(B')) $
 
-	Of course, it is also possible to go the other way around, expressing the
-	elements of $cal(B)$ as linear combinations of the elements of $cal(B')$:
-
-	$ cases(
-		underline(b_(1)) = q_(1, 1) underline(b'_(1)) +
-		q_(1, 2) underline(b'_(2)) + dots + q_(1, n) underline(b'_(n)) =
-		sum_(j = 1)^(n) q_(1, j) underline(b'_(j)),
-		underline(b_(2)) = q_(2, 1) underline(b'_(1)) +
-		q_(2, 2) underline(b'_(2)) + dots + q_(2, n) underline(b'_(n)) =
-		sum_(j = 1)^(n) q_(2, j) underline(b'_(j)),
-		dots.v,
-		underline(b_(n)) = q_(n, 1) underline(b'_(1)) +
-		q_(n, 2) underline(b'_(2)) + dots + q_(n, n) underline(b'_(n)) =
-		sum_(j = 1)^(n) q_(n, j) underline(b'_(j))) $
-
-
-	Therefore:
-
-	$ underline(x) =
-	sum_(j = 1)^(n) x_(j) underline(b_(j)) =
-	sum_(j = 1)^(n) x_(j) sum_(i = 1)^(n) q_(j, i) underline(b'_(i)) =
-	sum_(i = 1)^(n) x'_(i) underline(b'_(i)) $
-
-	By comparing the third and fourth members of the equality term by term:
-
-	$ x'_(i) = sum_(j = 1)^(n) q_(i, j) x_(j) =>
-	mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-	mat(
-	q_(1, 1), q_(1, 2), dots, q_(1, n);
-	q_(2, 1), q_(2, 2), dots, q_(2, n);
-	dots.v, dots.v, dots.down, dots.v;
-	q_(n, 1), q_(n, 2), dots, q_(n, n))
-	mat(x_(1); x_(2); dots.v; x_(n)) =
-	Q mat(x_(1); x_(2); dots.v; x_(n)) $
-
-	Substituting the one in the expression of the other gives:
-
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[$ mat(x_(1); x_(2); dots.v; x_(n)) =
-		P mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-		P Q mat(x_(1); x_(2); dots.v; x_(n)) $],
-		[$ mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-		Q mat(x_(1); x_(2); dots.v; x_(n)) =
-		Q P mat(x'_(1); x'_(2); dots.v; x'_(n)) $])
-
-	Since the two matrices on the edges of the equalities are the same,
-	for these equalities to hold both matrix products $P Q$ and $Q P$
-	must be equal to the identity matrix. In other words, $P$ and $Q$
-	are the inverse of each other, therefore:
-
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[$ mat(x_(1); x_(2); dots.v; x_(n)) =
-		P mat(x'_(1); x'_(2); dots.v; x'_(n)) $],
-		[$ mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-		P^(-1) mat(x_(1); x_(2); dots.v; x_(n)) $])
+	The matrix $P$, that has the vector representation of one basis with
+	respect to the other as its columns, is the desired matrix. Multiplying
+	both sides of the equation with $P^(-1)$ gives the second equality.
 ]
 
-// ADD AN EXAMPLE
+#exercise[
+	Consider @Multiple-representations. What is the matrix that changes
+	bases representations?
+]
+#solution[
+	Each member of the first basis, in vector representation with respect to
+	the second basis, constitutes one of the columns of the matrix:
+
+	$ cases(1 = lambda_(1, 1) 5 + lambda_(1, 2) (x + 1) + lambda_(1, 3) 2x^(2),
+	        x = lambda_(2, 1) 5 + lambda_(2, 2) (x + 1) + lambda_(2, 3) 2x^(2),
+	        x^(2) = lambda_(3, 1) 5 + lambda_(3, 2) (x + 1) + lambda_(3, 3) 2x^(2)) =>
+	  cases(1 = lambda_(1, 1) 5 + lambda_(1, 2) (x + 1) + lambda_(1, 3) 2x^(2),
+	        x = (lambda_(2, 2) + lambda_(2, 1) 5) + lambda_(2, 2) x + lambda_(2, 3) 2x^(2),
+	        x^(2) = lambda_(3, 1) 5 + lambda_(3, 2) (x + 1) + lambda_(3, 3) 2x^(2)) => \
+	  cases(1 = lambda_(1, 1) 5,
+	        0 = lambda_(1, 2),
+	        0 = lambda_(1, 3),
+	        0 = lambda_(2, 2) + lambda_(2, 1) 5,
+	        0 = lambda_(2, 2),
+	        x = lambda_(2, 2) x,
+	        0 = lambda_(3, 1),
+	        0 = lambda_(3, 2),
+	        x^(2) = lambda_(3, 3) 2x^(2)) =>
+	  cases(frac(1, 5) = lambda_(1, 1),
+	        0 = lambda_(1, 2),
+	        0 = lambda_(1, 3),
+	        -frac(1, 5) = lambda_(2, 1),
+	        1 = lambda_(2, 2),
+	        0 = lambda_(2, 3),
+	        0 = lambda_(3, 1),
+	        0 = lambda_(3, 2),
+	        frac(1, 2) = lambda_(3, 3)) =>
+	   mat(frac(1, 5), -frac(1, 5), 0;
+	       0, 1, 0;
+	       0, 0, frac(1, 2)) $
+
+	Considering, as an example, the two representations of
+	$p(x) = 3x^(2) + 2x - 5$:
+
+	$ mat(frac(1, 5), -frac(1, 5), 0;
+	      0, 1, 0;
+	      0, 0, frac(1, 2))
+	  vec(-5, 2, 3) =
+	  mat(frac(1, 5) dot (-5) -frac(1, 5) dot 2 + 0 dot 3;
+	      0 dot (-5) + 1 dot 2 + 0 dot 3;
+	      0 dot (-5) + 0 dot 2 + frac(1, 2) dot 3) =
+	  vec(-frac(7, 5), 2, frac(3, 2)) $
+
+	Which is correct.
+]

@@ -46,7 +46,9 @@ A matrix whose determinant is equal to $0$ is called a *singular matrix*.
 	  0 - 2 + 4 - 3 = -1 $
 ]
 
-#lemma[
+Peculiar matrices can have their determinant computed faster.
+
+#proposition[
 	The determinant of a triangular matrix is equal to the product of the
 	elements on its diagonal.
 ]
@@ -71,27 +73,37 @@ A matrix whose determinant is equal to $0$ is called a *singular matrix*.
 	$
 
 	The same is achieved for a lower triangular matrix by picking the first
-	row.
+	row. Note that this holds for diagonal matrices as well, since diagonal
+	matrices are a special case of triangular matrices.
 ]
 
-#theorem("Binet's Theorem")[
-	The determinant is a multiplicative function. In other words, given two
-	matrices $A$ and $B$:
+#proposition[
+	The determinant is invariant with respect to transposition.
+] <Determinant-equal-by-rows-or-columns>
+// #proof[
+// To be added
+// ]
 
-	$ det(A B) = det(A) det(B) $
+@Determinant-equal-by-rows-or-columns implies that the determinant of a
+matrix can be computed by applying the formula with respect to the columns,
+not only with respect to rows.
+
+#theorem("Binet's Theorem")[
+	Given two matrices $A$ and $B$, $det(A B) = det(A) det(B)$ (that is,
+	the determinant is a multiplicative function).
 ] <Binet-theorem>
 // #proof[
 // Hard to prove
 // ]
 
 #proposition[
-	The determinant is invariant with respect to transposition.
+	It two rows/columns of a matrix are swapped, its determinant changes sign.
 ]
 // #proof[
 // To be added
 // ]
 
-#lemma[
+#proposition[
 	Given a $n times n$ matrix $A$ and a scalar $k$,
 	$det(k A) = k^(n) det(A)$.
 ]
@@ -101,59 +113,32 @@ A matrix whose determinant is equal to $0$ is called a *singular matrix*.
 
 === Rank
 
-#lemma[
-	The rank of a matrix is invariant with respect to transposition. In other
-	words, $"rank(A)" = "rank"(A^(T))$.
+The number of linearly independent columns of a matrix is referred to as
+its *rank by column*, whereas the number of linearly independent rows of
+a matrix is referred to as its *rank by row*.
+
+Since the rank by row of a matrix is always equal to its rank by column,
+it is possible to simply refer to the *rank* of matrix meaning either one
+or the other. Given a matrix $A$, its rank is denoted as $"rank"(A)$.
+
+Clearly, the rank of a matrix cannot be greater than the minimum between
+its number of rows and its number of columns. In particular, only a square
+matrix can have its rank exactly equal to its number of rows/columns. If
+this is the case, the matrix is said to be *full rank*. Not all square
+matrices are full rank, but all full rank matrices are square.
+
+#proposition[
+	The rank of a matrix is invariant with respect to transposition.
 ] <Rank-invariant-with-transposition>
 // #proof[
 // To be added
 // ]
 
-#lemma[
-	A matrix is invertible if and only if it has full rank.
-] <Full-rank-matrices-are-invertible>
-
-#theorem[
-	Let $A$ be a square matrix. The following results are equivalent, meaning
-	if one of these is true also the others are true:
-
-	- $A$ is non singular;
-	- There exists an inverse of $A$;
-	- $A$ is full rank;
-	- The rows/columns of $A$ form a linearly independent set.
+#proposition[
+	A matrix has full rank if and only if it's not singular.
 ]
 // #proof[
-// Just combine the results found elsewhere
-// ]
-
-*Gaussian moves* are special operations that can be performed on matrices. Said
-operations are as follows:
-
-- Swapping two rows/columns;
-- Multiplying a row/column by a scalar;
-- Summing a row/column to another row/column multiplied by a scalar.
-
-#theorem[
-	The application of Gaussian moves to a matrix does not change its rank.
-] <Gauss-moves-rank>
-// #proof[
-// To be added
-// ]
-
-#lemma[
-	Let $A$ be a square matrix, and let $A'$ be the matrix resulting from
-	applying the first Gaussian move to $A$. Then $det(A) = -det(A')$.
-]
-// #proof[
-// To be added
-// ]
-
-#theorem[
-	The application of the third Gaussian move to a matrix does not change its
-	determinant.
-]
-// #proof[
-// To be added
+//
 // ]
 
 A matrix is in *row echelon form* if all rows having only zero entries
@@ -179,7 +164,10 @@ called the *pivot*, is on the right of the leading entry of every row above.
 	)
 ]
 
-#theorem[
+These matrices are relevant because their rank is particularly easy to
+compute.
+
+#proposition[
 	The rank of a matrix in row echelon form is equal to the number of its
 	pivots.
 ] <Rank-echelon-pivots>
@@ -187,7 +175,23 @@ called the *pivot*, is on the right of the leading entry of every row above.
 // To be added
 // ]
 
-@Rank-echelon-pivots suggests another way to compute the rank of a matrix.
+Any matrix can be converted in row echelon form by employing *Gaussian
+moves*, which are are special operations that can be performed on matrices.
+Said operations are as follows:
+
+- Swapping two rows/columns;
+- Multiplying a row/column by a scalar;
+- Summing a row/column to another row/column multiplied by a scalar.
+
+#proposition[
+	The application of Gaussian moves to a matrix does not change its rank.
+] <Gauss-moves-rank>
+// #proof[
+// To be added
+// ]
+
+@Gauss-moves-rank allows one to convert a matrix in row echelon form while
+keeping the rank equal to the original.
 
 #exercise[
 	Compute the rank of the matrix $A = mat(1, -1, 3, 2; 3, 2, 7, 6;
@@ -222,7 +226,7 @@ given by:
 $ (a^(-1)_(i, j)) = frac((-1)^(i + j) det(M_(j, i)), det(A)) $
 
 Where $M_(j, i)$ is the matrix $A$ with the $j$-th row and the $i$-th column
-removed.
+removed. If $A^(-1)$ exists, $A$ is said to be *invertible*.
 
 #proposition[
 	A matrix is invertible if and only if it's not singular.
@@ -234,6 +238,21 @@ removed.
 	
 	// The other way around is missing
 ]
+
+#proposition[
+	A matrix is invertible if and only if it has full rank.
+] <Full-rank-matrices-are-invertible>
+// #proof[
+// To be added
+// ]
+
+#proposition[
+	A matrix is invertible if and only if the set of its rows/columns forms a
+	linearly independent set.
+]
+// #proof[
+// To be added
+// ]
 
 #proposition[
 	Given an invertible matrix $A$, $det(A^(-1)) = (det(A))^(-1)$.
@@ -272,21 +291,14 @@ removed.
 	)
 ]
 
-#lemma[
-	A matrix is invertible if and only if the set of its rows/columns forms a
-	linearly independent set.
-] <Linearly-independent-set-not-null-determinant>
-// #proof[
-// To be added
-// ]
-
 === Similar matrices
 
 Two matrices $A$ and $B$ are said to be *similar* if there exist an
 invertible matrix $P$ such that $A = P B P^(-1)$.
 
 #proposition[
-	If two matrices are similar, they have the same determinant.
+	If two matrices are similar, they have the same determinant and
+	the same rank.
 ]
 #proof[
 	Suppose $A$ and $B$ are similar. Then:
