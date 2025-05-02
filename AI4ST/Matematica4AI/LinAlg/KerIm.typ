@@ -1,6 +1,8 @@
 #import "../Math4AI_definitions.typ": *
 
-Let $T: V |-> W$ a linear transformation between vector spaces $V$ and $W$.
+=== Image
+
+Let $T: V mapsto W$ a linear transformation between vector spaces $V$ and $W$.
 The set of all vectors of $W$ that have a correspondant in $V$ through $T$
 is called the *image* of the transformation $T$, and is denoted as $Im(T)$.
 It may or may not coincide with $W$.
@@ -8,8 +10,34 @@ It may or may not coincide with $W$.
 $ Im(T) = {underline(w) in W: exists underline(v) in V space "s.t." space
   T(underline(v)) = underline(w)} $
 
+#exercise[
+	Given the linear transformation $T: RR_(2)[x] mapsto RR_(2)[x]$ defined as
+	$T(p(x)) = x p(x) - frac(1, 2) x^(2) frac(d, d x) p(x)$, compute its image.
+]
+#solution[
+	The image of $T$ is the set of all polynomials $q(x) = a_(1) + a_(2)x +
+	a_(3)x^(2)$ such that $q(x) = T(p(x))$. That is:
+
+	$ q(x) = x p(x) - frac(1, 2) x^(2) p(x) =>
+	  a_(1) + a_(2)x + a_(3)x^(2) = x (b_(1) + b_(2)x + b_(3)x^(2)) - frac(1, 2) x^(2) frac(d, d x) (b_(1) + b_(2)x + b_(3)x^(2)) => \
+	  a_(1) + a_(2)x + a_(3)x^(2) = x b_(1) + b_(2)x^(2) + cancel(b_(3)x^(3)) - frac(1, 2) x^(2) b_(2) - cancel(b_(3)x^(3)) => 
+	  a_(1) + (a_(2) - b_(1))x + (a_(3) - frac(1, 2) b_(2)) x^(2) = 0 => \
+	  cases(
+		a_(1) = 0,
+		a_(2) - b_(1) = 0,
+		a_(3) - frac(1, 2) b_(2) = 0) =>
+	  cases(
+		a_(1) = 0,
+		a_(2) = b_(1),
+		a_(3) = frac(1, 2) b_(2)) $
+
+	This means that $Im(T)$ is the set:
+
+	$ Im(T) = {q(x) in RR_(2)[x]: q(x) = h x + frac(1, 2)k x^(2), h in RR, k in RR} $
+]
+
 #proposition[
-	Let $T: V |-> W$ be a linear transformation between vector spaces $V$ and
+	Let $T: V mapsto W$ be a linear transformation between vector spaces $V$ and
 	$W$. $Im(W)$ is a subspace of $W$.
 ] <Image-of-transformation-is-vector-space>
 #proof[
@@ -46,16 +74,77 @@ $ Im(T) = {underline(w) in W: exists underline(v) in V space "s.t." space
 	respect to the operations defined for $W$.
 ]
 
-Let $T: V |-> W$ a linear transformation between vector spaces $V$ and $W$.
-The set of all vectors of $V$ such that the application of $T$ to those
-vectors gives the null vector (of $W$) is called the *kernel* of $T$, and
-is denoted as $ker(T)$.
+Since it's possible to represent any linear transformation employing
+a matrix, it's also possible to extend the notion of image to matrices
+as well. Consider the matrix $M_(phi.alt)$ associated to the linear
+transformation $phi.alt: V mapsto W$ with respect to two bases $cal(B)$
+and $cal(C)$. The image of $M_(phi.alt)$ is the set of all coordinate
+vector representations $Y$ of vectors of $W$ such that it exists a
+coordinate representation vector $X$ of a vector in $V$ such that
+$M X = Y$.
+
+#exercise[
+	What is the image of $A = mat(1, 2, 3; 1, 4, 9; 1, 5, 12)$?
+]
+#solution[
+	$ mat(1, 2, 3; 1, 4, 9; 1, 5, 12) vec(x, y, z) = vec(l_(1), l_(2), l_(3)) => 
+	  mat(1 dot x + 2 dot y + 3 dot z;
+	      1 dot x + 4 dot y + 9 dot z;
+	      1 dot x + 5 dot y + 12 dot z) = vec(l_(1), l_(2), l_(3)) => 
+	  mat(x + 2y + 3z; x + 4y + 9z; x + 5y + 12z) = vec(l_(1), l_(2), l_(3)) => \
+	  cases(x + 2y + 3z = l_(1), x + 4y + 9z = l_(2), x + 5y + 12z = l_(3)) => 
+	  cases(l_(3) = 12z +5y +x,
+	        l_(2) = x + 4y + 9z,
+	        l_(1) = 3 l_(2) - 2l_(3)) $
+
+	Which gives:
+
+	$ Im(A) = {X : X = vec(3h - 2k, h, k), h in RR, k in RR} $
+]
+
+=== Kernel
+
+Let $T: V mapsto W$ a linear transformation between vector spaces $V$ and
+$W$. The set of all vectors of $V$ such that the application of $T$ to
+those vectors gives the null vector (of $W$) is called the *kernel* of
+$T$, and is denoted as $ker(T)$.
 
 $ ker(T) = {underline(v) in V: T(underline(v)) = underline(0)} $
 
+#exercise[
+	Given the linear transformation $T: RR_(2)[x] mapsto RR_(2)[x]$ defined as
+	$T(p(x)) = x p(x) - frac(1, 2) x^(2) frac(d, d x) p(x)$, compute its rank.
+]
+#solution[
+	The kernel of $T$ is the set of all polynomials $p(x) = a_(1) +
+	a_(2)x + a_(3)x^(2)$ such that $T(p(x)) = 0$. That is:
+
+	$ T(p(x)) = 0 =>
+	  x p(x) - frac(1, 2) x^(2) p(x) = 0 =>
+	  x (a_(1) + a_(2)x + a_(3)x^(2)) - frac(1, 2) x^(2) frac(d, d x) (a_(1) + a_(2)x + a_(3)x^(2)) = 0 => \
+	  a_(1)x + a_(2)x^(2) + a_(3)x^(3) - frac(1, 2) x^(2) (a_(2) + 2a_(3)x) = 0 => 
+	  a_(1)x + a_(2)x^(2) + cancel(a_(3)x^(3)) - frac(1, 2) a_(2) x^(2) - cancel(a_(3) x^(3)) = 0 => \
+	  a_(1)x + frac(1, 2) a_(2) x^(2) = 0 =>
+	  a_(1) + frac(1, 2) a_(2) x = 0 =>
+	  cases(a_(1) = 0, frac(1, 2) a_(2) = 0, a_(3) = a_(3)) =>
+	  cases(a_(1) = 0, a_(2) = 0, a_(3) = a_(3)) $
+	
+	This means that $ker(T)$ is the set:
+
+	$ ker(T) = {p(x) in RR_(2)[x]: p(x) = h x^(2), h in RR} $
+
+	Indeed:
+
+	$ T(h x^(2)) =
+	  x (h x^(2)) - frac(1, 2) x^(2) frac(d, d x) (h x^(2)) =
+	  h x^(3) - frac(1, 2) x^(2) (2h x) =
+	  cancel(h x^(3)) - cancel(h x^(3)) =
+	  0 $
+]
+
 #proposition[
-	Let $T: V |-> W$ be a linear transformation between vector spaces $V$ and
-	$W$. $ker(V)$ is a subspace of $V$.
+	Let $T: V mapsto W$ be a linear transformation between vector spaces $V$
+	and $W$. $ker(V)$ is a subspace of $V$.
 ] <Kernel-of-transformation-is-vector-space>
 #proof[
 	By @Subspace-proven-by-being-algebraically-closed, it suffices to
@@ -79,12 +168,96 @@ $ ker(T) = {underline(v) in V: T(underline(v)) = underline(0)} $
 	)
 ]
 
-Let $T: V |-> W$ be a linear transformation between vector spaces $V$ and $W$.
-The dimension of the image of $T$ is called the *rank* of $T$, and denoted as
-$"rank"(T)$, while the dimension of the kernel of $T$ is called the *nullity*
-of $T$, and denoted as $"null"(T)$.
+As it was done for the image, it's possible to define the kernel of a matrix.
+Consider the matrix $M_(phi.alt)$ associated to the linear transformation
+$phi.alt: V mapsto W$ with respect to two bases $cal(B)$ and $cal(C)$.
+The kernel of $M_(phi.alt)$ is the set of all coordinate vector
+representations $X$ of vectors of $V$ such that $M X = underline(0)$.
 
-#lemma[
+#exercise[
+	What is the kernel of $A = mat(1, 2, 3; 1, 4, 9; 1, 5, 12)$?
+]
+#solution[
+	$ mat(1, 2, 3; 1, 4, 9; 1, 5, 12) vec(x, y, z) = vec(0, 0, 0) => 
+	  mat(1 dot x + 2 dot y + 3 dot z;
+	      1 dot x + 4 dot y + 9 dot z;
+	      1 dot x + 5 dot y + 12 dot z) = vec(0, 0, 0) => 
+	mat(x + 2y + 3z; x + 4y + 9z; x + 5y + 12z) = vec(0, 0, 0) => \
+	cases(x + 2y + 3z = 0, x + 4y + 9z = 0, x + 5y + 12z = 0) =>
+	cases(x = -2y - 3z, y + 3z = 0, 3y + 9z = 0) =>
+	cases(x = 3z, y = -3z, z = z) $
+
+	Which gives:
+
+	$ ker(A) = {X : X = t vec(3, -3, 1), t in RR} $
+]
+
+=== Rank and nullity
+
+Let $T: V mapsto W$ be a linear transformation between vector spaces $V$
+and $W$. The dimension of the image of $T$ is called the *rank* of $T$,
+and denoted as $"rank"(T)$, while the dimension of the kernel of $T$ is
+called the *nullity* of $T$, and denoted as $"null"(T)$. Again, the notions
+of rank and nullity extend to matrices in the natural way.
+
+#theorem("Rank-nullity theorem")[
+	For any linear transformation $T: V mapsto W$, $dim(V) = "rank"(T) +
+	"null"(T)$.
+] <Rank-nullity-theorem>
+// #proof[
+// Hard to prove
+// ]
+
+#exercise[
+	Consider the linear transformation $T: "Mat"(2 times 2) mapsto
+	"Mat"(2 times 2)$ defined as:
+
+	$ T(mat(a, b; c, d)) = mat(a + b + c, 2b; b, 3d + 2c) $
+
+	What are its rank and nullity?
+]
+#solution[
+	The kernel of $T$ is given by:
+
+	$ T(mat(a, b; c, d)) = mat(0, 0; 0, 0) =>
+	  mat(a + b + c, 2b; b, 3d + 2c) = mat(0, 0; 0, 0) =>
+	  cases(a + b + c = 0,
+	        2b = 0,
+	        b = 0,
+	        3d + 2c = 0) =>
+	  cases(a = -c,
+	        b = 0,
+	        b = 0,
+	        d = -frac(2, 3)c) $
+
+	Which means that $ker(T)$ is the set:
+
+	$ ker(T) = {M in "Mat"(2 times 2): M = h mat(1, 0; 0, frac(2, 3)), h in RR} $
+
+	$ker(T)$ is spanned by a single matrix, which means that its dimension
+	is $1$. The image of $T$ is given by:
+
+	$ T(mat(a, b; c, d)) = mat(l_(1), l_(2); l_(3), l_(4)) =>
+	  mat(a + b + c, 2b; b, 3d + 2c) = mat(l_(1), l_(2); l_(3), l_(4)) =>
+	  cases(a + b + c = l_(1),
+	        2b = l_(2),
+	        b = l_(3),
+	        3d + 2c = l_(4)) =>
+	  cases(l_(1) = a + b + c,
+	        l_(2) = 2l_(3),
+	        l_(3) = b,
+	        l_(4) = 3d + 2c) $
+
+	Which means that $Im(T)$ is the set:
+
+	$ Im(T) = {M in "Mat"(2 times 2): M = alpha mat(1, 0; 0, 0) + beta mat(0, 2; 1, 0) + gamma mat(0, 0; 0, 1), alpha in RR, beta in RR, gamma in RR} $
+
+	$Im(T)$ is spanned by three matrices, which means that its dimension
+	is $3$. Note that the dimension of $"Mat"(2 times 2)$ is $4$, and
+	indeed $"rank"(T) + "null"(T) = 3 + 1 = 4$.
+]
+
+#proposition[
 	The rank of a linear transformation is equal to the rank of its matrix
 	representation (with respect to any basis).
 ]
@@ -92,28 +265,22 @@ of $T$, and denoted as $"null"(T)$.
 //
 // ]
 
-#theorem("Rank-nullity theorem")[
-	For any linear transformation $T: V |-> W$, $dim(V) = "rank"(T) +
-	"null"(T)$.
-] <Rank-nullity-theorem>
-// #proof[
-// Hard to prove
-// ]
+=== Inverse
 
-Let $T: V |-> W$ be a linear transformation between vector spaces $V$ and
-$W$. The linear transformation $T^(-1): W |-> V$ is said to be the *inverse*
+Let $T: V mapsto W$ be a linear transformation between vector spaces $V$ and
+$W$. The linear transformation $T^(-1): W mapsto V$ is said to be the *inverse*
 of $T$ if:
 
 $ T^(-1)(T(underline(v))) = T(T^(-1)(underline(v))) = underline(v),
-space forall underline(v) in V $
+  space forall underline(v) in V $
 
 As for any function, a linear transformation $T$ has an inverse if and only
-if it is both injective and subjective. A linear transformation that has an
-inverse is said to be *invertible*.
+if it's bijective. For this reason, bijective linear transformations are
+also referred to as *invertible* transformations.
 
-#theorem[
-	Let $T: V |-> W$ be a linear transformation. If $T$ is injective, then
-	$"null"(T) = 0$.
+#proposition[
+	Let $T: V |-> W$ be a linear transformation. $T$ is injective if and
+	only if $"null"(T) = 0$.
 ] <Injective-transformations-have-empty-nullity>
 #proof[
 	If $T$ is injective then, for any distinct $underline(v_(1)),
@@ -131,9 +298,9 @@ inverse is said to be *invertible*.
 	the definition of the nullity of a linear transformation to be $0$.
 ]
 
-#theorem[
-	Let $T: V |-> W$ be a linear transformation. If $T$ is invertible, then
-	$dim(V) = dim(W)$.
+#corollary[
+	Let $T: V |-> W$ be a linear transformation. $T$ is invertible if and
+	only if $dim(V) = dim(W)$.
 ] <Invertible-transformations-have-equal-dimensions>
 #proof[
 	By @Rank-nullity-theorem, $dim(V) = dim(ker(T)) + dim(Im(T))$. Being
@@ -142,132 +309,54 @@ inverse is said to be *invertible*.
 	$dim(ker(T)) = 0$. Therefore, $dim(V) = 0 + dim(Im(T)) = dim(W)$.
 ]
 
-As stated before, every result concerning linear transformations can be
-formulated very naturally as a result concerning matrices.
+#exercise[
+	Consider the invertible linear transformation $T: "Mat"(2 times 2)
+	mapsto "Mat"(2 times 2)$ defined as:
 
-#theorem[
-	Let A be the $m times n$ matrix associated to the invertible
-	linear application $T: V |-> W$ with respect to two bases
-	$cal(B)$ and $cal(C)$. Then, $m$ and $n$ are equal (that is,
-	$A$ is a square matrix).
-] <Invertible-matrices-have-equal-dimensions>
-#proof[
-	By @Invertible-transformations-have-equal-dimensions, if $T$ is
-	an invertible linear transformation, $dim(V) = dim(W)$. Since the
-	dimensions of $A$ are $dim(V)$ and $dim(W)$ respectively, $m = n$.
+	$ T(mat(a, b; c, d)) = mat(a + b + c, 2b; b + c, 3d + 2c) $
+
+	What is its inverse?
 ]
+#solution[
+	Reversing the equality and solving for $\{l_(1), l_(2), l_(3), l_(4)\}$:
 
-Indeed, it is possible to define a kernel and an image for an invertible
-matrix. Consider the linear transformation $T: V |-> W$, with respect to
-whom a $n times n$ matrix $A$ of real values can be associated. Therefore,
-any vector $underline(w) in W$ can be written as $A underline(v)$, where
-$underline(v)$ is a vector in $V$. Writing $v$ as a linear combination of
-the canonical basis of $V$ gives:
+	$ mat(l_(1), l_(2); l_(3), l_(4)) = mat(a + b + c, 2b; b + c, 3d + 2c) =>
+	  cases(l_(1) = a + b + c,
+	        l_(2) = 2b,
+	        l_(3) = b + c,
+	        l_(4) = 3d + 2c) =>
+	  cases(l_(1) = a + frac(1, 2) l_(2) + c,
+	        b = frac(1, 2) l_(2),
+	        l_(3) = frac(1, 2) l_(2) + c,
+	        l_(4) = 3d + 2c) => \
+	  cases(l_(1) = a + l_(3),
+	        b = frac(1, 2) l_(2),
+	        c = l_(3) - frac(1, 2) l_(2),
+	        l_(4) = 3d + 2l_(3) - l_(2)) =>
+	  cases(a = l_(1) - l_(3),
+	        b = frac(1, 2) l_(2),
+	        c = l_(3) - frac(1, 2) l_(2),
+	        l_(4) = 3d + 2l_(3) - l_(2)) =>
+	  cases(a = l_(1) - l_(3),
+	        b = frac(1, 2) l_(2),
+	        c = l_(3) - frac(1, 2) l_(2),
+	        d = frac(1, 3) l_(4) - frac(2, 3) l_(3) + frac(1, 3) l_(2)) $
 
-$ underline(w) = A underline(v) = A(lambda_(1) underline(e_(1)) +
-  lambda_(2) underline(e_(2)) + dots + lambda_(n) underline(e_(n))) =
-  A lambda_(1) underline(e_(1)) + A lambda_(2) underline(e_(2)) +
-  dots + A lambda_(n) underline(e_(n)) $
+	Which gives:
 
-But multiplying the matrix $A$ by the canonical vector $underline(e_(i))$
-simply returns the $i$-th column of $A$:
+	$ T^(-1)(mat(a, b; c, d)) = mat(a - c, frac(1, 2) b; c - frac(1, 2) b, frac(1, 3) d - frac(2, 3) c + frac(1, 3) b) $
 
-$ A underline(e_(i)) =
-  mat(
-	a_(1, 1), a_(1, 2), dots, a_(1, n);
-	a_(2, 1), a_(2, 2), dots, a_(2, n);
-	dots.v, dots.v, dots.down, dots.v;
-	a_(n, 1), a_(n, 2), dots, a_(n, n);
-) mat(0; dots.v; i; dots.v; 0) =
-mat(a_(1, i); a_(2, i); dots.v; a_(n, i)) $
+	Indeed:
 
-Which means that any image can be written as a linear combination of the
-columns of $A$, taken as vectors:
-
-$ underline(w) = A underline(v) = A lambda_(1) underline(e_(1)) +
-  A lambda_(2) underline(e_(2)) + dots + A lambda_(n) underline(e_(n)) =
-  lambda_(1) mat(a_(1, 1); a_(2, 1); dots.v; a_(n, 1)) +
-  lambda_(2) mat(a_(1, 2); a_(2, 2); dots.v; a_(n, 2)) +
-  dots + lambda_(n) mat(a_(1, n); a_(2, n); dots.v; a_(n, n)) $
-
-Being $underline(w)$ a generic vector, this must mean that the columns of $A$,
-taken as vectors, is a set that can generate $W$. To know the dimension of
-$Im(V)$, that is to say, the rank of $A$, it suffices to find the smallest
-number of column-vectors of $A$ that is linearly independent.
-
-By @Rank-nullity-theorem, the dimension of $Im(V)$, which is equal to
-$"rank"(A)$, has to be equal to the dimension of the domain, which in
-this case is just $RR^(n)$ having dimension $n$. Therefore, for a matrix
-to be invertible (that is, to be the matrix associated to an invertible
-linear transformation), its rank has to be equal to the number of its
-columns or, equivalently, if its columns form a linearly independent set.
-If this happens, such a matrix is said to have *full rank*.
-
-@Basis-change-is-matrix-multiplication proves that it is possible to
-convert the coordinate representation of a vector with respect to a
-given basis in the representation of the same vector to a different
-basis by multiplying the known representation with respect to a
-"conversion" matrix $P$. The same can be achieved with respect to
-matrices associated to endomorphisms.
-
-#theorem[
-	Let $T: V |-> V$ be an endomorphism of dimension $n$. Let $A$ be the
-	matrix associated to $T$ with respect to the basis $cal(B)$ (for both
-	domain and codomain), and let $A'$ be the matrix associated to $T$ with
-	respect to a different basis $cal(B')$. There exists an invertible matrix
-	$P$ such that:
-
-	$ A = P A' P^(-1) $
-] <Matrix-basis-change-is-matrix-multiplication>
-#proof[
-	Let $underline(x)$ be a vector of $V$, and let $underline(y)$ be the
-	result of applying $T$ to $underline(x)$. Being $T$ an endomorphism,
-	both $underline(x)$ and $underline(y)$ belong to the same vector space,
-	and can therefore be represented by the bases $cal(B)$ and $cal(B')$:
-
-	#grid(
-		columns: (0.25fr, 0.25fr, 0.25fr, 0.25fr),
-		[$ underline(x) <=> mat(x_(1); dots.v; x_(n))_(cal(B)) $],
-		[$ underline(x) <=> mat(x'_(1); dots.v; x'_(n))_(cal(B')) $],
-		[$ underline(y) = T(underline(x)) <=> mat(y_(1); dots.v; y_(n))_(cal(B)) $],
-		[$ underline(y) = T(underline(x)) <=> mat(y'_(1); dots.v; y'_(n))_(cal(B')) $],
-	)
-
-	By definition of associated matrix, applying $T$ to $underline(x)$ is
-	equivalent to multiplying $A$ with the representation of $underline(x)$
-	with respect to $cal(B)$, or multiplying $A'$ with the representation
-	of $underline(x)$ with respect to $cal(B')$:
-
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[$ mat(y_(1); dots.v; y_(n))_(cal(B)) =
-		A mat(x_(1); dots.v; x_(n))_(cal(B)) $],
-		[$ mat(y'_(1); dots.v; y'_(n))_(cal(B')) =
-		A' mat(x'_(1); dots.v; x'_(n))_(cal(B')) $]
-	)
-
-	As stated in @Basis-change-is-matrix-multiplication, there exist a matrix
-	$P$ that permits to convert the representation of a vector with respect to
-	a given basis in the representation to a different basis, while the inverse
-	matrix $P^(-1)$ does the opposite conversion. Such conversion, since they
-	belong to the same vector space $V$, can be done for both $underline(x)$
-	and $underline(y)$:
-
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[$ mat(y'_(1); y'_(2); dots.v; y'_(n)) =
-		P^(-1) mat(y_(1); y_(2); dots.v; y_(n)) $],
-		[$ mat(x'_(1); x'_(2); dots.v; x'_(n)) =
-		P^(-1) mat(x_(1); x_(2); dots.v; x_(n)) $])
-
-	Substituting in the previous expression gives:
-
-	$ mat(y'_(1); dots.v; y'_(n))_(cal(B')) =
-	A' mat(x'_(1); dots.v; x'_(n))_(cal(B')) =>
-	P^(-1) mat(y_(1); dots.v; y_(n))_(cal(B)) =
-	A' P^(-1) mat(x_(1); dots.v; x_(n))_(cal(B)) =>
-	P^(-1) A cancel(mat(x_(1); dots.v; x_(n))_(cal(B))) =
-	A' P^(-1) cancel(mat(x_(1); dots.v; x_(n))_(cal(B))) => \
-	P^(-1) A = A' P^(-1) => cancel(P) cancel(P^(-1)) A = P A' P^(-1) =>
-	A = P A' P^(-1) $
+	$ T^(-1)(T(mat(a, b; c, d))) &=
+	  T^(-1)(mat(a + b + c, 2b; b + c, 3d + 2c)) = \
+	  &= mat((a + b + c) - (b + c),
+	      frac(1, 2) (2b);
+	      (b + c) - frac(1, 2) (2b),
+	      frac(1, 3) (3d + 2c) - frac(2, 3) (b + c) + frac(1, 3) 2b) = \
+	  &= mat(a + cancel(b) + cancel(c) - cancel(b) - cancel(c),
+	      b;
+	      cancel(b) + c - cancel(b),
+	      d + cancel(frac(2, 3) c) - cancel(frac(2, 3) b) + cancel(frac(2, 3) c) + cancel(frac(2, 3) b)) =
+	  mat(a, b; c, d) $
 ]

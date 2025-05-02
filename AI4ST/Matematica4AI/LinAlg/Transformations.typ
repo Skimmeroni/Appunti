@@ -219,7 +219,7 @@ different bases.
 	to $cal(B')$ and $cal(C')$. Let $P$ be the matrix of basis change from
 	$cal(B)$ to $cal(B')$, and let $Q$ be the matrix of basis change from
 	$cal(C)$ to $cal(C')$. Then $M_(phi.alt) = Q^(-1) M'_(phi.alt) P$.
-]
+] <Matrix-basis-change-is-matrix-multiplication>
 #proof[
 	By definition, $M_(phi.alt) B = C$ and $M'_(phi.alt) B' = C'$.
 	But $P B = B'$ and $Q C = C'$, which gives:
