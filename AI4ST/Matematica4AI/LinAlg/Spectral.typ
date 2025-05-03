@@ -107,7 +107,7 @@ If the eigenvectors of symmetric matrix form an orthonormal basis,
 	$ A = mat(-1, 1, 0; 1, -1, 0; 0, 0, 3) $
 ]
 #solution[
-	$A$ is diagonalizable by virtue of @Symmetric-is-diagonalizable.
+	$A$ is diagonalizable by virtue of @Classes-always-diagonalizable
 	The eigenvalues can be retrieved from:
 
 	$ det(A - lambda I) =

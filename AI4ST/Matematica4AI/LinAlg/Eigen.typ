@@ -1,6 +1,6 @@
 #import "../Math4AI_definitions.typ": *
 
-// What's the point of eigen stuff?
+=== Definition
 
 Let $A$ be an $n times n$ square matrix, and let $lambda$ be a real value.
 The $n$-dimensional vector $underline(x)$ is said to be an *eigenvector*
@@ -8,11 +8,13 @@ of $A$ if it's not null and if:
 
 $ A underline(x) = lambda underline(x) $
 
-Where $lambda$ is the corresponding *eigenvalue* of $A$.
+Where $lambda$ is the corresponding *eigenvalue* of $A$. The set of all
+the (distinct) eigenvalues of a matrix is called its *eigenspectrum*, or
+just *spectrum*.
 
-Retrieving the eigenvectors of a matrix $A$ by applying such definition is
-not possible, since the information contained in the equation is insufficient.
-Infact:
+Note that it's impossible to retrieve the eigenvectors of a matrix $A$ by
+applying such definition directly. This is because the information contained
+in the equation is insufficient:
 
 $ A underline(x) = lambda underline(x) =>
   mat(a_(1, 1), a_(1, 2), dots, a_(1, n);
@@ -30,25 +32,32 @@ $ A underline(x) = lambda underline(x) =>
 	a_(n, 1) dot x_(1) + a_(n, 2) dot x_(2) + dots + x_(n) a_(n, n) =
 	lambda x_(n)) $
 
-Even assuming the $A$ matrix to be known, this system of equation has $n$
-equations but $n + 1$ unknowns (the $n$ components of $underline(x)$ and
-$lambda$). It is still possible to retrieve the eigenvectors of a matrix
-by following a different approach, by first retrieving its eigenvalues and
-then applying such definition.
+Even if the entries of $A$ were to be known, each equation has $n$
+known terms and $n + 1$ unknowns (the $n$ components of $underline(x)$
+and $lambda$).
+
+=== Computing the eigenvalues
+
+The correct way to obtain the eigenvectors of a matrix is to retrieve
+its eigenvalues first. Then, once known, apply the definition to retrieve
+the eigenvectors.
 
 Given a square matrix $A$ and a real value $lambda$, the *characteristic
 polynomial* of $A$ is defined as:
 
-$ p_(A)(lambda) = det(A - lambda I) = c_(0) + c_(1) lambda + c_(2) lambda^(2)
-  + dots + c_(n − 1) lambda^(n − 1) + (−1)^(n) lambda^(n) $
+$ p_(A)(lambda) =
+  det(A - lambda I) &=
+  c_(0) + c_(1) lambda + c_(2) lambda^(2) + dots + c_(n - 1) lambda^(n − 1) + (−1)^(n) lambda^(n) $
 
-Where:
+With $c_(0), c_(1), dots, c_(n - 1) in RR$. In particular:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
 	[$ c_(0) = det(A) $],
-	[$ c_(n − 1) = (−1)^(n − 1) tr(A) $]
+	[$ c_(n - 1) = (−1)^(n - 1) tr(A) $]
 )
+
+The characteristic polynomial of a matrix can be used to retrieve said spectrum.
 
 #theorem[
 	A real value is an eigenvalue for a given matrix if and only if
@@ -98,52 +107,261 @@ Where:
 	Which is the definition of eigenvalue.
 ]
 
-Knowing how to compute eigenvalues, it is then possible to solve the
-aforementioned equation and retrieve the eigenvectors.
+Note that an eigenvalue might appear more than once as root of the
+characteristic polynomial. The number of times an eigenvalue figures
+as solution to the characteristic polynomial of a matrix is referred
+to as the *algebraic multiplicity* of the eigenvalue. The algebraic
+multiplicity of an eigenvalue $lambda$ is denoted as $m_(a)(lambda)$.
 
-// ADD AN EXAMPLE
+#exercise[
+	What is the spectrum of the following matrix?
 
-Eigenvectors and eigenvalues can be defined with respect to linear
-transformations as well. Given a linear transformation $T: V |-> V$,
-a vector $underline(v) in V$ is an eigenvector for $T$ if $T underline(v)
-= lambda underline(v)$, where $lambda$ is an eigenvalue for $T$. Notice
-how it has been imposed that the transformation $T$ is an endomorphism,
-since otherwise mirroring the definition of eigenvector for matrices
-could not have been possible.
+	$ A = mat(7, frac(10, 3), -frac(2, 3);
+	          -1, frac(7, 3), -frac(2, 3);
+	          1, frac(2, 3), frac(11, 3)) $
+] <Compute-eigenvalues>
+#solution[
+	The determinant of $A$ is $75$. Applying @Eigenvalues-as-polynomial-roots:
 
-As stated in @Eigenvalues-as-polynomial-roots, to compute the eigenvalues
-of a matrix, it suffices to compute its characteristic polynomial. But any
-matrix can be associated to a linear transformation and vice versa, therefore
-to compute the eigenvalues of a linear transformation it suffices to compute
-the characteristic polynomial of the associated matrix of the linear
-transformation.
+	$ p_(A)(lambda) &=
+	  det(A - lambda I) =
+	  det(mat(7, frac(10, 3), -frac(2, 3);
+	          -1, frac(7, 3), -frac(2, 3);
+	          1, frac(2, 3), frac(11, 3)) -
+	      mat(lambda, 0, 0;
+	          0, lambda, 0;
+	          0, 0, lambda)) =
+	  det(mat(7 - lambda, frac(10, 3), -frac(2, 3);
+	          -1, frac(7, 3) - lambda, -frac(2, 3);
+	          1, frac(2, 3), frac(11, 3) - lambda)) = \
+	  &= (7 - lambda) det(mat(frac(7, 3) - lambda, -frac(2, 3); frac(2, 3), frac(11, 3) - lambda))
+	     -frac(10, 3) det(mat(-1, -frac(2, 3); 1, frac(11, 3) - lambda))
+	     -frac(2, 3) det(mat(-1, frac(7, 3) - lambda; 1, frac(2, 3))) = \
+	  &= (7 - lambda)((frac(7, 3) - lambda)(frac(11, 3) - lambda) + frac(4, 9))
+	     -frac(10, 3)(-frac(11, 3) + lambda + frac(2, 3))
+	     -frac(2, 3)(-frac(2, 3) - frac(7, 3) + lambda) = \
+	  &= (7 - lambda)(frac(77, 9) - frac(7, 3) lambda - frac(11, 3) lambda + lambda^(2) + frac(4, 9))
+	     -frac(10, 3)(lambda - 3) -frac(2, 3)(lambda - 3) = \
+	  &= (7 - lambda)(lambda^(2) - 6 lambda + 9) -4 (lambda - 3) =
+	     7 lambda^(2) - 42 lambda + 63 - lambda^(3) + 6 lambda^(2) - 9 lambda -4 lambda + 12 = \
+	  &= - lambda^(3) + 13 lambda^(2) - 55 lambda + 75 =
+	     -(lambda - 5)(lambda^(2) - 8 lambda + 15) =
+	     -(lambda - 5)(lambda - 5)(lambda - 3) $
 
-#theorem[
-	Let $T: V |-> V$ be an endomorphism, and let $A$ and $A'$ be two
-	matrices associated to $T$ with respect to the bases $cal(B)$ and
-	$cal(B')$ respectively. The characteristic polynomials of $A$ and
-	$A'$ are equivalent.
-] <Characteristic-polynomial-is-of-transformation>
-#proof[
-	The result follows from applying
-	@Matrix-basis-change-is-matrix-multiplication
-	to the characteristic polynomial of one of the matrices:
-
-	$ p_(A)(lambda) = det(A - lambda I) = det(P A' P^(-1) - lambda I) =
-	det(P A' P^(-1) - lambda P I P^(-1)) = \
-	det(P (A' P^(-1) - lambda I P^(-1))) =
-	det(P (A' - lambda I) P^(-1)) =
-	cancel(det(P)) det(A' - lambda I) cancel(det(P^(-1))) = \
-	det(A' - lambda I) = p_(A')(lambda) $
+	The two solutions are $lambda_(1) = 3$ with algebraic multiplicity
+	equal to $2$ and $lambda_(2) = 5$ with algebraic multiplicity equal
+	to $1$. The spectrum of $A$ is then the set ${3, 5}$.
 ]
 
-@Characteristic-polynomial-is-of-transformation justifies referring
-to such polynomial as the characteristic polynomial of the linear
-transformation itself, and not to one of the possible associated
-matrices to such transformation, since the choice of the matrix is
-irrelevant. Of course, the most convenient choice for the associated
-matrix is the one constructed with respect to the canonical basis,
-which in general requires the least amount of effort.
+#proposition[
+	Similar matrices have the same spectrum.
+] <Similar-matrices-same-spectrum>
+#proof[
+	Let $A$ and $B$ be two similar matrices. There exist then an
+	invertible matrix $P$ such that $A = P B P^(-1)$. Let $p_(A)(lambda)$
+	and $p_(B)(lambda)$ be the characteristic polynomial of $A$ and $B$
+	respectively. Applying @Matrix-basis-change-is-matrix-multiplication
+	to $p_(A)(lambda)$:
+
+	$ p_(A)(lambda) &= det(A - lambda I) = det(P B P^(-1) - lambda I) =
+	  det(P B P^(-1) - lambda P I P^(-1)) = \
+	  &= det(P (B P^(-1) - lambda I P^(-1))) =
+	  det(P (B - lambda I) P^(-1)) =
+	  cancel(det(P)) det(B - lambda I) cancel(det(P^(-1))) = \
+	  &= det(B - lambda I) = p_(B)(lambda) $
+]
+
+There is also an interesting connection between the eigenvalues of a
+matrix, its determinant and its trace.
+
+#proposition[
+	The determinant of a matrix is the product of its eigenvalues
+	(counted with multiplicity), whereas the trace of a matrix is
+	the sum of its eigenvalues (counted with multiplicity).
+]
+// #proof[
+//
+// ]
+
+=== Computing the eigenvectors
+
+Once @Eigenvalues-as-polynomial-roots is applied, it is then possible
+to retrieve the eigenvectors of a matrix by applying the definition.
+
+Note that the expression $det(A - lambda I) = 0$ entails that the system
+of equations associated to $A underline(x) = lambda underline(x)$ has an
+infinite number of solutions. This means that for each eigenvalue there
+exist not just one eigenvector, but an infinite set of them.
+
+The vector space spanned by each set of eigenvectors associated
+to a certain eigenvalue is called its *eigenspace*. The eigenspace
+associated to an eigenvalue $lambda$ is denoted as $E_(lambda)$.
+The dimension of an eigenspace is referred to as the *geometric
+multiplicity* of the corresponding eigenvalue. The geometric
+multiplicity of an eigenvalue $lambda$ is denoted as $m_(g)(lambda)$.
+
+#exercise[
+	What are the eigenspaces of the matrix of @Compute-eigenvalues ?
+] <Compute-eigenvectors>
+#solution[
+	$ A underline(x) = lambda_(1) underline(x) => &
+	  mat(7, frac(10, 3), -frac(2, 3);
+	          -1, frac(7, 3), -frac(2, 3);
+	          1, frac(2, 3), frac(11, 3)) vec(x, y, z) =
+	  3 vec(x, y, z) =>
+	  vec(7 dot x + frac(10, 3) dot y - frac(2, 3) dot z,
+	      -1 dot x + frac(7, 3) dot y - frac(2, 3) dot z,
+	      1 dot x + frac(2, 3) dot y + frac(11, 3) dot z) =
+	  vec(3x, 3y, 3z) => \
+	  & cases(7x + frac(10, 3)y - frac(2, 3)z = 3x,
+	          -x + frac(7, 3)y - frac(2, 3)z = 3y,
+	          x + frac(2, 3)y + frac(11, 3)z = 3z) =>
+	    cases(21x + 10y - 2z - 9x = 0,
+	          3x - 7y + 2z + 9y = 0,
+	          3x + 2y + 11z - 9z = 0) =>
+	    cases(6x + 5y - z = 0,
+	          3x + 2y + 2z = 0,
+	          3x + 2y + 2z = 0) => \
+	  & cases(5x + 4y = 0,
+	          z = -frac(3, 2)x - y,
+	          z = -frac(3, 2)x - y) =>
+	    cases(x = x,
+	          y = -frac(5, 4)x,
+	          z = -frac(1, 4)x) $
+
+	$ A underline(x) = lambda_(2) underline(x) => &
+	  mat(7, frac(10, 3), -frac(2, 3);
+	          -1, frac(7, 3), -frac(2, 3);
+	          1, frac(2, 3), frac(11, 3)) vec(x, y, z) =
+	  5 vec(x, y, z) =>
+	  vec(7 dot x + frac(10, 3) dot y - frac(2, 3) dot z,
+	      -1 dot x + frac(7, 3) dot y - frac(2, 3) dot z,
+	      1 dot x + frac(2, 3) dot y + frac(11, 3) dot z) =
+	  vec(5x, 5y, 5z) => \
+	  & cases(7x + frac(10, 3)y - frac(2, 3)z = 5x,
+	          -x + frac(7, 3)y - frac(2, 3)z = 5y,
+	          x + frac(2, 3)y + frac(11, 3)z = 5z) =>
+	    cases(21x + 10y - 2z - 15x = 0,
+	          3x - 7y + 2z + 15y = 0,
+	          3x + 2y + 11z - 15z = 0) =>
+	    cases(3x + 5y - z = 0,
+	          3x + 8y + 2z = 0,
+	          3x + 2y - 4z = 0) => \
+	  & cases(z = 3x + 5y,
+	          x + 2y = 0,
+	          x + 2y = 0) =>
+	    cases(z = -y,
+	          y = y,
+	          x = -2y) $
+
+	This means that the two eigenspaces are $E_(lambda_(1)) =
+	"span"{(1, -frac(5, 4), -frac(1, 4))^(T)}$ and $E_(lambda_(2))
+	= "span"{(-1, 1, -2)^(T)}$. Both have geometric multiplicity
+	equal to $1$.
+]
+
+#proposition[
+	For any eigenvalue $lambda$, $1 lt.eq m_(g)(lambda) lt.eq m_(a)(lambda)$.
+] <Eigenvalues-inequality>
+// #proof[
+// To be added
+// ]
+
+=== Eigenvectors and eigenvalues of linear transformations
+
+Eigenvectors and eigenvalues can be defined with respect to linear
+transformations as well. Given an endomorphism $T: V mapsto V$, a
+vector $underline(v) in V$ is an eigenvector for $T$ if $T underline(v)
+= lambda underline(v)$, where $lambda$ is an eigenvalue for $T$.
+
+As stated in @Eigenvalues-as-polynomial-roots, the eigenvalues of a matrix
+can be computed employing its characteristic polynomial. Since any linear
+transformation can be represented using a matrix, to compute the eigenvalues
+of a linear transformation it is possible to compute the characteristic
+polynomial of the associated matrix of the linear transformation. Once the
+eigenvalues are known, the eigenvectors can be retrieved as usual.
+
+@Similar-matrices-same-spectrum states that similar matrices have the
+same eigenvalues, and all matrix representations of the same linear
+transformations are always similar. This means that the choice of the
+bases of the matrix associated to the endomorphism, with respect to
+finding its eigenvalues, are irrelevant. For this reason, it is possible
+to refer to the characteristic polynomial of a linear transformation
+without having to specify the basis. Of course, from a practical standpoint,
+the most convenient choice of basis is most likely the canonical basis.
+
+#exercise[
+	What are the eigenvectors and eigenvalues of the linear
+	transformation $T: RR_(2)[x] mapsto RR_(2)[x]$ defined
+	as $T(p(x)) = p(x) - 3x frac(d, d x) p(x) + 4 frac(d^(2), d x) p(x)$?
+] <Compute-eigenvectors-2>
+#solution[
+	First, it is necessary to construct the matrix representation of $T$.
+	Evaluating the canonical basis ${1, x, x^(2)}$ with $T$ gives:
+
+	$ cases(T(1) = 1 - 3x frac(d, d x) (1) + 4 frac(d^(2), d x) (1) = 1 - 0 + 0 = 1,
+	        T(x) = x - 3x frac(d, d x) (x) + 4 frac(d^(2), d x) (x) = x - 3x = -2x,
+	        T(x^(2)) = x^(2) - 3x frac(d, d x) (x^(2)) + 4 frac(d^(2), d x) (x^(2)) = x^(2) - 6x^(2) + 8 = 8 - 5x^(2)) $
+
+	Which gives the matrix:
+
+	#grid(
+		columns: (0.2fr, 0.2fr, 0.2fr, 0.4fr),
+		[$ 1 <==> vec(1, 0, 0) $],
+		[$ -2x <==> vec(0, -2, 0) $],
+		[$ 8 - 5x^(2) <==> vec(8, 0, -5) $],
+		[$ A = mat(1, 0, 8; 0, -2, 0; 0, 0, -5) $]
+	)
+
+	The characteristic polynomial of $A$ is:
+
+	$ det(mat(1, 0, 8; 0, -2, 0; 0, 0, -5) - lambda mat(1, 0, 0; 0, 1, 0; 0, 0, 1)) =
+	  det(mat(1 - lambda, 0, 8; 0, -2 - lambda, 0; 0, 0, -5 - lambda)) =
+	  (1 - lambda)(lambda + 2)(lambda + 5) $
+
+	Which means that the spectrum of $A$ (and of $T$) is ${-5, -2, 1}$.
+	The eigenspace of $A$ is:
+
+	$ mat(1, 0, 8; 0, -2, 0; 0, 0, -5) vec(x, y, z) = -5 vec(x, y, z) => 
+	  mat(1 dot x + 0 dot y + 8 dot z;
+	      0 dot x -2 dot y + 0 dot z;
+	      0 dot x + 0 dot y -5 dot z) = -5 vec(x, y, z) => 
+	  cases(x + 8z = -5x, -2y = -5y, -5z = -5z) =>
+	  cases(x = -frac(4, 3)z, y = 0, z = z) $
+
+	$ mat(1, 0, 8; 0, -2, 0; 0, 0, -5) vec(x, y, z) = -2 vec(x, y, z) => 
+	  mat(1 dot x + 0 dot y + 8 dot z;
+	      0 dot x -2 dot y + 0 dot z;
+	      0 dot x + 0 dot y -5 dot z) = -2 vec(x, y, z) => 
+	  cases(x + 8z = -2x, -2y = -2y, -5z = -2z) =>
+	  cases(x = 0, y = y, z = 0) $
+
+	$ mat(1, 0, 8; 0, -2, 0; 0, 0, -5) vec(x, y, z) = 1 vec(x, y, z) => 
+	  mat(1 dot x + 0 dot y + 8 dot z;
+	      0 dot x -2 dot y + 0 dot z;
+	      0 dot x + 0 dot y -5 dot z) = vec(x, y, z) => 
+	  cases(x + 8z = x, -2y = y, -5z = z) =>
+	  cases(x = x, y = 0, z = 0) $
+
+	The eigenspaces are $E_(lambda_(1)) = "span"{(-frac(4, 3), 0, 1)^(T)} $,
+	$E_(lambda_(2)) = "span"{(0, 1, 0)^(T)}$ and $E_(lambda_(3)) =
+	"span"{(1, 0, 0)^(T)}$. All have geometric multiplicity equal to $1$.
+
+	The eigenspaces of $T$ can be constructed by "undoing" the vector
+	representation of the eigenspaces of $A$:
+
+	#grid(
+		columns: (0.4fr, 0.3fr, 0.3fr),
+		[$ (-frac(4, 3)t) dot 1 + 0 dot x + t dot x^(2) = -frac(4, 3)t + x^(2)t $],
+		[$ 0 dot 1 + t dot x + 0 dot x^(2) = x t $],
+		[$ t dot 1 + 0 dot x + 0 dot x^(2) = t $]
+	)
+
+	Which gives: $E_(lambda_(1)) = "span"{-frac(4, 3)t + x^(2)}$,
+	$E_(lambda_(2)) = "span"{x}$, $E_(lambda_(3)) = "span"{1}$.
+]
+
+=== Diagonalization
 
 #theorem("Diagonalization theorem")[
 	- *With respect to endomorphisms*. Let $T: V |-> V$ be an endomorphism
@@ -225,59 +443,17 @@ $A$ isn't always true, therefore not all matrices are diagonalizable. A
 matrix whose set of eigenvectors does not form a basis is said to be
 *defective*.
 
-// Add an example of a diagonalizable matrix
+#proposition[
+	The following classes of matrices are always diagonalizable:
 
-#exercise[
-	Prove that the matrix $A = mat(0, 1; 0, 0)$ is defective.
-]
-#solution[
-	Computing the characteristic polynomial of $A$ gives:
-
-	$ p_(A)(lambda) =
-	  det(A - lambda I) =
-	  mat(delim: "|", 0 - lambda, 1 - 0; 0 - 0, 0 - lambda) =
-	  mat(delim: "|", -lambda, 1; 0, -lambda) =
-	  (-lambda) dot (-lambda) - (0 dot 1) =
-	  lambda^(2) $
-
-	Such polynomial has only two roots, both being $0$. Therefore, the
-	eigenvalues of $A$ are $lambda_(1) = lambda_(2) = 0$. By applying the
-	definition:
-
-	$ A underline(x) = lambda underline(x) =>
-	mat(0, 1; 0, 0)
-	mat(x; y) =
-	0 mat(x; y) =>
-	mat(0 dot x + 1 dot y; 0 dot x + 0 dot y)
-	= mat(0 dot x; 0 dot y) =>
-	mat(y; 0) = mat(0; 0) =>
-	cases(y = 0, 0 = 0) $
-
-	This means that the eigenvectors of $A$ are all the vectors in the
-	form $mat(0; k)$ with $k in RR$. Of course, the set $E = {mat(0; k)}
-	subset RR^(2)$ is not linearly independent (at least two vectors are
-	needed) and therefore $A$ is defective.
-]
+	- Diagonal matrices;
+	- Symmetric matrices;
+	- Matrices of dimension $n$ having $n$ distinct eigenvalues.
+] <Classes-always-diagonalizable>
 
 Determining whether a matrix is diagonalizable through such definition can
 quickly become cumbersome, but there are necessary and sufficient conditions
 that are equivalent and that can ease the process.
-
-Let $A$ be a matrix and $lambda$ one of its eigenvalues. The number of
-times $lambda$ appears as a root of the characteristic polynomial of $A$
-is the *algebraic multiplicity* of $lambda$, and is denoted as $m_(a)(lambda)$.
-The dimension of the vector space generated by the set of eigenvectors that
-have $lambda$ as their eigenvalue is the *geometric multiplicity* of $lambda$,
-and is denoted as $m_(g)(lambda)$.
-
-#theorem[
-	For any eigenvalue $lambda$, the following inequality holds:
-
-	$ 1 lt.eq m_(g)(lambda) lt.eq m_(a)(lambda) $
-] <Eigenvalues-inequality>
-// #proof[
-// To be added
-// ]
 
 #theorem[
 	A matrix is diagonalizable if and only if, for each of its eigenvalues
@@ -287,18 +463,24 @@ and is denoted as $m_(g)(lambda)$.
 // To be added
 //]
 
-#corollary[
-	Any $n times n$ matrix that has $n$ distinct eigenvalues is diagonalizable.
-] <Single-multiplicity-is-diagonalizable>
-#proof[
-	If a matrix has as many distinct eigenvalues as its dimension it means
-	that the algebraic multiplicity of any of its eigenvalues is $1$. By
-	@Eigenvalues-inequality, for any eigenvalue $lambda_(i)$ its geometric
-	multiplicity must also be $1$, because $1 lt.eq m_(g)(lambda_(i)) lt.eq
-	1$. The fact that such matrix is diagonalizable follows from applying
-	@Same-multiplicity-is-diagonalizable.
+#exercise[
+	Consider the matrices in @Compute-eigenvectors and
+	@Compute-eigenvectors-2. Are they diagonalizable?
 ]
+#solution[
+	The matrix in @Compute-eigenvectors has eigenvalues $lambda_(1) =
+	3$ and $lambda_(2) = 5$. Their algebraic multiplicity are $2$ and
+	$1$ respectively, whereas their geometric multiplicity are both
+	$1$. By virtue of @Same-multiplicity-is-diagonalizable, it is not
+	diagonalizable.
 
-#theorem[
-	A symmetric matrix is always diagonalizable.
-] <Symmetric-is-diagonalizable>
+	On the other hand, the matrix in @Compute-eigenvectors-2 has three
+	eigenvalues, whose algebraic and geometric multiplicity is $1$ in
+	all of three cases. This means that it is diagonalizable; its
+	diagonalization is:
+
+	$ mat(1, 0, 8; 0, -2, 0; 0, 0, -5) =
+	  mat(-frac(4, 3), 0, 1; 0, 1, 0; 1, 0, 0) 
+	  mat(-5, 0, 0; 0, -2, 0; 0, 0, 1)
+	  mat(0, 0, 1; 0, 1, 0; 1, 0, frac(4, 3)) $
+]
