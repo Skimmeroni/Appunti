@@ -47,7 +47,7 @@
 #include "LinAlg/KerIm.typ"
 == Eigenvalues and Eigenvectors
 #include "LinAlg/Eigen.typ"
-== Spectral Theorem
+== Inner Product
 #include "LinAlg/Spectral.typ"
 == Decompositions
 #include "LinAlg/Decomposition.typ"

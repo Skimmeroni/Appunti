@@ -9,8 +9,9 @@ of $A$ if it's not null and if:
 $ A underline(x) = lambda underline(x) $
 
 Where $lambda$ is the corresponding *eigenvalue* of $A$. The set of all
-the (distinct) eigenvalues of a matrix is called its *eigenspectrum*, or
-just *spectrum*.
+the (distinct) eigenvalues of a matrix is called its *eigenspectrum*,
+or just *spectrum*. It is customary to sort the spectrum of a matrix in
+descending order.
 
 Note that it's impossible to retrieve the eigenvectors of a matrix $A$ by
 applying such definition directly. This is because the information contained
@@ -364,26 +365,24 @@ the most convenient choice of basis is most likely the canonical basis.
 === Diagonalization
 
 #theorem("Diagonalization theorem")[
-	- *With respect to endomorphisms*. Let $T: V |-> V$ be an endomorphism
-	  of dimension $n$ that has $n$ linearly independent eigenvectors
-	  $underline(e_(1)), dots, underline(e_(n))$. Let $E$ be the set that
-	  contains such vectors, forming a basis for $V$. Let $P$ be the matrix
-	  associated to $T$ with respect to the vectors in $E$. The matrix $P$
-	  is a diagonal matrix whose non-zero element are the eigenvalues of $T$.
-	- *With respect to matrices*. Let $A$ be a $n times n$ matrix that has
+	- (*With respect to matrices*) Let $A$ be a $n times n$ matrix
+	  that has $n$ linearly independent eigenvectors $underline(e_(1)),
+	  dots, underline(e_(n))$. Then there exist a diagonal matrix $D$
+	  that is similar to $A$, meaning that there exist a matrix $P$
+	  such that $A = P D P^(-1)$. In particular, the matrix $D$ has
+	  the eigenvalues of $A$ as non-zero elements (counted with
+	  multiplicity) and $P$ has the eigenvectors of $A$ as columns.
+	- (*With respect to endomorphisms*) Let $T: V mapsto V$ be an
+	  endomorphism mapping vector spaces of dimension $n$ having
 	  $n$ linearly independent eigenvectors $underline(e_(1)), dots,
-	  underline(e_(n))$. Then there exist a diagonal matrix $D$ that is
-	  similar to $A$, meaning that there exist a matrix $P$ such that $A =
-	  P D P^(-1)$. In particular, the matrix $D$ has the eigenvalues of $A$
-	  as non-zero elements (counted with multiplicity) and $P$ has the
-	  eigenvectors of $A$ as columns.
+	  underline(e_(n))$. Let $M$ be the matrix representation of $T$
+	  with respect to said eigenvectors. The matrix $M$ is a diagonal
+	  matrix whose non-zero entries are the eigenvalues of $T$.
 ] <Diagonalization-theorem>
 #proof[
-	// To be revisited with respect to both points
+	// The second depends on the first?
 
-	The first point is trivial
-
-	For the second point, consider the two matrices $P$ and $D$:
+	Consider the two matrices $P$ and $D$:
 
 	#grid(
 	columns: (0.5fr, 0.5fr),
@@ -427,33 +426,18 @@ the most convenient choice of basis is most likely the canonical basis.
 	$ A P = P D => A cancel(P) cancel(P^(-1)) = P D P^(-1) => A = P D P^(-1) $
 ]
 
-If for a given square matrix $A$ there exist an invertible matrix $P$
-and a diagonal matrix $D$ such that $A = P D P^(-1)$, matrix $A$ is
-said to be *diagonalizable*. As stated in @Diagonalization-theorem,
-the matrix $P$ is an invertible matrix whose columns are the eigenvectors
-of $A$ while $D$ is a diagonal matrix whose non-zero elements are the
-eigenvalues of $A$.
+If @Diagonalization-theorem holds for a certain matrix, said matrix is said
+to be *diagonalizable*. Note that, even though a matrix always has as many
+eigenvalues as its dimension, not all matrices are diagonalizable. This is
+because the Fundamental Theorem of Algebra states that the characteristic
+polynomial of a matrix of dimension $n$ will always have $n$ roots (albeit
+some might be complex numbers), but the corresponding eigenvectors might
+not form a basis.
 
-By the Fundamental Theorem of Algebra, the characteristic polynomial
-of any matrix will always have at least $n$ roots, albeit they might
-be complex numbers. Therefore, any square matrix will always have $n$
-(not necessarely distinct) eigenvalues. Despite this, the fact that the
-set of its eigenvectors forms a basis for the vector space associated to
-$A$ isn't always true, therefore not all matrices are diagonalizable. A
-matrix whose set of eigenvectors does not form a basis is said to be
-*defective*.
-
-#proposition[
-	The following classes of matrices are always diagonalizable:
-
-	- Diagonal matrices;
-	- Symmetric matrices;
-	- Matrices of dimension $n$ having $n$ distinct eigenvalues.
-] <Classes-always-diagonalizable>
-
-Determining whether a matrix is diagonalizable through such definition can
-quickly become cumbersome, but there are necessary and sufficient conditions
-that are equivalent and that can ease the process.
+A matrix that is not diagonalizable is said to be *defective*. Determining
+whether a matrix is diagonalizable or defective can be done either applying
+@Diagonalization-theorem directly, but there are equivalent necessary and
+sufficient conditions that can simplify the process.
 
 #theorem[
 	A matrix is diagonalizable if and only if, for each of its eigenvalues
@@ -462,6 +446,24 @@ that are equivalent and that can ease the process.
 // #proof[
 // To be added
 //]
+
+#corollary[
+	If a matrix of dimension $n$ has $n$ distinct eigenvalues, then it's
+	always diagonalizable.
+] <Distinct-eigenvalues-always-diagonalizable>
+#proof[
+	Consider a matrix of dimension $n$ having $n$ distinct
+	eigenvalues. Each eigenvalue, by definition, has both
+	algebraic and geometric multiplicity equal to $1$. Therefore,
+	@Same-multiplicity-is-diagonalizable always applies.
+]
+
+The process of "breaking down" a diagonalizable matrix $A$ into a triplet
+$P D P^(-1)$ applying @Diagonalization-theorem is called *diagonalization*.
+Note that, for any matrix diagonalizable $A$, there exist an infinite amount
+of possible diagonalizations, since for any $k in RR$, the matrix $(k P) D
+(k^(-1) P^(-1))$ would still be a valid diagonalization (multiplying an
+eigenvector by a scalar still gives an eigenvector).
 
 #exercise[
 	Consider the matrices in @Compute-eigenvectors and
@@ -474,10 +476,11 @@ that are equivalent and that can ease the process.
 	$1$. By virtue of @Same-multiplicity-is-diagonalizable, it is not
 	diagonalizable.
 
-	On the other hand, the matrix in @Compute-eigenvectors-2 has three
-	eigenvalues, whose algebraic and geometric multiplicity is $1$ in
-	all of three cases. This means that it is diagonalizable; its
-	diagonalization is:
+	On the other hand, the matrix in @Compute-eigenvectors-2 has
+	three eigenvalues, whose algebraic and geometric multiplicity
+	is $1$ in all of three cases. This means that, due to
+	@Distinct-eigenvalues-always-diagonalizable, it is diagonalizable.
+	The diagonalization is:
 
 	$ mat(1, 0, 8; 0, -2, 0; 0, 0, -5) =
 	  mat(-frac(4, 3), 0, 1; 0, 1, 0; 1, 0, 0) 

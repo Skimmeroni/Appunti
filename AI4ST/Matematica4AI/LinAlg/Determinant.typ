@@ -325,6 +325,3 @@ The *trace* of a square matrix is defined as the sum of the elements on its
 diagonal:
 
 $ tr(A) = sum_(i = 1)^(n) a_(i, i) $
-
-If the inverse of a matrix is equal to his transposition, said matrix is
-called *orthogonal*.

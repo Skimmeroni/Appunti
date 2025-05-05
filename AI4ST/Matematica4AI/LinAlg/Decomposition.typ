@@ -1,27 +1,5 @@
 #import "../Math4AI_definitions.typ": *
 
-A symmetric matrix $A$ is said to be *definite positive* if, for any vector
-$underline(x)$, $angle.l underline(x), A underline(x) angle.r > 0$. It is
-instead said to be *semidefinite positive* if, for any vector $underline(x)$,
-$angle.l underline(x), A underline(x) angle.r gt.eq 0$.
-
-#theorem[
-	If a symmetric matrix is definite positive, each one of its eigenvalues
-	is real and strictly positive.
-] <Definite-positive-is-positive-eigenvalues>
-#proof[
-	// To be retrieved from lectures (messed up)
-]
-
-#theorem[
-	If a symmetric matrix is definite positive, each one of its eigenvalues
-	is real and either positive or equal to $0$.
-] <Semidefinite-positive-is-positive-or-null-eigenvalues>
-#proof[
-	The idea is the same as in @Definite-positive-is-positive-eigenvalues but
-	considering $gt.eq$ instead of $>$.
-]
-
 #theorem("Cholesky Decomposition")[
 	For any positive definite matrix $A$ there exists a lower triangular
 	matrix $L$ such that $A = L L^(T)$.
@@ -104,25 +82,6 @@ $angle.l underline(x), A underline(x) angle.r gt.eq 0$.
 properties, it can be written as a product in the form $P D P^(-1)$. A more
 generic result can be achieved for non-square matrices.
 
-#lemma[
-	For any matrix $A$, the matrices $A^(T) A$ and $A A^(T)$ are positive
-	semidefinite.
-] <A-transposed-A-positive-semidefinite>
-#proof[
-	For a matrix to be positive definite it also needs to be symmetric.
-	Matrix $A^(T) A$ is indeed symmetric since $(A^(T) A)^(T) = A^(T)
-	(A^(T))^(T) = A^(T) A$. Let $underline(y) = A underline(x)$. Then
-	$underline(y)^(T) = (A underline(x))^(T) = underline(x)^(T) A^(T)$.
-	This means that:
-
-	$ angle.l underline(x), A^(T) A underline(x) angle.r =
-	  underline(x)^(T) A^(T) A underline(x) =
-	  underline(y)^(T) underline(y) = sum_(i = 1)^(n) y_(i)^(2) $
-
-	Which, by definition, is greater or equal than $0$. $A A^(T)$ can be
-	proven to be positive semidefinite following a similar line of thought.
-]
-
 #theorem("Singular Value Decomposition")[
 	Any $m times n$ matrix $A$ can be written as the product $A = U Sigma
 	V^(T)$, where:
@@ -152,7 +111,7 @@ generic result can be achieved for non-square matrices.
 	By @A-transposed-A-positive-semidefinite, $A^(T) A$ is positive
 	semidefinite. In turn, by @Spectral-theorem, it can be diagonalized
 	as $P D P^(T)$, where the eigenvalues along the diagonal of $D$ are
-	non negative as of @Semidefinite-positive-is-positive-or-null-eigenvalues.
+	non negative as of @Definite-matrices-eigenvalues.
 
 	Since the dimension of $A$ is $m times n$, the dimension of $A^(T) A$
 	ought to be $n times n$. In turn, the dimension of $D$ ought to be $n
@@ -192,7 +151,7 @@ generic result can be achieved for non-square matrices.
 	positive semidefinite. In turn, by @Spectral-theorem,
 	it can be diagonalized as $Q C Q^(T)$, where the
 	eigenvalues along the diagonal of $C$ are non negative
-	as of @Semidefinite-positive-is-positive-or-null-eigenvalues.
+	as of @Definite-matrices-eigenvalues.
 
 	Since the dimension of $A$ is $m times n$, the dimension of $A A^(T)$
 	ought to be $m times m$. In turn, the dimension of $C$ ought to be $m
