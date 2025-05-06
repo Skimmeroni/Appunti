@@ -127,12 +127,6 @@ $ ket(Psi_(1)) &=
 
 The controlled Hadamard is given by:
 
-//$ mat(I, 0; 0, H) times.circle I =
-//  mat(mat(1, 0; 0, 1), 0; 0, frac(sqrt(2), 2) mat(1, 1; 1, -1)) times.circle mat(1, 0; 0, 1) =
-//  mat(1, 0, 0, 0; 0, 1, 0, 0;
-//      0, 0, frac(sqrt(2), 2), frac(sqrt(2), 2);
-//      0, 0, frac(sqrt(2), 2), -frac(sqrt(2), 2)) times.circle mat(1, 0; 0, 1) $
-
 $ "CH" =
   (ketbra(0, 0) times.circle I + ketbra(1, 1) times.circle Q) times.circle I =
   ketbra(0, 0) times.circle I times.circle I + ketbra(1, 1) times.circle Q times.circle I $

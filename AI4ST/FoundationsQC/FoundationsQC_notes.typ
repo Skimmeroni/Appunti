@@ -49,12 +49,25 @@
 #include "Qubits/Measurement.typ"
 == Qubit manipulations
 #include "Qubits/Manipulations.typ"
-== Quantum circuits for known states
-#include "Qubits/Circuits.typ"
-== Quantum algorithms
-#include "Qubits/Algorithms.typ"
 //== Density matrices
 //#include "Qubits/Density.typ"
+#pagebreak()
+
+= Quantum Algorithms
+== Introduction to algorithms
+#include "Algorithms/Introduction.typ"
+== Quantum circuits for known states
+#include "Algorithms/States.typ"
+== Deutsch-Josza Algorithm
+#include "Algorithms/Deutsch-Josza.typ"
+== Bernstein-Vazirani Algorithm
+#include "Algorithms/Bernstein-Vazirani.typ"
+== Grover Algorithm
+#include "Algorithms/Grover.typ"
+== Representing graphs with quantum circuits
+#include "Algorithms/Hypergraphs.typ"
+== Quantum teleportation
+#include "Algorithms/Teleportation.typ"
 #pagebreak()
 
 = Quantum Theory
