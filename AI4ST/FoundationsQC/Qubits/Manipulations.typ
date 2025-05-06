@@ -34,7 +34,7 @@ what constraint a quantum transformation must abide to:
 Clearly, measurements cannot be considered quantum transformations.
 
 Constraint number $2$ imposes that the operator has a matrix representation
-with respect to a given basis. As stated in @Equivalent-definitions-of-unitary-matrix, 
+with respect to a given basis. As stated in @Unitary-matrices-orthonormal-bases
 the one and only kind of matrices that abide to constraint number $3$ and $4$
 are the unitary matrices. This means that the set of unitary matrices and the
 set of valid quantum transformations are exactly the same set.

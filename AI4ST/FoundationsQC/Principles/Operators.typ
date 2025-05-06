@@ -36,6 +36,22 @@ $ A^(dagger) = A^(T^(*)) =
 A square matrix $A$ is said to be *Hermitian* if $A^(dagger) = A$. It
 is said to be *unitary* if $A^(dagger) = A^(-1)$.
 
+#lemma[
+  Let $M$ be a generic matrix. Then $M^(dagger)M$ is Hermitian.
+] <Constructing-Hermitian-matrices>
+// #proof[
+// 
+// ]
+
+#lemma[
+Let $A$ be a matrix and let $bold(v), bold(w)$ two vectors. If $A$ is
+Hermitian, then $angle.l bold(w), A bold(v) angle.r = angle.l A bold(w),
+bold(v) angle.r$.
+]
+// #proof[
+//
+// ]
+
 #theorem[
   An Hermitian matrix has all real eigenvalues.
 ]
@@ -83,17 +99,10 @@ is said to be *unitary* if $A^(dagger) = A^(-1)$.
 ]
 
 #theorem[
-  Let $U$ be a matrix. The following definitions are equivalent (if one
-  is true, the others are as well):
-
-  - $U$ is a unitary matrix;
-  - The columns of $U$ form an orthonormal basis of $CC^(n)$ with
-    respect to the inner product;
-  - The rows of $U$ form an orthonormal basis of $CC^(n)$ with
-    respect to the inner product;
-  - $U$ is $L^(2)$-norm invariant: given any vector $bold(v) in CC^(n)$,
-    $abs(abs(U bold(v))) = abs(abs(bold(v)))$.
-] <Equivalent-definitions-of-unitary-matrix>
+  If $U$ is a unitary matrix, then the columns/rows of $U$ form an
+  orthonormal for of $CC^(n)$ with respect to the inner product, and
+  vice versa.
+] <Unitary-matrices-orthonormal-bases>
 // #proof[
 //
 // ]
@@ -120,18 +129,6 @@ matrix representation of $O$. The conjugate transpose of an
 operator is also called its *adjoint operator*. If an operator
 is equal to its adjoint (if its matrix representation is Hermitian),
 it is said to be *self-adjoint*. 
-
-//#lemma[
-//  Given two vector spaces $V$ and $W$, let $O$ be an operator
-//  $O: V -> W$. For any two vectors $bold(v) in V$ and $bold(w)
-//  in W$, the following holds:
-//
-//  $ angle.l bold(v), O bold(w) angle.r =
-//    (angle.l O bold(w), bold(v) angle.r)^(dagger) $
-//]
-// #proof[
-//
-// ]
 
 Hermitian matrices are also normal matrices, therefore it is possible
 to apply the spectral theorem and obtain their eigendecomposition. The
@@ -172,3 +169,18 @@ spectral decomposition of an Hermitian matrix has a unique property.
 
   // Prove that the decomposition is true
 ]
+
+An important class of Hermitian operators are the *orthogonal projectors*.
+An orthogonal projector is any operator that is self-adjoint and maps
+elements of a space to elements of one of its subspaces. The matrix
+representation of an orthogonal projector, say $P$, has the remarkable
+property that $P^(n) = P = P^(dagger)$.
+
+Consider a vector space $V$ having an orthonormal basis $bold(v)_(1), dots,
+bold(v)_(n)$. Let $W$ be a subspace of $V$ of dimension $k lt.eq n$. It
+is possible to construct an orthogonal projector $P$ in matrix form employing
+said basis as:
+
+$ P = sum_(i = 1)^(k) bold(v)^(dagger)_(i) bold(v)_(i) $
+
+Which is Hermitian by virtue of @Constructing-Hermitian-matrices.

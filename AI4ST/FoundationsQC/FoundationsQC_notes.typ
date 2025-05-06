@@ -53,6 +53,8 @@
 #include "Qubits/Circuits.typ"
 == Quantum algorithms
 #include "Qubits/Algorithms.typ"
+//== Density matrices
+//#include "Qubits/Density.typ"
 #pagebreak()
 
 = Quantum Theory

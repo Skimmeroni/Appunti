@@ -17,13 +17,13 @@ were introduced later.]:
 + Scalability: a technology that is not just theoretical but also usable in
   real applications.
 
-Many real implementations of quantum computers include:
+Hardaware implementations of quantum computers include:
 
-- *Superconducting qubits*;
-- *Semiconductors*;
-- *Photonic qubits*;
-- *Trapped ions*;
-- *Neutral atoms*.
+- *Superconducting quantum computing*;
+- *Spin qubit quantum computing* (also known as *semiconductor quantum computing*);
+- *Linear optical quantum computing* (also known as *photonic quantum computing*);
+- *Trapped-ion quantum computing*;
+- *Neutral atom quantum computing*.
 
 Classical computers are based on the Von Neumann architecture, whereas quantum
 computers have many architecture model. Some architectures are better for some

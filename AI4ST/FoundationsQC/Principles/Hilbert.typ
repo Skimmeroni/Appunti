@@ -30,12 +30,83 @@ this three properties:
 The square root of the inner product of a vector $bold(x)$ with itself
 is called the *norm* of the vector:
 
-$ abs(bold(x)) = sqrt(angle.l bold(x)\, bold(x) angle.r) =
+$ abs(abs(bold(x))) = sqrt(angle.l bold(x)\, bold(x) angle.r) =
   sqrt(mat(x_(1)^(*), dots, x_(n)^(*)) mat(x_(1); dots.v; x_(n))) $
 
 Any vector space that possesses an inner product is called an *Hilbert
 space*. Hilbert spaces are so obiquitous that, when not specified, any
 vector space is assumed to be an Hilbert space.
+
+In quantum mechanics have particular relevance bases of vector spaces
+that are *orthonormal*, meaning that all vectors of the basis are orthogonal
+to each other (except for itself) and have norm equal to $1$. Given a vector
+space $V$ and a basis $B = bold(v)_(1), dots, bold(v)_(n)$ for $V$, The set
+$B$ forms an orthonormal basis if:
+
+$ forall i, j in \{1, dots, n\},
+  angle.l bold(v)_(i), bold(v)_(j) angle.r =
+  cases(0 "if" i != j, 1 "if" i = j) $
+
+Finding an orthonormal basis for a vector space can be tedious. However,
+if a generic (non orthonormal) basis is known for a certain vector space,
+it is possible to apply an algorithm called *Gram-Schmidt procedure* that
+can construct an orthonormal basis from the known generic basis.
+
+Let $V$ be a vector space and let $B = bold(v)_(1), dots, bold(v)_(n)$
+be a basis for $V$. Let $C = bold(w)_(1), dots, bold(w)_(n)$ be the
+orthonormal basis that the Gram-Schmidt procedure will construct. The
+procedure is as follows: the first vector $bold(w)_(1)$ is given by
+the ratio $bold(v)_(1) slash abs(abs(bold(v)_(1)))$, whereas for any
+$1 lt.eq k lt.eq n$ the vector $bold(w)_(k + 1)$ is defined inductively:
+
+$ bold(w)_(k + 1) =
+  frac(bold(v)_(k + 1) - sum_(i = 1)^(k) angle.l bold(w)_(i)\, bold(v)_(k + 1) angle.r bold(w)_(i), 
+       abs(abs(bold(v)_(k + 1) - sum_(i = 1)^(k) angle.l bold(w)_(i)\, bold(v)_(k + 1) angle.r bold(w)_(i)))) $
+
+Since the Gram-Schmidt decomposition always works, for any vector space
+always exist at least an orthonormal basis.
+
+#exercise[
+  Consider the vector space $CC^(n)$ having basis $B = \{(1, 0, 0),
+  (0, 2i, i + 1), (1, 0, 3)\}$. Construct an orthonormal basis $C$ for
+  $CC^(n)$ from $B$.
+]
+#solution[
+  The first element of $C$ is simply $(1, 0, 0) slash abs(abs(1\, 0\, 0))
+  = (1, 0, 0)$. The second element:
+
+  $ bold(w)_(2) &=
+    frac(bold(v)_(2) - sum_(i = 1)^(1) angle.l bold(w)_(i)\, bold(v)_(2) angle.r bold(w)_(i), 
+       abs(abs(bold(v)_(2) - sum_(i = 1)^(1) angle.l bold(w)_(i)\, bold(v)_(2) angle.r bold(w)_(i)))) =
+    frac(bold(v)_(2) - angle.l bold(w)_(1)\, bold(v)_(2) angle.r bold(w)_(1), 
+       abs(abs(bold(v)_(2) - angle.l bold(w)_(1)\, bold(v)_(2) angle.r bold(w)_(1)))) =
+    frac(vec(0, 2i, i + 1) - angle.l vec(1, 0, 0)\, vec(0, 2i, i + 1) angle.r vec(1, 0, 0), 
+       abs(abs(vec(0, 2i, i + 1) - angle.l vec(1, 0, 0)\, vec(0, 2i, i + 1) angle.r vec(1, 0, 0)))) = \
+    &= frac(vec(0, 2i, i + 1) - 0 dot vec(1, 0, 0), abs(abs(vec(0, 2i, i + 1) - 0 dot vec(1, 0, 0)))) =
+    frac(vec(0, 2i, i + 1), abs(abs(vec(0, 2i, i + 1)))) =
+    frac(vec(0, 2i, i + 1), sqrt(0^(*) dot 0 + (2i)^(*) dot 2i + (i + 1)^(*) dot (i + 1))) =
+    vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6))) $
+
+  As for the third element:
+
+  $ bold(w)_(3) &=
+    frac(bold(v)_(3) - sum_(i = 1)^(2) angle.l bold(w)_(i)\, bold(v)_(3) angle.r bold(w)_(i), 
+       abs(abs(bold(v)_(3) - sum_(i = 1)^(2) angle.l bold(w)_(i)\, bold(v)_(3) angle.r bold(w)_(i)))) =
+    frac(bold(v)_(3) - angle.l bold(w)_(1)\, bold(v)_(3) angle.r bold(w)_(1) - angle.l bold(w)_(2)\, bold(v)_(3) angle.r bold(w)_(2), 
+       abs(abs(bold(v)_(3) - angle.l bold(w)_(1)\, bold(v)_(3) angle.r bold(w)_(1) - angle.l bold(w)_(2)\, bold(v)_(3) angle.r bold(w)_(2)))) = \
+    &= frac(vec(1, 0, 3) - angle.l vec(1, 0, 0)\, vec(1, 0, 3) angle.r vec(1, 0, 0) - angle.l vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6)))\, vec(1, 0, 3) angle.r vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6))), 
+       abs(abs(vec(1, 0, 3) - angle.l vec(1, 0, 0)\, vec(1, 0, 3) angle.r vec(1, 0, 0) - angle.l vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6)))\, vec(1, 0, 3) angle.r vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6)))))) = \
+    &= frac(vec(1, 0, 3) - vec(1, 0, 0) - (0^(*) dot 1 + (frac(2i, sqrt(6)))^(*) dot 0 + (frac(i + 1, sqrt(6)))^(*) dot 3) vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6))), 
+       abs(abs(vec(1, 0, 3) - vec(1, 0, 0) - (0^(*) dot 1 + (frac(2i, sqrt(6)))^(*) dot 0 + (frac(i + 1, sqrt(6)))^(*) dot 3) vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6)))))) =
+       frac(vec(0, 0, 3) + (frac(3i - 3, sqrt(6))) vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6))), 
+       abs(abs(vec(0, 0, 3) + (frac(3i - 3, sqrt(6))) vec(0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6)))))) = \
+    &= frac(vec(0, 0, 3) - vec(0, 1 + i, 1), abs(abs(vec(0, 0, 3) - vec(0, 1 + i, 1)))) =
+       frac(vec(0, -1 - i, 2), abs(abs(vec(0, -1 - i, 2)))) =
+       frac(vec(0, -1 - i, 2), sqrt(0^(*) dot 0 + (-1 -i)^(*) (-1 -i) + 2^(*) dot 2)) =
+       vec(0, frac(-1 - i, sqrt(6)), frac(2, sqrt(6))) $
+
+  Obtaining the set $C = \{(1, 0, 0), (0, frac(2i, sqrt(6)), frac(i + 1, sqrt(6))), (0, frac(-1 - i, sqrt(6)), frac(2, sqrt(6)))\}$
+]
 
 The *direct sum* of two vectors spaces $V$ and $W$ having bases $A =
 \{bold(alpha_(1)), dots, bold(alpha_(n))\}$ and $B = \{bold(beta_(1)),
