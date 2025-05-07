@@ -166,17 +166,6 @@ Another useful operator is the *Hadamard operator*, denoted as $H$:
     frac(1, 2) (2 ket(1)) = ket(1) $
 ]
 
-//Which produces an even superposition of $ket(0)$ and $ket(1)$ from either
-//of the standard basis elements:
-//
-//#grid(
-//  columns: (0.25fr, 0.25fr, 0.25fr, 0.25fr),
-//  [$ H ket(0) = ket(+) $],
-//  [$ H ket(1) = ket(-) $],
-//  [$ H ket(+) = ket(0) $],
-//  [$ H ket(-) = ket(1) $]
-//)
-
 The previous quantum transformations acted on single qubits, but
 extending the application of quantum transformations to more than
 one qubit at once is trivial. Suppose $U$ is a unitary transformation
@@ -371,7 +360,7 @@ and $T$ respectively:
   [$ P_(frac(pi, 4)) = T = mat(1, 0; 0, e^(i frac(pi, 4))) $]
 )
 
-// CZ gate, Toffoli gate
+// CZ gate, Toffoli gate, Friedkin gate
 
 It would be useful to have a small set of elementary gates that could
 be used to construct an arbitrary complicated function. Sadly, this

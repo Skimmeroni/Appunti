@@ -92,68 +92,63 @@ Applying these projectors to the final state $ket(Psi_(6))$:
 
 $ P_(00) ket(Psi_(6)) &=
   (ketbra(000, 000) + ketbra(001, 001))
-  (frac(1, 2) alpha (ket(000) + ket(100) + ket(010) + ket(110)) +
-  frac(1, 2) beta (ket(011) + ket(111) + ket(001) + ket(101))) = \
-  &= frac(1, 2) alpha ket(000) + frac(1, 2) beta ket(001) $
+  (frac(1, 2) alpha (ket(000) + ket(100) + ket(010) + ket(110)) + \
+  & frac(1, 2) beta (ket(011) + ket(111) + ket(001) + ket(101))) = 
+    frac(1, 2) alpha ket(000) + frac(1, 2) beta ket(001) $
 
 $ P_(01) ket(Psi_(6)) &=
   (ketbra(010, 010) + ketbra(011, 011))
-  (frac(1, 2) alpha (ket(000) + ket(100) + ket(010) + ket(110)) +
-  frac(1, 2) beta (ket(011) + ket(111) + ket(001) + ket(101))) = \
-  &= frac(1, 2) alpha ket(010) + frac(1, 2) beta ket(011) $
+  (frac(1, 2) alpha (ket(000) + ket(100) + ket(010) + ket(110)) + \
+  & frac(1, 2) beta (ket(011) + ket(111) + ket(001) + ket(101))) = 
+    frac(1, 2) alpha ket(010) + frac(1, 2) beta ket(011) $
 
 $ P_(10) ket(Psi_(6)) &=
   (ketbra(100, 100) + ketbra(101, 101))
-  (frac(1, 2) alpha (ket(000) + ket(100) + ket(010) + ket(110)) +
-  frac(1, 2) beta (ket(011) + ket(111) + ket(001) + ket(101))) = \
-  &= frac(1, 2) alpha ket(100) + frac(1, 2) beta ket(101) $
+  (frac(1, 2) alpha (ket(000) + ket(100) + ket(010) + ket(110)) + \
+  & frac(1, 2) beta (ket(011) + ket(111) + ket(001) + ket(101))) = 
+    frac(1, 2) alpha ket(100) + frac(1, 2) beta ket(101) $
 
 $ P_(11) ket(Psi_(6)) &=
   (ketbra(110, 110) + ketbra(111, 111))
-  (frac(1, 2) alpha (ket(000) + ket(100) + ket(010) + ket(110)) +
-  frac(1, 2) beta (ket(011) + ket(111) + ket(001) + ket(101))) = \
-  &= frac(1, 2) alpha ket(110) + frac(1, 2) beta ket(111) $
+  (frac(1, 2) alpha (ket(000) + ket(100) + ket(010) + ket(110)) + \
+  & frac(1, 2) beta (ket(011) + ket(111) + ket(001) + ket(101))) = 
+    frac(1, 2) alpha ket(110) + frac(1, 2) beta ket(111) $
 
-The norm of any of these states is the same, so the probability
-of having it as outcome:
+All of these (non-normalized) states have associated the same probability:
 
-$ abs(abs(P_(00) ket(Psi_(6)))) &=
-  abs(abs(P_(01) ket(Psi_(6)))) =
-  abs(abs(P_(10) ket(Psi_(6)))) =
-  abs(abs(P_(11) ket(Psi_(6)))) = \
-  sqrt((frac(1, 2) alpha)^(2) + (frac(1, 2) beta)^(2)) &=
-  sqrt(frac(1, 4) alpha^(2) + frac(1, 4) beta^(2)) =
-  sqrt(frac(1, 4) (alpha^(2) + beta^(2))) =
-  frac(1, 2) sqrt(alpha^(2) + beta^(2)) =
-  frac(1, 2) dot 1 =
-  frac(1, 2) $
-
-$ abs(abs(P_(00) ket(Psi_(6))))^(2) =
-  abs(abs(P_(01) ket(Psi_(6))))^(2) =
-  abs(abs(P_(10) ket(Psi_(6))))^(2) =
-  abs(abs(P_(11) ket(Psi_(6))))^(2) =
-  (frac(1, 2))^(2) = frac(1, 4) $
+$ bra(Psi_(6)) P_(00) ket(Psi_(6)) =
+  bra(Psi_(6)) P_(01) ket(Psi_(6)) =
+  bra(Psi_(6)) P_(10) ket(Psi_(6)) =
+  bra(Psi_(6)) P_(11) ket(Psi_(6)) = \
+  (frac(1, 2) alpha (bra(000) + bra(100) + bra(010) + bra(110)) +
+  frac(1, 2) beta (bra(011) + bra(111) + bra(001) + bra(101)))
+  (frac(1, 2) alpha ket(000) + frac(1, 2) beta ket(001)) = \
+  (frac(1, 2) alpha)^(2) + (frac(1, 2) beta)^(2) =
+  frac(1, 4) alpha^(2) + frac(1, 4) beta^(2) =
+  frac(1, 4) (alpha^(2) + beta^(2)) =
+  frac(1, 4) dot 1 =
+  frac(1, 4) $
 
 The resulting four possible states are therefore:
 
 $ ket(lambda_(1)) =
-  frac(P_(00) ket(Psi_(6)), abs(abs(P_(00) ket(Psi_(6))))) =
-  2(frac(1, 2) alpha ket(000) + frac(1, 2) beta ket(001)) =
+  frac(P_(00) ket(Psi_(6)), sqrt(bra(Psi_(6)) P_(00) ket(Psi_(6)))) =
+  sqrt(4) (frac(1, 2) alpha ket(000) + frac(1, 2) beta ket(001)) =
   alpha ket(000) + beta ket(001) =
   ket(00) times.circle (alpha ket(0) + beta ket(1)) $
 $ ket(lambda_(2)) =
-  frac(P_(01) ket(Psi_(6)), abs(abs(P_(01) ket(Psi_(6))))) =
-  2(frac(1, 2) alpha ket(010) + frac(1, 2) beta ket(011)) =
+  frac(P_(01) ket(Psi_(6)), sqrt(bra(Psi_(6)) P_(01) ket(Psi_(6)))) =
+  sqrt(4) (frac(1, 2) alpha ket(010) + frac(1, 2) beta ket(011)) =
   alpha ket(010) + beta ket(011) =
   ket(01) times.circle (alpha ket(0) + beta ket(1)) $
 $ ket(lambda_(3)) =
-  frac(P_(10) ket(Psi_(6)), abs(abs(P_(10) ket(Psi_(6))))) =
-  2(frac(1, 2) alpha ket(100) + frac(1, 2) beta ket(101)) =
+  frac(P_(10) ket(Psi_(6)), sqrt(bra(Psi_(6)) P_(10) ket(Psi_(6)))) =
+  sqrt(4) (frac(1, 2) alpha ket(100) + frac(1, 2) beta ket(101)) =
   alpha ket(100) + beta ket(101) =
   ket(10) times.circle (alpha ket(0) + beta ket(1)) $
 $ ket(lambda_(4)) =
-  frac(P_(11) ket(Psi_(6)), abs(abs(P_(11) ket(Psi_(6))))) =
-  2(frac(1, 2) alpha ket(110) + frac(1, 2) beta ket(111)) =
+  frac(P_(11) ket(Psi_(6)), sqrt(bra(Psi_(6)) P_(11) ket(Psi_(6)))) =
+  sqrt(4) (frac(1, 2) alpha ket(110) + frac(1, 2) beta ket(111)) =
   alpha ket(110) + beta ket(111) =
   ket(11) times.circle (alpha ket(0) + beta ket(1)) $
 

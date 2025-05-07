@@ -68,6 +68,8 @@
 #include "Algorithms/Hypergraphs.typ"
 == Quantum teleportation
 #include "Algorithms/Teleportation.typ"
+== Swap test
+#include "Algorithms/Swap.typ"
 #pagebreak()
 
 = Quantum Theory
