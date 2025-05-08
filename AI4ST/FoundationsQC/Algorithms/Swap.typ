@@ -97,24 +97,22 @@ $ bra(Psi_(2)) P_(0) ket(Psi_(2)) &=
      frac(1, 2) + frac(1, 2) (braket(Lambda_(1), Lambda_(2)))^(*) braket(Lambda_(1), Lambda_(2)) =
      frac(1, 2) + frac(1, 2) abs(braket(Lambda_(1), Lambda_(2)))^(2) $
 
-It is then necessary to run the circuit repeatedly on the exact same
-input state, or to have many identical copies of those states and run
-the circuit as many times in parallel. This way, the ancillary qubit
-will be found roughly $frac(1, 2) + frac(1, 2) abs(braket(Lambda_(1),
-Lambda_(2)))^(2)$ times in state $ket(0)$. When this sample mean is
-collected, it is possible to solve for $abs(braket(Lambda_(1), Lambda_(2)))$:
+It is then necessary to run the circuit repeatedly on the exact
+same input state, or to have many identical copies of those states
+and run the circuit as many times in parallel. This way, the value
+$frac(1, 2) + frac(1, 2) abs(braket(Lambda_(1), Lambda_(2)))^(2)$
+will be estimated with increasing accuracy. In particular, an
+accuracy of $epsilon$ can be achieved by running the circuit
+$O(frac(1, epsilon^(2)))$ times.
 
-$ frac(1, 2) + frac(1, 2) abs(braket(Lambda_(1),Lambda_(2)))^(2) approx
-  frac("N. of times" ket(0) "is found", "N. of observations") =>
-  abs(braket(Lambda_(1),Lambda_(2))) approx
-  sqrt(2 (frac("N. of times" ket(0) "is found", "N. of observations")) - 1) $
+When this sample mean $s = overline(bra(Psi_(2)) P_(0) ket(Psi_(2)))$
+is collected, it is possible to solve for $abs(braket(Lambda_(1),
+Lambda_(2)))$:
 
-For example, if $ket(0)$ is found roughly $50%$ of the time, then
-$abs(braket(Lambda_(1),Lambda_(2))) = 0$, which means that the two
-states are orthogonal. If $ket(0)$ is found almost $100%$ of the time,
-then $abs(braket(Lambda_(1),Lambda_(2))) = 1$, which means that the
-two states are equal.
+$ frac(1, 2) + frac(1, 2) abs(braket(Lambda_(1),Lambda_(2)))^(2)
+  approx s => abs(braket(Lambda_(1),Lambda_(2))) approx sqrt(2 s - 1) $
 
-The precision of the test increases with the number of times the circuit
-is run. If the desired accuracy is $epsilon$, it can be achieved by running
-the circuit $O(frac(1, epsilon^(2)))$ times.
+For example, if $s = 0.5$, then $abs(braket(Lambda_(1),Lambda_(2))) = 0$,
+which means that the two states are orthogonal. If $s = 1$, then
+$abs(braket(Lambda_(1),Lambda_(2))) = 1$, which means that the two
+states are equal.

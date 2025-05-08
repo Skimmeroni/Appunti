@@ -70,6 +70,8 @@
 #include "Algorithms/Teleportation.typ"
 == Swap test
 #include "Algorithms/Swap.typ"
+== Hadamard test
+#include "Algorithms/Hadamard.typ"
 #pagebreak()
 
 = Quantum Theory
