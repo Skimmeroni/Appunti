@@ -68,6 +68,8 @@
 #include "Algorithms/Hypergraphs.typ"
 == Quantum teleportation
 #include "Algorithms/Teleportation.typ"
+== Quantum Fourier Transform
+#include "Algorithms/Fourier.typ"
 == Swap test
 #include "Algorithms/Swap.typ"
 == Hadamard test
