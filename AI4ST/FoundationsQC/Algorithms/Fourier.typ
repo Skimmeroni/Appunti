@@ -266,15 +266,14 @@ $ "QFT"(ket(j)) &=
      sum_(k_(n) = 0)^(1) exp(2 pi i j frac(k_(n), 2^(n))) ket(k_(n))) = \
   &= frac(1, sqrt(2^(n)))
      times.circle.big_(l = 1)^(n)
-     (sum_(k_(l) = 0)^(1) exp(2 pi i j frac(k_(l), 2^(l))) ket(k_(l))) = \
-  &= frac(1, sqrt(2^(n)))
+     (sum_(k_(l) = 0)^(1) exp(2 pi i j frac(k_(l), 2^(l))) ket(k_(l))) =
+     frac(1, sqrt(2^(n)))
      times.circle.big_(l = 1)^(n)
-     (ket(0) + exp(2 pi i j frac(1, 2^(l))) ket(1)) = \
-  &= frac((ket(0) + e^(2 pi i 0.j_(n)) ket(1)) times.circle
+     (ket(0) + exp(2 pi i j 2^(-l)) ket(1)) = \
+  &= frac(1, sqrt(2^(n))) (ket(0) + e^(2 pi i 0.j_(n)) ket(1)) times.circle
        (ket(0) + e^(2 pi i 0.j_(n - 1) j_(n)) ket(1)) times.circle
        dots times.circle
-       (ket(0) + e^(2 pi i 0.j_(1) j_(2) dots j_(n)) ket(1)),
-       sqrt(2^(n))) $
+       (ket(0) + e^(2 pi i 0.j_(1) j_(2) dots j_(n)) ket(1)) $
 
 #exercise[
 	Compute $"QFT"(ket(110))$ using the newfound formula.
@@ -406,7 +405,7 @@ of the qubits at the end of the circuit are in a superposition with each
 other, and a measurement would destroy this superposition. Also, in most
 cases, it's not possible to prepare the circuit into the state $ket(j_(1)
 dots j_(n))$ in an efficient way. Nonetheless, the QFT is still very useful
-and figures as a subroutine in a quantum algorithms.
+and appears as a subroutine in many noteworthy quantum algorithms.
 
 #exercise[
 	Compute $"QFT"(ket(110))$ using the circuit.
@@ -459,3 +458,22 @@ and figures as a subroutine in a quantum algorithms.
 	  &= frac(1, sqrt(8)) "SWAP"_(1, 3) (ket(000) + ket(001) - ket(010) - ket(011) - i ket(100) - i ket(101) + i ket(110) + i ket(111)) = \
 	  &= frac(1, sqrt(8)) (ket(000) - i ket(001) - ket(010) + i ket(011) + ket(100) - i ket(101) - ket(110) + i ket(111)) $
 ]
+
+As for the non-quantum case, the inverse function of the Fourier transform
+is an important function. In the quantum computing case, the *Inverse Quantum
+Fourier Transform* has the result of the application of the QFT to a quantum
+state as input and the original state as output:
+
+$ "QFT"^(-1)(
+  frac((ket(0) + e^(2 pi i 0.j_(n)) ket(1)) times.circle
+       (ket(0) + e^(2 pi i 0.j_(n - 1) j_(n)) ket(1)) times.circle
+       dots times.circle
+       (ket(0) + e^(2 pi i 0.j_(1) j_(2) dots j_(n)) ket(1)),
+       sqrt(2^(n)))) =
+  ket(j_(1) j_(2) dots j_(n)) $
+
+Due to @QFT-matrix-is-unitary, the matrix of the inverse QFT is just
+the conjugate transpose of the QFT matrix. This means that the explicit
+expression for $"QFT"^(-1)$ is just:
+
+$ "QFT"^(-1)(ket(j)) = frac(1, sqrt(N)) sum_(k = 0)^(N - 1) exp(-2 pi i frac(k j, N)) ket(k) $

@@ -70,6 +70,8 @@
 #include "Algorithms/Teleportation.typ"
 == Quantum Fourier Transform
 #include "Algorithms/Fourier.typ"
+== Quantum phase estimation
+#include "Algorithms/Phase.typ"
 == Swap test
 #include "Algorithms/Swap.typ"
 == Hadamard test
