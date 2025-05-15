@@ -1,3 +1,4 @@
+#import "@preview/algo:0.3.6": algo, i, d, comment, code
 #import "@preview/ctheorems:1.1.3": *
 #import "@preview/cetz:0.3.2"
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge

@@ -258,8 +258,7 @@ this algorithm:
     (l_(1, 1) and dots and l_(1, n))
     or dots or
     (l_(m, 1) and dots and l_(m, n)) =
-    or.big_(j = 1)^(m) (and.big_(i = 1)^(n) l_(j, i))
-    $
+    or.big_(j = 1)^(m) (and.big_(i = 1)^(n) l_(j, i)) $
 
   Where each $l_(j, i)$ can be either non-negated (positive literal) or
   negated (negative literal)
@@ -268,8 +267,8 @@ this algorithm:
 
   #grid(
 	columns: (0.5fr, 0.5fr),
-	[$ w_(j, i) = cases(2 "if" l_(i, j) "is a positive literal",
-	                    -2 "if" l_(i, j) "is a negative literal") $],
+	[$ w_(j, i) = cases(+2 "if" l_(j, i) "is a positive literal",
+	                    -2 "if" l_(j, i) "is a negative literal") $],
 	[$ theta_(j) = n - 1 + frac(1, 2) sum_(i = 1)^(n) w_(j, i) $]
   )
 + Create one output neuron, having $m$ inputs (equal to the number of TLUs
@@ -280,3 +279,47 @@ this algorithm:
 Intuitively, the neurons in the first layer describe an hyperplane that 
 cuts the first hypercube... To then compute the disjunction...
 */
+
+#exercise[
+	Construct a TLU network for the boolean function:
+
+	$ F(A, B, C, D) =
+	  (A and B and C) or
+	  (overline(A) and B and D) or
+	  (A and B and overline(C) and overline(D)) $
+]
+#solution[
+	#align(
+		center,
+		[#diagram(
+			node-stroke: 1.5pt + blue,
+			node-fill: aqua,
+			edge-stroke: 1.5pt,
+			spacing: 4em,
+
+			node((-4, +1.5), name: <D>, fill: none, stroke: none, text(font: "Noto Sans", [D])),
+			node((-4, +0.5), name: <C>, fill: none, stroke: none, text(font: "Noto Sans", [C])),
+			node((-4, -0.5), name: <B>, fill: none, stroke: none, text(font: "Noto Sans", [B])),
+			node((-4, -1.5), name: <A>, fill: none, stroke: none, text(font: "Noto Sans", [A])),
+
+			node((0, 1), text(font: "Noto Sans", [6]), radius: 2em, name: <Theta1>),
+			node((0, 0), text(font: "Noto Sans", [4]), radius: 2em, name: <Theta2>),
+			node((0, -1), text(font: "Noto Sans", [3]), radius: 2em, name: <Theta3>),
+			edge(<A>, <Theta1>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<B>, <Theta1>, marks: (none, "latex"), label-pos: 0.2, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<C>, <Theta1>, marks: (none, "latex"), label-pos: 0.2, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<A>, <Theta2>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [-2])),
+			edge(<B>, <Theta2>, marks: (none, "latex"), label-pos: 0.2, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<D>, <Theta2>, marks: (none, "latex"), label-pos: 0.5, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<A>, <Theta3>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<B>, <Theta3>, marks: (none, "latex"), label-pos: 0.2, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<C>, <Theta3>, marks: (none, "latex"), label-pos: 0.2, label-angle: auto, label: text(font: "Noto Sans", [-2])),
+			edge(<D>, <Theta3>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [-2])),
+
+			node((2, 0), text(font: "Noto Sans", [1]), radius: 2em, name: <Theta4>),
+			edge(<Theta1>, <Theta4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<Theta2>, <Theta4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<Theta3>, <Theta4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<Theta4>, (3, 0), marks: (none, "latex"), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [Y]))
+	)])
+]
