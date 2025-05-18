@@ -201,7 +201,6 @@ algorithms are presented as follows:
 			) $],
 			[#diagram(
 				node-stroke: 1.5pt + blue,
-				node-fill: aqua,
 				edge-stroke: 1.5pt,
 				spacing: 4em,
 

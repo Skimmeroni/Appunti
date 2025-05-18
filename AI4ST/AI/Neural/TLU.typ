@@ -26,7 +26,6 @@ $0$ corresponds to a neuron insufficiently stimulated to be firing.
 		columns: (0.6fr, 0.4fr),
 		[#diagram(
 			node-stroke: 1.5pt + blue,
-			node-fill: aqua,
 			edge-stroke: 1.5pt,
 			spacing: 4em,
 
@@ -59,7 +58,6 @@ scalar product.
 		columns: (0.6fr, 0.4fr),
 		[#diagram(
 			node-stroke: 1.5pt + blue,
-			node-fill: aqua,
 			edge-stroke: 1.5pt,
 			spacing: 4em,
 
@@ -205,7 +203,6 @@ set of points become linearly separable.
 		columns: (0.5fr, 0.5fr),
 		[#diagram(
 			node-stroke: 1.5pt + blue,
-			node-fill: aqua,
 			edge-stroke: 1.5pt,
 			spacing: 4em,
 
@@ -213,7 +210,7 @@ set of points become linearly separable.
 			node((-1.5, -0.75), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[1]])),
 			node((0, 0.75), text(font: "Noto Sans", [-1]), radius: 2em, name: <Theta1>),
 			node((0, -0.75), text(font: "Noto Sans", [-1]), radius: 2em, name: <Theta2>),
-			node((1, 0), text(font: "Noto Sans", [3]), radius: 2em, name: <Theta3>),
+			node((1, 0), stroke: 1.5pt + fuchsia, text(font: "Noto Sans", [3]), radius: 2em, name: <Theta3>),
 
 			edge((-1.25, 0.75), <Theta1>, marks: (none, "latex"), label: text(font: "Noto Sans", [-2])),
 			edge((-1.25, -0.75), <Theta1>, marks: (none, "latex"), label: text(font: "Noto Sans", [2])),
@@ -293,7 +290,6 @@ cuts the first hypercube... To then compute the disjunction...
 		center,
 		[#diagram(
 			node-stroke: 1.5pt + blue,
-			node-fill: aqua,
 			edge-stroke: 1.5pt,
 			spacing: 4em,
 
@@ -316,7 +312,7 @@ cuts the first hypercube... To then compute the disjunction...
 			edge(<C>, <Theta3>, marks: (none, "latex"), label-pos: 0.2, label-angle: auto, label: text(font: "Noto Sans", [-2])),
 			edge(<D>, <Theta3>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [-2])),
 
-			node((2, 0), text(font: "Noto Sans", [1]), radius: 2em, name: <Theta4>),
+			node((2, 0), stroke: 1.5pt + fuchsia, text(font: "Noto Sans", [1]), radius: 2em, name: <Theta4>),
 			edge(<Theta1>, <Theta4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
 			edge(<Theta2>, <Theta4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
 			edge(<Theta3>, <Theta4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),

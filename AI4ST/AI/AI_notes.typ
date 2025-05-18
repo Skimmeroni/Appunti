@@ -30,5 +30,7 @@
 #include "Neural/TLU.typ"
 == Training TLUs
 #include "Neural/Training.typ"
+== Artificial neural networks
+#include "Neural/Artificial.typ" 
 // = Fuzzy logic
 // = Evolutionary computing
