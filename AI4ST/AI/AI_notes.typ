@@ -31,6 +31,8 @@
 == Training TLUs
 #include "Neural/Training.typ"
 == Artificial neural networks
-#include "Neural/Artificial.typ" 
+#include "Neural/Artificial.typ"
+== Multilayer perceptrons
+#include "Neural/MLP.typ"
 // = Fuzzy logic
 // = Evolutionary computing
