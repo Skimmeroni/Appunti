@@ -270,7 +270,8 @@ positive and negative errors may even each other out. A common choice for
 the error function for fixed learning tasks is the *Mean Squared Error
 function* (*MSE*):
 
-$ e = sum_(l in L_("fixed")) (o_(v 1)^((l)) - "out"_(v 1)^((l)))^(2) + dots + (o_(v m)^((l)) - "out"_(v m)^((l)))^(2) 
+$ e = sum_(l in L_("fixed")) e^((l))
+    = sum_(l in L_("fixed")) (o_(v 1)^((l)) - "out"_(v 1)^((l)))^(2) + dots + (o_(v m)^((l)) - "out"_(v m)^((l)))^(2) 
     = sum_(l in L_("fixed")) sum_(v in U_("out")) (o_(v)^((l)) - "out"_(v)^((l)))^(2) $
 
 That is, the sum over all training examples of the squared difference

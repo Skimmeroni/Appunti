@@ -206,7 +206,8 @@ function are:
        frac(1, (1 + e^(-("net" - theta)))^(2)) = \
     &= frac(1, 1 + e^(-("net" - theta))) -
        (frac(1, 1 + e^(-("net" - theta))))^(2) =
-       f_("act")("net", theta) - (f_("act")("net", theta))^(2) $
+       f_("act")("net", theta) - (f_("act")("net", theta))^(2) = \
+    &= f_("act")("net", theta) (1 - f_("act")("net", theta)) $
 
   That is, it is just itself minus itself squared. Being injective, it is
   also invertible:

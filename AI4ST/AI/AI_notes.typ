@@ -34,5 +34,9 @@
 #include "Neural/Artificial.typ"
 == Multilayer perceptrons
 #include "Neural/MLP.typ"
+== Logistic regression
+#include "Neural/Regression.typ"
+== Gradient descent
+#include "Neural/Gradient.typ"
 // = Fuzzy logic
 // = Evolutionary computing
