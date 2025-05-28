@@ -38,5 +38,9 @@
 #include "Neural/Regression.typ"
 == Gradient descent
 #include "Neural/Gradient.typ"
-// = Fuzzy logic
+#pagebreak()
+
+= Fuzzy logic
+== Introduction to fuzzy sets
+#include "Fuzzy/Sets.typ"
 // = Evolutionary computing
