@@ -41,6 +41,8 @@
 #pagebreak()
 
 = Fuzzy logic
-== Introduction to fuzzy sets
+== Fuzzy sets
 #include "Fuzzy/Sets.typ"
+== Fuzzy logic
+#include "Fuzzy/Logic.typ"
 // = Evolutionary computing

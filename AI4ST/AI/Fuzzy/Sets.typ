@@ -217,9 +217,13 @@ $alpha$-cuts of convex fuzzy sets are peculiar because they are always
 convex sets. On the other hand, $alpha$-cuts of non-convex fuzzy sets
 can be a union of more than one disjointed interval. It is also possible
 to use this property as a definition: a fuzzy set is convex if and only
-if all of its $alpha$-cuts convex sets. $alpha$-cuts uniquely identify
-fuzzy sets: if all the $alpha$-cuts of a fuzzy set $mu$ are known, the
-degree of membership $mu(x)$ of an element $x$ can be computed as:
+if all of its $alpha$-cuts convex sets. In particular, a fuzzy set $mu$
+is also referred to as a *fuzzy number* if $mu$ is normal and $[mu]_(alpha)$
+is bounded, closed, and convex $forall alpha in (0, 1]$.
+
+$alpha$-cuts uniquely identify fuzzy sets: if all the $alpha$-cuts of a
+fuzzy set $mu$ are known, the degree of membership $mu(x)$ of an element
+$x$ can be computed as:
 
 $ mu(x) = sup{alpha in [0, 1] | x in [mu]_(alpha)} $
 
@@ -265,7 +269,51 @@ function can be reconstructed by taking the _upper envelope_ of said cuts.
 //
 // ]
 
-/* How are alpha-cuts stored? As chains of linear lists */
+$alpha$-cuts can be stored in real memory in the form of linked lists. Each
+disjointed interval of each $alpha$-cut is stored in a separate node of the
+list, and the nodes are linked together in ascending order. Each list (each
+$alpha$-cut) has also a pointer to following list (following $alpha$-cut).
+
+#diagram(
+        node-stroke: 1.5pt,
+        edge-stroke: 1.5pt,
+        node-shape: rect,
+        spacing: 4em,
+
+        node((0, 0), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <A1>),
+        node((0.5, 0), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <A2>),
+		node((1.5, 0), text(font: "Noto Sans", [(#math.alpha#sub[11]]), radius: 1.5em, name: <A3>),
+        node((2, 0), text(font: "Noto Sans", [#math.alpha#sub[11])]), radius: 1.5em, name: <A4>),
+        node((2.5, 0), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <A5>),
+		node((3.5, 0), stroke: 0pt, text(font: "Noto Sans", [#math.dots]), radius: 1.5em, name: <A6>),
+		node((4.5, 0), text(font: "Noto Sans", [(#math.alpha#sub[1m]]), radius: 1.5em, name: <A7>),
+        node((5, 0), text(font: "Noto Sans", [#math.alpha#sub[1m])]), radius: 1.5em, name: <A8>),
+        node((5.5, 0), text(font: "Noto Sans", [nil]), radius: 1.5em, name: <A9>),
+
+        edge(<A2>, <A3>, marks: (none, "latex")),
+        edge(<A5>, <A6>, marks: (none, "latex")),
+        edge(<A6>, <A7>, marks: (none, "latex")),
+
+        node((0, 0.75), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <B1>),
+        node((0.5, 0.75), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <B2>),
+		node((1.5, 0.75), text(font: "Noto Sans", [(#math.alpha#sub[21]]), radius: 1.5em, name: <B3>),
+        node((2, 0.75), text(font: "Noto Sans", [#math.alpha#sub[21])]), radius: 1.5em, name: <B4>),
+        node((2.5, 0.75), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <B5>),
+		node((3.5, 0.75), stroke: 0pt, text(font: "Noto Sans", [#math.dots]), radius: 1.5em, name: <B6>),
+		node((4.5, 0.75), text(font: "Noto Sans", [(#math.alpha#sub[2n]]), radius: 1.5em, name: <B7>),
+        node((5, 0.75), text(font: "Noto Sans", [#math.alpha#sub[2n])]), radius: 1.5em, name: <B8>),
+        node((5.5, 0.75), text(font: "Noto Sans", [nil]), radius: 1.5em, name: <B9>),
+    
+        edge(<B2>, <B3>, marks: (none, "latex")),
+        edge(<B5>, <B6>, marks: (none, "latex")),
+        edge(<B6>, <B7>, marks: (none, "latex")),
+
+        edge(<A1>, <B1>, marks: (none, "latex")),
+        node((0, 1.5), stroke: 0pt, text(font: "Noto Sans", [#math.dots]), radius: 1.5em, name: <C1>),
+        edge(<B1>, <C1>, marks: (none, "latex")),
+
+		
+    )
 
 /* How to rebuild the envelope? */
 
@@ -319,8 +367,8 @@ complement to fuzzy sets in the following way:
 
 #grid(
 	columns: (0.4fr, 0.4fr, 0.2fr),
-	[$ mu_(1)(x) inter mu_(2)(x) = min_(x in X){mu_(1)(x), mu_(2)(x)} $],
-	[$ mu_(1)(x) union mu_(2)(x) = max_(x in X){mu_(1)(x), mu_(2)(x)} $],
+	[$ (mu_(1) inter mu_(2))(x) = min_(x in X){mu_(1)(x), mu_(2)(x)} $],
+	[$ (mu_(1) union mu_(2))(x) = max_(x in X){mu_(1)(x), mu_(2)(x)} $],
 	[$ not mu(x) = 1 - mu(x) $]
 )
 

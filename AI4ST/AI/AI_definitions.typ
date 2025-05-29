@@ -9,3 +9,6 @@
 #let proof = thmproof("proof", "Proof")
 #let exercise = thmbox("exercise", "Exercise", fill: rgb("#e9eef7"))
 #let solution = thmproof("solution", "Solution")
+
+#let dsl = $bracket.l.double$
+#let dsr = $bracket.r.double$
