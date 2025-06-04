@@ -51,5 +51,10 @@
 #include "Fuzzy/Variable.typ"
 == Fuzzy reasoning
 #include "Fuzzy/Inference.typ"
+#pagebreak()
 
-// = Evolutionary computing
+= Evolutionary computing
+== Biological background
+#include "Evolution/Background.typ"
+== Evolutionary algorithms
+#include "Evolution/Algorithm.typ"

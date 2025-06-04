@@ -78,9 +78,9 @@ It's possible to extend relation compositions to fuzzy sets. Given
 two fuzzy relations $rho_(1) in cal(F)(X times Y)$ and $rho_(2) in
 cal(F)(Y times Z)$, their composition is the fuzzy relation:
 
-$ (rho_(2) compose rho_(1))(x, z) =
+$ (rho_(2) compose rho_(1))(x, z) &=
   dsl (x, z) in (rho_(2) compose rho_(1)) dsr =
-  dsl exists y in Y: (x, y) in rho_(1) and (y, z) in rho_(2) dsr =
-  sup{dsl (x, y) in rho_(1) and (y, z) in rho_(2) dsr | y in Y} =
-  sup{min{dsl (x, y) in rho_(1) dsr, dsl (y, z) in rho_(2) dsr} | y in Y} =
-  sup{min{rho_(1)(x, y), rho_(2)(y, z)} | y in Y} $
+  dsl exists y in Y: (x, y) in rho_(1) and (y, z) in rho_(2) dsr = \
+  &= sup{dsl (x, y) in rho_(1) and (y, z) in rho_(2) dsr | y in Y} = \
+  &= sup{min{dsl (x, y) in rho_(1) dsr, dsl (y, z) in rho_(2) dsr} | y in Y} = \
+  &= sup{min{rho_(1)(x, y), rho_(2)(y, z)} | y in Y} $
