@@ -58,5 +58,9 @@
 #include "Evolution/Background.typ"
 == Evolutionary algorithms
 #include "Evolution/Algorithm.typ"
-== Related local search algorithms
-#include "Evolution/Related.typ"
+== Local search algorithms
+#include "Evolution/Local.typ"
+== Evolutionary local search algorithms
+#include "Evolution/Ea_local.typ"
+== Evolutionary algorithm design choices
+#include "Evolution/Design.typ"
