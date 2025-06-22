@@ -1,11 +1,3 @@
-"""
-To generate the SWIG binding:
-
-swig -python Tabu.i
-$(CC) -fPIC -c Tabu.c Tabu_wrap.c $(pkgconf --cflags python3)
-$(CC) -shared Tabu.o Tabu_wrap.o -lm -o _Tabu.so
-"""
-
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt

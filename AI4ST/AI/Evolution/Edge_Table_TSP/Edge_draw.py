@@ -1,11 +1,3 @@
-"""
-To generate the SWIG binding:
-
-swig -c++ -python Edge.i
-$(CXX) -fPIC -c Edge.cxx Edge_wrap.cxx $(pkgconf --cflags python3)
-$(CXX) -shared Edge.o Edge_wrap.o -lm -o _Edge.so
-"""
-
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt

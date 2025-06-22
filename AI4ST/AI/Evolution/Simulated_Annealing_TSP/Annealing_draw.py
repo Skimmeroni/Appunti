@@ -1,11 +1,3 @@
-"""
-To generate the SWIG binding:
-
-swig -python Annealing.i
-$(CC) -fPIC -c Annealing.c Annealing_wrap.c $(pkgconf --cflags python3)
-$(CC) -shared Annealing.o Annealing_wrap.o -lm -o _Annealing.so
-"""
-
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
