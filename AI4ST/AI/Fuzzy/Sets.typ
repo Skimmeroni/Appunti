@@ -172,7 +172,7 @@ are concave functions. Examples of functions with these characteristics are:
 		[$ Lambda_(a, b, c)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
 									frac(c - x, c - b) & "if" b lt.eq x lt.eq c,
 									0 & "otherwise") $],
-		[#image("fuzzy_triangular.svg")]
+		[#image("Convex_fuzzy_sets/fuzzy_triangular.svg")]
 	 )
 -	#grid(
 		columns: (0.3fr, 0.36fr, 0.33fr),
@@ -185,7 +185,7 @@ are concave functions. Examples of functions with these characteristics are:
 									1 & "if" b lt.eq x < c,
 									frac(d - x, d - c) & "if" c lt.eq x lt.eq d,
 									0 & "otherwise") $],
-		[#image("fuzzy_trapezoidal.svg")]
+		[#image("Convex_fuzzy_sets/fuzzy_trapezoidal.svg")]
  	)
 -	#grid(
 		columns: (0.3fr, 0.36fr, 0.33fr),
@@ -193,7 +193,7 @@ are concave functions. Examples of functions with these characteristics are:
 		$ Omega_(a, b) : RR mapsto [0, 1] $
 		with $a, b in RR$.],
 		[$ Omega_(a, b)(x) = e^(-(frac(x - a, b))^(2)) $],
-		[#image("fuzzy_bell.svg")]
+		[#image("Convex_fuzzy_sets/fuzzy_bell.svg")]
  	)
 
 The vertical representation of fuzzy sets presents some issues, mainly

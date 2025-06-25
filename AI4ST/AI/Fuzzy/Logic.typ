@@ -115,20 +115,20 @@ a $t$-norm. Other examples of $t$-norms are the:
 	columns: (0.5fr, 0.5fr),
 	[*Łukasiewicz t-norm*:
 	$ t(alpha, beta) = max{alpha + beta - 1, 0} $
-	#image("lukasiewicz_norm.svg", width: 66%)],
+	#image("Norm_graphs/lukasiewicz_norm.svg", width: 66%)],
 	[*Algebraic product*:
 	$ t(alpha, beta) = alpha dot beta $
-	#image("algebraic_product.svg", width: 66%)]
+	#image("Norm_graphs/algebraic_product.svg", width: 66%)]
 )
 
 #grid(
 	columns: (0.5fr, 0.5fr),
 	[*Drastic product*:
 	$ t(alpha, beta) = cases(0 & "if" 1 in.not {alpha, beta}, min{alpha, beta} & "otherwise") $
-	#image("drastic_product.svg", width: 66%)],
+	#image("Norm_graphs/drastic_product.svg", width: 66%)],
 	[*Nilpotent minimum*:
 	$ t(alpha, beta) = cases(min{alpha, beta} & "if" alpha + beta > 1, 0 & "otherwise") $
-	#image("nilpotent_minimum.svg", width: 66%)]
+	#image("Norm_graphs/nilpotent_minimum.svg", width: 66%)]
 )
 
 Also, from the boundedness property, it follows that $t(1, 1) = 1$ and
@@ -180,20 +180,20 @@ product and the drastic product one obtains the following conorms:
 	columns: (0.5fr, 0.5fr),
 	[*Łukasiewicz t-conorm*:
 	$ s(alpha, beta) = max{alpha + beta, 1} $
-	#image("lukasiewicz_conorm.svg", width: 66%)],
+	#image("Norm_graphs/lukasiewicz_conorm.svg", width: 66%)],
 	[*Algebraic sum*:
 	$ s(alpha, beta) = alpha + beta - alpha dot beta $
-	#image("algebraic_sum.svg", width: 66%)]
+	#image("Norm_graphs/algebraic_sum.svg", width: 66%)]
 )
 
 #grid(
 	columns: (0.5fr, 0.5fr),
 	[*Drastic sum*:
 	$ s(alpha, beta) = cases(1 & "if" 0 in.not {alpha, beta}, max{alpha, beta} & "otherwise") $
-	#image("drastic_sum.svg", width: 66%)],
+	#image("Norm_graphs/drastic_sum.svg", width: 66%)],
 	[*Nilpotent maximum*:
 	$ t(alpha, beta) = cases(max{alpha, beta} & "if" alpha + beta < 1, 1 & "otherwise") $
-	#image("nilpotent_maximum.svg", width: 66%)]
+	#image("Norm_graphs/nilpotent_maximum.svg", width: 66%)]
 )
 
 Analogously to $min{alpha, beta}$, $max{alpha, beta}$ is the only

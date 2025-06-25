@@ -64,3 +64,5 @@
 #include "Evolution/Ea_local.typ"
 == Evolutionary algorithm design choices
 #include "Evolution/Design.typ"
+== Swarm intelligence
+#include "Evolution/Swarm.typ"
