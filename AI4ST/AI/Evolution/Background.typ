@@ -1,32 +1,26 @@
 #import "../AI_definitions.typ": *
 
-*Metaheuristics* are a computational framework of techniques and practices
-used to solve optimization problems. Instead of finding an exact, analytical
-solution in a single step, which may be impossible or computationally
-expensive, metaheuristics allows one to find a "sufficiently good"
-approximated solution through several iterations, where at each step a
-candidate solution is refined. Since metaheuristics does not prescribe a
-fixed set of operations, to make use of it it is crucial to properly map
-the problem at hand to the abstract structures provided by the metaheuristic.
+A particular framework for solving optimization problems that falls
+into the guided search category is *Metaheuristics*. An example of
+metaheuristics is *evolutionary computing*: solving optimization problems
+constructing algorithms, called *evolutionary algorithms*, that draw
+inspiration from nature-driven and biological processes, in particular
+the Theory of Evolution. The Theory explains why the living beings on
+Earth look as they do and where do they come from.
 
-An example of metaheuristics is *evolutionary computing*, solving optimization
-problems constructing algorithms, called *evolutionary algorithms*, that draw
-inspiration from nature-driven and biological processes, in particular the
-Theory of Evolution.
-
-The major underpinning of biological evolution is the presence in nature of
-a "driving force", *natural selection*: with respect to a given environment,
-one or more traits that can appear randomly in species may be favoured or
-disfavoured by natural selection. Species with favoured traits tend to thrive
-and reproduce, passing the acquired traits onto their offspring, whereas
-species with unfavoured traits tend to die out.
+The major underpinning of the Theory of Evolution is the presence in
+nature of a "driving force", *natural selection*: with respect to a
+given environment, one or more traits that can appear randomly in species
+may be favoured or disfavoured by natural selection. Species with favoured
+traits tend to thrive and reproduce, passing the acquired traits onto their
+offspring, whereas species with unfavoured traits tend to die out.
 
 New or modified traits may be created by various processes. It can happen
 by chance in a single individual, for example from exposure to radiation
 or from an error in DNA duplication, but also often happens during
 reproduction, where the offspring inherits half set of chromosomes from
 each parent, therefore creating a new unique combination of traits, and
-during the meiosis process, when crossing over recombines homologous
+during the *meiosis* process, when crossing over recombines homologous
 chromosomes.
 
 The improvements carried out by these modification may vary: allowing an
@@ -41,8 +35,8 @@ immediately put to the test with respect to an environment and only the
 beneficial variations are kept and extended. However, the vast majority
 of random (genetic) modifications are harmful for the individual, either
 limiting its capabilities or even making it unfit to live, and these get
-lost in time. Only a very slim portion of the changes are actually
-beneficial; small improvements can accumulate over many generations,
+lost in the generations. Only a very slim portion of the changes are
+actually beneficial; small improvements can accumulate over many generations,
 leading to surprising complexity and strikingly fitting adaptations (to
 a specific environment).
 
@@ -115,101 +109,6 @@ that, even though not the best, is certainly satisfactory. The same
 approach is what evolutionary computing seeks to apply to the solution
 of numerical optimization problems.
 
-Formally speaking, an *optimization problem* is a pair $(Omega, f)$.
-$Omega$ is a set called *search space* that contains all the potential
-solutions (the "candidates") whereas $f: Omega mapsto RR$ is a function
-called *evaluation function*, that assigns a (real) number to each
-potential solution $omega in Omega$, representing "how good" said
-solution is. The "best" solutions, also called *exact solutions*,
-are those that return the highest value for the evaluation function.
-
-An element $omega^(*) in Omega$ is an exact of the optimization problem
-$(Omega, f)$ if and only if it is an *optimum*, either a minimum ($forall
-omega in Omega, f(omega^(*)) lt.eq f(omega)$) or a maximum ($forall omega
-in Omega, f(omega^(*)) gt.eq f(omega)$). Exact solutions can be more than
-one: in that case, one of them can be chosen arbitrarely. Also note that
-the search space is, in general, not the entire set of real numbers, but
-a subset of reals that satisfy some conditions, or *constraints*.
-
-#exercise[
-	Consider the problem of finding the lengths of a tridimensional box
-	with fixed surface area $S$ such that its volume is as big as possible.
-	How can it be formulated into an optimization problem? Does it have
-	an exact solution?
-]
-#solution[
-	The search space of the problem is the set of all triples of positive
-	real numbers, representing all the possible values for the three lengths,
-	constrained by forming a box having area equal to $S$. The evaluation
-	function is simply the volume of the box:
-
-	$ (Omega, f) = ({(x, y, z) in RR^(+) | 2 x y + 2 x z + 2 y z = S}, f(x, y, z) = x y z) $
-
-	The problem can be solved, for example using the method of Lagrange
-	multipliers. Constructing the Lagrangian:
-
-	$ cal(L) = f(x, y, z) + lambda dot g(x, y, z) =
-	  x y z + lambda (2 x y + 2 x z + 2 y z - S) =
-	  x y z + 2 lambda x y + 2 lambda x z + 2 lambda y z - lambda S $
-
-	Computing its gradient:
-
-	#set math.mat(column-gap: 1.5em)
-	$ nabla(cal(L)) = mat(y z + 2 lambda (y + z),
-	                      x z + 2 lambda (x + z),
-	                      x y + 2 lambda (x + y),
-	                      2 x y + 2 x z + 2 y z - S)^(T) $
-
-	Setting it to $0$ and solving (done automatically in Python):
-
-	```python
-	from sympy import solve
-	from sympy.abc import x, y, z, L, S
-	eq1 = y * z + 2 * L * (y + z)
-	eq2 = x * z + 2 * L * (x + z)
-	eq3 = y * x + 2 * L * (y + x)
-	eq4 = 2 * x * y + 2 * x * z + 2 * y * z - S
-	solve([eq1, eq2, eq3, eq4], [x, y, z, L])
-	```
-
-	Gives the exact solution $x = y = z = sqrt(S slash 6)$.
-]
-
-Optimization problems are ubiquitous in fields where the goal is to
-maximize the efficiency/performance/return of a process, such as routing
-problems (_Travelling Salesman Problem_), packing problems (_Knapsack
-problem_), or scheduling problems (such as air traffic or job scheduling).
-The approaches to solve them fall into four broad categories:
-
-- *Analytical Solution*: finding the optimum of the evaluation function
-  by computing it directly, such as zeroing the gradient, employs Lagrange
-  multipliers, a KKT system, ecc... If a problem can be solved this way,
-  it is advisable to do so, since the obtained solution is guaranteed to
-  be actually optimal (and not an approximation). However, many problems
-  cannot be solved analitically, for example because it's not possible
-  to zero the gradient (if the degree of the equation is too high) or
-  because the problem is NP-hard, and therefore too computational expensive;
-- *Complete/Exhaustive Exploration*: finding the optimum of the evaluation
-  function by trying every possible solution in the search space. Even
-  though the approach is technically correct, since out of all the possible
-  solutions there has to be one or more better than the others, if the
-  search space is too big the approach quickly becomes inefficient. Also,
-  if the search space is not discrete, the approach cannot be applied at
-  all;
-- *(Blind) Random Search*: finding the optimum of the evaluation function
-  by trying random values of the search space, keeping track of the best
-  solution found so far, and stopping when a sufficiently satisfactory
-  solution is found or when a given number of attempts is reached. The
-  approach is hardly promising;
-- *Guided (Random) Search*: finding the optimum of the evaluation
-  function by exploit the structure of the search space and how the
-  evaluation function assesses similar elements to control the search.
-  The idea is to notice if it's possible to search for solutions in
-  the search space not at random, but "steering" the search into
-  promising directions and pruning directions that aren't worthwile.
-  Of course, for this to be possible, the evaluation of similar elements
-  of the search space must be similar.
-
 Evolutionary computing, and metaheuristics in general, falls into the
 last category. To make good use of evolutionary computing technique,
 it is important to state how biological terms are translated into
@@ -275,3 +174,18 @@ quantifiable definition of fitness would be the number of (average) fertile
 offspring of an individual. In computer science, the fitness is much easier
 to quantify, since the optimization problem provides a fitness function with
 which solution candidates are to be evaluated.
+
+In classical mathematical optimization, many techniques and algorithms
+have been developed that are fairly closely related to evolutionary
+computing. Such methods are sometimes called *local search methods*,
+because they explore the search space in small steps, carrying out a
+local search for better solutions.
+
+Like evolutionary algorithms, these techniques are based on the
+assumption that similar solution candidates also yield similar
+values of the function to optimize. The main difference to evolutionary
+algorithms is that local search methods inspect one solution at a time,
+instead of an entire population (in some sense, they can be thought of
+as evolutionary algorithms with population size equal to $1$). They are
+often employed to improve solutions candidates locally or as a final
+optimization step for the output of an evolutionary algorithm.
