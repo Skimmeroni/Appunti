@@ -18,6 +18,10 @@ typedef struct {
 	unsigned int* Values;
 	float fitness;
 } Permutation;
+typedef struct {
+	unsigned int* Content;
+	unsigned int length;
+} Buffer;
 typedef float** Matrix;
 
 extern int NUMBER_OF_NODES;
@@ -34,6 +38,9 @@ void permutation_destroy(Permutation*);
 void permutation_copy(Permutation*, Permutation*);
 void permutation_print(Permutation*);
 Permutation permutation_generate_new_candidate(Matrix, Matrix);
+Buffer buffer_create();
+void buffer_destroy(Buffer*);
+void buffer_remove(Buffer*, unsigned int);
 Permutation main_loop(Matrix);
 
 #endif

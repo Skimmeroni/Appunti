@@ -115,6 +115,36 @@ void matrix_update_pheromone_matrix(Matrix F, Permutation* P, unsigned int attem
 	}
 }
 
+Buffer buffer_create()
+{
+	Buffer B;
+
+	B.Content = NULL;
+	B.Content = (unsigned int*)malloc(NUMBER_OF_NODES * sizeof(unsigned int));
+	if (B.Content != NULL) {
+		for (unsigned int i = 0; i < NUMBER_OF_NODES; ++i) {
+			B.Content[i] = i;
+		}
+		B.length = NUMBER_OF_NODES - 1;
+	} else {
+		perror("Error");
+	}
+
+	return B;
+}
+
+void buffer_destroy(Buffer* B)
+{
+	free(B->Content);
+	B->Content = NULL;
+}
+
+void buffer_remove(Buffer* B, unsigned int value)
+{
+	swap(&B->Content[value], &B->Content[buffer_len]);
+	--B->length;
+}
+
 void permutation_update_fitness(Permutation* P, Matrix M)
 {
 	P->fitness = M[P->Values[0]][P->Values[NUMBER_OF_NODES - 1]];
@@ -172,10 +202,9 @@ void permutation_print(Permutation* P)
 
 Permutation permutation_generate_new_candidate(Matrix M, Matrix F)
 {
-	unsigned int* buffer = NULL;
-	unsigned int buffer_len = NUMBER_OF_NODES - 1;
-	unsigned int pos = 0;
-	unsigned int t = rand() % NUMBER_OF_NODES;
+	unsigned int current_pos = 0;
+	unsigned int current_node;
+	Buffer B;
 	Permutation P;
 
 	P = permutation_create(M);
@@ -183,43 +212,49 @@ Permutation permutation_generate_new_candidate(Matrix M, Matrix F)
 		return P;
 	}
 
-	buffer = (unsigned int*)malloc(NUMBER_OF_NODES * sizeof(unsigned int));
-	if (buffer == NULL) {
-		perror("Error");
+	B = buffer_create();
+	if (B.content == NULL) {
 		permutation_destroy(&P);
 		return P;
 	}
 
-	P.Values[pos] = t;
-	for (unsigned int i = 0; i < NUMBER_OF_NODES; ++i) {
-		buffer[i] = i;
-	}
-	swap(&buffer[t], &buffer[buffer_len]);
-	--buffer_len;
+	current_node = rand() % NUMBER_OF_NODES;
+	P.Values[current_pos] = current_node;
+	buffer_remove(B, current_node);
 
-	while (buffer_len > 0) {
-		float* probabilities = NULL;
-		probabilities = (float*)malloc(buffer_len * sizeof(float));
-		for (unsigned int i = 0; i < buffer_len; ++i) {
+	while (B.length > 0) {
+		float probabilities[B.length];
+		unsigned int new_node;
+		float choice;
+		float cumulative;
+
+		for (unsigned int i = 0; i < B.length; ++i) {
 			float temp = 0;
-			for (unsigned int j = 0; j < buffer_len; ++i) {
+			for (unsigned int j = 0; j < B.length; ++j) {
 				temp += F[t][j];
 			}
 			probabilities[i] = F[t][i] / temp;
 		}
 
-		unsigned int new_t = 0;
-		P.Values[pos] = new_t;
-		swap(&buffer[t], &buffer[buffer_len]);
-		--buffer_len;
-		++pos;
-		t = new_t;
-		free(probabilities);
+		choice = (float) rand() / RAND_MAX;
+		cumulative = 0.0;
+
+		for (unsigned int i = 0; i < B.length; ++i) {
+			cumulative += probabilities[i];
+			if (choice <= cumulative) {
+				new_node = i;
+				break;
+			}
+		}
+
+		P.Values[current_pos] = new_node;
+		buffer_remove(B, current_node);
+
+		++current_pos;
+		current_node = new_node;
 	}
 
-	free(buffer);
-	buffer = NULL;
-
+	buffer_destroy(&B);
 	return P;
 }
 

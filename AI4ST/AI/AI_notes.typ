@@ -68,3 +68,5 @@
 #include "Evolution/Design.typ"
 == Swarm intelligence
 #include "Evolution/Swarm.typ"
+== Genetic algorithms and the Schemata Theorem
+#include "Evolution/Schemata.typ"
