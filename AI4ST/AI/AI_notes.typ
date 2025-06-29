@@ -70,3 +70,5 @@
 #include "Evolution/Swarm.typ"
 == Genetic algorithms and the Schemata Theorem
 #include "Evolution/Schemata.typ"
+== Genetic programming
+#include "Evolution/Programming.typ"

@@ -141,7 +141,7 @@ void buffer_destroy(Buffer* B)
 
 void buffer_remove(Buffer* B, unsigned int value)
 {
-	swap(&B->Content[value], &B->Content[buffer_len]);
+	swap(&B->Content[value], &B->Content[B->length]);
 	--B->length;
 }
 
@@ -213,14 +213,14 @@ Permutation permutation_generate_new_candidate(Matrix M, Matrix F)
 	}
 
 	B = buffer_create();
-	if (B.content == NULL) {
+	if (B.Content == NULL) {
 		permutation_destroy(&P);
 		return P;
 	}
 
 	current_node = rand() % NUMBER_OF_NODES;
 	P.Values[current_pos] = current_node;
-	buffer_remove(B, current_node);
+	buffer_remove(&B, current_node);
 
 	while (B.length > 0) {
 		float probabilities[B.length];
@@ -231,9 +231,9 @@ Permutation permutation_generate_new_candidate(Matrix M, Matrix F)
 		for (unsigned int i = 0; i < B.length; ++i) {
 			float temp = 0;
 			for (unsigned int j = 0; j < B.length; ++j) {
-				temp += F[t][j];
+				temp += F[current_node][j];
 			}
-			probabilities[i] = F[t][i] / temp;
+			probabilities[i] = F[current_node][i] / temp;
 		}
 
 		choice = (float) rand() / RAND_MAX;
@@ -242,13 +242,13 @@ Permutation permutation_generate_new_candidate(Matrix M, Matrix F)
 		for (unsigned int i = 0; i < B.length; ++i) {
 			cumulative += probabilities[i];
 			if (choice <= cumulative) {
-				new_node = i;
+				new_node = B.Content[i];
 				break;
 			}
 		}
 
 		P.Values[current_pos] = new_node;
-		buffer_remove(B, current_node);
+		buffer_remove(&B, current_node);
 
 		++current_pos;
 		current_node = new_node;
@@ -322,6 +322,7 @@ int main(int argc, char** argv)
 	Permutation optimal_perm = main_loop(M);
 	permutation_print(&optimal_perm);
 	permutation_destroy(&optimal_perm);
+
 	matrix_destroy(M);
 
 	return errno;
