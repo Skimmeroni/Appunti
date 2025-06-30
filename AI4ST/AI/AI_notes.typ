@@ -72,3 +72,5 @@
 #include "Evolution/Schemata.typ"
 == Genetic programming
 #include "Evolution/Programming.typ"
+== Evolutionary strategies
+#include "Evolution/Strategy.typ"

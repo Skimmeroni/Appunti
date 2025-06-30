@@ -18,7 +18,7 @@
     	(list-at _list (random (list-length _list))))
 
 (define inputs (list `I0 `I1 `I2 `I3 `S0 `S1))
-(define functions (list `AND `OR `NOT `IF))
+(define functions (list `AND `OR `NOT))
 (define symbols (append inputs functions))
 (define population-size 1000)
 
@@ -26,12 +26,10 @@
         (cond ((list-is-in inputs sexp) #t)
               ((and (list? sexp) (list-is-in functions (car sexp)))
               (cond ((or (equal? (car sexp) `AND)
-                    (equal? (car sexp) `OR)) (list (genetic-sexp-validate (list-at sexp 1))
-                                                   (genetic-sexp-validate (list-at sexp 2))))
+                         (equal? (car sexp) `OR)) (list (genetic-sexp-validate (list-at sexp 1))
+                                                        (genetic-sexp-validate (list-at sexp 2))))
                     ((equal? (car sexp) `NOT) (genetic-sexp-validate (list-at sexp 1)))
-                    ((equal? (car sexp) `IF)  (list (genetic-sexp-validate (list-at sexp 1))
-                                                    (genetic-sexp-validate (list-at sexp 2))
-                                                    (genetic-sexp-validate (list-at sexp 3))))))
+                    (#t #f)))
               (#t #f)))
 
 (define (genetic-init-grow depth max-depth)
@@ -39,19 +37,13 @@
               (i (random-choice inputs))
               (s (random-choice (list (random-choice functions)
                                       (random-choice inputs)))))
-		     (cond ((= depth 0) (cond ((or (equal? f `AND) (equal? f `OR)) (list f (genetic-init-grow (+ 1 depth) max-depth)
-		                                                                           (genetic-init-grow (+ 1 depth) max-depth)))
-		                              ((equal? f `NOT) (list f (genetic-init-grow (+ 1 depth) max-depth)))
-		                              ((equal? f `IF) (list f (genetic-init-grow (+ 1 depth) max-depth)
-		                                                      (genetic-init-grow (+ 1 depth) max-depth)
-		                                                      (genetic-init-grow (+ 1 depth) max-depth)))))
+		     (cond ((= depth 0) (if (equal? f `NOT) (list f (genetic-init-full (+ 1 depth) max-depth))
+                                                    (list f (genetic-init-full (+ 1 depth) max-depth)
+                                                            (genetic-init-full (+ 1 depth) max-depth))))
 		           ((> depth max-depth) (random-choice inputs))
 		           (#t (cond ((or (equal? s `AND) (equal? s `OR)) (list s (genetic-init-grow (+ 1 depth) max-depth)
 		                                                                  (genetic-init-grow (+ 1 depth) max-depth)))
 		                     ((equal? s `NOT) (list s (genetic-init-grow (+ 1 depth) max-depth)))
-		                     ((equal? s `IF) (list s (genetic-init-grow (+ 1 depth) max-depth)
-		                                             (genetic-init-grow (+ 1 depth) max-depth)
-		                                             (genetic-init-grow (+ 1 depth) max-depth)))
 		                     (#t (random-choice inputs)))))))
 
 (define (genetic-init-full depth max-depth)
@@ -59,24 +51,42 @@
               (i (random-choice inputs)))
               (if (> depth max-depth)
                   (random-choice inputs)
-                  (cond ((or (equal? f `AND) (equal? f `OR)) (list f (genetic-init-full (+ 1 depth) max-depth)
-                                                                     (genetic-init-full (+ 1 depth) max-depth)))
-                        ((equal? f `NOT) (list f (genetic-init-full (+ 1 depth) max-depth)))
-                        ((equal? f `IF) (list f (genetic-init-full (+ 1 depth) max-depth)
-                                                (genetic-init-full (+ 1 depth) max-depth)
-                                                (genetic-init-full (+ 1 depth) max-depth)))))))
+                  (if (equal? f `NOT)
+                      (list f (genetic-init-full (+ 1 depth) max-depth))
+                      (list f (genetic-init-full (+ 1 depth) max-depth)
+                              (genetic-init-full (+ 1 depth) max-depth))))))
 
-(define (genetic-init-ramp-inner-loop population iteration limit)
-        (if (zero? iteration)
-            population
-            (genetic-init-ramp-inner-loop (append population
-                                                  (genetic-init-grow 0 limit)
-                                                  (genetic-init-full 0 limit))
-                                          (- iteration 1))))
+(define (genetic-population-grow population iterations max-depth)
+	(if (zero? iterations)
+	    population
+	    (genetic-population-grow (append population (genetic-init-grow 0 max-depth))
+	                             (- iterations 1)
+	                             max-depth)))
 
-(define (genetic-init-ramp population runs max-depth)
-        (if (zero? runs)
-            population
-            (genetic-init-ramp (append population (genetic-init-ramp-inner-loop (list) 0 max-depth))
-                               (- runs 1)
-                               max-depth)))
+(define (genetic-population-full population iterations max-depth)
+	(if (zero? iterations)
+	    population
+	    (genetic-population-full (append population (genetic-init-full 0 max-depth))
+	                             (- iterations 1)
+	                             max-depth)))
+
+(define (genetic-init-ramp population pop-size max-depth)
+        (let ((batch-size (/ pop-size (* 2 max-depth))))
+             (if (equal? 1 max-depth)
+	             population
+	             (genetic-init-ramp (append population
+	                                        (genetic-population-grow (list) batch-size max-depth)
+	                                        (genetic-population-full (list) batch-size max-depth))
+	                                 pop-size (- max-depth 1)))))
+
+(display (genetic-init-full 0 5))
+(newline)
+
+;(define (random decimals)
+;        (if (zero? decimals)
+;            (list)
+;            (append (list (char->integer (read-char (open-input-file "/dev/urandom")))) (random (- decimals 1)))))
+;
+;(define (random decimals) (if (zero? decimals) 1 (* (char->integer (read-char (open-input-file "/dev/urandom"))) (random (- decimals 1)))))
+;
+;(char->integer (read-char (open-input-file "/dev/urandom")))
