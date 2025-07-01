@@ -1,21 +1,41 @@
 #import "../AI_definitions.typ": *
 
-An *optimization problem* is defined as a pair $(Omega, f)$. $Omega$ is a
-set called *search space* that contains all the potential solutions (the
-"candidates") whereas $f: Omega mapsto RR$ is a function called *evaluation
-function*, that assigns a (real) number to each potential solution $omega
-in Omega$, representing "how good" said solution is. The "best" solutions,
-also called *exact solutions*, are those that return the highest value when
-fed as input to the evaluation function.
+An *optimization problem* is defined as a triple $(Omega, f, succ)$.
+$Omega subset.eq RR^(n)$ is set called *search space*, $f: Omega mapsto
+RR$ is a function called *evaluation function* and $succ$ stands for
+an inequality symbol (either $gt.eq$ or $lt.eq$).
 
-An element $omega^(*) in Omega$ is an exact solution of the optimization
-problem $(Omega, f)$ if and only if it is an *optimum* for the evaluation
-function, either a minimum ($forall omega in Omega, f(omega^(*)) lt.eq
-f(omega)$) or a maximum ($forall omega in Omega, f(omega^(*)) gt.eq
-f(omega)$). If the search space contains more than one optima, any choice
-of optima can be chosen as exact solution. In general, the search space is
-not the set of all real numbers, but a subset of reals that satisfy some
-conditions, or *constraints*.
+Each member $omega in Omega$ is said to be a *valid solution*, or
+simply a *solution*. In general, the search space is not the set
+of all real numbers, but a subset of reals that satisfy some conditions,
+or *constraints*. The elements of $RR^(n)$ that fall outside $Omega$
+(that is, those that do not abide by the constrains fixed by $Omega$)
+are called *invalid solutions*.
+
+The value of $f(omega)$ represents the "quality" or the "goodness"
+of $omega$. Two solutions $omega_(1)$ and $omega_(2)$ can be compared
+relying on the evaluation function: if $f(omega_(1)) gt.eq f(omega_(2))$
+and $succ$ is $gt.eq$, then $omega_(1)$ is _better_ than $omega_(2)$, and
+_worse_ otherwise. On the other hand, if $f(omega_(1)) lt.eq f(omega_(2))$
+and $succ$ is $lt.eq$, then $omega_(1)$ is _better_ than $omega_(2)$, and
+_worse_ otherwise. 
+
+A solution $omega^(*) in Omega$ is said to be an *exact solution* of
+$(Omega, f, succ)$ if and only if it is an *optimum* for the evaluation
+function. That is, if $succ$ is $lt.eq$, the optimum has to be a minimum
+($forall omega in Omega, f(omega^(*)) lt.eq f(omega)$), while if $succ$
+is $gt.eq$ it has to be a maximum. ($forall omega in Omega, f(omega^(*))
+gt.eq f(omega)$). *Solving* an optimization problem simply means finding
+its exact solution: if the search space contains more than one optima,
+solving the optimization problem means finding one (no matter which one)
+out of them.
+
+If the symbol $succ$ is $gt.eq$, an optimization problem $(Omega, f, gt.eq)$
+is also called a *maximization problem*; if it's $lt.eq$, it's called a
+*minimization problem*. Note that a maximization problem can be converted
+into a maximization problem or vice versa simply by changing the sign of
+the evaluation function: that is, $(Omega, f, gt.eq) = (Omega, -f, lt.eq)$
+and $(Omega, f, lt.eq) = (Omega, -f, gt.eq)$.
 
 #exercise[
 	Consider the problem of finding the lengths of a tridimensional box
@@ -29,13 +49,12 @@ conditions, or *constraints*.
 	constrained by forming a box having area equal to $S$. The evaluation
 	function is simply the volume of the box:
 
-	$ (Omega, f) = ({(x, y, z) in RR^(+) | 2 x y + 2 x z + 2 y z = S}, f(x, y, z) = x y z) $
+	$ (Omega, f, >) = ({(x, y, z) in RR^(+) | 2 x y + 2 x z + 2 y z = S}, f(x, y, z) = x y z) $
 
 	The problem can be solved, for example using the method of Lagrange
 	multipliers. Constructing the Lagrangian:
 
 	$ cal(L) = f(x, y, z) + lambda dot g(x, y, z) =
-	  x y z + lambda (2 x y + 2 x z + 2 y z - S) =
 	  x y z + 2 lambda x y + 2 lambda x z + 2 lambda y z - lambda S $
 
 	Computing its gradient:
@@ -46,19 +65,9 @@ conditions, or *constraints*.
 	                      x y + 2 lambda (x + y),
 	                      2 x y + 2 x z + 2 y z - S)^(T) $
 
-	Setting it to $0$ and solving (done automatically in Python):
-
-	```python
-	from sympy import solve
-	from sympy.abc import x, y, z, L, S
-	eq1 = y * z + 2 * L * (y + z)
-	eq2 = x * z + 2 * L * (x + z)
-	eq3 = y * x + 2 * L * (y + x)
-	eq4 = 2 * x * y + 2 * x * z + 2 * y * z - S
-	solve([eq1, eq2, eq3, eq4], [x, y, z, L])
-	```
-
-	Gives the exact solution $x = y = z = sqrt(S slash 6)$.
+	Setting it to $0$ and solving #footnote[Done automatically in
+	Python using the `sympy` package.] for $x, y, z$ gives the exact
+	solution $x = y = z = sqrt(S slash 6)$.
 ]
 
 The approaches to solve optimization problems fall into four broad

@@ -1,6 +1,6 @@
 #set text(
 	font: "Gentium Plus",
-	size: 10pt,
+	size: 11pt,
 	lang: "en"
 )
 #set page(
@@ -8,12 +8,10 @@
 	header: align(right)[_Artificial Intelligence_],
 	numbering: "1"
 )
-#set par(
-	justify: true
-)
-#set heading(
-	numbering: "1."
-)
+#set par(justify: true)
+#set heading(numbering: "1.")
+#show heading.where(level: 1): set text(size: 18pt)
+#show heading.where(level: 2): set text(size: 14pt)
 
 #import "AI_definitions.typ": *
 
@@ -58,19 +56,23 @@
 #include "Evolution/Optimization.typ"
 == Local search algorithms
 #include "Evolution/Local.typ"
-== Biological background
-#include "Evolution/Background.typ"
 == Evolutionary algorithms
 #include "Evolution/Algorithm.typ"
-== Evolutionary local search algorithms
+// == The n-queens problem
+// #include "Evolution/Queens.typ"
+== Choosing a solution encoding
+#include "Evolution/Encoding.typ"
+== Choosing a selection method
+#include "Evolution/Selection.typ"
+== Choosing a genetic operator
+#include "Evolution/Operator.typ"
+== Classes of evolutionary algorithms: evolutionary local search
 #include "Evolution/Ea_local.typ"
-== Evolutionary algorithm design choices
-#include "Evolution/Design.typ"
-== Swarm intelligence
+== Classes of evolutionary algorithms: swarm intelligence
 #include "Evolution/Swarm.typ"
-== Genetic algorithms and the Schemata Theorem
+== Classes of evolutionary algorithms: genetic algorithms
 #include "Evolution/Schemata.typ"
-== Genetic programming
+== Classes of evolutionary algorithms: genetic programming
 #include "Evolution/Programming.typ"
-== Evolutionary strategies
+== Classes of evolutionary algorithms: evolutionary strategies
 #include "Evolution/Strategy.typ"
