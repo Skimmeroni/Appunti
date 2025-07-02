@@ -66,6 +66,8 @@
 #include "Evolution/Selection.typ"
 == Choosing a genetic operator
 #include "Evolution/Operator.typ"
+== Parallelization
+#include "Evolution/Parallel.typ"
 == Classes of evolutionary algorithms: evolutionary local search
 #include "Evolution/Ea_local.typ"
 == Classes of evolutionary algorithms: swarm intelligence
@@ -76,3 +78,5 @@
 #include "Evolution/Programming.typ"
 == Classes of evolutionary algorithms: evolutionary strategies
 #include "Evolution/Strategy.typ"
+== Classes of evolutionary algorithms: finding Pareto-frontiers
+#include "Evolution/Pareto.typ"

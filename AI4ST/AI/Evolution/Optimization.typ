@@ -1,9 +1,11 @@
 #import "../AI_definitions.typ": *
 
+=== Optimization problems
+
 An *optimization problem* is defined as a triple $(Omega, f, succ)$.
 $Omega subset.eq RR^(n)$ is set called *search space*, $f: Omega mapsto
-RR$ is a function called *evaluation function* and $succ$ stands for
-an inequality symbol (either $gt.eq$ or $lt.eq$).
+RR$ is a function called *objective function* or *evaluation function*
+and $succ$ stands for an inequality symbol (either $gt.eq$ or $lt.eq$).
 
 Each member $omega in Omega$ is said to be a *valid solution*, or
 simply a *solution*. In general, the search space is not the set
@@ -100,6 +102,8 @@ categories:
   similar elements of the search space must yield similar results. This
   is also referred to as the *principle of small improvements*.
 
+=== Examples of optimization problems
+
 Optimization problems are ubiquitous in fields where the goal is to
 maximize the efficiency/performance/return of a process. Examples include:
 
@@ -150,3 +154,82 @@ is so big that it's guaranteed to not be included in the solution. To
 simplify it further, the graph is assumed to be undirected, therefore
 the direction chosen to move from node to node is irrelevant.
 
+=== Multi-criteria optimization problems
+
+This simple model of optimization problem can be extended with
+more than one objective function, the so-called *multi-criteria
+optimization problems*, in the form $(Omega, (f_(1), succ_(1)),
+dots, (f_(k), succ_(k)))$.
+
+Solving such problems does not simply entail finding a solution in
+$Omega$ that maximizes/minimizes all functions at the same time,
+since some functions have to be minimized and others to be maximized.
+This means that a solution that has a very good quality with respect
+to some objective functions might have very bad quality with respect
+to others. Therefore, solving a multi-criteria optimization problem
+consists in finding the solution that yields the highest/lowest value
+for all objective functions at the same time _as much as possible_.
+
+The simplest approach for solving a multi-criteria optimization problem
+is to combine all objective functions $(f_(1), dots, f_(k))$ into one,
+effectively reducing the problem to a standard optimization problem. This
+is done as follows:
+
+$ f(omega) =
+  sum_(i = 1)^(k) w_(i) f_(i)(omega) =
+  w_(1) f_(1)(omega) + w_(2) f_(2)(omega) + dots + w_(k) f_(k)(omega) $
+
+Where the weights $w_(1), dots, w_(k)$ represent the "importance" of
+having a particular function maximized/minimized at the expence of the
+others. In other words, a great (absolute) value of $w_(i)$ means that
+an exact solution to the problem should be as close as possible to an
+optima of $f_(i)$, whereas a low (absolute) value of $w_(i)$ means that
+an exact solution to the problem doesn't have to strive to reach an
+optima of $f_(i)$. Also, the sign of the weights can be adjusted so that
+all functions have to be maximized/minimized.
+
+This approach is not particularly effective for multiple reasons. First,
+note how this just shifts the goalpost: now solving the problem requires
+to find appropriate weights, which in general is not possible aside from
+employing some heuristics. Also, even if it were to possible to find them,
+this does not allow for the weights to be adapted based on the properties
+of the potential solutions to be obtained (unless the function is computed
+again). However, the real issue lies even deeper: each arrangement of
+weights defines a _preference order_ of the solution candidates, and one
+has to aggregate these preference orders over the different arrangements
+to obtain an ordering of the solution candidates. This is also called the
+*problem of preference aggregation*. 
+
+Consider an multi-criteria optimization problem $(Omega, f_(1),
+dots, f_(k), >)$, where all functions have already been tuned
+(changing their sign if needed) so that all functions have to
+be maximized. A solution $omega_(1) in Omega$ *dominates* another
+solution $omega_(2) in Omega$ if and only if, for any $1 lt.eq i
+lt.eq k$, $f(omega_(1)) gt.eq f(omega_(2))$. A solution $omega_(1)
+in Omega$ *strictly dominates* another solution $omega_(2) in Omega$
+if and only if $omega_(1)$ dominates $omega_(2)$ and there's at least
+one $i$ in ${1, dots, k}$ such that $f(omega_(1)) > f(omega_(2))$.
+If an element $omega in Omega$ is not strictly dominated by any
+other element $omega' in Omega$, it is said to be *Pareto-optimal*.
+
+An alternative approach to combining all objective functions into
+one is to find one of these Pareto-optimal solutions. This is clearly
+a better approach, since now there's no need to specify the weights
+$w_(i)$ and it becomes possible to change the priorities of the solutions
+based on the obtained result, without having to recompute everything again.
+The downside is that there is rarely just one Pareto-optimal solutions:
+in most cases, those form a set called *Pareto-frontier*.
+
+A more interesting goal to set for solving multi-criteria optimization
+problems is to find not any solution in the Pareto-frontier, but the
+Pareto-frontier in its entirety. Clearly, this rules out the weighted
+combination method presented above, since it produces a single solution
+(although said solution _does_ lie on the Pareto-frontier, or at least
+gets close). Even if one were to repeat the process $r$ times, and
+returning $r$ solutions, said solutions would still be in the same
+neighborhood of the frontier. This is because the combined objective
+functions act as a $k$-dimensional hyperplane that intersects the search
+space, and the solutions are either in said intersection (assuming that
+it exists) or close to it. Solving this form of the problem has to be
+done following different paths, such as employing evolutionary algorithms
+(discussed further).

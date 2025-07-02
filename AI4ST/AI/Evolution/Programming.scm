@@ -17,6 +17,8 @@
 (define (random-choice _list)
     	(list-at _list (random (list-length _list))))
 
+(define (reduce f init l) (if (null? l) init (reduce f (f init (car l)) (cdr l))))
+
 (define inputs (list `I0 `I1 `I2 `I3 `S0 `S1))
 (define functions (list `AND `OR `NOT))
 (define symbols (append inputs functions))
@@ -79,8 +81,8 @@
 	                                        (genetic-population-full (list) batch-size max-depth))
 	                                 pop-size (- max-depth 1)))))
 
-(display (genetic-init-full 0 5))
-(newline)
+;(display (genetic-init-full 0 5))
+;(newline)
 
 ;(define (random decimals)
 ;        (if (zero? decimals)
@@ -90,3 +92,5 @@
 ;(define (random decimals) (if (zero? decimals) 1 (* (char->integer (read-char (open-input-file "/dev/urandom"))) (random (- decimals 1)))))
 ;
 ;(char->integer (read-char (open-input-file "/dev/urandom")))
+;(define (randmax max iterations) (let ((r (random))) (if (zero? iterations) max (if (> r max) (randmax r (- iterations 1)) (randmax max (- iterations 1))))))
+;(define (random l precision) (if (zero? precision) l (random (append l (list (read-char (open-input-file "/dev/urandom")))) (- precision 1))))
