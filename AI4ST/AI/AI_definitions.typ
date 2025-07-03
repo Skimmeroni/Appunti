@@ -4,6 +4,7 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 #import "@preview/board-n-pieces:0.6.0": board, position
 #import "@preview/syntree:0.2.1": syntree
+#import "@preview/game-theoryst:0.1.0": *
 
 #let theorem = thmbox("theorem", "Theorem", fill: rgb("#e7f7e6"))
 #let lemma = thmbox("lemma", "Lemma", fill: rgb("#f7ebf4"))

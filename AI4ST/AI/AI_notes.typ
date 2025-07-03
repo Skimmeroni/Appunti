@@ -58,14 +58,14 @@
 #include "Evolution/Local.typ"
 == Evolutionary algorithms
 #include "Evolution/Algorithm.typ"
-// == The n-queens problem
-// #include "Evolution/Queens.typ"
 == Choosing a solution encoding
 #include "Evolution/Encoding.typ"
 == Choosing a selection method
 #include "Evolution/Selection.typ"
 == Choosing a genetic operator
 #include "Evolution/Operator.typ"
+// == The n-queens problem
+// #include "Evolution/Queens.typ"
 == Parallelization
 #include "Evolution/Parallel.typ"
 == Classes of evolutionary algorithms: evolutionary local search
@@ -80,3 +80,5 @@
 #include "Evolution/Strategy.typ"
 == Classes of evolutionary algorithms: finding Pareto-frontiers
 #include "Evolution/Pareto.typ"
+== Classes of evolutionary algorithms: solving behaviour simulations
+#include "Evolution/Behaviour.typ"
