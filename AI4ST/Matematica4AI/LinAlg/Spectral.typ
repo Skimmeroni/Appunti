@@ -185,9 +185,9 @@ symmetric matrices.
 		   cases(x = 0, y = 0, z = z) $]
 	)
 
-	Which gives: $E_(lambda_(1)) = "span"{(-t, t, 0)^(T)}$,
-	$E_(lambda_(2)) = "span"{(t, t, 0)^(T)}$,
-	$E_(lambda_(3)) = "span"{(0, 0, t)^(T)}$. Out of all
+	Which gives: $E_(lambda_(1)) = "span"{(-1, 1, 0)^(T)}$,
+	$E_(lambda_(2)) = "span"{(1, 1, 0)^(T)}$,
+	$E_(lambda_(3)) = "span"{(0, 0, 1)^(T)}$. Out of all
 	the eigenvectors, the interest is to find the ones having
 	norm equal to $1$.
 

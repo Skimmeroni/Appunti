@@ -1,21 +1,9 @@
-#set text(
-	font: "Gentium Plus",
-	size: 11pt,
-	lang: "en"
+#import "../../University-Notes-Template.typ": university-notes
+#show: university-notes.with(
+	title: "Artificial Intelligence"
 )
-#set page(
-	paper: "a4",
-	header: align(right)[_Artificial Intelligence_],
-	numbering: "1"
-)
-#set par(justify: true)
-#set heading(numbering: "1.")
-#show heading.where(level: 1): set text(size: 18pt)
-#show heading.where(level: 2): set text(size: 14pt)
 
 #import "AI_definitions.typ": *
-
-#show link: underline
 #show: thmrules.with(qed-symbol: $square$)
 
 #outline(indent: auto)

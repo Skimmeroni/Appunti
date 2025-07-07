@@ -1,24 +1,9 @@
+#import "../../University-Notes-Template.typ": university-notes
+#show: university-notes.with(
+	title: "Advanced Foundations of Mathematics for AI"
+)
+
 #import "Math4AI_definitions.typ": *
-
-#set text(
-	font: "Gentium Plus",
-	size: 10pt,
-	lang: "en"
-)
-#set page(
-	paper: "a4",
-	header: align(right)[_Advanced Foundations of Mathematics for AI_],
-	numbering: "1"
-)
-#set par(
-	justify: true
-)
-#set heading(numbering: "1.")
-
-#show: thmbox-init()
-#show heading: set text(
-  font: "Noto Sans"
-)
 
 #outline(indent: auto)
 #pagebreak()
