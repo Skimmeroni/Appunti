@@ -3,9 +3,18 @@
 Among guided search algorithms, particular relevance have the so-called
 *local search algorithms*. The ones hereby presented are concerned with
 finding a minimum or a maximum of a real-valued function, meaning that
-they tackle an optimization problem where the search space is the set of
-real numbers and the evaluation function is the function whose optima are
-of interest.
+they tackle an optimization problem where the search space is the set
+of real numbers and the evaluation function is the function whose optima
+are of interest.
+
+All local search algorithms work by starting from a random solution,
+probing the neighboring solutions and, if a better one is found, restarting
+from said point, repeating the process until a sufficiently satisfactory
+solution is found. Of course, such algorithms rely on a (to be justified)
+assumption: the result of evaluating similar elements of the search space
+must yield similar results. Otherwise, probing the neighborhood of a
+solution would be a pointless endeavour. This is also referred to as
+the *principle of small improvements*.
 
 Of course, such problems could be solved analitically by computing the
 gradient of the evaluation function and setting it equal to $0$, but this
@@ -142,7 +151,7 @@ and will become more and more "conservative" as the iterations go by.
 
 #algo(
 	title: "Simulated-Annealing",
-	parameters: ([$f : RR^(n) -> RR$: function, $T$: float, $delta$: float, $epsilon$: termination criteria],),
+	parameters: ([$f : RR^(n) -> RR$: function, $T, delta$: float, $epsilon$: termination criteria],),
 	stroke: 0pt,
 	indent-guides: 1pt + gray,
 	fill: none,
@@ -155,7 +164,7 @@ and will become more and more "conservative" as the iterations go by.
 			if ($abs(Delta) > Delta_(max)$) #i \
 				$Delta_(max) <- abs(Delta)$ #d \
 			$p <- e^(Delta slash Delta_(max) T)$ #comment[Tolerance to worse solutions] \
-			$u <-$ a random value sampled from $U ~ (0, 1)$ \
+			$u <-$ a value sampled from $U ~ (0, 1)$ \
 			if ($Delta > 0$ or $p gt.eq u$) #i #comment[New solution is better or just tolerated] \
 				$x <- x'$ #d \
 			$T <- T - delta(T)$ #d #comment[Decrease temperature by a small amount] \
@@ -200,7 +209,7 @@ that decreases over time.
 
 #algo(
 	title: "Threshold-accepting",
-	parameters: ([$f : RR^(n) -> RR$: function, $theta$: float, $delta$: float, $epsilon$: termination criteria],),
+	parameters: ([$f : RR^(n) -> RR$: function, $theta, delta$: float, $epsilon$: termination criteria],),
 	stroke: 0pt,
 	indent-guides: 1pt + gray,
 	fill: none,
@@ -226,7 +235,7 @@ $theta_(0)$ and a scaling factor $eta$.
 
 #algo(
 	title: "Great-Deluge",
-	parameters: ([$f : RR^(n) -> RR$: function, $theta_(0)$: float, $eta$: float, $epsilon$: termination criteria],),
+	parameters: ([$f : RR^(n) -> RR$: function, $theta_(0), eta$: float, $epsilon$: termination criteria],),
 	stroke: 0pt,
 	indent-guides: 1pt + gray,
 	fill: none,

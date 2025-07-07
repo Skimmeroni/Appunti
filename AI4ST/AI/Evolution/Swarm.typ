@@ -118,8 +118,8 @@ be optimized must be $f: RR^(n) -> RR$.
 				if $f(bold(x)_(i)) gt.eq f("opt")$ then #i \
 					$"opt" <- bold(x)_(i)$ #d#d #comment[Update global optimum] \
 			for $i in {1, dots, N}$ #i \
-				$phi.alt_(1) <-$ a random value sampled from $U ~ (0, 1)$ \
-				$phi.alt_(2) <-$ a random value sampled from $U ~ (0, 1)$ \
+				$phi.alt_(1) <-$ a value sampled from $U ~ (0, 1)$ \
+				$phi.alt_(2) <-$ a value sampled from $U ~ (0, 1)$ \
 				$bold(v)_(i) <- w bold(v)_(i) + phi.alt_(1) C_(1)(bold(x)_(i)^(*) - bold(x)_(i)) + phi.alt_(2) C_(2)("opt" - bold(x)_(i))$ #comment[Update local velocity] \
 				$bold(x)_(i) <- bold(x)_(i) + bold(v)_(i)$ #d#d #comment[Update local position] \
 		while (not($epsilon$)) \

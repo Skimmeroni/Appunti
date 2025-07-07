@@ -66,7 +66,7 @@
 #include "Evolution/Operator.typ"
 // == The n-queens problem
 // #include "Evolution/Queens.typ"
-== Parallelization
+== Improving performance through parallelization
 #include "Evolution/Parallel.typ"
 == Classes of evolutionary algorithms: evolutionary local search
 #include "Evolution/Ea_local.typ"

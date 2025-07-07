@@ -144,7 +144,7 @@ choose their action once, without any possibility for adapting
 their strategy based on the behaviour of the other.
 
 In a known experiment, many strategies of varying complexity were tested
-against one another, to see which one, on average, managed to ensure the
+against one another, to see which one, on average, managed to secure the
 highest number of points to the user employing it. Each strategy would
 compete in a round robin tournament, meaning that each would have to be
 paired once with each other strategy. Each strategy had to compete against

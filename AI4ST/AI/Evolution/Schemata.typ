@@ -28,7 +28,7 @@ just four nucleotides: A, C, G, T.
 			chosen #math.arrow.l select $mu$ individuals from pop with roulette wheel selection \
 			newpop $<- emptyset$ \
 			for $i in {1, dots, mu slash 2}$ #i \
-				$u <-$ a random value sampled from $U ∼ (0, 1)$ \
+				$u <-$ a value sampled from $U ∼ (0, 1)$ \
 				if ($u lt.eq p_(x)$) #i \
 					#smallcaps("One-Point-Crossover") (chosen[2i - 1], chosen[2i]) #d \
 				#smallcaps("Bit-Mutation") (chosen[2i - 1], $p_(m)$) \

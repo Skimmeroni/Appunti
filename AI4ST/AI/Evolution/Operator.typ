@@ -23,7 +23,7 @@ $p_(m)$:
 	fill: none,
 	[
 		for $i = 1$ to $abs(S)$ #i \
-			$u <-$ a random value sampled from $U ~ (0, 1)$ \
+			$u <-$ a value sampled from $U ~ (0, 1)$ \
 			if ($u lt.eq p_(m)$) #i \
 				$S_(i) <- 1 - S_(i)$ #d#d \
 	]
@@ -70,7 +70,7 @@ with $sigma$ parameter to be chosen:
 	fill: none,
 	[
 		for $i = 1$ to $abs(S)$ #i \
-			$nu <-$ a random value sampled from $N ~ (0, sigma)$ \
+			$nu <-$ a value sampled from $N ~ (0, sigma)$ \
 			$S_(i) <- S_(i) + nu$ \
 			$S_(i) <- max{S_(i), l_(i)}$ \
 			$S_(i) <- min{S_(i), h_(i)}$ \
@@ -94,10 +94,10 @@ the parameter itself is tuned:
 	indent-guides: 1pt + gray,
 	fill: none,
 	[
-		$u <-$ a random value sampled from $U ~ (0, 1)$ \
+		$u <-$ a value sampled from $U ~ (0, 1)$ \
 		$sigma_(S) <- sigma_(S) dot exp(u slash sqrt(abs(S)))$ \
 		for $i = 1$ to $abs(S)$ #i \
-			$nu <-$ a random value sampled from $N ~ (0, sigma_(S))$ \
+			$nu <-$ a value sampled from $N ~ (0, sigma_(S))$ \
 			$S_(i) <- S_(i) + nu$ \
 			$S_(i) <- max{S_(i), l_(i)}$ \
 			$S_(i) <- min{S_(i), h_(i)}$ \
@@ -208,7 +208,7 @@ with a probability $p_(x)$.
 	fill: none,
 	[
 		for ($i in {0, 1, dots, abs(S)}$) #i \
-			$u <-$ a random value sampled from $U ~ (0, 1)$ \
+			$u <-$ a value sampled from $U ~ (0, 1)$ \
 			if $(u < p_(i))$ #i \
 				$t <- S_(1, i)$ \
 				$S_(1, i) <- S_(2, i)$ \
@@ -416,7 +416,7 @@ $n$-dimensional points that are represented by the parent chromosomes.
 	fill: none,
 	[
 		$R <-$ empty array \
-		$u <-$ a random value sampled from $U ~ (0, 1)$ \
+		$u <-$ a value sampled from $U ~ (0, 1)$ \
 		for $i = 1$ to $abs(S_(1))$ #i \
 			$R_(i) <- u dot S_(2, i) + (1 - u) dot S_(1, i)$ \
 	]

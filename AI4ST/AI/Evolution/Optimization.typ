@@ -97,10 +97,7 @@ categories:
   space by gathering information on the previous attempts. The idea is
   to start with a (mostly) random solution, observing how to change the
   solution in order to obtain a better one, and repeating the process
-  until a "satisfactory" result is obtained. This approach relies on
-  a (generally not too far-fetched) assumption: the result of evaluating
-  similar elements of the search space must yield similar results. This
-  is also referred to as the *principle of small improvements*.
+  until a "satisfactory" result is obtained.
 
 === Examples of optimization problems
 
@@ -116,32 +113,42 @@ maximize the efficiency/performance/return of a process. Examples include:
   traffic coordination).
 
 A well-known example of routing problem is the *Travelling Salesman Problem*
-(*TSP*), that can be formulated as an analogy: how can a traveller reach all
-cities of their planned trip by taking the shortest possible path?
+(*TSP*), that can be formulated informally as an analogy. Suppose that a
+traveller has a set of cities that they want to travel to, connected by
+roads, more or less distant from each other. How can they reach all cities
+of their planned trip, reaching each exactly once, such that the cumulative
+travelled distance is as small as possible?
 
-Formally, the problem is understood in terms of a graph, where the cities
-are the nodes, the edges are the roads connecting the cities and the weights
-are the lenghts of the distance between two cities (or the time needed to
-get from one to the other). Phrased this way, the TSP amounts to find an
-*Hamiltonian cycle* of the graph: a path that starts and ends in the same
-node, that reaches all of its nodes exactly once and whose cumulative weight
-is the smallest (of course, a graph can have more than one Hamiltonian cycle).
+Formally, the problem is understood in terms of graphs. Let $G = (V,
+E, W)$ be a weighted graph, with $V = {v_(1), dots, v_(n)}$ a set of
+vertices, $E subset.eq V times V - {(v, v) | v in V}$ a set of edges
+(having no loops) and $W: E -> RR^(+)$ a function that assigns a
+(positive) weight to each edge. Each node represents a city, each edge
+represents a road that connects two cities and each weight represents
+the length of the road (or the time needed to travel it).
 
-Let $G = (V, E, W)$ be a graph, with $V = {v_(1), dots, v_(n)}$ a set of
-vertices, $E subset.eq V times V - {(v, v) | v in V}$ a set of edges (having
-no loops) and $W: E -> RR^(+)$ a function that assigns a (positive) weight
-to each edge. The Travelling Salesman Problem is the optimization problem
-$(Omega, f)$, where $Omega$ is the set of all possible permutations of
-indices of the vertices that, two by two, have an edge that connects them:
+The Travelling Salesman Problem is then the optimization problem
+$(Omega, f)$, where $Omega$ is the set of all possible permutations
+of indices of the vertices that, two by two, have an edge that connects
+them:
 
 $ Omega = {pi(n) | forall k in [1, n], (v_(pi(k)), v_(pi((k + 1) mod n))) in E} $
 
-And where the function $f$ is the sum of all the weights of a member in $Omega$:
+Each representing one possible *Eulerian cycle* of the graph, a path that
+starts and ends in the same node and that reaches all of its nodes exactly
+once. The function $f$ is the sum of all the weights of a member in $Omega$,
+sign-flipped:
 
 $ f(pi) = -sum_(k = 1)^(n) W((v_(pi(k)), v_(pi((k + 1) mod n)))) $
 
-The $mod n$ is just to ensure that the last vertex "loops back" and connects
-to the first.
+The $mod n$ is just to ensure that the last vertex "loops back" and
+connects to the first. The minus sign in front turns the original
+minimization problem into a maximization problem.
+
+A solution of the TSP is then a solution $pi^(*) in Omega$ that maximizes
+$f$. These represent an *Hamiltonian cycle* of the graph, an Eulerian cycle
+whose cumulative weight is as small as possible. Of course, a graph can have
+more than one Hamiltonian cycle.
 
 The TSP is an NP-complete problem, therefore there is no way of computing
 a solution of the problem within an reasonable time bound, unless the
