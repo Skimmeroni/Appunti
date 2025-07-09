@@ -4,6 +4,7 @@
 )
 
 #import "Math4AI_definitions.typ": *
+#show: thmrules.with(qed-symbol: $square$)
 
 #outline(indent: auto)
 #pagebreak()
@@ -32,7 +33,9 @@
 #include "LinAlg/KerIm.typ"
 == Eigenvalues and Eigenvectors
 #include "LinAlg/Eigen.typ"
-== Inner Product
+== Inner product and cross product
+#include "LinAlg/Product.typ"
+== Spectral Theorem
 #include "LinAlg/Spectral.typ"
 == Decompositions
 #include "LinAlg/Decomposition.typ"

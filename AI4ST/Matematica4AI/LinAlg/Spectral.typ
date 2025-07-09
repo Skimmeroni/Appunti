@@ -1,102 +1,6 @@
 #import "../Math4AI_definitions.typ": *
 
-=== Definition
-
-Vector spaces, to be qualified as such, must provide the notion of a sum
-between two vectors and the notion of a multiplication between a vector
-and a scalar. However, some vector spaces support operations that go beyond
-these two.
-
-One such example is the *inner product*: given a vector space $V$, the
-inner product of two vectors $underline(v_(1))$ and $underline(v_(2))$
-of $V$, denoted as $angle.l underline(v_(1)), underline(v_(2)) angle.r$,
-is an operation that returns a scalar and that possessing these properties:
-
-- *Symmetry*: for any vectors $underline(v_(1)), underline(v_(2))$,
-  $angle.l underline(v_(1)), underline(v_(2)) angle.r =
-   angle.l underline(v_(2)), underline(v_(1)) angle.r$
-- *Linearity of the first term*: For any two scalars $a, b$ and for any
-  vectors $underline(v_(1)), underline(v_(2)), underline(v_(3))$,
-  $angle.l a underline(v_(1)) + b underline(v_(2)), underline(v_(3))
-    angle.r = a angle.l underline(v_(1)), underline(v_(3)) angle.r + b
-    angle.l underline(v_(2)), underline(v_(3)) angle.r$
-- *Positive-definiteness*: for any non-null vectors $underline(v_(1)),
-  underline(v_(2))$, $angle.l underline(v_(1)), underline(v_(2)) angle.r
-  gt.eq 0$.
-
-Vector spaces having a well defined notion of an inner product are called
-*inner product vector spaces*. Since it always return a scalar, the inner
-product is sometimes also referred to as the *scalar product*.
-
-#exercise[
-	Is $RR^(n)$ an inner product vector space?
-]
-#solution[
-	Yes. Given any two vectors $underline(x)$ and $underline(y)$ in
-	$RR^(n)$, the standard inner product over $RR^(n)$ is defined as:
-
-	$ angle.l underline(x), underline(y) angle.r =
-	  x_(1) y_(1) + x_(2) y_(2) + dots + x_(n - 1) y_(n - 1) + x_(n) y_(n) =
-	  sum_(i = 1)^(n) x_(i) y_(i) $
-
-	All three properties are satisfied:
-
-	- $angle.l underline(x), underline(y) angle.r =
-	   x_(1) y_(1) + dots + x_(n) y_(n) =
-	   y_(1) x_(1) + dots + y_(n) x_(n) =
-	   angle.l underline(y), underline(x) angle.r$
-	- $angle.l a underline(x) + b underline(y), underline(z) angle.r =
-	   (a x_(1) + b y_(1)) z_(1) + dots + (a x_(n) + b y_(n)) z_(n) =
-	   a (x_(1) z_(1)) + b (y_(1) z_(1)) + dots + a (x_(n) z_(n)) + b (y_(n) z_(n)) =
-	   a angle.l underline(x), underline(z) angle.r + b angle.l underline(y), underline(z) angle.r $
-	- $angle.l underline(x), underline(x) angle.r = 
-	   x_(1) x_(1) + dots + x_(n) x_(n) =
-	   x_(1)^(2) + dots + x_(n)^(2) gt.eq 0$
-]
-
-=== Orthogonality
-
-Any inner product induces a definition of *norm* of a vector, which
-generalizes the intuitive notion of "length":
-
-$ abs(abs(underline(v))) = sqrt(angle.l underline(v)\, underline(v) angle.r) $
-
-The inner product of a vector with itself is always non-negative, therefore
-the square root is non problematic. Since it's always possible to define a
-norm for any inner product vector space, they are also called *normed vector
-spaces*.
-
-In turn, the norm of a vector induces a definition of *angle* between
-vectors:
-
-$ theta = arccos(frac(angle.l underline(x)\, underline(y) angle.r,
-                 abs(abs(underline(x))) abs(abs(underline(y))))) $
-
-If the cosine of the angle between two vectors is $1$, said vectors are
-said to be *parallel*, while if it is $0$ they are said to be *orthogonal*.
-In particular:
-
-#grid(
-	columns: (0.5fr, 0.5fr),
-	[$ 1 = frac(angle.l underline(x)\, underline(y) angle.r,
-	       abs(abs(underline(x))) abs(abs(underline(y)))) =>
-	       angle.l underline(x), underline(y) angle.r =
-	       abs(abs(underline(x))) abs(abs(underline(y))) $],
-	[$ 0 = frac(angle.l underline(x)\, underline(y) angle.r,
-	       abs(abs(underline(x))) abs(abs(underline(y)))) =>
-	       angle.l underline(x), underline(y) angle.r = 0 $]
-)
-
-#exercise[
-	Consider the vector space $RR^(3)$. Compute the norm of $(1, 2, 3)$.
-]
-#solution[
-	$ abs(abs((1, 2, 3))) =
-	  sqrt(angle.l (1\, 2\, 3)\, (1\, 2\, 3) angle.r) =
-	  sqrt(1 dot 1 + 2 dot 2 + 3 dot 3) =
-	  sqrt(1 + 4 + 9) =
-	  sqrt(13) $
-]
+=== Orthogonal sets
 
 A set of vectors that are all orthogonal to each other is called
 an *orthogonal set*. A set of vectors $V = {underline(v_(1)), dots,
@@ -191,15 +95,15 @@ symmetric matrices.
 	the eigenvectors, the interest is to find the ones having
 	norm equal to $1$.
 
-	$ abs(abs((-t, t, 0)^(T))) &= 1 =>
+	$ norm((-t, t, 0)^(T)) &= 1 =>
 	  sqrt((-t) dot (-t) + t dot t + 0 dot 0) = 1 =>
 	  sqrt(2t^(2)) = 1 =>
 	  t = plus.minus frac(1, sqrt(2)) \
-	  abs(abs((t, t, 0)^(T))) &= 1 =>
+	  norm((t, t, 0)^(T)) &= 1 =>
 	  sqrt(t dot t + t dot t + 0 dot 0) = 1 =>
 	  sqrt(2t^(2)) = 1 =>
 	  t = plus.minus frac(1, sqrt(2)) \
-	  abs(abs((0, 0, t)^(T))) &= 1 =>
+	  norm((0, 0, t)^(T)) &= 1 =>
 	  sqrt(0 dot 0 + 0 dot 0 + t dot t) = 1 =>
 	  sqrt(t^(2)) = 1 =>
 	  t = plus.minus 1 $
