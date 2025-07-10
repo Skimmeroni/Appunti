@@ -61,45 +61,46 @@ highest value (the most sought after) is $0$.
 )
 
 From a global perspective, it is clear that the best choice would be to
-refrain, since they would both get a feasible $1$ year jail time. If the
-two prisoners were to look only after themselves, choosing to frame the
-other suspect would give them no jail time at all; this is a greedy choice
-however, since if they both act in accord to their self interest (they both
-frame each other), they would get $5$ years.
+refrain, since they would both get a feasible $1$ year jail time. However,
+if both prisoners were to unapologetically behave to maximize their best
+interest, they would both choose to confess, since it's the option that
+gives the highest payoff. Yet, if both prisoners confess, hence they both
+behave "rationally" from their own perspective, the result is sub-optimal,
+with both having to serve $5$ years in prison.
 
-Since the best possible outcome is $0$, but this outcome happens only
-in $1 slash 4$ scenarios, there is a tendency to obtain a suboptimal
-solution. More technically, a double confession is the so-called *Nash
-equilibrium* of this payoff matrix: neither agent can improve its payoff
-by changing its action, while the other agent maintains the same action.
-An improvement is only possible if both agents change their action choice.
-Nash showed that every payoff matrix has at least one Nash equilibrium
-under the condition that mixed strategies are allowed. A mixed strategy
-is one in which probabilities other than $1$ and $0$ may be assigned to
-the different options. That is, a mixed strategy is an unrestricted
-probability distribution over the different options a player can choose
-from.
+Technically speaking, a double confession is the so-called *Nash equilibrium*
+of this payoff matrix: neither agent can improve its payoff by changing
+its action, while the other agent maintains the same action. If both
+players confess and only one of them could theoretically change its
+action retroactively, it would actually just worsen the situation (from
+$-5$ to $0$, that is). An improvement is only possible if both agents
+change their action.
 
-The Prisoner's Dilemma can be generalized to a quadruplet of values
-$(T, R, P, S)$, representing the payoff of the four outcomes:
+The Prisoner's Dilemma can be generalized to an abstract two-player
+game where both players, wanting to maximize their gain, can choose
+one move out of two in each iteration. These two moves are _cooperating_
+and _betraying_: in the first, they both obtain a little reward, in the
+second, one obtains a great reward and the other obtains nothing. A
+payoff matrix can encode the four possible outcomes $(T, R, P, S)$,
+where:
 
-- $T$: the prisoner has confessed and the other did not (_temptation to defect_);
-- $R$: both prisoners have not confessed (_reward for mutual cooperation_);
-- $P$: both prisoners have confessed (_punishment for mutual defection_);
-- $S$: the prisoner has not confessed and the other did (_sucker's payoff_).
+- $T$: the player has betrayed and the other tried to cooperate (_temptation to defect_);
+- $R$: both prisoners have cooperated (_reward for mutual cooperation_);
+- $P$: prisoners betrayed each other (_punishment for mutual defection_);
+- $S$: the player tried to cooperate, but the other betrayed (_sucker's payoff_).
 
 #figure(
 	caption: [The generalized payoff matrix for the Prisoner's Dilemma.],
 	[#nfg(
-		players: ("Suspect 1", "Suspect 2"),
-		s1: ("Refrain", "Confess"),
-		s2: ("Refrain", "Confess"),
+		players: ($A$, $B$),
+		s1: ("Cooperate", "Betray"),
+		s2: ("Cooperate", "Betray"),
 		[$R, R$], [$S, T$], [$T, S$], [$P, P$]
 	)]
 )
 
-Any choice for the values of $T, R, P, S$ must abide by the two following
-constraints:
+The values of $T, R, P, S$ can be any quadruplet that satisfies 
+the two following constraints:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
@@ -110,38 +111,40 @@ constraints:
 The left inequality states that looking after oneself should yield
 an higher payoff than cooperating, and that being betrayed results
 in a unfavorable outcome, otherwise there would be no point in being
-self-interested. It also states that being altruistic is better for
-both, otherwise there would be no point in cooperating. The right
-inequality states that making ongoing cooperation preferable to
-alternating exploitation. With these conditions, mutual defection
+self-interested. It also states that being altruistic is better than
+being betrayed, otherwise there would be no point in cooperating.
+The right inequality states that making ongoing cooperation preferable
+to alternating exploitation. With these conditions, mutual defection
 is a Nash equilibrium of the payoff matrix.
 
-The Prisoner's Dilemma models many more social interactions where two
-agents have to choose between being selfish and helping each other out,
-even when the agent is not a human. From the point of view of the Dilemma,
-it would seem that the first choice yields better results than the second.
-But if this is the case, it begs the question: why do most living beings
-(humans, animals, ecc...) prefer altruism over egoism, even though this
-behaviour is suboptimal? Shouldn't have evolution ruled out cooperation
-in favour of competition?
+The most interesting aspect of the Prisoner's Dilemma is that it models
+many real-world social interactions where two agents (not necessarely
+two humans) have to choose between helping each other out towards a common
+goal or being selfish and trying to take advantage of one another. From
+the point of view of the Dilemma, it would seem that the second choice
+is better, since, again, exploitation allows for a greater potential gain
+than collaboration. But if this is the case, it begs the question:
+why do most living beings (humans, animals, ecc...) favour altruism
+over egoism? If cooperating is worse than competing, should have evolution
+ruled it out?
 
 First, it is clear that, despite its wide range of applicability, the
 Dilemma is a very limited model. For example, most real-world social
 interactions are episodic, meaning that after interacting with someone
 there's a good chance that many more other interactions with the same
-person/agent will happen in the near future. An extension of the Prisoner's
-Dilemma in this sense is the *Iterated Prisoner's Dilemma*, where the two
-parties have to take the same actions (confessing/refraining, or in general
-cooperating/betraying) in multiple iterations.
+person/agent will happen in the near future. Also, it assumes perfect
+transfer of information, that is, both agents know with exact certainty
+which action the other agent has taken.
 
-The rationale behind the Iterated Prisoner's Dilemma is that now
-cooperating could be more enticing in the long run, since now actions
-have consequences: if one of the two players starts being selfish, the
-other might seek revenge in the following iterations, also acting
-self-interested. In the original formulation of the problem this
-form of retaliation was not possible, since each player could only
-choose their action once, without any possibility for adapting
-their strategy based on the behaviour of the other.
+An extension of the Prisoner's Dilemma in this sense is the *Iterated
+Prisoner's Dilemma*, where the two parties have to take the same actions
+(cooperating/betraying) in multiple iterations. The rationale behind the
+Iterated Prisoner's Dilemma is that cooperating could be more enticing
+in the long run, since now actions have consequences: if one of the two
+players starts being selfish, the other might seek revenge in the following
+iterations, also acting self-interested. In the original formulation of the
+problem this form of retaliation was not possible, since each player could
+only choose their action once.
 
 In a known experiment, many strategies of varying complexity were tested
 against one another, to see which one, on average, managed to secure the

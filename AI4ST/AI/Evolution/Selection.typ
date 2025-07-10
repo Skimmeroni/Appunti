@@ -252,12 +252,6 @@ take part and hence kicking out unfit ones, whereas a small tournament size
 will increase the chances of average individuals to be drawn into tournaments
 with even worse ones.
 
-Tournament selection has another edge over rank-based selection: the fact
-that it's trivially parallelizable. This is because rank-based selection
-requires computing and normalizing the relative fitnesses, whereas as many
-tournaments can be carried out in parallel as one whishes, since all
-tournaments are independent and do not influence the original population.
-
 It should be noted, however, that even if an fit individual manages to
 produce offspring, there is no guarantee that there will always be an
 improvement. That is, if all of its descendants (generated from applying
