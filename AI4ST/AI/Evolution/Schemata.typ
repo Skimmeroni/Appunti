@@ -13,35 +13,31 @@ The term genetic algorithm bears its name from the structure of DNA,
 the most basic component of life, since it's described entirely by
 just four nucleotides: A, C, G, T.
 
-#algo(
+#pseudocode(
 	title: "Generic-Genetic-Algorithm",
-	parameters: ([$f : RR^(n) -> RR$: function, $mu$: integer (population size),
-	              $p_(x), p_(m)$: real, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		pop #math.arrow.l a random sequence of $mu$ bit strings \
-		for $i in {1, dots, mu}$ #i \
-			pop[i].fitness #math.arrow.l $f$(pop[i]) #d \
+	parameters: ([$f : RR^(n) -> RR$], [$mu$], [$p_(x)$], [$p_(m)$], [$epsilon$],),
+	content: [
+		pop $<-$ a random sequence of $mu$ bit strings \
+		for $i = 1$ to $mu$ #i \
+			pop[i].fitness $<-$ f(pop[i]) #d \
 		do #i \
-			chosen #math.arrow.l select $mu$ individuals from pop with roulette wheel selection \
+			chosen $<-$ select $mu$ individuals from pop with roulette wheel selection \
 			newpop $<- emptyset$ \
-			for $i in {1, dots, mu slash 2}$ #i \
+			for $i = 1$ to $mu slash 2$ #i \
 				$u <-$ a value sampled from $U ∼ (0, 1)$ \
-				if ($u lt.eq p_(x)$) #i \
+				if $(u lt.eq p_(x))$ #i \
 					#smallcaps("One-Point-Crossover") (chosen[2i - 1], chosen[2i]) #d \
 				#smallcaps("Bit-Mutation") (chosen[2i - 1], $p_(m)$) \
 				#smallcaps("Bit-Mutation") (chosen[2i], $p_(m)$) \
-				newpop #math.arrow.l newpop $union$ {chosen[2i - 1], chosen[2i]} #d \
-			pop #math.arrow.l newpop \
-			for $i in {1, dots, mu}$ #i \
-				pop[i].fitness #math.arrow.l $f$(pop[i]) #d#d \
+				newpop $<-$ newpop $union$ {chosen[2i - 1], chosen[2i]} #d \
+			pop $<-$ newpop \
+			for $i = 1$ to $mu$ #i \
+				pop[i].fitness $<-$ f(pop[i]) #d #d \
 		while(not($epsilon$)) \
-		best #math.arrow.l pop[0] \
-		for $i in {1, dots, mu}$ #i \
+		best $<-$ pop[0] \
+		for $i = 1$ to $mu$ #i \
 			if (pop[i].fitness > best.fitness) #i \
-				best #math.arrow.l pop[i] #d#d \
+				best $<-$ pop[i] #d #d \
 		return best
 	]
 )

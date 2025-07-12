@@ -15,17 +15,14 @@ and $1$s). For each bit of the encoding, the bit mutation flips its
 value (from $0$ to $1$ or from $1$ to $0$) with a given probability
 $p_(m)$:
 
-#algo(
+#pseudocode(
 	title: "Bit-Mutation",
-	parameters: ([$S$: binary string, $p_(m)$: real value in $[0, 1]$],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$S$], [$p_(m)$],),
+	content: [
 		for $i = 1$ to $abs(S)$ #i \
 			$u <-$ a value sampled from $U ~ (0, 1)$ \
 			if ($u lt.eq p_(m)$) #i \
-				$S_(i) <- 1 - S_(i)$ #d#d \
+				$S_(i) <- 1 - S_(i)$ #d #d \
 	]
 )
 
@@ -36,19 +33,16 @@ A variant of bit mutation is *n-bit mutation*, where instead of bit
 flipping each value with a certain probability, $1 lt.eq n lt.eq abs(s)$
 bits are chosen at random and flipped:
 
-#algo(
+#pseudocode(
 	title: "N-Bit-Mutation",
-	parameters: ([$S$: binary string, $n$: integer],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$X <- $ an empty array \
+	parameters: ([$S$], [$n$],),
+	content: [
+		$X <- $ empty array \
 		for $i = 1$ to $abs(s)$ #i \
 			$X_(i) = i$ #d \
 		$X <- $ the first $n$ elements of $X$ \
-		$X <- $ a random permutation of $X$ \
-		for $x_(i) in X$ #i \
+		$X <- $ random permutation of $X$ \
+		foreach $x_(i)$ in $X$ #i \
 			$S_(x_(i)) <- 1 - S_(x_(i))$ #d \
 	]
 )
@@ -62,13 +56,10 @@ each element of the array (of the solution) is shifted by a random
 different value sampled from a normal distribution $N ~ (0, sigma)$,
 with $sigma$ parameter to be chosen:
 
-#algo(
+#pseudocode(
 	title: "Gaussian-Mutation",
-	parameters: ([$S$: array of real numbers, $sigma$: real number],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$S$], [$sigma$],),
+	content: [
 		for $i = 1$ to $abs(S)$ #i \
 			$nu <-$ a value sampled from $N ~ (0, sigma)$ \
 			$S_(i) <- S_(i) + nu$ \
@@ -87,13 +78,10 @@ of the search space. A more refined variant of Gaussian mutation is
 own standard deviation parameter $S_(sigma)$ and, with each mutation,
 the parameter itself is tuned:
 
-#algo(
+#pseudocode(
 	title: "Self-Adaptive-Gaussian-Mutation",
-	parameters: ([$S$: array of real numbers, $sigma_(S)$: real number],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$S$, $sigma_(S)$],),
+	content: [
 		$u <-$ a value sampled from $U ~ (0, 1)$ \
 		$sigma_(S) <- sigma_(S) dot exp(u slash sqrt(abs(S)))$ \
 		for $i = 1$ to $abs(S)$ #i \
@@ -141,18 +129,15 @@ operators are exchanged. That is, given two chromosomes $S_(1)$ and
 $S_(2)$, the first $c$ alleles of $S_(1)$ are swapped with the first
 $n$ alleles of $S_(2)$, with $c$ chosen randomly:
 
-#algo(
+#pseudocode(
 	title: "One-Point-Crossover",
-	parameters: ([$S_(1), S_(2)$: chromosome (array of alleles)],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$S_(1)$], [$S_(2)$],),
+	content: [
 		$c <-$ a random value in ${1, 2, dots, abs(S_(1)) - 1}$ \
-		for ($i in {0, 1, dots, c - 1}$) #i \
+		for $i = 0$ to $c - 1$ #i \
 			$t <- S_(1, i)$ \
 			$S_(1, i) <- S_(2, i)$ \
-			$S_(2, i) <- t$ #d\
+			$S_(2, i) <- t$ #d \
 	]
 )
 
@@ -200,19 +185,16 @@ Instead of randomly choosing cutoff points, *uniform crossover* follows
 another approach: each gene $x$ of the pair of chromosomes is swapped
 with a probability $p_(x)$.
 
-#algo(
+#pseudocode(
 	title: "Uniform-Crossover",
-	parameters: ([$S_(1), S_(2)$: chromosome (array of alleles), $(p_(1), dots, p_(n))$: real values],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		for ($i in {0, 1, dots, abs(S)}$) #i \
+	parameters: ([$S_(1)$], [$S_(2)$], [$(p_(1), dots, p_(n))$],),
+	content: [
+		for $i = 0$ to $abs(S)$ #i \
 			$u <-$ a value sampled from $U ~ (0, 1)$ \
 			if $(u < p_(i))$ #i \
 				$t <- S_(1, i)$ \
 				$S_(1, i) <- S_(2, i)$ \
-				$S_(2, i) <- t$ #d#d \
+				$S_(2, i) <- t$ #d #d \
 	]
 )
 
@@ -260,12 +242,10 @@ chromosome, the designated alleles in a chromosome are exchanged with the
 alleles in the other chromosome that in the first chromosome are missing,
 and vice versa:
 
-#algo(
+#pseudocode(
 	title: "Uniform-Order-Based-Crossover",
-	parameters: ([$S_(1), S_(2)$: chromosome (array of alleles), $(p_(1), dots, p_(n))$: real values],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
+	parameters: ([$S_(1)$], [$S_(2)$], [$(p_(1), dots, p_(n))$],),
+	content:
 	[
 	]
 )
@@ -408,13 +388,10 @@ A more concrete example for chromosomes that are real-valued arrays is
 *arithmetic crossover*, which can be seen as interpolating between the
 $n$-dimensional points that are represented by the parent chromosomes.
 
-#algo(
+#pseudocode(
 	title: "Arithmetic-Crossover",
-	parameters: ([$S_(1), S_(2)$: arrays of real numbers],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$S_(1)$], [$S_(2)$],),
+	content: [
 		$R <-$ empty array \
 		$u <-$ a value sampled from $U ~ (0, 1)$ \
 		for $i = 1$ to $abs(S_(1))$ #i \

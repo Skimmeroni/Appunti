@@ -29,30 +29,27 @@ previously added to the list can become available again.
 The algorithm, presented as follows, requires a a termination criteria
 and a parameter $lambda$, which controls the size of the population:
 
-#algo(
+#pseudocode(
 	title: "Tabu-Search",
-	parameters: ([$f : RR^(n) -> RR$: function, $lambda$: integer, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$A <- $ #smallcaps("Random-Individual") () \
-		$A_(max) <- A$ \
-		$T <-$ #smallcaps("Init-Tabu-List") () \
+	parameters: ([$f : RR^(n) -> RR$], [$lambda$], [$epsilon$],),
+	content: [
+		A $<-$ #smallcaps("Random-Individual") () \
+		$A_(max) <-$ A \
+		T $<-$ #smallcaps("Init-Tabu-List") () \
 		do #i \
-			$P <- emptyset$ \
+			P $<- emptyset$ \
 			do #i \
-				$B <- $ #smallcaps("Mutate") ($A$) \
-				if ($(A, B) in.not T$ or $f(B) > f(A_(max))$) #i \
-					$P <- P union {B}$ #d#d \
-			while ($abs(P) < lambda$) \
+				B $<-$ #smallcaps("Mutate") (A) \
+				if $((A, B) in.not T or f(B) > f(A_(max)))$ #i \
+					P $<-$ P $union$ {B} #d#d \
+			while $(abs(P) < lambda)$ \
 			$A_("old") <- A$ \
 			$A <- max_(f) {P}$ \
-			if ($f(A) > f(A_(max))$) #i \
+			if $(f(A) > f(A_(max)))$ #i \
 				$A_(max) <- A$ #d \
-			if (#smallcaps("Maximum-Capacity") ($T$)) #i \
-				#smallcaps("Pop") ($T$) #d \
-			#smallcaps("Push") ($(A_("old"), A), T$) #d \
+			if (#smallcaps("Maximum-Capacity") (T)) #i \
+				#smallcaps("Pop") (T) #d \
+			#smallcaps("Push") $((A_("old"), A), T)$ #d \
 		while (not($epsilon$)) \
 		return $A_(max)$ \
 	]
@@ -80,7 +77,7 @@ Even though this approach is almost guaranteed to be very fast, has the
 issue of potentially limiting the search space too much. Also, the choice
 of the starting solution has a huge impact on the outcome, since each
 generation is heavily dependent on the previous.
-
+/*
 #algo(
 	title: "Memetic-Algorithm",
 	parameters: ([$f : RR^(n) -> RR$: function, $lambda$: integer, $epsilon$: termination criteria],),
@@ -102,7 +99,7 @@ generation is heavily dependent on the previous.
 		return $max_(f){P(t)}$ \
 	]
 )
-
+*/
 === Differential evolution
 
 *Differential evolution* tries to exploit the relationships that intercur

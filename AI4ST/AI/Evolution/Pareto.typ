@@ -59,16 +59,13 @@ spread out along the Pareto-frontier.
 The first building block of the algorithm is computing the fitness of each
 individual in the population with respect to all $k$ activation functions:
 
-#algo(
+#pseudocode(
 	title: "Update-All-Fitnesses",
-	parameters: ([$(f_(1), dots, f_(k))$: objective functions, $P$: population],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		for ($i in {1, dots, k}$) #i \
-			for ($j in {1, dots, mu}$) #i \
-				P[j].fitness-i $<- f_(i)(P[j])$ #d#d \
+	parameters: ([$(f_(1), dots, f_(k))$], [$P$],),
+	content: [
+		for $i = 1$ to $k$) #i \
+			for $j = 1$ to $mu$) #i \
+				P[j].fitness-i $<- f_(i)(P[j])$ #d #d \
 	]
 )
 
@@ -77,16 +74,13 @@ population $P$, from the set are repeatedly extracted the Pareto-optimal
 solutions, each constituting a frontier. The procedure is repeated until
 all frontiers are built:
 
-#algo(
+#pseudocode(
 	title: "Construct-Pareto-Frontiers",
-	parameters: ([$P$: population],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$P$],),
+	content: [
 		$i <- 1$ \
 		$cal(F) <- emptyset$ \
-		while ($P != emptyset$) #i \
+		while $(P != emptyset)$ #i \
 			$cal(F)_(i) <-$ the subset of $P$ containing Pareto-optimal solutions \
 			$i <- i + 1$ \
 			$P <- P - cal(F)_(i)$ \
@@ -112,18 +106,15 @@ solutions in one front have the same quality, one can differentiate
 between them by using the so called crowding distance values ($c d$).
 The solutions in the crowded areas (in the objective space) get a low
 chance (small crowding distance) to survive the selection.
-
-#algo(
+/*
+#pseudocode(
 	title: "NSGA-II",
 	parameters: ([$(f_(1), dots, f_(k))$: objective functions, $mu$: integer,
 	              $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	content: [
     $P <-$ an initial population of $mu$ individuals \
 	do #i \
-	  #smallcaps("Update-All-Fitnesses") ($f_(1), dots, f_(k), P$) \
+	  #smallcaps("Update-All-Fitnesses") $(f_(1), dots, f_(k), P)$ \
 	  $cal(F) <-$ #smallcaps("Construct-Pareto-Frontiers") ($P$) \
       $Q <-$ produce offspring from ($P, cal(F)$) with tournament selection w.r.t. rank \
 	  #smallcaps("Update-All-Fitnesses") ($f_(1), dots, f_(k), Q$) \
@@ -141,7 +132,7 @@ chance (small crowding distance) to survive the selection.
     return $S$ \
 	]
 )
-
+*/
 Another approach is called *strength Pareto evolutionary algorithm 2*
 (*SPEA2*), which is a standard evolutionary algorithm extended to
 work with more than one evaluation function. The algorithm stores
@@ -155,14 +146,12 @@ The idea of the archive is similar to the tabu list, but the admission
 criteria works the other way around: instead of filling the archive with
 the already attempted and therefore "banished" solutions, it is filled
 with the promising solutions.
-
+/*
 #algo(
 	title: "SPEA2",
 	parameters: ([$(f_(1), dots, f_(k))$: objective functions, $mu, tilde(mu)$: integer,
 	              $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
+	content:
 	[
 		$P <-$ an initial population of $mu$ individuals \
 		$R <- emptyset$ #comment[Archive] \
@@ -187,11 +176,11 @@ with the promising solutions.
 		return $S$ \
 	]
 )
-
+*/
 The last example is *Pareto-archived evolutionary strategy* (*PAES*).
 This approach is based on a (1 + 1)-ES an also relies on an archive in
 the form of a multi-dimensional table.
-
+/*
 #algo(
 	title: "PAES",
 	parameters: ([$(f_(1), dots, f_(k))$: objective functions, $tilde(mu)$: integer,
@@ -227,7 +216,7 @@ the form of a multi-dimensional table.
 		return $S$ \
 	]
 )
-
+*/
 Unless the archive is full, new solution candidates are added to it.
 If it is full, all dominated solution candidates are removed from it.
 If there are no dominated solution candidates, one of the individuals

@@ -70,42 +70,39 @@ similar to how it is done in simulated annealing, a more refined approach
 would be to fix a threshold $theta$ (which may be initialized at $1 slash
 5$) that is slowly increased over the iterations.
 
-#algo(
+#pseudocode(
 	title: "ES-Global-Adaptation-Comma-Strategy",
-	parameters: ([$f : RR^(n) -> RR$: function, $mu, lambda, k$: integer,
-	              $theta, alpha$: real, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$f : RR^(n) -> RR$], [$mu$], [$lambda$], [k],
+	             [$theta$], [$alpha$], [$epsilon$],),
+	content: [
 		$s <- 0$ \
 		$sigma <- $ an initial standard deviation \
-		pop #math.arrow.l a random sequence of $mu$ arrays of reals \
-		for $i in {1, dots, mu}$ #i \
-			pop[i].fitness #math.arrow.l $f$(pop[i]) #d \
+		pop $<-$ a random sequence of $mu$ arrays of reals \
+		foreach $i$ in ${1, dots, mu}$ #i \
+			pop[i].fitness $<-$ f(pop[i]) #d \
 		do #i \
-			pop' $<- emptyset$ \
-			for $i in {1, dots, lambda}$ #i \
-				$x <-$ a random element sampled from pop \
-				$y <-$ #smallcaps("Gaussian-mutation") ($x, sigma$) \
-				if ($x$.fitness > $y$.fitness) #i \
-					$s <- s + 1$ #d \
-				pop' $<-$ pop' $union {y}$ #d \
-			for $i in {1, dots, mu}$ #i \
-				pop'[i].fitness #math.arrow.l $f$(pop'[i]) #d#d \
-			pop $<-$ the best $mu$ individuals from pop' \
-			if ($t mod k = 0$) #i \
+			newpop $<- emptyset$ \
+			foreach $i$ in ${1, dots, lambda}$ #i \
+				x $<-$ a random element sampled from pop \
+				y $<-$ #smallcaps("Gaussian-mutation") ($x, sigma$) \
+				if (x.fitness > y.fitness) #i \
+					s $<-$ s + 1 #d \
+				newpop $<-$ newpop $union$ {y} #d \
+			foreach $i$ in ${1, dots, mu}$ #i \
+				newpop[i].fitness $<-$ f(newpop[i]) #d#d \
+			pop $<-$ the best $mu$ individuals from newpop \
+			if $(t mod k = 0)$ #i \
 				$p_(s) <-$ fraction of the $s$ individuals fitter than their parents \
-				if ($p_(s) > theta$) #i \
+				if $(p_(s) > theta)$ #i \
 					$theta <- theta dot alpha$ #d \
 				else #i \
 					$theta <- theta slash alpha$ #d \
 				$s <- 0$ #d \
 		while (not ($epsilon$)) \
-		best #math.arrow.l pop[0] \
-		for $i in {1, dots, mu}$ #i \
+		best $<-$ pop[0] \
+		foreach $i$ in ${1, dots, mu}$ #i \
 			if (pop[i].fitness > best.fitness) #i \
-				best #math.arrow.l pop[i] #d#d \
+				best $<-$ pop[i] #d#d \
 		return best
 	]
 )
@@ -125,31 +122,27 @@ fitter individuals. Therefore, even though the two does not influence each
 other directly, "good" genes and "good" standard deviations should go hand
 in hand.
 
-#algo(
+#pseudocode(
 	title: "ES-Local-Adaptation-Comma-Strategy",
-	parameters: ([$f : RR^(n) -> RR$: function, $mu, lambda$: integer,
-	              $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		pop #math.arrow.l a random sequence of $mu$ arrays of reals \
-		for $i in {1, dots, mu}$ #i \
-			pop[i].fitness #math.arrow.l $f$(pop[i]) #d \
+	parameters: ([$f : RR^(n) -> RR$], [$mu$], [$lambda$], [$epsilon$],),
+	content: [
+		pop $<-$ a random sequence of $mu$ arrays of reals \
+		for $i$ in ${1, dots, mu}$ #i \
+			pop[i].fitness $<-$ f(pop[i]) #d \
 		do #i \
-			pop' $<- emptyset$ \
-			for $i in {1, dots, lambda}$ #i \
+			newpop $<- emptyset$ \
+			for $i$ in ${1, dots, lambda}$ #i \
 				$(x, sigma_(x)) <-$ a random element sampled from pop \
-				$(y, sigma_(y)) <-$ #smallcaps("Self-Adaptive-Gaussian-Mutation") ($x, sigma$) \
-				pop' $<-$ pop' $union {(y, sigma_(y))}$ #d \
-			for $i in {1, dots, mu}$ #i \
-				pop'[i].fitness #math.arrow.l $f$(pop'[i]) #d \
-			pop $<-$ the best $mu$ individuals from pop' #d \
+				$(y, sigma_(y)) <-$ #smallcaps("Self-Adaptive-Gaussian-Mutation") $(x, sigma)$ \
+				newpop $<-$ newpop $union {(y, sigma_(y))}$ #d \
+			for $i$ in ${1, dots, mu}$ #i \
+				newpop[i].fitness $<-$ f(newpop[i]) #d \
+			pop $<-$ the best $mu$ individuals from newpop #d \
 		while (not ($epsilon$)) \
-		best #math.arrow.l pop[0] \
-		for $i in {1, dots, mu}$ #i \
+		best $<-$ pop[0] \
+		for $i$ in ${1, dots, mu}$ #i \
 			if (pop[i].fitness > best.fitness) #i \
-				best #math.arrow.l pop[i] #d#d \
+				best $<-$ pop[i] #d#d \
 		return best
 	]
 )

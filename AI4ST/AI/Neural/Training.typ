@@ -99,63 +99,57 @@ $y_(j)$. Let $W = (w_(1), dots, w_(n))$ be a set of randomly chosen initial
 weights and let $theta$ be a randomly chosen initial threshold. The two
 algorithms are presented as follows:
 
-#algo(
+#pseudocode(
 	title: "TLU-train-online",
 	parameters: ([$W = (w_(1), dots, w_(n))$],
 	             [$L = ((X_(1), y_(1)), dots, (X_(m), y_(m)))$],
-	             [#math.theta],
-	             [#math.eta]),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	             [$theta$],
+	             [$eta$]),
+	content: [
 		let $e <- infinity$ #comment[Error]\
-		while ($e != 0$)#i #comment[Continue until error vanishes]\
+		while $(e != 0)$ #i #comment[Continue until error vanishes]\
 			$e <- 0$\
 
-			for $l_(i)$ in $L$ do#i\
+			foreach $l_(i)$ in $L$ #i\
 				let $X, y <- l_(i, 1), l_(i, 2)$ #comment[Unpack]\
 
 				let $hat(y) <- 0$ #comment[Evaluate scalar product]\
-				if ($sum_(j = 1)^(|X|) X_(j) dot W_(j) >= theta$)#i\
+				if $(sum_(j = 1)^(|X|) X_(j) dot W_(j) >= theta)$ #i\
 					$hat(y) <- 1$#d\
 
-				if ($hat(y) != y$)#i #comment[Test for output mismatch]\
+				if $(hat(y) != y)$ #i #comment[Test for output mismatch]\
 					$e <- e + abs(y - hat(y))$ #comment[Update error]\
 					$theta <- theta - eta dot (y - hat(y))$ #comment[Update threshold]\
-					for $w_(j)$ in $W$ do#i\
+					foreach $w_(j)$ in $W$ #i\
 						$w_(j) <- w_(j) + eta dot (y - hat(y)) dot X_(j)$ #comment[Update weights]\
 	]
 )
 
-#algo(
+#pseudocode(
 	title: "TLU-train-batch",
 	parameters: ([$W = (w_(1), dots, w_(n))$],
 	             [$L = ((X_(1), y_(1)), dots, (X_(m), y_(m)))$],
-	             [#math.theta],
-	             [#math.eta]),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	             [$theta$],
+	             [$eta$]),
+	content: [
 		let $e <- infinity$ #comment[Error]\
-		while ($e != 0$)#i #comment[Continue until error vanishes]\
+		while $(e != 0)$ #i #comment[Continue until error vanishes]\
 			$e <- 0$\
 			let $theta^(*) <- 0$ #comment[Partial threshold]\
 			let $W^(*) <- (0, dots, 0)$ #comment[Partial weights]\
 
-			for $l_(i)$ in $L$ do#i\
+			foreach $l_(i)$ in $L$ #i\
 				let $X, y <- l_(i, 1), l_(i, 2)$ #comment[Unpack]\
 				let $hat(y) <- 0$ #comment[Evaluate scalar product]\
 
-				if ($sum_(j = 1)^(|X|) X_(j) dot W_(j) >= theta$)#i\
-					$hat(y) <- 1$#d\
+				if $(sum_(j = 1)^(|X|) X_(j) dot W_(j) >= theta)$ #i\
+					$hat(y) <- 1$ #d\
 
-				if ($hat(y) != y$)#i #comment[Test for output mismatch]\
+				if $(hat(y) != y)$ #i #comment[Test for output mismatch]\
 					$e <- e + abs(y - hat(y))$ #comment[Update error]\
 					$theta^(*) <- theta^(*) - eta dot (y - hat(y))$ #comment[Partially update threshold]\
-					for $w_(j)$ in $W$ do#i\
-						$w^(*)_(j) <- w^(*)_(j) + eta dot (y - hat(y)) dot X_(j)$#d#d #comment[Partially update weights]\
+					foreach $w_(j)$ in $W$ #i\
+						$w^(*)_(j) <- w^(*)_(j) + eta dot (y - hat(y)) dot X_(j)$ #d #d #comment[Partially update weights]\
 
 				$theta <- theta + theta^(*)$ #comment[Update threshold]\
 				$W <- W + W^(*)$ #comment[Update weights]

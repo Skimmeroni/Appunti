@@ -163,20 +163,17 @@ parse tree and/or a maximum depth; when such threshold is reached, all
 remaining branches are closed with terminal symbols, and aren't expanded
 further.
 
-#algo(
+#pseudocode(
 	title: "GP-Initialize-Grow",
-	parameters: ([$d, d_("max")$: integer],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		if ($d = 0$) #i \
+	parameters: ([$d$], [$d_("max")$],),
+	content: [
+		if $(d = 0)$ #i \
 			$n <-$ a random function sampled from $cal(F)$ #d #comment[Avoid expressions with a single term] \
-		else if ($d gt.eq d_("max")$) #i \
+		else if $(d gt.eq d_("max"))$ #i \
 			$n <-$ a random term sampled from $cal(T)$ #d #comment[Close the branch due to max size reached] \
 		else #i \
 			$n <-$ a random element sampled from $cal(T) union cal(F)$ #d #comment[Open the branch] \
-		foreach ($c in$ arguments of $n$) #i \
+		foreach $c$ in arguments of $n$ #i \
 			$c <-$ #smallcaps("GP-Initialize-Grow") ($d + 1, d_("max")$) #d #comment[Expand the branches recursively] \
 		return $n$ \
 	]
@@ -192,19 +189,16 @@ where the maximum tree height $d_("max")$ is always reached, whereas
 in the previous algorithm a branch could close long before $d_("max")$
 is reached (this is because a terminal symbol could be drawn at any step).
 
-#algo(
+#pseudocode(
 	title: "GP-Initialize-Full",
-	parameters: ([$d, d_("max")$: integer],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		if ($d gt.eq d_("max")$) #i \
+	parameters: ([$d$], [$d_("max")$],),
+	content: [
+		if $(d gt.eq d_("max"))$ #i \
 			$n <-$ a random term sampled from $cal(T)$ #d #comment[Close the branch due to max size reached] \
 		else #i \
 			$n <-$ a random element sampled from $cal(F)$ #comment[Always start with a function] \
 			#d #comment[This way, max size will always be reached] \
-		foreach ($c in$ arguments of $n$) #i \
+		foreach $c$ in arguments of $n$ #i \
 			$c <-$ #smallcaps("GP-Initialize-Full") ($d + 1, d_("max")$) #d #comment[Expand the branches recursively] \
 		return $n$ \
 	]
@@ -216,18 +210,15 @@ between iteration combining both the "grow" and the "full" initialization.
 This way, the population becomes representative of as many tree shapes,
 complexities and depths as possible.
 
-#algo(
+#pseudocode(
 	title: "GP-Initialize-Half-And-Half",
-	parameters: ([$mu, d_("max")$: integer],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$mu$], [$d_("max")$],),
+	content: [
 		$P <- emptyset$ #comment[Population starts empty] \
-		for $i in {1, dots, d_("max")}$ do #i \
-			for $j in {1, dots, mu slash (2 dot d_("max"))}$ do #i \
+		for $i = 1$ to $d_("max")$ do #i \
+			for $j = 1$ to $2 dot d_("max")$ do #i \
 				$P <- P union $ #smallcaps("GP-Initialize-Grow") $(0, i)$ \
-				$P <- P union $ #smallcaps("GP-Initialize-Full") $(0, i)$ #d#d \
+				$P <- P union $ #smallcaps("GP-Initialize-Full") $(0, i)$ #d #d \
 		return $P$ \
 	]
 )
@@ -316,22 +307,6 @@ a fitness penalty, because then it favors children that achieve the same
 result with simpler means (that is, with a less complex chromosome).
 *Intelligent recombination* chooses crossover points purposefully, which
 can help to prevent the creation of introns.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 An example of genetic programming is solving the $n times 1$ *multiplexor
 problem*. A multiplexor is a device that has $n$ data inputs, $log_(2)(n)$

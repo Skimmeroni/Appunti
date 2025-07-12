@@ -252,21 +252,18 @@ occurring in an individual, ecc...
 
 A generic evolutionary algorithm can be written as such:
 
-#algo(
+#pseudocode(
 	title: "Generic-evolutionary-algorithm",
-	parameters: ([$epsilon$: a termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$t <- 0$\
-		#smallcaps("Initialize") ($"population"(t)$) #comment[Create the initial population]\
-		#smallcaps("Evaluate") ($"population"(t)$) #comment[Compute fitness]\
-		while ($epsilon$ = False): #i\
-		$t <- t + 1$\
-		$"population"(t) <-$ #smallcaps("Select-from") ($"population"(t −1)$) #comment[Select individuals based on fitness]\
-		#smallcaps("Alter") ($"population"(t)$) #comment[Apply genetic operators]\
-		#smallcaps("Evaluate") ($"population"(t)$) #comment[Evaluate the new population]
+	parameters: ([$epsilon$],),
+	content: [
+		t $<-$ 0 \
+		#smallcaps("Initialize") (population(t)) #comment[Create the initial population] \
+		#smallcaps("Evaluate") (population(t)) #comment[Compute fitness] \
+		while (not($epsilon$)) #i \
+			t $<-$ t + 1 \
+			population(t) $<-$ #smallcaps("Select-from") (population"(t − 1)) #comment[Select individuals based on fitness] \
+			#smallcaps("Alter") (population(t)) #comment[Apply genetic operators] \
+			#smallcaps("Evaluate") (population(t)) #comment[Evaluate the new population] #d \
 	]
 )
 

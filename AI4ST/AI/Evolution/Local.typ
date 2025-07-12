@@ -49,19 +49,16 @@ direction of the gradient (or the opposite direction) is the direction
 where the function, with respect to that point, increases or decreases
 the most, and therefore moves closer to an optimum as fast as possible.
 
-#algo(
+#pseudocode(
 	title: "Gradient-Ascent/Descent",
-	parameters: ([$f : RR^(n) -> RR$: function, $eta$: integer, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$x = (x_(1), dots, x_(n)) <-$ A random initial solution \
+	parameters: ([$f : RR^(n) -> RR$], [$eta$], [$epsilon$],),
+	content: [
+		x = $(x_(1), dots, x_(n)) <-$ random initial solution \
 		do #i \
 			$nabla = (nabla_(1), dots, nabla_(n)) <- (frac(partial, partial x_(1))(f(x)), dots, frac(partial, partial x_(n))(f(x)))$ #comment[Compute gradient] \
-			$x <- x plus.minus eta nabla$ #comment[Update candidate solution] #d\
+			x $<- x plus.minus eta nabla$ #comment[Update candidate solution] #d \
 		while (not($epsilon$)) \
-		return $x$ #comment[Return best solution found] \
+		return x #comment[Return best solution found] \
 	]
 )
 
@@ -95,18 +92,15 @@ to a local optimum, the process restarts with this new point, otherwise
 another point in the neighborhood is tried. This approach, which can be
 thought of as a "naive" gradient descent, is called *hill climbing*.
 
-#algo(
+#pseudocode(
 	title: "Hill-Climbing",
-	parameters: ([$f : RR^(n) -> RR$: function, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$x = (x_(1), dots, x_(n)) <-$ A random initial solution \
+	parameters: ([$f : RR^(n) -> RR$], [$epsilon$],),
+	content: [
+		$x = (x_(1), dots, x_(n)) <-$ random initial solution \
 		do #i \
-			$x' = (x'_(1), dots, x'_(n)) <-$ A random point near $x$ \
-			if ($f(x') > f(x)$) #i \
-				$x <- x'$ #d#d #comment[Update if there is improvement] \
+			$x' = (x'_(1), dots, x'_(n)) <-$ random point near $x$ \
+			if $(f(x') > f(x))$ #i \
+				$x <- x'$ #d #d #comment[Update if there is improvement] \
 		while (not($epsilon$)) \
 		return $x$ #comment[Return best solution found] \
 	]
@@ -149,25 +143,22 @@ parameter is decreased iteration by iteration, meaning that the algorithm
 will be more inclined to accept a worse solution in the early iterations
 and will become more and more "conservative" as the iterations go by.
 
-#algo(
+#pseudocode(
 	title: "Simulated-Annealing",
-	parameters: ([$f : RR^(n) -> RR$: function, $T, delta$: float, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$x = (x_(1), dots, x_(n)) <-$ A random initial solution \
-		$Delta_(max) <- 0$ #comment[Variability across solutions] \
+	parameters: ([$f : RR^(n) -> RR$], [T], [$delta$], [$epsilon$],),
+	content: [
+		$x = (x_(1), dots, x_(n)) <-$ random initial solution \
+		$Delta_(max) <-$ 0 #comment[Variability across solutions] \
 		do #i \
-			$x' = (x'_(1), dots, x'_(n)) <-$ A random point near $x$ \
+			$x' = (x'_(1), dots, x'_(n)) <-$ random point near $x$ \
 			$Delta <- f(x') - f(x)$ #comment[Improvement size] \
-			if ($abs(Delta) > Delta_(max)$) #i \
+			if $(abs(Delta) > Delta_(max))$ #i \
 				$Delta_(max) <- abs(Delta)$ #d \
 			$p <- e^(Delta slash Delta_(max) T)$ #comment[Tolerance to worse solutions] \
 			$u <-$ a value sampled from $U ~ (0, 1)$ \
-			if ($Delta > 0$ or $p gt.eq u$) #i #comment[New solution is better or just tolerated] \
+			if $(Delta > 0 or p gt.eq u)$ #i #comment[New solution is better or tolerated] \
 				$x <- x'$ #d \
-			$T <- T - delta(T)$ #d #comment[Decrease temperature by a small amount] \
+			$T <- T - delta(T)$ #d #comment[Decrease temperature] \
 		while (not($epsilon$)) \
 		return $x$ #comment[Return best solution found] \
 	]
@@ -207,19 +198,16 @@ solution can be accepted but only if it's sufficiently similar to the current
 one, meaning that their difference is smaller than a given threshold $theta$
 that decreases over time.
 
-#algo(
+#pseudocode(
 	title: "Threshold-accepting",
-	parameters: ([$f : RR^(n) -> RR$: function, $theta, delta$: float, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$x = (x_(1), dots, x_(n)) <-$ A random initial solution \
+	parameters: ([$f : RR^(n) -> RR$], [$theta$], [$delta$], [$epsilon$],),
+	content: [
+		$x = (x_(1), dots, x_(n)) <-$ random initial solution \
 		do #i \
-			$x' = (x'_(1), dots, x'_(n)) <-$ A random point near $x$ \
-			if ($f(x) - f(x') < theta$) #i #comment[New solution is better or just tolerated] \
+			$x' = (x'_(1), dots, x'_(n)) <-$ random point near $x$ \
+			if $(f(x) - f(x') < theta)$ #i #comment[New solution is better or tolerated] \
 				$x <- x'$ #d \
-			$theta <- theta - delta(theta)$ #d #comment[Decrease threshold by a small amount] \
+			$theta <- theta - delta(theta)$ #d #comment[Decrease threshold] \
 		while (not($epsilon$)) \
 		return $x$ #comment[Return best solution found] \
 	]
@@ -233,18 +221,15 @@ of parameters for the threshold and on the number of the iteration, not on
 the current solution candidate. Such parameters are an initial threshold
 $theta_(0)$ and a scaling factor $eta$.
 
-#algo(
+#pseudocode(
 	title: "Great-Deluge",
-	parameters: ([$f : RR^(n) -> RR$: function, $theta_(0), eta$: float, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$x = (x_(1), dots, x_(n)) <-$ A random initial solution \
+	parameters: ([$f : RR^(n) -> RR$], [$theta_(0)$], [$eta$], [$epsilon$],),
+	content: [
+		$x = (x_(1), dots, x_(n)) <-$ random initial solution \
 		$t <- 0$ #comment[Initialize iteration counter] \
 		do #i \
-			$x' = (x'_(1), dots, x'_(n)) <-$ A random point near $x$ \
-			if ($f(x') gt.eq theta_(0) + t dot eta$) #i #comment[New solution is better or just tolerated] \
+			$x' = (x'_(1), dots, x'_(n)) <-$ random point near $x$ \
+			if $(f(x') gt.eq theta_(0) + t dot eta)$ #i #comment[New solution is better or tolerated] \
 				$x <- x'$ #d \
 			$t <- t + 1$ #d #comment[Increase iteration counter] \
 		while (not($epsilon$)) \
@@ -259,20 +244,17 @@ similar to Great Deluge, but such threshold also depends on the value yielded
 by the best solution found so far and, like threshold accepting, is decreased
 over time.
 
-#algo(
+#pseudocode(
 	title: "Record-To-Record-Travel",
-	parameters: ([$f : RR^(n) -> RR$: function, $theta$: float, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		$x = (x_(1), dots, x_(n)) <-$ A random initial solution \
+	parameters: ([$f : RR^(n) -> RR$], [$theta$], [$epsilon$],),
+	content: [
+		$x = (x_(1), dots, x_(n)) <-$ random initial solution \
 		$x_("best") <- x$ #comment[Initialize best solution] \
 		do #i \
-			$x' = (x'_(1), dots, x'_(n)) <-$ A random point near $x$ \
-			if ($f(x') gt.eq f(x_("best")) - theta$) #i #comment[New solution is better or just tolerated] \
+			$x' = (x'_(1), dots, x'_(n)) <-$ random point near $x$ \
+			if $(f(x') gt.eq f(x_("best")) - theta)$ #i #comment[New solution is better or tolerated] \
 				$x <- x'$ #d \
-			if ($f(x') > f(x_("best"))$) #i #comment[New solution better than the best one] \
+			if $(f(x') > f(x_("best")))$ #i #comment[New solution better than the best] \
 			$x_("best") <- x'$ #d#d #comment[Increase iteration counter] \
 		while (not($epsilon$)) \
 		return $x_("best")$ #comment[Return best solution found] \

@@ -95,35 +95,31 @@ the location of food in their vicinities. It combines gradient-based
 search with population-based search; for this reason, the function to
 be optimized must be $f: RR^(n) -> RR$.
 
-#algo(
+#pseudocode(
 	title: "Particle-Swarm-Optimization",
-	parameters: ([$f : RR^(n) -> RR$: function, $N$: integer (population size),
-	              $w, C_(1), C_(2)$: real, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
-		for $i in {1, dots, N}$ #i \
+	parameters: ([$f : RR^(n) -> RR$], [$N$], [$w$], [$C_(1)$], [$C_(2)$], [$epsilon$],),
+	content: [
+		for $i = 1$ to $N$ #i \
 			$bold(v)_(i) <- 0$ #comment[Initial velocity] \
 			$bold(x)_(i) <-$ a random element of the search space $Omega$ #comment[Initial position] \
 			$bold(x)_(i)^(*) <- bold(x)_(i)$ #d #comment[Locally known optimum] \
-		$"opt" <- bold(x)_(1)$ #comment[Globally known optimum] \
-		for $i in {2, dots, N}$ #i \
+		opt $<- bold(x)_(1)$ #comment[Globally known optimum] \
+		for $i = 2$ to $N$ #i \
 			if $f(bold(x)_(i)) gt.eq f("opt")$ then #i \
-				$"opt" <- bold(x)_(i)$ #d#d \
+				opt $<- bold(x)_(i)$ #d#d \
 		do #i \
-			for $i in {1, dots, N}$ #i \
+			for $i = 1$ in to $N$ #i \
 				if $f(bold(x)_(i)) gt.eq f(bold(x)_(i)^(*))$ then #i \
 					$bold(x)_(i)^(*) <- bold(x)_(i)$ #d #comment[Update local optimum] \
 				if $f(bold(x)_(i)) gt.eq f("opt")$ then #i \
-					$"opt" <- bold(x)_(i)$ #d#d #comment[Update global optimum] \
-			for $i in {1, dots, N}$ #i \
+					opt $<- bold(x)_(i)$ #d #d #comment[Update global optimum] \
+			for $i = 1$ to $N$ #i \
 				$phi.alt_(1) <-$ a value sampled from $U ~ (0, 1)$ \
 				$phi.alt_(2) <-$ a value sampled from $U ~ (0, 1)$ \
 				$bold(v)_(i) <- w bold(v)_(i) + phi.alt_(1) C_(1)(bold(x)_(i)^(*) - bold(x)_(i)) + phi.alt_(2) C_(2)("opt" - bold(x)_(i))$ #comment[Update local velocity] \
-				$bold(x)_(i) <- bold(x)_(i) + bold(v)_(i)$ #d#d #comment[Update local position] \
+				$bold(x)_(i) <- bold(x)_(i) + bold(v)_(i)$ #d #d #comment[Update local position] \
 		while (not($epsilon$)) \
-		return $"opt"$ \
+		return opt \
 	]
 )
 
@@ -248,19 +244,16 @@ is updated with the newly deposited pheromone. Each time $mu$ ants have
 traversed the graph, the pheromone matrix is evaporated employing an
 _evaporation factor_ $eta$.
 
-#algo(
+#pseudocode(
 	title: "Ant-Colony-Optimization",
-	parameters: ([$Q$: function, $W$: adjacency matrix, $mu, eta, c$: real, $epsilon$: termination criteria],),
-	stroke: 0pt,
-	indent-guides: 1pt + gray,
-	fill: none,
-	[
+	parameters: ([$Q$], [$W$], [$mu$], [$eta$], [$c$], [$epsilon$],),
+	content: [
 		$n <- abs(W)$ \
 		$Phi <-$ empty $n times n$ matrix \
 		$s <-$ a generic starting value \
-		for $i in {1, dots, n}$ #i \
-			for $j in {1, dots, n}$ #i \
-				$Phi_(i, j) <- s$ #d#d \
+		for $i = 1$ to $n$ #i \
+			for $j = 1$ to $n$ #i \
+				$Phi_(i, j) <- s$ #d #d \
 		$pi^(*) <- (1, dots, n)$ \
 		$Q(pi^(*)) = c dot (sum_(i = 1)^(n) W_(pi^(*)(i), pi^(*)((i mod n) + 1)))^(-1)$ \
 		iteration $<- 0$ \
@@ -272,22 +265,22 @@ _evaporation factor_ $eta$.
 			$C <- C \\ {t}$ \
 			while $C != emptyset$ #i \
 				$P <-$ empty array of $abs(C)$ elements \
-				for $i in {1, dots, n}$ #i \
+				for $i = 1$ to $n$ #i \
 					$P_(i) <- Phi_(t, i) slash sum_(j in C) Phi_(t, j)$ #d \
 				$t' <- $ next node chosen at random weighted by $P$ \
 				$pi$.append($t'$) \
 				$C <- C \\ {t'}$ \
 				$t <- t'$ #d \
 			$Q(pi) = c dot (sum_(i = 1)^(n) W_(pi(i), pi((i mod n) + 1)))^(-1)$ \
-			for $i in {1, dots, n}$ #i \
+			for $i = 1$ to $n$ #i \
 				$Phi_(pi(i), pi((i mod n) + 1)) <- Phi_(pi(i), pi((i mod n) + 1)) + Q(pi)$ #d \
 			if ($Q(pi) > Q(pi^(*))$) #i \
 				$pi^(*) <- pi$ \
 				$Q(pi^(*)) <- Q(pi)$ #d \
 			if (iteration $mod mu = 0$) #i \
-				for $i in {1, dots, n}$ #i \
-					for $j in {1, dots, n}$ #i \
-						$Phi_(i, j) <- (1 - eta) dot Phi_(i, j)$ #d#d#d#d \
+				for $i = 1$ to $n$ #i \
+					for $j = 1$ to $n$ #i \
+						$Phi_(i, j) <- (1 - eta) dot Phi_(i, j)$ #d #d #d #d \
 		while (not ($epsilon$)) \
 		return $pi^(*)$ \
 	]
