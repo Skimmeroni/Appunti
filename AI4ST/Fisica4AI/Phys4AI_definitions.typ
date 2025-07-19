@@ -1,6 +1,6 @@
 #import "@preview/ctheorems:1.1.3": *
 #import "@preview/cetz:0.4.0"
-#import "@preview/metro:0.3.0": unit, units, prefixes
+#import "@preview/metro:0.3.0": unit, units, prefixes, num
 #import units: *
 #import prefixes: *
 

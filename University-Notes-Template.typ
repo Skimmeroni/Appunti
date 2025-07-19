@@ -18,6 +18,8 @@
 	show heading.where(level: 2): set text(size: 14pt)
 	show heading: set block(above: 1.4em, below: 1em)
 
+	show figure.caption: set text(size: 9pt)
+
 	set document(
 		title: "Notes on " + title,
 		author: "Shania",

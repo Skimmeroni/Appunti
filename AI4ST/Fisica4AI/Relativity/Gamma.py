@@ -14,8 +14,10 @@ ax.set_xlabel("velocity [km / s]")
 ax.set_ylabel("γ")
 ax.set_title("Scaling of γ with respect to velocity")
 ax.set_yscale("log")
+ax.plot(velocities, gammas, label = "gamma", color = "blue")
+ax.legend()
 ax.grid()
 
-ax.plot(velocities, gammas)
 
 plt.savefig("gamma.svg")
+

@@ -9,6 +9,13 @@
 #outline(indent: auto)
 #pagebreak()
 
+= Optics
+== Waves and light
+#include "Optics/Waves.typ"
+== Ray model of light
+#include "Optics/Ray.typ"
+#pagebreak()
+
 = Theory of relativity
 == Introduction
 #include "Relativity/Relativity.typ"

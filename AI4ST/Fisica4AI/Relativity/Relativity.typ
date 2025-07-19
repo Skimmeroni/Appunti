@@ -36,36 +36,46 @@ one still finds that it moves with speed $c$.
 	          $v - c$ with respect to $S'$. However, this is not the
 	          case: the light beam moves at velocity $c$ both with respect
 	          to $S$ and with respect to $S'$.],
-	[#cetz.canvas({
-		import cetz.draw: *
-		set-style(
-			stroke: (thickness: 1.25pt),
-			circle: (radius: 0.25),
-			content: (padding: 2pt),
-			fill: black
-		)
+	[#grid(
+		columns: (0.5fr, 0.5fr),
+		[#cetz.canvas({
+			import cetz.draw: *
+			set-style(
+				stroke: (thickness: 1.25pt),
+				circle: (radius: 0.25),
+				content: (padding: 2pt),
+				fill: black
+			)
 
-		content((0, 0), $ S $, anchor: "north-east")
-		line((0, 0), (0, 3.5), mark: (end: "stealth"))
-		content((), $ y $, anchor: "south")
-		line((0, 0), (6, 0), mark: (end: "stealth"))
-		content((), $ x $, anchor: "west")
-		hobby((0.5, 1.75), (1, 1.5), (1.5, 1.75), (2, 1.5), (2.5, 1.75), (3, 1.5), (3.5, 1.75), (4, 1.5), (4.5, 1.75), fill: none, omega: 1, stroke: blue)
-		line((1, 1), (4, 1), mark: (end: "stealth"), stroke: green, fill: green)
-		content((2.5, 1), $ c $, anchor: "north")
+			content((0, 0), $ S $, anchor: "north-east")
+			line((0, 0), (0, 2), mark: (end: "stealth"))
+			content((), $ y $, anchor: "south")
+			line((0, 0), (5, 0), mark: (end: "stealth"))
+			content((), $ x $, anchor: "west")
+			content((2, 1), text(size: 30pt, fill: blue, [#math.arrow.r.long.squiggly]))
+			content((2, 0.75), $ c $, anchor: "north")
+		})],
+		[#cetz.canvas({
+			import cetz.draw: *
+			set-style(
+				stroke: (thickness: 1.25pt),
+				circle: (radius: 0.25),
+				content: (padding: 2pt),
+				fill: black
+			)
 
-		content((8, 0), $ S' $, anchor: "north-east")
-		line((8, 0), (8, 3.5), mark: (end: "stealth"))
-		content((), $ y $, anchor: "south")
-		line((8, 0), (14, 0), mark: (end: "stealth"))
-		content((), $ x $, anchor: "west")
-		line((8, 2.5), (9, 2.5), mark: (end: "stealth"), stroke: red, fill: red)
-		content((8.5, 2.5), $ v $, anchor: "north")
-		hobby((9.5, 1.75), (10, 1.5), (10.5, 1.75), (11, 1.5), (11.5, 1.75), (12, 1.5), (12.5, 1.75), (13, 1.5), (13.5, 1.75), fill: none, omega: 1, stroke: blue)
-		line((10, 1), (13, 1), mark: (end: "stealth"), stroke: green, fill: green)
-		content((11, 1), $ cancel(cross: #true, c - v) $, anchor: "north")
-		content((12, 1), $ c $, anchor: "north")
-	})]
+			content((0, 0), $ S' $, anchor: "north-east")
+			line((0, 0), (0, 2), mark: (end: "stealth"))
+			content((), $ y $, anchor: "south")
+			line((0, 0), (5, 0), mark: (end: "stealth"))
+			content((), $ x $, anchor: "west")
+			line((0, 1), (1, 1), mark: (end: "stealth"), stroke: red, fill: red)
+			content((0.5, 1), $ v $, anchor: "north")
+			content((3, 1), text(size: 30pt, fill: blue, [#math.arrow.r.long.squiggly]))
+			content((2.5, 0.75), $ cancel(cross: #true, c - v) $, anchor: "north")
+			content((3.5, 0.75), $ c $, anchor: "north")
+		})]
+	)]
 )
 
 Also, despite its accomplishments, Maxwell Equations left a question opened:
@@ -176,13 +186,13 @@ apparatus are moving.
 			)
 
 			line((0, 0), (2, 0))
-			line((0, 4), (2, 4))
-			line((2.5, 0), (2.5, 4), mark: (start: "|", end: "|", width: 0.375cm), stroke: 0.5pt, name: "length")
+			line((0, 5.5), (2, 5.5))
+			line((2.5, 0), (2.5, 5.5), mark: (start: "|", end: "|", width: 0.375cm), stroke: 0.5pt, name: "length")
 			content(("length.start", 50%, "length.end"), $L$, angle: "length.end", anchor: "north", padding: 0.1)
 
-			line((1, 0), (1, 4), stroke: (thickness: 0pt), name: "phantom")
-			content(("phantom.start", 15%, "phantom.end"), text(size: 20pt, fill: blue, [#math.arrow.r.long.squiggly]), angle: "phantom.end", padding: 0.1)
-			content(("phantom.end", 15%, "phantom.start"), text(size: 20pt, fill: blue, [#math.arrow.l.long.squiggly]), angle: "phantom.end", padding: 0.1)
+			line((1, 0), (1, 5.5), stroke: (dash: "dashed", paint: silver), name: "phantom")
+			content(("phantom.start", 10%, "phantom.end"), text(size: 20pt, fill: blue, [#math.arrow.r.long.squiggly]), angle: "phantom.end")
+			content(("phantom.end", 10%, "phantom.start"), text(size: 20pt, fill: blue, [#math.arrow.l.long.squiggly]), angle: "phantom.end")
 		})],
 		[#cetz.canvas({
 			import cetz.draw: *
@@ -203,6 +213,7 @@ apparatus are moving.
 			content(("speed.start", 50%, "speed.end"), $v Delta t$, angle: "speed.end", padding: 0.1, anchor: "south")			
 			line((1, 0), (4, 4), stroke: (dash: "dashed", paint: silver), name: "direction1")
 			line((4, 4), (7, 0), stroke: (dash: "dashed", paint: silver), name: "direction2")
+			line((4, 4), (4, 0), stroke: (dash: "dashed", paint: silver))
 			content(("direction1.start", 50%, "direction1.end"), text(size: 20pt, fill: blue, [#math.arrow.r.long.squiggly]), angle: "direction1.end", padding: 0.1, anchor: "south")
 			content(("direction2.start", 50%, "direction2.end"), text(size: 20pt, fill: blue, [#math.arrow.r.long.squiggly]), angle: "direction2.end", padding: 0.1, anchor: "south")
 		
@@ -399,6 +410,23 @@ This is also referred to as *length contraction*, or *Lorentz's
 contraction*. Analogously to how proper time was defined, *proper
 length* is a length measured from the frame of reference of an
 external observer, which is also the longest possible.
+
+#figure(
+	caption: [In the frame of reference of an external observer (left),
+	          a spaceship moving from the Moon to Saturn would appear
+	          "squeezed", but the distance between the planets would
+	          be its proper length. In the frame of reference of the
+	          spaceship itself (right), the length of the spaceship
+	          would be its proper length, but the distance between
+	          the planets would appear "squeezed". [Emojis retrieved from
+	          #link("https://openmoji.org")[Openemoji] and licensed
+	          under the #link("https://creativecommons.org/licenses/by-sa/4.0")[CC BY-SA 4.0] license]],
+	[#grid(
+		columns: (0.5fr, 0.5fr),
+		[#image("spaceship_stretched.svg", width: 90%)],
+		[#image("spaceship_squashed.svg", width: 75%)]
+	)]
+)
 
 Note that, this way, special theory of relativity presents a remarkable
 symmetric: a frame of reference at rest with a moving body will measure
