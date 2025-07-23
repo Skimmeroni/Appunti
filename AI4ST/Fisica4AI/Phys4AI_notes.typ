@@ -9,11 +9,20 @@
 #outline(indent: auto)
 #pagebreak()
 
+= Electricity
+== Electric charge
+#include "Electricity/Charge.typ"
+#pagebreak()
+
 = Optics
-== Waves and light
+== Mechanical waves
 #include "Optics/Waves.typ"
-== Ray model of light
-#include "Optics/Ray.typ"
+== Electromagnetic waves and light
+#include "Optics/Light.typ"
+== Reflection and refraction
+#include "Optics/RR.typ"
+== Mirrors and lenses
+#include "Optics/Lenses.typ"
 #pagebreak()
 
 = Theory of relativity

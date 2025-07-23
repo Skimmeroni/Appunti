@@ -1,72 +1,14 @@
 #import "../Phys4AI_definitions.typ": *
 
-The basis of the ray model of light is the observation that, in
-everyday life experience, light travels in straight lines, or
-_rays_, that bounce and/or traverse objects that they encounter.
+=== Reflection
 
-The ray model is an oversimplification, whose range of validity
-is confined to the cases where light traverses apertures (lenses,
-mirrors, and holes) that are very large compared to its wavelength.
-In this case, light (rays) traverses the aperture without disturbance;
-if the aperture is shrunk too much, the passage of light would be
-distorted beyond the capabilities of the ray model, and phenomena
-such as _diffraction_ would emerge.
-
-A *light ray* is defined as an abstract line (does not represent
-any actual, phyisical quantity) emitted from a _source_, moving in
-the same direction as the electromagnetic field of light. Any narrow
-beam of light, no matter how narrow, is actually a bundle of parallel
-light rays close together. *Lasers*, even though still constituted by
-many parallel light rays, is as good as an approximation can be of
-a single, isolated light ray.
-
-Light rays are represented graphically as, as said, straight lines.
-However, the light as a ray model presupposes that light beams are
-constituted by an infinite number of rays, hence it is not possible
-to draw them all. The idea is to draw only a handful of lines, each
-consistent with the way the rays are spreading, restricting the focus
-to the lines that are actually worth taking into consideration.
-
-The two main ways light rays are drawn is as rays emitted by a source,
-going in every direction, or as a bundle of parallel lines moving in the
-same direction. Source-like points make sense when dealing with objects
-that are close-by, not only actual light sources but also surfaces that
-deflect the incoming light to the surroundings. Parallel rays make sense
-when dealing with very precise sources like lasers or when dealing with
-far away objects, such as stars, whose incoming light is so distant that
-the rays arriving at an observer are essentially parallel to each other.
-
-#figure(
-	caption: [A point-like source emitting rays in every direction (left)
-	          and a beam-like bundle of parallel rays (right)],
-	[#grid(
-		columns: (0.5fr, 0.5fr),
-		[#cetz.canvas({
-			import cetz.draw: *
-			set-style(content: (padding: 3pt), stroke: (thickness: 1.5pt))
-			line((0, 0), (3, 0), mark: (start: "stealth", end: "stealth"), fill: black)
-			line((0.5, 1), (2.5, -1), mark: (start: "stealth", end: "stealth"), fill: black)
-			line((1.5, 1.5), (1.5, -1.5), mark: (start: "stealth", end: "stealth"), fill: black)
-			line((0.5, -1), (2.5, 1), mark: (start: "stealth", end: "stealth"), fill: black)
-		})],
-		[#cetz.canvas({
-			import cetz.draw: *
-			set-style(content: (padding: 3pt), stroke: (thickness: 1.5pt), fill: black)
-			line((0, 0), (5, 0), mark: (end: "stealth"))
-			line((0, 0.5), (5, 0.5), mark: (end: "stealth"))
-			line((0, 1), (5, 1), mark: (end: "stealth"))
-			line((0, 1.5), (5, 1.5), mark: (end: "stealth"))
-			line((0, 2), (5, 2), mark: (end: "stealth"))
-		})]
-	)]
-)
-
-The first phenomena that the ray model of light describes is *reflection*:
-light rays that bounce back from surfaces that they come into contact with.
-The image of oneself in front of a mirror and the image of the sky mirrored
-in the water of a pond are examples of reflection. The act of "seeing"
-itself requires reflection: an observed object is actually the light
-that it reflected coming into contact with the human eye.
+The first phenomena that the ray model of light is better-suited to
+interpret is *reflection*. Reflection happens when light "bounces back"
+from surfaces that it comes into contact with. The image of oneself in
+front of a mirror and the image of the sky mirrored in the water of a
+pond are examples of reflection. The act of "seeing" itself requires
+reflection: an observed object is actually the light that it reflected
+coming into contact with the human eye.
 
 Reflection from a flat, smooth surface, such as a mirror or a piece of
 polished metal, is called *specular reflection*. It can be observed
@@ -152,6 +94,8 @@ objects to be visually perceived.
 		line((9, -2), (10, 1), mark: (end: "stealth"), fill: black)
 	})]
 )
+
+=== Refraction
 
 Light waves travel with speed $c$ in a vacuum, but they slow down as
 they pass through transparent materials such as water or glass. The
@@ -255,13 +199,89 @@ From Snell's law, the following conclusion can be drawn:
 - When a ray is transmitted into a material with a lower index of
   refraction, it bends _away_ from the normal.
 
+=== Applying reflection and refraction: measuring the speed of light
+
+Reflection and refraction played a key role in the first (successful)
+attempt to measure the speed of light from Earth #footnote[Earlier
+attempts, dating two centuries back, used the rotation period of
+celestial bodies.]. This is also referred to as *Fizeau's experiment*,
+bearing the name of its author.
+
+The experimental apparatus consists of a light source, whose light rays
+reach a glass surface set at $45 degree$ that reflects and refracts in
+roughly equal amount. The reflected portion of light is ignored, whereas
+the refracted portion encounters a spinning toothed wheel: each tooth and
+each gap are equally spaced, and speed of the wheel can be controlled by
+the experimenter. If light hits one of the tooth gets blocked, if it hits
+one of the gaps it passes through. A mirror then reflects the light back
+to the original glass surface, encountering the wheel once again on its
+path, being refracted and reflected. The refracted portion of light is
+discarded, the reflected portion is observed.
+
+#figure(
+	caption: [A graphical representation of Fizeau's experimental apparatus:
+	          a light source (1) emitting light that is refracted by a glass
+	          surface (2), moving over a spinning wheel (3) to a mirror (4)
+	          and then back to the glass surface, whose reflection of light
+	          is collected (5).
+	          [#link("https://commons.wikimedia.org/w/index.php?curid=89913086")[Original image]
+	          by #link("https://commons.wikimedia.org/wiki/User:Д.Ильин")[Д.Ильин],
+	          licensed under the #link("https://creativecommons.org/publicdomain/zero/1.0/")[CC0] license,
+	          based on #link("https://commons.wikimedia.org/wiki/File:Fizeau.JPG")[earlier work]
+	          by #link("https://commons.wikimedia.org/wiki/User:Brews_ohare")[Brews_ohare]]],
+	[#image("fizeau.svg", width: 50%)]
+)
+
+In the starting condition, the wheel is at rest and the light source is
+aligned with one of the gaps of the wheel; after coming back from the
+mirror, it will be detected. The speed of the wheel is then increased
+over and over: the reflected light will become dimmer and dimmer, because
+more and more light rays will hit the teeth of the wheel when coming back
+from the mirror.
+
+After reaching a sufficient speed, there will be no incoming reflected
+light at all, since the wheel and the light will be perfectly synchronized:
+the light will come back from the mirror to the wheel in the exact same
+time as a teeth of the wheel will replace the gap that the light used to
+pass through. If speed is increased even further, the light and the wheel
+will become once again desynchronized, and the reflected light will become
+visible once again. When no reflected light can be detected, it must mean
+that the time that light takes for a round trip (from the wheel to the
+mirror and back) is the same as the time the wheel takes to rotate for
+the length of a tooth.
+
+Fizeau's original apparatus had a wheel of $720$ teeth, and the distance
+between the wheel and the mirror was $8633 metre$. Fizeau observed that
+reflected light disappeared when the wheel was spinning at a frequency of
+$12.6 second^(-1)$. If the wheel rotates for the exact length of a tooth,
+the rotated angle is of $pi slash 720$. Since $theta = 2 pi f t$, the time
+taken for the rotation has to be:
+
+$ t = frac(theta, 2 pi f) =
+  frac(frac(cancel(pi), 720), 2 dot cancel(pi) dot 12.6 second^(-1)) =
+  frac(1, 18114.0 second^(-1)) = num(5.5E-5) second $
+
+Light has to travel from the wheel to the mirror and back, so the length
+of the whole path is twice the distance between the mirror and the wheel.
+Being velocity equal to distance over time:
+
+$ tilde(c) = frac(d, t) = frac(2 dot 8633 metre, num(5.5E-5) second)
+  approx 313357531.7 metre slash second $
+
+Which, considering the current accepted value of the speed of light, is
+off only by:
+
+$ frac(tilde(c) dot 100, c) - 100 percent =
+  frac(313357531.7 cancel(metre slash second) dot 100,
+       299792458 cancel(metre slash second)) - 100 percent approx
+  4.5 percent $
+
+=== Fermat's principle
+
 Even though Snell's law was devised originally as an empirical law, it
 can be derived by assuming an even more fundamental principle: the *Fermat
 Principle*. This principle states that light rays, in any circumstance,
 always travel along the path that requires the least time to be traversed.
-
-// To derive the Law of Reflection, it is first necessary to describe a property
-// of mirror
 
 To derive Snell's law, consider a light ray that moves from a medium to
 another. Let $A$ be the starting point (lying in the first medium) and
@@ -382,6 +402,8 @@ $ n_(1) sin(theta_(1)) = n_(2) sin(theta_(2)) $
 
 Which is precisely Snell's law.
 
+=== Total internal reflection
+
 Consider a light beam crossing the boundary between two media with index
 of refraction $n_(1)$ and $n_(2)$ respectively. Assuming $n_(1) > n_(2)$,
 due to Snell's law, the refracted light ray will be bent away from the
@@ -447,6 +469,8 @@ from a medium with a greater index of refraction to a medium with a
 smaller index of refraction. In this case, light will always be partially
 reflected and partially refracted.
 
+=== Applying total internal reflection: optic fibers
+
 The most notable application of total internal reflection is light (and
 information) transmission through *optic fiber* cables. The simplest model
 of an optic fiber cable is a tube made of glass where light enters from
@@ -483,71 +507,3 @@ is often wrapped inside one or more layers of plastic.
 	          by #link("https://commons.wikimedia.org/wiki/User:DrBob")[Bob Mellish]]],
 	[#image("fiber.svg", width: 33%)]
 )
-
-Reflection and refraction were also employed in the first attempt to
-measure the speed of light from Earth #footnote[Earlier attempts, dating
-two centuries back, used the rotation period of celestial bodies.]. This
-is also referred to as *Fizeau's experiment*, from the name of its author.
-
-The experimental apparatus consists of a light source, whose light rays
-reach a glass surface set at $45 degree$ that reflects and refracts in
-roughly equal amount. The reflected portion of light is ignored, whereas
-the refracted portion encounters a spinning toothed wheel: each tooth and
-each gap are equally spaced, and speed of the wheel can be controlled by
-the experimenter. If light hits one of the tooth gets blocked, if it hits
-one of the gaps it passes through. A mirror then reflects the light back
-to the original glass surface, encountering the wheel once again on its
-path, being refracted and reflected. The refracted portion of light is
-discarded, the reflected portion is observed.
-
-#figure(
-	caption: [A graphical representation of Fizeau's experimental apparatus:
-	          a light source (1) emitting light that is refracted by a glass
-	          surface (2), moving over a spinning wheel (3) to a mirror (4)
-	          and then back to the glass surface, whose reflection of light
-	          is collected (5).
-	          [#link("https://commons.wikimedia.org/w/index.php?curid=89913086")[Original image]
-	          by #link("https://commons.wikimedia.org/wiki/User:Д.Ильин")[Д.Ильин],
-	          licensed under the #link("https://creativecommons.org/publicdomain/zero/1.0/")[CC0] license,
-	          based on #link("https://commons.wikimedia.org/wiki/File:Fizeau.JPG")[earlier work]
-	          by #link("https://commons.wikimedia.org/wiki/User:Brews_ohare")[Brews_ohare]]],
-	[#image("fizeau.svg", width: 50%)]
-)
-
-In the starting condition, the wheel is at rest and the light source is
-aligned with one of the gaps of the wheel; after coming back from the
-mirror, it will be detected. The speed of the wheel is then increased
-over and over: the reflected light will become dimmer and dimmer, because
-more and more light rays will hit the teeth of the wheel when coming back
-from the mirror.
-
-After reaching a sufficient speed, there will be no incoming reflected
-light at all, since the wheel and the light will be perfectly synchronized:
-the light will come back from the mirror to the wheel in the exact same
-time as a teeth of the wheel will replace the gap that the light used to
-pass through. If speed is increased even further, the light and the wheel
-will become once again desynchronized, and the reflected light will become
-visible once again. When no reflected light can be detected, it must mean
-that the time that light takes for a round trip (from the wheel to the
-mirror and back) is the same as the time the wheel takes to rotate for
-the length of a tooth.
-
-Fizeau's original apparatus had a wheel of $720$ teeth, and the distance
-between the wheel and the mirror was $8633 metre$. Fizeau observed that
-reflected light disappeared when the wheel was spinning at a frequency of
-$12.6 second^(-1)$. If the wheel rotates for the exact length of a tooth,
-the rotated angle is of $pi slash 720$. Since $theta = 2 pi f t$, the time
-taken for the rotation has to be:
-
-$ t = frac(theta, 2 pi f) =
-  frac(frac(cancel(pi), 720), 2 dot cancel(pi) dot 12.6 second^(-1)) =
-  frac(1, 18114.0 second^(-1)) = num(5.5E-5) second $
-
-Light has to travel from the wheel to the mirror and back, so the length
-of the whole path is twice the distance between the mirror and the wheel.
-Being velocity equal to distance over time:
-
-$ c = frac(d, t) = frac(2 dot 8633 metre, num(5.5E-5) second)
-  approx 313357531.7 metre slash second $
-
-Which is about $4.5 percent$ bigger than the current accepted value.
