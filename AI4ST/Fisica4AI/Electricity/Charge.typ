@@ -147,14 +147,14 @@ fundamental charge is equal to:
 
 $ e = num(1.60E-19) coulomb $
 
-The electrostatic force that exists between two charged objects can
-quantified by a formula, known as *Coulomb's Law*:
+The electrostatic force that exists between two point-like charged objects
+can be quantified by a formula, known as *Coulomb's Law*:
 
 $ F_(1 "on" 2) = F_(2 "on" 1) = frac(1, 4 pi epsilon_(0)) frac(abs(q_(1)) abs(q_(2)), r^(2)) $
 
 Where $q_(1)$ and $q_(2)$ are the charges of the two particles, $r$ is
-the distance between them and $epsilon_(0)$ is a constant, known as
-*permittivity constant*. Its value is:
+the distance between them and $epsilon_(0)$ is a constant, known as the
+*permittivity of free space*. Its value is:
 
 $ epsilon_(0) = num(8.85E-12) coulomb^(2) slash newton metre^(2) $
 
@@ -164,9 +164,24 @@ is sometimes written as $K$, whose value is:
 
 $ K = num(8.99E+9) newton metre^(2) slash coulomb^(2) $
 
-The electrostatic forces are directed along the line joining the two
-particles: they are repulsive for two charges of the same sign and
-attractive for two charges of opposite sign.
+The expression above refers to the magnitude of the electrostatic force.
+The vectors of the electrostatic force are directed along the line joining
+the two charges: they are repulsive for two charges of the same sign and
+attractive for two charges of opposite sign:
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ arrow(F)_(1 "on" 2) = frac(1, 4 pi epsilon_(0)) frac(q_(1) q_(2), r^(2)) hat(r)_(1, 2) $],
+	[$ arrow(F)_(2 "on" 1) = frac(1, 4 pi epsilon_(0)) frac(q_(1) q_(2), r^(2)) hat(r)_(2, 1) $]
+)
+
+Where $hat(r)$ is the vector of length $1$ that matches the direction of
+the force with the tail in the target charge and the tip pointing outwards.
+Note the absence of the absolute value on the charges: if both charges are
+positive or negative, $arrow(F)$ will point outward, since its sign stays
+the same. If the charges have different signs, the minus sign will make
+$arrow(F)$ point inward. In both cases, this matches the way that positive
+and negative charges attract and repel.
 
 #figure(
 	caption: [On the left, two positive electric charges push each other
@@ -240,49 +255,11 @@ attractive for two charges of opposite sign.
 	)]
 )
 
-Coulomb's Law is very similar to Newton's Law for gravity: both have
-the two properties of the object at the numerator multiplied together,
-both are proportional to a constant and both have the distance between
-the two particles as their denominator. Also, both laws work assuming
-that the objects are point-like, meaning that their other properties
-(mass, volume, shape, ecc...) are negligible with respect to their
-reciprocal distance.
-
-However, while gravity is always an attractive force, electrostatic
-force exists both in an attractive and in a repulsive fashion. Also,
-the gravitational constant $G$ is much (much) smaller than the
-electrostatic constant $K$, meaning that charges and masses of
-the same order of magnitude, the electrostatic force is incredibly
-stronger than gravity.
-
-#exercise[
-	The mass of a proton is $num(1.67E-27) kilo gram$, while the mass
-	of an electron is $num(9.11E-31) kilo gram$. What is the ratio
-	between the gravitational force between an electron and a proton
-	and the electrostatic force between an electron and a proton that
-	are $1 metre$ apart? Assume an electron 
-]
-#solution[
-	$ F_(e) &= frac(1, 4 pi dot num(8.85E-12) coulomb^(2) slash newton metre^(2))
-	          (frac(abs(num(1.60E-19) coulomb) dot abs(num(1.60E-19) coulomb), 1 metre^(2)))
-	        = num(2.30E-28) newton \
-	  F_(g) &= num(6.67E-11) metre^(3) kilo gram^(-1) s^(-2)
-	          (frac(num(1.67E-27) kilo gram dot num(9.11E-31) kilo gram, 1 metre^(2)))
-			= num(1.01E-67) newton $
-
-	Which means that the electrostatic force between the two is greater
-	than the gravitational force between the two by a factor of:
-
-	$ frac(F_(e), F_(g)) =
-	  frac(num(2.30E-28) newton, num(1.01E-67) newton) approx
-	  num(2.27E+39) $
-]
-
 Electrostatic force is no different than any other force, therefore
 the superposition principle holds: the net electrostatic force in a
 system is given by the sum of the electrostatic forces of the single
 components. Superposition also holds between a mixture of electrostatic
-and gravitational forces.
+and any other forces.
 
 #exercise[
 	Three charges $q_(1), q_(2), q_(3)$ are arranged in a triangle at the
@@ -321,45 +298,51 @@ and gravitational forces.
 	        num(+1.08E-3) newton $
 
 	Consider a system of coordinates centered on the third charge. The
-	force $arrow(F)_(1 "on" 3)$ points downward, hence has no component
-	on the $x$-axis and its $y$-component is negative. The force
-	$arrow(F)_(2 "on" 3)$ points north-west, hence has both an $x$ and
-	a $y$ component. The angle $theta$ between $arrow(F)_(2 "on" 3)$
-	and the coordinate system is:
+	force $arrow(F)_(1 "on" 3)$ points directly downward, since it has
+	no component along the $x$-axis and its $y$-component is negative.
+	Therefore:
+
+	$ arrow(F)_(1 "on" 3) =
+	  arrow(F)_(1 "on" 3, x) + arrow(F)_(1 "on" 3, y) =
+	  num(-1.35E-3) hat(j) newton $
+
+	The force $arrow(F)_(2 "on" 3)$ points north-west, since it has
+	a negative $x$ component and a positive $y$ component. The angle
+	$theta$ between $arrow(F)_(2 "on" 3)$ and the coordinate system is:
 
 	$ theta =
 	  arctan(frac("opposite side", "adjacent side")) =
 	  arctan(frac(10.0 centi metre, 5.0 centi metre)) =
 	  arctan(2.0) approx 63.4 degree $
 
-	Which means that the two components of $arrow(F)_(2 "on" 3)$ along the
-	$x$ and $y$ axis are:
+	Which means that the magnitude of the two components of
+	$arrow(F)_(2 "on" 3)$ along the $x$ and $y$ axis are:
 
 	$ F_(2 "on" 3, x) &= cos(theta) F_(2, "on" 3) = cos(63.4 degree) num(+1.08E-3) newton = num(+4.83E-4) newton \
 	  F_(2 "on" 3, y) &= sin(theta) F_(2, "on" 3) = sin(63.4 degree) num(+1.08E-3) newton = num(+9.66E-4) newton $
 
-	The net force along the $x$ axis is just $F_(2 "on" 3, x)$, since
-	$F_(1 "on" 3)$ has no component in this direction. The net force
-	along the $y$ axis is:
+	Which gives:
 
-	$ F_(3, y) =
-	  abs(F_(2 "on" 3, y) - F_(1 "on" 3)) =
-	  abs(num(+9.66E-4) newton - num(+1.35E-3) newton) =
-	  num(+3.84E-4) newton $
+	$ arrow(F)_(2 "on" 3) =
+	  arrow(F)_(2 "on" 3, x) + arrow(F)_(2 "on" 3, y) =
+	  num(-4.83E-4) hat(i) newton + num(+9.66E-4) hat(j) newton $
 
-	Where the minus sign hints at the fact that the two forces point
-	in opposite directions. The magnitude of the resulting force is
-	therefore:
+	The net electrostatic force acting upon the third charge is therefore:
+
+	$ arrow(F)_(3) &=
+	  arrow(F)_(1 "on" 3) + arrow(F)_(2 "on" 3) =
+	  num(-1.35E-3) hat(j) newton - num(+4.83E-4) hat(i) newton + num(+9.66E-4) hat(j) newton = \
+	  &= num(-4.83E-4) hat(i) newton num(-3.84E-4) hat(j) newton $
+
+	Of magnitude:
 
 	$ F_(3) = sqrt(F_(3, x)^(2) + F_(3, y)^(2)) =
 	  sqrt((num(+4.83E-4) newton)^(2) + (num(+3.84E-4) newton)^(2))
 	  = num(+6.20E-4) newton $
 
-	The $x$ component of $F_(3)$ points leftwards, since $F_(2 "on" 3, x)$
-	points leftward. The $y$ component of $F_(3)$ points downwards, since
-	$F_(1 "on" 3)$ is greater in magnitude than $F_(2 "on" 3, y)$.
-	Therefore, $F_(3)$ points south-west. In particular, the angle between
-	$F_(3)$ and the $x$ axis is:
+	Since both components of the net force are negative, $F_(3)$ points
+	south-west. In particular, the angle between $F_(3)$ and the $x$ axis
+	is:
 
 	$ phi.alt =
 	  arctan(frac("opposite side", "adjacent side")) =
@@ -412,15 +395,53 @@ and gravitational forces.
 				line((-1, 2), (-1, -0.875), (0, -2.875), stroke: (dash: "dashed"))
 				circle((0, 0), fill: white, radius: 0.1)
 
-				content((0, -2.875), $F_(1 "on" 3)$, anchor: "north")
-				content((-1, 2), $F_(2 "on" 3)$, anchor: "south-east")
-				content((-1, 0), $F_(2 "on" 3, x)$, anchor: "east")
-				content((0, 2), $F_(2 "on" 3, y)$, anchor: "south")
-				content((-1, -0.875), $F_(3)$, anchor: "north-east")
+				content((0, -2.875), $arrow(F)_(1 "on" 3)$, anchor: "north")
+				content((-1, 2), $arrow(F)_(2 "on" 3)$, anchor: "south-east")
+				content((-1, 0), $arrow(F)_(2 "on" 3, x)$, anchor: "east")
+				content((0, 2), $arrow(F)_(2 "on" 3, y)$, anchor: "south")
+				content((-1, -0.875), $arrow(F)_(3)$, anchor: "north-east")
 				content((0, 0), $q_(3)$, anchor: "north-west")
 				content((-0.375, 0.25), $theta$)
 				content((-0.625, -0.25), $phi.alt$)
 			})],
 		)]
 	)
+]
+
+Coulomb's Law shares some similarities with Newton's Law for gravity:
+both have the two properties of the object at the numerator multiplied
+together, both are proportional to a constant and both are inversely
+proportional to the distance of the two objects. Also, both laws work
+assuming that the objects are point-like, meaning that their other
+properties (mass, volume, shape, ecc...) are negligible with respect
+to their reciprocal distance.
+
+However, while gravity is always an attractive force, electrostatic
+force exists both in an attractive and in a repulsive fashion. Also,
+the gravitational constant $G$ is much (much) smaller than the
+electrostatic constant $K$, meaning that charges and masses of
+the same order of magnitude, the electrostatic force is incredibly
+stronger than gravity.
+
+#exercise[
+	The mass of a proton is $num(1.67E-27) kilo gram$, while the mass
+	of an electron is $num(9.11E-31) kilo gram$. What is the ratio
+	between the gravitational force between an electron and a proton
+	and the electrostatic force between an electron and a proton that
+	are $1 metre$ apart? Assume an electron 
+]
+#solution[
+	$ F_(e) &= frac(1, 4 pi dot num(8.85E-12) coulomb^(2) slash newton metre^(2))
+	          (frac(abs(num(1.60E-19) coulomb) dot abs(num(1.60E-19) coulomb), 1 metre^(2)))
+	        = num(2.30E-28) newton \
+	  F_(g) &= num(6.67E-11) metre^(3) kilo gram^(-1) s^(-2)
+	          (frac(num(1.67E-27) kilo gram dot num(9.11E-31) kilo gram, 1 metre^(2)))
+			= num(1.01E-67) newton $
+
+	Which means that the electrostatic force between the two is greater
+	than the gravitational force between the two by a factor of:
+
+	$ frac(F_(e), F_(g)) =
+	  frac(num(2.30E-28) newton, num(1.01E-67) newton) approx
+	  num(2.27E+39) $
 ]

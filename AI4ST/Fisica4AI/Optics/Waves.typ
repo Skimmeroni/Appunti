@@ -129,9 +129,13 @@ time frame with respect to space.
 	at $x = 0$ and snapshot graph at $t = 0$?
 ]
 #solution[
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[#image("history_graph.svg")],
-		[#image("snapshot_graph.svg")]
+	#figure(
+		caption: [On the left, the history graph at $x = 0$. On the right,
+		          the snapshot graph at $t = 0$.],
+		[#grid(
+			columns: (0.5fr, 0.5fr),
+			[#image("history_graph.svg")],
+			[#image("snapshot_graph.svg")]
+		)]
 	)
 ]

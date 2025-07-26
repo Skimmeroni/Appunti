@@ -12,6 +12,8 @@
 = Electricity
 == Electric charge
 #include "Electricity/Charge.typ"
+== Electric field
+#include "Electricity/Field.typ"
 #pagebreak()
 
 = Optics
