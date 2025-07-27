@@ -18,6 +18,5 @@ ax.plot(velocities, gammas, label = "gamma", color = "blue")
 ax.legend()
 ax.grid()
 
-
 plt.savefig("gamma.svg")
 

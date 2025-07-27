@@ -10,6 +10,8 @@
 #pagebreak()
 
 = Electricity
+== Electrostatic forces
+#include "Electricity/Introduction.typ"
 == Electric charge
 #include "Electricity/Charge.typ"
 == Electric field
