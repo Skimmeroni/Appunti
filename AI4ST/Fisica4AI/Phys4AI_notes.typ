@@ -16,6 +16,8 @@
 #include "Electricity/Charge.typ"
 == Electric field
 #include "Electricity/Field.typ"
+== Electric flux
+#include "Electricity/Flux.typ"
 #pagebreak()
 
 = Optics

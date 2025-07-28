@@ -436,7 +436,7 @@ as a point-like source with charge $Delta Q = lambda Delta y =
 		line((0.25, -1), (0.25, 6), stroke: (thickness: 1pt), mark: (end: "stealth"), fill: black)
 
 		rect((0, 0), (0.5, 5), fill: white)
-		rect((0, 4), (0.5, 4.5), fill: gradient.linear(red, blue, angle: 0deg))
+		rect((0, 4), (0.5, 4.5), fill: fuchsia)
 
 		content((0, 0), $L slash 2$, anchor: "north-east")
 		content((0, 5), $-L slash 2$, anchor: "south-east")
@@ -600,7 +600,7 @@ as a point-like source with charge $Delta Q = lambda Delta y =
 
 		circle((0, 0), radius: (1.5, 2), name: "ring1")
 		circle((0, 0), radius: (1.25, 1.75), fill: white, name: "ring2")
-		line((name: "ring2", anchor: 10deg), (name: "ring1", anchor: 10deg), (name: "ring1", anchor: 30deg), (name: "ring2", anchor: 30deg), (name: "ring2", anchor: 10deg), fill: gradient.linear(red, blue, angle: 90deg))
+		line((name: "ring2", anchor: 10deg), (name: "ring1", anchor: 10deg), (name: "ring1", anchor: 30deg), (name: "ring2", anchor: 30deg), (name: "ring2", anchor: 10deg), fill: fuchsia)
 		line((0, 0), ((name: "ring2", anchor: 20deg), 50%, (name: "ring1", anchor: 20deg)), name: "midpoint")
 
 		line((0, -3), (0, 3), stroke: (thickness: 1pt), mark: (end: "stealth"), fill: black)
@@ -739,7 +739,7 @@ given by each ring.
 		)
 
 		circle((0, 0), radius: (2, 2.5), name: "out")
-		circle((0, 0), radius: (1.5, 2), name: "ringi", fill: gradient.linear(red, blue))
+		circle((0, 0), radius: (1.5, 2), name: "ringi", fill: fuchsia)
 		circle((0, 0), radius: (1.25, 1.75), name: "ring", fill: white)
 		line((0, 0), ((name: "ringi", anchor: 20deg), 50%, (name: "ring", anchor: 20deg)), name: "midpoint")
 		line((0, 0), (name: "out", anchor: 135deg), name: "radius")

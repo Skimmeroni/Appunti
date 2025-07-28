@@ -9,7 +9,7 @@ A = np.abs(Q) / (4 * np.pi * epsilon)
 def electric_field(z):
 	return A * (np.abs(z) / np.pow(np.pow(z, 2) + np.pow(R, 2), 1.5))
 
-points = np.linspace(-100, 100, 1000)
+points = np.linspace(-50, 50, 1000)
 strengths = electric_field(points)
 
 fig, ax = plt.subplots()
