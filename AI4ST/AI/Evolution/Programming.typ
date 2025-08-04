@@ -1,12 +1,25 @@
 #import "../AI_definitions.typ": *
 
-*Genetic programming* is a set of techniques that apply the principles
-of evolution to functional terms or entire computer programs to find,
-through an evolutionary-like algorithm, the one that addresses a particular
-purpose. In general, this purpose entails finding the functional terms or
-program that best matches an input to an expected output. The chromosomes
-of genetic programming, called *genetic programs*, are functional terms
-and programs, and are allowed to have different lenghts.
+Evolutionary algorithms operate on chromosomes made up of strings.
+Logical predicates are nothing but strings with a semantic attached
+to it. Therefore, it is possible to generate logical predicates
+using evolutionary techniques.
+
+Such techniques encompass what is called *genetic programming*:
+applying the principles of evolution to functional terms or entire
+computer programs to find, through an evolutionary-like algorithm,
+the one that addresses a particular purpose. In general, this
+entails starting from a set of inputs and outputs, and trying
+different possible functional terms or programs that map each
+inputs to its output. The program of interest is the one that
+is capable of matching every single input to the respective output.
+
+The chromosomes of genetic programming are called *genetic programs*.
+Each genetic program is a functional term or a program. Since computer
+programs and logical statements with the same semantic can have more
+or less components, genetic programs are allowed (and expected) to have
+different lenghts. This is different from most evolutionary algorithms,
+where the length of a chromosome is fixed.
 
 Each genetic program is expressed in a *formal language*, whose elements
 are constructed from two sets: a set $cal(F)$ of *function symbols and
@@ -40,6 +53,17 @@ formulas are defined recursively as follows:
   $cal(F)$, then $f(w_(1), dots, w_(n))$ is a well-formed formula;
 - Nothing else is a well-formed formula.
 
+Notice how this way of writing logical formulas is somewhat different
+than the usual notation, especially for operators having arity equal
+to $2$, of terminal-function-terminal. That is, instead of having
+something like $3 + 5$ or $a => b$ one has $+ (3, 5)$ and $=> (a, b)$.
+The notation of well-formed formulas in genetic programming is what's
+called *prefix notation*: even though it may be less readable, it is
+much easier to manipulate (terms are arranged into a stack, their
+number is predictable). Also, any expression written in prefix notation
+can be converted into an equivalent expression in "standard" notation,
+therefore there's no loss of expressiveness.
+
 #exercise[
 	What would be the well-formed formulas for the formal language of
 	zeroeth-order logic?
@@ -53,19 +77,20 @@ formulas are defined recursively as follows:
 	- If $X$ and $Y$ are two well-formed formulas, then $=>(X, Y)$ is a well-formed formula;
 	- If $X$ is a well-formed formula, then $not(X)$ is a well-formed formula;
 	- Nothing else is a well-formed formula.
-
-	Note how the application of $and, or, =>$ is generally written as
-	$(X and Y), (X or Y), (X => Y)$, and not as $and(X, Y), or(X, Y),
-	=>(X, Y)$. This notation, called *prefix notation*, is simpler to
-	manipulate and is equivalent to the most-used notation, even though
-	less readable.
 ]
 
-Symbolic expressions are represented using *parse trees*, a tree where
-each node contains a term or a function, and the edges represent the
-application of a function to a well-formed formula; the number of children
-of each node in the tree represents the number of arguments to which the
-function is applied.
+Symbolic expressions are represented using *parse trees*. A parse tree
+is a tree data structure where each node encodes one and only component
+(a terminal or a function) of a given symbolic expression. Terminal
+symbols are the leaves, functions are the inner nodes and each edge
+connects a function to one of its arguments. The root of a parse tree
+is, in general, a function, even though one could have a parse tree
+with a single terminal and nothing else, which would be the root (such
+degenerate cases are not considered, however). A subtree with a given
+root represents a subexpression having such root as the operator and
+its children as its arguments. The height of the node in the tree
+represents the order of preference in which the expression is to be
+evaluated: the higher, the earlier.
 
 #exercise[
 	Consider the symbolic expressions $=>(and (a, b), not(or(c, 0)))$
@@ -118,13 +143,20 @@ a boolean parameter that receives a non-boolean parameter interprets it
 as follows: the number $0$ is converted into `false`, anything else (a
 `char`, a non-zero number, ecc...) into `true`.
 
-Another important property is the *completeness* of the sets $cal(F)$ and
-$cal(T)$ with respect to the expressions they represent. That is, the two
-sets should contain a sufficient number of elements to be able to generate
-every possible expression of the language. Finding the smallest set of
-functions that can generate every expression of a language is an NP-hard
-problem, therefore $cal(F)$ tends to be bigger than necessary. This is not
-an issue, however, since introducing more functions can simplify expressions
+Another important property is the *completeness* of the sets $cal(F)$
+and $cal(T)$ with respect to the expressions they represent. That is,
+the two sets should contain a sufficient number of elements to be able
+to generate every possible expression of the language. This is because
+genetic programming is a mere ricombination of "building blocks", not
+the creation of those "blocks" themselves. If the building blocks at
+hand cannot construct an expression with a given semantic, such expression
+will never come to life.
+
+Finding the smallest set of functions and terminals that can generate
+every expression of a language is an NP-hard problem. Therefore, $cal(F)$
+will most likely be bigger than necessary, with expressions with the same
+semantic that have more than one syntactic representation. This is not an
+issue, however, since introducing more functions can simplify expressions
 and increase their readability.
 
 #exercise[
@@ -133,48 +165,58 @@ and increase their readability.
 	zeroeth-order logic?
 ]
 #solution[
-	Yes. A set such as $cal(F) = {=>, not}$ would be sufficient,
-	since expressions containing $and$ and $or$ could be converted
-	into expressions with just $=>$ and $not$. The set $cal(F) =
-	{and, not}$ would also suffice. However, this would make
-	manipulating expressions much more cumbersome, therefore it
-	is much more convenient to use ${and, or, =>, not}$.
+	Yes. A set such as $cal(F') = {and, not}$ would be sufficient.
+	This is because both $or$ and $=>$ can be rewritten only using
+	functions from $cal(F')$:
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ P or Q equiv not((not P) and (not Q)) $],
+		[$ P => Q equiv not(P and (not Q)) $])
+
+	However, this would make manipulating expressions much more cumbersome,
+	which is why $cal(F) = {and, or, =>, not}$ is a much more convenient
+	choice.
 ]
 
 A good symbolic expression that solves the problem at hand is no
-different than applying an evolutionary algorithm: a random initial
-population of symbolic expressions is constructed, which is then
-evaluated by a fitness function. The symbolic expressions with higher
-fitness will (tend to) mutate and produce offspring applying genetic
-operators, the symbolic expressions with lower fitness will (tend to)
-die out in the generations. The fitness of a symbolic expression
-represents how well the genetic program maps the input to the expected
-output.
+different than applying an evolutionary algorithm, constructing
+a random initial population of symbolic expressions. Such expressions
+are encoded as parse trees, since from an algorithmic standpoint they
+are much easier to manipulate than, say, bare strings, especially for
+computing its fitness.
 
-Randomly generating a chromosome for genetic programming (that is, a
-random symbolic expression) has to be done with caution, since it has
-to respect the rules defined in the grammar. The simplest approach to
-do so is to follow the recursive definition for well-formed formulas.
-Since it is also convenient for the later evaluation of genetic programs,
-it's actually better to generate the parse tree corresponding to an
-expression, rather than a sequence of symbols. To make sure that the
-procedure terminates, one could set a maximum number of nodes of the
-parse tree and/or a maximum depth; when such threshold is reached, all
-remaining branches are closed with terminal symbols, and aren't expanded
-further.
+The fitness of each parse tree (of each symbolic expression) is evaluated
+by a fitness function. The fitness of a symbolic expression represents how
+well the genetic program maps the inputs to the expected output, or how
+many inputs are mapped correctly. The symbolic expressions with higher
+fitness will (tend to) mutate and produce offspring applying genetic
+operators, the symbolic expressions with lower fitness will (tend to) die
+out in the generations.
+
+Randomly generating chromosomes for genetic programming has to be done
+with caution, since it must abide by the rules defined in the grammar.
+An ill-defined parse tree is a waste at best and a source of defective
+offspring at worst. The best and simplest course of action to follow
+the (naturally) recursive definition for well-formed formulas. To make
+sure that the procedure terminates, one could set a maximum number of
+nodes of the parse tree and/or a maximum depth; when such threshold is
+reached, all remaining branches are closed with terminal symbols, and
+aren't expanded further.
 
 #pseudocode(
 	title: "GP-Initialize-Grow",
 	parameters: ([$d$], [$d_("max")$],),
 	content: [
 		if $(d = 0)$ #i \
-			$n <-$ a random function sampled from $cal(F)$ #d #comment[Avoid expressions with a single term] \
+			$n <-$ a random function sampled from $cal(F)$ #d #comment[Avoid single-term expressions] \
 		else if $(d gt.eq d_("max"))$ #i \
-			$n <-$ a random term sampled from $cal(T)$ #d #comment[Close the branch due to max size reached] \
+			$n <-$ a random term sampled from $cal(T)$ #comment[Close branch when] \
+			#d #comment[maximum size is reached] \
 		else #i \
-			$n <-$ a random element sampled from $cal(T) union cal(F)$ #d #comment[Open the branch] \
+			$n <-$ a random element sampled from $cal(T) union cal(F)$ #d #comment[Open branch] \
 		foreach $c$ in arguments of $n$ #i \
-			$c <-$ #smallcaps("GP-Initialize-Grow") ($d + 1, d_("max")$) #d #comment[Expand the branches recursively] \
+			$c <-$ #smallcaps("GP-Initialize-Grow") ($d + 1, d_("max")$) #d #comment[Expand branches recursively] \
 		return $n$ \
 	]
 )
@@ -194,10 +236,11 @@ is reached (this is because a terminal symbol could be drawn at any step).
 	parameters: ([$d$], [$d_("max")$],),
 	content: [
 		if $(d gt.eq d_("max"))$ #i \
-			$n <-$ a random term sampled from $cal(T)$ #d #comment[Close the branch due to max size reached] \
+			$n <-$ a random term sampled from $cal(T)$ #comment[Close branch when] \
+			#d #comment[maximum size is reached] \
 		else #i \
 			$n <-$ a random element sampled from $cal(F)$ #comment[Always start with a function] \
-			#d #comment[This way, max size will always be reached] \
+			#d #comment[So that max size is always reached] \
 		foreach $c$ in arguments of $n$ #i \
 			$c <-$ #smallcaps("GP-Initialize-Full") ($d + 1, d_("max")$) #d #comment[Expand the branches recursively] \
 		return $n$ \
@@ -293,20 +336,35 @@ make it shorter and/or more readable.
 	(or viceversa).
 ]
 
-Editing can be incorporated in the application of the genetic operators
-themselves (mutation and/or crossover), in order to reduce the number of
-wasterful computations. However, it is much more common to apply it only
-to the solution that has been found.
+Editing can be incorporated in the application of the genetic
+operators themselves (mutation and/or crossover), in order to
+obtain genetic operators that don't generate introns, hence
+reducing the number of wasterful computations. One example is
+*brood recombination*: brood recombination creates many children
+from the same two parents by applying a crossover operator with
+different parameters. Only the best child of the brood enters
+the next generation. This method is particularly useful if
+combined with a fitness penalty, because then it favors children
+that achieve the same result with less complex chromosomes.
 
-Other methods that have been suggested to reduce the creation of introns
-are modified genetic operators like *brood recombination*. This operator
-creates many children from the same two parents by applying a crossover
-operator with different parameters. Only the best child of the brood enters
-the next generation. This method is particularly useful if combined with
-a fitness penalty, because then it favors children that achieve the same
-result with simpler means (that is, with a less complex chromosome).
-*Intelligent recombination* chooses crossover points purposefully, which
-can help to prevent the creation of introns.
+Another operator is *intelligent recombination*, a form of
+recombination that chooses the crossover points selectively
+in such a way to prevent, or at least to mitigate, the creation
+of introns. A third method consists in introducing slight changes
+in the evaluation function such that what are considered introns
+now can be "reactived", in the sense that the newly modified
+fitness function assigns a nonzero weight to that subtree,
+potentially leading to its elimination.
+
+All these forms of intron prevention are still quite expensive, and
+rely on using ad-hoc genetic operators. In general, the cost of
+introducing intron prevention outweights its benefits, and is not
+worth it. It is actually much more common to keep the introns in
+the parse trees of the population, even if this reduces performance,
+and only prune the parse tree of the best solution found at the end
+of the process.
+
+=== Applying genetic programming: the $n times 1$ multiplexor problem
 
 An example of genetic programming is solving the $n times 1$ *multiplexor
 problem*. A multiplexor is a device that has $n$ data inputs, $log_(2)(n)$
@@ -319,6 +377,42 @@ multiplexor given as a "black box" and finding a symbolic expression of
 the Boolean function that describes it #footnote[The multiplexor problem
 can actually be solved analytically with little effort (when $n$ is small,
 at least), hence it should be seen just as a paradigmatic example.].
+
+#figure(
+	caption: [On the left, a schematic representation of a $2 times 1$
+	          multiplexor. On the right, the corresponding truth table.],
+	[#grid(
+		columns: (0.5fr, 0.5fr),
+		[#cetz.canvas({
+			import cetz.draw: *
+			set-style(
+				content: (padding: 3pt),
+				stroke: (thickness: 1.5pt),
+			)
+
+			line((0, 0), (1, 1), (1, 3), (0, 4), (0, 0), fill: aqua, close: true)
+			line((-1, 1), (0, 1))
+			line((-1, 3), (0, 3))
+			line((1, 2), (2, 2))
+			line((0.5, -0.5), (0.5, 0.5))
+
+			content((-1, 1), $I_(1)$, anchor: "east")
+			content((-1, 3), $I_(2)$, anchor: "east")
+			content((2, 2), $O_(1)$, anchor: "west")
+			content((0.5, -0.5), $S_(1)$, anchor: "north")
+		})],
+		[#table(columns: (auto, auto, auto, auto),
+		        table.header([*Selector*], [*Input 1*], [*Input 2*], [*Output*]),
+		        [$0$], [$0$], [$0$], [$0$],
+		        [$0$], [$0$], [$1$], [$0$],
+		        [$0$], [$1$], [$0$], [$1$],
+		        [$0$], [$1$], [$1$], [$1$],
+		        [$1$], [$0$], [$0$], [$0$],
+		        [$1$], [$0$], [$1$], [$1$],
+		        [$1$], [$1$], [$0$], [$0$],
+		        [$1$], [$1$], [$1$], [$1$])]
+	)]
+)
 
 The set of symbols chosen for solving the problem is $cal(T) = {d_(0),
 d_(1), dots, d_(n), s_(0), s_(1), dots, s_(log_(2)(n))}$, where the
