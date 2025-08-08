@@ -21,8 +21,9 @@ Colors = ["#440154", "#3b528b", "#21918c", "#5ec962", "#fd7b25"]
 pyplot.gca().set_facecolor("#d3d3d322")
 pyplot.gca().get_legend().set_visible(False)
 
-for chunk, color in zip(itertools.batched(pyplot.gca().get_lines(), 3), Colors):
-	for line in chunk:
-		line.set_color(color)
+for lines, color in zip(itertools.batched(pyplot.gca().get_lines(), 3), Colors):
+	lines[0].set_color(color)
+	lines[1].set_visible(False)
+	lines[2].set_visible(False)
 
 pyplot.savefig("number.svg", bbox_inches="tight")

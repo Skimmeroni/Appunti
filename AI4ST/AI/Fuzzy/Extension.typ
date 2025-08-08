@@ -1,73 +1,151 @@
 #import "../AI_definitions.typ": *
 
-As the name suggests, there exist a relationship between fuzzy sets and
-fuzzy logic. If the degree of membership of a fuzzy set describes "how
-much" an element possesses a certain property, the truth value of a fuzzy
-proposition describes "how truthful" it is to classifiy said element as
-a member of the set. That is, given an element $x in X$ and some fuzzy set
-$mu$, $mu(x)$ can be interpreted as the truth value of the fuzzy proposition
-"$x$ is a member of $mu$". That is, $mu(x) = dsl x in mu dsr$.
+As the name suggests, there exist a relationship between fuzzy sets
+and fuzzy logic. If the degree of membership to a fuzzy set describes
+"how much" an element possesses a certain property, the truth value
+of a fuzzy proposition describes "how truthful" it would be to classifiy
+said element as a member of the set.
+
+In other words, given an element $x in U$ and a fuzzy set $mu$, the
+degree of membership $mu(x)$ corresponds to the truth value of the
+fuzzy proposition "$x$ is a member of $mu$". More formally, $mu(x)
+= dsl x in mu dsr$.
 
 This link between fuzzy sets and fuzzy logic can shed light on why
-intersection, union and complement of fuzzy sets were defined the way
-they were. In general, it can provide a framework to extend many more
-instruments of classical set theory, like mappings and quantifiers, to
-fuzzy sets.
+intersection, union and complement of fuzzy sets were defined the
+way they were. In general, it can provide a framework to extend
+many more concepts of classical set theory, like mappings and the
+cartesian product, to fuzzy sets.
 
-=== Intersection, union, complement
+=== Intersection
 
 Consider the classical intersection between two sets $M_(1)$ and $M_(2)$:
 an element $x$ belongs to $M_(1) inter M_(2)$ if and only if it belongs
-to both $M_(1)$ and $M_(2)$ at the same time. In the case of fuzzy sets,
-it is reasonable to assume that $(mu_(1) inter mu_(2))(x)$, the degree
-of membership of an element $x$ with respect the intersection between
-the fuzzy sets $mu_(1)$ and $mu_(2)$, should only depend on $mu_(1)(x)$
-and $mu_(2)(x)$, the degree of membership of $x$ with respect to the two
-sets taken separately.
+to both $M_(1)$ and $M_(2)$ at the same time. It does not depend on the
+membership of any other element $y != x$ to $M_(1)$ or $M_(2)$.
 
-As stated, $mu_(1)(x)$ and $mu_(2)(x)$ should be interpreted as the
-truth value of the fuzzy propositions "$x in mu_(1)$" and "$x in mu_(2)$",
-respectively. Following this line of reasoning, $mu_(1)(x) and mu_(2)(x)$
-should be interpreted as the truth value of the fuzzy proposition "$x in
-(mu_(1) inter mu_(2))$". However, $mu_(1)(x) and mu_(2)(x)$ can be given
-a more precise formulation, since logical conjunctions are well-modeled
-by $t$-norms. Therefore, having chosen a suitable $t$-norm $t$:
+In the case of fuzzy sets, it is reasonable to assume the same. That
+is, $(mu_(1) inter mu_(2))(x)$, the degree of membership of an element
+$x$ with respect the intersection between the fuzzy sets $mu_(1)$ and
+$mu_(2)$, should only depend on $mu_(1)(x)$ and $mu_(2)(x)$, the degrees
+of membership of $x$ with respect to the two sets taken separately.
 
-$ mu_(1)(x) and mu_(2)(x) =
-  (mu_(1) inter mu_(2))(x) =
-  dsl x in (mu_(1) inter mu_(2)) dsr =
-  t(mu_(1)(x), mu_(2)(x)) $
+The proposition of interest is "$x$ belongs to $mu_(1)$ _and_ $x$
+belongs to $mu_(2)$", which is a conjunction of two atomic propositions.
+Since the truth function of a conjunction is best modeled by $t$-norms,
+let $t$ be the $t$-norm of choice. The intersection of two fuzzy sets
+$mu_(1)(x)$ and $mu_(2)(x)$ is defined as:
 
-And, assuming to choose the $max$ function as the $t$-norm, one obtains
-$(mu_(1) inter mu_(2))(x) = min_(x in X){mu_(1)(x), mu_(2)(x)}$, as
-expected.
+$ (mu_(1) inter_(t) mu_(2))(x) = t(mu_(1)(x), mu_(2)(x)) $
+
+Where the pedix $t$ specifies that the explicit expression of $(mu_(1)
+inter mu_(2))(x)$ depends on which $t$-norm has been chosen. Since
+$mu(x) = dsl x in mu dsr$, the truth value of the fuzzy proposition
+"$x$ belongs to $mu_(1)$ _and_ $x$ belongs to $mu_(2)$" is given by:
+
+$ dsl x in (mu_(1) inter_(t) mu_(2)) dsr = dsl x in mu_(1) and x in mu_(2) dsr $
+
+Choosing for example $min$ as the $t$-norm $t$, one obtains:
+
+$ (mu_(1) inter mu_(2))(x) = min{mu_(1)(x), mu_(2)(x)} $
+
+This is the default choice, unless stated otherwise.
 
 Employing a $t$-norm for the definition of the intersection between fuzzy
 sets implies that fuzzy set intersection inherits the four properties of
-a $t$-norm. This is important, because those mirrors the properties that
-classical set intersection possesses:
+a $t$-norm:
 
 - Classical set intersection is commutative, so is fuzzy set intersection;
 - Classical set intersection is associative, so is fuzzy set intersection;
 - Given three classical sets $A, B, C$, if $A subset.eq B$ then $(A inter
   C) subset.eq (B inter C)$. This is mirrored in the monotonicity property;
-- If $M subset.eq X$ is an ordinary subset of $X$ and $mu in cal(F)(X)$ is
-  a fuzzy set of $X$, due to the boundedness property:
+- The intersection of a fuzzy set with (the characteristic function of) an
+  ordinary set results in the original fuzzy set limited to the ordinary set
+  with which it was intersected. More formally, if $M subset.eq U$ is a
+  crisp subset of $U$ and $mu in cal(F)(U)$ is a fuzzy set of $U$:
 
-  $ (mu inter I_(M))(x) = cases(mu(x) & "if" x in M, 0 & "otherwise") $
+  $ (mu inter chi_(M))(x) = cases(mu(x) & "if" x in M, 0 & "otherwise") $
 
-In the same way, it is possible to define the union of two fuzzy sets by
-picking a suitable $t$-conorm $s$:
+This is relevant because these properties are the properties of classical
+set intersection that are worth preserving.
 
-$ mu_(1)(x) or mu_(2)(x) =
-  (mu_(1) union mu_(2))(x) =
-  dsl x in (mu_(1) union mu_(2)) dsr =
-  s(mu_(1)(x), mu_(2)(x)) $
+#exercise[
+    Consider the fuzzy set in @Fuzzy-height, labeled $mu_(1)(x)$, and the
+    fuzzy set $mu_(2)$:
 
-Where $max$ is the standard choice. Using $max$ and $min$ as definition of
-the fuzzy union and the fuzzy intersection has the added benefit of playing
-well with $alpha$-cuts. For any $alpha in [0, 1]$ and any fuzzy set $mu_(1)$
-and $mu_(2)$, one has:
+    #grid(
+        columns: (0.5fr, 0.5fr),
+        [$ mu_(1)(x) =
+          cases(1 & "if" x > 2,
+	            frac(5, 2) x - 4 & "if" x lt.eq 1.6 lt.eq 2,
+				0 & "if" x < 1.6) $],
+        [$ mu_(2)(x) =
+           cases(20x - 35 & "if" 1.75 lt.eq x lt.eq 1.80,
+                 1 & "if" 1.80 lt.eq x lt.eq 1.90,
+                 39 - 20x & "if" 1.90 lt.eq x lt.eq 1.95,
+                 0 & "otherwise") $]
+    )
+
+    What would be their intersection? Assume that the $t$ norm is $min$
+]
+#solution[
+    - In the range $(-infinity, 1.60)$, both membership functions are
+      equal to $0$, hence the minimum is $0$;
+    - In the range $[1.60, 1.75)$, $mu_(1)(x)$ is equal to $frac(5, 2)x
+      - 4$, while $mu_(2)(x)$ is equal to $0$. Since $mu_(1)(x)$ is always
+      positive, the minimum is $0$;
+    - In the range $[1.75, 1.80)$, $mu_(1)(x)$ is equal to $frac(5, 2)x
+      - 4$, while $mu_(2)(x)$ is equal to $20x - 35$. Up to $62 slash 35$
+      (about $1.7714$) $mu_(2)(x)$ is smaller than $mu_(1)(x)$, larger on
+      the other side;
+    - In the range $[1.80, 1.90)$, $mu_(1)(x)$ is equal to $frac(5, 2)x
+      - 4$, while $mu_(2)(x)$ is equal to $1$. The minimum is $frac(5, 2)x
+      - 4$;
+    - In the range $[1.90, 1.95)$, $mu_(1)(x)$ is equal to $frac(5, 2)x
+      - 4$, while $mu_(2)(x)$ is equal to $39x - 20$. Up to $86 slash 45$
+      (about $1.9111$) $mu_(1)(x)$ is smaller than $mu_(2)(x)$, larger on
+      the other side;
+    - In the range $[1.95, 2)$, $mu_(1)(x)$ is equal to $frac(5, 2)x
+      - 4$, while $mu_(2)(x)$ is equal to $0$. The minimum is $0$;
+    - In the range $[2, +infinity)$, $mu_(1)(x)$ is equal to $1$, while
+      $mu_(2)(x)$ is equal to $0$. The minimum is $0$.
+
+    Grouping the results into a function:
+
+    $ (mu_(1) sect mu_(2))(x) = cases(20x - 35 & "if" 1.75 lt.eq x < 1.7714,
+                                      frac(5, 2)x - 4 & "if" 1.7714 lt.eq x < 1.9111,
+                                      39x - 20 & "if" 1.9111 lt.eq x < 1.95,
+                                      0 & "otherwise") $
+
+    #figure(
+      caption: [Vertical representation of the intersection of the two fuzzy sets.],
+      [#image("intersection.svg", width: 66%)]
+    )
+]
+
+=== Union
+
+In the same fashion, the union operator can be extended to the realm of
+fuzzy sets. The proposition "$x$ belongs to $mu_(1)$ _or_ $x$ belongs
+to $mu_(2)$", which is a disjunction of two atomic propositions. Let
+$s$ be the $t$-conorm that models the truth function of the disjunction.
+The union of two fuzzy sets $mu_(1)(x)$ and $mu_(2)(x)$ is defined as:
+
+$ (mu_(1) union_(t) mu_(2))(x) = s(mu_(1)(x), mu_(2)(x)) $
+
+The truth value of the fuzzy proposition "$x$ belongs to $mu_(1)$ _or_
+$x$ belongs to $mu_(2)$" is given by:
+
+$ dsl x in (mu_(1) union_(t) mu_(2)) dsr = dsl x in mu_(1) or x in mu_(2) dsr $
+
+Choosing the default $max$ as $t$-conorm:
+
+$ (mu_(1) union mu_(2))(x) = max{mu_(1)(x), mu_(2)(x)} $
+
+Choosing $max$ and $min$ for defining of the fuzzy union and the fuzzy
+intersection respectively has the added benefit of playing well with
+$alpha$-cuts. For any $alpha in [0, 1]$ and any fuzzy set $mu_(1)$ and
+$mu_(2)$:
 
 #grid(
 	columns: (0.5fr, 0.5fr),
@@ -75,58 +153,22 @@ and $mu_(2)$, one has:
 	[$ [mu_(1) union mu_(2)]_(alpha) = [mu_(1)]_(alpha) union [mu_(2)]_(alpha) $]
 )
 
-To obtain the complement of a fuzzy set, note that $x in overline(M) ->
-not (x in M)$ for any element $x$ and any classical set $M$. By using
-$not alpha = 1 - alpha$ as truth function for the negation, one obtains
-$overline(mu)(x) = 1 - mu(x)$; this is in accord with the fact that
-$dsl x in overline(mu) dsr = dsl not (x in mu) dsr$.
+=== Complement
 
-Fuzzy set complement, like standard set complement, is *involutory*,
-meaning that applying it twice is equivalent to not applying it at
-all: $overline(overline(mu)) = mu$ for any fuzzy set $mu$. The standard
-set intersection of any set with its complement gives the universe set:
-fuzzy set complement "relaxes" this property as $(mu inter overline(mu))(x)
-lt.eq 0.5$ and $(mu union overline(mu))(x) gt.eq 0.5$ for any fuzzy set $mu$
-and any element $x$.
+In classical logic, the proposition "$x$ belongs to the complement of
+$M$" is equivalent to the proposition "$x$ does not belong to $M$",
+That is, $dsl x in overline(M) dsr equiv dsl not(x in M) dsr$. It is
+sensible to stick to this definition in fuzzy logic as well: by using
+the standard truth function for the negation $w_(not)(dsl alpha dsr)
+= 1 - dsl alpha dsr$, one obtains $overline(mu)(x) = 1 - mu(x)$.
 
-=== Universal and existential quantifiers
-
-Extending the universal quantifier $forall$ and the existential quantifier
-$exists$ can be done by building upon the process used to extend conjunction
-and disjunction, exploiting the relationship between these connectives and
-the quantifiers.
-
-For a given set $X = {x_(1), dots, x_(n)}$ and a predicate $P(x)$, the
-statement $(forall x in X)(P(x))$ is equivalent to $P(x_(1)) and dots
-and P(x_(n))$. That is, $P(x)$ is true for all members of $X$ if and
-only if it is true for each member of $X$ individually. This means that
-$(forall x in X)(P(x))$ can be extended in the following way:
-
-$ dsl forall x in X: P(x) dsr =
-  dsl P(x_(1)) and dots and P(x_(n)) dsr =
-  min{dsl P(x) dsr | x in X} $
-
-Analogously, the statement $(exists x in X)(P(x))$ is equivalent to
-$P(x_(1)) or dots or P(x_(n))$, therefore $(exists x in X)(P(x))$ can
-be extended as:
-
-$ dsl exists x in X: P(x) dsr =
-  dsl P(x_(1)) or dots or P(x_(n)) dsr =
-  max{dsl P(x) dsr | x in X} $
-
-If the set $X$ were to be infinite, one would have to substitute the
-minimum and the maximum with, respectively, the infimum and the supremum:
-
-#grid(
-	columns: (0.5fr, 0.5fr),
-	[$ dsl forall x in X: P(x) dsr = inf{dsl P(x) dsr | x in X} $],
-	[$ dsl exists x in X: P(x) dsr = sup{dsl P(x) dsr | x in X} $]
-)
-
-Choosing $min$ as a $t$-norm to extend the universal quantifier and
-$max$ as a $t$-conorm to extend the existential quantifier is a standard
-choice. Even though it would be valid, extend the quantifiers using norms
-that aren't $min$ and $max$ respectively is hardly ever done.
+Fuzzy set complement, like non-fuzzy set complement, is *involutory*,
+meaning that applying it twice is the same as not applying it at all:
+$overline(overline(mu)) = mu$ for any fuzzy set $mu$. The standard set
+intersection of any set with its complement gives the universe set: fuzzy
+set complement "relaxes" this property as $(mu inter overline(mu))(x) lt.eq
+0.5$ and $(mu union overline(mu))(x) gt.eq 0.5$ for any fuzzy set $mu$ and
+any element $x$.
 
 === Functions with one argument
 

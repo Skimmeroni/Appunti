@@ -1,17 +1,4 @@
-from fuzzylogic.classes import Domain, Set
-from fuzzylogic.functions import trapezoid, alpha
 from matplotlib import pyplot
-
-T = Domain("Example", 0, 10, res = 0.1)
-T.set = Set(trapezoid(1, 2, 2, 5)) | Set(trapezoid(1, 6, 7, 8, c_m = 0.5))
-T.set.plot()
-
-pyplot.gca().set_facecolor("#d3d3d322")
-pyplot.gca().get_legend().set_visible(False)
-for line in pyplot.gca().get_lines():
-    line.set_color("#7a76c2")
-
-pyplot.savefig("vertical.svg", bbox_inches="tight")
 
 fig, ax = pyplot.subplots()
 ax.set_facecolor("#d3d3d322")

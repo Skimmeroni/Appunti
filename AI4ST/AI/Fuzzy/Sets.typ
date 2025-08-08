@@ -1,105 +1,186 @@
 #import "../AI_definitions.typ": *
 
-Boolean logic assumes that any proposition can be given a truth value
-of either _true_ or _false_, or $1$ or $0$, with no room for ambiguity
-in between. Technically speaking, given a set $X$ of propositions, the
-subset $M subset.eq X$ of true propositions is constructed from $X$ by
-its *characteristic function* $I_(M)$:
+Standard set theory assumes that _elements_ (facts and objects of the
+world) belong or do not belong to _sets_ (collections of objects). That
+is, there is a clear and unambiguous rule that asserts whether or not
+an element is part of a set.
 
-#grid(
-	columns: (0.5fr, 0.5fr),
-	[$ I_(M) : X mapsto [0, 1], I_(M) = cases(1 & "if" x in M, 0 & "otherwise") $],
-	[$ M = {x | x in X, I_(M)(x) = 1} $]
-)
+Mathematically, this is represented with a so-called *characteristic
+function*: let $U$ be the set that, by definition, contains every
+element of potential interest (also called the *universe set*, or
+just the *universe*). Let $A$ be a subset of $U$; the characteristic
+function $chi_(A): U mapsto {0, 1}$ is defined as:
+	
+$ chi_(A)(x) = cases(1 & "if" x in A, 0 & "if" x in.not A) $
+
+Set-belonging is readily translated into formal logic, where statements
+are either (absolutely) true or (absolutely) false, with nothing in
+between. The proposition "$x$ belongs to $A$" is true if $chi_(A)(x) = 1$,
+and false otherwise. That is, $chi_(A)(x)$ is the _truth value_ of the
+proposition "$x$ belongs to $A$".
 
 #exercise[
-	Consider the set of natural numbers $NN$. Let $M subset.eq NN_(0)$
+	Consider the set of natural numbers $NN$. Let $NN_("even") subset.eq NN$
 	be the set of even natural numbers. What would be its characteristic
 	function?
 ]
 #solution[
-	It can be written as $I_(M)(x) = (x + 1) mod 2$, since the remainder
-	of the division between an even number and $2$ is $0$ whereas the
-	remainder of the division between an odd number and $2$ is $1$.
+	Dividing an even integer by $2$ gives a remainder of $0$, while dividing
+	an odd integer by $2$ gives a remainder of $1$. Adding $1$ to the number
+	gives the opposite result, because the successor of an even number is odd
+	and the successor of an odd number is even. Therefore, one possibility is
+	$chi_(NN_("even"))(x) = (x + 1) mod 2$, with $x in NN$.
 ]
 
-However, modelling everyday life human propositions this way will most
-likely be unfruitful. Fixing thresholds for determining whether a certain
-proposition is true or false is most likely impossible, both because they
-hardly exist and, even if they do, they are not agreed upon, and depend
-either from context to context or from person to person. Also, natural
-language widely employs adverbs such as somewhat, likely, almost, ecc...
-that aren't really reflected in binary logic and that induce a blurred
-line between truth and falseness. Finally, it should be noted that it
-would make little sense, in everyday life, to treat truth values are
-threshold overcomings: people just have "hunches", yet this doesn't (and
-shouldn't) stop one from giving nuanced definitions of true and false.
+Standard set theory and propositional/predicative logic are better suited to
+model mathematical statements: a triangle _is_ a three-sided shape, seven
+_is not_ divisible by three, $pi$ _belongs_ to $RR$, ecc... This is possible
+because assertions in math are, indeed, unambiguously true or false. Also,
+it is assumed that one is given "perfect" and "unbound" knowledge about the
+statements at hand. Finally, logic and set theory do not rely on natural
+language, but on a very restricted abstract formalism.
+
+However, this approach is ill-suited to tackle most real-world phenomena and,
+most importantly, to model human reasoning. Even though there are subsets in
+real life where a characteristic function can be defined with no ambiguity
+(the subset of people that are married, the subset of animals that are dogs,
+ecc...), this is most likely not the case.
+
+Human reasoning has to be carried out through natural language, which
+is spurious and context-dependent: adverbs such as _somewhat_, _likely_,
+_almost_, ecc... blur the line between truthness and falsehood. Whether
+or not an element should belong to a set or not is often not agreed upon,
+varying from context to context and/or from person to person. Also, being
+human cognition limited, reasoning has to rely on imperfect knowledge.
+However, it's still possible to make (imperfect) logical deductions even
+in the face of partial knowledge, assigning approximate truth values to
+propositions.
 
 #exercise[
-	Is there an example of natural language propositions for whom is
-	hard to assign a binary truth value?
+	Let $U$ be the set of all people. Let $X$ be the set of people that
+	are _tall_. What would be its characteristic function?
 ]
 #solution[
-	Consider the definition of "hot". It is hard to state if the
-	proposition _the weather is hot_ is either true or false, since
-	there is no set definition of what it means for the wheather to
-	be hot. That is, there really isn't an indicator function for
-	"hotness".
+	Using classical set theory, the only way to model "tallness" would be
+	through the following indicator function:
 
-	The problem could seemingly be sidestep by fixing a certain threshold
-	and formulating the indicator function of "hotness" as, say:
+	$ chi_("tall")(h) = cases(1 & "if" h gt.eq H, 0 & "if" h < H) $
 
-	$ I_(H)(w) = cases(1 & "if the temperature is greater or equal than 25 degrees", 0 & "otherwise") $
+	Where $H$ is a fixed threshold that discriminates between people that
+	are tall and people that are not tall. However, this would poorly model
+	reality for at least three reasons:
 
-	However, this approach would poorly model reality for at least three
-	reasons:
-
-	- The cutoff point of $25$ degrees, or any cutoff point for that matter,
-	  is chosen completely arbitrarely. In reality, every person has its own
-	  way of determining if the weather is or isn't hot;
-	- This would mean that if the temperature is $24.9$ degrees the weather
-	  should be considered just as cold as it would be if the temperature
-	  was $0$ degrees, or any temperature below $25$ degrees;
-	- Even if it were possible to unambiguously agree upon a cutoff point,
-	  it would still be impractical, since no one states that the weather
-	  is hot by checking the temperature, it is just an intuitive feeling.
+	- The choice of $H$ is not agreed upon, and would have to be chosen
+	  rather arbitrarely;
+	- Any person whose height is in the range $[0, H)$ is "just as" short,
+	  whereas any person whose height is in the range $[H, +infinity)$ is
+	  "just as" tall. This oversimplifies a more nuanced and realistic
+	  definition of "tallness";
+	- Even if $H$ were to be determined unambiguously, it would still make
+	  the classification impractical. In general, no one actually measures
+	  the height of a person before concluding of whether they are tall or
+	  not, mostly relying on instinct instead.
 ]
 
-The idea behind fuzzy sets is to introduce the idea of "partial" membership.
-That is, in contrast to classical logic where an element either is or is
-not a member of a set, elements of a fuzzy set have a number assigned that
-quantifies "how much" they belong to said set.
+These considerations suggest the need for subsets whose membership is 
+spurious. Instead of having a characteristic function whose outputs are
+either $1$ (complete membership) or $0$ (no membership), a function whose
+output is a number that quantifies "how much" an element belongs to a set.
+That is, introducing a notion of _partial membership_ to sets.
 
-More formally, let $X$ be a set. A *fuzzy subset* $mu$ of $X$, or simply a
-*fuzzy set* $mu$ of $X$, is a mapping $mu: X mapsto [0, 1]$ that assigns to
-each member $x in X$ a *degree of membership* $mu(x)$ to the fuzzy set $mu$.
-The set of all fuzzy sets for a given set $X$ (the "power set" of fuzzy
-sets) is denoted as $cal(F)(X)$.
+More formally, let $U$ be a universe set. A *fuzzy subset* $mu$ of $U$,
+or simply a *fuzzy set* $mu$ of $U$, is a mapping $mu: U mapsto [0, 1]$
+that assigns to each member $x in U$ a *degree of membership* $mu(x)$.
+The set of all fuzzy sets for a given universe set $U$ (the "power set"
+of fuzzy sets) is denoted as $cal(F)(U)$. It is customary to refer to
+"standard" sets (sets that are not fuzzy, that is) as *crisp sets*.
 
-When $mu(x) = 1$, it means that $x$ has complete membership with respect to
-$mu$, whereas if $mu(x) = 0$ it means that $x$ has complete non-membership
-with respect to $mu$. Characteristic functions can therefore be considered
-as special cases of fuzzy sets, having only $0$ and $1$ as possible outputs.
+Given a certain $x in U$, if $mu(x) in (0, 1)$ it means that $x$ belongs
+to the fuzzy set "only to some extent": the closer to $1$, the "more" it
+belongs, the closer to $0$, the "less" it belongs. In particular, if
+$mu(x) = 1$ then $x$ has absolute and unambiguous membership, whereas if
+$mu(x) = 0$ then $x$ has no membership at all #footnote[Some sources make
+a distinction between the fuzzy set and its membership function. That is,
+$mu$ is the fuzzy set and the function $mu(x)$ quantifies "how much" $x$
+belongs to $mu$. This can be useful from a pedagogical perspective, making
+the distinction between the concepts and their degree of membership.
+However, from a mathematical perspective it is much easier to think about
+the membership function as something that defines the set itself. Simply
+put: the membership function _is_ the fuzzy set.]. Characteristic functions
+of crisp sets can therefore be considered as special cases of fuzzy sets.
 
-Even though values of $0$ and $1$ for $mu(x)$ have a reasonable ontological
-interpretation, a value $mu(x) in (0, 1)$ begs the question: what does it
-mean, exactly, for an element to be partially a member of a set? It might
-seem natural to interpret $mu(x)$ as a probability value, since the range
-of possible values is $[0, 1]$. That is, to interpret $mu(x)$ as a probability
-distribution that assigns a probability $mu(x)$ to each $x in X$ of finding
-$x$ in the set $mu$.
+#exercise[
+	What is a possible membership function for the fuzzy set of tall people?
+] <Fuzzy-height>
+#solution[
+	It is reasonable to consider a person to be unambiguously tall if
+	their height is $2$ metres or more, and to consider a person to be
+	unambiguously short if their height is $1.6$ metres or less. The
+	issue arises for heights in the $(1.6, 2)$ interval; are people
+	with an height of $1.8$ metres tall? The simplest choice would be
+	a straight line:
 
-However, giving such interpretation would be wrong both from a mathematical
-perspective and an onthological perspective. First of all, $mu(x)$ does
-not validate (in general) all the axioms of probability, for example
-$integral_(-infinity)^(+infinity) mu(x) d x$ might not be equal to $1$.
-Even if fuzzy sets were to be restricted to only consider functions that
-satisfy the Kolmogorov axioms, it would still be ill-advised to interpret
-fuzzy sets as probabilities: fuzzy sets model how closely a property or
-a statement is satisfied, whereas probability models the certainty of an
-event to happen or not.
+	$ mu(x) = cases(1 & "if" x > 2,
+	                frac(5, 2) x - 4 & "if" x lt.eq 1.6 lt.eq 2,
+				    0 & "if" x < 1.6) $
 
-The most used interpretations of fuzzy sets are the following three:
+	#figure(
+		caption: [The vertical representation of the fuzzy set.],
+		[#image("height.svg", width: 66%)]
+	)
+]
+
+Note that fuzzy sets, even though they better model imprecise knowledge,
+aren't enough on their own. That is, there's still the need to find a
+membership function for the fuzzy set that adequately addresses the task
+at hand. The choice of the membership function is subjective and context
+dependent, and in general is not an empirical finding. As a matter of fact,
+the choice of membership function in @Fuzzy-height was as good as any.
+However, the flexibility of a membership function allows one to "tune"
+it to improve the model and make incremental adjustments.
+
+Crisp sets $A$ and $B$ can be manipulated with the known set operators:
+
+- *union*: $A union B = {x in U | x in A or x in B}$;
+- *intersection*: $A inter B = {x in U | x in A and x in B}$;
+- *complement*: $overline(A) = {x in U | x in.not A}$.
+
+Or, in terms of their characteristic functions:
+
+#grid(
+	columns: (0.37fr, 0.37fr, 0.26fr),
+	[$ chi_(A union B)(x) = max{chi_(A)(x), chi_(B)(x)} $],
+	[$ chi_(A inter B)(x) = min{chi_(A)(x), chi_(B)(x)} $],
+	[$ chi_(overline(A))(x) = 1 - chi_(A)(x) $]
+)
+
+Fuzzy sets $cal(A)$ and $cal(B)$ can be manipulated in the exact same way,
+since these operators extend naturally:
+
+#grid(
+	columns: (0.39fr, 0.39fr, 0.22fr),
+	[$mu_(cal(A) union cal(B))(x) = max{mu_(cal(A))(x), mu_(cal(B))(x)}$],
+	[$mu_(cal(A) inter cal(B))(x) = min{mu_(cal(A))(x), mu_(cal(B))(x)}$],
+	[$mu_(overline(cal(A)))(x) = 1 - mu_(cal(A))(x)$]
+)
+
+Note that this is just one (the simplest) of the many possible ways
+to extend set operators to fuzzy sets. Other choices, better suited
+for different models, will be explored later on.
+
+// Add an example?
+
+Even though the $[0, 1]$ codomain would suggest so, fuzzy membership
+has little to do with probability theory. That is, the value $mu(x)$
+does not represent the probability that the element $x in U$ belongs
+to $mu$, or that a random sample of $U$ results in an element of $mu$.
+Fuzzy sets model how closely a property or a statement is satisfied,
+whereas probability models the certainty of an event to happen or not
+#footnote[It should also be noted that $mu(x)$ does not necessarely
+comply with the three Kolmogorov axioms for probability. For example,
+$integral_(-infinity)^(+infinity) mu(x) d x$ might not be equal to
+$1$.]. Specifically, fuzzy sets have three main onthological
+interpretations:
 
 - *Similarity*. A fuzzy set represents the degree of proximity between a
   an element and another, used to set the scale. Given a reference object
@@ -124,119 +205,147 @@ The most used interpretations of fuzzy sets are the following three:
   degree of "surprise" if they were to happen. Popular with fuzzy artificial
   intelligence.
 
+@Probability-or-fuzzy clarifies the difference between probability and
+fuzzy set membership.
+
 #exercise[
-	Consider two bottles of water, $A$ and $B$. Bottle $A$ has a $0.0004$
-	probability of actually being a bottle of chlorine, whereas bottle $B$
-	has a degree of membership of $0.0004$ with respect to the fuzzy set
-	of chlorine bottles. Are the two the same?
-]
+	Let $B$ be the set of all bottles of $1$ litre capacity. Consider the
+	two following statements:
+
+	- Choosing a random bottle out of $B$, the probability of finding a
+	  bottle of water is $0.999$, while the probability of finding a bottle
+	  of (liquified) caffeine is $0.001$;
+	- The degree of membership of a bottle in $B$ with respect to the fuzzy
+	  set of water bottles is $0.999$, while the degree of membership with
+	  respect to the fuzzy set of (liquified) caffeine bottles is $0.001$.
+
+	Supposing that one bottle has to be drunk, and that one of the two
+	statements must be true. Which one would be the safest?
+] <Probability-or-fuzzy>
 #solution[
-	No. Having a probability of $0.0004$ of being a bottle of chlorine
-	could be interpreted as, out of $10000$ identically sampled bottles,
-	$4$ contain (only) chlorine and $9996$ contain (only) water. Having
-	a degree of membership of $0.0004$ with respect to the fuzzy set of
-	chlorine bottles could be interpreted as the statement "bottle $B$
-	contains chlorine" matching the definition "a bottle containing
-	chlorine" with a degree of $0.0004$, meaning that bottle $B$ has
-	almost nothing in common with a bottle of chlorine, containing a
-	lot of water and an infinitesimal amount of chlorine.
+	Having a probability of $0.001$ of being a bottle of caffeine could
+	be interpreted as, out of $1000$ identically sampled bottles, roughly
+	$1$ contains only and exclusively caffeine (and roughly $999$ contain
+	only water). Having a degree of membership of $0.001$ with respect to
+	the fuzzy set of caffeine bottles can be interpreted as a bottle in
+	$B$ matching the definition "this bottle contains only caffeine" with
+	a degree of $0.001$. That is, a bottle in $B$ would be $0.001$ litres
+	(one gram) of caffeine and $0.999$ litres of water. Knowing that the
+	lethal dose of caffeine for an adult individual is about ten grams
+	#footnote[#link("https://www.fda.gov/consumers/consumer-updates/spilling-beans-how-much-caffeine-too-much")],
+	the safest choice would be the second. This is because in the first
+	case there's a $0.1 percent$ chance of drinking one litre of caffeine
+	(far more than ten grams) while in the second case there's a $100
+	percent$ chance of drinking one gram of caffeine. That is, one chance
+	out of a thousand of dying against no chance at all.
 ]
 
-If the universe set $X = {x_(1), dots, x_(n)}$ is a discrete set,
+The *support* of a fuzzy set $mu in cal(F)(U)$ is the (crisp) set that
+contains all the elements of $U$ having non-zero degree of membership
+in $mu$:
+
+$ S(mu) = {x in U | mu(x) > 0} $
+
+The *core* of a fuzzy set $mu in cal(F)(U)$ is the (crisp) set that
+contains all the elements of $U$ having membership equal to $1$:
+
+$ C(mu) = {x in U | mu(x) = 1} $
+
+The *height* of a fuzzy set $mu in cal(F)(U)$ is the highest degree
+of membership obtained by any element of said set:
+
+$ h(mu) = sup{x in U | mu(x)} $
+
+If the universe set $U = {x_(1), dots, x_(n)}$ is a discrete set,
 to represent a fuzzy set $mu$ it is sufficient to list each member
-$x_(i)$ of $X$ together with its degree of membership $mu(x_(i))$.
+$x_(i)$ of $U$ together with its degree of membership $mu(x_(i))$.
 That is, $mu = {(x_(1), mu(x_(1))), (x_(2), mu(x_(2))), dots, (x_(n)
 mu(x_(n)))}$, meaning that $x_(1)$ belongs to $mu$ with $mu(x_(1))$
 degree, $x_(2)$ belongs to $mu$ with $mu(x_(2))$ degree, ecc...
 
-On the other hand, continuous fuzzy sets are tricky. A continuous
-fuzzy set $mu$ is identified by a degree of membership $mu(x)$ that
-is a continuous function, having codomain $[0, 1] subset RR$. The
-most intuitive representation of a continuous fuzzy set consists in
-drawing the graph of its degree of membership function: this
-representation is also referred to as its *vertical representation*.
+As for continuous sets, the most intuitive representation would
+be graphing the membership function of the fuzzy set, as done in
+@Fuzzy-height. This representation is also referred to as the
+*vertical representation* of the fuzzy set.
 
 Out of all continuous fuzzy sets, the main interest lies in *convex
 fuzzy sets*, that best model natural language. Convex fuzzy sets are
 fuzzy sets having a degree of membership function that is monotonically
-increasing up to a certain point and monotonically decreasing after said
-point. Note that a fuzzy set being convex does not entail that its degree
-of membership function is also a convex functions; indeed, such functions
-are concave functions. Examples of functions with these characteristics are:
+increasing up to a certain point and monotonically decreasing after
+said point. Ironically, the membership function of a convex fuzzy set
+is a concave function, not a convex function.
 
--	#grid(
-		columns: (0.3fr, 0.36fr, 0.33fr),
-		[*Triangular functions*
-		$ Lambda_(a, b, c) : RR mapsto [0, 1] $
-		with $a < b < c$ and $a, b, c in RR$.],
-		[$ Lambda_(a, b, c)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
-									frac(c - x, c - b) & "if" b lt.eq x lt.eq c,
-									0 & "otherwise") $],
-		[#image("Convex_fuzzy_sets/fuzzy_triangular.svg")]
-	 )
--	#grid(
-		columns: (0.3fr, 0.36fr, 0.33fr),
-		[*Trapezoidal functions*
-		$ Pi_(a, b, c, d) : RR mapsto [0, 1] $
-		with $a < b lt.eq c < d$ and \ $a, b, c, d in RR$.
-		$a = b = -infinity$ and $c = d = +infinity$ are also
-		valid.],
-		[$ Pi_(a, b, c, d)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
-									1 & "if" b lt.eq x < c,
-									frac(d - x, d - c) & "if" c lt.eq x lt.eq d,
-									0 & "otherwise") $],
-		[#image("Convex_fuzzy_sets/fuzzy_trapezoidal.svg")]
- 	)
--	#grid(
-		columns: (0.3fr, 0.36fr, 0.33fr),
-		[*Bell-shaped functions*
-		$ Omega_(a, b) : RR mapsto [0, 1] $
-		with $a, b in RR$.],
-		[$ Omega_(a, b)(x) = e^(-(frac(x - a, b))^(2)) $],
-		[#image("Convex_fuzzy_sets/fuzzy_bell.svg")]
- 	)
+Especially when building applications, one should consider convex fuzzy
+sets that can be specified uniquely by a few parameters, so that they are
+easy to tune. One example are *triangular functions*:
+
+#grid(
+	columns: (0.6fr, 0.4fr),
+	[$ Lambda_(a, b, c): RR mapsto [0, 1] "with" a < b < c "and" a, b, c in RR $],
+	[$ Lambda_(a, b, c)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
+								   frac(c - x, c - b) & "if" b lt.eq x lt.eq c,
+								   0 & "otherwise") $]
+)
+
+#figure(
+	caption: [Plot of a triangular function.],
+	[#image("Convex_fuzzy_sets/fuzzy_triangular.svg", width: 66%)]
+)
+
+Triangular functions are a special case of *trapezoidal functions*:
+
+#grid(
+	columns: (0.6fr, 0.4fr),
+	[$ Pi_(a, b, c, d): RR mapsto [0, 1] "with" a < b lt.eq c < d and a, b, c, d in RR $
+	 $a = b = -infinity$ and $c = d = +infinity$ are also valid],
+	[$ Pi_(a, b, c, d)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
+								  1 & "if" b lt.eq x < c,
+								  frac(d - x, d - c) & "if" c lt.eq x lt.eq d,
+								  0 & "otherwise") $]
+)
+
+#figure(
+	caption: [Plot of a trapezoidal function.],
+	[#image("Convex_fuzzy_sets/fuzzy_trapezoid.svg", width: 66%)]
+)
+
+Another class of functions are the *bell-shaped functions*:
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ Omega_(a, b) : RR mapsto [0, 1] "with" a, b in RR $],
+	[$ Omega_(a, b)(x) = e^(-(frac(x - a, b))^(2)) $]
+)
+
+#figure(
+	caption: [Plot of a bell-shaped function.],
+	[#image("Convex_fuzzy_sets/fuzzy_gauss.svg", width: 66%)]
+)
 
 The vertical representation of fuzzy sets presents some issues, mainly
 that storing fuzzy sets encoded as functions in a computer would be both
 impractical and inefficient. Also, manipulating fuzzy sets (computing
 intersections, unions, ecc...) becomes cumbersome. For these reasons,
 the vertical representation should be limited to illustration purposes.
-Another representation, called *horizontal representation*, employs
-so-called $alpha$-cuts.
 
-Given a universe set $X$ and a fuzzy set $mu in cal(F)(X)$, let $alpha$
-be any number between $0$ and $1$. The subset $[mu]_(alpha) = {x in X |
+Given a universe set $U$ and a fuzzy set $mu in cal(F)(U)$, let $alpha$
+be any number between $0$ and $1$. The subset $[mu]_(alpha) = {x in U |
 mu(x) gt.eq alpha}$ is referred to as the $alpha$*-level set* of $mu$,
-or $alpha$*-cut* of $mu$. Similarly, the subset $[mu]_(underline(alpha))
-= {x in X | mu(x) < alpha}$ is referred to as the *strict* $alpha$*-level
-set* of $mu$, or *strict* $alpha$*-cut* of $mu$. That is, the $alpha$-cut
-of a fuzzy set is the subset that contains all its elements having degree
-of membership greater or equal than $alpha$.
+or $alpha$*-cut* of $mu$. That is, the $alpha$-cut of a fuzzy set is the
+subset that contains all the elements having degree of membership greater
+or equal than $alpha$. By definition, $[mu]_(0)$ is just the entire universe.
 
-$alpha$-cuts of convex fuzzy sets are peculiar because they are always
-convex sets. On the other hand, $alpha$-cuts of non-convex fuzzy sets
-can be a union of more than one disjointed interval. It is also possible
-to use this property as a definition: a fuzzy set is convex if and only
-if all of its $alpha$-cuts convex sets.
+In a similar fashion, the subset $[mu]_(underline(alpha)) = {x in U |
+mu(x) > alpha}$ is referred to as the *strict* $alpha$*-level set* of
+$mu$, or *strict* $alpha$*-cut* of $mu$.
 
-$alpha$-cuts uniquely identify fuzzy sets: if all the $alpha$-cuts of a
-fuzzy set $mu$ are known, the degree of membership $mu(x)$ of an element
-$x$ can be computed as:
-
-$ mu(x) = sup{alpha in [0, 1] | x in [mu]_(alpha)} $
-
-Of course, it would be pointless to store all the $alpha$-cuts of
-a fuzzy set, since it would be no different than storing the entire
-degree of membership function. However, discretizing the set of all
-$alpha$-cuts into a discrete subset ${[mu]_(alpha_(1)), [mu]_(alpha_(2)),
-dots, [mu]_(alpha_(k))}$ is sufficient to reconstruct the entire fuzzy
-set with a surprising degree of accuracy:
-
-$ mu(x) approx max{alpha in {alpha_(1), alpha_(2), dots, alpha_(k)} | x in [mu]_(alpha)} $
+$alpha$-cuts are used in the *horizontal representation* of fuzzy sets,
+that consists in picking a subset of $alpha$-cuts and drawing only those,
+instead of the entire function. Each $alpha$-cut is represented as a
+straight line of height $[mu]_(alpha)$.
 
 #exercise[
-	What would be the vertical and horizontal representation of the
-	following degree of membership function?
+	What would be the horizontal representation of the following fuzzy set?
 
 	$ mu(x) = cases(x - 1 & "if" 1 lt.eq x < 2,
 	                -frac(3, 8) x + frac(7, 4) & "if" 2 lt.eq x < 4,
@@ -244,28 +353,43 @@ $ mu(x) approx max{alpha in {alpha_(1), alpha_(2), dots, alpha_(k)} | x in [mu]_
 	                frac(1, 2) & "if" 6 lt.eq x < 7,
 	                -frac(1, 2) x + 4 & "if" 7 lt.eq x < 8,
 	                0 & "otherwise") $
+
+	As $alpha$ use $0.15, 0.30, 0.45, 0.60, 0.75, 0.90$.
 ]
 #solution[
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[#image("vertical.svg")],
-		[#image("horizontal.svg")]
+	#figure(
+		caption: [The $alpha$-cuts of the given fuzzy set.],
+		[#image("horizontal.svg", width: 66%)]
 	)
 ]
 
-Formally, given a certain number of $alpha$-cuts, the original membership
-function can be reconstructed by taking the _upper envelope_ of said cuts.
+$alpha$-cuts of convex fuzzy sets are peculiar because they are always
+convex sets. On the other hand, $alpha$-cuts of non-convex fuzzy sets
+may be a union of more than one disjointed interval. It is also possible
+to use this property as a definition: a fuzzy set is convex if and only
+if all of its $alpha$-cuts are convex sets.
 
-#theorem("Representation theorem")[
-	Given $mu in cal(F)(X)$ a fuzzy set over a universe set $X$:
+$alpha$-cuts can uniquely identify fuzzy sets. By definition, the degree
+of membership $mu(x)$ of an element $x$ is the highest possible value of
+$alpha$ giving an $alpha$-cut that contains $x$:
 
-	$ [mu]_(0) = sup_(alpha in [0, 1]) {min(alpha, chi_([mu]_(alpha))(x))},
-	  space "where" chi_([mu]_(alpha))(x) =
-	  cases(1 & "if" x in [mu]_(alpha), 0 & "otherwise") $
-]
-// #proof[
-//
-// ]
+$ mu(x) = sup{alpha in [0, 1] | x in [mu]_(alpha)} $
+
+Of course, actually storing all possible $alpha$-cuts of a fuzzy
+set would be no improvement over storing the expression of the entire
+membership function. However, discretizing the set of all $alpha$-cuts
+into a subset ${[mu]_(alpha_(1)), [mu]_(alpha_(2)), dots, [mu]_(alpha_(k))}$
+is sufficient to approximate the entire fuzzy set:
+
+$ mu(x) approx max{alpha in {alpha_(1), alpha_(2), dots, alpha_(k)} | x in [mu]_(alpha)} $
+
+Formally speaking, given a certain number of $alpha$-cuts, the original
+membership function can be reconstructed by taking the _upper envelope_
+of said cuts. Both the number of $alpha$ values and which values to choose
+are decided arbitrarely (more values, better precision). A common choice
+is $0.25, 0.50, 0.75, 1$.
+
+/* How to rebuild the envelope? */
 
 $alpha$-cuts can be stored in real memory in the form of linked lists. Each
 disjointed interval of each $alpha$-cut is stored in a separate node of the
@@ -316,18 +440,19 @@ $alpha$-cut) has also a pointer to following list (following $alpha$-cut).
 		)]
 )
 
-/* How to rebuild the envelope? */
+#theorem("Representation theorem")[
+	Given $mu in cal(F)(U)$ a fuzzy set over a universe set $U$:
 
-#lemma[
-	Given $mu in cal(F)(X)$ a fuzzy set over a universe set $X$,
-	$[mu]_(0) = X$.
+	$ [mu]_(0) = sup_(alpha in [0, 1]) {min(alpha, chi_([mu]_(alpha))(x))},
+	  space "where" chi_([mu]_(alpha))(x) =
+	  cases(1 & "if" x in [mu]_(alpha), 0 & "otherwise") $
 ]
 // #proof[
 //
 // ]
 
 #lemma[
-	Let $mu in cal(F)(X)$ be a fuzzy set over a universe set $X$,
+	Let $mu in cal(F)(U)$ be a fuzzy set over a universe set $U$,
 	and let $alpha, beta in [0, 1]$. If $alpha < beta$, then
 	$[mu]_(alpha) supset.eq [mu]_(beta)$.
 ]
@@ -336,25 +461,10 @@ $alpha$-cut) has also a pointer to following list (following $alpha$-cut).
 // ]
 
 #lemma[
-	Let $mu in cal(F)(X)$ be a fuzzy set over a universe set $X$.
+	Let $mu in cal(F)(U)$ be a fuzzy set over a universe set $U$.
 	For any $alpha, beta in [0, 1]$, $inter.big_(alpha: alpha < beta)
 	[mu]_(alpha) = [mu]_(beta)$.
 ]
 // #proof[
 //
 // ]
-
-The *support* of a fuzzy set $mu in cal(F)(X)$ is the (standard) set that
-contains all of its members having non-zero degree of membership:
-
-$ S(mu) = [mu]_(underline(0)) = {x in X | mu(x) > 0} $
-
-The *core* of a fuzzy set $mu in cal(F)(X)$ is the (standard) set that
-contains all of its members having membership exactly equal to $1$:
-
-$ C(mu) = [mu]_(1) = {x in X | mu(x) = 1} $
-
-The *height* of a fuzzy set $mu in cal(F)(X)$ is the highest degree of
-membership obtained by any element of said set:
-
-$ h(mu) = sup_(x in X) {mu(x)} $

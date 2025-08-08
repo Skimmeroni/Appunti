@@ -29,12 +29,12 @@
 = Fuzzy logic
 == Fuzzy sets
 #include "Fuzzy/Sets.typ"
+== Relevant classes of fuzzy sets
+#include "Fuzzy/Classes.typ"
 == Fuzzy logic
 #include "Fuzzy/Logic.typ"
-== Extending operators to fuzzy sets
+== Extending set operators to fuzzy sets
 #include "Fuzzy/Extension.typ"
-== Linguistic variables
-#include "Fuzzy/Variable.typ"
 == Fuzzy reasoning
 #include "Fuzzy/Inference.typ"
 #pagebreak()
