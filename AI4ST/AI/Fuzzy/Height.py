@@ -13,4 +13,5 @@ pyplot.gca().get_lines()[0].set_color("#7a76c2")
 pyplot.gca().get_lines()[1].set_visible(False)
 pyplot.gca().get_lines()[2].set_visible(False)
 
-pyplot.savefig("height.svg", bbox_inches="tight")
+if __name__ == "__main__":
+	pyplot.savefig("height.svg", bbox_inches="tight")

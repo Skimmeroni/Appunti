@@ -26,11 +26,10 @@ brain.
 
 #figure(
 	image("neuron.png", width: 80%),
-	caption: [Schematic image of a neuron.
-	          By BruceBlaus,
-	          #link("https://creativecommons.org/licenses/by/3.0/legalcode.en")[CC BY 3.0],
-	          via Wikimedia Commons.
-	          #link("https://commons.wikimedia.org/w/index.php?curid=28761830")[original image]],
+	caption: [Schematic representation of a neuron.
+	          [#link("https://commons.wikimedia.org/w/index.php?curid=28761830")[Original image]
+		  by BruceBlaus, licensed under
+	          #link("https://creativecommons.org/licenses/by/3.0/legalcode.en")[CC BY 3.0].]],
 )
 
 Advantages of neural networks:

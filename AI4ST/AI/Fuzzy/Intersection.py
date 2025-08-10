@@ -35,4 +35,5 @@ for lines, color in zip(itertools.batched(pyplot.gca().get_lines(), 3), Colors):
 
 pyplot.gca().get_lines()[6].set_alpha(1.0)
 
-pyplot.savefig("intersection.svg", bbox_inches="tight")
+if __name__ == "__main__":
+	pyplot.savefig("intersection.svg", bbox_inches="tight")

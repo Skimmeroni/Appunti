@@ -41,5 +41,8 @@ for f in [heaviside, semi_linear, sine_up_to_saturation, logistic, hyperbolic_ta
 		Y = [f(i, np.float64(theta)) for i in X]
 		ax.plot(X, Y, c = color, label = f"theta = {sp.pretty(theta)}", linewidth = 2)
 	ax.legend()
-	plt.savefig(f"{f.__name__}.svg", bbox_inches="tight")
+
+	if __name__ == "__main__":
+		plt.savefig(f"{f.__name__}.svg", bbox_inches="tight")
+
 	plt.close()

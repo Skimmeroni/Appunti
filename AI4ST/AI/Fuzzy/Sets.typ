@@ -354,12 +354,13 @@ straight line of height $[mu]_(alpha)$.
 	                -frac(1, 2) x + 4 & "if" 7 lt.eq x < 8,
 	                0 & "otherwise") $
 
-	As $alpha$ use $0.15, 0.30, 0.45, 0.60, 0.75, 0.90$.
+	As $alpha$ use $0, 0.15, 0.30, 0.45, 0.60, 0.75, 0.90$.
 ]
 #solution[
 	#figure(
-		caption: [The $alpha$-cuts of the given fuzzy set.],
-		[#image("horizontal.svg", width: 66%)]
+		caption: [The $alpha$-cuts of the given fuzzy set. The membership
+		          function is drawn as a dashed line.],
+		[#image("alpha.svg", width: 66%)]
 	)
 ]
 

@@ -27,5 +27,6 @@ ax.set_facecolor("#d3d3d322")
 ax.grid()
 ax.plot(X, Y)
 ax.scatter([p[0] for p in PointsOrig], [p[1] for p in PointsOrig], c = "magenta")
-plt.savefig("logit2.svg")
-plt.close()
+
+if __name__ == "__main__":
+	plt.savefig("logit2.svg")

@@ -26,4 +26,5 @@ for lines, color in zip(itertools.batched(pyplot.gca().get_lines(), 3), Colors):
 	lines[1].set_visible(False)
 	lines[2].set_visible(False)
 
-pyplot.savefig("number.svg", bbox_inches="tight")
+if __name__ == "__main__":
+	pyplot.savefig("number.svg", bbox_inches="tight")

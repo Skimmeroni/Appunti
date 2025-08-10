@@ -15,5 +15,6 @@ for i in interval:
                      height = parabola(i + interval.step / 2), alpha = 0.3,
                      lw = 1, edgecolor = "black"))
 plt.plot(X, Y)
-plt.savefig("riemann.svg")
-plt.close()
+
+if __name__ == "__main__":
+	plt.savefig("riemann.svg")

@@ -24,7 +24,9 @@ order to achieve a common objective.
 
 #figure(
 	caption: [The complex patterns and unison movements of flock of birds
-	is an example of swarm intelligence.],
+	is an example of swarm intelligence.
+	[#link("https://commons.wikimedia.org/wiki/File:Auklet_flock_Shumagins_1986.jpg")[Original image]
+	under public domain.]],
 	image("Flock.jpg", width: 75%)
 )
 
