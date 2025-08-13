@@ -1,6 +1,6 @@
 #import "@preview/algo:0.3.6": algo, i, d, comment, code
 #import "@preview/ctheorems:1.1.3": *
-#import "@preview/cetz:0.3.4"
+#import "@preview/cetz:0.4.1"
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 #import "@preview/syntree:0.2.1": syntree
 #import "@preview/game-theoryst:0.1.0": *

@@ -13,11 +13,7 @@ function $chi_(A): U mapsto {0, 1}$ is defined as:
 	
 $ chi_(A)(x) = cases(1 & "if" x in A, 0 & "if" x in.not A) $
 
-Set-belonging is readily translated into formal logic, where statements
-are either (absolutely) true or (absolutely) false, with nothing in
-between. The proposition "$x$ belongs to $A$" is true if $chi_(A)(x) = 1$,
-and false otherwise. That is, $chi_(A)(x)$ is the _truth value_ of the
-proposition "$x$ belongs to $A$".
+This means that each set can be identified unambiguously with a function.
 
 #exercise[
 	Consider the set of natural numbers $NN$. Let $NN_("even") subset.eq NN$
@@ -89,28 +85,30 @@ output is a number that quantifies "how much" an element belongs to a set.
 That is, introducing a notion of _partial membership_ to sets.
 
 More formally, let $U$ be a universe set. A *fuzzy subset* $mu$ of $U$,
-or simply a *fuzzy set* $mu$ of $U$, is a mapping $mu: U mapsto [0, 1]$
-that assigns to each member $x in U$ a *degree of membership* $mu(x)$.
-The set of all fuzzy sets for a given universe set $U$ (the "power set"
-of fuzzy sets) is denoted as $cal(F)(U)$. It is customary to refer to
-"standard" sets (sets that are not fuzzy, that is) as *crisp sets*.
+or simply a *fuzzy set* $mu$ of $U$, is a set of pairs defined as:
+
+$ mu = {(x, mu(x)) | x in U} $
+
+Where $mu(x): U mapsto [0, 1]$ is a function, called *membership function*,
+that assigns to each member $x in U$ a *degree of membership* $mu(x)$ to
+the set $mu$. The set of all fuzzy sets that can be constructed out of a
+universe $U$ (the "power set" of fuzzy sets) is denoted as $cal(F)(U)$.
 
 Given a certain $x in U$, if $mu(x) in (0, 1)$ it means that $x$ belongs
 to the fuzzy set "only to some extent": the closer to $1$, the "more" it
 belongs, the closer to $0$, the "less" it belongs. In particular, if
 $mu(x) = 1$ then $x$ has absolute and unambiguous membership, whereas if
-$mu(x) = 0$ then $x$ has no membership at all #footnote[Some sources make
-a distinction between the fuzzy set and its membership function. That is,
-$mu$ is the fuzzy set and the function $mu(x)$ quantifies "how much" $x$
-belongs to $mu$. This can be useful from a pedagogical perspective, making
-the distinction between the concepts and their degree of membership.
-However, from a mathematical perspective it is much easier to think about
-the membership function as something that defines the set itself. Simply
-put: the membership function _is_ the fuzzy set.]. Characteristic functions
-of crisp sets can therefore be considered as special cases of fuzzy sets.
+$mu(x) = 0$ then $x$ has no membership at all.
+
+A "standard" set (a set that is not fuzzy, that is) can therefore be
+seen as a special case of a fuzzy set where its membership function
+(the characteristic function) is always either $0$ or $1$. It is
+customary to use the term *crisp set* to refer to sets that are not
+fuzzy.
 
 #exercise[
-	What is a possible membership function for the fuzzy set of tall people?
+	What is a possible membership function for the fuzzy set of tall
+	people?
 ] <Fuzzy-height>
 #solution[
 	It is reasonable to consider a person to be unambiguously tall if
@@ -123,11 +121,6 @@ of crisp sets can therefore be considered as special cases of fuzzy sets.
 	$ mu(x) = cases(1 & "if" x > 2,
 	                frac(5, 2) x - 4 & "if" x lt.eq 1.6 lt.eq 2,
 				    0 & "if" x < 1.6) $
-
-	#figure(
-		caption: [The vertical representation of the fuzzy set.],
-		[#image("height.svg", width: 66%)]
-	)
 ]
 
 Note that fuzzy sets, even though they better model imprecise knowledge,
@@ -139,38 +132,143 @@ the choice of membership function in @Fuzzy-height was as good as any.
 However, the flexibility of a membership function allows one to "tune"
 it to improve the model and make incremental adjustments.
 
-Crisp sets $A$ and $B$ can be manipulated with the known set operators:
+If the universe set $U = {x_(1), dots, x_(n)}$ is a discrete set,
+to represent a fuzzy set $mu$ it is sufficient to list each member
+$x_(i)$ of $U$ together with its degree of membership $mu(x_(i))$.
+That is, $mu = {(x_(1), mu(x_(1))), (x_(2), mu(x_(2))), dots, (x_(n)
+mu(x_(n)))}$.
 
-- *union*: $A union B = {x in U | x in A or x in B}$;
-- *intersection*: $A inter B = {x in U | x in A and x in B}$;
-- *complement*: $overline(A) = {x in U | x in.not A}$.
+Another way to represent a fuzzy set, particularly useful if the
+universe set is continuous, is simply graphing its membership
+function. This representation is also referred to as the *vertical
+representation* of the fuzzy set.
 
-Or, in terms of their characteristic functions:
+#exercise[
+	What would be the vertical representation of @Fuzzy-height?
+]
+#figure(
+	caption: [The vertical representation of the fuzzy set.],
+	[#image("height.svg", width: 66%)]
+)
+
+In general, the explicit expression of a fuzzy set (as a set of pairs)
+is hardly ever used, because it is cumbersome to manipulate and poorly
+integrates with crisp sets. Even worse, different sources use different
+constructions for defining a fuzzy set. Some refer to the membership
+function as the fuzzy set itself, some define a fuzzy set as a pair
+$(U, mu)$, with $U$ being the universe and $mu$ being the membership
+function. The simplest and least ambiguous way to refer and to use a
+fuzzy set is to refer to its membership function.
+
+Crisp sets $A$ and $B$ can be manipulated with the known set operators
+of *union*, *intersection* and *complement*:
 
 #grid(
-	columns: (0.37fr, 0.37fr, 0.26fr),
-	[$ chi_(A union B)(x) = max{chi_(A)(x), chi_(B)(x)} $],
-	[$ chi_(A inter B)(x) = min{chi_(A)(x), chi_(B)(x)} $],
+	columns: (0.5fr, 0.5fr),
+	[$ A union B = {x in U | x in A or x in B} $],
+	[$ chi_(A union B)(x) = max{chi_(A)(x), chi_(B)(x)} $]
+)
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ A inter B = {x in U | x in A and x in B} $],
+	[$ chi_(A inter B)(x) = min{chi_(A)(x), chi_(B)(x)} $]
+)
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ overline(A) = {x in U | x in.not A} $],
 	[$ chi_(overline(A))(x) = 1 - chi_(A)(x) $]
 )
 
-Fuzzy sets $cal(A)$ and $cal(B)$ can be manipulated in the exact same way,
-since these operators extend naturally:
+Fuzzy sets $cal(A)$ and $cal(B)$ can be manipulated in the exact same
+way, since these operators extend naturally. The membership functions
+of $cal(A) union cal(B)$, $cal(A) inter cal(B)$ and $overline(cal(A))$
+are given by:
 
 #grid(
-	columns: (0.39fr, 0.39fr, 0.22fr),
-	[$mu_(cal(A) union cal(B))(x) = max{mu_(cal(A))(x), mu_(cal(B))(x)}$],
-	[$mu_(cal(A) inter cal(B))(x) = min{mu_(cal(A))(x), mu_(cal(B))(x)}$],
-	[$mu_(overline(cal(A)))(x) = 1 - mu_(cal(A))(x)$]
+	columns: (0.37fr, 0.37fr, 0.26fr),
+	[$ mu_(cal(A) union cal(B))(x) = max{mu_(cal(A))(x), mu_(cal(B))(x)} $],
+	[$ mu_(cal(A) inter cal(B))(x) = min{mu_(cal(A))(x), mu_(cal(B))(x)} $],
+	[$ mu_(overline(cal(A)))(x) = 1 - mu_(cal(A))(x) $]
 )
 
-Note that this is just one (the simplest) of the many possible ways
-to extend set operators to fuzzy sets. Other choices, better suited
-for different models, will be explored later on.
+This is just one (the simplest) of the many possible ways to extend set
+operators to fuzzy sets. Other choices, better suited for different
+models, will be explored later on.
 
-// Add an example?
+Out of all continuous fuzzy sets, the main interest lies in *convex
+fuzzy sets*, that best model natural language. Convex fuzzy sets are
+fuzzy sets having a degree of membership function that is monotonically
+increasing up to a certain point and monotonically decreasing after
+said point. Ironically, the membership function of a convex fuzzy set
+is a concave function, not a convex function.
 
-Even though the $[0, 1]$ codomain would suggest so, fuzzy membership
+Especially when building applications, one should consider convex
+fuzzy sets whose membership function can be specified uniquely by
+a few parameters, so that they are easy to tune. One example are
+*triangular functions*:
+
+#grid(
+	columns: (0.6fr, 0.4fr),
+	[$ Lambda_(a, b, c): RR mapsto [0, 1] "with" a < b < c "and" a, b, c in RR $],
+	[$ Lambda_(a, b, c)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
+								   frac(c - x, c - b) & "if" b lt.eq x lt.eq c,
+								   0 & "otherwise") $]
+)
+
+#figure(
+	caption: [Plot of the triangular function $Lambda_(1.5, 2.25, 3)$.],
+	[#image("Convex_fuzzy_sets/fuzzy_triangular.svg", width: 66%)]
+)
+
+Triangular functions are a special case of *trapezoidal functions*:
+
+#grid(
+	columns: (0.6fr, 0.4fr),
+	[$ Pi_(a, b, c, d): RR mapsto [0, 1] "with" a < b lt.eq c < d and a, b, c, d in RR $
+	 $a = b = -infinity$ and $c = d = +infinity$ are also valid],
+	[$ Pi_(a, b, c, d)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
+								  1 & "if" b lt.eq x < c,
+								  frac(d - x, d - c) & "if" c lt.eq x lt.eq d,
+								  0 & "otherwise") $]
+)
+
+#figure(
+	caption: [Plot of the trapezoidal function $Pi_(1, 2, 3, 4)$.],
+	[#image("Convex_fuzzy_sets/fuzzy_trapezoid.svg", width: 66%)]
+)
+
+Another class of functions are the *bell-shaped functions*:
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ Omega_(a, b) : RR mapsto [0, 1] "with" a, b in RR $],
+	[$ Omega_(a, b)(x) = e^(-(frac(x - a, b))^(2)) $]
+)
+
+#figure(
+	caption: [Plot of the bell-shaped function $Omega_(2.5, 1)$.],
+	[#image("Convex_fuzzy_sets/fuzzy_gauss.svg", width: 66%)]
+)
+
+The *support* of a fuzzy set $mu in cal(F)(U)$ is the (crisp) set that
+contains all the elements of $U$ having non-zero degree of membership
+in $mu$:
+
+$ S(mu) = {x in U | mu(x) > 0} $
+
+The *core* of a fuzzy set $mu in cal(F)(U)$ is the (crisp) set that
+contains all the elements of $U$ having membership equal to $1$:
+
+$ C(mu) = {x in U | mu(x) = 1} $
+
+The *height* of a fuzzy set $mu in cal(F)(U)$ is the highest degree
+of membership obtained by any element of said set:
+
+$ h(mu) = sup{x in U | mu(x)} $
+
+Even though the $[0, 1]$ codomain could suggest so, fuzzy membership
 has little to do with probability theory. That is, the value $mu(x)$
 does not represent the probability that the element $x in U$ belongs
 to $mu$, or that a random sample of $U$ results in an element of $mu$.
@@ -239,233 +337,3 @@ fuzzy set membership.
 	percent$ chance of drinking one gram of caffeine. That is, one chance
 	out of a thousand of dying against no chance at all.
 ]
-
-The *support* of a fuzzy set $mu in cal(F)(U)$ is the (crisp) set that
-contains all the elements of $U$ having non-zero degree of membership
-in $mu$:
-
-$ S(mu) = {x in U | mu(x) > 0} $
-
-The *core* of a fuzzy set $mu in cal(F)(U)$ is the (crisp) set that
-contains all the elements of $U$ having membership equal to $1$:
-
-$ C(mu) = {x in U | mu(x) = 1} $
-
-The *height* of a fuzzy set $mu in cal(F)(U)$ is the highest degree
-of membership obtained by any element of said set:
-
-$ h(mu) = sup{x in U | mu(x)} $
-
-If the universe set $U = {x_(1), dots, x_(n)}$ is a discrete set,
-to represent a fuzzy set $mu$ it is sufficient to list each member
-$x_(i)$ of $U$ together with its degree of membership $mu(x_(i))$.
-That is, $mu = {(x_(1), mu(x_(1))), (x_(2), mu(x_(2))), dots, (x_(n)
-mu(x_(n)))}$, meaning that $x_(1)$ belongs to $mu$ with $mu(x_(1))$
-degree, $x_(2)$ belongs to $mu$ with $mu(x_(2))$ degree, ecc...
-
-As for continuous sets, the most intuitive representation would
-be graphing the membership function of the fuzzy set, as done in
-@Fuzzy-height. This representation is also referred to as the
-*vertical representation* of the fuzzy set.
-
-Out of all continuous fuzzy sets, the main interest lies in *convex
-fuzzy sets*, that best model natural language. Convex fuzzy sets are
-fuzzy sets having a degree of membership function that is monotonically
-increasing up to a certain point and monotonically decreasing after
-said point. Ironically, the membership function of a convex fuzzy set
-is a concave function, not a convex function.
-
-Especially when building applications, one should consider convex fuzzy
-sets that can be specified uniquely by a few parameters, so that they are
-easy to tune. One example are *triangular functions*:
-
-#grid(
-	columns: (0.6fr, 0.4fr),
-	[$ Lambda_(a, b, c): RR mapsto [0, 1] "with" a < b < c "and" a, b, c in RR $],
-	[$ Lambda_(a, b, c)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
-								   frac(c - x, c - b) & "if" b lt.eq x lt.eq c,
-								   0 & "otherwise") $]
-)
-
-#figure(
-	caption: [Plot of a triangular function.],
-	[#image("Convex_fuzzy_sets/fuzzy_triangular.svg", width: 66%)]
-)
-
-Triangular functions are a special case of *trapezoidal functions*:
-
-#grid(
-	columns: (0.6fr, 0.4fr),
-	[$ Pi_(a, b, c, d): RR mapsto [0, 1] "with" a < b lt.eq c < d and a, b, c, d in RR $
-	 $a = b = -infinity$ and $c = d = +infinity$ are also valid],
-	[$ Pi_(a, b, c, d)(x) = cases(frac(x - a, b - a) & "if" a lt.eq x < b,
-								  1 & "if" b lt.eq x < c,
-								  frac(d - x, d - c) & "if" c lt.eq x lt.eq d,
-								  0 & "otherwise") $]
-)
-
-#figure(
-	caption: [Plot of a trapezoidal function.],
-	[#image("Convex_fuzzy_sets/fuzzy_trapezoid.svg", width: 66%)]
-)
-
-Another class of functions are the *bell-shaped functions*:
-
-#grid(
-	columns: (0.5fr, 0.5fr),
-	[$ Omega_(a, b) : RR mapsto [0, 1] "with" a, b in RR $],
-	[$ Omega_(a, b)(x) = e^(-(frac(x - a, b))^(2)) $]
-)
-
-#figure(
-	caption: [Plot of a bell-shaped function.],
-	[#image("Convex_fuzzy_sets/fuzzy_gauss.svg", width: 66%)]
-)
-
-The vertical representation of fuzzy sets presents some issues, mainly
-that storing fuzzy sets encoded as functions in a computer would be both
-impractical and inefficient. Also, manipulating fuzzy sets (computing
-intersections, unions, ecc...) becomes cumbersome. For these reasons,
-the vertical representation should be limited to illustration purposes.
-
-Given a universe set $U$ and a fuzzy set $mu in cal(F)(U)$, let $alpha$
-be any number between $0$ and $1$. The subset $[mu]_(alpha) = {x in U |
-mu(x) gt.eq alpha}$ is referred to as the $alpha$*-level set* of $mu$,
-or $alpha$*-cut* of $mu$. That is, the $alpha$-cut of a fuzzy set is the
-subset that contains all the elements having degree of membership greater
-or equal than $alpha$. By definition, $[mu]_(0)$ is just the entire universe.
-
-In a similar fashion, the subset $[mu]_(underline(alpha)) = {x in U |
-mu(x) > alpha}$ is referred to as the *strict* $alpha$*-level set* of
-$mu$, or *strict* $alpha$*-cut* of $mu$.
-
-$alpha$-cuts are used in the *horizontal representation* of fuzzy sets,
-that consists in picking a subset of $alpha$-cuts and drawing only those,
-instead of the entire function. Each $alpha$-cut is represented as a
-straight line of height $[mu]_(alpha)$.
-
-#exercise[
-	What would be the horizontal representation of the following fuzzy set?
-
-	$ mu(x) = cases(x - 1 & "if" 1 lt.eq x < 2,
-	                -frac(3, 8) x + frac(7, 4) & "if" 2 lt.eq x < 4,
-	                frac(1, 8) x - frac(1, 4) & "if" 4 lt.eq x < 6,
-	                frac(1, 2) & "if" 6 lt.eq x < 7,
-	                -frac(1, 2) x + 4 & "if" 7 lt.eq x < 8,
-	                0 & "otherwise") $
-
-	As $alpha$ use $0, 0.15, 0.30, 0.45, 0.60, 0.75, 0.90$.
-]
-#solution[
-	#figure(
-		caption: [The $alpha$-cuts of the given fuzzy set. The membership
-		          function is drawn as a dashed line.],
-		[#image("alpha.svg", width: 66%)]
-	)
-]
-
-$alpha$-cuts of convex fuzzy sets are peculiar because they are always
-convex sets. On the other hand, $alpha$-cuts of non-convex fuzzy sets
-may be a union of more than one disjointed interval. It is also possible
-to use this property as a definition: a fuzzy set is convex if and only
-if all of its $alpha$-cuts are convex sets.
-
-$alpha$-cuts can uniquely identify fuzzy sets. By definition, the degree
-of membership $mu(x)$ of an element $x$ is the highest possible value of
-$alpha$ giving an $alpha$-cut that contains $x$:
-
-$ mu(x) = sup{alpha in [0, 1] | x in [mu]_(alpha)} $
-
-Of course, actually storing all possible $alpha$-cuts of a fuzzy
-set would be no improvement over storing the expression of the entire
-membership function. However, discretizing the set of all $alpha$-cuts
-into a subset ${[mu]_(alpha_(1)), [mu]_(alpha_(2)), dots, [mu]_(alpha_(k))}$
-is sufficient to approximate the entire fuzzy set:
-
-$ mu(x) approx max{alpha in {alpha_(1), alpha_(2), dots, alpha_(k)} | x in [mu]_(alpha)} $
-
-Formally speaking, given a certain number of $alpha$-cuts, the original
-membership function can be reconstructed by taking the _upper envelope_
-of said cuts. Both the number of $alpha$ values and which values to choose
-are decided arbitrarely (more values, better precision). A common choice
-is $0.25, 0.50, 0.75, 1$.
-
-/* How to rebuild the envelope? */
-
-$alpha$-cuts can be stored in real memory in the form of linked lists. Each
-disjointed interval of each $alpha$-cut is stored in a separate node of the
-list, and the nodes are linked together in ascending order. Each list (each
-$alpha$-cut) has also a pointer to following list (following $alpha$-cut).
-
-#figure(
-	caption: [Linked list representation of $alpha$-cuts],
-	[#diagram(
-			node-stroke: 1.5pt,
-			edge-stroke: 1.5pt,
-			node-shape: rect,
-			spacing: 4em,
-
-			node((0, 0), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <A1>),
-			node((0.5, 0), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <A2>),
-			node((1.5, 0), text(font: "Noto Sans", [(#math.alpha#sub[11]]), radius: 1.5em, name: <A3>),
-			node((2, 0), text(font: "Noto Sans", [#math.alpha#sub[11])]), radius: 1.5em, name: <A4>),
-			node((2.5, 0), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <A5>),
-			node((3.5, 0), stroke: 0pt, text(font: "Noto Sans", [#math.dots]), radius: 1.5em, name: <A6>),
-			node((4.5, 0), text(font: "Noto Sans", [(#math.alpha#sub[1m]]), radius: 1.5em, name: <A7>),
-			node((5, 0), text(font: "Noto Sans", [#math.alpha#sub[1m])]), radius: 1.5em, name: <A8>),
-			node((5.5, 0), text(font: "Noto Sans", [nil]), radius: 1.5em, name: <A9>),
-
-			edge(<A2>, <A3>, marks: (none, "latex")),
-			edge(<A5>, <A6>, marks: (none, "latex")),
-			edge(<A6>, <A7>, marks: (none, "latex")),
-
-			node((0, 0.75), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <B1>),
-			node((0.5, 0.75), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <B2>),
-			node((1.5, 0.75), text(font: "Noto Sans", [(#math.alpha#sub[21]]), radius: 1.5em, name: <B3>),
-			node((2, 0.75), text(font: "Noto Sans", [#math.alpha#sub[21])]), radius: 1.5em, name: <B4>),
-			node((2.5, 0.75), text(font: "Noto Sans", [#math.circle.filled.big]), radius: 1.5em, name: <B5>),
-			node((3.5, 0.75), stroke: 0pt, text(font: "Noto Sans", [#math.dots]), radius: 1.5em, name: <B6>),
-			node((4.5, 0.75), text(font: "Noto Sans", [(#math.alpha#sub[2n]]), radius: 1.5em, name: <B7>),
-			node((5, 0.75), text(font: "Noto Sans", [#math.alpha#sub[2n])]), radius: 1.5em, name: <B8>),
-			node((5.5, 0.75), text(font: "Noto Sans", [nil]), radius: 1.5em, name: <B9>),
-		
-			edge(<B2>, <B3>, marks: (none, "latex")),
-			edge(<B5>, <B6>, marks: (none, "latex")),
-			edge(<B6>, <B7>, marks: (none, "latex")),
-
-			edge(<A1>, <B1>, marks: (none, "latex")),
-			node((0, 1.5), stroke: 0pt, text(font: "Noto Sans", [#math.dots]), radius: 1.5em, name: <C1>),
-			edge(<B1>, <C1>, marks: (none, "latex")),
-
-			
-		)]
-)
-
-#theorem("Representation theorem")[
-	Given $mu in cal(F)(U)$ a fuzzy set over a universe set $U$:
-
-	$ [mu]_(0) = sup_(alpha in [0, 1]) {min(alpha, chi_([mu]_(alpha))(x))},
-	  space "where" chi_([mu]_(alpha))(x) =
-	  cases(1 & "if" x in [mu]_(alpha), 0 & "otherwise") $
-]
-// #proof[
-//
-// ]
-
-#lemma[
-	Let $mu in cal(F)(U)$ be a fuzzy set over a universe set $U$,
-	and let $alpha, beta in [0, 1]$. If $alpha < beta$, then
-	$[mu]_(alpha) supset.eq [mu]_(beta)$.
-]
-// #proof[
-//
-// ]
-
-#lemma[
-	Let $mu in cal(F)(U)$ be a fuzzy set over a universe set $U$.
-	For any $alpha, beta in [0, 1]$, $inter.big_(alpha: alpha < beta)
-	[mu]_(alpha) = [mu]_(beta)$.
-]
-// #proof[
-//
-// ]

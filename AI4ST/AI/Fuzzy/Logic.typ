@@ -47,6 +47,13 @@ simply by enumeration. This is done with the help of *truth tables*:
 	       augment: #(-1)) $],
 )
 
+Set-belonging is readily translated into formal logic, where statements
+are either (absolutely) true or (absolutely) false, with nothing in
+between. Given a universe $U$, the proposition "$x$ belongs to $A$"
+with $x in U$ and $A subset.eq U$ is true if $chi_(A)(x) = 1$, and false
+if $chi_(A)(x) = 0$. That is, $chi_(A)(x)$ is the _truth value_ of the
+proposition "$x$ belongs to $A$".
+
 The problem that arose in using set theory when modelling spurious
 memberships manifests itself in logic as well. That is, propositional
 logic asserts that propositions ought to be either unambiguously true
@@ -281,30 +288,8 @@ Using, $max$ as $t$-conorm gives:
 
 $ dsl exists x in U: P(x) dsr = sup{dsl P(x) dsr | x in U} $
 
-Even though $min$ and $max$ could be replaced with any other $t$-norm
-and $t$-conorm respectively, this is rarely the case. This is because,
-in general, $t$-norms and $t$-conorms are not idempotent, which easily
-leads to "degenerate" truth values in the case of uncountably infinite
+Even though $min$ and $max$ could technically be replaced with any other
+$t$-norm and $t$-conorm respectively, this is rarely the case. This is
+because, in general, $t$-norms and $t$-conorms are not idempotent, which
+easily leads to "degenerate" truth values in the case of uncountably infinite
 universes.
-
-#exercise[
-	Consider @Fuzzy-height. Let $P(x)$ be the statement "$x$ is tall"
-	and let $mu(x)$ be the truth value of said statement, that is $mu(x)
-	= dsl P(x) dsr$. What would be the truth value of the statement "all
-	people of height between $1.70$ and $1.80$ metres are tall"?
-]
-#solution[
-	The statement can be written as:
-
-	$ dsl forall x in [1.70, 1.80]: P(x) dsr =
-	  inf{dsl P(x) dsr | x in [1.70, 1.80]} $
-
-	Substituting $dsl P(x) dsr$ with $mu(x)$:
-
-	$ inf{dsl P(x) dsr | x in [1.70, 1.80]} =
-	  inf{mu(x) | x in [1.70, 1.80]} =
-	  mu(1.70) =
-	  0.25 $
-
-	Since $mu(x)$ is monotonically non-decreasing.
-]

@@ -29,6 +29,8 @@
 = Fuzzy logic
 == Fuzzy sets
 #include "Fuzzy/Sets.typ"
+== $alpha$-cuts
+#include "Fuzzy/Alpha.typ"
 == Relevant classes of fuzzy sets
 #include "Fuzzy/Classes.typ"
 == Fuzzy logic
