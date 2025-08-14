@@ -657,4 +657,12 @@ $ f[mu_(1), mu_(2)](y) =
       sup_((x_(1), x_(2)) in X_(1) times X_(2)){min{Lambda_(0, 1, 2)(x_(1)), Lambda_(1, 2, 3)(x_(2))} | x_(1) + x_(2) = 3} = \
       &= min{Lambda_(0, 1, 2)(1), Lambda_(1, 2, 3)(2)} =
       min{1, 1} = 1 $
+
+    // Missing $y in [1, 3)$ and $y in [3, 5)$
+
+    #figure(
+        caption: [The vertical representation of $Lambda_(0, 1, 2) +
+                  Lambda_(1, 2, 3)$.],
+        [#image("sum.svg", width: 66%)]
+    )
 ]
