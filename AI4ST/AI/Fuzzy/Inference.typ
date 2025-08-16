@@ -305,10 +305,10 @@ $ rho_(2)[rho_(1)[mu]] = (rho_(2) compose rho_(1))[mu] $
     the real measured values?
 ]
 #solution[
-    $ (rho compose rho')(a, y) =
-      sup_(x in X){min{rho'(a, x), rho(x, y)}} =
-      sup_(x in X){min{1 - min{5 abs(a - x), 1}, 1 - min{10 abs(x - y), 1}}} =
-      1 - min{frac(10, 3) abs(a - y), 1} $
+    $ (rho compose rho')(a, y) &=
+      sup_(x in X){min{rho'(a, x), rho(x, y)}} = \
+      &= sup_(x in X){min{1 - min{5 abs(a - x), 1}, 1 - min{10 abs(x - y), 1}}} = \
+      &= 1 - min{frac(10, 3) abs(a - y), 1} $
 
     // Why would that be the case?
 ]

@@ -14,8 +14,6 @@
 #include "Neural/Biology.typ"
 == Threshold Logic Units
 #include "Neural/TLU.typ"
-== Training TLUs
-#include "Neural/Training.typ"
 == Artificial neural networks
 #include "Neural/Artificial.typ"
 == Multilayer perceptrons
