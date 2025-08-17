@@ -11,15 +11,15 @@
 
 = Neural Networks
 == Biological foundations
-#include "Neural/Biology.typ"
+#include "Neural/Biological Foundations/Biology.typ"
 == Threshold Logic Units
-#include "Neural/TLU.typ"
+#include "Neural/Threshold Logic Units/TLU.typ"
 == Artificial neural networks
-#include "Neural/Artificial.typ"
+#include "Neural/Artificial Neural Networks/Artificial.typ"
 == Multilayer perceptrons
-#include "Neural/MLP.typ"
+#include "Neural/Multilayer Perceptrons/MLP.typ"
 == Logistic regression
-#include "Neural/Regression.typ"
+#include "Neural/Logistic Regression/Regression.typ"
 == Gradient descent
 #include "Neural/Gradient.typ"
 #pagebreak()
