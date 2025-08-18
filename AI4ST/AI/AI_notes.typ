@@ -9,6 +9,15 @@
 #outline(indent: auto)
 #pagebreak()
 
+= Introduction
+== Logistic regression
+#include "Introduction/Logistic Regression/Regression.typ"
+== Optimization problems
+#include "Introduction/Optimization.typ"
+== Local search algorithms
+#include "Introduction/Local.typ"
+#pagebreak()
+
 = Neural Networks
 == Biological foundations
 #include "Neural/Biological Foundations/Biology.typ"
@@ -18,8 +27,6 @@
 #include "Neural/Artificial Neural Networks/Artificial.typ"
 == Multilayer perceptrons
 #include "Neural/Multilayer Perceptrons/MLP.typ"
-== Logistic regression
-#include "Neural/Logistic Regression/Regression.typ"
 == Gradient descent
 #include "Neural/Gradient.typ"
 #pagebreak()
@@ -40,10 +47,6 @@
 #pagebreak()
 
 = Evolutionary computing
-== Optimization problems
-#include "Evolution/Optimization.typ"
-== Local search algorithms
-#include "Evolution/Local.typ"
 == Evolutionary algorithms
 #include "Evolution/Algorithm.typ"
 == Choosing a solution encoding
