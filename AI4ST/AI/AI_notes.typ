@@ -15,7 +15,7 @@
 == Optimization problems
 #include "Introduction/Optimization.typ"
 == Local search algorithms
-#include "Introduction/Local.typ"
+#include "Introduction/Local Search Algorithms/Local.typ"
 #pagebreak()
 
 = Neural Networks
@@ -33,15 +33,15 @@
 
 = Fuzzy logic
 == Fuzzy sets
-#include "Fuzzy/Sets.typ"
+#include "Fuzzy/Fuzzy Sets/Sets.typ"
 == $alpha$-cuts
-#include "Fuzzy/Alpha.typ"
+#include "Fuzzy/Alpha Cuts/Alpha.typ"
 == Relevant classes of fuzzy sets
-#include "Fuzzy/Classes.typ"
+#include "Fuzzy/Relevant Fuzzy Sets/Classes.typ"
 == Fuzzy logic
-#include "Fuzzy/Logic.typ"
+#include "Fuzzy/Fuzzy Logic/Logic.typ"
 == Extending set operators to fuzzy sets
-#include "Fuzzy/Extension.typ"
+#include "Fuzzy/Extending Set Operators/Extension.typ"
 == Fuzzy reasoning
 #include "Fuzzy/Inference.typ"
 #pagebreak()

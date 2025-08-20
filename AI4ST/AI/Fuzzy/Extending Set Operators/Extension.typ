@@ -1,4 +1,4 @@
-#import "../AI_definitions.typ": *
+#import "../../AI_definitions.typ": *
 
 As the name suggests, there exist a relationship between fuzzy sets
 and fuzzy logic. If the degree of membership to a fuzzy set describes

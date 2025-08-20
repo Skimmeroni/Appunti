@@ -7,7 +7,7 @@ def parabola(x):
 
 interval = range(0, 6, 1)
 X = np.linspace(interval.start, interval.stop, num = 100)
-Y = [parabola(x) for x in X]
+Y = parabola(X)
 
 fig, ax = plt.subplots()
 for i in interval:

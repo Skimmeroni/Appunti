@@ -342,9 +342,7 @@ function, activation function and output function for all of its neurons:
 
 #grid(
 	columns: (0.4fr, 0.3fr, 0.3fr),
-	[$ f^((u))_("net")(bold(w)_(u), bold("in")_(u)) =
-	   sum_(v in "pred"(u)) w_(u, v) "in"_(u, v)
-	   $],
+	[$ f^((u))_("net")(bold(w)_(u), bold("in")_(u)) = sum_(v in "pred"(u)) w_(u, v) "in"_(u, v) $],
 	[$ f_("act")^((u))("net"_(u), theta) = cases(1 & "if" "net"_(u) gt.eq theta, 0 & "otherwise") $],
 	[$ f_("out")^((u))("act"_(u)) = "act"_(u) $],
 )

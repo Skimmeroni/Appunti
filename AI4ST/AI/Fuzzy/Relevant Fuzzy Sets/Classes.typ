@@ -1,4 +1,4 @@
-#import "../AI_definitions.typ": *
+#import "../../AI_definitions.typ": *
 
 Some classes of fuzzy sets are more important than others. For example:
 

@@ -1,4 +1,4 @@
-#import "../AI_definitions.typ": *
+#import "../../AI_definitions.typ": *
 
 The vertical representation of fuzzy sets presents some issues, mainly
 that storing fuzzy sets encoded as functions in a computer would be both

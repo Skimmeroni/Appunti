@@ -1,4 +1,4 @@
-#import "../AI_definitions.typ": *
+#import "../../AI_definitions.typ": *
 
 Propositional logic deals with statements that can have only two
 possible truth values: true ($1$) or false ($0$). Given a statement
@@ -139,20 +139,20 @@ for fuzzy conjunction. Other examples of $t$-norms are the:
 	columns: (0.5fr, 0.5fr),
 	[*Łukasiewicz t-norm*:
 	$ t(x, y) = max{x + y - 1, 0} $
-	#image("Norm_graphs/lukasiewicz_norm.svg", width: 66%)],
+	#image("lukasiewicz_norm.svg", width: 66%)],
 	[*Algebraic product*:
 	$ t(x, y) = x dot y $
-	#image("Norm_graphs/algebraic_product.svg", width: 66%)]
+	#image("algebraic_product.svg", width: 66%)]
 )
 
 #grid(
 	columns: (0.5fr, 0.5fr),
 	[*Drastic product*:
 	$ t(x, y) = cases(0 & "if" 1 in.not {x, y}, min{x, y} & "otherwise") $
-	#image("Norm_graphs/drastic_product.svg", width: 66%)],
+	#image("drastic_product.svg", width: 66%)],
 	[*Nilpotent minimum*:
 	$ t(x, y) = cases(min{x, y} & "if" x + y > 1, 0 & "otherwise") $
-	#image("Norm_graphs/nilpotent_minimum.svg", width: 66%)]
+	#image("nilpotent_minimum.svg", width: 66%)]
 )
 
 Also, from the boundedness property, it follows that $t(1, 1) = 1$ and
@@ -208,20 +208,20 @@ conorms:
 	columns: (0.5fr, 0.5fr),
 	[*Łukasiewicz t-conorm*:
 	$ s(x, y) = max{x + y, 1} $
-	#image("Norm_graphs/lukasiewicz_conorm.svg", width: 66%)],
+	#image("lukasiewicz_conorm.svg", width: 66%)],
 	[*Algebraic sum*:
 	$ s(x, y) = x + y - x dot y $
-	#image("Norm_graphs/algebraic_sum.svg", width: 66%)]
+	#image("algebraic_sum.svg", width: 66%)]
 )
 
 #grid(
 	columns: (0.5fr, 0.5fr),
 	[*Drastic sum*:
 	$ s(x, y) = cases(1 & "if" 0 in.not {x, y}, max{x, y} & "otherwise") $
-	#image("Norm_graphs/drastic_sum.svg", width: 66%)],
+	#image("drastic_sum.svg", width: 66%)],
 	[*Nilpotent maximum*:
 	$ t(x, y) = cases(max{x, y} & "if" x + y < 1, 1 & "otherwise") $
-	#image("Norm_graphs/nilpotent_maximum.svg", width: 66%)]
+	#image("nilpotent_maximum.svg", width: 66%)]
 )
 
 Analogously to $min{x, y}$, $max{x, y}$ is the only $t$-conorm that is

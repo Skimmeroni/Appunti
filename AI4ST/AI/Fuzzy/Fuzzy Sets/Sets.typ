@@ -1,4 +1,4 @@
-#import "../AI_definitions.typ": *
+#import "../../AI_definitions.typ": *
 
 Standard set theory assumes that _elements_ (facts and objects of the
 world) belong or do not belong to _sets_ (collections of objects). That
@@ -219,7 +219,7 @@ a few parameters, so that they are easy to tune. One example are
 
 #figure(
 	caption: [Plot of the triangular function $Lambda_(1.5, 2.25, 3)$.],
-	[#image("Convex_fuzzy_sets/fuzzy_triangular.svg", width: 66%)]
+	[#image("fuzzy_triangular.svg", width: 66%)]
 )
 
 Triangular functions are a special case of *trapezoidal functions*:
@@ -236,7 +236,7 @@ Triangular functions are a special case of *trapezoidal functions*:
 
 #figure(
 	caption: [Plot of the trapezoidal function $Pi_(1, 2, 3, 4)$.],
-	[#image("Convex_fuzzy_sets/fuzzy_trapezoid.svg", width: 66%)]
+	[#image("fuzzy_trapezoid.svg", width: 66%)]
 )
 
 Another class of functions are the *bell-shaped functions*:
@@ -249,7 +249,7 @@ Another class of functions are the *bell-shaped functions*:
 
 #figure(
 	caption: [Plot of the bell-shaped function $Omega_(2.5, 1)$.],
-	[#image("Convex_fuzzy_sets/fuzzy_gauss.svg", width: 66%)]
+	[#image("fuzzy_gauss.svg", width: 66%)]
 )
 
 The *support* of a fuzzy set $mu in cal(F)(U)$ is the (crisp) set that

@@ -1,4 +1,4 @@
-#import "../AI_definitions.typ": *
+#import "../../AI_definitions.typ": *
 
 Among guided search algorithms, particular relevance have the so-called
 *local search algorithms*. The ones hereby presented are concerned with
