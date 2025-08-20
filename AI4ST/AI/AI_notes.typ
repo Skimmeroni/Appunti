@@ -27,8 +27,6 @@
 #include "Neural/Artificial Neural Networks/Artificial.typ"
 == Multilayer perceptrons
 #include "Neural/Multilayer Perceptrons/MLP.typ"
-== Gradient descent
-#include "Neural/Gradient.typ"
 #pagebreak()
 
 = Fuzzy logic
@@ -54,15 +52,15 @@
 == Choosing a selection method
 #include "Evolution/Selection.typ"
 == Choosing a genetic operator
-#include "Evolution/Operator.typ"
+#include "Evolution/Genetic Operators/Operator.typ"
 // == The n-queens problem
 // #include "Evolution/Queens.typ"
 == Improving performance through parallelization
 #include "Evolution/Parallel.typ"
 == Classes of evolutionary algorithms: evolutionary local search
-#include "Evolution/Ea_local.typ"
+#include "Evolution/Evolutionary Local Search/Ea_local.typ"
 == Classes of evolutionary algorithms: swarm intelligence
-#include "Evolution/Swarm.typ"
+#include "Evolution/Swarm Intelligence/Swarm.typ"
 == Classes of evolutionary algorithms: genetic algorithms
 #include "Evolution/Schemata.typ"
 == Classes of evolutionary algorithms: genetic programming

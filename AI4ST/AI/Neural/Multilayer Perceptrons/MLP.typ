@@ -128,10 +128,11 @@ multilayer perceptron is not a binary function.
 )
 
 There are many functions that can be classified as sigmoids. The simplest
-one is the *Heaviside function*, or *step function*, that returns $1$ for
-all values greater than a given argument $theta$ and $0$ otherwise:
+one is the Heaviside function, already employed in TLUs:
 
-$ f_("act")("net", theta) = cases(1 & "if" "net" gt.eq theta, 0 & "otherwise") $
+$ f_("act")("net", theta) =
+  H("net", theta) =
+  cases(1 & "if" "net" gt.eq theta, 0 & "otherwise") $
 
 This function is both very easy to conceptualize, and very efficient to
 implement in hardware. This is because, as it was done for the TLUs, it
@@ -145,12 +146,6 @@ compute convolutions.]. In particular, since positive numbers are encoded
 in hardware with a most significant bit of $0$ and negative number with
 a most significant bit of $1$, the result is just the negation of the 
 most significant bit of the weighted sum.
-
-#figure(
-    caption: [Plot of the Heaviside function, with three different
-              choices of $theta$],
-    [#image("heaviside.svg", width: 66%)]
-)
 
 The issues of the function lie in its abrupt jump from one value to another.
 This is both from a mathematical standpoint, because it renders the function
@@ -207,18 +202,15 @@ and differentiable everywhere. Furthermore, its derivative is very
 easy to compute:
 
 $ frac(d, d "net") f_("act")("net", theta) &=
-  frac(d, d "net") (frac(1, 1 + e^(-("net" - theta)))) = \
-  &= frac(frac(d, d "net") (1) dot (1 + e^(-("net" - theta))) -
-       frac(d, d "net") (1 + e^(-("net" - theta))) dot 1,
-       (1 + e^(-("net" - theta)))^(2)) = \
-  &= (frac(1, 1 + e^(-("net" - theta))))^(2)
-     (0 dot (1 + e^(-("net" - theta))) -
-     frac(d, d "net") (1) + frac(d, d "net") (e^(-("net" - theta)))) = \
-  &= f_("act")^(2)("net", theta) ((e^(-("net" - theta))) frac(d, d "net")("net" - theta)) =
-     f_("act")^(2)("net", theta) (e^(-("net" - theta))) = \
-  &= f_("act")^(2)("net", theta) (-1 + 1 + e^(-("net" - theta))) =
-     f_("act")^(2)("net", theta) (f_("act")^(-1)("net", theta) - 1) = \
-  &= f_("act")("net", theta) (1 - f_("act")("net", theta)) $
+  frac(d, d "net") (frac(1, 1 + e^(-("net" - theta)))) =
+  frac(d, d "net") ((1 + e^(-("net" - theta)))^(-1)) = \
+  &= -(1 + e^(-("net" - theta)))^(-2) frac(d, d "net") (1 + e^(-("net" - theta))) = \
+  &= -frac(1, (1 + e^(-("net" - theta)))^(2)) (frac(d, d "net") 1 + frac(d, d "net") e^(-("net" - theta))) = \
+  &= -f_("act")^(2)("net", theta) (0 - e^(-("net" - theta)) frac(d, d "net") ("net" - theta)) = \
+  &= f_("act")^(2)("net", theta) (e^(-("net" - theta))) = 
+  f_("act")^(2)("net", theta) (1 + e^(-("net" - theta)) - 1) = \
+  &= f_("act")^(2)("net", theta) (f_("act")^(-1)("net", theta) - 1) =
+  f_("act")("net", theta) (1 - f_("act")("net", theta)) $
 
 Sigmoid functions having $[0, 1]$ as codomain are called *unipolar
 sigmoid functions*. Functions having all the traits of a sigmoid
@@ -322,7 +314,7 @@ neuron of $U_(1)$.
 
     $ bold("act")_(U_("hidden")) =
       vec(f_("act")(0, -1), f_("act")(0, -1)) =
-      vec(1 "if" 0 gt.eq -1\, 0 "otherwise", 1 "if" 0 gt.eq -1\, 0 "otherwise") =
+      vec(H(0, -1), H(0, -1)) =
       vec(1, 1) $
 
     And the output is left unchanged by the output function. The input of
@@ -336,8 +328,7 @@ neuron of $U_(1)$.
 
     $ bold("out")_(U_("out")) =
       bold("act")_(U_("out")) =
-      cases(1 & "if" 4 gt.eq 3, 0 & "otherwise") =
-      1 $
+      H(4, 3) = 1 $
 ]
 
 The matrix notation for multilayer perceptrons can shed light on why
@@ -425,205 +416,159 @@ limited expressiveness.
 
 Multilayer perceptrons that use non-linear activation functions
 are more powerful than any network of TLUs, and can encode a much
-wider range of functions. Consider an arbitrary function $f$ that
-is Riemann-integrable. A $4$-layer perceptron (one input layer,
-one output layer, two hidden layers) that encodes said function
-is constructed as follows.
+wider range of functions.
+
+Consider an arbitrary function $f$ that is Riemann-integrable.
+This function can be approximated with arbitrary precision by
+a series of stepwise functions. The domain of the function can
+be partitioned into $n$ steps delimited by the border points
+$x_(1), x_(2), dots, x_(n)$.
+
+#figure(
+    caption: [The function $f(x) = x^(2)$, whose domain is restriced to
+              $[0, 6]$, approximated by a series of stepwise functions.],
+    [#image("riemann.svg", width: 75%)]
+) <Square-MLP-approximation>
+
+A $4$-layer perceptron (one input layer, one output layer, two hidden
+layers) that encodes said function is constructed as follows.
 
 The input layer has a single neuron, whose external input is the
-point of the function that one wishes to approximate. The output
-layer is also single neuron, receiving the input and transmitting
-it unchanged. All hidden neurons have a step function as activation
-function, whereas the input and output neuron have the identity function.
+point in the domain of the function that one wishes to approximate.
+The output layer is also single neuron, receiving the input and
+transmitting it unchanged. All hidden neurons have a step function
+as activation function, whereas the input and output neuron have the
+identity function.
 
-The domain of the function can be partitioned into $n$ steps delimited
-by the values $x_(1), x_(2), dots, x_(n)$. For each cutoff point a node
-in the first hidden layer of the perceptron is added. The weights of the
-incoming connections of said nodes are set to $1$, and the threshold of
-these nodes is the cutoff point itself.
+A neuron in the first hidden layer of the perceptron is added for each
+border point $x_(1), dots, x_(n)$. The weights of the incoming connections
+of said nodes are set to $1$, and the parameter $theta$ of these nodes is
+the border point itself. This way, only neurons whose $theta$ parameter is
+smaller than the output of the input layer (the external input, that is)
+will output $1$.
 
-This way, only neurons whose $theta$ parameter is smaller than
-the external input will fire. Suppose $overline(x)$ is fed into
-the network, and suppose that $x_(1) lt.eq x_(2) lt.eq dots lt.eq
-x_(i) lt.eq overline(x)$. The neurons of the first layer that will
-fire are the ones having as threshold $x_(1), x_(2), dots, x_(i)$.
+Each pair of adjacent border points induces $n - 1$ steps $[x_(1), x_(2)],
+[x_(2), x_(3)], dots, [x_(n - 1), x_(n)]$. Evaluating the function in one
+of these steps will yield a (more or less accurate) approximation for the
+true value of the function in said step. A neuron is added to the second
+hidden layer for each of these steps. Their parameters are chosen in such
+a way that, for each $i$-th neuron in the second hidden layer, its output
+will be $1$ if the external input is greater than $x_(i)$, but less than
+$x_(i + 1)$. Since the outputs of the first hidden layer are binary (the
+activation function is the stepwise function), choosing $theta$ equal to
+$1$ and the weights equal to $plus.minus 2$ suffices.
 
-Each pair of adjacent cutoff points induces $n - 1$ intervals $[x_(1),
-x_(2)], [x_(2), x_(3)], dots, [x_(n - 1), x_(n)]$. Each of these intervals
-will yield an approximation for all the values of the true function in said
-range (the most natural choice of this approximation is the middle point of
-the interval). For each of these intervals, the second hidden layer contains
-a neuron; the incoming weights and their thresholds are chosen so that a
-single neuron of the layer will be firing. Since the activation function is
-the Heaviside function, the inputs of the second hidden layer are binary,
-which means that using $plus.minus 2$ as weights for the second hidden
-layer will suffice.
+This way, there is one and only neuron in the second hidden layer
+whose output is $1$: the one that lies in the interval approximating
+its evaluation. Let $overline(x)$ be the external input fed into the
+network, and let the cutoff points of the steps be $x_(1), x_(2),
+dots, x_(n)$. Suppose that:
 
-This neuron will be the one associated to the interval that contains
-the given input to approximate. Suppose $overline(x)$ is fed as input,
-and the firing neurons of the first hidden layer are the ones having
-as threshold $x_(1), x_(2), dots, x_(i)$. The first, second, ..., up
-to $i - 1$-th neuron of the second hidden layer will not fire, because
-the incoming weights cancel out. The $i + 1$-th up to $n - 1$-th neuron
-of the second hidden layer will also not fire, since their inputs is $0$.
-The only neuron that will fire is the $i$-th, because the neuron of the
-first hidden layer having $x_(i)$ as threshold will give a positive
-contribution, whereas the neuron of the first hidden layer having $x_(i + 1)$
-as threshold will not give any contribution.
+$ x_(1) < x_(2) < dots < x_(i) lt.eq overline(x) lt.eq x_(i + 1) < dots < x_(n) $
 
-From the output of the network it is possible to know which is the best
-approximation for a given input, since each of the incoming weights of
-the input neuron is set to the chosen approximations of the function
-evaluated at the given input, and only one neuron of the second hidden
-layer will fire.
+The neurons of the first hidden layer that will output $1$ are those
+having as $theta$ parameter $x_(1), x_(2), dots, x_(i)$, whereas those
+having $x_(i + 1), dots, x_(n)$ will output $0$. As for the second
+hidden layer, the first $i - 1$ neurons will output $0$, because the
+incoming weight of a neuron is cancelled by the incoming weight of
+the following neuron. However, also the last $i + 1$ neurons will
+output $0$, because their incoming inputs are all $0$. The only neuron
+that will output $1$ is the $i$-th, because it receives a positive weight
+with a positive output and a negative weight with a null output; it's
+total incoming input is $+2$ and $H(2, 1) = 1$.
+
+The weights of the output layer are the approximated values of evaluating
+the function in each interval (the most obvious choice is the midpoint).
+Since only one input to the output neuron is not null, its output will
+precisely be the approximation of the value of the function with the
+given (external) input.
+
+// Correct, but messy
 
 #exercise[
-  Consider the function $f(x) = x^(2)$. Construct a multilayer perceptron
-  that can approximate said function.
+    Refer to @Square-MLP-approximation and construct a $4$-layer
+    perceptron that can approximate $f(x) = x^(2)$.
 ] <MLP-parabola>
 #solution[
-    Suppose $6$ steps going from $0$ to $6$ of uniform size. Evaluating the
-    function at the midpoints gives: $2.25, 6.25, 12.25, 20.25, 30.25$. 
+    Evaluating the function at the midpoints of the intervals gives
+    $2.25, 6.25, 12.25, 20.25, 30.25$. Therefore:
 
-    #align(center, [#image("riemann.svg", width: 75%)])
+    #figure(
+        caption: [A $4$-layer perceptron that approximates $f(x)$ in the
+                  $[0, 6]$ interval.],
+        [#diagram(
+            edge-stroke: 1.5pt,
+            spacing: 4em,
 
-    Which is equivalent to the following multilayer perceptron:
+            node((0, 1.125), stroke: 1.5pt + blue, radius: 1.5em, name: <I1>),      
+            node((1.5, -0.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H1>),
+            node((1.5, 0), stroke: 1.5pt + green, text(font: "Noto Sans", [+2]), radius: 1.5em, name: <H2>),
+            node((1.5, 0.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+3]), radius: 1.5em, name: <H3>),
+            node((1.5, 1.5), stroke: 1.5pt + green, text(font: "Noto Sans", [+4]), radius: 1.5em, name: <H4>),
+            node((1.5, 2.25), stroke: 1.5pt + green, text(font: "Noto Sans", [+5]), radius: 1.5em, name: <H5>),
+            node((1.5, 3), stroke: 1.5pt + green, text(font: "Noto Sans", [+6]), radius: 1.5em, name: <H6>),
 
-    #align(
-    center,
-      [#diagram(
-        edge-stroke: 1.5pt,
-        spacing: 4em,
+            node((3, -0.5), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H11>),
+            node((3, 0.25), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H12>),
+            node((3, 1), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H13>),
+            node((3, 1.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H14>),
+            node((3, 2.5), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H15>),
+            node((4.5, 1.125), stroke: 1.5pt + fuchsia, radius: 1.5em, name: <O1>),
 
-        node((0, 1.125), stroke: 1.5pt + blue, radius: 1.5em, name: <I1>),      
-        node((1.5, -0.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H1>),
-        node((1.5, 0), stroke: 1.5pt + green, text(font: "Noto Sans", [+2]), radius: 1.5em, name: <H2>),
-        node((1.5, 0.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+3]), radius: 1.5em, name: <H3>),
-        node((1.5, 1.5), stroke: 1.5pt + green, text(font: "Noto Sans", [+4]), radius: 1.5em, name: <H4>),
-        node((1.5, 2.25), stroke: 1.5pt + green, text(font: "Noto Sans", [+5]), radius: 1.5em, name: <H5>),
-        node((1.5, 3), stroke: 1.5pt + green, text(font: "Noto Sans", [+6]), radius: 1.5em, name: <H6>),
+            edge((-1, 1.125), <I1>, label-pos: 0.1, label-side: center, label: text(font: "Noto Sans", [x]), marks: (none, "latex")),
+            edge(<I1>, <H1>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H2>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H3>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H4>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H5>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H6>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
 
-        node((3, -0.5), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H11>),
-        node((3, 0.25), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H12>),
-        node((3, 1), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H13>),
-        node((3, 1.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H14>),
-        node((3, 2.5), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H15>),
-        node((4.5, 1.125), stroke: 1.5pt + fuchsia, radius: 1.5em, name: <O1>),
+            edge(<H1>, <H11>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
+            edge(<H2>, <H11>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
+            edge(<H2>, <H12>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
+            edge(<H3>, <H12>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
+            edge(<H3>, <H13>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
+            edge(<H4>, <H13>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
+            edge(<H4>, <H14>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
+            edge(<H5>, <H14>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
+            edge(<H5>, <H15>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
+            edge(<H6>, <H15>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
 
-        edge((-1, 1.125), <I1>, label-pos: 0.1, label-side: center, label: text(font: "Noto Sans", [x]), marks: (none, "latex")),
-        edge(<I1>, <H1>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H2>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H3>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H4>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H5>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H6>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<H11>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+2.25]), marks: (none, "latex")),
+            edge(<H12>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+6.25]), marks: (none, "latex")),
+            edge(<H13>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+12.25]), marks: (none, "latex")),
+            edge(<H14>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+20.25]), marks: (none, "latex")),
+            edge(<H15>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+30.25]), marks: (none, "latex")),
 
-        edge(<H1>, <H11>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
-        edge(<H2>, <H11>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
-        edge(<H2>, <H12>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
-        edge(<H3>, <H12>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
-        edge(<H3>, <H13>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
-        edge(<H4>, <H13>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
-        edge(<H4>, <H14>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
-        edge(<H5>, <H14>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
-        edge(<H5>, <H15>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
-        edge(<H6>, <H15>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
-
-        edge(<H11>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+2.25]), marks: (none, "latex")),
-        edge(<H12>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+6.25]), marks: (none, "latex")),
-        edge(<H13>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+12.25]), marks: (none, "latex")),
-        edge(<H14>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+20.25]), marks: (none, "latex")),
-        edge(<H15>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+30.25]), marks: (none, "latex")),
-
-        edge(<O1>, (5.5, 1.125), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]), marks: (none, "latex")),
-    )]
-  )
+            edge(<O1>, (5.5, 1.125), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]), marks: (none, "latex")),
+        )]
+    )
 ]
 
+Increasing the number of neurons (of step functions) give a better and
+better approximation. If the step sizes were to become infinitesimally
+small, the approximation would be perfect. Since there is no limit on
+the number of neurons that could be added, the following theorem can
+be stated:
+
 #theorem[
-  Any Riemann-integrable function can be approximated with arbitrary
-  accuracy by a multilayer perceptron of four layers.
+    Any Riemann-integrable function can be approximated with arbitrary
+    accuracy by a multilayer perceptron of four layers.
 ] <Multilayer-perceptron-approximates-Riemann>
 
-Note that @Multilayer-perceptron-approximates-Riemann does not restrict
-itself to continuous functions; there exist Riemann-integrable functions
-that present discontinuities #footnote[Riemann-integrable but discontinuous
-functions are said to be _continuous almost everywhere_. This is because,
-despite not being continuous, they still behave "nicely enough" to be
-integrated.], but a multilayer perceptron will still be able to approximate
-it. However, a continuous function is easier to approximate:
+Note that the degree of approximation in @Multilayer-perceptron-approximates-Riemann
+is given by the area between the function to approximate and the output of the
+multilayer perceptron. However, even though this area can be reduced at will,
+this does not mean that the difference between its output and the function to
+approximate is less than a certain error bound everywhere. That is, this area
+can only give an average measure of the quality of approximation.
 
-#theorem[
-  Any continuous Riemann-integrable function can be approximated with
-  arbitrary accuracy by a multilayer perceptron of three layers.
-] <Multilayer-perceptron-approximates-Riemann-continuous>
-
-This can be done by encoding into the multilayer perceptron not the
-absolute height of a step, but the relative height: the difference
-between the current step and the previous step. This perceptron is
-analogous to the previous one, except for the second hidden layer,
-which is removed, connecting the hidden layer directly to the output
-neuron. The ouputs of the hidden layer are the relative height of
-the steps.
-
-This way, the first part of the computation behaves just as in the
-previous case, only the neurons having as threshold a value smaller
-than the given input will fire. But now, the differences in height
-are added directly, reconstructing the height of the correct step.
-Clearly, applying this shortcut to non-continuous functions would
-not work, because there is no guarantee that the relative height
-at a certain step is actually the sum of the previous relative
-heights.
-
-#exercise[
-  Consider @MLP-parabola and construct an equivalent three layer perceptron.
-]
-#solution[
-    Computing the relative heights of the steps gives: $2.25 - 0 = 2.25,
-    6.25 - 2.25 = 4, 12.25 - 6.25 = 6, 20.25 - 12.25 = 8, 30.25 - 20.25
-    = 10$.
-
-    #align(
-    center,
-      [#diagram(
-        edge-stroke: 1.5pt,
-        spacing: 4em,
-
-        node((0, 0.75), stroke: 1.5pt + blue, radius: 1.5em, name: <I1>),      
-        node((2, -0.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H1>),
-        node((2, 0), stroke: 1.5pt + green, text(font: "Noto Sans", [+2]), radius: 1.5em, name: <H2>),
-        node((2, 0.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+3]), radius: 1.5em, name: <H3>),
-        node((2, 1.5), stroke: 1.5pt + green, text(font: "Noto Sans", [+4]), radius: 1.5em, name: <H4>),
-        node((2, 2.25), stroke: 1.5pt + green, text(font: "Noto Sans", [+5]), radius: 1.5em, name: <H5>),
-
-        node((4, 0.75), stroke: 1.5pt + fuchsia, radius: 1.5em, name: <O1>),
-
-        edge((-1, 0.75), <I1>, label-pos: 0.1, label-side: center, label: text(font: "Noto Sans", [x]), marks: (none, "latex")),
-        edge(<I1>, <H1>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H2>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H3>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H4>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H5>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-
-        edge(<H1>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+2.25]), marks: (none, "latex")),
-        edge(<H2>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+4]), marks: (none, "latex")),
-        edge(<H3>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+6]), marks: (none, "latex")),
-        edge(<H4>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+8]), marks: (none, "latex")),
-        edge(<H5>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+10]), marks: (none, "latex")),
-
-        edge(<O1>, (5, 0.75), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]), marks: (none, "latex")),
-    )]
-  )
-]
-
-Even though @Multilayer-perceptron-approximates-Riemann guarantees that
-any function can be approximated by a multilayer perceptron, the theorem
-itself isn't really useful. Clearly, the accuracy of the prediction of
-can be increased arbitrarely by increasing the number of neurons (that
-is, the number of steps) used in the hidden layers. The issue is that,
-to get a satisfying degree of approximation, it is necessary to construct
-a multilayer perceptron with many neurons (which means, choosing many
-steps), and this effort might outvalue the purpose.
+For example, consider a case in which a function possesses a very thin spike
+(like a very steep gaussian curve) which is not captured by any stair step.
+In such a case the area between the function to represent and the output of
+the multilayer perceptron might be small (because the spike is thin), but at
+the location of the spike the deviation of the output from the true function
+value can nevertheless be considerable.
 
 There are ways, however, to improve the degree of approximation without
 resorting exclusively to reducing the step size. For example, choosing
@@ -635,21 +580,238 @@ function. That is, using many steps where the function is heavily curved
 (and thus a linear approximation is poor) and little steps where it is
 almost linear.
 
-Note that the degree of approximation in @Multilayer-perceptron-approximates-Riemann
-is given by the area between the function to approximate and the output of the
-multilayer perceptron. However, even though this area can be reduced at will
-as stated, this does not mean that the difference between its output and the
-function to approximate is less than a certain error bound everywhere. That is,
-this area can only give an average measure of the quality of approximation.
+Also note that @Multilayer-perceptron-approximates-Riemann can also be
+applied to functions having more than one argument. Instead of approximating
+the function with one-dimensional step functions, it is approximated with
+$k$-dimensional "step functions" (with $k$ being the arity of the function)
+by partitioning the input space into $k$-dimensional hypercubes.
 
-For example, consider a case in which a function possesses a very thin spike
-(like a very steep gaussian curve) which is not captured by any stair step.
-In such a case the area between the function to represent and the output of
-the multilayer perceptron might be small (because the spike is thin), but at
-the location of the spike the deviation of the output from the true function
-value can nevertheless be considerable.
+Finally, @Multilayer-perceptron-approximates-Riemann does not restrict
+itself to continuous functions, since the definition of a Riemann-integrable
+does not require continuity #footnote[Riemann-integrable but discontinuous
+functions are said to be _continuous almost everywhere_. This is because,
+despite not being continuous, they still behave "nicely enough" to be
+integrated.]. However, if the function is continuous, the same result can
+be achieved with just $3$ layers instead of $4$. This is done by taking
+into account not the absolute height of a step, but its relative height:
+the difference between the current step and the previous step.
 
-/*
-The process can be extended to functions of varying arity, both in the
-non continuous case and in the continuous case
-*/
+A $3$-layer perceptron of this kind is very similar to the previous
+$4$-layer perceptron. The only differences are that the second hidden
+layer is removed and that the weights coming into the output layer are
+the relative step heights. This way, the first part of the computation
+behaves as in the previous case: only the neurons whose $theta$ parameter
+is smaller than the external input will output $0$. Now, however, the
+height differences of the steps are summed directly, "reconstructing"
+the desired height. This shortcut would not work for non-continuous
+functions, since there is no guarantee that summing all relative heights
+up to a given point is actually the desired height.
+
+#exercise[
+    Construct a $3$-layer perceptron equivalent to the one in @MLP-parabola.
+]
+#solution[
+    The relative heights of the step are $2.25 - 0 = 2.25, 6.25 - 2.25 = 4,
+    12.25 - 6.25 = 6, 20.25 - 12.25 = 8, 30.25 - 20.25 = 10$. This gives:
+
+    #figure(
+        caption: [A $3$-layer perceptron that approximates $f(x)$ in the
+                  $[0, 6]$ interval.],
+        [#diagram(
+            edge-stroke: 1.5pt,
+            spacing: 4em,
+
+            node((0, 0.75), stroke: 1.5pt + blue, radius: 1.5em, name: <I1>),      
+            node((2, -0.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 1.5em, name: <H1>),
+            node((2, 0), stroke: 1.5pt + green, text(font: "Noto Sans", [+2]), radius: 1.5em, name: <H2>),
+            node((2, 0.75), stroke: 1.5pt + green, text(font: "Noto Sans", [+3]), radius: 1.5em, name: <H3>),
+            node((2, 1.5), stroke: 1.5pt + green, text(font: "Noto Sans", [+4]), radius: 1.5em, name: <H4>),
+            node((2, 2.25), stroke: 1.5pt + green, text(font: "Noto Sans", [+5]), radius: 1.5em, name: <H5>),
+
+            node((4, 0.75), stroke: 1.5pt + fuchsia, radius: 1.5em, name: <O1>),
+
+            edge((-1, 0.75), <I1>, label-pos: 0.1, label-side: center, label: text(font: "Noto Sans", [x]), marks: (none, "latex")),
+            edge(<I1>, <H1>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H2>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H3>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H4>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H5>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+
+            edge(<H1>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+2.25]), marks: (none, "latex")),
+            edge(<H2>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+4]), marks: (none, "latex")),
+            edge(<H3>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+6]), marks: (none, "latex")),
+            edge(<H4>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+8]), marks: (none, "latex")),
+            edge(<H5>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [+10]), marks: (none, "latex")),
+
+            edge(<O1>, (5, 0.75), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]), marks: (none, "latex")),
+        )]
+    )
+]
+
+Since, again, the accuracy of the prediction can be increased at will,
+the following theorem can be stated:
+
+#theorem[
+    Any continuous Riemann-integrable function can be approximated with
+    arbitrary accuracy by a multilayer perceptron of three layers.
+] <Multilayer-perceptron-approximates-Riemann-continuous>
+
+Even though it has been proven that any Riemann-integrable function can be
+encoded into a multilayer perceptron (@Multilayer-perceptron-approximates-Riemann),
+this result is not very useful on its own. This is because it does not
+specify how many neurons ought to be added: if the number of neurons
+necessary to achieve a satisfactory approximation is infinitely large,
+such a perceptron cannot be constructed in practice.
+
+Also, the fact that a function can be approximated with a $4$-layer
+perceptron does not imply that said construction is the only possible,
+neither that it is the most efficient (giving the best approximation
+with the least effort). There may be a perceptron with a different
+network structure that encodes the same function and whose approximation
+is just as "good" (if not better), but the theorem cannot prove its
+existence.
+
+As it was the case for a single TLU, there is interest in having
+the neural network _learn_ from examples which are the best choice
+of parameters and weights in order to approximate a given function,
+rather than fixing them by hand. TLUs employed a non-differentiable
+function (the stepwise function) as their "activation function",
+which meant that their error function had to be engineered in a
+very specific way. However, multilayer perceptrons don't abide
+by this restriction, and can have activation functions that are
+differentiable.
+
+The central idea is to deduce the direction in which the weights
+and the parameters have to be changed at every step from the gradient
+of the error function. Since the gradient gives the direction of
+steepest descent, the correct direction is the opposite of the
+gradient (minimizing the error instead of maximising it). At each
+step, the gradient is computed, a small adjustment to the weights
+and the parameters is made and the process is repeated until the
+degree of approximation is satisfactory.
+
+Consider a multilayer perceptron with $r$ layers: let $U_(0)$ be the
+layer of input neurons, $U_(1)$ to $U_(r - 2)$ the layers of hidden
+neurons and $U_(r - 1)$ the layer of output neuron. Let $e$ be the
+total error for a fixed learning task $L_("fixed")$. To understand
+how to the weights with respect to this function, it is necessary
+to explicitly rewrite the error in term of the weights. Assume that
+the multilayer perceptron has the logistic function as activation
+function for its neurons and the identity function as output function.
+
+Consider a single neuron $u$ belonging either to an hidden layer
+or to the output layer, that is $u in U_(k)$ with $0 < k lt.eq
+r - 1$. Its predecessors are given by $"pred"(u) = {p_(1), dots,
+p_(n)} in U_(k - 1)$. The corresponding vector of weights, also
+embedding the $theta$ parameter to ease calculations, is $bold(w)_(u)
+= (-theta_(u), w_(u, p_(1)), dots, w_(u, p_(n)))$. The gradient of
+the total error function with respect to these weights is:
+
+$ nabla_(bold(w)_(u)) e =
+  frac(partial e, partial bold(w)_(u)) = 
+  (-frac(partial e, partial theta_(u)),
+   frac(partial e, partial w_(u, p_(1))),
+   dots, frac(partial e, partial w_(u, p_(n)))) $
+
+Explicitly substituting the expression for $e$:
+
+$ nabla_(bold(w)_(u)) e =
+  frac(partial e, partial bold(w)_(u)) = 
+  frac(partial, partial bold(w)_(u)) sum_(l in L_("fixed")) e^((l)) =
+  sum_(l in L_("fixed")) frac(partial e^((l)), partial bold(w)_(u)) =
+  sum_(l in L_("fixed")) nabla_(bold(w)_(u)) e^((l)) $
+
+Consider a single training pattern $l$ and its error $e^((l)) =
+sum_(v in U_("out")) e^((l))_(v)$. The error depends on the value
+of the output of the layer, which in turn depends (also) on the
+network input. However, the network input depends on the weights:
+
+$ "net"_(u)^((l)) =
+  bold(w)_(u) bold("in")_(u)^((l)) =
+  bold(w)_(u) (1, "out"_(p_(1))^((l)), dots, "out"_(p_(n))^((l))) $
+
+Which means that there's a dependency between the error and the
+weights. Applying the chain rule:
+
+
+$ nabla_(bold(w)_(u)) e^((l)) =
+  frac(partial e^((l)), partial bold(w)_(u)) =
+  frac(partial e^((l)), partial "net"_(u)^((l)))
+  frac(partial "net"_(u)^((l)), partial bold(w)_(u)) =
+  frac(partial e^((l)), partial "net"_(u)^((l)))
+  frac(partial bold(w)_(u) bold("in")_(u)^((l)), partial bold(w)_(u)) =
+  frac(partial e^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) $
+
+Expanding the error $e^((l))$ in the first factor:
+
+$ frac(partial e^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) &=
+  frac(partial sum_(v in U_("out")) (o_(v)^((l)) - "out"_(v)^((l)))^(2), partial "net"_(u)^((l))) bold("in")_(u)^((l)) =
+  sum_(v in U_("out")) frac(partial (o_(v)^((l)) - "out"_(v)^((l)))^(2), partial "net"_(u)^((l))) bold("in")_(u)^((l)) $
+
+Simplifying the expression:
+
+$ frac(partial e^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) &= 
+  sum_(v in U_("out")) 2 (o_(v)^((l)) - "out"_(v)^((l))) frac(partial (o_(v)^((l)) - "out"_(v)^((l))), partial "net"_(u)^((l))) bold("in")_(u)^((l)) = \
+  &= 2 sum_(v in U_("out")) (o_(v)^((l)) - "out"_(v)^((l))) (cancel(frac(partial o_(v)^((l)), partial "net"_(u)^((l)))) - frac(partial "out"_(v)^((l)), partial "net"_(u)^((l)))) bold("in")_(u)^((l)) = \
+  &= -2 underbrace(sum_(v in U_("out")) (o_(v)^((l)) - "out"_(v)^((l))) frac(partial "out"_(v)^((l)), partial "net"_(u)^((l))), delta_(u)^((l))) bold("in")_(u)^((l)) = 
+  -2 delta_(u)^((l)) bold("in")_(u)^((l)) $
+
+Where the shorthand $delta_(u)^((l))$ is introduced for clarity. Note
+that $partial o_(v)^((l)) slash partial "net"_(u)^((l))$ is $0$ because,
+by definition, the output in the training pattern does not depend on the
+network input function.
+
+To compute $delta_(u)^((l))$, first consider the particularly favourable
+case in which $u$ is an output neuron. Since the neurons in the output
+layer (or in any layer, for that matter), are not connected to each other,
+there is no dependency between the output of one and the network input of
+another. This means that all terms of the sum except for $v = u$ are null,
+because $partial "out"_(v)^((l)) slash partial "net"_(u)^((l))$ is $0$:
+
+$ nabla_(bold(w)_(u)) e^((l)) =
+  frac(partial e^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) =
+  -2 sum_(v = u) (o_(v)^((l)) - "out"_(v)^((l))) frac(partial "out"_(v)^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) =
+  -2 (o_(u)^((l)) - "out"_(u)^((l))) frac(partial "out"_(u)^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) $
+
+This means that the weights coming into the output neuron $u$ should
+be shifted:
+
+$ Delta_(w_(bold(u))^((l))) =
+  -frac(eta, 2) (-2 (o_(u)^((l)) - "out"_(u)^((l))) frac(partial "out"_(u)^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l))) =
+  eta (o_(u)^((l)) - "out"_(u)^((l))) frac(partial "out"_(u)^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) $
+
+Where the minus signs cancel, because the interest is in going in the
+direction opposite to the gradient of the error function. The parameter
+$eta$ is called the *learning rate*, and represents the lenght of the
+step taken in one iteration of gradient descent. Popular choices for
+$eta$ are $0.1$ and $0.2$, but in general the best choice is domain
+specific.
+
+The above expression was referring to the weight change that results
+from a single training pattern $l$. That is, this is how weights are
+adapted in online training, where the weights are adapted immediately
+after each example is presented to the perceptron. In the case of
+batch learning the idea is the same, the difference being that one
+would have to sum all partial updates over all training patterns
+and then applying the resulting change at the end of each epoch,
+not immediately after each evaluation.
+
+The derivative of $partial "out"_(u)^((l)) slash partial "net"_(u)^((l))$
+cannot be calculated in the general case, since the output depends on the
+choice of the activation function. Suppose that the logistic function has
+been chosen, and that the output function is the identity function (as it
+is the case, in general). Then:
+
+$ frac(partial "out"_(u)^((l)), partial "net"_(u)^((l))) &=
+	frac(partial f_("out")("act"_(u)^((l))), partial "net"_(u)^((l))) =
+	frac(partial "act"_(u)^((l)), partial "net"_(u)^((l))) =
+	frac(partial f_("act")("net"_(u)^((l))), partial "net"_(u)^((l))) =
+	f'_("act")("net"_(u)^((l))) = \
+	&= f_("act")("net"_(u)^((l))) (1 - f_("act")("net"_(u)^((l)))) =
+	"act"_(u)^((l)) (1 - "act"_(u)^((l))) = "out"_(u)^((l)) (1 - "out"_(u)^((l))) $
+
+Which means that the adaptation should be:
+
+$ Delta_(w_(bold(u))^((l))) =
+	eta (o_(u)^((l)) - "out"_(u)^((l))) frac(partial "out"_(u)^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) =
+	eta (o_(u)^((l)) - "out"_(u)^((l))) "out"_(u)^((l)) (1 - "out"_(u)^((l))) bold("in")_(u)^((l)) $

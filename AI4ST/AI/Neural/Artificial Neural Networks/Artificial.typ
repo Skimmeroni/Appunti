@@ -343,7 +343,7 @@ function, activation function and output function for all of its neurons:
 #grid(
 	columns: (0.4fr, 0.3fr, 0.3fr),
 	[$ f^((u))_("net")(bold(w)_(u), bold("in")_(u)) = sum_(v in "pred"(u)) w_(u, v) "in"_(u, v) $],
-	[$ f_("act")^((u))("net"_(u), theta) = cases(1 & "if" "net"_(u) gt.eq theta, 0 & "otherwise") $],
+	[$ f_("act")^((u))("net"_(u), theta) = H("net"_(u), theta) $],
 	[$ f_("out")^((u))("act"_(u)) = "act"_(u) $],
 )
 
@@ -417,14 +417,23 @@ as possible.
 
 In order to determine how well a neural network solves a fixed learning
 task, an error function is employed, which measures how well the outputs
-of the network match the outputs in the training patterns. Of course,
-taking the difference between the outputs of the network and the outputs
-in the patterns does not make a good error function, since positive and
-negative errors may cancel out. A common choice of error function for
-fixed learning tasks is the *Mean Squared Error function* (*MSE*):
+of the network match the outputs in the training patterns. The cumulative
+error has the following expression:
 
-$ e = sum_(l in L_("fixed")) e^((l))
-    = sum_(l in L_("fixed")) (o_(v_(1))^((l)) - "out"_(v_(1))^((l)))^(2) + dots + (o_(v_(m))^((l)) - "out"_(v_(m))^((l)))^(2) 
+$ e = sum_(l in L_("fixed")) e^((l)) =
+      sum_(v in U_("out")) e_(v) =
+      sum_(l in L_("fixed")) sum_(v in U_("out")) e^((l))_(v) $
+
+Which is the sum of the errors of each neuron with the corresponding
+output in a training pattern, summed over all training patterns.
+
+As for the choice of the error function, simply taking the difference
+between the outputs of the network and the outputs in the patterns
+is not a good idea, since positive and negative errors may cancel
+out. A common choice of error function for fixed learning tasks is
+the *Mean Squared Error function* (*MSE*):
+
+$ e = sum_(l in L_("fixed")) (o_(v_(1))^((l)) - "out"_(v_(1))^((l)))^(2) + dots + (o_(v_(m))^((l)) - "out"_(v_(m))^((l)))^(2) 
     = sum_(l in L_("fixed")) sum_(v in U_("out")) (o_(v)^((l)) - "out"_(v)^((l)))^(2) $
 
 That is, the sum over all training examples of the squared difference

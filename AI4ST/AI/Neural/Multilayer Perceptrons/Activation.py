@@ -1,9 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def heaviside(x, theta):
-	return np.piecewise(x, [x >= theta, x < theta], [1, 0])
-
 def semi_linear(x, theta):
 	return np.piecewise(x, [x < theta - 0.5, ((x >= theta - 0.5) & (x <= theta + 0.5)), x > theta + 0.5],
 	                       [0, lambda x: x - theta + 0.5, 1])
@@ -21,7 +18,7 @@ def hyperbolic_tangent(x, theta):
 X = np.linspace(-10, 10, num = 1000)
 Parameters = [-1/2 * np.pi, 1/2 * np.pi, np.pi]
 Colors = ["#7a76c2", "#ff6e9c", "#6dff88"]
-Functions = [heaviside, semi_linear, sine_up_to_saturation, logistic, hyperbolic_tangent]
+Functions = [semi_linear, sine_up_to_saturation, logistic, hyperbolic_tangent]
 
 for f in Functions:
 	fig, ax = plt.subplots()

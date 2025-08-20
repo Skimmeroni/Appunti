@@ -13,8 +13,18 @@ $y$. If the sum of all the inputs multiplied by their weights is a value
 greater or equal than a given threshold $theta$, the output $y$ is equal
 to $1$, to $0$ otherwise:
 
-$ y = cases(1 & "if" display(sum_(i = 1)^(n) w_(i) x_(i)) gt.eq theta,
-		     0 & "otherwise") $
+$ y = H(sum_(i = 1)^(n) w_(i) x_(i), theta) =
+      cases(1 & "if" display(sum_(i = 1)^(n) w_(i) x_(i)) gt.eq theta,
+      0 & "otherwise") $
+
+This function is also referred to as the *Heaviside function*, or
+*stepwise function*.
+
+#figure(
+    caption: [Plot of the Heaviside function, with three different
+              choices of $theta$],
+    [#image("heaviside.svg", width: 66%)]
+)
 
 The inputs can be collected into a single input vector $bold(x) = (x_(1),
 dots, x_(n))$ and the weights into a weight vector $bold(w) = (w_(1), dots,
