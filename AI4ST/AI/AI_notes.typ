@@ -26,7 +26,12 @@
 == Artificial neural networks
 #include "Neural/Artificial Neural Networks/Artificial.typ"
 == Multilayer perceptrons
-#include "Neural/Multilayer Perceptrons/MLP.typ"
+=== Structure of a multilayer perceptron
+#include "Neural/Multilayer Perceptrons/Structure.typ"
+=== Approximating functions using a multilayer perceptron
+#include "Neural/Multilayer Perceptrons/Approximation.typ"
+=== Training a multilayer perceptron
+#include "Neural/Multilayer Perceptrons/Backpropagation.typ"
 #pagebreak()
 
 = Fuzzy logic
