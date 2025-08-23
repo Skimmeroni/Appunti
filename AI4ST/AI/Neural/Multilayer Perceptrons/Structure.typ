@@ -212,6 +212,17 @@ $ frac(d, d "net") f_("act")("net", theta) &=
   &= f_("act")^(2)("net", theta) (f_("act")^(-1)("net", theta) - 1) =
   f_("act")("net", theta) (1 - f_("act")("net", theta)) $
 
+The successive derivatives are as well:
+
+$ frac(d^(2), d "net") (f_("act")("net", theta) &=
+  frac(d, d "net") (f_("act")("net", theta) (1 - f_("act")("net", theta))) = \
+  &= (1 - f_("act")("net", theta)) frac(d, d "net") f_("act")("net", theta) +
+  f_("act")("net", theta) frac(d, d "net") (1 - f_("act")("net", theta)) = \
+  &= (1 - f_("act")("net", theta)) frac(d, d "net") f_("act")("net", theta) -
+  f_("act")("net", theta) frac(d, d "net") f_("act")("net", theta) = \
+  &= (1 - f_("act")("net", theta) - f_("act")("net", theta)) frac(d, d "net") f_("act")("net", theta) = \
+  &= (1 -2f_("act")("net", theta)) frac(d, d "net") f_("act")("net", theta) $
+
 Sigmoid functions having $[0, 1]$ as codomain are called *unipolar
 sigmoid functions*. Functions having all the traits of a sigmoid
 function whose codomain is $[-1, 1]$ are called *bipolar sigmoid

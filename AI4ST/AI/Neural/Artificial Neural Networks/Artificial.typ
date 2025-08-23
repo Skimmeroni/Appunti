@@ -11,7 +11,7 @@ original domain to the image domain, the set of points become linearly
 separable again.
 
 #exercise[
-	Construct a network of threshold logic units that encode biimplication.
+	Construct a network of threshold logic units that encodes biimplication.
 ] <Neural-biimplication>
 #solution[
 	One possibility is as follows:
@@ -47,9 +47,50 @@ separable again.
 	#figure(
 		caption: [The euclidean plane partitioned by the two implications
 		          are in blue and in red. The strip in the middle (in
-		          fuchsia) and the rest of the plane are now linearly
+		          purple) and the rest of the plane are now linearly
 		          separable.],
 		[#image("biimplication.svg", width: 75%)]
+	)
+]
+
+#exercise[
+	Construct a network of threshold logic units that encodes the exclusive or.
+] <Neural-exclusive-or>
+#solution[
+	One possibility is as follows:
+
+	#figure(
+		caption: [A network of TLUs that encodes the exclusive or.],
+		[#diagram(
+			node-stroke: 1.5pt + blue,
+			edge-stroke: 1.5pt,
+			spacing: 4em,
+
+			node((-1.5, 0.75), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[2]])),
+			node((-1.5, -0.75), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[1]])),
+			node((0, 0.75), text(font: "Noto Sans", [-1]), radius: 2em, name: <Theta1>),
+			node((0, -0.75), text(font: "Noto Sans", [+1]), radius: 2em, name: <Theta2>),
+			node((1, 0), stroke: 1.5pt + fuchsia, text(font: "Noto Sans", [+1]), radius: 2em, name: <Theta3>),
+
+			edge((-1.25, 0.75), <Theta1>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [-2])),
+			edge((-1.25, -0.75), <Theta1>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [-2])),
+			edge((-1.25, 0.75), <Theta2>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge((-1.25, -0.75), <Theta2>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<Theta1>, <Theta3>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<Theta2>, <Theta3>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<Theta3>, (2, 0), marks: (none, "latex"), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]))
+		)]
+	)
+
+	This is done by rewriting $A xor B$ as $(A or B) and
+	(not A or not B)$.
+
+	#figure(
+		caption: [The euclidean plane partitioned by the two disjunctions
+		          are in blue and in red. The strip in the middle (in
+		          purple) and the rest of the plane are now linearly
+		          separable.],
+		[#image("xor.svg", width: 75%)]
 	)
 ]
 

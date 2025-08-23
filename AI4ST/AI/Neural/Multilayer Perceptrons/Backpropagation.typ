@@ -256,8 +256,9 @@ perceptron with training examples, but is oblivious to the "shape"
 of the network. That is, the number of hidden layers and the number
 of hidden neurons have to be fixed "by hand" before the training
 process. For a $3$-layer perceptron, a known rule of thumb for
-determining how many hidden neurons there should be is: $("number
-of input neurons" + "number of output neurons") slash 2$.
+determining how many hidden neurons there should be is:
+
+$ frac("number of input neurons" + "number of output neurons", 2) $
 
 The simplest approach to find the most suitable number of hidden
 neurons is to try out different configurations and see what works

@@ -32,6 +32,8 @@
 #include "Neural/Multilayer Perceptrons/Approximation.typ"
 === Training a multilayer perceptron
 #include "Neural/Multilayer Perceptrons/Backpropagation.typ"
+=== Deep learning
+#include "Neural/Multilayer Perceptrons/Deep.typ"
 #pagebreak()
 
 = Fuzzy logic
