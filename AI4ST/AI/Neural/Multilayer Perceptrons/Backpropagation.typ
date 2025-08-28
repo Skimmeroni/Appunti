@@ -82,9 +82,8 @@ $ frac(partial e^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) &=
   -2 delta_(u)^((l)) bold("in")_(u)^((l)) $
 
 Where the shorthand $delta_(u)^((l))$ is introduced for clarity. Note
-that $partial o_(v)^((l)) slash partial "net"_(u)^((l))$ is $0$ because,
-by definition, the output in the training pattern does not depend on the
-network input function.
+that $partial o_(v)^((l)) slash partial "net"_(u)^((l))$ is $0$ because
+$o_(v)^((l))$ is a known constant.
 
 To compute $delta_(u)^((l))$, first consider the particularly favourable
 case in which $u$ is an output neuron. Since the neurons in the output
@@ -189,6 +188,8 @@ $ frac(partial "net"_(s)^((l)), partial "net"_(u)^((l))) =
   frac(partial, partial "net"_(u)^((l))) (bold(w)_(s) bold("in")_(s)^((l))) =
   frac(partial, partial "net"_(u)^((l)))
   ((sum_(p in "pred"(s)) w_(s, p) "out"_(p)^((l))) - theta_(s)) $
+
+// FIXME: use the same arrangement as it is done in RBFs
 
 Out of all neurons $p in "pred"(s)$ there is precisely the neuron $u$,
 since $s$ is one of its successors. This means that the only term of

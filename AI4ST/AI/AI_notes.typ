@@ -16,15 +16,22 @@
 #include "Introduction/Optimization.typ"
 == Local search algorithms
 #include "Introduction/Local Search Algorithms/Local.typ"
+== K-Means clustering
+#include "Introduction/Kmeans.typ"
 #pagebreak()
 
 = Neural Networks
 == Biological foundations
 #include "Neural/Biological Foundations/Biology.typ"
-== Threshold Logic Units
-#include "Neural/Threshold Logic Units/TLU.typ"
+== Threshold logic units
+=== Single threshold logic units
+#include "Neural/Threshold Logic Units/Single.typ"
+=== Training single threshold logic units
+#include "Neural/Threshold Logic Units/Training.typ"
+=== Multiple threshold logic units
+#include "Neural/Threshold Logic Units/Multiple.typ"
 == Artificial neural networks
-#include "Neural/Artificial Neural Networks/Artificial.typ"
+#include "Neural/Artificial.typ"
 == Multilayer perceptrons
 === Structure of a multilayer perceptron
 #include "Neural/Multilayer Perceptrons/Structure.typ"
@@ -34,6 +41,14 @@
 #include "Neural/Multilayer Perceptrons/Backpropagation.typ"
 === Deep learning
 #include "Neural/Multilayer Perceptrons/Deep.typ"
+=== Sensitivity analysis
+#include "Neural/Multilayer Perceptrons/Sensitivity.typ"
+== Radial basis function networks
+#include "Neural/Radial Basis Functions/Structure.typ"
+=== Approximating functions using a radial basis function network
+#include "Neural/Radial Basis Functions/Approximation.typ"
+=== Training radial basis function networks
+#include "Neural/Radial Basis Functions/Training.typ"
 #pagebreak()
 
 = Fuzzy logic
