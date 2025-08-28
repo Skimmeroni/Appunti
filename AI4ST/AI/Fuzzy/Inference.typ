@@ -256,7 +256,7 @@ $y$ attains the value $y_(0)$.
                            0 & "otherwise")}} = \
       &= 1 - min{5 abs(y - 0.3), 1} $
 
-    // Why would that be the case?
+    // FIXME: Why would that be the case?
 ]
 
 As stated, an implication of the form $x in A -> y in B$ can be
@@ -277,7 +277,7 @@ $ rho(x, y) =
     $ rho(x, y) = cases(1 & "if" min{abs(3 - y), 1} lt.eq abs(2 - x),
                         1 - min{abs(3 - y), 1} & "otherwise") $
 
-    // Why would that be the case?
+    // FIXME: Why would that be the case?
 ]
 
 It's possible to extend relation compositions to fuzzy sets. Given
@@ -310,5 +310,5 @@ $ rho_(2)[rho_(1)[mu]] = (rho_(2) compose rho_(1))[mu] $
       &= sup_(x in X){min{1 - min{5 abs(a - x), 1}, 1 - min{10 abs(x - y), 1}}} = \
       &= 1 - min{frac(10, 3) abs(a - y), 1} $
 
-    // Why would that be the case?
+    // FIXME: Why would that be the case?
 ]

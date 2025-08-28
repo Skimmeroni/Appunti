@@ -42,45 +42,57 @@ $n + 3(n - 1) - 1 + 1 = 4n - 3$.
 	parity function with $n = 3$?
 ]
 #solution[
+	The number of neurons needed is $4 dot 3 - 3 = 9$.
+
 	#figure(
-		caption: [A network of TLUs that encodes the $3$-bit even parity function.],
+		caption: [A multilayer perceptron that encodes the $3$-bit even parity function.],
 		[#diagram(
 			node-stroke: 1.5pt + blue,
 			edge-stroke: 1.5pt,
 			spacing: 4em,
 
-			node((-1.25, 0.5), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[2]])),
-			node((-1.25, -0.5), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[1]])),
-			node((-1.25, 1.125), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[3]])),
-			node((0, 0.5), text(font: "Noto Sans", [-1]), radius: 2em, name: <Theta1>),
-			node((0, -0.5), text(font: "Noto Sans", [+1]), radius: 2em, name: <Theta2>),
-			node((0.875, 0), stroke: 1.5pt + blue, text(font: "Noto Sans", [+1]), radius: 2em, name: <Theta3>),
-			node((0.875, 1.125), stroke: 1.5pt + blue, text(font: "Noto Sans", [-1]), radius: 2em, name: <Theta4>),
-			node((1.875, 0.5), stroke: 1.5pt + blue, text(font: "Noto Sans", [+1]), radius: 2em, name: <Theta5>),
-			node((2.875, 0.5), stroke: 1.5pt + fuchsia, text(font: "Noto Sans", [-1]), radius: 2em, name: <Theta6>),
+			node((-2, 0.5), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[2]])),
+			node((-2, -0.5), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[1]])),
+			node((-2, 1.5), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[3]])),
 
-			edge((-1, 0.5), <Theta1>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [-2])),
-			edge((-1, -0.5), <Theta1>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [-2])),
-			edge((-1, 0.5), <Theta2>, marks: (none, "latex"), label-pos: 0.4, label-angle: auto, label: text(font: "Noto Sans", [+2])),
-			edge((-1, -0.5), <Theta2>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
-			edge((-1, 1.125), <Theta4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [-2])),
-			edge(<Theta1>, <Theta3>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
-			edge(<Theta2>, <Theta3>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
-			edge(<Theta3>, <Theta5>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
-			edge(<Theta4>, <Theta5>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
-			edge(<Theta5>, <Theta6>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [-1])),
-			edge(<Theta6>, (3.875, 0.5), marks: (none, "latex"), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]))
+			node((-1, 0.5), stroke: 1.5pt + green, radius: 2em, name: <I1>),
+			node((-1, -0.5), stroke: 1.5pt + green, radius: 2em, name: <I2>),
+			node((-1, 1.5), stroke: 1.5pt + green, radius: 2em, name: <I3>),
+			node((0, 0.5), text(font: "Noto Sans", [-1]), radius: 2em, name: <H1>),
+			node((0, -0.5), text(font: "Noto Sans", [+1]), radius: 2em, name: <H2>),
+			node((1, 0), text(font: "Noto Sans", [+1]), radius: 2em, name: <H3>),
+			node((0, 1.5), text(font: "Noto Sans", [-1]), radius: 2em, name: <H4>),
+			node((1, 1), text(font: "Noto Sans", [+1]), radius: 2em, name: <H5>),
+			node((2, 0.5), stroke: 1.5pt + fuchsia, text(font: "Noto Sans", [-1]), radius: 2em, name: <O1>),
+
+			edge((-2, 0.5), <I1>, marks: (none, "latex")),
+			edge((-2, -0.5), <I2>, marks: (none, "latex")),
+			edge((-2, 1.5), <I3>, marks: (none, "latex")),
+			edge(<I1>, <H1>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [-2])),
+			edge(<I2>, <H1>, marks: (none, "latex"), label-pos: 0.25, label-angle: auto, label: text(font: "Noto Sans", [-2])),
+			edge(<I1>, <H2>, marks: (none, "latex"), label-pos: 0.25, label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<I2>, <H2>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<I3>, <H4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [-2])),
+			edge(<H1>, <H3>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<H2>, <H3>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<H3>, <H5>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<H4>, <H5>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+2])),
+			edge(<H5>, <O1>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [-1])),
+			edge(<O1>, (3, 0.5), marks: (none, "latex"), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]))
 		)]
 	)
 ]
 
-// Not exactly the construction espoused by the textbook but correct nonetheless
+// FIXME: Not exactly the construction espoused by the textbook but correct nonetheless
 
 In the first case, the multilayer perceptron always has $3$ layers
 (one input, one hidden, one output) but the total number of neurons 
 scales exponentially with the number of inputs. In the second case,
 both the number of layers and the total number of neurons scales
-linearly. For large values of $n$, the advantage is considerable.
+linearly. For large values of $n$, the advantage is noticeable: with
+$n = 10$, a $3$-layer perceptron would need $2^(10 - 1) + 10 + 1 =
+523$ neurons, while a multilayer perceptron build with the second
+approach would need $4 dot 10 - 3 = 37$ neurons.
 
 Using more than one hidden layer promises, in many cases, to give the
 same result for the same task (if not better) as a $3$-layer of $4$-layer
@@ -108,7 +120,7 @@ overfitting is the so-called *dropout training*, which consists in
 disabling some hidden neurons at random during each forward and backward
 propagation iteration.
 
-// Weight decay and sparsity constraints aren't clear.
+// FIXME: Weight decay and sparsity constraints aren't clear.
 
 Another concern of deep learning is preventing *vanishing gradients*.
 The phenomena of vanishing gradients occurr when the first hidden
@@ -294,6 +306,4 @@ trained already, and even if the gradient vanishes this is not a much
 of an issue because their optimal parameters have most likely been
 found already.
 
-// Convolutional neural network
-
-// Sensitivity analysis
+// FIXME: add convolutional neural network

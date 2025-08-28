@@ -167,7 +167,7 @@ other t-norms because it is *idempotent*, meaning that $t(x, x) = x$ for
 all $x in [0, 1]$. This might seem a mandatory requirement, but it is not.
 There are scenarios where idempotency is actually undesireable.
 
-// Maybe add the example of the house sale.
+// FIXME: maybe add the example of the house sale.
 
 A function $s: [0, 1]^(2) mapsto [0, 1]$ is said to be a $t$-*conorm*,
 or *triangular conorm*, if it possesses the first three properties

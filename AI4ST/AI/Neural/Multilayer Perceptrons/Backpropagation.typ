@@ -206,7 +206,7 @@ $ frac(partial "net"_(s)^((l)), partial "net"_(u)^((l))) &=
   cancel(frac(partial theta_(s), partial "net"_(u)^((l)))) =
   w_(s, u) frac(partial "out"_(u)^((l)), partial "net"_(u)^((l))) $
 
-// Why is theta cancelled?
+// FIXME: why is theta cancelled?
 
 Substituting in the previous expression:
 
@@ -249,7 +249,7 @@ $ Delta bold(w)_(u)^((l)) =
   eta (sum_(s in "succ"(u)) delta^((l))_(s) w_(s, u)) frac(partial "out"_(u)^((l)), partial "net"_(u)^((l))) bold("in")_(u)^((l)) =
   eta (sum_(s in "succ"(u)) delta^((l))_(s) w_(s, u)) "out"_(u)^((l)) (1 - "out"_(u)^((l))) bold("in")_(u)^((l)) $
 
-// Extend the online learning and batch learning algorithm for multilayer perceptrons
+// FIXME: maybe extend the online learning and batch learning algorithm for multilayer perceptrons
 
 The backpropagation algorithm allows one to train a multilayer
 perceptron with training examples, but is oblivious to the "shape"
@@ -311,7 +311,7 @@ are merged into a single set, that will be the training data. Common
 choices of $n$ are $5$ (_5-fold cross-validation_) and $10$
 (_10-fold cross-validation_).
 
-// Ok but what does it do?
+// FIXME: ok but what does it do?
 
 Another approach to prevent overfitting is what's called *early
 stopping*: during the training the accuracy of the multilayer

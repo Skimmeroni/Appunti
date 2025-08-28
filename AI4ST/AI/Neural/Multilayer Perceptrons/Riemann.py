@@ -3,18 +3,28 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
 def parabola(x):
-	return x**2
+	return np.pow(x, 2)
 
-interval = range(0, 6, 1)
-X = np.linspace(interval.start, interval.stop, num = 100)
+left_boundary = 0
+right_boundary = 6
+steps = [(1, "raw"), (0.1, "fine")]
+X = np.linspace(left_boundary, right_boundary, 1000)
 Y = parabola(X)
 
-fig, ax = plt.subplots()
-for i in interval:
-	ax.add_patch(Rectangle(xy = [i, 0], width = interval.step,
-                     height = parabola(i + interval.step / 2), alpha = 0.3,
-                     lw = 1, edgecolor = "black"))
-plt.plot(X, Y)
-
 if __name__ == "__main__":
-	plt.savefig("riemann.svg")
+	for step_size, name in steps:
+		fig, ax = plt.subplots()
+		ax.set_facecolor("#d3d3d322")
+		ax.grid()
+
+		for i in np.arange(left_boundary, right_boundary + step_size, step_size):
+			ax.add_patch(Rectangle(xy = [i - step_size / 2, 0], width = step_size,
+						 height = parabola(i), lw = 1, edgecolor = "black",
+						 facecolor = "#d6ddff"))
+
+		plt.plot(X, Y, color = "#ff6e9c", lw = 2)
+		ax.set_xlabel('X')
+		ax.set_ylabel('Y')
+
+		plt.savefig(f"riemann-{name}.svg", bbox_inches="tight")
+		plt.close()

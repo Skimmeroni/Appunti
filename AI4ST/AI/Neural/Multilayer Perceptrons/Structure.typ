@@ -32,8 +32,8 @@ following characteristics:
 - The network input function and the activation function of input neurons
   are the identity function (input neurons propagate the external input
   unchanged);
-- The network input function of hidden neurons is the weighted sum of
-  their inputs and the corresponding weights:
+- The network input function of hidden neurons and output neurons is the
+  weighted sum of their inputs and the corresponding weights:
 
   $ forall u in U_("hidden") union U_("out"), space
     f_("net")^((u))(w_(u_(1)), dots, w_(u_(n)), "in"_(u_(1)), dots, "in"_(u_(n))) =
@@ -274,8 +274,8 @@ neuron of $U_(1)$.
             edge-stroke: 1.5pt,
             spacing: 4em,
 
-            node((0, -1), stroke: 1.5pt + blue, text(font: "Noto Sans", [0]), radius: 2em, name: <I1>),
-            node((0, 0), stroke: 1.5pt + blue, text(font: "Noto Sans", [0]), radius: 2em, name: <I2>),
+            node((0, -1), stroke: 1.5pt + blue, radius: 2em, name: <I1>),
+            node((0, 0), stroke: 1.5pt + blue, radius: 2em, name: <I2>),
             node((1.5, -1), stroke: 1.5pt + green, text(font: "Noto Sans", [-1]), radius: 2em, name: <H1>),
             node((1.5, 0), stroke: 1.5pt + green, text(font: "Noto Sans", [-1]), radius: 2em, name: <H2>),
             node((3, -0.5), stroke: 1.5pt + fuchsia, text(font: "Noto Sans", [+3]), radius: 2em, name: <O1>),
@@ -292,11 +292,11 @@ neuron of $U_(1)$.
         )],
     )
 
-    Where two extra neurons on the left are added. These accomodate
+    Where two input neurons on the left are added. These accomodate
     the fact that the external input of the input layers of a multilayer
     perceptron cannot be weighted (a network of TLUs did not have this
-    restriction). The $theta$ parameter equal to $0$ ensures that the
-    input flows in unchanged.
+    restriction). These receive the external input and transmit it
+    unchanged.
 
     The output function can be set to be the identity function for any
     neuron. The activation function is the Heaviside function, using as
@@ -421,4 +421,6 @@ limited expressiveness.
     and "compress" them into two. The same process could be applied to
     the network as many times as desired, which means that the number
     of layers can be arbitrarely decreased.
+
+    // FIXME: it's not entirely clear where does linearity come into place
 ]
