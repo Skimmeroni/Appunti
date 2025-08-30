@@ -1,11 +1,37 @@
 #import "../../AI_definitions.typ": *
 
-@Multilayer-perceptron-approximates-Riemann induces a method for
-constructing a multilayer perceptron of $4$ layers that can approximate
-any function with arbitrary accuracy. However, as already stated this
-doesn't mean that said construction is the most efficient. An often
-cited example is the $n$-bit even parity function, the binary function
-defined as:
+Even though @Multilayer-perceptron-approximates-Riemann proves that
+any Riemann-integrable function can be encoded into a multilayer
+perceptron. This shows how powerful such objects are in theory, but
+doesn't give much information on the practical side. Even though it's
+true that a $4$-layer perceptron with an enormous amount of hidden
+neurons can encode any function with little to no error, this doesn't
+mean that it's actually feasible to implement a perceptron having that
+many hidden neurons.
+
+@Multilayer-perceptron-approximates-Riemann is an existence theorem,
+not an existence and uniqueness theorem: the fact that a function can
+be approximated with a $4$-layer perceptron does not imply that said
+construction is the only possible. Moreover, it doesn't even imply that
+it's the "best" construction, meaning the one that requires the smallest
+number of neurons for reaching the same approximation error.
+
+Technically speaking, it is possible to improve the approximation of a
+multilayer perceptron without increasing the number of hidden neurons.
+For example, an activation function that is not the Heaviside function
+might better model the shape of the function to encode. A complementary
+approach would be to use step widths that aren't uniform, using smaller
+steps where the function is heavily skewed (thus a linear approximation
+is poor) and larger steps where it is almost linear.
+
+Incorporating these improvements into a $4$-layer perceptron can ameliorate
+the problem of the growing number of hidden neurons. It would then seem as
+the $4$-layer model is always enough. However, it can be shown that a much
+greater approximating power can be obtained by abandoning the $4$-layer
+model completely, constructing perceptrons that have $5$ or even more layers.
+
+An often cited example is in encoding the $n$-bit even parity function,
+the binary function defined as:
 
 $ p_(n)(x_(1), dots, x_(n)) = cases(1 "if an even number of inputs is" 1,
                                     0 "if an odd number of inputs is" 1) $
@@ -94,14 +120,13 @@ $n = 10$, a $3$-layer perceptron would need $2^(10 - 1) + 10 + 1 =
 523$ neurons, while a multilayer perceptron build with the second
 approach would need $4 dot 10 - 3 = 37$ neurons.
 
-Using more than one hidden layer promises, in many cases, to give the
-same result for the same task (if not better) as a $3$-layer of $4$-layer
-perceptron. This is the focus of the area of *deep learning*, where the
-"depth" of a neural network is the length of the longest path in the
-graph underlying the network. In the case of multilayer perceptrons, a
-feed-forward neural network where elements of the same layer cannot be
-connected, the depth is the number of hidden layers plus one (the output
-layer).
+Multilayer perceptrons with many hidden layers are one of the
+interests of *deep learning*, the branch of neural network theory
+that studies neural networks that are _deep_. The "depth" of a neural
+network is the length of the longest path in the graph underlying the
+network. In the case of multilayer perceptrons, a feed-forward neural
+network where elements of the same layer cannot be connected, the depth
+is the number of hidden layers plus one (the output layer).
 
 The first concern of deep learning is preventing overfitting. Overfitting
 is mainly caused from the fact that, having many hidden layers and hence

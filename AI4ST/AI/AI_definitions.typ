@@ -2,6 +2,7 @@
 #import "@preview/ctheorems:1.1.3": *
 #import "@preview/cetz:0.4.1"
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+#import fletcher.shapes: hexagon
 #import "@preview/syntree:0.2.1": syntree
 #import "@preview/game-theoryst:0.1.0": *
 

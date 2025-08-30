@@ -9,7 +9,8 @@ neural network structured in layers, with the following characteristics:
   hidden layer;
 - The input layer and the hidden layer are fully connected: $C = (U_("in")
   times U_("hidden")) union C'$, $C' subset.eq (U_("hidden") times U_("out"))$;
-- The network input function of hidden neurons is a distance function:
+- The network input function of hidden neurons is a distance function. Its
+  arguments are the input(s) and the weight(s):
 
     $ forall u in U_("hidden") union U_("out"), space
       f_("net")^((u))(w_(u_(1)), dots, w_(u_(n)), "in"_(u_(1)), dots, "in"_(u_(n))) =
@@ -303,8 +304,11 @@ other, simply by complementing the previous network:
 	[#image("XOR.svg", width: 50%)]
 )
 
-The rectangular function isn't the only radial function. A similar choice
-is the *triangular function*:
+The rectangular function is simple to use, especially if the distance is
+bidimensional, because the capture area has the same activation value in
+any point. This doesn't have to be the case; a radial function can also
+assign different values to different points. An example is the *triangular
+function*:
 
 $ f_("act")("net", sigma) = cases(0 & "if" "net" > sigma,
                                   1 - display(frac("net", sigma)) & "otherwise") $
@@ -326,10 +330,24 @@ $ f_("act")("net", sigma) = cases(0 & "if" "net" > 2 sigma,
     [#image("cosine_down_to_zero.svg", width: 66%)]
 )
 
-The three aforementioned functions evaluate to $0$ over a given treshold.
-This isn't a necessary condition for a radial functions; indeed, there are
-radial functions with no boundary at all. One example is the *gaussian
-function*:
+The three aforementioned functions are bounded by a given treshold,
+meaning that they clearly define an area where the activation is not
+$0$ (potentially different from point to point) from the rest of the
+plane, where the activation is $0$.
+
+#figure(
+    caption: [Plot of the value of the triangular function with
+              $sigma = 0.5$ for each point in the $[-1, 1] times
+              [-1, 1]$ plane, computed on the distance from the
+              center $(0, 0)$ . The value decreases as the point
+              is further from the center, until becoming $0$ when
+              sufficiently far away],
+    [#image("triangular-radius.svg", width: 66%)]
+)
+
+There are radial functions that have no boundary at all, meaning that
+they always assign a non-zero activation to any point of the domain.
+One example is the *Gaussian function*:
 
 $ f_("act")("net", sigma) = e^(-display(frac("net"^(2), 2 sigma^(2)))) $
 
@@ -339,6 +357,15 @@ $ f_("act")("net", sigma) = e^(-display(frac("net"^(2), 2 sigma^(2)))) $
     [#image("gaussian.svg", width: 66%)]
 )
 
-Where an activation is always non-zero for all inputs, but becomes
-smaller and smaller as the input moves away from the center, until
-it becomes negligible.
+The activation is the highest in the center of the capture region
+and becomes smaller and smaller as the input is far away from the
+center, without ever going to $0$.
+
+#figure(
+    caption: [Plot of the value of the Gaussian function with
+              $sigma = 0.5$ for each point in the $[-1, 1] times
+              [-1, 1]$ plane, computed on the distance from the
+              center $(0, 0)$ . The value decreases as the point
+              is further from the center, but never vanishes.],
+    [#image("gaussian-radius.svg", width: 66%)]
+)

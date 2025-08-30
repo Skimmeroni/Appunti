@@ -8,11 +8,31 @@ with arbitrary accuracy, but this proof is very convoluted. Nonetheless,
 a "relaxed" version of this result, that concerns itself only with
 Riemann-integrable functions, is fairly approachable.
 
-First, consider an arbitrary function $f$ that is Riemann-integrable.
-By definition, it's always possible to approximate $f$ with arbitrary
-precision as a series of stepwise functions. The domain of the function
-is partitioned into $n$ steps delimited by the border points $x_(1),
-x_(2), dots, x_(n)$.
+Let $f$ be a function that is Riemann-integrable. To prove that there's
+at least one multilayer perceptron that can encode $f$, notice how it's
+always possible to approximate $f$ with arbitrary precision as a series
+of *stepwise functions*. A single stepwise function of extremes $a$ and
+$b$ and height $h$ is defined as:
+
+$ S_(a, b, h)(x) = cases(h & "if" a lt.eq x lt.eq b, 0 & "otherwise") $
+
+#figure(
+    caption: [Plot of the stepwise function, with three different
+              choices for the parameters],
+    [#image("stepwise.svg", width: 66%)]
+)
+
+To approximate $f$ this way, the domain of the function is first
+partitioned into $n$ steps, delimited by the border points $x_(1),
+x_(2), dots, x_(n)$. $f$ is then rewritten as a piecewise function,
+where each $i$-th piece has $x_(i)$ and $x_(i + 1)$ as extremes and
+$f((x_(i) + x_(i + 1)) slash 2)$, the function evaluated at the
+midpoint of the two extremes, as height:
+
+$ f(x) approx cases(f(display(frac(x_(1) + x_(2), 2))) & "if" x_(1) lt.eq x < x_(2),
+                   f(display(frac(x_(2) + x_(3), 2))) & "if" x_(2) lt.eq x < x_(3),
+                   dots.v,
+                   f(display(frac(x_(n - 1) + x_(n), 2))) & "if" x_(n - 1) lt.eq x < x_(n)) $
 
 #figure(
     caption: [The function $f(x) = x^(2)$, whose domain is restriced to
@@ -26,59 +46,59 @@ x_(2), dots, x_(n)$.
     )]
 ) <Square-MLP-approximation>
 
-It is easy to show that a single stepwise function of extremes $a$ and $b$
-and height $h$ can be encoded into a multilayer perceptron in the following
-way:
-
-#figure(
-    caption: [A multilayer perceptron that encodes a stepwise function
-              of extremes $a$ and $b$ and of height $h$.],
-    [#diagram(
-        edge-stroke: 1.5pt,
-        spacing: 4em,
-
-        node((0, 0), stroke: 1.5pt + blue, radius: 2em, name: <I1>),
-        node((1, -0.5), stroke: 1.5pt + green, text(font: "Noto Sans", [a]), radius: 2em, name: <H1>),
-        node((1, 0.5), stroke: 1.5pt + green, text(font: "Noto Sans", [b]), radius: 2em, name: <H2>),
-        node((2, 0), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 2em, name: <H3>),
-        node((3, 0), stroke: 1.5pt + fuchsia, radius: 2em, name: <O1>),
-
-        edge((-1, 0), <I1>, label-pos: 0.1, label-angle: auto, label-side: center, label: text(font: "Noto Sans", [x#sub[1]]), marks: (none, "latex")),
-        edge(<I1>, <H1>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<I1>, <H2>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
-        edge(<H1>, <H3>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
-        edge(<H2>, <H3>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
-        edge(<H3>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [h]), marks: (none, "latex")),
-        edge(<O1>, (4, 0), label-pos: 1.1, label-angle: auto, label-side: center, label: text(font: "Noto Sans", [y]), marks: (none, "latex")),
-    )],
-)
-
-If the input is smaller than $a$, then both hidden layers output $0$,
-which is fed into the second hidden layer outputting $0$ as well. If
-the input lies between $a$ and $b$, the hidden neuron at the top of
-the first hidden layer outputs $1$, the bottom one $0$. The hidden
-neuron in the second hidden layer receives as input $(+2 dot +1) +
-(0 dot +1) = +2$, hence it outputs $1$. The output neuron then outputs
-$+1 dot h = h$. If the input is bigger than $b$, then the output of
-the two hidden layers cancel out, and the final output is $0$.
-
-The idea behind proving that a Riemann-integrable function can be encoded
-into a multilayer perceptron is to prove that a multilayer perceptron can
-encode its stepwise function approximation.
+The idea is to first show that a multilayer perceptron can encode
+a single stepwise function, then show that it can also encode any
+piecewise approximation with arbitrary accuracy. This approach can
+be used not only for multilayer perceptrons, but for most neural
+networks in general.
 
 #theorem[
     Any Riemann-integrable function can be encoded with arbitrary
     accuracy into a multilayer perceptron of four layers.
 ] <Multilayer-perceptron-approximates-Riemann>
 #proof[
-    The construction of this perceptron (one input layer, one output
-    layer, two hidden layers) is as follows. The input layer has a
-    single neuron, whose external input is the point in the domain
-    of the function that one wishes to approximate. The output layer
-    is also single neuron, receiving the input and transmitting it
-    unchanged. All hidden neurons have a step function as activation
-    function, whereas the input and output neuron have the identity
-    function.
+    A single stepwise function $S_(a, b, h)(x)$ can be encoded into
+    a multilayer perceptron in the following way:
+
+    #figure(
+        caption: [A multilayer perceptron that encodes a stepwise function
+                of extremes $a$ and $b$ and of height $h$.],
+        [#diagram(
+            edge-stroke: 1.5pt,
+            spacing: 4em,
+
+            node((0, 0), stroke: 1.5pt + blue, radius: 2em, name: <I1>),
+            node((1, -0.5), stroke: 1.5pt + green, text(font: "Noto Sans", [a]), radius: 2em, name: <H1>),
+            node((1, 0.5), stroke: 1.5pt + green, text(font: "Noto Sans", [b]), radius: 2em, name: <H2>),
+            node((2, 0), stroke: 1.5pt + green, text(font: "Noto Sans", [+1]), radius: 2em, name: <H3>),
+            node((3, 0), stroke: 1.5pt + fuchsia, radius: 2em, name: <O1>),
+
+            edge((-1, 0), <I1>, label-pos: 0.1, label-angle: auto, label-side: center, label: text(font: "Noto Sans", [x#sub[1]]), marks: (none, "latex")),
+            edge(<I1>, <H1>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<I1>, <H2>, label-angle: auto, label: text(font: "Noto Sans", [+1]), marks: (none, "latex")),
+            edge(<H1>, <H3>, label-angle: auto, label: text(font: "Noto Sans", [+2]), marks: (none, "latex")),
+            edge(<H2>, <H3>, label-angle: auto, label: text(font: "Noto Sans", [-2]), marks: (none, "latex")),
+            edge(<H3>, <O1>, label-angle: auto, label: text(font: "Noto Sans", [h]), marks: (none, "latex")),
+            edge(<O1>, (4, 0), label-pos: 1.1, label-angle: auto, label-side: center, label: text(font: "Noto Sans", [y]), marks: (none, "latex")),
+        )],
+    )
+
+    If the input is smaller than $a$, then both hidden layers output $0$,
+    which is fed into the second hidden layer outputting $0$ as well. If
+    the input lies between $a$ and $b$, the hidden neuron at the top of
+    the first hidden layer outputs $1$, the bottom one $0$. The hidden
+    neuron in the second hidden layer receives as input $(2 dot 1) +
+    (0 dot 1) = 2$, hence it outputs $1$. The output neuron then outputs
+    $1 dot h = h$. If the input is bigger than $b$, then the output of
+    the two hidden layers cancel out, and the final output is $0$.
+
+    The entire $4$-layer perceptron is a generalized form of this
+    perceptron. The input layer has a single neuron, whose external
+    input is the point in the domain of the function that one wishes
+    to approximate. The output layer is also single neuron, receiving
+    the input and transmitting it unchanged. All hidden neurons have
+    a step function as activation function, whereas the input and
+    output neuron have the identity function.
 
     A neuron in the first hidden layer of the perceptron is added for
     each border point $x_(1), dots, x_(n)$. The weights of the incoming
@@ -87,22 +107,16 @@ encode its stepwise function approximation.
     whose $theta$ parameter is smaller than the output of the input
     layer (the external input, that is) will output $1$.
 
-    Each pair of adjacent border points induces $n - 1$ steps $[x_(1), x_(2)],
-    [x_(2), x_(3)], dots, [x_(n - 1), x_(n)]$. Evaluating the function in one
-    of these steps will yield a (more or less accurate) approximation for the
-    true value of the function in said step. A neuron is added to the second
-    hidden layer for each of these steps. Their parameters are chosen in such
-    a way that, for each $i$-th neuron in the second hidden layer, its output
-    will be $1$ if the external input is greater than $x_(i)$, but less than
-    $x_(i + 1)$. Since the outputs of the first hidden layer are binary (the
-    activation function is the stepwise function), choosing $theta$ equal to
-    $1$ and the weights equal to $plus.minus 2$ suffices.
+    A neuron is added to the second hidden layer for each step $[x_(1),
+    x_(2)], [x_(2), x_(3)], dots, [x_(n - 1), x_(n)]$. The output of each
+    of these neurons will be $1$ if the external input is greater than
+    $x_(i)$, but less than $x_(i + 1)$. This way, there is one and only
+    neuron in the second hidden layer whose output is $1$: the one that
+    lies in the interval approximating its evaluation.
 
-    This way, there is one and only neuron in the second hidden layer
-    whose output is $1$: the one that lies in the interval approximating
-    its evaluation. Let $overline(x)$ be the external input fed into the
-    network, and let the cutoff points of the steps be $x_(1), x_(2),
-    dots, x_(n)$. Suppose that:
+    Let $overline(x)$ be the external input fed into the network, and
+    let the cutoff points of the steps be $x_(1), x_(2), dots, x_(n)$.
+    Suppose that:
 
     $ x_(1) < x_(2) < dots < x_(i) lt.eq overline(x) lt.eq x_(i + 1) < dots < x_(n) $
 
@@ -118,10 +132,9 @@ encode its stepwise function approximation.
     total incoming input is $+2$ and $H(2, 1) = 1$.
 
     The weights of the output layer are the approximated values of evaluating
-    the function in each interval (the most obvious choice is the midpoint).
-    Since only one input to the output neuron is not null, its output will
-    precisely be the approximation of the value of the function with the
-    given (external) input.
+    the function in each interval. Since only one input to the output neuron
+    is not null, its output will precisely be the approximation of the value
+    of the function with the given (external) input.
 
     Increasing the number of neurons (of step functions) give a better and
     better approximation. If the step sizes were to become infinitesimally
@@ -193,43 +206,14 @@ encode its stepwise function approximation.
     )
 ]
 
-Note that the degree of approximation in @Multilayer-perceptron-approximates-Riemann
-is given by the area between the function to approximate and the output of the
-multilayer perceptron. However, even though this area can be reduced at will,
-this does not mean that the difference between its output and the function to
-approximate is less than a certain error bound everywhere. That is, this area
-can only give an average measure of the quality of approximation.
-
-For example, consider a case in which a function possesses a very thin spike
-(like a very steep gaussian curve) which is not captured by any stair step.
-In such a case the area between the function to represent and the output of
-the multilayer perceptron might be small (because the spike is thin), but at
-the location of the spike the deviation of the output from the true function
-value can nevertheless be considerable.
-
-There are ways, however, to improve the degree of approximation without
-resorting exclusively to reducing the step size. For example, choosing
-an activation function for the hidden layers that is not the Heaviside
-function (like, say, the logistic function) might better model the shape
-of the function at hand. A complementary approach would be to use step
-widths that aren't uniform, but that scale with the skewdness of the
-function. That is, using many steps where the function is heavily curved
-(and thus a linear approximation is poor) and little steps where it is
-almost linear.
-
-Also note that @Multilayer-perceptron-approximates-Riemann can also be
-applied to functions having more than one argument. Instead of approximating
-the function with one-dimensional step functions, it is approximated with
-$k$-dimensional "step functions" (with $k$ being the arity of the function)
-by partitioning the input space into $k$-dimensional hypercubes.
-
-Finally, @Multilayer-perceptron-approximates-Riemann does not restrict
-itself to continuous functions, since the definition of a Riemann-integrable
-does not require continuity #footnote[Riemann-integrable but discontinuous
+@Multilayer-perceptron-approximates-Riemann does not restrict itself to
+continuous functions, since the definition of a Riemann-integrable does
+not require continuity #footnote[Riemann-integrable but discontinuous
 functions are said to be _continuous almost everywhere_. This is because,
 despite not being continuous, they still behave "nicely enough" to be
-integrated.]. However, if the function is continuous, the same result can
-be achieved with just $3$ layers instead of $4$.
+integrated.]. However, if the function is continuous, the same result
+can be achieved with just $3$ layers instead of $4$ by using a slightly
+different approach.
 
 #theorem[
     Any continuous Riemann-integrable function can be approximated with
@@ -295,17 +279,34 @@ be achieved with just $3$ layers instead of $4$.
     )
 ]
 
-Even though @Multilayer-perceptron-approximates-Riemann proves that any
-Riemann-integrable function can be encoded into a multilayer perceptron,
-this result is not very useful on its own. This is because it does not
-specify how many neurons ought to be added: if the number of neurons
-necessary to achieve a satisfactory approximation is infinitely large,
-such a perceptron cannot be constructed in practice.
+@Multilayer-perceptron-approximates-Riemann has been stated for
+functions with a single argument, but can be readily extended to
+functions having arity $k > 1$. Instead of approximating the function
+with one-dimensional stepwise functions, it is approximated with
+$k$-dimensional "step functions" by partitioning the input space
+into $k$-dimensional hypercubes. This isn't transferred that easily
+to @Multilayer-perceptron-approximates-Riemann-continuous, because
+the dependency between the arguments has to be taken into account.
 
-Also, the fact that a function can be approximated with a $4$-layer
-perceptron does not imply that said construction is the only possible,
-neither that it is the most efficient (giving the best approximation
-with the least effort). There may be a perceptron with a different
-network structure that encodes the same function and whose approximation
-is just as "good" (if not better), but the theorem cannot prove its
-existence.
+Note that the degree of approximation in @Multilayer-perceptron-approximates-Riemann
+is given by the area between the function to approximate and the output of the
+multilayer perceptron. However, even though this area can be reduced at will,
+this does not mean that the difference between its output and the function to
+approximate is less than a certain error bound everywhere. That is, this area
+can only give an average measure of the quality of approximation.
+
+For example, consider a case in which a function possesses a very thin spike
+(like a very steep gaussian curve) which is not captured by any stair step.
+In such a case the area between the function to represent and the output of
+the multilayer perceptron might be small (because the spike is thin), but at
+the location of the spike the deviation of the output from the true function
+value can nevertheless be considerable.
+
+#figure(
+    caption: [Plot of the function $x + exp(1 - (10x - 41)^(2))$,
+              approximated with a series of stepwise functions of
+              width $1 slash 4$. The spike in the middle is not
+              truly captured by any step, hence the local error
+              is greater than the average error.],
+    [#image("spike.svg", width: 66%)]
+)

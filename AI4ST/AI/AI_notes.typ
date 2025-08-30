@@ -16,8 +16,8 @@
 #include "Introduction/Optimization.typ"
 == Local search algorithms
 #include "Introduction/Local Search Algorithms/Local.typ"
-== K-Means clustering
-#include "Introduction/Kmeans.typ"
+== K-means clustering
+#include "Introduction/K-means Clustering/Kmeans.typ"
 #pagebreak()
 
 = Neural Networks
@@ -38,7 +38,7 @@
 === Approximating functions using a multilayer perceptron
 #include "Neural/Multilayer Perceptrons/Approximation.typ"
 === Training a multilayer perceptron
-#include "Neural/Multilayer Perceptrons/Backpropagation.typ"
+#include "Neural/Multilayer Perceptrons/Training.typ"
 === Deep learning
 #include "Neural/Multilayer Perceptrons/Deep.typ"
 === Sensitivity analysis
@@ -47,8 +47,11 @@
 #include "Neural/Radial Basis Functions/Structure.typ"
 === Approximating functions using a radial basis function network
 #include "Neural/Radial Basis Functions/Approximation.typ"
-=== Training radial basis function networks
+=== Training a radial basis function network
 #include "Neural/Radial Basis Functions/Training.typ"
+== Self-organizing maps
+=== Structure of a self-organizing map
+#include "Neural/Self-Organizing Maps/Structure.typ"
 #pagebreak()
 
 = Fuzzy logic
