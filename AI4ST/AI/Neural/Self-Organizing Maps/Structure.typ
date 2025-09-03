@@ -13,28 +13,10 @@ feed-forward neural network with the following characteristics:
 - The activation function of the output neurons is a radial function;
 - The output function of the output neurons is the identity function.
 
-The output may be discretized according to the "winner takes all"
-principle: the neuron with the highest activation produces the
-output $1$, all other neurons produce the output $0$
-
-// What is that supposed to mean?
-
-In some sense, a self-organizing map is similar to a radial basis
-function network where the output layer and the hidden layer have
-been merged into one.
-
-In the same fashion, the weights coming into the output layer determine
-the coordinates of a center, from which the distance of the input is
-measured; in the context of self-organizing maps, this center is called
-*reference vector*. The closer the input to a reference vector, the
-higher the activation of the corresponding neuron. In general, the
-$sigma$ parameter of all output neurons (the radius of the capture
-region) is always the same.
-
-One notable feature of self-organizing maps is that the neurons in the
-output layer don't necessarely operate in a vacuum. In particular, a
-*neighborhood relationship* forms between the output neurons, described
-by a distance function:
+A self-organizing map is a generalization of the LVQ network, where the
+relationship between output neurons is more elaborate. In particular,
+the *neighborhood relationship* that exists between the output neurons
+is described by a distance function:
 
 $ d_("neurons"): U_("out") times U_("out") mapsto RR_(0)^(+) $
 
@@ -58,24 +40,6 @@ map as a (usually two-dimensional) grid.
         }
 	})]
 )
-
-The neighborhood relationship may also be missing, which is formally
-represented by an extreme distance measure for the neurons: each neuron
-has distance $0$ to itself and infinite distance to all other neurons.
-By choosing this distance measure, the neurons become effectively independent.
-
-If a neighborhood relationship is missing and the output is discretized,
-a self-organizing map describes a so-called *vector quantization* of the
-input space: the input space is divided into as many regions as there are
-output neurons. This is achieved by assigning to an output neuron all
-points of the input space for which the neuron yields the highest
-activation.
-
-Since all output neurons have the same functions, to an output neuron
-all points of the input space are assigned that are closer to the neuron's
-reference vector than to the reference vector of any other output neuron.
-This tessellation can be represented by a so-called *Voronoi diagram*,
-that shows the way in which the input space is partitioned into regions.
 
 The goal of having a self-organizing map learn is to have reference
 vectors that are close to each other in the input space relate to output

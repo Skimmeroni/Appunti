@@ -188,9 +188,8 @@ the decision border on a cartesian plane.
 
 #figure(
 	caption: [Going clockwise from top left: a cartesian plane
-			  partitioned by the function of the TLU that computes
-			  a TLU that computes conjunction, disjunction, implication
-			  and negation.],
+			  partitioned by the TLU that computes the conjunction,
+			  disjunction, implication and negation.],
 	[#grid(
 		columns: (0.5fr, 0.5fr),
 		row-gutter: 30pt,
