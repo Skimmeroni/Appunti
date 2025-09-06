@@ -65,9 +65,9 @@ given two events $A$ and $B$:
   containing all outcomes not contained in $A$. That is, $A^(c)$ occurs
   if and only if $A$ does not occur. $A^(c)$ is also called the *complementary
   event* of $A$;
-- The *intersection* of $A$ and $B$, denoted as $A sect B$, corresponds
+- The *intersection* of $A$ and $B$, denoted as $A inter B$, corresponds
   to the event containing all outcomes contained both in $A$ and in $B$.
-  That is, $A sect B$ occurs if and only if both $A$ and $B$ occur at
+  That is, $A inter B$ occurs if and only if both $A$ and $B$ occur at
   the same time;
 - The *union* of $A$ and $B$, denoted as $A union B$, corresponds to the
   event containing all outcomes contained either in $A$, in $B$ or in both.
@@ -91,7 +91,7 @@ given two events $A$ and $B$:
 	  intersection, representing the event "a male as first born and a female
 	  as third born" is given by:
 
-	  $ {M M M, M M F, M F M, M F F} sect {M M F, M F F, F M F, F F F} =
+	  $ {M M M, M M F, M F M, M F F} inter {M M F, M F F, F M F, F F F} =
 	    {M M F, M F F} $
 ]
 
@@ -137,7 +137,7 @@ From such axioms, it is possible to derive many useful consequences.
 #proof[
 	Consider the countably infinite collection of events $emptyset,
 	emptyset, dots$. By definition, the null event is disjoint with
-	itself, since set algebra gives $emptyset sect emptyset = emptyset$.
+	itself, since set algebra gives $emptyset inter emptyset = emptyset$.
 	The collection $emptyset, emptyset, dots$ is therefore made up of
 	disjoint events, and by set algebra $emptyset union emptyset union
 	dots = emptyset$, therefore $P(emptyset union emptyset union dots) =
@@ -200,33 +200,33 @@ From such axioms, it is possible to derive many useful consequences.
 ]
 
 #theorem[
-	For any two events $A$ and $B$, $P(A union B) = P(A) + P(B) - P(A sect B)$.
+	For any two events $A$ and $B$, $P(A union B) = P(A) + P(B) - P(A inter B)$.
 ] <Probability-of-union-of-two-generic-events>
 #proof[
 	By set algebra, the event $A union B$ can itself be seen as the
-	union of two disjoint events, $A$ and $A^(c) sect B$. It is therefore
+	union of two disjoint events, $A$ and $A^(c) inter B$. It is therefore
 	possible to apply @3rd-Kolmogorov-axiom-for-finite-collections, resulting
 	in:
 
-	$ P(A union B) = P(A union (A^(c) sect B)) = P(A) + P(A^(c) sect B) $
+	$ P(A union B) = P(A union (A^(c) inter B)) = P(A) + P(A^(c) inter B) $
 
 	In the same fashion, the event $B$ can be seen as the union
-	of the disjoint events $A sect B$ and $A^(c) sect B$. Applying
+	of the disjoint events $A inter B$ and $A^(c) inter B$. Applying
 	@3rd-Kolmogorov-axiom-for-finite-collections gives:
 
-	$ P(B) = P((A sect B) union (A^(c) sect B)) = P(A sect B) +
-	  P(A^(c) sect B) $
+	$ P(B) = P((A inter B) union (A^(c) inter B)) = P(A inter B) +
+	  P(A^(c) inter B) $
 
-	Moving $P(A sect B)$ to the left side gives $P(B) - P(A sect B) =
-	P(A^(c) sect B)$. Substituting such expression in the first equation
-	gives $P(A union B) = P(A) + P(B) - P(A sect B)$.
+	Moving $P(A inter B)$ to the left side gives $P(B) - P(A inter B) =
+	P(A^(c) inter B)$. Substituting such expression in the first equation
+	gives $P(A union B) = P(A) + P(B) - P(A inter B)$.
 ]
 
 #theorem[
 	For any three events $A$, $B$ and $C$:
 
-	$ P(A union B union C) = P(A) + P(B) + P(C) - P(A sect B) - P(A sect C) -
-	P(B sect C) + P(A sect B sect C) $
+	$ P(A union B union C) = P(A) + P(B) + P(C) - P(A inter B) - P(A inter C) -
+	P(B inter C) + P(A inter B inter C) $
 ] <Probability-of-union-of-three-generic-events>
 #proof[
 	Works similarly as @Probability-of-union-of-two-generic-events.
@@ -345,7 +345,7 @@ Given two events $A$ and $B$ with $P(B) > 0$, the probability of $A$ to
 occur given that $B$ occurred is called the *conditional probability* of
 $A$ given $B$, and is given as:
 
-$ P(A divides B) = frac(P(A sect B), B) $
+$ P(A divides B) = frac(P(A inter B), B) $
 
 // Why is the formula like so?
 
@@ -371,7 +371,7 @@ $ P(A divides B) = frac(P(A sect B), B) $
 	$P(A_(j) divides B)$, also called the *posterior probability*, is
 	given as:
 
-	$ P(A_(j) divides B) = frac(P(A_(j) sect B), P(B)) =
+	$ P(A_(j) divides B) = frac(P(A_(j) inter B), P(B)) =
 	  frac(P(B divides A_(j)) P(A_(j)), sum_(i = 1)^(infinity)
 	  P(B divides A_(i)) P(A_(i))) $
 ] <Bayes-theorem>
@@ -431,16 +431,16 @@ An equivalent definition of independent events is as follows.
 Given two independent events $A$ and $B$, by the previous
 definition $P(A) = P(A divides B)$, so:
 
-$ P(A divides B) = frac(P(A sect B), P(B)) =>
-  P(A) = frac(P(A sect B), P(B)) =>
-  P(A sect B) = P(A) P(B) $
+$ P(A divides B) = frac(P(A inter B), P(B)) =>
+  P(A) = frac(P(A inter B), P(B)) =>
+  P(A inter B) = P(A) P(B) $
 
 Event independence can be extended to a situation with more than two events.
 Given a collection of $n$ events $A_(1), A_(2), dots, A_(n)$, such events are
 said to be *mutually independent* if for every $k = 2, 3, dots, n$ and for
 every subset of indices $i_(1), i_(2), dots, i_(k)$:
 
-$ P(A_(i, 1) sect A_(i, 2) sect dots sect A_(i, k)) =
+$ P(A_(i, 1) inter A_(i, 2) inter dots inter A_(i, k)) =
   P(A_(i, 1)) dot P(A_(i, 2)) dot  dots dot P(A_(i, k)) $
 
 Kolmogorov axioms define the properties of probability but do not offer

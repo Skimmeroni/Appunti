@@ -14,15 +14,15 @@
 
 = Descriptive statistics
 == Introduction
-#include "Descriptive/Introduction.typ"
+#include "Descriptive Statistics/Introduction/Introduction.typ"
 == Frequencies for a single variable
-#include "Descriptive/Frequency.typ"
+#include "Descriptive Statistics/Single Variables/Frequency.typ"
 == Frequencies for two variables
-#include "Descriptive/Correlation.typ"
+#include "Descriptive Statistics/Two Variables/Frequency.typ"
 == Central tendency indices
-#include "Descriptive/Central.typ"
+#include "Descriptive Statistics/Central Tendency Indices/Indices.typ"
 == Variability indices
-#include "Descriptive/Variability.typ"
+#include "Descriptive Statistics/Variability Indices/Indices.typ"
 #pagebreak()
 
 = Probability theory
@@ -34,15 +34,15 @@
 
 = Random variables
 == Discrete random variables
-#include "Variables/DiscreteRV.typ"
+#include "Random Variables/DiscreteRV.typ"
 == Known discrete random variables
-#include "Variables/KnownDRV.typ"
+#include "Random Variables/Known Discrete RVs/Known.typ"
 == Continuous random variables
-#include "Variables/ContinuousRV.typ"
+#include "Random Variables/ContinuousRV.typ"
 == Known continuous random variables
-#include "Variables/KnownCRV.typ"
+#include "Random Variables/Known Continuous RVs/Known.typ"
 == Joint probability distributions
-#include "Variables/Joint.typ"
+#include "Random Variables/Joint.typ"
 #pagebreak()
 
 = Inferential statistics
