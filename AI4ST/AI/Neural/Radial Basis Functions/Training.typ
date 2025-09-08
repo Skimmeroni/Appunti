@@ -166,13 +166,13 @@ formula, hence the error is always zero.
 
             node((-1.75, -1), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[2]])),
             node((-1.75, 0), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[1]])),
-            node((-0.5, -1), stroke: 1.5pt + fuchsia, radius: 2em, name: <I1>),
-            node((-0.5, 0), stroke: 1.5pt + fuchsia, radius: 2em, name: <I2>),
-            node((1, -2), text(font: "Noto Sans", [0.5]), radius: 2em, name: <H1>),
-            node((1, -1), text(font: "Noto Sans", [0.5]), radius: 2em, name: <H2>),
-            node((1, 0), text(font: "Noto Sans", [0.5]), radius: 2em, name: <H3>),
-            node((1, 1), text(font: "Noto Sans", [0.5]), radius: 2em, name: <H4>),
-            node((2.5, -0.5), text(font: "Noto Sans", [0]), stroke: 1.5pt + green, radius: 2em, name: <O1>),
+            node((-0.5, -1), radius: 2em, name: <I1>),
+            node((-0.5, 0), radius: 2em, name: <I2>),
+            node((1, -2), stroke: 1.5pt + green, text(font: "Noto Sans", [0.5]), radius: 2em, name: <H1>),
+            node((1, -1), stroke: 1.5pt + green, text(font: "Noto Sans", [0.5]), radius: 2em, name: <H2>),
+            node((1, 0), stroke: 1.5pt + green, text(font: "Noto Sans", [0.5]), radius: 2em, name: <H3>),
+            node((1, 1), stroke: 1.5pt + green, text(font: "Noto Sans", [0.5]), radius: 2em, name: <H4>),
+            node((2.5, -0.5), stroke: 1.5pt + fuchsia, text(font: "Noto Sans", [0]), radius: 2em, name: <O1>),
 
             edge((-1.75, -1), <I1>, marks: (none, "latex")),
             edge((-1.75, 0), <I2>, marks: (none, "latex")),
@@ -284,21 +284,21 @@ $ bold(w)_(u) approx bold(A)^(+) bold(o)_(u) =
 
             node((-1.25, 0.5), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[2]])),
             node((-1.25, -0.5), fill: none, stroke: none, text(font: "Noto Sans", [x#sub[1]])),
-            node((0, 0.5), stroke: 1.5pt + fuchsia, radius: 2em, name: <Theta1>),
-            node((0, -0.5), stroke: 1.5pt + fuchsia, radius: 2em, name: <Theta2>),
-            node((1.5, 0.5), text(font: "Noto Sans", [0.5]), radius: 2em, name: <Theta3>),
-            node((1.5, -0.5), text(font: "Noto Sans", [0.5]), radius: 2em, name: <Theta4>),
-            node((3, 0), text(font: "Noto Sans", [-0.362]), stroke: 1.5pt + green, radius: 2em, name: <Theta5>),
+            node((0, 0.5), radius: 2em, name: <I1>),
+            node((0, -0.5), radius: 2em, name: <I2>),
+            node((1.5, 0.5), stroke: 1.5pt + green, text(font: "Noto Sans", [0.5]), radius: 2em, name: <H1>),
+            node((1.5, -0.5), stroke: 1.5pt + green, text(font: "Noto Sans", [0.5]), radius: 2em, name: <H2>),
+            node((3, 0), stroke: 1.5pt + fuchsia, text(font: "Noto Sans", [-0.362]), radius: 2em, name: <O1>),
 
-            edge((-1, 0.5), <Theta1>, marks: (none, "latex")),
-            edge((-1, -0.5), <Theta2>, marks: (none, "latex")),
-            edge(<Theta1>, <Theta3>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [0])),
-            edge(<Theta1>, <Theta4>, marks: (none, "latex"), label-pos: 0.65, label-angle: auto, label: text(font: "Noto Sans", [+1])),
-            edge(<Theta2>, <Theta3>, marks: (none, "latex"), label-pos: 0.65, label-angle: auto, label: text(font: "Noto Sans", [0])),
-            edge(<Theta2>, <Theta4>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+1])),
-            edge(<Theta3>, <Theta5>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+1.3375])),
-            edge(<Theta4>, <Theta5>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+1.3375])),
-            edge(<Theta5>, (4, 0), marks: (none, "latex"), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]))
+            edge((-1, 0.5), <I1>, marks: (none, "latex")),
+            edge((-1, -0.5), <I2>, marks: (none, "latex")),
+            edge(<I1>, <H1>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [0])),
+            edge(<I1>, <H2>, marks: (none, "latex"), label-pos: 0.65, label-angle: auto, label: text(font: "Noto Sans", [+1])),
+            edge(<I2>, <H1>, marks: (none, "latex"), label-pos: 0.65, label-angle: auto, label: text(font: "Noto Sans", [0])),
+            edge(<I2>, <H2>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+1])),
+            edge(<H1>, <O1>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+1.3375])),
+            edge(<H2>, <O1>, marks: (none, "latex"), label-angle: auto, label: text(font: "Noto Sans", [+1.3375])),
+            edge(<O1>, (4, 0), marks: (none, "latex"), label-pos: 1.1, label-side: center, label: text(font: "Noto Sans", [y]))
         )]
     )
 ]

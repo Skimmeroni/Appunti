@@ -65,6 +65,12 @@
 === Structure of a self-organizing map
 #include "Neural/Self-Organizing Maps/Structure.typ"
 #pagebreak()
+== Hopfield networks
+=== Structure of a Hopfield network
+#include "Neural/Hopfield Networks/Structure.typ"
+=== Training a Hopfield network
+#include "Neural/Hopfield Networks/Training.typ"
+#pagebreak()
 
 = Fuzzy logic
 == Fuzzy sets
