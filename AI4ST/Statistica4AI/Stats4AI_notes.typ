@@ -7,9 +7,10 @@
 #show: thmrules.with(qed-symbol: $square$)
 
 #outline(indent: auto)
-#figure(
-	image("Stats4AI_cover.jpg")
-)
+#pagebreak()
+
+#v(50%)
+#figure(image("Stats4AI_cover.jpg"))
 #pagebreak()
 
 = Descriptive statistics
@@ -17,12 +18,12 @@
 #include "Descriptive Statistics/Introduction/Introduction.typ"
 == Frequencies for a single variable
 #include "Descriptive Statistics/Single Variables/Frequency.typ"
-== Frequencies for two variables
-#include "Descriptive Statistics/Two Variables/Frequency.typ"
 == Central tendency indices
 #include "Descriptive Statistics/Central Tendency Indices/Indices.typ"
 == Variability indices
 #include "Descriptive Statistics/Variability Indices/Indices.typ"
+== Frequencies for two variables
+#include "Descriptive Statistics/Two Variables/Frequency.typ"
 #pagebreak()
 
 = Probability theory
@@ -58,7 +59,7 @@
 #include "Inferential/Hypothesis.typ"
 #pagebreak()
 
-= Regression model
-== Simple linear regression
-#include "Regression/Simple_linear.typ"
-#pagebreak()
+//= Regression model
+//== Simple linear regression
+//#include "Regression/Simple_linear.typ"
+//#pagebreak()

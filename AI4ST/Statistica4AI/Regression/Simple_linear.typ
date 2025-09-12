@@ -49,6 +49,7 @@ the value of $x_(i)$.
 	#table(
 		columns: 20,
 		stroke: none,
+		fill: none,
 		..csv("example1.csv").flatten()
 	)
 

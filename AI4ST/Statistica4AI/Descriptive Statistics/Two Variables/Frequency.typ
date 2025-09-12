@@ -1,53 +1,44 @@
 #import "../../Stats4AI_definitions.typ": *
 
-In most cases, there is interest in analyzing more than one variable at a
-time for the same sample. For the sake of simplicity, consider a situation
-where only two variables are under analysis at the same time (it is trivial
-to generalize to $m$ variables), either both discrete or both continuous.
-The set of observations will therefore be in the form ${(x_(1), y_(1)),
-(x_(2), y_(2)), dots, (x_(n), y_(n))}$, where $x_(i)$ is the value coming
-from the first variable and $y_(i)$ is the value coming from the second
-variable.
+Most statistical enqiries are interested in analyzing more than one
+variable at the same time.
 
-Given two variables $X$ and $Y$, let $V = {(v_(j), v_(i))}$ with
-$1 lt.eq i lt.eq N$ and $1 lt.eq j lt.eq M$ be the set of all
-possible couples that can be constructed by choosing a value for
-$X$ and a value for $Y$. In the same fashion as the single variable
-case, it is possible to compute the *absolute frequency* $f_(j i)$
-as the number of observations in the sample having $v_(j)$ as the
-value for the first variable and $v_(i)$ as the value for the second
-variable.  From the absolute frequency it is possible to compute the
-*double absolute frequency distribution* as the function $f$ that,
-for any $(v_(j), v_(i))$, outputs the corresponding absolute frequency.
+Consider two discrete variables $X$ and $Y$. Suppose that a bivariate
+dataset is constructed from a sample of size $n$ of observations $O =
+((x_(1), y_(1)), (x_(2), y_(2)), dots, (x_(n), y_(n)))$ of $X$ and
+$Y$. The support of both variables considered at the same time is the
+Cartesian product of the two supports, that is $D(X, Y) = D(X) times
+D(Y)$.
 
-From the absolute frequency it is possible to define what is called the
-*cumulative absolute frequency* $F_(j, i)$, given by the sum of the absolute
-frequencies of all possible values $(v_(a), v_(b)) in V$ such that $v_(a)
-lt.eq v_(j)$ and $v_(b) lt.eq v_(i)$. As for the absolute frequency, it is
-possible to define the *cumulative double absolute frequency distribution* as
-the function $F$ that, for any $(v_(j), v_(i))$, outputs the corresponding
-cumulative absolute frequency.
+The *double absolute frequency* $f_(i, j)$ of $(d_(i), d_(j)) in
+D(X, Y)$ is defined as the number of observations in the sample
+that have $d_(i)$ as the value attained by $X$ and $d_(j)$ as the
+value attained by $Y$.
 
-$ F_(j, i) = sum_(a: v_(a) lt.eq v_(j), b: v_(b) lt.eq v_(i))^(|V|)
+$ f_(i, j) = abs({(x, y) | (x, y) in O, x = d_(i), y = d_(j)}) $
+
+From the double absolute frequency it is possible to define what
+is called the *double cumulative absolute frequency* $F_(i, j)$
+of $(d_(i), d_(j)) in D(X, Y)$ as the sum of the double absolute
+frequencies of all $(d_(a), d_(b)) in D(X, Y)$ such that $d_(a)
+lt.eq d_(i)$ and $d_(b) lt.eq d_(j)$.
+
+$ F_(i, j) = sum_(a: d_(a) lt.eq d_(i), b: d_(b) lt.eq d_(j))^(abs(D(X, Y)))
   f_(a, b) $
 
-The relative frequency $p_(j, i)$ is given by the ratio between the
-absolute frequency $f_(j, i)$ and the sample size $n$. As for the
-absolute frequency, it is possible to define the *double relative
-frequency distribution* as the function $p$ that, for any $(v_(j),
-v_(i))$, outputs the corresponding relative frequency.
+The *double relative frequency* $p_(i, j)$ of $(d_(i), d_(j)) in
+D(X, Y)$ is given by the ratio between the double absolute frequency
+$f_(i, j)$ and the sample size $n$.
 
-$ p_(j, i) = frac(f_(j, i), n) $
+$ p_(i, j) = frac(f_(i, j), n) $
 
-From the relative frequency it is possible to define what is called the
-*cumulative relative frequency* $P_(j, i)$, given by the sum of the relative
-frequencies of all possible values $(v_(a), v_(b)) in V$ such that $v_(a)
-lt.eq v_(j)$ and $v_(b) lt.eq v_(i)$. As for the relative frequency, it is
-possible to define the *cumulative double relative frequency distribution*
-as the function $P$ that, for any $(v_(j), v_(i))$, outputs the corresponding
-cumulative relative frequency.
+From the double absolute frequency it is possible to define what
+is called the *double cumulative relative frequency* $P_(i, j)$
+of $(d_(i), d_(j)) in D(X, Y)$ as the sum of the double relative
+frequencies of all $(d_(a), d_(b)) in D(X, Y)$ such that $d_(a)
+lt.eq d_(i)$ and $d_(b) lt.eq d_(j)$.
 
-$ P_(j, i) = sum_(a: v_(a) lt.eq v_(j), b: v_(b) lt.eq v_(i))^(|V|)
+$ P_(i, j) = sum_(a: d_(a) lt.eq d_(i), b: d_(b) lt.eq d_(j))^(abs(D(X, Y)))
   p_(a, b) $
 
 #exercise[
@@ -60,6 +51,7 @@ $ P_(j, i) = sum_(a: v_(a) lt.eq v_(j), b: v_(b) lt.eq v_(i))^(|V|)
 		table(
 			columns: 18,
 			stroke: none,
+			fill: none,
 			..csv("rooms_occupants_data.csv", delimiter: " ").flatten()
 		)
 	)
@@ -68,20 +60,32 @@ $ P_(j, i) = sum_(a: v_(a) lt.eq v_(j), b: v_(b) lt.eq v_(i))^(|V|)
 	#align(
 		center,
 		table(
+			inset: (
+				x: 10pt,
+				y: 9pt,
+			),
 			columns: 6,
 			[*Number of \ rooms*], [*Number of \ occupants*],
-			[*Absolute \ frequency*], [*Relative \ frequency*],
-			[*Cumulative \ absolute \ frequency*],
-			[*Relative \ absolute \ frequency*],
+			[*Double \ absolute \ frequency*], [*Double \ relative \ frequency*],
+			[*Double \ cumulative \ absolute \ frequency*],
+			[*Double \ cumulative \ relative \ frequency*],
 			..csv("rooms_occupants_result.csv").flatten()
 		)
 	)
 ]
 
-One way to obtain a graphical representation for two variables is the
-*heat map*, or *color map*: a table where the possible values for the
-two variables are arranged on the sides and each $(v_(j), v_(i))$ cell
-is coloured: said colour is as bright as $f_(j, i)$ is high.
+Frequencies for three or more variables can be defined following the
+same approach. Also, if one or more of the variables are continuous,
+it is still possible to assign them a frequency by partitioning the
+observations into classes.
+
+A known graphical representation for the double absolute frequency or
+double relative frequency is the *heat map*, or *color map*. A heat map
+is a rectangle partitioned into cells, where to each cell is assigned
+one member of the support. Each cell is colored with a different shade
+of the same color: the brightness of the color is proportional to the
+double absolute/relative frequency of the support element assigned to
+that cell.
 
 #exercise[
 	Draw a color map for the absolute frequency in @Flats-Occupants.
@@ -95,9 +99,24 @@ is coloured: said colour is as bright as $f_(j, i)$ is high.
 	)
 ]
 
-Aside from said frequencies, that are analogous to single
-variable frequencies, other frequencies can be considered
-when analyzing samples with two variables. One such example
-are *marginal frequencies*, frequencies computed on exclusively
-one of the two variables without taking into account the value
-of the other.
+When dealing with bivariate or multivariate data, it can still be
+interesting to know the frequency of the values of a single variable,
+without considering the value of the other(s). Frequencies that take
+into account only one variable in each observation neglecting the
+others are called *marginal frequencies*.
+
+For example, consider two variables $X$ and $Y$ and a sample of size
+$n$ of observations $O = ((x_(1), y_(1)), (x_(2), y_(2)), dots, (x_(n),
+y_(n)))$. For a $d_(i) in D(X)$, the marginal absolute frequency with
+respect to $X$ is defined as the number of observations in the sample
+that have $d_(i)$ as the value attained by $X$ and any value as the
+value attained by $Y$. On the other hand, for a $d_(j) in D(Y)$ the
+marginal absolute frequency with respect to $Y$ is defined as the
+number of observations in the sample that have any value as the
+value attained by $X$ and $d_(j)$ as the value attained by $Y$.
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ f_(i,) = abs({(x, y) | (x, y) in O, x = d_(i)}) $],
+	[$ f_(,j) = abs({(x, y) | (x, y) in O, y = d_(j)}) $]
+)
