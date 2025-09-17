@@ -27,13 +27,19 @@
 #pagebreak()
 
 = Probability theory
-== Probability
-#include "Probability/Probability.typ"
+== Sample spaces and events 
+#include "Probability Theory/Spaces.typ"
+== Axiomatic definition of probability
+#include "Probability Theory/Axiomatic Definition/Definition.typ"
 == Combinatorics
-#include "Probability/Combinatorics.typ"
+#include "Probability Theory/Combinatorics.typ"
+== Conditional probability
+#include "Probability Theory/Conditional.typ"
 #pagebreak()
 
 = Random variables
+== Random variables
+#include "Random Variables/RV.typ"
 == Discrete random variables
 #include "Random Variables/DiscreteRV.typ"
 == Known discrete random variables

@@ -1,11 +1,15 @@
 #import "../Stats4AI_definitions.typ": *
 
-*Combinatorics* is an area of mathematics primarily concerned with counting,
-that is the enumeration of the possible arrangements or configurations of
-specified structures.
+As long as the sample space is small and has a simple structure (a deck
+of cards, the faces on a die, ecc...), counting its elements one by one
+is sufficient to know its cardinality. However, for large sample spaces
+and for sample spaces with a non obvious structure, counting is unfeasible.
+The mathematical discipline concerned with counting, as in the enumeration
+of the possible arrangements or configurations of specified structures, is
+*combinatorics*.
 
-The most important building block of combinatorics is the *fundamental
-principle of counting*. Consider an experiment having $n$ components,
+The most important building block of combinatorics is the *Fundamental
+Principle of Counting*. Consider an experiment having $n$ components,
 with each $i$-th component having $x_(i)$ possible outcomes. The number
 of outcomes of the experiment as a whole is given by:
 
@@ -16,20 +20,24 @@ $ product_(i = 1)^(n) x_(i) = x_(1) dot x_(2) dot (dots) dot x_(n) $
 	by the roll of a die. How many outcomes does this experiment have?
 ]
 #solution[
-	A coin toss has two possible outcomes, while the roll of a die has
-	six. Therefore, the experiment as a whole has $6 dot 2 = 12$ possible
-	outcomes. Indeed:
+	A coin toss has two possible outcomes, while the roll of a die
+	has six. The number of outcomes of the experiment as a whole can
+	be computed applying the Fundamental Principle of Counting, giving
+	$6 dot 2 = 12$. This is confirmed by counting its elements one by
+	one.
 
 	#grid(
-		columns: (0.4fr, 0.6fr),
-		[$ Omega_(1) = {H, T} $
-		 $ Omega_(2) = {1, 2, 3, 4, 5, 6} $],
-		[$ Omega = {{H, 1}, {T, 1}, {H, 2}, {T, 2}, {H, 3}, {T, 3}, \
-				   {H, 4}, {T, 4}, {H, 5}, {T, 5}, {H, 6}, {T, 6}} $]
+		columns: (0.25fr, 0.75fr),
+		[$ Omega_(1) &= {H, T} \
+		   Omega_(2) &= {1, 2, 3, 4, 5, 6} $],
+		[$ Omega =
+		   Omega_(1) times Omega_(2) =
+		   {& {H, 1}, {T, 1}, {H, 2}, {T, 2}, {H, 3}, {T, 3}, \
+		   & {H, 4}, {T, 4}, {H, 5}, {T, 5}, {H, 6}, {T, 6}} $]
 	)
 ]
 
-Starting from the fundamental principle of counting, it is possible to
+Starting from the Fundamental Principle of Counting, it is possible to
 describe many common counting situations.
 
 A *sequence with repetition* is a situation dealing with ordered sequences
@@ -78,6 +86,9 @@ elements (none repeated) chosen among $n$ with $k lt.eq n$, such that:
 
 $ binom(n, k) = frac(n!, k! (n - k)!) =
   frac(n dot (n - 1) dot (n - 2) dot (dots) dot (n - k + 1), k!) $
+
+The expression $binom(n, k)$ is called *binomial* and is read "$n$ choose
+$k$".
 
 #exercise[
 	In how many ways is it possible to arrange $20$ people in groups of $4$?

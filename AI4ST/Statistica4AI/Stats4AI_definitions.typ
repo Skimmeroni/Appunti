@@ -1,6 +1,9 @@
 #import "@preview/ctheorems:1.1.3": *
+#import "@preview/cetz:0.4.0"
+#import "@preview/cetz-venn:0.1.4": venn2, venn3
 
 #let theorem = thmbox("theorem", "Theorem", fill: rgb("#e7f7e6"))
+#let axiom = thmbox("axiom", "Axiom", fill: rgb("#d6ffff"))
 #let lemma = thmbox("lemma", "Lemma", fill: rgb("#f7ebf4"))
 #let corollary = thmbox("corollary", "Corollary", fill: rgb("#f7ebf4"))
 #let proof = thmproof("proof", "Proof")
