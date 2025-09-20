@@ -1,52 +1,78 @@
 #import "../Stats4AI_definitions.typ": *
 
-Kolmogorov axioms define the properties of probability but do not offer
-a method for assigning them to events. The simplest approaches, such as
-assigning the same probability to each event, are far to weak to model
-reality. Also, the sample space and the events are different from experiment
-to experiment, making it hard to generalize a coherent theory of probability.
-A more powerful concept to be introduced which can help model probability is
-the *random variable*.
+Approaching experiments by constructing a model that operates case
+by case (tossing a coin, rolling a dice, drawing a card, ecc...)
+is insufficient if the goal is to put probability theory on solid
+grounds. What is needed is to _abstract_ the modeling aspects in
+such a way that they are applicable everywhere.
 
-A random variable can be conceived as a mapping from the sample space
-to the real line. In other words, a random variable is a function that
-assigns a probability to any possible event of the sample space. Given
-a sample space $cal(S)$, a random variable $X$ for such sample space is
-defined as $X : cal(S) |-> RR$, and the probability of such variable
-to assume a certain value $x$ of the sample space, called its *realization*,
-is denoted as $P(X = x)$.
+Instead of referring to the possible outcomes of an experiment as
+they are, a better way is to map each outcome (each simple event)
+to a number with a fixed mapping rule. For a given sample space
+$cal(S)$, any mapping from $cal(S)$ to $RR$ is called a *random
+variable*. The name "random variable" highlights two aspects: it's
+a "variable" because different numerical values are possible, but
+it's also "random" because the observed value depends on which of
+the possible experimental outcomes results.
+
+Random variables are generally denoted with uppercase letters. For
+a given sample space $cal(S)$ and an event $s in cal(S)$, let $X :
+cal(S) mapsto RR$ be a random variable. The real number that is
+mapped by $X$ to $s$ is $X(s)$. $X$ may not be injective, meaning
+that more than one event can be mapped to the same number. For any
+random variable $X$, the set of possible values that $X$ can return
+(its image) is also called its *support*, denoted as $D(X)$.
+
+Like events, it's possible to assign probabilities to random
+variables: the probability assigned to a certain mapping $X(s)$
+with $s in cal(S)$ is just the probability assigned to $s$,
+meaning that $P(X(s)) = P(s)$. With a slight abuse of notation,
+it is much more common to write $P(X(s))$ as $P(X = X(s))$,
+emphasising the value returned by the variable rather than the
+outcome of the experiment which resulted in said value.
 
 #exercise[
-	Suppose a real estate investment has been carried out, and there are
-	three apartments of different value ready to be sold. Assuming that
-	the probability of selling one, two or three of those is the same,
-	model this situation using a random variable.
-]
+	Consider an experiment consisting in tossing three coins. Construct a
+	random variable that maps each outcome to the number of heads appearing
+	in that outcome.
+] <Random-variables>
 #solution[
-	It is possible to model this scenario using a random variable $X$, whose
-	realizations correspond to which and how many apartments were sold. Each
-	realization can be conceived as a triple $(a_(1), a_(2), a_(3))$, where
-	each $a_(i)$ has value $1$ if the $i$-th apartment was sold and $0$
-	otherwise:
+	The sample space of the experiment is (referring to @Experiments):
 
-	$ Omega = {(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), (1, 0, 0),
-	  (1, 0, 1), (1, 1, 0), (1, 1, 1)} $
+	$ cal(S) = {T T T, T T H, T H T, H T T, T H H, H H T, H T H, H H H} $
 
-	The realizations of $X$ correspond to the events with a matching
-	number of $1$s. To each value of $X$ is then possible to assign a
-	value of probability by equally dividing the total probability among
-	the events, such that $P(Omega) = 1$.
+	The number of heads in each possible outcome is $0$, $1$, $2$ or $3$.
+	These are captured by the following events:
 
 	#grid(
-		columns: (0.45fr, 0.55fr),
-		[$ X(0, 0, 0) &= 0 \
-		   X(0, 0, 1) &= X(1, 0, 0) = X(0, 1, 0) = 1 \
-		   X(1, 1, 0) &= X(0, 1, 1) = X(1, 0, 1) = 2 \
-		   X(1, 1, 1) &= 3 $],
-		[$ P(X = 0) &= P({(0, 0, 0)}) = 12.5 percent \
-		   P(X = 1) &= P({(0, 0, 1), (1, 0, 0), (0, 1, 0)}) = 37.5 percent \
-		   P(X = 2) &= P({(1, 1, 0), (0, 1, 1), (1, 0, 1)}) = 37.5 percent \
-		   P(X = 3) &= P({(1, 1, 1)}) = 12.5 percent $]
+		columns: (0.5fr, 0.5fr),
+		[$ "Zero heads"  &= {T T T} \
+		   "One head"    &= {T T H, T H T, H T T} $],
+		[$ "Two heads"   &= {T H H, H H T, H T H} \
+		   "Three heads" &= {H H H} $]
+	)
+
+	Let $X$ be the random variable that maps each possible event to a
+	number, counting the number of heads in such outcome. The support
+	of $X$ is $D(X) = {0, 1, 2, 3}$. Since $cal(S)$ is discrete, the
+	mappings described by $X$ can be enumerated:
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ X(T T T) &= 0 \
+		   X(T T H) &= X(T H T) = X(H T T) = 1 $],
+		[$ X(T H H) &= X(H H T) = X(H T H) = 2 \
+		   X(H H H) &= 3 $]
+	)
+
+	Probabilities are assigned by invoking the Principle of Indifference:
+
+	#grid(
+		columns: (0.5fr, 0.5fr),
+		[$ P(X = 0) &= P({T T T}) = frac(1, 8) \
+		   P(X = 1) &= P({T T H, T H T, H T T}) = frac(3, 8) $],
+		[$ P(X = 2) &= P({T H H, H H T, H T H}) = frac(3, 8) \
+		   P(X = 3) &= P({H H H}) = frac(1, 8) $]
 	)
 ]
 
@@ -60,5 +86,3 @@ continuous if the two following properties apply:
   in a disjoint union of such intervals;
 + The probability of the random variable to assume a specific value is
   always zero.
-
-The set of values that a random variable can assume is called its *support*.

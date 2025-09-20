@@ -41,11 +41,11 @@
 == Random variables
 #include "Random Variables/RV.typ"
 == Discrete random variables
-#include "Random Variables/DiscreteRV.typ"
+#include "Random Variables/Discrete RVs/RV.typ"
 == Known discrete random variables
 #include "Random Variables/Known Discrete RVs/Known.typ"
 == Continuous random variables
-#include "Random Variables/ContinuousRV.typ"
+#include "Random Variables/Continuous RVs/RV.typ"
 == Known continuous random variables
 #include "Random Variables/Known Continuous RVs/Known.typ"
 == Joint probability distributions

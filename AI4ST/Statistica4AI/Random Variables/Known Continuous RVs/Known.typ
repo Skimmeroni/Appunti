@@ -25,11 +25,11 @@ said variable are:
 
 Indeed, the relation between the two holds:
 
-$ integral_(-infinity)^(x) f(t) d t =
+$ integral_(-infinity)^(x) f(t) d t &=
   integral_(-infinity)^(a) f(t) d t +
   integral_(a)^(x) f(t) d t =
-  0 + integral_(a)^(x) frac(1, b - a) d t =
-  frac(1, b - a) integral_(a)^(x) 1 d t =
+  0 + integral_(a)^(x) frac(1, b - a) d t = \
+  &= frac(1, b - a) integral_(a)^(x) 1 d t =
   frac(1, b - a) (x - a) = frac(x - a, b - a) $
 
 #theorem[
@@ -43,39 +43,29 @@ $ integral_(-infinity)^(x) f(t) d t =
 	)
 ] <Expected-value-variance-Uniform>
 #proof[
-	$ E(X) = integral_(-infinity)^(+infinity) x dot f(x) d x =
-	integral_(-infinity)^(a) x dot f(x) d x +
-	integral_(a)^(b) x dot f(x) d x +
-	integral_(b)^(+infinity) x dot f(x) d x = \
-	0 + integral_(a)^(b) x (frac(1, b - a)) d x + 0 =
-	frac(1, b - a) integral_(a)^(b) x d x =
-	frac(1, b - a) (frac(b^(2), 2) - frac(a^(2), 2)) =
-	frac(1, cancel((b - a))) frac(cancel((b - a))(b + a), 2) =
-	frac(b + a, 2) $
+	The expected value is given by:
 
-	$ V(X) = integral_(-infinity)^(+infinity) (x - E(X))^(2) dot f(x) d x =
-	integral_(-infinity)^(a) (x - E(X))^(2) dot f(x) d x +
-	integral_(a)^(b) (x - E(X))^(2) dot f(x) d x + \
-	integral_(b)^(+infinity) (x - E(X))^(2) dot f(x) d x =
-	0 + integral_(a)^(b) (x - frac(b + a, 2))^(2) (frac(1, b - a)) d x + 0 = \
-	frac(1, b - a) integral_(a)^(b) x^(2) + frac((b + a)^(2), 4) - (b + a)x
-	d x = frac(1, b - a) (integral_(a)^(b) x^(2) d x + integral_(a)^(b)
-	frac((b + a)^(2), 4) d x - integral_(a)^(b) (b + a)x d x) = \
-	frac(1, b - a) integral_(a)^(b) x^(2) d x +
-	frac((b + a)^(2), 4(b - a)) integral_(a)^(b) 1 d x
-	- frac(b + a, b - a) integral_(a)^(b) x d x =
-	frac(1, b - a) (frac(b^(3), 3) - frac(a^(3), 3)) +
-	frac((b + a)^(2), 4 cancel((b - a))) cancel((b - a)) - \
-	frac(b + a, b - a) (frac(b^(2), 2) - frac(a^(2), 2)) =
-	frac(1, cancel((b - a))) frac(cancel((b - a))(b^(2) + b a + a^(2)), 3) +
-	frac((b + a)^(2), 4 ) - frac(b + a, cancel((b - a)))
-	frac(cancel((b - a))(b + a), 2) = \
-	frac((b + a)^(2) - b a, 3) + frac((b + a)^(2), 4) - frac((b + a)^(2), 2) =
-	frac(4(b + a)^(2) - 4 b a + 3(b + a)^(2) - 6(b + a)^(2), 12) = \
-	frac((b + a)^(2) - 4 b a , 12) =
-	frac(b^(2) + a^(2) + 2 b a - 4 b a , 12) =
-	frac(b^(2) + a^(2) - 2 b a, 12) =
-	frac((b - a)^(2), 12) $
+	$ E(X) &= integral_(-infinity)^(+infinity) x dot f(x) d x =
+	          integral_(-infinity)^(a) x dot f(x) d x + integral_(a)^(b) x dot f(x) d x + integral_(b)^(+infinity) x dot f(x) d x = \
+	       &= 0 + integral_(a)^(b) x (frac(1, b - a)) d x + 0 =
+	          frac(1, b - a) integral_(a)^(b) x d x =
+	          frac(1, b - a) (frac(b^(2), 2) - frac(a^(2), 2)) = \
+	       &= frac(1, cancel((b - a))) frac(cancel((b - a))(b + a), 2) =
+	          frac(b + a, 2) $
+
+	The variance is given by:
+
+	$ V(X) &= integral_(-infinity)^(+infinity) (x - E(X))^(2) dot f(x) d x =
+	          0 + (integral_(a)^(b) (x - E(X))^(2) dot f(x) d x) + 0 = \
+	       &= integral_(a)^(b) (x - frac(b + a, 2))^(2) (frac(1, b - a)) d x =
+	          frac(1, b - a) integral_(a)^(b) x^(2) + frac((b + a)^(2), 4) - (b + a)x d x = \
+	       &= frac(1, b - a) (integral_(a)^(b) x^(2) d x + integral_(a)^(b) frac((b + a)^(2), 4) d x - integral_(a)^(b) (b + a)x d x) = \
+	       &= frac(1, b - a) integral_(a)^(b) x^(2) d x + frac((b + a)^(2), 4(b - a)) integral_(a)^(b) 1 d x - frac(b + a, b - a) integral_(a)^(b) x d x = \
+	       &= frac(1, b - a) (frac(b^(3), 3) - frac(a^(3), 3)) + frac((b + a)^(2), 4 cancel((b - a))) cancel((b - a)) - frac(b + a, b - a) (frac(b^(2), 2) - frac(a^(2), 2)) = \
+	       &= frac(1, cancel((b - a))) frac(cancel((b - a))(b^(2) + b a + a^(2)), 3) + frac((b + a)^(2), 4 ) - frac(b + a, cancel((b - a))) frac(cancel((b - a))(b + a), 2) = \
+	       &= frac(b^(2) + b a + a^(2), 3) + frac(a^(2) + b^(2) + 2 a b, 4) - frac(a^(2) + b^(2) + 2 a b, 2) = \
+	       &= frac(4b^(2) + 4b a + 4a^(2) + 3a^(2) + 3b^(2) + 6 a b - 6a^(2) - 6b^(2) - 12a b, 12) = \
+	       &= frac(a^(2) + b^(2) - 2 a b, 12) = frac((b - a)^(2), 12) $
 ]
 
 === Normal random variable
@@ -172,11 +162,11 @@ E(lambda)$) if the pdf and cdf of said variable are:
 
 Indeed, the relation between the two holds:
 
-$ integral_(-infinity)^(x) f(t) d t =
+$ integral_(-infinity)^(x) f(t) d t &=
   integral_(-infinity)^(0) f(t) d t +
   integral_(0)^(x) f(t) d t =
-  0 + integral_(0)^(x) lambda e^(-lambda t) d t =
-  integral_(0)^(-lambda x) cancel(lambda) frac(-1, cancel(lambda)) e^(u) d u =
+  0 + integral_(0)^(x) lambda e^(-lambda t) d t = \
+  &= integral_(0)^(-lambda x) cancel(lambda) frac(-1, cancel(lambda)) e^(u) d u =
   -(e^(-lambda x) - e^(0)) = 1 - e^(-lambda x) $
 
 #theorem[
@@ -190,46 +180,69 @@ $ integral_(-infinity)^(x) f(t) d t =
 	)
 ] <Expected-value-variance-Exponential>
 #proof[
-	$ E(X) = integral_(-infinity)^(+infinity) x dot f(x) d x =
-	  integral_(-infinity)^(0) x dot f(x) d x +
-	  integral_(0)^(+infinity) x dot f(x) d x =
-	  0 + integral_(0)^(+infinity) lambda x e^(-lambda x) d x = \
-	  -integral_(0)^(+infinity) x (-lambda e^(-lambda x)) d x =
-	  -[x e^(-lambda x)]^(infinity)_(0)
-	  +integral_(0)^(+infinity) e^(-lambda x) d x =
-	  -(infinity dot e^(-lambda dot infinity) - 0 dot e^(-lambda dot 0))
-	  +integral_(0)^(-infinity) frac(e^(u), -lambda) d u = \
-	  -0 -frac(1, lambda) integral_(0)^(-infinity) e^(u) d u =
-	  frac(1, lambda) integral_(-infinity)^(0) e^(u) d u =
-	  frac(1, lambda) (e^(0) - e^(-infinity)) = frac(1, lambda) (1 - 0) =
-	  frac(1, lambda) $
+	The expected value is given by:
 
-	$ V(X) = E(X^(2)) - (E(X))^(2) = -(frac(1, lambda))^(2) +
-	  integral_(-infinity)^(+infinity) x^(2) dot f(x) d x =
-	  -frac(1, lambda^(2)) + integral_(-infinity)^(0) x^(2) dot f(x) d x + \
-	  integral_(0)^(+infinity) x^(2) dot f(x) d x = -frac(1, lambda^(2)) + 0 +
-	  integral_(0)^(+infinity) lambda x^(2) e^(-lambda x) d x =
-	  -frac(1, lambda^(2)) -integral_(0)^(+infinity) x^(2) (-lambda e^(-lambda
-	  x)) d x = \
-	  -frac(1, lambda^(2)) -[x^(2) e^(-lambda x)]^(infinity)_(0)
-	  +integral_(0)^(+infinity) 2 x e^(-lambda x) d x =
-	  -frac(1, lambda^(2))
-	  -(infinity^(2) dot e^(-lambda dot infinity^(2)) -
-	  0^(2) dot e^(-lambda dot 0^(2))) - \
-	  frac(2, lambda) integral_(0)^(+infinity) x (-lambda e^(-lambda x)) d x =
-	  -frac(1, lambda^(2)) - 0 -
-	  frac(2, lambda) integral_(0)^(+infinity) x (-lambda e^(-lambda x)) d x =
-	  -frac(1, lambda^(2)) - frac(2, lambda) [x e^(-lambda x)]^(infinity)_(0) \
-	  +frac(2, lambda) integral_(0)^(+infinity) e^(-lambda x) d x =
-	  -frac(1, lambda^(2)) - frac(2, lambda) (infinity dot e^(-lambda dot
-	  infinity) - 0 dot e^(-lambda dot 0)) +frac(2, lambda)
-	  integral_(0)^(-infinity) frac(e^(u), -lambda) d u =
-	  -frac(1, lambda^(2)) - 0 - \
-	  frac(2, lambda^(2)) integral_(0)^(-infinity) e^(u) d u =
-	  -frac(1, lambda^(2)) +
-	  frac(2, lambda^(2)) integral_(-infinity)^(0) e^(u) d u =
-	  -frac(1, lambda^(2)) + frac(2, lambda^(2)) (e^(0) - e^(-infinity)) =
-	  -frac(1, lambda^(2)) + frac(2, lambda^(2)) = frac(1, lambda^(2)) $
+	$ E(X) &= integral_(-infinity)^(+infinity) x dot f(x) d x =
+	  integral_(-infinity)^(0) x dot f(x) d x +
+	  integral_(0)^(+infinity) x dot f(x) d x = \
+	  &= 0 + integral_(0)^(+infinity) lambda x e^(-lambda x) d x = 
+	  integral_(0)^(+infinity) x lambda e^(-lambda x) d x $
+
+	Applying integration by parts:
+
+	$ E(X) &= integral_(0)^(+infinity) x lambda e^(-lambda x) d x =
+	          -integral_(0)^(+infinity) x (-lambda e^(-lambda x)) d x =
+	          -[x e^(-lambda x)]^(infinity)_(0) +integral_(0)^(+infinity) e^(-lambda x) d x = \
+	       &= -(infinity dot e^(-lambda dot infinity) - 0 dot e^(-lambda dot 0))
+	          +integral_(0)^(+infinity) e^(-lambda x) d x =
+	          -0 + integral_(0)^(+infinity) e^(-lambda x) d x = \
+	       &= integral_(0)^(+infinity) e^(-lambda x) d x $
+
+	Solving by substitution:
+
+	$ E(X) &= integral_(0)^(+infinity) e^(-lambda x) d x =
+	          integral_(0)^(-infinity) frac(e^(u), -lambda) d u = 
+	          frac(1, lambda) integral_(-infinity)^(0) e^(u) d u =
+	          frac(1, lambda) (e^(0) - e^(-infinity)) =
+	          frac(1 - 0, lambda) =
+	          frac(1, lambda) $
+
+	As for the variance:
+
+	$ V(X) &= E(X^(2)) - (E(X))^(2) =
+	          -(frac(1, lambda))^(2) + integral_(-infinity)^(+infinity) x^(2) dot f(x) d x = \
+	       &= -frac(1, lambda^(2)) + integral_(-infinity)^(0) x^(2) dot f(x) d x + integral_(0)^(+infinity) x^(2) dot f(x) d x = \
+	       &= -frac(1, lambda^(2)) + 0 + integral_(0)^(+infinity) lambda x^(2) e^(-lambda x) d x =
+	          -frac(1, lambda^(2)) + integral_(0)^(+infinity) lambda x^(2) e^(-lambda x) d x $
+
+	Applying integration by parts:
+
+	$ V(X) &= -frac(1, lambda^(2)) + integral_(0)^(+infinity) lambda x^(2) e^(-lambda x) d x =
+	          -frac(1, lambda^(2)) -integral_(0)^(+infinity) x^(2) (-lambda e^(-lambda x)) d x = \
+	       &= -frac(1, lambda^(2)) -[x^(2) e^(-lambda x)]^(infinity)_(0) +integral_(0)^(+infinity) 2 x e^(-lambda x) d x = \
+	       &= -frac(1, lambda^(2)) -(infinity^(2) dot e^(-lambda dot infinity^(2)) - 0^(2) dot e^(-lambda dot 0^(2))) - 2 integral_(0)^(+infinity) x e^(-lambda x) d x = \
+	       &= -frac(1, lambda^(2)) - 0 - 2 integral_(0)^(+infinity) x e^(-lambda x) d x =
+	          -frac(1, lambda^(2)) - 2 integral_(0)^(+infinity) x e^(-lambda x) d x $
+
+	Applying integration by parts (again):
+
+	$ V(X) &= -frac(1, lambda^(2)) - 2 integral_(0)^(+infinity) x e^(-lambda x) d x =
+	          -frac(1, lambda^(2)) - frac(2, lambda) integral_(0)^(+infinity) x (-lambda e^(-lambda x)) d x = \
+	       &= -frac(1, lambda^(2)) - frac(2, lambda) [x e^(-lambda x)]^(infinity)_(0) +frac(2, lambda) integral_(0)^(+infinity) e^(-lambda x) d x = \
+	       &= -frac(1, lambda^(2)) - frac(2, lambda) (infinity dot e^(-lambda dot infinity) - 0 dot e^(-lambda dot 0)) + frac(2, lambda) integral_(0)^(+infinity) e^(-lambda x) d x = \
+	       &= -frac(1, lambda^(2)) - frac(2, lambda) dot 0 + frac(2, lambda) integral_(0)^(+infinity) e^(-lambda x) d x =
+	          -frac(1, lambda^(2)) + frac(2, lambda) integral_(0)^(+infinity) e^(-lambda x) d x $
+
+	Solving by substitution:
+
+	$ V(X) &= -frac(1, lambda^(2)) + frac(2, lambda) integral_(0)^(+infinity) e^(-lambda x) d x =
+	          -frac(1, lambda^(2)) + frac(2, lambda) integral_(0)^(-infinity) frac(e^(u), -lambda) d u = 
+	          -frac(1, lambda^(2)) - frac(2, lambda^(2)) integral_(0)^(-infinity) e^(u) d u = \
+	       &= -frac(1, lambda^(2)) + frac(2, lambda^(2)) integral_(-infinity)^(0) e^(u) d u =
+	          -frac(1, lambda^(2)) + frac(2, lambda^(2)) (e^(0) - e^(-infinity)) = 
+	          -frac(1, lambda^(2)) + frac(2, lambda^(2)) = 
+	          frac(-1 + 2, lambda^(2)) = 
+	          frac(1, lambda^(2)) $
 ]
 
 #exercise[

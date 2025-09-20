@@ -195,6 +195,28 @@ Otherwise, $X$ and $Y$ are dependent (not independent).
 	Since the two values differ, $X$ and $Y$ ought to be dependent.
 ]
 
+Moreover, joint pmf/pdf can be used to prove the linearity of 
+expected value and variance.
+
+#theorem[
+	For any two random variables $X$ and $Y$ with supports $D(X)$ and
+	$D(Y)$ respectively, $E[X + Y] = E[X] + E[Y]$.
+] <Expected-value-linear-function>
+// #proof[
+// To be added
+// ]
+
+Unlike the expected value, the variance is not always a linear
+function, but only when the variables at hand are independent.
+
+#theorem[
+	For any two independent random variables $X$ and $Y$ with supports
+	$D(X)$ and $D(Y)$ respectively, $V[X + Y] = V[X] + V[Y]$.
+] <Variance-linear-function>
+// #proof[
+// To be added
+// ]
+
 In the more general case of having $n$ random variables $X_(1), X_(2), dots, 
 X_(n)$, said variables are independent if for any subset $X_(i_(1)), X_(i_(2)),
 dots, X_(i_(k))$ of size $k in [2, n]$, the joint pmfs or pdfs is equal to the 

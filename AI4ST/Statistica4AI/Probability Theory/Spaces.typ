@@ -44,7 +44,8 @@ occur or not occur, depending on the outcome of the experiment.
 When an experiment is performed, a particular event $A$ is said to occur if
 the outcome of the experiment is either $A$ itself or is a subset of $A$. In
 general, exactly one simple event will occur, but many compound events will
-occur simultaneously.
+occur simultaneously. This is why "simple event" and "outcome" are used
+interchangeably.
 
 #exercise[
 	Provide some examples of events, referring to @Experiments.

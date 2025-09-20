@@ -42,11 +42,15 @@ results: success ($X = 1$) or failure ($X = 0$), with nothing in between.
 ] <Expected-value-variance-Bernoulli>
 #proof[
 	#grid(
-		columns: (0.5fr, 0.5fr),
-		[$ E(X) = 0 dot (1 - p) + 1 dot p = 0 + p = p $],
-		[$ V(X) = (0 - p)^(2) dot (1 - p) + (1 - p)^(2) dot p = \
-		   p^(2)(1 - p) + p(1 - p)^(2) = (p^(2) + p(1 - p))(1 - p) = \
-		   (cancel(p^(2)) + p - cancel(p^(2)))(1 - p) = p(1 - p) $]
+		columns: (0.4fr, 0.6fr),
+		[$ E(X) &= 0 dot (1 - p) + 1 dot p = \
+		        &= 0 + p = \
+		        &= p $],
+		[$ V(X) &= (0 - p)^(2) dot (1 - p) + (1 - p)^(2) dot p = \
+		   &= p^(2)(1 - p) + p(1 - p)^(2) = \
+		   &= (p^(2) + p(1 - p))(1 - p) = \
+		   &= (cancel(p^(2)) + p - cancel(p^(2)))(1 - p) = \
+		   &= p(1 - p) $]
 	)
 ]
 
@@ -93,10 +97,9 @@ parameters $n$ and $p$ are therefore as follows:
 	@Variance-linear-function (the latter can be applied since the Bernoulli
 	random variables that constitue $X$ are independent).
 
-	$ E(X) = E(Y_(1) + Y_(2) + dots + Y_(n)) =
-	  E(Y_(1)) + E(Y_(2)) + dots + E(Y_(n)) = n E(Y_(i)) = n p $
-
-	$ V(X) = V(Y_(1) + Y_(2) + dots + Y_(n)) =
+	$ E(X) &= E(Y_(1) + Y_(2) + dots + Y_(n)) =
+	  E(Y_(1)) + E(Y_(2)) + dots + E(Y_(n)) = n E(Y_(i)) = n p \
+	  V(X) &= V(Y_(1) + Y_(2) + dots + Y_(n)) =
 	  V(Y_(1)) + V(Y_(2)) + dots + V(Y_(n)) = n V(Y_(i)) = n p(1 - p) $
 
 	Where $E(Y_(i))$ and $V(Y_(i))$ are retrieved from
@@ -141,14 +144,11 @@ random variable $X$ of parameter $lambda$ are therefore as follows:
 	$n -> infinity, p -> 0$ is applied, and let $lambda = n p$. This results
 	in:
 
-	#grid(
-		columns: (0.4fr, 0.6fr),
-		[$ E(X) = lim_(n -> infinity \ p -> 0) E(Y) =
-		   lim_(n -> infinity \ p -> 0) n p = lambda $],
-		[$ V(X) = lim_(n -> infinity \ p -> 0) V(Y) =
-		   lim_(n -> infinity \ p -> 0) n p(1 - p) =
-		   lambda(1 - 0) = lambda $]
-	)
+	$ E(X) &= lim_(n -> infinity \ p -> 0) E(Y) =
+	         lim_(n -> infinity \ p -> 0) n p = lambda \
+	  V(X) &= lim_(n -> infinity \ p -> 0) V(Y) =
+	         lim_(n -> infinity \ p -> 0) n p(1 - p) =
+	         lambda(1 - 0) = lambda $
 ]
 
 #exercise[
@@ -158,17 +158,12 @@ random variable $X$ of parameter $lambda$ are therefore as follows:
 	less traps?
 ]
 #solution[
-	#grid(
-		columns: (0.5fr, 0.5fr),
-		[$ p(3) = P(X = 3) = frac(2^(3), 3!) e^(-2) =
-		   frac(8, 6) e^(-2) approx 0.18 $],
-		[$ F(3) = P(X lt.eq 3) = sum_(k in NN, k lt.eq 3)
-		   frac(2^(k), k!) e^(-2) = \ frac(2^(0), 0!) e^(-2) +
-		   frac(2^(1), 1!) e^(-2) + frac(2^(2), 2!) e^(-2) +
-		   frac(2^(3), 3!) e^(-2) = \ e^(-2) (frac(1, 1) +
-		   frac(2, 1) + frac(4, 2) + frac(8, 6)) =
-		   e^(-2) frac(19, 3) approx 0.86 $]
-	)
+	$ p(3) = P(X = 3) = frac(2^(3), 3!) e^(-2) = frac(8, 6) e^(-2) approx 0.18 $
+
+	$ F(3) = P(X lt.eq 3) &= sum_(k in NN, k lt.eq 3) frac(2^(k), k!) e^(-2) =
+	          frac(2^(0), 0!) e^(-2) + frac(2^(1), 1!) e^(-2) + frac(2^(2), 2!) e^(-2) + frac(2^(3), 3!) e^(-2) = \
+	          &= e^(-2) (frac(1, 1) + frac(2, 1) + frac(4, 2) + frac(8, 6)) =
+	          e^(-2) frac(19, 3) approx 0.86 $
 ]
 
 The Poisson distribution model events where the size of the population is very
@@ -247,16 +242,13 @@ course, cannot be greater than the size of the entire population).
 	population size. Therefore, $X tilde (5, 20, 12)$. Evaluating the pdf
 	for $X = 2$ gives:
 
-	$ p(2) = P(X = 2) = frac(display(binom(12, 2) binom(20 - 12, 5 - 2)),
+	$ p(2) = P(X = 2) &= frac(display(binom(12, 2) binom(20 - 12, 5 - 2)),
 	  display(binom(20, 5))) = frac(display(frac(12!, 2! (12 - 2)!))
-	  display(frac(8!, 3! (8 - 3)!)), display(frac(20!, 5! (20 - 5)!))) =
-	  frac(display(frac(12 dot 11 dot cancel(10!), 2 dot cancel(10!)))
+	  display(frac(8!, 3! (8 - 3)!)), display(frac(20!, 5! (20 - 5)!))) = \
+	  &= frac(display(frac(12 dot 11 dot cancel(10!), 2 dot cancel(10!)))
 	  display(frac(8 dot 7 dot 6 dot cancel(5!), 6 dot cancel(5!))),
 	  display(frac(20 dot 19 dot 18 dot 17 dot 16 dot cancel(15!),
-	  120 dot cancel(15!)))) = \
-	  display(frac(cancel(12) dot 11 dot 8 dot 7 dot 6, cancel(12))) dot
-	  display(frac(cancel(20) dot 6, cancel(20) dot 19 dot 18 dot 17 dot 16))
-	  = frac(22176, 93024) approx 0.238 $
+	  120 dot cancel(15!)))) = frac(22176, 93024) approx 0.238 $
 ]
 
 #theorem[
@@ -344,20 +336,23 @@ experiment to have a specific result does not depend on the previous ones.
 	This result can be proven by applying known theorems concerning geometric
 	functions:
 
-	$ E(X) = p(1 - p)^(0) dot 0 + p(1 - p)^(1) dot 1 + p(1 - p)^(2) dot 2 +
-	  ... = p(1 - p) + 2p(1 - p)^(2) + 3p(1 - p)^(3) + ... = \ sum_(i =
-	  0)^(infinity) i p(1 - p)^(i) = p sum_(i = 0)^(infinity) i(1 - p)^(i) =
-	  p (1 - p) sum_(i = 0)^(infinity) i(1 - p)^(i - 1) =
-	  p (1 - p) [frac(d, d p) (-sum_(i = 0)^(infinity) (1 - p)^(i))] = \
-	  p (1 - p) frac(d, d p) (- frac(1, p)) = cancel(p) (1 - p)
-	  (frac(1, p^(cancel(2)))) = frac(1 - p, p) $
+	$ E(X) &= p(1 - p)^(0) dot 0 + p(1 - p)^(1) dot 1 + p(1 - p)^(2) dot 2 + ... = \
+	         &= p(1 - p) + 2p(1 - p)^(2) + 3p(1 - p)^(3) + ... = \
+	         &= sum_(i = 0)^(infinity) i p(1 - p)^(i) =
+	         p sum_(i = 0)^(infinity) i(1 - p)^(i) =
+	         p (1 - p) sum_(i = 0)^(infinity) i(1 - p)^(i - 1) = \
+	         &= p (1 - p) [frac(d, d p) (-sum_(i = 0)^(infinity) (1 - p)^(i))] =
+	         p (1 - p) frac(d, d p) (- frac(1, p)) = \
+	         &= cancel(p) (1 - p)(frac(1, p^(cancel(2)))) =
+	         frac(1 - p, p) $
 
 	Then, applying @Alternative-form-for-variance:
 
-	$ V(X) = E(X^(2)) - (E(X))^(2) = frac((2 - p)(1 - p), p^(2)) -
-	  (frac(1 - p, p))^(2) = frac(2 - 2p - p + p^(2), p^(2)) -
-	  frac(1 + p^(2) - 2p, p^(2)) = \ frac(2 - 3p + cancel(p^(2))
-	  - 1 - cancel(p^(2)) + 2p, p^(2)) = frac(1 - p, p^(2)) $
+	$ V(X) &= E(X^(2)) - (E(X))^(2) =
+	  frac((2 - p)(1 - p), p^(2)) - (frac(1 - p, p))^(2) = \
+	  &= frac(2 - 2p - p + p^(2), p^(2)) - frac(1 + p^(2) - 2p, p^(2)) = 
+	  frac(2 - 3p + cancel(p^(2)) - 1 - cancel(p^(2)) + 2p, p^(2)) =
+	  frac(1 - p, p^(2)) $
 ]
 
 === Negative binomial random variable
