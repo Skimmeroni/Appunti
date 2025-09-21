@@ -158,7 +158,7 @@ Also, while it is perfectly valid to define the inner product for
 any number of dimensions, the cross product really makes sense only
 in the context of $3$-dimensional vectors.
 
-#proposition[
+#lemma[
 	Given two vectors $underline(a), underline(b) in RR^(3)$, their cross
 	product $underline(a) times underline(b)$ is perpendicular to both
 	$underline(a)$ and $underline(b)$.
@@ -222,9 +222,9 @@ and the angle between them.
 	  a_(1)^(2)b_(2)^(2) + a_(2)^(2)b_(1)^(2) - 2a_(1)a_(2)b_(1)b_(2) + \
 	  &+ (a_(1)^(2)b_(1)^(2) - a_(1)^(2)b_(1)^(2))
 	   + (a_(2)^(2)b_(2)^(2) - a_(2)^(2)b_(2)^(2))
-	   + (a_(3)^(2)b_(3)^(2) - a_(3)^(2)b_(3)^(2)) =
-	   - (a_(1)b_(1) + a_(2)b_(2) + a_(3)b_(3))^(2) + \ 
-	  &+ a_(2)^(2)b_(3)^(2) + a_(3)^(2)b_(2)^(2) + 
+	   + (a_(3)^(2)b_(3)^(2) - a_(3)^(2)b_(3)^(2)) = \
+	  &= - (a_(1)b_(1) + a_(2)b_(2) + a_(3)b_(3))^(2) +
+	     a_(2)^(2)b_(3)^(2) + a_(3)^(2)b_(2)^(2) + 
 	     a_(3)^(2)b_(1)^(2) + a_(1)^(2)b_(3)^(2) + 
 	     a_(1)^(2)b_(2)^(2) + a_(2)^(2)b_(1)^(2) +
 	     a_(1)^(2)b_(1)^(2) + a_(2)^(2)b_(2)^(2) +
@@ -247,10 +247,11 @@ and the angle between them.
 
 	$ norm(underline(a) times underline(b))^(2) &=
 	  norm(underline(a))^(2) norm(underline(b))^(2) - angle.l underline(a), underline(b) angle.r^(2) =
-	  norm(underline(a))^(2) norm(underline(b))^(2) - (norm(underline(a)) norm(underline(b)) cos(theta))^(2) =
-	  norm(underline(a))^(2) norm(underline(b))^(2) - norm(underline(a))^(2) norm(underline(b))^(2) cos^(2)(theta) = \
-	  &= norm(underline(a))^(2) norm(underline(b))^(2) (1 - cos^(2)(theta)) =
-	  norm(underline(a))^(2) norm(underline(b))^(2) sin^(2)(theta) $
+	  norm(underline(a))^(2) norm(underline(b))^(2) - (norm(underline(a)) norm(underline(b)) cos(theta))^(2) = \
+	  &= norm(underline(a))^(2) norm(underline(b))^(2) - norm(underline(a))^(2) norm(underline(b))^(2) cos^(2)(theta) =
+	  norm(underline(a))^(2) norm(underline(b))^(2) (1 - cos^(2)(theta)) = \
+	  &= norm(underline(a))^(2) norm(underline(b))^(2) sin^(2)(theta) =
+	  (norm(underline(a)) norm(underline(b)) sin(theta))^(2) $
 
 	Taking the square root on both sides, one obtains the desired result.
 ]
@@ -300,7 +301,7 @@ The cross product also has an interesting geometric interpretation.
 	to @Cross-Product-And-Sine.
 ]
 
-#proposition[
+#lemma[
 	Given three vectors $underline(a), underline(b), underline(c) in RR^(3)$
 	and a scalar $k$:
 

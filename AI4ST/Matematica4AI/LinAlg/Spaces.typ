@@ -112,7 +112,6 @@ the same meaning.
 	- The product has the distributive property:
 	$ lambda (mat(v_(1); v_(2); dots.v; v_(n)) +
 		mat(w_(1); w_(2); dots.v; w_(n))) =
-		lambda mat(v_(1) + w_(1); v_(2) + w_(2); dots.v; v_(n) + w_(n)) =
 		mat(lambda (v_(1) + w_(1)); lambda (v_(2) + w_(2)); dots.v;
 		lambda (v_(n) + w_(n))) = mat(lambda v_(1) + lambda w_(1);
 		lambda v_(2) + lambda w_(2); dots.v; lambda v_(n) + lambda
@@ -135,11 +134,10 @@ the same meaning.
 	two such polynomials it suffices to sum the coefficients of their
 	monomials having the same degree:
 
-	$ (a_(n) x^(n) + a_(n - 1) x^(n - 1) + dots + a_(1) x + a_(0)) +
-	  (b_(m) x^(m) + b_(m - 1) x^(m - 1) + dots + b_(1) x + b_(0)) = \
+	$ (a_(n) x^(n) + a_(n - 1) x^(n - 1) + dots + a_(0)) +
+	  (b_(m) x^(m) + b_(m - 1) x^(m - 1) + dots + b_(0)) = \
 	  a_(n) x^(n) + a_(n - 1) x^(n - 1) + dots + (a_(m) + b_(m)) x^(m) +
-	  (a_(m - 1) + b_(m - 1)) x^(m - 1) + dots + (a_(1) + b_(1)) x +
-	  (a_(0) + b_(0)) $
+	  (a_(m - 1) + b_(m - 1)) x^(m - 1) + dots + (a_(0) + b_(0)) $
 
 	To multiply a polynomial with real coefficients and degree $lt.eq n$
 	with a real number it suffices to multiply each coefficient of its
@@ -154,7 +152,7 @@ the same meaning.
 	// Maybe add such?
 ]
 
-#proposition[
+#lemma[
 	Let $V$ be a vector space. To prove that a set $W$ is a subspace of $V$
 	it suffices to prove that it is a subset of $V$ and is algebraically
 	closed with respect to the same operations defined for $V$.
@@ -164,26 +162,27 @@ the same meaning.
 // ]
 
 #exercise[
-	Consider the vector space $RR^(3)$. Prove that the set $W_(1)$ is
-	a subspace of $RR^(3)$ while $W_(2)$ is not.
+	Consider the vector space $RR^(3)$. Prove that the set $W_(1) subset.eq
+	RR^(3)$ is a subspace of $RR^(3)$ while $W_(2) subset.eq RR^(3)$ is not.
 
 	#grid(
 		columns: (0.5fr, 0.5fr),
-		[$ W_(1) = {mat(x_(1); x_(2); x_(3)) :
+		[$ W_(1) = {mat(x_(1); x_(2); x_(3)) mid(|)
 		   mat(x_(1); x_(2); x_(3)) in RR^(3), x_(1) + x_(2) = 0} $],
-		[$ W_(2) = {mat(x_(1); x_(2); x_(3)) :
+		[$ W_(2) = {mat(x_(1); x_(2); x_(3)) mid(|)
 		   mat(x_(1); x_(2); x_(3)) in RR^(3), x_(2) = 2x_(3) + 1} $]
 	)
 ]
 #solution[
-	The first set is a subspace of $RR^(3)$ because it is a subset of $V$
-	and is algebraically closed:
+	The sum between two elements in $W_(1)$ is closed:
 
 	$ mat(x_(1); x_(2); x_(3)) + mat(y_(1); y_(2); y_(3)) =
-	  mat(x_(1); -x_(1); x_(3)) + mat(y_(1); -y_(1); y_(3)) =
-	  mat(x_(1) + y_(1); -x_(1) - y_(1); x_(3) + y_(3)) =>
+	  mat(x_(1); -x_(1); x_(3)) + mat(y_(1); -y_(1); y_(3)) = 
+	  mat(x_(1) + y_(1); -x_(1) - y_(1); x_(3) + y_(3)) => \
 	  x_(2) + y_(2) = -x_(1) - y_(1) =>
 	  x_(2) + y_(2) + (x_(1) + y_(1)) = 0 $
+
+	So it is the multiplication by a scalar:
 
 	$ lambda mat(x_(1); x_(2); x_(3)) =
 	  lambda mat(x_(1); -x_(1); x_(3)) =
@@ -191,11 +190,12 @@ the same meaning.
 	  lambda x_(2) = -lambda x_(1) =>
 	  lambda(x_(1) + x_(2)) = 0 $
 
-	The second one, on the other hand, is not:
+	Therefore, the first set is a subset of $RR^(3)$. On the other
+	hand, the sum between two elements in $W_(2)$ is not closed:
 
 	$ mat(x_(1); x_(2); x_(3)) + mat(y_(1); y_(2); y_(3)) =
 	  mat(x_(1); 2x_(3) + 1; x_(3)) + mat(y_(1); 2y_(3) + 1; y_(3)) =
-	  mat(x_(1) + y_(1); 2x_(3) + 2y_(3) + 2; x_(3) + y_(3)) =>
+	  mat(x_(1) + y_(1); 2x_(3) + 2y_(3) + 2; x_(3) + y_(3)) => \
 	  2x_(3) + 2y_(3) + 2 eq.not 2(x_(3) + y_(3)) + 1 $
 ]
 

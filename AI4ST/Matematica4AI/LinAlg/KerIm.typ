@@ -18,10 +18,10 @@ $ Im(T) = {underline(w) in W: exists underline(v) in V space "s.t." space
 	The image of $T$ is the set of all polynomials $q(x) = a_(1) + a_(2)x +
 	a_(3)x^(2)$ such that $q(x) = T(p(x))$. That is:
 
-	$ q(x) = x p(x) - frac(1, 2) x^(2) p(x) =>
-	  a_(1) + a_(2)x + a_(3)x^(2) = x (b_(1) + b_(2)x + b_(3)x^(2)) - frac(1, 2) x^(2) frac(d, d x) (b_(1) + b_(2)x + b_(3)x^(2)) => \
-	  a_(1) + a_(2)x + a_(3)x^(2) = x b_(1) + b_(2)x^(2) + cancel(b_(3)x^(3)) - frac(1, 2) x^(2) b_(2) - cancel(b_(3)x^(3)) => 
-	  a_(1) + (a_(2) - b_(1))x + (a_(3) - frac(1, 2) b_(2)) x^(2) = 0 => \
+	$ q(x) &= x p(x) - frac(1, 2) x^(2) p(x) => \
+	  a_(1) + a_(2)x + a_(3)x^(2) &= x (b_(1) + b_(2)x + b_(3)x^(2)) - frac(1, 2) x^(2) frac(d, d x) (b_(1) + b_(2)x + b_(3)x^(2)) => \
+	  a_(1) + a_(2)x + a_(3)x^(2) &= x b_(1) + b_(2)x^(2) + cancel(b_(3)x^(3)) - frac(1, 2) x^(2) b_(2) - cancel(b_(3)x^(3)) => \
+	  a_(1) + (a_(2) - b_(1))x + (a_(3) - frac(1, 2) b_(2)) x^(2) &= 0 => 
 	  cases(
 		a_(1) = 0,
 		a_(2) - b_(1) = 0,
@@ -33,10 +33,10 @@ $ Im(T) = {underline(w) in W: exists underline(v) in V space "s.t." space
 
 	This means that $Im(T)$ is the set:
 
-	$ Im(T) = {q(x) in RR_(2)[x]: q(x) = h x + frac(1, 2)k x^(2), h in RR, k in RR} $
+	$ Im(T) = {q(x) in RR_(2)[x] mid(|) q(x) = h x + frac(1, 2)k x^(2), h in RR, k in RR} $
 ]
 
-#proposition[
+#lemma[
 	Let $T: V mapsto W$ be a linear transformation between vector spaces $V$ and
 	$W$. $Im(W)$ is a subspace of $W$.
 ] <Image-of-transformation-is-vector-space>
@@ -87,11 +87,11 @@ $M X = Y$.
 	What is the image of $A = mat(1, 2, 3; 1, 4, 9; 1, 5, 12)$?
 ]
 #solution[
-	$ mat(1, 2, 3; 1, 4, 9; 1, 5, 12) vec(x, y, z) = vec(l_(1), l_(2), l_(3)) => 
+	$ mat(1, 2, 3; 1, 4, 9; 1, 5, 12) vec(x, y, z) &= vec(l_(1), l_(2), l_(3)) => 
 	  mat(1 dot x + 2 dot y + 3 dot z;
 	      1 dot x + 4 dot y + 9 dot z;
-	      1 dot x + 5 dot y + 12 dot z) = vec(l_(1), l_(2), l_(3)) => 
-	  mat(x + 2y + 3z; x + 4y + 9z; x + 5y + 12z) = vec(l_(1), l_(2), l_(3)) => \
+	      1 dot x + 5 dot y + 12 dot z) = vec(l_(1), l_(2), l_(3)) => \
+	  mat(x + 2y + 3z; x + 4y + 9z; x + 5y + 12z) &= vec(l_(1), l_(2), l_(3)) =>
 	  cases(x + 2y + 3z = l_(1), x + 4y + 9z = l_(2), x + 5y + 12z = l_(3)) => 
 	  cases(l_(3) = 12z +5y +x,
 	        l_(2) = x + 4y + 9z,
@@ -99,7 +99,7 @@ $M X = Y$.
 
 	Which gives:
 
-	$ Im(A) = {X : X = vec(3h - 2k, h, k), h in RR, k in RR} $
+	$ Im(A) = {X mid(|) X = vec(3h - 2k, h, k), h in RR, k in RR} $
 ]
 
 === Kernel
@@ -120,9 +120,9 @@ $ ker(T) = {underline(v) in V: T(underline(v)) = underline(0)} $
 	a_(2)x + a_(3)x^(2)$ such that $T(p(x)) = 0$. That is:
 
 	$ T(p(x)) = 0 =>
-	  x p(x) - frac(1, 2) x^(2) p(x) = 0 =>
+	  x p(x) - frac(1, 2) x^(2) p(x) = 0 => \
 	  x (a_(1) + a_(2)x + a_(3)x^(2)) - frac(1, 2) x^(2) frac(d, d x) (a_(1) + a_(2)x + a_(3)x^(2)) = 0 => \
-	  a_(1)x + a_(2)x^(2) + a_(3)x^(3) - frac(1, 2) x^(2) (a_(2) + 2a_(3)x) = 0 => 
+	  a_(1)x + a_(2)x^(2) + a_(3)x^(3) - frac(1, 2) x^(2) (a_(2) + 2a_(3)x) = 0 => \
 	  a_(1)x + a_(2)x^(2) + cancel(a_(3)x^(3)) - frac(1, 2) a_(2) x^(2) - cancel(a_(3) x^(3)) = 0 => \
 	  a_(1)x + frac(1, 2) a_(2) x^(2) = 0 =>
 	  a_(1) + frac(1, 2) a_(2) x = 0 =>
@@ -131,7 +131,7 @@ $ ker(T) = {underline(v) in V: T(underline(v)) = underline(0)} $
 	
 	This means that $ker(T)$ is the set:
 
-	$ ker(T) = {p(x) in RR_(2)[x]: p(x) = h x^(2), h in RR} $
+	$ ker(T) = {p(x) in RR_(2)[x] mid(|) p(x) = h x^(2), h in RR} $
 
 	Indeed:
 
@@ -142,7 +142,7 @@ $ ker(T) = {underline(v) in V: T(underline(v)) = underline(0)} $
 	  0 $
 ]
 
-#proposition[
+#lemma[
 	Let $T: V mapsto W$ be a linear transformation between vector spaces $V$
 	and $W$. $ker(V)$ is a subspace of $V$.
 ] <Kernel-of-transformation-is-vector-space>
@@ -178,18 +178,18 @@ representations $X$ of vectors of $V$ such that $M X = underline(0)$.
 	What is the kernel of $A = mat(1, 2, 3; 1, 4, 9; 1, 5, 12)$?
 ]
 #solution[
-	$ mat(1, 2, 3; 1, 4, 9; 1, 5, 12) vec(x, y, z) = vec(0, 0, 0) => 
+	$ mat(1, 2, 3; 1, 4, 9; 1, 5, 12) vec(x, y, z) &= vec(0, 0, 0) => 
 	  mat(1 dot x + 2 dot y + 3 dot z;
 	      1 dot x + 4 dot y + 9 dot z;
-	      1 dot x + 5 dot y + 12 dot z) = vec(0, 0, 0) => 
-	mat(x + 2y + 3z; x + 4y + 9z; x + 5y + 12z) = vec(0, 0, 0) => \
+	      1 dot x + 5 dot y + 12 dot z) = vec(0, 0, 0) => \
+	mat(x + 2y + 3z; x + 4y + 9z; x + 5y + 12z) &= vec(0, 0, 0) => 
 	cases(x + 2y + 3z = 0, x + 4y + 9z = 0, x + 5y + 12z = 0) =>
 	cases(x = -2y - 3z, y + 3z = 0, 3y + 9z = 0) =>
 	cases(x = 3z, y = -3z, z = z) $
 
 	Which gives:
 
-	$ ker(A) = {X : X = t vec(3, -3, 1), t in RR} $
+	$ ker(A) = {X mid(|) X = t vec(3, -3, 1), t in RR} $
 ]
 
 === Rank and nullity
@@ -219,8 +219,7 @@ of rank and nullity extend to matrices in the natural way.
 #solution[
 	The kernel of $T$ is given by:
 
-	$ T(mat(a, b; c, d)) = mat(0, 0; 0, 0) =>
-	  mat(a + b + c, 2b; b, 3d + 2c) = mat(0, 0; 0, 0) =>
+	$ mat(a + b + c, 2b; b, 3d + 2c) = mat(0, 0; 0, 0) =>
 	  cases(a + b + c = 0,
 	        2b = 0,
 	        b = 0,
@@ -232,13 +231,12 @@ of rank and nullity extend to matrices in the natural way.
 
 	Which means that $ker(T)$ is the set:
 
-	$ ker(T) = {M in "Mat"(2 times 2): M = h mat(1, 0; 0, frac(2, 3)), h in RR} $
+	$ ker(T) = {M in "Mat"(2 times 2) mid(|) M = h mat(1, 0; 0, frac(2, 3)), h in RR} $
 
 	$ker(T)$ is spanned by a single matrix, which means that its dimension
 	is $1$. The image of $T$ is given by:
 
-	$ T(mat(a, b; c, d)) = mat(l_(1), l_(2); l_(3), l_(4)) =>
-	  mat(a + b + c, 2b; b, 3d + 2c) = mat(l_(1), l_(2); l_(3), l_(4)) =>
+	$ mat(a + b + c, 2b; b, 3d + 2c) = mat(l_(1), l_(2); l_(3), l_(4)) =>
 	  cases(a + b + c = l_(1),
 	        2b = l_(2),
 	        b = l_(3),
@@ -250,14 +248,16 @@ of rank and nullity extend to matrices in the natural way.
 
 	Which means that $Im(T)$ is the set:
 
-	$ Im(T) = {M in "Mat"(2 times 2): M = alpha mat(1, 0; 0, 0) + beta mat(0, 2; 1, 0) + gamma mat(0, 0; 0, 1), alpha in RR, beta in RR, gamma in RR} $
+	$ Im(T) = {M in "Mat"(2 times 2) mid(|)
+	           M = alpha mat(1, 0; 0, 0) + beta mat(0, 2; 1, 0) + gamma mat(0, 0; 0, 1),
+	           alpha in RR, beta in RR, gamma in RR} $
 
 	$Im(T)$ is spanned by three matrices, which means that its dimension
 	is $3$. Note that the dimension of $"Mat"(2 times 2)$ is $4$, and
 	indeed $"rank"(T) + "null"(T) = 3 + 1 = 4$.
 ]
 
-#proposition[
+#lemma[
 	The rank of a linear transformation is equal to the rank of its matrix
 	representation (with respect to any basis).
 ]
@@ -278,7 +278,7 @@ As for any function, a linear transformation $T$ has an inverse if and only
 if it's bijective. For this reason, bijective linear transformations are
 also referred to as *invertible* transformations.
 
-#proposition[
+#lemma[
 	Let $T: V |-> W$ be a linear transformation. $T$ is injective if and
 	only if $"null"(T) = 0$.
 ] <Injective-transformations-have-empty-nullity>
@@ -318,9 +318,9 @@ also referred to as *invertible* transformations.
 	What is its inverse?
 ]
 #solution[
-	Reversing the equality and solving for $\{l_(1), l_(2), l_(3), l_(4)\}$:
+	Reversing the equality and solving for ${l_(1), l_(2), l_(3), l_(4)}$:
 
-	$ mat(l_(1), l_(2); l_(3), l_(4)) = mat(a + b + c, 2b; b + c, 3d + 2c) =>
+	$ mat(l_(1), l_(2); l_(3), l_(4)) =& mat(a + b + c, 2b; b + c, 3d + 2c) =>
 	  cases(l_(1) = a + b + c,
 	        l_(2) = 2b,
 	        l_(3) = b + c,
@@ -329,7 +329,7 @@ also referred to as *invertible* transformations.
 	        b = frac(1, 2) l_(2),
 	        l_(3) = frac(1, 2) l_(2) + c,
 	        l_(4) = 3d + 2c) => \
-	  cases(l_(1) = a + l_(3),
+	  &cases(l_(1) = a + l_(3),
 	        b = frac(1, 2) l_(2),
 	        c = l_(3) - frac(1, 2) l_(2),
 	        l_(4) = 3d + 2l_(3) - l_(2)) =>

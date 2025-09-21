@@ -156,10 +156,11 @@ product between two matrices that are not product-conformant is undefined.
 	)
 ]
 #solution[
-	$ A B =
+	$ A B &=
 	  mat(-1, 4; 6, 1) mat(3, 2, -4; 5, 0, 2) =
 	  mat((-1) dot 3 + 4 dot 5, (-1) dot 2 + 4 dot 0, (-1) dot (-4) + 4 dot 2;
-	      6 dot 3 + 1 dot 5, 6 dot 2 + 1 dot 0, 6 dot (-4) + 1 dot 2) =
+	      6 dot 3 + 1 dot 5, 6 dot 2 + 1 dot 0, 6 dot (-4) + 1 dot 2) = \
+	  &= mat(-3 + 20, -2 + 0, 4 + 8; 18 + 5, 12 + 0, -24 + 2) =
 	  mat(17, -2, 12; 23, 12, -22) $
 ]
 
@@ -197,7 +198,7 @@ of $A$. If a matrix is equal to its transposed, it is said to be *symmetric*.
 	) $]
 )
 
-#proposition[
+#lemma[
 	Let $A$ and $B$ be two product-conformant matrices. Then $(A B)^(T) =
 	B^(T) A^(T)$.
 ]

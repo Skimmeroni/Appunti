@@ -47,10 +47,10 @@ or to $-infinity$, respectively). Finally, a series is said to be
 
 	As long as $r != 1$. Therefore:
 
-	$ sum_(n = 0)^(infinity) a r^(n) = lim_(n -> +infinity) s_(n) =
+	$ sum_(n = 0)^(infinity) a r^(n) &= lim_(n -> +infinity) s_(n) =
 	  lim_(n -> +infinity) a frac(1 - r^(n + 1), 1 - r) =
-	  frac(a, 1 - r) - (frac(a, 1 - r)) lim_(n -> +infinity) r^(n + 1) =
-	  frac(a, 1 - r) (1 - lim_(n -> +infinity) r^(n + 1)) $
+	  frac(a, 1 - r) - (frac(a, 1 - r)) lim_(n -> +infinity) r^(n + 1) = \
+	  &= frac(a, 1 - r) (1 - lim_(n -> +infinity) r^(n + 1)) $
 
 	There are three possibilities:
 
@@ -60,7 +60,7 @@ or to $-infinity$, respectively). Finally, a series is said to be
 	  if $a$ is negative. This is particularly evident when $r = 1$:
 
 	  $ s_(n) = sum_(i = 0)^(n) a 1^(n) = a 1^(0) + a 1^(1) + a 1^(2) +
-	    a 1^(3) + dots + a 1^(n) = a + a + a + a + dots + a = a(n + 1) $
+	            dots + a 1^(n) = a + a + a + dots + a = a(n + 1) $
 
 	- If $-1 < r < 1$, (almost) as shown in @One-over-n-goes-to-zero,
 	  $display(lim_(n -> +infinity) r^(n + 1) = 0)$. Therefore,
@@ -70,8 +70,8 @@ or to $-infinity$, respectively). Finally, a series is said to be
 	  This is particularly evident when $r = -1$:
 
 	  $ s_(n) = sum_(i = 0)^(n) a (-1)^(n) = a (-1)^(0) + a (-1)^(1) +
-	    a (-1)^(2) + a (-1)^(3) + dots + a (-1)^(n) = cancel(a) - cancel(a)
-	    + cancel(a) - cancel(a) + dots $
+	    a (-1)^(2) + a (-1)^(3) + dots = cancel(a) - cancel(a) + cancel(a) -
+	    cancel(a) + dots $
 
 	  This means that $s_(n)$ is either equal to $a$ if $n$ is even and equal
 	  to $0$ if $n$ is odd. Therefore, the limit $display(lim_(n -> +infinity)
@@ -92,13 +92,13 @@ or to $-infinity$, respectively). Finally, a series is said to be
 
 	It is then possible to expand the series as:
 
-	$ sum_(n = 1)^(infinity) frac(1, n(n + 1)) =
-	  sum_(n = 1)^(infinity) frac(1, n) - frac(1, n + 1) =
-	  frac(1, 1) - frac(1, 1 + 1) + frac(1, 2) - frac(1, 2 + 1) +
+	$ sum_(n = 1)^(infinity) frac(1, n(n + 1)) &=
+	  sum_(n = 1)^(infinity) frac(1, n) - frac(1, n + 1) = \
+	  &= frac(1, 1) - frac(1, 1 + 1) + frac(1, 2) - frac(1, 2 + 1) +
 	  frac(1, 3) - frac(1, 3 + 1) + frac(1, 4) - frac(1, 4 + 1) + dots = \
-	  1 - cancel(frac(1, 2)) + cancel(frac(1, 2)) - cancel(frac(1, 3)) +
-	  cancel(frac(1, 3)) - cancel(frac(1, 4)) + cancel(frac(1, 4)) -
-	  frac(1, 5) + dots = 1 - lim_(n -> +infinity) frac(1, n + 1) =
+	  &= 1 - cancel(frac(1, 2)) + cancel(frac(1, 2)) - cancel(frac(1, 3)) +
+	  cancel(frac(1, 3)) - cancel(frac(1, 4)) + cancel(frac(1, 4)) - frac(1, 5) + dots = \
+	  &= 1 - lim_(n -> +infinity) frac(1, n + 1) =
 	  1 - 0 = 1 $
 ]
 
@@ -183,8 +183,8 @@ series is to apply what is called a *convergence test*.
 	  frac(102, 5) $
 
 	The application of @Convergent-series-have-linearity is
-	justified because $sum_(n = 0)^(+infinity) (frac(1, 6))^(n)$
-	is a geometric series of common ratio $frac(1, 6)$, that was
+	justified because $sum_(n = 0)^(+infinity) (1 slash 6)^(n)$
+	is a geometric series of common ratio $1 slash 6$, that was
 	proven to be convergent in @Geometric-series.
 ]
 
@@ -266,7 +266,7 @@ series is to apply what is called a *convergence test*.
 
 	$ lim_(n -> + infinity) frac(display(frac(n + 7, n^(3) - 8n)),
 	  display(frac(1, n^(2)))) = lim_(n -> + infinity)
-	  frac(n + 7, cancel(n)(n^(2) - 8)) dot n^(cancel(2)) =
+	  frac(n^(cancel(2)) (n + 7), cancel(n)(n^(2) - 8)) =
 	  lim_(n -> + infinity) frac(n^(2) + 7n, n^(2) - 8) =
 	  lim_(n -> + infinity) frac(cancel(n^(2)) (1 + display(frac(7, n))),
 	  cancel(n^(2)) (1 - display(frac(8, n^(2))))) = frac(1 + 0, 1 - 0) = 1 $

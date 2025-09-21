@@ -172,7 +172,6 @@ that, when multiplied, have the same effect as applying $T$.
 	representation with respect to $cal(B)_(1)$ is:
 
 	$ (3, 1, 0) =
-	  lambda_(1) (1, 0, 1) + lambda_(2) (2, 1, -1) + lambda_(3) (-2, 1, 4) =
 	  1 (1, 0, 1) + 1 (2, 1, -1) + 0 (-2, 1, 4) <==>
 	  vec(1, 1, 0)_(cal(B)_(1)) $
 
@@ -181,7 +180,6 @@ that, when multiplied, have the same effect as applying $T$.
 	respect to $cal(B)_(2)$ is:
 
 	$ (3, 1) =
-	  lambda'_(1) (1, 2) + lambda'_(2) (2, 1) =
 	  -frac(1, 3) (1, 2) + frac(5, 3) (2, 1) <==>
 	  vec(-frac(1, 3), frac(5, 3))_(cal(B)_(2)) $
 
@@ -204,7 +202,7 @@ the *identity transformation*. Also, the same result allows one to construct
 the matrix representation of the same linear transformation employing
 different bases.
 
-#proposition[
+#lemma[
 	Let $phi.alt: V |-> W$ be a linear transformation between two vector
 	spaces $V$ and $W$. Let $cal(B)$ and $cal(B')$ be two distinct bases
 	for $V$ and let $cal(C)$ and $cal(C')$ be two distinct bases for $W$.

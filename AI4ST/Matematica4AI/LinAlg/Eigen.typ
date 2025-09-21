@@ -25,13 +25,10 @@ $ A underline(x) = lambda underline(x) =>
   mat(x_(1); x_(2); dots.v; x_(n)) =
   lambda mat(x_(1); x_(2); dots.v; x_(n)) =>
   cases(
-	a_(1, 1) dot x_(1) + a_(1, 2) dot x_(2) + dots + x_(n) a_(1, n) =
-	lambda x_(1),
-	a_(2, 1) dot x_(1) + a_(2, 2) dot x_(2) + dots + x_(n) a_(2, n) =
-	lambda x_(2),
+	a_(1, 1) dot x_(1) + dots + x_(n) a_(1, n) = lambda x_(1),
+	a_(2, 1) dot x_(1) + dots + x_(n) a_(2, n) = lambda x_(2),
 	dots.v,
-	a_(n, 1) dot x_(1) + a_(n, 2) dot x_(2) + dots + x_(n) a_(n, n) =
-	lambda x_(n)) $
+	a_(n, 1) dot x_(1) + dots + x_(n) a_(n, n) = lambda x_(n)) $
 
 Even if the entries of $A$ were to be known, each equation has $n$
 known terms and $n + 1$ unknowns (the $n$ components of $underline(x)$
@@ -122,39 +119,44 @@ multiplicity of an eigenvalue $lambda$ is denoted as $m_(a)(lambda)$.
 	          1, frac(2, 3), frac(11, 3)) $
 ] <Compute-eigenvalues>
 #solution[
-	The determinant of $A$ is $75$. Applying @Eigenvalues-as-polynomial-roots:
+	The determinant of $A$ is $75$. The $A - lambda I$ matrix is:
+	
+	$ A - lambda I =
+	  mat(7, frac(10, 3), -frac(2, 3);
+	      -1, frac(7, 3), -frac(2, 3);
+	      1, frac(2, 3), frac(11, 3)) -
+	  mat(lambda, 0, 0;
+	      0, lambda, 0;
+	      0, 0, lambda) =
+	  mat(7 - lambda, frac(10, 3), -frac(2, 3);
+	      -1, frac(7, 3) - lambda, -frac(2, 3);
+	      1, frac(2, 3), frac(11, 3) - lambda) $
+
+	The characteristic polynomial of $A$ is:
 
 	$ p_(A)(lambda) &=
 	  det(A - lambda I) =
-	  det(mat(7, frac(10, 3), -frac(2, 3);
-	          -1, frac(7, 3), -frac(2, 3);
-	          1, frac(2, 3), frac(11, 3)) -
-	      mat(lambda, 0, 0;
-	          0, lambda, 0;
-	          0, 0, lambda)) =
 	  det(mat(7 - lambda, frac(10, 3), -frac(2, 3);
 	          -1, frac(7, 3) - lambda, -frac(2, 3);
 	          1, frac(2, 3), frac(11, 3) - lambda)) = \
-	  &= (7 - lambda) det(mat(frac(7, 3) - lambda, -frac(2, 3); frac(2, 3), frac(11, 3) - lambda))
-	     -frac(10, 3) det(mat(-1, -frac(2, 3); 1, frac(11, 3) - lambda))
-	     -frac(2, 3) det(mat(-1, frac(7, 3) - lambda; 1, frac(2, 3))) = \
 	  &= (7 - lambda)((frac(7, 3) - lambda)(frac(11, 3) - lambda) + frac(4, 9))
 	     -frac(10, 3)(-frac(11, 3) + lambda + frac(2, 3))
 	     -frac(2, 3)(-frac(2, 3) - frac(7, 3) + lambda) = \
 	  &= (7 - lambda)(frac(77, 9) - frac(7, 3) lambda - frac(11, 3) lambda + lambda^(2) + frac(4, 9))
 	     -frac(10, 3)(lambda - 3) -frac(2, 3)(lambda - 3) = \
 	  &= (7 - lambda)(lambda^(2) - 6 lambda + 9) -4 (lambda - 3) =
-	     7 lambda^(2) - 42 lambda + 63 - lambda^(3) + 6 lambda^(2) - 9 lambda -4 lambda + 12 = \
-	  &= - lambda^(3) + 13 lambda^(2) - 55 lambda + 75 =
-	     -(lambda - 5)(lambda^(2) - 8 lambda + 15) =
-	     -(lambda - 5)(lambda - 5)(lambda - 3) $
+	     (7 - lambda)(lambda - 3)^(2) -4 (lambda - 3) = \
+	  &= (lambda - 3)((7 - lambda)(lambda - 3) -4) =
+	     (lambda - 3)(7 lambda -21 - lambda^(2) + 3 lambda -4) = \
+	  &= (lambda - 3)(- lambda^(2) + 10 lambda -25) = -(lambda - 3)(lambda - 5)^(2) $
 
-	The two solutions are $lambda_(1) = 3$ with algebraic multiplicity
-	equal to $2$ and $lambda_(2) = 5$ with algebraic multiplicity equal
-	to $1$. The spectrum of $A$ is then the set ${3, 5}$.
+	The two roots of $p_(A)(lambda)$ are $lambda_(1) = 3$, with algebraic
+	multiplicity equal to $1$, and $lambda_(2) = 5$, with algebraic
+	multiplicity equal to $2$. Applying @Eigenvalues-as-polynomial-roots,
+	the spectrum of $A$ is the set ${3, 5}$.
 ]
 
-#proposition[
+#lemma[
 	Similar matrices have the same spectrum.
 ] <Similar-matrices-same-spectrum>
 #proof[
@@ -167,15 +169,15 @@ multiplicity of an eigenvalue $lambda$ is denoted as $m_(a)(lambda)$.
 	$ p_(A)(lambda) &= det(A - lambda I) = det(P B P^(-1) - lambda I) =
 	  det(P B P^(-1) - lambda P I P^(-1)) = \
 	  &= det(P (B P^(-1) - lambda I P^(-1))) =
-	  det(P (B - lambda I) P^(-1)) =
-	  cancel(det(P)) det(B - lambda I) cancel(det(P^(-1))) = \
-	  &= det(B - lambda I) = p_(B)(lambda) $
+	  det(P (B - lambda I) P^(-1)) = \
+	  &= cancel(det(P)) det(B - lambda I) cancel(det(P^(-1))) =
+	  det(B - lambda I) = p_(B)(lambda) $
 ]
 
 There is also an interesting connection between the eigenvalues of a
 matrix, its determinant and its trace.
 
-#proposition[
+#lemma[
 	The determinant of a matrix is the product of its eigenvalues
 	(counted with multiplicity), whereas the trace of a matrix is
 	the sum of its eigenvalues (counted with multiplicity).
@@ -205,6 +207,8 @@ multiplicity of an eigenvalue $lambda$ is denoted as $m_(g)(lambda)$.
 	What are the eigenspaces of the matrix of @Compute-eigenvalues ?
 ] <Compute-eigenvectors>
 #solution[
+	The eigenspace of $lambda_(1)$ is:
+
 	$ A underline(x) = lambda_(1) underline(x) => &
 	  mat(7, frac(10, 3), -frac(2, 3);
 	          -1, frac(7, 3), -frac(2, 3);
@@ -229,6 +233,8 @@ multiplicity of an eigenvalue $lambda$ is denoted as $m_(g)(lambda)$.
 	    cases(x = x,
 	          y = -frac(5, 4)x,
 	          z = -frac(1, 4)x) $
+
+	The eigenspace of $lambda_(2)$ is:
 
 	$ A underline(x) = lambda_(2) underline(x) => &
 	  mat(7, frac(10, 3), -frac(2, 3);
@@ -261,7 +267,7 @@ multiplicity of an eigenvalue $lambda$ is denoted as $m_(g)(lambda)$.
 	equal to $1$.
 ]
 
-#proposition[
+#lemma[
 	For any eigenvalue $lambda$, $1 lt.eq m_(g)(lambda) lt.eq m_(a)(lambda)$.
 ] <Eigenvalues-inequality>
 // #proof[
@@ -300,25 +306,25 @@ the most convenient choice of basis is most likely the canonical basis.
 	First, it is necessary to construct the matrix representation of $T$.
 	Evaluating the canonical basis ${1, x, x^(2)}$ with $T$ gives:
 
-	$ cases(T(1) = 1 - 3x frac(d, d x) (1) + 4 frac(d^(2), d x) (1) = 1 - 0 + 0 = 1,
-	        T(x) = x - 3x frac(d, d x) (x) + 4 frac(d^(2), d x) (x) = x - 3x = -2x,
-	        T(x^(2)) = x^(2) - 3x frac(d, d x) (x^(2)) + 4 frac(d^(2), d x) (x^(2)) = x^(2) - 6x^(2) + 8 = 8 - 5x^(2)) $
+	$ cases(T(1) &= 1 - 3x frac(d, d x) (1) + 4 frac(d^(2), d x) (1) = 1 - 0 + 0 = 1,
+	        T(x) &= x - 3x frac(d, d x) (x) + 4 frac(d^(2), d x) (x) = x - 3x = -2x,
+	        T(x^(2)) &= x^(2) - 3x frac(d, d x) (x^(2)) + 4 frac(d^(2), d x) (x^(2)) = x^(2) - 6x^(2) + 8 = 8 - 5x^(2)) $
 
-	Which gives the matrix:
+	The matrix $A$ is therefore constituted by the following columns:
 
 	#grid(
-		columns: (0.2fr, 0.2fr, 0.2fr, 0.4fr),
+		columns: (0.33fr, 0.33fr, 0.33fr),
 		[$ 1 <==> vec(1, 0, 0) $],
 		[$ -2x <==> vec(0, -2, 0) $],
-		[$ 8 - 5x^(2) <==> vec(8, 0, -5) $],
-		[$ A = mat(1, 0, 8; 0, -2, 0; 0, 0, -5) $]
+		[$ 8 - 5x^(2) <==> vec(8, 0, -5) $]
 	)
 
 	The characteristic polynomial of $A$ is:
 
-	$ det(mat(1, 0, 8; 0, -2, 0; 0, 0, -5) - lambda mat(1, 0, 0; 0, 1, 0; 0, 0, 1)) =
-	  det(mat(1 - lambda, 0, 8; 0, -2 - lambda, 0; 0, 0, -5 - lambda)) =
-	  (1 - lambda)(lambda + 2)(lambda + 5) $
+	$ p_(A)(lambda) &=
+	  det(mat(1, 0, 8; 0, -2, 0; 0, 0, -5) - lambda mat(1, 0, 0; 0, 1, 0; 0, 0, 1)) = \
+	  &= det(mat(1 - lambda, 0, 8; 0, -2 - lambda, 0; 0, 0, -5 - lambda)) =
+	  -(lambda - 1)(lambda + 2)(lambda + 5) $
 
 	Which means that the spectrum of $A$ (and of $T$) is ${-5, -2, 1}$.
 	The eigenspace of $A$ is:
@@ -351,12 +357,9 @@ the most convenient choice of basis is most likely the canonical basis.
 	The eigenspaces of $T$ can be constructed by "undoing" the vector
 	representation of the eigenspaces of $A$:
 
-	#grid(
-		columns: (0.4fr, 0.3fr, 0.3fr),
-		[$ (-frac(4, 3)t) dot 1 + 0 dot x + t dot x^(2) = -frac(4, 3)t + x^(2)t $],
-		[$ 0 dot 1 + t dot x + 0 dot x^(2) = x t $],
-		[$ t dot 1 + 0 dot x + 0 dot x^(2) = t $]
-	)
+	$ (-frac(4, 3)t) dot 1 + 0 dot x + t dot x^(2) &= -frac(4, 3)t + x^(2)t \
+	  0 dot 1 + t dot x + 0 dot x^(2) &= x t \
+	  t dot 1 + 0 dot x + 0 dot x^(2) &= t $
 
 	Which gives: $E_(lambda_(1)) = "span"{-frac(4, 3)t + x^(2)}$,
 	$E_(lambda_(2)) = "span"{x}$, $E_(lambda_(3)) = "span"{1}$.

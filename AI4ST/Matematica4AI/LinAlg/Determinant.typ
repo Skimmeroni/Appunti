@@ -35,20 +35,20 @@ A matrix whose determinant is equal to $0$ is called a *singular matrix*.
 	the first column, the third row and the third column. Suppose the first
 	column is chosen:
 
-	$ det(A) = sum_(i = 1)^(3) (-1)^(i + j) a_(i, j) det(M_(i, j)) = \
-	  (-1)^(1 + 1) a_(1, 1) det(M_(1, 1)) +
+	$ det(A) &= sum_(i = 1)^(3) (-1)^(i + j) a_(i, j) det(M_(i, j)) = \
+	  &= (-1)^(1 + 1) a_(1, 1) det(M_(1, 1)) +
 	  (-1)^(2 + 1) a_(2, 1) det(M_(2, 1)) +
 	  (-1)^(3 + 1) a_(3, 1) det(M_(3, 1)) = \
-	  1 dot mat(1, 2; 1, 0) -
+	  &= 1 dot mat(1, 2; 1, 0) -
 	  cancel(0 dot mat(2, 3; 1, 0)) +
-	  1 dot mat(2, 3; 1, 2) =
-	  (1 dot 0 - 1 dot 2) + (2 dot 2 - 3 dot 1) =
+	  1 dot mat(2, 3; 1, 2) = \
+	  &= (1 dot 0 - 1 dot 2) + (2 dot 2 - 3 dot 1) =
 	  0 - 2 + 4 - 3 = -1 $
 ]
 
 Peculiar matrices can have their determinant computed faster.
 
-#proposition[
+#lemma[
 	The determinant of a triangular matrix is equal to the product of the
 	elements on its diagonal.
 ]
@@ -77,7 +77,7 @@ Peculiar matrices can have their determinant computed faster.
 	matrices are a special case of triangular matrices.
 ]
 
-#proposition[
+#lemma[
 	The determinant is invariant with respect to transposition.
 ] <Determinant-equal-by-rows-or-columns>
 // #proof[
@@ -96,14 +96,14 @@ not only with respect to rows.
 // Hard to prove
 // ]
 
-#proposition[
+#lemma[
 	It two rows/columns of a matrix are swapped, its determinant changes sign.
 ]
 // #proof[
 // To be added
 // ]
 
-#proposition[
+#lemma[
 	Given a $n times n$ matrix $A$ and a scalar $k$,
 	$det(k A) = k^(n) det(A)$.
 ]
@@ -127,14 +127,14 @@ matrix can have its rank exactly equal to its number of rows/columns. If
 this is the case, the matrix is said to be *full rank*. Not all square
 matrices are full rank, but all full rank matrices are square.
 
-#proposition[
+#lemma[
 	The rank of a matrix is invariant with respect to transposition.
 ] <Rank-invariant-with-transposition>
 // #proof[
 // To be added
 // ]
 
-#proposition[
+#lemma[
 	A matrix has full rank if and only if it's not singular.
 ]
 // #proof[
@@ -167,7 +167,7 @@ called the *pivot*, is on the right of the leading entry of every row above.
 These matrices are relevant because their rank is particularly easy to
 compute.
 
-#proposition[
+#lemma[
 	The rank of a matrix in row echelon form is equal to the number of its
 	pivots.
 ] <Rank-echelon-pivots>
@@ -183,7 +183,7 @@ Said operations are as follows:
 - Multiplying a row/column by a scalar;
 - Summing a row/column to another row/column multiplied by a scalar.
 
-#proposition[
+#lemma[
 	The application of Gaussian moves to a matrix does not change its rank.
 ] <Gauss-moves-rank>
 // #proof[
@@ -228,7 +228,7 @@ $ (a^(-1)_(i, j)) = frac((-1)^(i + j) det(M_(j, i)), det(A)) $
 Where $M_(j, i)$ is the matrix $A$ with the $j$-th row and the $i$-th column
 removed. If $A^(-1)$ exists, $A$ is said to be *invertible*.
 
-#proposition[
+#lemma[
 	A matrix is invertible if and only if it's not singular.
 ] <Invertible-matrices-not-null-determinant>
 #proof[
@@ -239,14 +239,14 @@ removed. If $A^(-1)$ exists, $A$ is said to be *invertible*.
 	// The other way around is missing
 ]
 
-#proposition[
+#lemma[
 	A matrix is invertible if and only if it has full rank.
 ] <Full-rank-matrices-are-invertible>
 // #proof[
 // To be added
 // ]
 
-#proposition[
+#lemma[
 	A matrix is invertible if and only if the set of its rows/columns forms a
 	linearly independent set.
 ]
@@ -254,7 +254,7 @@ removed. If $A^(-1)$ exists, $A$ is said to be *invertible*.
 // To be added
 // ]
 
-#proposition[
+#lemma[
 	Given an invertible matrix $A$, $det(A^(-1)) = (det(A))^(-1)$.
 ]
 #proof[
@@ -298,14 +298,14 @@ two invertible matrices $S$ and $T$ such that $B = T^(-1) A S$. If
 $T = S$, the two matrices are said to be *similar*. Matrix similarity
 is a special case of matrix equivalence.
 
-#proposition[
+#lemma[
 	Matrix equivalence (and similarity) is an equivalence relation.
 ]
 // #proof[
 // 
 // ]
 
-#proposition[
+#lemma[
 	If two matrices are similar, they have the same determinant and
 	the same rank.
 ]

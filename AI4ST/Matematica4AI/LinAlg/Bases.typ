@@ -204,24 +204,24 @@ A vector space whose dimension is a finite number is said to be a
 	It's trivial to see that, for the first basis, such linear combination
 	is $p(x)$ itself:
 
-	$ lambda_(0) 1 + lambda_(1) x + lambda_(2) x^(2) =
-	  -5 + 2x + 3x^(2) =>
+	$ lambda_(0) 1 + lambda_(1) x + lambda_(2) x^(2) = -5 + 2x + 3x^(2) =>
 	  cases(lambda_(0) = -5, lambda_(1) = 2, lambda_(2) = 3) $
 
 	Regarding the second basis, it can be rewritten as:
 
-	$ lambda_(0) 5 + lambda_(1) (x + 1) + lambda_(2) 2x^(2) &=
-	  -5 + 2x + 3x^(2) =>
-	  lambda_(0) 5 + lambda_(1) x + lambda_(1) + lambda_(2) 2x^(2) =
-	  -5 + 2x + 3x^(2) => \
-	  (5 lambda_(0) + lambda_(1)) + (lambda_(1)) x + (2 lambda_(2)) x^(2) &=
-	  -5 + 2x + 3x^(2) =>
+	$ lambda_(0) 5 + lambda_(1) (x + 1) + lambda_(2) 2x^(2) = -5 + 2x + 3x^(2) => \
+	  lambda_(0) 5 + lambda_(1) x + lambda_(1) + lambda_(2) 2x^(2) = -5 + 2x + 3x^(2) => \
+	  (5 lambda_(0) + lambda_(1)) + (lambda_(1)) x + (2 lambda_(2)) x^(2) = -5 + 2x + 3x^(2) => \
 	  cases(5 lambda_(0) + lambda_(1) = -5,
 	        lambda_(1) = 2,
 	        2 lambda_(2) = 3) =>
 	  cases(lambda_(0) = -frac(7, 5),
 	        lambda_(1) = 2,
 	        lambda_(2) = frac(3, 2)) $
+
+	// Writing explicitly:
+
+	// $ 3x^(2) + 2x - 5 = (-5 + 2x + 3x^(2)) + (-7 + 2(x + 1) + 3x^(2)) $
 ]
 
 The basis of a vector space that renders calculations the most "comfortable"
@@ -267,7 +267,7 @@ Bases can be employed to represent vectors, no matter their nature
 (polynomials, tuples, matrices, ecc...), in a unique and standardised
 form.
 
-#proposition[
+#lemma[
 	Let $V$ be a vector space of dimension $n$, and let $B = \{underline(b_(1)),
 	dots, underline(b_(n))\}$ be a basis. Given a generic vector $underline(v)$,
 	let $sum_(i = 1)^(n) lambda_(i) underline(b_(i)) = underline(v)$ be a

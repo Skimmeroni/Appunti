@@ -10,13 +10,14 @@ itself, but it is customary to denote sequences as such.
 	Provide some examples of sequences.
 ] <Examples-of-sequences>
 #solution[
-	#grid(
-	columns: (0.25fr, 0.35fr, 0.4fr),
-		[$ {1, 2, 3, dots, n} = {n} $],
-		[$ {-1, 1, -1, dots, (-1)^(n)} = {(-1)^(n)} $],
-		[$ {1, frac(1, 2), frac(1, 4), dots, (frac(1, 2))^(n)} =
-		   {(frac(1, 2))^(n)} $]
-	)
+	- The natural numbers, listed from $1$ up to a given $n$, forms a
+	  sequence: ${1, 2, 3, dots, n} = {n}$;
+	- An infinitely long alternating collection of $+1$ and $-1$ forms
+	  a sequence: ${-1, 1, -1, dots, (-1)^(n)} = {(-1)^(n)}$;
+	- The integer powers of $1 slash 2$, listed from $1$ up to a given
+	  $(1 slash 2)^(n)$, forms a sequence: 
+
+	$ {1, frac(1, 2), frac(1, 4), dots, (frac(1, 2))^(n)} = {(frac(1, 2))^(n)} $
 ]
 
 A sequence ${x_(n)}_(n in NN)$ is said to be:
@@ -34,8 +35,16 @@ A sequence that possesses one of the aforementioned properties is said to be
 	properties?
 ]
 #solution[
-	${n}_(n in NN)$ is increasing, ${(frac(1, 2))^(n)}_(n in NN)$ is
-	decreasing, ${(-1)^(n)}_(n in NN)$ is not monotone.
+	- By definition, the successor of a natural number is greater than
+	  the number itself. Hence, ${n}_(n in NN)$ is an increasing sequence;
+	- By definition, the successor of the reciprocal a natural number is
+	  smaller than the number itself. Hence, ${(frac(1, 2))^(n)}_(n in NN)$
+	  is decreasing;
+	- ${(-1)^(n)}_(n in NN)$ is not monotone. For example, choosing $n = 0$
+	  and $m = 1$, one has $x_(n) = (-1)^(0) = 1$ and $x_(m) = (-1)^(1) =
+	  -1$, hence $x_(n) < x_(m)$. However, choosing $n = 1$ and $m = 2$, one
+	  has $x_(n) = (-1)^(1) = -1$ and $x_(m) = (-1)^(2) = 1$, hence $x_(n)
+	  > x_(m)$.
 ]
 
 A sequence ${x_(n)}_(n in NN)$ is said to have a *limit* $L in RR$ if, given
@@ -179,11 +188,8 @@ That is, if a sequence has a limit, it might not be monotone.
 
 #theorem[
 	Let ${x_(n)}$ and ${y_(n)}$ be two sequences such that, for any $n in NN$,
-	$x_(n) lt.eq y_(n)$. Suppose that:
-
-	$ lim_(n -> +infinity) y_(n) = +infinity $
-
-	Then, $display(lim_(n -> +infinity) x_(n) = +infinity)$.
+	$x_(n) lt.eq y_(n)$. If $display(lim_(n -> +infinity) y_(n) = +infinity)$,
+	then $display(lim_(n -> +infinity) x_(n) = +infinity)$.
 ] <Squeeze-theorem-for-divergent-sequences>
 // #proof[
 // To be added
@@ -205,20 +211,20 @@ That is, if a sequence has a limit, it might not be monotone.
 	The result on the left is trivial, the result on the right was already
 	proven in @One-over-n-goes-to-zero.
 
-	It is clear that, for any $n in NN$, $0^(n) lt.eq (frac(1, 2))^(n)$.
-	It is also possible to prove by induction that, for any $n in NN$,
-	$(frac(1, 2))^(n) lt.eq frac(1, n)$:
+	Clearly, $0^(n) lt.eq (1 slash 2)^(n)$ for any $n in NN$. Moreover,
+	the fact that $(1 slash 2)^(n) lt.eq 1 slash n$ for any $n in NN$
+	can be proven applying the Principle of Induction:
 
-	- With $n = 1$, $frac(1, 2)^(1) = frac(1, 2)$ and $frac(1, 1) = 1$, and
-	  clearly $frac(1, 2) lt.eq 1$;
-	- Assuming $(frac(1, 2))^(n) lt.eq frac(1, n)$ to be true:
+	- With $n = 1$, $(1 slash 2)^(1) = 1 slash 2$ and $1 slash 1 = 1$, and
+	  clearly $1 slash 2 lt.eq 1$;
+	- Assuming $(1 slash 2)^(n) lt.eq 1 slash n$ to be true:
 
-	  $ (frac(1, 2))^(n + 1) lt.eq frac(1, n + 1) =>
+	  $ (frac(1, 2))^(n + 1) lt.eq frac(1, n + 1) =>&
 	    (frac(1, 2)) (frac(1, 2))^(n) lt.eq frac(1, n) - frac(1, n(n + 1)) =>
 	    (frac(1, 2))^(n) lt.eq frac(2, n) - frac(2, n(n + 1)) => \
-	    frac(1, n) lt.eq frac(2, n) - frac(2, n(n + 1)) =>
-	    - frac(1, n) lt.eq - frac(2, n(n + 1)) =>
-	    frac(1, n) gt.eq frac(2, n(n + 1)) =>
+	    &frac(1, n) lt.eq frac(2, n) - frac(2, n(n + 1)) =>
+	    - frac(1, n) lt.eq - frac(2, n(n + 1)) => \
+	    &frac(1, n) gt.eq frac(2, n(n + 1)) => 
 	    1 gt.eq frac(2, n + 1) => n + 1 gt.eq 2 => n gt.eq 1 $
 
 	It is then possible to apply @Squeeze-theorem-for-sequences to prove

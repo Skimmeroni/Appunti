@@ -22,7 +22,7 @@ $ angle.l underline(v_(i)), underline(v_(j)) angle.r =
 By extension, an *orthogonal matrix* is a matrix whose rows/columns,
 considered as vectors, form an orthogonal set.
 
-#proposition[
+#lemma[
 	An orthogonal matrix has its inverse equal to its transposed.
 ] <Orthogonal-inverse-equals-transposed>
 // #proof[
@@ -61,10 +61,10 @@ symmetric matrices.
 
 	$ p_(A)(lambda) &=
 	  det(A - lambda I) =
-	  det(mat(-1 -lambda, 1, 0; 1, -1 -lambda, 0; 0, 0, 3 -lambda)) =
-	  (3 - lambda) det(mat(-1 -lambda, 1; 1, -1 -lambda)) = \
-	  &= (3 - lambda)((-1 - lambda)^(2) - 1) =
-	  (3 - lambda)(cancel(1) + lambda^(2) + 2 lambda cancel(- 1)) =
+	  det(mat(-1 -lambda, 1, 0; 1, -1 -lambda, 0; 0, 0, 3 -lambda)) = \
+	  &= (3 - lambda) det(mat(-1 -lambda, 1; 1, -1 -lambda)) =
+	  (3 - lambda)((-1 - lambda)^(2) - 1) = \
+	  &= (3 - lambda)(cancel(1) + lambda^(2) + 2 lambda cancel(- 1)) =
 	  lambda (3 - lambda)(lambda + 2) $
 
 	The spectrum of $A$ is ${-2, 0, 3}$. As for the eigenvectors:
@@ -135,7 +135,7 @@ $A$ is said to be:
 - *Semidefinite negative* if, for any $underline(x)$, $angle.l underline(x), A underline(x) angle.r lt.eq 0$;
 - *Indefinite* otherwise.
 
-#proposition[
+#lemma[
 	Let $A$ be a symmetric matrix. If $A$ is:
 
 	- Definite positive, all of its eigenvalues are strictly positive;
