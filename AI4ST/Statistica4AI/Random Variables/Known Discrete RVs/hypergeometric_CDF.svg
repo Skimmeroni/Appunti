@@ -242,16 +242,16 @@
 <text x='685.37' y='540.87' text-anchor='middle' style='font-size: 19.20px;fill: #4D4D4D; font-family: "Nimbus Sans";' textLength='21.34px' lengthAdjust='spacingAndGlyphs'>60</text>
 <text x='393.87' y='565.29' text-anchor='middle' style='font-size: 24.00px; font-weight: bold; font-family: "Nimbus Sans";' textLength='13.34px' lengthAdjust='spacingAndGlyphs'>x</text>
 <text transform='translate(22.98,302.41) rotate(-90)' text-anchor='middle' style='font-size: 24.00px; font-weight: bold; font-family: "Nimbus Sans";' textLength='159.33px' lengthAdjust='spacingAndGlyphs'>F(x) = P(X ≤ x)</text>
-<rect x='33.26' y='38.23' width='721.22' height='33.69' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='44.22' y='45.99' width='17.28' height='18.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<circle cx='52.86' cy='55.08' r='5.69' style='stroke-width: 0.71; fill: #00C1A9;' />
-<rect x='280.97' y='45.99' width='17.28' height='18.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<circle cx='289.61' cy='55.08' r='5.69' style='stroke-width: 0.71; fill: #00A9FF;' />
-<rect x='517.73' y='45.99' width='17.28' height='18.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<circle cx='526.37' cy='55.08' r='5.69' style='stroke-width: 0.71; fill: #E36EF6;' />
-<text x='66.98' y='62.07' style='font-size: 19.20px; font-family: "Nimbus Sans";' textLength='208.52px' lengthAdjust='spacingAndGlyphs'>n = 430, m = 70, k = 300</text>
-<text x='303.73' y='62.07' style='font-size: 19.20px; font-family: "Nimbus Sans";' textLength='208.52px' lengthAdjust='spacingAndGlyphs'>n = 440, m = 60, k = 200</text>
-<text x='540.49' y='62.07' style='font-size: 19.20px; font-family: "Nimbus Sans";' textLength='208.52px' lengthAdjust='spacingAndGlyphs'>n = 450, m = 50, k = 100</text>
+<rect x='26.86' y='38.23' width='734.02' height='33.69' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='37.82' y='45.99' width='17.28' height='18.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<circle cx='46.46' cy='55.08' r='5.69' style='stroke-width: 0.71; fill: #00C1A9;' />
+<rect x='278.84' y='45.99' width='17.28' height='18.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<circle cx='287.48' cy='55.08' r='5.69' style='stroke-width: 0.71; fill: #00A9FF;' />
+<rect x='519.86' y='45.99' width='17.28' height='18.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<circle cx='528.50' cy='55.08' r='5.69' style='stroke-width: 0.71; fill: #E36EF6;' />
+<text x='60.58' y='62.07' style='font-size: 19.20px; font-family: "Nimbus Sans";' textLength='212.78px' lengthAdjust='spacingAndGlyphs'>N = 360, M = 70, n = 300</text>
+<text x='301.60' y='62.07' style='font-size: 19.20px; font-family: "Nimbus Sans";' textLength='212.78px' lengthAdjust='spacingAndGlyphs'>N = 380, M = 60, n = 200</text>
+<text x='542.62' y='62.07' style='font-size: 19.20px; font-family: "Nimbus Sans";' textLength='212.78px' lengthAdjust='spacingAndGlyphs'>N = 400, M = 50, n = 100</text>
 <text x='73.22' y='26.47' style='font-size: 28.80px; font-weight: bold; font-family: "Nimbus Sans";' textLength='455.44px' lengthAdjust='spacingAndGlyphs'>Hypergeometric Distribution CDF</text>
 </g>
 </g>
