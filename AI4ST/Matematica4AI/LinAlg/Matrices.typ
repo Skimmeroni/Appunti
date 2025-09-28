@@ -178,6 +178,15 @@ The product between matrices possesses the following properties:
 - The identity matrix is the identity element for matrix multiplication, since
   $A I = I A = A$ for any matrix $A$.
 
+Consider the product $A B$ between the two matrices $A$ and $B$. If $B$ is
+a column matrix, it is sometimes useful to write the product as:
+
+$ A B =
+  b_(1) vec(a_(1, 1), a_(2, 1), dots.v, a_(m, 1)) +
+  b_(2) vec(a_(1, 2), a_(2, 2), dots.v, a_(m, 2)) +
+  dots +
+  b_(n) vec(a_(1, n), a_(2, n), dots.v, a_(m, n)) $
+
 Given a matrix $A$, the matrix $A^(T)$ that has the rows of $A$ as its
 columns and the columns of $A$ as its rows is called the *transposed*
 of $A$. If a matrix is equal to its transposed, it is said to be *symmetric*.

@@ -37,19 +37,14 @@ are (be they numbers, functions, polynomals, etcetera); as long as the
 aforementioned properties hold for the two operations, such set shares
 all of the properties that a vector space possesses.
 
-Given a vector space $V$, a set $W$ is said to be a *subspace* of $V$ if
-it's a subset of $V$ and it's itself a vector space with respect to the
-same operations defined for $V$.
-
 For the sake of readability, the product between a real number and
-a vector is often represented without the dot. That is to say, the
-expressions $lambda dot underline(x)$ and $lambda underline(x)$ have
-the same meaning.
+a vector is often represented without the dot. Hence, the expressions
+$lambda dot underline(x)$ and $lambda underline(x)$ have the same meaning.
 
 #exercise[
 	Denote as $RR^(n)$ the set containing all vectors of real components
-	#footnote("This is a misnomer.") in the $n$-dimensional plane. Prove
-	that $RR^(n)$ constitutes a vector space.
+	#footnote[This is a frustrating misnomer.] in the $n$-dimensional
+	plane. Prove that $RR^(n)$ constitutes a vector space.
 ]
 #solution[
 	It is possible to define both a sum between two vectors in
@@ -152,14 +147,12 @@ the same meaning.
 	// Maybe add such?
 ]
 
-#lemma[
-	Let $V$ be a vector space. To prove that a set $W$ is a subspace of $V$
-	it suffices to prove that it is a subset of $V$ and is algebraically
-	closed with respect to the same operations defined for $V$.
-] <Subspace-proven-by-being-algebraically-closed>
-// #proof[
-// To be added
-// ]
+Given a vector space $V$, a set $W$ is said to be a *subspace* of $V$ if
+it's a subset of $V$ and it's itself a vector space with respect to the
+same operations defined for $V$. That is to say, $W$ is a subspace of $V$
+if $W subset.eq V$ and $W$ is algebraically closed with respect to the
+vector sum and the multiplication by a scalar as they are defined for
+$V$.
 
 #exercise[
 	Consider the vector space $RR^(3)$. Prove that the set $W_(1) subset.eq
@@ -198,11 +191,3 @@ the same meaning.
 	  mat(x_(1) + y_(1); 2x_(3) + 2y_(3) + 2; x_(3) + y_(3)) => \
 	  2x_(3) + 2y_(3) + 2 eq.not 2(x_(3) + y_(3)) + 1 $
 ]
-
-#lemma[
-	Let $V$ be a vector space. The sets ${underline(0)}$ and $V$ are always
-	subspaces of $V$.
-]
-// #proof[
-// To be added (it's easy)
-// ]

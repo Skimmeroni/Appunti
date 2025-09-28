@@ -20,7 +20,9 @@ $ angle.l underline(v_(i)), underline(v_(j)) angle.r =
   cases(1 "if" underline(v_(i)) = underline(v_(j)), 0 "otherwise") $
 
 By extension, an *orthogonal matrix* is a matrix whose rows/columns,
-considered as vectors, form an orthogonal set.
+considered as vectors, form an orthogonal set. In the same way, an
+*orthonormal matrix* is a matrix whose rows/columns, considered as
+vectors, form an orthonormal set.
 
 #lemma[
 	An orthogonal matrix has its inverse equal to its transposed.
@@ -28,6 +30,44 @@ considered as vectors, form an orthogonal set.
 // #proof[
 // 
 // ]
+
+#lemma[
+	Rotation matrices are orthonormal.
+]
+#proof[
+	Consider, for the sake of simplicity, rotations in $RR^(2)$; the case
+	for arbitrary dimensions follows the same idea. Let then $R_(theta) =
+	display(mat(cos(theta), -sin(theta); sin(theta), cos(theta)))$ for a
+	given angle $theta$. Its determinant is:
+
+	$ det(mat(cos(theta), -sin(theta); sin(theta), cos(theta))) =
+	  cos(theta) cos(theta) - sin(theta) (-sin(theta)) =
+	  cos^(2)(theta) + sin^(2)(theta) = 1 $
+
+	The inverse of $R_(theta)$ is:
+
+	$ R^(-1)_(theta) =
+	  mat(display(frac(cos(theta), 1)), display(frac(sin(theta), 1));
+	      display(frac(-sin(theta), 1)), display(frac(cos(theta), 1))) =
+	  mat(cos(theta), sin(theta); -sin(theta), cos(theta)) =
+	  R^(T)_(theta) $
+
+	@Orthogonal-inverse-equals-transposed ensures that $R_(theta)$ is
+	orthogonal. As for the norm of its columns:
+
+	$ vec(cos(theta), sin(theta)) dot vec(cos(theta), sin(theta)) &=
+	  cos(theta) cos(theta) + sin(theta) sin(theta) =
+	  cos^(2)(theta) + sin^(2)(theta) = 1 \
+	  vec(cos(theta), sin(theta)) dot vec(-sin(theta), cos(theta)) &=
+	  cancel(cos(theta) (-sin(theta))) + cancel(sin(theta) cos(theta)) = 0 \
+	  vec(-sin(theta), cos(theta)) dot vec(cos(theta), sin(theta)) &=
+	  cancel(sin(theta) cos(theta)) + cancel(cos(theta) (-sin(theta))) = 0 \
+	  vec(-sin(theta), cos(theta)) dot vec(-sin(theta), cos(theta)) &=
+	  (-sin(theta)) (-sin(theta)) + cos(theta) cos(theta) =
+	  sin^(2)(theta) + cos^(2)(theta) = 1 $
+
+	Which means that $R_(theta)$ is also orthonormal by definition.
+]
 
 === Spectral theorem
 

@@ -167,31 +167,67 @@ A vector space whose dimension is a finite number is said to be a
 	+ It's always possible to construct a (potentially empty) set
 	  $W' subset.eq W$ with $abs(W') = abs(W) - abs(U)$ such that
 	  $V$ is spanned by $U union W'$.
+] <Steinitz-exchange-lemma>
+#proof[
+	Suppose $U = {u_(1), dots, u_(m)}$ and $W = {w_(1), dots, w_(n)}$.
+	Since both sets are finite, it's possible to prove the result by
+	induction over $m = abs(U)$.
+
+	Consider the base case $m = 0$. If so, $U$ is just the empty set,
+	and therefore $abs(U)$ is certainly less than $abs(W)$. Moreover,
+	a set $W' subset.eq W$ with $abs(W') = abs(W) - abs(U)$ such that
+	$V$ is spanned by $U union W'$ exists and is the set $W$ itself.
+	This is because $W = W'$ is a subset of itself, $abs(W') = abs(W)
+	- 0 = abs(W)$ and $U union W'$ spans $V$ because $W = W'$ spans
+	$V$ by hypothesis.
+
+	For the inductive step, suppose that the statement is true up to
+	$k - 1 in NN$. The set $U union W'$ can be written as ${u_(1), dots,
+	u_(k - 1), w_(k), dots, w_(n)}$, rearranging the $w_(i)$ vectors if
+	necessary. The inductive hypothesis states that $k lt.eq n$ and that
+	it's always possible to construct a set $W' subset.eq W$ with $abs(W')
+	= abs(W) - abs(U)$ such that $V$ is spanned by $U union W'$. By
+	hypothesis $U subset.eq V$, which means that the $k$-th vector
+	of $U$ is in $V$. It's then possible to write it as a linear
+	combination of vectors in $U union W'$:
+
+	$ u_(k) = sum_(i = 1)^(k - 1) lambda_(i) u_(i) + sum_(j = k)^(n) lambda_(j) w_(j) $
+
+	For some set of coefficients ${lambda_(1), dots, lambda_(n)}$. Note how
+	there's at least one $lambda_(j)$ with $j gt.eq k$ that is non zero,
+	because otherwise the equality would read $u_(k) = sum_(i = 1)^(k - 1)
+	lambda_(i) u_(i)$ and therefore $U$ would not be a linearly independent
+	set. This also implies that $k lt.eq n$. Suppose, without loss of
+	generality, that $lambda_(k)$ is non zero (the vectors can be rearranged
+	if necessary). Then:
+
+	$ w_(k) = frac(1, lambda_(k)) (u_(k) - sum_(j = 1)^(k - 1) lambda_(j) u_(j) - sum_(j = k + 1)^(n) lambda_(j) w_(j)) $
+
+	Which means that it's possible to write $w_(k)$ as a linear combination
+	of the vectors ${u_(1), dots, u_(k - 1), u_(k), w_(k + 1), dots, w_(n)}$.
+	This set contains all the sets that the inductive hypothesis assumes can
+	generate $V$, hence this set can also generate $V$.
 ]
+
+// FIXME: confusing
 
 #theorem("Dimension theorem for vector spaces")[
-	Given a vector space $V$, any two bases of $V$ have the same
-	cardinality. This cardinality is the smallest number of linearly
-	independent vectors needed to generate $V$.
+	All bases of any vector space have the same cardinality; this
+	cardinality is the smallest number of linearly independent
+	vectors needed to generate it.
 ]
 #proof[
-	// First part is missing
+	Let $V$ be a vector space and let $cal(B)_(1)$ and $cal(B)_(2)$
+	be two bases for $V$. If $V$ is finite-dimensional, this is a
+	direct consequence of @Steinitz-exchange-lemma. This is because
+	a basis is, by definition, a set of vectors that is linearly
+	independent and that can generate its entire vector space.
+	Therefore, $cal(B)_(1)$ and $cal(B)_(2)$ can appear interchangeably
+	in the hypothesis of @Steinitz-exchange-lemma. In one case one has 
+	$abs(cal(B)_(1)) lt.eq abs(cal(B)_(2))$, in the other $abs(cal(B)_(2))
+	lt.eq abs(cal(B)_(1))$, hence $abs(cal(B)_(1)) = abs(cal(B)_(2))$.
 
-	If $S$ can generate $V$ and $underline(w)$ belongs to $V$, there exists a
-	linear combination of the vectors in $S$ such that:
-
-	$ underline(w) = sum_(i = 1)^(n) lambda_(i) underline(s_(i)) =
-	  lambda_(1) underline(s_(1)) + dots + lambda_(n) underline(s_(n)) $
-
-	Moving $underline(w)$ to the right side of the equation gives:
-
-	$ underline(0) = (-1) underline(w) + lambda_(1) underline(s_(1)) + dots +
-	  lambda_(n) underline(s_(n)) $
-
-	The expression on the right side of the equation is indeed a linear
-	combination of $S union {underline(w)}$, that is equal to the null
-	vector. Since at least $-1$ is a non zero coefficient, such set
-	is linearly dependent.
+	// FIXME: the infinite case is missing
 ]
 
 #exercise[

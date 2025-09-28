@@ -41,8 +41,8 @@ $ Im(T) = {underline(w) in W: exists underline(v) in V space "s.t." space
 	$W$. $Im(W)$ is a subspace of $W$.
 ] <Image-of-transformation-is-vector-space>
 #proof[
-	By @Subspace-proven-by-being-algebraically-closed, it suffices to
-	prove that $underline(w_(1)) + underline(w_(2)) in Im(W)$ holds for
+	To show that $Im(W)$ is a subspace of $W$, it has to be proven
+	that $underline(w_(1)) + underline(w_(2)) in Im(W)$ holds for
 	all $underline(w_(1)), underline(w_(2)) in Im(W)$ and that $lambda
 	underline(w) in Im(W)$ holds for all $underline(w) in Im(W)$ and
 	$lambda in RR$.
@@ -147,10 +147,10 @@ $ ker(T) = {underline(v) in V: T(underline(v)) = underline(0)} $
 	and $W$. $ker(V)$ is a subspace of $V$.
 ] <Kernel-of-transformation-is-vector-space>
 #proof[
-	By @Subspace-proven-by-being-algebraically-closed, it suffices to
-	prove that $underline(v_(1)) + underline(v_(2)) in ker(V)$ holds for
-	all $underline(v_(1)), underline(v_(2)) in ker(V)$ and that $lambda
-	underline(v) in ker(V)$ holds for all $underline(v) in ker(V)$ and
+	To show that $ker(W)$ is a subspace of $W$, it has to be proven
+	that $underline(w_(1)) + underline(w_(2)) in ker(W)$ holds for
+	all $underline(w_(1)), underline(w_(2)) in ker(W)$ and that $lambda
+	underline(w) in ker(W)$ holds for all $underline(w) in ker(W)$ and
 	$lambda in RR$.
 
 	By definition, if $underline(v) in ker(V)$ holds, then

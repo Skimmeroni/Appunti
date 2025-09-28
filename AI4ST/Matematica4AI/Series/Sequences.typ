@@ -51,7 +51,7 @@ A sequence ${x_(n)}_(n in NN)$ is said to have a *limit* $L in RR$ if, given
 any number $epsilon > 0$, exists $N in NN$ dependent on $epsilon$, such that
 for any $n > N$:
 
-$ |x_(n) - L| < epsilon $
+$ abs(x_(n) - L) < epsilon $
 
 In that case, ${x_(n)}_(n in NN)$ is said to *converge* to $L$, or simply
 to be *convergent*. To denote that ${x_(n)}_(n in NN)$ has limit $L$ the
@@ -59,27 +59,64 @@ following notation is used:
 
 $ lim_(n -> +infinity) x_(n) = L $
 
+Proving the convergence of a series is often far from obvious.
+@Archimedean-Principle is a useful fact that can aid in such
+endeavour.
+
+#lemma("Archimedean principle")[
+	For any $a, b in RR$ with $a > 0$, there exist $n in NN$ such that
+	$n a > b$.
+] <Archimedean-Principle>
+#proof[
+	Stating that $n a > b$ is the same as stating that $n > a slash b$;
+	since $a$ is assumed to be positive, there are no issues in dividing
+	both sides by $a$. Since $RR$ is closed under division (the ratio of
+	two real numbers is always a real number), $a slash b$ is a real number.
+
+	Let $a slash b = x$; the statement $n a > b$ is then equivalent to
+	$n > x$. Suppose that the statement is false, and therefore that there
+	is no $n$ such that $n > x$. Stated otherwise, this would mean that the
+	real number $x$ is greater than any natural number. If that were to be
+	the case, $NN$ would have a supremum, since $NN$ is a non-empty subset
+	of $RR$ and $RR$ is a complete set.
+
+	Let $S = sup(NN)$; notice that $S$ might not be equal to $x$, but
+	is certainly smaller than $x$. Consider $S - 1$; since $S = sup(NN)$,
+	$S - 1$ is clearly not an upper bound for $NN$, which means that
+	there has to exist $m in NN$ such that $m > S - 1$. However, this
+	is the same as $m + 1 > S$, which leads to a contradiction since
+	$S = sup(NN)$ and $m + 1 in NN$ ($NN$ is closed under addition).
+
+	Therefore, it must be the case that for any $x in RR$, there exist
+	$n in NN$ such that $n > x$. Having chosen $x = a slash b$, it then
+	exists $n in NN$ such that $n > a slash b$, which is the same as
+	stating that there exists $n in NN$ such that $a n > b$.
+]
+
 #exercise[
 	Prove that $display(lim_(x -> +infinity) frac(1, n) = 0)$.
 ] <One-over-n-goes-to-zero>
 #solution[
-	Let $epsilon$ be any strictly positive number, and let $N = [frac(1,
-	epsilon)] + 1$. By the definition of $N$, any $n > N$ cannot lie in
-	the interval $(0, 1]$, because it has to be at least greater than $1$.
-	Therefore, any $frac(1, n)$ must lie in $(0, 1]$. Since $epsilon$ is
-	strictly positive, it must be true that:
+	First, notice that:
 
-	$ 0 < frac(1, n) < epsilon $
+	$ abs(frac(1, n) - 0) = abs(frac(1, n)) = frac(1, n) $
 
-	If both $frac(1, n)$ and $epsilon$ are strictly positive, they must
-	be greater than any negative number, and in particular greater than
-	$-epsilon$. Therefore, the $0$ in the inequality can be substituted
-	with $-epsilon$:
+	Since $0$ is the neutral element of addition for $NN$ and $QQ^(+)$
+	is closed under division. Therefore, to prove that $lim_(n -> +infinity)
+	1 slash n = 0$, it is necessary to prove the existence, for any $epsilon
+	> 0$, of a $N in NN$ such that $1 slash n < epsilon$ for any $n > N$.
 
-	$ 0 < frac(1, n) < epsilon => -epsilon < frac(1, n) < epsilon =>
-	  abs(frac(1, n)) < epsilon => abs(frac(1, n) - 0) < epsilon $
+	$1 slash n < epsilon$ is equivalent to $n > 1 slash epsilon$. This
+	means that, by choosing a $N < n$ such that $N > 1 slash epsilon$,
+	one has $1 slash n < 1 slash N$, since dividing a number by a bigger
+	number gives a smaller result. Having chosen $N$ such that $N > 1
+	slash epsilon$, one has:
 
-	Which is the definition of convergence.
+	$ frac(1, n) < frac(1, N) < frac(1, frac(1, epsilon)) space "which is" space
+	  frac(1, n) < frac(1, N) < epsilon $
+
+	The fact that such $N$ exists is guaranteed by @Archimedean-Principle,
+	hence the result is proven.
 ]
 
 Note that the existence of a $L in RR$ such that $lim_(n -> +infinity) x_(n) =

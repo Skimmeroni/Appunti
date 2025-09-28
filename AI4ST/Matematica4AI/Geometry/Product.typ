@@ -95,8 +95,11 @@ is formed between them.
 	Given the two vectors $underline(a)$ and $underline(b)$, let
 	$underline(a) - underline(b)$ be the difference between the two:
 
-	#figure[
-		#diagram(
+	#figure(
+		caption: [Given $underline(a)$ and $underline(b)$, the vector
+		          $underline(a) plus.minus underline(b)$ is given by
+		          applying the Parallelogram Law.],
+		diagram(
 			edge-stroke: 0.75pt,
 			spacing: 4em,
 			edge((5, 2.5), (0, 2.5), marks: ("stealth", none), label-pos: 0, $x$),
@@ -106,7 +109,7 @@ is formed between them.
 			edge((1, 0.5), (4, 2), marks: (none, "stealth"), stroke: 1pt + blue, $underline(a) - underline(b)$),
 			node((0.5, 2), $theta$, radius: 0pt)
 		)
-	]
+	)
 
 	Applying the Law of Cosines:
 
@@ -193,8 +196,10 @@ and the angle between them.
 	Given the two vectors $underline(a)$ and $underline(b)$, let
 	$underline(a) times underline(b)$ be their cross product:
 
-	#figure[
-		#diagram(
+	#figure(
+		caption: [Cross product of $underline(a)$ and $underline(b)$.
+		          The resulting vector is $underline(a) times underline(b)$.],
+		diagram(
 			edge-stroke: 0.75pt,
 			spacing: 4em,
 			edge((5, 2.5), (0, 2.5), marks: ("stealth", none), label-pos: 0, $x$),
@@ -204,7 +209,7 @@ and the angle between them.
 			edge((0, 2.5), (3.5, 3.5), marks: (none, "stealth"), stroke: 1pt + blue, $underline(b)$),
 			edge((0, 2.5), (1.5, 1.25), marks: (none, "stealth"), stroke: 1pt + fuchsia, $underline(a) times underline(b)$),
 		)
-	]
+	)
 
 	Taking the square of $norm(underline(a) times underline(b))$ gives:
 
@@ -279,8 +284,11 @@ The cross product also has an interesting geometric interpretation.
 	$underline(a)$ and $underline(b)$.
 ]
 #proof[
-	#figure[
-		#diagram(
+	#figure(
+		caption: [Extending $underline(a)$ and $underline(b)$ along each
+		          other's parallel direction, one obtains a parallelogram.
+		          Its area is equal to $underline(a) times underline(b)$.],
+		diagram(
 			edge-stroke: 0.75pt,
 			spacing: 4em,
 			edge((0, 2.5), (0.5, 0.5), marks: (none, "stealth"), stroke: 1pt + blue, $underline(a)$),
@@ -290,7 +298,7 @@ The cross product also has an interesting geometric interpretation.
 			edge((0.5, 2.5), (0.5, 0.5), "--", stroke: 1pt + blue, $norm(underline(a)) sin(theta)$),
 			node((0.375, 2), $theta$, radius: 0pt)
 		)
-	]
+	)
 
 	Consider two vectors $underline(a)$ and $underline(b)$, with an
 	angle $theta$ between them. The projection of $underline(a)$ onto

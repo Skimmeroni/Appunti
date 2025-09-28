@@ -31,14 +31,23 @@
 #include "LinAlg/Transformations.typ"
 == Kernel and Image
 #include "LinAlg/KerIm.typ"
-== Eigenvalues and Eigenvectors
-#include "LinAlg/Eigen.typ"
+#pagebreak()
+
+= Analytic Geometry
+//== Vectors in space
+//#include "Geometry/Cartesian.typ"
 == Inner product and cross product
-#include "LinAlg/Product.typ"
+#include "Geometry/Product.typ"
+//== Equation of the straight line
+//#include "Geometry/Line.typ"
+//== Rotations
+//#include "Geometry/Rotation.typ"
+== Eigenvalues and Eigenvectors
+#include "Geometry/Eigen.typ"
 == Spectral Theorem
-#include "LinAlg/Spectral.typ"
+#include "Geometry/Spectral.typ"
 == Decompositions
-#include "LinAlg/Decomposition.typ"
+#include "Geometry/Decomposition.typ"
 #pagebreak()
 
 = Multivariable calculus
