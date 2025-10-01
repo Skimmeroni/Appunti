@@ -34,14 +34,14 @@
 #pagebreak()
 
 = Analytic Geometry
-//== Vectors in space
-//#include "Geometry/Cartesian.typ"
+== Vectors in space
+#include "Geometry/Cartesian.typ"
 == Inner product and cross product
 #include "Geometry/Product.typ"
-//== Equation of the straight line
-//#include "Geometry/Line.typ"
-//== Rotations
-//#include "Geometry/Rotation.typ"
+== Equation of the straight line
+#include "Geometry/Line.typ"
+== Rotations
+#include "Geometry/Rotation.typ"
 == Eigenvalues and Eigenvectors
 #include "Geometry/Eigen.typ"
 == Spectral Theorem
@@ -51,5 +51,7 @@
 #pagebreak()
 
 = Multivariable calculus
+== Complex numbers
+#include "Calculus/Complex.typ"
 == Partial derivatives
 #include "Calculus/Partial.typ"
