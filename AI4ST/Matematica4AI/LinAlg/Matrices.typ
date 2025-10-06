@@ -120,9 +120,36 @@ The sum between matrices possesses the following properties:
 - The null matrix is the identity element for matrix sum, since
   $A + O = O + A = A$ for any matrix $A$.
 
-Given a $m times p$ matrix $A$ and a $p times n$ matrix $B$, the *product*
-between two matrices (also called *row-by-column product*) is the $m times n$
-matrix $C = A B$ given by:
+The *product between a matrix and a scalar* is an operation that has as input
+a matrix $A$ and a scalar $k$ and has as output a matrix $k A$ that has each
+entry multiplied by $k$.
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ A = mat(
+	   a_(1, 1), a_(1, 2), dots, a_(1, n);
+	   a_(2, 1), a_(2, 2), dots, a_(2, n);
+	   dots.v, dots.v, dots.down, dots.v;
+	   a_(m, 1), a_(m, 2), dots, a_(m, n)
+	) $],
+	[$ k A = mat(
+	   k a_(1, 1), k a_(1, 2), dots, k a_(1, n);
+	   k a_(2, 1), k a_(2, 2), dots, k a_(2, n);
+	   dots.v, dots.v, dots.down, dots.v;
+	   k a_(m, 1), k a_(m, 2), dots, k a_(m, n)
+	) $]
+)
+
+The product between a matrix and a scalar possesses the following properties:
+
+- It is associative;
+- It is commutative with respect to the matrix multiplication;
+- It is distributive with respect to the matrix sum;
+- It is distributive with respect to the matrix transposition;
+
+Given a $m times p$ matrix $A$ and a $p times n$ matrix $B$, the *matrix
+product* between two matrices (also called *row-by-column product*) is
+the $m times n$ matrix $C = A B$ given by:
 
 $ C = A B = (c_(i, j)) =
   mat(
@@ -145,6 +172,14 @@ That is, the $i,j$-th entry of $A B$ is given by the sum between the products
 corresponding entries of the $i$-th row of $A$ and the $j$-th column of $B$.
 Two matrices that possess this property are called _product-conformant_. The
 product between two matrices that are not product-conformant is undefined.
+
+If $B$ is a column matrix, it is sometimes useful to write the product as:
+
+$ A B =
+  b_(1) vec(a_(1, 1), a_(2, 1), dots.v, a_(m, 1)) +
+  b_(2) vec(a_(1, 2), a_(2, 2), dots.v, a_(m, 2)) +
+  dots +
+  b_(n) vec(a_(1, n), a_(2, n), dots.v, a_(m, n)) $
 
 #exercise[
 	Compute the product of the following matrices:
@@ -178,15 +213,6 @@ The product between matrices possesses the following properties:
 - The identity matrix is the identity element for matrix multiplication, since
   $A I = I A = A$ for any matrix $A$.
 
-Consider the product $A B$ between the two matrices $A$ and $B$. If $B$ is
-a column matrix, it is sometimes useful to write the product as:
-
-$ A B =
-  b_(1) vec(a_(1, 1), a_(2, 1), dots.v, a_(m, 1)) +
-  b_(2) vec(a_(1, 2), a_(2, 2), dots.v, a_(m, 2)) +
-  dots +
-  b_(n) vec(a_(1, n), a_(2, n), dots.v, a_(m, n)) $
-
 Given a matrix $A$, the matrix $A^(T)$ that has the rows of $A$ as its
 columns and the columns of $A$ as its rows is called the *transposed*
 of $A$. If a matrix is equal to its transposed, it is said to be *symmetric*.
@@ -211,33 +237,30 @@ of $A$. If a matrix is equal to its transposed, it is said to be *symmetric*.
 	Let $A$ and $B$ be two product-conformant matrices. Then $(A B)^(T) =
 	B^(T) A^(T)$.
 ]
-// #proof[
-// To be added
-// ]
+#proof[
+	Suppose that the dimension of $A$ is $m times p$ and that the
+	dimension of $B$ is $p times n$. Let $A B = C$; from the definition
+	of matrix product:
 
-The *product between a matrix and a scalar* is an operation that has as input
-a matrix $A$ and a scalar $k$ and has as output a matrix $k A$ that has each
-entry multiplied by $k$.
+	$ c_(i, j) = sum_(k = 1)^(p) a_(i, k) dot b_(k, j) space
+	  forall i in {1, dots, m}, forall j in {1, dots, n} $
 
-#grid(
-	columns: (0.5fr, 0.5fr),
-	[$ A = mat(
-	   a_(1, 1), a_(1, 2), dots, a_(1, n);
-	   a_(2, 1), a_(2, 2), dots, a_(2, n);
-	   dots.v, dots.v, dots.down, dots.v;
-	   a_(m, 1), a_(m, 2), dots, a_(m, n)
-	) $],
-	[$ k A = mat(
-	   k a_(1, 1), k a_(1, 2), dots, k a_(1, n);
-	   k a_(2, 1), k a_(2, 2), dots, k a_(2, n);
-	   dots.v, dots.v, dots.down, dots.v;
-	   k a_(m, 1), k a_(m, 2), dots, k a_(m, n)
-	) $]
-)
+	Let $(A B)^(T) = R$. The matrices $R$ and $C$ have the same dimension,
+	since $C$ is a square matrix. The entries of $R$ are:
 
-The product between a matrix and a scalar possesses the following properties:
+	$ r_(j, i) = sum_(k = 1)^(p) a_(i, k) dot b_(k, j) space
+	  forall j in {1, dots, n}, forall i in {1, dots, m} $
 
-- It is associative;
-- It is commutative with respect to the matrix multiplication;
-- It is distributive with respect to the matrix sum;
-- It is distributive with respect to the matrix transposition;
+	Let $B^(T) A^(T) = S$. The dimension of $B^(T)$ is $n times p$, while
+	the dimension of $A^(T)$ is $p times m$, hence $B^(T)$ and $A^(T)$ are
+	product-conformant. The entries of $S$ are:
+
+	$ s_(j, i) = sum_(k = 1)^(p) b_(k, j) dot a_(i, k) space
+	  forall j in {1, dots, n}, forall i in {1, dots, m} $
+
+	Since the product of real numbers is commutative, $b_(k, j)
+	dot a_(i, k) = a_(i, k) dot b_(k, j)$ for any $i, j, k$. Since
+	$r_(j, i)$ and $s_(j, i)$ are computed from the same summations
+	with the same indices, $r_(j, i) = s_(j, i)$ for any $i in {1, dots, m}$
+	and any $j in {1, dots, n}$.
+]

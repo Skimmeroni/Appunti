@@ -349,101 +349,187 @@ solutions for any system.
 	from such solutions.
 ]
 
+#lemma[
+	A solvable linear system of equations has a single solution if
+	and only if the rank of its coefficient matrix equals the number
+	of unknowns in the system.
+] <Single-solution-rank-unknowns>
+// #proof[
+// To be added
+// ]
+
 A linear system of equations is said to be *determined* if it has as
 many equations as unknowns. It is instead said to be *overdetermined*
-if it has more equations than unknowns or *underdetermined* if it has
-more unknowns than equations. Determined, overdetermined or underdetermined
-are either solvable or unsolvable.
+if it has more equations than unknowns or *underdetermined* if it
+has more unknowns than equations.
 
-#lemma[
-	Consider a solvable linear system of equations that is determined.
-	The system has one and only solution if and only if the rank of the
-	coefficient matrix equals the number of equations in the system. On
-	the other hand, the system has infinitely many solutions if and only
-	if the rank of the coefficient matrix is smaller than the number of
-	equations in the system.
+Determined, overdetermined or underdetermined systems may or may not
+be solvable. In particular, solvable determined and overdetermined
+system can have either a single solution or infinitely many solutions,
+while solvable underdetermined systems always have infinitely many
+solutions.
+
+#corollary[
+	A solvable underdetermined linear system of equations always has
+	infinitely many solutions.
 ]
-// #proof[
-// Consider a solvable linear system of equations $A underline(x) =
-// underline(b)$ that is determined. Being determined, the matrix $A$
-// has to be a square matrix, suppose of dimension $n times n$. Being
-// solvable, @Rouche-Capelli-theorem ensures that $"rank"(A) =
-// "rank"(A | underline(b))$.
-// ]
-
-#lemma[
-	Consider a solvable linear system of equations that is overdetermined.
-	The system has one and only solution if and only if the rank of the
-	coefficient matrix equals the number of equations in the system. On
-	the other hand, the system has infinitely many solutions if and only
-	if the rank of the coefficient matrix is smaller than the number of
-	equations in the system.
-]
-// #proof[
-// To be added
-// ]
-
-#lemma[
-	An underdetermined linear system of equations that is solvable
-	always has infinitely many solutions. In particular, the number
-	of free variables in the system is given by the difference between
-	the number of equations and the rank of the coefficient matrix.
-]
-// #proof[
-// To be added
-// ]
-
-The previous lemmas characterize the number of solutions that different
-system of equations can have, but do not specify how to find them.
-@Cramer-theorem instructs how to find solutions for a determined system.
-
-#theorem("Cramer Theorem")[
-	Consider a determined system of linear equations $A underline(x) =
-	underline(b)$. If $A$ is not singular, then it is solvable. Moreover,
-	its one and only solution is $underline(x)^(p) = A^(-1) underline(b)$.
-] <Cramer-theorem>
 #proof[
-	To prove that $A underline(x) = underline(b)$ can have at most one
-	solution, suppose by contradiction that this is not the case, and
-	therefore that the system has two or more solutions. Suppose that
-	two of its solutions are $underline(x)^(p)$ and $underline(x)^(q)$,
-	with $underline(x)^(p) != underline(x)^(q)$. As it was the case in
-	@Zero-one-infinite-solutions, it's possible to write $A(underline(x)^(p)
-	- underline(x)^(q)) = underline(0)$. Since $A$ is assumed to be
-	invertible:
-
-	$ A (underline(x)^(p) - underline(x)^(q)) = underline(0) =>
-	  cancel(A^(-1)) cancel(A) (underline(x)^(p) - underline(x)^(q)) = A^(-1) underline(0) =>
-	  underline(x)^(p) - underline(x)^(q) = underline(0) =>
-	  underline(x)^(p) = underline(x)^(q) $
-
-	But it was assumed that $underline(x)^(p) != underline(x)^(q)$, which
-	leads to a contradiction. It has to be true then that the system has
-	one and only solution.
-
-	The fact that $underline(x)^(p) = A^(-1) underline(b)$ is a possible
-	solution to the system stems from the obvious fact that substituting
-	$underline(x)$ with $underline(x)^(p)$ gives $A A^(-1) underline(b) =
-	underline(b)$. However, since $x^(p) = A^(-1) underline(b)$, the
-	existence of $x^(p)$ necessitates $A$ to be invertible, which is to
-	say that $A$ has to be not singular. Also, since it has just been shown
-	that such system has a single solution, this solution also happens to
-	be the one and only.
+	@Single-solution-rank-unknowns states that the only way for a
+	system of equations to have a single solution is to have a
+	coefficient matrix whose rank equals the number of unknowns.
+	However, an underdetermined system cannot satisfy such condition,
+	because its rank is at most equal to the number of its equations.
+	@Zero-one-infinite-solutions states that, if a system is solvable,
+	it either has a single solution or infinitely many solutions;
+	since a solvable underdetermined system cannot have a single
+	solution, it must have infinitely many solutions.
 ]
 
-@Cramer-theorem is powerful, but holds only for determined system.
-This is because the coefficient matrix, to be inverted, has to be
-a square matrix, which happens only in determined systems. Moreover,
-for large matrices, computing the inverse matrix can be very expensive.
-A more generic approach, which also happens to be faster, is given in
-@Gaussian-elimination.
+#lemma[
+	If a linear system of equations has infinitely many solutions, the
+	number of free variables in the system is given by the difference
+	between the number of equations and the rank of the coefficient matrix.
+]
+// #proof[
+// To be added
+// ]
 
-#theorem("Principle of Gaussian elimination")[
+The previous results characterize the number of solutions that
+different system of equations can have, but do not specify how to
+find them. @Cramer-rule instructs how to find solutions for a
+determined system.
+
+#theorem("Cramer's Rule")[
+	Consider a determined system of linear equations $A underline(x) =
+	underline(b)$. If it has a single solution, such solution is
+	$underline(x)^(*) = A^(-1) underline(b)$, given component-wise as:
+
+	#set math.mat(delim: "|")
+
+	$ x^(*)_(i) =
+	  frac(display(mat(a_(1, 1), dots, a_(1, i - 1), b_(1), a_(1, i + 1), dots, a_(1, n);
+	                   a_(1, 2), dots, a_(2, i - 1), b_(2), a_(2, i + 1), dots, a_(2, n);
+	                   dots.v, dots.down, dots.v, dots.v, dots.v, dots.down, dots.v;
+	                   a_(n, 1), dots, a_(n, i - 1), b_(n), a_(n, i + 1), dots, a_(n, n))),
+	       display(mat(a_(1, 1), a_(1, 2), dots, a_(1, n);
+	                   a_(1, 2), a_(2, 2), dots, a_(2, n);
+	                   dots.v, dots.v, dots.down, dots.v;
+	                   a_(n, 1), a_(n, 2), dots, a_(n, n)))) =
+	frac(det(A_(i)(underline(b))), det(A)) $
+
+	Where $A_(i)(underline(b))$ is the matrix $A$ with the $i$-th column
+	replaced by $underline(b)$.
+] <Cramer-rule>
+#proof[
+	The fact that the only solution to the system is precisely
+	$underline(x)^(*) = A^(-1) underline(b)$ stems from the obvious
+	fact that substituting it in $A underline(x) = underline(b)$
+	yields a valid identity.
+
+	$A^(-1)$ certainly exists because by @Single-solution-rank-unknowns
+	a system of equations has a single solution if and only if the rank
+	of its coefficient matrix equals the number of unknowns in the system.
+	Since the system is determined, having the rank of its coefficient
+	matrix equal to the number of unknowns means that the matrix is full
+	rank, hence invertible (@Full-rank-matrices-are-invertible).
+
+	To prove that the $i$-th component of $underline(x)^(*)$ is 
+	$det(A_(i)(underline(b))) slash det(A)$, consider the matrix:
+
+	$ I_(i)(underline(x)^(*)) =
+	  mat(underline(e)_(1), underline(e)_(2), dots, underline(x)^(*), dots, underline(e)_(n - 1), underline(e)_(n)) =
+	  mat(1, 0, dots, x^(*)_(1), dots, 0, 0;
+	      0, 1, dots, x^(*)_(2), dots, 0, 0;
+	      dots.v, dots.v, dots.down, dots.v, dots.down, dots.v, dots.v;
+	      0, 0, dots, x^(*)_(n - 1), dots, 1, 0;
+	      0, 0, dots, x^(*)_(n), dots, 0, 1) $
+
+	Which is the $n times n$ identity matrix with the $i$-th column
+	substituted with $underline(x)^(*)$. The determinant of this matrix
+	can be computed by expanding with respect to the $i$-th column:
+
+	$ det(I_(i)(underline(x)^(*))) =
+	  (-1)^(i + 1) x^(*)_(1) 
+	  mat(delim: "|",
+	      0, 1, dots, 0, 0;
+	      dots.v, dots.v, dots.down, dots.v, dots.v;
+	      0, 0, dots, 1, 0;
+	      0, 0, dots, 0, 1) 
+	  + dots + (-1)^(i + i) x^(*)_(i) 
+	  mat(delim: "|",
+	      1, 0, dots, 0, 0;
+	      dots.v, dots.v, dots.down, dots.v, dots.v;
+	      0, 0, dots, 1, 0;
+	      0, 0, dots, 0, 1) 
+	  &+ dots + (-1)^(i + n) x^(*)_(n) 
+	  mat(delim: "|",
+	      1, 0, dots, 0, 0;
+	      0, 1, dots, 0, 0;
+	      dots.v, dots.v, dots.down, dots.v, dots.v;
+	      0, 0, dots, 1, 0) $
+
+	Since the $i$-th column is the only one containing non-zero elements
+	on the diagonal, all these sub-matrices are diagonal matrices. This
+	means that it's possible to apply @Determinant-of-triangular-matrix.
+	Notice however that all such sub-matrices, except for the $i$-th
+	one, have at least a $0$ in their diagonal, hence their determinant
+	is $0$. The $i$-th sub-matrix is instead the $n - 1$ identity matrix,
+	whose determinant is $1$. The determinant of $I_(i)(underline(x)^(*))$
+	is therefore:
+
+	$ det(I_(i)(underline(x)^(*))) =
+	  0 + dots +
+	  (-1)^(i + i) x^(*)_(i) 
+	  mat(delim: "|",
+	      1, 0, dots, 0, 0;
+	      dots.v, dots.v, dots.down, dots.v, dots.v;
+	      0, 0, dots, 1, 0;
+	      0, 0, dots, 0, 1)
+	  + dots + 0 =
+	  (-1)^(2i) x^(*)_(i) dot 1 =
+	  1 dot x^(*)_(i) =
+	  x^(*)_(i) $
+
+	Multiplying $A$ with $I_(i)(underline(x)^(*))$ gives:
+
+	$ A I_(i)(underline(x)^(*)) &=
+	  A mat(underline(e)_(1), underline(e)_(2), dots, underline(x)^(*), dots, underline(e)_(n - 1), underline(e)_(n)) =
+	  mat(A underline(e)_(1), A underline(e)_(2), dots, A underline(x)^(*), dots, A underline(e)_(n - 1), A underline(e)_(n)) = \
+	  &= mat(underline(a)_(1), underline(a)_(2), dots, b, dots, underline(a)_(n - 1), underline(a)_(n)) = A_(i)(underline(b)) $
+
+	Since $A I_(i)(underline(x)^(*))$ and $A_(i)(underline(b))$ are equal,
+	their determinants are also equal. Applying @Binet-theorem:
+
+	$ det(A I_(i)(underline(x)^(*))) =
+	  det(A) det(I_(i)(underline(x)^(*))) =
+	  det(A) x^(*)_(i) =
+	  det(A_(i)(underline(b))) $
+
+	Rearranging:
+
+	$ x^(*)_(i) = frac(det(A_(i)(underline(b))), det(A)) $
+]
+
+Despite being a very straightforward rule, @Cramer-rule isn't a very
+practical result for solving systems of equations. The first reason
+is that has limited scope, since it is only valid for determined
+systems whose coefficient matrix is non singular: in accord to
+@Rouche-Capelli-theorem, underdetermined and overdetermined systems
+are not precluded from being solvable, as determined systems having
+a singular coefficient matrix. The second reason is that computing
+the solution requires the matrix to be inverted, which for large
+matrices is prohibitely expensive.
+
+A different rule for solving systems of equations, which works for any
+system and is much faster, is the *Gauss-Jordan algorithm*. The validity
+of the algorithm relies on @Gauss-Jordan-validity.
+
+#theorem("Validity of the Gauss-Jordan algorithm")[
 	Let $A$ be the coefficient matrix of a linear system of equations
 	$S$. Applying any Gauss move one or more times to $A$ gives a new
 	matrix $A'$ associated to a new linear system of equations $S'$
 	whose general solution is the same of $S$. 
-] <Gaussian-elimination>
+] <Gauss-Jordan-validity>
 // #proof[
 // To be added
 // ]

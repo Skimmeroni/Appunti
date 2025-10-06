@@ -323,3 +323,40 @@ The cross product also has an interesting geometric interpretation.
 // #proof[
 // To be added
 // ]
+
+A similar argument can be made for the determinant of a matrix. Consider
+a $2 times 2$ matrix $A$ and its two column vectors $underline(v) =
+vec(a_(1, 1), a_(2, 1))$ and $underline(u) = vec(a_(1, 2), a_(2, 2))$.
+Let $theta$ be the angle that $underline(v)$ forms with the $x$ axis
+and let $phi$ be the angle that $underline(w)$ forms with the $x$ axis;
+assume, without loss of generality, that $phi gt.eq theta$. Using polar
+coordinates:
+
+#grid(
+	columns: (0.5fr, 0.5fr),
+	[$ cases(
+	   a_(1, 1) = norm(v) cos(theta),
+	   a_(2, 1) = norm(v) sin(theta)
+	   ) $],
+	[$ cases(
+	   a_(1, 2) = norm(w) cos(phi),
+	   a_(2, 2) = norm(w) sin(phi)
+	   ) $]
+)
+
+Substituting in the expression for the determinant of $A$:
+
+$ det(A)&= a_(1, 1) a_(2, 2) - a_(2, 1) a_(1, 2) =
+  norm(v) cos(theta) norm(w) sin(phi) - norm(v) sin(theta) norm(w) cos(phi) = \
+  &= norm(v) norm(w) (cos(theta) sin(phi) - sin(theta) cos(phi)) =
+  norm(v) norm(w) sin(phi - theta) $
+
+Where $phi - theta$ is the angle between the two vectors. This means
+that the determinant of a $2 times 2$ matrix is, not counting the sign,
+the area of the parallelogram formed by its column vectors. If $phi$
+were to be smaller than $theta$, a minus sign would have arisen in
+front of the expression.
+
+The argument can be extended to $3$ dimensions, showing that the
+determinant of a $3 times 3$ matrix is the volume of the shape
+formed by its three column vectors.

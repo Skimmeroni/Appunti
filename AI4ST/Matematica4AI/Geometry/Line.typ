@@ -230,3 +230,24 @@ intersection between the hyperplanes, because are the points that
 lie on all of them at the same time. Moreover, if the system has no
 solution, then the hyperplanes are parallel to each other, since they
 have no point of intersection.
+
+For example, with $n = 3$ a straight line is the intersection of two
+planes, since it's the set of points that is common between the two.
+The Cartesian form of a straight line in $RR^(3)$ is then:
+
+$ cases(
+	a_(1, 1) x_(1) + a_(1, 2) x_(2) + a_(1, 3) x_(3) = c_(1),
+	a_(2, 1) x_(1) + a_(2, 2) x_(2) + a_(2, 3) x_(3) = c_(2)
+  ) $
+
+The parametric form is the expected:
+
+$ vec(x_(1), x_(2), x_(3)) =
+  vec(x^(p)_(1), x^(p)_(2), x^(p)_(3)) +
+  t vec(v_(1), v_(2), v_(3)) 
+  space "or" space
+  cases(
+	x_(1) = x^(p)_(1) + v_(1) t,
+	x_(2) = x^(p)_(2) + v_(2) t,
+	x_(3) = x^(p)_(3) + v_(3) t,
+  ) $

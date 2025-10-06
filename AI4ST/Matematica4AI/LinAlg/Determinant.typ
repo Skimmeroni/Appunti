@@ -8,18 +8,22 @@ $det(A)$ or $| A |$, is defined recursively as follows:
 
 $ det(A) =
   cases(
-	sum_(j = 1)^(n) (-1)^(i + j) a_(i, j) det(M_(i, j)) "if" n > 1,
-	a_(11) "otherwise"
+	sum_(j = 1)^(n) (-1)^(i + j) a_(i, j) det(M_(i, j)) & "if" n > 1,
+	a_(1, 1) & "otherwise"
 ) $
 
-Where $j$ is any column of the matrix $A$ chosen at random and $M_(i, j)$ is
+Where $i$ is any column of the matrix $A$ chosen at random and $M_(i, j)$ is
 the matrix obtained by removing the $i$-th row and $j$-th column from $A$.
-The formula can also be applied with respect to rows instead of columns.
 
-When the matrix has dimension $n = 2$, the formula can actually be simplified
-as follows:
+For matrices of dimension $2$, the formula simplifies as:
 
-$ det(A) = (a_(1, 1) dot a_(2, 2)) - (a_(2, 1) dot a_(1, 2)) $
+$ det(A) = a_(1, 1) a_(2, 2) - a_(2, 1) a_(1, 2) $
+
+For matrices of dimension $3$, the formula simplifies as:
+
+$ det(A) = a_(1, 1) a_(2, 2) a_(3, 3) − a_(1, 1) a_(2, 3) a_(3, 2) −
+           a_(1, 2) a_(2, 1) a_(3, 3) + a_(1, 2) a_(2, 3) a_(3, 1) +
+           a_(1, 3) a_(2, 1) a_(3, 2) − a_(1, 3) a_(2, 2) a_(3, 1) $
 
 A matrix whose determinant is equal to $0$ is called a *singular matrix*.
 
@@ -51,7 +55,7 @@ Peculiar matrices can have their determinant computed faster.
 #lemma[
 	The determinant of a triangular matrix is equal to the product of the
 	elements on its diagonal.
-]
+] <Determinant-of-triangular-matrix>
 #proof[
 	Consider an upper triangular matrix $A$ and pick the first column to
 	apply the formula:
@@ -98,10 +102,57 @@ not only with respect to rows.
 
 #lemma[
 	It two rows/columns of a matrix are swapped, its determinant changes sign.
-]
+] <Swapping-changes-determinant-sign>
 // #proof[
 // To be added
 // ]
+
+#lemma[
+	If a matrix has two (or more) duplicate rows/columns, its determinant
+	is $0$.
+] <Duplicates-zero-determinant>
+#proof[
+	Let $A$ be a matrix with two duplicate rows. Swapping those rows
+	gives a new matrix $A'$, whose determinant is $-det(A)$ due to
+	@Swapping-changes-determinant-sign. However, $A$ and $A'$ are
+	the same matrix, because the swapped rows are identical. Hence
+	$det(A) = -det(A)$, which is only possible if $det(A) = 0$. The
+	line of reasoning works the same for columns due to
+	@Determinant-equal-by-rows-or-columns.
+]
+
+#lemma[
+	If a matrix has a row/column entirely constituted by $0$s, its
+	determinant is $0$.
+] <Zeros-zero-determinant>
+#proof[
+	#set math.mat(delim: "|")
+
+	Let $A$ be a matrix with a row entirely constituted by $0$s.
+	Suppose that such row is the $i$-th row. Computing the
+	determinant expanding with respect to such row:
+
+	$ det(A) =
+	  (-1)^(i + 1) a_(i, 1) mat(a_(1, 2), dots, a_(1, n);
+	                            a_(2, 2), dots, a_(2, n);
+	                            dots.v, dots.down, dots.v;
+	                            a_(i - 1, 2), dots, a_(i - 1, n);
+	                            a_(i + 1, 2), dots, a_(i + 1, n);
+	                            dots.v, dots.down, dots.v;
+	                            a_(m, 2), dots, a_(m, n)) +
+	  dots +
+	  (-1)^(i + n) a_(i, n) mat(a_(1, 1), dots, a_(1, n - 1);
+	                            a_(2, 1), dots, a_(2, n - 1);
+	                            dots.v, dots.down, dots.v;
+	                            a_(i - 1, 1), dots, a_(i - 1, n - 1);
+	                            a_(i + 1, 1), dots, a_(i + 1, n - 1);
+	                            dots.v, dots.down, dots.v;
+	                            a_(m, 1), dots, a_(m, n - 1)) $
+
+	But $a_(i, 1), dots, a_(i, n)$ are all $0$, hence the entire
+	product is equal to $0$. Due to @Determinant-equal-by-rows-or-columns
+	the same works for columns.
+]
 
 #lemma[
 	Given a $n times n$ matrix $A$ and a scalar $k$,
@@ -291,6 +342,17 @@ removed. If $A^(-1)$ exists, $A$ is said to be *invertible*.
 	)
 ]
 
+#lemma[
+	The matrix product of invertible matrices is an invertible matrix.
+]
+#proof[
+	Let $A$ and $B$ be two invertible matrices. @Binet-theorem asserts
+	that $det(A B) = det(A) det(B)$. Being invertible, $det(A) != 0$ and
+	$det(B) != 0$ due to @Invertible-matrices-not-null-determinant. Since
+	the only way for a product of two real numbers to be equal to $0$ is
+	if at most one of them is $0$, $det(A B)$ cannot be equal to $0$.
+]
+
 === Equivalent and similar matrices
 
 Two matrices $A$ and $B$ are said to be *equivalent* if there exist
@@ -301,21 +363,56 @@ is a special case of matrix equivalence.
 #lemma[
 	Matrix equivalence (and similarity) is an equivalence relation.
 ]
-// #proof[
-// 
-// ]
+#proof[
+	Let $A, B, C$ be any matrices. Matrix equivalence is an equivalence
+	relation if it is reflexive, symmetric and transitive:
 
+	- Matrix equivalence is reflexive if there exist two invertible
+	  matrices $T$ and $S$ such that $T^(-1) A S = A$. Suppose that
+	  the dimension of $A$ is $m times n$; Let $T^(-1) = I_(m)$ and
+	  $S = I_(n)$. Since the identity matrix is the identity element
+	  for the matrix product, $T^(-1) A S = I_(m) A I_(n) = A$. This
+	  means that matrix equivalence is reflexive, because any identity
+	  matrix is invertible (it's his own inverse);
+	- Matrix equivalence is symmetric if knowing that $A$ and $B$ are
+	  matrix equivalent implies that $B$ and $A$ are matrix equivalent.
+	  If $A$ is matrix equivalent to $B$, then there exist two invertible
+	  matrices $T$ and $S$ such that $T^(-1) A S = B$. Suppose that the
+	  dimension of $A$ is $m times n$, the dimension of $T^(-1)$ is
+	  $t times m$ and the dimension of $S$ is $n times s$. The dimension
+	  of $B$ is then $t times s$. Multiplying both sides by $T$ on the
+	  left gives $A S = T B$; multiplying both sides by $S^(-1)$ on the
+	  right gives $A = T B S^(-1)$. This means that $B$ is matrix equivalent
+	  to $A$. Moving $T^(-1)$ and $S$ to the other side of the equation
+	  is justified because, by hypothesis, they are invertible. Moreover,
+	  the product $T B S^(-1)$ is conformant because the dimensions are
+	  consistent;
+	- Matrix equivalence is transitive if knowing that $A$ and $B$ are
+	  matrix equivalent and knowing that $B$ and $C$ are matrix equivalent
+	  implies that $A$ and $C$ are matrix equivalent. If $A$ is matrix
+	  equivalent to $B$, then there exist two invertible matrices $T$ and
+	  $S$ such that $T^(-1) A S = B$. If $B$ is matrix equivalent to $C$,
+	  then there exist two invertible matrices $P$ and $Q$ such that
+	  $P^(-1) B Q = C$. Substituting the first expression in the second
+	  gives $P^(-1) T^(-1) A S Q = C$. Let $P^(-1) T^(-1) = X$ and
+	  $S Q = Y$; since $P^(-1)$, $T^(-1)$, $S$ and $Q$ are invertible,
+	  $X$ and $Y$ are also invertible. This gives $X A Y = C$ and
+	  therefore $A$ and $C$ are equivalent. 
+
+	Matrix similarity is a special case of matrix equivalence, hence
+	matrix similarity is also an equivalence relation.
+]
 #lemma[
 	If two matrices are similar, they have the same determinant and
 	the same rank.
 ]
 #proof[
-	Suppose $A$ and $B$ are similar. Then:
+	Suppose $A$ and $B$ are similar matrices. Then:
 
 	$ det(A) =
 	  det(P B P^(-1)) =
 	  det(P) det(B) det(P^(-1)) =
-	  cancel(det(P)) det(B) frac(1, cancel(det(P))) =
+	  cancel(det(P)) frac(1, cancel(det(P))) det(B) =
 	  det(B) $
 ]
 

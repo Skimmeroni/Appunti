@@ -66,7 +66,3 @@ Notice the difference between $mat(v_(1), v_(2), dots, v_(n))^(T)$ and
 $(v_(1), v_(2), dots, v_(n))$. The first is the vector itself, the second
 is the point in the $n$-dimensional space whose coordinates are the
 components of $underline(v)$, read in order.
-
-This representation can also shed light on what the determinant of a matrix
-actually is. Consider a $2 times 2$ matrix $A$; its determinant is $det(A)
-= a_(1, 1) a_(2, 2) - a_(2, 1) a_(1, 2)$

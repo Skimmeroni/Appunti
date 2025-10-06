@@ -12,10 +12,10 @@ There are multiple way to express a complex number. The most intuitive
 one is the *rectangular form*, or *algebraic form*. A complex number
 written in such form is a number $z = a + i b$, where $i$ is the imaginary
 unit and $a$ and $b$ are real numbers. The number $a$ is the *real part*
-of the complex number $z = a + i b$, $b$ is the *imaginary part*. The two
-are also denoted as $Re(z)$ and $Im(z)$, respectively. A complex number
-with imaginary part equal to $0$ is just a real number; a complex number
-with real part equal to $0$ is said to be a *purely imaginary* number.
+of the complex number $z = a + i b$, $b$ is the *imaginary part*. A
+complex number with imaginary part equal to $0$ is just a real number;
+a complex number with real part equal to $0$ is said to be a *purely
+imaginary* number.
 
 #exercise[
     What are the roots of the polynomial $z^(2) + 6z + 25$?
@@ -48,25 +48,49 @@ $ z_(1) + z_(2) &=
   frac((a_(1) + i b_(1))(a_(2) - i b_(2)), (a_(2) + i b_(2))(a_(2) - i b_(2))) =
   frac(a_(1) a_(2) - b_(1) b_(2) + i (a_(1) b_(2) + a_(2) b_(1)), a_(2)^(2) - b_(2)^(2)) $
 
-A complex number $z$ can be identified with the ordered pair of real
-numbers $(Re(z), Im(z))$, which may be interpreted as coordinates of
-a point in a Cartesian plane, or, equivalently, as a two-dimensional
-vector. This Cartesian plane is referred to as the *complex plane*
-or the *Argand diagram*. The horizontal axis of the complex plane
-is reserved for the real part, the vertical axis for the imaginary
-part. This representation is also called the *Cartesian form* of the
-complex number.
+The operator $Re$ has a complex number as input and "extracts" its
+real part, returning it as output. Similarly, the operator $Im$ has
+a complex number as input and "extracts" its imaginary part (without
+the $i$), returning it as output. Both operators have $CC$ as domain
+and $RR$ as codomain.
+
+Given a complex number $z = a + i b$ in algebraic form, $Re(z) = a$
+and $Im(z) = b$. This means that $z$ can be uniquely identified with
+the ordered pair of real numbers $(Re(z), Im(z))$. This pair can be
+interpreted as coordinates of a point in a Cartesian plane, or,
+equivalently, as a two-dimensional vector. This Cartesian plane is
+referred to as the *complex plane* or the *Argand diagram*. The
+horizontal axis of the complex plane is reserved for the real part,
+the vertical axis for the imaginary part. This representation is
+also called the *Cartesian form* of the complex number.
 
 #figure(
-	caption: [A complex number depicted in the complex plane.],
-	diagram(
-		edge-stroke: 0.75pt,
-		spacing: 3em,
-
-		edge((-1, 0), (5, 0), marks: (none, "stealth"), label-pos: 0.85, label-angle: auto, label: "Real axis"),
-		edge((0, 1), (0, -3), marks: (none, "stealth"), label-pos: 0.66, label-angle: auto, label: "Imaginary axis"),
-		edge((0, 0), (3, -1), marks: (none, "stealth"), label-pos: 0.95, stroke: 1pt + blue, $(Re(z), Im(z))$)
-	)
+	caption: [A complex number depicted in the complex plane. The $x$ axis
+	          is reserved for the real part, the $y$ axis for the imaginary
+	          part.],
+    cetz.canvas({
+        cetz.draw.set-style(
+            axes: (
+                fill: black,
+                x: (mark: (end: ">"), padding: 1),
+                y: (mark: (end: ">"), padding: 1)
+            )
+        )
+        
+        plot.plot(
+            size: (6, 3),
+            axis-style: "school-book",
+            x-equal: "y",
+            x-tick-step: 0.5,
+            y-tick-step: 0.5,
+            {
+                plot.add(((0, 0), (2, 1)), mark: "o")
+                plot.annotate({
+                    cetz.draw.content((2, 1), anchor: "north", $(Re(z), Im(z))$)
+                })
+            }
+        )
+    })
 )
 
 This also implies that standard vector operation, vector sum and
@@ -82,19 +106,34 @@ axis. It is trivial to see that, for any complex number $z$, $(z^(*))^(*)
 = z$. A complex number is real if and only if it equals its own conjugate.
 
 #figure(
-	caption: [The complex conjugate $z^(*)$ of a complex number $z$ is
+    caption: [The complex conjugate $z^(*)$ of a complex number $z$ is
 	          symmetric to $z$ with respect to the real axis.],
-	diagram(
-		edge-stroke: 0.75pt,
-		spacing: 3em,
-
-		edge((-1, 0), (5, 0), marks: (none, "stealth"), label-pos: 0.85, label-angle: auto, label: "Real axis"),
-		edge((0, 1.5), (0, -3), marks: (none, "stealth"), label-pos: 0.7, label-angle: auto, label: "Imaginary axis"),
-		edge((0, 0), (3, -1), marks: (none, "stealth"), label-pos: 0.95, stroke: 1pt + blue),
-		edge((0, 0), (3, 1), marks: (none, "stealth"), label-pos: 0.95, stroke: 1pt + fuchsia),
-		node((3, -1), $(Re(z), Im(z))$),
-		node((3, 1), $(Re(z), -Im(z))$)
-	)
+    cetz.canvas({
+        cetz.draw.set-style(
+            axes: (
+                fill: black,
+                x: (mark: (end: ">"), padding: 1),
+                y: (mark: (end: ">"), padding: 1)
+            )
+        )
+        
+        plot.plot(
+            size: (6, 3),
+            axis-style: "school-book",
+            x-equal: "y",
+            x-tick-step: 1,
+            y-tick-step: 1,
+            x-min: 0,
+            {
+                plot.add(((0, 0), (2, 1)), mark: "o")
+                plot.add(((0, 0), (2, -1)), mark: "o")
+                plot.annotate({
+                    cetz.draw.content((2, 1), anchor: "north", $(Re(z), Im(z))$)
+                    cetz.draw.content((2, -1), anchor: "south", $(Re(z), -Im(z))$)
+                })
+            }
+        )
+    })
 )
 
 Having a vector representation, it's possible to assign a length and
@@ -126,16 +165,31 @@ $(-pi, pi]$.
 
 #figure(
 	caption: [The argument and magnitude of a complex number.],
-	diagram(
-		edge-stroke: 0.75pt,
-		spacing: 3em,
-
-		edge((-1, 0), (5.5, 0), marks: (none, "stealth"), label-pos: 0.9, label-angle: auto, label: "Real axis"),
-		edge((0, 1), (0, -3), marks: (none, "stealth"), label-pos: 0.66, label-angle: auto, label: "Imaginary axis"),
-		edge((0, 0), (4, -2), marks: (none, "stealth"), label-pos: 0.5, label-angle: auto, stroke: 1pt + blue, $abs(z) = r$),
-        node((4, -2), $(Re(z), Im(z))$),
-        edge((1, 0), (0.85, -0.4), bend: -30deg, label-pos: 0.53, stroke: blue, $arg(z) = phi$)
-	)
+    cetz.canvas({
+        cetz.draw.set-style(
+            axes: (
+                fill: black,
+                x: (mark: (end: ">"), padding: 1),
+                y: (mark: (end: ">"), padding: 1)
+            )
+        )
+        
+        plot.plot(
+            size: (6, 3),
+            axis-style: "school-book",
+            x-equal: "y",
+            x-tick-step: 0.5,
+            y-tick-step: 0.5,
+            {
+                plot.add(((0, 0), (2, 1)), mark: "o")
+                plot.annotate({
+                    cetz.draw.content((2, 1), anchor: "north", $(Re(z), Im(z))$)
+                    cetz.draw.content((1, 0.5), anchor: "north", $abs(z) = r$)
+                    cetz.draw.content((1, 0), anchor: "north", $arg(z) = phi$)
+                })
+            }
+        )
+    })
 )
 
 As it is the case for any vector, a complex number can be identified using
@@ -183,18 +237,32 @@ coordinates the notation $r angle phi$ can be used.
     #figure(
         caption: [The complex number $z$ depicted in the complex plane using polar
                   coordinates.],
-        diagram(
-            edge-stroke: 0.75pt,
-            spacing: 3em,
-
-            edge((-2.5, 0), (1.5, 0), marks: (none, "stealth"), label-pos: 1, label: $x$),
-            edge((0, 1), (0, -2), marks: (none, "stealth"), label-pos: 1, label: $y$),
-            edge((0, 0), (-2, -1), marks: (none, "stealth"), label-pos: 0.5, label-angle: auto, stroke: 1pt + blue, $3$),
-            edge((0.5, 0), (-0.5, -0.2), bend: -30deg, label-pos: 0.3, stroke: blue, $frac(5 pi, 6)$),
-            node((-2, -1), $3 angle frac(5 pi, 6)$),
-            edge((-2, -0.8), (0, -0.8), dash: "dashed", stroke: blue, $frac(3 sqrt(3), 2)$),
-            edge((-1.625, -0.8), (-1.625, 0), dash: "dashed", stroke: blue, $frac(3, 2)$),
-        )
+        cetz.canvas({
+            cetz.draw.set-style(
+                axes: (
+                    fill: black,
+                    x: (mark: (end: ">"), padding: 1),
+                    y: (mark: (end: ">"), padding: 1)
+                )
+            )
+            
+            plot.plot(
+                size: (9, 3),
+                axis-style: "school-book",
+                x-equal: "y",
+                x-tick-step: 1,
+                y-tick-step: 1,
+                {
+                    plot.add(((0, 0), (-2.6, 1.5)), mark: "o")
+                    plot.add(((-2.6, -1), (-2.6, -1)))
+                    plot.annotate({
+                        cetz.draw.content((-2.6, 1.5), anchor: "north", $3 angle frac(5 pi, 6)$)
+                        cetz.draw.content((-1.3, 1), anchor: "north", $3$)
+                        cetz.draw.content((0, 0), anchor: "north-west", $frac(5 pi, 6)$)
+                    })
+                }
+            )
+        })
     )
 ]
 
@@ -350,18 +418,38 @@ $2 pi slash n$ between each adjacent pair.
     )
 
     #figure(
-        caption: [The three roots on the complex plane. Notice the fact that
-                  they are equally spaced.],
-        diagram(
-            edge-stroke: 0.75pt,
-            spacing: 3em,
-
-            edge((-2, 0), (2, 0), marks: (none, "stealth"), label-pos: 1, label: $x$),
-            edge((0, 2), (0, -2), marks: (none, "stealth"), label-pos: 1, label: $y$),
-            edge((0, 0), (1.18, 0.43), marks: (none, "stealth"), label-pos: 1.1, stroke: 1pt + blue, $z_(1)$),
-            edge((0, 0), (-0.21, -1.24), marks: (none, "stealth"), label-pos: 0.9, stroke: 1pt + blue, $z_(2)$),
-            edge((0, 0), (-0.96, 0.80), marks: (none, "stealth"), label-pos: 1, stroke: 1pt + blue, $z_(3)$),
-        )
+        caption: [The three roots on the complex plane, equally spaced
+                  in a circle of radius $root(3, 2)$.],
+        cetz.canvas({
+            cetz.draw.set-style(
+                axes: (
+                    fill: black,
+                    x: (mark: (end: ">"), padding: 1),
+                    y: (mark: (end: ">"), padding: 1)
+                )
+            )
+            
+            plot.plot(
+                size: (6, 4),
+                axis-style: "school-book",
+                x-equal: "y",
+                x-tick-step: 1,
+                y-tick-step: 1,
+                {
+                    plot.add(domain: (0, 2 * calc.pi),
+                             t => (1.26 * calc.cos(t), 1.26 * calc.sin(t))
+                    )
+                    plot.add(((0, 0), (1.18, 0.43)), mark: "o")
+                    plot.add(((0, 0), (-0.21, -1.24)), mark: "o")
+                    plot.add(((0, 0), (-0.96, 0.80)), mark: "o")
+                    plot.annotate({
+                        cetz.draw.content((1.18, 0.43), anchor: "north-west", $z_(1)$)
+                        cetz.draw.content((-0.21, -1.24), anchor: "south", $z_(2)$)
+                        cetz.draw.content((-0.96, 0.80), anchor: "north-east", $z_(3)$)
+                    })
+                }
+            )
+        })
     )
 ]
 

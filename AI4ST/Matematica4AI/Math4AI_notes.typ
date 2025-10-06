@@ -38,7 +38,7 @@
 #include "Geometry/Cartesian.typ"
 == Inner product and cross product
 #include "Geometry/Product.typ"
-== Equation of the straight line
+== Equation of lines and planes
 #include "Geometry/Line.typ"
 == Rotations
 #include "Geometry/Rotation.typ"

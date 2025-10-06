@@ -174,6 +174,9 @@ multiplicity of an eigenvalue $lambda$ is denoted as $m_(a)(lambda)$.
 	  det(B - lambda I) = p_(B)(lambda) $
 ]
 
+@Similar-matrices-same-spectrum also implies that a basis change is
+spectrum-preserving.
+
 There is also an interesting connection between the eigenvalues of a
 matrix, its determinant and its trace.
 
@@ -199,6 +202,10 @@ exist not just one eigenvector, but an infinite set of them.
 The vector space spanned by each set of eigenvectors associated
 to a certain eigenvalue is called its *eigenspace*. The eigenspace
 associated to an eigenvalue $lambda$ is denoted as $E_(lambda)$.
+If the eigenspace of a $n times n$ matrix corresponds to the entire
+$RR^(n)$, meaning that set of its eigenvectors forms a basis for
+$RR^(n)$, such set of eigenvectors is referred to as an *eigenbasis*.
+
 The dimension of an eigenspace is referred to as the *geometric
 multiplicity* of the corresponding eigenvalue. The geometric
 multiplicity of an eigenvalue $lambda$ is denoted as $m_(g)(lambda)$.
@@ -266,13 +273,6 @@ multiplicity of an eigenvalue $lambda$ is denoted as $m_(g)(lambda)$.
 	= "span"{(-1, 1, -2)^(T)}$. Both have geometric multiplicity
 	equal to $1$.
 ]
-
-#lemma[
-	For any eigenvalue $lambda$, $1 lt.eq m_(g)(lambda) lt.eq m_(a)(lambda)$.
-] <Eigenvalues-inequality>
-// #proof[
-// To be added
-// ]
 
 === Eigenvectors and eigenvalues of linear transformations
 
@@ -441,6 +441,13 @@ A matrix that is not diagonalizable is said to be *defective*. Determining
 whether a matrix is diagonalizable or defective can be done either applying
 @Diagonalization-theorem directly, but there are equivalent necessary and
 sufficient conditions that can simplify the process.
+
+#lemma[
+	For any eigenvalue $lambda$, $1 lt.eq m_(g)(lambda) lt.eq m_(a)(lambda)$.
+] <Eigenvalues-inequality>
+// #proof[
+// To be added
+// ]
 
 #theorem[
 	A matrix is diagonalizable if and only if, for each of its eigenvalues
