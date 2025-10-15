@@ -55,8 +55,6 @@
 = Inferential statistics
 == Random sampling
 #include "Inferential/Sampling.typ"
-== Central Limit Theorem
-#include "Inferential/Central.typ"
 == Point estimate
 #include "Inferential/Point.typ"
 == Confidence intervals

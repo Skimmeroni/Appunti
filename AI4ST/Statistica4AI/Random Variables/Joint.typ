@@ -55,12 +55,14 @@ and "moving" along the other
 	and let $Y$ be the amount of home insurance policy deductible. Consider
 	the following joint pmf for said variables:
 
-	#table(
-		columns: 4,
-		[$p(x, y)$], [$500$], [$1000$], [$5000$],
-		[$100$], [$0.3$], [$0.05$], [$0$],
-		[$500$], [$0.15$], [$0.2$], [$0.05$],
-		[$1000$], [$0.1$], [$0.1$], [$0.05$]
+	#figure(
+		table(
+			columns: 4,
+			[$p(x, y)$], [$500$], [$1000$], [$5000$],
+			[$100$], [$0.3$], [$0.05$], [$0$],
+			[$500$], [$0.15$], [$0.2$], [$0.05$],
+			[$1000$], [$0.1$], [$0.1$], [$0.05$]
+		)
 	)
 
 	Is is well defined? What are the marginal probability mass functions of $X$
@@ -76,28 +78,36 @@ and "moving" along the other
 
 	The marginal probability mass function of $X$ is given by:
 
-	$ sum_(y in D(Y)) p(X = 100, Y) = P(X = 100, Y = 500) + 
-	  P(X = 100, Y = 1000) + P(X = 100, Y = 5000) = 0.3 + 0.05 + 0 = 0.35 $
+	$ sum_(y in D(Y)) p(X = 100, Y) &=
+	  P(X = 100, Y = 500) + P(X = 100, Y = 1000) \ & + P(X = 100, Y = 5000) = 
+	  0.3 + 0.05 + 0 = 0.35 \
+	  sum_(y in D(Y)) p(X = 500, Y) &=
+	  P(X = 500, Y = 500) + P(X = 500, Y = 1000) \ & + P(X = 500, Y = 5000) = 
+	  0.15 + 0.2 + 0.05 = 0.4 \
+	  sum_(y in D(Y)) p(X = 1000, Y) &=
+	  P(X = 1000, Y = 500) + P(X = 1000, Y = 1000) \ & + P(X = 1000, Y = 5000) = 
+	  0.1 + 0.1 + 0.05 = 0.25 $
 
-	$ sum_(y in D(Y)) p(X = 500, Y) = P(X = 500, Y = 500) + 
-	  P(X = 500, Y = 1000) + P(X = 500, Y = 5000) = 0.15 + 0.2 + 0.05 = 0.4 $
-
-	$ sum_(y in D(Y)) p(X = 1000, Y) = P(X = 1000, Y = 500) + 
-	  P(X = 1000, Y = 1000) + P(X = 1000, Y = 5000) = 0.1 + 0.1 + 0.05 = 0.25 $
-
-	$ sum_(x in D(X)) p(X, Y = 500) = P(X = 100, Y = 500) + 
-	  P(X = 500, Y = 500) + P(X = 1000, Y = 500) = 0.3 + 0.15 + 0.1 = 0.55 $
-
-	$ sum_(x in D(X)) p(X, Y = 1000) = P(X = 100, Y = 1000) + 
-	  P(X = 500, Y = 1000) + P(X = 1000, Y = 1000) = 0.05 + 0.2 + 0.1 = 0.35 $
-
-	$ sum_(x in D(X)) p(X, Y = 5000) = P(X = 100, Y = 5000) + 
-	  P(X = 500, Y = 5000) + P(X = 1000, Y = 5000) = 0 + 0.05 + 0.05 = 0.1 $
+	Grouping the terms:
 
 	$ p_(X)(x) = cases(
 	  0.35 & "if" x = 100  and (y = 500 or y = 1000 or y = 5000),
 	  0.4  & "if" x = 500  and (y = 500 or y = 1000 or y = 5000),
 	  0.25 & "if" x = 1000 and (y = 500 or y = 1000 or y = 5000)) $
+
+	As for $Y$:
+
+	$ sum_(x in D(X)) p(X, Y = 500) &=
+	  P(X = 100, Y = 500) + P(X = 500, Y = 500) \ & + P(X = 1000, Y = 500) =
+	  0.3 + 0.15 + 0.1 = 0.55 \
+	  sum_(x in D(X)) p(X, Y = 1000) &=
+	  P(X = 100, Y = 1000) + P(X = 500, Y = 1000) \ & + P(X = 1000, Y = 1000) =
+	  0.05 + 0.2 + 0.1 = 0.35 \
+	  sum_(x in D(X)) p(X, Y = 5000) &=
+	  P(X = 100, Y = 5000) + P(X = 500, Y = 5000) \ & + P(X = 1000, Y = 5000) =
+	  0 + 0.05 + 0.05 = 0.1 $
+
+	Grouping the terms:
 
 	$ p_(Y)(y) = cases(
 	  0.55 & "if" y = 500  and (x = 100 or x = 500 or x = 1000),
