@@ -26,4 +26,6 @@
 #include "Introduction.typ"
 == Sinusoids
 #include "Sinusoid.typ"
+== Spectrum
+#include "Spectrum.typ"
 #pagebreak()

@@ -25,17 +25,22 @@ components:
   the signal makes every $2 pi$ seconds;
 - $phi$ is the *phase*, the displacement from $0$.
 
-The radian frequency is the *frequency* multiplied by $2 pi$. The 
-frequency $f$ is the number of oscillations that the signal makes
-every second. The *period* $T$ is the time the signal takes to make
-an entire oscillation. The frequency and the period are the reciprocal
-of each other.
+The radian frequency is the *cyclic frequency*, or just *frequency*
+for short, multiplied by $2 pi$. The frequency $f$ is the number of
+oscillations that the signal makes every second. The *period* $T$ is
+the time the signal takes to make an entire oscillation. The frequency
+and the period are the reciprocal of each other.
 
 #grid(
     columns: (0.5fr, 0.5fr),
     [$ f = 2 pi omega $],
     [$ T = frac(1, f) = frac(2 pi, omega) $]
 )
+
+Notice that choosing $f = 0$ gives a perfectly valid sinusoid: a constant
+function equal to its amplitude (since $cos(0) = 1$). In the context of
+signals, a sinusoid having frequency $0$ is often called DC (as in "direct
+current").
 
 #figure(
 	caption: [Plot of the sinusoidal signal $s(t) = 5 cos(0.3 pi t + 1.5 pi)$.],
@@ -413,33 +418,6 @@ $t = 0$.
     )
 )
 
-Recall the inverse Euler formula for the cosine:
-
-$ cos(theta) =
-  frac(e^(j theta) + e^(-j theta), 2) =
-  frac(e^(j theta) + (e^(j theta))^(*), 2) $
-
-Since a sinusoid is in the form $s(t) = A cos(omega_(0) t + phi)$,
-it's also possible to write is as:
-
-$ s(t) &=
-  A cos(omega_(0) t + phi) =
-  A (frac(e^(j (omega_(0) t + phi)) + e^(-j (omega_(0) t + phi)), 2)) =
-  frac(A, 2) e^(j (omega_(0) t + phi)) + frac(A, 2) e^(-j (omega_(0) t + phi)) = \
-  &= frac(A, 2) e^(j omega_(0) t) e^(j phi) + frac(A, 2) e^(-j omega_(0) t) e^(-j phi) =
-  frac(1, 2) X e^(j omega_(0) t) + frac(1, 2) (X e^(j omega_(0) t))^(*) =
-  frac(1, 2) z(t) + frac(1, 2) z^(*)(t) = Re{z(t)} $
-
-This formula has an interesting interpretation. The sinusoid $s(t)$
-is actually composed of a positive frequency complex exponential
-$frac(1, 2) X e^(j omega_(0) t)$ and a negative frequency complex
-exponential $frac(1, 2) (X e^(j omega_(0) t))^(*)$. The two have
-the same amplitude, the same phase in modulus and the same radian
-frequency in modulus. In other words, any sinusoid can be represented
-as the sum of two complex rotating phasors that are rotating in opposite
-directions (the angles have opposite sign) starting from phasors that
-are complex conjugates of each other.
-
 As already hinted at, complex exponential signals allow one to compute
 the sum of sinusoids with ease. This is remarkably true when summing
 sinusoids having the same radian frequency.
@@ -447,7 +425,7 @@ sinusoids having the same radian frequency.
 #theorem("Phasor addition rule")[
     Let $A_(k) cos(omega_(0) t + phi_(k))$ with $k in {1, 2, dots, n}$
     be a family of $n$ sinusoids, all having the same radian frequency.
-    Then:
+    Then their sum is still a sinusoid. In particular:
 
     $ sum_(k = 1)^(n) A_(k) cos(omega_(0) t + phi_(k)) = A cos(omega_(0) t + phi) $
 
